@@ -1,46 +1,58 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of October 28: approved stable-workspace review ae6a0f9f passed.**
-Both diagnostic and raw references passed all171 JSON-logger obligations. The
-original source failed exactly12 bug tests while159 preservation tests passed.
-Both profiles passed four fresh boundary/state/transport probes and two native
-fixtures;backend support passed. All17 completed receipts and19 operations
-reconcile,charging35.85609079245478seconds with zero model turns/cash. All owned
-containers/canary are absent;all images remain.
-[Actual results](../../reports/toolkit-v2/c13/repository-stable-workspace-20261028/RESULTS.md)
-preserve the earlier168/171 failure and the new exact scope. Do not replay either
-terminal review. No names were normalized or assertions/obligations dropped.
+**Status as of October 29: shared-native bundle 17defe159 is terminal.**
+Its runtime component stopped at preflight, before any download, build, worker,
+canary or grant charge. Three first-party script hashes in the nested runtime
+review were stale. The outer bundle bound the current files, but its preparation
+audit flattened the mappings and missed the conflict. The failed attempt and
+original PASS record are retained with the
+[reconciliation](../../reports/toolkit-v2/c13/repository-shared-native-20261028/preflight-failure-reconciliation.json).
 
-Pool64 snapshots/40 repositories/5037 required identities is provisional.
-Families are26 single-file,23 multi-file and15 audits;77 cases are still missing
-(21/24/32) from the frozen141-case cohort. Stage assignment,model qualification,
-comparative usefulness,live selection,resource,human-control and release remain
-open. The fixed-path observer is an explicit reviewed container profile;older
-corpus bindings and the packaged default retain their original applicability.
+The independently approved, previously unstarted package and docs components
+then passed. Corrected wheel b3d9c5d0 and its 32 cached dependencies passed all
+20 private installed checks, including the normal CLI's exact shared-default
+program identity. The private runtime and scratch were removed. Cached Lychee
+passed the 69-document offline check against its recorded input hashes; its
+unchanged private runtime was removed. These completed checks are not repeated.
+No models, cash, downloads, image builds or grant charges occurred.
+[Component results](../../reports/toolkit-v2/c13/repository-shared-native-20261028/independent-component-results.json)
+preserve the exact approved scopes.
 
-The verified source-M1 result remains bound to dbf9be31 and wheel3791d8f7.
-Their13source gates and20installed checks do not qualify the new source. D121
-promotes the same two path-creation lines into the shared packaged v6 observer,
-so normal CLI exports use the verified behavior. Current source b09911a0 compiles
-raw program1f099dfb byte-for-byte equal to that actual profile. Legacy observer/
-parser files are unchanged. All13integrated source checks passed:1775tests/21skips in both full runs,82%
-coverage,both branch gates,schema,lint,policy,mypy and build. Both runs retain the
-existing Starlette/httpx warning. The corrected wheel still needs its exact installed check.
+The new runtime-only review is
+[a11807f2](../../reports/toolkit-v2/c13/repository-review-bindings-20261029/runtime-review.json),
+SHA-256 a11807f2aaf8880661a7cf248d2d0738c26e672ed61a9b3e2d5cb184a1f4b40b.
+It corrects the three pins and checks every nested execution review before a
+runtime marker. Seven authored checks detect the original conflict; the actual
+driver rejects a stale pin before Docker. Image-binding fixtures passed. The
+same Git bytes, tasks, programs, assertions, permissions and finite allowances
+remain: one exact download, one COPY-only image, at most 21 offline calls,
+26 existing-grant operations and 1,335 reserved seconds. A fresh actual approval
+is required because 17defe159 permits one attempt and forbids automatic retries.
+No package, docs or full source-suite replay is needed. No architecture decision.
 
-The unapproved Git/docs draft765e28e7 is WITHDRAWN before execution. Do not run
-it after a late approval. Preserve its preparation under commit84e7072;new source,
-wheel and runtime bindings will be reviewed together after source checks. No Git
-archive download/build/execution happened. Dead still needs real Git. Read-only
-inventory found87Debian packages and removed only the verified230109184-byte owned
-export. Isort actually needs genuine distribution metadata;Sopel also needs a
-compatible closure. SQLglot7479has an undetected partial repair. These are distinct
-blockers;none is silently repaired by changing test names or reducing obligations.
+The prior ae6a0f9f check remains successful: both profiles passed all 171
+JSON-logger obligations, and the original failed the expected 12 tests while
+159 preservation tests passed. Its 17 receipts and 19 operations reconcile.
+Current shared source b09911a0 compiles the same raw program 1f099dfb. All 13
+source gates passed: 1,775 tests and 21 skips in each full run, 82% coverage and
+both branch gates. Legacy observer/parser contracts are unchanged. The new
+installed-wheel evidence does not establish new-image conformance or task value.
 
-Grant totals remain13304/3755/120080.87940059323/0.0. Expiry-only amendment5d9e7d9a
-renews to2026-10-29T20:04:36.625328Z with counters/absolute ceilings preserved.
-The completed docs scan aacf34a8 retains its old input hashes;current docs changes
-need the newly reviewed offline scan. No models,cash,credentials,host activation
-or release. Source-M2 safe implementation continues;no architecture decision.
+The provisional pool remains 64 snapshots / 40 repositories / 5,037 identities:
+26 single-file, 23 multi-file and 15 audit cases. The frozen cohort still needs
+77 cases (21 / 24 / 32). Read-only cache triage found 133 unused rows across
+98 repositories, all with a cached archive; 87 have one Python body path and 46
+have several. Those are preliminary path counts, not verified task families,
+rights, runtime compatibility or reproduced cases. No stages are assigned.
+Comparative usefulness, correct live selection, resource acceptance, human
+control and release remain separate open gates.
+
+Grant counters remain 13304 / 3755 / 120080.87940059323 / 0.0. Existing expiry-only
+amendment 5d9e7d9a ends at 2026-10-29T20:04:36.625328Z. Preserve all counters and
+check the current ledger before execution. About 97 GiB was free before these
+checks; the 50 GiB reserve holds. All images remain. Isort needs genuine package
+metadata; Sopel needs its compatible dependency closure; SQLglot7479 has an
+undetected partial repair. The Git review does not resolve those exclusions.
 
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
@@ -83,16 +95,17 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '42f5977'
-last_check_command: 'repository-shared-native-20261028/run-source-checks.py:all13checks;prepare-template.py;prepare-review.py;package-review-shared-native-20261028/prepare-review.py'
-last_check_result: 'Sourceb09911a0 passed13gates,1775tests/21skips both runs,82%coverage,both branch gates;wheelb3d9c5d0 built. Runtime1b9ff4bc and package74c1c82d are prepared,not executed. All prior ae6a0f9f receipts/counters remain;pool64/77gap.'
-next_action: 'Obtain exact approval for repository-shared-native-20261028/approval-bundle.json. It binds realGit download/oneCOPY-onlyimage,21maxoffline calls/26ops/1335reservedseconds including all38Dead obligations and two171-test shared-default controls;new wheelb3d9c5d0 plus32cached dependencies for20private checks;current cached offline docs. Run once,retain canonical charges/receipts,and continue safe cohort/selection work. Old765e28e7 is WITHDRAWN;no source-suite replay or architecture/budget decision needed.'
+last_verified_commit: '2bc86b1'
+last_check_command: 'run-integration-bundle.py 17defe159:terminal preflight failure;independent package20/docs69 passed;new recursive binding audit and driver/derivation fixtures passed'
+last_check_result: 'No runtime dispatch or grant charge;three stale nested pins identified. Corrected wheel20checks and exact offline docs passed,private runtimes removed. Sourceb099 unchanged;pool64/77gap. New runtimea11807f2 prepared with100assets and256unique nested file bindings;not approved or executed.'
+next_action: 'Obtain exact runtime-only approvala11807f2aaf8880661a7cf248d2d0738c26e672ed61a9b3e2d5cb184a1f4b40b. Then check current grant/expiry and run repository-review-bindings-20261029/run-bundle.py once. Same pinnedGit/component/tasks/allowances;do not repeat completed package/docs/source checks. Continue safe independent corpus and selection work;preserve all attempts and images.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
+  - 'Actual17defe159approval was exercised once:runtime terminal before external work,independent package20/docs passed. Fresh runtime-onlya11807f2 needs exact approval because the one-attempt review forbids retries. No new model,architecture,package/docs or budget decision.'
   - 'None for terminalae6a0f9f:actual direct approval ran once and all17receipts/19operations reconcile. New pinnedGit download/component/image and fresh untrusted source execution require their concrete exact review. No architecture/budget decision;routine finite definitions/expiry amendments remain delegated.'
   - 'None for terminal22b0cf03:actual approval completed once,5receipts/7operations/18.11404641577974seconds,zero models/cash. New observer/source execution requires a concrete exact review;no unused-slot transfer or replay. Safe native-identity adapter/corpus preparation continues;no architecture or budget decision is needed.'
   - 'None for terminalf18daa4a and its explicitly approved finite report-control continuation:initial3charges retained,XS8unstarted immutable payloads completed,exact docs passed. New portable Markdown payload changes software bytes and needs one concrete exact execution approval. PyMdown remains unstarted;no unused-slot transfer,refund or image/build authority.'

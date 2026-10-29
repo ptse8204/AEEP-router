@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "parent_approval_sha256": "17defe15993ee2b54a84193c5bd047243060d372ecc04ecb00d740bba77ed40e",
+  "recorded_at": "2026-10-29T08:01:05.908711+00:00",
+  "failure": "Nested runtime preparation bound stale hashes for three first-party integration scripts;actual hashes were explicitly bound in the approved outer bundle. No runtime execution marker,download,build,canary or grant charge.",
+  "mismatches": [
+    {
+      "file": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/repository-shared-native-20261028/run-integration-bundle.py",
+      "nested_stale_sha256": "d8d0be6aaa16042ad3951e674f85e2a98aabe117d2e5edd8d7777e4e079430c7",
+      "actual_and_approved_parent_sha256": "c41dc8471682facdefbb34c720ab5ef0da30dae4a699a34061396b46e128a215"
+    },
+    {
+      "file": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/repository-shared-native-20261028/prepare-integration-bundle.py",
+      "nested_stale_sha256": "52b79d9640ea902d30c815e98736266e94a7c64f57d962adef659ab58572aff3",
+      "actual_and_approved_parent_sha256": "d44514a0b2e125b5f3bf725a8bb9c39987977b4a7f557cd8bdc889276601d530"
+    },
+    {
+      "file": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/repository-shared-native-20261028/check-integration-dispatch.py",
+      "nested_stale_sha256": "6c0ba41ef4c17b00597712a6db942e27d0a659187afae7f7f535c30f45de244f",
+      "actual_and_approved_parent_sha256": "db572f94e894aafa05708d13a24ce4cfac96421e2d8a2982d32574ee8f3d675f"
+    }
+  ],
+  "canonical_grant_unchanged": [
+    13304,
+    3755,
+    120080.87940059323,
+    "0.0"
+  ],
+  "runtime_attempt_terminal_no_retry": true,
+  "independent_components": [
+    "package",
+    "docs"
+  ],
+  "authority": "Actual direct parent approval explicitly includes both unchanged unstarted components. Common source,accounting and identity bindings are reconciled;no retry of runtime. Docs continuation is also expressly allowed by the parent preparation-failure clause. No expansion of software,permissions or execution counts.",
+  "new_authority_claimed": false
+}

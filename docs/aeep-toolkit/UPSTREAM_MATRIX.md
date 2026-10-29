@@ -1512,3 +1512,21 @@ CLI export. No runtime,install,download,model or shared-budget charge occurred.
 Fresh current offline docs joins that exact approval;all13source gates are
 complete and are not repeated. Old765e28e7 stays withdrawn. The central model
 usefulness/selection gates remain open,with64provisional cases and77missing.
+
+### October 29: shared-native component completion and review correction
+
+Actual approval17defe159ended at runtime preflight because three nested script
+pins were stale;the outer review held current hashes but its flattened audit
+missed the conflict. No download,build,worker,canary or grant charge occurred.
+The separately approved unstarted package and docs components then passed:
+wheelb3d9c5d0 plus32cached dependencies,20private installed checks,and69document
+cached offline verification. Both owned runtimes were removed;all images remain.
+
+Runtime-onlya11807f2corrects those pins and adds a nested-review audit before the
+execution marker. Seven authored binding checks,the actual driver stop fixture
+and image derivation fixtures passed without external execution. Same Git,
+programs,tasks,assertions,permissions and21call/26operation/1335second envelope.
+The terminal one-attempt approval forbids a runtime retry;new exact approval is
+needed. Completed package/docs and13source gates are not repeated. Pool64and
+77-case gap remain. Cached133rows/98repositories are metadata candidates only;
+comparative usefulness,live selection,resource,human-control and release stay open.

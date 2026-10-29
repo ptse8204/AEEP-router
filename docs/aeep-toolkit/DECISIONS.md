@@ -2115,3 +2115,23 @@ actual completed ae6a0f9f results. Complete all13source gates,build the correcte
 wheel,and prepare one new exact Git/runtime/wheel/docs review. Keep resource
 qualification separate from comparative usefulness and live selection;no model,
 threshold,permission or architecture change is authorized by this promotion.
+
+## D122: Validate nested execution reviews before combining their bindings
+
+The actual17defe159attempt stopped before external work because its nested
+runtime review retained three stale script hashes. The outer preparation copied
+the child map,then overwrote those entries with current hashes. That validated
+the flattened map while leaving the child's conflicting pins untested.
+
+Keep every terminal review and its original preparation result. Audit each
+execution review,template,parent envelope and embedded dependency map before
+combining them;reject conflicting pins even when the outer hash is current.
+Use one small first-party report helper rather than a new core service. Authored
+controls reproduce this exact failure,and the actual driver must stop before
+Docker or an execution marker. Preserve unchanged task programs and software.
+
+The already approved unstarted package/docs components may complete after exact
+common-source,identity,accounting and no-side-effect reconciliation. They passed
+and are not rerun. The failed runtime has a one-attempt boundary;prepare a new
+exact runtime-only review instead of silently replaying it. No scope expansion,
+budget reset,refund,new model call or scientific gate follows from this repair.
