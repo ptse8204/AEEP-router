@@ -2323,7 +2323,6 @@ custom/direct outputs under their existing review/grader requirements. Run the
 required software checks for this actual code change;historical live evidence
 stays bound to b09911a0. No additional model turn is needed for the guard.
 
-
 ## D130: Reject mismatched standard patch bridges and prioritize task value
 
 On October 29 the operator objected to the helped CLI-control exercise as a user

@@ -1,0 +1,39 @@
+{
+  "source_commit": "df9eee7f2535a47e957418da0747c2d428641f26",
+  "source_digest": "5a4257e3dc4abab14fcb70cfdfd86542790cb82333c42f78c42bf5a590be613b",
+  "installation_sha256": "c1c474a1d5a6bce79d9bb6abcac2f1f0eb62c392b90f9e4b403ba812483edb49",
+  "driver_sha256": "83bde39c802b886079a280ab9013a1b86d44b4a1e2efb2bfe44b793dba1720a9",
+  "wheel_sha256": "ee1fdba5f1f9479e0c205b9eae29adc71ae6416458ac407778221d6bbfa9fd75",
+  "wheel_bytes": 1992312,
+  "inputs": {
+    "reports/toolkit-v2/integration-completion/package-review-codec-preflight-20261029/installed-codec-check.py": "3329dcc55422e86aa205254a2e6dbad627928a551f126ff88400cebda422d973"
+  },
+  "codec_check": "reports/toolkit-v2/integration-completion/package-review-codec-preflight-20261029/installed-codec-check.py",
+  "installed_module_hashes": {
+    "aeep.assessment.repository_suites": "9923c3e1f8c9d751cb1fc7088853838f9ee28d3cc78f463fdbdc25313a305843",
+    "aeep.assessment.service": "46cdcda346e6d112b2a6b4e65b5bc1ddecc08ac29656f833587599e2e937b718"
+  },
+  "effects": "Install the changed AEEP wheel with exactly32 unchanged cached dependency wheels in one new private runtime. Run three focused offline checks: CLI entry point, installed source identity/router-free import, and first-party codec preflight. Reuse historical unchanged-feature evidence without replaying its20 checks. Network and other host-home access are denied. Remove only the unchanged owned runtime and scratch; retain evidence and inert wheel cache.",
+  "limits": {
+    "maximum_download_bytes": 0,
+    "maximum_download_seconds_each": 60,
+    "maximum_offline_check_seconds_each": 60,
+    "minimum_host_reserve_bytes": 53687091200,
+    "dependency_wheels": 32,
+    "first_party_wheels": 1,
+    "cash_usd": 0
+  },
+  "permissions": {
+    "models": false,
+    "workers": false,
+    "new_services": false,
+    "credentials": false,
+    "host_activation": false,
+    "download_destinations": [],
+    "network_during_install_and_checks": false,
+    "installation": "New private runtime only",
+    "cleanup": "Unchanged task runtime and its new scratch only; preserve old work, backups, images and volumes"
+  },
+  "change": "Adds early validation that standard managed-worker patch fields match every scheduled repository task encoding. The installed check accepts matching plain/gzip profiles and rejects mixed or mismatched profiles before budget reservation. No task decoder, observer, schema, third-party package, model, image or historical evidence changes. Source and installed behavior checks are engineering evidence only.",
+  "execution_started": false
+}

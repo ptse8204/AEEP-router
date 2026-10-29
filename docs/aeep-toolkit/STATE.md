@@ -104,10 +104,10 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: 'f3eecc0'
+last_verified_commit: 'df9eee7f2535a47e957418da0747c2d428641f26'
 last_check_command: 'repository-codec-preflight-20261029/run-source-checks.py (13 gates);actual-definition-regression.json;analyze-retained-failures.py'
 last_check_result: 'Source5a4257e3:13/13 gates passed;1786tests/21skips in each full run;82%coverage,both branch gates;schema,ruff,policy,mypy168files,build passed. Actual invalid definition rejected before model reservation with unchanged counters. Completed sourceb099 comparison remains both14/19;38captures/19loads;2actual admission refusals. No new models or formal qualification.'
-next_action: 'Source guard and retained-failure analysis are complete. Do not replay models,source gates or corpus batches. Prepare the exact changed-wheel/cached-offline-docs bundle under repository-codec-preflight-20261029;three focused installed checks use32 unchanged cached dependencies. Historical live evidence stays sourceb099/f3eecc0. The operator removed the helped control exercise from the critical path;no architecture decision or model trial is requested.'
+next_action: 'Guard source5a4257e3 is committed asdf9eee7;all13 source gates passed. Do not replay models,source gates or corpus batches. The concrete changed-wheel/cached-docs review is reports/toolkit-v2/c13/repository-codec-preflight-20261029/approval-bundle.json. Obtain exact approval before running its driver;three focused installed checks use32 unchanged cached dependencies. Historical live evidence stays sourceb099/f3eecc0. The helped control exercise is off the critical path;no architecture choice or model turn is requested.'
 blocked_actions:
   - 'Helped report comprehension is recorded. The operator removed the concrete control exercise from the critical path on October29;control-use qualification remains unmeasured and is not an engineering/comparison blocker.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
@@ -4408,7 +4408,6 @@ No Git download,image build,package installation,model,shared grant charge or
 release occurred during this preparation. Pool64/77gap and current13304/3755/
 120080.87940059323/0.0 remain. No architecture or budget decision is needed.
 
-
 ## October 29 handoff: comparison ready, exact execution approval requested
 
 Commit `4b9d9b5` contains the reconciled two-audit outcomes and the bounded
@@ -4417,7 +4416,6 @@ was presented to the operator after all 284 bindings and focused preparation che
 passed. Approval is pending; no new model, worker or service has started. The
 working tree was clean after that commit. Open the pilot README/PLAN and current
 grant before the next dependent action. Do not resume deferred corpus work.
-
 
 ## October 29: actual usefulness execution approved and started
 
@@ -4429,3 +4427,19 @@ was pending. Standing finite-amendment authority covered expiry-only amendment
 through 2026-10-30T20:50:41.445938Z. All counters and absolute ceilings are unchanged.
 Inspect durable started/results files before resuming; no automatic controller or
 invocation retry. Existing worker/collector conformance is the first gated phase.
+
+## October 29: codec guard committed; focused installation/docs review next
+
+Commit `df9eee7f2535a47e957418da0747c2d428641f26` contains the verified source guard, eleven regressions,
+actual-definition refusal evidence and retained comparative failure analysis.
+All 13 source gates passed with unchanged source 5a4257e3. Both full suites passed
+1786 tests with 21 skips; coverage is 82% and both branch gates passed. No model,
+worker or grader replay followed. The new wheel is ee1fdba5f1f9479e0c205b9eae29adc71ae6416458ac407778221d6bbfa9fd75.
+
+The concrete `repository-codec-preflight-20261029/approval-bundle.json` covers
+three focused installed checks with the same 32 cached dependencies and current
+cached offline documentation verification. Installation/external checker
+execution is pending exact authority; completed source and model checks are not
+repeated. Preserve all old evidence and images. The helped human-control exercise
+is no longer on the critical path after the operator's clarification. C13 remains
+IN_PROGRESS; production efficacy and public release are not claimed.
