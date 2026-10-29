@@ -58,3 +58,14 @@ The frozen cohort still needs 76 cases. Qualification, comparative usefulness,
 correct live selection, resource acceptance, human control and release remain
 open. Successful grader reproduction would add only the independently verified
 cases; it would establish no candidate benefit or savings.
+
+## Completed outcome, October 29
+
+The actual approval and terminal records are retained. Only two collection calls
+ran;neither reached a body comparison. Param failed strict configuration without
+its asyncio plugin. Jsonpickle missed two required Ruff identities. Both remain
+excluded;no cases were added. The controller binding correction,all six cumulative
+operations/5.994088584091514seconds and confirmed cleanup are reconciled in the
+[actual results](../repository-audit-canonical-binding-20261029/RESULTS.md).
+Corpus expansion and Param/Ruff support are deferred in favor of the working-pool
+usefulness comparison. The earlier preparation text and review remain historical.

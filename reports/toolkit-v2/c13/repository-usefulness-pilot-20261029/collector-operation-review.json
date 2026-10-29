@@ -1,0 +1,24 @@
+{
+  "proxy_name": "aeep-reviewed-model-proxy",
+  "proxy_id": "5f9a44f86633409a250d11a78cf59357495da2078724ee0261bc73acff57f0f3",
+  "proxy_image": "sha256:5bf590eb0bf8a06187ff092f0f75cf83b540cc27bd6a75fd8bd91305ca7b13de",
+  "proxy_memory_bytes": 536870912,
+  "network_id": "8f657f861de8897d53df66efdf595c6d2e202b174af81f2827db409fe53f19d6",
+  "proxy_inspect_format": "{\"Id\":{{json .Id}},\"Image\":{{json .Image}},\"Running\":{{json .State.Running}},\"Memory\":{{json .HostConfig.Memory}},\"MemorySwap\":{{json .HostConfig.MemorySwap}},\"Networks\":{{json .NetworkSettings.Networks}}}",
+  "source_digest": "b09911a0b7b79f6f78a5371bbad53580ff0692fc3d371592a983437898a19fcf",
+  "definitions_sha256": "4c8b04f2b026721db6ff993670a0bc4e917293affbebfcbf68842da3c0df9c77",
+  "runner_sha256": "80c877816ef304d4e53bd0d32e3e60738545978500968ccf488807b1e30ad988",
+  "images": {
+    "control": "sha256:0c05b495931e8558baf76b099c01c3b80a4b5136b5640d387db2d8ee644cf1db",
+    "treatment": "sha256:388c8328ddebc8455e9cf484491fee89926fa212d2f1219f2fc88a48527b18ea"
+  },
+  "purpose": "Fresh exact public-root/instruction worker fingerprints:11 isolation groups per role and collector denial;zero models.",
+  "maximum_model_turns": 0,
+  "limits": {
+    "maximum_inspection_operations": 2,
+    "maximum_inspection_seconds": 480,
+    "maximum_proxy_lifecycle_operations": 1,
+    "maximum_proxy_lifecycle_seconds": 600
+  },
+  "authority": "Only actual approval of the parent review authorizes this component."
+}

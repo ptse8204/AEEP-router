@@ -2198,3 +2198,66 @@ preservation guard;predeclare30/83minimum and256maximum expanded identities per
 case. No test can be dropped or outcome used to remap the scope. Static fixtures
 and reused backend evidence do not qualify either source. New source execution
 requires its exact finite review;no model,architecture or budget decision.
+
+## D126: Preserve the actual failed collections and qualify only the missing support
+
+The ca735d78controller used formatted-file digests as canonical JSON wire digests.
+Its two bookkeeping operations completed before any source call. A recorded
+routine definition/budget amendment corrected only those expected digests under
+the standing delegation,retained the two charges,and resumed the same six
+unstarted approved calls. Cumulative control allowance was10operations/362seconds;
+no source,assertion,payload-file,permission,model or cash authority changed.
+
+The two actual collections then completed and were audited. Param exposed all30
+identities but exited3because pytest-asyncio was not registered for its strict
+configuration. Jsonpickle exposed81of83required identities:the missing two are
+`tests/handler_test.py::ruff` and `tests/object_test.py::ruff`. No body comparison
+ran. Both remain excluded. Six cumulative operations/5.994088584091514seconds stay
+charged,including the earlier control failure. No case is added to pool65.
+
+Prepare Param only with the exact cached pytest-asyncio1.2.0wheel,15095bytes,
+SHA8e17ae5e46d8e7efe51ab6494dd2010f4ca8dae51652aa3c8d55acf50bfb2e99.
+Its Apache notice,entry point and Python3.13dependency markers are checked as data.
+Keep every original source/test/reference/negative byte and all30identities.
+One plugin registration/event-loop fixture plus fresh collection/reference/
+counterexample requires new execution approval;the prior unregistered collection
+cannot qualify it. No installer,download,image build or new core behavior.
+
+Defer Jsonpickle on this backend. Its original required Ruff items cannot be
+removed,and the earlier source-only metadata omission does not qualify that
+lint scope. Supporting it would need a separately reviewed upstream Ruff/plugin
+and complete applicable configuration path. Choose other independent workloads
+instead of expanding the core for one unadopted case. Reused backend conformance,
+plugin fixtures and source reproduction remain separate from comparative value.
+
+## D127: Stop corpus expansion and test usefulness on the working pool
+
+The October 29 operator direction identifies an excessive testing loop. Packaging,
+dependency, collection and review-hash repairs have displaced the central value
+and selection questions. Reconcile actual outcomes and charges, then defer
+incompatible optional workloads, including the inert Param plugin preparation.
+
+Use existing AssessmentService, BenchmarkRunner, controlled workers, protected
+graders and captures for a bounded development comparison from the 65 working
+snapshots. Prepare 21 pairs: seven tasks per family from 21 repositories, with
+ordinary capable Codex versus the same environment plus optional Ponytail 4.10.0.
+Choose cases before model outcomes, preserve their original assertions and source
+notices, isolate public inputs from private tests/answers, and stop on uncertain
+execution, accounting, grading, cleanup or capture. Poor candidate performance
+is a result, not a reason to replace tasks or expand the corpus.
+
+This intermediate experiment can inform a decision about further investment and
+provide task success, resource observations and engagement evidence. It cannot
+qualify or admit the candidate or replace the frozen 8/28/105 campaign. The
+implementation rejects development-exposed cases even in formal training;
+reserve their related repositories outside all later formal stages. Report the
+resulting loss of eligible provisional cases explicitly. Keep resource acceptance
+separate and do not turn proposed operational thresholds into product requirements.
+
+Follow the result with actual evidence-bound admission/selection restraint.
+Positive live selection benefit requires independently established applicable
+value and a separate cohort. Do not label every abstention correct merely because
+this pilot is inconclusive, or spend new task turns replaying an ineligible
+candidate to manufacture a positive selection claim. Each next test must name
+the decision it enables and its stop condition. New model disclosure/execution
+still needs its concrete scope; no architecture decision is needed.

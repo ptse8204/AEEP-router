@@ -1,0 +1,103 @@
+{
+  "inert_schedule_only": true,
+  "actual_current_conformance_claim": false,
+  "existing_engine_projection": {
+    "scope": "fresh_campaign_reservations",
+    "stages": [
+      {
+        "stage": "trial",
+        "calls_minimum": 42,
+        "calls_upper": 42,
+        "operations_upper": 42,
+        "model_turns": 42,
+        "elapsed_reservation_upper_seconds": 12810,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "warmup",
+        "calls_minimum": 0,
+        "calls_upper": 0,
+        "operations_upper": 0,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 0,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "router_setup",
+        "calls_minimum": 43,
+        "calls_upper": 43,
+        "operations_upper": 43,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 1290,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "grader_validation",
+        "calls_minimum": 1,
+        "calls_upper": 1,
+        "operations_upper": 1,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 30,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "report_generation",
+        "calls_minimum": 1,
+        "calls_upper": 1,
+        "operations_upper": 1,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 30,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "grader_reference",
+        "calls_minimum": 0,
+        "calls_upper": 0,
+        "operations_upper": 0,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 0.0,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "grader_probe",
+        "calls_minimum": 1,
+        "calls_upper": 962,
+        "operations_upper": 962,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 33670.0,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "recipe_grading",
+        "calls_minimum": 0,
+        "calls_upper": 42,
+        "operations_upper": 42,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 1470.0,
+        "cash_reservation_upper_usd": "0"
+      }
+    ],
+    "upper_allowance": {
+      "operations": 1091,
+      "model_turns": 42,
+      "elapsed_seconds": 49300.0,
+      "cash_usd": "0"
+    },
+    "prior_operations": [],
+    "gaps": [],
+    "fits_remaining": true,
+    "authorization_changed": false,
+    "automatic_retries": 0,
+    "explanation": "Bounds cover the frozen campaign including setup, warm-ups, grading and reporting. They are reservation ceilings, not measured consumption or execution approval. Early failures can use less. Prior operations are already charged and are not added again. Preparation must finish before a plan is reviewed; unplanned future planning, conformance, reusable-tool construction and interventions require their own reviewed allowances. Production monitoring uses receipts and launches no comparison calls."
+  },
+  "extra_inspection_proxy_operations": 4,
+  "extra_inspection_proxy_reserved_seconds": 19080,
+  "total_upper_operations": 1095,
+  "total_upper_reserved_seconds": 68380.0,
+  "grant_counters": [
+    13333,
+    3755,
+    120131.70525092818,
+    "0.0"
+  ]
+}

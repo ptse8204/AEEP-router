@@ -6284,3 +6284,43 @@ boundary/default-control replay. Seven preparation checks,actual operation9
 rejection and three authored wrapper scenarios passed without source execution.
 New subjects require exact approval;old unused slots do not transfer. Pool65/76gap
 remains,with no scientific/resource/human/release gate closed.
+
+## October 29: reconcile two excluded audits and prioritize comparative value
+
+The approved ca735d78 controller stopped before source execution on a wire-digest
+binding error. Standing routine definition/budget authority covered the unchanged
+unstarted calls after correction; no new human response was invented. Param's
+30-item collection failed strict configuration because its asyncio plugin was
+unregistered. Jsonpickle exposed 81/83 items, omitting two required Ruff checks.
+No reference/counterexample body ran and no task was added. Both remain excluded.
+All six cumulative operations/5.994088584091514 seconds remain charged; two
+canonical chains and owned cleanup reconcile. Grant: 13333/3755/120131.70525092818/$0.
+
+D127 defers Param/Ruff support and further corpus expansion. The next work is a
+bounded 21-pair development comparison using the 65 working snapshots, followed
+by evidence-bound selection/admission restraint. Seven tasks per family from
+21 repositories enable descriptive usefulness and capture checks; they do not
+replace the frozen 8/28/105 campaign or prove positive live selection value.
+Development exposure excludes related repositories from every formal stage;
+quantify the loss before dispatch. Keep resource acceptance separate. New models
+and public-source disclosure need a concrete exact review. Source b09911a0, wheel
+b3d9c5d0 and completed source/package/docs checks remain unchanged and are not
+repeated. C13 remains IN_PROGRESS; release remains unauthorized.
+
+The bounded usefulness pilot is now prepared:21pairs/21repositories/seven per family,
+Ponytail4.10.0 optional against the ordinary gpt-6-astra medium agent. Review
+bf8d62f2c30c5923f72731d7259cd792733b344bfe1915b778ae0bf23f0362c9 binds284assets
+and permits42turns/1095operations/68380reservedseconds/$0 on the existing grant.
+No new software,images,dependencies or services. Forty-two rendered prompt checks,
+six canonical old-trial replays,seven missing-evidence stop fixtures,five grader
+binding fixtures and three old-pair analysis checks passed;none supplies new
+benchmark evidence. After model exposure24related snapshots leave all formal
+stages,leaving41potential candidates. Qualification thresholds remain unchanged.
+Actual new model/public-disclosure authority is pending;no architecture decision.
+
+Active69-document lint passed using the offline cache. An overbroad explicit lint
+of the excluded historical plan-coverage file reported old blank-line,fence and
+HTML discrepancies;those historical bytes are preserved. New appended blank lines
+were corrected. The69-document pinned runtime check remains its original completed
+evidence,not a new check after these status edits. Full source/package/docs-runtime
+checks are not repeated for this report/controller-only work.

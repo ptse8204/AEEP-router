@@ -1,0 +1,49 @@
+{
+  "passed": true,
+  "actual_human_source_authority": "ca735d78f53c33685af78d487eb83bdc06edf743e0630233eadeb070f76d4518",
+  "operator_control_amendment": "78778e136ac859322f1c79c03904ef799b31ea699e6a7a4904524c3288d73d2b",
+  "cumulative_operations": 6,
+  "cumulative_seconds": 5.994088584091514,
+  "physical_source_calls": 2,
+  "source_body_reference_counterexample_calls": 0,
+  "canonical_completed_receipt_chains": 2,
+  "new_runtime_probes": 0,
+  "cases_added": 0,
+  "grant_before": [
+    13327,
+    3755,
+    120125.71116234409,
+    "0.0"
+  ],
+  "grant_after": [
+    13333,
+    3755,
+    120131.70525092818,
+    "0.0"
+  ],
+  "all_operations_complete": true,
+  "all_owned_containers_and_canary_absent": true,
+  "source_unchanged": true,
+  "all_images_caches_and_prior_failures_retained": true,
+  "source_statuses": {
+    "param1073": {
+      "qualified": false,
+      "native_ids_observed": 30,
+      "collect_exit": 3,
+      "cause": "pytest_asyncio plugin not enabled;asyncio_default_fixture_loop_scope option unregistered under strict warning policy. No assertion removed."
+    },
+    "jsonpickle587": {
+      "qualified": false,
+      "native_ids_observed": 81,
+      "collect_exit": 0,
+      "missing_required_ids": [
+        "tests/handler_test.py::ruff",
+        "tests/object_test.py::ruff"
+      ],
+      "cause": "Required pytest-ruff items absent. The source-only projection cannot qualify the original declared lint obligations without the upstream linter/plugin/config path. Do not drop them.",
+      "decision": "Exclude this proposed audit on the current runtime;defer optional Ruff integration instead of expanding core scope for one case."
+    }
+  },
+  "new_model_cash_build_download_install": false,
+  "qualification_comparative_usefulness_selection": false
+}

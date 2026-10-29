@@ -1,63 +1,51 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**Status as of October 29: cached-only review d1caf28b completed successfully.**
-The one COPY-only image built from retained9f47. Exact output image:
-`sha256:35dc1bcb7e8162c2a0cef6cbd30bc4bf276c082b11b6e5fc259b6800e8c5ca04`,
-tag `aeep-toolkit-v2/repository-grader:py313-shared-native-git-20261028`.
-The inherited configuration and parent layers match;all images remain.
-No downloads,libraries,package installations,models or cash were added.
+**Status as of October 29: the latest two source audits added no tasks.**
+Review ca735d78 was approved. Its controller stopped before source execution on
+formatted-file versus canonical-wire digests. The standing routine definition/
+budget delegation covered correction of that control binding for the same six
+unstarted calls; it did not create a new human approval or retry source execution.
+The two earlier bookkeeping charges remain. Two subsequent collections completed:
+Param exposed all 30 identities but exited 3 because its asyncio plugin was not
+registered; Jsonpickle exposed 81 of 83 required identities, missing two Ruff
+items. Neither reached reference/counterexample grading. Both remain excluded.
+[Results and reconciliation](../../reports/toolkit-v2/c13/repository-audit-canonical-binding-20261029/RESULTS.md)
+retain two canonical completed receipt chains and all six cumulative operations,
+5.994088584091514 charged seconds, zero models/cash, and confirmed owned cleanup.
+No image was changed or deleted. Param plugin preparation is inert and deferred.
 
-Both profiles passed fresh boundary/state/transport and native-event checks.
-Actual Git/linker/local-command/Identify checks passed. Dead's reference passed
-38/38 required identities;the original failed the one bug test and passed37
-preservation tests. The raw/default reference passed too. The frozen171-test
-JSON-logger reference and12-failure original controls behaved as expected.
-[Actual results](../../reports/toolkit-v2/c13/repository-cached-git-20261029/execution-result.json)
-and [canonical audit](../../reports/toolkit-v2/c13/repository-cached-git-20261029/runtime-execution/completion-audit.json)
-retain19completed receipt/attempt chains. All22operations reconcile and charge
-41.88380412571132seconds. All new owned containers and the unchanged canary are
-absent. Cache,context,new image,old images and prior failures remain.
+The working [provisional pool](../../reports/toolkit-v2/c13/repository-cached-git-20261029/provisional-pool.json)
+remains 65 snapshots / 41 repositories / 5075 required identities: 27 single-file,
+23 multi-file and 15 authored audits. These are grader reproductions, not capability
+qualification or comparative value. The formal balanced 141-case plan still has
+76 missing cases before any new development exclusions. Its thresholds remain.
 
-The [provisional pool](../../reports/toolkit-v2/c13/repository-cached-git-20261029/provisional-pool.json)
-now contains65snapshots/41repositories/5075required identities:27single-file,
-23multi-file and15audits. The frozen141-case cohort still needs76cases
-(20single-file,24multi-file,32audit). The repeated JSON-logger controls add no
-independent case. Older source/runtime bindings remain;there is no automatic
-corpus-wide or model qualification. No stage is frozen and no candidate is
-adopted. Comparative usefulness,correct live selection,resource acceptance,
-human control and release remain open.
+D127 stops corpus expansion as the immediate critical path. Prepare a bounded
+21-pair development comparison from existing tasks: seven per family and one
+snapshot per repository, ordinary capable Codex versus optional Ponytail 4.10.0.
+Record source exclusions, uncertainty and exact execution/disclosure scope before
+models. Then exercise actual evidence-bound admission/selection restraint.
+Positive selection benefit needs independent applicable value; a pilot or a
+synthetic decision matrix cannot close that gate. Defer incompatible workloads.
+Each next test must name its decision and stop condition. Resource acceptance
+remains separate. No architecture choice is required.
 
-The preceding a11807f2operation remains complete and charged2.9479576251469553
-seconds after its expected-library guard omitted the inherited ELF loader. Its
-archive/context and the exact failure remain. The actual network-attempt count
-is unknown within its reviewed maximum2. Newd1caf28bused only the verified cache.
-The read-only parent export verified the loader and other libraries;the unchanged
-owned export/static scratch were removed. No earlier attempt was replayed or
-refunded. Shared-native17defe159remains terminal at its nested-pin preflight;
-its independently approved package20anddocs69checks passed and were not repeated.
-Current sourceb09911a0 retains13passed source gates,1775tests/21skips in both full
-runs,82%coverage,both branch gates,and the installed wheelb3d9c5d0checks.
+The [bounded usefulness plan](../../reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/PLAN.md)
+and [exact execution review](../../reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/operation-review.json)
+are prepared. All 284 assets and 42 task prompt bindings check; the stop gate reopens
+six old canonical trials and rejects seven missing-evidence fixtures. These checks
+supply no new task-value evidence. Source-only selected archives total 2502866 bytes.
+After exposure, 24 related snapshots must leave all formal stages, leaving 41
+provisional candidates. The review allows 42 model-turn reservations, 1095 operations
+and 68380 reserved seconds at $0; these are conservative ceilings, not predictions.
+Actual new execution/public disclosure approval is pending. No services have started.
 
-Grant counters now13327/3755/120125.71116234409/0.0. Current expiry-only amendment
-5d9e7d9aends2026-10-29T20:04:36.625328Z. Check the live ledger/expiry before future
-execution. The50GiB reserve holds. Safe next work is source/license/scope/runtime
-curation of independent cached repository cases and preparation of a finite
-execution review on the now-verified image. No architecture or budget decision.
-No further runtime/model/source execution is authorized by unused d1caf28bslots.
-
-Two new cached audits are prepared,not executed:Param1073andJsonpickle587.
-They retain29/82published identities plus one explicit preservation guard each.
-Jsonpickle's non-runtime Git/linter/docs edits are separately recorded and outside
-this authored serializer scope;test-patch and other row fields are unchanged.
-Current exact review[ca735d78](../../reports/toolkit-v2/c13/repository-cached-audits-20261029/operation-review.json)
-binds the two sources,source notices,current backend and controller. It permits
-six calls/eight additional existing-grant operations/360reservedseconds,zero
-models/cash/downloads/installs/builds/credentials/release. Prior19canonical chains
-reopen and all backend definitions/environment match;new runtime probes are zero.
-Preparation/definition/budget guards and three authored dispatch scenarios passed.
-These are inert checks,not new source reproduction. Actual untrusted execution
-approval is needed because completed d1caf28bcovered other source subjects.
-No architecture or budget decision. Source/package/docs checks are not repeated.
+Current grant counters: 13333 operations / 3755 turns / 120131.70525092818 seconds /
+$0. Expiry-only amendment 5d9e7d9a ends 2026-10-29T20:04:36.625328Z. Check current
+ledger and expiry before dispatch. Source b09911a0 remains unchanged: all 13 source
+gates, 1775 tests / 21 skips in both full runs, 82% coverage, both branch gates,
+20 installed wheel checks and 69-document offline check are retained. Do not
+repeat them for report-only changes. Earlier failures and all charges remain.
 
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
@@ -100,19 +88,19 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: 'c46e55b'
-last_check_command: 'completed d1caf28b/consolidate-runtime.py;cached-audits prepare_cases.py,check_preparation.py,check_dispatch.py'
-last_check_result: 'Actual pool65/5075IDs. Two authored audit seeds/4payloads prepared with all29/82published assertions plus guards;no source execution. Exact prior19backend chains reopen;8operation budget rejects9;3wrapper fixtures pass. Newreviewca735d78pending,6calls/8ops/360seconds;grant unchanged13327/3755/120125.71116234409/0.0.'
-next_action: 'Obtain exact cached-audits reviewca735d78f53c33685af78d487eb83bdc06edf743e0630233eadeb070f76d4518 approval,check current grant/expiry,and run repository-cached-audits-20261029/run_review.py once. New subjects need6source calls;reuse exact verified backend without probe/package/docs/source-suite replay. Preserve all original assertions and counters;adopt only actual reproduced provisional cases,then continue independent corpus preparation.'
+last_verified_commit: '591ef4d'
+last_check_command: 'audit canonical readback;usefulness-pilot task,evidence,grade,analysis and controller checks;offline make docs-lint'
+last_check_result: 'Two excluded source collections reconcile6ops/5.994088584091514seconds. Pilot21pairs/21repos prepared;42 task bindings,6 canonical trial replays,7 evidence-stop fixtures,5 grade-binding checks,3 old pairs reanalyzed;284 assets match. No new models/services started. Active69doc lint passed;old excluded report lint issues preserved.'
+next_action: 'Obtain exact pilot reviewbf8d62f2c30c5923f72731d7259cd792733b344bfe1915b778ae0bf23f0362c9 execution/public-disclosure approval;then verify current grant/expiry and run repository-usefulness-pilot-20261029/run-review.py once. Maximum42turns/1095ops/68380reservedseconds/$0;retain all charges. On completion run canonical audit and actual admission-restraint analysis. No corpus expansion,package/docs/source-suite reruns or architecture decision.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'Exact ca735d78 approval is pending for two new authored source audits:6offline calls/8additional existing-grant operations/360seconds,on retained35dc1bcb. Zero models,cash,downloads,installs,builds,credentials,services,activation,release or deletion. Completed d1caf28b covered different subjects;routine inert preparation is delegated.'
-  - 'Future real-task model qualification/usefulness/selection execution and any additional untrusted software require their concrete reviewed scopes. The corpus and study are not yet ready;no architecture or budget decision is being requested.'
-  - 'Release/publication,paid services,credential access,wider disclosure,and retained-image/volume/backup or unrelated-resource removal remain outside authority. Historical exact-review outcomes remain in the journal and immutable artifacts below.'
+  - 'Exact reviewbf8d62f2c30c5923f72731d7259cd792733b344bfe1915b778ae0bf23f0362c9 awaits actual approval:21new public repository task disclosures and up to42 model-turn reservations in existing isolated workers/proxy,1095operations/68380reservedseconds/$0. Earlier source-audit approval allowed zero models and different subjects. No architecture or new infrastructure decision.'
+  - 'Param asyncio and Jsonpickle Ruff support are deferred,not blockers for the working-pool comparison. Their untrusted execution is not authorized by unused old slots.'
+  - 'Release/publication,paid services,credential access,wider disclosure,and retained-image/volume/backup or unrelated-resource removal remain outside authority.'
 unknowns:
   - 'Agent-skill-eval scripted dispatch is verified; its Codex harness is unqualified. The managed path uses the recorded AEEP fallback decision.'
   - 'The original study finds zero success gain and no supported 10% time benefit. Strict token pairs remain 0/105; historical candidate-specific use and generated-tool invocation remain unknown. New diagnostics do not repair history.'

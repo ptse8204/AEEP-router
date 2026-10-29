@@ -1,0 +1,106 @@
+{
+  "batch_completed": true,
+  "review_sha256": "4c41a80ad55b0e477966316f884fd57bc1e917cdba7ff8d330a409882d5fc526",
+  "source_digest": "b09911a0b7b79f6f78a5371bbad53580ff0692fc3d371592a983437898a19fcf",
+  "model_turns": 0,
+  "qualification": false,
+  "admission": false,
+  "comparative_usefulness": false,
+  "results": [
+    {
+      "case_id": "holoviz__param-1073-aeep-contract-audit",
+      "reproduction_eligible": false,
+      "variants": [],
+      "exclusion": "collection_or_exhaustive_scope_failed",
+      "error_type": "ValueError",
+      "reason": "Native collection did not complete on the reviewed runtime"
+    },
+    {
+      "case_id": "jsonpickle__jsonpickle-587-aeep-contract-audit",
+      "reproduction_eligible": false,
+      "variants": [],
+      "exclusion": "collection_or_exhaustive_scope_failed",
+      "error_type": "ValueError",
+      "reason": "Missing or overlapping alias group"
+    }
+  ],
+  "receipts": [
+    {
+      "name": "collection-holoviz__param-1073-aeep-contract-audit",
+      "operation_id": "recipe_generation_ae85b6cee5b74fa18dcd1e493df551dc-call-1",
+      "receipt_id": "rcpt_180466f03aa742a89660b0d9a3b9752f",
+      "receipt_ref": "401a17c34d7afcfb74d179c7d1c4b597066fa4973e1d3d70d890ea3a3e980ee8",
+      "container_name": "aeep-812f4fdf09c662f9927ae237a4a4db54",
+      "container_removed": true,
+      "environment_digest": "eb8db9dbd52b4272db4f5ae1c586e63b1fdbd0f971cab7158fcd823812e4c46a",
+      "attempt_state": "COMPLETED",
+      "profile": "operator"
+    },
+    {
+      "name": "collection-jsonpickle__jsonpickle-587-aeep-contract-audit",
+      "operation_id": "recipe_generation_ae85b6cee5b74fa18dcd1e493df551dc-call-2",
+      "receipt_id": "rcpt_2bf70fefc06f4e6a9231465dd6b0726d",
+      "receipt_ref": "d88c9db8e9fb8c4e28f26ef890989808e9e69a21749277ab65e98b4abc81a7d4",
+      "container_name": "aeep-77310071f463af89ecdcf2df98f217bd",
+      "container_removed": true,
+      "environment_digest": "eb8db9dbd52b4272db4f5ae1c586e63b1fdbd0f971cab7158fcd823812e4c46a",
+      "attempt_state": "COMPLETED",
+      "profile": "operator"
+    }
+  ],
+  "observations": [
+    {
+      "name": "collection-holoviz__param-1073-aeep-contract-audit",
+      "operation_id": "recipe_generation_ae85b6cee5b74fa18dcd1e493df551dc-call-1",
+      "raw_file": "raw-observation-1.json",
+      "raw_sha256": "b4914fabf73296dd088dd8d3d40cedf5d6fc6c86e81d99c666fc01b68db961ec",
+      "execution_error_type": null,
+      "profile": "operator"
+    },
+    {
+      "name": "collection-jsonpickle__jsonpickle-587-aeep-contract-audit",
+      "operation_id": "recipe_generation_ae85b6cee5b74fa18dcd1e493df551dc-call-2",
+      "raw_file": "raw-observation-2.json",
+      "raw_sha256": "868c731c03d2e14d090ce3248cfac4d5c45d8b585ab264d951e66e33e4e69036",
+      "execution_error_type": null,
+      "profile": "operator"
+    }
+  ],
+  "grant_before": [
+    13329,
+    3755,
+    120126.67630838603,
+    "0.0"
+  ],
+  "conformance_reused": {
+    "source_digest": "b09911a0b7b79f6f78a5371bbad53580ff0692fc3d371592a983437898a19fcf",
+    "image_id": "sha256:35dc1bcb7e8162c2a0cef6cbd30bc4bf276c082b11b6e5fc259b6800e8c5ca04",
+    "evidence_review_sha256": "a5ab9d595b67d7a6a7b6c1ea1aadd4c6777aae547515adafbf2b7b3c9343824b",
+    "evidence_audit_sha256": "73318b284d9207d42a7c83fad4537a05bd9aba8f897f549f92b2ecbe20e742a6",
+    "canonical_completed_receipt_chains_reopened": 19,
+    "executor_definitions_and_environment_identical": true,
+    "shared_default_compatibility_passed": true,
+    "new_runtime_probes": 0,
+    "new_subjects_not_qualified_by_reuse": true
+  },
+  "conformance_mode": "exact_current_backend_reuse",
+  "new_runtime_probes": 0,
+  "default_observer_probes_passed": true,
+  "runtime_support_statuses": {},
+  "derived_review_sha256": "41129318320358f40070d63e7ec0cfef347f7575b028b6bb3cdeaa07a30b3341",
+  "shared_default_compatibility_passed": true,
+  "ledger_operations": 4,
+  "contained_calls_started": 2,
+  "elapsed_complete": true,
+  "containers_removed": true,
+  "source_unchanged": true,
+  "eligible_cases": 0,
+  "grant_after": [
+    13333,
+    3755,
+    120131.70525092818,
+    "0.0"
+  ],
+  "elapsed_seconds": 5.08307895809412,
+  "cases_adopted": 0
+}

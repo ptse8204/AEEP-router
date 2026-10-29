@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/repository-cached-audits-20261029/runtime-execution/run.py", line 307, in <module>
+    asyncio.run(main())
+    ~~~~~~~~~~~^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 720, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/repository-cached-audits-20261029/runtime-execution/run.py", line 198, in main
+    collected = await observe('collection-' + identity, payload, item['sha256'])
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/repository-cached-audits-20261029/runtime-execution/run.py", line 137, in observe
+    raise StopDispatch('Staged payload changed')
+StopDispatch: Staged payload changed

@@ -1,0 +1,682 @@
+{
+  "purpose": "21-pair development usefulness comparison; no formal qualification/admission",
+  "source_digest": "b09911a0b7b79f6f78a5371bbad53580ff0692fc3d371592a983437898a19fcf",
+  "pool_manifest_sha256": "416b613522bdef6091b761dd6adc28e343b6760f82b69ed4c29ce3b6f2d22379",
+  "pool_case_count": 65,
+  "selected_count": 21,
+  "repository_count": 21,
+  "family_counts": {
+    "single-file-repair": 7,
+    "multi-file-repair": 7,
+    "contract-audit": 7
+  },
+  "public_root": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public",
+  "public_archive_bytes": 2502866,
+  "only_selected_hash_named_public_archives": true,
+  "models_or_workers_started": false,
+  "cases": [
+    {
+      "task_id": "matthewwithanm__python-markdownify-200",
+      "family": "single-file-repair",
+      "repository": "https://github.com/matthewwithanm/python-markdownify",
+      "revision": "ac5736f0a3ccd072202aa99edcbe3cc31340461b",
+      "origin_kind": "upstream_issue",
+      "license": "Source: MIT; issue data: CC-BY-4.0",
+      "provenance": "Provisional screening curation only; not adopted or frozen. Base ac5736f0a3ccd072202aa99edcbe3cc31340461b; Codeload SHA256 fbaf6fc2cfb1e38001c5156402a4db3573467abf5c4d4566722bba55dbed477a. Source prefix markdownify/. Published Python repair is the reference; original source is the negative. A nonempty original-source counterexample maps to the same tested filesystem as the empty baseline and is not a separate observation. No source/test/installer executed during preparation. Declared Python3.8 adapted to3.13 /pytest8.3.5; explicit pure wheels, no project install or optional plugin autoload. Non-source published edits omitted: []. Licensing and source bounds reviewed; runtime reproduction remains required. These sources have not been used to change the grader.",
+      "case_schema": "assessment.repository-suite-case.v1",
+      "public_input_sha256": "ce0ea6d62df639c6d23e1a1bbb8d769e129e89dc0382ad22615788dd47006f07",
+      "public_archive": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/68a3304179cd076dd9e6b292fe66cbdf9177e61be0705714b9d34c011513a9e4.tar.gz",
+        "sha256": "68a3304179cd076dd9e6b292fe66cbdf9177e61be0705714b9d34c011513a9e4",
+        "size_bytes": 19698
+      },
+      "archive_files": 21,
+      "expanded_bytes": 83248,
+      "required_identities": 49,
+      "historical_runtime_binding": {
+        "evidence_manifest": "reports/toolkit-v2/c13/repository-compact-patches-20261022/provisional-pool.json",
+        "source_runtime_binding": "Preserve the referenced manifest; old runtime conformance is not transferred."
+      },
+      "current_model_grading_qualification": false
+    },
+    {
+      "task_id": "AbsaOSS__generate-release-notes-207",
+      "family": "multi-file-repair",
+      "repository": "https://github.com/AbsaOSS/generate-release-notes",
+      "revision": "dcf920a9f86605820ee5304dccb9ace9bf7b26e9",
+      "origin_kind": "upstream_issue",
+      "license": "Source: Apache-2.0; issue data: CC-BY-4.0",
+      "provenance": "Provisional screening curation only; not adopted or frozen. Base dcf920a9f86605820ee5304dccb9ace9bf7b26e9; Codeload SHA256 9a81bd9a935af007f22c801bff5b760861582c813475631b05f27d5fb4f0e2a7. Source prefix release_notes_generator/. Published Python repair is the reference; original source is the negative. A nonempty original-source counterexample maps to the same tested filesystem as the empty baseline and is not a separate observation. No source/test/installer executed during preparation. Declared Python3.12 adapted to3.13 /pytest8.3.5; explicit pure wheels, no project install or optional plugin autoload. Non-source published edits omitted: ['DEVELOPER.md']. Licensing and source bounds reviewed; runtime reproduction remains required. These sources have not been used to change the grader. Version2 explicitly loads pytest_mock3.15.0 from the separately reviewed image; autoload remains disabled. Exact SDK/runtime closure is private, frozen and offline. Original v1 draft remains unexecuted.",
+      "case_schema": "assessment.repository-suite-case.v2",
+      "public_input_sha256": "3f2626d5ca7da2da9bcbf8e658fbc14072873d4e83e69a3e22887ea018bcc136",
+      "public_archive": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/38dd17e313f54ff5638bbabc278e3dabf445c4e3402ee48b7b5f2cbb928edf6d.tar.gz",
+        "sha256": "38dd17e313f54ff5638bbabc278e3dabf445c4e3402ee48b7b5f2cbb928edf6d",
+        "size_bytes": 161320
+      },
+      "archive_files": 136,
+      "expanded_bytes": 725455,
+      "required_identities": 24,
+      "historical_runtime_binding": {
+        "evidence_manifest": "reports/toolkit-v2/c13/repository-compact-patches-20261022/provisional-pool.json",
+        "source_runtime_binding": "Preserve the referenced manifest; old runtime conformance is not transferred."
+      },
+      "current_model_grading_qualification": false
+    },
+    {
+      "task_id": "MahjongRepository__mahjong-62-aeep-contract-audit",
+      "family": "contract-audit",
+      "repository": "https://github.com/MahjongRepository/mahjong",
+      "revision": "743a8fe7f37faadc2889bd2c69c6d448a12b8efa",
+      "origin_kind": "authored_control",
+      "license": "Source: MIT; issue data: CC-BY-4.0",
+      "provenance": "Provisional screening curation only; not adopted or frozen. Base 743a8fe7f37faadc2889bd2c69c6d448a12b8efa; Codeload SHA256 cf9cd452bf900a2a0a53d27b1a35f329ad9432506fcf97d8f7bfe8a2df0c74af. Source prefix mahjong/. Starting snapshot includes the published Python repair (patch SHA256 e07993c4469e6c7f9eddfb03dab8886b014a1dd07f18ea2fa087e064eff0d95f); this is an authored audit, not the unmodified upstream issue. Empty patch is correct under a byte-preservation contract; original bug source is its negative. Original test assertions remain, plus an explicitly authored snapshot-preservation test. No source/test/installer executed during preparation. Declared Python3.10 adapted to3.13 /pytest8.3.5; explicit pure wheels, no project install or optional plugin autoload. Non-source published edits omitted: []. Licensing and source bounds reviewed; runtime reproduction remains required. These sources have not been used to change the grader.",
+      "case_schema": "assessment.repository-suite-case.v1",
+      "public_input_sha256": "e01545c039146ab952a02b2e75afec4167d9978353044fd66871212f468d56d3",
+      "public_archive": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/f0c33f748fa112bf3b179cff0ef6959fe1a7844fef329553809de6d3567132bf.tar.gz",
+        "sha256": "f0c33f748fa112bf3b179cff0ef6959fe1a7844fef329553809de6d3567132bf",
+        "size_bytes": 44547
+      },
+      "archive_files": 108,
+      "expanded_bytes": 307596,
+      "required_identities": 6,
+      "historical_runtime_binding": {
+        "evidence_manifest": "reports/toolkit-v2/c13/repository-compact-patches-20261022/provisional-pool.json",
+        "source_runtime_binding": "Preserve the referenced manifest; old runtime conformance is not transferred."
+      },
+      "current_model_grading_qualification": false
+    },
+    {
+      "task_id": "python-markdown__markdown-1587",
+      "family": "single-file-repair",
+      "repository": "https://github.com/Python-Markdown/markdown",
+      "revision": "9933a0a4699f3dea91f46528a2bf54863f531c08",
+      "origin_kind": "upstream_issue",
+      "license": "Source: BSD-3-Clause; issue data: CC-BY-4.0",
+      "provenance": "Provisional screening curation only; not adopted or frozen. Base 9933a0a4699f3dea91f46528a2bf54863f531c08; Codeload SHA256 637040c52c1090e68d8a44eed14caba33af9185f7224c229777dd284676aa0b9. Source prefix markdown/. Published Python repair is the reference; original source is the negative. A nonempty original-source counterexample maps to the same tested filesystem as the empty baseline and is not a separate observation. No source/test/installer executed during preparation. Declared Python3.12 adapted to3.13 /pytest8.3.5; explicit pure wheels, no project install or optional plugin autoload. Non-source published edits omitted: ['docs/changelog.md']. Licensing and source bounds reviewed; runtime reproduction remains required. These sources have not been used to change the grader.",
+      "case_schema": "assessment.repository-suite-case.v1",
+      "public_input_sha256": "28a3f89342b76ffd072341fda47bdf750ac2483ebd267a5e9483dd1b82c2a8a6",
+      "public_archive": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/9e2c8c0944d3f9308109ce4a53082a31f25c10f11c198d33e625fee9f8a19ef3.tar.gz",
+        "sha256": "9e2c8c0944d3f9308109ce4a53082a31f25c10f11c198d33e625fee9f8a19ef3",
+        "size_bytes": 365671
+      },
+      "archive_files": 439,
+      "expanded_bytes": 1912493,
+      "required_identities": 118,
+      "historical_runtime_binding": {
+        "evidence_manifest": "reports/toolkit-v2/c13/repository-compact-patches-20261022/provisional-pool.json",
+        "source_runtime_binding": "Preserve the referenced manifest; old runtime conformance is not transferred."
+      },
+      "current_model_grading_qualification": false
+    },
+    {
+      "task_id": "gerlero__foamlib-315",
+      "family": "multi-file-repair",
+      "repository": "https://github.com/gerlero/foamlib",
+      "revision": "3ca383de60c17cada3b91a5673d14b41096e470b",
+      "origin_kind": "upstream_issue",
+      "license": "Source: GPL-3.0-only; issue data: CC-BY-4.0",
+      "provenance": "Provisional screening curation only; not adopted or frozen. Base 3ca383de60c17cada3b91a5673d14b41096e470b; Codeload SHA256 cacbbf332949f5df0c2de1fcc3965ac89ee7af41f20a179b6c65fe1d3f3bf5be. Source prefix foamlib/. Published Python repair is the reference; original source is the negative. A nonempty original-source counterexample maps to the same tested filesystem as the empty baseline and is not a separate observation. An explicitly authored protected test exercises the second changed behavior described in the public issue; unchanged source must also fail it. Original upstream assertions remain unchanged. No source/test/installer executed during preparation. Declared Python3.9 adapted to3.13 /pytest8.3.5; explicit pure wheels, no project install or optional plugin autoload. Non-source published edits omitted: []. Licensing and source bounds reviewed; runtime reproduction remains required. These sources have not been used to change the grader.",
+      "case_schema": "assessment.repository-suite-case.v1",
+      "public_input_sha256": "8bc8418d0605a6dc4903b059e252b385a9fcd95c4d947d169b43c3e10d21c4c7",
+      "public_archive": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/a0c557392902fac11efd3f4f2285682b94d7829f57970c7b62988a0b77fc2eef.tar.gz",
+        "sha256": "a0c557392902fac11efd3f4f2285682b94d7829f57970c7b62988a0b77fc2eef",
+        "size_bytes": 99738
+      },
+      "archive_files": 50,
+      "expanded_bytes": 255661,
+      "required_identities": 3,
+      "historical_runtime_binding": {
+        "evidence_manifest": "reports/toolkit-v2/c13/repository-compact-patches-20261022/provisional-pool.json",
+        "source_runtime_binding": "Preserve the referenced manifest; old runtime conformance is not transferred."
+      },
+      "current_model_grading_qualification": false
+    },
+    {
+      "task_id": "iluvcapra__pycmx-12-aeep-contract-audit",
+      "family": "contract-audit",
+      "repository": "https://github.com/iluvcapra/pycmx",
+      "revision": "b6379ec1fe7c300ec1c18a3ef0c2c680e65007c8",
+      "origin_kind": "authored_control",
+      "license": "Source: MIT; issue data: CC-BY-4.0",
+      "provenance": "Provisional screening curation only; not adopted or frozen. Base b6379ec1fe7c300ec1c18a3ef0c2c680e65007c8; Codeload SHA256 ccf07ecae4e9b20701c35be5a1dca1cc08d1fd17dd188b2a22e5cb092c3c5d23. Source prefix pycmx/. Starting snapshot includes the published Python repair (patch SHA256 0c2751ce59532743ced82ee98e186d39ad64e8714f5bf51e979166c0d2cdf92f); this is an authored audit, not the unmodified upstream issue. Empty patch is correct under a byte-preservation contract; original bug source is its negative. Original test assertions remain, plus an explicitly authored snapshot-preservation test. No source/test/installer executed during preparation. Declared Python3.9 adapted to3.13 /pytest8.3.5; explicit pure wheels, no project install or optional plugin autoload. Non-source published edits omitted: ['README.md']. Licensing and source bounds reviewed; runtime reproduction remains required. These sources have not been used to change the grader.",
+      "case_schema": "assessment.repository-suite-case.v1",
+      "public_input_sha256": "fef754655f50c46c44b3c5d5615ddfdbc93dbe5cfe4a0fcaeee68d62688719ea",
+      "public_archive": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/314f6dd68ffeb162bf91cca9934077c17ee620169d27a93c295660ede8b68975.tar.gz",
+        "sha256": "314f6dd68ffeb162bf91cca9934077c17ee620169d27a93c295660ede8b68975",
+        "size_bytes": 183410
+      },
+      "archive_files": 44,
+      "expanded_bytes": 1274748,
+      "required_identities": 10,
+      "historical_runtime_binding": {
+        "evidence_manifest": "reports/toolkit-v2/c13/repository-compact-patches-20261022/provisional-pool.json",
+        "source_runtime_binding": "Preserve the referenced manifest; old runtime conformance is not transferred."
+      },
+      "current_model_grading_qualification": false
+    },
+    {
+      "task_id": "spulec__freezegun-582",
+      "family": "single-file-repair",
+      "repository": "https://github.com/spulec/freezegun",
+      "revision": "2bb47113a5f9f290d26630c92732e58f49557179",
+      "origin_kind": "upstream_issue",
+      "license": "Source: Apache-2.0; issue data: CC-BY-4.0",
+      "provenance": "Provisional screening curation only; not adopted or frozen. Base 2bb47113a5f9f290d26630c92732e58f49557179; Codeload SHA256 2f9621c8d94720540344359a2278e955b4eef39475b830706a2809bce77f425e. Source prefix freezegun/. Published Python repair is the reference; original source is the negative. A nonempty original-source counterexample maps to the same tested filesystem as the empty baseline and is not a separate observation. No source/test/installer executed during preparation. Declared Python3.12 adapted to3.13 /pytest8.3.5; explicit pure wheels, no project install or optional plugin autoload. Non-source published edits omitted: ['CHANGELOG']. Licensing and source bounds reviewed; runtime reproduction remains required. These sources have not been used to change the grader.",
+      "case_schema": "assessment.repository-suite-case.v1",
+      "public_input_sha256": "913aef6f5365a65b568f568155e39bb8d686110a681124799ddb2296bbf4ba44",
+      "public_archive": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/53b10ca4bd7d839219c9c61c051c974962d2889509dc9fe1cfe233e7f6034e87.tar.gz",
+        "sha256": "53b10ca4bd7d839219c9c61c051c974962d2889509dc9fe1cfe233e7f6034e87",
+        "size_bytes": 32476
+      },
+      "archive_files": 40,
+      "expanded_bytes": 140062,
+      "required_identities": 10,
+      "historical_runtime_binding": {
+        "evidence_manifest": "reports/toolkit-v2/c13/repository-compact-patches-20261022/provisional-pool.json",
+        "source_runtime_binding": "Preserve the referenced manifest; old runtime conformance is not transferred."
+      },
+      "current_model_grading_qualification": false
+    },
+    {
+      "task_id": "oOo0oOo__leanclient-24-declared-tests",
+      "family": "multi-file-repair",
+      "repository": "https://github.com/oOo0oOo/leanclient",
+      "revision": "2343b4ef41e8cf82676c2a999b61981e2b57c244",
+      "origin_kind": "upstream_issue",
+      "license": "Source: MIT; issue data: CC-BY-4.0",
+      "provenance": "Provisional screening curation only; not adopted or frozen. Base 2343b4ef41e8cf82676c2a999b61981e2b57c244; Codeload SHA256 381599f64f3ad3d270b522e979e68208ddbdef9f43b61e40857ed9973ffb31e0. Source prefix leanclient/. Published Python repair is the reference; original source is the negative. A nonempty original-source counterexample maps to the same tested filesystem as the empty baseline and is not a separate observation. An explicitly authored protected test exercises the second changed behavior described in the public issue; unchanged source must also fail it. Original upstream assertions remain unchanged. No source/test/installer executed during preparation. Declared Python3.12 adapted to3.13 /pytest8.3.5; explicit pure wheels, no project install or optional plugin autoload. Non-source published edits omitted: []. Licensing and source bounds reviewed; runtime reproduction remains required. These sources have not been used to change the grader. Source-only scope retains the full leanclient and tests trees and root license/packaging/README, excluding unrelated docs/examples/CI. Full upstream archive and every omitted file are retained in diagnostic-source-scope-review.json. This is not the full upstream checkout or official runtime. New explicit declared-node task scope. All14 original required identities/assertions are retained; a protected appended collection hook deselects only other identities. Earlier whole-module observation remains FAILED at exit1 (14 declared PASSED,3 unrelated ERROR). No frozen campaign/holdout, success threshold or global exit guard changes. No claim about the three Lean-server tests or their unretained traceback.",
+      "case_schema": "assessment.repository-suite-case.v1",
+      "public_input_sha256": "02d45a9840daa4c3c2e349d1be7d3439cec6c87164b7afedea43950bc62427c8",
+      "public_archive": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/c69321cd8c470bb1adbc5b8b37bed6abcacc2e5ae7cde21eaffcb7471ed2d39c.tar.gz",
+        "sha256": "c69321cd8c470bb1adbc5b8b37bed6abcacc2e5ae7cde21eaffcb7471ed2d39c",
+        "size_bytes": 59186
+      },
+      "archive_files": 35,
+      "expanded_bytes": 281705,
+      "required_identities": 14,
+      "historical_runtime_binding": {
+        "evidence_manifest": "reports/toolkit-v2/c13/repository-compact-patches-20261022/provisional-pool.json",
+        "source_runtime_binding": "Preserve the referenced manifest; old runtime conformance is not transferred."
+      },
+      "current_model_grading_qualification": false
+    },
+    {
+      "task_id": "scitokens__scitokens-202-aeep-contract-audit",
+      "family": "contract-audit",
+      "repository": "https://github.com/scitokens/scitokens",
+      "revision": "0f40bbee39626cc64e751478aa875ee05e94bedb",
+      "origin_kind": "authored_control",
+      "license": "Retained upstream license text hashes; issue metadata CC-BY-4.0",
+      "provenance": "Unadopted pre-stage source/runtime curation. Source revision and exact retained license hashes are in prepared-cases.json. Authored fixed-snapshot audit: published Python repair applied to public source, empty reference, original-source negative and private byte-preservation guard. All original required assertions retained; protected exact-node collection composes the prior collection hook and selects only declared identities. No whole-checkout, official benchmark/runtime equivalence or arbitrary repository-preservation claim. Scope/omissions reviewed before models; no model outcomes used. Extra wheels are private optional grader supports, not host/core dependencies.",
+      "case_schema": "assessment.repository-suite-case.v1",
+      "public_input_sha256": "bf59f51350a4ad3d516233e88403d91ae954179cbf29fcad0873e2921ff30013",
+      "public_archive": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/344ccc84d540afc7c81cabbd0aa012aa6b69a4847039d3ecdc99e6a4b58d7dc2.tar.gz",
+        "sha256": "344ccc84d540afc7c81cabbd0aa012aa6b69a4847039d3ecdc99e6a4b58d7dc2",
+        "size_bytes": 57808
+      },
+      "archive_files": 65,
+      "expanded_bytes": 220953,
+      "required_identities": 12,
+      "historical_runtime_binding": {
+        "evidence_manifest": "reports/toolkit-v2/c13/repository-compact-patches-20261022/provisional-pool.json",
+        "source_runtime_binding": "Preserve the referenced manifest; old runtime conformance is not transferred."
+      },
+      "current_model_grading_qualification": false
+    },
+    {
+      "task_id": "jpadilla__pyjwt-1040-declared-tests",
+      "family": "single-file-repair",
+      "repository": "https://github.com/jpadilla/pyjwt",
+      "revision": "ebc941de508f76acaa78defb15197092458f1874",
+      "origin_kind": "upstream_issue",
+      "license": "Retained upstream license text hashes; issue metadata CC-BY-4.0",
+      "provenance": "Unadopted pre-stage source/runtime curation. Source revision and exact retained license hashes are in prepared-cases.json. Published Python repair reference and original-source negative. All original required assertions retained; protected exact-node collection composes the prior collection hook and selects only declared identities. No whole-checkout, official benchmark/runtime equivalence or arbitrary repository-preservation claim. Scope/omissions reviewed before models; no model outcomes used. Extra wheels are private optional grader supports, not host/core dependencies.",
+      "case_schema": "assessment.repository-suite-case.v1",
+      "public_input_sha256": "e41e11921c7eeadd272cfa8fc9e61ee6edcd918223b021353154c13ffcad44bf",
+      "public_archive": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/5878ccab2f46d4cbe3f42dbb2f0b12e31014119fa0e71d8da36edae3ccff7bd3.tar.gz",
+        "sha256": "5878ccab2f46d4cbe3f42dbb2f0b12e31014119fa0e71d8da36edae3ccff7bd3",
+        "size_bytes": 88245
+      },
+      "archive_files": 92,
+      "expanded_bytes": 349611,
+      "required_identities": 77,
+      "historical_runtime_binding": {
+        "evidence_manifest": "reports/toolkit-v2/c13/repository-compact-patches-20261022/provisional-pool.json",
+        "source_runtime_binding": "Preserve the referenced manifest; old runtime conformance is not transferred."
+      },
+      "current_model_grading_qualification": false
+    },
+    {
+      "task_id": "python-scim__scim2-models-126-declared-tests",
+      "family": "multi-file-repair",
+      "repository": "https://github.com/python-scim/scim2-models",
+      "revision": "c6bd77ff9fa383f31360eb9a30b8315ec49d8e97",
+      "origin_kind": "upstream_issue",
+      "license": "Retained upstream license text hashes; issue metadata CC-BY-4.0",
+      "provenance": "Unadopted pre-stage source/runtime curation. Source revision and exact retained license hashes are in prepared-cases.json. Published Python repair reference and original-source negative. All original required assertions retained; protected exact-node collection composes the prior collection hook and selects only declared identities. No whole-checkout, official benchmark/runtime equivalence or arbitrary repository-preservation claim. Scope/omissions reviewed before models; no model outcomes used. Extra wheels are private optional grader supports, not host/core dependencies.",
+      "case_schema": "assessment.repository-suite-case.v3",
+      "public_input_sha256": "9cc79fe5e0ff6a68c0abf71867da085a740d2306a6de4bb7275ed5ce911c9b6a",
+      "public_archive": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/77a0f4d2dc6d9e08ecd284b44f43afa45377af553fccbffc4763ce79762cc67b.tar.gz",
+        "sha256": "77a0f4d2dc6d9e08ecd284b44f43afa45377af553fccbffc4763ce79762cc67b",
+        "size_bytes": 194089
+      },
+      "archive_files": 123,
+      "expanded_bytes": 980639,
+      "required_identities": 340,
+      "historical_runtime_binding": {
+        "evidence_manifest": "reports/toolkit-v2/c13/repository-workload-batch-20261022/runtime-execution/completion-audit.json",
+        "source_digest": "59b9d61c8af596b9c8e1ce63b842754e76152811f74f4b1fb0a13e5753a52269",
+        "image_id": "sha256:324a1fee6ee58475ecfdc659c98be5b5a8480fae4389b26b13b5b0b43bc32d2b",
+        "image_tag": "aeep-toolkit-v2/repository-grader:py313-pydantic-django-20261022"
+      },
+      "current_model_grading_qualification": false
+    },
+    {
+      "task_id": "gidgethub__gidgethub-225-aeep-contract-audit",
+      "family": "contract-audit",
+      "repository": "https://github.com/gidgethub/gidgethub",
+      "revision": "abdf45e24b0ac2dbbcb3b423594326d9627c3db8",
+      "origin_kind": "authored_control",
+      "license": "Retained upstream license text hashes; issue metadata CC-BY-4.0",
+      "provenance": "Unadopted pre-stage source/runtime curation. Source revision and exact retained license hashes are in prepared-cases.json. Authored fixed-snapshot audit: published Python repair applied to public source, empty reference, original-source negative and private byte-preservation guard. All original required assertions retained; protected exact-node collection composes the prior collection hook and selects only declared identities. No whole-checkout, official benchmark/runtime equivalence or arbitrary repository-preservation claim. Scope/omissions reviewed before models; no model outcomes used. Extra wheels are private optional grader supports, not host/core dependencies.",
+      "case_schema": "assessment.repository-suite-case.v1",
+      "public_input_sha256": "2b6bc48adac999865249574aa797921b4bdae38adca17c42071b66bb6c48de4d",
+      "public_archive": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/019764bd0d4a1ecb0e0977b221ffee9e34ada6b75deaf71079cc69c321af86e6.tar.gz",
+        "sha256": "019764bd0d4a1ecb0e0977b221ffee9e34ada6b75deaf71079cc69c321af86e6",
+        "size_bytes": 122725
+      },
+      "archive_files": 78,
+      "expanded_bytes": 1383986,
+      "required_identities": 58,
+      "historical_runtime_binding": {
+        "evidence_manifest": "reports/toolkit-v2/c13/repository-compact-patches-20261022/provisional-pool.json",
+        "source_runtime_binding": "Preserve the referenced manifest; old runtime conformance is not transferred."
+      },
+      "current_model_grading_qualification": false
+    },
+    {
+      "task_id": "sciunto-org__python-bibtexparser-515-declared-tests",
+      "family": "single-file-repair",
+      "repository": "https://github.com/sciunto-org/python-bibtexparser",
+      "revision": "c015d35b8d89055eaadf992801aa6436ec783463",
+      "origin_kind": "upstream_issue",
+      "license": "Retained upstream license text hashes; issue metadata CC-BY-4.0",
+      "provenance": "Unadopted pre-stage source/runtime curation. Source revision and exact retained license hashes are in prepared-cases.json. Published Python repair reference and original-source negative. All original required assertions retained; protected exact-node collection composes the prior collection hook and selects only declared identities. No whole-checkout, official benchmark/runtime equivalence or arbitrary repository-preservation claim. Scope/omissions reviewed before models; no model outcomes used. Extra wheels are private optional grader supports, not host/core dependencies.",
+      "case_schema": "assessment.repository-suite-case.v1",
+      "public_input_sha256": "403332cf976ed72510aba8767d2efb784387f1ddec418830f921f0d564a5d567",
+      "public_archive": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/2c00892609fc95c9988a2eca47cc4faeab6a44803d77ba9c970ce2909ab08916.tar.gz",
+        "sha256": "2c00892609fc95c9988a2eca47cc4faeab6a44803d77ba9c970ce2909ab08916",
+        "size_bytes": 80585
+      },
+      "archive_files": 83,
+      "expanded_bytes": 351663,
+      "required_identities": 27,
+      "historical_runtime_binding": {
+        "evidence_manifest": "reports/toolkit-v2/c13/repository-compact-patches-20261022/provisional-pool.json",
+        "source_runtime_binding": "Preserve the referenced manifest; old runtime conformance is not transferred."
+      },
+      "current_model_grading_qualification": false
+    },
+    {
+      "task_id": "researchobject__ro-crate-py-248-declared-tests",
+      "family": "multi-file-repair",
+      "repository": "https://github.com/ResearchObject/ro-crate-py",
+      "revision": "949318679c22a419aff021d188f02261ae037ce8",
+      "origin_kind": "upstream_issue",
+      "license": "Retained upstream license text hashes; issue metadata CC-BY-4.0",
+      "provenance": "Unadopted pre-stage source/runtime curation. Source revision and exact retained license hashes are in prepared-cases.json. Published Python repair reference and original-source negative. All original required assertions retained; protected exact-node collection composes the prior collection hook and selects only declared identities. No whole-checkout, official benchmark/runtime equivalence or arbitrary repository-preservation claim. Scope/omissions reviewed before models; no model outcomes used. Extra wheels are private optional grader supports, not host/core dependencies.",
+      "case_schema": "assessment.repository-suite-case.v4",
+      "public_input_sha256": "33029367a705d2339c7f589e89ee0962cfdad70027edab3b9f33ee4555058867",
+      "public_archive": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/05cee311bf2fdc07127847c5e12c771cfe4ef596983ad3417d0304c0ecbb975f.tar.gz",
+        "sha256": "05cee311bf2fdc07127847c5e12c771cfe4ef596983ad3417d0304c0ecbb975f",
+        "size_bytes": 368008
+      },
+      "archive_files": 116,
+      "expanded_bytes": 2364469,
+      "required_identities": 38,
+      "historical_runtime_binding": {
+        "evidence_manifest": "reports/toolkit-v2/c13/repository-effective-runtime-20261027/runtime-execution/completion-audit.json",
+        "source_digest": "86012b45856c2ceea8c123a008e5dbbb30e12adac8e816de8ff80500976d4e9b",
+        "image_id": "sha256:df79d0f38f0a2a060d9562a4ed6997c21cd501cebe7b49867a6076e5f41d64da",
+        "image_tag": "aeep-toolkit-v2/repository-grader:py313-effective-runtime-20261027",
+        "observer_profile": "Exact operator pytest-row framing and bounded failure-tail wrapper; no automatic default-observer campaign qualification",
+        "recipe_digest": "dfb9cd6d9263f1619306b111daa7795f11ce06203b63c05d4bf2a815835a9382"
+      },
+      "current_model_grading_qualification": false
+    },
+    {
+      "task_id": "hynek__svcs-140-aeep-contract-audit",
+      "family": "contract-audit",
+      "repository": "https://github.com/hynek/svcs",
+      "revision": "f8585ce9f8fe6df9da4cf405cec1e03f4708be26",
+      "origin_kind": "authored_control",
+      "license": "Retained upstream license text hashes; issue metadata CC-BY-4.0",
+      "provenance": "Unadopted pre-stage source/runtime curation. Source revision and exact retained license hashes are in prepared-cases.json. Authored fixed-snapshot audit: published Python repair applied to public source, empty reference, original-source negative and private byte-preservation guard. All original required assertions retained; protected exact-node collection composes the prior collection hook and selects only declared identities. No whole-checkout, official benchmark/runtime equivalence or arbitrary repository-preservation claim. Scope/omissions reviewed before models; no model outcomes used. Extra wheels are private optional grader supports, not host/core dependencies.",
+      "case_schema": "assessment.repository-suite-case.v3",
+      "public_input_sha256": "cd9fad8b39d20da20f9e348e6905fd785a2f4c3f10bc976d7e2ba7af1d03afd9",
+      "public_archive": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/62d9acc0518bb04eea3e07c1ae52d56536e3fc0139c6ac0e4061785b45623426.tar.gz",
+        "sha256": "62d9acc0518bb04eea3e07c1ae52d56536e3fc0139c6ac0e4061785b45623426",
+        "size_bytes": 34982
+      },
+      "archive_files": 37,
+      "expanded_bytes": 168862,
+      "required_identities": 32,
+      "historical_runtime_binding": {
+        "evidence_manifest": "reports/toolkit-v2/c13/repository-workload-batch-20261022/runtime-execution/completion-audit.json",
+        "source_digest": "59b9d61c8af596b9c8e1ce63b842754e76152811f74f4b1fb0a13e5753a52269",
+        "image_id": "sha256:324a1fee6ee58475ecfdc659c98be5b5a8480fae4389b26b13b5b0b43bc32d2b",
+        "image_tag": "aeep-toolkit-v2/repository-grader:py313-pydantic-django-20261022"
+      },
+      "current_model_grading_qualification": false
+    },
+    {
+      "task_id": "joke2k__django-environ-592-declared-tests",
+      "family": "single-file-repair",
+      "repository": "https://github.com/joke2k/django-environ",
+      "revision": "e2e50deaa5ffcb06ad39c352a99c226a19968e43",
+      "origin_kind": "upstream_issue",
+      "license": "Retained upstream license text hashes; issue metadata CC-BY-4.0",
+      "provenance": "Unadopted pre-stage source/runtime curation. Source revision and exact retained license hashes are in prepared-cases.json. Published Python repair reference and original-source negative. All original required assertions retained; protected exact-node collection composes the prior collection hook and selects only declared identities. No whole-checkout, official benchmark/runtime equivalence or arbitrary repository-preservation claim. Scope/omissions reviewed before models; no model outcomes used. Extra wheels are private optional grader supports, not host/core dependencies.",
+      "case_schema": "assessment.repository-suite-case.v1",
+      "public_input_sha256": "1a001c0354e895c273cd1ba65152f362b366ecd29cec57ae4c1beda55ba6c02f",
+      "public_archive": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/d3d53f316a9ac7e77ae2dfae501d35d2337ebd6a5273ea25c80dabf3f35b55ad.tar.gz",
+        "sha256": "d3d53f316a9ac7e77ae2dfae501d35d2337ebd6a5273ea25c80dabf3f35b55ad",
+        "size_bytes": 57453
+      },
+      "archive_files": 55,
+      "expanded_bytes": 225945,
+      "required_identities": 42,
+      "historical_runtime_binding": {
+        "evidence_manifest": "reports/toolkit-v2/c13/repository-compact-patches-20261022/provisional-pool.json",
+        "source_runtime_binding": "Preserve the referenced manifest; old runtime conformance is not transferred."
+      },
+      "current_model_grading_qualification": false
+    },
+    {
+      "task_id": "canopen-python__canopen-613-declared-tests",
+      "family": "multi-file-repair",
+      "repository": "https://github.com/canopen-python/canopen",
+      "revision": "593f0621f41ce3f94c09322ca8414c7e649b128e",
+      "origin_kind": "upstream_issue",
+      "license": "Retained upstream license text hashes; issue metadata CC-BY-4.0",
+      "provenance": "Unadopted pre-stage source/runtime curation. Source revision and exact retained license hashes are in prepared-cases.json. Published Python repair reference and original-source negative. All original required assertions retained; protected exact-node collection composes the prior collection hook and selects only declared identities. No whole-checkout, official benchmark/runtime equivalence or arbitrary repository-preservation claim. Scope/omissions reviewed before models; no model outcomes used. Extra wheels are private optional grader supports, not host/core dependencies.",
+      "case_schema": "assessment.repository-suite-case.v5",
+      "public_input_sha256": "abadc2b1f40b3fa8729e042ff313d1aecb52dc96ba4eef672f68155447d566b7",
+      "public_archive": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/acb9bf4e8eab94b3b5a7554ab6f913086eb2c5d714a57350b60ce708f37b2a90.tar.gz",
+        "sha256": "acb9bf4e8eab94b3b5a7554ab6f913086eb2c5d714a57350b60ce708f37b2a90",
+        "size_bytes": 104376
+      },
+      "archive_files": 75,
+      "expanded_bytes": 547457,
+      "required_identities": 8,
+      "historical_runtime_binding": {
+        "evidence_manifest": "reports/toolkit-v2/c13/repository-multifile-sources-20261027/runtime-execution/completion-audit.json",
+        "source_digest": "374579f1121ee62964613f5b5a392fa2063939feba9393c65086da8052f2ac13",
+        "image_id": "sha256:9f473c493b7af1854922807d2acbdcbe3b955313dc57f203e6f73c9c50f9ea85",
+        "image_tag": "aeep-toolkit-v2/repository-grader:py313-multifile-20261027",
+        "observer_profile": "Explicit larger-source profile,pytest framing,Hypothesis seed29 and bounded failed-public-log envelope;no automatic campaign qualification",
+        "recipe_digest": "673e765c82eac462013ab3dda2f4f0fd67f2125e431a9929893d916aa229d557"
+      },
+      "current_model_grading_qualification": false
+    },
+    {
+      "task_id": "lincolnloop__goodconf-51-aeep-contract-audit",
+      "family": "contract-audit",
+      "repository": "https://github.com/lincolnloop/goodconf",
+      "revision": "501ee693ab92816e6718c54a4026f4e82350cd52",
+      "origin_kind": "authored_control",
+      "license": "Retained upstream license text hashes; issue metadata CC-BY-4.0",
+      "provenance": "Unadopted pre-stage source/runtime curation. Source revision and exact retained license hashes are in prepared-cases.json. Authored fixed-snapshot audit: published Python repair applied to public source, empty reference, original-source negative and private byte-preservation guard. All original required assertions retained; protected exact-node collection composes the prior collection hook and selects only declared identities. No whole-checkout, official benchmark/runtime equivalence or arbitrary repository-preservation claim. Scope/omissions reviewed before models; no model outcomes used. Extra wheels are private optional grader supports, not host/core dependencies.",
+      "case_schema": "assessment.repository-suite-case.v3",
+      "public_input_sha256": "467320de8d4f1637cf82bf82a56db049076825ac8ffb21f03b2220b7dad5be2d",
+      "public_archive": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/dd9af8858a8e96f7e3df8dabc7bf906dc5b10005ad66d8d62557a943504bb694.tar.gz",
+        "sha256": "dd9af8858a8e96f7e3df8dabc7bf906dc5b10005ad66d8d62557a943504bb694",
+        "size_bytes": 14033
+      },
+      "archive_files": 20,
+      "expanded_bytes": 46232,
+      "required_identities": 22,
+      "historical_runtime_binding": {
+        "evidence_manifest": "reports/toolkit-v2/c13/repository-supported-suites-20261027/runtime-execution/completion-audit.json",
+        "source_digest": "4cb0bf7419eb2fa74a8bf2c3e63eb8fdc4e9a477c999e7fd72f45aace456e919",
+        "image_id": "sha256:f60342e9c6a50933353ebea047b89935c75579541cf628f4fe4d15a1c0515e93",
+        "image_tag": "aeep-toolkit-v2/repository-grader:py313-cached-suites-20261027"
+      },
+      "current_model_grading_qualification": false
+    },
+    {
+      "task_id": "serge-sans-paille__beniget-121-declared-tests-py313-truth",
+      "family": "single-file-repair",
+      "repository": "https://github.com/serge-sans-paille/beniget",
+      "revision": "6a4605a48591a9d2b0e65493edfe3b690b1a1271",
+      "origin_kind": "upstream_issue",
+      "license": "Retained upstream license text hashes; issue metadata CC-BY-4.0",
+      "provenance": "Unadopted pre-stage source/runtime curation. Source revision and exact retained license hashes are in prepared-cases.json. Published Python repair reference and original-source negative. All original required assertions retained; protected exact-node collection composes the prior collection hook and selects only declared identities. No whole-checkout, official benchmark/runtime equivalence or arbitrary repository-preservation claim. Scope/omissions reviewed before models; no model outcomes used. Extra wheels are private optional grader supports, not host/core dependencies. Separate pre-freeze Python3.13 truth adaptation under standing definition authority: every422 required assertion remains. Three newer-builtin identities already pass on the original source in this runtime and become preservation checks; three WindowsError checks remain fail-to-pass. Old six-failure metadata/classifier outcome remains failed. Exact physical payload hashes and completed receipts are reused, not replayed. No model result informed this adaptation.",
+      "case_schema": "assessment.repository-suite-case.v1",
+      "public_input_sha256": "eae4378e7150745361f3e2b04a7f8de7dc745c1f9a83101e56d2753e7a17f21c",
+      "public_archive": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/de3dcb3fdb6270998ce24fcae4d8a79270c87ff51896910cbf68e715911d7d1f.tar.gz",
+        "sha256": "de3dcb3fdb6270998ce24fcae4d8a79270c87ff51896910cbf68e715911d7d1f",
+        "size_bytes": 33754
+      },
+      "archive_files": 20,
+      "expanded_bytes": 162346,
+      "required_identities": 422,
+      "historical_runtime_binding": {
+        "evidence_manifest": "reports/toolkit-v2/c13/repository-compact-patches-20261022/provisional-pool.json",
+        "source_runtime_binding": "Preserve the referenced manifest; old runtime conformance is not transferred."
+      },
+      "current_model_grading_qualification": false
+    },
+    {
+      "task_id": "tefra__xsdata-1126-issue-behavior-audit",
+      "family": "multi-file-repair",
+      "repository": "https://github.com/tefra/xsdata",
+      "revision": "b6bd7e912ee346a0f5471543db31e2d6aa8a9809",
+      "origin_kind": "authored_control",
+      "license": "Retained upstream license text hashes; issue metadata CC-BY-4.0",
+      "provenance": "Unadopted pre-stage source/runtime curation. Source revision and exact retained license hashes are in prepared-cases.json. Published Python repair reference and original-source negative. All original required assertions retained; protected exact-node collection composes the prior collection hook and selects only declared identities. No whole-checkout, official benchmark/runtime equivalence or arbitrary repository-preservation claim. Scope/omissions reviewed before models; no model outcomes used. Extra wheels are private optional grader supports, not host/core dependencies. Explicit operator pytest-benchmark plugin for the source pyproject --benchmark-skip option. Source/reference/protected test bytes,required identities and all assertions unchanged. Earlier collection failures remain failed. Authored issue-derived behavior guard,not an unmodified upstream benchmark: two same-named nested enums through existing promotion/lookup APIs. All original assertions/identities retained;only the existing first-party selector literal extended. No golden source-text,private new method or exact implementation assertion.",
+      "case_schema": "assessment.repository-suite-case.v5",
+      "public_input_sha256": "4c523dba61f43556970959b251423edc3b33fcc85619141ee80b8c846a50b4eb",
+      "public_archive": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/cc7d9d8712746971b216188420716736881390e626bf40cce9c173060559d428.tar.gz",
+        "sha256": "cc7d9d8712746971b216188420716736881390e626bf40cce9c173060559d428",
+        "size_bytes": 328513
+      },
+      "archive_files": 445,
+      "expanded_bytes": 1882413,
+      "required_identities": 29,
+      "historical_runtime_binding": {
+        "evidence_manifest": "reports/toolkit-v2/c13/repository-issue-behavior-20261028/control-continuation/completion-audit.json",
+        "source_digest": "374579f1121ee62964613f5b5a392fa2063939feba9393c65086da8052f2ac13",
+        "image_id": "sha256:9f473c493b7af1854922807d2acbdcbe3b955313dc57f203e6f73c9c50f9ea85",
+        "image_tag": "aeep-toolkit-v2/repository-grader:py313-multifile-20261027",
+        "observer_profile": "Issue-derived authored behavior guard plus all original upstream tests;reference/original/both partials reproduced. Current boundary and benchmark-plugin receipts retained;no automatic model qualification.",
+        "recipe_digest": "673e765c82eac462013ab3dda2f4f0fd67f2125e431a9929893d916aa229d557"
+      },
+      "current_model_grading_qualification": false
+    },
+    {
+      "task_id": "prometheus__client_python-1134-aeep-contract-audit",
+      "family": "contract-audit",
+      "repository": "https://github.com/prometheus/client_python",
+      "revision": "47d2b416d75f5569863e2bb08a15b58218563814",
+      "origin_kind": "authored_control",
+      "license": "Retained upstream license text hashes; issue metadata CC-BY-4.0",
+      "provenance": "Unadopted pre-stage source/runtime curation. Source revision and exact retained license hashes are in prepared-cases.json. Authored fixed-snapshot audit: published Python repair applied to public source, empty reference, original-source negative and private byte-preservation guard. All original required assertions retained; protected exact-node collection composes the prior collection hook and selects only declared identities. No whole-checkout, official benchmark/runtime equivalence or arbitrary repository-preservation claim. Scope/omissions reviewed before models; no model outcomes used. Extra wheels are private optional grader supports, not host/core dependencies.",
+      "case_schema": "assessment.repository-suite-case.v3",
+      "public_input_sha256": "ef066a69efe19e6db311339c46225cbe117bd56481ba0ed73dcc690f17fe4034",
+      "public_archive": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/983ff828b2ab65503d93dbdd7e94ef63cc3036a5cec36162506c35bde7c35651.tar.gz",
+        "sha256": "983ff828b2ab65503d93dbdd7e94ef63cc3036a5cec36162506c35bde7c35651",
+        "size_bytes": 52249
+      },
+      "archive_files": 34,
+      "expanded_bytes": 219111,
+      "required_identities": 30,
+      "historical_runtime_binding": {
+        "evidence_manifest": "reports/toolkit-v2/c13/repository-supported-suites-20261027/runtime-execution/completion-audit.json",
+        "source_digest": "4cb0bf7419eb2fa74a8bf2c3e63eb8fdc4e9a477c999e7fd72f45aace456e919",
+        "image_id": "sha256:f60342e9c6a50933353ebea047b89935c75579541cf628f4fe4d15a1c0515e93",
+        "image_tag": "aeep-toolkit-v2/repository-grader:py313-cached-suites-20261027"
+      },
+      "current_model_grading_qualification": false
+    }
+  ],
+  "assets": {
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-screening-curation-20261022-v2/public/68a3304179cd076dd9e6b292fe66cbdf9177e61be0705714b9d34c011513a9e4.tar.gz": "68a3304179cd076dd9e6b292fe66cbdf9177e61be0705714b9d34c011513a9e4",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-screening-curation-20261022-v2/protected/matthewwithanm__python-markdownify-200-tests.tar.gz": "05bfc9c166ba0034cdff89ca84f8cdee9b36d46c8594972d60860b015564a195",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-screening-curation-20261022-v2/protected/matthewwithanm__python-markdownify-200-reference.json": "962512247193436e95c1c1674f03bb8bdf5755962fa9460df2013dc4e4b47dda",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-cohort-20261022/wheels/pytest-8.3.5-py3-none-any.whl": "c69214aa47deac29fad6c2a4f590b9c4a9fdb16a403176fe154b79c0b4d4d820",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-cohort-20261022/wheels/iniconfig-2.1.0-py3-none-any.whl": "9deba5723312380e77435581c6bf4935c94cbfab9b1ed33ef8d238ea168eb760",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-cohort-20261022/wheels/packaging-25.0-py3-none-any.whl": "29572ef2b1f17581046b3a2227d5c611fb25ec70ca1ba8554b24b0e69331a484",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-cohort-20261022/wheels/pluggy-1.6.0-py3-none-any.whl": "e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-curation-20261022-runtime/beautifulsoup4-4.12.3-py3-none-any.whl": "b80878c9f40111313e55da8ba20bdba06d8fa3969fc68304167741bbf9e082ed",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-curation-20261022-runtime/soupsieve-2.6-py3-none-any.whl": "e72c4ff06e4fb6e4b5a9f0f55fe6e81514581fca1515028625d0f299c602ccc9",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-cohort-20261022/wheels/six-1.17.0-py2.py3-none-any.whl": "4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/68a3304179cd076dd9e6b292fe66cbdf9177e61be0705714b9d34c011513a9e4.tar.gz": "68a3304179cd076dd9e6b292fe66cbdf9177e61be0705714b9d34c011513a9e4",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-replacement-runtime-20261022-cases/public/38dd17e313f54ff5638bbabc278e3dabf445c4e3402ee48b7b5f2cbb928edf6d.tar.gz": "38dd17e313f54ff5638bbabc278e3dabf445c4e3402ee48b7b5f2cbb928edf6d",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-replacement-runtime-20261022-cases/protected/AbsaOSS__generate-release-notes-207-tests.tar.gz": "e48639bd7903299fd7fe825ac8b0a9dd88bd1458cf4f2592f2cee88251ee3132",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-replacement-runtime-20261022-cases/protected/AbsaOSS__generate-release-notes-207-reference.json": "a7652e835d1208a1312f26b81b5a43c95075ecc1d49347dbd3a42d504ccdb7a9",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/38dd17e313f54ff5638bbabc278e3dabf445c4e3402ee48b7b5f2cbb928edf6d.tar.gz": "38dd17e313f54ff5638bbabc278e3dabf445c4e3402ee48b7b5f2cbb928edf6d",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-screening-curation-20261022-v2/public/f0c33f748fa112bf3b179cff0ef6959fe1a7844fef329553809de6d3567132bf.tar.gz": "f0c33f748fa112bf3b179cff0ef6959fe1a7844fef329553809de6d3567132bf",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-screening-curation-20261022-v2/protected/MahjongRepository__mahjong-62-aeep-contract-audit-tests.tar.gz": "62a053c4bf670bdff9a7b3ae4da3d5d48b0ce09efaf6fdacec8a53e737436aed",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-screening-curation-20261022-v2/protected/MahjongRepository__mahjong-62-aeep-contract-audit-reference.json": "32052955a0b9055ea6463832a6b7fe43bc0663b94106e8b7bf23e0ab8bbbb72c",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/f0c33f748fa112bf3b179cff0ef6959fe1a7844fef329553809de6d3567132bf.tar.gz": "f0c33f748fa112bf3b179cff0ef6959fe1a7844fef329553809de6d3567132bf",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-screening-curation-20261022-v2/public/9e2c8c0944d3f9308109ce4a53082a31f25c10f11c198d33e625fee9f8a19ef3.tar.gz": "9e2c8c0944d3f9308109ce4a53082a31f25c10f11c198d33e625fee9f8a19ef3",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-screening-curation-20261022-v2/protected/python-markdown__markdown-1587-tests.tar.gz": "f2a08f2b7a84d195c8cb2643fe9b9b2a8746e921be8a7ae66d6cd54ad6f05b66",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-screening-curation-20261022-v2/protected/python-markdown__markdown-1587-reference.json": "2fb3436b5818fc74dbe69c138d57a1de9c08e7291ed8661e4ca8c890742a025a",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/9e2c8c0944d3f9308109ce4a53082a31f25c10f11c198d33e625fee9f8a19ef3.tar.gz": "9e2c8c0944d3f9308109ce4a53082a31f25c10f11c198d33e625fee9f8a19ef3",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-replacement-runtime-20261022-additional-cases/public/a0c557392902fac11efd3f4f2285682b94d7829f57970c7b62988a0b77fc2eef.tar.gz": "a0c557392902fac11efd3f4f2285682b94d7829f57970c7b62988a0b77fc2eef",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-replacement-runtime-20261022-additional-cases/protected/gerlero__foamlib-315-tests.tar.gz": "3024d7b83c9d7011a2a65618aa77c6718685a997cafecc10c5168c9c3daba46a",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-replacement-runtime-20261022-additional-cases/protected/gerlero__foamlib-315-reference.json": "ca411bbd11ed1bace84e6c02db317ce09d367a9c198879d4e9a8ddfae3c034cc",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/a0c557392902fac11efd3f4f2285682b94d7829f57970c7b62988a0b77fc2eef.tar.gz": "a0c557392902fac11efd3f4f2285682b94d7829f57970c7b62988a0b77fc2eef",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-replacement-runtime-20261022-cases/public/314f6dd68ffeb162bf91cca9934077c17ee620169d27a93c295660ede8b68975.tar.gz": "314f6dd68ffeb162bf91cca9934077c17ee620169d27a93c295660ede8b68975",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-replacement-runtime-20261022-cases/protected/iluvcapra__pycmx-12-aeep-contract-audit-tests.tar.gz": "80d9328758ea3cd8ce71c0d45aeac63d133d35c0c3a1e0e2b904182e9f9f3cf6",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-replacement-runtime-20261022-cases/protected/iluvcapra__pycmx-12-aeep-contract-audit-reference.json": "82086d1c41ef80b16240f07775aa583cca8a9ce020156fac22ba581e13ace3c4",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/314f6dd68ffeb162bf91cca9934077c17ee620169d27a93c295660ede8b68975.tar.gz": "314f6dd68ffeb162bf91cca9934077c17ee620169d27a93c295660ede8b68975",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-screening-curation-20261022-v2/public/53b10ca4bd7d839219c9c61c051c974962d2889509dc9fe1cfe233e7f6034e87.tar.gz": "53b10ca4bd7d839219c9c61c051c974962d2889509dc9fe1cfe233e7f6034e87",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-screening-curation-20261022-v2/protected/spulec__freezegun-582-tests.tar.gz": "d431f6587c0d400f430e2ca85d7e01c1dca47888481d03bbf138e3fe9ae32898",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-screening-curation-20261022-v2/protected/spulec__freezegun-582-reference.json": "45db20a980cd765c9937edc8169348d637239da13e525dee22adf5b3090c7fcd",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-cohort-20261022/wheels/python_dateutil-2.9.0.post0-py2.py3-none-any.whl": "a8b2bc7bffae282281c8140a97d3aa9c14da0b136dfe83f850eea9a5f7470427",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/53b10ca4bd7d839219c9c61c051c974962d2889509dc9fe1cfe233e7f6034e87.tar.gz": "53b10ca4bd7d839219c9c61c051c974962d2889509dc9fe1cfe233e7f6034e87",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-replacement-runtime-20261022-additional-cases/public/c69321cd8c470bb1adbc5b8b37bed6abcacc2e5ae7cde21eaffcb7471ed2d39c.tar.gz": "c69321cd8c470bb1adbc5b8b37bed6abcacc2e5ae7cde21eaffcb7471ed2d39c",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-declared-tests-20261022-v3/tests.tar.gz": "f9b198a4b25ff800a84f604565bdc96b608f11b5cfce8275d105f6dc0026056d",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-declared-tests-20261022-v3/reference.json": "06715a7291e06fc60cad391c8e1055465f993168809696e0a19ff52e0abb4535",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/c69321cd8c470bb1adbc5b8b37bed6abcacc2e5ae7cde21eaffcb7471ed2d39c.tar.gz": "c69321cd8c470bb1adbc5b8b37bed6abcacc2e5ae7cde21eaffcb7471ed2d39c",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-corpus-expansion-20261022-cases-v2/scitokens__scitokens-202-aeep-contract-audit/344ccc84d540afc7c81cabbd0aa012aa6b69a4847039d3ecdc99e6a4b58d7dc2.tar.gz": "344ccc84d540afc7c81cabbd0aa012aa6b69a4847039d3ecdc99e6a4b58d7dc2",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-corpus-expansion-20261022-cases-v2/scitokens__scitokens-202-aeep-contract-audit/tests.tar.gz": "b5d365322db677381736a9210cc3483b070e768bebffb1c37de5b7642e087044",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-corpus-expansion-20261022-cases-v2/scitokens__scitokens-202-aeep-contract-audit/reference.json": "eee2086eae543920bdd521bf5356f9b6aea1c97112e3ffecb5aad020767647b6",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-replacement-runtime-20261022-wheels/pytest-8.3.5-py3-none-any.whl": "c69214aa47deac29fad6c2a4f590b9c4a9fdb16a403176fe154b79c0b4d4d820",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-replacement-runtime-20261022-wheels/iniconfig-2.1.0-py3-none-any.whl": "9deba5723312380e77435581c6bf4935c94cbfab9b1ed33ef8d238ea168eb760",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-replacement-runtime-20261022-wheels/packaging-25.0-py3-none-any.whl": "29572ef2b1f17581046b3a2227d5c611fb25ec70ca1ba8554b24b0e69331a484",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-replacement-runtime-20261022-wheels/pluggy-1.6.0-py3-none-any.whl": "e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/344ccc84d540afc7c81cabbd0aa012aa6b69a4847039d3ecdc99e6a4b58d7dc2.tar.gz": "344ccc84d540afc7c81cabbd0aa012aa6b69a4847039d3ecdc99e6a4b58d7dc2",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-corpus-expansion-20261022-cases-v2/jpadilla__pyjwt-1040-declared-tests/5878ccab2f46d4cbe3f42dbb2f0b12e31014119fa0e71d8da36edae3ccff7bd3.tar.gz": "5878ccab2f46d4cbe3f42dbb2f0b12e31014119fa0e71d8da36edae3ccff7bd3",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-corpus-expansion-20261022-cases-v2/jpadilla__pyjwt-1040-declared-tests/tests.tar.gz": "07db1150bf3f85e02a793a7e34fa36260b947e3282a127b86e73638acba6588a",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-corpus-expansion-20261022-cases-v2/jpadilla__pyjwt-1040-declared-tests/reference.json": "a924ee972ad8066f198d72605b63b82c864981485bd91a432ba560186f5c4f01",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/5878ccab2f46d4cbe3f42dbb2f0b12e31014119fa0e71d8da36edae3ccff7bd3.tar.gz": "5878ccab2f46d4cbe3f42dbb2f0b12e31014119fa0e71d8da36edae3ccff7bd3",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-workload-batch-20261022-cases-v3/python-scim__scim2-models-126-declared-tests/77a0f4d2dc6d9e08ecd284b44f43afa45377af553fccbffc4763ce79762cc67b.tar.gz": "77a0f4d2dc6d9e08ecd284b44f43afa45377af553fccbffc4763ce79762cc67b",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-workload-batch-20261022-cases-v3/python-scim__scim2-models-126-declared-tests/tests.tar.gz": "7b96c374bc5c157e99e349b12b88c0924505e2cc4325939deb3355d891dc5084",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-workload-batch-20261022-cases-v3/python-scim__scim2-models-126-declared-tests/reference.json": "a09ac670e3f014b08bd9f73854c7a7ca14f06311b5074c1471c3ad5d89485751",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/77a0f4d2dc6d9e08ecd284b44f43afa45377af553fccbffc4763ce79762cc67b.tar.gz": "77a0f4d2dc6d9e08ecd284b44f43afa45377af553fccbffc4763ce79762cc67b",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-corpus-expansion-20261022-cases-v2/gidgethub__gidgethub-225-aeep-contract-audit/019764bd0d4a1ecb0e0977b221ffee9e34ada6b75deaf71079cc69c321af86e6.tar.gz": "019764bd0d4a1ecb0e0977b221ffee9e34ada6b75deaf71079cc69c321af86e6",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-corpus-expansion-20261022-cases-v2/gidgethub__gidgethub-225-aeep-contract-audit/tests.tar.gz": "eb5a54de6c0ff4ee05cc62666eb7203c1a93a8c2ef4434a7f146723d0bd9b31d",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-corpus-expansion-20261022-cases-v2/gidgethub__gidgethub-225-aeep-contract-audit/reference.json": "1f8d7847136ef46087e9c16ae419ecf326650bc0d352ca4d96cd042ba85d345c",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-corpus-expansion-20261022-wheels/uritemplate-4.2.0-py3-none-any.whl": "962201ba1c4edcab02e60f9a0d3821e82dfc5d2d6662a21abd533879bdb8a686",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/019764bd0d4a1ecb0e0977b221ffee9e34ada6b75deaf71079cc69c321af86e6.tar.gz": "019764bd0d4a1ecb0e0977b221ffee9e34ada6b75deaf71079cc69c321af86e6",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-corpus-expansion-20261022-cases-v2/sciunto-org__python-bibtexparser-515-declared-tests/2c00892609fc95c9988a2eca47cc4faeab6a44803d77ba9c970ce2909ab08916.tar.gz": "2c00892609fc95c9988a2eca47cc4faeab6a44803d77ba9c970ce2909ab08916",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-corpus-expansion-20261022-cases-v2/sciunto-org__python-bibtexparser-515-declared-tests/tests.tar.gz": "f89b808b468163492ceec746dca5df3cb3988c2f56896e4680f4bc6ee8c83e5b",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-corpus-expansion-20261022-cases-v2/sciunto-org__python-bibtexparser-515-declared-tests/reference.json": "e28489c2915bf313c95554d7828a95cecb21be3a10c71a7a6d43fe3079fc329f",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-corpus-expansion-20261022-wheels/pylatexenc-3.0a33-py3-none-any.whl": "71221905d8e731c0600cde10af08f16f539723b6ffe17f478e56f5c0208c507a",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/2c00892609fc95c9988a2eca47cc4faeab6a44803d77ba9c970ce2909ab08916.tar.gz": "2c00892609fc95c9988a2eca47cc4faeab6a44803d77ba9c970ce2909ab08916",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-test-root-cases-20261027/researchobject__ro-crate-py-248-declared-tests/05cee311bf2fdc07127847c5e12c771cfe4ef596983ad3417d0304c0ecbb975f.tar.gz": "05cee311bf2fdc07127847c5e12c771cfe4ef596983ad3417d0304c0ecbb975f",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-test-root-cases-20261027/researchobject__ro-crate-py-248-declared-tests/tests.tar.gz": "e940b62ffc20a374394f3e3935440c93b5b873e155b73be14252898b8e178e53",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-test-root-cases-20261027/researchobject__ro-crate-py-248-declared-tests/reference.json": "66a37668836f7b533a212a4ec757d7f70b5caeeaab891fff954e8cca130fe8ea",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/05cee311bf2fdc07127847c5e12c771cfe4ef596983ad3417d0304c0ecbb975f.tar.gz": "05cee311bf2fdc07127847c5e12c771cfe4ef596983ad3417d0304c0ecbb975f",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-workload-batch-20261022-cases-v3/hynek__svcs-140-aeep-contract-audit/62d9acc0518bb04eea3e07c1ae52d56536e3fc0139c6ac0e4061785b45623426.tar.gz": "62d9acc0518bb04eea3e07c1ae52d56536e3fc0139c6ac0e4061785b45623426",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-workload-batch-20261022-cases-v3/hynek__svcs-140-aeep-contract-audit/tests.tar.gz": "62fabcc295426740d8fff7aef3ee5021a2b38d4f3c84a9c45b147ddc904f7814",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-workload-batch-20261022-cases-v3/hynek__svcs-140-aeep-contract-audit/reference.json": "2157503f770b34814140030e0eb076afde88dee4a2ae119bf95c7144ef0fae50",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/62d9acc0518bb04eea3e07c1ae52d56536e3fc0139c6ac0e4061785b45623426.tar.gz": "62d9acc0518bb04eea3e07c1ae52d56536e3fc0139c6ac0e4061785b45623426",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-corpus-expansion-20261022-cases-v2/joke2k__django-environ-592-declared-tests/d3d53f316a9ac7e77ae2dfae501d35d2337ebd6a5273ea25c80dabf3f35b55ad.tar.gz": "d3d53f316a9ac7e77ae2dfae501d35d2337ebd6a5273ea25c80dabf3f35b55ad",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-corpus-expansion-20261022-cases-v2/joke2k__django-environ-592-declared-tests/tests.tar.gz": "e0bafa5af38f57e8e2cfa5303f8cccce988b22af2edfbda6ed617ffe75687263",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-corpus-expansion-20261022-cases-v2/joke2k__django-environ-592-declared-tests/reference.json": "1bd87dfbdbf47d8cb789396bc648c3cd253b6c781d479e445dcef2c4d71b12d3",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/d3d53f316a9ac7e77ae2dfae501d35d2337ebd6a5273ea25c80dabf3f35b55ad.tar.gz": "d3d53f316a9ac7e77ae2dfae501d35d2337ebd6a5273ea25c80dabf3f35b55ad",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-multifile-cases-20261027/canopen-python__canopen-613-declared-tests/acb9bf4e8eab94b3b5a7554ab6f913086eb2c5d714a57350b60ce708f37b2a90.tar.gz": "acb9bf4e8eab94b3b5a7554ab6f913086eb2c5d714a57350b60ce708f37b2a90",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-multifile-cases-20261027/canopen-python__canopen-613-declared-tests/tests.tar.gz": "74483c557191a3eb8c278227c66eeb979984d1411e3aaadd63f8f8d94b938dbb",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-multifile-cases-20261027/canopen-python__canopen-613-declared-tests/reference.json": "abee6999dfca5f9f1f2c3c557380d710dc36680a9fed7471985c6ea8d2d2f942",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/acb9bf4e8eab94b3b5a7554ab6f913086eb2c5d714a57350b60ce708f37b2a90.tar.gz": "acb9bf4e8eab94b3b5a7554ab6f913086eb2c5d714a57350b60ce708f37b2a90",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-supported-suite-cases-20261027-v2/lincolnloop__goodconf-51-aeep-contract-audit/dd9af8858a8e96f7e3df8dabc7bf906dc5b10005ad66d8d62557a943504bb694.tar.gz": "dd9af8858a8e96f7e3df8dabc7bf906dc5b10005ad66d8d62557a943504bb694",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-supported-suite-cases-20261027-v2/lincolnloop__goodconf-51-aeep-contract-audit/tests.tar.gz": "9ed2061195f791d34c73a76c8d678bc1e0b5817b6a8c3bc0a24ae88b72fb87d3",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-supported-suite-cases-20261027-v2/lincolnloop__goodconf-51-aeep-contract-audit/reference.json": "32325ce9f10869de03c20e032b783f3ed01dcd46a3f88d233c0e2997d4a1af5e",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/dd9af8858a8e96f7e3df8dabc7bf906dc5b10005ad66d8d62557a943504bb694.tar.gz": "dd9af8858a8e96f7e3df8dabc7bf906dc5b10005ad66d8d62557a943504bb694",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-corpus-expansion-20261022-cases-v2/serge-sans-paille__beniget-121-declared-tests/de3dcb3fdb6270998ce24fcae4d8a79270c87ff51896910cbf68e715911d7d1f.tar.gz": "de3dcb3fdb6270998ce24fcae4d8a79270c87ff51896910cbf68e715911d7d1f",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-corpus-expansion-20261022-cases-v2/serge-sans-paille__beniget-121-declared-tests/tests.tar.gz": "ff8f9b372a26cd09e5bd671c1d2df1bcb53d1566a98cddb731535ebac03ef3cb",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-beniget-py313-truth-20261022/reference.json": "59bbd02584d06c2d83de3f277890c6abc12535661fd3348bd2e39589729e77b3",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-corpus-expansion-20261022-wheels/gast-0.6.0-py3-none-any.whl": "52b182313f7330389f72b069ba00f174cfe2a06411099547288839c6cbafbd54",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/de3dcb3fdb6270998ce24fcae4d8a79270c87ff51896910cbf68e715911d7d1f.tar.gz": "de3dcb3fdb6270998ce24fcae4d8a79270c87ff51896910cbf68e715911d7d1f",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-multifile-cases-20261027/tefra__xsdata-1126-declared-tests/cc7d9d8712746971b216188420716736881390e626bf40cce9c173060559d428.tar.gz": "cc7d9d8712746971b216188420716736881390e626bf40cce9c173060559d428",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-issue-behavior-20261028-v5/tefra__xsdata-1126-declared-tests/tests.tar.gz": "388f3713fb752ab40447fcc55660822763d329888380a9f9b77bf107aa2ebec2",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-issue-behavior-20261028-v5/tefra__xsdata-1126-declared-tests/reference-artifact.json": "dda9fbec3e4632029b043296bbd69e07ccf70e1716e3605ed0ccbea26ced8fbb",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/cc7d9d8712746971b216188420716736881390e626bf40cce9c173060559d428.tar.gz": "cc7d9d8712746971b216188420716736881390e626bf40cce9c173060559d428",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-supported-suite-cases-20261027-v2/prometheus__client_python-1134-aeep-contract-audit/983ff828b2ab65503d93dbdd7e94ef63cc3036a5cec36162506c35bde7c35651.tar.gz": "983ff828b2ab65503d93dbdd7e94ef63cc3036a5cec36162506c35bde7c35651",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-supported-suite-cases-20261027-v2/prometheus__client_python-1134-aeep-contract-audit/tests.tar.gz": "16915b73ef97e89cb5d33a19fc12816da13656ba75d2cc0d6d9500a2d343288c",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-supported-suite-cases-20261027-v2/prometheus__client_python-1134-aeep-contract-audit/reference.json": "526943dbec6ee1e429b04267b42b9ca707833265cf199320352541e807280899",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/983ff828b2ab65503d93dbdd7e94ef63cc3036a5cec36162506c35bde7c35651.tar.gz": "983ff828b2ab65503d93dbdd7e94ef63cc3036a5cec36162506c35bde7c35651"
+  },
+  "formal_exclusions_after_model_exposure": [
+    "matthewwithanm__python-markdownify-200",
+    "python-markdown__markdown-1587",
+    "MahjongRepository__mahjong-62-aeep-contract-audit",
+    "spulec__freezegun-582",
+    "AbsaOSS__generate-release-notes-207",
+    "iluvcapra__pycmx-12-aeep-contract-audit",
+    "gerlero__foamlib-315",
+    "oOo0oOo__leanclient-24-declared-tests",
+    "jpadilla__pyjwt-1040-declared-tests",
+    "sciunto-org__python-bibtexparser-515-declared-tests",
+    "joke2k__django-environ-592-declared-tests",
+    "scitokens__scitokens-202-aeep-contract-audit",
+    "gidgethub__gidgethub-225-aeep-contract-audit",
+    "serge-sans-paille__beniget-121-declared-tests-py313-truth",
+    "python-scim__scim2-models-90-declared-tests",
+    "python-scim__scim2-models-120-declared-tests",
+    "python-scim__scim2-models-126-declared-tests",
+    "hynek__svcs-140-aeep-contract-audit",
+    "lincolnloop__goodconf-51-aeep-contract-audit",
+    "prometheus__client_python-1134-aeep-contract-audit",
+    "researchobject__ro-crate-py-248-declared-tests",
+    "canopen-python__canopen-613-declared-tests",
+    "tefra__xsdata-1126-issue-behavior-audit",
+    "tefra__xsdata-1132-issue-behavior-audit"
+  ],
+  "formal_exclusion_count_after_model_exposure": 24,
+  "provisional_cases_remaining_after_exposure": 41,
+  "remaining_family_counts_after_exposure": {
+    "multi-file-repair": 15,
+    "single-file-repair": 18,
+    "contract-audit": 8
+  },
+  "development_cases_cannot_be_reused_even_in_formal_training": true,
+  "formal_141_case_campaign_unchanged": true,
+  "adopted_cases": 0,
+  "qualification": false,
+  "comparative_value_observed": false
+}
