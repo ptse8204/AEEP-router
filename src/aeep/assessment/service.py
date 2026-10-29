@@ -426,6 +426,8 @@ class AssessmentService:
     def budget_preview(self, plan_id: str) -> dict[str, Any]:
         plan = AssessmentPlan.model_validate(self.repository.get("plan", plan_id))
         mapping = ReviewedMapping.model_validate(self.repository.get("mapping", plan.mapping_digest))
+        from .repository_suites import require_worker_artifact_encoding
+        require_worker_artifact_encoding([*plan.suite.cases, *plan.suite.warmup_cases], mapping.subjects)
         turns_per_case = 0
         operations_per_case = 0
         cash_per_case: Decimal | None = Decimal(0)
@@ -749,6 +751,8 @@ class AssessmentService:
         mapping = ReviewedMapping.model_validate(
             self.repository.get("mapping", plan.mapping_digest)
         )
+        from .repository_suites import require_worker_artifact_encoding
+        require_worker_artifact_encoding([*plan.suite.cases, *plan.suite.warmup_cases], mapping.subjects)
         if plan.comparison is not None:
             from .comparison import define
             reference = next((item for item in mapping.dependencies if item.id == plan.reference_id), None)

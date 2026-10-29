@@ -1,5 +1,30 @@
 # Local delivery decision
 
+## October 29 update: real repository usefulness
+
+The [completed development comparison](repository-usefulness-pilot-20261029/comparison.html)
+finds identical task outcomes: 14/19 verified successes in each arm. All 38 valid
+turns have verified capture chains and all 19 treatment turns loaded Ponytail
+4.10.0 instructions. Neither output-format condition establishes resource savings.
+The actual admission API refused both development reports without changing
+admissions or allowances. These checks establish restraint for this evidence;
+positive selection value and formal capability qualification remain unproven.
+
+All task workers and graders are gone, the existing proxy is stopped, and all
+images are preserved. The full approved scope consumed 323 operations, 41 charged
+turns and 5137.359838171862 accounting seconds, including three engineering-censored
+turns. Accounting seconds are not study elapsed time. No cash was spent.
+
+A small [definition preflight](repository-codec-preflight-20261029/README.md)
+prevents the observed mixed-format error before model reservation. Its source
+verification and updated-wheel review remain separate from the completed live
+study's source. The engineering recommendation remains a bounded experimental
+handoff; production and public release remain NO_GO. No architecture decision is
+pending. The formal 8/28/105 campaign, applicable positive-value evidence, concrete
+human-control qualification and whole-system operational acceptance remain open.
+The operator removed the helped control exercise from the critical path; it does
+not block engineering or analysis, and no human completion is claimed.
+
 ## Current October 21 verification
 
 The capture repair is complete. Four actual model receipts have verified token

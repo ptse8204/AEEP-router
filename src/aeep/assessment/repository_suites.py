@@ -16,7 +16,7 @@ import tarfile
 import zlib
 from collections import Counter
 from pathlib import Path, PurePosixPath
-from typing import Any, Literal
+from typing import TYPE_CHECKING, Any, Literal
 
 from pydantic import ConfigDict, Field, TypeAdapter, model_validator
 
@@ -33,6 +33,9 @@ from ..models import (
 from .identity import protected_directory
 from .models import Digest, RecipeDefinition, content_digest
 from .repository_tasks import Probe, RepositoryPatch, checked_files
+
+if TYPE_CHECKING:
+    from ..benchmarking import BenchmarkCase
 
 MAX_ARCHIVE = 650_000
 MAX_EXPANDED = 4_000_000
@@ -447,6 +450,29 @@ def reference_outputs(recipe: RecipeDefinition, inputs: list[dict[str, Any]]) ->
             raise ConfigurationError('published reference patch has changed binding or scope')
         outputs.append(output)
     return outputs
+
+
+def require_worker_artifact_encoding(cases: list[BenchmarkCase], subjects: list[ExecutorSpec]) -> None:
+    """Reject incompatible standard patch bridges before reserving model work."""
+    expected = set()
+    for case in cases:
+        if case.action.capability != 'assessment.repository_suite@1':
+            continue
+        truth = case.validators[-1].config.get('expected') if case.validators else None
+        if not isinstance(truth, dict) or truth.get('patch_encoding') not in (None, 'gzip-json'):
+            raise ConfigurationError('repository task has no supported patch-encoding truth')
+        expected.add('patch_gzip_b64' if truth.get('patch_encoding') == 'gzip-json' else 'patch_b64')
+    if not expected:
+        return
+    for subject in subjects:
+        if subject.kind != ExecutorKind.MANAGED_HOST:
+            continue
+        artifact = subject.managed_host_config().artifact
+        if (artifact is not None and artifact.output_field in {'patch_b64', 'patch_gzip_b64'}
+                and expected != {artifact.output_field}):
+            raise ConfigurationError(
+                f'repository task patch encoding is incompatible with worker {subject.id}; '
+                'use separate matching plain-JSON and gzip worker profiles')
 
 
 def repository_suite_recipe(cases: list[RepositorySuiteCase], *, assessment: bool = False) -> RecipeDefinition:

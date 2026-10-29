@@ -118,3 +118,7 @@ For source-archive tasks, use the separately reviewed
 [repository suite mapping](REPOSITORY_EVALUATION.md#prepare-real-repository-test-suites).
 It reuses the existing single-file artifact bridge; a suite definition alone
 does not establish worker conformance, qualification or comparative usefulness.
+For standard repository patch artifacts, budget preview and dispatch require
+the worker's output field to match every scheduled task's plain or gzip codec.
+Use separate matching profiles for mixed encodings. Incompatible definitions
+fail before model-turn reservations; existing decoder meanings stay unchanged.

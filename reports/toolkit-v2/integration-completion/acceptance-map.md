@@ -1,5 +1,22 @@
 # Remaining delivery gates
 
+## October 29 update
+
+The [real repository development comparison](../c13/repository-usefulness-pilot-20261029/comparison.html)
+completed 19 valid pairs: both arms passed 14/19 with identical outcomes. All
+38 captures and 19 candidate instruction loads verify; semantic contribution and
+independent provider metering remain unknown. The actual admission API refused
+both development reports. No candidate was admitted or activated.
+
+Current software work adds an early patch-format definition guard. Its
+[verification record](../c13/repository-codec-preflight-20261029/README.md) separates
+current source checks from the completed study's source `b09911a0`. The
+[helped control card](../c13/repository-usefulness-pilot-20261029/CONTROL_CHECK.md)
+has been removed from the critical path after the operator's objection; its
+actual use remains unmeasured. Formal qualification, demonstrated useful
+selection, whole-system resource acceptance and release remain open. Historical
+snapshots below keep their original source and evidence scopes.
+
 ## Current October 21 update
 
 The capture repair is complete: four real diagnostic capture chains verify,

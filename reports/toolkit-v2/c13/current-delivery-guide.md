@@ -7,6 +7,29 @@ managed evaluator where the tested upstream Codex contract did not meet requirem
 Waza and LangGraph are optional, tested fixture integrations. No hosted service or
 orchestrator is required for this local path.
 
+## October 29 repository comparison
+
+The [real repository report](repository-usefulness-pilot-20261029/comparison.html)
+contains 19 valid pairs across three maintenance task families. Both ordinary
+Codex and optional Ponytail 4.10.0 passed 14/19, with identical pass/fail outcomes.
+All 38 token capture chains verify; all 19 candidate turns have positive native
+instruction-loading evidence. Loading does not prove semantic contribution, and
+capturing provider reports does not independently verify provider billing.
+The plain and gzip conditions remain separate; neither supplies a supported
+resource-savings claim or formal qualification.
+
+The actual admission API refused both development reports. No candidate was
+activated. Two earlier cases remain engineering-censored, with all three turns
+charged. The new [control card](repository-usefulness-pilot-20261029/CONTROL_CHECK.md)
+uses the stopped job for status/recovery and stop-command discovery. Its expected
+outputs are supplied, so any participant response is a helped exercise.
+The operator subsequently objected to this exercise as a user gate. It is removed
+from the critical path; no control-use completion is claimed. The
+[selection decision](repository-usefulness-pilot-20261029/SELECTION_DECISION.md)
+and [failure diagnosis](repository-usefulness-pilot-20261029/FAILURE_ANALYSIS.md)
+explain the task-value result without requiring that exercise.
+The older journeys below retain their original evidence and missing measurements.
+
 ## Identify the journey
 
 | Record | Scope and result |

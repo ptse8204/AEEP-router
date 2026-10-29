@@ -1,0 +1,748 @@
+{
+  "scope": "Supplemental retained-evidence diagnosis; frozen grades and thresholds unchanged.",
+  "source_model_evidence": "b09911a0b7b79f6f78a5371bbad53580ff0692fc3d371592a983437898a19fcf",
+  "comparison_analysis_sha256": "e3535c409f04a2aa00793b606950b11ebbcd561a9a31f7a70b9550fc47772789",
+  "complete_pairs": 19,
+  "both_failed_pairs": 5,
+  "matching_method": "Final task-callback observations, unique protected test-identity set, complete reply digest, and recomputed per-case grade multiset.",
+  "arm_assignment_limit": "The retained observer log lacks a direct trial/arm reference. Supplemental test details remain unordered; canonical arm verdicts remain bound to their trial records.",
+  "new_models_or_graders": 0,
+  "frozen_results_changed": false,
+  "records": [
+    {
+      "case": "AbsaOSS__generate-release-notes-207",
+      "family": "multi-file-repair",
+      "codec": "plain",
+      "canonical_arm_success": {
+        "control": false,
+        "treatment": false
+      },
+      "observation_arm_assignment": "unavailable; unordered per-case pair",
+      "observations": [
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-plain-20261029/observer-061.json",
+          "observer_file_sha256": "353c1264c5e6c393a500a207c800cacbef9d391c21499bb4d909ea1b4e510521",
+          "reply_digest_verified": true,
+          "grade_recomputed": false,
+          "exit_code": 1,
+          "required_identities": 24,
+          "observed_identities": 24,
+          "remaining_bug_tests": {
+            "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_with_issues_and_pulls_and_commits": "FAILED",
+            "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_with_issues_and_pulls_and_commits_with_skip_labels": "FAILED",
+            "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_with_no_issues": "FAILED",
+            "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_with_no_issues_skip_labels": "FAILED",
+            "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_isolated_record_types_no_labels_no_type_defined": "FAILED",
+            "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_isolated_record_types_with_labels_no_type_defined": "FAILED",
+            "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_isolated_record_types_no_labels_with_type_defined": "FAILED",
+            "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_isolated_record_types_with_labels_with_type_defined": "FAILED",
+            "tests/unit/release_notes_generator/utils/test_pull_request_utils.py::test_get_issues_for_pr_success": "FAILED",
+            "tests/unit/release_notes_generator/utils/test_pull_request_utils.py::test_get_issues_for_pr_empty_nodes": "FAILED",
+            "tests/unit/release_notes_generator/utils/test_pull_request_utils.py::test_get_issues_for_pr_http_error": "FAILED",
+            "tests/unit/release_notes_generator/utils/test_pull_request_utils.py::test_get_issues_for_pr_malformed_response": "FAILED",
+            "tests/unit/release_notes_generator/utils/test_pull_request_utils.py::test_get_issues_for_pr_caching": "FAILED",
+            "tests/unit/release_notes_generator/utils/test_pull_request_utils.py::test_get_issues_for_pr_different_numbers_not_cached": "FAILED"
+          },
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        },
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-plain-20261029/observer-062.json",
+          "observer_file_sha256": "e06f60d77ee8b146badc5ba76cfcab848342f8160b15a03c27d555441fd3512d",
+          "reply_digest_verified": true,
+          "grade_recomputed": false,
+          "exit_code": 1,
+          "required_identities": 24,
+          "observed_identities": 24,
+          "remaining_bug_tests": {
+            "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_with_issues_and_pulls_and_commits": "FAILED",
+            "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_with_issues_and_pulls_and_commits_with_skip_labels": "FAILED",
+            "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_with_no_issues": "FAILED",
+            "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_with_no_issues_skip_labels": "FAILED",
+            "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_isolated_record_types_no_labels_no_type_defined": "FAILED",
+            "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_isolated_record_types_with_labels_no_type_defined": "FAILED",
+            "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_isolated_record_types_no_labels_with_type_defined": "FAILED",
+            "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_isolated_record_types_with_labels_with_type_defined": "FAILED",
+            "tests/unit/release_notes_generator/utils/test_pull_request_utils.py::test_get_issues_for_pr_success": "FAILED",
+            "tests/unit/release_notes_generator/utils/test_pull_request_utils.py::test_get_issues_for_pr_empty_nodes": "FAILED",
+            "tests/unit/release_notes_generator/utils/test_pull_request_utils.py::test_get_issues_for_pr_http_error": "FAILED",
+            "tests/unit/release_notes_generator/utils/test_pull_request_utils.py::test_get_issues_for_pr_malformed_response": "FAILED",
+            "tests/unit/release_notes_generator/utils/test_pull_request_utils.py::test_get_issues_for_pr_caching": "FAILED",
+            "tests/unit/release_notes_generator/utils/test_pull_request_utils.py::test_get_issues_for_pr_different_numbers_not_cached": "FAILED"
+          },
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        }
+      ]
+    },
+    {
+      "case": "MahjongRepository__mahjong-62-aeep-contract-audit",
+      "family": "contract-audit",
+      "codec": "plain",
+      "canonical_arm_success": {
+        "control": true,
+        "treatment": true
+      },
+      "observation_arm_assignment": "unavailable; unordered per-case pair",
+      "observations": [
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-plain-20261029/observer-077.json",
+          "observer_file_sha256": "d789a8ae2dab427cf9bb64bade5d3639c0d9eec39f8430a051f16c26aa619548",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 6,
+          "observed_identities": 6,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        },
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-plain-20261029/observer-078.json",
+          "observer_file_sha256": "5c6a3bd7ec2a4d521f89a39bc8370bc46bd74d04ffc94282bc701be7e790ffa7",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 6,
+          "observed_identities": 6,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        }
+      ]
+    },
+    {
+      "case": "canopen-python__canopen-613-declared-tests",
+      "family": "multi-file-repair",
+      "codec": "gzip",
+      "canonical_arm_success": {
+        "control": false,
+        "treatment": false
+      },
+      "observation_arm_assignment": "unavailable; unordered per-case pair",
+      "observations": [
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-gzip-20261029/observer-035.json",
+          "observer_file_sha256": "358ae78f3b8a201cbf776df3880e5f7d5905d5233be5096869a29e4899af5a1e",
+          "reply_digest_verified": true,
+          "grade_recomputed": false,
+          "exit_code": 1,
+          "required_identities": 8,
+          "observed_identities": 8,
+          "remaining_bug_tests": {
+            "test/test_pdo.py::TestPDO::test_pdo_getitem": "FAILED",
+            "test/test_pdo.py::TestPDO::test_pdo_iterate": "FAILED"
+          },
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        },
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-gzip-20261029/observer-036.json",
+          "observer_file_sha256": "bb9b268234e7ddd7185e02bbb91f33578d04b2ffc9c0a6886c1f5bda06713e28",
+          "reply_digest_verified": true,
+          "grade_recomputed": false,
+          "exit_code": 1,
+          "required_identities": 8,
+          "observed_identities": 8,
+          "remaining_bug_tests": {
+            "test/test_pdo.py::TestPDO::test_pdo_getitem": "FAILED",
+            "test/test_pdo.py::TestPDO::test_pdo_iterate": "FAILED"
+          },
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        }
+      ]
+    },
+    {
+      "case": "gerlero__foamlib-315",
+      "family": "multi-file-repair",
+      "codec": "plain",
+      "canonical_arm_success": {
+        "control": true,
+        "treatment": true
+      },
+      "observation_arm_assignment": "unavailable; unordered per-case pair",
+      "observations": [
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-plain-20261029/observer-063.json",
+          "observer_file_sha256": "ee1ca3b23c872ed4ed6434f91b9c15f05046e9b09ba9d9f9752e4089f26c6b26",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 3,
+          "observed_identities": 3,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        },
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-plain-20261029/observer-064.json",
+          "observer_file_sha256": "c3b01852ac39518c28b72b86762dc3b059a8cac0e6ae52989c51327cce399c7b",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 3,
+          "observed_identities": 3,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        }
+      ]
+    },
+    {
+      "case": "gidgethub__gidgethub-225-aeep-contract-audit",
+      "family": "contract-audit",
+      "codec": "plain",
+      "canonical_arm_success": {
+        "control": true,
+        "treatment": true
+      },
+      "observation_arm_assignment": "unavailable; unordered per-case pair",
+      "observations": [
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-plain-20261029/observer-083.json",
+          "observer_file_sha256": "70df40fe333f1662590a4592e0f4b9876f3ef264761eeb80c44cf8b1d8b027c8",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 58,
+          "observed_identities": 58,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        },
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-plain-20261029/observer-084.json",
+          "observer_file_sha256": "8ac92b7f22bcdbdae33ea83a42c5658497e7b6be00dce5dec708423c7d7baa15",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 58,
+          "observed_identities": 58,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        }
+      ]
+    },
+    {
+      "case": "hynek__svcs-140-aeep-contract-audit",
+      "family": "contract-audit",
+      "codec": "gzip",
+      "canonical_arm_success": {
+        "control": true,
+        "treatment": true
+      },
+      "observation_arm_assignment": "unavailable; unordered per-case pair",
+      "observations": [
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-gzip-20261029/observer-039.json",
+          "observer_file_sha256": "e3a18f59dfa221c3702f2a1bd4ce37dc5e94f046beb4afcf42bbcee76de1b020",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 32,
+          "observed_identities": 32,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        },
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-gzip-20261029/observer-040.json",
+          "observer_file_sha256": "61399c5aaecf8366b1c61e46c59cacfab84bcd78714be389abb3c36827b8c6e8",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 32,
+          "observed_identities": 32,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        }
+      ]
+    },
+    {
+      "case": "iluvcapra__pycmx-12-aeep-contract-audit",
+      "family": "contract-audit",
+      "codec": "plain",
+      "canonical_arm_success": {
+        "control": true,
+        "treatment": true
+      },
+      "observation_arm_assignment": "unavailable; unordered per-case pair",
+      "observations": [
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-plain-20261029/observer-075.json",
+          "observer_file_sha256": "857496978d0e70556475223b76ebe0bf4b9abdce4d60b83e0a402e553e94d277",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 10,
+          "observed_identities": 10,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        },
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-plain-20261029/observer-076.json",
+          "observer_file_sha256": "417106b6346e3587a40777191562238add48b138e0347bed2f8e865452ccd96a",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 10,
+          "observed_identities": 10,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        }
+      ]
+    },
+    {
+      "case": "joke2k__django-environ-592-declared-tests",
+      "family": "single-file-repair",
+      "codec": "plain",
+      "canonical_arm_success": {
+        "control": true,
+        "treatment": true
+      },
+      "observation_arm_assignment": "unavailable; unordered per-case pair",
+      "observations": [
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-plain-20261029/observer-071.json",
+          "observer_file_sha256": "0c2a274e3aaa311a8d652f72fdd3baa35da1736a358e43e71e1d9f620b87ce4e",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 42,
+          "observed_identities": 42,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        },
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-plain-20261029/observer-072.json",
+          "observer_file_sha256": "fe415324de3f54d2608eb8467e23da5b20b124ba84d4e03651d9a019e089cc1b",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 42,
+          "observed_identities": 42,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        }
+      ]
+    },
+    {
+      "case": "jpadilla__pyjwt-1040-declared-tests",
+      "family": "single-file-repair",
+      "codec": "plain",
+      "canonical_arm_success": {
+        "control": false,
+        "treatment": false
+      },
+      "observation_arm_assignment": "unavailable; unordered per-case pair",
+      "observations": [
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-plain-20261029/observer-081.json",
+          "observer_file_sha256": "f38ff3e939f6305edb5f71dc4c83b31ce4d5614eca4da8abbd72f6e6d7e2a0ed",
+          "reply_digest_verified": true,
+          "grade_recomputed": false,
+          "exit_code": 1,
+          "required_identities": 77,
+          "observed_identities": 77,
+          "remaining_bug_tests": {
+            "tests/test_api_jwt.py::TestJWT::test_encode_with_non_str_iss": "FAILED"
+          },
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        },
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-plain-20261029/observer-082.json",
+          "observer_file_sha256": "64dec01ddf8a4f2877649b9625d453e9255646012b1038355d930c3c9649758c",
+          "reply_digest_verified": true,
+          "grade_recomputed": false,
+          "exit_code": 1,
+          "required_identities": 77,
+          "observed_identities": 77,
+          "remaining_bug_tests": {
+            "tests/test_api_jwt.py::TestJWT::test_encode_with_non_str_iss": "FAILED",
+            "tests/test_api_jwt.py::TestJWT::test_validate_iss_with_non_str_issuer": "FAILED"
+          },
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        }
+      ]
+    },
+    {
+      "case": "lincolnloop__goodconf-51-aeep-contract-audit",
+      "family": "contract-audit",
+      "codec": "gzip",
+      "canonical_arm_success": {
+        "control": false,
+        "treatment": false
+      },
+      "observation_arm_assignment": "unavailable; unordered per-case pair",
+      "observations": [
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-gzip-20261029/observer-031.json",
+          "observer_file_sha256": "6bb6960665e2dfaaa277fe1d65253cd7c3cbeb8bec687a3364230bf5551b8952",
+          "reply_digest_verified": true,
+          "grade_recomputed": false,
+          "exit_code": 1,
+          "required_identities": 22,
+          "observed_identities": 22,
+          "remaining_bug_tests": {},
+          "preservation_failures": {
+            "tests/test_initial.py::test_initial_converts_to_callable": "FAILED",
+            "tests/test_aeep_preservation.py::test_snapshot_preserved": "FAILED"
+          },
+          "additional_nonpassed_tests": {}
+        },
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-gzip-20261029/observer-032.json",
+          "observer_file_sha256": "df48498aa08a29934fb86b5710afc1990f267ae6ab1506654a8a3c1690e67a10",
+          "reply_digest_verified": true,
+          "grade_recomputed": false,
+          "exit_code": 1,
+          "required_identities": 22,
+          "observed_identities": 22,
+          "remaining_bug_tests": {},
+          "preservation_failures": {
+            "tests/test_initial.py::test_initial_converts_to_callable": "FAILED",
+            "tests/test_aeep_preservation.py::test_snapshot_preserved": "FAILED"
+          },
+          "additional_nonpassed_tests": {}
+        }
+      ]
+    },
+    {
+      "case": "matthewwithanm__python-markdownify-200",
+      "family": "single-file-repair",
+      "codec": "plain",
+      "canonical_arm_success": {
+        "control": true,
+        "treatment": true
+      },
+      "observation_arm_assignment": "unavailable; unordered per-case pair",
+      "observations": [
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-plain-20261029/observer-067.json",
+          "observer_file_sha256": "2a05f349f136e6d3140ba996268bb88e8dd4967a1a11aaf2aa36b3194a24160f",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 49,
+          "observed_identities": 49,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        },
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-plain-20261029/observer-068.json",
+          "observer_file_sha256": "453f3fff1b3c0f2ddc5f48428ad67fe9acc509d313a2e455eccc1f1d541566dd",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 49,
+          "observed_identities": 49,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        }
+      ]
+    },
+    {
+      "case": "oOo0oOo__leanclient-24-declared-tests",
+      "family": "multi-file-repair",
+      "codec": "plain",
+      "canonical_arm_success": {
+        "control": true,
+        "treatment": true
+      },
+      "observation_arm_assignment": "unavailable; unordered per-case pair",
+      "observations": [
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-plain-20261029/observer-069.json",
+          "observer_file_sha256": "c4cff1ff7a16ce343773855a60d54c9887f1a0c53f5bb594c1bfcf7664980361",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 14,
+          "observed_identities": 14,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        },
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-plain-20261029/observer-070.json",
+          "observer_file_sha256": "7dc11a29c8287553ad7ad17dabdcedf483001a8d8551c8f54e996682308e50cb",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 14,
+          "observed_identities": 14,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        }
+      ]
+    },
+    {
+      "case": "prometheus__client_python-1134-aeep-contract-audit",
+      "family": "contract-audit",
+      "codec": "gzip",
+      "canonical_arm_success": {
+        "control": true,
+        "treatment": true
+      },
+      "observation_arm_assignment": "unavailable; unordered per-case pair",
+      "observations": [
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-gzip-20261029/observer-033.json",
+          "observer_file_sha256": "a33453ced0d7d6a9830ef3ee09899f425f6d1151935e3a7fe61a92a1d775d7e5",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 30,
+          "observed_identities": 30,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        },
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-gzip-20261029/observer-034.json",
+          "observer_file_sha256": "eca14ede573a2f94438636349b58b2946ac24ba913ee06013905b2dc9c15ec60",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 30,
+          "observed_identities": 30,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        }
+      ]
+    },
+    {
+      "case": "python-markdown__markdown-1587",
+      "family": "single-file-repair",
+      "codec": "plain",
+      "canonical_arm_success": {
+        "control": true,
+        "treatment": true
+      },
+      "observation_arm_assignment": "unavailable; unordered per-case pair",
+      "observations": [
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-plain-20261029/observer-079.json",
+          "observer_file_sha256": "c0b8c2c1ee0518c1f1a28d13226a9394fd4fe8ea5c64c5045e043f856cabbc20",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 118,
+          "observed_identities": 118,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        },
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-plain-20261029/observer-080.json",
+          "observer_file_sha256": "248aa8e1ca68a3f037f03f0153050d609a9e1ced1841ebd10ae0107ac0dfb856",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 118,
+          "observed_identities": 118,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        }
+      ]
+    },
+    {
+      "case": "python-scim__scim2-models-126-declared-tests",
+      "family": "multi-file-repair",
+      "codec": "gzip",
+      "canonical_arm_success": {
+        "control": true,
+        "treatment": true
+      },
+      "observation_arm_assignment": "unavailable; unordered per-case pair",
+      "observations": [
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-gzip-20261029/observer-037.json",
+          "observer_file_sha256": "a0fecca804a787d85d7233008bfbeb11ec4b487cc405dc2e5a5f22dc931ce6a6",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 340,
+          "observed_identities": 340,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        },
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-gzip-20261029/observer-038.json",
+          "observer_file_sha256": "1fe6399fede82807787ed4137c0489b6f7468ec5a9a0c3ef533029d0e120962b",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 340,
+          "observed_identities": 340,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        }
+      ]
+    },
+    {
+      "case": "scitokens__scitokens-202-aeep-contract-audit",
+      "family": "contract-audit",
+      "codec": "plain",
+      "canonical_arm_success": {
+        "control": true,
+        "treatment": true
+      },
+      "observation_arm_assignment": "unavailable; unordered per-case pair",
+      "observations": [
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-plain-20261029/observer-065.json",
+          "observer_file_sha256": "3aefbd32a20ce988621a8566b50611621863425314ed5ddb42e1277b8ad25668",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 12,
+          "observed_identities": 12,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        },
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-plain-20261029/observer-066.json",
+          "observer_file_sha256": "48d5a49a6e97104de26ca178848ec17bc02e141aa82fc970ed5f77ad1d0ffa76",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 12,
+          "observed_identities": 12,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        }
+      ]
+    },
+    {
+      "case": "serge-sans-paille__beniget-121-declared-tests-py313-truth",
+      "family": "single-file-repair",
+      "codec": "plain",
+      "canonical_arm_success": {
+        "control": true,
+        "treatment": true
+      },
+      "observation_arm_assignment": "unavailable; unordered per-case pair",
+      "observations": [
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-plain-20261029/observer-073.json",
+          "observer_file_sha256": "58a60142bd2e0a5e6ec53a9a6edfefc4a9fc8bfd9b206c180f5d285e2d980747",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 422,
+          "observed_identities": 422,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        },
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-plain-20261029/observer-074.json",
+          "observer_file_sha256": "431608a0f77393e43f6704c92a6818fe4cf08cf121643afb2496a1d6165687f7",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 422,
+          "observed_identities": 422,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        }
+      ]
+    },
+    {
+      "case": "spulec__freezegun-582",
+      "family": "single-file-repair",
+      "codec": "plain",
+      "canonical_arm_success": {
+        "control": true,
+        "treatment": true
+      },
+      "observation_arm_assignment": "unavailable; unordered per-case pair",
+      "observations": [
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-plain-20261029/observer-085.json",
+          "observer_file_sha256": "28d808224c63acad17baf915ff95d6920e69d8a26345954db2b8ed9c670fb340",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 10,
+          "observed_identities": 10,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        },
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-plain-20261029/observer-086.json",
+          "observer_file_sha256": "5fe1d3952f0f75e2d1dfcbc6e203460787019cc93902be044ed783fa90708017",
+          "reply_digest_verified": true,
+          "grade_recomputed": true,
+          "exit_code": 0,
+          "required_identities": 10,
+          "observed_identities": 10,
+          "remaining_bug_tests": {},
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        }
+      ]
+    },
+    {
+      "case": "tefra__xsdata-1126-issue-behavior-audit",
+      "family": "multi-file-repair",
+      "codec": "gzip",
+      "canonical_arm_success": {
+        "control": false,
+        "treatment": false
+      },
+      "observation_arm_assignment": "unavailable; unordered per-case pair",
+      "observations": [
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-gzip-20261029/observer-041.json",
+          "observer_file_sha256": "4e3caa0ebec99b58e32fd7e05672b29a496c1917c0da03715089e44cf44202f3",
+          "reply_digest_verified": true,
+          "grade_recomputed": false,
+          "exit_code": 1,
+          "required_identities": 29,
+          "observed_identities": 29,
+          "remaining_bug_tests": {
+            "tests/codegen/handlers/test_unnest_inner_classes.py::UnnestInnerClassesTests::test_update_types": "FAILED"
+          },
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        },
+        {
+          "observer": "reports/toolkit-v2/c13/repository-usefulness-gzip-20261029/observer-042.json",
+          "observer_file_sha256": "e101a65824b2d7a4881ccd0eae84091555d37488f9b4952b5616e643b374cf02",
+          "reply_digest_verified": true,
+          "grade_recomputed": false,
+          "exit_code": 1,
+          "required_identities": 29,
+          "observed_identities": 29,
+          "remaining_bug_tests": {
+            "tests/codegen/handlers/test_unnest_inner_classes.py::UnnestInnerClassesTests::test_update_types": "FAILED"
+          },
+          "preservation_failures": {},
+          "additional_nonpassed_tests": {}
+        }
+      ]
+    }
+  ]
+}

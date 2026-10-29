@@ -2322,3 +2322,32 @@ changing legacy decoder/receipt meanings or inventing output conversions. Keep
 custom/direct outputs under their existing review/grader requirements. Run the
 required software checks for this actual code change;historical live evidence
 stays bound to b09911a0. No additional model turn is needed for the guard.
+
+
+## D130: Reject mismatched standard patch bridges and prioritize task value
+
+On October 29 the operator objected to the helped CLI-control exercise as a user
+gate and reiterated the central question: does a capability materially help a
+task? Remove that exercise from the critical path. Retain the objection and prior
+responses without claiming human-control qualification or altering old evidence.
+
+The actual 19-pair study observed zero additional successes with optional Ponytail
+4.10.0. The protected-test diagnosis finds remaining bug checks in four failed
+repair cases and preservation failures in the fifth. Both canonical arms fail
+those same five cases. Supplemental observer details lack a direct arm reference,
+so they remain unordered within each pair. Preserve that limit. Keep the baseline
+for this tested scope; positive live selection benefit remains unproven.
+
+The small provider-neutral source guard now rejects incompatible standard managed
+artifact fields during budget preview and dispatch verification. It accepts both
+corrected definitions and refuses the actual failed mixed plan before reservation,
+with counters unchanged. Direct/custom artifacts retain their existing contract.
+No decoder, schema, third-party dependency, worker image or model changed.
+
+Source 5a4257e3 passed all 13 gates: 1786 tests/21 skips in each full run, 82%
+coverage, both branch gates, schemas, ruff, policy, mypy across 168 files and build.
+Historical live results retain source b09911a0. Current installation needs three
+focused checks of the changed artifact. Prepare one exact bundle with the 32
+cached dependencies and pinned offline docs checker before asking for the
+installation/execution authority excluded by the comparison review. No new model
+or architecture decision is needed. C13 remains IN_PROGRESS.

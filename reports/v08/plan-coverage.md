@@ -6365,3 +6365,20 @@ Next safe engineering is a preflight codec guard preventing this actual defect
 before model reservations,followed by required checks for that code change.
 The human concrete-control response remains pending;no model replay or corpus
 expansion is the next step.
+
+## October 29: value findings retained; codec preflight verified
+
+The [selection decision](../toolkit-v2/c13/repository-usefulness-pilot-20261029/SELECTION_DECISION.md)
+retains the ordinary baseline for the tested 19 pairs: both arms passed 14/19,
+with 38 verified captures and 19 instruction loads. No supported savings or
+positive live selection benefit follows. The operator removed the helped control
+exercise from the critical path; no human-control qualification is claimed.
+
+The [source guard](../toolkit-v2/c13/repository-codec-preflight-20261029/README.md)
+prevents the actual mixed-format controller error before model reservation. All
+13 current source gates passed, including 1786 tests/21 skips in both runs, 82%
+coverage and both branch gates. No upstream component, decoder, schema or image
+changed. The completed live study stays source b09911a0; guard source 5a4257e3
+is separately bound. Three focused current-wheel checks plus cached offline docs
+execution await their exact review. No corpus/model replay or broader test
+expansion is planned.

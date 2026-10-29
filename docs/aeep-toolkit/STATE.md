@@ -2,60 +2,66 @@
 
 **October 29: the real-task development comparison and canonical audit completed.**
 Ordinary Codex and optional Ponytail 4.10.0 each passed 14/19 tasks, with identical
-pass/fail outcomes in every pair. This observed no task-success gain on this
-selected sample; it does not establish broad absence of value. The
-[readable report](../../reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/comparison.html)
-and [analysis](../../reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/comparison-analysis.json)
-retain per-task and per-family results. All 38 valid task-token capture chains
-verify; all 19 candidate turns have positive instruction-loading evidence.
-Loading does not establish semantic contribution or provider-internal metering.
+pass/fail outcomes in every pair. This sample shows no task-success gain. It does
+not establish that the skill has no value elsewhere. The
+[readable report](../../reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/comparison.html),
+[selection decision](../../reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/SELECTION_DECISION.md)
+and [paired failure diagnosis](../../reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/FAILURE_ANALYSIS.md)
+retain the actual results. All 38 valid token capture chains verify; all 19
+candidate turns have positive instruction-loading evidence. Loading does not
+prove semantic contribution or independently verify the provider's meter.
 
-The two output-format conditions stay separate. Plain: 11/13 successes per arm,
-1334530 ordinary versus1691894 candidate reported input+output tokens. Gzip: 3/6
-per arm,683419 versus753147 tokens. Task-time differences are descriptive. Only
-11 plain and3 gzip pairs both succeeded; neither condition meets the20-pair
-resource-interval gate. No confidence-supported resource or cash savings claim.
+Plain and gzip conditions stay separate. Plain: 11/13 successes per arm, with
+1334530 ordinary versus 1691894 candidate reported input-plus-output tokens.
+Gzip: 3/6 per arm, with 683419 versus 753147 tokens. Task-time differences are
+descriptive. Only 11 plain and three gzip pairs both succeeded; neither meets
+the 20-pair resource-interval gate. No supported resource or cash savings claim.
+Four failed repair cases retain failing bug tests; the fifth failed case violates
+preservation checks. Supplemental test details remain unordered within each pair
+because observer logs lack direct arm references. Canonical arm grades remain bound.
 
-The actual admission API refused both canonical development reports because
-qualification and measured benefit are required. Admissions and counters stayed
-unchanged. This proves those restraint checks;positive live selection benefit
-and general correctness of abstention remain unproven. No candidate was activated.
+The actual admission API refused both development reports. Admissions and counters
+stayed unchanged. This proves those restraint checks; positive live selection
+benefit and general abstention quality remain unproven. No candidate was activated.
+The supported decision for these tested tasks is to keep the ordinary baseline.
 
 My original uniform-gzip controller error affected two earlier cases and three
-turns. They remain engineering-censored with their canonical records unchanged;
-they are not capability failures or silently replaced tasks. The exact delegated
-correction used each untouched case's existing plain/gzip contract. All source,
-test,reference,dependency and grader-program bytes stayed fixed. Both local and
-original cumulative caps were enforced;no started case was replayed.
+turns. Those remain engineering-censored, with canonical records unchanged and
+charges retained. The delegated correction used only untouched cases' existing
+plain/gzip contracts; source, test, reference, dependency and grader bytes stayed
+fixed. No started case was replayed. The
+[completion audit](../../reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/comparison-completion-audit.json)
+reopens all 323 completed operations: 41 charged turns, including the three
+engineering turns, 5137.359838171862 accounting seconds and $0. Accounting seconds
+are not end-to-end wall time. The unused report reservation was settled from
+proof its body never started; no operation or turn allowance was refunded.
+Owned workers and graders are gone, the existing proxy is stopped, and all images
+remain. Grant counters: 13656/3796/125269.06508910004/$0. Expiry amendment 827aead8
+ends 2026-10-30T20:50:41.445938Z. No unused review slot authorizes replay.
 
-[The completion audit](../../reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/comparison-completion-audit.json)
-reopens all323completed operations:41charged turns total,including the3engineering
-turns,5137.359838171862operation seconds and$0. Operation seconds are accounting,
-not end-to-end wall time. The only unused report reservation was settled from
-proof its body never started;no operation or model-turn allowance was refunded.
-All owned workers/graders are gone;the existing proxy is stopped;all images remain.
-Grant counters:13656/3796/125269.06508910004/$0. Expiry827aead8 ends
-2026-10-30T20:50:41.445938Z. No unused review slot authorizes replay.
+The model results bind source b09911a0 and source-tree commit f3eecc0. Its prior
+software, installed-wheel and documentation evidence keeps that scope. The new
+[artifact-format guard](../../reports/toolkit-v2/c13/repository-codec-preflight-20261029/README.md)
+rejects the actual failed mixed definition before model reservation and accepts
+both corrected profiles, with grant counters unchanged. Current source 5a4257e3
+passed all 13 required source checks: both full runs passed 1786 tests with
+21 skips, displayed coverage is 82%, and both branch gates passed. The wheel
+is built; its three focused installed checks and current cached offline docs
+check await their concrete review. No additional model turn is needed.
 
-Results bind sourceb09911a0 and source-tree commitf3eecc0. Its prior13source gates,
-1775tests/21skips in both runs,82%coverage,both branch gates,20installed checks and
-69-document runtime check remain their original evidence. Next safe engineering
-is an early product guard against incompatible task/worker artifact formats;
-keep the completed study's source/meaning unchanged and run required checks
-for the actual code change. No additional model turn is needed for that guard.
+All 21 intended repositories reached model workers, including censored cases.
+The [exposure overlay](../../reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/formal-exposure-exclusions.json)
+excludes 24 related snapshots from every formal stage. Of the historical technical
+pool of 65, only 41 potential snapshots remain eligible. No stages are frozen
+or adopted. Formal 8/28/105 requirements and qualification thresholds remain.
+Corpus expansion and optional Param/Jsonpickle dependency work remain deferred.
 
-All21intended repositories reached model workers,including censored cases. The
-[exposure overlay](../../reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/formal-exposure-exclusions.json)
-excludes24related snapshots from every formal stage. The historical technical
-pool65 remains;only41potential snapshots remain eligible. No stages are frozen
-or cases adopted. Formal8/28/105requirements and qualification thresholds remain.
-Corpus expansion,Param asyncio and Jsonpickle Ruff work remain deferred.
-
-The [concrete control card](../../reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/CONTROL_CHECK.md)
-has verified status/help commands. Actual human status/recovery/stop-discovery
-feedback is requested and pending. Earlier helped comprehension remains recorded;
-no unaided usability or complete control qualification is claimed. Resource
-acceptance stays separate,with workload-derived targets still unaccepted.
+The operator's [latest clarification](../../reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/operator-value-priority-20261029.json)
+objects to the helped CLI-control exercise as a user gate and prioritizes material
+capability value. That exercise is removed from the critical path. No actual
+control-use response or qualification is claimed; earlier helped comprehension
+remains recorded. Resource acceptance stays separate, with workload-derived
+targets still unaccepted. No architecture decision is pending.
 
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
@@ -99,11 +105,11 @@ checkpoint_status:
   C12: PASS
   C13: IN_PROGRESS
 last_verified_commit: 'f3eecc0'
-last_check_command: 'Both component audit-completion.py;analyze-codec-continuation.py;comparison-completion-audit.json canonical readback'
-last_check_result: '19valid pairs:both14/19,all outcomes matched;38/38capture chains;19/19positive candidate instruction loads;2actual admission refusals. Including3engineering turns:323complete ops/41turns/5137.359838171862accountingseconds/$0. All owned cleanup verified;proxy stopped. Formal qualification and positive live selection benefit remain unproven.'
-next_action: 'Model execution is complete;DO NOT rerun any controller. Implement the small standard repository-artifact preflight guard,then run required source checks for that real code change. Historical comparison stays sourceb099/f3eecc0. Prepare any necessary current-wheel/docs execution review only after artifacts are concrete. Human control-card response remains pending;no new architecture choice or model trial is requested.'
+last_check_command: 'repository-codec-preflight-20261029/run-source-checks.py (13 gates);actual-definition-regression.json;analyze-retained-failures.py'
+last_check_result: 'Source5a4257e3:13/13 gates passed;1786tests/21skips in each full run;82%coverage,both branch gates;schema,ruff,policy,mypy168files,build passed. Actual invalid definition rejected before model reservation with unchanged counters. Completed sourceb099 comparison remains both14/19;38captures/19loads;2actual admission refusals. No new models or formal qualification.'
+next_action: 'Source guard and retained-failure analysis are complete. Do not replay models,source gates or corpus batches. Prepare the exact changed-wheel/cached-offline-docs bundle under repository-codec-preflight-20261029;three focused installed checks use32 unchanged cached dependencies. Historical live evidence stays sourceb099/f3eecc0. The operator removed the helped control exercise from the critical path;no architecture decision or model trial is requested.'
 blocked_actions:
-  - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
+  - 'Helped report comprehension is recorded. The operator removed the concrete control exercise from the critical path on October29;control-use qualification remains unmeasured and is not an engineering/comparison blocker.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'

@@ -346,6 +346,14 @@ operator-side encoding helper. Both agent arms need identical output instruction
 A campaign can convert its new cases to v3 before freezing the common mapping;
 old cases and evidence retain their original definitions.
 
+Budget preview and execution reject a standard managed-worker artifact field
+that disagrees with a scheduled task's encoding. V1/v2 tasks use `patch_b64`;
+v3 and later compressed tasks use `patch_gzip_b64`. Split mixed datasets into
+matching worker profiles, or prepare a separately reviewed conversion before
+freezing the study. A union output schema does not change an individual task's
+decoder. Direct outputs and custom bridges retain their existing review and
+grader requirements; this check performs no output conversion.
+
 The compressed patch may contain at most 500000 bytes; expanded JSON and its file
 mapping may contain at most 4000000 bytes. The source tree, protected overlay and
 complete grader payload must still fit their existing bounds. Invalid compression,
