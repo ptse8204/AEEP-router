@@ -88,7 +88,7 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '591ef4d'
+last_verified_commit: '4b9d9b5'
 last_check_command: 'audit canonical readback;usefulness-pilot task,evidence,grade,analysis and controller checks;offline make docs-lint'
 last_check_result: 'Two excluded source collections reconcile6ops/5.994088584091514seconds. Pilot21pairs/21repos prepared;42 task bindings,6 canonical trial replays,7 evidence-stop fixtures,5 grade-binding checks,3 old pairs reanalyzed;284 assets match. No new models/services started. Active69doc lint passed;old excluded report lint issues preserved.'
 next_action: 'Obtain exact pilot reviewbf8d62f2c30c5923f72731d7259cd792733b344bfe1915b778ae0bf23f0362c9 execution/public-disclosure approval;then verify current grant/expiry and run repository-usefulness-pilot-20261029/run-review.py once. Maximum42turns/1095ops/68380reservedseconds/$0;retain all charges. On completion run canonical audit and actual admission-restraint analysis. No corpus expansion,package/docs/source-suite reruns or architecture decision.'
@@ -4391,3 +4391,13 @@ need the next actual exact approval. Source13gates are complete;do not rerun.
 No Git download,image build,package installation,model,shared grant charge or
 release occurred during this preparation. Pool64/77gap and current13304/3755/
 120080.87940059323/0.0 remain. No architecture or budget decision is needed.
+
+
+## October 29 handoff: comparison ready, exact execution approval requested
+
+Commit `4b9d9b5` contains the reconciled two-audit outcomes and the bounded
+usefulness comparison. Review `bf8d62f2c30c5923f72731d7259cd792733b344bfe1915b778ae0bf23f0362c9`
+was presented to the operator after all 284 bindings and focused preparation checks
+passed. Approval is pending; no new model, worker or service has started. The
+working tree was clean after that commit. Open the pilot README/PLAN and current
+grant before the next dependent action. Do not resume deferred corpus work.
