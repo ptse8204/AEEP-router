@@ -1,5 +1,21 @@
 # Remaining delivery gates
 
+## Current artifact verification
+
+Exact bundle 88e5c1b9 completed all three installed checks and offline docs
+verification on 69 bound inputs. Both private runtimes were removed unchanged;
+all 168 Python wheel members match source 5a4257e3. The source's 13 software gates
+remain passed. No models, graders, downloads, Docker operations or cash spending
+were added. The [completion audit](../c13/repository-codec-preflight-20261029/completion-audit.json)
+retains actual hashes and unchanged grant counters.
+
+The [beta assessment](../c13/repository-codec-preflight-20261029/BETA_ASSESSMENT.md)
+recommends private local experiments on the tested macOS arm64/Python 3.13 setup.
+C13 remains IN_PROGRESS for unmet acceptance. Formal capability qualification,
+positive live selection benefit, broader operational/platform claims and operator
+release review remain open. No execution approval is pending for this completed
+increment. The prior docs check retains its input scope before status updates.
+
 ## October 29 update
 
 The [real repository development comparison](../c13/repository-usefulness-pilot-20261029/comparison.html)

@@ -1681,3 +1681,22 @@ changed. The completed live study stays source b09911a0; guard source 5a4257e3
 is separately bound. Three focused current-wheel checks plus cached offline docs
 execution await their exact review. No corpus/model replay or broader test
 expansion is planned.
+
+## October 29: current installation/docs verified; bounded beta handoff
+
+The approved 88e5c1b9 bundle passed three current-wheel checks and offline docs
+verification on 69 bound inputs. Both private runtimes were removed unchanged;
+all 33 wheel archives remain. The audit matches 168 Python wheel members to
+source 5a4257e3. No models, downloads, Docker operations, cash or grant changes
+occurred. Source, model and grader runs were not repeated. Documentation hashes
+retain the actual inputs before these status updates.
+
+The [beta assessment](../../reports/toolkit-v2/c13/repository-codec-preflight-20261029/BETA_ASSESSMENT.md)
+records the current functionality matrix and source/wheel footprint. Private local
+experimentation is the engineering recommendation. Production release and public
+benefit claims remain NO_GO. C13 remains IN_PROGRESS for unmet acceptance, with
+no pending installation or execution approval. The comparative result is unchanged:
+both arms passed 14/19, with no additional successes, no supported savings and
+two actual admission refusals. A justified new capability-value hypothesis and
+untouched cases are prerequisites to another efficacy execution review. The
+helped control exercise remains off the critical path.

@@ -2350,3 +2350,26 @@ focused checks of the changed artifact. Prepare one exact bundle with the 32
 cached dependencies and pinned offline docs checker before asking for the
 installation/execution authority excluded by the comparison review. No new model
 or architecture decision is needed. C13 remains IN_PROGRESS.
+
+## D131: Complete current-artifact checks and keep the beta decision scoped
+
+The operator approved exact bundle 88e5c1b9. It completed once: all three installed
+checks passed, followed by offline docs verification on 69 bound inputs. Both
+private runtimes were removed unchanged. The audit matches all 168 Python wheel
+members to current source 5a4257e3 and preserves the 33 cached wheel archives.
+No models, downloads, Docker operations, cash or grant changes occurred.
+
+The engineering recommendation is LIMITED_BETA for private experiments on the
+tested macOS arm64/Python 3.13 setup. Production release and public benefit claims
+remain NO_GO; operator publication approval is absent. C13 remains IN_PROGRESS
+for unmet acceptance. The completed source b09911a0 comparison still has identical
+14/19 outcomes and no demonstrated incremental benefit. Positive live selection
+benefit and formal qualification remain unproven. Another efficacy study needs a
+justified hypothesis, untouched cases and applicable exact authority. Preserve
+these limits instead of replaying models or expanding infrastructure tests to
+fill checkpoint counts.
+
+The 69-input docs result binds its actual files before routine status updates.
+Keep those hashes and results unchanged. No further checker approval is needed
+solely for this progress record. The operator's clarification keeps the helped
+control exercise off the critical path.

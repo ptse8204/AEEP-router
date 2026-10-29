@@ -7,6 +7,16 @@ managed evaluator where the tested upstream Codex contract did not meet requirem
 Waza and LangGraph are optional, tested fixture integrations. No hosted service or
 orchestrator is required for this local path.
 
+## Current installation and verification
+
+The corrected source passed all 13 software gates. Its exact wheel and 32 cached
+dependencies then passed three focused installed checks; the private runtime was
+removed unchanged. The approved offline docs check passed all 69 bound inputs
+and removed its checker runtime. No additional model or grader ran.
+The [beta assessment](repository-codec-preflight-20261029/BETA_ASSESSMENT.md)
+separates these engineering results from actual capability-value evidence and
+records the limits on private local use. Production release remains NO_GO.
+
 ## October 29 repository comparison
 
 The [real repository report](repository-usefulness-pilot-20261029/comparison.html)

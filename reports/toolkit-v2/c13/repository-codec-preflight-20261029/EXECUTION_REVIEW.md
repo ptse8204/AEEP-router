@@ -1,5 +1,9 @@
 # Focused current-wheel and offline-docs review
 
+**Status: approved and completed once.** All three installed checks and the
+69-input offline docs check passed; both private runtimes were removed unchanged.
+See the [completion audit](completion-audit.json). The original request follows.
+
 The comparative task-value work is complete: both arms passed 14/19 with no
 candidate-only success. The source fix prevents the controller format mistake
 before model reservation. This review finishes verification of that changed

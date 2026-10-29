@@ -46,8 +46,9 @@ rejects the actual failed mixed definition before model reservation and accepts
 both corrected profiles, with grant counters unchanged. Current source 5a4257e3
 passed all 13 required source checks: both full runs passed 1786 tests with
 21 skips, displayed coverage is 82%, and both branch gates passed. The wheel
-is built; its three focused installed checks and current cached offline docs
-check await their concrete review. No additional model turn is needed.
+is built and passed all three focused installed checks. The approved cached
+offline docs check passed 69 bound inputs with zero local-link errors. Both
+private runtimes were removed unchanged. No additional model turn was used.
 
 All 21 intended repositories reached model workers, including censored cases.
 The [exposure overlay](../../reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/formal-exposure-exclusions.json)
@@ -105,16 +106,16 @@ checkpoint_status:
   C12: PASS
   C13: IN_PROGRESS
 last_verified_commit: 'df9eee7f2535a47e957418da0747c2d428641f26'
-last_check_command: 'repository-codec-preflight-20261029/run-source-checks.py (13 gates);actual-definition-regression.json;analyze-retained-failures.py'
-last_check_result: 'Source5a4257e3:13/13 gates passed;1786tests/21skips in each full run;82%coverage,both branch gates;schema,ruff,policy,mypy168files,build passed. Actual invalid definition rejected before model reservation with unchanged counters. Completed sourceb099 comparison remains both14/19;38captures/19loads;2actual admission refusals. No new models or formal qualification.'
-next_action: 'Guard source5a4257e3 is committed asdf9eee7;all13 source gates passed. Do not replay models,source gates or corpus batches. The concrete changed-wheel/cached-docs review is reports/toolkit-v2/c13/repository-codec-preflight-20261029/approval-bundle.json. Obtain exact approval before running its driver;three focused installed checks use32 unchanged cached dependencies. Historical live evidence stays sourceb099/f3eecc0. The helped control exercise is off the critical path;no architecture choice or model turn is requested.'
+last_check_command: 'Approved run-bundle.py88e5c1b9;completion-audit.json canonical readback. Earlier13source gates and retained-failure analysis are complete and were not repeated.'
+last_check_result: 'Approved88e5c1b9 completed once:3installed checks and69-input offline docs passed;both private runtimes removed unchanged;all168Python wheel members match current source5a4257e3. No models,downloads,Docker,cash or grant changes. Source13gates remain passed1786tests/21skips per run,82%coverage,both branch gates. Sourceb099 comparison remains both14/19,38captures,19loads,2admission refusals;no formal qualification or positive selection benefit.'
+next_action: 'Current engineering verification and local beta assessment are complete;read reports/toolkit-v2/c13/repository-codec-preflight-20261029/BETA_ASSESSMENT.md. No execution or installation approval is pending. Do not replay terminal models,source suites,graders or package/docs drivers. C13 remains open for unmet acceptance:formal capability qualification,positive selection evidence,broader operational/platform claims and operator release review. Another efficacy campaign requires a justified capability/workload hypothesis,untouched cases and new exact authority;do not expand corpus or repeat infrastructure tests merely to fill gates. Human-control exercise stays off the critical path.'
 blocked_actions:
   - 'Helped report comprehension is recorded. The operator removed the concrete control exercise from the critical path on October29;control-use qualification remains unmeasured and is not an engineering/comparison blocker.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'bf8d62f2 execution is complete and terminal:41turns charged. Do not reuse its remaining slot or replay completed/censored work. First-party preflight guard engineering is authorized;new artifact installation or other untrusted execution needs its concrete applicable review if required.'
+  - 'No pending authority for the completed work:bf8d62f2 comparison and88e5c1b9 installation/docs are terminal. Do not reuse slots or rerun drivers. Any new justified model study,untrusted software or changed installation needs its own applicable exact authority.'
   - 'Param asyncio and Jsonpickle Ruff support are deferred,not blockers for the working-pool comparison. Their untrusted execution is not authorized by unused old slots.'
   - 'Release/publication,paid services,credential access,wider disclosure,and retained-image/volume/backup or unrelated-resource removal remain outside authority.'
 unknowns:
@@ -4443,3 +4444,28 @@ execution is pending exact authority; completed source and model checks are not
 repeated. Preserve all old evidence and images. The helped human-control exercise
 is no longer on the critical path after the operator's clarification. C13 remains
 IN_PROGRESS; production efficacy and public release are not claimed.
+
+## October 29: approved current artifact verified; local beta assessment complete
+
+Actual human approval of exact88e5c1b9 is recorded. The bundle completed once:
+three installed checks passed in its private runtime, then the cached offline docs
+check passed 69 bound inputs with zero local-link errors. Both runtimes were
+removed unchanged; all 33 wheel archives remain. The completion audit verifies
+all 168 Python wheel members against source5a4257e3 and unchanged grant counters
+13656/3796/125269.06508910004/$0. Zero models, downloads, Docker operations,
+credentials, activation or cash. The source suites and model study were not replayed.
+The docs scan binds its recorded inputs before this status prose.
+
+The [beta assessment](../../reports/toolkit-v2/c13/repository-codec-preflight-20261029/BETA_ASSESSMENT.md)
+contains the current functionality matrix, upstream reuse, measured source/wheel
+footprint and remaining evidence limits. Engineering recommendation: LIMITED_BETA
+for private experiments on the tested macOS arm64/Python3.13 setup; production
+release and public benefit claims remain NO_GO. This is not operator publication
+approval or a C13 PASS. No installation/execution approval remains pending.
+
+The comparative result still supports retaining the baseline for these tasks.
+Formal qualification and positive live selection benefit remain unproven. Do not
+turn more infrastructure tests or replayed cases into efficacy evidence. Another
+study needs a justified capability/workload hypothesis and untouched cases before
+its exact execution review. The operator's helped control exercise remains off
+the critical path. No new architecture choice is needed.
