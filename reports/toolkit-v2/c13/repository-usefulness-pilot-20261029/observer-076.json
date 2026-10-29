@@ -1,0 +1,37 @@
+{
+  "stage": "repository_suite_probe",
+  "operation_seconds": 1.9590204576961696,
+  "reply_type": "dict",
+  "reply_digest": "631770b6d83faaa4876aacf8428f795f006aa8fb4636dd2384de120bd17976a9",
+  "field_names": [
+    "archive_sha256",
+    "exit_code",
+    "pytest",
+    "python",
+    "statuses"
+  ],
+  "field_types": {
+    "exit_code": "int",
+    "statuses": "dict",
+    "archive_sha256": "str",
+    "python": "str",
+    "pytest": "str"
+  },
+  "exit_code": 0,
+  "archive_sha256": "1be39d3add7c12850cf625e1b47e6d365629805910f95fd86aa5439cdc23bb2b",
+  "python": "3.13",
+  "pytest": "8.3.5",
+  "status_count": 10,
+  "statuses": {
+    "tests/test_class_decorator.py::TestClassDecoratorWithFixture::test_with_fixture": "PASSED",
+    "tests/test_class_decorator.py::TestClassDecoratorWithFixture::test_without_fixture": "PASSED",
+    "tests/test_class_decorator.py::TestClassDecoratorWithFixture::test_with_yield_fixture": "PASSED",
+    "tests/test_class_decorator.py::TestClassDecoratorWithFixture::test_with_func_fixture": "PASSED",
+    "tests/test_class_decorator.py::test_decorator_with_argument_named_func[a]": "PASSED",
+    "tests/test_class_decorator.py::test_decorator_with_argument_named_func[b]": "PASSED",
+    "tests/test_class_decorator.py::test_freezegun_with_argument_named_arg[a]": "PASSED",
+    "tests/test_class_decorator.py::test_freezegun_with_argument_named_arg[b]": "PASSED",
+    "tests/test_class_decorator.py::test_freezegun_decorator_first_parametrize_second[a]": "PASSED",
+    "tests/test_class_decorator.py::test_freezegun_decorator_first_parametrize_second[b]": "PASSED"
+  }
+}

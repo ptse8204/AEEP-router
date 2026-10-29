@@ -53,3 +53,25 @@ Only after a complete execution result, run `audit-completion.py` and
 `analyze-and-check-admission.py` in this directory with the same interpreter and
 `PYTHONPATH=src`. If the attempt stops, reconcile the actual ledger and partial
 observations first; do not mark the comparison complete or rerun it.
+
+## Current execution: continue from durable component state
+
+The original command above is terminal;do not rerun it. The human approved it,
+but my uniform-gzip worker definition conflicted with legacy plain-patch tasks.
+Three turns touched two cases before cancellation. The
+[stopped reconciliation](stopped-accounting-audit.json) retains every charge and
+confirms cleanup. Those cases supply no comparative-value observations.
+
+The [recorded controller correction](codec-control-review.json) uses delegated
+definition authority inside the actual approval. Nineteen untouched original
+tasks are running in two components:13plain and6gzip. No source,test,reference,
+external software,image,model,destination,permission or metric changed. The
+original intended21slots remain,with two engineering-censored cases and no
+replacement or replay. Both local and original cumulative guards apply;at most
+41turns across all attempts fit the approved42.
+
+Inspect `codec-continuation-started.json`, the component started/results files
+and canonical ledger before resuming. The process is already running;do not
+launch it again. On completion,audit both components and run
+`analyze-codec-continuation.py`. Keep resource conditions separate and report
+all attrition. Nineteen pairs cannot satisfy the20-pair resource-interval gate.

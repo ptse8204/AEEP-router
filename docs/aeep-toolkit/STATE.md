@@ -1,5 +1,34 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**Execution update, October 29: the approved usefulness run hit a controller codec defect.**
+The original uniform-gzip worker definition was incompatible with legacy plain
+patch decoders. I cancelled further dispatch. Three charged turns touched two
+cases; they are engineering-censored and supply zero task-value observations.
+Canonical grades are preserved; they are not reclassified as capability failures.
+[Stopped accounting audit](../../reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/stopped-accounting-audit.json)
+reopens 92 completed grader chains and three completed task chains, confirms
+cleanup and the stopped proxy, and reconciles 105 operations/825.743449958507
+charged seconds. The only pending report reservation was settled from proof that
+its body never started; no operation or model-turn allowance was refunded.
+
+[Exact control review](../../reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/codec-control-review.json)
+26594bcad49f2e065cdf554f7ab335a297e343449650a1708ad193e3bcb22a14
+uses standing definition/scope delegation and the actual approval's explicit
+routine-control amendment clause. It corrects only unstarted tasks: 13 use the
+existing plain artifact contract; six use gzip. All 19 original case fields,
+source/test/reference/dependency bytes and grader programs match. Both arms use
+the same format for each task. Strict decoder/payload fixtures and both guards
+rejecting cumulative turn 43 passed without source/model execution.
+
+The two components are now running once on the existing source, images and proxy.
+Original cumulative anchor remains 13333/3755/120131.70525092818/$0. At most
+38 further turns give 41 cumulative, within the approved 42/1095/68380/$0 limits.
+Do not replay either started case or the original controller. Keep plain/gzip
+resource results separate. Nineteen completed pairs would remain below the
+20-pair resource-interval minimum; no missing interval becomes a savings claim.
+Inspect `codec-continuation-started.json`, component results and the canonical
+ledger before any resume. No new permission is needed inside this scope.
+
 **Status as of October 29: the latest two source audits added no tasks.**
 Review ca735d78 was approved. Its controller stopped before source execution on
 formatted-file versus canonical-wire digests. The standing routine definition/
@@ -91,14 +120,14 @@ checkpoint_status:
 last_verified_commit: '4b9d9b5'
 last_check_command: 'audit canonical readback;usefulness-pilot task,evidence,grade,analysis and controller checks;offline make docs-lint'
 last_check_result: 'Two excluded source collections reconcile6ops/5.994088584091514seconds. Pilot21pairs/21repos prepared;42 task bindings,6 canonical trial replays,7 evidence-stop fixtures,5 grade-binding checks,3 old pairs reanalyzed;284 assets match. No new models/services started. Active69doc lint passed;old excluded report lint issues preserved.'
-next_action: 'Obtain exact pilot reviewbf8d62f2c30c5923f72731d7259cd792733b344bfe1915b778ae0bf23f0362c9 execution/public-disclosure approval;then verify current grant/expiry and run repository-usefulness-pilot-20261029/run-review.py once. Maximum42turns/1095ops/68380reservedseconds/$0;retain all charges. On completion run canonical audit and actual admission-restraint analysis. No corpus expansion,package/docs/source-suite reruns or architecture decision.'
+next_action: 'Follow already-started run-codec-continuation.py and its plain/gzip components;DO NOT rerun the original controller or either censored case. Inspect durable component started/results files and live canonical status first. After completion audit each component,combine19pair descriptive results with2engineering-censored slots,and test actual admission restraint. Preserve original cumulative anchor/caps and all3earlier turns. No source/package/docs-runtime reruns or corpus expansion.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'Exact reviewbf8d62f2c30c5923f72731d7259cd792733b344bfe1915b778ae0bf23f0362c9 awaits actual approval:21new public repository task disclosures and up to42 model-turn reservations in existing isolated workers/proxy,1095operations/68380reservedseconds/$0. Earlier source-audit approval allowed zero models and different subjects. No architecture or new infrastructure decision.'
+  - 'bf8d62f2 is actually approved and running;no further approval is needed within its exact42turn/1095operation/68380second/$0 envelope. Stop on uncertainty;do not retry started invocations. Changed untrusted software,source/disclosure or broader authority remains separate.'
   - 'Param asyncio and Jsonpickle Ruff support are deferred,not blockers for the working-pool comparison. Their untrusted execution is not authorized by unused old slots.'
   - 'Release/publication,paid services,credential access,wider disclosure,and retained-image/volume/backup or unrelated-resource removal remain outside authority.'
 unknowns:
@@ -4401,3 +4430,15 @@ was presented to the operator after all 284 bindings and focused preparation che
 passed. Approval is pending; no new model, worker or service has started. The
 working tree was clean after that commit. Open the pilot README/PLAN and current
 grant before the next dependent action. Do not resume deferred corpus work.
+
+
+## October 29: actual usefulness execution approved and started
+
+The human replied “approve” to exact review bf8d62f2. Actual approval is recorded
+in the pilot directory; the existing controller is running once. Its starting
+counters are 13333/3755/120131.70525092818/$0. The grant had expired while approval
+was pending. Standing finite-amendment authority covered expiry-only amendment
+827aead87b80f3b6c32bc19a11abfcf31ffd1706a45a3b8050db6f1bf046111e,
+through 2026-10-30T20:50:41.445938Z. All counters and absolute ceilings are unchanged.
+Inspect durable started/results files before resuming; no automatic controller or
+invocation retry. Existing worker/collector conformance is the first gated phase.

@@ -1623,3 +1623,24 @@ HTML discrepancies;those historical bytes are preserved. New appended blank line
 were corrected. The69-document pinned runtime check remains its original completed
 evidence,not a new check after these status edits. Full source/package/docs-runtime
 checks are not repeated for this report/controller-only work.
+
+## October 29 approved usefulness execution: codec correction
+
+The human approved bf8d62f2. Expiry-only amendment827aead8 preserves all absolute
+limits/counters through2026-10-30T20:50:41.445938Z. Both11-group worker profiles
+passed;92grader controls completed. My uniform-gzip definition then rejected
+legacy plain-patch outputs. Dispatch was cancelled. Three turns/two cases remain
+charged and engineering-censored,not capability failures. Canonical readback and
+existing recovery confirm complete attempts/cleanup. The known unstarted report
+body was reconciled with explicit proof;105operations/825.743449958507seconds
+remain charged.
+
+D128 and exact control review26594bcad49f2e065cdf554f7ab335a297e343449650a1708ad193e3bcb22a14
+apply the standing definition/scope authority and actual parent's routine-control
+clause to19unstarted original tasks:13plain/sixgzip. No case fields,external
+software,source/test/reference bytes,images,model,destination or permissions
+change. All19strict codec/payload fixtures pass;both guards reject cumulative
+turn43. The components are running once under the original anchor/caps. Maximum
+41cumulative turns;no started case replay or corpus expansion. Keep component
+resource results separate;19pairs leave the20-pair interval gate unmet. No
+qualification,admission,positive selection,resource,human or release gate closes.

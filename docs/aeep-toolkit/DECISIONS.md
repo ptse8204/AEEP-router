@@ -2261,3 +2261,38 @@ this pilot is inconclusive, or spend new task turns replaying an ineligible
 candidate to manufacture a positive selection claim. Each next test must name
 the decision it enables and its stop condition. New model disclosure/execution
 still needs its concrete scope; no architecture decision is needed.
+
+## D128: Correct the task artifact format without replaying started work
+
+The first approved usefulness attempt used gzip for every task. The existing
+legacy decoder requires plain JSON;the mixed recipe's union output schema did
+not make gzip valid for every truth version. The prompt fixture missed that
+per-case contract. Three turns reached two cases before cancellation. Preserve
+their canonical records and charges;exclude both cases from value analysis for
+this known engineering defect. Do not call those outcomes capability failures
+or retry either case.
+
+All92grader and3task chains reopen as completed,with owned cleanup confirmed.
+The report-body reservation was known unstarted:the exact per-trial exception
+propagated before report generation or its clock. The existing operation API
+settled that unused reservation with explicit operator proof;operations and
+three model-turn allowances remain charged. Total105operations/825.743449958507
+seconds reconcile. Original terminal files remain unchanged.
+
+The actual parent's routine-control amendment clause and standing definition/
+scope delegation cover correct existing artifact profiles for the19unstarted
+tasks:13plain,sixgzip. Every original case field and source/test/reference/wheel
+byte matches;no product source,grader program,image,model,destination,permission,
+metric or intended case slot changes. Both arms receive the same format within
+each case. A new strict decoder roundtrip rejects the original mismatch and
+checks actual grader payload bounds for all19cases without executing them.
+
+Record exact component definitions and fresh applicable worker evidence. Existing
+service grader validation remains mandatory. New reservations enforce BOTH local
+component caps and the original13333/3755/120131.70525092818/$0 anchor;synthetic
+checks reject parent turn43 in either component. No fresh allowance or human
+answer is invented. At most38new turns plus3earlier give41inside42. Known task
+failures remain results;common execution/evidence uncertainty stops dispatch.
+Keep plain/gzip resource results separate. Nineteen pairs cannot meet the20-pair
+resource-interval minimum or qualify/admit. Report two censored slots and all
+attrition explicitly;do not replace tasks to recover a favorable result.
