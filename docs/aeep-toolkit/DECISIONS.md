@@ -2172,3 +2172,29 @@ its own exact rights,scope,reference/counterexample reproduction and applicable
 execution approval. Re-run boundary checks only for a changed or stale binding,
 not as a substitute for preparing the missing representative tasks. Preserve all
 prior failed charges and keep resource acceptance separate from comparative value.
+
+## D125: Prepare two cached fixed-snapshot audits on the verified backend
+
+Use the independent Param1073 and Jsonpickle587 snapshots as authored audit
+candidates. Their source archives and BSD license notices are already cached.
+Apply the published source fix to the public snapshot,retain all published
+required assertions,and add the explicit byte-preservation guard. The reference
+is empty and the original-source counterexample stays private. These are source
+contract audits,not complete published repair tasks or official benchmark scores.
+
+Jsonpickle's published patch also changes Git/linter/documentation files. The
+reviewed source-only scope keeps the serializer fix and all test-patch bytes,
+and records every omitted metadata edit before models or external execution.
+No version,distribution metadata,installer or dependency is fabricated. Existing
+upstream fallback behavior remains unchanged. The first inert preparation's
+asset-adapter and unsupported metadata-scope errors remain recorded.
+
+Reuse actual dual-profile conformance only while sourceb09911a0,image35dc1bcb,
+executor definitions,environment and canonical19receipt chains still match.
+Do not repeat boundary/default-control probes. New tasks need their own native
+collections,exhaustive alias groups frozen before body calls,and reference/
+counterexample observations. Require every original alias plus the explicit
+preservation guard;predeclare30/83minimum and256maximum expanded identities per
+case. No test can be dropped or outcome used to remap the scope. Static fixtures
+and reused backend evidence do not qualify either source. New source execution
+requires its exact finite review;no model,architecture or budget decision.

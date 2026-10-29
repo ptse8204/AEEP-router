@@ -6267,3 +6267,20 @@ case and no corpus-wide/model qualification transfers. Further safe cached-sourc
 curation continues;new untrusted source/model execution needs a concrete review.
 Completed source13/package20/docs69are not repeated. Central usefulness/selection,
 resource,human-control and release gates stay open.
+
+### October 29: two cached authored audit subjects prepared
+
+Param1073andJsonpickle587are prepared as fixed-snapshot audits:29/82published
+identities plus explicit preservation guards,empty references and original-source
+negatives. Jsonpickle's Git/linter/docs patch edits are explicitly omitted from
+the source-only contract before execution;all test-patch/other row data remain.
+Source/BSD notices are pinned. No fabricated metadata,installer,new wheel or core
+change. First inert adapter/scope errors remain recorded.
+
+Reviewca735d78permits at most6offline calls/8additional existing-grant operations/
+360seconds on retained35dc1bcb,zero models/cash/builds/downloads/installs. Exact
+backend19canonical chains and unchanged source/executor/environment match;no
+boundary/default-control replay. Seven preparation checks,actual operation9
+rejection and three authored wrapper scenarios passed without source execution.
+New subjects require exact approval;old unused slots do not transfer. Pool65/76gap
+remains,with no scientific/resource/human/release gate closed.

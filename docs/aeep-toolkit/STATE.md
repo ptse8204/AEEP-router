@@ -45,6 +45,20 @@ curation of independent cached repository cases and preparation of a finite
 execution review on the now-verified image. No architecture or budget decision.
 No further runtime/model/source execution is authorized by unused d1caf28bslots.
 
+Two new cached audits are prepared,not executed:Param1073andJsonpickle587.
+They retain29/82published identities plus one explicit preservation guard each.
+Jsonpickle's non-runtime Git/linter/docs edits are separately recorded and outside
+this authored serializer scope;test-patch and other row fields are unchanged.
+Current exact review[ca735d78](../../reports/toolkit-v2/c13/repository-cached-audits-20261029/operation-review.json)
+binds the two sources,source notices,current backend and controller. It permits
+six calls/eight additional existing-grant operations/360reservedseconds,zero
+models/cash/downloads/installs/builds/credentials/release. Prior19canonical chains
+reopen and all backend definitions/environment match;new runtime probes are zero.
+Preparation/definition/budget guards and three authored dispatch scenarios passed.
+These are inert checks,not new source reproduction. Actual untrusted execution
+approval is needed because completed d1caf28bcovered other source subjects.
+No architecture or budget decision. Source/package/docs checks are not repeated.
+
 Four real diagnostic turns have verified token capture chains. Three passed
 independent grading; the initial callback failure remains ungraded. The approved
 one-turn forced check captured a bound native Ponytail instruction-loading event.
@@ -86,42 +100,19 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: '7b7abb0'
-last_check_command: 'run-bundle.py d1caf28b;runtime-execution/audit-execution.py;consolidate-runtime.py'
-last_check_result: 'Build35dc1bcb and19physical calls passed;22canonical operations/41.88380412571132seconds;all receipt chains and cleanup verified. Dead38reference/original and frozen171defaultcontrols passed. Pool65/41repos/5075IDs;76cases missing. Zero models/cash/downloads;all images retained.'
-next_action: 'Continue inert independent cached-source/license/runtime curation for remaining20single/24multi/32audit cases. Reuse verified image35dc1bcb and unchanged shared-v6 observer where applicable;new task/software execution needs a concrete finite review. Preserve65case source/runtime bindings;no stage freeze,model qualification or usefulness/selection claim before evidence. Do not repeat completed source/package/docs/runtime batches.'
+last_verified_commit: 'c46e55b'
+last_check_command: 'completed d1caf28b/consolidate-runtime.py;cached-audits prepare_cases.py,check_preparation.py,check_dispatch.py'
+last_check_result: 'Actual pool65/5075IDs. Two authored audit seeds/4payloads prepared with all29/82published assertions plus guards;no source execution. Exact prior19backend chains reopen;8operation budget rejects9;3wrapper fixtures pass. Newreviewca735d78pending,6calls/8ops/360seconds;grant unchanged13327/3755/120125.71116234409/0.0.'
+next_action: 'Obtain exact cached-audits reviewca735d78f53c33685af78d487eb83bdc06edf743e0630233eadeb070f76d4518 approval,check current grant/expiry,and run repository-cached-audits-20261029/run_review.py once. New subjects need6source calls;reuse exact verified backend without probe/package/docs/source-suite replay. Preserve all original assertions and counters;adopt only actual reproduced provisional cases,then continue independent corpus preparation.'
 blocked_actions:
   - 'Report comprehension is demonstrated with help. Concrete control discovery remains partial; no unaided control-use or population-wide usability claim. Both actual responses and product correction are retained.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
   - 'Infrastructure adequacy remains separate; prior proposed numeric SLOs are not adopted. Derive targets from actual workload observations without relaxing established guards or reviewed experiment limits.'
   - 'Release/publication is unauthorized; broader platform and upstream Codex-harness claims remain unqualified.'
 missing_permissions:
-  - 'None for completed d1caf28b:actual approval exercised once,19receipts/22operations reconcile and pool65. New source/model/software execution requires its concrete exact review;unused slots do not transfer. Routine inert curation/finite definition amendments continue without an architecture or budget question.'
-  - 'Actuala11807f2approval was exercised once and ended at the missing-loader expectation guard. One completed operation stays charged. Fresh cached-onlyd1caf28bneeds exact approval:the old review forbids automatic retry/guard changes. No new download,dependency,model,architecture or budget decision.'
-  - 'Actual17defe159approval was exercised once:runtime terminal before external work,independent package20/docs passed. Fresh runtime-onlya11807f2 needs exact approval because the one-attempt review forbids retries. No new model,architecture,package/docs or budget decision.'
-  - 'None for terminalae6a0f9f:actual direct approval ran once and all17receipts/19operations reconcile. New pinnedGit download/component/image and fresh untrusted source execution require their concrete exact review. No architecture/budget decision;routine finite definitions/expiry amendments remain delegated.'
-  - 'None for terminal22b0cf03:actual approval completed once,5receipts/7operations/18.11404641577974seconds,zero models/cash. New observer/source execution requires a concrete exact review;no unused-slot transfer or replay. Safe native-identity adapter/corpus preparation continues;no architecture or budget decision is needed.'
-  - 'None for terminalf18daa4a and its explicitly approved finite report-control continuation:initial3charges retained,XS8unstarted immutable payloads completed,exact docs passed. New portable Markdown payload changes software bytes and needs one concrete exact execution approval. PyMdown remains unstarted;no unused-slot transfer,refund or image/build authority.'
-  - 'None for terminal123ff4ee:actual approval completed once,10receipts/12operations/26.03374574892223seconds,zero models/cash. New authored protected behavior checks or other subjects require a concrete exact review;unused calls cannot cover changed payloads. Routine finite definitions are delegated;no architecture/budget decision is needed.'
-  - 'None for completed4661ce49:all3components completed once,15receipts/17operations/46.957869624719024seconds charged,zero models/cash. Image2386 and all older images remain. The old e6b1fb2c8charges and failed probe remain. New untrusted subjects/runtime supports need a new exact review;routine finite definitions remain delegated.'
-  - 'None for terminalf0261e6d: actual approval executed once;both audits reproduced,4 receipts/6 operations/10.159214583225548 seconds charged,zero models/cash. Imagef603 retained. Further untrusted source/runtime execution needs a new concrete review; no retries or unused-slot authority transfer.'
-  - 'None for terminalfaa10772: actual approval executed once;4 diagnostics/6 operations/11.11573583446443 seconds charged,zero models/cash. The collector did not resolve exact causes. Four tasks remain excluded;do not replay or install speculative fixes. Continue independent source curation; any new untrusted source execution needs a new exact review.'
-  - 'None for terminalc81557a2: actual October27 approval executed once;3of6 tasks reproduced,12 calls/15 operations/35.61532362597063 seconds charged,zero models/cash. Imagef603 retained. Further diagnostic/source execution needs a new concrete exact review; no unused slots or retry authority transfer. Routine finite definitions remain delegated.'
-  - 'None for terminalbe8b0e5f: actual October27 approval executed once. Four tasks reproduced,CanvasAPI excluded;12 calls/15 operations charged. New imageb0eb4add retained. No unused slot, changed source/test execution, model, install or future replay authority transfers. Prepare the next exact review; routine finite definitions and expiry amendments remain delegated.'
-  - 'None for terminal51c43d2c: actual exact approval exercised once, all three components passed. No unused slot, future source execution or model authority transfers. New third-party workload execution needs a concrete exact review; static source curation and routine finite definitions continue without another architecture decision.'
-  - 'None for terminal38f87c22: actual approval executed once,87operations charged,15new cases retained and7excluded. Image324a1fee is retained. No further model/source execution or replay follows from its unused slots. Prepare the next concrete review before asking for intervention.'
-  - 'None for completed31c5138d: actual exact approval exercised once. Runtime4of5 cases reproduced; package19 checks and docs passed. No replay or future-source/model/install authority transfers. New independent source reproduction requires a new concrete review; routine finite definitions remain delegated.'
-  - 'None for completedab120327: actual approval exercised once;19 physical calls completed and21operations charged. Seven provisional candidates retained after a separately recorded no-replay truth adaptation. No future execution, build, install, model or release authority transfers.'
-  - 'None for completed7bbc9678: actual approval exercised once; all4 observations passed,6operations charged and all owned containers absent. No future source/model execution, build, install or replay is authorized by this terminal review.'
-  - 'None for completed4cfc412d: actual approval exercised once; six cases reproduced, two excluded, all14 physical attempts/receipts reopened and owned containers absent. Its two unstarted negative slots cannot be reused. No model/install/future-source authority transfers.'
-  - 'Review48fa60c0 is WITHDRAWN before execution because the proposed multi-file case is actually one source-body change plus two docstring edits. No installation, build or contained call occurred. Do not execute it even if a late response approves it. A correctly scoped future runtime/plugin review remains to be prepared.'
-  - 'None for completed89245763: actual exact approval exercised once and the semantic-fault check passed;3 operations charged. The grant is now12839 operations,3744 turns,118201.13565913262 seconds and0.0 cash. All three preceding reviews are terminal; no new source/runtime/model execution is authorized by them.'
-  - 'None for terminal six-call review6174f3e4: approved and all6 calls executed. Click3 variants and Marshmallow reference/original checked; last Marshmallow import-fault probe blocked at protocol validation with its raw reply unretained. Eight operations remain charged; no automatic retry.'
-  - 'None for terminal bundlea2787cd8: actual approval exercised; installed wheel19 checks and offline docs passed. Grader stopped after6 calls on a report-script exit-code defect; all8 operations and failed terminal result remain. No retry or future authority follows.'
-  - 'None for completed upstream grader review56ca1751: actual approval exercised once; all six calls passed, eight operations charged and all owned containers removed. No future changed-pack execution, wheel installation or models are authorized by this terminal review. Continue first-party source verification and safe curation.'
-  - 'None for completed correction bundle9aaa3f73: exact approval was exercised once and all components passed. It is terminal; no model or future upstream execution is authorized by that bundle. Read-only cohort/source work and routine finite definition amendments continue.'
-  - 'None for the completed capture repair. The exact additional one-turn approval ba27e521 was exercised once successfully; no further diagnostic turn is pending.'
-  - 'Release/publication and further retained-image, backup or unrelated resource removal remain outside authority.'
+  - 'Exact ca735d78 approval is pending for two new authored source audits:6offline calls/8additional existing-grant operations/360seconds,on retained35dc1bcb. Zero models,cash,downloads,installs,builds,credentials,services,activation,release or deletion. Completed d1caf28b covered different subjects;routine inert preparation is delegated.'
+  - 'Future real-task model qualification/usefulness/selection execution and any additional untrusted software require their concrete reviewed scopes. The corpus and study are not yet ready;no architecture or budget decision is being requested.'
+  - 'Release/publication,paid services,credential access,wider disclosure,and retained-image/volume/backup or unrelated-resource removal remain outside authority. Historical exact-review outcomes remain in the journal and immutable artifacts below.'
 unknowns:
   - 'Agent-skill-eval scripted dispatch is verified; its Codex harness is unqualified. The managed path uses the recorded AEEP fallback decision.'
   - 'The original study finds zero success gain and no supported 10% time benefit. Strict token pairs remain 0/105; historical candidate-specific use and generated-tool invocation remain unknown. New diagnostics do not repair history.'
