@@ -1548,3 +1548,21 @@ cached-verifier,driver,definition/budget and image-derivation fixtures passed.
 Fresh exact approval is needed because the terminal review forbids retries.
 Completed source13/package20/docs69are not repeated;pool64/77gap and all central
 scientific,resource,human-control and release gates remain open.
+
+### October 29: cached Git runtime completed
+
+Actuald1caf28bpassed one COPY-only build and19contained calls. Outputimage
+35dc1bcb7e8162c2a0cef6cbd30bc4bf276c082b11b6e5fc259b6800e8c5ca04has unchanged
+inherited configuration/parent layers. Fresh dual-profile boundaries/native
+fixtures,Git/linker/local-command/Identify checks,Dead38reference/original,
+raw reference and two frozen171-test shared-default controls all passed.
+All19completed receipt/attempt chains and22operations reconcile;41.88380412571132
+seconds charged,zero models/cash/downloads/installs. Owned containers/canary are
+absent;all images/cache/context remain. Prior failed2.9479576251469553seconds stays.
+
+Consolidation adds only Dead:65provisional snapshots/41repositories/5075IDs,
+families27single/23multi/15audit,76missing. Old bindings remain;controls add no
+case and no corpus-wide/model qualification transfers. Further safe cached-source
+curation continues;new untrusted source/model execution needs a concrete review.
+Completed source13/package20/docs69are not repeated. Central usefulness/selection,
+resource,human-control and release gates stay open.

@@ -1,0 +1,39 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 240B done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for docker.io/aeep-toolkit-v2/repository-grader:py313-multifile-20261027
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 4.13MB 0.0s done
+#4 DONE 0.1s
+
+#5 [1/4] FROM docker.io/aeep-toolkit-v2/repository-grader:py313-multifile-20261027@sha256:9f473c493b7af1854922807d2acbdcbe3b955313dc57f203e6f73c9c50f9ea85
+#5 resolve docker.io/aeep-toolkit-v2/repository-grader:py313-multifile-20261027@sha256:9f473c493b7af1854922807d2acbdcbe3b955313dc57f203e6f73c9c50f9ea85 done
+#5 DONE 0.2s
+
+#6 [2/4] COPY --chmod=0555 git /usr/bin/git
+#6 DONE 0.0s
+
+#7 [3/4] COPY templates/ /usr/share/git-core/templates/
+#7 DONE 0.0s
+
+#8 [4/4] COPY copyright /usr/share/doc/aeep-local-git/copyright
+#8 DONE 0.0s
+
+#9 exporting to image
+#9 exporting layers 0.1s done
+#9 exporting manifest sha256:35dc1bcb7e8162c2a0cef6cbd30bc4bf276c082b11b6e5fc259b6800e8c5ca04 done
+#9 exporting config sha256:0fbf5493d294ce18d57b4ae82cb232abe0fb546a5e8d75f9a725a30e29277386 done
+#9 naming to docker.io/aeep-toolkit-v2/repository-grader:py313-shared-native-git-20261028 done
+#9 unpacking to docker.io/aeep-toolkit-v2/repository-grader:py313-shared-native-git-20261028 0.0s done
+#9 DONE 0.2s
+
+View build details: docker-desktop://dashboard/build/default/default/pjo29lye16drgmcj9g5t1iqe3

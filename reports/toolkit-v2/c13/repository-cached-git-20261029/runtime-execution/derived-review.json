@@ -1,0 +1,315 @@
+{
+  "method_sha256": "3c27b33db89b6465f68ec8364b104974502ffe2e29b83066501b6d5d4639eef1",
+  "parent_operation_review_sha256": "a5ab9d595b67d7a6a7b6c1ea1aadd4c6777aae547515adafbf2b7b3c9343824b",
+  "source_digest": "b09911a0b7b79f6f78a5371bbad53580ff0692fc3d371592a983437898a19fcf",
+  "cases_file": ".aeep/repository-shared-native-runtime-20261028/derived/cases.json",
+  "variants_file": ".aeep/repository-shared-native-runtime-20261028/derived/variants.json",
+  "assets": {
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-shared-native-runtime-20261028/derived/asottile__dead-204-native-expanded-scope-tests.tar.gz": "d31e1a9ea93a0be87e18b648e1241439e4b22f201802bba2fe15bc642a0cb01b",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-shared-native-runtime-20261028/derived/cases.json": "2b4299f63d23fb952f1c94e0087f9a5ccdd00a7ae655e7a56d066894097a2a61",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-shared-native-runtime-20261028/derived/asottile__dead-204-native-expanded-scope-reference-payload.json": "49c2ff8fcb3bd896aaaac6db407fd5f245e4e3ac79edd217575a5490b9a486a2",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-shared-native-runtime-20261028/derived/variants.json": "fc47adce7ab74d22dc02b57285698e67416b787fe868b936982fa7f6e3a5d9c0",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-shared-native-runtime-20261028/derived/asottile__dead-204-native-expanded-scope-counterexample-payload.json": "7a81692d5f46573a20607f780afc9084ae326de99551afe69c48988582afea29"
+  },
+  "mappings": [
+    {
+      "original_required_aliases": 32,
+      "expanded_required_identities": 38,
+      "alias_groups": {
+        "tests/dead_test.py::test_class_methods_in_closure": [
+          "tests/dead_test.py::test_class_methods_in_closure"
+        ],
+        "tests/dead_test.py::test_dead_disable_regex_matching[#": [
+          "tests/dead_test.py::test_dead_disable_regex_matching[# dead: disable]",
+          "tests/dead_test.py::test_dead_disable_regex_matching[# noqa: dead: disable]"
+        ],
+        "tests/dead_test.py::test_dead_disable_regex_matching[#dead:disable]": [
+          "tests/dead_test.py::test_dead_disable_regex_matching[#dead:disable]"
+        ],
+        "tests/dead_test.py::test_dead_disable_regex_not_matching[#": [
+          "tests/dead_test.py::test_dead_disable_regex_not_matching[# noqa]",
+          "tests/dead_test.py::test_dead_disable_regex_not_matching[# undead: disable]"
+        ],
+        "tests/dead_test.py::test_is_marked_as_used[x": [
+          "tests/dead_test.py::test_is_marked_as_used[x = 1\\nprint(x)\\n]"
+        ],
+        "tests/dead_test.py::test_is_marked_as_used[annotated": [
+          "tests/dead_test.py::test_is_marked_as_used[annotated assignment]"
+        ],
+        "tests/dead_test.py::test_is_marked_as_used[def": [
+          "tests/dead_test.py::test_is_marked_as_used[def f(): ...\\n__all__ = (\"f\",)]",
+          "tests/dead_test.py::test_is_marked_as_used[def f(): ...\\nprint(f())\\n]",
+          "tests/dead_test.py::test_is_marked_as_used[def g(): ...\\ndef f(): ...\\n__all__ = [\"f\", g.__name__]]",
+          "tests/dead_test.py::test_is_marked_as_used[def unused(): ... # dead: disable\\n]"
+        ],
+        "tests/dead_test.py::test_is_marked_as_used[async": [
+          "tests/dead_test.py::test_is_marked_as_used[async def f(): ...\\nprint(f())\\n]"
+        ],
+        "tests/dead_test.py::test_is_marked_as_used[class": [
+          "tests/dead_test.py::test_is_marked_as_used[class C: ...\\nprint(C())\\n]",
+          "tests/dead_test.py::test_is_marked_as_used[class C:\\n   def __str__(self): return \"hi\"\\nprint(C())\\n]"
+        ],
+        "tests/dead_test.py::test_is_marked_as_used[from": [
+          "tests/dead_test.py::test_is_marked_as_used[from os.path import exists as wat\\nprint(wat)\\n]"
+        ],
+        "tests/dead_test.py::test_is_marked_as_used[import": [
+          "tests/dead_test.py::test_is_marked_as_used[import sys\\ndef unique_function(): ...\\nsys.modules[__name__].unique_function()\\n]"
+        ],
+        "tests/dead_test.py::test_deleted_file_dont_raise_error": [
+          "tests/dead_test.py::test_deleted_file_dont_raise_error"
+        ],
+        "tests/dead_test.py::test_setup_py_entrypoints_mark_as_used": [
+          "tests/dead_test.py::test_setup_py_entrypoints_mark_as_used"
+        ],
+        "tests/dead_test.py::test_setup_cfg_entry_points_marked_as_used": [
+          "tests/dead_test.py::test_setup_cfg_entry_points_marked_as_used"
+        ],
+        "tests/dead_test.py::test_setup_cfg_without_entry_points": [
+          "tests/dead_test.py::test_setup_cfg_without_entry_points"
+        ],
+        "tests/dead_test.py::test_setup_cfg_without_attribute_entry_point": [
+          "tests/dead_test.py::test_setup_cfg_without_attribute_entry_point"
+        ],
+        "tests/dead_test.py::test_never_referenced": [
+          "tests/dead_test.py::test_never_referenced"
+        ],
+        "tests/dead_test.py::test_assignment_not_counted_as_reference": [
+          "tests/dead_test.py::test_assignment_not_counted_as_reference"
+        ],
+        "tests/dead_test.py::test_only_referenced_in_tests": [
+          "tests/dead_test.py::test_only_referenced_in_tests"
+        ],
+        "tests/dead_test.py::test_unused_dead_disable_comment": [
+          "tests/dead_test.py::test_unused_dead_disable_comment"
+        ],
+        "tests/dead_test.py::test_partially_disabled": [
+          "tests/dead_test.py::test_partially_disabled"
+        ],
+        "tests/dead_test.py::test_unused_argument": [
+          "tests/dead_test.py::test_unused_argument"
+        ],
+        "tests/dead_test.py::test_unused_argument_in_scope": [
+          "tests/dead_test.py::test_unused_argument_in_scope"
+        ],
+        "tests/dead_test.py::test_using_an_argument": [
+          "tests/dead_test.py::test_using_an_argument"
+        ],
+        "tests/dead_test.py::test_ignore_unused_arguments_stubs": [
+          "tests/dead_test.py::test_ignore_unused_arguments_stubs"
+        ],
+        "tests/dead_test.py::test_ignored_arguments": [
+          "tests/dead_test.py::test_ignored_arguments"
+        ],
+        "tests/dead_test.py::test_unused_posonly_argument": [
+          "tests/dead_test.py::test_unused_posonly_argument"
+        ],
+        "tests/dead_test.py::test_ignore_unused_arguments_by_default": [
+          "tests/dead_test.py::test_ignore_unused_arguments_by_default"
+        ],
+        "tests/dead_test.py::test_unused_annotated_assignment": [
+          "tests/dead_test.py::test_unused_annotated_assignment"
+        ],
+        "tests/dead_test.py::test_typedict_keys_used": [
+          "tests/dead_test.py::test_typedict_keys_used"
+        ],
+        "tests/dead_test.py::test_global_target": [
+          "tests/dead_test.py::test_global_target"
+        ],
+        "tests/dead_test.py::test_allowed_symbols_file": [
+          "tests/dead_test.py::test_allowed_symbols_file"
+        ]
+      },
+      "selector_path": "tests/conftest.py",
+      "only_selector_literal_changed": true,
+      "source_assertions_and_repairs_unchanged": true,
+      "collection_is_not_grade": true,
+      "frozen_before_body_trials": true,
+      "derived_tests_sha256": "d31e1a9ea93a0be87e18b648e1241439e4b22f201802bba2fe15bc642a0cb01b",
+      "case_id": "asottile__dead-204-native-expanded-scope",
+      "collection_observation": {
+        "name": "collection-asottile__dead-204-native-expanded-scope",
+        "operation_id": "recipe_generation_92b385e48f5447ac938edd0c1834ef0d-call-14",
+        "raw_file": "raw-observation-14.json",
+        "raw_sha256": "212cc92374b98eb1a52d3622971f11a3af4151ddc7744b4a99c11b9fa656dba3",
+        "execution_error_type": null,
+        "profile": "operator"
+      }
+    }
+  ],
+  "expectations": {
+    "asottile__dead-204-native-expanded-scope": {
+      "reference": {
+        "exit_code": 0,
+        "valid": true,
+        "detail": "",
+        "statuses": {
+          "tests/dead_test.py::test_class_methods_in_closure": "PASSED",
+          "tests/dead_test.py::test_dead_disable_regex_matching[# dead: disable]": "PASSED",
+          "tests/dead_test.py::test_dead_disable_regex_matching[# noqa: dead: disable]": "PASSED",
+          "tests/dead_test.py::test_dead_disable_regex_matching[#dead:disable]": "PASSED",
+          "tests/dead_test.py::test_dead_disable_regex_not_matching[# noqa]": "PASSED",
+          "tests/dead_test.py::test_dead_disable_regex_not_matching[# undead: disable]": "PASSED",
+          "tests/dead_test.py::test_is_marked_as_used[x = 1\\nprint(x)\\n]": "PASSED",
+          "tests/dead_test.py::test_is_marked_as_used[annotated assignment]": "PASSED",
+          "tests/dead_test.py::test_is_marked_as_used[def f(): ...\\n__all__ = (\"f\",)]": "PASSED",
+          "tests/dead_test.py::test_is_marked_as_used[def f(): ...\\nprint(f())\\n]": "PASSED",
+          "tests/dead_test.py::test_is_marked_as_used[def g(): ...\\ndef f(): ...\\n__all__ = [\"f\", g.__name__]]": "PASSED",
+          "tests/dead_test.py::test_is_marked_as_used[def unused(): ... # dead: disable\\n]": "PASSED",
+          "tests/dead_test.py::test_is_marked_as_used[async def f(): ...\\nprint(f())\\n]": "PASSED",
+          "tests/dead_test.py::test_is_marked_as_used[class C: ...\\nprint(C())\\n]": "PASSED",
+          "tests/dead_test.py::test_is_marked_as_used[class C:\\n   def __str__(self): return \"hi\"\\nprint(C())\\n]": "PASSED",
+          "tests/dead_test.py::test_is_marked_as_used[from os.path import exists as wat\\nprint(wat)\\n]": "PASSED",
+          "tests/dead_test.py::test_is_marked_as_used[import sys\\ndef unique_function(): ...\\nsys.modules[__name__].unique_function()\\n]": "PASSED",
+          "tests/dead_test.py::test_deleted_file_dont_raise_error": "PASSED",
+          "tests/dead_test.py::test_setup_py_entrypoints_mark_as_used": "PASSED",
+          "tests/dead_test.py::test_setup_cfg_entry_points_marked_as_used": "PASSED",
+          "tests/dead_test.py::test_setup_cfg_without_entry_points": "PASSED",
+          "tests/dead_test.py::test_setup_cfg_without_attribute_entry_point": "PASSED",
+          "tests/dead_test.py::test_never_referenced": "PASSED",
+          "tests/dead_test.py::test_assignment_not_counted_as_reference": "PASSED",
+          "tests/dead_test.py::test_only_referenced_in_tests": "PASSED",
+          "tests/dead_test.py::test_unused_dead_disable_comment": "PASSED",
+          "tests/dead_test.py::test_partially_disabled": "PASSED",
+          "tests/dead_test.py::test_unused_argument": "PASSED",
+          "tests/dead_test.py::test_unused_argument_in_scope": "PASSED",
+          "tests/dead_test.py::test_using_an_argument": "PASSED",
+          "tests/dead_test.py::test_ignore_unused_arguments_stubs": "PASSED",
+          "tests/dead_test.py::test_ignored_arguments": "PASSED",
+          "tests/dead_test.py::test_unused_posonly_argument": "PASSED",
+          "tests/dead_test.py::test_ignore_unused_arguments_by_default": "PASSED",
+          "tests/dead_test.py::test_unused_annotated_assignment": "PASSED",
+          "tests/dead_test.py::test_typedict_keys_used": "PASSED",
+          "tests/dead_test.py::test_global_target": "PASSED",
+          "tests/dead_test.py::test_allowed_symbols_file": "PASSED"
+        },
+        "required_identities": [
+          "tests/dead_test.py::test_class_methods_in_closure",
+          "tests/dead_test.py::test_dead_disable_regex_matching[# dead: disable]",
+          "tests/dead_test.py::test_dead_disable_regex_matching[# noqa: dead: disable]",
+          "tests/dead_test.py::test_dead_disable_regex_matching[#dead:disable]",
+          "tests/dead_test.py::test_dead_disable_regex_not_matching[# noqa]",
+          "tests/dead_test.py::test_dead_disable_regex_not_matching[# undead: disable]",
+          "tests/dead_test.py::test_is_marked_as_used[x = 1\\nprint(x)\\n]",
+          "tests/dead_test.py::test_is_marked_as_used[annotated assignment]",
+          "tests/dead_test.py::test_is_marked_as_used[def f(): ...\\n__all__ = (\"f\",)]",
+          "tests/dead_test.py::test_is_marked_as_used[def f(): ...\\nprint(f())\\n]",
+          "tests/dead_test.py::test_is_marked_as_used[def g(): ...\\ndef f(): ...\\n__all__ = [\"f\", g.__name__]]",
+          "tests/dead_test.py::test_is_marked_as_used[def unused(): ... # dead: disable\\n]",
+          "tests/dead_test.py::test_is_marked_as_used[async def f(): ...\\nprint(f())\\n]",
+          "tests/dead_test.py::test_is_marked_as_used[class C: ...\\nprint(C())\\n]",
+          "tests/dead_test.py::test_is_marked_as_used[class C:\\n   def __str__(self): return \"hi\"\\nprint(C())\\n]",
+          "tests/dead_test.py::test_is_marked_as_used[from os.path import exists as wat\\nprint(wat)\\n]",
+          "tests/dead_test.py::test_is_marked_as_used[import sys\\ndef unique_function(): ...\\nsys.modules[__name__].unique_function()\\n]",
+          "tests/dead_test.py::test_deleted_file_dont_raise_error",
+          "tests/dead_test.py::test_setup_py_entrypoints_mark_as_used",
+          "tests/dead_test.py::test_setup_cfg_entry_points_marked_as_used",
+          "tests/dead_test.py::test_setup_cfg_without_entry_points",
+          "tests/dead_test.py::test_setup_cfg_without_attribute_entry_point",
+          "tests/dead_test.py::test_never_referenced",
+          "tests/dead_test.py::test_assignment_not_counted_as_reference",
+          "tests/dead_test.py::test_only_referenced_in_tests",
+          "tests/dead_test.py::test_unused_dead_disable_comment",
+          "tests/dead_test.py::test_partially_disabled",
+          "tests/dead_test.py::test_unused_argument",
+          "tests/dead_test.py::test_unused_argument_in_scope",
+          "tests/dead_test.py::test_using_an_argument",
+          "tests/dead_test.py::test_ignore_unused_arguments_stubs",
+          "tests/dead_test.py::test_ignored_arguments",
+          "tests/dead_test.py::test_unused_posonly_argument",
+          "tests/dead_test.py::test_ignore_unused_arguments_by_default",
+          "tests/dead_test.py::test_unused_annotated_assignment",
+          "tests/dead_test.py::test_typedict_keys_used",
+          "tests/dead_test.py::test_global_target",
+          "tests/dead_test.py::test_allowed_symbols_file"
+        ]
+      },
+      "counterexample": {
+        "exit_code": 1,
+        "valid": false,
+        "detail": "test_failure",
+        "statuses": {
+          "tests/dead_test.py::test_class_methods_in_closure": "FAILED",
+          "tests/dead_test.py::test_dead_disable_regex_matching[# dead: disable]": "PASSED",
+          "tests/dead_test.py::test_dead_disable_regex_matching[# noqa: dead: disable]": "PASSED",
+          "tests/dead_test.py::test_dead_disable_regex_matching[#dead:disable]": "PASSED",
+          "tests/dead_test.py::test_dead_disable_regex_not_matching[# noqa]": "PASSED",
+          "tests/dead_test.py::test_dead_disable_regex_not_matching[# undead: disable]": "PASSED",
+          "tests/dead_test.py::test_is_marked_as_used[x = 1\\nprint(x)\\n]": "PASSED",
+          "tests/dead_test.py::test_is_marked_as_used[annotated assignment]": "PASSED",
+          "tests/dead_test.py::test_is_marked_as_used[def f(): ...\\n__all__ = (\"f\",)]": "PASSED",
+          "tests/dead_test.py::test_is_marked_as_used[def f(): ...\\nprint(f())\\n]": "PASSED",
+          "tests/dead_test.py::test_is_marked_as_used[def g(): ...\\ndef f(): ...\\n__all__ = [\"f\", g.__name__]]": "PASSED",
+          "tests/dead_test.py::test_is_marked_as_used[def unused(): ... # dead: disable\\n]": "PASSED",
+          "tests/dead_test.py::test_is_marked_as_used[async def f(): ...\\nprint(f())\\n]": "PASSED",
+          "tests/dead_test.py::test_is_marked_as_used[class C: ...\\nprint(C())\\n]": "PASSED",
+          "tests/dead_test.py::test_is_marked_as_used[class C:\\n   def __str__(self): return \"hi\"\\nprint(C())\\n]": "PASSED",
+          "tests/dead_test.py::test_is_marked_as_used[from os.path import exists as wat\\nprint(wat)\\n]": "PASSED",
+          "tests/dead_test.py::test_is_marked_as_used[import sys\\ndef unique_function(): ...\\nsys.modules[__name__].unique_function()\\n]": "PASSED",
+          "tests/dead_test.py::test_deleted_file_dont_raise_error": "PASSED",
+          "tests/dead_test.py::test_setup_py_entrypoints_mark_as_used": "PASSED",
+          "tests/dead_test.py::test_setup_cfg_entry_points_marked_as_used": "PASSED",
+          "tests/dead_test.py::test_setup_cfg_without_entry_points": "PASSED",
+          "tests/dead_test.py::test_setup_cfg_without_attribute_entry_point": "PASSED",
+          "tests/dead_test.py::test_never_referenced": "PASSED",
+          "tests/dead_test.py::test_assignment_not_counted_as_reference": "PASSED",
+          "tests/dead_test.py::test_only_referenced_in_tests": "PASSED",
+          "tests/dead_test.py::test_unused_dead_disable_comment": "PASSED",
+          "tests/dead_test.py::test_partially_disabled": "PASSED",
+          "tests/dead_test.py::test_unused_argument": "PASSED",
+          "tests/dead_test.py::test_unused_argument_in_scope": "PASSED",
+          "tests/dead_test.py::test_using_an_argument": "PASSED",
+          "tests/dead_test.py::test_ignore_unused_arguments_stubs": "PASSED",
+          "tests/dead_test.py::test_ignored_arguments": "PASSED",
+          "tests/dead_test.py::test_unused_posonly_argument": "PASSED",
+          "tests/dead_test.py::test_ignore_unused_arguments_by_default": "PASSED",
+          "tests/dead_test.py::test_unused_annotated_assignment": "PASSED",
+          "tests/dead_test.py::test_typedict_keys_used": "PASSED",
+          "tests/dead_test.py::test_global_target": "PASSED",
+          "tests/dead_test.py::test_allowed_symbols_file": "PASSED"
+        },
+        "required_identities": [
+          "tests/dead_test.py::test_class_methods_in_closure",
+          "tests/dead_test.py::test_dead_disable_regex_matching[# dead: disable]",
+          "tests/dead_test.py::test_dead_disable_regex_matching[# noqa: dead: disable]",
+          "tests/dead_test.py::test_dead_disable_regex_matching[#dead:disable]",
+          "tests/dead_test.py::test_dead_disable_regex_not_matching[# noqa]",
+          "tests/dead_test.py::test_dead_disable_regex_not_matching[# undead: disable]",
+          "tests/dead_test.py::test_is_marked_as_used[x = 1\\nprint(x)\\n]",
+          "tests/dead_test.py::test_is_marked_as_used[annotated assignment]",
+          "tests/dead_test.py::test_is_marked_as_used[def f(): ...\\n__all__ = (\"f\",)]",
+          "tests/dead_test.py::test_is_marked_as_used[def f(): ...\\nprint(f())\\n]",
+          "tests/dead_test.py::test_is_marked_as_used[def g(): ...\\ndef f(): ...\\n__all__ = [\"f\", g.__name__]]",
+          "tests/dead_test.py::test_is_marked_as_used[def unused(): ... # dead: disable\\n]",
+          "tests/dead_test.py::test_is_marked_as_used[async def f(): ...\\nprint(f())\\n]",
+          "tests/dead_test.py::test_is_marked_as_used[class C: ...\\nprint(C())\\n]",
+          "tests/dead_test.py::test_is_marked_as_used[class C:\\n   def __str__(self): return \"hi\"\\nprint(C())\\n]",
+          "tests/dead_test.py::test_is_marked_as_used[from os.path import exists as wat\\nprint(wat)\\n]",
+          "tests/dead_test.py::test_is_marked_as_used[import sys\\ndef unique_function(): ...\\nsys.modules[__name__].unique_function()\\n]",
+          "tests/dead_test.py::test_deleted_file_dont_raise_error",
+          "tests/dead_test.py::test_setup_py_entrypoints_mark_as_used",
+          "tests/dead_test.py::test_setup_cfg_entry_points_marked_as_used",
+          "tests/dead_test.py::test_setup_cfg_without_entry_points",
+          "tests/dead_test.py::test_setup_cfg_without_attribute_entry_point",
+          "tests/dead_test.py::test_never_referenced",
+          "tests/dead_test.py::test_assignment_not_counted_as_reference",
+          "tests/dead_test.py::test_only_referenced_in_tests",
+          "tests/dead_test.py::test_unused_dead_disable_comment",
+          "tests/dead_test.py::test_partially_disabled",
+          "tests/dead_test.py::test_unused_argument",
+          "tests/dead_test.py::test_unused_argument_in_scope",
+          "tests/dead_test.py::test_using_an_argument",
+          "tests/dead_test.py::test_ignore_unused_arguments_stubs",
+          "tests/dead_test.py::test_ignored_arguments",
+          "tests/dead_test.py::test_unused_posonly_argument",
+          "tests/dead_test.py::test_ignore_unused_arguments_by_default",
+          "tests/dead_test.py::test_unused_annotated_assignment",
+          "tests/dead_test.py::test_typedict_keys_used",
+          "tests/dead_test.py::test_global_target",
+          "tests/dead_test.py::test_allowed_symbols_file"
+        ]
+      }
+    }
+  },
+  "frozen_before_any_body_trial": true,
+  "policy": "Exhaustive disjoint native alias groups; every matched identity required;no outcome tuning or source/assertion/patch edits."
+}

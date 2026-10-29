@@ -2157,3 +2157,18 @@ and every frozen task obligation. Keep all images and prior evidence. A new
 actual approval is required because the terminal review permits one attempt and
 forbids automatic retries. Package/docs/source checks remain complete;no model,
 architecture,threshold,spending or release decision follows from this repair.
+
+## D124: Keep successful runtime conformance separate from corpus reproduction
+
+The actual cached Git image35dc1bcbpassed both shared-v6 profiles,the real local
+Git/linker/Identify checks,Dead's38obligations and two frozen171-test controls.
+Its19completed receipt chains,22operations and cleanup reconcile. Add only the
+new Dead snapshot to the provisional pool;do not count controls or transfer old
+source/runtime case bindings. The pool is65and stages remain unfrozen.
+
+Reuse this exact image/observer conformance for applicable finite source batches
+while checking identity and permissions at dispatch. Each new source still needs
+its own exact rights,scope,reference/counterexample reproduction and applicable
+execution approval. Re-run boundary checks only for a changed or stale binding,
+not as a substitute for preparing the missing representative tasks. Preserve all
+prior failed charges and keep resource acceptance separate from comparative value.

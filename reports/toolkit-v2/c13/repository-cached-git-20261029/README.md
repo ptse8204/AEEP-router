@@ -1,5 +1,11 @@
 # Cached Git runtime: inherited-loader correction
 
+**Completed successfully on October 29.** The build and all 19 worker calls
+passed; 22 operations / 41.88380412571132 seconds reconcile. The new Dead case
+raises the provisional pool to 65; 76 cases remain. All images are retained and
+new owned containers/canary are absent. The preparation record below preserves
+the exact approved scope. See [actual results](RESULTS.md).
+
 The approved `a11807f2` attempt downloaded and verified the exact Git archive,
 then stopped before Docker. Its expected dependency names omitted
 `ld-linux-aarch64.so.1`. That system loader already exists in the retained parent.
