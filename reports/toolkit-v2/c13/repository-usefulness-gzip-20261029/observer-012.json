@@ -1,0 +1,35 @@
+{
+  "stage": "repository_suite_probe",
+  "operation_seconds": 2.0876634996384382,
+  "reply_type": "dict",
+  "reply_digest": "22cc41a2cd999fa2fbdaad9b024a6481c5124e9446a2c736b27965dea83b0422",
+  "field_names": [
+    "archive_sha256",
+    "exit_code",
+    "pytest",
+    "python",
+    "statuses"
+  ],
+  "field_types": {
+    "exit_code": "int",
+    "statuses": "dict",
+    "archive_sha256": "str",
+    "python": "str",
+    "pytest": "str"
+  },
+  "exit_code": 1,
+  "archive_sha256": "a043b4f180960ff744fb49b358a546d55b93f8870192c4eeee9ca67df3ebde9a",
+  "python": "3.13",
+  "pytest": "8.3.5",
+  "status_count": 8,
+  "statuses": {
+    "test/test_pdo.py::TestPDO::test_pdo_export": "PASSED",
+    "test/test_pdo.py::TestPDO::test_pdo_map_bit_mapping": "PASSED",
+    "test/test_pdo.py::TestPDO::test_pdo_map_getitem": "PASSED",
+    "test/test_pdo.py::TestPDO::test_pdo_maps_iterate": "PASSED",
+    "test/test_pdo.py::TestPDO::test_pdo_save": "PASSED",
+    "test/test_pdo.py::TestPDO::test_pdo_save_skip_readonly": "PASSED",
+    "test/test_pdo.py::TestPDO::test_pdo_getitem": "FAILED",
+    "test/test_pdo.py::TestPDO::test_pdo_iterate": "FAILED"
+  }
+}

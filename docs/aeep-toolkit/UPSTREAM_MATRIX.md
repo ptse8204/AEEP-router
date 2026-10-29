@@ -1644,3 +1644,23 @@ turn43. The components are running once under the original anchor/caps. Maximum
 41cumulative turns;no started case replay or corpus expansion. Keep component
 resource results separate;19pairs leave the20-pair interval gate unmet. No
 qualification,admission,positive selection,resource,human or release gate closes.
+
+## October 29: real-task comparison complete, no success gain observed
+
+The existing AEEP fallback engine completed19valid repository pairs on source
+b09911a0/source-treef3eecc0. Ordinary and optionalPonytail4.10.0 both passed14/19;
+all outcomes match. Token capture verifies38/38 and candidate instruction loading
+19/19. The two codec conditions remain separate;only11plain/3gzip pairs both
+succeeded,so no supported resource or cash saving follows. Actual synchronous
+admission calls rejected both canonical development reports,with admissions and
+counters unchanged. Positive live selection benefit remains unproven.
+
+The original controller defect leaves2censored slots/3charged turns. Canonical
+audit reconciles323complete operations/41turns/5137.359838171862accountingseconds/
+$0. All owned workers/graders are absent,proxy stopped,images retained. Grant
+13656/3796/125269.06508910004/$0. Exposure excludes24related snapshots,leaving41
+potential formal cases;8/28/105and all thresholds remain. C13 stays IN_PROGRESS.
+Next safe engineering is a preflight codec guard preventing this actual defect
+before model reservations,followed by required checks for that code change.
+The human concrete-control response remains pending;no model replay or corpus
+expansion is the next step.

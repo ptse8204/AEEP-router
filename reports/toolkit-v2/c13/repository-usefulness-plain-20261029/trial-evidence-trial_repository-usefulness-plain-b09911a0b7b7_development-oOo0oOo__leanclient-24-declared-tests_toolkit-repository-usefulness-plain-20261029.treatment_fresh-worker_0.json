@@ -1,0 +1,274 @@
+{
+  "trial_id": "trial_repository-usefulness-plain-b09911a0b7b7_development-oOo0oOo__leanclient-24-declared-tests_toolkit-repository-usefulness-plain-20261029.treatment_fresh-worker_0",
+  "case_id": "development-oOo0oOo__leanclient-24-declared-tests",
+  "canonical_trial_ref": "f732e96d84a07b06d26441f06f7084bde2adaa0881120dbd95d666c67f7efed0",
+  "canonical_trial_complete": true,
+  "receipt_ref": "2ae3d9f50382746faffafcae64addcec460829675557d87ba30554e5aeb321ea",
+  "receipt": {
+    "receipt_id": "rcpt_eca46d0bd1dd48cfbb7aee985e0e6f92",
+    "decision_id": "dec_4c4652e006554d86905e48b14299c34e",
+    "action_id": "act_29247e4bca504be390b12cb191b03ef6",
+    "capability": "assessment.repository_suite@1",
+    "executor_id": "toolkit-repository-usefulness-plain-20261029.treatment",
+    "executor_kind": "host_managed",
+    "status": "success",
+    "attempt": 1,
+    "started_at": "2026-10-29T21:21:42.587163Z",
+    "ended_at": "2026-10-29T21:22:38.434904Z",
+    "estimated": {
+      "resources": {
+        "monetary_usd": 0.0,
+        "latency_ms": 0.0,
+        "cpu_ms": 0.0,
+        "memory_mb_seconds": 0.0,
+        "peak_memory_mb": 0.0,
+        "gpu_ms": 0.0,
+        "network_bytes": 0,
+        "context_tokens": 0,
+        "input_tokens": 0,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 0,
+        "reasoning_output_tokens": 0,
+        "subscription_units": 0.0
+      },
+      "cash": {
+        "amount_usd": "0.0",
+        "upper_bound_usd": "0.0",
+        "evidence": {
+          "status": "complete",
+          "source": "static_estimate",
+          "trust": "self_asserted",
+          "evidence_id": null,
+          "source_reference": null,
+          "digest": null,
+          "observed_at": null
+        }
+      },
+      "subscription_usage": [],
+      "success_probability": 0.95,
+      "quality_score": 0.95,
+      "risk_score": 0.05,
+      "confidence": 0.5,
+      "source": "static",
+      "sample_size": 0,
+      "uncertainty": null
+    },
+    "executor_fingerprint": "sha256:8311b01ec0ce6b94a73790f990ea1baa1ba739c54ead99cc9cf029a7821ab5ee",
+    "cohort_digest": "sha256:0032fabc9907baaef396c902760169486597411421f50048faf5e43f18772240",
+    "action_features": {
+      "input_bytes": 1497,
+      "input_items": 13,
+      "text_characters": 1384,
+      "max_depth": 2,
+      "size_bucket": "2^10"
+    },
+    "actual_resources": {
+      "monetary_usd": 0.0,
+      "latency_ms": 54697.35245779157,
+      "cpu_ms": 0.0,
+      "memory_mb_seconds": 0.0,
+      "peak_memory_mb": 0.0,
+      "gpu_ms": 0.0,
+      "network_bytes": 0,
+      "context_tokens": 0,
+      "input_tokens": 164710,
+      "cached_input_tokens": 138880,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 1771,
+      "reasoning_output_tokens": 101,
+      "subscription_units": 0.0
+    },
+    "accounting": {
+      "cash": {
+        "status": "unavailable",
+        "components": []
+      },
+      "subscription_usage": [
+        {
+          "provider": "openai",
+          "resource_pool": "codex.self",
+          "unit": "provider_unit",
+          "consumed": null,
+          "source": {
+            "status": "unavailable",
+            "source": "unavailable",
+            "trust": "untrusted",
+            "evidence_id": null,
+            "source_reference": null,
+            "digest": null,
+            "observed_at": null
+          },
+          "included_or_paid": "unknown",
+          "rate_snapshot_id": null,
+          "usage_fingerprint": null
+        }
+      ],
+      "model_usage": [
+        {
+          "provider": "openai",
+          "model": "gpt-6-astra",
+          "access_channel": "subscription",
+          "input_tokens": 164710,
+          "cached_input_tokens": 138880,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1771,
+          "reasoning_output_tokens": 101,
+          "evidence": {
+            "status": "complete",
+            "source": "provider_report",
+            "trust": "self_asserted",
+            "evidence_id": null,
+            "source_reference": null,
+            "digest": null,
+            "observed_at": "2026-10-29T21:22:37.847394Z"
+          }
+        }
+      ],
+      "tool_footprint": null
+    },
+    "cache_affinity": null,
+    "approval_id": null,
+    "transport_success": true,
+    "execution_success": true,
+    "schema_valid": true,
+    "task_valid": true,
+    "quality_score": 1.0,
+    "validation_results": [
+      {
+        "kind": "schema",
+        "valid": true,
+        "quality_score": 1.0,
+        "detail": "schema validation passed",
+        "trust": "observed"
+      }
+    ],
+    "output_valid": true,
+    "error_type": null,
+    "error_message": null,
+    "trace_id": null,
+    "metadata": {
+      "host_progress": "{\"stage\":\"turn_completed\",\"elapsed_seconds\":54.12413412518799,\"callback_counts\":{\"requested\":0,\"handler_completed\":0,\"response_written\":0,\"rejected\":0},\"last_event\":\"turn/completed\",\"callback_last_elapsed_seconds\":{},\"last_item_type\":null,\"last_event_elapsed_seconds\":54.12385004200041,\"final_message_received\":true,\"turn_completion_received\":true}",
+      "actual_model": "gpt-6-astra",
+      "host_runtime_digest": "3ab937618d5bc325f1962d3969ed62e0c4f62c77b904036851b1cf86c2890873",
+      "boundary_digest": "86ec3bfe393fa24471f949037bc06e6b3e2513dc978a95a6d9816fcd85b80aab",
+      "model_turn_count": 1,
+      "codex_token_fields": "[\"cacheWriteInputTokens\", \"cachedInputTokens\", \"inputTokens\", \"outputTokens\", \"reasoningOutputTokens\", \"totalTokens\"]",
+      "tool_selection_rounds": null,
+      "implementation_schema_bytes": null,
+      "output_schema_bytes": 117,
+      "result_bytes": 18,
+      "tool_call_count": 10,
+      "host_tools_used": "[\"sha256:ad2634d601879078be3658ad320790948459e468edf9ed772e4c5df21a99583b\", \"sha256:cbf69bb16f39dc9d0cc024898e8fb9b8e5890fbfd7f9388a287fec215b5df135\"]",
+      "host_advertised_inventory_digest": "sha256:bab61d25e9e7f803ff97f1c9f237c18d809335355bf7c3d32535bf2c3b1904aa",
+      "candidate_skill_name_sha256": "99e1ea0dc21155f199005f8c0bebdfaab72da093e94882e313aa2e92048cb36e",
+      "candidate_skill_sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+      "host_available_tools": "unknown",
+      "approval_evidence_digest": null,
+      "thread_identity_digest": "sha256:a1dbcfed8703a2faced51fdb72987422ae2873fe95d5b79127a4dbdca91cf455",
+      "turn_identity_digest": "sha256:c53d962d4aa9d4c85ea21fdcccdc8d520af90a95e4eed9012ba2bb6299ea16d7",
+      "artifact_sha256": "fdce2f08e8c764772e5ae7d93ed736670f287597d27a1eb8c46b4129ee370d9e",
+      "artifact_bytes": 46627,
+      "worker_digest": "50db1787d67f416149df475adc237b16a9b7ed666fc1a7c14580302cb933e95c",
+      "catalog_metrics_scope": "aeep-metrics-348db7ec7efd2f582c704d8382dce94a",
+      "worker_cleanup_confirmed": true,
+      "execution_evidence_digest": "35bd7519e1c5447f757377a774fe320a24f9c6d8f8abc355b8766cb3e48aece6",
+      "task_instruction_sha256": "dddad504a246618d2190d8e000b27f251f62727d2893554adbc2f1f0be3d7ef2",
+      "adapter_id": "codex-app-server:text-phase-final-treatment",
+      "protocol_version": "aeep-agent-router/0.154.0 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+      "response_bytes": 62189,
+      "invocation_guard_ms": 103.84095786139369,
+      "exit_code": null,
+      "attempt_id": "attempt_2e9626f3e33b4f548053fa191c5bda66",
+      "capability_discovery": {
+        "exposed": null,
+        "retrieved": null,
+        "invoked": null
+      },
+      "catalog_metrics": {
+        "schema_version": "codex.catalog-metrics.v1",
+        "scope": "aeep-metrics-348db7ec7efd2f582c704d8382dce94a",
+        "batches": 46,
+        "rejected_batches": 0,
+        "overflow": false,
+        "collector_closed": true,
+        "delivery_complete": false,
+        "observations": [
+          {
+            "name": "codex.thread.skills.enabled_total",
+            "value": 6.0,
+            "count": 1,
+            "catalog_surface": "host_world_state"
+          },
+          {
+            "name": "codex.thread.skills.enabled_total",
+            "value": 0.0,
+            "count": 1,
+            "catalog_surface": "thread_context"
+          },
+          {
+            "name": "codex.thread.skills.kept_total",
+            "value": 0.0,
+            "count": 1,
+            "catalog_surface": "thread_context"
+          },
+          {
+            "name": "codex.thread.skills.kept_total",
+            "value": 6.0,
+            "count": 1,
+            "catalog_surface": "host_world_state"
+          },
+          {
+            "name": "codex.thread.skills.truncated",
+            "value": 0.0,
+            "count": 1,
+            "catalog_surface": "thread_context"
+          },
+          {
+            "name": "codex.thread.skills.truncated",
+            "value": 0.0,
+            "count": 1,
+            "catalog_surface": "host_world_state"
+          },
+          {
+            "name": "codex.skill.injected",
+            "value": 1,
+            "count": 1,
+            "skill_digest": "99e1ea0dc21155f199005f8c0bebdfaab72da093e94882e313aa2e92048cb36e",
+            "status": "ok",
+            "invoke_type": "implicit"
+          }
+        ]
+      }
+    }
+  },
+  "worker_cleanup_confirmed": true,
+  "independent_grader_observed": true,
+  "task_grade": true,
+  "task_prompt_bound": true,
+  "token_capture": {
+    "status": "verified",
+    "receipt_ref": "2ae3d9f50382746faffafcae64addcec460829675557d87ba30554e5aeb321ea",
+    "journal_ref": "35bd7519e1c5447f757377a774fe320a24f9c6d8f8abc355b8766cb3e48aece6",
+    "known_fields": [
+      "input_tokens",
+      "cached_input_tokens",
+      "cache_write_input_tokens",
+      "output_tokens",
+      "reasoning_output_tokens"
+    ],
+    "provider_usage_independently_verified": false,
+    "source": "provider_report",
+    "trust": "self_asserted"
+  },
+  "candidate_loading": {
+    "instructions_loaded": true,
+    "invoked": null,
+    "delivery_complete": false,
+    "snapshot_ref": "ce9a3b3ce267ba9f2af205bc9e150c40b1aeac6e30fea2f32a4e2f73eea812df",
+    "skill_sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+    "invoke_types": [
+      "implicit"
+    ]
+  }
+}

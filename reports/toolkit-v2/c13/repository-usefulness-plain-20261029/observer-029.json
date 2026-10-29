@@ -1,0 +1,41 @@
+{
+  "stage": "repository_suite_probe",
+  "operation_seconds": 1.7376995841041207,
+  "reply_type": "dict",
+  "reply_digest": "9bba7c78acad070943f6d8a3403d50f3d1bb5a8084c9039f1722575393381884",
+  "field_names": [
+    "archive_sha256",
+    "exit_code",
+    "pytest",
+    "python",
+    "statuses"
+  ],
+  "field_types": {
+    "exit_code": "int",
+    "statuses": "dict",
+    "archive_sha256": "str",
+    "python": "str",
+    "pytest": "str"
+  },
+  "exit_code": 1,
+  "archive_sha256": "b179596f6a1b74695a352b5c41045c7d1eb3e946837c2443524aaf8fc2e53120",
+  "python": "3.13",
+  "pytest": "8.3.5",
+  "status_count": 14,
+  "statuses": {
+    "tests/integration/test_line_range_diagnostics.py::test_is_line_range_complete_empty_processing": "PASSED",
+    "tests/integration/test_line_range_diagnostics.py::test_is_line_range_complete_basic": "PASSED",
+    "tests/integration/test_line_range_diagnostics.py::test_is_line_range_complete_single_line": "PASSED",
+    "tests/integration/test_line_range_diagnostics.py::test_is_line_range_complete_sequential": "PASSED",
+    "tests/integration/test_line_range_diagnostics.py::test_is_line_range_complete_parallel": "PASSED",
+    "tests/integration/test_line_range_diagnostics.py::test_filter_diagnostics_by_range_basic": "PASSED",
+    "tests/integration/test_line_range_diagnostics.py::test_filter_diagnostics_by_range_overlapping": "PASSED",
+    "tests/integration/test_line_range_diagnostics.py::test_filter_diagnostics_by_range_empty": "PASSED",
+    "tests/integration/test_line_range_diagnostics.py::test_get_diagnostics_invalid_range": "PASSED",
+    "tests/integration/test_line_range_diagnostics.py::test_get_diagnostics_backward_compatibility": "PASSED",
+    "tests/integration/test_line_range_diagnostics.py::test_get_diagnostics_fatal_error_no_diagnostics": "PASSED",
+    "tests/integration/test_line_range_diagnostics.py::test_get_diagnostics_with_range_filters": "PASSED",
+    "tests/integration/test_line_range_diagnostics.py::test_filter_diagnostics_by_range_uses_fullrange": "FAILED",
+    "tests/test_aeep_multifile.py::test_utils_fullrange_and_fallback": "FAILED"
+  }
+}

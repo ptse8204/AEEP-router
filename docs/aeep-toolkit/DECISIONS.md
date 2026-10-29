@@ -2296,3 +2296,29 @@ failures remain results;common execution/evidence uncertainty stops dispatch.
 Keep plain/gzip resource results separate. Nineteen pairs cannot meet the20-pair
 resource-interval minimum or qualify/admit. Report two censored slots and all
 attrition explicitly;do not replace tasks to recover a favorable result.
+
+## D129: Preserve the observed tie and enforce task codecs before model work
+
+The corrected19-pair development comparison completed on sourceb09911a0. Both
+arms passed14/19 with identical task outcomes. All38token capture chains verify
+and all19candidate instruction loads are positive;semantic contribution and
+provider-internal metering remain unproven. Plain and gzip resource conditions
+stay separate,with only11and3both-successful pairs. No supported savings or
+broad usefulness verdict follows. The actual admission API rejected both real
+development reports without changing admissions/counters. Positive live selector
+benefit remains a different unproven result.
+
+Retain two engineering-censored slots and their3turns. All323operations/41turns/
+5137.359838171862accounting seconds/$0 reconcile,within the original approval.
+All21source repositories were exposed;24related snapshots leave all formal stages,
+leaving41potential snapshots. No stage/count/threshold is relaxed. Do not spend
+more turns merely to recover a20-pair count or hunt a favorable candidate result.
+
+The known controller mistake should become an early product validation error.
+After the completed study/audit/admission check,add a narrow provider-neutral
+check for standard repository artifact fields versus scheduled task codecs,
+before budget preview or model execution. It must reject mismatches without
+changing legacy decoder/receipt meanings or inventing output conversions. Keep
+custom/direct outputs under their existing review/grader requirements. Run the
+required software checks for this actual code change;historical live evidence
+stays bound to b09911a0. No additional model turn is needed for the guard.

@@ -1,0 +1,274 @@
+{
+  "trial_id": "trial_repository-usefulness-plain-b09911a0b7b7_development-AbsaOSS__generate-release-notes-207_toolkit-repository-usefulness-plain-20261029.treatment_fresh-worker_0",
+  "case_id": "development-AbsaOSS__generate-release-notes-207",
+  "canonical_trial_ref": "1bce8c7d15a0e82d5d5b567b330b925a733c1f792f71c971933fd668ac2d3034",
+  "canonical_trial_complete": true,
+  "receipt_ref": "d0ce7537477df442f31c02f1aef15a3685e508a2bf53e3aaf9ca64f0232e83b7",
+  "receipt": {
+    "receipt_id": "rcpt_d5a6bd8119cd4e51b6eb0030afd32929",
+    "decision_id": "dec_909ee473216545e0bbe601c6c86bf1bd",
+    "action_id": "act_d1d7207d74d647dc86a63ca6a14395c6",
+    "capability": "assessment.repository_suite@1",
+    "executor_id": "toolkit-repository-usefulness-plain-20261029.treatment",
+    "executor_kind": "host_managed",
+    "status": "success",
+    "attempt": 1,
+    "started_at": "2026-10-29T21:13:58.064636Z",
+    "ended_at": "2026-10-29T21:14:40.347514Z",
+    "estimated": {
+      "resources": {
+        "monetary_usd": 0.0,
+        "latency_ms": 0.0,
+        "cpu_ms": 0.0,
+        "memory_mb_seconds": 0.0,
+        "peak_memory_mb": 0.0,
+        "gpu_ms": 0.0,
+        "network_bytes": 0,
+        "context_tokens": 0,
+        "input_tokens": 0,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 0,
+        "reasoning_output_tokens": 0,
+        "subscription_units": 0.0
+      },
+      "cash": {
+        "amount_usd": "0.0",
+        "upper_bound_usd": "0.0",
+        "evidence": {
+          "status": "complete",
+          "source": "static_estimate",
+          "trust": "self_asserted",
+          "evidence_id": null,
+          "source_reference": null,
+          "digest": null,
+          "observed_at": null
+        }
+      },
+      "subscription_usage": [],
+      "success_probability": 0.95,
+      "quality_score": 0.95,
+      "risk_score": 0.05,
+      "confidence": 0.5,
+      "source": "static",
+      "sample_size": 0,
+      "uncertainty": null
+    },
+    "executor_fingerprint": "sha256:8311b01ec0ce6b94a73790f990ea1baa1ba739c54ead99cc9cf029a7821ab5ee",
+    "cohort_digest": "sha256:09a95895053cdea3aacb0f91875669b42d8e9d8628136216fa5712187f21a1c9",
+    "action_features": {
+      "input_bytes": 2364,
+      "input_items": 43,
+      "text_characters": 2172,
+      "max_depth": 2,
+      "size_bucket": "2^11"
+    },
+    "actual_resources": {
+      "monetary_usd": 0.0,
+      "latency_ms": 40937.11220799014,
+      "cpu_ms": 0.0,
+      "memory_mb_seconds": 0.0,
+      "peak_memory_mb": 0.0,
+      "gpu_ms": 0.0,
+      "network_bytes": 0,
+      "context_tokens": 0,
+      "input_tokens": 124625,
+      "cached_input_tokens": 102400,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 1552,
+      "reasoning_output_tokens": 28,
+      "subscription_units": 0.0
+    },
+    "accounting": {
+      "cash": {
+        "status": "unavailable",
+        "components": []
+      },
+      "subscription_usage": [
+        {
+          "provider": "openai",
+          "resource_pool": "codex.self",
+          "unit": "provider_unit",
+          "consumed": null,
+          "source": {
+            "status": "unavailable",
+            "source": "unavailable",
+            "trust": "untrusted",
+            "evidence_id": null,
+            "source_reference": null,
+            "digest": null,
+            "observed_at": null
+          },
+          "included_or_paid": "unknown",
+          "rate_snapshot_id": null,
+          "usage_fingerprint": null
+        }
+      ],
+      "model_usage": [
+        {
+          "provider": "openai",
+          "model": "gpt-6-astra",
+          "access_channel": "subscription",
+          "input_tokens": 124625,
+          "cached_input_tokens": 102400,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1552,
+          "reasoning_output_tokens": 28,
+          "evidence": {
+            "status": "complete",
+            "source": "provider_report",
+            "trust": "self_asserted",
+            "evidence_id": null,
+            "source_reference": null,
+            "digest": null,
+            "observed_at": "2026-10-29T21:14:39.969627Z"
+          }
+        }
+      ],
+      "tool_footprint": null
+    },
+    "cache_affinity": null,
+    "approval_id": null,
+    "transport_success": true,
+    "execution_success": true,
+    "schema_valid": true,
+    "task_valid": true,
+    "quality_score": 1.0,
+    "validation_results": [
+      {
+        "kind": "schema",
+        "valid": true,
+        "quality_score": 1.0,
+        "detail": "schema validation passed",
+        "trust": "observed"
+      }
+    ],
+    "output_valid": true,
+    "error_type": null,
+    "error_message": null,
+    "trace_id": null,
+    "metadata": {
+      "host_progress": "{\"stage\":\"turn_completed\",\"elapsed_seconds\":40.572024415712804,\"callback_counts\":{\"requested\":0,\"handler_completed\":0,\"response_written\":0,\"rejected\":0},\"last_event\":\"turn/completed\",\"callback_last_elapsed_seconds\":{},\"last_item_type\":null,\"last_event_elapsed_seconds\":40.57141620805487,\"final_message_received\":true,\"turn_completion_received\":true}",
+      "actual_model": "gpt-6-astra",
+      "host_runtime_digest": "3ab937618d5bc325f1962d3969ed62e0c4f62c77b904036851b1cf86c2890873",
+      "boundary_digest": "86ec3bfe393fa24471f949037bc06e6b3e2513dc978a95a6d9816fcd85b80aab",
+      "model_turn_count": 1,
+      "codex_token_fields": "[\"cacheWriteInputTokens\", \"cachedInputTokens\", \"inputTokens\", \"outputTokens\", \"reasoningOutputTokens\", \"totalTokens\"]",
+      "tool_selection_rounds": null,
+      "implementation_schema_bytes": null,
+      "output_schema_bytes": 117,
+      "result_bytes": 18,
+      "tool_call_count": 7,
+      "host_tools_used": "[\"sha256:cbf69bb16f39dc9d0cc024898e8fb9b8e5890fbfd7f9388a287fec215b5df135\"]",
+      "host_advertised_inventory_digest": "sha256:bab61d25e9e7f803ff97f1c9f237c18d809335355bf7c3d32535bf2c3b1904aa",
+      "candidate_skill_name_sha256": "99e1ea0dc21155f199005f8c0bebdfaab72da093e94882e313aa2e92048cb36e",
+      "candidate_skill_sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+      "host_available_tools": "unknown",
+      "approval_evidence_digest": null,
+      "thread_identity_digest": "sha256:355429f68187da0427b20d4e0e0269fb6064448614bebef47b906f0860bcd6b8",
+      "turn_identity_digest": "sha256:7c13ea2fc8f598a00c362b922c5a851874275d0a116387c26a1a35fae23a0ad1",
+      "artifact_sha256": "6ab6f2105c08ad8129e65186ae4bb2612082cbc4ac23d14d7cdcfcd0c0312047",
+      "artifact_bytes": 23360,
+      "worker_digest": "50db1787d67f416149df475adc237b16a9b7ed666fc1a7c14580302cb933e95c",
+      "catalog_metrics_scope": "aeep-metrics-0ec102dba697abf08d03be41f20fc825",
+      "worker_cleanup_confirmed": true,
+      "execution_evidence_digest": "e55caf6569eeeaa87928c8501144881f524ec79c0463061f2e4d06bc66c4f6cc",
+      "task_instruction_sha256": "695b78a2b875cb4975e63264346d03a2e2e6c31fec73ff92f7e4c28b42c96083",
+      "adapter_id": "codex-app-server:text-phase-final-treatment",
+      "protocol_version": "aeep-agent-router/0.154.0 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+      "response_bytes": 31165,
+      "invocation_guard_ms": 105.92658258974552,
+      "exit_code": null,
+      "attempt_id": "attempt_b12f3d95dfc442b2b2f6c299ec7627b6",
+      "capability_discovery": {
+        "exposed": null,
+        "retrieved": null,
+        "invoked": null
+      },
+      "catalog_metrics": {
+        "schema_version": "codex.catalog-metrics.v1",
+        "scope": "aeep-metrics-0ec102dba697abf08d03be41f20fc825",
+        "batches": 40,
+        "rejected_batches": 0,
+        "overflow": false,
+        "collector_closed": true,
+        "delivery_complete": false,
+        "observations": [
+          {
+            "name": "codex.thread.skills.enabled_total",
+            "value": 0.0,
+            "count": 1,
+            "catalog_surface": "thread_context"
+          },
+          {
+            "name": "codex.thread.skills.enabled_total",
+            "value": 6.0,
+            "count": 1,
+            "catalog_surface": "host_world_state"
+          },
+          {
+            "name": "codex.thread.skills.kept_total",
+            "value": 6.0,
+            "count": 1,
+            "catalog_surface": "host_world_state"
+          },
+          {
+            "name": "codex.thread.skills.kept_total",
+            "value": 0.0,
+            "count": 1,
+            "catalog_surface": "thread_context"
+          },
+          {
+            "name": "codex.thread.skills.truncated",
+            "value": 0.0,
+            "count": 1,
+            "catalog_surface": "host_world_state"
+          },
+          {
+            "name": "codex.thread.skills.truncated",
+            "value": 0.0,
+            "count": 1,
+            "catalog_surface": "thread_context"
+          },
+          {
+            "name": "codex.skill.injected",
+            "value": 1,
+            "count": 1,
+            "skill_digest": "99e1ea0dc21155f199005f8c0bebdfaab72da093e94882e313aa2e92048cb36e",
+            "status": "ok",
+            "invoke_type": "implicit"
+          }
+        ]
+      }
+    }
+  },
+  "worker_cleanup_confirmed": true,
+  "independent_grader_observed": true,
+  "task_grade": false,
+  "task_prompt_bound": true,
+  "token_capture": {
+    "status": "verified",
+    "receipt_ref": "d0ce7537477df442f31c02f1aef15a3685e508a2bf53e3aaf9ca64f0232e83b7",
+    "journal_ref": "e55caf6569eeeaa87928c8501144881f524ec79c0463061f2e4d06bc66c4f6cc",
+    "known_fields": [
+      "input_tokens",
+      "cached_input_tokens",
+      "cache_write_input_tokens",
+      "output_tokens",
+      "reasoning_output_tokens"
+    ],
+    "provider_usage_independently_verified": false,
+    "source": "provider_report",
+    "trust": "self_asserted"
+  },
+  "candidate_loading": {
+    "instructions_loaded": true,
+    "invoked": null,
+    "delivery_complete": false,
+    "snapshot_ref": "d1633c8d8ae79bf1480e89f792c2169223507b5c20f5190ede1ded9b9e4e4df6",
+    "skill_sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+    "invoke_types": [
+      "implicit"
+    ]
+  }
+}

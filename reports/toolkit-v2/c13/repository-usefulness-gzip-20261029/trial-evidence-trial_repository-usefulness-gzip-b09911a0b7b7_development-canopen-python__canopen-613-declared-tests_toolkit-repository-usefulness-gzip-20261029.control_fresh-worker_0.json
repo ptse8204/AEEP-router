@@ -1,0 +1,261 @@
+{
+  "trial_id": "trial_repository-usefulness-gzip-b09911a0b7b7_development-canopen-python__canopen-613-declared-tests_toolkit-repository-usefulness-gzip-20261029.control_fresh-worker_0",
+  "case_id": "development-canopen-python__canopen-613-declared-tests",
+  "canonical_trial_ref": "d3acab704760341527cd054db8e09ed5a83485965a229995c8c71afa615d4bea",
+  "canonical_trial_complete": true,
+  "receipt_ref": "acad98052b6d982eb1f1fff8acea2610328c919bc6890719d38cdf7cd8a1c09a",
+  "receipt": {
+    "receipt_id": "rcpt_c82ed7d310f14e99b82f1153c9130885",
+    "decision_id": "dec_ffbd9f39a4f9426781e284ffdc6b5d14",
+    "action_id": "act_6102b30238164f569802155def3f19c7",
+    "capability": "assessment.repository_suite@1",
+    "executor_id": "toolkit-repository-usefulness-gzip-20261029.control",
+    "executor_kind": "host_managed",
+    "status": "success",
+    "attempt": 1,
+    "started_at": "2026-10-29T21:40:55.179255Z",
+    "ended_at": "2026-10-29T21:41:47.146607Z",
+    "estimated": {
+      "resources": {
+        "monetary_usd": 0.0,
+        "latency_ms": 0.0,
+        "cpu_ms": 0.0,
+        "memory_mb_seconds": 0.0,
+        "peak_memory_mb": 0.0,
+        "gpu_ms": 0.0,
+        "network_bytes": 0,
+        "context_tokens": 0,
+        "input_tokens": 0,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 0,
+        "reasoning_output_tokens": 0,
+        "subscription_units": 0.0
+      },
+      "cash": {
+        "amount_usd": "0.0",
+        "upper_bound_usd": "0.0",
+        "evidence": {
+          "status": "complete",
+          "source": "static_estimate",
+          "trust": "self_asserted",
+          "evidence_id": null,
+          "source_reference": null,
+          "digest": null,
+          "observed_at": null
+        }
+      },
+      "subscription_usage": [],
+      "success_probability": 0.95,
+      "quality_score": 0.95,
+      "risk_score": 0.05,
+      "confidence": 0.5,
+      "source": "static",
+      "sample_size": 0,
+      "uncertainty": null
+    },
+    "executor_fingerprint": "sha256:b7736ac7fa786918345feaed53a1f6dd5e8e7ff3ada4aee77bb29581ef98de9a",
+    "cohort_digest": "sha256:3b337fb0c290b5d023565ffe2193f852bd7d665644ace3f9cb1fe2144c2f8fce",
+    "action_features": {
+      "input_bytes": 2477,
+      "input_items": 33,
+      "text_characters": 2287,
+      "max_depth": 2,
+      "size_bucket": "2^11"
+    },
+    "actual_resources": {
+      "monetary_usd": 0.0,
+      "latency_ms": 51006.25545810908,
+      "cpu_ms": 0.0,
+      "memory_mb_seconds": 0.0,
+      "peak_memory_mb": 0.0,
+      "gpu_ms": 0.0,
+      "network_bytes": 0,
+      "context_tokens": 0,
+      "input_tokens": 111951,
+      "cached_input_tokens": 101504,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 1836,
+      "reasoning_output_tokens": 52,
+      "subscription_units": 0.0
+    },
+    "accounting": {
+      "cash": {
+        "status": "unavailable",
+        "components": []
+      },
+      "subscription_usage": [
+        {
+          "provider": "openai",
+          "resource_pool": "codex.self",
+          "unit": "provider_unit",
+          "consumed": null,
+          "source": {
+            "status": "unavailable",
+            "source": "unavailable",
+            "trust": "untrusted",
+            "evidence_id": null,
+            "source_reference": null,
+            "digest": null,
+            "observed_at": null
+          },
+          "included_or_paid": "unknown",
+          "rate_snapshot_id": null,
+          "usage_fingerprint": null
+        }
+      ],
+      "model_usage": [
+        {
+          "provider": "openai",
+          "model": "gpt-6-astra",
+          "access_channel": "subscription",
+          "input_tokens": 111951,
+          "cached_input_tokens": 101504,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1836,
+          "reasoning_output_tokens": 52,
+          "evidence": {
+            "status": "complete",
+            "source": "provider_report",
+            "trust": "self_asserted",
+            "evidence_id": null,
+            "source_reference": null,
+            "digest": null,
+            "observed_at": "2026-10-29T21:41:46.230343Z"
+          }
+        }
+      ],
+      "tool_footprint": null
+    },
+    "cache_affinity": null,
+    "approval_id": null,
+    "transport_success": true,
+    "execution_success": true,
+    "schema_valid": true,
+    "task_valid": true,
+    "quality_score": 1.0,
+    "validation_results": [
+      {
+        "kind": "schema",
+        "valid": true,
+        "quality_score": 1.0,
+        "detail": "schema validation passed",
+        "trust": "observed"
+      }
+    ],
+    "output_valid": true,
+    "error_type": null,
+    "error_message": null,
+    "trace_id": null,
+    "metadata": {
+      "host_progress": "{\"stage\":\"turn_completed\",\"elapsed_seconds\":50.12710599973798,\"callback_counts\":{\"requested\":0,\"handler_completed\":0,\"response_written\":0,\"rejected\":0},\"last_event\":\"turn/completed\",\"callback_last_elapsed_seconds\":{},\"last_item_type\":null,\"last_event_elapsed_seconds\":50.12662525009364,\"final_message_received\":true,\"turn_completion_received\":true}",
+      "actual_model": "gpt-6-astra",
+      "host_runtime_digest": "69c464f231ad1405d47ad95f65f4773a9ec852431d42fecba22acf50dfe29844",
+      "boundary_digest": "972214a85d1605e8d3ad088a657d7b5589f58f9ddf0c880998a6f26093de0be7",
+      "model_turn_count": 1,
+      "codex_token_fields": "[\"cacheWriteInputTokens\", \"cachedInputTokens\", \"inputTokens\", \"outputTokens\", \"reasoningOutputTokens\", \"totalTokens\"]",
+      "tool_selection_rounds": null,
+      "implementation_schema_bytes": null,
+      "output_schema_bytes": 117,
+      "result_bytes": 18,
+      "tool_call_count": 12,
+      "host_tools_used": "[\"sha256:ad2634d601879078be3658ad320790948459e468edf9ed772e4c5df21a99583b\", \"sha256:cbf69bb16f39dc9d0cc024898e8fb9b8e5890fbfd7f9388a287fec215b5df135\"]",
+      "host_advertised_inventory_digest": "sha256:f0b430e3c4be830176e9fe18ab762d0e2ed5626f0ee69cd9fb5f346cd6ba3a69",
+      "host_available_tools": "unknown",
+      "approval_evidence_digest": null,
+      "thread_identity_digest": "sha256:4f40d6e92535de0d6a2c474b667e1de947839d555b3e773d40d45399b3a207a3",
+      "turn_identity_digest": "sha256:ed024ffd12015bd13a103892cc7c0984172fe76bd3b4d3a886d632c70203c8c0",
+      "artifact_sha256": "ae08a873e4ee5318f95a1b2be3e2e7d8711943409a30a04f12a72f679ffee4f6",
+      "artifact_bytes": 7163,
+      "worker_digest": "02ade244b34f01833583cec43d29d87160563a9ee7f7080216a10640b7cd7846",
+      "catalog_metrics_scope": "aeep-metrics-39566f116b726516ea43321db7d8e094",
+      "worker_cleanup_confirmed": true,
+      "execution_evidence_digest": "5eb09e5fe7fe023068532dc55a48a749432a91c3d4c7755770c292e0bf91a45a",
+      "task_instruction_sha256": "2e9e3f104236983f0034573da570d9f09f021baef4ce41420c792bf44dfd441d",
+      "adapter_id": "codex-app-server:text-phase-final-control",
+      "protocol_version": "aeep-agent-router/0.154.0 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+      "response_bytes": 9574,
+      "invocation_guard_ms": 108.56154188513756,
+      "exit_code": null,
+      "attempt_id": "attempt_ddcbd6790fef4240ae82936debb5f9f2",
+      "capability_discovery": {
+        "exposed": null,
+        "retrieved": null,
+        "invoked": null
+      },
+      "catalog_metrics": {
+        "schema_version": "codex.catalog-metrics.v1",
+        "scope": "aeep-metrics-39566f116b726516ea43321db7d8e094",
+        "batches": 47,
+        "rejected_batches": 0,
+        "overflow": false,
+        "collector_closed": true,
+        "delivery_complete": false,
+        "observations": [
+          {
+            "name": "codex.thread.skills.enabled_total",
+            "value": 5.0,
+            "count": 1,
+            "catalog_surface": "host_world_state"
+          },
+          {
+            "name": "codex.thread.skills.enabled_total",
+            "value": 0.0,
+            "count": 1,
+            "catalog_surface": "thread_context"
+          },
+          {
+            "name": "codex.thread.skills.kept_total",
+            "value": 5.0,
+            "count": 1,
+            "catalog_surface": "host_world_state"
+          },
+          {
+            "name": "codex.thread.skills.kept_total",
+            "value": 0.0,
+            "count": 1,
+            "catalog_surface": "thread_context"
+          },
+          {
+            "name": "codex.thread.skills.truncated",
+            "value": 0.0,
+            "count": 1,
+            "catalog_surface": "thread_context"
+          },
+          {
+            "name": "codex.thread.skills.truncated",
+            "value": 0.0,
+            "count": 1,
+            "catalog_surface": "host_world_state"
+          }
+        ]
+      }
+    }
+  },
+  "worker_cleanup_confirmed": true,
+  "independent_grader_observed": true,
+  "task_grade": false,
+  "task_prompt_bound": true,
+  "token_capture": {
+    "status": "verified",
+    "receipt_ref": "acad98052b6d982eb1f1fff8acea2610328c919bc6890719d38cdf7cd8a1c09a",
+    "journal_ref": "5eb09e5fe7fe023068532dc55a48a749432a91c3d4c7755770c292e0bf91a45a",
+    "known_fields": [
+      "input_tokens",
+      "cached_input_tokens",
+      "cache_write_input_tokens",
+      "output_tokens",
+      "reasoning_output_tokens"
+    ],
+    "provider_usage_independently_verified": false,
+    "source": "provider_report",
+    "trust": "self_asserted"
+  },
+  "candidate_loading": {
+    "instructions_loaded": null,
+    "invoked": null,
+    "delivery_complete": false,
+    "snapshot_ref": "c551edb3e88478f43d7f7f82a0e0d13b1a6e518f40885ca173b371a48c50225d",
+    "skill_sha256": null
+  }
+}

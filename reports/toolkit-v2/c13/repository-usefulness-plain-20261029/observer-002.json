@@ -1,0 +1,51 @@
+{
+  "stage": "repository_suite_probe",
+  "operation_seconds": 2.1396836671046913,
+  "reply_type": "dict",
+  "reply_digest": "b75896fcc2bb8d3bba87de6f798e1088d3de5af5784a80bbc7857c93ccc2bb74",
+  "field_names": [
+    "archive_sha256",
+    "exit_code",
+    "pytest",
+    "python",
+    "statuses"
+  ],
+  "field_types": {
+    "exit_code": "int",
+    "statuses": "dict",
+    "archive_sha256": "str",
+    "python": "str",
+    "pytest": "str"
+  },
+  "exit_code": 0,
+  "archive_sha256": "50ecc8358086b8e9cd8e474512e3fdcddf6336988bc6404a08f13461fb30a54d",
+  "python": "3.13",
+  "pytest": "8.3.5",
+  "status_count": 24,
+  "statuses": {
+    "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_with_issues_and_pulls_and_commits": "PASSED",
+    "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_with_issues_and_pulls_and_commits_with_skip_labels": "PASSED",
+    "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_with_no_commits": "PASSED",
+    "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_with_no_commits_with_wrong_issue_number_in_pull_body_mention": "PASSED",
+    "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_with_no_issues": "PASSED",
+    "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_with_no_issues_skip_labels": "PASSED",
+    "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_with_no_pulls": "PASSED",
+    "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_no_input_data": "PASSED",
+    "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_isolated_record_types_no_labels_no_type_defined": "PASSED",
+    "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_isolated_record_types_with_labels_no_type_defined": "PASSED",
+    "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_isolated_record_types_no_labels_with_type_defined": "PASSED",
+    "tests/unit/release_notes_generator/record/factory/test_default_record_factory.py::test_generate_isolated_record_types_with_labels_with_type_defined": "PASSED",
+    "tests/unit/release_notes_generator/utils/test_pull_request_utils.py::test_extract_issue_numbers_from_body_no_issues": "PASSED",
+    "tests/unit/release_notes_generator/utils/test_pull_request_utils.py::test_extract_issue_numbers_from_body_single_issue": "PASSED",
+    "tests/unit/release_notes_generator/utils/test_pull_request_utils.py::test_extract_issue_numbers_from_body_multiple_issues": "PASSED",
+    "tests/unit/release_notes_generator/utils/test_pull_request_utils.py::test_extract_issue_numbers_from_body_mixed_case_keywords": "PASSED",
+    "tests/unit/release_notes_generator/utils/test_pull_request_utils.py::test_extract_issue_numbers_from_body_no_body": "PASSED",
+    "tests/unit/release_notes_generator/utils/test_pull_request_utils.py::test_extract_issue_numbers_from_body_complex_text_with_wrong_syntax": "PASSED",
+    "tests/unit/release_notes_generator/utils/test_pull_request_utils.py::test_get_issues_for_pr_success": "PASSED",
+    "tests/unit/release_notes_generator/utils/test_pull_request_utils.py::test_get_issues_for_pr_empty_nodes": "PASSED",
+    "tests/unit/release_notes_generator/utils/test_pull_request_utils.py::test_get_issues_for_pr_http_error": "PASSED",
+    "tests/unit/release_notes_generator/utils/test_pull_request_utils.py::test_get_issues_for_pr_malformed_response": "PASSED",
+    "tests/unit/release_notes_generator/utils/test_pull_request_utils.py::test_get_issues_for_pr_caching": "PASSED",
+    "tests/unit/release_notes_generator/utils/test_pull_request_utils.py::test_get_issues_for_pr_different_numbers_not_cached": "PASSED"
+  }
+}

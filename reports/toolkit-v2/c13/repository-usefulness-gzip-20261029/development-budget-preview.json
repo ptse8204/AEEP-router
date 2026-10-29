@@ -1,0 +1,396 @@
+{
+  "campaign_allowance": {
+    "scope": "fresh_campaign_reservations",
+    "stages": [
+      {
+        "stage": "trial",
+        "calls_minimum": 12,
+        "calls_upper": 12,
+        "operations_upper": 12,
+        "model_turns": 12,
+        "elapsed_reservation_upper_seconds": 3660.0,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "warmup",
+        "calls_minimum": 0,
+        "calls_upper": 0,
+        "operations_upper": 0,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 0.0,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "router_setup",
+        "calls_minimum": 13,
+        "calls_upper": 13,
+        "operations_upper": 13,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 390,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "grader_validation",
+        "calls_minimum": 1,
+        "calls_upper": 1,
+        "operations_upper": 1,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 30,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "report_generation",
+        "calls_minimum": 1,
+        "calls_upper": 1,
+        "operations_upper": 1,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 30,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "grader_reference",
+        "calls_minimum": 0,
+        "calls_upper": 0,
+        "operations_upper": 0,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 0.0,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "grader_probe",
+        "calls_minimum": 1,
+        "calls_upper": 210,
+        "operations_upper": 210,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 7350.0,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "recipe_grading",
+        "calls_minimum": 0,
+        "calls_upper": 12,
+        "operations_upper": 12,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 420.0,
+        "cash_reservation_upper_usd": "0"
+      }
+    ],
+    "upper_allowance": {
+      "operations": 249,
+      "model_turns": 12,
+      "elapsed_seconds": 11880.0,
+      "cash_usd": "0"
+    },
+    "prior_operations": [
+      {
+        "operation_id": "conformance_probe_0526eac9cbe84083854510e7a0605b53:collector-proxy-lifecycle",
+        "stage": "collector_proxy_lifecycle",
+        "state": "complete",
+        "elapsed_seconds": 9.310499125160277,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 600.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "conformance_probe_15d2ba2de5f54891b3039fff0f1b6150:collector-proxy-lifecycle",
+        "stage": "collector_proxy_lifecycle",
+        "state": "complete",
+        "elapsed_seconds": 8.25316558405757,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 600.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "conformance_probe_2b630682e5304a149b6f2c9a40e71694:collector-proxy-lifecycle",
+        "stage": "collector_proxy_lifecycle",
+        "state": "complete",
+        "elapsed_seconds": 6.4150432497262955,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 600.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "conformance_probe_4f0094a42b8b452780c0f08a436f9958:collector-proxy-lifecycle",
+        "stage": "collector_proxy_lifecycle",
+        "state": "complete",
+        "elapsed_seconds": 9.328967374749482,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 600.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "conformance_probe_6b6daa36177547f085155b5984399751:collector-proxy-lifecycle",
+        "stage": "collector_proxy_lifecycle",
+        "state": "complete",
+        "elapsed_seconds": 8.85959062492475,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 600.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "conformance_probe_7f38d2b83f844713bb13b2d7be719dd6:collector-proxy-lifecycle",
+        "stage": "collector_proxy_lifecycle",
+        "state": "complete",
+        "elapsed_seconds": 8.253461792133749,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 600.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "conformance_probe_852813ac99c5471bb610266aa67686f6:collector-proxy-lifecycle",
+        "stage": "collector_proxy_lifecycle",
+        "state": "complete",
+        "elapsed_seconds": 7.2207549582235515,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 600.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "pair-inspection:conformance_probe_0526eac9cbe84083854510e7a0605b53",
+        "stage": "worker_pair_inspection",
+        "state": "complete",
+        "elapsed_seconds": 6.274571042042226,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "pair-inspection:conformance_probe_13e8cfee077e4f798d7d555f28bb0cfe",
+        "stage": "worker_pair_inspection",
+        "state": "complete",
+        "elapsed_seconds": 6.273432499729097,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "pair-inspection:conformance_probe_15d2ba2de5f54891b3039fff0f1b6150",
+        "stage": "worker_pair_inspection",
+        "state": "complete",
+        "elapsed_seconds": 5.187676250003278,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "pair-inspection:conformance_probe_19d6b095009c43c6a79f1fca86fd1c78",
+        "stage": "worker_pair_inspection",
+        "state": "complete",
+        "elapsed_seconds": 5.186230457853526,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "pair-inspection:conformance_probe_2b630682e5304a149b6f2c9a40e71694",
+        "stage": "worker_pair_inspection",
+        "state": "complete",
+        "elapsed_seconds": 4.248960459139198,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "pair-inspection:conformance_probe_3d85a687012447edbaa93304d79cc853",
+        "stage": "worker_pair_inspection",
+        "state": "complete",
+        "elapsed_seconds": 5.59439929202199,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "pair-inspection:conformance_probe_4f0094a42b8b452780c0f08a436f9958",
+        "stage": "worker_pair_inspection",
+        "state": "complete",
+        "elapsed_seconds": 6.347349165938795,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "pair-inspection:conformance_probe_5a63859b1782431cb1a6769a5b440bfa",
+        "stage": "worker_pair_inspection",
+        "state": "complete",
+        "elapsed_seconds": 6.458471416030079,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "pair-inspection:conformance_probe_6b6daa36177547f085155b5984399751",
+        "stage": "worker_pair_inspection",
+        "state": "complete",
+        "elapsed_seconds": 6.457276584114879,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "pair-inspection:conformance_probe_793b4f8727cd46cdb8c9be6692a1a4e0",
+        "stage": "worker_pair_inspection",
+        "state": "complete",
+        "elapsed_seconds": 4.245932917110622,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "pair-inspection:conformance_probe_7f38d2b83f844713bb13b2d7be719dd6",
+        "stage": "worker_pair_inspection",
+        "state": "complete",
+        "elapsed_seconds": 5.594385374803096,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "pair-inspection:conformance_probe_852813ac99c5471bb610266aa67686f6",
+        "stage": "worker_pair_inspection",
+        "state": "complete",
+        "elapsed_seconds": 4.811395124997944,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "pair-inspection:conformance_probe_98dcbf592d924ebe9f3dc771b96b636d",
+        "stage": "worker_pair_inspection",
+        "state": "complete",
+        "elapsed_seconds": 6.347406333312392,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "pair-inspection:conformance_probe_cf9cae1cf3c94da08e938c95d52c82d6",
+        "stage": "worker_pair_inspection",
+        "state": "complete",
+        "elapsed_seconds": 4.811780417338014,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        }
+      }
+    ],
+    "gaps": [],
+    "fits_remaining": true,
+    "authorization_changed": false,
+    "automatic_retries": 0,
+    "explanation": "Bounds cover the frozen campaign including setup, warm-ups, grading and reporting. They are reservation ceilings, not measured consumption or execution approval. Early failures can use less. Prior operations are already charged and are not added again. Preparation must finish before a plan is reviewed; unplanned future planning, conformance, reusable-tool construction and interventions require their own reviewed allowances. Production monitoring uses receipts and launches no comparison calls."
+  },
+  "purpose": "assessment",
+  "adapter_eligibility": [
+    {
+      "executor_id": "toolkit-repository-usefulness-gzip-20261029.control",
+      "adapter": "codex-app-server:text-phase-final-control",
+      "adapter_version": "1",
+      "support_status": "experimental",
+      "eligible": true,
+      "missing_capabilities": [],
+      "permission_verification": "checked_separately_before_invocation",
+      "managed_worker_configured": true
+    },
+    {
+      "executor_id": "toolkit-repository-usefulness-gzip-20261029.treatment",
+      "adapter": "codex-app-server:text-phase-final-treatment",
+      "adapter_version": "1",
+      "support_status": "experimental",
+      "eligible": true,
+      "missing_capabilities": [],
+      "permission_verification": "checked_separately_before_invocation",
+      "managed_worker_configured": true
+    }
+  ],
+  "minimum_trial_model_turns": 12,
+  "trial_elapsed_upper_seconds": 3660.0,
+  "evaluation_stage": null,
+  "screening_trial_model_turns": 0,
+  "workers": [
+    {
+      "role": "baseline",
+      "executor_id": "toolkit-repository-usefulness-gzip-20261029.control",
+      "model_worker_profiles": [
+        "codex-app-server:text-phase-final-control"
+      ]
+    },
+    {
+      "role": "candidate",
+      "executor_id": "toolkit-repository-usefulness-gzip-20261029.treatment",
+      "model_worker_profiles": [
+        "codex-app-server:text-phase-final-treatment"
+      ]
+    }
+  ],
+  "model_worker_profile_count": 2,
+  "measurement_concurrency": 1,
+  "remaining": {
+    "model_turns": 2216,
+    "elapsed_seconds": 480859.30877514975,
+    "operations": 36414,
+    "cash_usd": "0"
+  },
+  "explanation": "Counts adapter model turns, not internal inference steps. Full planned trials exclude planning, warm-ups and retries. Profiles use fresh conversations per trial; timed trials run sequentially. Early rejection can use less; elapsed time is unknown until measured. Per-operation limits remain enforced."
+}

@@ -1,0 +1,49 @@
+{
+  "stage": "repository_suite_probe",
+  "operation_seconds": 3.19889000011608,
+  "reply_type": "dict",
+  "reply_digest": "d68ce90a0feffd38dc343290e60e3e22ab5242f302a03d297f03d8d1e4058593",
+  "field_names": [
+    "archive_sha256",
+    "exit_code",
+    "pytest",
+    "python",
+    "statuses"
+  ],
+  "field_types": {
+    "exit_code": "int",
+    "statuses": "dict",
+    "archive_sha256": "str",
+    "python": "str",
+    "pytest": "str"
+  },
+  "exit_code": 1,
+  "archive_sha256": "23af37250e1e4f485dcc1087c3822f290c74a9ef0543637a7dfc5dff72d96764",
+  "python": "3.13",
+  "pytest": "8.3.5",
+  "status_count": 22,
+  "statuses": {
+    "tests/test_goodconf.py::test_initial": "PASSED",
+    "tests/test_goodconf.py::test_dump_json": "PASSED",
+    "tests/test_goodconf.py::test_dump_toml": "PASSED",
+    "tests/test_goodconf.py::test_dump_yaml": "PASSED",
+    "tests/test_goodconf.py::test_dump_yaml_no_docstring": "PASSED",
+    "tests/test_goodconf.py::test_dump_yaml_none": "PASSED",
+    "tests/test_goodconf.py::test_generate_markdown": "PASSED",
+    "tests/test_goodconf.py::test_generate_markdown_no_docstring": "PASSED",
+    "tests/test_goodconf.py::test_generate_markdown_default_false": "PASSED",
+    "tests/test_goodconf.py::test_generate_markdown_types": "PASSED",
+    "tests/test_goodconf.py::test_generate_markdown_required": "PASSED",
+    "tests/test_goodconf.py::test_undefined": "PASSED",
+    "tests/test_goodconf.py::test_fileconfigsettingssource_repr": "PASSED",
+    "tests/test_goodconf.py::test_fileconfigsettingssource_get_field_value": "PASSED",
+    "tests/test_initial.py::test_initial": "PASSED",
+    "tests/test_initial.py::test_initial_default": "PASSED",
+    "tests/test_initial.py::test_initial_default_factory": "PASSED",
+    "tests/test_initial.py::test_no_initial": "PASSED",
+    "tests/test_initial.py::test_default_initial": "PASSED",
+    "tests/test_initial.py::test_optional_initial": "PASSED",
+    "tests/test_aeep_preservation.py::test_snapshot_preserved": "FAILED",
+    "tests/test_initial.py::test_initial_converts_to_callable": "FAILED"
+  }
+}

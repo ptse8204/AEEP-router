@@ -1,0 +1,41 @@
+{
+  "stage": "repository_suite_probe",
+  "operation_seconds": 2.037885250058025,
+  "reply_type": "dict",
+  "reply_digest": "09328856d1c7446089ec98d8225eaa079ac1844182e4a0bfdb63f86618caa150",
+  "field_names": [
+    "archive_sha256",
+    "exit_code",
+    "pytest",
+    "python",
+    "statuses"
+  ],
+  "field_types": {
+    "exit_code": "int",
+    "statuses": "dict",
+    "archive_sha256": "str",
+    "python": "str",
+    "pytest": "str"
+  },
+  "exit_code": 0,
+  "archive_sha256": "66abd82dea8f227498b4b12c443c8519227a8aa3d496f3ba48e911c8853d4a2d",
+  "python": "3.13",
+  "pytest": "8.3.5",
+  "status_count": 14,
+  "statuses": {
+    "tests/integration/test_line_range_diagnostics.py::test_is_line_range_complete_empty_processing": "PASSED",
+    "tests/integration/test_line_range_diagnostics.py::test_is_line_range_complete_basic": "PASSED",
+    "tests/integration/test_line_range_diagnostics.py::test_is_line_range_complete_single_line": "PASSED",
+    "tests/integration/test_line_range_diagnostics.py::test_is_line_range_complete_sequential": "PASSED",
+    "tests/integration/test_line_range_diagnostics.py::test_is_line_range_complete_parallel": "PASSED",
+    "tests/integration/test_line_range_diagnostics.py::test_filter_diagnostics_by_range_basic": "PASSED",
+    "tests/integration/test_line_range_diagnostics.py::test_filter_diagnostics_by_range_overlapping": "PASSED",
+    "tests/integration/test_line_range_diagnostics.py::test_filter_diagnostics_by_range_empty": "PASSED",
+    "tests/integration/test_line_range_diagnostics.py::test_filter_diagnostics_by_range_uses_fullrange": "PASSED",
+    "tests/integration/test_line_range_diagnostics.py::test_get_diagnostics_invalid_range": "PASSED",
+    "tests/integration/test_line_range_diagnostics.py::test_get_diagnostics_backward_compatibility": "PASSED",
+    "tests/integration/test_line_range_diagnostics.py::test_get_diagnostics_fatal_error_no_diagnostics": "PASSED",
+    "tests/integration/test_line_range_diagnostics.py::test_get_diagnostics_with_range_filters": "PASSED",
+    "tests/test_aeep_multifile.py::test_utils_fullrange_and_fallback": "PASSED"
+  }
+}
