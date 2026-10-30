@@ -2373,3 +2373,18 @@ The 69-input docs result binds its actual files before routine status updates.
 Keep those hashes and results unchanged. No further checker approval is needed
 solely for this progress record. The operator's clarification keeps the helped
 control exercise off the critical path.
+
+## D132: Reconcile public evidence before another capability study
+
+The October 30 continuation found the native task idle at `c70c9c5`. Its completed
+19-pair optional-skill comparison supersedes the active guide's October 7 status
+as the latest evidence entry point. Update the guide and index while preserving
+all historical records and source scopes. Reuse the existing `aeep_value` contract
+for a future three-way study; do not add an engine or force a candidate to win.
+
+No new hypothesis is established by the negative Ponytail result. Prepare a
+specific capability/workload rationale and current independent qualification
+before freezing fresh cases or requesting execution. The 41 potential snapshots
+are not an adopted cohort. Corpus work stays deferred. No release, installation,
+model or checker authority transfers from a terminal review to changed inputs.
+The continuation audit records factual cross-checks and remaining bindings.

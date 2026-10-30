@@ -6401,3 +6401,22 @@ both arms passed 14/19, with no additional successes, no supported savings and
 two actual admission refusals. A justified new capability-value hypothesis and
 untouched cases are prerequisites to another efficacy execution review. The
 helped control exercise remains off the critical path.
+
+## October 30: current native-task reconciliation and discovery gap
+
+The native Toolkit task is idle at `c70c9c5` in the separate aeep-toolkit-v2 checkout.
+Its current source `5a4257e3` has 1786 passes/21 skips in both full suites, 82% displayed
+coverage and completed installed/docs checks. The live `b09911a0` study remains
+14/19 for both arms, with 19 instruction loads and 38 valid token chains. It is not
+the unrun normal/discovery/AEEP comparison and supplies no positive selection
+benefit. The [continuation audit](../toolkit-v2/c13/continuation-reconciliation-20261030/README.md)
+pins five retained reports and records the existing three-way contract and
+unresolved hypothesis, qualification, cohort, bindings and execution review.
+
+Only active evidence prose, index and status records changed; historical evidence
+and implementation bytes are preserved. No tests/models/installations/grant
+operations ran. First-party factual/link checks are separate from required
+`make docs-check`, which was not executed: Lychee is absent from PATH and the prior
+private checker was removed. New active-input hashes require a fresh bounded
+checker review; do not replay its terminal driver. C13 and production/release
+gates remain open.

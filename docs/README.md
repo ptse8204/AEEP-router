@@ -89,9 +89,12 @@ Understand the design choices and the results behind them.
 - [Job-application sandbox design](JOB_APPLICATION_DEMO.md)
 
 Each measured result applies to its recorded source, environment and task.
-The completed DOCX and composed workbook studies did not qualify their
-candidates. The normal-agent / discovery-only / discovery-plus-AEEP comparison
-remains unrun, and human comprehension remains unmeasured.
+The [October 29 Toolkit comparison](EVIDENCE.md#latest-toolkit-comparison-october-29)
+found the same 14/19 successes for ordinary Codex and optional Ponytail, with no
+demonstrated incremental benefit. The earlier DOCX and workbook studies did not
+qualify. The normal-agent / discovery-only / discovery-plus-AEEP comparison
+remains unrun. Helped human comprehension is recorded in Toolkit state; broader
+usability and production acceptance remain open.
 
 ## Contributors and historical work
 

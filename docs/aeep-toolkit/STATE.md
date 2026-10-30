@@ -108,7 +108,7 @@ checkpoint_status:
 last_verified_commit: 'df9eee7f2535a47e957418da0747c2d428641f26'
 last_check_command: 'Approved run-bundle.py88e5c1b9;completion-audit.json canonical readback. Earlier13source gates and retained-failure analysis are complete and were not repeated.'
 last_check_result: 'Approved88e5c1b9 completed once:3installed checks and69-input offline docs passed;both private runtimes removed unchanged;all168Python wheel members match current source5a4257e3. No models,downloads,Docker,cash or grant changes. Source13gates remain passed1786tests/21skips per run,82%coverage,both branch gates. Sourceb099 comparison remains both14/19,38captures,19loads,2admission refusals;no formal qualification or positive selection benefit.'
-next_action: 'Current engineering verification and local beta assessment are complete;read reports/toolkit-v2/c13/repository-codec-preflight-20261029/BETA_ASSESSMENT.md. No execution or installation approval is pending. Do not replay terminal models,source suites,graders or package/docs drivers. C13 remains open for unmet acceptance:formal capability qualification,positive selection evidence,broader operational/platform claims and operator release review. Another efficacy campaign requires a justified capability/workload hypothesis,untouched cases and new exact authority;do not expand corpus or repeat infrastructure tests merely to fill gates. Human-control exercise stays off the critical path.'
+next_action: 'Read reports/toolkit-v2/c13/continuation-reconciliation-20261030/README.md. Actual native-task state and retained results are reconciled; source5a4257e3 stays unchanged. Prepare a justified pinned capability/workload hypothesis before fresh qualification and untouched value cases. No terminal controller replay or corpus expansion. Revised active guides need a new bounded checker review. C13 remains IN_PROGRESS; production and publication remain NO_GO.'
 blocked_actions:
   - 'Helped report comprehension is recorded. The operator removed the concrete control exercise from the critical path on October29;control-use qualification remains unmeasured and is not an engineering/comparison blocker.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
@@ -4469,3 +4469,21 @@ turn more infrastructure tests or replayed cases into efficacy evidence. Another
 study needs a justified capability/workload hypothesis and untouched cases before
 its exact execution review. The operator's helped control exercise remains off
 the critical path. No new architecture choice is needed.
+
+## October 30: continuation reconciled against current native task
+
+The native implementation task was idle; its latest pushed branch is at `c70c9c5`
+in the separate aeep-toolkit-v2 checkout. The old router checkout's unrelated
+uncommitted work was preserved. The
+[continuation audit](../../reports/toolkit-v2/c13/continuation-reconciliation-20261030/README.md)
+cross-checks five retained JSON reports and repairs the active evidence guide's
+outdated entry point. No model, worker, grader, installer or grant operation ran.
+No software suite was replayed. Current implementation evidence remains `5a4257e3`;
+live comparison remains `b09911a0`. Historical records retain their original bytes.
+
+The next study must first justify a pinned capability/workload hypothesis, then
+prepare independent qualification and untouched value cases through existing
+contracts. The audit records exact unresolved bindings and separates the three
+contrasts. No new candidate, case cohort or execution authority is invented.
+C13 remains IN_PROGRESS. The revised active docs still need a fresh bounded
+checker review; previous 69-input results do not cover these edits.

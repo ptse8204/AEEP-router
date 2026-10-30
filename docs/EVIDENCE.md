@@ -15,6 +15,7 @@ retains the full history, including failed attempts and remaining work.
 <details>
 <summary>Contents</summary>
 
+- [Latest Toolkit comparison (October 29)](#latest-toolkit-comparison-october-29)
 - [Use cases supported by evidence](#use-cases-supported-by-evidence)
 - [Software checks](#software-checks)
 - [Worker and native execution checks](#worker-and-native-execution-checks)
@@ -29,6 +30,36 @@ retains the full history, including failed attempts and remaining work.
 - [Stack planning evidence](#stack-planning-evidence)
 
 </details>
+
+## Latest Toolkit comparison (October 29)
+
+The completed repository development comparison tested ordinary Codex against
+optional Ponytail 4.10.0. Both passed the same **14/19 tasks**, with zero additional
+successes from the skill. All 19 treatment turns loaded its instructions; all 38
+valid token capture chains verified. This establishes exposure, not semantic
+contribution. The two-arm study does not test autonomous discovery or the
+normal-agent / discovery-only / discovery-plus-AEEP comparison.
+
+The [selection decision](../reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/SELECTION_DECISION.md)
+retains the baseline for these tasks. Neither format group met the successful-pair
+requirement for resource intervals. No supported token, time or cash savings
+claim follows. Two controller-censored cases remain excluded with their charges
+retained. Both actual development-report admission attempts were refused.
+
+Current source `5a4257e3` separately passed all 13 engineering checks: **1786
+passed, 21 skipped** in each full run, displayed coverage **82%**, and both branch
+gates passed. Three focused installed-wheel checks and offline documentation
+checks on 69 bound inputs also passed. The
+[artifact completion audit](../reports/toolkit-v2/c13/repository-codec-preflight-20261029/completion-audit.json)
+binds those results. The live study binds earlier source `b09911a0`; software
+verification does not establish live qualification for current source.
+
+The [beta assessment](../reports/toolkit-v2/c13/repository-codec-preflight-20261029/BETA_ASSESSMENT.md)
+recommends private experimentation on the tested macOS arm64/Python 3.13 setup.
+Production release remains NO_GO. Formal qualification, positive live selection
+benefit and broader operational acceptance remain open. The October 30
+[continuation audit and next-study requirements](../reports/toolkit-v2/c13/continuation-reconciliation-20261030/README.md)
+explain what must be prepared before another efficacy run.
 
 ## Use cases supported by evidence
 
@@ -299,7 +330,8 @@ the existing failed holdouts remain part of the record.
 The normal-agent / discovery-only / discovery-plus-AEEP value comparison has not
 run. It must test optional use after matching qualification and environment
 checks pass. General improvements in agent quality, representative resource
-savings, native catalog selection and human comprehension remain unproven.
+savings and native catalog selection remain unproven. Toolkit records include
+helped comprehension; broader usability remains unqualified.
 
 The current controlled workbook experiment combines container workers with a
 native macOS callback. Running it unchanged entirely on Linux cloud is not
