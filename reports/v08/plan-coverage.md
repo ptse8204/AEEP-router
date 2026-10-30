@@ -6420,3 +6420,21 @@ operations ran. First-party factual/link checks are separate from required
 private checker was removed. New active-input hashes require a fresh bounded
 checker review; do not replay its terminal driver. C13 and production/release
 gates remain open.
+
+## October 30: actionable next-study readiness and safe cached lint
+
+The [review packet](../toolkit-v2/c13/next-study-review-20261030/README.md)
+binds current source contracts and both completed codec components' exact
+historical plans/routes/images. It records no justified new candidate, no adopted
+untouched cohort and no executable approval request. The next step is a concrete
+workflow/baseline-limitation/candidate-mechanism hypothesis, followed by current
+independent qualification and source-disjoint value definitions. Existing counts,
+thresholds, exposure exclusions, ledger and deferred corpus work remain.
+
+An actual cached markdownlint-cli2 0.23.3 CLI scan passed all 69 active inputs with
+zero issues in a network/write-denied sandbox. A sandbox-start failure and a
+library-only no-op are retained and not counted as checks. No npx/install/download
+ran. Lychee is unavailable; its check did not run and no link failure is inferred.
+The full make docs-check gate remains incomplete. Later progress prose retains
+its own input binding; the saved actual scan is not retroactively broadened.
+No new models, graders, workers, grant operations or source changes occurred.

@@ -108,7 +108,7 @@ checkpoint_status:
 last_verified_commit: 'df9eee7f2535a47e957418da0747c2d428641f26'
 last_check_command: 'Approved run-bundle.py88e5c1b9;completion-audit.json canonical readback. Earlier13source gates and retained-failure analysis are complete and were not repeated.'
 last_check_result: 'Approved88e5c1b9 completed once:3installed checks and69-input offline docs passed;both private runtimes removed unchanged;all168Python wheel members match current source5a4257e3. No models,downloads,Docker,cash or grant changes. Source13gates remain passed1786tests/21skips per run,82%coverage,both branch gates. Sourceb099 comparison remains both14/19,38captures,19loads,2admission refusals;no formal qualification or positive selection benefit.'
-next_action: 'Read reports/toolkit-v2/c13/continuation-reconciliation-20261030/README.md. Actual native-task state and retained results are reconciled; source5a4257e3 stays unchanged. Prepare a justified pinned capability/workload hypothesis before fresh qualification and untouched value cases. No terminal controller replay or corpus expansion. Revised active guides need a new bounded checker review. C13 remains IN_PROGRESS; production and publication remain NO_GO.'
+next_action: 'Read reports/toolkit-v2/c13/next-study-review-20261030/README.md and review.json. NOT_READY_FOR_EXECUTION_REVIEW: first establish an operator-relevant workflow, independently verifiable success, specific baseline limitation and pinned candidate mechanism. No candidate chosen arbitrarily. Current/historical bindings and exposure-manifest hashes are recorded. Cached Markdown CLI passed69active inputs; Lychee remains unavailable and full docs-check is not passed. No models,installations,push or controller replay. C13 remains IN_PROGRESS.'
 blocked_actions:
   - 'Helped report comprehension is recorded. The operator removed the concrete control exercise from the critical path on October29;control-use qualification remains unmeasured and is not an engineering/comparison blocker.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
@@ -4487,3 +4487,20 @@ contracts. The audit records exact unresolved bindings and separates the three
 contrasts. No new candidate, case cohort or execution authority is invented.
 C13 remains IN_PROGRESS. The revised active docs still need a fresh bounded
 checker review; previous 69-input results do not cover these edits.
+
+## October 30: next-study readiness packet and actual cached Markdown check
+
+The [readiness packet](../../reports/toolkit-v2/c13/next-study-review-20261030/README.md)
+records why no existing candidate/workload presently justifies another live run.
+It pins both completed codec components' historical plans, routes, images and
+subject/recipe identities; current source contracts stay separate. New candidate,
+qualification, workload and executor bindings remain explicitly unresolved.
+The remaining potential-case manifest matches its recorded hash without reading
+task or truth bodies. No untouched cases or independent review are invented.
+
+The cached markdownlint-cli2 0.23.3 declared CLI checked 69 active files with zero
+issues under network/write denial. Initial nested-sandbox failure and an earlier
+library-only no-op are preserved and excluded from lint evidence. Lychee is
+unavailable; no Lychee failure or full docs-check success is inferred. These
+checks add no qualification, live selection, operational or release evidence.
+No model, worker, grader, installer or grant operation was started.

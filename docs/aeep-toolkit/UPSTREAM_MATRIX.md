@@ -1700,3 +1700,14 @@ both arms passed 14/19, with no additional successes, no supported savings and
 two actual admission refusals. A justified new capability-value hypothesis and
 untouched cases are prerequisites to another efficacy execution review. The
 helped control exercise remains off the critical path.
+
+## October 30 continuation disposition
+
+No upstream component or candidate was added, installed or newly qualified.
+The [next-study readiness packet](../../reports/toolkit-v2/c13/next-study-review-20261030/README.md)
+keeps existing pins and the AssessmentService/BenchmarkRunner fallback. Current
+source contracts and historical plain/gzip execution bindings remain separate.
+A workflow-specific candidate mechanism and independent task provenance must
+precede a new execution review. Cached markdownlint-cli2 0.23.3 ran only as an
+authoring check; Lychee remains unavailable. No evaluator compatibility or live
+capability benefit is inferred from documentation tooling.

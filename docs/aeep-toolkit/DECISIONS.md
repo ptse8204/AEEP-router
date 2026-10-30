@@ -2388,3 +2388,17 @@ before freezing fresh cases or requesting execution. The 41 potential snapshots
 are not an adopted cohort. Corpus work stays deferred. No release, installation,
 model or checker authority transfers from a terminal review to changed inputs.
 The continuation audit records factual cross-checks and remaining bindings.
+
+## D133: Prepare missing study inputs; reuse the installed Markdown checker
+
+The next-study packet is NOT_READY_FOR_EXECUTION_REVIEW. Do not choose another
+candidate solely because the Ponytail result was negative or a newer package
+exists. First document the workflow, independent success contract, baseline
+limitation and candidate mechanism. Preserve all exposure exclusions and existing
+qualification/value contracts. Exact next-run bindings and budgets remain unknown;
+a historical route fingerprint is not current-source conformance or authority.
+
+The pinned Markdown checker is already cached. Its declared CLI completed a
+read-only, network-denied 69-input scan with zero issues. No install or npx ran.
+A zero-exit library import was a launcher no-op and is explicitly not validation.
+Lychee is absent; preserve that tooling gap separately from actual link errors.
