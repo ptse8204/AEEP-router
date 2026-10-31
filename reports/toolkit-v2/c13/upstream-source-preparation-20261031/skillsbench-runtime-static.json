@@ -1,0 +1,472 @@
+{
+  "purpose": "Static task/runtime/verifier audit, no upstream code or shell execution",
+  "tasks": [
+    {
+      "task_id": "financial-modeling-qa",
+      "files": [
+        {
+          "path": "tasks/financial-modeling-qa/environment/Dockerfile",
+          "role": "environment",
+          "sha256": "1a96660506b8ff1bd2ed9b87f1e756bad4c4a05ddd38be4b645b36ed3a3a3f53",
+          "observed": {
+            "runtime_setup_lines": [
+              "FROM ubuntu:24.04",
+              "# RUN apt-get update && apt-get install -y \\",
+              "#     python3-pip \\",
+              "RUN apt-get update && apt-get install -y python3 python3-pip \\"
+            ]
+          }
+        },
+        {
+          "path": "tasks/financial-modeling-qa/oracle/solve.sh",
+          "role": "oracle",
+          "sha256": "75171aad9ccbc6bb498937822fd024063616c4284d3f4261a52a3ebd72de02c4",
+          "observed": {
+            "runtime_setup_lines": []
+          }
+        },
+        {
+          "path": "tasks/financial-modeling-qa/verifier/test.sh",
+          "role": "verifier",
+          "sha256": "fe7195562321b71ace6e1f6858994939238cc7ce0ec2d0ae3b610278489a42b7",
+          "observed": {
+            "runtime_setup_lines": [
+              "apt-get update",
+              "apt-get install -y curl",
+              "curl -LsSf https://astral.sh/uv/0.9.7/install.sh | sh"
+            ]
+          }
+        },
+        {
+          "path": "tasks/financial-modeling-qa/verifier/test_outputs.py",
+          "role": "verifier",
+          "sha256": "66550d2f2b83314342c8ea8c81a867d06bbc0b177c23f34b44161f022d64f5ec",
+          "observed": {
+            "imports": [
+              "hashlib",
+              "os",
+              "re"
+            ],
+            "test_functions": [
+              "test_inputs_exist",
+              "test_answer_file_exists",
+              "test_answer_format_is_number",
+              "test_answer_value_correct"
+            ],
+            "skip_calls": [],
+            "process_calls": []
+          }
+        }
+      ],
+      "executed": false
+    },
+    {
+      "task_id": "pdf-excel-diff",
+      "files": [
+        {
+          "path": "tasks/pdf-excel-diff/environment/Dockerfile",
+          "role": "environment",
+          "sha256": "1baf957923ddb2343e0764a3d9b03c8792a6411e867b44e3afef850d8e2bf062",
+          "observed": {
+            "runtime_setup_lines": [
+              "FROM ubuntu:24.04",
+              "RUN apt-get update && apt-get install -y \\",
+              "    python3-pip \\",
+              "    wget \\",
+              "RUN wget -O /root/employees_current.xlsx https://raw.githubusercontent.com/XuandongZhao/skillsbench-files/main/pdf-excel-diff/employees_current.xlsx && \\",
+              "    wget -O /root/employees_backup.pdf https://raw.githubusercontent.com/XuandongZhao/skillsbench-files/main/pdf-excel-diff/employees_backup.pdf"
+            ]
+          }
+        },
+        {
+          "path": "tasks/pdf-excel-diff/oracle/solve.sh",
+          "role": "oracle",
+          "sha256": "ea12dbaf1606e3a1e4dfafb653f9896a5f2524a2a1bd2fadf66353de69eb0a13",
+          "observed": {
+            "runtime_setup_lines": []
+          }
+        },
+        {
+          "path": "tasks/pdf-excel-diff/verifier/test.sh",
+          "role": "verifier",
+          "sha256": "8793d4be74268ffb9c492f85a094d871709e9a11f7c9cf4f3a023381d7b454ec",
+          "observed": {
+            "runtime_setup_lines": [
+              "apt-get update",
+              "apt-get install -y curl",
+              "curl -LsSf https://astral.sh/uv/0.9.7/install.sh | sh"
+            ]
+          }
+        },
+        {
+          "path": "tasks/pdf-excel-diff/verifier/test_outputs.py",
+          "role": "verifier",
+          "sha256": "4ac05115f9c9d9555f37849434de0ec9a74ac2e3cb53946c0b27c57bf300b5d0",
+          "observed": {
+            "imports": [
+              "json",
+              "pathlib",
+              "pytest"
+            ],
+            "test_functions": [
+              "test_output_file_exists",
+              "test_output_file_valid_json",
+              "test_output_has_required_keys",
+              "test_correct_deleted_count",
+              "test_correct_deleted_ids",
+              "test_correct_modified_count",
+              "test_modified_employee_structure",
+              "test_correct_modified_ids",
+              "test_correct_modified_fields",
+              "test_correct_modified_values",
+              "test_full_comparison"
+            ],
+            "skip_calls": [],
+            "process_calls": []
+          }
+        }
+      ],
+      "executed": false
+    },
+    {
+      "task_id": "sales-pivot-analysis",
+      "files": [
+        {
+          "path": "tasks/sales-pivot-analysis/environment/Dockerfile",
+          "role": "environment",
+          "sha256": "385cb88d95271d73b72796dc0e66387997ff08d9e3a00a09afc02cade91349b2",
+          "observed": {
+            "runtime_setup_lines": [
+              "FROM ubuntu:24.04",
+              "RUN apt-get update && apt-get install -y \\",
+              "    python3-pip \\",
+              "RUN pip install --no-cache-dir \\"
+            ]
+          }
+        },
+        {
+          "path": "tasks/sales-pivot-analysis/oracle/solve.sh",
+          "role": "oracle",
+          "sha256": "c32145e5992af57a10859ea7b3d48ab9f56f955286f1fac2511cf4f1c89e4f84",
+          "observed": {
+            "runtime_setup_lines": []
+          }
+        },
+        {
+          "path": "tasks/sales-pivot-analysis/verifier/test.sh",
+          "role": "verifier",
+          "sha256": "89a25f079630a5015cafce30c8bd9d94b314de7efeaf95fbe3b6dffdae1797a1",
+          "observed": {
+            "runtime_setup_lines": [
+              "pip install --no-cache-dir pytest==8.3.4 pytest-json-ctrf==0.3.6 openpyxl==3.1.5"
+            ]
+          }
+        },
+        {
+          "path": "tasks/sales-pivot-analysis/verifier/test_outputs.py",
+          "role": "verifier",
+          "sha256": "e8cf8f07ba92961daa3eb5a2f8f173378770e5f80aafdf3626305643040d4ba9",
+          "observed": {
+            "imports": [
+              "openpyxl",
+              "pytest"
+            ],
+            "test_functions": [
+              "test_pivot_row_is_state",
+              "test_pivot_uses_correct_aggregation",
+              "test_pivot_col_field",
+              "test_source_data_has_required_column",
+              "test_source_data_has_reasonable_row_count",
+              "test_quarter_values_are_valid",
+              "test_state_values_are_valid",
+              "test_pivot_cache_has_fields",
+              "test_total_equals_earners_times_median_income",
+              "test_sa2_codes_from_income_file_present"
+            ],
+            "skip_calls": [
+              "pytest.skip(f\"'{sheet_name}' is not a matrix pivot\")"
+            ],
+            "process_calls": []
+          }
+        }
+      ],
+      "executed": false
+    },
+    {
+      "task_id": "spring-boot-jakarta-migration",
+      "files": [
+        {
+          "path": "tasks/spring-boot-jakarta-migration/environment/Dockerfile",
+          "role": "environment",
+          "sha256": "0e7be464178abddb2ffb480b88a9c60e3e12a3b7ce9c7d04fac4f126e864d4ec",
+          "observed": {
+            "runtime_setup_lines": [
+              "FROM ubuntu:24.04",
+              "RUN apt-get update && apt-get install -y \\",
+              "    curl \\",
+              "    wget \\",
+              "RUN curl -s \"https://get.sdkman.io\" | bash",
+              "    sdk install java 8.0.392-tem && \\",
+              "    sdk install java 21.0.2-tem && \\",
+              "    sdk default java 21.0.2-tem\"",
+              "    sdk install maven 3.9.6\"",
+              "    sdk use java 8.0.392-tem && \\",
+              "    mvn dependency:go-offline -B\" || true",
+              "RUN bash -c \"source $SDKMAN_DIR/bin/sdkman-init.sh && sdk default java 21.0.2-tem\""
+            ]
+          }
+        },
+        {
+          "path": "tasks/spring-boot-jakarta-migration/oracle/solve.sh",
+          "role": "oracle",
+          "sha256": "212d4bf7328ad1fa223e518f8a90d9160cc7b4a134832bd72e3735b7a9c11da9",
+          "observed": {
+            "runtime_setup_lines": [
+              "sdk use java 21.0.2-tem",
+              "mvn clean compile -q",
+              "mvn test -q"
+            ]
+          }
+        },
+        {
+          "path": "tasks/spring-boot-jakarta-migration/verifier/test.sh",
+          "role": "verifier",
+          "sha256": "b588a9d9a690da244472fd5259f72ada9d766564973689354dea69767e8a6c0c",
+          "observed": {
+            "runtime_setup_lines": [
+              "apt-get update",
+              "apt-get install -y curl",
+              "curl -LsSf https://astral.sh/uv/0.9.7/install.sh | sh",
+              "sdk use java 21.0.2-tem 2>/dev/null || true"
+            ]
+          }
+        },
+        {
+          "path": "tasks/spring-boot-jakarta-migration/verifier/test_outputs.py",
+          "role": "verifier",
+          "sha256": "bfc7a5e8c8fd1bfa3c1ddf58c9c819a237ae07022f52671c845538c50af3aac8",
+          "observed": {
+            "imports": [
+              "os",
+              "re",
+              "subprocess"
+            ],
+            "test_functions": [
+              "test_no_javax_validation",
+              "test_jakarta_persistence_present",
+              "test_jakarta_validation_present",
+              "test_enable_method_security",
+              "test_request_matchers_used",
+              "test_rest_client_used",
+              "test_maven_compile",
+              "test_maven_test",
+              "test_no_old_jaxb_api",
+              "test_no_old_jjwt"
+            ],
+            "skip_calls": [],
+            "process_calls": [
+              "subprocess.run(['bash', '-c', 'source /root/.sdkman/bin/sdkman-init.sh && sdk use java 21.0.2-tem && mvn clean compile -q'], cwd=WORKSPACE_DIR, capture_output=True, text=True, timeout=300)",
+              "subprocess.run(['bash', '-c', 'source /root/.sdkman/bin/sdkman-init.sh && sdk use java 21.0.2-tem && mvn test -q'], cwd=WORKSPACE_DIR, capture_output=True, text=True, timeout=300)"
+            ]
+          }
+        }
+      ],
+      "executed": false
+    },
+    {
+      "task_id": "react-performance-debugging",
+      "files": [
+        {
+          "path": "tasks/react-performance-debugging/environment/Dockerfile",
+          "role": "environment",
+          "sha256": "3f402dfe032923ea8a1d2bedba2bb9838d0af339526f5de298b3eebb65fee3d2",
+          "observed": {
+            "runtime_setup_lines": [
+              "FROM ubuntu:24.04",
+              "RUN apt-get update && apt-get install -y \\",
+              "    curl \\",
+              "    python3-pip \\",
+              "    curl -fsSL \"https://nodejs.org/dist/v20.18.1/node-v20.18.1-linux-${NODE_ARCH}.tar.xz\" | tar -xJ -C /usr/local --strip-components=1",
+              "RUN npm install",
+              "# Install npm dependencies using lockfile for reproducibility",
+              "RUN npm ci",
+              "cd /services/api-simulator && npm start &\\n\\"
+            ]
+          }
+        },
+        {
+          "path": "tasks/react-performance-debugging/environment/api-simulator/Dockerfile",
+          "role": "environment",
+          "sha256": "e1b88c3c3c3b0d3f9dc2ef3aff06d261fb4fbb24df1e1bf29fc580e8c18792bc",
+          "observed": {
+            "runtime_setup_lines": [
+              "FROM node:20-alpine",
+              "RUN npm install"
+            ]
+          }
+        },
+        {
+          "path": "tasks/react-performance-debugging/oracle/solve.sh",
+          "role": "oracle",
+          "sha256": "877a939b540750c494a0b3bc0887409ae281b5baf2816f1f2db5499394963626",
+          "observed": {
+            "runtime_setup_lines": [
+              "npm run build",
+              "npm start &",
+              "BEFORE=$(curl -s -o /dev/null -w '%{time_total}' http://localhost:3000)",
+              "npm run build",
+              "npm start &",
+              "AFTER=$(curl -s -o /dev/null -w '%{time_total}' http://localhost:3000)",
+              "AFTER_PRODUCTS=$(curl -s -o /dev/null -w '%{time_total}' http://localhost:3000/api/products)",
+              "AFTER_CHECKOUT=$(curl -s -o /dev/null -w '%{time_total}' -X POST -H \"Content-Type: application/json\" -d '{}' http://localhost:3000/api/checkout)"
+            ]
+          }
+        },
+        {
+          "path": "tasks/react-performance-debugging/verifier/conftest.py",
+          "role": "verifier",
+          "sha256": "e8607f792eef0f6eae98707e32bf96b0502f547890db6b0ec33f1a85182b4a3c",
+          "observed": {
+            "imports": [
+              "asyncio",
+              "httpx",
+              "pytest"
+            ],
+            "test_functions": [],
+            "skip_calls": [],
+            "process_calls": []
+          }
+        },
+        {
+          "path": "tasks/react-performance-debugging/verifier/test.sh",
+          "role": "verifier",
+          "sha256": "b49163271d4cc53136febc9ad20e445189d0649c9d165b8632722703d26c8df1",
+          "observed": {
+            "runtime_setup_lines": [
+              "  python3 -m pip install --break-system-packages pytest==8.3.4 pytest-asyncio==0.24.0 \\",
+              "if ! curl -s http://localhost:3001/health > /dev/null 2>&1; then",
+              "  cd /services/api-simulator && npm start &",
+              "    if curl -s http://localhost:3001/health > /dev/null 2>&1; then",
+              "npm run build",
+              "npm start &",
+              "  if curl -s http://localhost:3000 > /dev/null 2>&1; then"
+            ]
+          }
+        },
+        {
+          "path": "tasks/react-performance-debugging/verifier/test_outputs.py",
+          "role": "verifier",
+          "sha256": "d1853fb5ea107170643dd201128ab44f485c1f793e29dc1ba2105da266239ad3",
+          "observed": {
+            "imports": [
+              "httpx",
+              "playwright.sync_api",
+              "pytest",
+              "time"
+            ],
+            "test_functions": [
+              "test_homepage_loads_fast",
+              "test_homepage_has_products",
+              "test_products_api_fast",
+              "test_checkout_fast",
+              "test_external_api_actually_called",
+              "test_memoization_limits_rerenders",
+              "test_compare_page_initial_bundle_small",
+              "test_testids_preserved",
+              "test_cart_add_item",
+              "test_compare_page_works",
+              "test_real_product_data_rendered"
+            ],
+            "skip_calls": [],
+            "process_calls": []
+          }
+        }
+      ],
+      "executed": false
+    },
+    {
+      "task_id": "software-dependency-audit",
+      "files": [
+        {
+          "path": "tasks/software-dependency-audit/environment/Dockerfile",
+          "role": "environment",
+          "sha256": "4f3a36f3b333769533db9b568ff435081024f32db6cc524d56988b0cad3df0f6",
+          "observed": {
+            "runtime_setup_lines": [
+              "FROM python:3.12-slim",
+              "RUN apt-get update && apt-get install -y \\",
+              "    curl \\",
+              "    wget \\",
+              "RUN wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | gpg --dearmor -o /usr/share/keyrings/trivy.gpg && \\",
+              "    apt-get update && \\",
+              "    apt-get install -y trivy && \\",
+              "RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && \\",
+              "    apt-get install -y git-lfs && \\"
+            ]
+          }
+        },
+        {
+          "path": "tasks/software-dependency-audit/oracle/solution.py",
+          "role": "oracle",
+          "sha256": "0a699d8f8e27d6537b7def8fcc2fe8669bab3c712e4c3602f07ace0b5d935973",
+          "observed": {
+            "imports": [
+              "csv",
+              "json",
+              "os",
+              "subprocess",
+              "sys"
+            ],
+            "test_functions": [],
+            "skip_calls": [],
+            "process_calls": [
+              "subprocess.run(command, capture_output=True, text=True)"
+            ]
+          }
+        },
+        {
+          "path": "tasks/software-dependency-audit/oracle/solve.sh",
+          "role": "oracle",
+          "sha256": "20075563ec51e02100d09f45ec48669dc1ae0e5a0f1ac04eb36763e854b556fc",
+          "observed": {
+            "runtime_setup_lines": []
+          }
+        },
+        {
+          "path": "tasks/software-dependency-audit/verifier/test.sh",
+          "role": "verifier",
+          "sha256": "9265ee934d6511a57128913ae81037dc67717c4af9f893cb725fe1654f7b6c4e",
+          "observed": {
+            "runtime_setup_lines": [
+              "apt-get update",
+              "apt-get install -y curl",
+              "curl -LsSf https://astral.sh/uv/0.9.7/install.sh | sh"
+            ]
+          }
+        },
+        {
+          "path": "tasks/software-dependency-audit/verifier/test_outputs.py",
+          "role": "verifier",
+          "sha256": "bc447eecd3f5b5e2622a0e719def8efb12c20b691b7a9710e36d7bde562b0940",
+          "observed": {
+            "imports": [
+              "csv",
+              "io",
+              "os",
+              "pytest"
+            ],
+            "test_functions": [
+              "test_csv_structure_and_content",
+              "test_required_fields_non_empty",
+              "test_vulnerability_severity_and_format",
+              "test_csv_matches_ground_truth"
+            ],
+            "skip_calls": [],
+            "process_calls": []
+          }
+        }
+      ],
+      "executed": false
+    }
+  ]
+}

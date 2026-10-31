@@ -1,5 +1,47 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**October 31: canonical plan preparation added; SDK execution remains blocked.**
+[The workflow increment](../../reports/toolkit-v2/c13/workflow-preparation-20261031/README.md)
+connects explicit v2 preparation to the existing setup service. Setup v2, bounded
+upstream integration cases and plan v7 preserve formal v1 case counts. Preparation
+checks public input bytes, task selections and current asset-use reviews. It
+creates no grant, review or job and starts no model. The focused run passed 64
+tests. The [corrected verification record](../../reports/toolkit-v2/c13/workflow-preparation-20261031/verification-correction/checks.json)
+records all 13 source checks passing on unchanged source7034203e: 1,891 passed
+and 21 skipped in each full run, 82% coverage, both branch gates and the build.
+The initial failed run remains preserved. Broader release checks remain open.
+
+A real-input audit found that reconciliation's 3.7 MB payload exceeds the current
+1 MiB plan reader, although its ZIP fits the worker transport. That reader needs
+correction. Packaging, preview and export overhead also need complete canonical
+accounting before the composed workflow can pass.
+
+The approved 57-wheel LangGraph runtime was installed idempotently and retained.
+Review48dd65dc ended at interpreter bootstrap. Approved correction7f88a7c1
+passed the sandbox and installed-package checks; actual SDK startup then failed
+before its inner database. The driver missed the traceback. Both attempts are
+terminal and the runtime is unchanged. Their scope is frozen source f1fe5413;
+neither qualifies newer code or the whole integration.
+
+Diagnostic review a40d942d was withdrawn before execution after a standard-library
+probe demonstrated that SQLite could not open its owned database. Metadata-only
+access to the exact workspace ancestors passes SQLite and all three denial
+checks. The replacement [SQLite bootstrap review](../../reports/toolkit-v2/c13/full-stack-20261030/langgraph-sqlite-bootstrap/operation-review.json),
+SHA-256 fb96467652c56ba57e7ba29cf4eb18bca3e932e417d18ad0c92ab948c59e79fa,
+is pending exact approval. It repeats no installation or successful package/docs
+check.
+
+The approved offline documentation check passed its 72 frozen inputs and removed
+its unchanged owned runtime. Later prose edits are outside that scope.
+[Read-only upstream preparation](../../reports/toolkit-v2/c13/upstream-source-preparation-20261031/README.md)
+records actual APIs, artifact identities and the six original verifier/runtime
+contracts. No upstream task or verifier, new service, model, credential access,
+Docker mutation, activation or release occurred. Preserve all images and volumes.
+The read-only inventory observed 166 images, 22 containers and 27 volumes, with
+roughly 72 GiB host space free. Changes outside this task are not cleanup authority.
+All-integration readiness and both domain journeys remain open. Comparisons stay
+paused.
+
 **October 30: all upstream integrations precede new comparisons.**
 The operator approved [the complete-stack implementation plan](STACK_COMPLETION.md).
 Every recommended integration must have current functional evidence, and both
@@ -17,8 +59,8 @@ records the barrier, v2 workflow/task bindings, generic skill-package inspection
 per-task reports and initial Cisco/LangGraph bridges. Its
 [integration status](../../reports/toolkit-v2/c13/full-stack-20261030/integration-status.json)
 separates actual functionality from metadata and fixtures. All required integrations
-and both composed CLI journeys remain unverified. Automatic canonical plan
-preparation and external-evaluator dispatch remain implementation work.
+and both composed CLI journeys remain unverified. Explicit canonical plan
+preparation is added by the October31 increment; external-evaluator dispatch remains open.
 
 The operator reported no Copilot subscription; Waza's real default backend remains
 blocked on access. Six original SkillsBench tasks and two pinned external inputs
@@ -27,7 +69,7 @@ reference/counterexample grading and controlled task execution remain open.
 A bounded required-use engineering bootstrap avoids making stack completion depend
 on a comparison that the completion gate itself blocks; it grants no value evidence.
 The [retained LangGraph runtime review](../../reports/toolkit-v2/c13/full-stack-20261030/langgraph-runtime/operation-review.json)
-is pending exact execution approval. Do not execute b03c2ddb. No new models,
+was approved and attempted on October31; read the newer terminal results above. Do not execute b03c2ddb. No new models,
 services, image changes, activation, release, credential access or historical replay
 occurred. Read the packet's source-check logs for actual final verification;
 interrupted earlier runs are retained with their narrower scope.

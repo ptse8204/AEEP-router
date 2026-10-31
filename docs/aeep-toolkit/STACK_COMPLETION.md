@@ -110,8 +110,37 @@ These commands inspect metadata and bytes. `stack-status` lists the required
 checks without probing components. Workflow v2 binds
 candidate bytes, the selected pack, task IDs and component dependency preview.
 A supplied canonical assessment must bind the same task IDs and candidate, and
-its grader recipe must bind the pack digest. Automatic plan preparation and
-external-evaluator dispatch are still missing and appear as blockers.
+its grader recipe must bind the pack digest. A configuration can instead bind
+an existing setup request, source record and manifest under `preparation`.
+Explicit preparation calls the existing assessment setup service:
+
+```bash
+PYTHONPATH=src python3 -m aeep_toolkit workflow prepare \
+  --workflow /absolute/path/workflow.json --configuration document-data \
+  --reviewed-digest EXACT_PREVIEW_DIGEST --write-plan /absolute/path/new-plan
+```
+
+This writes an inert canonical plan and a bound workflow file. It does not review
+definitions, change a grant, install components, enqueue work or start a model.
+Existing subject, recipe, environment, experiment and task-set records are
+required. Interrupted preparation retains its intent and requires inspection;
+completed preparation can export the same canonical draft again to a new directory.
+External-evaluator dispatch remains missing and is shown as a blocker.
+
+`assessment.integration-cases.v1`, setup v2 and plan v7 cover one to six distinct
+upstream tasks for stack checks. They require a reviewed, required-use experiment,
+one candidate route, one condition and one repetition. Their reports cannot
+qualify or admit a capability, or establish candidate or selection usefulness.
+The formal `assessment.recipe-cases.v1` contract still requires 141 cases and
+keeps its existing screening, training and holdout requirements.
+
+The task-input adapter packages original instructions and inputs into the existing
+single-file worker transport. It excludes bundled skills, installers, answers and
+verifiers. Preparation compares the complete case input against those bytes and
+resolves each task's exact, unrevoked asset-use determination in the existing
+record store. A source license or an arbitrary review reference cannot substitute
+for that determination. The worker runtime, output transport, path adaptations,
+protected verifiers and reference checks still require applicable evidence.
 
 Execution continues to use the existing AssessmentService, executors, grants,
 attempts and receipts. The LangGraph SDK adapter delegates approved executor
@@ -137,7 +166,8 @@ gate or prevent engineering work on the other components.
 
 A separately reviewed `--engineering-review` can bootstrap the composed workflow
 before the all-integration gate. It is limited to one condition, one repetition,
-one to six qualification tasks, two routes and at most twelve model turns, with
+one to six qualification tasks, one candidate route (or a separately reviewed
+two-route diagnostic) and at most twelve model turns, with
 required candidate exposure. Its canonical scope must match the exact plan and
 current source and pass the existing grant checks. Optional-use/value stages,
 holdouts, challengers and broader runs are rejected. The separate bounded

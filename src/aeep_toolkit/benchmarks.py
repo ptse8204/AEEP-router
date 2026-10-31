@@ -2,10 +2,13 @@
 
 from __future__ import annotations
 
+import base64
 import hashlib
+import io
 import json
 import os
 import stat
+import zipfile
 from pathlib import Path, PurePosixPath
 from typing import Any, Literal
 
@@ -214,6 +217,42 @@ def stage_agent_assets(
         target.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
         with target.open("xb") as stream:
             stream.write(raw)
+
+
+def task_input(pack: BenchmarkPack, root: Path, task_id: str) -> dict[str, Any]:
+    """Preserve original public bytes in the existing single-file worker transport.
+
+    This is packaging only. The operator still resolves rights, runtime/path
+    adaptations and protected verifier execution before any worker receives it.
+    Candidate skills, environment installers, oracles and verifiers are excluded.
+    """
+    from aeep.assessment.models import content_digest
+
+    task = pack.task(task_id)
+    inspect_pack(pack, root, (task_id,))
+    public = [asset for asset in task.assets if asset.role in {'instruction', 'input'}]
+    if sum(asset.bytes for asset in public) > 16_000_000:
+        raise ValueError('task exceeds this adapter expanded-input limit; review a larger transport')
+    stream = io.BytesIO()
+    instruction = None
+    with zipfile.ZipFile(stream, 'w', compression=zipfile.ZIP_DEFLATED) as archive:
+        for asset in sorted(public, key=lambda item:item.path):
+            raw = asset_path(root, asset).read_bytes()
+            if len(raw) != asset.bytes or hashlib.sha256(raw).hexdigest() != asset.sha256:
+                raise ValueError('task input changed while packaging')
+            if asset.role == 'instruction':
+                instruction = raw.decode('utf-8')
+            entry = zipfile.ZipInfo(asset.path, date_time=(1980, 1, 1, 0, 0, 0))
+            entry.compress_type = zipfile.ZIP_DEFLATED
+            entry.external_attr = (stat.S_IFREG | 0o444) << 16
+            archive.writestr(entry, raw)
+    raw = stream.getvalue()
+    if len(raw) > 4_000_000:
+        raise ValueError('task exceeds the existing managed artifact transport limit')
+    return {'task_id':task_id, 'task':instruction, 'benchmark_pack_sha256':content_digest(pack.model_dump(mode='json')),
+            'task_archive_b64':base64.b64encode(raw).decode('ascii'),
+            'task_archive_sha256':hashlib.sha256(raw).hexdigest(),
+            'output_paths':list(task.output_paths)}
 
 
 def initial_catalog() -> dict[str, Any]:

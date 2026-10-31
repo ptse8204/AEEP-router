@@ -7,9 +7,10 @@ parked; prior Ponytail results, charges, approvals and source bindings are intac
 The source implements an all-integration comparison barrier, v2 workflow metadata,
 original task asset inspection/separation, generic pinned skill-package inspection,
 per-task report rows, a bounded integration-check path in the existing managed runner, and initial
-Cisco/LangGraph bridges. The ordinary workflow still lacks automatic canonical
-plan preparation and external evaluator dispatch. These are implementation gaps,
-not permission requests. The stack gate has not passed.
+Cisco/LangGraph bridges. The October31 workflow increment adds explicit canonical plan preparation;
+external evaluator dispatch and composed real-task execution remain open. Read
+[the increment](../workflow-preparation-20261031/README.md) for its narrower scope.
+The stack gate has not passed.
 
 `skillsbench-pack.json` and `source-inventory.json` bind six original tasks, 172
 upstream repository files and two externally hosted input files (5,014,404 bytes
@@ -60,8 +61,10 @@ router layering issue, remains outside this result and open.
 The exact runtime review remains 48dd65dc34a980234cc33809ddefe7dcf0d908462e08e9efbdc2c1f21f624b6d.
 The independent offline docs review remains
 052573e2f5fc9ee26eb3635f0d643f707c0d8dfbb69649a4248eebfa223cefe8.
-Neither has executed. Cached markdownlint authoring passed on seven changed
-guides; full `make docs-check` awaits the pinned checker approval.
+Both were approved and attempted on October31. The offline docs check passed
+its72 exact inputs and removed only its unchanged owned runtime. The LangGraph
+57-wheel installation and idempotence passed; sandbox bootstrap initially failed
+before SDK execution. The original attempt remains terminal.
 
 The SDK review's wheel matches all 173 current Python members. Its five guide
 snapshots precede subsequent prose/status edits; see `langgraph-runtime/wheel-source-audit.json`.
@@ -75,3 +78,26 @@ image layers or services. Commit/version-specific lookups were rate limited;
 no pin was changed. GitHub's current docs include CLI access in Copilot Free,
 so Waza does not yet establish a paid-plan requirement. Eligibility, Auto-model
 compatibility and protected setup remain open.
+
+
+## October31 execution and correction
+
+The approved7f88a7c1 runtime-only correction passed home-read/outside-write/network
+denial checks and the installed-package check. Its real SDK process failed before
+creating the inner database; the parent retained receipt metadata but missed the
+raw traceback. The runtime remains unchanged and retained. These observations
+apply to frozen f1fe5413 code, not later workflow changes. No models or services ran.
+
+A first-party standard-library-only probe then demonstrated that SQLite could not
+open its database in the allowed workspace. Adding metadata access to the exact
+workspace ancestors passes SQLite create/write/read and all three denial checks.
+This identifies a concrete blocker; it does not reconstruct the lost SDK traceback.
+
+The proposed a40d942d import diagnostic was withdrawn before any execution
+because its old profile would repeat the SQLite blocker. The replacement
+[review](langgraph-sqlite-bootstrap/operation-review.json), SHA-256
+fb96467652c56ba57e7ba29cf4eb18bca3e932e417d18ad0c92ab948c59e79fa, is pending
+exact approval. It reuses the installed runtime, checks SQLite/containment first,
+and permits one import diagnostic and one gated unchanged SDK check with up to
+six owned executor calls. Raw diagnostics are now retained within explicit bounds.
+It includes no installation, successful package/docs rerun, model, service or cleanup.

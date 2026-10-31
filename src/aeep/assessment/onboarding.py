@@ -270,7 +270,7 @@ def prepare_setup(service: AssessmentService, request: AssessmentSetupRequest) -
     # Save the selection even when recipe execution must wait for operator review.
     request = request.model_copy(update={'structure': selected})
     setup_id = repository.put('setup_request', content_digest(request), request)
-    if recipe.extension is not None and request.case_set_id is None:
+    if recipe.extension is not None and request.case_set_id is None and request.integration_case_set_id is None:
         materialization = prepare(service, subject_id=request.subject_id, recipe_id=request.recipe_id,
             authorization_id=request.authorization_id, environment=environment, seed=request.seed)
         blocked = []
@@ -293,7 +293,8 @@ def prepare_setup(service: AssessmentService, request: AssessmentSetupRequest) -
     plan = service.propose(subject_id=request.subject_id, family=family, candidate_id=request.candidate_id,
         baseline_id=request.baseline_id, authorization_id=request.authorization_id, environment=environment,
         seed=request.seed, structure=selected, case_set_id=request.case_set_id,
-        experiment=experiment, pilot_report_id=request.pilot_report_id)
+        experiment=experiment, pilot_report_id=request.pilot_report_id,
+        integration_case_set_id=request.integration_case_set_id)
     return {'status': 'plan_review_required', 'setup_id': setup_id, 'plan_id': plan.plan_id,
             'definition_digests': plan.definition_digests, 'structure_choices': service.comparison_choices(plan.plan_id),
             'budget': service.budget_preview(plan.plan_id), 'reasons': plan.blocked_reasons, 'execution_authorized': False}

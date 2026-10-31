@@ -2453,3 +2453,23 @@ selected, Phoenix remains an alternative, Archestra remains research, and the
 OpenSkillEval dataset rights exclusion stands. Existing authority and release
 restrictions remain. This is product ordering, not approval to install or execute
 new untrusted artifacts, start services, use credentials or spend cash.
+
+
+## D136: Separate finite stack checks from formal case materialization
+
+Use explicit setup v2, `assessment.integration-cases.v1` and plan v7 for one to six
+distinct upstream integration tasks. The existing setup service, record store,
+workers, execution controls and reports remain responsible for the resulting
+plan. Integration requires reviewed pack, recipe, environment, task set and
+required-use experiment definitions. It schedules one candidate route and cannot
+qualify, admit or establish candidate/selection value. Formal v1 case sets still
+require 141 cases; no six-task template expansion or threshold change is allowed.
+
+Workflow preparation is an explicit operator step after an exact inert preview.
+It creates no grant, definition review, installation or job. Resolve asset-use
+determinations from current canonical reviews, bind original public task bytes,
+and keep verifier/oracle bytes outside the worker payload. Retain a preparation
+intent and result in the existing store. An interrupted intent cannot silently
+create another plan; a completed draft can be exported again without reproposal.
+These are implementation rules under the standing finite test-definition
+delegation, not new untrusted execution, disclosure or installation authority.

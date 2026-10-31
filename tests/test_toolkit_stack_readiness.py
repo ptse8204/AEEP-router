@@ -189,7 +189,7 @@ def test_stack_requires_all_roles_both_domains_and_current_review(tmp_path, monk
         asyncio.run(router.close())
 
 
-def engineering_fixture(service, original):
+def engineering_fixture(service, original, *, candidate_only=False):
     from aeep.assessment.models import (
         AssessmentComparison,
         AssessmentPlan,
@@ -220,13 +220,16 @@ def engineering_fixture(service, original):
     data["definition_digests"].append(
         content_digest(AssessmentComparison.model_validate(data["comparison"]))
     )
+    if candidate_only:
+        data['suite']['routes'] = [route for route in data['suite']['routes'] if route['executor_id'] == 'candidate']
+        data['suite']['baseline_route_id'] = None
     plan = AssessmentPlan.model_validate(data)
     review = EngineeringRunReview(
         plan_digest=content_digest(plan),
         implementation_source=D,
         scope_request_id="engineering-fixture",
         case_ids=tuple(c.case_id for c in plan.suite.cases),
-        maximum_model_turns=2,
+        maximum_model_turns=1 if candidate_only else 2,
     )
     ref = service.repository.put("toolkit_engineering_run", content_digest(review), review)
     service.repository.review(ref)
@@ -242,6 +245,22 @@ def engineering_fixture(service, original):
     )
     service.repository.put("recipe_materialization_request", scope.plan_id, scope)
     return plan, ref
+
+
+def test_real_qualification_shape_uses_one_candidate_route_and_one_turn(tmp_path, monkeypatch):
+    from aeep_toolkit.stack_readiness import require_engineering_run
+
+    router, service, adapter, *_ = prepared(tmp_path, monkeypatch)
+    try:
+        plan, ref = engineering_fixture(service, adapter.plan, candidate_only=True)
+        monkeypatch.setattr(service.repository, 'authorize', lambda _:None)
+        assert require_engineering_run(service.repository, ref, plan=plan, source_digest=D).maximum_model_turns == 1
+        # No other one-route check can borrow the candidate-only allowance.
+        plan.suite.routes[0].executor_id = plan.baseline_id
+        with pytest.raises(ConfigurationError):
+            require_engineering_run(service.repository, ref, plan=plan, source_digest=D)
+    finally:
+        asyncio.run(router.close())
 
 
 def test_engineering_bootstrap_requires_an_exact_separate_review_and_current_grant(

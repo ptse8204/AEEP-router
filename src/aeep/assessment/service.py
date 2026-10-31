@@ -168,6 +168,7 @@ class AssessmentService:
         structure: ComparisonStructure | None = None,
         _proposal_operation_id: str | None = None,
         case_set_id: str | None = None,
+        integration_case_set_id: str | None = None,
         experiment: IncrementalExperiment | None = None,
         pilot: PilotPolicy | None = None,
         pilot_report_id: str | None = None,
@@ -230,13 +231,21 @@ class AssessmentService:
         plan_id = new_id("plan")
         fixture_root = self.directory / plan_id / "fixtures"
         case_set = None
-        if recipe.extension is not None:
+        integration_cases = None
+        if integration_case_set_id is not None:
+            from .integration_cases import require_integration_cases
+
+            integration_cases = require_integration_cases(self.repository, integration_case_set_id,
+                recipe=recipe, environment=environment, seed=seed, experiment=experiment)
+            if case_set_id is not None or pilot is not None or pilot_report_id is not None or selected_structure != 'controlled_agent':
+                raise ConfigurationError('integration checks cannot inherit formal case sets, pilots or another structure')
+        elif recipe.extension is not None:
             if case_set_id is None:
                 raise ConfigurationError("materialize the reviewed executable recipe before proposing its campaign")
             case_set = RecipeCaseSet.model_validate(self.repository.get("recipe_case_set", case_set_id))
             if case_set.recipe_digest != recipe_digest or case_set.environment_digest != environment_digest or case_set.seed != seed:
                 raise ConfigurationError("generated cases differ from the reviewed recipe, environment or seed")
-        cases = case_set.cases if case_set is not None else [
+        cases = integration_cases.cases if integration_cases is not None else case_set.cases if case_set is not None else [
             (
                 generate_reviewed_case(recipe, index, seed, split)
                 if recipe.generator == "record_template:1"
@@ -310,11 +319,12 @@ class AssessmentService:
             preceding_pilot = AssessmentPlan.model_validate(self.repository.get("plan", pilot_report.plan_digest))
         pilot_digest = self.repository.put("pilot_policy", content_digest(pilot), pilot) if pilot else None
         plan = AssessmentPlan(
-            schema_version="assessment.plan.v6" if pilot_report else "assessment.plan.v5" if pilot else "assessment.plan.v4" if experiment else "assessment.plan.v3" if case_set is not None else "assessment.plan.v2",
+            schema_version="assessment.plan.v7" if integration_cases else "assessment.plan.v6" if pilot_report else "assessment.plan.v5" if pilot else "assessment.plan.v4" if experiment else "assessment.plan.v3" if case_set is not None else "assessment.plan.v2",
             pilot=pilot,
             pilot_report_digest=content_digest(pilot_report) if pilot_report else None,
             recipe_case_set_digest=content_digest(case_set) if case_set is not None else None,
-            preparation_request_ids=([case_set.request_id] if case_set else []) + ([preceding_pilot.plan_id] if preceding_pilot else []) or None,
+            integration_case_set_digest=content_digest(integration_cases) if integration_cases else None,
+            preparation_request_ids=([integration_cases.request_id] if integration_cases else [case_set.request_id] if case_set else []) + ([preceding_pilot.plan_id] if preceding_pilot else []) or None,
             comparison=comparison,
             feature_combinations=combinations,
             plan_id=plan_id,
@@ -326,7 +336,7 @@ class AssessmentService:
             candidate_id=candidate_id,
             baseline_id=baseline_id,
             reference_id=reference.id if reference else None,
-            definition_digests=[*([experiment.three_way_access_digest] if experiment and experiment.three_way_access_digest else []), recipe_digest, mapping_digest, environment_digest, comparison_digest, *([content_digest(case_set)] if case_set else []), *([pilot_digest] if pilot_digest else []), *([content_digest(pilot_report), content_digest(preceding_pilot)] if pilot_report and preceding_pilot else [])],
+            definition_digests=[*([experiment.three_way_access_digest] if experiment and experiment.three_way_access_digest else []), recipe_digest, mapping_digest, environment_digest, comparison_digest, *([content_digest(integration_cases)] if integration_cases else []), *([content_digest(case_set)] if case_set else []), *([pilot_digest] if pilot_digest else []), *([content_digest(pilot_report), content_digest(preceding_pilot)] if pilot_report and preceding_pilot else [])],
             route_fingerprints={item.id: behavior_fingerprint(item) for item in mapping.subjects},
             executable_dependencies=mapping.executable_dependencies,
             suite=BenchmarkSuite(
@@ -485,7 +495,7 @@ class AssessmentService:
         campaign = campaign_allowances(self, plan, operations_per_case=operations_per_case,
             turns_per_case=turns_per_case, seconds_per_case=trial_seconds_per_case,
             cash_per_case=cash_per_case, remaining=remaining)
-        return {"campaign_allowance": campaign, "purpose": "timing_pilot" if plan.pilot else "assessment", "adapter_eligibility": eligibility, "minimum_trial_model_turns": required,
+        return {"campaign_allowance": campaign, "purpose": "stack_integration_only" if plan.integration_case_set_digest else "timing_pilot" if plan.pilot else "assessment", "adapter_eligibility": eligibility, "minimum_trial_model_turns": required,
                 "trial_elapsed_upper_seconds": len(plan.suite.cases) * plan.suite.repetitions * len(plan.suite.conditions) * trial_seconds_per_case,
                 "evaluation_stage": plan.comparison.experiment.stage if plan.comparison and plan.comparison.experiment else None,
                 "screening_trial_model_turns": screening, "workers": workers, "model_worker_profile_count": len({identity for worker in workers for identity in worker["model_worker_profiles"]}), "measurement_concurrency": 1, "remaining": remaining, "explanation": "Counts adapter model turns, not internal inference steps. Full planned trials exclude planning, warm-ups and retries. Profiles use fresh conversations per trial; timed trials run sequentially. Early rejection can use less; elapsed time is unknown until measured. Per-operation limits remain enforced."}
@@ -744,6 +754,16 @@ class AssessmentService:
                     or case_set.environment_digest != plan.environment_digest or case_set.seed != plan.suite.seed
                     or plan.preparation_request_ids != [case_set.request_id, *([preceding_pilot.plan_id] if preceding_pilot else [])]):
                 raise ConfigurationError("executable recipe cases changed after materialization")
+        if plan.integration_case_set_digest is not None:
+            from .integration_cases import require_integration_cases
+
+            integration_cases = require_integration_cases(self.repository, plan.integration_case_set_digest,
+                recipe=RecipeDefinition.model_validate(self.repository.get('recipe', plan.recipe_digest)),
+                environment=AssessmentEnvironment.model_validate(self.repository.get('environment', plan.environment_digest)),
+                seed=plan.suite.seed, experiment=plan.comparison.experiment if plan.comparison else None)
+            if (integration_cases.cases != plan.suite.cases
+                    or plan.preparation_request_ids != [integration_cases.request_id]):
+                raise ConfigurationError('integration cases changed after preparation')
         subject = AssessmentSubject.model_validate(
             self.repository.get("subject", plan.subject_digest)
         )
@@ -812,7 +832,8 @@ class AssessmentService:
         binding = AssessmentRunBinding.model_validate(self.repository.get("run_binding", qualified_plan.plan_id))
         from .verification import verification_source_digest
         recipe = RecipeDefinition.model_validate(self.repository.get("recipe", plan.recipe_digest))
-        if (content_digest(report) != experiment.qualification_report_digest
+        if (qualified_plan.integration_case_set_digest is not None
+                or content_digest(report) != experiment.qualification_report_digest
                 or prior_experiment is None or prior_experiment.stage != "qualification"
                 or qualified_plan.authorization_id != plan.authorization_id
                 or qualified_plan.subject_digest != plan.subject_digest or qualified_plan.recipe_digest != plan.recipe_digest

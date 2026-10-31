@@ -201,6 +201,10 @@ def fit_report(
         report.outcome = "insufficient_evidence"
         report.qualification_passed = False
         report.explanations.append("Timing pilot only: its cases cannot enter holdout or authorize admission.")
+    if plan.integration_case_set_digest is not None:
+        report.outcome = "insufficient_evidence"
+        report.qualification_passed = False
+        report.explanations.append("Stack integration only: upstream reference tasks do not establish candidate or selection usefulness and cannot authorize admission.")
     apply_assessment_costs(report, campaign, ledger)
     return report
 

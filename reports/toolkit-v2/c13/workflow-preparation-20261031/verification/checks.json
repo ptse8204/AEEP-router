@@ -1,0 +1,75 @@
+{
+  "source_before": "8d154e394f4410972334f9ead5fae6dac7b1169c4ae4a1a054584800467739eb",
+  "source_after": "8d154e394f4410972334f9ead5fae6dac7b1169c4ae4a1a054584800467739eb",
+  "checks": [
+    {
+      "name": "compileall",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.07754629105329514
+    },
+    {
+      "name": "schemas",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.8695901250466704
+    },
+    {
+      "name": "assessment-policy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.16386662470176816
+    },
+    {
+      "name": "ruff",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.03190075000748038
+    },
+    {
+      "name": "mypy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.27603045804426074
+    },
+    {
+      "name": "pytest",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 1,
+      "elapsed_seconds": 627.9938371661119
+    }
+  ],
+  "evidence_kind": "first_party_engineering_checks",
+  "models": 0,
+  "comparative_campaigns": "PAUSED"
+}

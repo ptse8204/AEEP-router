@@ -519,7 +519,7 @@ def test_qualification_transfer_uses_canonical_records_and_exact_backend(
     store.close()
 
 
-@pytest.mark.parametrize("fault", ["grant", "subject", "recipe", "source", "holdout"])
+@pytest.mark.parametrize("fault", ["grant", "subject", "recipe", "source", "holdout", "integration"])
 def test_three_way_keeps_shared_qualification_lineage_and_holdout_gate(monkeypatch, fault):
     import aeep.assessment.service as module
     from aeep.assessment.service import AssessmentService
@@ -533,6 +533,7 @@ def test_three_way_keeps_shared_qualification_lineage_and_holdout_gate(monkeypat
 
     case.split = BenchmarkSplit.HOLDOUT
     qualified = SimpleNamespace(
+        integration_case_set_digest=None,
         plan_id="qualified",
         candidate_id="candidate",
         authorization_id="grant",
@@ -605,6 +606,8 @@ def test_three_way_keeps_shared_qualification_lineage_and_holdout_gate(monkeypat
         )
     if fault == "source":
         binding.source_digest = "old-source"
+    if fault == "integration":
+        qualified.integration_case_set_digest = "f" * 64
     with pytest.raises(
         ConfigurationError,
         match="disjoint holdout" if fault == "holdout" else "current independent qualification",

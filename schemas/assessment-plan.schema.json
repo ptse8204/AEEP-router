@@ -2120,7 +2120,8 @@
         "assessment.plan.v3",
         "assessment.plan.v4",
         "assessment.plan.v5",
-        "assessment.plan.v6"
+        "assessment.plan.v6",
+        "assessment.plan.v7"
       ],
       "title": "Schema Version",
       "type": "string"
@@ -2293,6 +2294,19 @@
       ],
       "default": null,
       "title": "Pilot Report Digest"
+    },
+    "integration_case_set_digest": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Integration Case Set Digest"
     }
   },
   "required": [

@@ -1,0 +1,51 @@
+{
+  "purpose": "First-party private input-codec size audit only. No worker, upstream task/verifier, provider disclosure or asset-use clearance.",
+  "tasks": [
+    {
+      "task_id": "financial-modeling-qa",
+      "task_input_json_bytes": 568763,
+      "archive_bytes": 425306,
+      "input_sha256": "6c4c78f290c55e7c98632187acc0a73a55001309a343441bb7214db82d5fa71d",
+      "fits_current_1mib_plan_reader_alone": true
+    },
+    {
+      "task_id": "pdf-excel-diff",
+      "task_input_json_bytes": 3713571,
+      "archive_bytes": 2783275,
+      "input_sha256": "75bd1c4bb5ee3c615173f98e4ba88cf7ad8a574a15fb80639ebff262c0470228",
+      "fits_current_1mib_plan_reader_alone": false
+    },
+    {
+      "task_id": "sales-pivot-analysis",
+      "task_input_json_bytes": 292933,
+      "archive_bytes": 217907,
+      "input_sha256": "3cb7da863308e21a8e3229fd1a64935c72ea509f01910c4079710e58d2e1bf34",
+      "fits_current_1mib_plan_reader_alone": true
+    },
+    {
+      "task_id": "spring-boot-jakarta-migration",
+      "task_input_json_bytes": 24693,
+      "archive_bytes": 17025,
+      "input_sha256": "83388706e133e6f50b06043918483514c52d1be9d5180a60015ef84b385adc0f",
+      "fits_current_1mib_plan_reader_alone": true
+    },
+    {
+      "task_id": "react-performance-debugging",
+      "task_input_json_bytes": 40646,
+      "archive_bytes": 28915,
+      "input_sha256": "e4c56269cfe384fe04f0646e158f153c09b2752d6375edfd3af9fc33c00fa71e",
+      "fits_current_1mib_plan_reader_alone": true
+    },
+    {
+      "task_id": "software-dependency-audit",
+      "task_input_json_bytes": 119746,
+      "archive_bytes": 88452,
+      "input_sha256": "7e7a12f4111f5b297e73b8e3d7ed392f618e2cd04a32aa14b0c15466507346ce",
+      "fits_current_1mib_plan_reader_alone": true
+    }
+  ],
+  "six_input_json_bytes": 4760359,
+  "risk": "Workflow/managed metadata readers currently cap plan files at1MiB. Larger bounded v7 plans need a separate explicit reader limit while keeping ordinary metadata/v1 limits unchanged.",
+  "models": 0,
+  "upstream_executed": false
+}

@@ -1,0 +1,6 @@
+{
+  "purpose": "First-party standard-library-only boundary diagnosis. No SDK import, model, installer or terminal-attempt retry.",
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n    import json, pathlib, sqlite3; p=pathlib.Path.cwd(); c=sqlite3.connect(p/\"first-party-sqlite-probe.sqlite3\"); c.execute(\"create table probe(value integer)\"); c.close(); print(json.dumps({\"cwd\": str(p), \"sqlite_created\":True}))\n                                                           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsqlite3.OperationalError: unable to open database file\n"
+}

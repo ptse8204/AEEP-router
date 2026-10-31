@@ -136,12 +136,12 @@ def require_engineering_run(
         or len(plan.suite.conditions) != 1
         or plan.suite.warmup_cases
         or not 1 <= len(plan.suite.cases) <= 6
-        or len(plan.suite.routes) != 2
+        or len(plan.suite.routes) not in {1, 2}
         or {route.executor_id for route in plan.suite.routes}
-        != {plan.candidate_id, plan.baseline_id}
+        != ({plan.candidate_id} if len(plan.suite.routes) == 1 else {plan.candidate_id, plan.baseline_id})
         or any(case.split.value != "qualification" for case in plan.suite.cases)
         or tuple(case.case_id for case in plan.suite.cases) != review.case_ids
-        or review.maximum_model_turns != len(plan.suite.cases) * 2
+        or review.maximum_model_turns != len(plan.suite.cases) * len(plan.suite.routes)
     ):
         raise ConfigurationError(
             "engineering scope is not an exact bounded required-use qualification check"

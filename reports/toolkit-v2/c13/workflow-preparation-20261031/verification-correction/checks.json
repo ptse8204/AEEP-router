@@ -1,0 +1,160 @@
+{
+  "source_before": "7034203e16ade1928eee0f989798346440023582b0f5cdcbe9b59878d14c4042",
+  "source_after": "7034203e16ade1928eee0f989798346440023582b0f5cdcbe9b59878d14c4042",
+  "checks": [
+    {
+      "name": "compileall",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.060601791832596064
+    },
+    {
+      "name": "schemas",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.7537511247210205
+    },
+    {
+      "name": "assessment-policy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.15223150001838803
+    },
+    {
+      "name": "ruff",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.06974854180589318
+    },
+    {
+      "name": "mypy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.27684137504547834
+    },
+    {
+      "name": "pytest",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 582.4374298327602
+    },
+    {
+      "name": "coverage-tests",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 884.225045084022
+    },
+    {
+      "name": "coverage-json",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-preparation-20261031/verification-correction/coverage.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.7604529168456793
+    },
+    {
+      "name": "coverage-report",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.3143472499214113
+    },
+    {
+      "name": "critical-coverage",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_critical_coverage.py",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-preparation-20261031/verification-correction/coverage.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.0366461668163538
+    },
+    {
+      "name": "assessment-coverage",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_coverage.py",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-preparation-20261031/verification-correction/coverage.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.03622412495315075
+    },
+    {
+      "name": "toolkit-integration-fixtures",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest",
+        "integrations/toolkit"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.6485571670345962
+    },
+    {
+      "name": "build",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "build",
+        "--no-isolation",
+        "--outdir",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-preparation-20261031/verification-correction/dist"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.0479576671496034
+    }
+  ],
+  "evidence_kind": "first_party_engineering_checks",
+  "models": 0,
+  "comparative_campaigns": "PAUSED",
+  "predecessor": "../verification/checks.json",
+  "correction": "Update historical three-way SimpleNamespace test doubles for the optional integration-case field; add explicit refusal of integration qualification transfer. No assertion or production guard weakened."
+}

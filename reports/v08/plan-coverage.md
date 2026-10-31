@@ -6529,3 +6529,39 @@ credential access, cash or release occurred. Waza lacks authorized backend acces
 Copilot Free is a possible protected-setup path, not verified account access.
 SkillsBench asset rights and runtime pinning remain open. Existing CI edits and
 all user work are preserved and excluded from this implementation commit.
+
+
+## October31: stack-first workflow preparation and retained SDK attempt
+
+Toolkit source7034203e16ade1928eee0f989798346440023582b0f5cdcbe9b59878d14c4042
+passed all13 source gates unchanged:1891tests/21skips in both full runs,82%coverage,
+both branch gates and build. [The increment](../toolkit-v2/c13/workflow-preparation-20261031/README.md)
+adds explicit canonical plan preparation, setup v2, bounded upstream integration
+cases and plan v7. Formal141-case materialization and admission thresholds remain.
+Current working-source verification includes the separately preserved CI work;
+that work is excluded from the stack implementation commit. Initial five mock-field
+failures and corrected67-test checks remain recorded; no assertion was weakened.
+
+The CLI fixture reaches and recovers a canonical draft without a job/model/grant
+change. This is software evidence only. Actual task runtimes, protected upstream
+verifiers, external evaluator dispatch and full wrapper overhead accounting remain
+open. The real reconciliation input also exposes a1MiB plan-reader limit; its
+3.7MB payload requires a separately bounded v7 reader. All required integrations
+and both domain workflows still need functional proof before comparisons resume.
+
+Approved reviews48dd65dc/052573e2 executed independently.57cached wheels were
+installed idempotently and retained; the first SDK bootstrap failed. Offline docs
+passed72 exact inputs and removed the unchanged owned runtime. Approved7f88a7c1
+passed sandbox and installed-package checks, then SDK startup failed before its
+inner database. Runtime remained unchanged. Both SDK attempts are terminal; their
+missing traceback is recorded. Standard-library-only checks reproduce SQLite
+opening failure and pass a narrow workspace-ancestor metadata correction.
+Pending exact reviewfb964676 covers fresh SQLite/containment, one import diagnostic
+and one unchanged gated SDK check, zero models/cash/install/services. Earlier
+a40d942d is withdrawn before execution. Frozenf1fe5413 only; no current-stack pass.
+
+[Upstream source preparation](../toolkit-v2/c13/upstream-source-preparation-20261031/README.md)
+records real APIs, artifacts and all six original verifier/runtime contracts. No
+upstream task/verifier was executed. Waza protected setup and rights/runtime locks
+remain; no paid plan, new provider, credentials, service, Docker mutation, release
+or historical replay is authorized or inferred. Existing negative results stay.

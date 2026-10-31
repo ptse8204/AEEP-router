@@ -1,0 +1,696 @@
+........................................................................ [  3%]
+........................................................................ [  7%]
+........................................................................ [ 11%]
+........................................................................ [ 15%]
+........................................................................ [ 18%]
+........................................................................ [ 22%]
+........................................................................ [ 26%]
+........................................................................ [ 30%]
+........................................................................ [ 33%]
+........................................................................ [ 37%]
+........................................................................ [ 41%]
+........................................................................ [ 45%]
+........................................................................ [ 48%]
+........................................................................ [ 52%]
+........................................................................ [ 56%]
+........................................................................ [ 60%]
+........................................................................ [ 64%]
+........................................................................ [ 67%]
+........................................................................ [ 71%]
+........................................................................ [ 75%]
+........................................................................ [ 79%]
+..........................................s............................. [ 82%]
+.........s...................................ss..........s.........ss... [ 86%]
+.....s..........s....................................................... [ 90%]
+........ssss......................................................s..... [ 94%]
+.............................ss.........................FFFFF...ss...... [ 97%]
+......s....s...................s.......                                  [100%]
+=================================== FAILURES ===================================
+__ test_three_way_keeps_shared_qualification_lineage_and_holdout_gate[grant] ___
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x11028f2a0>
+fault = 'grant'
+
+    @pytest.mark.parametrize("fault", ["grant", "subject", "recipe", "source", "holdout"])
+    def test_three_way_keeps_shared_qualification_lineage_and_holdout_gate(monkeypatch, fault):
+        import aeep.assessment.service as module
+        from aeep.assessment.service import AssessmentService
+    
+        current = value()
+        prior = current.model_copy(update={"stage": "qualification", "exposure": "required"})
+        case = SimpleNamespace(
+            split=SimpleNamespace(value="holdout"), action=SimpleNamespace(input={"seed": 1})
+        )
+        from aeep.benchmarking import BenchmarkSplit
+    
+        case.split = BenchmarkSplit.HOLDOUT
+        qualified = SimpleNamespace(
+            plan_id="qualified",
+            candidate_id="candidate",
+            authorization_id="grant",
+            subject_digest="subject",
+            recipe_digest="recipe",
+            comparison=SimpleNamespace(experiment=prior),
+            suite=SimpleNamespace(routes=["candidate"], cases=[case]),
+        )
+        plan = SimpleNamespace(
+            candidate_id="candidate",
+            authorization_id="grant",
+            subject_digest="subject",
+            recipe_digest="recipe",
+            environment_digest="environment",
+            suite=SimpleNamespace(cases=[case]),
+        )
+        report = SimpleNamespace(
+            plan_digest="qualified-digest",
+            campaign_digest="campaign-digest",
+            grader_validation_digest="grader",
+        )
+        campaign = SimpleNamespace()
+        binding = SimpleNamespace(source_digest="current-source")
+        records = {
+            "environment": SimpleNamespace(),
+            "report": report,
+            "plan": qualified,
+            "campaign": campaign,
+            "run_binding": binding,
+            "recipe": SimpleNamespace(),
+        }
+        for name in (
+            "AssessmentEnvironment",
+            "AssessmentReport",
+            "AssessmentPlan",
+            "BenchmarkCampaignReport",
+            "AssessmentRunBinding",
+            "RecipeDefinition",
+        ):
+            monkeypatch.setattr(getattr(module, name), "model_validate", lambda record: record)
+        monkeypatch.setattr("aeep.assessment.boundary.require_differential", lambda *args: None)
+        monkeypatch.setattr(
+            "aeep.assessment.verification.verification_source_digest", lambda *args: "current-source"
+        )
+        monkeypatch.setattr(
+            module, "fit_report", lambda *args: SimpleNamespace(qualification_passed=True)
+        )
+    
+        def digest(record):
+            if record is report:
+                return current.qualification_report_digest
+            if record is qualified:
+                return report.plan_digest
+            if record is campaign:
+                return report.campaign_digest
+            return "same-input"
+    
+        monkeypatch.setattr(module, "content_digest", digest)
+        service = object.__new__(AssessmentService)
+        service.repository = SimpleNamespace(
+            get=lambda kind, key: records[kind], authorize=lambda _: None
+        )
+        if fault in ("grant", "subject", "recipe"):
+            setattr(
+                qualified,
+                {"grant": "authorization_id", "subject": "subject_digest", "recipe": "recipe_digest"}[
+                    fault
+                ],
+                "unrelated",
+            )
+        if fault == "source":
+            binding.source_digest = "old-source"
+        with pytest.raises(
+            ConfigurationError,
+            match="disjoint holdout" if fault == "holdout" else "current independent qualification",
+        ):
+>           service._verify_incremental_evidence(plan, current)
+
+tests/test_v08_three_way.py:612: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <aeep.assessment.service.AssessmentService object at 0x1110744d0>
+plan = namespace(candidate_id='candidate', authorization_id='grant', subject_digest='subject', recipe_digest='recipe', enviro...t', suite=namespace(cases=[namespace(split=<BenchmarkSplit.HOLDOUT: 'holdout'>, action=namespace(input={'seed': 1}))]))
+experiment = IncrementalExperiment(schema_version='assessment.experiment.v2', stage='aeep_value', exposure='optional', environment=...33333333333333333333333333333333333333333333333333333333', catalog_definition_digest=None, marginal_report_digest=None)
+
+    def _verify_incremental_evidence(self, plan: AssessmentPlan, experiment: IncrementalExperiment) -> None:
+        from .boundary import require_differential
+        environment = AssessmentEnvironment.model_validate(self.repository.get("environment", plan.environment_digest))
+        require_differential(self.repository, environment, plan)
+        if experiment.stage == "qualification":
+            return
+        assert experiment.qualification_report_digest is not None
+        report = AssessmentReport.model_validate(self.repository.get("report", experiment.qualification_report_digest))
+        qualified_plan = AssessmentPlan.model_validate(self.repository.get("plan", report.plan_digest))
+        prior_experiment = qualified_plan.comparison.experiment if qualified_plan.comparison else None
+        campaign = BenchmarkCampaignReport.model_validate(self.repository.get("campaign", report.campaign_digest))
+        binding = AssessmentRunBinding.model_validate(self.repository.get("run_binding", qualified_plan.plan_id))
+        from .verification import verification_source_digest
+        recipe = RecipeDefinition.model_validate(self.repository.get("recipe", plan.recipe_digest))
+>       if (qualified_plan.integration_case_set_digest is not None
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                or content_digest(report) != experiment.qualification_report_digest
+                or prior_experiment is None or prior_experiment.stage != "qualification"
+                or qualified_plan.authorization_id != plan.authorization_id
+                or qualified_plan.subject_digest != plan.subject_digest or qualified_plan.recipe_digest != plan.recipe_digest
+                or prior_experiment.environment != experiment.environment
+                or binding.source_digest != verification_source_digest(Path(__file__).parents[3])
+                or report.grader_validation_digest is None
+                or not fit_report(qualified_plan, recipe, campaign).qualification_passed):
+E               AttributeError: 'types.SimpleNamespace' object has no attribute 'integration_case_set_digest'
+
+src/aeep/assessment/service.py:835: AttributeError
+_ test_three_way_keeps_shared_qualification_lineage_and_holdout_gate[subject] __
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x111295240>
+fault = 'subject'
+
+    @pytest.mark.parametrize("fault", ["grant", "subject", "recipe", "source", "holdout"])
+    def test_three_way_keeps_shared_qualification_lineage_and_holdout_gate(monkeypatch, fault):
+        import aeep.assessment.service as module
+        from aeep.assessment.service import AssessmentService
+    
+        current = value()
+        prior = current.model_copy(update={"stage": "qualification", "exposure": "required"})
+        case = SimpleNamespace(
+            split=SimpleNamespace(value="holdout"), action=SimpleNamespace(input={"seed": 1})
+        )
+        from aeep.benchmarking import BenchmarkSplit
+    
+        case.split = BenchmarkSplit.HOLDOUT
+        qualified = SimpleNamespace(
+            plan_id="qualified",
+            candidate_id="candidate",
+            authorization_id="grant",
+            subject_digest="subject",
+            recipe_digest="recipe",
+            comparison=SimpleNamespace(experiment=prior),
+            suite=SimpleNamespace(routes=["candidate"], cases=[case]),
+        )
+        plan = SimpleNamespace(
+            candidate_id="candidate",
+            authorization_id="grant",
+            subject_digest="subject",
+            recipe_digest="recipe",
+            environment_digest="environment",
+            suite=SimpleNamespace(cases=[case]),
+        )
+        report = SimpleNamespace(
+            plan_digest="qualified-digest",
+            campaign_digest="campaign-digest",
+            grader_validation_digest="grader",
+        )
+        campaign = SimpleNamespace()
+        binding = SimpleNamespace(source_digest="current-source")
+        records = {
+            "environment": SimpleNamespace(),
+            "report": report,
+            "plan": qualified,
+            "campaign": campaign,
+            "run_binding": binding,
+            "recipe": SimpleNamespace(),
+        }
+        for name in (
+            "AssessmentEnvironment",
+            "AssessmentReport",
+            "AssessmentPlan",
+            "BenchmarkCampaignReport",
+            "AssessmentRunBinding",
+            "RecipeDefinition",
+        ):
+            monkeypatch.setattr(getattr(module, name), "model_validate", lambda record: record)
+        monkeypatch.setattr("aeep.assessment.boundary.require_differential", lambda *args: None)
+        monkeypatch.setattr(
+            "aeep.assessment.verification.verification_source_digest", lambda *args: "current-source"
+        )
+        monkeypatch.setattr(
+            module, "fit_report", lambda *args: SimpleNamespace(qualification_passed=True)
+        )
+    
+        def digest(record):
+            if record is report:
+                return current.qualification_report_digest
+            if record is qualified:
+                return report.plan_digest
+            if record is campaign:
+                return report.campaign_digest
+            return "same-input"
+    
+        monkeypatch.setattr(module, "content_digest", digest)
+        service = object.__new__(AssessmentService)
+        service.repository = SimpleNamespace(
+            get=lambda kind, key: records[kind], authorize=lambda _: None
+        )
+        if fault in ("grant", "subject", "recipe"):
+            setattr(
+                qualified,
+                {"grant": "authorization_id", "subject": "subject_digest", "recipe": "recipe_digest"}[
+                    fault
+                ],
+                "unrelated",
+            )
+        if fault == "source":
+            binding.source_digest = "old-source"
+        with pytest.raises(
+            ConfigurationError,
+            match="disjoint holdout" if fault == "holdout" else "current independent qualification",
+        ):
+>           service._verify_incremental_evidence(plan, current)
+
+tests/test_v08_three_way.py:612: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <aeep.assessment.service.AssessmentService object at 0x1108458d0>
+plan = namespace(candidate_id='candidate', authorization_id='grant', subject_digest='subject', recipe_digest='recipe', enviro...t', suite=namespace(cases=[namespace(split=<BenchmarkSplit.HOLDOUT: 'holdout'>, action=namespace(input={'seed': 1}))]))
+experiment = IncrementalExperiment(schema_version='assessment.experiment.v2', stage='aeep_value', exposure='optional', environment=...33333333333333333333333333333333333333333333333333333333', catalog_definition_digest=None, marginal_report_digest=None)
+
+    def _verify_incremental_evidence(self, plan: AssessmentPlan, experiment: IncrementalExperiment) -> None:
+        from .boundary import require_differential
+        environment = AssessmentEnvironment.model_validate(self.repository.get("environment", plan.environment_digest))
+        require_differential(self.repository, environment, plan)
+        if experiment.stage == "qualification":
+            return
+        assert experiment.qualification_report_digest is not None
+        report = AssessmentReport.model_validate(self.repository.get("report", experiment.qualification_report_digest))
+        qualified_plan = AssessmentPlan.model_validate(self.repository.get("plan", report.plan_digest))
+        prior_experiment = qualified_plan.comparison.experiment if qualified_plan.comparison else None
+        campaign = BenchmarkCampaignReport.model_validate(self.repository.get("campaign", report.campaign_digest))
+        binding = AssessmentRunBinding.model_validate(self.repository.get("run_binding", qualified_plan.plan_id))
+        from .verification import verification_source_digest
+        recipe = RecipeDefinition.model_validate(self.repository.get("recipe", plan.recipe_digest))
+>       if (qualified_plan.integration_case_set_digest is not None
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                or content_digest(report) != experiment.qualification_report_digest
+                or prior_experiment is None or prior_experiment.stage != "qualification"
+                or qualified_plan.authorization_id != plan.authorization_id
+                or qualified_plan.subject_digest != plan.subject_digest or qualified_plan.recipe_digest != plan.recipe_digest
+                or prior_experiment.environment != experiment.environment
+                or binding.source_digest != verification_source_digest(Path(__file__).parents[3])
+                or report.grader_validation_digest is None
+                or not fit_report(qualified_plan, recipe, campaign).qualification_passed):
+E               AttributeError: 'types.SimpleNamespace' object has no attribute 'integration_case_set_digest'
+
+src/aeep/assessment/service.py:835: AttributeError
+__ test_three_way_keeps_shared_qualification_lineage_and_holdout_gate[recipe] __
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x111294590>
+fault = 'recipe'
+
+    @pytest.mark.parametrize("fault", ["grant", "subject", "recipe", "source", "holdout"])
+    def test_three_way_keeps_shared_qualification_lineage_and_holdout_gate(monkeypatch, fault):
+        import aeep.assessment.service as module
+        from aeep.assessment.service import AssessmentService
+    
+        current = value()
+        prior = current.model_copy(update={"stage": "qualification", "exposure": "required"})
+        case = SimpleNamespace(
+            split=SimpleNamespace(value="holdout"), action=SimpleNamespace(input={"seed": 1})
+        )
+        from aeep.benchmarking import BenchmarkSplit
+    
+        case.split = BenchmarkSplit.HOLDOUT
+        qualified = SimpleNamespace(
+            plan_id="qualified",
+            candidate_id="candidate",
+            authorization_id="grant",
+            subject_digest="subject",
+            recipe_digest="recipe",
+            comparison=SimpleNamespace(experiment=prior),
+            suite=SimpleNamespace(routes=["candidate"], cases=[case]),
+        )
+        plan = SimpleNamespace(
+            candidate_id="candidate",
+            authorization_id="grant",
+            subject_digest="subject",
+            recipe_digest="recipe",
+            environment_digest="environment",
+            suite=SimpleNamespace(cases=[case]),
+        )
+        report = SimpleNamespace(
+            plan_digest="qualified-digest",
+            campaign_digest="campaign-digest",
+            grader_validation_digest="grader",
+        )
+        campaign = SimpleNamespace()
+        binding = SimpleNamespace(source_digest="current-source")
+        records = {
+            "environment": SimpleNamespace(),
+            "report": report,
+            "plan": qualified,
+            "campaign": campaign,
+            "run_binding": binding,
+            "recipe": SimpleNamespace(),
+        }
+        for name in (
+            "AssessmentEnvironment",
+            "AssessmentReport",
+            "AssessmentPlan",
+            "BenchmarkCampaignReport",
+            "AssessmentRunBinding",
+            "RecipeDefinition",
+        ):
+            monkeypatch.setattr(getattr(module, name), "model_validate", lambda record: record)
+        monkeypatch.setattr("aeep.assessment.boundary.require_differential", lambda *args: None)
+        monkeypatch.setattr(
+            "aeep.assessment.verification.verification_source_digest", lambda *args: "current-source"
+        )
+        monkeypatch.setattr(
+            module, "fit_report", lambda *args: SimpleNamespace(qualification_passed=True)
+        )
+    
+        def digest(record):
+            if record is report:
+                return current.qualification_report_digest
+            if record is qualified:
+                return report.plan_digest
+            if record is campaign:
+                return report.campaign_digest
+            return "same-input"
+    
+        monkeypatch.setattr(module, "content_digest", digest)
+        service = object.__new__(AssessmentService)
+        service.repository = SimpleNamespace(
+            get=lambda kind, key: records[kind], authorize=lambda _: None
+        )
+        if fault in ("grant", "subject", "recipe"):
+            setattr(
+                qualified,
+                {"grant": "authorization_id", "subject": "subject_digest", "recipe": "recipe_digest"}[
+                    fault
+                ],
+                "unrelated",
+            )
+        if fault == "source":
+            binding.source_digest = "old-source"
+        with pytest.raises(
+            ConfigurationError,
+            match="disjoint holdout" if fault == "holdout" else "current independent qualification",
+        ):
+>           service._verify_incremental_evidence(plan, current)
+
+tests/test_v08_three_way.py:612: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <aeep.assessment.service.AssessmentService object at 0x110b432d0>
+plan = namespace(candidate_id='candidate', authorization_id='grant', subject_digest='subject', recipe_digest='recipe', enviro...t', suite=namespace(cases=[namespace(split=<BenchmarkSplit.HOLDOUT: 'holdout'>, action=namespace(input={'seed': 1}))]))
+experiment = IncrementalExperiment(schema_version='assessment.experiment.v2', stage='aeep_value', exposure='optional', environment=...33333333333333333333333333333333333333333333333333333333', catalog_definition_digest=None, marginal_report_digest=None)
+
+    def _verify_incremental_evidence(self, plan: AssessmentPlan, experiment: IncrementalExperiment) -> None:
+        from .boundary import require_differential
+        environment = AssessmentEnvironment.model_validate(self.repository.get("environment", plan.environment_digest))
+        require_differential(self.repository, environment, plan)
+        if experiment.stage == "qualification":
+            return
+        assert experiment.qualification_report_digest is not None
+        report = AssessmentReport.model_validate(self.repository.get("report", experiment.qualification_report_digest))
+        qualified_plan = AssessmentPlan.model_validate(self.repository.get("plan", report.plan_digest))
+        prior_experiment = qualified_plan.comparison.experiment if qualified_plan.comparison else None
+        campaign = BenchmarkCampaignReport.model_validate(self.repository.get("campaign", report.campaign_digest))
+        binding = AssessmentRunBinding.model_validate(self.repository.get("run_binding", qualified_plan.plan_id))
+        from .verification import verification_source_digest
+        recipe = RecipeDefinition.model_validate(self.repository.get("recipe", plan.recipe_digest))
+>       if (qualified_plan.integration_case_set_digest is not None
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                or content_digest(report) != experiment.qualification_report_digest
+                or prior_experiment is None or prior_experiment.stage != "qualification"
+                or qualified_plan.authorization_id != plan.authorization_id
+                or qualified_plan.subject_digest != plan.subject_digest or qualified_plan.recipe_digest != plan.recipe_digest
+                or prior_experiment.environment != experiment.environment
+                or binding.source_digest != verification_source_digest(Path(__file__).parents[3])
+                or report.grader_validation_digest is None
+                or not fit_report(qualified_plan, recipe, campaign).qualification_passed):
+E               AttributeError: 'types.SimpleNamespace' object has no attribute 'integration_case_set_digest'
+
+src/aeep/assessment/service.py:835: AttributeError
+__ test_three_way_keeps_shared_qualification_lineage_and_holdout_gate[source] __
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10f3e0d70>
+fault = 'source'
+
+    @pytest.mark.parametrize("fault", ["grant", "subject", "recipe", "source", "holdout"])
+    def test_three_way_keeps_shared_qualification_lineage_and_holdout_gate(monkeypatch, fault):
+        import aeep.assessment.service as module
+        from aeep.assessment.service import AssessmentService
+    
+        current = value()
+        prior = current.model_copy(update={"stage": "qualification", "exposure": "required"})
+        case = SimpleNamespace(
+            split=SimpleNamespace(value="holdout"), action=SimpleNamespace(input={"seed": 1})
+        )
+        from aeep.benchmarking import BenchmarkSplit
+    
+        case.split = BenchmarkSplit.HOLDOUT
+        qualified = SimpleNamespace(
+            plan_id="qualified",
+            candidate_id="candidate",
+            authorization_id="grant",
+            subject_digest="subject",
+            recipe_digest="recipe",
+            comparison=SimpleNamespace(experiment=prior),
+            suite=SimpleNamespace(routes=["candidate"], cases=[case]),
+        )
+        plan = SimpleNamespace(
+            candidate_id="candidate",
+            authorization_id="grant",
+            subject_digest="subject",
+            recipe_digest="recipe",
+            environment_digest="environment",
+            suite=SimpleNamespace(cases=[case]),
+        )
+        report = SimpleNamespace(
+            plan_digest="qualified-digest",
+            campaign_digest="campaign-digest",
+            grader_validation_digest="grader",
+        )
+        campaign = SimpleNamespace()
+        binding = SimpleNamespace(source_digest="current-source")
+        records = {
+            "environment": SimpleNamespace(),
+            "report": report,
+            "plan": qualified,
+            "campaign": campaign,
+            "run_binding": binding,
+            "recipe": SimpleNamespace(),
+        }
+        for name in (
+            "AssessmentEnvironment",
+            "AssessmentReport",
+            "AssessmentPlan",
+            "BenchmarkCampaignReport",
+            "AssessmentRunBinding",
+            "RecipeDefinition",
+        ):
+            monkeypatch.setattr(getattr(module, name), "model_validate", lambda record: record)
+        monkeypatch.setattr("aeep.assessment.boundary.require_differential", lambda *args: None)
+        monkeypatch.setattr(
+            "aeep.assessment.verification.verification_source_digest", lambda *args: "current-source"
+        )
+        monkeypatch.setattr(
+            module, "fit_report", lambda *args: SimpleNamespace(qualification_passed=True)
+        )
+    
+        def digest(record):
+            if record is report:
+                return current.qualification_report_digest
+            if record is qualified:
+                return report.plan_digest
+            if record is campaign:
+                return report.campaign_digest
+            return "same-input"
+    
+        monkeypatch.setattr(module, "content_digest", digest)
+        service = object.__new__(AssessmentService)
+        service.repository = SimpleNamespace(
+            get=lambda kind, key: records[kind], authorize=lambda _: None
+        )
+        if fault in ("grant", "subject", "recipe"):
+            setattr(
+                qualified,
+                {"grant": "authorization_id", "subject": "subject_digest", "recipe": "recipe_digest"}[
+                    fault
+                ],
+                "unrelated",
+            )
+        if fault == "source":
+            binding.source_digest = "old-source"
+        with pytest.raises(
+            ConfigurationError,
+            match="disjoint holdout" if fault == "holdout" else "current independent qualification",
+        ):
+>           service._verify_incremental_evidence(plan, current)
+
+tests/test_v08_three_way.py:612: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <aeep.assessment.service.AssessmentService object at 0x11108fb50>
+plan = namespace(candidate_id='candidate', authorization_id='grant', subject_digest='subject', recipe_digest='recipe', enviro...t', suite=namespace(cases=[namespace(split=<BenchmarkSplit.HOLDOUT: 'holdout'>, action=namespace(input={'seed': 1}))]))
+experiment = IncrementalExperiment(schema_version='assessment.experiment.v2', stage='aeep_value', exposure='optional', environment=...33333333333333333333333333333333333333333333333333333333', catalog_definition_digest=None, marginal_report_digest=None)
+
+    def _verify_incremental_evidence(self, plan: AssessmentPlan, experiment: IncrementalExperiment) -> None:
+        from .boundary import require_differential
+        environment = AssessmentEnvironment.model_validate(self.repository.get("environment", plan.environment_digest))
+        require_differential(self.repository, environment, plan)
+        if experiment.stage == "qualification":
+            return
+        assert experiment.qualification_report_digest is not None
+        report = AssessmentReport.model_validate(self.repository.get("report", experiment.qualification_report_digest))
+        qualified_plan = AssessmentPlan.model_validate(self.repository.get("plan", report.plan_digest))
+        prior_experiment = qualified_plan.comparison.experiment if qualified_plan.comparison else None
+        campaign = BenchmarkCampaignReport.model_validate(self.repository.get("campaign", report.campaign_digest))
+        binding = AssessmentRunBinding.model_validate(self.repository.get("run_binding", qualified_plan.plan_id))
+        from .verification import verification_source_digest
+        recipe = RecipeDefinition.model_validate(self.repository.get("recipe", plan.recipe_digest))
+>       if (qualified_plan.integration_case_set_digest is not None
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                or content_digest(report) != experiment.qualification_report_digest
+                or prior_experiment is None or prior_experiment.stage != "qualification"
+                or qualified_plan.authorization_id != plan.authorization_id
+                or qualified_plan.subject_digest != plan.subject_digest or qualified_plan.recipe_digest != plan.recipe_digest
+                or prior_experiment.environment != experiment.environment
+                or binding.source_digest != verification_source_digest(Path(__file__).parents[3])
+                or report.grader_validation_digest is None
+                or not fit_report(qualified_plan, recipe, campaign).qualification_passed):
+E               AttributeError: 'types.SimpleNamespace' object has no attribute 'integration_case_set_digest'
+
+src/aeep/assessment/service.py:835: AttributeError
+_ test_three_way_keeps_shared_qualification_lineage_and_holdout_gate[holdout] __
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10abaeba0>
+fault = 'holdout'
+
+    @pytest.mark.parametrize("fault", ["grant", "subject", "recipe", "source", "holdout"])
+    def test_three_way_keeps_shared_qualification_lineage_and_holdout_gate(monkeypatch, fault):
+        import aeep.assessment.service as module
+        from aeep.assessment.service import AssessmentService
+    
+        current = value()
+        prior = current.model_copy(update={"stage": "qualification", "exposure": "required"})
+        case = SimpleNamespace(
+            split=SimpleNamespace(value="holdout"), action=SimpleNamespace(input={"seed": 1})
+        )
+        from aeep.benchmarking import BenchmarkSplit
+    
+        case.split = BenchmarkSplit.HOLDOUT
+        qualified = SimpleNamespace(
+            plan_id="qualified",
+            candidate_id="candidate",
+            authorization_id="grant",
+            subject_digest="subject",
+            recipe_digest="recipe",
+            comparison=SimpleNamespace(experiment=prior),
+            suite=SimpleNamespace(routes=["candidate"], cases=[case]),
+        )
+        plan = SimpleNamespace(
+            candidate_id="candidate",
+            authorization_id="grant",
+            subject_digest="subject",
+            recipe_digest="recipe",
+            environment_digest="environment",
+            suite=SimpleNamespace(cases=[case]),
+        )
+        report = SimpleNamespace(
+            plan_digest="qualified-digest",
+            campaign_digest="campaign-digest",
+            grader_validation_digest="grader",
+        )
+        campaign = SimpleNamespace()
+        binding = SimpleNamespace(source_digest="current-source")
+        records = {
+            "environment": SimpleNamespace(),
+            "report": report,
+            "plan": qualified,
+            "campaign": campaign,
+            "run_binding": binding,
+            "recipe": SimpleNamespace(),
+        }
+        for name in (
+            "AssessmentEnvironment",
+            "AssessmentReport",
+            "AssessmentPlan",
+            "BenchmarkCampaignReport",
+            "AssessmentRunBinding",
+            "RecipeDefinition",
+        ):
+            monkeypatch.setattr(getattr(module, name), "model_validate", lambda record: record)
+        monkeypatch.setattr("aeep.assessment.boundary.require_differential", lambda *args: None)
+        monkeypatch.setattr(
+            "aeep.assessment.verification.verification_source_digest", lambda *args: "current-source"
+        )
+        monkeypatch.setattr(
+            module, "fit_report", lambda *args: SimpleNamespace(qualification_passed=True)
+        )
+    
+        def digest(record):
+            if record is report:
+                return current.qualification_report_digest
+            if record is qualified:
+                return report.plan_digest
+            if record is campaign:
+                return report.campaign_digest
+            return "same-input"
+    
+        monkeypatch.setattr(module, "content_digest", digest)
+        service = object.__new__(AssessmentService)
+        service.repository = SimpleNamespace(
+            get=lambda kind, key: records[kind], authorize=lambda _: None
+        )
+        if fault in ("grant", "subject", "recipe"):
+            setattr(
+                qualified,
+                {"grant": "authorization_id", "subject": "subject_digest", "recipe": "recipe_digest"}[
+                    fault
+                ],
+                "unrelated",
+            )
+        if fault == "source":
+            binding.source_digest = "old-source"
+        with pytest.raises(
+            ConfigurationError,
+            match="disjoint holdout" if fault == "holdout" else "current independent qualification",
+        ):
+>           service._verify_incremental_evidence(plan, current)
+
+tests/test_v08_three_way.py:612: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <aeep.assessment.service.AssessmentService object at 0x10ff9c9d0>
+plan = namespace(candidate_id='candidate', authorization_id='grant', subject_digest='subject', recipe_digest='recipe', enviro...t', suite=namespace(cases=[namespace(split=<BenchmarkSplit.HOLDOUT: 'holdout'>, action=namespace(input={'seed': 1}))]))
+experiment = IncrementalExperiment(schema_version='assessment.experiment.v2', stage='aeep_value', exposure='optional', environment=...33333333333333333333333333333333333333333333333333333333', catalog_definition_digest=None, marginal_report_digest=None)
+
+    def _verify_incremental_evidence(self, plan: AssessmentPlan, experiment: IncrementalExperiment) -> None:
+        from .boundary import require_differential
+        environment = AssessmentEnvironment.model_validate(self.repository.get("environment", plan.environment_digest))
+        require_differential(self.repository, environment, plan)
+        if experiment.stage == "qualification":
+            return
+        assert experiment.qualification_report_digest is not None
+        report = AssessmentReport.model_validate(self.repository.get("report", experiment.qualification_report_digest))
+        qualified_plan = AssessmentPlan.model_validate(self.repository.get("plan", report.plan_digest))
+        prior_experiment = qualified_plan.comparison.experiment if qualified_plan.comparison else None
+        campaign = BenchmarkCampaignReport.model_validate(self.repository.get("campaign", report.campaign_digest))
+        binding = AssessmentRunBinding.model_validate(self.repository.get("run_binding", qualified_plan.plan_id))
+        from .verification import verification_source_digest
+        recipe = RecipeDefinition.model_validate(self.repository.get("recipe", plan.recipe_digest))
+>       if (qualified_plan.integration_case_set_digest is not None
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                or content_digest(report) != experiment.qualification_report_digest
+                or prior_experiment is None or prior_experiment.stage != "qualification"
+                or qualified_plan.authorization_id != plan.authorization_id
+                or qualified_plan.subject_digest != plan.subject_digest or qualified_plan.recipe_digest != plan.recipe_digest
+                or prior_experiment.environment != experiment.environment
+                or binding.source_digest != verification_source_digest(Path(__file__).parents[3])
+                or report.grader_validation_digest is None
+                or not fit_report(qualified_plan, recipe, campaign).qualification_passed):
+E               AttributeError: 'types.SimpleNamespace' object has no attribute 'integration_case_set_digest'
+
+src/aeep/assessment/service.py:835: AttributeError
+=============================== warnings summary ===============================
+../../../../Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/testclient.py:1
+  /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_v08_three_way.py::test_three_way_keeps_shared_qualification_lineage_and_holdout_gate[grant]
+FAILED tests/test_v08_three_way.py::test_three_way_keeps_shared_qualification_lineage_and_holdout_gate[subject]
+FAILED tests/test_v08_three_way.py::test_three_way_keeps_shared_qualification_lineage_and_holdout_gate[recipe]
+FAILED tests/test_v08_three_way.py::test_three_way_keeps_shared_qualification_lineage_and_holdout_gate[source]
+FAILED tests/test_v08_three_way.py::test_three_way_keeps_shared_qualification_lineage_and_holdout_gate[holdout]
+5 failed, 1885 passed, 21 skipped, 1 warning in 627.21s (0:10:27)

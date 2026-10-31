@@ -58,12 +58,25 @@ def setup_options(ctx: typer.Context, authorization: str, after: str = '', limit
 @app.command('setup')
 def setup(ctx: typer.Context, subject: str, recipe: str, candidate: str, baseline: str,
           authorization: str, environment: str, structure: str | None = None, seed: int = 0,
-          case_set: str | None = None, experiment: str | None = None, pilot_report: str | None = None) -> None:
+          case_set: str | None = None, experiment: str | None = None, pilot_report: str | None = None,
+          integration_case_set: str | None = None) -> None:
     """Prepare a plan or fixture request from existing configuration; approve nothing."""
     from .onboarding import prepare_setup
-    emit(prepare_setup(ctx.obj, AssessmentSetupRequest.model_validate(dict(subject_id=subject, recipe_id=recipe,
+    emit(prepare_setup(ctx.obj, AssessmentSetupRequest.model_validate(dict(
+        schema_version='assessment.setup.v2' if integration_case_set else 'assessment.setup.v1',
+        integration_case_set_id=integration_case_set, subject_id=subject, recipe_id=recipe,
         candidate_id=candidate, baseline_id=baseline, authorization_id=authorization, environment_id=environment,
         structure=structure, seed=seed, case_set_id=case_set, experiment_id=experiment, pilot_report_id=pilot_report))))
+
+
+@app.command('define-integration-cases')
+def define_integration_cases(ctx: typer.Context, file: Path) -> None:
+    """Store bounded upstream task definitions; review and execution remain separate."""
+    from .models import IntegrationCaseSet, content_digest
+
+    record = IntegrationCaseSet.model_validate_json(file.read_bytes())
+    digest = ctx.obj.repository.put('integration_case_set', content_digest(record), record)
+    emit({'integration_case_set_id':digest, 'reviewed':False, 'execution_authorized':False})
 
 
 @app.command('define-experiment')
