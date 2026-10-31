@@ -6472,3 +6472,32 @@ remain. No release, publication, activation or new model authority is implied.
 
 Cached offline Markdown/local path checks are tracked in the packet. Full
 make docs-check remains blocked by missing Lychee; no link-failure claim follows.
+
+## Toolkit task scores and token differences, October 30
+
+The [retained repository comparison](../toolkit-v2/c13/repository-usefulness-pilot-20261029/comparison.html)
+now gives each task's frozen binary score, both token counts, the signed difference
+and percentage. Both arms scored14/19 (73.68%). Plain reported input-plus-output
+tokens increased357364 (26.78%); gzip increased69728 (10.20%). All-completed and
+both-successful subsets remain separate, as do format conditions. These descriptive
+observations supply no confidence-supported savings/regression or monetary claim.
+
+The [presentation record](../toolkit-v2/c13/repository-usefulness-pilot-20261029/presentation-20261030/README.md)
+retains the original HTML/Markdown snapshots and rechecks38 canonical trials,
+receipts and final token journals read-only. New JSON/CSV preserve all five raw
+token dimensions and canonical references. No partial-credit endpoint is invented
+from unordered supplemental test observations. The two censored tasks remain
+unknown, with their costs preserved. No model, grader, installer or container ran;
+source24dccd3e and counters13658/3796/125271.32079997612/$0 remain unchanged.
+This presentation correction closes no stack-integration, capability-usefulness,
+selection-usefulness or release gate. Specialist runtime reviewb03c2ddb remains
+unapproved; no additional execution authority is inferred from the report request.
+
+Presentation checks match all21 rows and38 raw-token rows across JSON/CSV/HTML,
+verify16 local links and preserve original input hashes. Three changed/report
+documents and the71 configured active inputs pass Markdownlint. An extra lint of
+this historical coverage file reports40 existing issues before the new section;
+those records remain untouched. Full make docs-check still stops at missing
+Lychee0.24.2. Browser file navigation was denied, so no visual browser check is
+claimed. No product executable source changed; the13-check24dccd3e result retains
+its existing scope. Detailed checks are in the presentation record.

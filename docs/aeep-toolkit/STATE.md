@@ -1,5 +1,20 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**October 30: comparison presentation now includes task scores and token differences.**
+The [repository comparison](../../reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/comparison.html)
+shows each frozen 0/1 task score, both arm token counts, absolute differences and
+percentages, with raw fields in JSON/CSV. Both arms scored 14/19 (73.68%). Reported
+input-plus-output tokens increased by 357364 (26.78%) for plain tasks and 69728
+(10.20%) for gzip tasks. These are descriptive observations, not supported savings
+or regression claims. Both-successful subsets are separate; conditions stay separate.
+The [read-only presentation audit](../../reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/presentation-20261030/README.md)
+reopened all 38 canonical capture chains and grades. Original report snapshots,
+analysis, ledgers and thresholds remain. No new model, grader, install or container
+ran; source and grant counters are unchanged. No finer quality score was predeclared,
+and unordered supplemental test logs cannot establish an arm-specific partial score.
+The assembled-stack, new candidate-usefulness and selection-usefulness gates remain
+open. Corrected specialist runtime approval `b03c2ddb` is still pending.
+
 **October 30: assembled-stack delivery is the current priority.**
 The [component audit](../../reports/toolkit-v2/c13/stack-delivery-20261030/README.md)
 distinguishes actual upstream execution from imports, mock fixtures and research.
