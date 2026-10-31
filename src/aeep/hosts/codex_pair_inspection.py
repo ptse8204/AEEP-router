@@ -7,11 +7,11 @@ import json
 import re
 import tempfile
 import time
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any, Literal
 from uuid import uuid4
 
-from pydantic import model_validator
+from pydantic import Field, SerializerFunctionWrapHandler, model_serializer, model_validator
 
 from ..assessment.boundary import BoundaryProbe, BoundaryProbeDefinition
 from ..assessment.destinations import require_destination
@@ -128,9 +128,42 @@ SKILL_PROFILES: dict[str, tuple[str, str, str, set[str]]] = {
 }
 
 
+class ReviewedSkillProfile(StrictModel):
+    """One reviewed package, which may contain a bundle behind its primary skill.
+
+    This checks byte exposure; additional executable dependencies still require
+    their own applicable functional checks. It does not qualify arbitrary tools.
+    """
+    primary_path: str
+    alias_path: str
+    package_root: str
+    aliases: list[str] = Field(min_length=1, max_length=16)
+    files: dict[str, Digest] = Field(min_length=1, max_length=512)
+
+    @model_validator(mode='after')
+    def bounded_package(self) -> ReviewedSkillProfile:
+        for value in (self.primary_path, self.alias_path, self.package_root, *self.files):
+            path = PurePosixPath(value)
+            if (not path.is_absolute() or str(path) != value or '..' in path.parts or '\\' in value
+                    or any(part.casefold() in {'.git', '.codex', '.ssh', '.aws'} for part in path.parts)
+                    or path.name.casefold() in {'auth.json', 'credentials.json'} or path.name.casefold().startswith('.env')
+                    or not (value.startswith('/opt/dependencies/') or value.startswith('/etc/codex/skills/'))):
+                raise ValueError('reviewed skill paths must stay in immutable dependency/skill namespaces')
+        root = PurePosixPath(self.package_root)
+        if (not self.primary_path.endswith('/SKILL.md') or not self.alias_path.endswith('/SKILL.md')
+                or not self.alias_path.startswith('/etc/codex/skills/')
+                or not self.package_root.startswith('/opt/dependencies/')
+                or self.primary_path not in self.files
+                or any(not PurePosixPath(path).is_relative_to(root) for path in self.files)
+                or len(self.aliases) != len(set(self.aliases))
+                or any(not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}', name) for name in self.aliases)):
+            raise ValueError('reviewed package files, primary skill and aliases are inconsistent')
+        return self
+
+
 class WorkerPairInspection(StrictModel):
-    schema_version: Literal['assessment.worker-pair-inspection.v1', 'assessment.worker-pair-inspection.v2', 'assessment.worker-pair-inspection.v3'] = 'assessment.worker-pair-inspection.v1'
-    profile: Literal['spreadsheets:1', 'ponytail:1', 'docx:1'] = 'spreadsheets:1'
+    schema_version: Literal['assessment.worker-pair-inspection.v1', 'assessment.worker-pair-inspection.v2', 'assessment.worker-pair-inspection.v3', 'assessment.worker-pair-inspection.v4'] = 'assessment.worker-pair-inspection.v1'
+    profile: Literal['spreadsheets:1', 'ponytail:1', 'docx:1', 'reviewed-skill:1'] = 'spreadsheets:1'
     control: ExecutorSpec
     treatment: ExecutorSpec
     # The differential definition remains separately reviewed; paths cannot be
@@ -138,12 +171,31 @@ class WorkerPairInspection(StrictModel):
     differential: DifferentialEnvironment
     shared_versions: dict[str, str]
     candidate_skill_digest: Digest
+    reviewed_skill: ReviewedSkillProfile | None = None
+
+    @model_serializer(mode='wrap')
+    def historical_bytes(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
+        value: dict[str, Any] = handler(self)
+        if self.reviewed_skill is None:
+            value.pop('reviewed_skill', None)
+        return value
+
+    def skill_profile(self) -> tuple[str, str, str, set[str]]:
+        selected = self.reviewed_skill
+        if self.profile == 'reviewed-skill:1' and selected is not None:
+            return selected.primary_path, selected.alias_path, selected.package_root, set(selected.aliases)
+        return SKILL_PROFILES[self.profile]
 
     @model_validator(mode='after')
     def reviewed_pair(self) -> WorkerPairInspection:
         differential = self.differential
-        skill_path, alias_path, directory, names = SKILL_PROFILES[self.profile]
-        extended = self.schema_version.endswith('.v3')
+        generic = self.schema_version.endswith('.v4')
+        if (generic != (self.profile == 'reviewed-skill:1') or generic != (self.reviewed_skill is not None)):
+            raise ValueError('generic skill inspection requires the new exact reviewed v4 profile')
+        if not generic and self.reviewed_skill is not None:
+            raise ValueError('historical inspection cannot acquire a generic skill profile')
+        skill_path, alias_path, directory, names = self.skill_profile()
+        extended = self.schema_version.endswith(('.v3', '.v4'))
         shared_version_names = {'pandas', 'openpyxl', 'python-docx'} if self.profile == 'docx:1' else {'pandas', 'openpyxl'}
         if ((not extended and self.profile != 'spreadsheets:1')
                 or set(differential.candidate_paths) != {skill_path, alias_path, directory}
@@ -193,6 +245,13 @@ class WorkerPairInspection(StrictModel):
         validate_worker_pair(*workers)
         if (workers[1].reviewed_files or {}).get(skill_path) != self.candidate_skill_digest:
             raise ValueError('candidate skill is not pinned in the treatment image')
+        if self.reviewed_skill is not None:
+            if self.reviewed_skill.files[skill_path] != self.candidate_skill_digest:
+                raise ValueError('primary candidate digest differs from the reviewed package')
+            for path, digest in self.reviewed_skill.files.items():
+                if ((workers[1].reviewed_files or {}).get(path) != digest
+                        or path in (workers[0].reviewed_files or {})):
+                    raise ValueError('all reviewed package bytes must be pinned only in treatment')
         return self
 
 
@@ -286,7 +345,7 @@ def observations(definition: WorkerPairInspection, role: str, worker: ManagedWor
     inventory = inspect.get('advertised_inventory',{})
     skills = inventory.get('skills',[])
     enabled = [s for s in skills if s.get('enabled') is True]
-    names = SKILL_PROFILES[definition.profile][3]
+    names = definition.skill_profile()[3]
     target = getattr(definition, role).managed_host_config().invocation
     backgrounds = {item.name: item.path for item in target.supporting_skills} if target else {}
     shared_skills = [item for item in enabled if item.get('name') in backgrounds
@@ -295,8 +354,8 @@ def observations(definition: WorkerPairInspection, role: str, worker: ManagedWor
     correct_inventory = (not inventory.get('apps') and not inventory.get('servers') and
         len(shared_skills) == len(backgrounds) and
         (len(candidates)==1 and candidates[0].get('name') in names if expected else not candidates))
-    if expected and definition.schema_version.endswith('.v3'):
-        correct_inventory &= len(candidates) == 1 and candidates[0].get('path') in SKILL_PROFILES[definition.profile][:2]
+    if expected and definition.schema_version.endswith(('.v3', '.v4')):
+        correct_inventory &= len(candidates) == 1 and candidates[0].get('path') in definition.skill_profile()[:2]
     candidate_access = (all(candidate) and observed['candidate_skill_sha256']==definition.candidate_skill_digest
                         if expected else not any(candidate)) and correct_inventory
     disabled = inspect.get('config/read',{})
@@ -310,7 +369,7 @@ def observations(definition: WorkerPairInspection, role: str, worker: ManagedWor
     return {
         'allowed_tool': {'workspace_write':inspect['sandbox_command']['workspace_write'] is True,
                          'dependencies':observed['shared_workbook_roundtrip'] is True and versions and docx_roundtrip and (not expected
-                             or definition.profile in {'ponytail:1', 'docx:1'}
+                             or definition.profile in {'ponytail:1', 'docx:1', 'reviewed-skill:1'}
                              or facts.get('dependencies')=={'authoring_helper':True,'artifact_tool_csv':True})},
         'denied_tool': {'credential_read_denied':observed['credential_canary']=='denied'},
         'cross_worker': {'own_readable':observed['own_workspace']=='readable','other_absent':observed['other_workspace']=='absent'},
@@ -332,7 +391,7 @@ def observations(definition: WorkerPairInspection, role: str, worker: ManagedWor
 
 
 def filesystem_observation(value: dict[str, Any], profile: str = 'spreadsheets:1') -> dict[str, Any]:
-    if profile not in SKILL_PROFILES:
+    if profile not in {*SKILL_PROFILES, 'reviewed-skill:1'}:
         raise ConfigurationError('unknown paired skill profile')
     statuses = {'own_workspace','other_workspace','credential_canary','external_answer'}
     booleans = {'shared_workbook_roundtrip','candidate_alias','candidate_runtime'}
@@ -528,7 +587,7 @@ async def execute_pair(service: AssessmentService, control_request: str, treatme
                         paths = {'own_workspace':'/workspace/'+markers[index],'other_workspace':'/workspace/'+markers[1-index],
                                  'credential_canary':'/worker/auth/'+canary,'external_answer':str(answer)}
                         program = CHECK.replace('PATHS',repr(paths)).replace('DOCX_PROBE',str(definition.profile == 'docx:1'))
-                        for old, new in zip(SKILL_PROFILES['spreadsheets:1'][:3], SKILL_PROFILES[definition.profile][:3], strict=True):
+                        for old, new in zip(SKILL_PROFILES['spreadsheets:1'][:3], definition.skill_profile()[:3], strict=True):
                             program = program.replace(repr(old), repr(new))
                         facts[index]['filesystem'] = filesystem_observation(await observed_command(index,'filesystem',program), definition.profile)
                     if definition.profile == 'spreadsheets:1':

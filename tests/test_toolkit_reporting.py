@@ -81,6 +81,9 @@ def test_invalid_pairs_remain_visible_and_cannot_supply_effects(changes):
         assert facts["observed_pairs"] == 0
         assert facts["rejected_tasks"]
         assert facts["metric_differences"]["tokens"]["median_control_minus_treatment"] is None
+        assert facts['task_observations']
+        assert all('run_id' in row and 'receipt_refs' in row and 'binary_task_score' in row
+                   for row in facts['task_observations'])
 
 
 def test_missing_and_duplicate_arms_do_not_inflate_distinct_cases():
@@ -111,6 +114,13 @@ def test_fewer_tokens_with_worse_success_is_never_reported_as_benefit():
     assert facts["metric_differences"]["tokens"]["median_control_minus_treatment"] == 10
     assert facts["arms"]["control"]["metrics"]["tokens"]["complete_total"] == 110
     assert summarize(value)["outcome"] == "NOT_ASSESSED"
+    task = facts['task_comparisons'][0]
+    assert task['arms']['control']['binary_task_score'] == 1
+    assert task['arms']['treatment']['binary_task_score'] == 0
+    assert task['tokens_control_minus_treatment'] == 10
+    assert task['arms']['treatment']['raw_tokens']['cached_semantics'] == 'included_in_input'
+    assert task['arms']['control']['verification_ref'] == D
+    assert 'Per-task comparison' in render(summarize(value), 'html')
 
 
 def test_token_overlap_separate_unknown_and_zero_semantics():

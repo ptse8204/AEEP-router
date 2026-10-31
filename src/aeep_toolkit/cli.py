@@ -90,6 +90,7 @@ def main(argv: list[str] | None = None) -> int:
     diagnostic = sub.add_parser('doctor', help='Read project connection metadata without starting services')
     diagnostic.add_argument('--host', choices=('codex', 'claude', 'dsh', 'deepseek-api'), required=True)
     diagnostic.add_argument('--project', type=Path, required=True)
+    sub.add_parser('stack-status', help='Print all required integration checks; no readiness or execution is inferred')
     report = sub.add_parser('report', help='Summarize normalized records without executing an evaluator')
     report.add_argument('--evidence', type=Path, required=True)
     report.add_argument('--format', choices=('json', 'markdown', 'html'), default='markdown')
@@ -131,6 +132,8 @@ def main(argv: list[str] | None = None) -> int:
     evaluation.add_argument('arguments', nargs=argparse.REMAINDER, help='Backend plan, run or report arguments')
     workflow = sub.add_parser('workflow', help='Select a hash-bound configuration through the existing managed evaluator')
     workflow.add_argument('arguments', nargs=argparse.REMAINDER)
+    benchmark = sub.add_parser('benchmark', help='Inspect pinned benchmark packs and protected asset separation; no execution')
+    benchmark.add_argument('arguments', nargs=argparse.REMAINDER)
     repository_recipe = sub.add_parser('repository-recipe', help='Export a reviewed repository recipe definition; never executes code')
     repository_recipe.add_argument('--cases', type=Path, required=True)
     repository_recipe.add_argument('--assessment', action='store_true', help='Require distinct curated 8/28/105 campaign cases')
@@ -211,6 +214,14 @@ def main(argv: list[str] | None = None) -> int:
                 parser.exit(2, 'The scripted backend assets are missing; it is unavailable in this installation.\n')
             # Keep the upstream development bridge's module namespace in its own process.
             return subprocess.run([sys.executable, '-B', str(script), *args.arguments], check=False).returncode
+        if args.command == 'benchmark':
+            from .benchmarks import main as benchmark_main
+            benchmark_main(args.arguments)
+            return 0
+        if args.command == 'stack-status':
+            from .stack_readiness import checklist
+            print(json.dumps(checklist(), indent=2))
+            return 0
         if args.command == 'candidate':
             from .candidate import inspect
             print(json.dumps(inspect(args.path.absolute()).describe(), indent=2))

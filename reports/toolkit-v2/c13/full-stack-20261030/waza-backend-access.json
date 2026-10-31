@@ -1,0 +1,30 @@
+{
+  "operator_observation": "No Copilot subscription",
+  "current_state": "BLOCKED_NO_AUTHORIZED_REAL_BACKEND",
+  "waza_source_revision": "e534d149d89ae77ea158469fb4d2003804b2ee76",
+  "supported_default": "Copilot SDK with host-owned protected sign-in",
+  "documented_alternative": "Custom provider configuration; no provider, credential, destination or spending authority exists for it.",
+  "current_github_docs": [
+    {
+      "url": "https://docs.github.com/en/copilot/get-started/plans",
+      "observed_claim": "All plans include Copilot CLI; Copilot Free has limited allowance and automatic model selection."
+    },
+    {
+      "url": "https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/authenticate-copilot-cli",
+      "observed_claim": "Default interactive authentication is OAuth; BYOK is a separate documented option."
+    }
+  ],
+  "paid_plan_required": "NOT_ESTABLISHED",
+  "free_path": "Possible operator-owned access path; eligibility, SDK model-selection compatibility and actual accounting remain unverified.",
+  "remaining_work": [
+    "Finish real Waza result normalization and controlled backend configuration.",
+    "Review the exact pinned bundled CLI/runtime and supported Free/Auto behavior.",
+    "Prepare protected operator-terminal setup without capturing its output.",
+    "Obtain bounded execution/disclosure authority before a real backend check."
+  ],
+  "credentials_read": false,
+  "credentials_copied": false,
+  "account_changed": false,
+  "model_calls": 0,
+  "candidate_usefulness": "NOT_ASSESSED"
+}

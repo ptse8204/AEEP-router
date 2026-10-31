@@ -38,6 +38,7 @@ from aeep_toolkit.models import (
     SourcePin,
     TokenObservation,
 )
+from aeep_toolkit.stack_readiness import require_engineering_run, require_stack_complete
 from aeep_toolkit.telemetry import bound_journal, candidate_loading, capture_summary, token_capture
 
 
@@ -152,7 +153,8 @@ class AEEPAssessmentAdapter:
             "notice": "Existing reviews, grant and worker conformance still apply. Preview grants no execution authority.",
         }
 
-    async def evaluate(self, reviewed_plan_id: str) -> EvidenceBundle:
+    async def evaluate(self, reviewed_plan_id: str, *, stack_readiness_ref: str | None = None,
+                       engineering_review_ref: str | None = None) -> EvidenceBundle:
         if reviewed_plan_id != self.review_digest:
             raise ConfigurationError("exact source, plan and adapter review required")
         if verification_source_digest(self.root) != self.capabilities.implementation_sha256:
@@ -162,9 +164,25 @@ class AEEPAssessmentAdapter:
         )
         if current != self.plan:
             raise ConfigurationError("reviewed plan changed")
+        if engineering_review_ref is not None:
+            if stack_readiness_ref is not None:
+                raise ConfigurationError('select engineering or comparison authority, never both')
+            require_engineering_run(self.service.repository, engineering_review_ref,
+                                    plan=self.plan, source_digest=self.capabilities.implementation_sha256)
+        else:
+            require_stack_complete(self.service.repository, stack_readiness_ref,
+                                   source_digest=self.capabilities.implementation_sha256)
         # The service owns all authorization, reservation, execution and recovery.
         report = await self.service.run(self.service.enqueue(self.plan.plan_id))
-        return self.normalize(report.report_id)
+        bundle = self.normalize(report.report_id)
+        if engineering_review_ref is not None:
+            if report.qualification_passed:
+                raise ConfigurationError('finite engineering check unexpectedly claims qualification')
+            self.details['engineering_scope'] = {'review_ref': engineering_review_ref,
+                                                 'purpose': 'stack_integration_only',
+                                                 'candidate_usefulness': 'NOT_ASSESSED',
+                                                 'selection_usefulness': 'NOT_ASSESSED'}
+        return bundle
 
     def normalize(self, report_id: str) -> EvidenceBundle:
         repository = self.service.repository
@@ -542,6 +560,8 @@ def main(argv: list[str] | None = None) -> None:
             command.add_argument("--output", type=Path, required=True)
         if name == "run":
             command.add_argument("--reviewed-digest", required=True)
+            command.add_argument("--stack-readiness", help="Reviewed current-source canonical complete-stack record")
+            command.add_argument("--engineering-review", help="Exact finite required-use integration check; never value evidence")
         if name == "report":
             command.add_argument("--report-id", required=True)
     args = parser.parse_args(argv)
@@ -554,6 +574,8 @@ def main(argv: list[str] | None = None) -> None:
             return
         if args.operation == "run" and args.reviewed_digest != preview["review_sha256"]:
             raise ConfigurationError("exact review differs")
+        if args.operation == "run" and not (args.stack_readiness or args.engineering_review):
+            raise ConfigurationError("complete upstream stack evidence is required before new comparisons")
 
         async def execute() -> None:
             router = Router.from_manifest(args.manifest)
@@ -575,7 +597,8 @@ def main(argv: list[str] | None = None) -> None:
                 )
                 try:
                     bundle = (
-                        await adapter.evaluate(args.reviewed_digest)
+                        await adapter.evaluate(args.reviewed_digest, stack_readiness_ref=args.stack_readiness,
+                                               engineering_review_ref=args.engineering_review)
                         if args.operation == "run"
                         else adapter.normalize(args.report_id)
                     )

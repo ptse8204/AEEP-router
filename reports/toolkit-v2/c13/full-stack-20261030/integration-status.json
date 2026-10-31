@@ -1,0 +1,294 @@
+{
+  "implementation_source": "f1fe5413d40cedbd3c4af9c9436f75c37a1e80743ce3704da181f680c8597b71",
+  "comparison_campaigns": "PAUSED",
+  "parked_review": "b03c2ddb",
+  "components": [
+    {
+      "component": "agent-skill-eval",
+      "selected_source_revision": "59de161f657b82bfaf8f6abe83dfff38552deb21",
+      "required_checks": [
+        "controlled_dispatch",
+        "grading_accounting_cleanup"
+      ],
+      "functional_current_source": "NOT_VERIFIED",
+      "installation": "NOT_INFERRED_FROM_CACHE_OR_CATALOG",
+      "enablement": "NOT_INFERRED",
+      "execution_authority": "SEPARATE_EXACT_REVIEW_REQUIRED_FOR_NEW_UNTRUSTED_EXECUTION",
+      "candidate_usefulness": "SEPARATE_GATE",
+      "selection_usefulness": "SEPARATE_GATE",
+      "actual_scope": "Historical actual upstream scheduler/graders use FakeHarness; real controlled-agent bridge is still missing."
+    },
+    {
+      "component": "aeep-evaluator",
+      "selected_source_revision": "538606417ea93be6e82c431011c4f209a68ceb81",
+      "required_checks": [
+        "managed_workflow",
+        "recovery_accounting"
+      ],
+      "functional_current_source": "NOT_VERIFIED",
+      "installation": "NOT_INFERRED_FROM_CACHE_OR_CATALOG",
+      "enablement": "NOT_INFERRED",
+      "execution_authority": "SEPARATE_EXACT_REVIEW_REQUIRED_FOR_NEW_UNTRUSTED_EXECUTION",
+      "candidate_usefulness": "SEPARATE_GATE",
+      "selection_usefulness": "SEPARATE_GATE",
+      "actual_scope": "Selected managed fallback is implemented and has historical real model evidence; current stack composition is not verified."
+    },
+    {
+      "component": "waza",
+      "selected_source_revision": "e534d149d89ae77ea158469fb4d2003804b2ee76",
+      "required_checks": [
+        "real_agent",
+        "grading_accounting_cleanup"
+      ],
+      "functional_current_source": "NOT_VERIFIED",
+      "installation": "NOT_INFERRED_FROM_CACHE_OR_CATALOG",
+      "enablement": "NOT_INFERRED",
+      "execution_authority": "SEPARATE_EXACT_REVIEW_REQUIRED_FOR_NEW_UNTRUSTED_EXECUTION",
+      "candidate_usefulness": "SEPARATE_GATE",
+      "selection_usefulness": "SEPARATE_GATE",
+      "actual_scope": "Actual binary mock checks and report normalization exist. Default real backend needs authorized Copilot access; operator has no subscription. No alternate provider is authorized."
+    },
+    {
+      "component": "skillrank",
+      "selected_source_revision": "5216bae9149b4ff8a7f9e014b6889fb094cee8e1",
+      "required_checks": [
+        "search_show",
+        "bounded_diagnostic_evaluation"
+      ],
+      "functional_current_source": "NOT_VERIFIED",
+      "installation": "NOT_INFERRED_FROM_CACHE_OR_CATALOG",
+      "enablement": "NOT_INFERRED",
+      "execution_authority": "SEPARATE_EXACT_REVIEW_REQUIRED_FOR_NEW_UNTRUSTED_EXECUTION",
+      "candidate_usefulness": "SEPARATE_GATE",
+      "selection_usefulness": "SEPARATE_GATE",
+      "actual_scope": "Pinned core inspection/catalog information; working search/show and evaluation dispatch remain missing."
+    },
+    {
+      "component": "skillsbench",
+      "selected_source_revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+      "required_checks": [
+        "document_data",
+        "software_engineering",
+        "protected_verifiers"
+      ],
+      "functional_current_source": "NOT_VERIFIED",
+      "installation": "NOT_INFERRED_FROM_CACHE_OR_CATALOG",
+      "enablement": "NOT_INFERRED",
+      "execution_authority": "SEPARATE_EXACT_REVIEW_REQUIRED_FOR_NEW_UNTRUSTED_EXECUTION",
+      "candidate_usefulness": "SEPARATE_GATE",
+      "selection_usefulness": "SEPARATE_GATE",
+      "actual_scope": "Six original task manifests and all 174 selected source/input assets retained; no reference/verifier runtime has executed; rights/runtime review remains open."
+    },
+    {
+      "component": "mcpmark",
+      "selected_source_revision": "cd45b7f57923b9b3985467f5139927575f83141c",
+      "required_checks": [
+        "reference_task",
+        "state_cleanup"
+      ],
+      "functional_current_source": "NOT_VERIFIED",
+      "installation": "NOT_INFERRED_FROM_CACHE_OR_CATALOG",
+      "enablement": "NOT_INFERRED",
+      "execution_authority": "SEPARATE_EXACT_REVIEW_REQUIRED_FOR_NEW_UNTRUSTED_EXECUTION",
+      "candidate_usefulness": "SEPARATE_GATE",
+      "selection_usefulness": "SEPARATE_GATE",
+      "actual_scope": "Pinned metadata/import only; controlled reference-task adapter/runtime remains missing."
+    },
+    {
+      "component": "mcp-universe",
+      "selected_source_revision": "0df6c42717f2a618d34f5b271efd05be462b9e4d",
+      "required_checks": [
+        "reference_task",
+        "state_cleanup"
+      ],
+      "functional_current_source": "NOT_VERIFIED",
+      "installation": "NOT_INFERRED_FROM_CACHE_OR_CATALOG",
+      "enablement": "NOT_INFERRED",
+      "execution_authority": "SEPARATE_EXACT_REVIEW_REQUIRED_FOR_NEW_UNTRUSTED_EXECUTION",
+      "candidate_usefulness": "SEPARATE_GATE",
+      "selection_usefulness": "SEPARATE_GATE",
+      "actual_scope": "Pinned metadata/import only; controlled reference-task adapter/runtime remains missing."
+    },
+    {
+      "component": "skill-scanner",
+      "selected_source_revision": "c3d7fd9fee50cf2ea45f0b381eb61f857360f825",
+      "required_checks": [
+        "static_scan",
+        "findings_and_failures"
+      ],
+      "functional_current_source": "NOT_VERIFIED",
+      "installation": "NOT_INFERRED_FROM_CACHE_OR_CATALOG",
+      "enablement": "NOT_INFERRED",
+      "execution_authority": "SEPARATE_EXACT_REVIEW_REQUIRED_FOR_NEW_UNTRUSTED_EXECUTION",
+      "candidate_usefulness": "SEPARATE_GATE",
+      "selection_usefulness": "SEPARATE_GATE",
+      "actual_scope": "Actual static-CLI bridge implemented; unit replies are synthetic. No scanner package/runtime execution."
+    },
+    {
+      "component": "toolhive",
+      "selected_source_revision": "33ba170aad633e20520f380500a45cd158f24aed",
+      "required_checks": [
+        "launch_invoke",
+        "permissions_stop"
+      ],
+      "functional_current_source": "NOT_VERIFIED",
+      "installation": "NOT_INFERRED_FROM_CACHE_OR_CATALOG",
+      "enablement": "NOT_INFERRED",
+      "execution_authority": "SEPARATE_EXACT_REVIEW_REQUIRED_FOR_NEW_UNTRUSTED_EXECUTION",
+      "candidate_usefulness": "SEPARATE_GATE",
+      "selection_usefulness": "SEPARATE_GATE",
+      "actual_scope": "Pinned planning only; reviewed server launch/invoke/stop integration remains missing."
+    },
+    {
+      "component": "semantic-conventions",
+      "selected_source_revision": "68e89181d4cb9bbce975c8128e694363214ab5fb",
+      "required_checks": [
+        "receipt_export",
+        "privacy_disable"
+      ],
+      "functional_current_source": "NOT_VERIFIED",
+      "installation": "NOT_INFERRED_FROM_CACHE_OR_CATALOG",
+      "enablement": "NOT_INFERRED",
+      "execution_authority": "SEPARATE_EXACT_REVIEW_REQUIRED_FOR_NEW_UNTRUSTED_EXECUTION",
+      "candidate_usefulness": "SEPARATE_GATE",
+      "selection_usefulness": "SEPARATE_GATE",
+      "actual_scope": "Existing minimized receipt-to-OTLP preview and instrumentation only. No exporter/service activation, actual local ingestion or export-disable proof."
+    },
+    {
+      "component": "langfuse",
+      "selected_source_revision": "c106bb3d945323688e6f6079f65fb0ab28203b53",
+      "required_checks": [
+        "ingestion_linkage",
+        "export_disable"
+      ],
+      "functional_current_source": "NOT_VERIFIED",
+      "installation": "NOT_INFERRED_FROM_CACHE_OR_CATALOG",
+      "enablement": "NOT_INFERRED",
+      "execution_authority": "SEPARATE_EXACT_REVIEW_REQUIRED_FOR_NEW_UNTRUSTED_EXECUTION",
+      "candidate_usefulness": "SEPARATE_GATE",
+      "selection_usefulness": "SEPARATE_GATE",
+      "actual_scope": "Selected observability backend; private deployment, ingestion and linkage remain missing. No service started."
+    },
+    {
+      "component": "langgraph",
+      "selected_source_revision": "40a2e6d845054cc0cc17a6a169ca6e7394e5231c",
+      "required_checks": [
+        "conditional_loop",
+        "interruption_recovery"
+      ],
+      "functional_current_source": "NOT_VERIFIED",
+      "installation": "NOT_INFERRED_FROM_CACHE_OR_CATALOG",
+      "enablement": "NOT_INFERRED",
+      "execution_authority": "SEPARATE_EXACT_REVIEW_REQUIRED_FOR_NEW_UNTRUSTED_EXECUTION",
+      "candidate_usefulness": "SEPARATE_GATE",
+      "selection_usefulness": "SEPARATE_GATE",
+      "actual_scope": "Actual-SDK adapter implemented; unit fixtures pass. Real composed execution/recovery check awaits exact runtime review. Historical graph fixtures retain their limited scope."
+    },
+    {
+      "component": "evoagentx",
+      "selected_source_revision": "d77fd6b9a3e76c8dd83bebe3374c53a3f5d16f54",
+      "required_checks": [
+        "real_proposal",
+        "proposal_validation"
+      ],
+      "functional_current_source": "NOT_VERIFIED",
+      "installation": "NOT_INFERRED_FROM_CACHE_OR_CATALOG",
+      "enablement": "NOT_INFERRED",
+      "execution_authority": "SEPARATE_EXACT_REVIEW_REQUIRED_FOR_NEW_UNTRUSTED_EXECUTION",
+      "candidate_usefulness": "SEPARATE_GATE",
+      "selection_usefulness": "SEPARATE_GATE",
+      "actual_scope": "Pinned upstream proposal API inspected; real contained proposal adapter/runtime remains missing."
+    },
+    {
+      "component": "aflow",
+      "selected_source_revision": "3f457218fc716093fe53f6df8a5d5e6379d66346",
+      "required_checks": [
+        "bounded_optimization",
+        "protected_grading_accounting"
+      ],
+      "functional_current_source": "NOT_VERIFIED",
+      "installation": "NOT_INFERRED_FROM_CACHE_OR_CATALOG",
+      "enablement": "NOT_INFERRED",
+      "execution_authority": "SEPARATE_EXACT_REVIEW_REQUIRED_FOR_NEW_UNTRUSTED_EXECUTION",
+      "candidate_usefulness": "SEPARATE_GATE",
+      "selection_usefulness": "SEPARATE_GATE",
+      "actual_scope": "Pinned upstream optimizer inspected; finite contained calibration cycle remains missing."
+    },
+    {
+      "component": "agent-framework",
+      "selected_source_revision": "2d9cc3f8ae465baf1aed3022f89b6848db4ffa7b",
+      "required_checks": [
+        "approved_workflow",
+        "interruption_accounting"
+      ],
+      "functional_current_source": "NOT_VERIFIED",
+      "installation": "NOT_INFERRED_FROM_CACHE_OR_CATALOG",
+      "enablement": "NOT_INFERRED",
+      "execution_authority": "SEPARATE_EXACT_REVIEW_REQUIRED_FOR_NEW_UNTRUSTED_EXECUTION",
+      "candidate_usefulness": "SEPARATE_GATE",
+      "selection_usefulness": "SEPARATE_GATE",
+      "actual_scope": "Pinned ZIP recommendation retained; additional workflow adapter/runtime remains missing."
+    },
+    {
+      "component": "aeep-router",
+      "selected_source_revision": "8b015bf0247d4d9f49038982c49f3711a2802d97",
+      "required_checks": [
+        "optional_execution",
+        "essentials_independence"
+      ],
+      "functional_current_source": "NOT_VERIFIED",
+      "installation": "NOT_INFERRED_FROM_CACHE_OR_CATALOG",
+      "enablement": "NOT_INFERRED",
+      "execution_authority": "SEPARATE_EXACT_REVIEW_REQUIRED_FOR_NEW_UNTRUSTED_EXECUTION",
+      "candidate_usefulness": "SEPARATE_GATE",
+      "selection_usefulness": "SEPARATE_GATE",
+      "actual_scope": "Existing Router/StackRuntime retained; optional current configuration journey remains unverified."
+    },
+    {
+      "component": "github-sponsors",
+      "selected_source_revision": "f1fe5413d40cedbd3c4af9c9436f75c37a1e80743ce3704da181f680c8597b71",
+      "required_checks": [
+        "source_attribution",
+        "authorized_link"
+      ],
+      "functional_current_source": "NOT_VERIFIED",
+      "installation": "NOT_INFERRED_FROM_CACHE_OR_CATALOG",
+      "enablement": "NOT_INFERRED",
+      "execution_authority": "SEPARATE_EXACT_REVIEW_REQUIRED_FOR_NEW_UNTRUSTED_EXECUTION",
+      "candidate_usefulness": "SEPARATE_GATE",
+      "selection_usefulness": "SEPARATE_GATE",
+      "actual_scope": "Existing source attribution/support-link contracts retained; current source-bound link resolution check remains unverified."
+    },
+    {
+      "component": "workflow-document-data",
+      "selected_source_revision": "f1fe5413d40cedbd3c4af9c9436f75c37a1e80743ce3704da181f680c8597b71",
+      "required_checks": [
+        "ordinary_cli",
+        "canonical_report"
+      ],
+      "functional_current_source": "NOT_VERIFIED",
+      "installation": "NOT_INFERRED_FROM_CACHE_OR_CATALOG",
+      "enablement": "NOT_INFERRED",
+      "execution_authority": "SEPARATE_EXACT_REVIEW_REQUIRED_FOR_NEW_UNTRUSTED_EXECUTION",
+      "candidate_usefulness": "SEPARATE_GATE",
+      "selection_usefulness": "SEPARATE_GATE",
+      "actual_scope": "v2 candidate/pack/component inspection and recipe binding implemented; canonical plan creation, approved setup and full CLI execution remain missing. Separately reviewed required-use engineering bootstrap is implemented; no engineering execution occurred."
+    },
+    {
+      "component": "workflow-software-engineering",
+      "selected_source_revision": "f1fe5413d40cedbd3c4af9c9436f75c37a1e80743ce3704da181f680c8597b71",
+      "required_checks": [
+        "ordinary_cli",
+        "canonical_report"
+      ],
+      "functional_current_source": "NOT_VERIFIED",
+      "installation": "NOT_INFERRED_FROM_CACHE_OR_CATALOG",
+      "enablement": "NOT_INFERRED",
+      "execution_authority": "SEPARATE_EXACT_REVIEW_REQUIRED_FOR_NEW_UNTRUSTED_EXECUTION",
+      "candidate_usefulness": "SEPARATE_GATE",
+      "selection_usefulness": "SEPARATE_GATE",
+      "actual_scope": "Same v2 operator interface; no separate driver. Canonical plan creation, approved setup and full CLI execution remain missing. Separately reviewed required-use engineering bootstrap is implemented; no engineering execution occurred."
+    }
+  ],
+  "all_integrations_complete": false
+}

@@ -1,0 +1,138 @@
+{
+  "source_revision": "c106bb3d945323688e6f6079f65fb0ab28203b53",
+  "source_url": "https://github.com/langfuse/langfuse/blob/c106bb3d945323688e6f6079f65fb0ab28203b53/docker-compose.yml",
+  "source_sha256": "f97798f4164bfd515df1052670cead1ab577989eb86ebde96078b08129c373c3",
+  "services": [
+    {
+      "service": "langfuse-worker",
+      "upstream_image_reference": "docker.langfuse.com/langfuse/langfuse-worker:4",
+      "immutable_digest": null,
+      "source_ports": [
+        "127.0.0.1:3030:3030"
+      ],
+      "required_secret_variable_names": [
+        "SALT",
+        "ENCRYPTION_KEY",
+        "CLICKHOUSE_PASSWORD",
+        "LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID",
+        "LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY",
+        "LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID",
+        "LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY",
+        "LANGFUSE_S3_BATCH_EXPORT_ACCESS_KEY_ID",
+        "LANGFUSE_S3_BATCH_EXPORT_SECRET_ACCESS_KEY",
+        "REDIS_AUTH",
+        "AWS_ACCESS_KEY_ID",
+        "AWS_SECRET_ACCESS_KEY"
+      ],
+      "source_volume_targets": [],
+      "status": "NOT_DEPLOYED"
+    },
+    {
+      "service": "langfuse-web",
+      "upstream_image_reference": "docker.langfuse.com/langfuse/langfuse:4",
+      "immutable_digest": null,
+      "source_ports": [
+        "3000:3000"
+      ],
+      "required_secret_variable_names": [
+        "SALT",
+        "ENCRYPTION_KEY",
+        "CLICKHOUSE_PASSWORD",
+        "LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID",
+        "LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY",
+        "LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID",
+        "LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY",
+        "LANGFUSE_S3_BATCH_EXPORT_ACCESS_KEY_ID",
+        "LANGFUSE_S3_BATCH_EXPORT_SECRET_ACCESS_KEY",
+        "REDIS_AUTH",
+        "AWS_ACCESS_KEY_ID",
+        "AWS_SECRET_ACCESS_KEY",
+        "NEXTAUTH_SECRET",
+        "LANGFUSE_INIT_PROJECT_SECRET_KEY",
+        "LANGFUSE_INIT_USER_PASSWORD"
+      ],
+      "source_volume_targets": [],
+      "status": "NOT_DEPLOYED"
+    },
+    {
+      "service": "clickhouse",
+      "upstream_image_reference": "docker.io/clickhouse/clickhouse-server:25.12",
+      "immutable_digest": null,
+      "source_ports": [
+        "127.0.0.1:8123:8123",
+        "127.0.0.1:9000:9000"
+      ],
+      "required_secret_variable_names": [
+        "CLICKHOUSE_PASSWORD"
+      ],
+      "source_volume_targets": [
+        "langfuse_clickhouse_data:/var/lib/clickhouse",
+        "langfuse_clickhouse_logs:/var/log/clickhouse-server"
+      ],
+      "status": "NOT_DEPLOYED"
+    },
+    {
+      "service": "minio",
+      "upstream_image_reference": "cgr.dev/chainguard/minio",
+      "immutable_digest": null,
+      "source_ports": [
+        "9090:9000",
+        "127.0.0.1:9091:9001"
+      ],
+      "required_secret_variable_names": [
+        "MINIO_ROOT_PASSWORD"
+      ],
+      "source_volume_targets": [
+        "langfuse_minio_data:/data"
+      ],
+      "status": "NOT_DEPLOYED"
+    },
+    {
+      "service": "redis",
+      "upstream_image_reference": "docker.io/redis:7",
+      "immutable_digest": null,
+      "source_ports": [
+        "127.0.0.1:6379:6379"
+      ],
+      "required_secret_variable_names": [],
+      "source_volume_targets": [
+        "langfuse_redis_data:/data"
+      ],
+      "status": "NOT_DEPLOYED"
+    },
+    {
+      "service": "postgres",
+      "upstream_image_reference": "docker.io/postgres:${POSTGRES_VERSION:-17}",
+      "immutable_digest": null,
+      "source_ports": [
+        "127.0.0.1:5432:5432"
+      ],
+      "required_secret_variable_names": [
+        "POSTGRES_PASSWORD"
+      ],
+      "source_volume_targets": [
+        "langfuse_postgres_data:/var/lib/postgresql/data"
+      ],
+      "status": "NOT_DEPLOYED"
+    }
+  ],
+  "adaptations_required": [
+    "Resolve every mutable image reference to reviewed architecture-specific digests before pull.",
+    "Publish only the web UI on127.0.0.1; keep all state services on a task-owned internal Docker network.",
+    "Disable upstream telemetry and AI/provider features; no external credential inheritance.",
+    "Generate task-owned credentials only under exact service approval; never print values.",
+    "Use new task-owned volumes, preserve all existing services/images/volumes.",
+    "Verify receipt trace ingestion, canonical reference linkage and export-disable behavior through existing executor controls."
+  ],
+  "open_implementation": "Existing OTLP is a preview only; an actual reviewed local exporter is still missing.",
+  "authority": "No pull,service,volume,credential or execution authority is inferred.",
+  "footprint": "Unknown until immutable image inventory and bounded operation are reviewed.",
+  "deployed": false,
+  "gate": "NOT_VERIFIED",
+  "image_inventory_ref": "langfuse-image-metadata.json",
+  "additional_blockers": [
+    "The current major4 web/worker tags publish source7efeac5e, not the selected c106bb3d source. Find a matching published immutable artifact or document a compatibility reason before proposing a pin change.",
+    "The MinIO manifest resolved but its config metadata request returned HTTP400. This is not runtime failure evidence.",
+    "No image layers were downloaded, and metadata inspection does not prove deployed compatibility or footprint."
+  ]
+}

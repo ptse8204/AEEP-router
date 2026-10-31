@@ -13,6 +13,10 @@ The user-facing deliverable is a trustworthy per-capability comparison report wi
 
 ## Architectural approach
 
+The operator's [complete-stack order](STACK_COMPLETION.md) requires every selected
+upstream integration and both harder task domains before new comparisons. Earlier
+checkpoint passes retain their stated scope; they do not close this delivery gate.
+
 Delivery now prioritizes an [assembled, reusable evaluation workflow](STACK_DELIVERY.md).
 Its [component audit](../../reports/toolkit-v2/c13/stack-delivery-20261030/README.md)
 separates executed integrations from imports, mock fixtures and research. Working

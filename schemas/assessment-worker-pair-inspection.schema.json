@@ -568,6 +568,52 @@
       "title": "ResourceVector",
       "type": "object"
     },
+    "ReviewedSkillProfile": {
+      "additionalProperties": false,
+      "description": "One reviewed package, which may contain a bundle behind its primary skill.\n\nThis checks byte exposure; additional executable dependencies still require\ntheir own applicable functional checks. It does not qualify arbitrary tools.",
+      "properties": {
+        "primary_path": {
+          "title": "Primary Path",
+          "type": "string"
+        },
+        "alias_path": {
+          "title": "Alias Path",
+          "type": "string"
+        },
+        "package_root": {
+          "title": "Package Root",
+          "type": "string"
+        },
+        "aliases": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 16,
+          "minItems": 1,
+          "title": "Aliases",
+          "type": "array"
+        },
+        "files": {
+          "additionalProperties": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "maxProperties": 512,
+          "minProperties": 1,
+          "title": "Files",
+          "type": "object"
+        }
+      },
+      "required": [
+        "primary_path",
+        "alias_path",
+        "package_root",
+        "aliases",
+        "files"
+      ],
+      "title": "ReviewedSkillProfile",
+      "type": "object"
+    },
     "RouteEstimate": {
       "additionalProperties": false,
       "properties": {
@@ -794,7 +840,8 @@
       "enum": [
         "assessment.worker-pair-inspection.v1",
         "assessment.worker-pair-inspection.v2",
-        "assessment.worker-pair-inspection.v3"
+        "assessment.worker-pair-inspection.v3",
+        "assessment.worker-pair-inspection.v4"
       ],
       "title": "Schema Version",
       "type": "string"
@@ -804,7 +851,8 @@
       "enum": [
         "spreadsheets:1",
         "ponytail:1",
-        "docx:1"
+        "docx:1",
+        "reviewed-skill:1"
       ],
       "title": "Profile",
       "type": "string"
@@ -829,6 +877,17 @@
       "pattern": "^[a-f0-9]{64}$",
       "title": "Candidate Skill Digest",
       "type": "string"
+    },
+    "reviewed_skill": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ReviewedSkillProfile"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
     }
   },
   "required": [

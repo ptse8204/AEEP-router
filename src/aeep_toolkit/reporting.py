@@ -60,6 +60,20 @@ def arm_summary(runs: list[EvaluationRun]) -> dict[str, Any]:
     }
 
 
+def task_observation(run: EvaluationRun) -> dict[str, Any]:
+    return {
+        'task_sha256': run.task_sha256, 'arm': run.arm, 'run_id': run.run_id,
+        'verification': run.verification,
+        'binary_task_score': int(run.verification == 'pass') if run.verification in {'pass', 'fail'} else None,
+        'tokens': measurement(run, 'tokens'),
+        'raw_tokens': run.tokens.model_dump(mode='json') if run.tokens else None,
+        'agent_wall_seconds': run.agent_wall_seconds,
+        'verification_wall_seconds': run.verification_wall_seconds,
+        'retries': run.retries, 'execution_status': run.status,
+        'receipt_refs': list(run.receipt_refs), 'verification_ref': run.verification_ref,
+    }
+
+
 def summarize(bundle: EvidenceBundle, *, accounting_records: dict[str, Any] | None = None,
               currency: str = "USD", recurring_fee: dict[str, str] | None = None) -> dict[str, Any]:
     if recurring_fee is not None and accounting_records is None:
@@ -118,6 +132,18 @@ def summarize(bundle: EvidenceBundle, *, accounting_records: dict[str, Any] | No
                     "confidence_interval": None,
                 }
             graded = [pair for pair in pairs if all(run.verification in {"pass", "fail"} for run in pair.values())]
+            task_comparisons = []
+            for pair in pairs:
+                task_arms: dict[str, Any] = {}
+                for arm, run in pair.items():
+                    task_arms[arm] = task_observation(run)
+                control_tokens, treatment_tokens = task_arms['control']['tokens'], task_arms['treatment']['tokens']
+                difference = control_tokens - treatment_tokens if control_tokens is not None and treatment_tokens is not None else None
+                task_comparisons.append({
+                    'task_sha256': pair['control'].task_sha256, 'arms': task_arms,
+                    'tokens_control_minus_treatment': difference,
+                    'relative_tokens_control_minus_treatment': difference / control_tokens if difference is not None and control_tokens else None,
+                })
             success_difference = (
                 sum(int(pair["treatment"].verification == "pass") - int(pair["control"].verification == "pass")
                     for pair in graded) / len(graded) if graded and len(graded) == len(pairs) and not rejected else None
@@ -132,6 +158,8 @@ def summarize(bundle: EvidenceBundle, *, accounting_records: dict[str, Any] | No
                 "arms": {arm: arm_summary([run for run in selected if run.arm == arm]) | ({"actual_cash": cash["arms"][arm]["complete_total"], "cost_per_verified_success": cash["arms"][arm]["cost_per_verified_success"]} if cash else {}) for arm in ("control", "treatment")},
                 "success_rate_treatment_minus_control": success_difference,
                 "metric_differences": differences,
+                "task_comparisons": task_comparisons,
+                "task_observations": [task_observation(run) for run in selected],
                 **({"cash": cash} if cash is not None else {}),
             })
         cohorts.append({"binding": dict(zip(COHORT_FIELDS, key, strict=True)), "families": families})
@@ -154,6 +182,7 @@ def summarize(bundle: EvidenceBundle, *, accounting_records: dict[str, Any] | No
             "Only observed tasks are checked. Entire missing pairs cannot be detected without the reviewed plan's expected cases.",
             "Different cohort bindings are never pooled. Repetitions lack a pairing index and are rejected rather than counted as independent cases.",
             "Partial measurements are labeled as known subsets. Resource differences do not override task failures or establish benefit.",
+            "Per-task binary scores restate recorded independent pass/fail; they introduce no partial-credit quality rubric. Unknown/skipped grades have no numeric score.",
             "Synthetic and replay records cannot establish real model value. Invocation is not evidence of causation.",
             "Confidence and value verdicts require the existing reviewed analysis. Supplied receipt accounting is descriptive; recurring fees are explicit scenarios, not incurred charges or a demonstrated benefit.",
         ],
@@ -236,8 +265,24 @@ def render(summary: dict[str, Any], format: str) -> str:
                     relative = difference.get('relative_mean_control_minus_treatment')
                     percent = f'{Decimal(str(relative)) * 100:.4g}%' if relative is not None else 'unknown'
                     lines.append(f"  Paired {metric}: mean control minus treatment {difference.get('mean_control_minus_treatment', 'unknown')}; relative mean difference {percent}; median difference {difference['median_control_minus_treatment']}; measured pairs {difference['measured_pairs']}/{difference['observed_pairs']}.")
+            if family.get('task_comparisons'):
+                def shown(value: Any) -> str:
+                    return 'unknown' if value is None else str(value)
+                lines += ["Per-task comparison (resource difference = control minus treatment; positive means fewer treatment tokens)",
+                          "Task SHA-256 | Control score | Treatment score | Control tokens | Treatment tokens | Token difference | Relative difference"]
+                for task in family['task_comparisons']:
+                    arms = task['arms']
+                    relative = task['relative_tokens_control_minus_treatment']
+                    percent = f'{relative * 100:+.4g}%' if relative is not None else 'unknown'
+                    lines.append(' | '.join([task['task_sha256'],
+                        shown(arms['control']['binary_task_score']), shown(arms['treatment']['binary_task_score']),
+                        shown(arms['control']['tokens']), shown(arms['treatment']['tokens']),
+                        shown(task['tokens_control_minus_treatment']), percent]))
+                lines.append("Task timing, retries, raw token categories and canonical references: " + json.dumps(family['task_comparisons'], sort_keys=True, allow_nan=False))
             for rejected in family["rejected_tasks"]:
                 lines.append(f"Unpaired task {rejected['task_sha256']}: {' '.join(rejected['reasons'])}")
+            if family.get('task_observations'):
+                lines.append('All task observations, including failed, forced and unpaired runs: ' + json.dumps(family['task_observations'], sort_keys=True, allow_nan=False))
             if 'cash' in family:
                 cash = family['cash']
                 lines.append(f"Cash currency: {cash['currency']}; evidence kind: {binding['evidence_kind']}.")

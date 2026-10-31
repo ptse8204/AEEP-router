@@ -2434,3 +2434,22 @@ grant's expiry-only extension preserves counters and absolute ceilings.
 The current [delivery packet](../../reports/toolkit-v2/c13/stack-delivery-20261030/README.md)
 records source checks, audit, wrappers, failure reconciliation, corrected review
 and subsequent work. No candidate activation, public release or benefit claim.
+
+## D135: Complete all recommended integrations before new comparisons
+
+The operator explicitly selected every upstream integration as the next delivery
+gate, and equal priority for document/data and software-engineering SkillsBench
+tasks. [STACK_COMPLETION.md](STACK_COMPLETION.md) records the accepted plan.
+Components remain individually selectable. Installation, availability, functional
+integration, candidate usefulness and AEEP selection usefulness remain distinct.
+Source-only catalogs, report imports and mock fixtures do not pass integration.
+
+Park the pending specialist runtime review and all new comparative campaigns.
+Preserve prior Ponytail results, source pins, exposure exclusions and costs. Build
+thin adapters around existing software and connect the existing CLI, setup,
+workers, grading, telemetry and canonical reports. Retain reusable reviewed
+runtimes; never add a second scheduler, event store or graph engine. Langfuse is
+selected, Phoenix remains an alternative, Archestra remains research, and the
+OpenSkillEval dataset rights exclusion stands. Existing authority and release
+restrictions remain. This is product ordering, not approval to install or execute
+new untrusted artifacts, start services, use credentials or spend cash.

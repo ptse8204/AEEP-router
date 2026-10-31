@@ -1,5 +1,37 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**October 30: all upstream integrations precede new comparisons.**
+The operator approved [the complete-stack implementation plan](STACK_COMPLETION.md).
+Every recommended integration must have current functional evidence, and both
+document/data and software workflows must work through the ordinary CLI before
+candidate-value or selection trials resume. Optional enablement remains separate
+from implementation. Park specialist review `b03c2ddb`; pause Ruff/LibCST and
+Ponytail campaigns and unrelated corpus expansion. Historical results and costs
+remain. Engineering conformance checks may proceed under applicable authority;
+model-backed checks are not candidate-value evidence. No installation, service,
+credential, cash, publication or release authority is inferred. Implementation
+is in progress; the all-integration gate has not passed.
+
+The [current implementation packet](../../reports/toolkit-v2/c13/full-stack-20261030/README.md)
+records the barrier, v2 workflow/task bindings, generic skill-package inspection,
+per-task reports and initial Cisco/LangGraph bridges. Its
+[integration status](../../reports/toolkit-v2/c13/full-stack-20261030/integration-status.json)
+separates actual functionality from metadata and fixtures. All required integrations
+and both composed CLI journeys remain unverified. Automatic canonical plan
+preparation and external-evaluator dispatch remain implementation work.
+
+The operator reported no Copilot subscription; Waza's real default backend remains
+blocked on access. Six original SkillsBench tasks and two pinned external inputs
+are privately retained. Task rights, proprietary bundled skills, runtime locks,
+reference/counterexample grading and controlled task execution remain open.
+A bounded required-use engineering bootstrap avoids making stack completion depend
+on a comparison that the completion gate itself blocks; it grants no value evidence.
+The [retained LangGraph runtime review](../../reports/toolkit-v2/c13/full-stack-20261030/langgraph-runtime/operation-review.json)
+is pending exact execution approval. Do not execute b03c2ddb. No new models,
+services, image changes, activation, release, credential access or historical replay
+occurred. Read the packet's source-check logs for actual final verification;
+interrupted earlier runs are retained with their narrower scope.
+
 **October 30: comparison presentation now includes task scores and token differences.**
 The [repository comparison](../../reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/comparison.html)
 shows each frozen 0/1 task score, both arm token counts, absolute differences and

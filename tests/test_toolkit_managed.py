@@ -313,6 +313,8 @@ async def test_missing_prompt_and_unqualified_boundary_are_explicit_gaps(tmp_pat
 async def test_execution_keeps_service_denial(tmp_path, monkeypatch):
     router, _service, adapter, _path, _ = prepared(tmp_path, monkeypatch)
     try:
+        # This fixture isolates the existing grant check after the new delivery gate.
+        monkeypatch.setattr(adapter_module, 'require_stack_complete', lambda *a, **k: None)
         before = router.store._connection.total_changes
         # The unrelated original grant must not be copied or expanded for this plan.
         with pytest.raises(ConfigurationError, match="authorization scope"):
@@ -339,6 +341,7 @@ async def test_dispatch_reuses_service_and_propagates_interruption_without_retry
 
     monkeypatch.setattr(service, "enqueue", enqueue)
     monkeypatch.setattr(service, "run", interrupted)
+    monkeypatch.setattr(adapter_module, 'require_stack_complete', lambda *a, **k: None)
     try:
         with pytest.raises(asyncio.CancelledError):
             await adapter.evaluate(adapter.review_digest)

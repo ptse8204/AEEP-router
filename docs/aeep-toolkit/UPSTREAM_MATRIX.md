@@ -1739,3 +1739,22 @@ the already installed pinned Buildx plugin without credential copying. Help-only
 checks passed. Its new bounded review is pending under the original one-attempt
 restriction. All previous costs and images are retained. No model, publication,
 admission, new candidate benefit or selection benefit is inferred.
+
+## October 30–31: full stack gate and engineering implementation
+
+The operator's [complete-stack order](STACK_COMPLETION.md) supersedes the specialist
+campaign. The [current audit](../../reports/toolkit-v2/c13/full-stack-20261030/integration-status.json)
+marks actual integration work still missing. No catalog, import, preview or unit
+fixture closes current functional readiness. OTLP support is a receipt preview,
+not an operational exporter. The Waza default backend needs authorized Copilot
+access; the operator has no subscription. No alternate provider is assumed.
+
+Workflow v2 inspects exact candidate/pack/component choices and canonical recipe
+bindings. New comparisons require current complete-stack evidence. A separate
+bounded required-use engineering review can bootstrap composed operation under
+existing grants; it cannot resume optional-use/value trials. Generic package
+inspection and Cisco/LangGraph bridge code are implemented but have not run
+against new upstream runtimes. Six original SkillsBench tasks are retained with
+protected verifier/oracle separation; their rights and runtime checks remain open.
+Historical evidence retains its original scope. The retained runtime review is
+an engineering check, not a new efficacy campaign.

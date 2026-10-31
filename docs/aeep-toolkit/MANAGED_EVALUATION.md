@@ -1,5 +1,11 @@
 # Compare a skill through an existing AEEP assessment
 
+New comparisons are paused by the [complete-stack gate](STACK_COMPLETION.md).
+`run` now requires `--stack-readiness` with current canonical completion evidence.
+A separate `--engineering-review` permits only an exact bounded required-use
+qualification check; it cannot resume optional-use/value trials. Existing grant,
+disclosure and worker controls still apply. Report export does not run tasks.
+
 This optional backend connects a reviewed controlled-agent skill plan to the
 existing AssessmentService and BenchmarkRunner. It uses their workers, grants,
 receipts, graders and recovery. Agent-skill-eval remains the scripted backend;

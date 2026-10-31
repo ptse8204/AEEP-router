@@ -35,6 +35,35 @@ class EvaluationWorkflow(ContractModel):
     configurations: dict[Identifier, WorkflowConfiguration] = Field(min_length=1, max_length=16)
 
 
+class CandidateBinding(ContractModel):
+    path: str = Field(min_length=1, max_length=4096)
+    sha256: Digest
+
+
+class StackConfiguration(ContractModel):
+    evaluator: Literal['managed', 'agent-skill-eval', 'waza', 'skillrank']
+    candidate: CandidateBinding
+    benchmark: WorkflowFile
+    asset_root: str = Field(min_length=1, max_length=4096)
+    task_ids: tuple[Identifier, ...] = Field(min_length=1, max_length=256)
+    components: tuple[Identifier, ...] = Field(min_length=1, max_length=32)
+    assessment: WorkflowConfiguration | None = None
+    benchmark_recipe: WorkflowFile | None = None
+
+    @model_validator(mode='after')
+    def explicit_selection(self) -> StackConfiguration:
+        if len(set(self.task_ids)) != len(self.task_ids) or len(set(self.components)) != len(self.components):
+            raise ValueError('workflow tasks and components must be distinct')
+        return self
+
+
+class StackWorkflow(ContractModel):
+    schema_version: Literal['aeep.toolkit.workflow.v2'] = 'aeep.toolkit.workflow.v2'
+    registry: WorkflowFile
+    policy: WorkflowFile
+    configurations: dict[Identifier, StackConfiguration] = Field(min_length=1, max_length=16)
+
+
 def _read(binding: WorkflowFile, root: Path) -> tuple[Path, bytes]:
     from .cli import read_bytes
 
@@ -90,6 +119,78 @@ def prepare(definition: Path, configuration: str) -> tuple[dict[str, Any], Path,
     return preview, plan_path, source_path
 
 
+def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
+    """Inspect the complete selected stack; never create a plan, grant or runtime."""
+    from aeep.assessment.models import content_digest
+
+    from .benchmarks import BenchmarkPack, inspect_pack
+    from .candidate import inspect
+    from .cli import read_json
+    from .installation import PreviewPolicy, preview
+    from .models import ExtensionRegistry
+
+    workflow = StackWorkflow.model_validate(read_json(definition))
+    if configuration not in workflow.configurations:
+        raise ValueError('unknown stack configuration')
+    selected = workflow.configurations[configuration]
+    root = definition.absolute().parent
+    _, registry_raw = _read(workflow.registry, root)
+    _, policy_raw = _read(workflow.policy, root)
+    registry = ExtensionRegistry.model_validate_json(registry_raw)
+    policy = PreviewPolicy.model_validate_json(policy_raw)
+    pack_path, pack_raw = _read(selected.benchmark, root)
+    pack = BenchmarkPack.model_validate_json(pack_raw)
+    candidate_path = Path(selected.candidate.path)
+    candidate_path = candidate_path if candidate_path.is_absolute() else root/candidate_path
+    candidate = inspect(candidate_path.absolute())
+    if candidate.sha256 != selected.candidate.sha256:
+        raise ValueError('selected candidate bytes changed')
+    asset_root = Path(selected.asset_root)
+    asset_root = asset_root if asset_root.is_absolute() else root/asset_root
+    tasks = inspect_pack(pack, asset_root.absolute(), selected.task_ids)
+    installation = preview(registry, selected.components, policy, profile='full')
+    engine = 'aeep-evaluator' if selected.evaluator == 'managed' else selected.evaluator
+    if engine not in selected.components or pack.pack_id not in selected.components:
+        raise ValueError('selected evaluator and benchmark pack must be explicit components')
+    blockers = list(installation.blockers)
+    if any(task.rights_review_ref is None for task in pack.tasks if task.task_id in selected.task_ids):
+        blockers.append('selected task asset rights have no exact review reference')
+    assessment = None
+    if selected.assessment is None:
+        blockers.append('canonical assessment preparation and applicable worker/grader evidence remain required')
+    else:
+        plan_path, plan_raw = _read(selected.assessment.plan, root)
+        source_path, source_raw = _read(selected.assessment.source, root)
+        from aeep.assessment.models import AssessmentPlan, RecipeDefinition
+
+        from .managed import plan_preview
+        plan = AssessmentPlan.model_validate_json(plan_raw)
+        source = SourcePin.model_validate_json(source_raw)
+        if source.artifact_sha256 != candidate.sha256:
+            raise ValueError('assessment source differs from the selected candidate package')
+        if {case.action.input.get('task_id') for case in plan.suite.cases} != set(selected.task_ids):
+            raise ValueError('canonical assessment task selection differs from the benchmark pack')
+        if selected.benchmark_recipe is None:
+            blockers.append('canonical grader recipe has no selected task-pack binding')
+        else:
+            _, recipe_raw = _read(selected.benchmark_recipe, root)
+            recipe = RecipeDefinition.model_validate_json(recipe_raw)
+            if (content_digest(recipe) != plan.recipe_digest
+                    or recipe.dependencies.get('benchmark_pack') != content_digest(pack.model_dump(mode='json'))):
+                raise ValueError('canonical grader recipe differs from the exact task-pack assets')
+        assessment = {'plan_path':str(plan_path), 'source_path':str(source_path),
+                      'backend_review':plan_preview(plan, source)}
+    if selected.evaluator != 'managed':
+        blockers.append('selected external evaluator workflow dispatch is not implemented; no fallback is inferred')
+    facts = {'workflow':workflow.model_dump(mode='json'), 'configuration':configuration,
+             'candidate':candidate.describe(), 'benchmark':tasks, 'benchmark_path':str(pack_path),
+             'installation':installation.model_dump(mode='json'), 'assessment':assessment}
+    return {**facts, 'review_sha256':content_digest(facts), 'blockers':blockers,
+            'gates':{'stack_integration':'NOT_VERIFIED_BY_PREVIEW', 'candidate_usefulness':'NOT_ASSESSED',
+                     'selection_usefulness':'NOT_ASSESSED'},
+            'notice':'Complete selected metadata only. No installation, definition review, canonical plan creation or execution. Dispatch additionally requires current all-integration evidence.'}
+
+
 def main(argv: list[str] | None = None) -> None:
     from .cli import read_bytes
 
@@ -99,17 +200,20 @@ def main(argv: list[str] | None = None) -> None:
     bind.add_argument('--plan', type=Path, required=True)
     bind.add_argument('--source', type=Path, required=True)
     bind.add_argument('--configuration', required=True)
-    for name in ('plan', 'run', 'report'):
+    for name in ('plan', 'prepare', 'run', 'report'):
         command = commands.add_parser(name)
         command.add_argument('--workflow', type=Path, required=True)
         command.add_argument('--configuration', required=True)
-        if name != 'plan':
+        if name in {'run', 'report'}:
             command.add_argument('--reviewed-digest', required=True)
             command.add_argument('--manifest', type=Path, required=True)
             command.add_argument('--directory', type=Path)
             command.add_argument('--output', type=Path, required=True)
         if name == 'report':
             command.add_argument('--report-id', required=True)
+        if name == 'run':
+            command.add_argument('--stack-readiness', help='Canonical current-source all-integration completion record')
+            command.add_argument('--engineering-review', help='Canonical finite required-use integration review')
     args = parser.parse_args(argv)
     try:
         if args.operation == 'bind':
@@ -119,8 +223,21 @@ def main(argv: list[str] | None = None) -> None:
             workflow = EvaluationWorkflow(configurations={args.configuration: WorkflowConfiguration(**files)})
             print(workflow.model_dump_json(indent=2))
             return
-        preview, plan, source = prepare(args.workflow, args.configuration)
-        if args.operation == 'plan':
+        from .cli import read_json
+        version = read_json(args.workflow).get('schema_version', 'aeep.toolkit.workflow.v1')
+        if version == 'aeep.toolkit.workflow.v2':
+            preview = prepare_stack(args.workflow, args.configuration)
+            if args.operation in {'plan', 'prepare'}:
+                print(json.dumps(preview, indent=2))
+                return
+            if preview['blockers'] or preview['assessment'] is None:
+                raise ValueError('selected stack is not executable')
+            plan, source = Path(preview['assessment']['plan_path']), Path(preview['assessment']['source_path'])
+            backend_review = preview['assessment']['backend_review']
+        else:
+            preview, plan, source = prepare(args.workflow, args.configuration)
+            backend_review = preview['backend_review']
+        if args.operation in {'plan', 'prepare'}:
             print(json.dumps(preview, indent=2))
             return
         if args.reviewed_digest != preview['review_sha256']:
@@ -133,7 +250,11 @@ def main(argv: list[str] | None = None) -> None:
         if args.directory is not None:
             delegated += ['--directory', str(args.directory)]
         if args.operation == 'run':
-            delegated += ['--reviewed-digest', preview['backend_review']['review_sha256']]
+            if args.stack_readiness is not None:
+                delegated += ['--stack-readiness', args.stack_readiness]
+            if args.engineering_review is not None:
+                delegated += ['--engineering-review', args.engineering_review]
+            delegated += ['--reviewed-digest', backend_review['review_sha256']]
         else:
             delegated += ['--report-id', args.report_id]
         managed_main(delegated)

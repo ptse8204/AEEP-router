@@ -1,5 +1,11 @@
 # Run an assembled evaluation workflow
 
+New comparisons are paused by the [complete-stack gate](STACK_COMPLETION.md).
+`run` now requires `--stack-readiness` with current canonical completion evidence.
+A separate `--engineering-review` permits only an exact bounded required-use
+qualification check; it cannot resume optional-use/value trials. Existing grant,
+disclosure and worker controls still apply. Report export does not run tasks.
+
 Use one reviewed workflow to choose a capability configuration, run its existing
 assessment and inspect canonical results. The Toolkit connects benchmark inputs,
 workers, protected grading, telemetry and reporting. It reuses AssessmentService
