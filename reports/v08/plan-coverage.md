@@ -6592,3 +6592,20 @@ frozen inputs, not this newer prose; current-input docs verification remains ope
 All-integration completion and both real domain journeys remain open. Candidate
 and selection comparisons remain paused. No model, Docker change, service,
 credential access, activation, publication or release occurred in this increment.
+
+## October 31: current-source shared SDK execution prepared
+
+The [concrete review](../toolkit-v2/c13/full-stack-20261030/composed-sdk-runtime/README.md)
+binds verified source 0cb8f956, the current AEEP wheel, 60 cached dependency wheels,
+the actual LangGraph and Agent Framework check programs, and a standard-library
+containment check. It is unexecuted, pending exact approval fb7fc581. Maximum
+11 owned calls, 16 isolated engineering-grant operations, 240 reserved seconds,
+zero models/cash. All existing runtimes and Docker resources remain untouched.
+
+Preparation verified the closure and denial without approval; the exact boundary
+passes SQLite/read/write/network probes. The Agent Framework program passed with
+a clearly labeled first-party SDK builder, not the real upstream implementation.
+The older unapproved fb964676 proposal is withdrawn before execution because the
+shared runtime can verify both SDKs on the current wheel. No historical approval
+or successful package/docs check is replayed. The current-input docs check remains
+open. Stack integration, candidate usefulness and selection usefulness stay separate.

@@ -1,5 +1,18 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**October 31: one current-source runtime review replaces the older SDK proposal.**
+The [composed SDK review](../../reports/toolkit-v2/c13/full-stack-20261030/composed-sdk-runtime/README.md),
+SHA-256 fb7fc581114945988267cac35513f8235f757d325d3253dd0aa3bbfe6bb60801,
+is prepared and unexecuted. It reuses the current verified wheel and cached
+61-wheel closure in one retained private environment for both LangGraph and
+Agent Framework. At most 11 owned executor calls, 16 isolated engineering-grant
+operations and 240 reserved seconds; zero models/cash. Setup and actual SDKs need
+exact approval under the existing untrusted-installation/execution boundary.
+First-party boundary and check-program preparation passed; those are not SDK
+proof. The older unapproved fb964676 proposal is withdrawn before execution to
+avoid testing an obsolete wheel. Old installed runtime and terminal attempts stay.
+Current input docs verification remains open. No comparative campaign resumes.
+
 **October 31: large task-plan reader and Agent Framework source checks passed.**
 The [next increment](../../reports/toolkit-v2/c13/component-adapters-20261031/README.md)
 adds a separate 32 MiB v7 plan reader; ordinary metadata and historical plans keep
@@ -45,8 +58,8 @@ probe demonstrated that SQLite could not open its owned database. Metadata-only
 access to the exact workspace ancestors passes SQLite and all three denial
 checks. The replacement [SQLite bootstrap review](../../reports/toolkit-v2/c13/full-stack-20261030/langgraph-sqlite-bootstrap/operation-review.json),
 SHA-256 fb96467652c56ba57e7ba29cf4eb18bca3e932e417d18ad0c92ab948c59e79fa,
-is pending exact approval. It repeats no installation or successful package/docs
-check.
+was withdrawn before execution in favor of the current-source shared review
+above. Its earlier preparation and all terminal evidence remain unchanged.
 
 The approved offline documentation check passed its 72 frozen inputs and removed
 its unchanged owned runtime. Later prose edits are outside that scope.

@@ -1,3 +1,24 @@
+# Current pending operation — October 31
+
+Use the shared composed-sdk-runtime review
+fb7fc581114945988267cac35513f8235f757d325d3253dd0aa3bbfe6bb60801 after direct
+matching approval. It is prepared and not executed. It checks both SDKs on the
+current 0cb8f956 wheel in a new retained 61-wheel runtime. Verify all bound files
+before dispatch. Do not regenerate the preparation after asking for approval:
+free-space observations are part of the installation digest. No model turns.
+
+fb964676 is withdrawn before execution. If its older question receives approval,
+do not run it; the driver rejects withdrawn reviews. 7f88a7c1 was already executed
+and terminal. Preserve that failure, its successful package check, and the old
+retained runtime. Do not repeat successful checks on the old wheel.
+
+Source and runtime preparation are committed separately. The next first-party
+implementation priorities are real agent-skill-eval dispatch and ordinary workflow
+composition/accounting, then protected task verifiers and the remaining component
+lifecycles. All-integration readiness remains open and comparisons stay paused.
+
+---
+
 # Latest handoff update — October 31
 
 Current source checks completed: source
