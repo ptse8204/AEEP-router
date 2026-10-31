@@ -20,8 +20,11 @@ from pydantic import ValidationError
 from .installation import PROFILES, InstalledObservation, PreviewPolicy, preview
 from .models import EvidenceBundle, ExtensionRegistry
 
+METADATA_BYTES = 1024 * 1024
+INTEGRATION_PLAN_BYTES = 32 * METADATA_BYTES
 
-def read_bytes(path: Path) -> bytes:
+
+def _read_bounded_bytes(path: Path, maximum_bytes: int) -> bytes:
     if path.is_symlink() or path.name.casefold() in {'auth.json', 'credentials.json'} or path.name.casefold().startswith('.env'):
         raise ValueError('credential files and metadata symlinks are excluded')
     resolved = path.resolve(strict=True)
@@ -35,9 +38,30 @@ def read_bytes(path: Path) -> bytes:
         info = os.fstat(handle.fileno())
         if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1:
             raise ValueError('metadata must be a regular file without hard links')
-        raw = handle.read(1024 * 1024 + 1)
-    if len(raw) > 1024 * 1024:
-        raise ValueError('metadata exceeds the 1 MiB limit')
+        if info.st_size > maximum_bytes:
+            raise ValueError('input exceeds its bounded reader limit')
+        raw = handle.read(maximum_bytes + 1)
+    if len(raw) > maximum_bytes:
+        raise ValueError('input exceeds its bounded reader limit')
+    return raw
+
+
+def read_bytes(path: Path) -> bytes:
+    return _read_bounded_bytes(path, METADATA_BYTES)
+
+
+def read_plan_bytes(path: Path) -> bytes:
+    """Only explicit v7 integration plans may exceed ordinary metadata limits.
+
+    This envelope supports the initial six-task pack and its artifact transfers.
+    Callers must still parse the complete AssessmentPlan and verify canonical
+    identity and authority. This function never creates a service or job.
+    """
+    raw = _read_bounded_bytes(path, INTEGRATION_PLAN_BYTES)
+    if len(raw) > METADATA_BYTES:
+        value = json.loads(raw)
+        if not isinstance(value, dict) or value.get('schema_version') != 'assessment.plan.v7':
+            raise ValueError('large plan files require the bounded v7 integration contract')
     return raw
 
 

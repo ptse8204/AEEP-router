@@ -5,6 +5,7 @@ import base64
 import hashlib
 import io
 import json
+import random
 import zipfile
 from datetime import timedelta
 
@@ -48,12 +49,18 @@ from aeep_toolkit.workflow import prepare_stack
 from aeep_toolkit.workflow_preparation import TaskRightsReview, prepare_canonical
 
 
-def configured(tmp_path):
+def configured(tmp_path, *, large=False):
     path, data, skill = definition(tmp_path)
     selected = data["configurations"]["document-data"]
     benchmark_path = path.parent / "benchmark.json"
     pack = BenchmarkPack.model_validate_json(benchmark_path.read_bytes())
     task = pack.tasks[0]
+    if large:
+        raw = random.Random(183).randbytes(1_200_000)
+        (path.parent/'task-pack/data.csv').write_bytes(raw)
+        asset = next(item for item in task.assets if item.path == 'data.csv')
+        asset.bytes = len(raw)
+        asset.sha256 = hashlib.sha256(raw).hexdigest()
     rights = TaskRightsReview(
         source_revision=pack.source.revision,
         task_id=task.task_id,

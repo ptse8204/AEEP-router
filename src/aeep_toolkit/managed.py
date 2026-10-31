@@ -545,7 +545,7 @@ def main(argv: list[str] | None = None) -> None:
     import asyncio
 
     from aeep.router import Router
-    from aeep_toolkit.cli import read_json
+    from aeep_toolkit.cli import read_json, read_plan_bytes
     from aeep_toolkit.reporting import render
 
     parser = argparse.ArgumentParser(description=__doc__)
@@ -566,7 +566,7 @@ def main(argv: list[str] | None = None) -> None:
             command.add_argument("--report-id", required=True)
     args = parser.parse_args(argv)
     try:
-        plan = AssessmentPlan.model_validate(read_json(args.plan))
+        plan = AssessmentPlan.model_validate_json(read_plan_bytes(args.plan))
         source = SourcePin.model_validate(read_json(args.source))
         preview = plan_preview(plan, source)
         if args.operation == "plan":

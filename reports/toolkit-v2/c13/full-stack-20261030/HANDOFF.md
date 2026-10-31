@@ -1,3 +1,22 @@
+# Latest handoff update — October 31
+
+Current source checks completed: source
+0cb8f956171e0b52de07a50ad9d328d02ed98309d0fd5e29f7ea8eae6a350e85 passed all
+13 checks, 1,906 tests/21 skips in both runs, 82% combined coverage, both branch
+gates and build. See ../component-adapters-20261031/verification/checks.json.
+Session 2007 has completed; do not repeat the full suite without a new change.
+The large-input reader and optional Agent Framework adapter remain narrower than
+a functional stack pass. Its SDK has not been imported or installed.
+
+Pending exact review fb96467652c56ba57e7ba29cf4eb18bca3e932e417d18ad0c92ab948c59e79fa
+is unexecuted. Approval 7f88a7c1 was already exercised; retain its terminal failure
+and successful package evidence. Do not run it again. No comparison resumes.
+
+Preserve unrelated CI edits, including interleaved STATE/coverage prose. Stage
+only stack edits through an index projection for those shared files.
+
+---
+
 # Resume the stack-first implementation
 
 Work explicitly in `/Users/edwintse/Documents/aeep-toolkit-v2`, branch

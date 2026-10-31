@@ -1,5 +1,22 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**October 31: large task-plan reader and Agent Framework source checks passed.**
+The [next increment](../../reports/toolkit-v2/c13/component-adapters-20261031/README.md)
+adds a separate 32 MiB v7 plan reader; ordinary metadata and historical plans keep
+their 1 MiB limit. A 1.2 MB binary-input fixture reaches both CLI previews with
+unchanged canonical case bytes. The optional Agent Framework adapter binds exact
+executor/action receipts and passes predecessor references to existing dispatch.
+Failure/cancellation prevents silent restart. SDK checkpoint restoration and
+ordinary workflow composition remain unsupported/unverified. No real SDK imported.
+
+Focused source checks passed 92 tests. All 13 checks passed on unchanged source
+0cb8f956171e0b52de07a50ad9d328d02ed98309d0fd5e29f7ea8eae6a350e85:
+1,906 tests passed and 21 skipped in each full run, 82% combined coverage, both
+branch gates and the build. [The actual record](../../reports/toolkit-v2/c13/component-adapters-20261031/verification/checks.json)
+includes the separately preserved CI work; that work is excluded from this
+implementation commit. Private execution databases and owned workspaces are
+excluded from Git but retained locally. No comparison resumes.
+
 **October 31: canonical plan preparation added; SDK execution remains blocked.**
 [The workflow increment](../../reports/toolkit-v2/c13/workflow-preparation-20261031/README.md)
 connects explicit v2 preparation to the existing setup service. Setup v2, bounded

@@ -6565,3 +6565,30 @@ records real APIs, artifacts and all six original verifier/runtime contracts. No
 upstream task/verifier was executed. Waza protected setup and rights/runtime locks
 remain; no paid plan, new provider, credentials, service, Docker mutation, release
 or historical replay is authorized or inferred. Existing negative results stay.
+
+## October 31: bounded large-input plans and Agent Framework source adapter
+
+[The adapter increment](../toolkit-v2/c13/component-adapters-20261031/README.md)
+passes all 13 checks on source
+0cb8f956171e0b52de07a50ad9d328d02ed98309d0fd5e29f7ea8eae6a350e85:
+1,906 tests passed and 21 skipped in both full runs, 82% combined coverage, both
+branch gates and the build. The source digest includes preserved CI changes,
+which are excluded from this implementation commit. Focused checks passed 92 tests.
+
+The v7 plan reader now accepts at most 32 MiB while metadata and older plans
+retain the 1 MiB bound and credential/link exclusions. A reproducible large-input
+fixture passes both CLI previews with exact case bytes and no worker. The optional
+Agent Framework adapter forwards reference lineage through fingerprint-bound
+dispatch and checks canonical receipt identity. Failure and cancellation stop
+successor dispatch and prevent silent restart. Its builder tests are first-party
+fixtures; real SDK execution and ordinary workflow composition remain unverified.
+The current wheel is built, not installed. Three exact upstream dependency wheels
+are cached and inspected, not executed.
+
+LangGraph's terminal attempts and retained runtime are unchanged. Pending review
+fb964676 remains the next permissioned SQLite/bootstrap check; no retry or broader
+permission is inferred. The completed offline documentation check covers its 72
+frozen inputs, not this newer prose; current-input docs verification remains open.
+All-integration completion and both real domain journeys remain open. Candidate
+and selection comparisons remain paused. No model, Docker change, service,
+credential access, activation, publication or release occurred in this increment.

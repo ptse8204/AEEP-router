@@ -141,6 +141,9 @@ resolves each task's exact, unrevoked asset-use determination in the existing
 record store. A source license or an arbitrary review reference cannot substitute
 for that determination. The worker runtime, output transport, path adaptations,
 protected verifiers and reference checks still require applicable evidence.
+Ordinary metadata and historical plans retain a 1 MiB reader limit. Explicit
+v7 integration plans have a separate 32 MiB file envelope, covering the initial
+six-task pack without changing model-turn, worker-artifact or spending limits.
 
 Execution continues to use the existing AssessmentService, executors, grants,
 attempts and receipts. The LangGraph SDK adapter delegates approved executor
@@ -172,3 +175,10 @@ required candidate exposure. Its canonical scope must match the exact plan and
 current source and pass the existing grant checks. Optional-use/value stages,
 holdouts, challengers and broader runs are rejected. The separate bounded
 engineering review does not authorize installations or model disclosure by itself.
+
+
+The Agent Framework core adapter now composes a bounded sequence of approved
+executors. Steps bind fingerprints, action IDs and canonical predecessor receipt
+references. It refuses a silent restart after failure or cancellation and does
+not restore SDK checkpoints. Its real SDK runtime, interruption accounting and
+ordinary CLI composition remain unverified; fixture checks do not pass the gate.

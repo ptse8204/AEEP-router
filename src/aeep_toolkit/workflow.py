@@ -73,14 +73,14 @@ class StackWorkflow(ContractModel):
     configurations: dict[Identifier, StackConfiguration] = Field(min_length=1, max_length=16)
 
 
-def _read(binding: WorkflowFile, root: Path) -> tuple[Path, bytes]:
-    from .cli import read_bytes
+def _read(binding: WorkflowFile, root: Path, *, integration_plan: bool = False) -> tuple[Path, bytes]:
+    from .cli import read_bytes, read_plan_bytes
 
     path = Path(binding.path)
     path = path if path.is_absolute() else root / path
     if any(parent.is_symlink() for parent in path.parents):
         raise ValueError('workflow input parents cannot be symlinks')
-    raw = read_bytes(path)
+    raw = read_plan_bytes(path) if integration_plan else read_bytes(path)
     if hashlib.sha256(raw).hexdigest() != binding.sha256:
         raise ValueError('workflow input changed after binding')
     return path.absolute(), raw
@@ -189,7 +189,7 @@ def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
     elif selected.assessment is None:
         blockers.append('canonical assessment preparation and applicable worker/grader evidence remain required')
     else:
-        plan_path, plan_raw = _read(selected.assessment.plan, root)
+        plan_path, plan_raw = _read(selected.assessment.plan, root, integration_plan=True)
         source_path, source_raw = _read(selected.assessment.source, root)
         from aeep.assessment.models import AssessmentPlan, RecipeDefinition
 

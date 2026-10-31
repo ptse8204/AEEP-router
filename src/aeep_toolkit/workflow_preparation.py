@@ -219,9 +219,14 @@ def prepare_canonical(
     # occurred, the durable result remains recoverable and no execution occurs.
     if prepare_stack(definition, configuration)["review_sha256"] != reviewed_digest:
         raise ConfigurationError("workflow inputs changed while preparing its canonical plan")
+    from .cli import INTEGRATION_PLAN_BYTES
+
+    plan_text = plan.model_dump_json(indent=2) + "\n"
+    if len(plan_text.encode('utf-8')) > INTEGRATION_PLAN_BYTES:
+        raise ConfigurationError("canonical integration plan exceeds the bounded reader envelope")
     destination.mkdir(mode=0o700)
     plan_path = destination / "plan.json"
-    plan_path.write_text(plan.model_dump_json(indent=2) + "\n")
+    plan_path.write_text(plan_text)
     source_path = Path(preview["preparation"]["source_path"])
     data = workflow.model_dump(mode="json")
     for name in ("registry", "policy"):
