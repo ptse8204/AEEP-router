@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "driver_sha256": "9e7816f03e2620742af7dcf4cf441205f63030ae1f66e91b1bebefb46b04e7f5",
+  "source_digest": "24dccd3e2a90e03f8b4e2608d7a49da1ba4975b1cc78fdc5faf843a6a184cb0e",
+  "build_argv": [
+    "/usr/local/bin/docker",
+    "--host",
+    "unix:///Users/edwintse/.docker/run/docker.sock",
+    "build",
+    "--pull=false",
+    "--network=none",
+    "--provenance=false",
+    "--sbom=false",
+    "--tag",
+    "aeep-toolkit-v2/specialists:ruff0162-libcst186-py313-20261030",
+    "--file",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/stack-delivery-20261030/Dockerfile.specialists",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-candidate-review-20261030"
+  ],
+  "external_code_executed": false,
+  "new_grant_operations": 0,
+  "boundary_choice": "Stock ContainerExecutor mounts runtime source and is excluded by this review. Reuse CommandExecutor with exact mount-free Docker argv instead; no executor implementation change."
+}

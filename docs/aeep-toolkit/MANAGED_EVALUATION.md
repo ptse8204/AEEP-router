@@ -5,6 +5,10 @@ existing AssessmentService and BenchmarkRunner. It uses their workers, grants,
 receipts, graders and recovery. Agent-skill-eval remains the scripted backend;
 its tested Codex contract gaps and this fallback choice are recorded in D40.
 
+Use [named workflow configurations](STACK_DELIVERY.md) to bind and select these
+same plan/source files through the Toolkit CLI. That interface delegates to the
+commands below; it introduces no runner or additional execution authority.
+
 The managed path requires a reviewed repository checkout because existing
 assessment evidence binds its executable source. It does not prepare a new
 experiment, sign in, amend a grant, install a skill or replace worker conformance.

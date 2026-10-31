@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "name": "failed-config-parser",
+      "argv": [
+        "/usr/local/bin/docker",
+        "--host",
+        "unix:///Users/edwintse/.docker/run/docker.sock",
+        "build",
+        "--help",
+        "--provenance=false",
+        "--sbom=false"
+      ],
+      "exit_code": 125,
+      "stdout_bytes": 0,
+      "stderr_bytes": 328,
+      "log": "failed-config-parser.txt",
+      "help_only_no_build": true
+    },
+    {
+      "name": "corrected-config-parser",
+      "argv": [
+        "/usr/local/bin/docker",
+        "--host",
+        "unix:///Users/edwintse/.docker/run/docker.sock",
+        "build",
+        "--help",
+        "--provenance=false",
+        "--sbom=false"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 4857,
+      "stderr_bytes": 0,
+      "log": "corrected-config-parser.txt",
+      "help_only_no_build": true
+    }
+  ],
+  "new_build_or_container_calls": 0,
+  "original_diagnostics_not_recovered": "These are separate explicit help-only observations, not fabricated raw output from the original attempt."
+}

@@ -1,0 +1,6 @@
+FROM aeep-toolkit-v2/capture-policy-local-tag-20261021:control
+USER 0
+COPY ["ruff-0.16.2-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", "libcst-1.8.6-cp313-cp313-manylinux_2_28_aarch64.whl", "pyyaml_ft-8.0.0-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", "/opt/aeep-candidate-wheels/"]
+RUN ["python3", "-I", "-c", "import sys; assert sys.version_info[:2] == (3, 13)"]
+RUN ["python3", "-I", "-m", "pip", "install", "--no-index", "--no-deps", "--no-cache-dir", "--disable-pip-version-check", "--target", "/opt/aeep-specialists", "/opt/aeep-candidate-wheels/ruff-0.16.2-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", "/opt/aeep-candidate-wheels/libcst-1.8.6-cp313-cp313-manylinux_2_28_aarch64.whl", "/opt/aeep-candidate-wheels/pyyaml_ft-8.0.0-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"]
+USER 65534:65534

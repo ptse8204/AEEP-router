@@ -2402,3 +2402,35 @@ The pinned Markdown checker is already cached. Its declared CLI completed a
 read-only, network-denied 69-input scan with zero issues. No install or npx ran.
 A zero-exit library import was a launcher no-op and is explicitly not validation.
 Lychee is absent; preserve that tooling gap separately from actual link errors.
+
+## D134: Deliver an assembled workflow with three independent acceptance gates
+
+The operator prioritizes reusable stack integration over more Ponytail campaign
+work. Audit actual source/interfaces and retained executions before selecting
+components. Keep the managed D40 fallback, existing benchmark tasks, isolation,
+telemetry and canonical reporting. A named hash-bound workflow delegates to that
+existing CLI; it adds no engine, service or database. Source `24dccd3e` passed 13
+software checks, including 1,798 passed/21 skipped per full run and both coverage gates.
+
+Working stack integration, candidate usefulness and AEEP selection usefulness are
+independent gates. Synthetic interfaces, component availability and admission
+restraint cannot substitute for real comparisons. Preserve all negative Ponytail
+results and exposure exclusions. Do not replay them for counts. Preserve Ruff
+where already ordinary; a duplicate wrapper is a negative/skill-only contrast,
+not a reason to remove the existing tool. LibCST is a distinct proposed migration
+mechanism, with usefulness unproven. Generic specialist worker profiles and
+individual/bundle telemetry remain engineering work, not architecture questions.
+
+Actual approval `732f9cdd` ended at Docker125 before installation. Its private
+configuration hid installed Buildx, and the driver also compared raw versus
+sanitized failed receipts incorrectly. Retain the failed receipt, complete
+journal, terminal attempt and two operations/2.255710876081139sec. No image or
+specialist check ran. Help-only observations validate the corrected credential-free
+plugin discovery and canonical receipt guard. Because the exact review forbids
+automatic retries, one fresh bounded amendment needs approval. It changes no
+external software, probe, source, model, destination or cash scope. The existing
+grant's expiry-only extension preserves counters and absolute ceilings.
+
+The current [delivery packet](../../reports/toolkit-v2/c13/stack-delivery-20261030/README.md)
+records source checks, audit, wrappers, failure reconciliation, corrected review
+and subsequent work. No candidate activation, public release or benefit claim.

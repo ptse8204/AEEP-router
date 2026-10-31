@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "build_invocations": 0,
+  "container_calls": 0,
+  "new_software_or_installations": 0,
+  "correction": "A private Docker config explicitly discovers the already installed Docker Desktop CLI plugins, without reading/copying the user config or credentials.",
+  "config_file": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/specialist-buildx-launcher-inspection-20261030/docker-config/config.json",
+  "config_sha256": "042bab2aad8ab69bf7226ceb4a443f004311772de877d384db420c4da223f9bd",
+  "config_contents": {
+    "cliPluginsExtraDirs": [
+      "/Applications/Docker.app/Contents/Resources/cli-plugins"
+    ]
+  },
+  "buildx_binary": "/Applications/Docker.app/Contents/Resources/cli-plugins/docker-buildx",
+  "buildx_sha256": "172198b843a176b83f4f3235f74dc7cbc8c6015fece0e0bf04b8d111e30dd410",
+  "results": [
+    {
+      "argv": [
+        "/usr/local/bin/docker",
+        "--host",
+        "unix:///Users/edwintse/.docker/run/docker.sock",
+        "buildx",
+        "version"
+      ],
+      "returncode": 0,
+      "log": "reports/toolkit-v2/c13/stack-delivery-20261030/docker-isolated-buildx-version.txt"
+    },
+    {
+      "argv": [
+        "/usr/local/bin/docker",
+        "--host",
+        "unix:///Users/edwintse/.docker/run/docker.sock",
+        "build",
+        "--help"
+      ],
+      "returncode": 0,
+      "log": "reports/toolkit-v2/c13/stack-delivery-20261030/docker-corrected-build-help.txt"
+    }
+  ],
+  "legacy_build_help_missing_provenance": true,
+  "corrected_help_has_provenance": true
+}

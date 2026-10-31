@@ -1711,3 +1711,31 @@ A workflow-specific candidate mechanism and independent task provenance must
 precede a new execution review. Cached markdownlint-cli2 0.23.3 ran only as an
 authoring check; Lychee remains unavailable. No evaluator compatibility or live
 capability benefit is inferred from documentation tooling.
+
+## October 30: audit executable assembly before expanding experiments
+
+The [21-entry audit](../../reports/toolkit-v2/c13/stack-delivery-20261030/audit.json)
+pins retained interfaces/evidence and rights records. The managed fallback is
+real executed integration; agent-skill-eval supplies real scripted scheduling,
+Waza ran mocks, LangGraph ran bounded graph fixtures, and Cisco supplies report
+import only. ToolHive/hosted tracing/generated workflow engines are not deployed
+by catalog presence. No replacement framework is added.
+
+The new named workflow selects exact existing plans through the current CLI.
+Source `24dccd3e` passed software gates; current-source real end-to-end demonstration
+remains pending. Existing negative Ponytail reports remain intact and are not
+repeated. Three acceptance gates now track working stack, candidate usefulness
+and AEEP selection usefulness independently; resource/release gates remain separate.
+
+Optional candidate source inspection pins Ruff 0.16.2, LibCST 1.8.6 and its
+Python3.13 dependency pyyaml-ft 8.0.0 by exact official wheel hashes. The wheels
+remain inert; no host installation or candidate execution occurred. Preserve
+Ruff wherever already an ordinary tool. Wrappers are proposed individual/bundle
+configurations, not qualification evidence or mandatory core dependencies.
+
+The approved runtime attempt732f9cdd failed at the Docker legacy parser before
+installation; no image or probe ran. The corrected private configuration finds
+the already installed pinned Buildx plugin without credential copying. Help-only
+checks passed. Its new bounded review is pending under the original one-attempt
+restriction. All previous costs and images are retained. No model, publication,
+admission, new candidate benefit or selection benefit is inferred.

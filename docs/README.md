@@ -110,6 +110,8 @@ release promises. Adopted ADRs and historical reports keep their original bytes.
 
 ## Evaluation toolkit development
 
+- [Assembled evaluation workflow](aeep-toolkit/STACK_DELIVERY.md): named reviewed configurations, upstream execution audit and separate stack/candidate/selection gates.
+
 - [Repository usefulness and selection evaluations](aeep-toolkit/REPOSITORY_EVALUATION.md): bounded patch grading, source-pinned development tasks and separate policy-decision scoring.
 
 Follow the [V2 checkpoint state](aeep-toolkit/STATE.md) for the evaluation-focused

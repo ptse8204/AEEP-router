@@ -13,6 +13,13 @@ The user-facing deliverable is a trustworthy per-capability comparison report wi
 
 ## Architectural approach
 
+Delivery now prioritizes an [assembled, reusable evaluation workflow](STACK_DELIVERY.md).
+Its [component audit](../../reports/toolkit-v2/c13/stack-delivery-20261030/README.md)
+separates executed integrations from imports, mock fixtures and research. Working
+stack integration, candidate usefulness and AEEP selection usefulness are three
+independent acceptance gates. Ponytail's completed results remain preserved;
+replaying them is outside this delivery work.
+
 One product, **two plugin categories**:
 
 1. **Candidate capabilities:** what AEEP evaluates (initially one local `SKILL.md`; later MCP servers, other skills and tools).

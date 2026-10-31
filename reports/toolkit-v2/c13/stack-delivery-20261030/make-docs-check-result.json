@@ -1,0 +1,27 @@
+{
+  "passed": false,
+  "exit_code": 2,
+  "argv": [
+    "/usr/bin/sandbox-exec",
+    "-f",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/stack-delivery-20261030/docs-read-only.sb",
+    "/Library/Developer/CommandLineTools/usr/bin/make",
+    "-f",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/stack-delivery-20261030/cached-docs-check.mk",
+    "docs-check"
+  ],
+  "cached_pinned_lint_cli_used": true,
+  "network_denied": true,
+  "user_file_writes_denied": true,
+  "dev_null_sink_only": true,
+  "new_software_or_installation": false,
+  "make_sha256": "b70707c1f9840ac675679b417caee721528cbaf5a59a63f8c19877f5e5fe56a1",
+  "profile_sha256": "0691d168a6e27a76f57de66877fdc4e5110f6a5edd1903b779240bed3ed6af92",
+  "scope": "Same configured active-document targets; cached markdownlint0.23.3 replaces npx. Use actual installed GNU Make because Apple shim needs a denied cache; previous shim failure is preserved.",
+  "actual_failure": [
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/stack-delivery-20261030/cached-docs-check.mk:4: warning: overriding commands for target `docs-lint'",
+    "Makefile:12: warning: ignoring old commands for target `docs-lint'",
+    "/bin/sh: lychee: command not found",
+    "make: *** [docs-links] Error 1"
+  ]
+}

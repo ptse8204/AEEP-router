@@ -1,0 +1,13 @@
+(version 1)
+(allow default)
+(deny network*)
+(deny file-write*)
+(deny file-read* (subpath "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep"))
+(deny file-read* (subpath "/Users/edwintse/Documents/aeep-toolkit-v2/.git"))
+(deny file-read* (subpath "/Users/edwintse/Documents/aeep-toolkit-v2/.codex"))
+(deny file-read* (subpath "/Users/edwintse/Documents/aeep-toolkit-v2/.aws"))
+(deny file-read* (subpath "/Users/edwintse/.codex"))
+(deny file-read* (subpath "/Users/edwintse/.aws"))
+(deny file-read* (subpath "/Users/edwintse/.ssh"))
+
+(allow file-write-data (literal "/dev/null"))

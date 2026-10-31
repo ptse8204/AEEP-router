@@ -1,0 +1,493 @@
+{
+  "schema": "aeep.toolkit.assembled-stack-audit.v1",
+  "audit_kind": "source_and_retained_evidence_no_dispatch",
+  "git_head": "fdcb9230f78d9ed2635325577d49dc15d0272993",
+  "scope": "Checkout source and retained evidence only. Historical execution is not current conformance. Installed metadata is not runtime verification.",
+  "new_network_calls": 0,
+  "new_model_turns": 0,
+  "new_container_calls": 0,
+  "new_installations": 0,
+  "package_metadata_only": {
+    "aeep-agent-router": "0.5.0",
+    "agent-skill-eval": null,
+    "langgraph": null,
+    "opentelemetry-api": "1.44.0",
+    "pydantic": "2.12.0"
+  },
+  "inputs": [
+    {
+      "path": "src/aeep_toolkit/catalog.json",
+      "exists": true,
+      "sha256": "725b4be4df5ec91932a08c790ba058f359566c2d258945cf5864c871f3fc7c47"
+    },
+    {
+      "path": "reports/toolkit-v2/c01/review-worksheet.json",
+      "exists": true,
+      "sha256": "6e8f9b7445c4db2c91ae96aca83353289e99dcdce2502d23efc33d5cd59dbc87"
+    }
+  ],
+  "components": [
+    {
+      "component": "openskilleval",
+      "repository": "https://github.com/ALEX-nlp/OpenSkillEval",
+      "reviewed_revision": "d0e109283eee79216284cdf09ee59bf63239fb13",
+      "reviewed_artifact_sha256": null,
+      "rights_from_record": {
+        "observed": "Apache-2.0 code; CC-BY-NC-4.0 dataset",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "integration_tier": "researched_or_listed_only",
+      "primary_managed_workflow": false,
+      "interface": null,
+      "evidence": null,
+      "recorded_scope_or_exclusion": "Code Apache-2.0; benchmark data CC-BY-NC-4.0. Commercial redistribution is not cleared; no data copied or grader executed.",
+      "installed_now": null,
+      "executable_now": null,
+      "runtime_probe_performed": false
+    },
+    {
+      "component": "evoagentx",
+      "repository": "https://github.com/ANative-Lab/EvoAgentX",
+      "reviewed_revision": "d77fd6b9a3e76c8dd83bebe3374c53a3f5d16f54",
+      "reviewed_artifact_sha256": null,
+      "rights_from_record": {
+        "observed": "MIT",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "integration_tier": "researched_or_listed_only",
+      "primary_managed_workflow": false,
+      "interface": null,
+      "evidence": null,
+      "recorded_scope_or_exclusion": "Model-driven workflow generation needs a selected provider, finite metered plan and generated-code boundary. This toolkit does not execute generated workflows on the host; upstream issue reports are not reproduced defects.",
+      "installed_now": null,
+      "executable_now": null,
+      "runtime_probe_performed": false
+    },
+    {
+      "component": "phoenix",
+      "repository": "https://github.com/Arize-ai/phoenix",
+      "reviewed_revision": "4b1fa58bc7d6bd4d43d4034bac9a9a2a1def79a4",
+      "reviewed_artifact_sha256": null,
+      "rights_from_record": {
+        "observed": "Elastic-2.0 server",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "integration_tier": "researched_or_listed_only",
+      "primary_managed_workflow": false,
+      "interface": null,
+      "evidence": null,
+      "recorded_scope_or_exclusion": "Langfuse OTLP was selected for optional observability. Phoenix is not a mandatory second server; its Elastic-2.0 terms and deployment need separate review.",
+      "installed_now": null,
+      "executable_now": null,
+      "runtime_probe_performed": false
+    },
+    {
+      "component": "aflow",
+      "repository": "https://github.com/FoundationAgents/AFlow",
+      "reviewed_revision": "3f457218fc716093fe53f6df8a5d5e6379d66346",
+      "reviewed_artifact_sha256": null,
+      "rights_from_record": {
+        "observed": "MIT",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "integration_tier": "researched_or_listed_only",
+      "primary_managed_workflow": false,
+      "interface": null,
+      "evidence": null,
+      "recorded_scope_or_exclusion": "Pinned LiveCodeBench code deserializes pickle data; optimization loads workflow code. No approved dataset/artifact or generated-code execution boundary. Source observation only, no exploit or workload executed.",
+      "installed_now": null,
+      "executable_now": null,
+      "runtime_probe_performed": false
+    },
+    {
+      "component": "mcp-universe",
+      "repository": "https://github.com/SalesforceAIResearch/MCP-Universe",
+      "reviewed_revision": "0df6c42717f2a618d34f5b271efd05be462b9e4d",
+      "reviewed_artifact_sha256": null,
+      "rights_from_record": {
+        "observed": "Apache-2.0 LICENSE.txt; task/asset terms unknown",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "integration_tier": "researched_or_listed_only",
+      "primary_managed_workflow": false,
+      "interface": null,
+      "evidence": null,
+      "recorded_scope_or_exclusion": "Selected uppercase task differs from MCPMark in file count and required word-count outputs. Shared external asset lacks a recorded immutable hash and separate redistribution clearance; no pack copied.",
+      "installed_now": null,
+      "executable_now": null,
+      "runtime_probe_performed": false
+    },
+    {
+      "component": "ard-spec",
+      "repository": "https://github.com/ards-project/ard-spec",
+      "reviewed_revision": "b76f235a8f461876ad4f1e77abd0eb0eb302b48d",
+      "reviewed_artifact_sha256": null,
+      "rights_from_record": null,
+      "integration_tier": "implemented_reader",
+      "primary_managed_workflow": false,
+      "interface": {
+        "path": "src/aeep/discovery.py",
+        "exists": true,
+        "sha256": "c4f1cc934b8bb2d12a233407cf304083fe51a6585a17d378dd4e3253710f4e9e"
+      },
+      "evidence": {
+        "path": "docs/adr/ADR-010-ard-discovery-boundary.md",
+        "exists": true,
+        "sha256": "c3b32da38b421b2b98bda08295b28185aa547f775160bc0a80b781c2382a3b63"
+      },
+      "recorded_scope_or_exclusion": "Toolkit discovery reuses the existing reviewed ARD v0.91 client. Catalog source observation does not upgrade that contract; network authority and remote deployment conformance remain separate.",
+      "installed_now": null,
+      "executable_now": null,
+      "runtime_probe_performed": false
+    },
+    {
+      "component": "skillsbench",
+      "repository": "https://github.com/benchflow-ai/skillsbench",
+      "reviewed_revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+      "reviewed_artifact_sha256": null,
+      "rights_from_record": {
+        "observed": "Apache-2.0 repository; per-task rights still review",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "integration_tier": "existing_task_adapter_historical_negative",
+      "primary_managed_workflow": false,
+      "interface": {
+        "path": "src/aeep/assessment/skillsbench_recipe.py",
+        "exists": true,
+        "sha256": "d6f5b404e85986d8db7dd70a966224a1533f4172b7b88e8d4bc55db5e08f49ef"
+      },
+      "evidence": {
+        "path": "reports/toolkit-v2/c13/next-study-review-20261030/README.md",
+        "exists": true,
+        "sha256": "fbf310689650d063e41d2fee07c96679c79e671948302b80cb6ce463f5fbdbc4"
+      },
+      "recorded_scope_or_exclusion": "Existing pinned DOCX benchmark adapter and historical negative evidence retained. No new V2 live qualification or transfer to unrelated hosts/tasks.",
+      "installed_now": null,
+      "executable_now": null,
+      "runtime_probe_performed": false
+    },
+    {
+      "component": "skillrank",
+      "repository": "https://github.com/buildbetter-app/skillrank",
+      "reviewed_revision": "5216bae9149b4ff8a7f9e014b6889fb094cee8e1",
+      "reviewed_artifact_sha256": null,
+      "rights_from_record": {
+        "observed": "MIT crates; Elastic-2.0 registry/web",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "integration_tier": "researched_or_listed_only",
+      "primary_managed_workflow": false,
+      "interface": null,
+      "evidence": null,
+      "recorded_scope_or_exclusion": "MIT core is distinct from Elastic-2.0 registry/web. Pinned core treatment prepends a skill-use directive and groups versions by major/minor, so its evaluation cannot establish optional-choice value at exact patch identity.",
+      "installed_now": null,
+      "executable_now": null,
+      "runtime_probe_performed": false
+    },
+    {
+      "component": "skill-scanner",
+      "repository": "https://github.com/cisco-ai-defense/skill-scanner",
+      "reviewed_revision": "c3d7fd9fee50cf2ea45f0b381eb61f857360f825",
+      "reviewed_artifact_sha256": null,
+      "rights_from_record": {
+        "observed": "Apache-2.0",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "integration_tier": "implemented_import_only",
+      "primary_managed_workflow": false,
+      "interface": {
+        "path": "src/aeep_toolkit/external.py",
+        "exists": true,
+        "sha256": "2a11b1ec12f0b5e6d9d608a5a7f85f0f4c37c5719096637de9bb246fb5cc2c99"
+      },
+      "evidence": {
+        "path": "tests/test_toolkit_external.py",
+        "exists": true,
+        "sha256": "00e218c94bc3ce50d92f7a92580062f5e1278850c2824fac7e31f2d37490fe56"
+      },
+      "recorded_scope_or_exclusion": "Pinned single-skill JSON import preserves findings, suppressed counts and failed analyzers without trusting is_safe. Scanner execution, optional LLM analyzers, installation and complete coverage remain unqualified.",
+      "installed_now": null,
+      "executable_now": null,
+      "runtime_probe_performed": false
+    },
+    {
+      "component": "mcpmark",
+      "repository": "https://github.com/eval-sys/mcpmark",
+      "reviewed_revision": "cd45b7f57923b9b3985467f5139927575f83141c",
+      "reviewed_artifact_sha256": null,
+      "rights_from_record": {
+        "observed": "Apache-2.0 repository; service/data terms separate",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "integration_tier": "researched_or_listed_only",
+      "primary_managed_workflow": false,
+      "interface": null,
+      "evidence": null,
+      "recorded_scope_or_exclusion": "Selected file_context/uppercase instructions require only uppercase conversion while verifier additionally requires answer.txt word counts. External file_context.zip lacks recorded immutable hash/data-rights clearance; no asset or grader copied.",
+      "installed_now": null,
+      "executable_now": null,
+      "runtime_probe_performed": false
+    },
+    {
+      "component": "langgraph",
+      "repository": "https://github.com/langchain-ai/langgraph",
+      "reviewed_revision": "40a2e6d845054cc0cc17a6a169ca6e7394e5231c",
+      "reviewed_artifact_sha256": "e3f5f8ff4259f9281b73ff50fc9ef5cc3b025b8936b8283ecdca7cc0c4128690",
+      "rights_from_record": {
+        "observed": "MIT",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "integration_tier": "executed_bounded_fixture",
+      "primary_managed_workflow": false,
+      "interface": {
+        "path": "integrations/toolkit/langgraph_fixture.py",
+        "exists": true,
+        "sha256": "a23998cb16049b22a42ad480e7bdd1025070c10e46074aa7db37936315c31116"
+      },
+      "evidence": {
+        "path": "reports/toolkit-v2/integration-completion/langgraph-review-v2/execution/checks.json",
+        "exists": true,
+        "sha256": "461aaaf5206bce1d2dc82e50ef06e0848235755af41fa72b77c469159f682b0e"
+      },
+      "recorded_scope_or_exclusion": "Actual 1.2.14 wheel ran four sandboxed no-model text fixtures through CommandExecutor, with receipts and removal. General graphs, checkpoint persistence, model tools and live agent efficacy are not qualified.",
+      "installed_now": null,
+      "executable_now": null,
+      "runtime_probe_performed": false
+    },
+    {
+      "component": "langfuse",
+      "repository": "https://github.com/langfuse/langfuse",
+      "reviewed_revision": "c106bb3d945323688e6f6079f65fb0ab28203b53",
+      "reviewed_artifact_sha256": null,
+      "rights_from_record": {
+        "observed": "MIT except ee paths; third-party terms separate",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "integration_tier": "implemented_otlp_preview_only",
+      "primary_managed_workflow": false,
+      "interface": {
+        "path": "src/aeep/telemetry.py",
+        "exists": true,
+        "sha256": "cd41c31d03fced77e009883142ebcbc721be8dd8feff01ba9e6bcd7428395e8d"
+      },
+      "evidence": {
+        "path": "tests/test_toolkit_external.py",
+        "exists": true,
+        "sha256": "00e218c94bc3ce50d92f7a92580062f5e1278850c2824fac7e31f2d37490fe56"
+      },
+      "recorded_scope_or_exclusion": "Receipt-to-OTLP/HTTP JSON preview reuses AEEP instrumentation. No SDK, server, credential read or export; destination, disclosure authority, deployed compatibility and footprint remain unverified.",
+      "installed_now": null,
+      "executable_now": null,
+      "runtime_probe_performed": false
+    },
+    {
+      "component": "agent-framework",
+      "repository": "https://github.com/microsoft/agent-framework",
+      "reviewed_revision": "2d9cc3f8ae465baf1aed3022f89b6848db4ffa7b",
+      "reviewed_artifact_sha256": null,
+      "rights_from_record": {
+        "observed": "MIT",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "integration_tier": "researched_or_listed_only",
+      "primary_managed_workflow": false,
+      "interface": null,
+      "evidence": null,
+      "recorded_scope_or_exclusion": "LangGraph supplies the bounded external workflow fixture. A second framework has no selected workflow requirement or reviewed runtime; no replacement orchestration layer is added.",
+      "installed_now": null,
+      "executable_now": null,
+      "runtime_probe_performed": false
+    },
+    {
+      "component": "waza",
+      "repository": "https://github.com/microsoft/waza",
+      "reviewed_revision": "e534d149d89ae77ea158469fb4d2003804b2ee76",
+      "reviewed_artifact_sha256": "277517374f1e44419b21f7d2d1eea61b5d4602456ef343f2c86858a81aca72e8",
+      "rights_from_record": {
+        "observed": "MIT; bundled CLI separate license",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "integration_tier": "executed_mock_engine",
+      "primary_managed_workflow": false,
+      "interface": {
+        "path": "src/aeep_toolkit/external.py",
+        "exists": true,
+        "sha256": "2a11b1ec12f0b5e6d9d608a5a7f85f0f4c37c5719096637de9bb246fb5cc2c99"
+      },
+      "evidence": {
+        "path": "reports/toolkit-v2/integration-completion/waza-review-v4/execution/checks.json",
+        "exists": true,
+        "sha256": "9f7c59a729bbf7c2afd3b2836ccb266ca5bde30adb2eaa388fd72b9a4a60a273"
+      },
+      "recorded_scope_or_exclusion": "Pinned 0.38.9 executable completed six sandboxed mock outcomes and JSON/Markdown/HTML normalization; neutral comparison exit 1 preserved. Executable workspace removed. Real-agent isolation, authentication and benefit remain unqualified.",
+      "installed_now": null,
+      "executable_now": null,
+      "runtime_probe_performed": false
+    },
+    {
+      "component": "registry",
+      "repository": "https://github.com/modelcontextprotocol/registry",
+      "reviewed_revision": "970df037919faa70456dde08c295473002d850e5",
+      "reviewed_artifact_sha256": null,
+      "rights_from_record": {
+        "observed": "Apache-2.0/MIT transition; docs CC-BY-4.0",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "integration_tier": "implemented_reader",
+      "primary_managed_workflow": false,
+      "interface": {
+        "path": "src/aeep/discovery_service.py",
+        "exists": true,
+        "sha256": "b79f1e1bee96190541314c3ccc9a79976c087ad9bbee62954b358e862996b431"
+      },
+      "evidence": {
+        "path": "tests/test_toolkit_discovery.py",
+        "exists": true,
+        "sha256": "8ae23085fe3deb2b552fc1a01f237130c8b997dcabb2da9461840fdaa9ce3df6"
+      },
+      "recorded_scope_or_exclusion": "Toolkit discovery reuses existing MCP Registry reader with configured source/deadline/remote authority and provenance. Candidate execution and remote service conformance are separate.",
+      "installed_now": null,
+      "executable_now": null,
+      "runtime_probe_performed": false
+    },
+    {
+      "component": "semantic-conventions",
+      "repository": "https://github.com/open-telemetry/semantic-conventions",
+      "reviewed_revision": "68e89181d4cb9bbce975c8128e694363214ab5fb",
+      "reviewed_artifact_sha256": null,
+      "rights_from_record": {
+        "observed": "Apache-2.0",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "integration_tier": "implemented_local_telemetry",
+      "primary_managed_workflow": true,
+      "interface": {
+        "path": "src/aeep/telemetry.py",
+        "exists": true,
+        "sha256": "cd41c31d03fced77e009883142ebcbc721be8dd8feff01ba9e6bcd7428395e8d"
+      },
+      "evidence": {
+        "path": "reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/comparison-analysis.json",
+        "exists": true,
+        "sha256": "e3535c409f04a2aa00793b606950b11ebbcd561a9a31f7a70b9550fc47772789"
+      },
+      "recorded_scope_or_exclusion": "Existing AEEP instrumentation and minimized receipt OTLP preview preserve observed raw dimensions. No guessed GenAI usage, exporter activation or telemetry service dependency.",
+      "installed_now": null,
+      "executable_now": null,
+      "runtime_probe_performed": false
+    },
+    {
+      "component": "toolhive",
+      "repository": "https://github.com/stacklok/toolhive",
+      "reviewed_revision": "33ba170aad633e20520f380500a45cd158f24aed",
+      "reviewed_artifact_sha256": null,
+      "rights_from_record": {
+        "observed": "Apache-2.0",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "integration_tier": "researched_or_listed_only",
+      "primary_managed_workflow": false,
+      "interface": null,
+      "evidence": null,
+      "recorded_scope_or_exclusion": "Existing MCPExecutor Streamable HTTP can consume a reviewed ToolHive endpoint. No selected daemon/image identity, network policy, installation/removal plan or paired-worker conformance; endpoint support alone is not isolation.",
+      "installed_now": null,
+      "executable_now": null,
+      "runtime_probe_performed": false
+    },
+    {
+      "component": "agent-skill-eval",
+      "repository": "https://github.com/tardigrde/agent-skill-eval",
+      "reviewed_revision": "59de161f657b82bfaf8f6abe83dfff38552deb21",
+      "reviewed_artifact_sha256": "5e29aff9fc354475c7e3e652659475e89cbb438603ee55d0392f0c845dbcf07f",
+      "rights_from_record": {
+        "observed": "MIT",
+        "redistribution": "No new upstream code/data bundled. Full transitive binary/data/asset clearance remains UNKNOWN except the declared metadata in the reviewed agent-skill-eval wheel lock."
+      },
+      "integration_tier": "executed_scripted_fixture",
+      "primary_managed_workflow": false,
+      "interface": {
+        "path": "integrations/toolkit/evaluate.py",
+        "exists": true,
+        "sha256": "6ac206cfd6a5aae07ed50ebfafdc788c0ec016b957c89c49270f4c4aef58e2ad"
+      },
+      "evidence": {
+        "path": "reports/toolkit-v2/integration-completion/router-free-v3/verification.json",
+        "exists": true,
+        "sha256": "d921d9a397d8261aa6b6119a43c7c2bbd26d2631b18696c2067c54c95efde84a"
+      },
+      "recorded_scope_or_exclusion": "Pinned 0.7.0 scripted integration ran separate controlled fixture workers. Native Codex launch/token contract is unqualified; D40 selects the existing AEEP fallback for managed-model evaluation.",
+      "installed_now": null,
+      "executable_now": null,
+      "runtime_probe_performed": false
+    },
+    {
+      "component": "aeep-router",
+      "repository": "https://github.com/ptse8204/AEEP-router",
+      "reviewed_revision": "8b015bf0247d4d9f49038982c49f3711a2802d97",
+      "reviewed_artifact_sha256": null,
+      "rights_from_record": {
+        "observed": "Apache-2.0 repository; existing dependency/data terms remain separate.",
+        "redistribution": "Existing distribution unchanged; no new third-party data."
+      },
+      "integration_tier": "existing_optional_execution",
+      "primary_managed_workflow": false,
+      "interface": {
+        "path": "src/aeep/stack_runtime.py",
+        "exists": true,
+        "sha256": "304a6260560591f9175c81aaaa492ef85c68b272b25f09351e844a496622614c"
+      },
+      "evidence": {
+        "path": "tests/test_stack_planning.py",
+        "exists": true,
+        "sha256": "b0a8dc68ca4d392d3ba73df37449176b0b7450af9679f8b18d6e8e35fcc740e9"
+      },
+      "recorded_scope_or_exclusion": "Existing Router, StackService and StackRuntime remain explicit legacy entry points with their own reviewed configuration. Toolkit Essentials does not instantiate them; current final regression is pending.",
+      "installed_now": null,
+      "executable_now": null,
+      "runtime_probe_performed": false
+    },
+    {
+      "component": "aeep-evaluator",
+      "repository": "https://github.com/ptse8204/AEEP-router",
+      "reviewed_revision": "538606417ea93be6e82c431011c4f209a68ceb81",
+      "reviewed_artifact_sha256": null,
+      "rights_from_record": {
+        "observed": "Apache-2.0 repository; existing dependency/data terms remain separate.",
+        "redistribution": "Existing distribution unchanged; no new third-party data."
+      },
+      "integration_tier": "executed_live_development",
+      "primary_managed_workflow": true,
+      "interface": {
+        "path": "src/aeep_toolkit/managed.py",
+        "exists": true,
+        "sha256": "0d278623aa440f6a6b1764fc5aff5d20e294fa812f480068318b3b40c594877d"
+      },
+      "evidence": {
+        "path": "reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/comparison-completion-audit.json",
+        "exists": true,
+        "sha256": "372ba5390c9bed068087c43c0bc2e15beeb10169adf7bf5d1e118f1d8c6d4d3e"
+      },
+      "recorded_scope_or_exclusion": "Managed skill adapter and canonical reports reuse AssessmentService/BenchmarkRunner. Current authenticated worker conformance and V2 live comparison remain unverified.",
+      "installed_now": null,
+      "executable_now": null,
+      "runtime_probe_performed": false
+    },
+    {
+      "component": "github-sponsors",
+      "integration_tier": "implemented_support_link_preview",
+      "rights_from_record": {
+        "observed": "External hosted service terms; no software or data redistribution.",
+        "redistribution": "No bundle proposed."
+      },
+      "interface": {
+        "path": "src/aeep_toolkit/reporting.py",
+        "exists": true,
+        "sha256": "59d5d72323581c315d605620f4d7125b7d7db6b7880dbfc6fd8d3bf714d44a22"
+      },
+      "primary_managed_workflow": false,
+      "installed_now": null,
+      "executable_now": null,
+      "recorded_scope_or_exclusion": "External authorized support link only; ownership verification and publication are separate. No payout SDK/service."
+    }
+  ]
+}

@@ -129,6 +129,8 @@ def main(argv: list[str] | None = None) -> int:
     evaluation = sub.add_parser('eval', help='Run an explicitly selected existing evaluation backend')
     evaluation.add_argument('backend', choices=('scripted', 'managed'))
     evaluation.add_argument('arguments', nargs=argparse.REMAINDER, help='Backend plan, run or report arguments')
+    workflow = sub.add_parser('workflow', help='Select a hash-bound configuration through the existing managed evaluator')
+    workflow.add_argument('arguments', nargs=argparse.REMAINDER)
     repository_recipe = sub.add_parser('repository-recipe', help='Export a reviewed repository recipe definition; never executes code')
     repository_recipe.add_argument('--cases', type=Path, required=True)
     repository_recipe.add_argument('--assessment', action='store_true', help='Require distinct curated 8/28/105 campaign cases')
@@ -139,6 +141,10 @@ def main(argv: list[str] | None = None) -> int:
     selection_report.add_argument('--evaluation', type=Path, required=True)
     args = parser.parse_args(argv)
     try:
+        if args.command == 'workflow':
+            from .workflow import main as workflow_main
+            workflow_main(args.arguments)
+            return 0
         if args.command == 'repository-suite-recipe':
             from aeep.assessment.repository_suites import (
                 RepositorySuiteCase,

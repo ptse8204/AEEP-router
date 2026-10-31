@@ -1,0 +1,63 @@
+"""Exact synthetic availability checks, to run only in the approved container."""
+import ast
+import importlib.metadata
+import json
+import os
+from pathlib import Path
+import socket
+import subprocess
+import sys
+
+request = json.load(sys.stdin)
+assert set(request) == {'probe'} and request['probe'] in {'boundary', 'ruff', 'libcst'}
+assert sys.version_info[:2] == (3, 13)
+assert os.geteuid() == 65534
+sys.path.insert(0, '/opt/aeep-specialists')
+result = {'probe': request['probe'], 'evidence_kind': 'synthetic',
+          'candidate_usefulness': 'NOT_ASSESSED', 'selection_usefulness': 'NOT_ASSESSED'}
+
+if request['probe'] == 'boundary':
+    assert not Path('/var/run/docker.sock').exists()
+    assert not Path('/Users/edwintse').exists()
+    assert not Path('/host').exists()
+    try:
+        Path('/aeep-write-must-fail').write_text('synthetic')
+    except OSError:
+        pass
+    else:
+        raise AssertionError('root write was permitted')
+    try:
+        with socket.create_connection(('1.1.1.1', 443), timeout=1):
+            raise AssertionError('network connection was permitted')
+    except OSError:
+        pass
+    result['passed'] = True
+elif request['probe'] == 'ruff':
+    assert importlib.metadata.version('ruff') == '0.16.2'
+    cases = [
+        ('import os\n# retained comment\nvalue = 1\n', '# retained comment\nvalue = 1\n', False),
+        ('import os as os\n', 'import os as os\n', True),
+    ]
+    for before, expected, exact in cases:
+        done = subprocess.run(['/opt/aeep-specialists/bin/ruff', 'check', '--isolated',
+            '--no-cache', '--select', 'F401', '--fix', '--stdin-filename', 'availability.py', '-'],
+            input=before, text=True, capture_output=True, timeout=15, check=True)
+        assert ast.dump(ast.parse(done.stdout)) == ast.dump(ast.parse(expected))
+        assert '# retained comment' not in before or '# retained comment' in done.stdout
+        assert not exact or done.stdout == expected
+    result.update(passed=True, fixtures=len(cases))
+else:
+    assert importlib.metadata.version('libcst') == '1.8.6'
+    assert importlib.metadata.version('pyyaml-ft') == '8.0.0'
+    import libcst as cst
+    from libcst.codemod import CodemodContext
+    from libcst.codemod.commands.rename import RenameCommand
+    before = 'from legacy import thing\nvalue = thing(1)\n# legacy.thing\nlabel = "legacy.thing"\n'
+    expected = 'from modern import thing\nvalue = thing(1)\n# legacy.thing\nlabel = "legacy.thing"\n'
+    command = RenameCommand(CodemodContext(), old_name='legacy.thing', new_name='modern.thing')
+    assert command.transform_module(cst.parse_module(before)).code == expected
+    unchanged = 'label = "legacy.thing"\n# legacy.thing\n'
+    command = RenameCommand(CodemodContext(), old_name='legacy.thing', new_name='modern.thing')
+    assert command.transform_module(cst.parse_module(unchanged)).code == unchanged
+    result.update(passed=True, fixtures=2)
+print(json.dumps(result, allow_nan=False))

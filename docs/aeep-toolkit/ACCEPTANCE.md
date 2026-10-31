@@ -68,3 +68,12 @@ Do not make 'DEMONSTRATED_BENEFIT' automatic based only on a positive point esti
 ## Public release evidence gates
 
 Software tests, installer/source builds, host conformance, real paired experiments, human-comprehension results and independently reproduced claims are separate gates. Maintain explicit statuses. A polished website is not evaluation evidence. Never publish claims with metrics that were computed from a fake/replay harness as if they were live.
+
+## Assembled-stack delivery gates (October 30 steering)
+
+Record working stack integration, candidate usefulness and AEEP selection
+usefulness independently, following [the workflow contract](STACK_DELIVERY.md#acceptance-gates).
+An executable assembly cannot establish candidate benefit. Candidate benefit
+cannot establish a benefit from AEEP's selection decisions. Resource qualification
+and release remain separate. This delivery ordering changes no frozen campaign,
+8/28/105 case requirement, confidence threshold, authority or historical verdict.

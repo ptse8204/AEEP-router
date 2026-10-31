@@ -1,0 +1,20 @@
+{"review_sha256": "732f9cdd09c211dd34b547d306b4161ef5136463400c8fb2fb6943877cce0202", "source_digest": "24dccd3e2a90e03f8b4e2608d7a49da1ba4975b1cc78fdc5faf843a6a184cb0e", "passed": false, "build_started": true, "checks": [], "grant_before": [13656, 3796, 125269.06508910004, "0.0"], "model_turns": 0, "candidate_usefulness": "NOT_ASSESSED", "selection_usefulness": "NOT_ASSESSED", "stack_integration": "COMPONENT_AVAILABILITY_ONLY", "error_type": "AssertionError", "reserved_operations": 2, "reserved_seconds_sum": 330.0, "grant_after": [13658, 3796, 125271.32079997612, "0.0"], "source_unchanged": true}
+Traceback (most recent call last):
+  File "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/stack-delivery-20261030/run-specialists.py", line 302, in <module>
+    asyncio.run(main())
+    ~~~~~~~~~~~^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 720, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/stack-delivery-20261030/run-specialists.py", line 247, in main
+    await execute(build_scope,build_spec,'build',{},300)
+  File "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/stack-delivery-20261030/run-specialists.py", line 218, in execute
+    assert stored is not None and content_digest(stored)==content_digest(receipt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

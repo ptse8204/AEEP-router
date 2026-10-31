@@ -1,0 +1,147 @@
+{
+  "schema": "aeep.toolkit.external-software-review.v1",
+  "status": "PENDING_HUMAN_APPROVAL",
+  "purpose": "Check the differentiated candidate closures in the existing isolated worker infrastructure before preparing their representative-task comparisons. This is component availability only, not a completed stack, qualification, usefulness or selection gate.",
+  "source_digest": "24dccd3e2a90e03f8b4e2608d7a49da1ba4975b1cc78fdc5faf843a6a184cb0e",
+  "parent_reference": "aeep-toolkit-v2/capture-policy-local-tag-20261021:control",
+  "parent_image": "sha256:0c05b495931e8558baf76b099c01c3b80a4b5136b5640d387db2d8ee644cf1db",
+  "parent_architecture": "arm64",
+  "expected_python_major_minor": [
+    3,
+    13
+  ],
+  "expected_user": "65534:65534",
+  "target_tag": "aeep-toolkit-v2/specialists:ruff0162-libcst186-py313-20261030",
+  "software": [
+    {
+      "name": "ruff",
+      "version": "0.16.2",
+      "filename": "ruff-0.16.2-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+      "sha256": "335c621622c4650330be50842561c6586ac6971bb8ab5407fe34dcc9efb16bbe",
+      "bytes": 10975825,
+      "url": "https://files.pythonhosted.org/packages/85/d6/9d96948caf5a632be62d62202d5ec914d6856f204fd79eb036e5915e79ea/ruff-0.16.2-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
+    },
+    {
+      "name": "libcst",
+      "version": "1.8.6",
+      "filename": "libcst-1.8.6-cp313-cp313-manylinux_2_28_aarch64.whl",
+      "sha256": "1a3a5e4ee870907aa85a4076c914ae69066715a2741b821d9bf16f9579de1105",
+      "bytes": 2235818,
+      "url": "https://files.pythonhosted.org/packages/36/a1/bd1b2b2b7f153d82301cdaddba787f4a9fc781816df6bdb295ca5f88b7cf/libcst-1.8.6-cp313-cp313-manylinux_2_28_aarch64.whl"
+    },
+    {
+      "name": "pyyaml-ft",
+      "version": "8.0.0",
+      "filename": "pyyaml_ft-8.0.0-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+      "sha256": "3fa992481155ddda2e303fcc74c79c05eddcdbc907b888d3d9ce3ff3e2adcfb0",
+      "bytes": 746792,
+      "url": "https://files.pythonhosted.org/packages/e3/bb/23a9739291086ca0d3189eac7cd92b4d00e9fdc77d722ab610c35f9a82ba/pyyaml_ft-8.0.0-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
+    }
+  ],
+  "assets": {
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-candidate-review-20261030/ruff-0.16.2-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl": "335c621622c4650330be50842561c6586ac6971bb8ab5407fe34dcc9efb16bbe",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-candidate-review-20261030/libcst-1.8.6-cp313-cp313-manylinux_2_28_aarch64.whl": "1a3a5e4ee870907aa85a4076c914ae69066715a2741b821d9bf16f9579de1105",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-candidate-review-20261030/pyyaml_ft-8.0.0-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl": "3fa992481155ddda2e303fcc74c79c05eddcdbc907b888d3d9ce3ff3e2adcfb0",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/stack-delivery-20261030/specialist-probe.py.txt": "b294d0084b27554e440f87397f19ab1e91fb7d005ec7bd66666413aefd70b10a",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/stack-delivery-20261030/Dockerfile.specialists": "3cba087988c421d2716594767637374a7befcf0e8f1159f29d0ab0399f1f2ab2",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/stack-delivery-20261030/dockerignore.specialists": "5cac8e0c7176cb468bef466c73b72677c9e817ac225e40b3e6aac6070f0ca30d",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/stack-delivery-20261030/candidate-preparation.json": "467bb3b2e702fdc77ed02be9d9450a3582b3b4ce5c2bbff50c1d8ed2b73b6481",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/stack-delivery-20261030/parent-image-metadata.json": "d97d2548f29a9befc44a0bc61ed56e548da32a4ea7062577a9baa235d2bfbe39",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-candidate-review-20261030/Dockerfile": "3cba087988c421d2716594767637374a7befcf0e8f1159f29d0ab0399f1f2ab2",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-candidate-review-20261030/.dockerignore": "5cac8e0c7176cb468bef466c73b72677c9e817ac225e40b3e6aac6070f0ca30d"
+  },
+  "docker_binary": "/usr/local/bin/docker",
+  "docker_socket": "unix:///Users/edwintse/.docker/run/docker.sock",
+  "build": {
+    "maximum_attempts": 1,
+    "network": "none",
+    "pull": false,
+    "context": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-candidate-review-20261030",
+    "dockerfile": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/stack-delivery-20261030/Dockerfile.specialists",
+    "network_downloads": 0,
+    "host_or_project_installations": 0,
+    "maximum_growth_bytes": 1073741824,
+    "before_build": "Verify the parent ID, empty OnBuild, inherited user, all asset hashes and >=51GiB free; record Docker usage. The Dockerfile verifies Python3.13 before installing exactly three cached wheels privately in the image. No sdist or lifecycle script.",
+    "after_build": "Bind the actual image ID once. Require unchanged parent/configuration and inherited layer prefix, restored nonroot user, and measured image growth within the envelope. Keep the image."
+  },
+  "checks": {
+    "maximum_container_calls": 3,
+    "probe_sequence": [
+      "boundary",
+      "ruff",
+      "libcst"
+    ],
+    "probe_program": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/stack-delivery-20261030/specialist-probe.py.txt",
+    "program_transport": "Existing argv-only CommandExecutor into python3 -I; the exact program and one JSON probe selector go to the owned container, never a shell.",
+    "runtime": "Existing controlled executor/AssessmentEnvironment container boundary; override the inherited worker entrypoint with python3. Never launch Codex, the collector or a proxy.",
+    "limits": {
+      "network": "none",
+      "read_only_root": true,
+      "uid": "65534:65534",
+      "cpus": 1,
+      "memory_bytes": 536870912,
+      "pids_limit": 64,
+      "cap_drop": "ALL",
+      "no_new_privileges": true,
+      "timeout_seconds": 45
+    },
+    "mounts": "Private tmpfs for /tmp and /workspace only. No host home, repository, Docker socket, credentials, persistent volumes, other task or answer mounts.",
+    "negative_probe": "Attempt root write and TCP connection to1.1.1.1:443; both must be denied. No application data is sent. This is an explicitly reviewed deny probe, not a permitted service destination.",
+    "fixtures": {
+      "ruff": 2,
+      "libcst": 2
+    },
+    "fixture_kind": "Synthetic literal smoke checks. No real-task usefulness or formal correctness counts."
+  },
+  "accounting": {
+    "grant": "onboarding",
+    "maximum_additional_operations": 6,
+    "maximum_additional_reserved_seconds": 600,
+    "maximum_model_turns": 0,
+    "maximum_cash_usd": "0",
+    "counters_anchor": [
+      13656,
+      3796,
+      125269.06508910004,
+      "0.0"
+    ],
+    "phase_bounds": {
+      "setup": {
+        "operations": 1,
+        "seconds": 30
+      },
+      "build": {
+        "operations": 1,
+        "seconds": 300
+      },
+      "checks": {
+        "operations": 3,
+        "seconds": 135
+      },
+      "analysis": {
+        "operations": 1,
+        "seconds": 120
+      }
+    },
+    "authority": "Standing finite definition/scope/expiry delegation may record the exact current-source requests on the existing grant before reservations. Preserve all counters and absolute ceilings; no new grant or reset.",
+    "receipts": "Use existing assessment reservations, CommandExecutor journals/receipts, terminal attempt records and operation ledger. Account for failures and partial work; no unattested zero usage. Do not execute outside these controls."
+  },
+  "failure_policy": "Stop dispatch on uncertain accounting/effects, changed source/assets, failed containment, parent drift or unknown cleanup. Retain all costs and logs. No automatic retry of any started build or check. Independent software checks may continue only after canonical completion and verified owned-container cleanup.",
+  "cleanup": "Remove only newly owned stopped probe containers/private scratch after verified ownership. Preserve the new image for the remaining work and every existing image, volume, backup, user file and historical result.",
+  "excluded": [
+    "model or paid calls",
+    "credentials or authentication state",
+    "new dependency versions",
+    "downloads during execution",
+    "additional images or builds",
+    "Ruff unsafe fixes",
+    "host/project installation",
+    "publication or release",
+    "admission or activation",
+    "historical study replay",
+    "protected task or truth disclosure",
+    "old-image deletion"
+  ],
+  "reason_approval_is_required": "The pasted continuation expressly withholds untrusted software execution. CONTINUATION.md requires applicable operator authorization for image/container provisioning. Existing terminal reviews bind different software; standing definition delegation does not authorize these new libraries/binary.",
+  "readiness_limits": "Exact external artifacts, Dockerfile, probes and finite authority envelope are prepared. Before dispatch, use standing definition authority to bind current canonical scope/request records to these same assets and grant; that bookkeeping cannot change this software, boundary, counts or permissions. No model comparison is authorized."
+}

@@ -1,0 +1,71 @@
+{
+  "workflow": {
+    "schema_version": "aeep.toolkit.workflow.v1",
+    "backend": "managed",
+    "configurations": {
+      "preserved-negative-example": {
+        "plan": {
+          "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c07/edit-value-native-20261019/plan.json",
+          "sha256": "a208dc649bcf08f9cf7cd0d2e54c4cef21a3d7e15c583c689f49895d83b8ee3f"
+        },
+        "source": {
+          "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c07/edit-value-native-20261019/source-pin.json",
+          "sha256": "7c3fcfe42ccf541ae52939503c5a4b45fc12d78fbf97bca43862ee8419ca6627"
+        }
+      }
+    }
+  },
+  "configuration": "preserved-negative-example",
+  "backend_review": {
+    "plan_sha256": "d66fc6ea16d29d472d387d565f78a1fbff401264f049105061e6ece71124bb11",
+    "source": {
+      "repository": "https://github.com/DietrichGebert/ponytail",
+      "revision": "1d95ff7d39de12d87014ea40d4e22201bddc501b",
+      "artifact_sha256": "28db736a30751c76ae4f8649e5f810ae086213f7e15ad601e692b6f87188117e",
+      "license_expression": "MIT",
+      "data_rights": "Source-declared MIT for pinned repository code; no task dataset redistribution claim."
+    },
+    "adapter": {
+      "schema_version": "aeep.toolkit.adapter.v1",
+      "adapter_id": "aeep.benchmark-runner.codex",
+      "implementation_sha256": "24dccd3e2a90e03f8b4e2608d7a49da1ba4975b1cc78fdc5faf843a6a184cb0e",
+      "hosts": [
+        "codex"
+      ],
+      "candidate_types": [
+        "skill"
+      ],
+      "optional_invocation": true,
+      "telemetry": [
+        "tokens",
+        "agent_wall_seconds",
+        "verification_wall_seconds"
+      ],
+      "containment": "unverified",
+      "conformance_ref": null
+    },
+    "review_sha256": "ab6a5a024f94f751119473dfb10f286216227ee6b2a5502cd94b97f0a44897a3",
+    "plan_id": "plan_017bce61874c437296c66276e91876d6",
+    "authorization_id": "onboarding",
+    "blocked_reasons": [],
+    "notice": "File-based review only. Source association, current grant, worker conformance and available budget are checked by the existing service before execution."
+  },
+  "review_sha256": "76c67b70e2b4a3993b4a1f294ea0ca44684163438fd464e04efd0844b1c8b239",
+  "case_count": 141,
+  "task_families": [
+    "edit:adjacent",
+    "edit:easy",
+    "edit:multi_file"
+  ],
+  "candidate_inventory": {
+    "ponytail_skill": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2"
+  },
+  "exposure": "optional",
+  "stage": "marginal_value",
+  "gates": {
+    "stack_integration": "NOT_VERIFIED_BY_PREVIEW",
+    "candidate_usefulness": "NOT_ASSESSED",
+    "selection_usefulness": "NOT_ASSESSED"
+  },
+  "notice": "Metadata selection only. No grant, worker, installation or model is started. Execution rechecks the canonical plan, source, authority, accounting and conformance through the existing service. A named configuration does not qualify its capability bundle."
+}

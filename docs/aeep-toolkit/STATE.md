@@ -1,5 +1,42 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**October 30: assembled-stack delivery is the current priority.**
+The [component audit](../../reports/toolkit-v2/c13/stack-delivery-20261030/README.md)
+distinguishes actual upstream execution from imports, mock fixtures and research.
+A new [named workflow CLI](STACK_DELIVERY.md) binds plan/source configurations and
+delegates to the existing managed runner. Source `24dccd3e` passed all 13 software
+checks: 1,798 passed/21 skipped in each full run, 82% coverage and both branch gates.
+This verified working snapshot includes the preserved pending CI edits; the
+separate CI-only branch and its source `974bc979` retain their own scope.
+
+Working-stack integration remains pending a current-source real end-to-end run.
+Candidate usefulness and AEEP selection usefulness remain separately unproven.
+The previous Ponytail results and all exposure exclusions are preserved; none
+were replayed. Ruff already exists in this developer environment: preserve it
+where ordinary, and treat an added wrapper as a duplicate/skill-only contrast
+there. LibCST supplies a distinct proposed migration mechanism, not proven value.
+Three inert wrappers were validated, not installed or executed.
+
+Actual approval `732f9cdd` was exercised once. Docker's private configuration hid
+the installed Buildx plugin; the legacy parser rejected the build flags at exit 125.
+No image, installation or specialist check ran. The canonical failed receipt,
+complete journal and terminal attempt remain. Two operations/2.255710876081139sec
+stay charged; counters 13658/3796/125271.32079997612/$0. An expiry-only delegated
+amendment retains ceilings/counters through 2026-11-01T00:48:16.492685Z.
+Help-only checks reproduce the parser failure and validate the correction without
+building. The explicit one-attempt/no-retry review requires a fresh amendment.
+
+The [corrected review](../../reports/toolkit-v2/c13/stack-delivery-20261030/launcher-correction/specialist-runtime-review.json)
+binds unchanged software/probes, the installed Buildx binary, corrected private
+configuration and canonical receipt guard. It permits one build/three offline
+calls, at most six new operations and 600 reserved seconds, zero models/cash/downloads.
+Approval is pending. Generic reviewed skill conformance is also an engineering
+gap: the existing paired inspector names spreadsheets, Ponytail and DOCX only.
+Never relabel these specialists or transfer old conformance. After availability,
+complete that profile, representative task/grader validation, individual/bundle
+comparisons and equal-inventory selection using existing contracts. No operator
+architecture decision, historical replay or release is authorized.
+
 **October 29: the real-task development comparison and canonical audit completed.**
 Ordinary Codex and optional Ponytail 4.10.0 each passed 14/19 tasks, with identical
 pass/fail outcomes in every pair. This sample shows no task-success gain. It does
@@ -106,9 +143,9 @@ checkpoint_status:
   C12: PASS
   C13: IN_PROGRESS
 last_verified_commit: 'df9eee7f2535a47e957418da0747c2d428641f26'
-last_check_command: 'Approved run-bundle.py88e5c1b9;completion-audit.json canonical readback. Earlier13source gates and retained-failure analysis are complete and were not repeated.'
-last_check_result: 'Approved88e5c1b9 completed once:3installed checks and69-input offline docs passed;both private runtimes removed unchanged;all168Python wheel members match current source5a4257e3. No models,downloads,Docker,cash or grant changes. Source13gates remain passed1786tests/21skips per run,82%coverage,both branch gates. Sourceb099 comparison remains both14/19,38captures,19loads,2admission refusals;no formal qualification or positive selection benefit.'
-next_action: 'Read reports/toolkit-v2/c13/next-study-review-20261030/README.md and review.json. NOT_READY_FOR_EXECUTION_REVIEW: first establish an operator-relevant workflow, independently verifiable success, specific baseline limitation and pinned candidate mechanism. No candidate chosen arbitrarily. Current/historical bindings and exposure-manifest hashes are recorded. Cached Markdown CLI passed69active inputs; Lychee remains unavailable and full docs-check is not passed. No models,installations,push or controller replay. C13 remains IN_PROGRESS.'
+last_check_command: 'stack-delivery-20261030/validation/checks.json:13/13 on working source24dccd3e;1798passed/21skipped per full run. Actual732f attempt reconciled; no retry.'
+last_check_result: 'Source24dccd3e13gates passed,82%coverage,both branch gates. Source includes preserved CI inputs. Named workflow software checks passed; no new live stack/value/selection pass.732f buildCLI failed125,no image/tool check;2operations and2.255710876sec retained. Corrected review pending. OriginalPonytail14/19both preserved.'
+next_action: 'Toolkit: inspect stack-delivery-20261030/launcher-correction/specialist-runtime-review.json and actual approval before one new bounded build; old732f9cdd is terminal. Then generic skill conformance, preserved ordinary inventory, validated real-task comparisons and equal-inventory selection. Keep independent CI-only branch/evidence separate; no historical replay or new model authority.'
 blocked_actions:
   - 'Helped report comprehension is recorded. The operator removed the concrete control exercise from the critical path on October29;control-use qualification remains unmeasured and is not an engineering/comparison blocker.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
@@ -4504,3 +4541,21 @@ library-only no-op are preserved and excluded from lint evidence. Lychee is
 unavailable; no Lychee failure or full docs-check success is inferred. These
 checks add no qualification, live selection, operational or release evidence.
 No model, worker, grader, installer or grant operation was started.
+
+## October 30: assemble reusable evaluation delivery; preserve the failed runtime attempt
+
+The operator redirected delivery toward an assembled, reusable stack, with working
+stack integration, candidate usefulness and AEEP selection usefulness as separate
+gates. The source/evidence audit, named workflow CLI, inert specialist wrappers,
+source13-check record and exact failure/correction are in
+[the delivery packet](../../reports/toolkit-v2/c13/stack-delivery-20261030/README.md).
+Source `24dccd3e` includes preserved uncommitted CI repair inputs; its full suites
+passed1798/21skips each. No new-source installation or fresh live conformance is
+claimed. The original732f9cdd execution is terminal with all costs retained.
+
+Next intervention is the exact corrected runtime review, not an architecture or
+budget choice. Its SHA-256 is `b03c2ddb38a5c9484a5b8a933ce94958ce93948dd423f508b906bf74a2202ad9`.
+The three gates remain open. Generic skill inspection, actual baseline inventory,
+validated real-task intents, frozen comparisons and actual selection behavior
+remain explicit engineering work. Do not substitute a mock or a refusal-to-admit
+check for those outcomes. No new model authority is inferred.
