@@ -1,0 +1,25 @@
+{
+  "purpose": "Correctly distinguish absent paid subscription from unverified supported backend access",
+  "retrieved_at": "2026-11-01T21:18:36.013892+00:00",
+  "primary_sources": [
+    {
+      "url": "https://docs.github.com/en/copilot/get-started/plans",
+      "observation": "The current plan overview includes Copilot CLI in every plan, including Free. Free uses automatic model selection. Eligibility, administrator policies and limits still apply."
+    },
+    {
+      "url": "https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli",
+      "observation": "CLI use needs an active Copilot plan and authentication. This is not proof that this operator has usable access."
+    }
+  ],
+  "selected_waza_source": "e534d149d89ae77ea158469fb4d2003804b2ee76",
+  "session_source_sha256": "5c435e0ab30b5ac6fbc0eebc8c83ad285b43bbcb713d2e3cfd1c43e3c903f7f8",
+  "source_observation": "validateReasoningEffort returns without model lookup when effort is omitted; auto or empty model is rejected only if a nonempty reasoning effort was supplied. SessionConfig receives the selected model. No compatible runtime or quota is inferred from this static source.",
+  "operator_observation": "No Copilot subscription reported. Copilot Free eligibility/enrollment/authentication remain unverified.",
+  "status": "BLOCKED_SUPPORTED_BACKEND_ACCESS_UNVERIFIED",
+  "next_boundary": "Prepare exact native artifacts, containment/tool policy and protected operator setup before asking the user to sign in. Do not capture sign-in, read/copy authentication, assume spending, change provider or force a paid plan.",
+  "models": 0,
+  "authentication_attempted": false,
+  "installed": false,
+  "executed": false,
+  "paid_authority_inferred": false
+}

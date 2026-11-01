@@ -1,0 +1,162 @@
+{
+  "$defs": {
+    "RecipeMaterializationRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "default": "assessment.recipe-materialization.v1",
+          "enum": [
+            "assessment.recipe-materialization.v1",
+            "assessment.recipe-materialization.v2"
+          ],
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "plan_id": {
+          "title": "Plan Id",
+          "type": "string"
+        },
+        "subject_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Subject Digest",
+          "type": "string"
+        },
+        "recipe_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Recipe Digest",
+          "type": "string"
+        },
+        "mapping_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Mapping Digest",
+          "type": "string"
+        },
+        "environment_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Environment Digest",
+          "type": "string"
+        },
+        "authorization_id": {
+          "title": "Authorization Id",
+          "type": "string"
+        },
+        "definition_digests": {
+          "items": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "title": "Definition Digests",
+          "type": "array"
+        },
+        "seed": {
+          "title": "Seed",
+          "type": "integer"
+        },
+        "runtime_dependencies": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "pattern": "^[a-f0-9]{64}$",
+                "type": "string"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Runtime Dependencies"
+        }
+      },
+      "required": [
+        "subject_digest",
+        "recipe_digest",
+        "mapping_digest",
+        "environment_digest",
+        "authorization_id",
+        "definition_digests",
+        "seed"
+      ],
+      "title": "RecipeMaterializationRequest",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "An inert, reviewed scope; it cannot create or extend a grant.",
+  "properties": {
+    "schema_version": {
+      "const": "aeep.toolkit.workflow-accounting.v1",
+      "default": "aeep.toolkit.workflow-accounting.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "workflow_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Workflow Sha256",
+      "type": "string"
+    },
+    "configurations": {
+      "items": {
+        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+        "type": "string"
+      },
+      "maxItems": 16,
+      "minItems": 1,
+      "title": "Configurations",
+      "type": "array"
+    },
+    "operations": {
+      "items": {
+        "enum": [
+          "plan",
+          "prepare",
+          "run",
+          "report"
+        ],
+        "type": "string"
+      },
+      "maxItems": 4,
+      "minItems": 1,
+      "title": "Operations",
+      "type": "array"
+    },
+    "source_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Digest",
+      "type": "string"
+    },
+    "manifest_path": {
+      "maxLength": 4096,
+      "minLength": 1,
+      "title": "Manifest Path",
+      "type": "string"
+    },
+    "manifest_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Manifest Sha256",
+      "type": "string"
+    },
+    "request": {
+      "$ref": "#/$defs/RecipeMaterializationRequest"
+    },
+    "maximum_overhead_seconds": {
+      "maximum": 600,
+      "minimum": 1,
+      "title": "Maximum Overhead Seconds",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "workflow_sha256",
+    "configurations",
+    "operations",
+    "source_digest",
+    "manifest_path",
+    "manifest_sha256",
+    "request",
+    "maximum_overhead_seconds"
+  ],
+  "title": "WorkflowAccountingDefinition",
+  "type": "object"
+}

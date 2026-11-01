@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import sqlite3
 from pathlib import Path, PurePosixPath
 from typing import Any, Literal
 
@@ -269,10 +270,15 @@ def main(argv: list[str] | None = None) -> None:
     scheduler = commands.add_parser('define-scheduler', help='Store an inert external scheduling definition; grants no authority')
     scheduler.add_argument('--file', type=Path, required=True)
     scheduler.add_argument('--manifest', type=Path, required=True)
+    accounting = commands.add_parser('define-accounting', help='Store an inert workflow overhead scope; grants no authority')
+    accounting.add_argument('--file', type=Path, required=True)
+    accounting.add_argument('--manifest', type=Path, required=True)
     for name in ('plan', 'prepare', 'run', 'report'):
         command = commands.add_parser(name)
         command.add_argument('--workflow', type=Path, required=True)
         command.add_argument('--configuration', required=True)
+        command.add_argument('--accounting', type=Path, help='Exact reviewed scope for canonical workflow overhead accounting')
+        command.add_argument('--operation-id', help='Fresh durable accounting identity; never reuse or reset after interruption')
         if name in {'run', 'report'}:
             command.add_argument('--reviewed-digest', required=True)
             command.add_argument('--manifest', type=Path, required=True)
@@ -289,24 +295,27 @@ def main(argv: list[str] | None = None) -> None:
             command.add_argument('--engineering-review', help='Canonical finite required-use integration review')
     args = parser.parse_args(argv)
     try:
-        if args.operation in {'define-rights', 'define-scheduler'}:
+        if args.operation in {'define-rights', 'define-scheduler', 'define-accounting'}:
             import asyncio
 
             from aeep.assessment.repository import AssessmentRepository
             from aeep.assessment.scheduling import SchedulerDefinition
             from aeep.router import Router
 
+            from .workflow_accounting import WorkflowAccountingDefinition
             from .workflow_preparation import TaskRightsReview
 
             record = (TaskRightsReview.model_validate_json(read_bytes(args.file)) if args.operation == 'define-rights'
+                      else WorkflowAccountingDefinition.model_validate_json(read_bytes(args.file)) if args.operation == 'define-accounting'
                       else SchedulerDefinition.model_validate_json(read_bytes(args.file)))
-            kind = 'toolkit_task_rights' if args.operation == 'define-rights' else 'scheduler'
+            kind = ('toolkit_task_rights' if args.operation == 'define-rights' else
+                    'toolkit_workflow_accounting' if args.operation == 'define-accounting' else 'scheduler')
             router = Router.from_manifest(args.manifest)
             try:
                 from aeep.assessment.models import content_digest
 
                 ref = AssessmentRepository(router.store).put(kind, content_digest(record), record)
-                print(json.dumps({'rights_review_ref' if args.operation == 'define-rights' else 'scheduler_ref':ref,
+                print(json.dumps({'rights_review_ref' if args.operation == 'define-rights' else 'accounting_ref' if args.operation == 'define-accounting' else 'scheduler_ref':ref,
                                   'reviewed':False, 'execution_authorized':False}))
             finally:
                 asyncio.run(router.close())
@@ -318,54 +327,69 @@ def main(argv: list[str] | None = None) -> None:
             workflow = EvaluationWorkflow(configurations={args.configuration: WorkflowConfiguration(**files)})
             print(workflow.model_dump_json(indent=2))
             return
-        from .cli import read_json
-        version = read_json(args.workflow).get('schema_version', 'aeep.toolkit.workflow.v1')
-        if version == 'aeep.toolkit.workflow.v2':
-            preview = prepare_stack(args.workflow, args.configuration)
-            if args.operation == 'prepare' and args.write_plan is not None:
-                from .workflow_preparation import prepare_canonical
+        from .workflow_accounting import account_workflow
 
-                result = prepare_canonical(args.workflow, args.configuration,
-                    reviewed_digest=args.reviewed_digest, destination=args.write_plan,
-                    directory=args.directory)
-                print(json.dumps(result, indent=2))
-                return
+        with account_workflow(args.accounting, workflow_file=args.workflow,
+                              configuration=args.configuration, stage=args.operation,
+                              operation_key=args.operation_id,
+                              manifest=getattr(args, 'manifest', None)) as meter:
+            from .cli import read_json
+            version = read_json(args.workflow).get('schema_version', 'aeep.toolkit.workflow.v1')
+            if version == 'aeep.toolkit.workflow.v2':
+                preview = prepare_stack(args.workflow, args.configuration)
+                preview['workflow_accounting'] = meter.describe() if meter else {'coverage': 'NOT_RECORDED'}
+                if args.operation == 'prepare' and args.write_plan is not None:
+                    from .workflow_preparation import prepare_canonical
+
+                    result = prepare_canonical(args.workflow, args.configuration,
+                        reviewed_digest=args.reviewed_digest, destination=args.write_plan,
+                        directory=args.directory)
+                    result['workflow_accounting'] = meter.describe() if meter else {'coverage': 'NOT_RECORDED'}
+                    print(json.dumps(result, indent=2))
+                    return
+                if args.operation in {'plan', 'prepare'}:
+                    print(json.dumps(preview, indent=2))
+                    return
+                if preview['blockers'] or preview['assessment'] is None:
+                    raise ValueError('selected stack is not executable')
+                plan, source = Path(preview['assessment']['plan_path']), Path(preview['assessment']['source_path'])
+                backend_review = preview['assessment']['backend_review']
+            else:
+                if args.operation == 'prepare' and args.write_plan is not None:
+                    raise ValueError('canonical preparation requires an explicit v2 workflow')
+                preview, plan, source = prepare(args.workflow, args.configuration)
+                preview['workflow_accounting'] = meter.describe() if meter else {'coverage': 'NOT_RECORDED'}
+                backend_review = preview['backend_review']
             if args.operation in {'plan', 'prepare'}:
                 print(json.dumps(preview, indent=2))
                 return
-            if preview['blockers'] or preview['assessment'] is None:
-                raise ValueError('selected stack is not executable')
-            plan, source = Path(preview['assessment']['plan_path']), Path(preview['assessment']['source_path'])
-            backend_review = preview['assessment']['backend_review']
-        else:
-            if args.operation == 'prepare' and args.write_plan is not None:
-                raise ValueError('canonical preparation requires an explicit v2 workflow')
-            preview, plan, source = prepare(args.workflow, args.configuration)
-            backend_review = preview['backend_review']
-        if args.operation in {'plan', 'prepare'}:
-            print(json.dumps(preview, indent=2))
-            return
-        if args.reviewed_digest != preview['review_sha256']:
-            raise ValueError('exact selected workflow review required')
-        from .managed import main as managed_main
+            if args.reviewed_digest != preview['review_sha256']:
+                raise ValueError('exact selected workflow review required')
+            from aeep.assessment.models import AssessmentPlan
 
-        # This fixed argv delegates all execution/export and recovery to the existing path.
-        delegated = [args.operation, '--plan', str(plan), '--source', str(source),
-                     '--manifest', str(args.manifest), '--output', str(args.output)]
-        if 'scheduler' in preview:
-            delegated += ['--scheduler', preview['scheduler']['path']]
-        if args.directory is not None:
-            delegated += ['--directory', str(args.directory)]
-        if args.operation == 'run':
-            if args.stack_readiness is not None:
-                delegated += ['--stack-readiness', args.stack_readiness]
-            if args.engineering_review is not None:
-                delegated += ['--engineering-review', args.engineering_review]
-            delegated += ['--reviewed-digest', backend_review['review_sha256']]
-        else:
-            delegated += ['--report-id', args.report_id]
-        managed_main(delegated)
-    except (ValueError, OSError, ConfigurationError):
+            from .cli import read_plan_bytes
+            from .managed import main as managed_main
+            from .workflow_accounting import bind_workflow_plan
+
+            bind_workflow_plan(AssessmentPlan.model_validate_json(read_plan_bytes(plan)), args.manifest)
+
+            # This fixed argv delegates all execution/export and recovery to the existing path.
+            delegated = [args.operation, '--plan', str(plan), '--source', str(source),
+                         '--manifest', str(args.manifest), '--output', str(args.output)]
+            if 'scheduler' in preview:
+                delegated += ['--scheduler', preview['scheduler']['path']]
+            if args.directory is not None:
+                delegated += ['--directory', str(args.directory)]
+            if args.operation == 'run':
+                if args.stack_readiness is not None:
+                    delegated += ['--stack-readiness', args.stack_readiness]
+                if args.engineering_review is not None:
+                    delegated += ['--engineering-review', args.engineering_review]
+                delegated += ['--reviewed-digest', backend_review['review_sha256']]
+            else:
+                delegated += ['--report-id', args.report_id]
+            managed_main(delegated)
+    except (ValueError, OSError, ConfigurationError, sqlite3.Error):
         parser.exit(2, 'Workflow inputs or exact review are invalid. No automatic retry.\n')
 
 

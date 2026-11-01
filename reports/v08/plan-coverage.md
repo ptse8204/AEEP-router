@@ -6641,3 +6641,51 @@ six standard-library boundary probes passed. The dependency-audit database is
 now pinned from public metadata, but its84MB archive has no license/readme at
 that revision. It was not downloaded. Both task domains and all required
 integrations still need functional evidence; comparisons remain paused.
+
+
+## November 1: workflow overhead uses the existing accounting store
+
+The [accounting increment](../toolkit-v2/c13/workflow-accounting-20261101/README.md)
+adds optional scope-bound accounting to ordinary workflow inspection, preparation,
+execution and reporting commands. It uses existing reviewed authority, operation
+reservations, ledger and receipts. Scope storage is inert; definitions cannot
+create permissions or raise grants. Canonical plan links reject unrelated
+subject/recipe/mapping/environment/grant bindings. Atomic unsettled-operation
+checks reject concurrent wrappers and uncertain accounting, without replay or
+counter resets.
+
+Exclusive wrapper wall/process CPU excludes awaited canonical assessment time;
+raw intervals remain. Token/memory/cash measurements stay unknown. The report
+links the wrapper operation for resolution after command return. Measurement
+ends before its own receipt/ledger write and Router close. Component setup and
+readiness costs remain open, so this is not complete composed cost coverage.
+
+Focused checks passed134 tests. All13source gates passed on unchanged
+443b90a7157f60321646f32493f0191cd194a485494c53715ea5894712c295cc:
+1,958passes/21skips per full run,83%combined coverage,both branch floors,schemas,
+integration fixtures and packaging. The working snapshot includes preserved CI
+work, excluded from implementation commits. No real upstream SDK/task,
+model, service, Docker mutation, credential, activation, publication or release
+ran. Old approvals/counters/results and unrelated CI work are preserved.
+The all-integration and both domain gates remain open; comparisons stay paused.
+
+
+The current-source shared SDK review5136b81a is prepared and unexecuted. It
+retains64 wheels, exercises the real LangGraph/Agent Framework programs over
+at most11 owned executor calls/16 isolated engineering operations/240 reserved
+seconds, and verifies16 installed ASE source files without invoking ASE. No
+models/cash/downloads/services/Docker changes/credentials/release/cleanup.
+Inert verification, refusal without approval and standard-library boundary
+preparation passed. Unapproved fb7fc581 is superseded before execution; its
+review and historical runtimes/attempts remain. Offline docs cf63f3e6 is pending.
+
+The scanner preparation downloaded94,742,653bytes and copied5,154,075 verified
+cached bytes, with no installation/import/execution. All92 artifacts pass existing
+archive and target-dependency checks;214 packaged source files match the selected
+commit. Its generated version/native CEL helper are separately fingerprinted.
+A separate component runtime preserves incompatible OpenAI/Rich pins. This is
+preparation, not scanner functionality. Read-only Docker inventory:170images,
+13containers,25volumes,69.38GBbuild cache; no changes. Host reserve stays above50GiB.
+Current GitHub docs include CLI access on Copilot Free; account eligibility and
+pinned-Waza functionality remain unverified. No paid plan, provider substitution
+or authentication access is inferred.

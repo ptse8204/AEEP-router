@@ -216,3 +216,30 @@ own charges. Upstream timing/token defaults are compatibility artifacts and are
 excluded from measured usage. Reports retain canonical task grades and raw token
 categories. General workflow preparation/export overhead still needs complete
 accounting; no assembled-stack pass is claimed.
+
+
+## Workflow overhead accounting
+
+Add `--accounting /absolute/path/accounting.json --operation-id fresh-id` to the
+existing `workflow plan`, `prepare`, `run` or `report` command to record its wrapper
+costs in the existing ledger. The accounting file must already have an exact,
+current operator review. It binds the workflow bytes, configuration, manifest,
+source and existing grant request. Store a definition without reviewing it:
+
+```bash
+PYTHONPATH=src python3 -m aeep_toolkit workflow define-accounting \
+  --file /absolute/path/accounting.json --manifest /absolute/path/manifest.json
+```
+
+Scope storage grants no authority. A repeated operation ID, revoked review,
+changed source or unresolved prior wrapper operation stops dispatch. New IDs do
+not reconcile interrupted work or reset counters. Canonical execution retains
+its own accounting; the wrapper excludes that interval and retains both raw and
+exclusive timing. Its token/memory/cash measurements remain unknown. Measurement
+ends before its own final receipt/ledger write and Router close. The report links
+the operation ID; resolve its final measurement after command return.
+
+Old workflow definitions and commands remain valid. Without a scope, overhead
+coverage is explicitly NOT_RECORDED. This addition does not account for every
+component's installation/readiness path, or complete either domain journey.
+Those costs and actual upstream lifecycle checks remain part of the stack gate.

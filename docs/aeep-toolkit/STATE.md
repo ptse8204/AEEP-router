@@ -1,5 +1,36 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 1: workflow overhead source checks passed; current SDK review ready.**
+The [accounting increment](../../reports/toolkit-v2/c13/workflow-accounting-20261101/README.md)
+adds opt-in ordinary CLI accounting under an exact reviewed scope and existing
+grant. Canonical execution intervals are excluded from wrapper charges; raw spans,
+plan links, failures and partial costs stay. An atomic unsettled-operation check
+blocks concurrent/bypassed reservations. Unmetered commands remain compatible and
+show NOT_RECORDED. Missing usage is unknown. Finalization/persistence and component
+setup/readiness coverage remain open; no whole-workflow completion is claimed.
+
+Focused checks passed 134 tests. All 13 source checks passed on unchanged
+443b90a7157f60321646f32493f0191cd194a485494c53715ea5894712c295cc:
+1,958 passed and 21 skipped per full run, 83% coverage, both branch gates and build.
+The [check record](../../reports/toolkit-v2/c13/workflow-accounting-20261101/verification/checks.json)
+includes preserved CI work, excluded from implementation commits. No real SDK,
+model or task verifier ran. Comparative campaigns remain paused.
+
+Current-source [SDK review](../../reports/toolkit-v2/c13/workflow-accounting-20261101/composed-sdk-runtime/README.md)
+5136b81a is prepared and unexecuted. It retains a64-wheel runtime for real
+LangGraph/Agent Framework checks and an ASE installed-source check only. At most
+11 owned calls/16 isolated engineering operations/240 reserved seconds; zero
+models/cash. Inert/refusal and stdlib boundary checks passed. Unapproved fb7fc581
+is superseded before execution; do not execute it. Offline docs review cf63f3e6
+remains pending. No permission transfers to changed artifacts.
+
+Cisco's92 artifacts are cached and pass static archive/dependency checks;214
+packaged source files match the selected revision. No scanner installation or
+execution occurred. Its OpenAI2.x/Rich14.x pins require a separate component
+runtime. Current GitHub docs include CLI access in Copilot Free, but operator
+eligibility, protected setup and pinned-Waza compatibility remain unverified.
+No paid plan or alternate provider is assumed.
+
 **November 1: real evaluator scheduling source passed all software checks.**
 The [workflow-engine increment](../../reports/toolkit-v2/c13/workflow-engine-20261101/README.md)
 adds a guarded BenchmarkRunner scheduling port, actual AgentHarness child source,

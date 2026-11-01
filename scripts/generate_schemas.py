@@ -193,6 +193,7 @@ from aeep_toolkit.models import (
     ExtensionRegistry,
 )
 from aeep_toolkit.selection import SelectionEvaluation
+from aeep_toolkit.workflow_accounting import WorkflowAccountingDefinition
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_DIR = ROOT / "schemas"
@@ -241,6 +242,7 @@ MODEL_FILES = {
     "task-outcome.schema.json": TaskExecutionOutcome,
     "assessment-setup-request.schema.json": AssessmentSetupRequest,
     "assessment-scheduler.schema.json": SchedulerDefinition,
+    "toolkit-workflow-accounting.schema.json": WorkflowAccountingDefinition,
     "assessment-controlled-fixture.schema.json": ControlledFixtureRecord,
     "assessment-recipe-extension.schema.json": ExecutableRecipeExtension,
     "assessment-recipe-materialization.schema.json": RecipeMaterializationRequest,

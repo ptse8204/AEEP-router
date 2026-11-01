@@ -156,6 +156,9 @@ class AEEPAssessmentAdapter:
 
     async def evaluate(self, reviewed_plan_id: str, *, stack_readiness_ref: str | None = None,
                        engineering_review_ref: str | None = None) -> EvidenceBundle:
+        from .workflow_accounting import bind_workflow_plan
+
+        bind_workflow_plan(self.plan)
         if reviewed_plan_id != self.review_digest:
             raise ConfigurationError("exact source, plan and adapter review required")
         if verification_source_digest(self.root) != self.capabilities.implementation_sha256:
@@ -176,7 +179,10 @@ class AEEPAssessmentAdapter:
         # The service owns all authorization, reservation, execution and recovery.
         if self.plan.scheduler_digest != (self.coordinator.definition_digest if self.coordinator else None):
             raise ConfigurationError("selected evaluator is missing or changed; no fallback is inferred")
-        report = await self.service.run(self.service.enqueue(self.plan.plan_id), coordinator=self.coordinator) if self.coordinator else await self.service.run(self.service.enqueue(self.plan.plan_id))
+        from .workflow_accounting import exclude_canonical_execution
+
+        with exclude_canonical_execution():
+            report = await self.service.run(self.service.enqueue(self.plan.plan_id), coordinator=self.coordinator) if self.coordinator else await self.service.run(self.service.enqueue(self.plan.plan_id))
         bundle = self.normalize(report.report_id)
         if engineering_review_ref is not None:
             if report.qualification_passed:
@@ -188,6 +194,9 @@ class AEEPAssessmentAdapter:
         return bundle
 
     def normalize(self, report_id: str) -> EvidenceBundle:
+        from .workflow_accounting import bind_workflow_plan
+
+        bind_workflow_plan(self.plan)
         repository = self.service.repository
         report = AssessmentReport.model_validate(repository.get("report", report_id))
         if report.plan_digest != content_digest(self.plan):
@@ -364,6 +373,12 @@ class AEEPAssessmentAdapter:
                         or not set(observation.trial_refs.values()) <= {content_digest(t) for t in campaign.trials}):
                     raise ConfigurationError('upstream scheduling evidence differs from the canonical campaign')
                 self.details['external_scheduler'] = observation.model_dump(mode='json')
+        from .workflow_accounting import active_accounting
+
+        self.details['workflow_accounting'] = active_accounting() or {
+            'coverage': 'NOT_RECORDED',
+            'notice': 'No workflow overhead scope was selected; execution ledger alone is incomplete composed cost coverage.',
+        }
         return EvidenceBundle(candidate=self.source, adapter=self.capabilities, runs=tuple(runs))
 
     def _run(self, trial: BenchmarkTrial, receipt: ExecutionReceipt) -> EvaluationRun:
@@ -550,6 +565,7 @@ def comparison_summary(adapter: AEEPAssessmentAdapter, bundle: EvidenceBundle) -
         "break_even_uses": analysis.break_even_uses,
         "timing_scope": details["timing_scope"],
         "telemetry_capture": details["telemetry_capture_summary"],
+        "workflow_accounting": details.get("workflow_accounting", {"coverage": "NOT_RECORDED"}),
     }
     if 'external_scheduler' in details:
         summary['external_scheduler'] = details['external_scheduler']

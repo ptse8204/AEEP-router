@@ -233,6 +233,7 @@ def render(summary: dict[str, Any], format: str) -> str:
             ("Uncertainty intervals", "savings_interval"),
             ("Separate worker conditions", "condition_comparisons"),
             ("Utility, guardrails and challengers", "utility_evidence"),
+            ("Workflow overhead accounting", "workflow_accounting"),
             ("Assessment usage, including known subtotals", "measured_usage"),
             ("Measurement coverage", "measurement_coverage"),
             ("Assessment resource break-even uses", "break_even_uses"),

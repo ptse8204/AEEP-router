@@ -2497,3 +2497,22 @@ No new scheduler service, database, provider or graph engine is introduced.
 Source fixtures do not establish actual upstream execution. New software and
 models still require applicable exact authority, and the complete-stack barrier
 continues to block comparative campaigns.
+
+
+## D138 — Account for the operator wrapper without another cost store
+
+Use the existing assessment grants, operation ledger and receipts for workflow
+inspection, preparation and export overhead. An optional, exact reviewed scope
+binds source, files, selection and existing authority. No grant or permission is
+created by its storage or selection. Keep unmetered commands compatible and
+label their missing overhead coverage.
+
+Exclude the awaited canonical assessment interval from wrapper wall/process CPU;
+retain raw spans and all inner charges. Do not turn required legacy vector zeros
+into measured tokens, memory or cash. Measurement ends before its own persistence
+and Router close. Canonical plan links prevent charging an unrelated grant or
+definition. Check unresolved operations and reserve atomically so concurrent
+wrappers cannot bypass recovery. No retries or counter resets are added.
+
+This source increment does not complete component setup/readiness accounting,
+real SDK execution or either domain journey. The all-integration barrier remains.

@@ -239,10 +239,17 @@ class AssessmentRepository:
                     )
         return grant
 
-    def reserve(self, plan: AssessmentPlan | AssessmentPlanningRequest | RecipeMaterializationRequest | ConformanceProbeRequest, operation_id: str, limits: AssessmentLimits, *, stage: str = "operation") -> None:
+    def reserve(self, plan: AssessmentPlan | AssessmentPlanningRequest | RecipeMaterializationRequest | ConformanceProbeRequest, operation_id: str, limits: AssessmentLimits, *, stage: str = "operation", require_settled_plan: bool = False) -> None:
         # Recheck grant and review state while holding the same write transaction as the debit.
         with self.store._immediate_transaction() as connection:
             grant = self.authorize(plan)
+            if require_settled_plan and connection.execute(
+                "SELECT 1 FROM assessment_operations operation JOIN assessment_records started "
+                "ON started.kind='operation_start' AND started.id=operation.id "
+                "WHERE operation.state='reserved' AND json_extract(started.payload_json, '$.plan_id')=? LIMIT 1",
+                (plan.plan_id,),
+            ).fetchone():
+                raise ConfigurationError("workflow has unresolved accounting; inspect before further work")
             job = connection.execute(
                 "SELECT state FROM assessment_jobs WHERE plan_id=? ORDER BY rowid DESC LIMIT 1",
                 (plan.plan_id,),

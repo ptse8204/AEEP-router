@@ -1,0 +1,30 @@
+{
+  "review_sha256": "5136b81a2ab2bb44768b5a2fb7293095b177dbd249fb824b1aae27e5bcc3f41b",
+  "checks": [
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "reports/toolkit-v2/c13/workflow-accounting-20261101/composed-sdk-runtime/run-review.py"
+      ],
+      "returncode": 0,
+      "stdout": "{\"review_sha256\": \"5136b81a2ab2bb44768b5a2fb7293095b177dbd249fb824b1aae27e5bcc3f41b\", \"wheel_count\": 64, \"installed\": false, \"executed\": false}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "reports/toolkit-v2/c13/workflow-accounting-20261101/composed-sdk-runtime/run-review.py",
+        "--execute-approved",
+        "0000000000000000000000000000000000000000000000000000000000000000"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-accounting-20261101/composed-sdk-runtime/run-review.py\", line 218, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-accounting-20261101/composed-sdk-runtime/run-review.py\", line 208, in main\n    assert args.execute_approved == identity\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  ],
+  "no_runtime_created": true,
+  "no_execution_started": true,
+  "models": 0,
+  "optional_sdk_imported": false,
+  "preparation_only": true
+}

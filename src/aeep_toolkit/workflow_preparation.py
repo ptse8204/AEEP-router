@@ -210,6 +210,9 @@ def prepare_canonical(
             plan = AssessmentPlan.model_validate(repository.get("plan", result.plan_id))
             if content_digest(plan) != result.plan_digest:
                 raise ConfigurationError("prepared canonical plan changed")
+            from .workflow_accounting import bind_workflow_plan
+
+            bind_workflow_plan(plan, Path(preview["preparation"]["manifest_path"]))
             return plan, result
         finally:
             await router.close()

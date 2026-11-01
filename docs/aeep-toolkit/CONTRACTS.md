@@ -69,3 +69,14 @@ identities or telemetry. Twenty-six focused checks pass on integrated source;
 full verification passed; see `reports/toolkit-v2/c02/summary.json`. Canonical
 evidence resolution belongs to C04/C05; no reference is trusted merely because
 these schemas accept it.
+
+
+The optional `aeep.toolkit.workflow-accounting.v1` scope binds exact workflow,
+manifest and source bytes, selected configurations/stages and an existing grant
+request. Its review joins the atomic reservation check; it grants no authority.
+The ordinary CLI accepts `--accounting` and `--operation-id`. No existing workflow
+schema or unmetered command requires these flags. Unmetered overhead stays
+NOT_RECORDED. A wrapper receipt records exclusive wall/process CPU, retains raw
+intervals, and links canonical plan definitions. Nested assessment time is
+excluded. Missing token/memory/cash evidence stays unknown. Its finalization
+boundary is explicit, and unresolved reservations prohibit blind retry.

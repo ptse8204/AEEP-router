@@ -1,0 +1,1109 @@
+{
+  "purpose": "Existing wheel/archive guards plus target-specific metadata closure checks; no execution",
+  "checks": [
+    {
+      "name": "aiohappyeyeballs",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "aiohttp",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "aiohappyeyeballs>=2.5.0",
+          "compatible": true
+        },
+        {
+          "requirement": "aiosignal>=1.4.0",
+          "compatible": true
+        },
+        {
+          "requirement": "attrs>=17.3.0",
+          "compatible": true
+        },
+        {
+          "requirement": "frozenlist>=1.1.1",
+          "compatible": true
+        },
+        {
+          "requirement": "multidict<7.0,>=4.5",
+          "compatible": true
+        },
+        {
+          "requirement": "propcache>=0.2.0",
+          "compatible": true
+        },
+        {
+          "requirement": "yarl<2.0,>=1.17.0",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "aiosignal",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "frozenlist>=1.1.0",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "annotated-doc",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "annotated-types",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "anthropic",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "anyio<5,>=3.5.0",
+          "compatible": true
+        },
+        {
+          "requirement": "distro<2,>=1.7.0",
+          "compatible": true
+        },
+        {
+          "requirement": "docstring-parser<1,>=0.15",
+          "compatible": true
+        },
+        {
+          "requirement": "httpx<1,>=0.25.0",
+          "compatible": true
+        },
+        {
+          "requirement": "jiter<1,>=0.4.0",
+          "compatible": true
+        },
+        {
+          "requirement": "pydantic<3,>=1.9.0",
+          "compatible": true
+        },
+        {
+          "requirement": "sniffio",
+          "compatible": true
+        },
+        {
+          "requirement": "typing-extensions<5,>=4.14",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "anyio",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "idna>=2.8",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "attrs",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "certifi",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "cffi",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "pycparser; implementation_name != \"PyPy\"",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "charset-normalizer",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "cisco-ai-skill-scanner",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "anthropic<1,>=0.50",
+          "compatible": true
+        },
+        {
+          "requirement": "click>=8.3.3",
+          "compatible": true
+        },
+        {
+          "requirement": "confusable-homoglyphs<4,>=3.3",
+          "compatible": true
+        },
+        {
+          "requirement": "fastapi<1,>=0.115",
+          "compatible": true
+        },
+        {
+          "requirement": "httpx<1,>=0.27",
+          "compatible": true
+        },
+        {
+          "requirement": "litellm<2,>=1.89.7",
+          "compatible": true
+        },
+        {
+          "requirement": "magika<2,>=1.0",
+          "compatible": true
+        },
+        {
+          "requirement": "oletools<1,>=0.60",
+          "compatible": true
+        },
+        {
+          "requirement": "openai<3,>=2.0",
+          "compatible": true
+        },
+        {
+          "requirement": "pdfid<2,>=1.1",
+          "compatible": true
+        },
+        {
+          "requirement": "protobuf<7,>=5.29",
+          "compatible": true
+        },
+        {
+          "requirement": "pydantic<3,>=2.10",
+          "compatible": true
+        },
+        {
+          "requirement": "pyjwt<3,>=2.15.0",
+          "compatible": true
+        },
+        {
+          "requirement": "python-dotenv<2,>=1.0",
+          "compatible": true
+        },
+        {
+          "requirement": "python-frontmatter<2,>=1.1",
+          "compatible": true
+        },
+        {
+          "requirement": "python-multipart<0.1,>=0.0.31",
+          "compatible": true
+        },
+        {
+          "requirement": "pyyaml<7,>=6.0",
+          "compatible": true
+        },
+        {
+          "requirement": "rich<15,>=14.0",
+          "compatible": true
+        },
+        {
+          "requirement": "tabulate<1,>=0.9",
+          "compatible": true
+        },
+        {
+          "requirement": "textual<9,>=7.0",
+          "compatible": true
+        },
+        {
+          "requirement": "urllib3<3,>=2.8.0",
+          "compatible": true
+        },
+        {
+          "requirement": "uvicorn[standard]<1,>=0.34",
+          "compatible": true
+        },
+        {
+          "requirement": "yara-x<2,>=1.10",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "click",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "colorclass",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "confusable-homoglyphs",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "cryptography",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "cffi>=2.0.0 ; platform_python_implementation != 'PyPy'",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "distro",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "docstring-parser",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "easygui",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "fastapi",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "starlette>=0.46.0",
+          "compatible": true
+        },
+        {
+          "requirement": "pydantic>=2.9.0",
+          "compatible": true
+        },
+        {
+          "requirement": "typing-extensions>=4.8.0",
+          "compatible": true
+        },
+        {
+          "requirement": "typing-inspection>=0.4.2",
+          "compatible": true
+        },
+        {
+          "requirement": "annotated-doc>=0.0.2",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "fastuuid",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "filelock",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "flatbuffers",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "frozenlist",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "fsspec",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "h11",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "hf-xet",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "httpcore",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "certifi",
+          "compatible": true
+        },
+        {
+          "requirement": "h11>=0.16",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "httptools",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "httpx",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "anyio",
+          "compatible": true
+        },
+        {
+          "requirement": "certifi",
+          "compatible": true
+        },
+        {
+          "requirement": "httpcore==1.*",
+          "compatible": true
+        },
+        {
+          "requirement": "idna",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "huggingface-hub",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "filelock>=3.10.0",
+          "compatible": true
+        },
+        {
+          "requirement": "fsspec>=2023.5.0",
+          "compatible": true
+        },
+        {
+          "requirement": "hf-xet<2.0.0,>=1.4.3; platform_machine == \"x86_64\" or platform_machine == \"amd64\" or platform_machine == \"AMD64\" or platform_machine == \"arm64\" or platform_machine == \"aarch64\"",
+          "compatible": true
+        },
+        {
+          "requirement": "httpx<1,>=0.23.0",
+          "compatible": true
+        },
+        {
+          "requirement": "packaging>=20.9",
+          "compatible": true
+        },
+        {
+          "requirement": "pyyaml>=5.1",
+          "compatible": true
+        },
+        {
+          "requirement": "tqdm>=4.42.1",
+          "compatible": true
+        },
+        {
+          "requirement": "typer",
+          "compatible": true
+        },
+        {
+          "requirement": "typing-extensions>=4.1.0",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "idna",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "importlib-metadata",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "zipp >=3.20",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "jinja2",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "MarkupSafe>=2.0",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "jiter",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "jsonschema",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "attrs>=22.2.0",
+          "compatible": true
+        },
+        {
+          "requirement": "jsonschema-specifications>=2023.03.6",
+          "compatible": true
+        },
+        {
+          "requirement": "referencing>=0.28.4",
+          "compatible": true
+        },
+        {
+          "requirement": "rpds-py>=0.25.0",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "jsonschema-specifications",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "referencing>=0.31.0",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "linkify-it-py",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "uc-micro-py",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "litellm",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "fastuuid>=0.14.0,<1.0",
+          "compatible": true
+        },
+        {
+          "requirement": "httpx>=0.28.0,<1.0",
+          "compatible": true
+        },
+        {
+          "requirement": "openai>=2.20.0,<3.0.0",
+          "compatible": true
+        },
+        {
+          "requirement": "python-dotenv>=1.0.0,<2.0",
+          "compatible": true
+        },
+        {
+          "requirement": "tiktoken>=0.8.0,<1.0",
+          "compatible": true
+        },
+        {
+          "requirement": "importlib-metadata>=8.0.0,<9.0",
+          "compatible": true
+        },
+        {
+          "requirement": "tokenizers>=0.21.0,<1.0",
+          "compatible": true
+        },
+        {
+          "requirement": "click>=8.0.0,<9.0",
+          "compatible": true
+        },
+        {
+          "requirement": "jinja2>=3.1.6,<4.0",
+          "compatible": true
+        },
+        {
+          "requirement": "aiohttp>=3.14.2,<4.0",
+          "compatible": true
+        },
+        {
+          "requirement": "pydantic>=2.10.0,<3.0.0",
+          "compatible": true
+        },
+        {
+          "requirement": "jsonschema>=4.0.0,<5.0",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "magika",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "click>=8.1.7",
+          "compatible": true
+        },
+        {
+          "requirement": "onnxruntime>=1.21.0; python_version == '3.13'",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "markdown-it-py",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "mdurl~=0.1",
+          "compatible": true
+        },
+        {
+          "requirement": "linkify-it-py>=1,<3 ; extra == \"linkify\"",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "markupsafe",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "mdit-py-plugins",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "markdown-it-py>=2.0.0,<5.0.0",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "mdurl",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "msoffcrypto-tool",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "cryptography (>=39.0)",
+          "compatible": true
+        },
+        {
+          "requirement": "olefile (>=0.46)",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "multidict",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "numpy",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "olefile",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "oletools",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "pyparsing <4,>=2.1.0",
+          "compatible": true
+        },
+        {
+          "requirement": "olefile >=0.46",
+          "compatible": true
+        },
+        {
+          "requirement": "easygui",
+          "compatible": true
+        },
+        {
+          "requirement": "colorclass",
+          "compatible": true
+        },
+        {
+          "requirement": "pcodedmp >=1.2.5",
+          "compatible": true
+        },
+        {
+          "requirement": "msoffcrypto-tool ; platform_python_implementation != \"PyPy\" or (python_version >= \"3\" and platform_system != \"Windows\" and platform_system != \"Darwin\")",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "onnxruntime",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "flatbuffers",
+          "compatible": true
+        },
+        {
+          "requirement": "numpy>=1.21.6",
+          "compatible": true
+        },
+        {
+          "requirement": "packaging",
+          "compatible": true
+        },
+        {
+          "requirement": "protobuf",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "openai",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "anyio<5,>=3.5.0",
+          "compatible": true
+        },
+        {
+          "requirement": "distro<2,>=1.7.0",
+          "compatible": true
+        },
+        {
+          "requirement": "httpx<1,>=0.23.0",
+          "compatible": true
+        },
+        {
+          "requirement": "jiter<1,>=0.10.0",
+          "compatible": true
+        },
+        {
+          "requirement": "pydantic<3,>=1.9.0",
+          "compatible": true
+        },
+        {
+          "requirement": "sniffio",
+          "compatible": true
+        },
+        {
+          "requirement": "tqdm>4",
+          "compatible": true
+        },
+        {
+          "requirement": "typing-extensions<5,>=4.11",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "packaging",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "pcodedmp",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "oletools (>=0.54)",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "pdfid",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "platformdirs",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "propcache",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "protobuf",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "pycparser",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "pydantic",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "annotated-types>=0.6.0",
+          "compatible": true
+        },
+        {
+          "requirement": "pydantic-core==2.41.5",
+          "compatible": true
+        },
+        {
+          "requirement": "typing-extensions>=4.14.1",
+          "compatible": true
+        },
+        {
+          "requirement": "typing-inspection>=0.4.2",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "pydantic-core",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "typing-extensions>=4.14.1",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "pygments",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "pyjwt",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "pyparsing",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "python-dotenv",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "python-frontmatter",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "PyYAML",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "python-multipart",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "pyyaml",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "referencing",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "attrs>=22.2.0",
+          "compatible": true
+        },
+        {
+          "requirement": "rpds-py>=0.7.0",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "regex",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "requests",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "charset_normalizer<4,>=2",
+          "compatible": true
+        },
+        {
+          "requirement": "idna<4,>=2.5",
+          "compatible": true
+        },
+        {
+          "requirement": "urllib3<3,>=1.26",
+          "compatible": true
+        },
+        {
+          "requirement": "certifi>=2023.5.7",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "rich",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "markdown-it-py (>=2.2.0)",
+          "compatible": true
+        },
+        {
+          "requirement": "pygments (>=2.13.0,<3.0.0)",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "rpds-py",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "shellingham",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "sniffio",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "starlette",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "anyio<5,>=3.6.2",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "tabulate",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "textual",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "markdown-it-py[linkify] (>=2.1.0)",
+          "compatible": true
+        },
+        {
+          "requirement": "mdit-py-plugins",
+          "compatible": true
+        },
+        {
+          "requirement": "platformdirs (>=3.6.0,<5)",
+          "compatible": true
+        },
+        {
+          "requirement": "pygments (>=2.19.2,<3.0.0)",
+          "compatible": true
+        },
+        {
+          "requirement": "rich (>=14.2.0)",
+          "compatible": true
+        },
+        {
+          "requirement": "typing-extensions (>=4.4.0,<5.0.0)",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "tiktoken",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "regex>=2022.1.18",
+          "compatible": true
+        },
+        {
+          "requirement": "requests>=2.26.0",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "tokenizers",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "huggingface-hub>=0.16.4,<2.0",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "tqdm",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "typer",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "click>=8.0.0",
+          "compatible": true
+        },
+        {
+          "requirement": "shellingham>=1.3.0",
+          "compatible": true
+        },
+        {
+          "requirement": "rich>=10.11.0",
+          "compatible": true
+        },
+        {
+          "requirement": "annotated-doc>=0.0.2",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "typing-extensions",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "typing-inspection",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "typing-extensions>=4.12.0",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "uc-micro-py",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "urllib3",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "uvicorn",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "click>=7.0",
+          "compatible": true
+        },
+        {
+          "requirement": "h11>=0.8",
+          "compatible": true
+        },
+        {
+          "requirement": "httptools>=0.6.3; extra == 'standard'",
+          "compatible": true
+        },
+        {
+          "requirement": "python-dotenv>=0.13; extra == 'standard'",
+          "compatible": true
+        },
+        {
+          "requirement": "pyyaml>=5.1; extra == 'standard'",
+          "compatible": true
+        },
+        {
+          "requirement": "uvloop>=0.15.1; (sys_platform != 'win32' and (sys_platform != 'cygwin' and platform_python_implementation != 'PyPy')) and extra == 'standard'",
+          "compatible": true
+        },
+        {
+          "requirement": "watchfiles>=0.20; extra == 'standard'",
+          "compatible": true
+        },
+        {
+          "requirement": "websockets>=10.4; extra == 'standard'",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "uvloop",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "watchfiles",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "anyio>=3.0.0",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "websockets",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "yara-x",
+      "archive_checks": true,
+      "requirements": []
+    },
+    {
+      "name": "yarl",
+      "archive_checks": true,
+      "requirements": [
+        {
+          "requirement": "idna>=2.0",
+          "compatible": true
+        },
+        {
+          "requirement": "multidict>=4.0",
+          "compatible": true
+        },
+        {
+          "requirement": "propcache>=0.2.1",
+          "compatible": true
+        }
+      ]
+    },
+    {
+      "name": "zipp",
+      "archive_checks": true,
+      "requirements": []
+    }
+  ],
+  "issues": [],
+  "bound_archive_guard_reservation_bytes": 1343924424,
+  "command_count": 47,
+  "all_dependencies_compatible": true,
+  "host_installer_target_support": "The existing process-free host installer refuses cross-platform Linux targets and dependency extras. This record does not bypass that guard or authorize a Docker build.",
+  "installed": false,
+  "executed": false,
+  "models": 0
+}

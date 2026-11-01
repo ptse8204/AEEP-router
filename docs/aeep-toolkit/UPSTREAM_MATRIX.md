@@ -1,5 +1,13 @@
 # Upstream source review and reuse decisions
 
+Current delivery follows [STACK_COMPLETION.md](STACK_COMPLETION.md): every
+required integration and both document/data and software workflows need current
+functional evidence before comparisons resume. The C01 DEFER labels and older
+telemetry choices below are historical decisions, not permission to omit those
+integrations. Langfuse is now selected for private observability. Components
+remain individually selectable; installation, execution permission and usefulness
+are separate from implementation. Waza still lacks supported backend access.
+
 October 19 telemetry correction: D65 reuses the existing Codex 0.154.0 native
 OTLP collector and AEEP execution journal. No new telemetry dependency or hosted
 backend is selected. All 564 old token captures passed a retrospective consistency

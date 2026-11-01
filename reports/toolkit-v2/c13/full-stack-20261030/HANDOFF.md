@@ -1,3 +1,57 @@
+# Active November 1 handoff — workflow source committed; SDK approval pending
+
+Use /Users/edwintse/Documents/aeep-toolkit-v2, codex/toolkit-v2-implementation.
+The default aeep-agent-router checkout is different. Recover from STATE and the
+latest packet, not old pending-operation paragraphs retained below.
+
+The scheduler increment is committed as c1336e1. The next accounting increment
+has passed all13 checks on unchanged443b90a7:1,958tests/21skips per full run,
+83%combined coverage,both branch gates and build. Session46956 completed; do not
+repeat tests without a new source change. The wrapper uses the existing ledger,
+atomic unsettled-operation checks and exact source/grant/plan links. It excludes
+canonical execution intervals and explicitly labels unknown usage/finalization
+limits. Setup/readiness accounting and complete domain journeys remain open.
+
+Current SDK review5136b81a2ab2bb44768b5a2fb7293095b177dbd249fb824b1aae27e5bcc3f41b
+is prepared and unexecuted at ../workflow-accounting-20261101/composed-sdk-runtime/.
+It binds frozen443b90a7, the new wheel and63 cached dependencies. After exact
+approval, create the matching operator-approval.json record and run its existing
+run-review.py --execute-approved digest. Do not regenerate the review after
+asking: disk observations are part of the installation digest. One attempt per
+component; keep the runtime/receipts and allow independent SDK/package work after
+a terminal component failure. No models, services, Docker changes or cleanup.
+It verifies real LangGraph/Agent Framework and ASE source identity only, not ASE's
+controlled-worker journey or complete ordinary workflow composition. Older
+unapproved fb7fc581 is superseded before execution and its driver rejects it.
+
+Offline docs cf63f3e642bf6630c682dd553e55558ebd31ce3bdcc5c5681b17c1fe81b97761
+is pending at ../workflow-engine-20261101/docs-review/. After exact approval use
+its existing runner. Maximum3 Markdown-only attempts; tools/config/profile/list
+stay fixed. Retain logs and owned reusable tooling. It is independent of SDKs.
+
+Cisco's92 Linux/arm64 wheels are cached and statically checked, not installed.
+Read ../workflow-accounting-20261101/scanner-preparation/. All214 tracked packaged
+source files match selectedc3d7fd9f; generated/native helper bytes are fingerprinted.
+Target retainedimage35dc1bcb/Python3.13.15. Build a concrete contained execution
+review before provisioning; the host installer correctly rejects cross-platform
+and dependency-extra closure. No old image/container/volume may be removed.
+
+Waza supported access remains unverified. Current official docs include Copilot
+Free CLI; selected source accepts auto/empty model with reasoning effort omitted.
+No paid subscription is assumed. Prepare exact artifacts, tool policy and native
+protected operator setup before sign-in; never capture authentication. The six
+SkillsBench tasks still need rights/runtime/verifier/reference work; the external
+PDF/XLSX inputs and Trivy database have unresolved use rights. All required
+integration/domain gates remain open; comparisons stay paused.
+
+Preserve unrelated CI edits in .github, CONTRIBUTING, pyproject, test_ci_checkout
+and interleaved STATE/coverage prose. Stage own STATE/coverage changes through an
+index projection. Do not stage private cache wheels, databases or owned workspaces.
+Preserve historical results, charges, approvals and exposure exclusions. No push,
+activation, publication or release is inferred.
+
+---
+
 # Active November 1 implementation and source freeze
 
 Current work is the workflow-engine-20261101 increment. Source
