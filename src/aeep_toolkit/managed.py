@@ -45,13 +45,13 @@ from aeep_toolkit.telemetry import bound_journal, candidate_loading, capture_sum
 def plan_preview(plan: AssessmentPlan, source: SourcePin) -> dict[str, Any]:
     """Pure file-based review; no Router, database, recovery or host initialization."""
     capabilities = AdapterCapabilities(
-        adapter_id="aeep.benchmark-runner.codex",
+        adapter_id="aeep.benchmark-runner.codex:external-scheduler" if plan.scheduler_digest else "aeep.benchmark-runner.codex",
         implementation_sha256=verification_source_digest(
             Path(verification.__file__).resolve().parents[3]
         ),
         hosts=("codex",),
         candidate_types=("skill",),
-        optional_invocation=True,
+        optional_invocation=plan.scheduler_digest is None,
         telemetry=("tokens", "agent_wall_seconds", "verification_wall_seconds"),
         containment="unverified",
     )
@@ -73,8 +73,9 @@ def plan_preview(plan: AssessmentPlan, source: SourcePin) -> dict[str, Any]:
 class AEEPAssessmentAdapter:
     """Bind one existing plan; a source pin is attribution, never authorization."""
 
-    def __init__(self, service: AssessmentService, plan_id: str, source: SourcePin):
+    def __init__(self, service: AssessmentService, plan_id: str, source: SourcePin, *, coordinator: Any = None):
         self.service, self.source = service, source.model_copy(deep=True)
+        self.coordinator = coordinator
         self.root = Path(verification.__file__).resolve().parents[3]
         self.plan = AssessmentPlan.model_validate(service.repository.get("plan", plan_id))
         if not self.plan.plan_id or Path(self.plan.plan_id).name != self.plan.plan_id or self.plan.plan_id in {'.', '..'}:
@@ -173,7 +174,9 @@ class AEEPAssessmentAdapter:
             require_stack_complete(self.service.repository, stack_readiness_ref,
                                    source_digest=self.capabilities.implementation_sha256)
         # The service owns all authorization, reservation, execution and recovery.
-        report = await self.service.run(self.service.enqueue(self.plan.plan_id))
+        if self.plan.scheduler_digest != (self.coordinator.definition_digest if self.coordinator else None):
+            raise ConfigurationError("selected evaluator is missing or changed; no fallback is inferred")
+        report = await self.service.run(self.service.enqueue(self.plan.plan_id), coordinator=self.coordinator) if self.coordinator else await self.service.run(self.service.enqueue(self.plan.plan_id))
         bundle = self.normalize(report.report_id)
         if engineering_review_ref is not None:
             if report.qualification_passed:
@@ -343,6 +346,24 @@ class AEEPAssessmentAdapter:
             "timing_scope": "Trial wall time includes routing and preflight; separately measured grading is excluded by BenchmarkRunner.",
             "notice": "All primary and auxiliary costs remain in the canonical ledger. Normalization alone is not efficacy or release qualification.",
         }
+        if self.plan.scheduler_digest is not None:
+            from .ase_scheduler import SchedulerObservation
+
+            try:
+                scheduling_payload = repository.get("scheduler_observation", self.plan.plan_id)
+            except ConfigurationError:
+                self.details['external_scheduler'] = {'definition_ref':self.plan.scheduler_digest,
+                                                       'completion':'UNKNOWN'}
+            else:
+                observation = SchedulerObservation.model_validate(scheduling_payload)
+                process = ExecutionReceipt.model_validate(repository.get(
+                    'scheduler_receipt', self.plan.plan_id + ':external-scheduler'))
+                if (observation.definition_ref != self.plan.scheduler_digest
+                        or content_digest(process) != observation.process_receipt_ref
+                        or process.execution_success is not True
+                        or not set(observation.trial_refs.values()) <= {content_digest(t) for t in campaign.trials}):
+                    raise ConfigurationError('upstream scheduling evidence differs from the canonical campaign')
+                self.details['external_scheduler'] = observation.model_dump(mode='json')
         return EvidenceBundle(candidate=self.source, adapter=self.capabilities, runs=tuple(runs))
 
     def _run(self, trial: BenchmarkTrial, receipt: ExecutionReceipt) -> EvaluationRun:
@@ -530,6 +551,9 @@ def comparison_summary(adapter: AEEPAssessmentAdapter, bundle: EvidenceBundle) -
         "timing_scope": details["timing_scope"],
         "telemetry_capture": details["telemetry_capture_summary"],
     }
+    if 'external_scheduler' in details:
+        summary['external_scheduler'] = details['external_scheduler']
+        summary['limitations'].append('Upstream scheduler timing/token defaults are compatibility artifacts. Only canonical AEEP receipts supply measured usage; the upstream JSON assertion checks the existing protected grade certificate.')
     summary["limitations"].extend([
         f"Canonical campaign: {details['canonical_trials']} trials; {len(bundle.runs)} normalized primary trials; "
         f"{len(details['normalization_gaps'])} normalization gaps; {len(details['auxiliary_trial_ids'])} auxiliary trials.",
@@ -554,6 +578,7 @@ def main(argv: list[str] | None = None) -> None:
         command = commands.add_parser(name)
         command.add_argument("--plan", type=Path, required=True)
         command.add_argument("--source", type=Path, required=True)
+        command.add_argument("--scheduler", type=Path, help="Exact reviewed external scheduling definition")
         if name != "plan":
             command.add_argument("--manifest", type=Path, required=True)
             command.add_argument("--directory", type=Path)
@@ -568,6 +593,15 @@ def main(argv: list[str] | None = None) -> None:
     try:
         plan = AssessmentPlan.model_validate_json(read_plan_bytes(args.plan))
         source = SourcePin.model_validate(read_json(args.source))
+        scheduler = None
+        if args.scheduler is not None:
+            from aeep.assessment.scheduling import SchedulerDefinition
+
+            scheduler = SchedulerDefinition.model_validate(read_json(args.scheduler))
+            if content_digest(scheduler) != plan.scheduler_digest:
+                raise ConfigurationError("scheduler file differs from the frozen plan")
+        if args.operation == "run" and bool(plan.scheduler_digest) != (scheduler is not None):
+            raise ConfigurationError("selected evaluator requires its bound scheduler file")
         preview = plan_preview(plan, source)
         if args.operation == "plan":
             print(json.dumps(preview, indent=2))
@@ -584,7 +618,12 @@ def main(argv: list[str] | None = None) -> None:
                     router,
                     args.directory or args.manifest.resolve().parent / ".aeep" / "assessments",
                 )
-                adapter = AEEPAssessmentAdapter(service, plan.plan_id, source)
+                coordinator = None
+                if scheduler is not None:
+                    from .ase_scheduler import AgentSkillEvalCoordinator
+
+                    coordinator = AgentSkillEvalCoordinator(service.repository, plan)
+                adapter = AEEPAssessmentAdapter(service, plan.plan_id, source, coordinator=coordinator)
                 if content_digest(adapter.plan) != content_digest(plan):
                     raise ConfigurationError("supplied plan differs from canonical record")
                 args.output.mkdir(mode=0o700, parents=False, exist_ok=False)

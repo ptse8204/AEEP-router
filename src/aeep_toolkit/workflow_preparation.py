@@ -102,7 +102,7 @@ def prepare_canonical(
     selected = workflow.configurations[configuration]
     if (
         preview["review_sha256"] != reviewed_digest
-        or selected.evaluator != "managed"
+        or selected.evaluator not in {"managed", "agent-skill-eval"}
         or selected.preparation is None
         or preview["preparation"] is None
     ):
@@ -236,6 +236,8 @@ def prepare_canonical(
     target["asset_root"] = str((root / selected.asset_root).absolute())
     for name in ("benchmark", "benchmark_recipe"):
         target[name]["path"] = str(_read(WorkflowFile.model_validate(target[name]), root)[0])
+    if target.get("scheduler") is not None:
+        target["scheduler"]["path"] = str(_read(WorkflowFile.model_validate(target["scheduler"]), root)[0])
     target["preparation"] = None
     target["assessment"] = {
         name: {"path": str(path), "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}

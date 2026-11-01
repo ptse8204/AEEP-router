@@ -70,6 +70,7 @@ from .recipes import (
 )
 from .reporting import apply_assessment_costs, fit_report
 from .repository import AssessmentRepository
+from .scheduling import TrialCoordinator, require_scheduler
 
 
 def benchmark_route(spec: ExecutorSpec) -> BenchmarkRoute:
@@ -169,6 +170,7 @@ class AssessmentService:
         _proposal_operation_id: str | None = None,
         case_set_id: str | None = None,
         integration_case_set_id: str | None = None,
+        scheduler_digest: str | None = None,
         experiment: IncrementalExperiment | None = None,
         pilot: PilotPolicy | None = None,
         pilot_report_id: str | None = None,
@@ -318,8 +320,16 @@ class AssessmentService:
             pilot_report = AssessmentReport.model_validate(self.repository.get("report", pilot_report_id))
             preceding_pilot = AssessmentPlan.model_validate(self.repository.get("plan", pilot_report.plan_digest))
         pilot_digest = self.repository.put("pilot_policy", content_digest(pilot), pilot) if pilot else None
+        scheduler = require_scheduler(self.repository, scheduler_digest) if scheduler_digest else None
+        if scheduler is not None and (integration_cases is None or len(cases) > scheduler.maximum_requests):
+            raise ConfigurationError("external scheduler requires its bounded integration cases")
+        if scheduler is not None and any(
+                path in mapping.executable_dependencies and mapping.executable_dependencies[path] != value
+                for path, value in scheduler.executable_dependencies.items()):
+            raise ConfigurationError("scheduler cannot replace canonical executable dependencies")
         plan = AssessmentPlan(
-            schema_version="assessment.plan.v7" if integration_cases else "assessment.plan.v6" if pilot_report else "assessment.plan.v5" if pilot else "assessment.plan.v4" if experiment else "assessment.plan.v3" if case_set is not None else "assessment.plan.v2",
+            schema_version="assessment.plan.v8" if scheduler else "assessment.plan.v7" if integration_cases else "assessment.plan.v6" if pilot_report else "assessment.plan.v5" if pilot else "assessment.plan.v4" if experiment else "assessment.plan.v3" if case_set is not None else "assessment.plan.v2",
+            scheduler_digest=scheduler_digest,
             pilot=pilot,
             pilot_report_digest=content_digest(pilot_report) if pilot_report else None,
             recipe_case_set_digest=content_digest(case_set) if case_set is not None else None,
@@ -336,9 +346,9 @@ class AssessmentService:
             candidate_id=candidate_id,
             baseline_id=baseline_id,
             reference_id=reference.id if reference else None,
-            definition_digests=[*([experiment.three_way_access_digest] if experiment and experiment.three_way_access_digest else []), recipe_digest, mapping_digest, environment_digest, comparison_digest, *([content_digest(integration_cases)] if integration_cases else []), *([content_digest(case_set)] if case_set else []), *([pilot_digest] if pilot_digest else []), *([content_digest(pilot_report), content_digest(preceding_pilot)] if pilot_report and preceding_pilot else [])],
+            definition_digests=[*([scheduler_digest] if scheduler_digest else []), *([experiment.three_way_access_digest] if experiment and experiment.three_way_access_digest else []), recipe_digest, mapping_digest, environment_digest, comparison_digest, *([content_digest(integration_cases)] if integration_cases else []), *([content_digest(case_set)] if case_set else []), *([pilot_digest] if pilot_digest else []), *([content_digest(pilot_report), content_digest(preceding_pilot)] if pilot_report and preceding_pilot else [])],
             route_fingerprints={item.id: behavior_fingerprint(item) for item in mapping.subjects},
-            executable_dependencies=mapping.executable_dependencies,
+            executable_dependencies={**mapping.executable_dependencies, **(scheduler.executable_dependencies if scheduler else {})},
             suite=BenchmarkSuite(
                 suite_id=plan_id,
                 domain=recipe.capability,
@@ -743,6 +753,12 @@ class AssessmentService:
 
     def _verify_dependencies(self, plan: AssessmentPlan) -> ReviewedMapping:
         verify_dependencies(plan.executable_dependencies)
+        if plan.scheduler_digest is not None:
+            scheduler = require_scheduler(self.repository, plan.scheduler_digest)
+            if (len(plan.suite.cases) > scheduler.maximum_requests
+                    or any(plan.executable_dependencies.get(path) != value
+                           for path, value in scheduler.executable_dependencies.items())):
+                raise ConfigurationError("scheduler dependencies differ from the reviewed plan")
         from .pilot import require_separation
         require_separation(self.repository, plan)
         from .pilot import require_linked_pilot
@@ -1057,11 +1073,13 @@ class AssessmentService:
                     raise ConfigurationError('assessment costs belong to a different grant')
         return sorted(identities), sorted(sources)
 
-    async def run(self, assessment_id: str) -> AssessmentReport:
+    async def run(self, assessment_id: str, *, coordinator: TrialCoordinator | None = None) -> AssessmentReport:
         job = self.status(assessment_id)
         if job["state"] == "complete":
             return AssessmentReport.model_validate(self.repository.get("report", job["report_id"]))
         plan = AssessmentPlan.model_validate(self.repository.get("plan", job["plan_id"]))
+        if plan.scheduler_digest != (coordinator.definition_digest if coordinator else None):
+            raise ConfigurationError("selected scheduler differs; no implicit evaluator fallback")
         self.repository.authorize(plan)
         mapping = self._verify_dependencies(plan)
         recipe = RecipeDefinition.model_validate(self.repository.get("recipe", plan.recipe_digest))
@@ -1281,7 +1299,7 @@ class AssessmentService:
 
             finally:
                 self.repository.finish_operation(operation_id, elapsed_seconds=max(0, time.perf_counter() - started - sum(program_seconds)), resources=ResourceVector(cpu_ms=(time.process_time() - cpu_started) * 1000))
-            campaign = await runner.run(plan.suite)
+            campaign = await runner.run(plan.suite, coordinator=coordinator) if coordinator else await runner.run(plan.suite)
         except ConfigurationError:
             error_code = "assessment_blocked_or_budget_exhausted"
             trials = [

@@ -8,7 +8,7 @@ import json
 from pathlib import Path, PurePosixPath
 from typing import Any, Literal
 
-from pydantic import Field, model_validator
+from pydantic import Field, SerializerFunctionWrapHandler, model_serializer, model_validator
 
 from .models import ContractModel, Digest, Identifier, SourcePin
 
@@ -56,6 +56,14 @@ class StackConfiguration(ContractModel):
     assessment: WorkflowConfiguration | None = None
     benchmark_recipe: WorkflowFile | None = None
     preparation: SetupFiles | None = None
+    scheduler: WorkflowFile | None = None
+
+    @model_serializer(mode='wrap')
+    def preserve_existing(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
+        result: dict[str, Any] = handler(self)
+        if self.scheduler is None:
+            result.pop('scheduler', None)
+        return result
 
     @model_validator(mode='after')
     def explicit_selection(self) -> StackConfiguration:
@@ -210,14 +218,34 @@ def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
                 raise ValueError('canonical grader recipe differs from the exact task-pack assets')
         assessment = {'plan_path':str(plan_path), 'source_path':str(source_path),
                       'backend_review':plan_preview(plan, source)}
-    if selected.evaluator != 'managed':
+    scheduler_binding: dict[str, str] | None = None
+    if selected.scheduler is not None:
+        from aeep.assessment.scheduling import SchedulerDefinition
+
+        scheduler_path, scheduler_raw = _read(selected.scheduler, root)
+        scheduler = SchedulerDefinition.model_validate_json(scheduler_raw)
+        if selected.evaluator != 'agent-skill-eval' or scheduler.adapter_id != 'agent-skill-eval.controlled.v1':
+            raise ValueError('selected evaluator differs from the scheduling definition')
+        reference = content_digest(scheduler)
+        if preparation is not None and request.scheduler_digest != reference:
+            raise ValueError('setup request differs from the selected scheduler')
+        if assessment is not None and plan.scheduler_digest != reference:
+            raise ValueError('canonical plan differs from the selected scheduler')
+        scheduler_binding = {'path':str(scheduler_path), 'definition_ref':reference}
+    if selected.evaluator not in {'managed', 'agent-skill-eval'} or (selected.evaluator == 'agent-skill-eval' and scheduler_binding is None):
         blockers.append('selected external evaluator workflow dispatch is not implemented; no fallback is inferred')
+    if selected.evaluator == 'managed' and (
+            (preparation is not None and request.scheduler_digest is not None)
+            or (assessment is not None and plan.scheduler_digest is not None)):
+        raise ValueError('managed selection cannot run an external scheduler plan')
     from aeep.assessment.verification import verification_source_digest
 
-    facts = {'workflow':workflow.model_dump(mode='json'), 'configuration':configuration,
+    facts: dict[str, Any] = {'workflow':workflow.model_dump(mode='json'), 'configuration':configuration,
              'candidate':candidate.describe(), 'benchmark':tasks, 'benchmark_path':str(pack_path),
              'installation':installation.model_dump(mode='json'), 'assessment':assessment,
              'preparation':preparation, 'implementation_source':verification_source_digest(Path(__file__).parents[2])}
+    if scheduler_binding is not None:
+        facts['scheduler'] = scheduler_binding
     return {**facts, 'review_sha256':content_digest(facts), 'blockers':blockers,
             'gates':{'stack_integration':'NOT_VERIFIED_BY_PREVIEW', 'candidate_usefulness':'NOT_ASSESSED',
                      'selection_usefulness':'NOT_ASSESSED'},
@@ -238,6 +266,9 @@ def main(argv: list[str] | None = None) -> None:
     rights = commands.add_parser('define-rights', help='Store an inert exact task-asset rights determination; grants no authority')
     rights.add_argument('--file', type=Path, required=True)
     rights.add_argument('--manifest', type=Path, required=True)
+    scheduler = commands.add_parser('define-scheduler', help='Store an inert external scheduling definition; grants no authority')
+    scheduler.add_argument('--file', type=Path, required=True)
+    scheduler.add_argument('--manifest', type=Path, required=True)
     for name in ('plan', 'prepare', 'run', 'report'):
         command = commands.add_parser(name)
         command.add_argument('--workflow', type=Path, required=True)
@@ -258,21 +289,25 @@ def main(argv: list[str] | None = None) -> None:
             command.add_argument('--engineering-review', help='Canonical finite required-use integration review')
     args = parser.parse_args(argv)
     try:
-        if args.operation == 'define-rights':
+        if args.operation in {'define-rights', 'define-scheduler'}:
             import asyncio
 
             from aeep.assessment.repository import AssessmentRepository
+            from aeep.assessment.scheduling import SchedulerDefinition
             from aeep.router import Router
 
             from .workflow_preparation import TaskRightsReview
 
-            record = TaskRightsReview.model_validate_json(read_bytes(args.file))
+            record = (TaskRightsReview.model_validate_json(read_bytes(args.file)) if args.operation == 'define-rights'
+                      else SchedulerDefinition.model_validate_json(read_bytes(args.file)))
+            kind = 'toolkit_task_rights' if args.operation == 'define-rights' else 'scheduler'
             router = Router.from_manifest(args.manifest)
             try:
                 from aeep.assessment.models import content_digest
 
-                ref = AssessmentRepository(router.store).put('toolkit_task_rights', content_digest(record), record)
-                print(json.dumps({'rights_review_ref':ref, 'reviewed':False, 'execution_authorized':False}))
+                ref = AssessmentRepository(router.store).put(kind, content_digest(record), record)
+                print(json.dumps({'rights_review_ref' if args.operation == 'define-rights' else 'scheduler_ref':ref,
+                                  'reviewed':False, 'execution_authorized':False}))
             finally:
                 asyncio.run(router.close())
             return
@@ -317,6 +352,8 @@ def main(argv: list[str] | None = None) -> None:
         # This fixed argv delegates all execution/export and recovery to the existing path.
         delegated = [args.operation, '--plan', str(plan), '--source', str(source),
                      '--manifest', str(args.manifest), '--output', str(args.output)]
+        if 'scheduler' in preview:
+            delegated += ['--scheduler', preview['scheduler']['path']]
         if args.directory is not None:
             delegated += ['--directory', str(args.directory)]
         if args.operation == 'run':

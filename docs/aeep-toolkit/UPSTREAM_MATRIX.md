@@ -1758,3 +1758,15 @@ against new upstream runtimes. Six original SkillsBench tasks are retained with
 protected verifier/oracle separation; their rights and runtime checks remain open.
 Historical evidence retains its original scope. The retained runtime review is
 an engineering check, not a new efficacy campaign.
+
+## November 1: controlled ASE scheduling source integration
+
+The new workflow scheduling adapter targets ASE 0.7.0 at the existing pin. It
+subclasses AgentHarness rather than FakeHarness and connects its scheduler and
+JSON assertion grader to canonical trial execution and protected grade
+certificates. Setup v3/plan v8 freeze the runtime and scheduling definition;
+native upstream Codex execution/parsing remain unsupported. SDK timing defaults
+are excluded from canonical metrics. This is implemented source with synthetic
+boundary tests; actual upstream/runtime and composed domain checks remain open.
+Waza, SkillRank, protected task runtimes and the other required component gates
+remain unchanged. No comparison resumes.

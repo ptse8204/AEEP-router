@@ -1,3 +1,35 @@
+# Active November 1 implementation and source freeze
+
+Current work is the workflow-engine-20261101 increment. Source
+a762c5f0e9ce0279d18a873b8289a34308482fbbc4ea0492cb5db68623bdab96 passed
+all 13 checks. Session22023 has completed; do not rerun without a new source change.
+Both full runs passed 1,930 tests and skipped 21; coverage82%, both branch gates
+and packaging passed. Read ../workflow-engine-20261101/verification/checks.json. No actual
+optional SDK or model has executed. Existing source schemas were regenerated.
+Focused checks112 passed; new scheduler/child checks24 passed.
+
+New source: assessment/scheduling.py; bounded scheduling port in BenchmarkRunner;
+setupv3/planv8 scheduler binding; workflow selection/preparation; ase_contract.py,
+ase_child.py and ase_scheduler.py. Actual task execution and protected grading
+remain in the old runner. Native upstream Codex launch/parsing are unsupported;
+SDK default timing is excluded. Runtime tree and all16 ASE source files are bound.
+Full generic preparation/export cost coverage is still open. Read the packet
+README for exact scope. This is not functional integration or usefulness evidence.
+
+Pending fb7fc581 is unchanged and bound to frozen0cb8f956. No approval for a new
+ASE/current-wheel runtime is inferred. Preserve all terminal attempts and runtimes.
+Primary real runtime checks will need applicable exact artifacts/authority.
+The dependency-audit database metadata is now pinned (84MB), but its Hub revision
+has no license/readme; rights remain unresolved and no database download occurred.
+Keep comparisons paused and preserve unrelated CI changes via selective staging.
+
+Current-input offline docs review cf63f3e6 is prepared and unexecuted. Its
+three attempts permit only listed Markdown edits; tools/profile/config/list stay
+pinned, and the owned runtime is retained. A user question is pending. No old
+terminal docs permission is transferred.
+
+---
+
 # Current pending operation — October 31
 
 Use the shared composed-sdk-runtime review

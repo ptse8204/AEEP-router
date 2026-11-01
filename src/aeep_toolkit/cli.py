@@ -51,7 +51,7 @@ def read_bytes(path: Path) -> bytes:
 
 
 def read_plan_bytes(path: Path) -> bytes:
-    """Only explicit v7 integration plans may exceed ordinary metadata limits.
+    """Only explicit integration plans may exceed ordinary metadata limits.
 
     This envelope supports the initial six-task pack and its artifact transfers.
     Callers must still parse the complete AssessmentPlan and verify canonical
@@ -60,7 +60,7 @@ def read_plan_bytes(path: Path) -> bytes:
     raw = _read_bounded_bytes(path, INTEGRATION_PLAN_BYTES)
     if len(raw) > METADATA_BYTES:
         value = json.loads(raw)
-        if not isinstance(value, dict) or value.get('schema_version') != 'assessment.plan.v7':
+        if not isinstance(value, dict) or value.get('schema_version') not in {'assessment.plan.v7', 'assessment.plan.v8'}:
             raise ValueError('large plan files require the bounded v7 integration contract')
     return raw
 

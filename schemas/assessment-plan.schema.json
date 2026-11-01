@@ -2121,7 +2121,8 @@
         "assessment.plan.v4",
         "assessment.plan.v5",
         "assessment.plan.v6",
-        "assessment.plan.v7"
+        "assessment.plan.v7",
+        "assessment.plan.v8"
       ],
       "title": "Schema Version",
       "type": "string"
@@ -2307,6 +2308,19 @@
       ],
       "default": null,
       "title": "Integration Case Set Digest"
+    },
+    "scheduler_digest": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Scheduler Digest"
     }
   },
   "required": [

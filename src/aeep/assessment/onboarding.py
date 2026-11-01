@@ -294,7 +294,8 @@ def prepare_setup(service: AssessmentService, request: AssessmentSetupRequest) -
         baseline_id=request.baseline_id, authorization_id=request.authorization_id, environment=environment,
         seed=request.seed, structure=selected, case_set_id=request.case_set_id,
         experiment=experiment, pilot_report_id=request.pilot_report_id,
-        integration_case_set_id=request.integration_case_set_id)
+        integration_case_set_id=request.integration_case_set_id,
+        scheduler_digest=request.scheduler_digest)
     return {'status': 'plan_review_required', 'setup_id': setup_id, 'plan_id': plan.plan_id,
             'definition_digests': plan.definition_digests, 'structure_choices': service.comparison_choices(plan.plan_id),
             'budget': service.budget_preview(plan.plan_id), 'reasons': plan.blocked_reasons, 'execution_authorized': False}

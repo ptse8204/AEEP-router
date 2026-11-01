@@ -2473,3 +2473,27 @@ intent and result in the existing store. An interrupted intent cannot silently
 create another plan; a completed draft can be exported again without reproposal.
 These are implementation rules under the standing finite test-definition
 delegation, not new untrusted execution, disclosure or installation authority.
+
+## D137: Let upstream scheduling call the canonical trial runner
+
+Add a scheduling port to BenchmarkRunner rather than another execution or
+accounting implementation. Setup v3 and plan v8 freeze an exact external
+scheduler definition for the bounded integration case set. Historical setup
+and plan versions retain their serialization and managed behavior. A missing
+or different scheduler must stop before claiming a job; no fallback is inferred.
+
+The ASE child subclasses the actual AgentHarness and uses the actual EvalRunner
+and deterministic assertion API. Opaque slots map to the existing canonical
+trial execution, preserving its order, durable claims, worker boundaries,
+reservations and protected grading. Upstream assertion results check canonical
+grade certificates, not an independent second task oracle. Reject missing,
+repeated or reordered slots and mismatched grades. Native upstream Codex launch
+and parsing remain unsupported; D40's selected managed fallback remains available.
+
+Bind all 16 upstream Python files, the exact entrypoint, sandbox profile and
+complete retained runtime tree. SDK overhead excludes awaited canonical trial
+intervals; raw upstream compatibility token/time defaults are never measurements.
+No new scheduler service, database, provider or graph engine is introduced.
+Source fixtures do not establish actual upstream execution. New software and
+models still require applicable exact authority, and the complete-stack barrier
+continues to block comparative campaigns.

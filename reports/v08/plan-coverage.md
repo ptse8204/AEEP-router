@@ -6609,3 +6609,35 @@ The older unapproved fb964676 proposal is withdrawn before execution because the
 shared runtime can verify both SDKs on the current wheel. No historical approval
 or successful package/docs check is replayed. The current-input docs check remains
 open. Stack integration, candidate usefulness and selection usefulness stay separate.
+
+
+## November 1: canonical execution retains upstream scheduling
+
+The [workflow-engine increment](../toolkit-v2/c13/workflow-engine-20261101/README.md)
+adds a bounded scheduling port to BenchmarkRunner and real ASE AgentHarness/
+EvalRunner source. Workflow v2 can select that adapter; setup v3 and plan v8 bind
+its exact definition, sandbox command, full runtime tree and 16 selected upstream
+Python sources. Old setup/plan serialization stays unchanged. No fallback is
+inferred after failure. Canonical AEEP workers, reservations, task grading and
+receipts remain authoritative. The upstream JSON assertion checks their protected
+grade certificate; mandatory SDK timing defaults are excluded from measurements.
+Native upstream Codex launch/parsing remain unsupported.
+
+Focused checks passed112 tests, including24 new scheduler/child checks. All13
+source checks passed on unchanged a762c5f0e9ce0279d18a873b8289a34308482fbbc4ea0492cb5db68623bdab96:
+1,930passes/21skips per full run,82%combined coverage,both branch floors,schemas,
+integration fixtures and packaging. The verified working snapshot includes
+preserved CI edits; they are excluded from this implementation commit. These
+are first-party checks with labeled SDK substitutes, not real upstream execution.
+
+Scheduler overhead has an existing-ledger reservation and excludes nested trial
+intervals. Surrounding inspection/preparation/export accounting remains open.
+Three additional selected wheels (2,584,227bytes) were downloaded for static
+archive review only; the63-dependency closure passes static checks. No optional
+SDK import/install, model, Docker mutation, service, credential, activation,
+publication or release occurred. Pending fb7fc581 remains bound to older0cb8f956.
+The fresh72-input offline docs review cf63f3e6 is prepared and unexecuted; its
+six standard-library boundary probes passed. The dependency-audit database is
+now pinned from public metadata, but its84MB archive has no license/readme at
+that revision. It was not downloaded. Both task domains and all required
+integrations still need functional evidence; comparisons remain paused.

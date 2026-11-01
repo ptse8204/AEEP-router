@@ -38,6 +38,7 @@ from aeep.assessment.models import (
 )
 from aeep.assessment.repository_suites import RepositorySuiteCase
 from aeep.assessment.repository_tasks import RepositoryCase
+from aeep.assessment.scheduling import SchedulerDefinition
 from aeep.assessment.tools import declarations as assessment_tools
 from aeep.attempts import ExecutionAttempt
 from aeep.benchmarking import (
@@ -239,6 +240,7 @@ MODEL_FILES = {
     "task-reconciliation.schema.json": TaskReconciliation,
     "task-outcome.schema.json": TaskExecutionOutcome,
     "assessment-setup-request.schema.json": AssessmentSetupRequest,
+    "assessment-scheduler.schema.json": SchedulerDefinition,
     "assessment-controlled-fixture.schema.json": ControlledFixtureRecord,
     "assessment-recipe-extension.schema.json": ExecutableRecipeExtension,
     "assessment-recipe-materialization.schema.json": RecipeMaterializationRequest,

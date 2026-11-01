@@ -46,6 +46,21 @@ Existing exports remain unchanged. This is one distribution and one repository;
 no new dependency, server or database is introduced. The full Essentials journey
 still requires C03-C06.
 
+## Bounded external scheduling
+
+`assessment.scheduler.v1` binds a reviewed sandbox command, executable file
+closure, complete runtime tree, owned workspace, request ceiling and overhead
+allowance. Setup v3 and plan v8 select its digest for one to six required-use
+integration tasks. Historical setup v1/v2 and plan v1–v7 omit the new optional
+field and keep their meanings. Both integration plan versions use the separate
+32 MiB reader; ordinary metadata and historical plans retain their limits.
+
+The scheduling port can request only the existing canonical trial sequence.
+It cannot introduce cases, reorder or repeat them, replace execution/grading,
+raise grant ceilings or admit a capability. Runtime and definition drift stop
+dispatch. Uncertain work and costs remain in the existing attempt/receipt ledger.
+An integration plan never supplies formal qualification or usefulness evidence.
+
 ## Verified C02 scope
 
 The inert registry rejects duplicate IDs and looks up explicit extensions.

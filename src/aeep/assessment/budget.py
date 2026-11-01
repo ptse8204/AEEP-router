@@ -48,6 +48,11 @@ def campaign_allowances(service: AssessmentService, plan: AssessmentPlan, *,
     add('router_setup', routers, routers * 30)
     add('grader_validation', 1, 30)
     add('report_generation', 1, 30)  # Reserved before the campaign, released last.
+    if plan.scheduler_digest is not None:
+        from .scheduling import require_scheduler
+
+        scheduler = require_scheduler(service.repository, plan.scheduler_digest)
+        add('external_scheduler', 1, scheduler.overhead_seconds)
     recipe = RecipeDefinition.model_validate(service.repository.get('recipe', plan.recipe_digest))
     if recipe.extension is not None:
         from .extensions import bounded_batches

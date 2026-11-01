@@ -17,7 +17,10 @@ from decimal import Decimal
 from enum import StrEnum
 from pathlib import Path
 from statistics import median
-from typing import Any, Literal, cast
+from typing import TYPE_CHECKING, Any, Literal, cast
+
+if TYPE_CHECKING:
+    from .assessment.scheduling import TrialCoordinator
 
 from pydantic import Field, SerializerFunctionWrapHandler, model_serializer, model_validator
 
@@ -1833,7 +1836,14 @@ class BenchmarkRunner:
         finally:
             await router.close()
 
-    async def run(self, suite: BenchmarkSuite) -> BenchmarkCampaignReport:
+    async def run(self, suite: BenchmarkSuite, *, coordinator: TrialCoordinator | None = None) -> BenchmarkCampaignReport:
+        if coordinator is not None and (
+                not 1 <= len(suite.cases) <= 6 or len(suite.routes) != 1 or suite.repetitions != 1
+                or len(suite.conditions) != 1 or suite.warmup_cases
+                or suite.conditions[0] not in {BenchmarkCondition.PROCESS_COLD,
+                    AssessmentBenchmarkCondition.ROUTER_FRESH, AssessmentBenchmarkCondition.FRESH_WORKER}
+                or any(case.split != BenchmarkSplit.QUALIFICATION for case in suite.cases)):
+            raise ConfigurationError("external scheduling supports finite fresh-worker integration cases only")
         self._freeze_snapshots(suite)
         suite_digest = self._freeze_suite(suite)
         frozen = await self._preflight(suite)
@@ -1869,10 +1879,20 @@ class BenchmarkRunner:
         trials: list[BenchmarkTrial] = []
         screened_out: set[str] = set()
         previous_split: BenchmarkSplit | None = None
-        try:
-            for case, route, condition, repetition in planned:
+        busy = False
+        aborted = False
+
+        async def execute_position(position: str) -> BenchmarkTrial | None:
+            nonlocal previous_split, busy, aborted
+            if busy or aborted or position != str(next_position[0]) or next_position[0] >= len(planned):
+                aborted = True
+                raise ConfigurationError("scheduler changed order, duplicated or invented a trial")
+            busy = True
+            try:
+                case, route, condition, repetition = planned[next_position[0]]
+                next_position[0] += 1
                 if suite.stop_on_screening_failure and route.route_id in screened_out:
-                    continue
+                    return None
                 if suite.sequential_stages and previous_split != case.split:
                     for instance in warm.values():
                         await instance.close()
@@ -1891,7 +1911,7 @@ class BenchmarkRunner:
                     trials.append(prior)
                     if prior.phase == BenchmarkPhase.QUALIFICATION and prior.valid is False:
                         screened_out.add(route.route_id)
-                    continue
+                    return prior
                 phase = {
                     BenchmarkSplit.QUALIFICATION: BenchmarkPhase.QUALIFICATION,
                     BenchmarkSplit.TRAINING: BenchmarkPhase.MEASUREMENT,
@@ -1943,6 +1963,22 @@ class BenchmarkRunner:
                 finally:
                     if condition in {BenchmarkCondition.PROCESS_COLD, AssessmentBenchmarkCondition.ROUTER_FRESH, AssessmentBenchmarkCondition.FRESH_WORKER}:
                         await router.close()
+                return completed
+            except BaseException:
+                aborted = True
+                raise
+            finally:
+                busy = False
+
+        next_position = [0]
+        try:
+            if coordinator is None:
+                for index in range(len(planned)):
+                    await execute_position(str(index))
+            else:
+                await coordinator.coordinate(tuple(str(i) for i in range(len(planned))), execute_position)
+                if aborted or busy or next_position[0] != len(planned):
+                    raise ConfigurationError("scheduler omitted canonical trials")
         finally:
             for router in warm.values():
                 await router.close()

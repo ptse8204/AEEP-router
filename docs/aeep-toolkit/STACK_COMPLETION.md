@@ -125,7 +125,9 @@ definitions, change a grant, install components, enqueue work or start a model.
 Existing subject, recipe, environment, experiment and task-set records are
 required. Interrupted preparation retains its intent and requires inspection;
 completed preparation can export the same canonical draft again to a new directory.
-External-evaluator dispatch remains missing and is shown as a blocker.
+An explicit ASE scheduling definition now connects external scheduling to the
+same canonical trial runner. Its new runtime has not been executed; previews
+still cannot establish functional readiness.
 
 `assessment.integration-cases.v1`, setup v2 and plan v7 cover one to six distinct
 upstream tasks for stack checks. They require a reviewed, required-use experiment,
@@ -182,3 +184,35 @@ executors. Steps bind fingerprints, action IDs and canonical predecessor receipt
 references. It refuses a silent restart after failure or cancellation and does
 not restore SDK checkpoints. Its real SDK runtime, interruption accounting and
 ordinary CLI composition remain unverified; fixture checks do not pass the gate.
+
+## External scheduling through the same workflow
+
+Select `agent-skill-eval` and bind a `scheduler` file in the v2 configuration.
+Setup v3 and plan v8 bind that exact definition, runtime tree, source files and
+sandbox command. Store the inert definition through the existing record store:
+
+```bash
+PYTHONPATH=src python3 -m aeep_toolkit workflow define-scheduler \
+  --file /absolute/path/scheduler.json --manifest /absolute/path/manifest.json
+```
+
+This command grants no review or execution authority. Preparation requires the
+canonical definition to be reviewed. Old setups/plans keep their serialized
+meanings and managed execution. A v8 plan cannot silently use the managed fallback.
+Only one to six required-use integration tasks with fresh trial conditions are
+supported; external optional-use/value campaigns remain unavailable.
+
+The real upstream `AgentHarness` shim requests opaque trial slots. AEEP retains
+trial claims, worker checks, reservations, execution and protected task grading.
+ASE's deterministic JSON assertion checks the resulting canonical grade
+certificate; it does not provide a second independent task verifier. The native
+upstream Codex launcher and usage parser remain unsupported by this adapter.
+All 16 ASE source files and the complete installed runtime are checked before
+dispatch. Hooks, model graders and upstream retries are disabled.
+
+SDK process receipts and overhead enter the existing operation ledger. Awaited
+canonical trial intervals are excluded from SDK elapsed cost, preserving their
+own charges. Upstream timing/token defaults are compatibility artifacts and are
+excluded from measured usage. Reports retain canonical task grades and raw token
+categories. General workflow preparation/export overhead still needs complete
+accounting; no assembled-stack pass is claimed.

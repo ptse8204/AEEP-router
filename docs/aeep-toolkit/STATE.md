@@ -1,5 +1,33 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 1: real evaluator scheduling source passed all software checks.**
+The [workflow-engine increment](../../reports/toolkit-v2/c13/workflow-engine-20261101/README.md)
+adds a guarded BenchmarkRunner scheduling port, actual AgentHarness child source,
+setup v3/plan v8 and ordinary workflow selection. AEEP keeps all actual trial
+claims, workers, protected grading, grants and receipts. Native upstream Codex
+launch/parsing remain unsupported. Upstream assertions check canonical grade
+certificates, not a second independent task oracle. SDK timing defaults never
+supply measurements. Existing versions and historical FakeHarness evidence stay.
+
+Focused checks passed 112 tests; the new subset passed 24. All 13 source gates
+passed on unchanged a762c5f0e9ce0279d18a873b8289a34308482fbbc4ea0492cb5db68623bdab96:
+1,930 passed and 21 skipped in each full run, 82% combined coverage, both branch
+gates and packaging. [The record](../../reports/toolkit-v2/c13/workflow-engine-20261101/verification/checks.json)
+includes preserved unrelated CI changes; those are excluded from this commit.
+No actual optional SDK, model or task verifier ran.
+SDK overhead now has an existing-ledger reservation with nested trial intervals
+excluded; general preparation/export overhead is still open. Runtime execution
+needs an applicable review; pending fb7fc581 remains frozen on older0cb8f956 and
+has not been executed. No comparative campaign resumes.
+Current-input offline docs review cf63f3e6
+is prepared and unexecuted, with three bounded Markdown-only attempts and a
+retained tooling runtime. Six standard-library boundary probes passed.
+
+The dependency-audit task's unpinned external database resolves to an 84 MB archive
+at an immutable Hub revision. No license/readme appears at that revision; use
+rights remain unresolved. Public metadata only, no archive download. Both domain
+journeys and every required integration still need functional evidence.
+
 **October 31: one current-source runtime review replaces the older SDK proposal.**
 The [composed SDK review](../../reports/toolkit-v2/c13/full-stack-20261030/composed-sdk-runtime/README.md),
 SHA-256 fb7fc581114945988267cac35513f8235f757d325d3253dd0aa3bbfe6bb60801,
