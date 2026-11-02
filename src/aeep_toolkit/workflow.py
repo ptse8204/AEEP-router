@@ -47,6 +47,19 @@ class SetupFiles(ContractModel):
     manifest: WorkflowFile
 
 
+class WorkflowRuntimeBinding(ContractModel):
+    installation: WorkflowFile
+    components: dict[Identifier, Identifier] = Field(min_length=1, max_length=32)
+    references: tuple[WorkflowFile, ...] = Field(default=(), max_length=16)
+
+    @model_serializer(mode='wrap')
+    def preserve_existing(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
+        result: dict[str, Any] = handler(self)
+        if not self.references:
+            result.pop('references', None)
+        return result
+
+
 class StackConfiguration(ContractModel):
     evaluator: Literal['managed', 'agent-skill-eval', 'waza', 'skillrank']
     candidate: CandidateBinding
@@ -58,18 +71,23 @@ class StackConfiguration(ContractModel):
     benchmark_recipe: WorkflowFile | None = None
     preparation: SetupFiles | None = None
     scheduler: WorkflowFile | None = None
+    runtimes: dict[Identifier, WorkflowRuntimeBinding] = Field(default_factory=dict, max_length=16)
 
     @model_serializer(mode='wrap')
     def preserve_existing(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
         result: dict[str, Any] = handler(self)
         if self.scheduler is None:
             result.pop('scheduler', None)
+        if not self.runtimes:
+            result.pop('runtimes', None)
         return result
 
     @model_validator(mode='after')
     def explicit_selection(self) -> StackConfiguration:
         if len(set(self.task_ids)) != len(self.task_ids) or len(set(self.components)) != len(self.components):
             raise ValueError('workflow tasks and components must be distinct')
+        if any(not set(binding.components) <= set(self.components) for binding in self.runtimes.values()):
+            raise ValueError('runtime bindings may provide selected components only')
         if self.assessment is not None and self.preparation is not None:
             raise ValueError('select either an existing assessment or canonical preparation inputs')
         return self
@@ -239,6 +257,12 @@ def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
             (preparation is not None and request.scheduler_digest is not None)
             or (assessment is not None and plan.scheduler_digest is not None)):
         raise ValueError('managed selection cannot run an external scheduler plan')
+    runtime_setup = None
+    if selected.runtimes:
+        from .workflow_runtime import lifecycle_preview
+
+        runtime_setup, _ = lifecycle_preview(definition, configuration, tuple(selected.runtimes), operation='setup')
+        blockers.extend(runtime_setup['blockers'])
     from aeep.assessment.verification import verification_source_digest
 
     facts: dict[str, Any] = {'workflow':workflow.model_dump(mode='json'), 'configuration':configuration,
@@ -247,6 +271,8 @@ def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
              'preparation':preparation, 'implementation_source':verification_source_digest(Path(__file__).parents[2])}
     if scheduler_binding is not None:
         facts['scheduler'] = scheduler_binding
+    if runtime_setup is not None:
+        facts['runtime_setup'] = {name:runtime_setup[name] for name in ('review_sha256','installation_plans','observations','blockers')}
     return {**facts, 'review_sha256':content_digest(facts), 'blockers':blockers,
             'gates':{'stack_integration':'NOT_VERIFIED_BY_PREVIEW', 'candidate_usefulness':'NOT_ASSESSED',
                      'selection_usefulness':'NOT_ASSESSED'},
@@ -293,6 +319,14 @@ def main(argv: list[str] | None = None) -> None:
         if name == 'run':
             command.add_argument('--stack-readiness', help='Canonical current-source all-integration completion record')
             command.add_argument('--engineering-review', help='Canonical finite required-use integration review')
+    for name in ('setup', 'readiness', 'remove'):
+        command = commands.add_parser(name, help='Selected private Python runtimes; functional evidence remains separate')
+        command.add_argument('--workflow', type=Path, required=True)
+        command.add_argument('--configuration', required=True)
+        command.add_argument('--runtime', action='append', required=True, help='Explicit runtime binding; repeat for independent runtimes')
+        command.add_argument('--accounting', type=Path, help='Exact accounting v2 scope; required when applying setup/removal')
+        command.add_argument('--operation-id')
+        command.add_argument('--reviewed-digest', help='Exact operation-specific lifecycle preview; omit for inspection only')
     args = parser.parse_args(argv)
     try:
         if args.operation in {'define-rights', 'define-scheduler', 'define-accounting'}:
@@ -319,6 +353,16 @@ def main(argv: list[str] | None = None) -> None:
                                   'reviewed':False, 'execution_authorized':False}))
             finally:
                 asyncio.run(router.close())
+            return
+        if args.operation in {'setup', 'readiness', 'remove'}:
+            from .workflow_runtime import lifecycle
+
+            result = lifecycle(args.workflow, args.configuration, tuple(args.runtime),
+                               operation=args.operation, reviewed_digest=args.reviewed_digest,
+                               accounting=args.accounting, operation_key=args.operation_id)
+            print(json.dumps(result, indent=2))
+            if result.get('complete') is False:
+                parser.exit(2, 'Runtime lifecycle has partial failures. Inspect retained journals and costs; no automatic retry.\n')
             return
         if args.operation == 'bind':
             files = {name: WorkflowFile(path=str(getattr(args, name).absolute()),
@@ -350,6 +394,8 @@ def main(argv: list[str] | None = None) -> None:
                 if args.operation in {'plan', 'prepare'}:
                     print(json.dumps(preview, indent=2))
                     return
+                if args.operation == 'run' and any(value['installed'] is not True for value in preview.get('runtime_setup', {}).get('observations', {}).values()):
+                    raise ValueError('selected private runtime is absent, changed or unverified')
                 if preview['blockers'] or preview['assessment'] is None:
                     raise ValueError('selected stack is not executable')
                 plan, source = Path(preview['assessment']['plan_path']), Path(preview['assessment']['source_path'])

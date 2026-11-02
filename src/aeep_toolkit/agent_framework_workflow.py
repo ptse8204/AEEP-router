@@ -164,6 +164,10 @@ def compile_pipeline(
             else:
                 await context.send_message(successor.model_dump(mode="json"))
 
+        # FunctionExecutor validates the context even when explicit message and
+        # output types are supplied. Bind the concrete optional SDK type only
+        # after loading that SDK; no global import or forward-reference guessing.
+        run.__annotations__["context"] = module.WorkflowContext[dict, dict]
         return run
 
     nodes = [

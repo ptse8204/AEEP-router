@@ -1,0 +1,137 @@
+{
+  "receipt_id": "rcpt_1ca86e5e194940d6b1cb6cee21445536",
+  "decision_id": "reviewed-framework-component",
+  "action_id": "act_fa0aaa94642148a9b0c2d75bcc5666e4",
+  "capability": "toolkit.upstream-engineering@1",
+  "executor_id": "toolkit.current-sdk-framework",
+  "executor_kind": "command",
+  "status": "success",
+  "attempt": 1,
+  "started_at": "2026-11-02T21:12:03.727297Z",
+  "ended_at": "2026-11-02T21:12:06.370139Z",
+  "estimated": {
+    "resources": {
+      "monetary_usd": 0.0,
+      "latency_ms": 0.0,
+      "cpu_ms": 0.0,
+      "memory_mb_seconds": 0.0,
+      "peak_memory_mb": 0.0,
+      "gpu_ms": 0.0,
+      "network_bytes": 0,
+      "context_tokens": 0,
+      "input_tokens": 0,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_output_tokens": 0,
+      "subscription_units": 0.0
+    },
+    "cash": {
+      "amount_usd": null,
+      "upper_bound_usd": null,
+      "evidence": {
+        "status": "unavailable",
+        "source": "unavailable",
+        "trust": "untrusted",
+        "evidence_id": null,
+        "source_reference": null,
+        "digest": null,
+        "observed_at": null
+      }
+    },
+    "subscription_usage": [],
+    "success_probability": 0.95,
+    "quality_score": 0.95,
+    "risk_score": 0.05,
+    "confidence": 0.5,
+    "source": "static",
+    "sample_size": 0,
+    "uncertainty": null
+  },
+  "executor_fingerprint": null,
+  "cohort_digest": null,
+  "action_features": null,
+  "actual_resources": {
+    "monetary_usd": 0.0,
+    "latency_ms": 2642.382999882102,
+    "cpu_ms": 1159.928464,
+    "memory_mb_seconds": 196.65226752086892,
+    "peak_memory_mb": 117.046875,
+    "gpu_ms": 0.0,
+    "network_bytes": 0,
+    "context_tokens": 460,
+    "input_tokens": 0,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 0,
+    "reasoning_output_tokens": 0,
+    "subscription_units": 0.0
+  },
+  "accounting": {
+    "cash": {
+      "status": "unavailable",
+      "components": []
+    },
+    "subscription_usage": [],
+    "model_usage": [],
+    "tool_footprint": null
+  },
+  "cache_affinity": null,
+  "approval_id": null,
+  "transport_success": null,
+  "execution_success": true,
+  "schema_valid": null,
+  "task_valid": null,
+  "quality_score": null,
+  "validation_results": [],
+  "output_valid": null,
+  "error_type": null,
+  "error_message": null,
+  "trace_id": null,
+  "metadata": {
+    "review_sha256": "034f218da03805fefa831eac08c555300405315356ec26a95399aea662dca579",
+    "evidence_kind": "upstream_engineering",
+    "executable": "/usr/bin/sandbox-exec",
+    "stdout_bytes": 1932,
+    "stderr_bytes": 0,
+    "stdout_truncated": false,
+    "stderr_truncated": false,
+    "execution_evidence": {
+      "schema_version": "execution.evidence.v1",
+      "attempt_id": "act_fa0aaa94642148a9b0c2d75bcc5666e4",
+      "adapter": "CommandExecutor",
+      "events": [
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "79f6706a0bf44fcc801642d0c344fc83",
+          "attempt_id": "act_fa0aaa94642148a9b0c2d75bcc5666e4",
+          "sequence": 0,
+          "kind": "execution.started",
+          "source_id": "start",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "79f6706a0bf44fcc801642d0c344fc83",
+          "attempt_id": "act_fa0aaa94642148a9b0c2d75bcc5666e4",
+          "sequence": 1,
+          "kind": "execution.completed",
+          "source_id": "terminal",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        }
+      ],
+      "complete": true,
+      "cancellation_confirmed": false,
+      "identity_digest": null,
+      "boundary_digest": null,
+      "journal_id": "79f6706a0bf44fcc801642d0c344fc83"
+    },
+    "execution_evidence_digest": "bceb303cc3620fcd6d75bcc05f1321522da56601f41a67d270bd8eab1c125870"
+  }
+}

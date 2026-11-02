@@ -35,26 +35,31 @@ from aeep.router import Router
 
 from .models import Digest, Identifier
 
-WorkflowStage = Literal["plan", "prepare", "run", "report"]
+WorkflowStage = Literal["plan", "prepare", "run", "report", "setup", "readiness", "remove"]
 
 
 class WorkflowAccountingDefinition(StrictModel):
     """An inert, reviewed scope; it cannot create or extend a grant."""
 
-    schema_version: Literal["aeep.toolkit.workflow-accounting.v1"] = "aeep.toolkit.workflow-accounting.v1"
+    schema_version: Literal["aeep.toolkit.workflow-accounting.v1", "aeep.toolkit.workflow-accounting.v2"] = "aeep.toolkit.workflow-accounting.v1"
     workflow_sha256: Digest
     configurations: tuple[Identifier, ...] = Field(min_length=1, max_length=16)
-    operations: tuple[WorkflowStage, ...] = Field(min_length=1, max_length=4)
+    operations: tuple[WorkflowStage, ...] = Field(min_length=1, max_length=7)
     source_digest: Digest
     manifest_path: str = Field(min_length=1, max_length=4096)
     manifest_sha256: Digest
     request: RecipeMaterializationRequest
-    maximum_overhead_seconds: int = Field(strict=True, ge=1, le=600)
+    maximum_overhead_seconds: int = Field(strict=True, ge=1, le=3600)
 
     @model_validator(mode="after")
     def distinct_selections(self) -> WorkflowAccountingDefinition:
         if len(set(self.configurations)) != len(self.configurations) or len(set(self.operations)) != len(self.operations):
             raise ValueError("workflow accounting selections must be distinct")
+        if self.schema_version.endswith('.v1') and (
+            not set(self.operations) <= {"plan", "prepare", "run", "report"}
+            or self.maximum_overhead_seconds > 600
+        ):
+            raise ValueError("lifecycle stages and larger reservations require accounting v2")
         return self
 
 
@@ -84,6 +89,17 @@ class WorkflowMeter:
         self.scope: WorkflowAccountingDefinition | None = None
         self.repository: AssessmentRepository | None = None
         self.plan_ids: list[str] = []
+        self.outcome_error: str | None = None
+
+    def authorize(self) -> None:
+        if self.scope is None or self.repository is None:
+            raise ConfigurationError("workflow accounting scope is unavailable")
+        request = self.scope.request.model_copy(update={
+            "definition_digests": list(dict.fromkeys([*self.scope.request.definition_digests, self.definition_ref]))
+        })
+        self.repository.authorize(request)
+        if verification_source_digest(Path(__file__).resolve().parents[2]) != self.scope.source_digest:
+            raise ConfigurationError("workflow accounting source changed")
 
     def bind(self, plan: AssessmentPlan, manifest: Path | None = None) -> None:
         if self.scope is None or self.repository is None:
@@ -230,6 +246,7 @@ def account_workflow(
             raise
         finally:
             _ACTIVE.reset(token)
+            failure = failure or meter.outcome_error
             drift = False
             if failure is None:
                 try:

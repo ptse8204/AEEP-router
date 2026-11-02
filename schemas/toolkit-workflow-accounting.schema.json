@@ -86,8 +86,11 @@
   "description": "An inert, reviewed scope; it cannot create or extend a grant.",
   "properties": {
     "schema_version": {
-      "const": "aeep.toolkit.workflow-accounting.v1",
       "default": "aeep.toolkit.workflow-accounting.v1",
+      "enum": [
+        "aeep.toolkit.workflow-accounting.v1",
+        "aeep.toolkit.workflow-accounting.v2"
+      ],
       "title": "Schema Version",
       "type": "string"
     },
@@ -112,11 +115,14 @@
           "plan",
           "prepare",
           "run",
-          "report"
+          "report",
+          "setup",
+          "readiness",
+          "remove"
         ],
         "type": "string"
       },
-      "maxItems": 4,
+      "maxItems": 7,
       "minItems": 1,
       "title": "Operations",
       "type": "array"
@@ -141,7 +147,7 @@
       "$ref": "#/$defs/RecipeMaterializationRequest"
     },
     "maximum_overhead_seconds": {
-      "maximum": 600,
+      "maximum": 3600,
       "minimum": 1,
       "title": "Maximum Overhead Seconds",
       "type": "integer"

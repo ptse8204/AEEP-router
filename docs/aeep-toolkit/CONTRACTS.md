@@ -70,7 +70,6 @@ full verification passed; see `reports/toolkit-v2/c02/summary.json`. Canonical
 evidence resolution belongs to C04/C05; no reference is trusted merely because
 these schemas accept it.
 
-
 The optional `aeep.toolkit.workflow-accounting.v1` scope binds exact workflow,
 manifest and source bytes, selected configurations/stages and an existing grant
 request. Its review joins the atomic reservation check; it grants no authority.
@@ -80,3 +79,19 @@ NOT_RECORDED. A wrapper receipt records exclusive wall/process CPU, retains raw
 intervals, and links canonical plan definitions. Nested assessment time is
 excluded. Missing token/memory/cash evidence stays unknown. Its finalization
 boundary is explicit, and unresolved reservations prohibit blind retry.
+
+## Selected private-runtime lifecycle
+
+Workflow v2 optionally binds named runtime installation files and component to
+package mappings. Empty runtime maps and parent-reference lists are omitted from
+serialization, preserving previous workflow bytes. The v1 workflow is unchanged.
+Published workflow v1/v2 JSON schemas are generated from these existing models.
+Canonical export keeps exact parent references so removal cannot discard another
+configuration's runtime. Readiness separates observed installation from unknown
+enablement, execution permission, functional status and usefulness.
+
+`aeep.toolkit.workflow-accounting.v2` adds setup/readiness/removal stages and a
+finite per-wrapper reservation of at most 3,600 seconds. It reuses existing grant,
+review, receipt and operation records; it creates no authority. Version1 retains
+its original four stages and 600-second limit. Runtime lifecycle records bind the
+operation, workflow review, installation digest and retained journal hash.

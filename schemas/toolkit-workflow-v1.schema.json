@@ -1,0 +1,74 @@
+{
+  "$defs": {
+    "WorkflowConfiguration": {
+      "additionalProperties": false,
+      "properties": {
+        "plan": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "source": {
+          "$ref": "#/$defs/WorkflowFile"
+        }
+      },
+      "required": [
+        "plan",
+        "source"
+      ],
+      "title": "WorkflowConfiguration",
+      "type": "object"
+    },
+    "WorkflowFile": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "title": "WorkflowFile",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.toolkit.workflow.v1",
+      "default": "aeep.toolkit.workflow.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "backend": {
+      "const": "managed",
+      "default": "managed",
+      "title": "Backend",
+      "type": "string"
+    },
+    "configurations": {
+      "maxProperties": 16,
+      "minProperties": 1,
+      "patternProperties": {
+        "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$": {
+          "$ref": "#/$defs/WorkflowConfiguration"
+        }
+      },
+      "title": "Configurations",
+      "type": "object"
+    }
+  },
+  "required": [
+    "configurations"
+  ],
+  "title": "EvaluationWorkflow",
+  "type": "object"
+}

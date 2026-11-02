@@ -1,0 +1,90 @@
+{
+  "source_before": "a8dd37ebb220b9bed7ac0afd8ed96676d8c85be0225c5fffeb6df57cda67c22d",
+  "source_after": "a8dd37ebb220b9bed7ac0afd8ed96676d8c85be0225c5fffeb6df57cda67c22d",
+  "checks": [
+    {
+      "name": "compileall",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.0784607082605362
+    },
+    {
+      "name": "schemas",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.8741960837505758
+    },
+    {
+      "name": "assessment-policy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.1614962499588728
+    },
+    {
+      "name": "ruff",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.07106437487527728
+    },
+    {
+      "name": "mypy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.3126897499896586
+    },
+    {
+      "name": "pytest",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 628.4129538750276
+    },
+    {
+      "name": "coverage-tests",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 2,
+      "elapsed_seconds": 67.54938733391464
+    }
+  ],
+  "models": 0,
+  "evidence_kind": "first_party_engineering_checks",
+  "comparative_campaigns": "PAUSED",
+  "scope": "Explicit selected private-runtime lifecycle through the ordinary workflow CLI, retained parent consumer bindings, accounting v2 and unchanged-runtime removal guards. Synthetic first-party installation only; no optional SDK, real benchmark, model or usefulness claim."
+}

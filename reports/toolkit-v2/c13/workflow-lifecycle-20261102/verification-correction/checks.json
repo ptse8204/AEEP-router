@@ -1,0 +1,159 @@
+{
+  "source_before": "e363cfa5ada2201e355b1e4528ff36cb2d05a08fff7423912c6d5e163ea43dfb",
+  "source_after": "e363cfa5ada2201e355b1e4528ff36cb2d05a08fff7423912c6d5e163ea43dfb",
+  "checks": [
+    {
+      "name": "compileall",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.06893508369103074
+    },
+    {
+      "name": "schemas",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.8457543752156198
+    },
+    {
+      "name": "assessment-policy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.16004154086112976
+    },
+    {
+      "name": "ruff",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.06638387497514486
+    },
+    {
+      "name": "mypy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.2744647078216076
+    },
+    {
+      "name": "pytest",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 640.0056027499959
+    },
+    {
+      "name": "coverage-tests",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 932.2491901251487
+    },
+    {
+      "name": "coverage-json",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-lifecycle-20261102/verification-correction/coverage.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.8520758328959346
+    },
+    {
+      "name": "coverage-report",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.4149205000139773
+    },
+    {
+      "name": "critical-coverage",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_critical_coverage.py",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-lifecycle-20261102/verification-correction/coverage.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.03796516731381416
+    },
+    {
+      "name": "assessment-coverage",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_coverage.py",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-lifecycle-20261102/verification-correction/coverage.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.037289041094481945
+    },
+    {
+      "name": "toolkit-integration-fixtures",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest",
+        "integrations/toolkit"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.7503457921557128
+    },
+    {
+      "name": "build",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "build",
+        "--no-isolation",
+        "--outdir",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-lifecycle-20261102/verification-correction/dist"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.088778290897608
+    }
+  ],
+  "models": 0,
+  "evidence_kind": "first_party_engineering_checks",
+  "comparative_campaigns": "PAUSED",
+  "scope": "Explicit selected private-runtime lifecycle through the ordinary workflow CLI, retained parent consumer bindings, accounting v2 and unchanged-runtime removal guards. Synthetic first-party installation and strict SDK-context development checks only; no optional SDK, real benchmark, model or usefulness claim. Includes Framework callback correction from actual SDK failure."
+}

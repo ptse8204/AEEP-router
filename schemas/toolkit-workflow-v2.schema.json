@@ -1,0 +1,265 @@
+{
+  "$defs": {
+    "CandidateBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "title": "CandidateBinding",
+      "type": "object"
+    },
+    "SetupFiles": {
+      "additionalProperties": false,
+      "properties": {
+        "request": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "source": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "manifest": {
+          "$ref": "#/$defs/WorkflowFile"
+        }
+      },
+      "required": [
+        "request",
+        "source",
+        "manifest"
+      ],
+      "title": "SetupFiles",
+      "type": "object"
+    },
+    "StackConfiguration": {
+      "additionalProperties": false,
+      "properties": {
+        "evaluator": {
+          "enum": [
+            "managed",
+            "agent-skill-eval",
+            "waza",
+            "skillrank"
+          ],
+          "title": "Evaluator",
+          "type": "string"
+        },
+        "candidate": {
+          "$ref": "#/$defs/CandidateBinding"
+        },
+        "benchmark": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "asset_root": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "title": "Asset Root",
+          "type": "string"
+        },
+        "task_ids": {
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "minItems": 1,
+          "title": "Task Ids",
+          "type": "array"
+        },
+        "components": {
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+            "type": "string"
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "title": "Components",
+          "type": "array"
+        },
+        "assessment": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/WorkflowConfiguration"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "benchmark_recipe": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/WorkflowFile"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "preparation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SetupFiles"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "scheduler": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/WorkflowFile"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "runtimes": {
+          "maxProperties": 16,
+          "patternProperties": {
+            "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$": {
+              "$ref": "#/$defs/WorkflowRuntimeBinding"
+            }
+          },
+          "title": "Runtimes",
+          "type": "object"
+        }
+      },
+      "required": [
+        "evaluator",
+        "candidate",
+        "benchmark",
+        "asset_root",
+        "task_ids",
+        "components"
+      ],
+      "title": "StackConfiguration",
+      "type": "object"
+    },
+    "WorkflowConfiguration": {
+      "additionalProperties": false,
+      "properties": {
+        "plan": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "source": {
+          "$ref": "#/$defs/WorkflowFile"
+        }
+      },
+      "required": [
+        "plan",
+        "source"
+      ],
+      "title": "WorkflowConfiguration",
+      "type": "object"
+    },
+    "WorkflowFile": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "title": "WorkflowFile",
+      "type": "object"
+    },
+    "WorkflowRuntimeBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "installation": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "components": {
+          "maxProperties": 32,
+          "minProperties": 1,
+          "patternProperties": {
+            "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$": {
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+              "type": "string"
+            }
+          },
+          "title": "Components",
+          "type": "object"
+        },
+        "references": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/WorkflowFile"
+          },
+          "maxItems": 16,
+          "title": "References",
+          "type": "array"
+        }
+      },
+      "required": [
+        "installation",
+        "components"
+      ],
+      "title": "WorkflowRuntimeBinding",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.toolkit.workflow.v2",
+      "default": "aeep.toolkit.workflow.v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "registry": {
+      "$ref": "#/$defs/WorkflowFile"
+    },
+    "policy": {
+      "$ref": "#/$defs/WorkflowFile"
+    },
+    "configurations": {
+      "maxProperties": 16,
+      "minProperties": 1,
+      "patternProperties": {
+        "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$": {
+          "$ref": "#/$defs/StackConfiguration"
+        }
+      },
+      "title": "Configurations",
+      "type": "object"
+    }
+  },
+  "required": [
+    "registry",
+    "policy",
+    "configurations"
+  ],
+  "title": "StackWorkflow",
+  "type": "object"
+}

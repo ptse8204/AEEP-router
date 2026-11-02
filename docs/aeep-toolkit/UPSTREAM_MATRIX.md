@@ -1778,3 +1778,34 @@ are excluded from canonical metrics. This is implemented source with synthetic
 boundary tests; actual upstream/runtime and composed domain checks remain open.
 Waza, SkillRank, protected task runtimes and the other required component gates
 remain unchanged. No comparison resumes.
+
+## November 2: actual SDK execution and lifecycle assembly
+
+Approved review5136b81a installed the retained64-wheel runtime and passed real
+LangGraph1.2.14 composition over six owned calls. The installed-package check
+passed, with all16 ASE source files verified but no ASE scheduler execution.
+Agent Framework failed on immutable engineering-record identity before SDK use.
+Approved continuation66848247 isolated its workspace but failed first-party
+ExecutorSpec validation before SDK use; its Framework attempt is terminal.
+Approved [description correction](../../reports/toolkit-v2/c13/framework-driver-correction-20261102/operation-review.json)
+482c8c11 reached the real SDK, which rejected the callback context annotated as
+`Any` before owned dispatch. The adapter now binds the concrete optional SDK
+context type. The [current-wheel/Framework review](../../reports/toolkit-v2/c13/workflow-lifecycle-20261102/corrected-sdk-runtime/operation-review.json)
+034f218d requires its exact approval and all13 source gates before execution. Strict-context program/driver
+fixtures, package-program preparation and both standard-library boundaries passed;
+these remain first-party preparation, not actual SDK proof. No new SDK,
+backend, provider or dependency was selected.
+
+Ordinary workflow setup/readiness/removal now reuse the owned Python installer
+and existing ledger. Source tests use explicitly synthetic wheels; actual
+component readiness and both SkillsBench domain journeys remain open. These
+commands do not install or launch unselected components. No candidate comparison
+resumes; no resource, usefulness or release gate is closed by this increment.
+
+Approved034f218d now passes on current code: installation/idempotence, both
+boundaries, all five real Framework checks and installed workflow CLI/schema/
+source verification. Its five owned operations are settled; zero models. The
+runtime and all old runtimes are retained. All13 source gates pass on e363cfa5,
+with1977 passed/21 skipped per full run,83% coverage and both branch floors.
+This is bounded component evidence, not an ordinary two-domain journey or a
+full-stack, candidate-value, selection-value, resource or release pass.

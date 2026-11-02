@@ -2454,7 +2454,6 @@ OpenSkillEval dataset rights exclusion stands. Existing authority and release
 restrictions remain. This is product ordering, not approval to install or execute
 new untrusted artifacts, start services, use credentials or spend cash.
 
-
 ## D136: Separate finite stack checks from formal case materialization
 
 Use explicit setup v2, `assessment.integration-cases.v1` and plan v7 for one to six
@@ -2498,7 +2497,6 @@ Source fixtures do not establish actual upstream execution. New software and
 models still require applicable exact authority, and the complete-stack barrier
 continues to block comparative campaigns.
 
-
 ## D138 — Account for the operator wrapper without another cost store
 
 Use the existing assessment grants, operation ledger and receipts for workflow
@@ -2516,3 +2514,36 @@ wrappers cannot bypass recovery. No retries or counter resets are added.
 
 This source increment does not complete component setup/readiness accounting,
 real SDK execution or either domain journey. The all-integration barrier remains.
+
+## D139 — Selected runtime lifecycle reuses the installer and ledger (November 2)
+
+Connect explicit named runtime bindings to ordinary workflow setup/readiness/
+removal commands. Require exact operation-specific review and accounting v2 for
+writes, retain independent failure journals and recheck authority/source before
+each destination. Preserve unchanged v1/v2 serialization when bindings are absent.
+Preserve known unselected consumers, including the parent of a canonical export.
+Do not add a runtime manager, scheduler or registry. Installation is not evidence
+of enablement, permission, functionality or usefulness.
+
+Approved SDK5136b81a passed installation, containment, real Graph composition
+and installed-source checks; Framework hit the immutable-record guard. Its66848247
+continuation then failed the first-party driver's missing required description.
+Keep both attempts terminal and their costs/evidence intact. The new Framework
+review validates complete executor/context/receipt construction and an actual
+standard-library denial probe before requesting approval. No successful SDK or
+package check is repeated. All comparative campaigns remain paused.
+
+The actual482c8c11 attempt then exposed Framework1.21.0's mandatory context type.
+Bind the concrete lazy-loaded `WorkflowContext[dict, dict]` on callbacks and make
+the development substitute reject the old `Any` signature. Preserve the failed
+receipt. Group current-wheel installation and the corrected Framework check under
+034f218d, gated on complete current-source verification. Keep dependency pins,
+previous runtimes and Graph evidence; no comparative campaign resumes.
+
+Approved034f218d now passes on current code: installation/idempotence, both
+boundaries, all five real Framework checks and installed workflow CLI/schema/
+source verification. Its five owned operations are settled; zero models. The
+runtime and all old runtimes are retained. All13 source gates pass on e363cfa5,
+with1977 passed/21 skipped per full run,83% coverage and both branch floors.
+This is bounded component evidence, not an ordinary two-domain journey or a
+full-stack, candidate-value, selection-value, resource or release pass.

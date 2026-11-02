@@ -2,6 +2,7 @@
 
 import asyncio
 from types import SimpleNamespace
+from typing import Generic, TypeVar, get_args, get_origin
 
 import pytest
 
@@ -47,9 +48,17 @@ def receipt(executor, fingerprint, success, key):
 @pytest.fixture
 def sdk_fixture(monkeypatch):
     constructed = []
+    Out, Final = TypeVar("Out"), TypeVar("Final")
+
+    class Context(Generic[Out, Final]):
+        pass
 
     class Node:
         def __init__(self, function, **kwargs):
+            # Mirror the pinned SDK's required context contract. This substitute
+            # is first-party development evidence, never upstream execution proof.
+            context = function.__annotations__["context"]
+            assert get_origin(context) is Context and get_args(context) == (dict, dict)
             self.function = function
             self.id = kwargs["id"]
             assert kwargs["input"] is kwargs["output"] is kwargs["workflow_output"] is dict
@@ -92,7 +101,7 @@ def sdk_fixture(monkeypatch):
         bridge,
         "importlib",
         SimpleNamespace(
-            import_module=lambda _: SimpleNamespace(FunctionExecutor=Node, WorkflowBuilder=Builder)
+            import_module=lambda _: SimpleNamespace(FunctionExecutor=Node, WorkflowBuilder=Builder, WorkflowContext=Context)
         ),
     )
     return constructed

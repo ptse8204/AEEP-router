@@ -178,7 +178,6 @@ current source and pass the existing grant checks. Optional-use/value stages,
 holdouts, challengers and broader runs are rejected. The separate bounded
 engineering review does not authorize installations or model disclosure by itself.
 
-
 The Agent Framework core adapter now composes a bounded sequence of approved
 executors. Steps bind fingerprints, action IDs and canonical predecessor receipt
 references. It refuses a silent restart after failure or cancellation and does
@@ -214,9 +213,9 @@ SDK process receipts and overhead enter the existing operation ledger. Awaited
 canonical trial intervals are excluded from SDK elapsed cost, preserving their
 own charges. Upstream timing/token defaults are compatibility artifacts and are
 excluded from measured usage. Reports retain canonical task grades and raw token
-categories. General workflow preparation/export overhead still needs complete
-accounting; no assembled-stack pass is claimed.
-
+categories. Opt-in workflow accounting records wrapper preparation/export costs with nested
+execution spans excluded. Final receipt persistence and Router close remain
+outside that measurement; no assembled-stack pass is claimed.
 
 ## Workflow overhead accounting
 
@@ -243,3 +242,95 @@ Old workflow definitions and commands remain valid. Without a scope, overhead
 coverage is explicitly NOT_RECORDED. This addition does not account for every
 component's installation/readiness path, or complete either domain journey.
 Those costs and actual upstream lifecycle checks remain part of the stack gate.
+
+## Selected runtime setup and removal
+
+Bind an existing reviewed `runtime-installation.v1` file under a v2
+configuration's `runtimes` map. Each binding names the selected components and
+which exact package artifact provides them. A runtime can serve several selected
+components. The workflow checks its complete dependency closure against the
+workflow's permission, license, data and resource policy before setup.
+
+```json
+"runtimes": {
+  "workflow-sdk": {
+    "installation": {"path": "/absolute/path/installation.json", "sha256": "EXACT_FILE_SHA256"},
+    "components": {"langgraph": "langgraph", "agent-framework": "agent-framework-core"}
+  }
+}
+```
+
+Use explicit runtime IDs so an operator can prepare or remove one component
+without starting the others. These commands inspect owned installation state;
+they import no upstream SDK and perform no backend sign-in:
+
+```bash
+PYTHONPATH=src python3 -m aeep_toolkit workflow setup \
+  --workflow /absolute/path/workflow.json --configuration document-data \
+  --runtime workflow-sdk
+PYTHONPATH=src python3 -m aeep_toolkit workflow readiness \
+  --workflow /absolute/path/workflow.json --configuration document-data \
+  --runtime workflow-sdk
+PYTHONPATH=src python3 -m aeep_toolkit workflow remove \
+  --workflow /absolute/path/workflow.json --configuration document-data \
+  --runtime workflow-sdk
+```
+
+Omitting `--reviewed-digest` keeps setup/removal inert. To apply an authorized
+operation, add its exact preview digest, a reviewed accounting v2 scope and a
+fresh operation ID:
+
+```bash
+PYTHONPATH=src python3 -m aeep_toolkit workflow setup \
+  --workflow /absolute/path/workflow.json --configuration document-data \
+  --runtime workflow-sdk --reviewed-digest EXACT_SETUP_PREVIEW_DIGEST \
+  --accounting /absolute/path/accounting-v2.json --operation-id fresh-setup-id
+```
+
+Removal uses its own preview digest and the same flags on `workflow remove`.
+It preserves an edited or interrupted runtime and any known unselected consumer.
+Canonical workflow export retains the original workflow reference, including
+other configurations that still use the runtime. A changed or missing parent
+blocks removal until the operator reviews updated bindings. No global consumer
+inventory is inferred. Setup/removal are limited to private Python runtime plans;
+container images, services and binary installers still use their separate reviews.
+
+Accounting v2 adds `setup`, `readiness` and `remove` stages; its explicit wrapper
+reservation can be at most 3,600 seconds within an existing grant. This schema
+limit grants no new allowance. Existing v1 scope stages and their 600-second
+ceiling are unchanged. Readiness may be metered or identify its costs as
+NOT_RECORDED. Independent installer failures retain their journals and costs;
+source drift, revoked authority or uncertain accounting stops later effects.
+
+Installation, enablement, execution permission, functional readiness and
+usefulness remain separate fields. A matching owned tree proves installation
+only. `workflow run` refuses a bound runtime that is absent or changed, and the
+all-integration barrier still applies. This increment's synthetic wheel tests
+verify lifecycle behavior; they are not upstream integration or task evidence.
+
+## November 2 SDK execution evidence
+
+The approved 5136b81a check installed and retained the 64-wheel runtime. Real
+LangGraph 1.2.14 passed conditional execution, bounded loops, interrupt/resume
+and lost-checkpoint denial over six owned executor calls. The installed-package
+check passed, including the 16 ASE source files; ASE itself did not execute.
+Agent Framework stopped before its SDK call because its engineering record IDs
+collided with the prior Graph check. The immutable-record guard held.
+
+The approved 66848247 continuation used a separate workspace but stopped on a
+missing required executor description in the driver. No Framework SDK call or
+new engineering grant ran. Its Framework attempt is terminal. Approved Framework-only correction482c8c11 reached the real SDK, which rejected
+the callback context annotated as `Any` before owned dispatch. The current source
+now supplies the concrete SDK `WorkflowContext` type. Current-wheel/Framework
+review034f218d requires exact approval and all13 source gates; it retains a new private
+runtime with unchanged dependency pins. Successful Graph/package/installation checks are not
+replayed. Full stack and both domain journeys remain open; comparisons stay
+paused. Read the [current evidence](../../reports/toolkit-v2/c13/workflow-lifecycle-20261102/README.md).
+
+Approved034f218d now passes on current code: installation/idempotence, both
+boundaries, all five real Framework checks and installed workflow CLI/schema/
+source verification. Its five owned operations are settled; zero models. The
+runtime and all old runtimes are retained. All13 source gates pass on e363cfa5,
+with1977 passed/21 skipped per full run,83% coverage and both branch floors.
+This is bounded component evidence, not an ordinary two-domain journey or a
+full-stack, candidate-value, selection-value, resource or release pass.

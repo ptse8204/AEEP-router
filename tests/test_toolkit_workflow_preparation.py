@@ -8,6 +8,7 @@ import json
 import random
 import zipfile
 from datetime import timedelta
+from pathlib import Path
 
 import pytest
 from test_toolkit_workflow_v2 import definition
@@ -454,3 +455,55 @@ def test_small_task_set_cannot_relax_formal_counts_or_acquire_value_semantics(tm
         assert "integration_case_set_id" not in old.model_dump(mode="json")
     finally:
         asyncio.run(service.router.close())
+
+
+def test_canonical_export_retains_runtime_consumer_bindings(tmp_path, monkeypatch):
+    from test_toolkit_runtime_install import installation
+
+    from aeep_toolkit.installation import manifest_digest
+    from aeep_toolkit.models import ExtensionManifest
+    from aeep_toolkit.workflow_runtime import lifecycle_preview
+
+    path, service, *_ = configured(tmp_path)
+    folder = tmp_path / "owned-install-plan"
+    folder.mkdir()
+    plan = installation(folder)
+    install_file = folder / "installation.json"
+    install_file.write_text(plan.model_dump_json())
+    data = json.loads(path.read_bytes())
+    registry_path, policy_path = tmp_path / "registry.json", tmp_path / "policy.json"
+    registry, policy = json.loads(registry_path.read_bytes()), json.loads(policy_path.read_bytes())
+    metadata = next(item for item in registry["extensions"] if item["extension_id"] == "aeep-evaluator")
+    metadata["source"]["artifact_sha256"] = plan.wheels[0].sha256
+    policy["reviewed_dependency_manifests"].extend([
+        manifest_digest(ExtensionManifest.model_validate(metadata)),
+        *(item.manifest_sha256 for item in plan.preview.items),
+    ])
+    policy["allowed_data_rights"].append("fixture-only")
+    for field in ("allowed_filesystem_scopes", "allowed_authentication", "allowed_financial_exposure"):
+        policy[field] = list(dict.fromkeys([*policy[field], *getattr(plan.policy, field)]))
+    for name, target, value in (("registry", registry_path, registry), ("policy", policy_path, policy)):
+        target.write_text(json.dumps(value))
+        data[name]["sha256"] = hashlib.sha256(target.read_bytes()).hexdigest()
+    data["configurations"]["document-data"]["runtimes"] = {
+        "engine": {"installation": {"path": str(install_file.relative_to(tmp_path)),
+                                   "sha256": hashlib.sha256(install_file.read_bytes()).hexdigest()},
+                   "components": {"aeep-evaluator": "engine"}}
+    }
+    data["configurations"]["software-engineering"] = data["configurations"]["document-data"]
+    path.write_text(json.dumps(data))
+    monkeypatch.setattr(Router, "from_manifest", lambda *_: service.router)
+    monkeypatch.setattr(service.router, "close", _no_close)
+    try:
+        review = prepare_stack(path, "document-data")
+        result = prepare_canonical(path, "document-data", reviewed_digest=review["review_sha256"],
+                                   destination=tmp_path / "prepared-runtime")
+        exported = json.loads(Path(result["workflow_path"]).read_bytes())
+        binding = exported["configurations"]["document-data"]["runtimes"]["engine"]
+        assert binding["installation"]["path"] == str(install_file)
+        assert binding["references"] == [{"path": str(path), "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}]
+        removal, _ = lifecycle_preview(Path(result["workflow_path"]), "document-data", ("engine",), operation="remove")
+        assert removal["blockers"] and any("software-engineering" in ref for ref in removal["shared_references"]["engine"])
+        assert not Path(plan.destination).exists()
+    finally:
+        asyncio.run(Router.close(service.router))

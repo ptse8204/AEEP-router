@@ -1,0 +1,41 @@
+{
+  "sdk": "langgraph",
+  "version": "1.2.14",
+  "checks": [
+    {
+      "check": "conditional_execution",
+      "passed": true,
+      "step_receipts": 3
+    },
+    {
+      "check": "loop_ceiling",
+      "passed": true,
+      "step_receipts": 2
+    },
+    {
+      "check": "interrupt_and_resume",
+      "passed": true,
+      "step_receipts": 1
+    },
+    {
+      "check": "lost_checkpoint_and_denied_dispatch",
+      "passed": true,
+      "step_receipts": 0
+    }
+  ],
+  "receipts": [
+    "f5353d60dd71305797733f6299d912c77d1e833eaab6d850694d41696d222f7b",
+    "9c0e8449dff6dfa6d25ee29749cf3b903ab21af40c2c0b0a618b39b0778e3ce3",
+    "4e5ecf0f29838411c95e4340d45501119384524c7aa620ae3597a084c19d36c3",
+    "c3a3f7d9882c696dcebdbcf7c8cf42cc9a13464773e3055b3b5887a60dc41cef",
+    "1857b5705d8c715110bb437b0b5a756f26af47511dc5612fd8e8e8cac1d9d629",
+    "ae6dae8ac99956ab8450d85bdb30c9b452f268f182dde5b59bea8637d6548db5"
+  ],
+  "operations": 6,
+  "models": 0,
+  "host_home_denied": true,
+  "recovery_scope": "same-runtime checkpoint resumption; lost state fails closed; process-restart continuation unverified",
+  "candidate_usefulness": "NOT_ASSESSED",
+  "selection_usefulness": "NOT_ASSESSED",
+  "all_integration_readiness": "NOT_ESTABLISHED"
+}

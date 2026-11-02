@@ -241,6 +241,12 @@ def prepare_canonical(
         target[name]["path"] = str(_read(WorkflowFile.model_validate(target[name]), root)[0])
     if target.get("scheduler") is not None:
         target["scheduler"]["path"] = str(_read(WorkflowFile.model_validate(target["scheduler"]), root)[0])
+    for binding in target.get("runtimes", {}).values():
+        binding["installation"]["path"] = str(_read(WorkflowFile.model_validate(binding["installation"]), root)[0])
+        refs = [{"path":str(_read(WorkflowFile.model_validate(ref), root)[0]), "sha256":ref["sha256"]}
+                for ref in binding.get("references", [])]
+        refs.append({"path":str(definition.absolute()), "sha256":hashlib.sha256(definition.read_bytes()).hexdigest()})
+        binding["references"] = list({(ref["path"],ref["sha256"]):ref for ref in refs}.values())
     target["preparation"] = None
     target["assessment"] = {
         name: {"path": str(path), "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
