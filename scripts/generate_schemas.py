@@ -195,6 +195,7 @@ from aeep_toolkit.models import (
 from aeep_toolkit.selection import SelectionEvaluation
 from aeep_toolkit.workflow import EvaluationWorkflow, StackWorkflow
 from aeep_toolkit.workflow_accounting import WorkflowAccountingDefinition
+from aeep_toolkit.workflow_security import ScannerRuntimeDefinition, WorkflowScanRecord
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_DIR = ROOT / "schemas"
@@ -246,6 +247,8 @@ MODEL_FILES = {
     "toolkit-workflow-accounting.schema.json": WorkflowAccountingDefinition,
     "toolkit-workflow-v1.schema.json": EvaluationWorkflow,
     "toolkit-workflow-v2.schema.json": StackWorkflow,
+    "toolkit-scanner-runtime.schema.json": ScannerRuntimeDefinition,
+    "toolkit-workflow-scan.schema.json": WorkflowScanRecord,
     "assessment-controlled-fixture.schema.json": ControlledFixtureRecord,
     "assessment-recipe-extension.schema.json": ExecutableRecipeExtension,
     "assessment-recipe-materialization.schema.json": RecipeMaterializationRequest,

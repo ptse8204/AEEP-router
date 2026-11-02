@@ -334,3 +334,68 @@ runtime and all old runtimes are retained. All13 source gates pass on e363cfa5,
 with1977 passed/21 skipped per full run,83% coverage and both branch floors.
 This is bounded component evidence, not an ordinary two-domain journey or a
 full-stack, candidate-value, selection-value, resource or release pass.
+
+## Selected static scanning through the workflow
+
+Use the optional scanner binding to inspect the same candidate bytes that an
+evaluation would receive. The scanner runs in its reviewed offline container;
+findings and analyzer failures remain separate from task scores and usefulness.
+It neither activates a candidate nor establishes that a skill is safe.
+
+A candidate may contain evaluation answers. Create a new filtered copy before
+canonical inspection so those answers stay outside worker payloads:
+
+```bash
+PYTHONPATH=src python3 -m aeep_toolkit candidate /absolute/path/skill \
+  --stage /absolute/path/new-staged-skill --manifest /absolute/path/manifest.json
+```
+
+This records the staged subject and measured preparation/static-inspection costs
+in the existing repository. It creates no grant. An existing destination,
+credential-state files, links or changed payload are rejected. A failed setup
+leaves its copy for inspection and preserves unrelated work.
+
+A v2 configuration may select `skill-scanner` and bind an exact `scanner` file.
+The `scanner-runtime.v1` definition names the candidate digest, existing container
+image, executable fingerprints and separate reviewed scanner request. Store it
+without approving or executing it:
+
+```bash
+PYTHONPATH=src python3 -m aeep_toolkit workflow define-scanner \
+  --file /absolute/path/scanner.json --manifest /absolute/path/manifest.json
+PYTHONPATH=src python3 -m aeep_toolkit workflow scan \
+  --workflow /absolute/path/workflow.json --configuration document-data
+```
+
+The scan preview shows the dependency/permission closure and complete container
+command without querying Docker. Execution requires its exact digest, an
+accounting v3 scope, a fresh operation ID and applicable scanner authority:
+
+```bash
+PYTHONPATH=src python3 -m aeep_toolkit workflow scan \
+  --workflow /absolute/path/workflow.json --configuration document-data \
+  --accounting /absolute/path/accounting-v3.json --operation-id fresh-scan-id \
+  --reviewed-digest EXACT_SCAN_PREVIEW_DIGEST
+```
+
+The existing executor supplies containment, attempts and execution events. The
+scanner's nested operation and wrapper overhead are charged separately. Only
+latency is measured here; container CPU/RSS and model usage remain unknown.
+Interruption retains costs. Uncertain cleanup blocks new dispatch even with a
+new operation ID. Cleanup checks the exact image, ownership label and immutable
+container ID before stopping or removing a container; it preserves unknown work.
+No images or volumes are removed.
+
+Add `--scan-report SCAN_REF` to `workflow run` or `workflow report` when the
+configuration selects a scanner. The workflow verifies the candidate, current
+source/runtime, journal, settled charge and receipt before attaching minimized
+findings to its canonical report. Selected component checks have their own report
+section. An unselected scanner remains inert. Accounting v1/v2 cannot authorize
+the new scan stage; existing definitions keep their earlier behavior.
+
+Actual approved Cisco checks on source `e363cfa5` passed containment and both
+selected/control scans. The selected format-json payload had one informational
+missing-license finding, four analyzers and no reported analyzer failures.
+The control had four findings, including two high/critical. All five operations
+remain charged. The new ordinary CLI bridge still needs its own current-source
+contained execution check. Read the [evidence and next review](../../reports/toolkit-v2/c13/workflow-scanner-20261102/README.md).

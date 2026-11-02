@@ -1809,3 +1809,22 @@ runtime and all old runtimes are retained. All13 source gates pass on e363cfa5,
 with1977 passed/21 skipped per full run,83% coverage and both branch floors.
 This is bounded component evidence, not an ordinary two-domain journey or a
 full-stack, candidate-value, selection-value, resource or release pass.
+
+## November 2 selected scanner and workflow bridge
+
+Cisco 2.2.1 now has actual bounded execution evidence, replacing the source-only
+status of earlier dated entries. Approved ec8079e7 built and retained image
+`sha256:1cf3c4405db2f9b4721a35e10534f72a6b428fda49b3ee1114ef27d4f8a17eb4`.
+Approved 84365d39 completed the selected scan after the original empty-stdin
+failure. The selected payload produced one informational finding; the control
+produced four findings including two high/critical. Both used four analyzers
+and reported no analyzer failures. The five settled charges and original failures
+are retained in the [scanner packet](../../reports/toolkit-v2/c13/scanner-runtime-20261102/README.md).
+
+The new ordinary CLI scanner binding uses the existing container executor,
+canonical journals, separate explicit scanner authority and accounting v3.
+Package bytes are checked against the reviewed wheel before Cisco is imported.
+Source tests use labeled first-party substitutes. Current-source contained CLI
+execution is pending its own review; the old scanner result cannot close that
+gate. The complete stack and both SkillsBench domain journeys remain incomplete,
+and comparative campaigns remain paused.

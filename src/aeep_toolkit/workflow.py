@@ -71,6 +71,7 @@ class StackConfiguration(ContractModel):
     benchmark_recipe: WorkflowFile | None = None
     preparation: SetupFiles | None = None
     scheduler: WorkflowFile | None = None
+    scanner: WorkflowFile | None = None
     runtimes: dict[Identifier, WorkflowRuntimeBinding] = Field(default_factory=dict, max_length=16)
 
     @model_serializer(mode='wrap')
@@ -78,6 +79,8 @@ class StackConfiguration(ContractModel):
         result: dict[str, Any] = handler(self)
         if self.scheduler is None:
             result.pop('scheduler', None)
+        if self.scanner is None:
+            result.pop('scanner', None)
         if not self.runtimes:
             result.pop('runtimes', None)
         return result
@@ -88,6 +91,8 @@ class StackConfiguration(ContractModel):
             raise ValueError('workflow tasks and components must be distinct')
         if any(not set(binding.components) <= set(self.components) for binding in self.runtimes.values()):
             raise ValueError('runtime bindings may provide selected components only')
+        if self.scanner is not None and 'skill-scanner' not in self.components:
+            raise ValueError('scanner binding requires explicit component selection')
         if self.assessment is not None and self.preparation is not None:
             raise ValueError('select either an existing assessment or canonical preparation inputs')
         return self
@@ -257,6 +262,10 @@ def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
             (preparation is not None and request.scheduler_digest is not None)
             or (assessment is not None and plan.scheduler_digest is not None)):
         raise ValueError('managed selection cannot run an external scheduler plan')
+    scanner_preview = None
+    if selected.scanner is not None:
+        from .workflow_security import scan_preview
+        scanner_preview, _, _ = scan_preview(definition, configuration)
     runtime_setup = None
     if selected.runtimes:
         from .workflow_runtime import lifecycle_preview
@@ -271,6 +280,8 @@ def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
              'preparation':preparation, 'implementation_source':verification_source_digest(Path(__file__).parents[2])}
     if scheduler_binding is not None:
         facts['scheduler'] = scheduler_binding
+    if scanner_preview is not None:
+        facts['scanner'] = scanner_preview
     if runtime_setup is not None:
         facts['runtime_setup'] = {name:runtime_setup[name] for name in ('review_sha256','installation_plans','observations','blockers')}
     return {**facts, 'review_sha256':content_digest(facts), 'blockers':blockers,
@@ -316,9 +327,19 @@ def main(argv: list[str] | None = None) -> None:
             command.add_argument('--directory', type=Path)
         if name == 'report':
             command.add_argument('--report-id', required=True)
+        command.add_argument('--scan-report', help='Canonical selected scanner observation; required only when configured')
         if name == 'run':
             command.add_argument('--stack-readiness', help='Canonical current-source all-integration completion record')
             command.add_argument('--engineering-review', help='Canonical finite required-use integration review')
+    scan_command = commands.add_parser('scan', help='Explicit static scanning through the existing contained executor')
+    scan_command.add_argument('--workflow', type=Path, required=True)
+    scan_command.add_argument('--configuration', required=True)
+    scan_command.add_argument('--accounting', type=Path)
+    scan_command.add_argument('--operation-id')
+    scan_command.add_argument('--reviewed-digest')
+    define_scanner = commands.add_parser('define-scanner', help='Store an inert scanner runtime definition; no review or execution')
+    define_scanner.add_argument('--file', type=Path, required=True)
+    define_scanner.add_argument('--manifest', type=Path, required=True)
     for name in ('setup', 'readiness', 'remove'):
         command = commands.add_parser(name, help='Selected private Python runtimes; functional evidence remains separate')
         command.add_argument('--workflow', type=Path, required=True)
@@ -329,7 +350,12 @@ def main(argv: list[str] | None = None) -> None:
         command.add_argument('--reviewed-digest', help='Exact operation-specific lifecycle preview; omit for inspection only')
     args = parser.parse_args(argv)
     try:
-        if args.operation in {'define-rights', 'define-scheduler', 'define-accounting'}:
+        if args.operation == 'scan':
+            from .workflow_security import scan
+            print(json.dumps(scan(args.workflow, args.configuration, accounting=args.accounting,
+                operation_key=args.operation_id, reviewed_digest=args.reviewed_digest), indent=2))
+            return
+        if args.operation in {'define-rights', 'define-scheduler', 'define-accounting', 'define-scanner'}:
             import asyncio
 
             from aeep.assessment.repository import AssessmentRepository
@@ -338,18 +364,20 @@ def main(argv: list[str] | None = None) -> None:
 
             from .workflow_accounting import WorkflowAccountingDefinition
             from .workflow_preparation import TaskRightsReview
+            from .workflow_security import ScannerRuntimeDefinition
 
             record = (TaskRightsReview.model_validate_json(read_bytes(args.file)) if args.operation == 'define-rights'
                       else WorkflowAccountingDefinition.model_validate_json(read_bytes(args.file)) if args.operation == 'define-accounting'
+                      else ScannerRuntimeDefinition.model_validate_json(read_bytes(args.file)) if args.operation == 'define-scanner'
                       else SchedulerDefinition.model_validate_json(read_bytes(args.file)))
             kind = ('toolkit_task_rights' if args.operation == 'define-rights' else
-                    'toolkit_workflow_accounting' if args.operation == 'define-accounting' else 'scheduler')
+                    'toolkit_workflow_accounting' if args.operation == 'define-accounting' else 'toolkit_scanner_runtime' if args.operation == 'define-scanner' else 'scheduler')
             router = Router.from_manifest(args.manifest)
             try:
                 from aeep.assessment.models import content_digest
 
                 ref = AssessmentRepository(router.store).put(kind, content_digest(record), record)
-                print(json.dumps({'rights_review_ref' if args.operation == 'define-rights' else 'accounting_ref' if args.operation == 'define-accounting' else 'scheduler_ref':ref,
+                print(json.dumps({'rights_review_ref' if args.operation == 'define-rights' else 'accounting_ref' if args.operation == 'define-accounting' else 'scanner_ref' if args.operation == 'define-scanner' else 'scheduler_ref':ref,
                                   'reviewed':False, 'execution_authorized':False}))
             finally:
                 asyncio.run(router.close())
@@ -417,6 +445,18 @@ def main(argv: list[str] | None = None) -> None:
             from .managed import main as managed_main
             from .workflow_accounting import bind_workflow_plan
 
+            if preview.get('scanner') is not None:
+                from .workflow_security import require_scan
+                if meter is None or meter.repository is None or args.scan_report is None:
+                    raise ValueError('selected scanner needs a canonical scan report and workflow accounting')
+                scan_record = require_scan(meter.repository, args.scan_report, args.workflow, args.configuration)
+                meter.component_refs['skill-scanner'] = args.scan_report
+                meter.component_observations['skill-scanner'] = {
+                    'scan_ref': args.scan_report, 'receipt_ref': scan_record.receipt_ref,
+                    'execution_evidence_ref': scan_record.execution_evidence_ref,
+                    'candidate_sha256': scan_record.candidate_sha256, **scan_record.observations}
+            elif args.scan_report is not None:
+                raise ValueError('unselected scanner evidence cannot be attached')
             bind_workflow_plan(AssessmentPlan.model_validate_json(read_plan_bytes(plan)), args.manifest)
 
             # This fixed argv delegates all execution/export and recovery to the existing path.

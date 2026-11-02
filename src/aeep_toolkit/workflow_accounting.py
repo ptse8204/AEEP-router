@@ -11,7 +11,7 @@ from contextvars import ContextVar
 from pathlib import Path
 from typing import Any, Literal
 
-from pydantic import Field, model_validator
+from pydantic import Field, SerializerFunctionWrapHandler, model_serializer, model_validator
 
 from aeep.assessment.models import (
     AssessmentLimits,
@@ -35,16 +35,16 @@ from aeep.router import Router
 
 from .models import Digest, Identifier
 
-WorkflowStage = Literal["plan", "prepare", "run", "report", "setup", "readiness", "remove"]
+WorkflowStage = Literal["plan", "prepare", "run", "report", "setup", "readiness", "remove", "scan"]
 
 
 class WorkflowAccountingDefinition(StrictModel):
     """An inert, reviewed scope; it cannot create or extend a grant."""
 
-    schema_version: Literal["aeep.toolkit.workflow-accounting.v1", "aeep.toolkit.workflow-accounting.v2"] = "aeep.toolkit.workflow-accounting.v1"
+    schema_version: Literal["aeep.toolkit.workflow-accounting.v1", "aeep.toolkit.workflow-accounting.v2", "aeep.toolkit.workflow-accounting.v3"] = "aeep.toolkit.workflow-accounting.v1"
     workflow_sha256: Digest
     configurations: tuple[Identifier, ...] = Field(min_length=1, max_length=16)
-    operations: tuple[WorkflowStage, ...] = Field(min_length=1, max_length=7)
+    operations: tuple[WorkflowStage, ...] = Field(min_length=1, max_length=8)
     source_digest: Digest
     manifest_path: str = Field(min_length=1, max_length=4096)
     manifest_sha256: Digest
@@ -60,6 +60,8 @@ class WorkflowAccountingDefinition(StrictModel):
             or self.maximum_overhead_seconds > 600
         ):
             raise ValueError("lifecycle stages and larger reservations require accounting v2")
+        if self.schema_version.endswith('.v2') and 'scan' in self.operations:
+            raise ValueError('scanner execution requires explicit accounting v3')
         return self
 
 
@@ -75,6 +77,14 @@ class WorkflowPlanLink(StrictModel):
     operation_id: str
     assessment_plan_id: str
     assessment_plan_digest: Digest
+    component_refs: dict[Identifier, Digest] = Field(default_factory=dict, max_length=16)
+
+    @model_serializer(mode='wrap')
+    def preserve_existing(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
+        value: dict[str, Any] = handler(self)
+        if not self.component_refs:
+            value.pop('component_refs', None)
+        return value
 
 
 class WorkflowMeter:
@@ -90,6 +100,8 @@ class WorkflowMeter:
         self.repository: AssessmentRepository | None = None
         self.plan_ids: list[str] = []
         self.outcome_error: str | None = None
+        self.component_refs: dict[str, str] = {}
+        self.component_observations: dict[str, Any] = {}
 
     def authorize(self) -> None:
         if self.scope is None or self.repository is None:
@@ -111,7 +123,7 @@ class WorkflowMeter:
             raise ConfigurationError("workflow accounting and canonical plan use different authority or definitions")
         self.repository.put("toolkit_workflow_plan_link", self.operation_id, WorkflowPlanLink(
             operation_id=self.operation_id, assessment_plan_id=plan.plan_id,
-            assessment_plan_digest=content_digest(plan),
+            assessment_plan_digest=content_digest(plan), component_refs=self.component_refs,
         ))
         if plan.plan_id not in self.plan_ids:
             self.plan_ids.append(plan.plan_id)
@@ -133,6 +145,7 @@ class WorkflowMeter:
 
     def describe(self) -> dict[str, Any]:
         return {
+            **({"component_refs": self.component_refs} if self.component_refs else {}),
             "definition_ref": self.definition_ref,
             "operation_id": self.operation_id,
             "assessment_plan_ids": list(self.plan_ids),
@@ -149,6 +162,11 @@ _ACTIVE: ContextVar[WorkflowMeter | None] = ContextVar("aeep_workflow_meter", de
 def active_accounting() -> dict[str, Any] | None:
     meter = _ACTIVE.get()
     return meter.describe() if meter else None
+
+
+def active_component_observations() -> dict[str, Any]:
+    meter = _ACTIVE.get()
+    return dict(meter.component_observations) if meter else {}
 
 
 def bind_workflow_plan(plan: AssessmentPlan, manifest: Path | None = None) -> None:

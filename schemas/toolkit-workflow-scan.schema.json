@@ -1,0 +1,82 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.toolkit.workflow-scan.v1",
+      "default": "aeep.toolkit.workflow-scan.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "definition_ref": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Definition Ref",
+      "type": "string"
+    },
+    "implementation_source": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Implementation Source",
+      "type": "string"
+    },
+    "candidate_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Candidate Sha256",
+      "type": "string"
+    },
+    "environment_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Environment Digest",
+      "type": "string"
+    },
+    "wrapper_operation_id": {
+      "title": "Wrapper Operation Id",
+      "type": "string"
+    },
+    "operation_id": {
+      "title": "Operation Id",
+      "type": "string"
+    },
+    "request_plan_id": {
+      "title": "Request Plan Id",
+      "type": "string"
+    },
+    "authorization_id": {
+      "title": "Authorization Id",
+      "type": "string"
+    },
+    "receipt_ref": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Receipt Ref",
+      "type": "string"
+    },
+    "execution_evidence_ref": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Execution Evidence Ref",
+      "type": "string"
+    },
+    "observations": {
+      "additionalProperties": true,
+      "title": "Observations",
+      "type": "object"
+    },
+    "cleanup_verified": {
+      "title": "Cleanup Verified",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "definition_ref",
+    "implementation_source",
+    "candidate_sha256",
+    "environment_digest",
+    "wrapper_operation_id",
+    "operation_id",
+    "request_plan_id",
+    "authorization_id",
+    "receipt_ref",
+    "execution_evidence_ref",
+    "observations",
+    "cleanup_verified"
+  ],
+  "title": "WorkflowScanRecord",
+  "type": "object"
+}

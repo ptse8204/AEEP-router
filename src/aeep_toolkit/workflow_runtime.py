@@ -270,8 +270,8 @@ def lifecycle(
             return details
         if reviewed_digest != details["review_sha256"] or details["blockers"]:
             raise ConfigurationError("exact unblocked runtime lifecycle review required")
-        if meter is None or meter.scope is None or not meter.scope.schema_version.endswith(".v2"):
-            raise ConfigurationError("runtime changes require an exact accounting v2 scope")
+        if meter is None or meter.scope is None or meter.scope.schema_version not in {"aeep.toolkit.workflow-accounting.v2", "aeep.toolkit.workflow-accounting.v3"}:
+            raise ConfigurationError("runtime changes require an exact accounting v2 or v3 scope")
         assert meter.repository is not None
         results = []
         completed: dict[str, dict[str, Any]] = {}

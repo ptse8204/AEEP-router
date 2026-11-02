@@ -1,0 +1,272 @@
+{
+  "$defs": {
+    "AssessmentEnvironment": {
+      "additionalProperties": false,
+      "properties": {
+        "environment_id": {
+          "title": "Environment Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "trusted_local",
+            "container",
+            "codex_sandbox"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "identity": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Identity",
+          "type": "object"
+        },
+        "network": {
+          "default": false,
+          "title": "Network",
+          "type": "boolean"
+        },
+        "container_image": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Container Image"
+        },
+        "cpu_count": {
+          "default": 1,
+          "exclusiveMinimum": 0,
+          "maximum": 64,
+          "title": "Cpu Count",
+          "type": "number"
+        },
+        "memory_mb": {
+          "default": 256,
+          "maximum": 65536,
+          "minimum": 32,
+          "title": "Memory Mb",
+          "type": "integer"
+        },
+        "process_limit": {
+          "default": 64,
+          "maximum": 1024,
+          "minimum": 1,
+          "title": "Process Limit",
+          "type": "integer"
+        },
+        "container_runtime": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Container Runtime"
+        },
+        "container_socket": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Container Socket"
+        },
+        "read_only_roots": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Read Only Roots",
+          "type": "array"
+        },
+        "conformance_digests": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "pattern": "^[a-f0-9]{64}$",
+                "type": "string"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Conformance Digests"
+        },
+        "differential_conformance_digest": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Differential Conformance Digest"
+        }
+      },
+      "required": [
+        "environment_id",
+        "kind",
+        "identity"
+      ],
+      "title": "AssessmentEnvironment",
+      "type": "object"
+    },
+    "RecipeMaterializationRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "default": "assessment.recipe-materialization.v1",
+          "enum": [
+            "assessment.recipe-materialization.v1",
+            "assessment.recipe-materialization.v2"
+          ],
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "plan_id": {
+          "title": "Plan Id",
+          "type": "string"
+        },
+        "subject_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Subject Digest",
+          "type": "string"
+        },
+        "recipe_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Recipe Digest",
+          "type": "string"
+        },
+        "mapping_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Mapping Digest",
+          "type": "string"
+        },
+        "environment_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Environment Digest",
+          "type": "string"
+        },
+        "authorization_id": {
+          "title": "Authorization Id",
+          "type": "string"
+        },
+        "definition_digests": {
+          "items": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "title": "Definition Digests",
+          "type": "array"
+        },
+        "seed": {
+          "title": "Seed",
+          "type": "integer"
+        },
+        "runtime_dependencies": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "pattern": "^[a-f0-9]{64}$",
+                "type": "string"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Runtime Dependencies"
+        }
+      },
+      "required": [
+        "subject_digest",
+        "recipe_digest",
+        "mapping_digest",
+        "environment_digest",
+        "authorization_id",
+        "definition_digests",
+        "seed"
+      ],
+      "title": "RecipeMaterializationRequest",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.toolkit.scanner-runtime.v1",
+      "default": "aeep.toolkit.scanner-runtime.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_revision": {
+      "const": "c3d7fd9fee50cf2ea45f0b381eb61f857360f825",
+      "default": "c3d7fd9fee50cf2ea45f0b381eb61f857360f825",
+      "title": "Source Revision",
+      "type": "string"
+    },
+    "environment": {
+      "$ref": "#/$defs/AssessmentEnvironment"
+    },
+    "request": {
+      "$ref": "#/$defs/RecipeMaterializationRequest"
+    },
+    "candidate_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Candidate Sha256",
+      "type": "string"
+    },
+    "worker_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Worker Sha256",
+      "type": "string"
+    },
+    "executable_dependencies": {
+      "additionalProperties": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "maxProperties": 32,
+      "minProperties": 1,
+      "title": "Executable Dependencies",
+      "type": "object"
+    },
+    "timeout_seconds": {
+      "default": 125,
+      "maximum": 300,
+      "minimum": 1,
+      "title": "Timeout Seconds",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "environment",
+    "request",
+    "candidate_sha256",
+    "worker_sha256",
+    "executable_dependencies"
+  ],
+  "title": "ScannerRuntimeDefinition",
+  "type": "object"
+}

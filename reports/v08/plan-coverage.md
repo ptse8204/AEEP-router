@@ -6744,3 +6744,30 @@ installation. Read [the packet](../toolkit-v2/c13/scanner-runtime-20261102/READM
 Product source e363cfa5 and completed13 source gates are unchanged. The earlier
 offline docs success retains its exact72-input hashes; this progress/STATE note
 was appended afterward. No source/guide command change or new full-stack claim.
+
+
+<!-- ordinary-cli-scanner-20261102:start -->
+## November 2: ordinary scanner workflow source passed; execution review ready
+
+Approved84365d39 completed the actual selected scan; five total operations remain
+settled. The new CLI connection reuses containment,journals,ledger and canonical
+reporting, with separate scanner authority/accountingv3 and filtered candidate
+staging. Old workflow/accounting contracts retain their meanings.
+
+All13 unchanged-source gates pass on0116d754:2007passes/21skips in both full
+runs,82.54%coverage,both branch floors,schemas and build. Earlier42 storage
+failures and two teardown errors retain their records. Final verification uses
+post-teardown passing-fixture cleanup with deliberate failure/skip controls;
+assertions and product limits are unchanged. Failed logs/metadata remain even
+where normal pytest retention later expired numbered temporary roots.
+
+[Review8f4ab6d3](../toolkit-v2/c13/workflow-scanner-20261102/operation-review.json)
+is concrete,inertly verified and unapproved. It covers the actual module CLI
+scanner check,current wheel/32cached dependencies and offline docs. Package
+execution requires50.72GiB free; defer it without consuming an attempt
+if short,while independent scanner/docs remain eligible. All images,volumes,
+old runtimes and unrelated work remain. Source proof includes preserved local
+CI edits excluded from implementation commits. Both three-task domain previews
+show real blockers. Full stack,task journeys,candidate usefulness,selection
+usefulness,resource and release gates remain open; comparisons stay paused.
+<!-- ordinary-cli-scanner-20261102:end -->

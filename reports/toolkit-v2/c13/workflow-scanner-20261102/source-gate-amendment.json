@@ -1,0 +1,17 @@
+{
+  "authority": "Standing finite test-definition delegation; same tests/assertions/product/source. No grant/counter or acceptance-threshold change.",
+  "reason": "Initial complete branch-coverage run: 42 storage-guard failures, 1965 passed, 21 skipped. Passing synthetic fixtures accumulated about5.6GiB and crossed the50GiB host reserve. Complete logs and failed fixture data retained.",
+  "source": "0116d754bc7a7f86ddaf018043b13ef95789be114b2509b71e243bad32ae3ec5",
+  "preserved_checks": [
+    "compileall",
+    "schemas",
+    "assessment-policy",
+    "ruff",
+    "mypy",
+    "pytest"
+  ],
+  "retry": "Only branch-coverage suite and its unstarted downstream gates; use pytest tmp_path_retention_policy=failed and tmp_path_retention_count=1.",
+  "cleanup": "Only completed passing fixtures of this run; exact manifest in owned-fixture-cleanup.json. Older roots and failed fixtures remain.",
+  "coverage_gate_passed": false,
+  "upstream_executed": false
+}

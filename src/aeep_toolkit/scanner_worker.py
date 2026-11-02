@@ -13,11 +13,46 @@ import os
 import subprocess
 import sys
 import tempfile
+import zipfile
+from importlib.metadata import distribution
 from pathlib import Path, PurePosixPath
 from typing import Any
 
 SOURCE_REVISION = "c3d7fd9fee50cf2ea45f0b381eb61f857360f825"
-SCANNER = "/opt/aeep-scanner/bin/skill-scanner"
+SCANNER = "/opt/aeep-scanner/bin/python"
+SCANNER_VERSION = "2.2.1"
+SCANNER_ARTIFACT = "e5e6a3d7f956afccae73c7326e3a1a2d43203a431b7cbd598333f6098b3190e6"
+SCANNER_WHEEL = Path(
+    "/opt/aeep-scanner-wheels/cisco_ai_skill_scanner-2.2.1-cp311.cp312.cp313.cp314-none-manylinux_2_17_aarch64.whl"
+)
+
+
+def runtime_identity() -> dict[str, Any]:
+    """Read the retained reviewed wheel and installed bytes without importing Cisco."""
+    if (
+        SCANNER_WHEEL.is_symlink()
+        or hashlib.sha256(SCANNER_WHEEL.read_bytes()).hexdigest() != SCANNER_ARTIFACT
+    ):
+        raise ValueError("scanner wheel artifact differs from the reviewed pin")
+    installed = distribution("cisco-ai-skill-scanner")
+    if installed.version != SCANNER_VERSION:
+        raise ValueError("scanner installed version differs from the reviewed pin")
+    count = 0
+    with zipfile.ZipFile(SCANNER_WHEEL) as archive:
+        for entry in archive.infolist():
+            if entry.is_dir() or not entry.filename.startswith("skill_scanner/"):
+                continue
+            path = Path(str(installed.locate_file(entry.filename)))
+            if path.is_symlink() or not path.is_file() or path.read_bytes() != archive.read(entry):
+                raise ValueError("scanner installed source/data differs from the reviewed artifact")
+            count += 1
+    if count == 0:
+        raise ValueError("scanner artifact contains no package source")
+    return {
+        "scanner_version": SCANNER_VERSION,
+        "scanner_artifact_sha256": SCANNER_ARTIFACT,
+        "scanner_source_files_verified": count,
+    }
 
 
 def scan(request: dict[str, Any], workspace: Path) -> dict[str, Any]:
@@ -67,6 +102,7 @@ def scan(request: dict[str, Any], workspace: Path) -> dict[str, Any]:
     ).hexdigest()
     if identity != request["candidate_sha256"]:
         raise ValueError("candidate bytes differ inside scanner worker")
+    runtime = runtime_identity()
     with tempfile.TemporaryDirectory(prefix="aeep-static-scan-", dir=workspace) as directory:
         root = Path(directory) / "candidate"
         root.mkdir(mode=0o700)
@@ -78,7 +114,17 @@ def scan(request: dict[str, Any], workspace: Path) -> dict[str, Any]:
             with target.open("xb") as stream:
                 stream.write(raw)
         result = subprocess.run(
-            [SCANNER, "scan", str(root), "--format", "json"],
+            [
+                SCANNER,
+                "-I",
+                "-B",
+                "-m",
+                "skill_scanner.cli.cli",
+                "scan",
+                str(root),
+                "--format",
+                "json",
+            ],
             stdin=subprocess.DEVNULL,
             capture_output=True,
             env={
@@ -127,6 +173,7 @@ def scan(request: dict[str, Any], workspace: Path) -> dict[str, Any]:
         if after != hashes or any(path.is_symlink() for path in root.rglob("*")):
             raise ValueError("candidate bytes changed during static scanning")
         return {
+            **runtime,
             "component": "skill-scanner",
             "check": request["check"],
             "source_revision": SOURCE_REVISION,
@@ -164,12 +211,20 @@ def scan(request: dict[str, Any], workspace: Path) -> dict[str, Any]:
 
 
 def main() -> None:
-    if sys.platform != "linux" or os.getuid() == 0 or not Path("/workspace").is_dir():
+    if sys.platform != "linux" or os.getuid() == 0:
+        raise ValueError("static scanner requires the reviewed nonroot Linux worker")
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--workspace", choices=("/workspace", "/tmp"), default="/workspace")
+    args = parser.parse_args()
+    workspace = Path(args.workspace)
+    if sys.platform != "linux" or os.getuid() == 0 or not workspace.is_dir():
         raise ValueError("static scanner requires the reviewed nonroot Linux worker")
     raw = sys.stdin.buffer.read(12 * 1024**2 + 1)
     if len(raw) > 12 * 1024**2:
         raise ValueError("scanner input exceeds its envelope")
-    print(json.dumps(scan(json.loads(raw), Path("/workspace")), allow_nan=False))
+    print(json.dumps(scan(json.loads(raw), workspace), allow_nan=False))
 
 
 if __name__ == "__main__":

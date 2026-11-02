@@ -373,8 +373,11 @@ class AEEPAssessmentAdapter:
                         or not set(observation.trial_refs.values()) <= {content_digest(t) for t in campaign.trials}):
                     raise ConfigurationError('upstream scheduling evidence differs from the canonical campaign')
                 self.details['external_scheduler'] = observation.model_dump(mode='json')
-        from .workflow_accounting import active_accounting
+        from .workflow_accounting import active_accounting, active_component_observations
 
+        components = active_component_observations()
+        if components:
+            self.details['workflow_component_checks'] = components
         self.details['workflow_accounting'] = active_accounting() or {
             'coverage': 'NOT_RECORDED',
             'notice': 'No workflow overhead scope was selected; execution ledger alone is incomplete composed cost coverage.',
@@ -566,6 +569,7 @@ def comparison_summary(adapter: AEEPAssessmentAdapter, bundle: EvidenceBundle) -
         "timing_scope": details["timing_scope"],
         "telemetry_capture": details["telemetry_capture_summary"],
         "workflow_accounting": details.get("workflow_accounting", {"coverage": "NOT_RECORDED"}),
+        **({"workflow_component_checks": details["workflow_component_checks"]} if details.get("workflow_component_checks") else {}),
     }
     if 'external_scheduler' in details:
         summary['external_scheduler'] = details['external_scheduler']

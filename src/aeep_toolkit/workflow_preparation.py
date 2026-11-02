@@ -241,6 +241,8 @@ def prepare_canonical(
         target[name]["path"] = str(_read(WorkflowFile.model_validate(target[name]), root)[0])
     if target.get("scheduler") is not None:
         target["scheduler"]["path"] = str(_read(WorkflowFile.model_validate(target["scheduler"]), root)[0])
+    if target.get("scanner") is not None:
+        target["scanner"]["path"] = str(_read(WorkflowFile.model_validate(target["scanner"]), root)[0])
     for binding in target.get("runtimes", {}).values():
         binding["installation"]["path"] = str(_read(WorkflowFile.model_validate(binding["installation"]), root)[0])
         refs = [{"path":str(_read(WorkflowFile.model_validate(ref), root)[0]), "sha256":ref["sha256"]}

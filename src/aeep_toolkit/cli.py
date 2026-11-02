@@ -139,6 +139,8 @@ def main(argv: list[str] | None = None) -> int:
         operation.add_argument('--reviewed-digest', required=True)
     candidate = sub.add_parser('candidate', help='Inspect exact local skill payload without executing or installing it')
     candidate.add_argument('path', type=Path)
+    candidate.add_argument('--stage', type=Path, help='Explicit new private copy of captured skill bytes; excludes evaluation answers')
+    candidate.add_argument('--manifest', type=Path, help='Optionally record the staged subject and measured setup costs; no grant or execution')
     discovery = sub.add_parser('discover', help='Search explicitly configured sources and retain provenance; never install candidates')
     discovery.add_argument('--config', type=Path, required=True)
     discovery.add_argument('--store', type=Path, required=True, help='Discovery provenance database (this command writes records)')
@@ -247,8 +249,12 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps(checklist(), indent=2))
             return 0
         if args.command == 'candidate':
-            from .candidate import inspect
-            print(json.dumps(inspect(args.path.absolute()).describe(), indent=2))
+            from .candidate import inspect, stage_subject
+            if args.manifest is not None and args.stage is None:
+                raise ValueError('canonical candidate inspection requires an explicit new staged payload')
+            candidate_result = (stage_subject(args.path.absolute(), args.stage.absolute(), args.manifest)
+                      if args.stage is not None else inspect(args.path.absolute()).describe())
+            print(json.dumps(candidate_result, indent=2))
             return 0
         if args.command in {'install-plan', 'install', 'remove'}:
             from aeep.errors import ConfigurationError

@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 EXCLUDED = frozenset({'evals', '.git', '__pycache__'})
+PROTECTED = frozenset({'.codex', '.ssh', '.aws', '.azure', '.gnupg', '.docker', '.config', '.npm'})
 
 
 def identity(files: dict[str, bytes]) -> str:
@@ -19,7 +20,7 @@ def identity(files: dict[str, bytes]) -> str:
     for name, raw in files.items():
         path = Path(name)
         if (not name or len(name) > 512 or path.is_absolute() or '..' in path.parts or '\\' in name
-                or str(path) != name or any(part.casefold() in EXCLUDED | {'.codex'} for part in path.parts)
+                or str(path) != name or any(part.casefold() in EXCLUDED | PROTECTED for part in path.parts)
                 or name.casefold() in folded or not isinstance(raw, bytes)
                 or path.name.casefold() in {'auth.json', 'credentials.json'} or path.name.casefold().startswith('.env')):
             raise ValueError('unsafe or ambiguous candidate payload path')
@@ -45,6 +46,8 @@ class CandidatePayload:
 
         self.describe()
         canonical(str(destination))
+        if any(part.casefold() in PROTECTED for part in destination.parts):
+            raise ValueError('candidate staging excludes credential-state directories')
         if destination.exists():
             raise ValueError('staging requires a new directory')
         destination.mkdir(mode=0o700)
@@ -61,6 +64,8 @@ def inspect(path: Path) -> CandidatePayload:
 
     root = path.parent if path.name == 'SKILL.md' else path
     canonical(str(root))
+    if any(part.casefold() in PROTECTED for part in root.parts):
+        raise ValueError('credential-state directories are excluded')
     if not root.is_dir():
         raise ValueError('candidate must be a canonical local directory or SKILL.md')
     files: dict[str, bytes] = {}
@@ -74,12 +79,55 @@ def inspect(path: Path) -> CandidatePayload:
             selected = Path(directory)/name
             info = selected.lstat()
             if stat.S_ISDIR(info.st_mode):
-                if name.casefold() == '.codex':
-                    raise ValueError('Codex state is excluded')
+                if name.casefold() in PROTECTED:
+                    raise ValueError('credential-state directories are excluded')
                 continue
             if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1:
                 raise ValueError('candidate links and special files are excluded')
+            if name.casefold() in {'auth.json', 'credentials.json'} or name.casefold().startswith('.env'):
+                raise ValueError('credential-state files are excluded')
             files[str(selected.relative_to(root))] = read_bytes(selected)
             if len(files) > 512 or sum(map(len,files.values())) > 8 * 1024**2:
                 raise ValueError('candidate payload exceeds bounds')
     return CandidatePayload(files,identity(files))
+
+
+
+def stage_subject(source: Path, destination: Path, manifest: Path | None = None) -> dict[str, Any]:
+    """Copy the captured public skill payload; optionally reuse canonical inspection."""
+    import time
+
+    from aeep.component_setup import require_space
+
+    began, cpu = time.perf_counter(), time.process_time()
+    payload = inspect(source)
+    require_space(destination, sum(len(raw) for raw in payload.files.values()) + 1024**2)
+    payload.stage(destination)
+    result = {**payload.describe(), 'staged_path': str(destination), 'subject_ref': None,
+              'subject_id': None, 'setup_cost_ref': None, 'execution_authorized': False}
+    if manifest is None:
+        result['preparation_wall_seconds'] = time.perf_counter() - began
+        result['preparation_process_cpu_ms'] = (time.process_time() - cpu) * 1000
+        result['canonical_cost_coverage'] = 'NOT_RECORDED'
+        return result
+    import asyncio
+
+    from aeep.assessment.models import AssessmentSetupCost, content_digest
+    from aeep.assessment.service import AssessmentService
+    from aeep.router import Router
+
+    router = Router.from_manifest(manifest)
+    elapsed, used = time.perf_counter() - began, (time.process_time() - cpu) * 1000
+    try:
+        service = AssessmentService(router, manifest.parent / '.aeep' / 'assessments')
+        subject = service.inspect_local(destination, kind='skill')
+        if subject.dependency_digests != payload.describe()['files']:
+            raise ValueError('staged candidate changed during canonical inspection; preserve the copy')
+        cost = AssessmentSetupCost(subject_digest=content_digest(subject), stage='candidate_payload_preparation',
+                                   elapsed_seconds=elapsed, cpu_ms=used)
+        ref = service.repository.put('setup_cost', cost.cost_id, cost)
+        return {**result, 'subject_ref': content_digest(subject), 'subject_id': subject.subject_id,
+                'setup_cost_ref': ref, 'canonical_cost_coverage':
+                'Captured preparation and canonical static inspection; final persistence/Router close excluded. No grant created.'}
+    finally:
+        asyncio.run(router.close())

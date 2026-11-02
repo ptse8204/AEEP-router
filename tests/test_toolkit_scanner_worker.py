@@ -9,6 +9,21 @@ import pytest
 from aeep_toolkit import scanner_worker
 from aeep_toolkit.candidate import identity
 
+REAL_RUNTIME_IDENTITY = scanner_worker.runtime_identity
+
+
+@pytest.fixture(autouse=True)
+def reviewed_runtime_substitute(monkeypatch):
+    monkeypatch.setattr(
+        scanner_worker,
+        "runtime_identity",
+        lambda: {
+            "scanner_version": "2.2.1",
+            "scanner_artifact_sha256": scanner_worker.SCANNER_ARTIFACT,
+            "scanner_source_files_verified": 1,
+        },
+    )
+
 
 def request():
     files = {
@@ -125,3 +140,31 @@ def test_host_execution_is_refused(monkeypatch):
     monkeypatch.setattr(scanner_worker.sys, "platform", "darwin")
     with pytest.raises(ValueError, match="nonroot Linux worker"):
         scanner_worker.main()
+
+
+def test_installed_scanner_identity_uses_owned_artifact_bytes_without_import(tmp_path, monkeypatch):
+    import hashlib
+    import zipfile
+    from types import SimpleNamespace
+
+    artifact = tmp_path / "scanner.whl"
+    package = tmp_path / "skill_scanner"
+    package.mkdir()
+    code = b'raise AssertionError("owned identity fixture must never be imported")\n'
+    (package / "fixture.py").write_bytes(code)
+    with zipfile.ZipFile(artifact, "w") as archive:
+        archive.writestr("skill_scanner/fixture.py", code)
+    monkeypatch.setattr(scanner_worker, "SCANNER_WHEEL", artifact)
+    monkeypatch.setattr(
+        scanner_worker, "SCANNER_ARTIFACT", hashlib.sha256(artifact.read_bytes()).hexdigest()
+    )
+    monkeypatch.setattr(
+        scanner_worker,
+        "distribution",
+        lambda _: SimpleNamespace(version="2.2.1", locate_file=lambda name: tmp_path / name),
+    )
+    observed = REAL_RUNTIME_IDENTITY()
+    assert observed["scanner_source_files_verified"] == 1
+    (package / "fixture.py").write_bytes(b"changed")
+    with pytest.raises(ValueError, match="installed source"):
+        REAL_RUNTIME_IDENTITY()

@@ -2547,3 +2547,20 @@ runtime and all old runtimes are retained. All13 source gates pass on e363cfa5,
 with1977 passed/21 skipped per full run,83% coverage and both branch floors.
 This is bounded component evidence, not an ordinary two-domain journey or a
 full-stack, candidate-value, selection-value, resource or release pass.
+
+## November 2: optional scanner in the ordinary workflow
+
+Bind selected static scanning to the existing container executor, canonical
+journals, operation ledger and report path. Use a separate explicit scanner
+request and accounting v3 for wrapper costs; older scopes cannot authorize the
+new stage. Require current source/candidate/runtime and settled receipt bindings
+before attaching observations. Retain the reviewed image and private runtimes.
+Keep snippets, task content and diagnostic text out of persisted findings.
+Candidate staging excludes evaluation answers before canonical inspection.
+
+The approved selected scan 84365d39 passed on the prior e363cfa5 source. A
+bookkeeping-only amendment preserved old control evidence by choosing new output
+paths before that call. Five total operations remain settled. The ordinary CLI
+launch has changed worker/user/mount bindings and therefore needs its own exact
+execution review. These engineering checks supply no task, usefulness, resource
+or release result. No comparative campaign resumes while the stack gate is open.

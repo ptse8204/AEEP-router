@@ -1,5 +1,39 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- ordinary-cli-scanner-20261102:start -->
+**November 2: ordinary scanner workflow source passed; exact grouped review awaits approval.**
+Approved84365d39 completed the selected scan: four analyzers, one INFO finding,
+zero analyzer failures. All five earlier operations are settled and original
+control evidence is unchanged. Do not rerun either selected follow-up driver.
+The [ordinary workflow increment](../../reports/toolkit-v2/c13/workflow-scanner-20261102/README.md)
+adds filtered candidate staging, explicit scanner selection, accounting v3,
+canonical journals/receipts and checked report attachment through the existing
+container executor. No new scheduler, registry service or database implementation.
+
+All13 source gates pass on unchanged0116d754:2007passed/21skipped in both full
+runs,82.54%coverage,both branch floors,schemas,packaging. The42 space-guard
+failures and two cleanup-teardown errors remain in their original records; final
+verification uses a checked post-teardown passing-fixture cleanup hook. Only
+passing fixtures of this run were manually removed. Failed logs/metadata remain;
+older numbered temporary roots later expired through normal pytest retention.
+No real benchmark evidence was stored there. All controllers are stopped.
+
+[Grouped review8f4ab6d3](../../reports/toolkit-v2/c13/workflow-scanner-20261102/operation-review.json)
+binds one fresh boundary/one actual scan via the module CLI, the current wheel
+with32 unchanged cached dependencies, and cached offline docs. It passes inert
+validation but is unapproved/unexecuted. Preserve all Docker resources/runtimes.
+The package additionally requires50.72GiB free; it stays unstarted without
+consuming an attempt if short. Scanner/docs remain independent. No cleanup of
+older resources is authorized by this review. Check component markers before
+resuming, record exact operator approval, then use run-review.py; never retry a
+terminal attempt. Both named three-task domain previews are valid and visibly
+blocked on rights/runtime/assessment evidence. Protected task journeys, actual
+evaluator/worker composition, remaining upstream integrations and full-stack gate
+stay open. Comparisons remain paused; no model/task/service/release ran.
+Source proof includes preserved unrelated local CI work, excluded from these
+implementation commits. Parentc9f0199. Keep the50GiB reserve.
+<!-- ordinary-cli-scanner-20261102:end -->
+
 **November2 follow-up: actual Cisco control passed; selected-byte follow-up needs approval.**
 The [scanner packet](../../reports/toolkit-v2/c13/scanner-runtime-20261102/README.md)
 records approved ec8079e7: retained image1cf3c440, successful containment, and an

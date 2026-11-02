@@ -1,0 +1,9 @@
+{
+  "authority": "Standing finite testing-method delegation; unchanged source/assertions/thresholds/grants.",
+  "source": "0116d754bc7a7f86ddaf018043b13ef95789be114b2509b71e243bad32ae3ec5",
+  "previous_full_coverage": "2007 passed,21skipped,2teardown errors; both errors were pytest cleanup calling the test-denied os.open before monkeypatch restoration. All assertions passed; the invocation is not marked passed.",
+  "correction": "Use a local first-party pytest hook to remove only passing tmp_path fixtures after all fixture finalizers restore patches. Keep failures,unknowns and older roots. Two affected tests pass under this exact policy.",
+  "reused": "Six unchanged original gates; rerun full coverage and unstarted downstream gates only.",
+  "plugin": "aeep_fixture_cleanup.py",
+  "comparisons": "PAUSED"
+}

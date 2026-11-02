@@ -234,6 +234,7 @@ def render(summary: dict[str, Any], format: str) -> str:
             ("Separate worker conditions", "condition_comparisons"),
             ("Utility, guardrails and challengers", "utility_evidence"),
             ("Workflow overhead accounting", "workflow_accounting"),
+            ("Selected component checks (separate from task grading)", "workflow_component_checks"),
             ("Assessment usage, including known subtotals", "measured_usage"),
             ("Measurement coverage", "measurement_coverage"),
             ("Assessment resource break-even uses", "break_even_uses"),

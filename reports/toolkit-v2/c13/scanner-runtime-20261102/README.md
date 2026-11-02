@@ -36,3 +36,17 @@ remain open. This establishes bounded scanner functionality only; it supplies no
 security assurance, candidate/selection value, full-stack, resource or release pass.
 Container resources reported by the Docker client are not worker measurements.
 Bootstrap/final persistence overhead remains outside complete accounting coverage.
+
+
+## Selected follow-up completed
+
+The operator approved 84365d39. Before dispatch, inspection found the prepared
+follow-up would overwrite the control's evidence paths. The delegated
+[evidence-path amendment](selected-evidence-path-amendment.json) changed only
+owned output paths and preflight order; the original driver and review remain.
+The safe driver completed exactly one selected call. Its
+[result](execution/selected-stdin-result.json) reports four analyzers, one INFO
+missing-license finding and zero analyzer failures. The candidate digest matched,
+the owned container was removed and all original control evidence stayed unchanged.
+Five operations are now settled; none are unresolved. Do not rerun either driver.
+Ordinary CLI attachment remains a separate current-source check.
