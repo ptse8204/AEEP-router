@@ -1,0 +1,68 @@
+{
+  "passed": true,
+  "upstream_executed": false,
+  "docker_mutated": false,
+  "installation": false,
+  "driver_cases": [
+    {
+      "case": "success",
+      "passed": true,
+      "synthetic_calls": [
+        "build",
+        "boundary",
+        "selected-candidate",
+        "static-negative-control"
+      ],
+      "upstream_executed": false,
+      "docker_mutated": false
+    },
+    {
+      "case": "terminal-scan-failure",
+      "passed": true,
+      "synthetic_calls": [
+        "build",
+        "boundary",
+        "selected-candidate"
+      ],
+      "upstream_executed": false,
+      "docker_mutated": false
+    },
+    {
+      "case": "unrelated-container-preserved",
+      "passed": true,
+      "synthetic_calls": [
+        "build",
+        "boundary",
+        "selected-candidate",
+        "static-negative-control"
+      ],
+      "upstream_executed": false,
+      "docker_mutated": false
+    },
+    {
+      "case": "existing-name-refused",
+      "passed": true,
+      "synthetic_calls": [
+        "build"
+      ],
+      "upstream_executed": false,
+      "docker_mutated": false
+    },
+    {
+      "case": "owned-container-stopped",
+      "passed": true,
+      "synthetic_calls": [
+        "build",
+        "boundary",
+        "selected-candidate",
+        "static-negative-control",
+        "stop-owned"
+      ],
+      "upstream_executed": false,
+      "docker_mutated": false
+    }
+  ],
+  "normalization_retains_findings_and_failure_hashes": true,
+  "scope": "First-party substitutes only; not scanner functionality, security approval or stack-completion evidence.",
+  "retained_workspace": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/scanner-driver-preparation-4-20261102"
+}

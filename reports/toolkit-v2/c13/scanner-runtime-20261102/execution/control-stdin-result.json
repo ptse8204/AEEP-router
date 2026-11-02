@@ -1,0 +1,57 @@
+{
+  "component": "skill-scanner",
+  "check": "findings_and_failures",
+  "source_revision": "c3d7fd9fee50cf2ea45f0b381eb61f857360f825",
+  "implementation_source": "e363cfa5ada2201e355b1e4528ff36cb2d05a08fff7423912c6d5e163ea43dfb",
+  "mode": "upstream_functional",
+  "candidate_sha256": "b5a11d9b0cca377b004e051907d3d25ee995e20661d7957081f3e8bc41c618bb",
+  "findings_count": 4,
+  "candidate_bytes_bound": true,
+  "high_or_critical": 2,
+  "high_or_critical_detected": true,
+  "failed_analyzers": 0,
+  "analyzers_executed": 4,
+  "findings": [
+    {
+      "id": "MANIFEST_MISSING_LICENSE_c5ae9be793",
+      "rule_id": "MANIFEST_MISSING_LICENSE",
+      "category": "policy_violation",
+      "severity": "INFO",
+      "analyzer": "static",
+      "line_number": null
+    },
+    {
+      "id": "YARA_prompt_injection_generic_8b390d7f13",
+      "rule_id": "YARA_prompt_injection_generic",
+      "category": "prompt_injection",
+      "severity": "CRITICAL",
+      "analyzer": "static",
+      "line_number": 1
+    },
+    {
+      "id": "YARA_tool_chaining_abuse_generic_47d8828310",
+      "rule_id": "YARA_tool_chaining_abuse_generic",
+      "category": "tool_chaining_abuse",
+      "severity": "MEDIUM",
+      "analyzer": "static",
+      "line_number": 1
+    },
+    {
+      "id": "PROMPT_INJECTION_IGNORE_INSTRUCTIONS_74578b19da",
+      "rule_id": "PROMPT_INJECTION_IGNORE_INSTRUCTIONS",
+      "category": "prompt_injection",
+      "severity": "HIGH",
+      "analyzer": "static",
+      "line_number": 5
+    }
+  ],
+  "analyzer_failures": [],
+  "analyzers_used": [
+    "static_analyzer",
+    "bytecode",
+    "pipeline",
+    "correlation"
+  ],
+  "upstream_report_sha256": "2b8397cecdad93cf4f723913d22c25f9ccea1b903b396c54260d7d68e1ef42ea",
+  "safety_verdict": "NOT_ESTABLISHED"
+}

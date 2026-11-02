@@ -1,0 +1,4 @@
+{
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/opt/aeep-stack/scanner_worker.py\", line 176, in <module>\n    main()\n    ~~~~^^\n  File \"/opt/aeep-stack/scanner_worker.py\", line 172, in main\n    print(json.dumps(scan(json.loads(raw), Path(\"/workspace\")), allow_nan=False))\n                          ~~~~~~~~~~^^^^^\n  File \"/usr/local/lib/python3.13/json/__init__.py\", line 352, in loads\n    return _default_decoder.decode(s)\n           ~~~~~~~~~~~~~~~~~~~~~~~^^^\n  File \"/usr/local/lib/python3.13/json/decoder.py\", line 345, in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.13/json/decoder.py\", line 363, in raw_decode\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)\n"
+}

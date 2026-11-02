@@ -1,5 +1,21 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November2 follow-up: actual Cisco control passed; selected-byte follow-up needs approval.**
+The [scanner packet](../../reports/toolkit-v2/c13/scanner-runtime-20261102/README.md)
+records approved ec8079e7: retained image1cf3c440, successful containment, and an
+actual static control with4 analyzers/4 findings/2 high-or-critical findings.
+The original selected-byte call got empty stdin because Docker-i was missing;
+it failed before scanner import. Delegated bookkeeping corrected only the then
+unstarted control. All4 operations remain charged and settled; zero models.
+[Review84365d39](../../reports/toolkit-v2/c13/scanner-runtime-20261102/selected-operation-review.json)
+requests one additional selected-byte call on the same image/payload/sandbox,
+with no build/install/download. Run complete-selected.py only after its exact
+approval is recorded, and inspect its claim/result first. No successful SDK,
+boundary/control or docs attempt is replayed. Both task domains and the complete
+upstream stack remain open; comparisons stay paused. Parent2da414c; product
+source remains e363cfa5. The earlier docs check retains its exact72-input hashes;
+this additive progress note follows it and changes no operator commands.
+
 **November 2: runtime lifecycle connected; upstream stack remains incomplete.**
 The [workflow lifecycle increment](../../reports/toolkit-v2/c13/workflow-lifecycle-20261102/README.md)
 adds named v2 runtime bindings and ordinary setup/readiness/removal through the

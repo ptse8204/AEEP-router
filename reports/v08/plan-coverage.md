@@ -6732,3 +6732,15 @@ The six original SkillsBench input archives fit the existing transport; protecte
 verifiers/oracles/bundled skills are excluded. Nothing was sent to workers. The
 92-wheel Cisco image context is prepared but unexecuted; its concrete review is
 next. Full stack and both domain journeys remain open.
+
+## November2 follow-up: retained Cisco runtime and actual static control
+
+Approvedec8079e7 built image1cf3c440 and passed containment. The selected call
+failed before scanner import on empty stdin. A delegated unstarted-phase-i
+correction then passed actual control scanning:4 analyzers,4 findings,2 high/
+critical findings,0 reported analyzer failures. Four operations stay charged and
+settled. Exact84365d39 requests one extra selected-byte call without rebuild or
+installation. Read [the packet](../toolkit-v2/c13/scanner-runtime-20261102/README.md).
+Product source e363cfa5 and completed13 source gates are unchanged. The earlier
+offline docs success retains its exact72-input hashes; this progress/STATE note
+was appended afterward. No source/guide command change or new full-stack claim.

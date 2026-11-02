@@ -82,3 +82,9 @@ files. It sends nothing to a worker and supplies no benchmark result.
 The final authorized docs attempt3 passed offline markdownlint and Lychee against
 the72 current inputs. Tool bytes are unchanged. [The receipt](../sdk-docs-correction-20261102/docs-attempt-3.json)
 retains exact input hashes. No remaining docs attempt is inferred from that success.
+
+The next [scanner work unit](../scanner-runtime-20261102/README.md) built the
+retained image and passed containment plus the actual static detection control.
+The selected-byte follow-up needs exact84365d39 approval after an empty-input
+launch failure. Its four previous charges remain. Read its summary before any
+dispatch; no successful SDK/docs check needs replay.

@@ -1,0 +1,138 @@
+{
+  "receipt_id": "rcpt_cfe059a2c05c4ee7aa2f402e574e3479",
+  "decision_id": "scanner:ec8079e7250e72b12d358788808e634e410f8631f2c5a03db856368782858730:build",
+  "action_id": "act_62b3ccfc4d6f45f199031daae69123c3",
+  "capability": "toolkit.upstream-engineering@1",
+  "executor_id": "toolkit.scanner-build",
+  "executor_kind": "command",
+  "status": "success",
+  "attempt": 1,
+  "started_at": "2026-11-02T21:20:36.498756Z",
+  "ended_at": "2026-11-02T21:21:25.434609Z",
+  "estimated": {
+    "resources": {
+      "monetary_usd": 0.0,
+      "latency_ms": 0.0,
+      "cpu_ms": 0.0,
+      "memory_mb_seconds": 0.0,
+      "peak_memory_mb": 0.0,
+      "gpu_ms": 0.0,
+      "network_bytes": 0,
+      "context_tokens": 0,
+      "input_tokens": 0,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_output_tokens": 0,
+      "subscription_units": 0.0
+    },
+    "cash": {
+      "amount_usd": null,
+      "upper_bound_usd": null,
+      "evidence": {
+        "status": "unavailable",
+        "source": "unavailable",
+        "trust": "untrusted",
+        "evidence_id": null,
+        "source_reference": null,
+        "digest": null,
+        "observed_at": null
+      }
+    },
+    "subscription_usage": [],
+    "success_probability": 0.95,
+    "quality_score": 0.95,
+    "risk_score": 0.05,
+    "confidence": 0.5,
+    "source": "static",
+    "sample_size": 0,
+    "uncertainty": null
+  },
+  "executor_fingerprint": null,
+  "cohort_digest": null,
+  "action_features": null,
+  "actual_resources": {
+    "monetary_usd": 0.0,
+    "latency_ms": 48933.88541601598,
+    "cpu_ms": 305.53353599999997,
+    "memory_mb_seconds": 930.6979561189801,
+    "peak_memory_mb": 30.1875,
+    "gpu_ms": 0.0,
+    "network_bytes": 0,
+    "context_tokens": 4503,
+    "input_tokens": 0,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 0,
+    "reasoning_output_tokens": 0,
+    "subscription_units": 0.0
+  },
+  "accounting": {
+    "cash": {
+      "status": "unavailable",
+      "components": []
+    },
+    "subscription_usage": [],
+    "model_usage": [],
+    "tool_footprint": null
+  },
+  "cache_affinity": null,
+  "approval_id": null,
+  "transport_success": null,
+  "execution_success": true,
+  "schema_valid": null,
+  "task_valid": null,
+  "quality_score": null,
+  "validation_results": [],
+  "output_valid": null,
+  "error_type": null,
+  "error_message": null,
+  "trace_id": null,
+  "metadata": {
+    "review_sha256": "ec8079e7250e72b12d358788808e634e410f8631f2c5a03db856368782858730",
+    "evidence_kind": "upstream_engineering",
+    "docker_client_resources_are_not_worker_resources": true,
+    "executable": "/usr/local/bin/docker",
+    "stdout_bytes": 18013,
+    "stderr_bytes": 206,
+    "stdout_truncated": false,
+    "stderr_truncated": false,
+    "execution_evidence": {
+      "schema_version": "execution.evidence.v1",
+      "attempt_id": "scanner:ec8079e7250e72b12d358788808e634e410f8631f2c5a03db856368782858730:build",
+      "adapter": "CommandExecutor",
+      "events": [
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "6941b4a58a244c8bb68c53ba1a84c9da",
+          "attempt_id": "scanner:ec8079e7250e72b12d358788808e634e410f8631f2c5a03db856368782858730:build",
+          "sequence": 0,
+          "kind": "execution.started",
+          "source_id": "start",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "6941b4a58a244c8bb68c53ba1a84c9da",
+          "attempt_id": "scanner:ec8079e7250e72b12d358788808e634e410f8631f2c5a03db856368782858730:build",
+          "sequence": 1,
+          "kind": "execution.completed",
+          "source_id": "terminal",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        }
+      ],
+      "complete": true,
+      "cancellation_confirmed": false,
+      "identity_digest": null,
+      "boundary_digest": null,
+      "journal_id": "6941b4a58a244c8bb68c53ba1a84c9da"
+    },
+    "execution_evidence_digest": "8313e0394d4bb29210242b1cf42e22505fd91cdf25ea8af5e191f348efda6f9b"
+  }
+}
