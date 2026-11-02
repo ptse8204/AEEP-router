@@ -1,0 +1,34 @@
+{
+  "status": "CURRENT_SOURCE_FIX_IMPLEMENTED_CAPACITY_BLOCKED",
+  "source": "2df307d7be87d442e5795a0dc085282816944a41f64eb965a861780f629f2cd2",
+  "focused_tests_passed": 40,
+  "source_checks_passed": 5,
+  "full_pytest": {
+    "passed": 1666,
+    "failed_storage_guards": 41,
+    "skipped": 1,
+    "exit_code": 2,
+    "interrupted": true
+  },
+  "prior_grouped_review": "8f4ab6d37cca76936274ac838394e15edd9391c5c76bae356ad5a98de01f135b",
+  "prior_results": {
+    "boundary": "FAILED_BEFORE_SCANNER",
+    "cleanup_verified": true,
+    "charged_operations": 1,
+    "actual_scan": "NOT_STARTED",
+    "package": "UNSTARTED_SUPERSEDED",
+    "offline_docs": "PASS"
+  },
+  "cleanup_review": "b1a3e67151c947bbab18110d936d0a2c85cceff2c74ff67fa9c7fb04c0d9fb37",
+  "cleanup_completed": true,
+  "cleanup_allocated_bytes": 669085696,
+  "cleanup_immediate_observed_net_free_change": -446464,
+  "host_free_bytes": 50670104576,
+  "working_headroom_target_bytes": 55834574848,
+  "minimum_host_reserve_bytes": 53687091200,
+  "real_benchmark_or_model_execution": false,
+  "comparisons": "PAUSED",
+  "all_stack_integrations_complete": false,
+  "next": "Restore actual usable host headroom; run verify-source-resume.py once. Then prepare corrected carrier/current-wheel exact review. Preserve successful docs and all charges.",
+  "operator_intervention": "Restore>=52GiB actual usable space while preserving work/backups; no large test/build/install may start below the50GiB reserve."
+}

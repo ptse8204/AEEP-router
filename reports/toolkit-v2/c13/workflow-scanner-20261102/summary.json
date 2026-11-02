@@ -1,6 +1,6 @@
 {
   "checkpoint": "C13",
-  "status": "SOURCE_PASS_EXECUTION_APPROVAL_PENDING",
+  "status": "APPROVED_PARTIAL_RESULT_REQUIRES_CARRIER_CORRECTION",
   "source": "0116d754bc7a7f86ddaf018043b13ef95789be114b2509b71e243bad32ae3ec5",
   "selected_scanner_call": "PASS under84365d39;5total operations settled; no replay",
   "ordinary_cli_source": "IMPLEMENTED",
@@ -38,12 +38,19 @@
     "both_branch_floors": "PASS"
   },
   "review_sha256": "8f4ab6d37cca76936274ac838394e15edd9391c5c76bae356ad5a98de01f135b",
-  "execution_started": false,
+  "execution_started": true,
   "package_space": {
     "required_free_gib": 50.71645100042224,
     "current_free_gib": 50.55391311645508,
     "state": "UNSTARTED_UNTIL_HEADROOM"
   },
   "note": "Failed fixture metadata/logs were preserved; later normal pytest retention removed old numbered temporary roots. No real benchmark evidence was stored there.",
-  "next": "Record exact operator approval, inspect per-component markers, then run run-review.py. Independent scanner/docs remain eligible while package headroom is short."
+  "next": "../workflow-scanner-carrier-20261102/README.md",
+  "actual_grouped_results": {
+    "scanner": "FAILED_BOUNDARY_BEFORE_CISCO",
+    "charged_operations": 1,
+    "cleanup_verified": true,
+    "package": "UNSTARTED_SUPERSEDED_BY_CARRIER_FIX",
+    "docs": "PASS_ATTEMPT_1"
+  }
 }

@@ -2564,3 +2564,15 @@ paths before that call. Five total operations remain settled. The ordinary CLI
 launch has changed worker/user/mount bindings and therefore needs its own exact
 execution review. These engineering checks supply no task, usefulness, resource
 or release result. No comparative campaign resumes while the stack gate is open.
+
+
+## November 2: separate protocol and scanner interpreters
+
+Use the existing parent-image Python for AEEP's containment protocol. Use Cisco's
+private environment only for its scanner child. The actual boundary failed before
+scanner import. The inspected private environment cannot supply AEEP's required
+dependencies; the original stderr was not retained for full failure attribution. No new package or image is needed for this correction.
+The source regression binds both interpreter choices. Current full verification
+is blocked by real host headroom,not marked passed. Preserve the successful docs,
+failed charge,all backups and Docker resources. Resume from the
+[carrier handoff](../../reports/toolkit-v2/c13/workflow-scanner-carrier-20261102/README.md).

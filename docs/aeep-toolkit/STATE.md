@@ -1,5 +1,47 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- scanner-carrier-20261102:start -->
+**November 2 later: docs passed; scanner carrier corrected; current verification is capacity-blocked.**
+Approved8f4ab6d3 ran once. The boundary failed before Cisco loaded, cleanup was
+verified, and its one operation stays settled/charged. The actual scan never
+started. Offline docs passed attempt1 with unchanged tools and72 recorded inputs.
+The old wheel remained uninstalled and is now superseded. Do not retry that
+scanner component or install its known-invalid carrier as current-source proof.
+Read the [correction handoff](../../reports/toolkit-v2/c13/workflow-scanner-carrier-20261102/README.md).
+
+The adapter wrongly loaded AEEP's protocol in Cisco's private environment, which
+has no required psutil. The failure's specific stderr was not retained; this
+invalid interpreter choice is established from the pinned inventory/import
+chain; the original process error is not fully attributed. The fix retains parent-image python3 for
+AEEP framing and private Cisco Python only for the child. Forty focused tests
+pass. Source2df307d7 passes compile,schemas,policy,Ruff,mypy. Its full suite was
+stopped at the storage reserve:1666passed,41 real space-guard failures,1skipped,
+then KeyboardInterrupt. This is not a full-source pass. All controllers stopped.
+
+Approvedb1a3e671 removed exactly283 obsolete first-party CSV-test SQLite copies;
+both primary campaign databases and all other resources were preserved. Its
+669085696 allocated bytes yielded no observed usable-space gain (immediate
+net counter change:-446464bytes). Host free subsequently measured47.4GiB.
+Twenty-five Time Machine local snapshots were observed and left untouched;
+no per-file contribution or recovery attribution is established. No Docker
+image,volume,old runtime,user work or backup was removed.
+
+Operator intervention: restore at least52GiB actual usable host free space,
+keeping the50GiB reserve. This is engineering working headroom,not a product
+acceptance budget. After verifying space, run verify-source-resume.py once;
+it reuses only the five unchanged gates and reruns the incomplete full suites
+and downstream checks with checked post-teardown fixture cleanup. Then freeze
+corrected source,build the changed wheel with the same32 cached dependencies,
+and prepare one exact carrier/runtime/package correction review. A fresh
+bootstrap/containment probe must precede the actual CLI scan. Keep the existing
+canonical ledger and failed charge; any finite budget amendment preserves counters.
+No changed untrusted execution is authorized yet. Completed docs retain exact
+input scope and are not replayed for counts. Full stack,both SkillsBench journeys,
+candidate usefulness,selection usefulness,resource and release gates remain open;
+comparisons stay paused. Unrelated local CI work remains preserved/separate.
+Parent9f6244b; corrected source2df307d7be87d442e5795a0dc085282816944a41f64eb965a861780f629f2cd2.
+<!-- scanner-carrier-20261102:end -->
+
 <!-- ordinary-cli-scanner-20261102:start -->
 **November 2: ordinary scanner workflow source passed; exact grouped review awaits approval.**
 Approved84365d39 completed the selected scan: four analyzers, one INFO finding,

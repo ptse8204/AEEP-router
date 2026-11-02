@@ -233,7 +233,8 @@ def test_inert_preview_lists_real_containment_without_starting_backend(
         result = json.loads(capsys.readouterr().out)
         argv = result["container_command_template"]
         assert "-i" in argv and "--pull=never" in argv and "--read-only" in argv
-        assert argv[argv.index("--entrypoint") + 1] == "/opt/aeep-scanner/bin/python"
+        assert argv[argv.index("--entrypoint") + 1] == "python3"
+        assert result["executor"]["config"]["argv"][0] == "/opt/aeep-scanner/bin/python"
         mounts = [argv[i + 1] for i, item in enumerate(argv) if item == "--mount"]
         assert len(mounts) == 2 and all("readonly" in item for item in mounts)
         assert any("src/aeep," in item for item in mounts) and any(

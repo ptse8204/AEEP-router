@@ -1,0 +1,82 @@
+{
+  "source_before": "2df307d7be87d442e5795a0dc085282816944a41f64eb965a861780f629f2cd2",
+  "source_after": "2df307d7be87d442e5795a0dc085282816944a41f64eb965a861780f629f2cd2",
+  "checks": [
+    {
+      "name": "compileall",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.07316966680809855
+    },
+    {
+      "name": "schemas",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.7967202919535339
+    },
+    {
+      "name": "assessment-policy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.15165020804852247
+    },
+    {
+      "name": "ruff",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.06320329196751118
+    },
+    {
+      "name": "mypy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.5861621252261102
+    },
+    {
+      "name": "pytest",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest",
+        "-p",
+        "aeep_fixture_cleanup",
+        "-o",
+        "tmp_path_retention_policy=all",
+        "-o",
+        "tmp_path_retention_count=1"
+      ],
+      "exit_code": 2,
+      "elapsed_seconds": 382.11503829201683
+    }
+  ],
+  "models": 0,
+  "evidence_kind": "first_party_engineering_checks",
+  "comparative_campaigns": "PAUSED",
+  "scope": "Restore the existing parent Python interpreter for AEEP container framing; retain Cisco private Python for its child. First-party source/CLI tests only, no actual scanner or model execution. Includes preserved unrelated local CI work, excluded from implementation commits."
+}

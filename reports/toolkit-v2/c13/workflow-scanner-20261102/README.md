@@ -78,3 +78,12 @@ and counterexample grading, real evaluator/worker composition and the remaining
 upstream integrations are still open. Comparisons remain paused. Stack operation,
 candidate usefulness, selection usefulness, resource acceptance and release are
 separate gates.
+
+
+## Approved execution outcome
+
+Approved8f4ab6d3 ran once. The containment probe failed before Cisco loaded;
+cleanup was verified and its one charge remains settled. Docs passed on attempt1.
+The wheel stayed unstarted on space and is now superseded by the internal carrier
+correction. Do not replay the scanner component or install that old wheel as a
+current-source result. Read the [correction and capacity handoff](../workflow-scanner-carrier-20261102/README.md).

@@ -6771,3 +6771,32 @@ CI edits excluded from implementation commits. Both three-task domain previews
 show real blockers. Full stack,task journeys,candidate usefulness,selection
 usefulness,resource and release gates remain open; comparisons stay paused.
 <!-- ordinary-cli-scanner-20261102:end -->
+
+
+<!-- scanner-carrier-20261102:start -->
+## November 2: actual scanner launch failure, corrected carrier and storage blocker
+
+Approved8f4ab6d3 failed the boundary before Cisco or actual scan; cleanup verified,
+one operation remains settled. Offline docs passed attempt1. Package execution
+never started and its older artifact is superseded. The adapter now retains
+parent-image Python for the AEEP protocol and Cisco's private Python for its
+child. The pinned private environment lacks required psutil. Original stderr
+was not retained,so no exact missing-module exception is called observed.
+
+[Current source/handoff](../toolkit-v2/c13/workflow-scanner-carrier-20261102/README.md):
+40 focused passes,5 source gates passed. Full current-source verification stopped
+at actual host reserve with1666passes,41space failures,1skip and KeyboardInterrupt;
+it remains incomplete. All failed/interrupted evidence stays. Approvedb1a3e671
+removed283 obsolete test-only copies,preserving both primary campaign databases
+and every other resource. Allocated669085696bytes is not recovered capacity:
+immediate observed net free change was-446464bytes; host later showed47.4GiB.
+No snapshots,backups,Docker resources or old runtimes were touched.
+
+Actual usable host space must be restored before large checks. Recommended
+engineering working headroom is52GiB including the50GiB reserve; this does not
+set product resource acceptance. Resume only the incomplete suites/downstream
+gates on unchanged source,then prepare the corrected carrier/current-wheel exact
+review with fresh bootstrap diagnostics and preserved counters. Do not retry old
+terminal scanner calls or replay successful docs. All-stack,both task domains,
+usefulness,selection,resource and release stay open; comparisons remain paused.
+<!-- scanner-carrier-20261102:end -->

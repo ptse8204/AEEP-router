@@ -1,0 +1,1791 @@
+........................................................................ [  3%]
+........................................................................ [  7%]
+........................................................................ [ 10%]
+........................................................................ [ 14%]
+........................................................................ [ 17%]
+........................................................................ [ 21%]
+........................................................................ [ 24%]
+........................................................................ [ 28%]
+........................................................................ [ 31%]
+........................................................................ [ 35%]
+.........FF............FFFFFFFFFFFFFFFFF.......FFF........F............. [ 39%]
+........................................................................ [ 42%]
+.....................................................FFFFFFFFFFF.FFFFFFF [ 46%]
+........................................................................ [ 49%]
+........................................................................ [ 53%]
+........................................................................ [ 56%]
+........................................................................ [ 60%]
+........................................................................ [ 63%]
+........................................................................ [ 67%]
+........................................................................ [ 71%]
+........................................................................ [ 74%]
+........................................................................ [ 78%]
+........................................................................ [ 81%]
+..............s.....................................
+=================================== FAILURES ===================================
+__________ test_real_offline_install_replay_and_conflict_safe_remove ___________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_real_offline_install_repl0')
+
+    def test_real_offline_install_replay_and_conflict_safe_remove(tmp_path):
+>       plan = installation(tmp_path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_runtime_install.py:53: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('a10fc3d8956d3885fb6a124dc38f1f4817ca56657cb84f027f2a0d6f898299f0',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_real_offline_install_repl0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_real_offline_install_repl0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='ff8fde3a79d42e2e5f32a576acb93a13dc598cd4ecd843c9d30e450d62dff53a'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+______________ test_preview_no_effects_and_review_before_effects _______________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_preview_no_effects_and_re0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10c223bd0>
+
+    def test_preview_no_effects_and_review_before_effects(tmp_path, monkeypatch):
+>       plan = installation(tmp_path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_runtime_install.py:75: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('a10fc3d8956d3885fb6a124dc38f1f4817ca56657cb84f027f2a0d6f898299f0',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_preview_no_effects_and_re0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_preview_no_effects_and_re0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='ff8fde3a79d42e2e5f32a576acb93a13dc598cd4ecd843c9d30e450d62dff53a'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+_____________ test_drift_and_conflicts_prevent_installation[wheel] _____________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_drift_and_conflicts_preve0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10b385da0>
+change = 'wheel'
+
+    @pytest.mark.parametrize('change', ['wheel', 'interpreter', 'platform', 'space', 'existing', 'link'])
+    def test_drift_and_conflicts_prevent_installation(tmp_path, monkeypatch, change):
+        from aeep import component_setup
+        from aeep.errors import ConfigurationError
+>       plan = installation(tmp_path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_runtime_install.py:116: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('a10fc3d8956d3885fb6a124dc38f1f4817ca56657cb84f027f2a0d6f898299f0',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_drift_and_conflicts_preve0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_drift_and_conflicts_preve0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='ff8fde3a79d42e2e5f32a576acb93a13dc598cd4ecd843c9d30e450d62dff53a'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+__________ test_drift_and_conflicts_prevent_installation[interpreter] __________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_drift_and_conflicts_preve1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d901fd0>
+change = 'interpreter'
+
+    @pytest.mark.parametrize('change', ['wheel', 'interpreter', 'platform', 'space', 'existing', 'link'])
+    def test_drift_and_conflicts_prevent_installation(tmp_path, monkeypatch, change):
+        from aeep import component_setup
+        from aeep.errors import ConfigurationError
+>       plan = installation(tmp_path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_runtime_install.py:116: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('a10fc3d8956d3885fb6a124dc38f1f4817ca56657cb84f027f2a0d6f898299f0',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_drift_and_conflicts_preve1/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_drift_and_conflicts_preve1/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='ff8fde3a79d42e2e5f32a576acb93a13dc598cd4ecd843c9d30e450d62dff53a'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+___________ test_drift_and_conflicts_prevent_installation[platform] ____________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_drift_and_conflicts_preve2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d903e70>
+change = 'platform'
+
+    @pytest.mark.parametrize('change', ['wheel', 'interpreter', 'platform', 'space', 'existing', 'link'])
+    def test_drift_and_conflicts_prevent_installation(tmp_path, monkeypatch, change):
+        from aeep import component_setup
+        from aeep.errors import ConfigurationError
+>       plan = installation(tmp_path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_runtime_install.py:116: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('a10fc3d8956d3885fb6a124dc38f1f4817ca56657cb84f027f2a0d6f898299f0',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_drift_and_conflicts_preve2/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_drift_and_conflicts_preve2/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='ff8fde3a79d42e2e5f32a576acb93a13dc598cd4ecd843c9d30e450d62dff53a'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+_____________ test_drift_and_conflicts_prevent_installation[space] _____________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_drift_and_conflicts_preve3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d903a80>
+change = 'space'
+
+    @pytest.mark.parametrize('change', ['wheel', 'interpreter', 'platform', 'space', 'existing', 'link'])
+    def test_drift_and_conflicts_prevent_installation(tmp_path, monkeypatch, change):
+        from aeep import component_setup
+        from aeep.errors import ConfigurationError
+>       plan = installation(tmp_path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_runtime_install.py:116: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('a10fc3d8956d3885fb6a124dc38f1f4817ca56657cb84f027f2a0d6f898299f0',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_drift_and_conflicts_preve3/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_drift_and_conflicts_preve3/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='ff8fde3a79d42e2e5f32a576acb93a13dc598cd4ecd843c9d30e450d62dff53a'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+___________ test_drift_and_conflicts_prevent_installation[existing] ____________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_drift_and_conflicts_preve4')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d902740>
+change = 'existing'
+
+    @pytest.mark.parametrize('change', ['wheel', 'interpreter', 'platform', 'space', 'existing', 'link'])
+    def test_drift_and_conflicts_prevent_installation(tmp_path, monkeypatch, change):
+        from aeep import component_setup
+        from aeep.errors import ConfigurationError
+>       plan = installation(tmp_path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_runtime_install.py:116: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('f01279c18f76f758b0020c8ca832085f72fc42d8be49b92f4be8202d5eaccce6',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_drift_and_conflicts_preve4/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_drift_and_conflicts_preve4/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='91a8b35211ee0c5f0fb6efcb250d251a9c87b778039749c4a0fb1d0c001ca4f7'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+_____________ test_drift_and_conflicts_prevent_installation[link] ______________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_drift_and_conflicts_preve5')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10c223af0>
+change = 'link'
+
+    @pytest.mark.parametrize('change', ['wheel', 'interpreter', 'platform', 'space', 'existing', 'link'])
+    def test_drift_and_conflicts_prevent_installation(tmp_path, monkeypatch, change):
+        from aeep import component_setup
+        from aeep.errors import ConfigurationError
+>       plan = installation(tmp_path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_runtime_install.py:116: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('f01279c18f76f758b0020c8ca832085f72fc42d8be49b92f4be8202d5eaccce6',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_drift_and_conflicts_preve5/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_drift_and_conflicts_preve5/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='91a8b35211ee0c5f0fb6efcb250d251a9c87b778039749c4a0fb1d0c001ca4f7'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+_____________ test_failure_after_effects_retained_and_not_replayed _____________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_failure_after_effects_ret0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10b387380>
+
+    def test_failure_after_effects_retained_and_not_replayed(tmp_path, monkeypatch):
+>       plan = installation(tmp_path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_runtime_install.py:139: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('f01279c18f76f758b0020c8ca832085f72fc42d8be49b92f4be8202d5eaccce6',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_failure_after_effects_ret0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_failure_after_effects_ret0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='91a8b35211ee0c5f0fb6efcb250d251a9c87b778039749c4a0fb1d0c001ca4f7'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+________________ test_removal_preserves_changed_runtime[added] _________________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_removal_preserves_changed0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d9018d0>
+change = 'added'
+
+    @pytest.mark.parametrize('change', ['added', 'missing', 'mode', 'symlink', 'hardlink', 'fifo', 'credentials'])
+    def test_removal_preserves_changed_runtime(tmp_path, monkeypatch, change):
+>       plan = installation(tmp_path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_runtime_install.py:153: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('f01279c18f76f758b0020c8ca832085f72fc42d8be49b92f4be8202d5eaccce6',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_removal_preserves_changed0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_removal_preserves_changed0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='91a8b35211ee0c5f0fb6efcb250d251a9c87b778039749c4a0fb1d0c001ca4f7'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+_______________ test_removal_preserves_changed_runtime[missing] ________________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_removal_preserves_changed1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d902900>
+change = 'missing'
+
+    @pytest.mark.parametrize('change', ['added', 'missing', 'mode', 'symlink', 'hardlink', 'fifo', 'credentials'])
+    def test_removal_preserves_changed_runtime(tmp_path, monkeypatch, change):
+>       plan = installation(tmp_path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_runtime_install.py:153: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('f01279c18f76f758b0020c8ca832085f72fc42d8be49b92f4be8202d5eaccce6',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_removal_preserves_changed1/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_removal_preserves_changed1/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='91a8b35211ee0c5f0fb6efcb250d251a9c87b778039749c4a0fb1d0c001ca4f7'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+_________________ test_removal_preserves_changed_runtime[mode] _________________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_removal_preserves_changed2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d903bd0>
+change = 'mode'
+
+    @pytest.mark.parametrize('change', ['added', 'missing', 'mode', 'symlink', 'hardlink', 'fifo', 'credentials'])
+    def test_removal_preserves_changed_runtime(tmp_path, monkeypatch, change):
+>       plan = installation(tmp_path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_runtime_install.py:153: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('f01279c18f76f758b0020c8ca832085f72fc42d8be49b92f4be8202d5eaccce6',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_removal_preserves_changed2/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_removal_preserves_changed2/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='91a8b35211ee0c5f0fb6efcb250d251a9c87b778039749c4a0fb1d0c001ca4f7'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+_______________ test_removal_preserves_changed_runtime[symlink] ________________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_removal_preserves_changed3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d900ec0>
+change = 'symlink'
+
+    @pytest.mark.parametrize('change', ['added', 'missing', 'mode', 'symlink', 'hardlink', 'fifo', 'credentials'])
+    def test_removal_preserves_changed_runtime(tmp_path, monkeypatch, change):
+>       plan = installation(tmp_path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_runtime_install.py:153: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('f01279c18f76f758b0020c8ca832085f72fc42d8be49b92f4be8202d5eaccce6',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_removal_preserves_changed3/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_removal_preserves_changed3/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='91a8b35211ee0c5f0fb6efcb250d251a9c87b778039749c4a0fb1d0c001ca4f7'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+_______________ test_removal_preserves_changed_runtime[hardlink] _______________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_removal_preserves_changed4')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d901780>
+change = 'hardlink'
+
+    @pytest.mark.parametrize('change', ['added', 'missing', 'mode', 'symlink', 'hardlink', 'fifo', 'credentials'])
+    def test_removal_preserves_changed_runtime(tmp_path, monkeypatch, change):
+>       plan = installation(tmp_path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_runtime_install.py:153: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('f01279c18f76f758b0020c8ca832085f72fc42d8be49b92f4be8202d5eaccce6',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_removal_preserves_changed4/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_removal_preserves_changed4/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='91a8b35211ee0c5f0fb6efcb250d251a9c87b778039749c4a0fb1d0c001ca4f7'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+_________________ test_removal_preserves_changed_runtime[fifo] _________________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_removal_preserves_changed5')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d901390>
+change = 'fifo'
+
+    @pytest.mark.parametrize('change', ['added', 'missing', 'mode', 'symlink', 'hardlink', 'fifo', 'credentials'])
+    def test_removal_preserves_changed_runtime(tmp_path, monkeypatch, change):
+>       plan = installation(tmp_path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_runtime_install.py:153: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('f01279c18f76f758b0020c8ca832085f72fc42d8be49b92f4be8202d5eaccce6',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_removal_preserves_changed5/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_removal_preserves_changed5/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='91a8b35211ee0c5f0fb6efcb250d251a9c87b778039749c4a0fb1d0c001ca4f7'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+_____________ test_removal_preserves_changed_runtime[credentials] ______________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_removal_preserves_changed6')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d902040>
+change = 'credentials'
+
+    @pytest.mark.parametrize('change', ['added', 'missing', 'mode', 'symlink', 'hardlink', 'fifo', 'credentials'])
+    def test_removal_preserves_changed_runtime(tmp_path, monkeypatch, change):
+>       plan = installation(tmp_path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_runtime_install.py:153: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('f01279c18f76f758b0020c8ca832085f72fc42d8be49b92f4be8202d5eaccce6',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_removal_preserves_changed6/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_removal_preserves_changed6/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='91a8b35211ee0c5f0fb6efcb250d251a9c87b778039749c4a0fb1d0c001ca4f7'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+_________________ test_tampered_preview_and_selection_rejected _________________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_tampered_preview_and_sele0')
+
+    def test_tampered_preview_and_selection_rejected(tmp_path):
+>       plan = installation(tmp_path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_runtime_install.py:177: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('f01279c18f76f758b0020c8ca832085f72fc42d8be49b92f4be8202d5eaccce6',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_tampered_preview_and_sele0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_tampered_preview_and_sele0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='91a8b35211ee0c5f0fb6efcb250d251a9c87b778039749c4a0fb1d0c001ca4f7'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+_______________________________ test_cli_journey _______________________________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_cli_journey0')
+capsys = <_pytest.capture.CaptureFixture object at 0x10d9d66d0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d900d70>
+
+    def test_cli_journey(tmp_path, capsys, monkeypatch):
+>       plan = installation(tmp_path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_runtime_install.py:189: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('f01279c18f76f758b0020c8ca832085f72fc42d8be49b92f4be8202d5eaccce6',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_cli_journey0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_cli_journey0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='91a8b35211ee0c5f0fb6efcb250d251a9c87b778039749c4a0fb1d0c001ca4f7'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+__________ test_actual_wheel_sizes_cannot_be_understated_by_manifest ___________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_actual_wheel_sizes_cannot0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d8b5e10>
+
+    def test_actual_wheel_sizes_cannot_be_understated_by_manifest(tmp_path, monkeypatch):
+        from aeep import component_setup
+>       plan = installation(tmp_path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_runtime_install.py:206: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('f01279c18f76f758b0020c8ca832085f72fc42d8be49b92f4be8202d5eaccce6',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_actual_wheel_sizes_cannot0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_actual_wheel_sizes_cannot0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='91a8b35211ee0c5f0fb6efcb250d251a9c87b778039749c4a0fb1d0c001ca4f7'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+__________ test_inactive_extra_dependency_does_not_force_installation __________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_inactive_extra_dependency0')
+
+    def test_inactive_extra_dependency_does_not_force_installation(tmp_path):
+>       plan = installation(tmp_path,requires='Requires-Dist: absent; extra == "unused"\n')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_runtime_install.py:240: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('a25be1edb1fdef746a0cc7d8c53e46c0d01a373e265120f058ddfd8fc8f30d9c',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_inactive_extra_dependency0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_inactive_extra_dependency0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='d2397354268e5bfb5d1328f8a5d4b4355f994cca39fce9628645dacdf9a02a03'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+___________ test_applied_pip_command_cannot_resolve_new_dependencies ___________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_applied_pip_command_canno0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d9023c0>
+
+    def test_applied_pip_command_cannot_resolve_new_dependencies(tmp_path,monkeypatch):
+>       plan = installation(tmp_path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_runtime_install.py:245: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('f01279c18f76f758b0020c8ca832085f72fc42d8be49b92f4be8202d5eaccce6',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_applied_pip_command_canno0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_applied_pip_command_canno0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='91a8b35211ee0c5f0fb6efcb250d251a9c87b778039749c4a0fb1d0c001ca4f7'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+_ test_own_shared_data_installs_only_inside_private_runtime_and_preserves_edits _
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_own_shared_data_installs_0')
+
+    def test_own_shared_data_installs_only_inside_private_runtime_and_preserves_edits(tmp_path):
+>       plan = installation(tmp_path, name='aeep-agent-router', extra={
+            'aeep_agent_router-1.0.data/data/share/aeep/examples/demo.txt': 'owned example',
+        })
+
+tests/test_toolkit_runtime_install.py:255: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('b2610239670645cd7d395efe8bce1ab2cef423c9727131cffd45fe007e58840d',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_own_shared_data_installs_0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_own_shared_data_installs_0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_agent_router-1.0-py3-none-any.whl', name='aeep-agent-router', version='1.0', sha256='32d6d8d1f72c9c55221c6cfb6fdf9a3d476229813eac11e4abdb86ff21cf7fef'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+____ test_private_wheel_scripts_install_and_remove_without_global_commands _____
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_private_wheel_scripts_ins0')
+
+    def test_private_wheel_scripts_install_and_remove_without_global_commands(tmp_path):
+>       plan = installation(tmp_path, extra={'aeep_installer_fixture-1.0.data/scripts/fixture-helper': '#!python\nprint("synthetic")\n'})
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_runtime_install.py:296: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('6bc243d0f47d2c64f6384237e6ef18429c018fd1bcc52ce1745e649cd1f6b5c9',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_private_wheel_scripts_ins0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_private_wheel_scripts_ins0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='89e25b0a05ecda34674c6698567e2d504cc4ec578b3565e730f6227fc0967564'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+___________ test_canonical_export_retains_runtime_consumer_bindings ____________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_canonical_export_retains_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d8b5320>
+
+    def test_canonical_export_retains_runtime_consumer_bindings(tmp_path, monkeypatch):
+        from test_toolkit_runtime_install import installation
+    
+        from aeep_toolkit.installation import manifest_digest
+        from aeep_toolkit.models import ExtensionManifest
+        from aeep_toolkit.workflow_runtime import lifecycle_preview
+    
+        path, service, *_ = configured(tmp_path)
+        folder = tmp_path / "owned-install-plan"
+        folder.mkdir()
+>       plan = installation(folder)
+               ^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_workflow_preparation.py:470: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('280d17d049686c4f5973a20367bfcff4aa5b24a32e0c863ded60df90f5d283a5',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_canonical_export_retains_0/owned-install-plan/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_canonical_export_retains_0/owned-install-plan/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='0da7bf00e9533165a9129a1949fcbf493f24af808c3f9c869e4ffcb43187c261'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+_____ test_preview_and_readiness_are_inert_and_do_not_assert_functionality _____
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_preview_and_readiness_are0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d206970>
+capsys = <_pytest.capture.CaptureFixture object at 0x10cc77850>
+
+    def test_preview_and_readiness_are_inert_and_do_not_assert_functionality(
+        tmp_path, monkeypatch, capsys
+    ):
+>       value = configured(tmp_path)
+                ^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_workflow_runtime.py:105: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_workflow_runtime.py:37: in configured
+    plan = installation(folder)
+           ^^^^^^^^^^^^^^^^^^^^
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('280d17d049686c4f5973a20367bfcff4aa5b24a32e0c863ded60df90f5d283a5',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_preview_and_readiness_are0/plan-0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_preview_and_readiness_are0/plan-0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='0da7bf00e9533165a9129a1949fcbf493f24af808c3f9c869e4ffcb43187c261'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+_______ test_real_owned_fixture_lifecycle_through_the_ordinary_workflow ________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_real_owned_fixture_lifecy0')
+capsys = <_pytest.capture.CaptureFixture object at 0x10cf7da50>
+
+    def test_real_owned_fixture_lifecycle_through_the_ordinary_workflow(tmp_path, capsys):
+>       value = configured(tmp_path)
+                ^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_workflow_runtime.py:138: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_workflow_runtime.py:37: in configured
+    plan = installation(folder)
+           ^^^^^^^^^^^^^^^^^^^^
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('280d17d049686c4f5973a20367bfcff4aa5b24a32e0c863ded60df90f5d283a5',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_real_owned_fixture_lifecy0/plan-0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_real_owned_fixture_lifecy0/plan-0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='0da7bf00e9533165a9129a1949fcbf493f24af808c3f9c869e4ffcb43187c261'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+________ test_mismatch_or_missing_authority_prevents_effects[artifact] _________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_mismatch_or_missing_autho0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d76c210>
+change = 'artifact'
+
+    @pytest.mark.parametrize("change", ["artifact", "policy", "file", "review", "accounting"])
+    def test_mismatch_or_missing_authority_prevents_effects(tmp_path, monkeypatch, change):
+>       value = configured(tmp_path)
+                ^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_workflow_runtime.py:215: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_workflow_runtime.py:37: in configured
+    plan = installation(folder)
+           ^^^^^^^^^^^^^^^^^^^^
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('280d17d049686c4f5973a20367bfcff4aa5b24a32e0c863ded60df90f5d283a5',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_mismatch_or_missing_autho0/plan-0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_mismatch_or_missing_autho0/plan-0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='0da7bf00e9533165a9129a1949fcbf493f24af808c3f9c869e4ffcb43187c261'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+_________ test_mismatch_or_missing_authority_prevents_effects[policy] __________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_mismatch_or_missing_autho1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d76cad0>
+change = 'policy'
+
+    @pytest.mark.parametrize("change", ["artifact", "policy", "file", "review", "accounting"])
+    def test_mismatch_or_missing_authority_prevents_effects(tmp_path, monkeypatch, change):
+>       value = configured(tmp_path)
+                ^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_workflow_runtime.py:215: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_workflow_runtime.py:37: in configured
+    plan = installation(folder)
+           ^^^^^^^^^^^^^^^^^^^^
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('280d17d049686c4f5973a20367bfcff4aa5b24a32e0c863ded60df90f5d283a5',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_mismatch_or_missing_autho1/plan-0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_mismatch_or_missing_autho1/plan-0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='0da7bf00e9533165a9129a1949fcbf493f24af808c3f9c869e4ffcb43187c261'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+__________ test_mismatch_or_missing_authority_prevents_effects[file] ___________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_mismatch_or_missing_autho2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d76f770>
+change = 'file'
+
+    @pytest.mark.parametrize("change", ["artifact", "policy", "file", "review", "accounting"])
+    def test_mismatch_or_missing_authority_prevents_effects(tmp_path, monkeypatch, change):
+>       value = configured(tmp_path)
+                ^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_workflow_runtime.py:215: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_workflow_runtime.py:37: in configured
+    plan = installation(folder)
+           ^^^^^^^^^^^^^^^^^^^^
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('280d17d049686c4f5973a20367bfcff4aa5b24a32e0c863ded60df90f5d283a5',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_mismatch_or_missing_autho2/plan-0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_mismatch_or_missing_autho2/plan-0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='0da7bf00e9533165a9129a1949fcbf493f24af808c3f9c869e4ffcb43187c261'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+_________ test_mismatch_or_missing_authority_prevents_effects[review] __________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_mismatch_or_missing_autho3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10bee1e10>
+change = 'review'
+
+    @pytest.mark.parametrize("change", ["artifact", "policy", "file", "review", "accounting"])
+    def test_mismatch_or_missing_authority_prevents_effects(tmp_path, monkeypatch, change):
+>       value = configured(tmp_path)
+                ^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_workflow_runtime.py:215: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_workflow_runtime.py:37: in configured
+    plan = installation(folder)
+           ^^^^^^^^^^^^^^^^^^^^
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('280d17d049686c4f5973a20367bfcff4aa5b24a32e0c863ded60df90f5d283a5',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_mismatch_or_missing_autho3/plan-0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_mismatch_or_missing_autho3/plan-0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='0da7bf00e9533165a9129a1949fcbf493f24af808c3f9c869e4ffcb43187c261'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+_______ test_mismatch_or_missing_authority_prevents_effects[accounting] ________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_mismatch_or_missing_autho4')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d76eb30>
+change = 'accounting'
+
+    @pytest.mark.parametrize("change", ["artifact", "policy", "file", "review", "accounting"])
+    def test_mismatch_or_missing_authority_prevents_effects(tmp_path, monkeypatch, change):
+>       value = configured(tmp_path)
+                ^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_workflow_runtime.py:215: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_workflow_runtime.py:37: in configured
+    plan = installation(folder)
+           ^^^^^^^^^^^^^^^^^^^^
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('280d17d049686c4f5973a20367bfcff4aa5b24a32e0c863ded60df90f5d283a5',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_mismatch_or_missing_autho4/plan-0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_mismatch_or_missing_autho4/plan-0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='0da7bf00e9533165a9129a1949fcbf493f24af808c3f9c869e4ffcb43187c261'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+___________ test_shared_runtime_is_retained_for_other_configuration ____________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_shared_runtime_is_retaine0')
+
+    def test_shared_runtime_is_retained_for_other_configuration(tmp_path):
+>       value = configured(tmp_path)
+                ^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_workflow_runtime.py:252: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_workflow_runtime.py:37: in configured
+    plan = installation(folder)
+           ^^^^^^^^^^^^^^^^^^^^
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('280d17d049686c4f5973a20367bfcff4aa5b24a32e0c863ded60df90f5d283a5',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_shared_runtime_is_retaine0/plan-0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_shared_runtime_is_retaine0/plan-0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='0da7bf00e9533165a9129a1949fcbf493f24af808c3f9c869e4ffcb43187c261'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+______ test_independent_runtime_continues_after_terminal_install_failure _______
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_independent_runtime_conti0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d8b42f0>
+
+    def test_independent_runtime_continues_after_terminal_install_failure(tmp_path, monkeypatch):
+>       value = configured(tmp_path, 2)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_workflow_runtime.py:267: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_workflow_runtime.py:37: in configured
+    plan = installation(folder)
+           ^^^^^^^^^^^^^^^^^^^^
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('280d17d049686c4f5973a20367bfcff4aa5b24a32e0c863ded60df90f5d283a5',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_independent_runtime_conti0/plan-0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_independent_runtime_conti0/plan-0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='0da7bf00e9533165a9129a1949fcbf493f24af808c3f9c869e4ffcb43187c261'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+___________________ test_user_edit_survives_selected_removal ___________________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_user_edit_survives_select0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d207a80>
+
+    def test_user_edit_survives_selected_removal(tmp_path, monkeypatch):
+>       value = configured(tmp_path)
+                ^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_workflow_runtime.py:296: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_workflow_runtime.py:37: in configured
+    plan = installation(folder)
+           ^^^^^^^^^^^^^^^^^^^^
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('280d17d049686c4f5973a20367bfcff4aa5b24a32e0c863ded60df90f5d283a5',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_user_edit_survives_select0/plan-0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_user_edit_survives_select0/plan-0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='0da7bf00e9533165a9129a1949fcbf493f24af808c3f9c869e4ffcb43187c261'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+__ test_aliases_share_one_installation_and_missing_second_config_does_not_run __
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_aliases_share_one_install0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d8b6e40>
+
+    def test_aliases_share_one_installation_and_missing_second_config_does_not_run(
+        tmp_path, monkeypatch
+    ):
+>       value = configured(tmp_path)
+                ^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_workflow_runtime.py:359: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_workflow_runtime.py:37: in configured
+    plan = installation(folder)
+           ^^^^^^^^^^^^^^^^^^^^
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('280d17d049686c4f5973a20367bfcff4aa5b24a32e0c863ded60df90f5d283a5',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_aliases_share_one_install0/plan-0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_aliases_share_one_install0/plan-0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='0da7bf00e9533165a9129a1949fcbf493f24af808c3f9c869e4ffcb43187c261'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+___ test_revocation_between_independent_installations_stops_further_effects ____
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_revocation_between_indepe0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d76e5f0>
+
+    def test_revocation_between_independent_installations_stops_further_effects(tmp_path, monkeypatch):
+>       value = configured(tmp_path, 2)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_workflow_runtime.py:386: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_workflow_runtime.py:37: in configured
+    plan = installation(folder)
+           ^^^^^^^^^^^^^^^^^^^^
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('280d17d049686c4f5973a20367bfcff4aa5b24a32e0c863ded60df90f5d283a5',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_revocation_between_indepe0/plan-0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_revocation_between_indepe0/plan-0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='0da7bf00e9533165a9129a1949fcbf493f24af808c3f9c869e4ffcb43187c261'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+___________ test_changed_runtime_binding_stops_before_second_effect ____________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_changed_runtime_binding_s0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d76e040>
+
+    def test_changed_runtime_binding_stops_before_second_effect(tmp_path, monkeypatch):
+>       value = configured(tmp_path, 2)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_workflow_runtime.py:409: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_workflow_runtime.py:37: in configured
+    plan = installation(folder)
+           ^^^^^^^^^^^^^^^^^^^^
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('280d17d049686c4f5973a20367bfcff4aa5b24a32e0c863ded60df90f5d283a5',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_changed_runtime_binding_s0/plan-0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_changed_runtime_binding_s0/plan-0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='0da7bf00e9533165a9129a1949fcbf493f24af808c3f9c869e4ffcb43187c261'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+____________ test_exported_workflow_keeps_parent_runtime_reference _____________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_exported_workflow_keeps_p0')
+
+    def test_exported_workflow_keeps_parent_runtime_reference(tmp_path):
+>       value = configured(tmp_path)
+                ^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_workflow_runtime.py:431: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_workflow_runtime.py:37: in configured
+    plan = installation(folder)
+           ^^^^^^^^^^^^^^^^^^^^
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('280d17d049686c4f5973a20367bfcff4aa5b24a32e0c863ded60df90f5d283a5',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_exported_workflow_keeps_p0/plan-0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_exported_workflow_keeps_p0/plan-0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='0da7bf00e9533165a9129a1949fcbf493f24af808c3f9c869e4ffcb43187c261'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+___ test_readiness_never_inspects_protected_runtime_targets[/Users/edwintse] ___
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_readiness_never_inspects_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d76c830>
+target = '/Users/edwintse'
+
+    @pytest.mark.parametrize("target", [str(Path.home()), str(Path.home() / ".ssh/runtime"), "/"])
+    def test_readiness_never_inspects_protected_runtime_targets(tmp_path, monkeypatch, target):
+>       value = configured(tmp_path)
+                ^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_workflow_runtime.py:449: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_workflow_runtime.py:37: in configured
+    plan = installation(folder)
+           ^^^^^^^^^^^^^^^^^^^^
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('280d17d049686c4f5973a20367bfcff4aa5b24a32e0c863ded60df90f5d283a5',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_readiness_never_inspects_0/plan-0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_readiness_never_inspects_0/plan-0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='0da7bf00e9533165a9129a1949fcbf493f24af808c3f9c869e4ffcb43187c261'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+_ test_readiness_never_inspects_protected_runtime_targets[/Users/edwintse/.ssh/runtime] _
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_readiness_never_inspects_1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10d76d8d0>
+target = '/Users/edwintse/.ssh/runtime'
+
+    @pytest.mark.parametrize("target", [str(Path.home()), str(Path.home() / ".ssh/runtime"), "/"])
+    def test_readiness_never_inspects_protected_runtime_targets(tmp_path, monkeypatch, target):
+>       value = configured(tmp_path)
+                ^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_workflow_runtime.py:449: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_workflow_runtime.py:37: in configured
+    plan = installation(folder)
+           ^^^^^^^^^^^^^^^^^^^^
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('280d17d049686c4f5973a20367bfcff4aa5b24a32e0c863ded60df90f5d283a5',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_readiness_never_inspects_1/plan-0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_readiness_never_inspects_1/plan-0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='0da7bf00e9533165a9129a1949fcbf493f24af808c3f9c869e4ffcb43187c261'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+__________ test_readiness_never_inspects_protected_runtime_targets[/] __________
+
+tmp_path = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_readiness_never_inspects_2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10cfa2350>
+target = '/'
+
+    @pytest.mark.parametrize("target", [str(Path.home()), str(Path.home() / ".ssh/runtime"), "/"])
+    def test_readiness_never_inspects_protected_runtime_targets(tmp_path, monkeypatch, target):
+>       value = configured(tmp_path)
+                ^^^^^^^^^^^^^^^^^^^^
+
+tests/test_toolkit_workflow_runtime.py:449: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_toolkit_workflow_runtime.py:37: in configured
+    plan = installation(folder)
+           ^^^^^^^^^^^^^^^^^^^^
+tests/test_toolkit_runtime_install.py:42: in installation
+    return runtime.prepare(selection, rules, tmp_path/'runtime', wheelhouse, wheels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = InstallationPreview(schema_version='aeep.toolkit.installation-preview.v1', profile='essentials', selected=('engine',),...time consumption is unmeasured.', 'This preview performs no installation and cannot authorize execution or spending.'))
+policy = PreviewPolicy(host='codex', platform='darwin-arm64', allowed_licenses=('MIT',), allowed_data_rights=('fixture-only',),...nown_memory=False, reviewed_dependency_manifests=('280d17d049686c4f5973a20367bfcff4aa5b24a32e0c863ded60df90f5d283a5',))
+destination = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_readiness_never_inspects_2/plan-0/runtime')
+wheelhouse = PosixPath('/private/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/pytest-of-edwintse/pytest-1438/test_readiness_never_inspects_2/plan-0/wheels')
+wheels = (Wheel(extension_id='engine', filename='aeep_installer_fixture-1.0-py3-none-any.whl', name='aeep-installer-fixture', version='1.0', sha256='0da7bf00e9533165a9129a1949fcbf493f24af808c3f9c869e4ffcb43187c261'),)
+
+    def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
+                wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+        """Read local inputs, producing an inert exact review document without writes."""
+        target, source = canonical(str(destination)), canonical(str(wheelhouse))
+        if not target.parent.is_dir() or target.exists() or not source.is_dir():
+            raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
+        interpreter = Path(sys.executable).resolve(strict=True)
+        result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
+                                     interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
+                                     python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
+                                     wheels=wheels)
+        required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
+        if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+>           raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
+E           ValueError: actual wheel closure would cross the 50 GiB free-space reserve
+
+src/aeep_toolkit/install_runtime.py:249: ValueError
+=============================== warnings summary ===============================
+../../../../Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/testclient.py:1
+  /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_toolkit_runtime_install.py::test_real_offline_install_replay_and_conflict_safe_remove
+FAILED tests/test_toolkit_runtime_install.py::test_preview_no_effects_and_review_before_effects
+FAILED tests/test_toolkit_runtime_install.py::test_drift_and_conflicts_prevent_installation[wheel]
+FAILED tests/test_toolkit_runtime_install.py::test_drift_and_conflicts_prevent_installation[interpreter]
+FAILED tests/test_toolkit_runtime_install.py::test_drift_and_conflicts_prevent_installation[platform]
+FAILED tests/test_toolkit_runtime_install.py::test_drift_and_conflicts_prevent_installation[space]
+FAILED tests/test_toolkit_runtime_install.py::test_drift_and_conflicts_prevent_installation[existing]
+FAILED tests/test_toolkit_runtime_install.py::test_drift_and_conflicts_prevent_installation[link]
+FAILED tests/test_toolkit_runtime_install.py::test_failure_after_effects_retained_and_not_replayed
+FAILED tests/test_toolkit_runtime_install.py::test_removal_preserves_changed_runtime[added]
+FAILED tests/test_toolkit_runtime_install.py::test_removal_preserves_changed_runtime[missing]
+FAILED tests/test_toolkit_runtime_install.py::test_removal_preserves_changed_runtime[mode]
+FAILED tests/test_toolkit_runtime_install.py::test_removal_preserves_changed_runtime[symlink]
+FAILED tests/test_toolkit_runtime_install.py::test_removal_preserves_changed_runtime[hardlink]
+FAILED tests/test_toolkit_runtime_install.py::test_removal_preserves_changed_runtime[fifo]
+FAILED tests/test_toolkit_runtime_install.py::test_removal_preserves_changed_runtime[credentials]
+FAILED tests/test_toolkit_runtime_install.py::test_tampered_preview_and_selection_rejected
+FAILED tests/test_toolkit_runtime_install.py::test_cli_journey - ValueError: ...
+FAILED tests/test_toolkit_runtime_install.py::test_actual_wheel_sizes_cannot_be_understated_by_manifest
+FAILED tests/test_toolkit_runtime_install.py::test_inactive_extra_dependency_does_not_force_installation
+FAILED tests/test_toolkit_runtime_install.py::test_applied_pip_command_cannot_resolve_new_dependencies
+FAILED tests/test_toolkit_runtime_install.py::test_own_shared_data_installs_only_inside_private_runtime_and_preserves_edits
+FAILED tests/test_toolkit_runtime_install.py::test_private_wheel_scripts_install_and_remove_without_global_commands
+FAILED tests/test_toolkit_workflow_preparation.py::test_canonical_export_retains_runtime_consumer_bindings
+FAILED tests/test_toolkit_workflow_runtime.py::test_preview_and_readiness_are_inert_and_do_not_assert_functionality
+FAILED tests/test_toolkit_workflow_runtime.py::test_real_owned_fixture_lifecycle_through_the_ordinary_workflow
+FAILED tests/test_toolkit_workflow_runtime.py::test_mismatch_or_missing_authority_prevents_effects[artifact]
+FAILED tests/test_toolkit_workflow_runtime.py::test_mismatch_or_missing_authority_prevents_effects[policy]
+FAILED tests/test_toolkit_workflow_runtime.py::test_mismatch_or_missing_authority_prevents_effects[file]
+FAILED tests/test_toolkit_workflow_runtime.py::test_mismatch_or_missing_authority_prevents_effects[review]
+FAILED tests/test_toolkit_workflow_runtime.py::test_mismatch_or_missing_authority_prevents_effects[accounting]
+FAILED tests/test_toolkit_workflow_runtime.py::test_shared_runtime_is_retained_for_other_configuration
+FAILED tests/test_toolkit_workflow_runtime.py::test_independent_runtime_continues_after_terminal_install_failure
+FAILED tests/test_toolkit_workflow_runtime.py::test_user_edit_survives_selected_removal
+FAILED tests/test_toolkit_workflow_runtime.py::test_aliases_share_one_installation_and_missing_second_config_does_not_run
+FAILED tests/test_toolkit_workflow_runtime.py::test_revocation_between_independent_installations_stops_further_effects
+FAILED tests/test_toolkit_workflow_runtime.py::test_changed_runtime_binding_stops_before_second_effect
+FAILED tests/test_toolkit_workflow_runtime.py::test_exported_workflow_keeps_parent_runtime_reference
+FAILED tests/test_toolkit_workflow_runtime.py::test_readiness_never_inspects_protected_runtime_targets[/Users/edwintse]
+FAILED tests/test_toolkit_workflow_runtime.py::test_readiness_never_inspects_protected_runtime_targets[/Users/edwintse/.ssh/runtime]
+FAILED tests/test_toolkit_workflow_runtime.py::test_readiness_never_inspects_protected_runtime_targets[/]
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! KeyboardInterrupt !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py:123: KeyboardInterrupt
+(to show a full traceback on KeyboardInterrupt use --full-trace)
+41 failed, 1666 passed, 1 skipped, 1 warning in 381.27s (0:06:21)

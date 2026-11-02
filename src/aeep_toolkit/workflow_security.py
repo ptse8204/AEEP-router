@@ -168,8 +168,8 @@ class ScanContainerExecutor(ContainerExecutor):
                 )
             replacement.extend(["--mount", f"type=bind,src={path},dst={path},readonly"])
         argv[index - 1 : index + 1] = replacement
-        # Reuse the already-reviewed scanner environment's Python dependencies.
-        argv[argv.index("--entrypoint") + 1] = "/opt/aeep-scanner/bin/python"
+        # The parent image provides the qualified AEEP protocol dependencies.
+        # Only scan_spec's child uses Cisco's independent private environment.
         index = argv.index("run") + 1
         argv[index:index] = ["--label", "aeep.workflow-scan=" + str(context.attempt_id)]
         return argv, name
