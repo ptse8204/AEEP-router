@@ -1856,3 +1856,13 @@ canonical scan reference, receipt/journal and settled exclusive costs are in the
 [completed result](../../reports/toolkit-v2/c13/coverage-completion-20261103/RESULTS.md).
 The image and private runtime are retained. This does not complete either task
 domain or any usefulness/resource/release gate. Upstream pins are unchanged.
+
+### November 3: ASE real-runtime execution review, not yet executed
+
+The retained 0.7.0 source/artifact pins remain unchanged. All 16 source files match;
+the production child/contract match current source. Seven actual first-party native/
+Git checks and three substituted parent controls passed. The
+[prepared SDK review](../../reports/toolkit-v2/c13/ase-runtime-contract-20261103/README.md)
+permits zero-model positive/negative certificate fixtures only after exact
+approval. FakeHarness is not selected; real controlled Codex and full workflow
+integration remain unverified. No upstream or model result is claimed.

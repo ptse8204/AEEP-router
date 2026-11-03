@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "scripts": [
+    {
+      "script": "check-driver.py",
+      "exit_code": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"scenarios\": [\n    {\n      \"canonical_valid_fixture\": true,\n      \"forged_upstream_grade\": false,\n      \"rejected\": false,\n      \"prior_counter_preserved\": true,\n      \"operation_settled\": true\n    },\n    {\n      \"canonical_valid_fixture\": false,\n      \"forged_upstream_grade\": false,\n      \"rejected\": false,\n      \"prior_counter_preserved\": true,\n      \"operation_settled\": true\n    },\n    {\n      \"canonical_valid_fixture\": false,\n      \"forged_upstream_grade\": true,\n      \"rejected\": true,\n      \"prior_counter_preserved\": true,\n      \"operation_settled\": true\n    }\n  ],\n  \"evidence_kind\": \"first_party_substituted_executor_and_grade_certificates\",\n  \"actual_ASE_imports\": 0,\n  \"actual_Git_processes\": 0,\n  \"actual_models\": 0,\n  \"actual_main_grant_changes\": 0\n}\n{\"expiry_controls_passed\": true, \"same_or_existing_ceilings_preserved\": true, \"current_predecessor_used\": true, \"already_extended_grant_not_rewritten\": true, \"counters_not_reset\": true, \"actual_main_grant_changes\": 0}\n",
+      "evidence_kind": "first_party_substitutes_only"
+    },
+    {
+      "script": "check-bundle.py",
+      "exit_code": 0,
+      "stdout": "{\"sdk\": {\"passed\": true, \"exit_code\": 0}, \"docs\": {\"passed\": true, \"exit_code\": 0}}\n{\"sdk\": {\"passed\": false, \"exit_code\": 0}, \"docs\": {\"passed\": true, \"exit_code\": 0}}\n{\"sdk\": {\"passed\": false, \"exit_code\": 0}, \"common_stop\": \"Unresolved SDK accounting; retain all resources\"}\n{\"passed\": true, \"blank_line_only_correction_preserves_code\": true, \"bundle_controls\": [{\"SDK_fixture_passed\": true, \"accounting_settled\": true, \"independent_docs_ran\": true}, {\"SDK_fixture_passed\": false, \"accounting_settled\": true, \"independent_docs_ran\": true}, {\"SDK_fixture_passed\": false, \"accounting_settled\": false, \"independent_docs_ran\": false}], \"actual_ASE_imports\": 0, \"actual_docs_tool_calls\": 0, \"actual_grant_changes\": 0}\n",
+      "evidence_kind": "first_party_substitutes_only"
+    }
+  ],
+  "all_review_programs_compile": true,
+  "ASE_imports": 0,
+  "model_calls": 0,
+  "main_grant_changes": 0
+}

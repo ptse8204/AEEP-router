@@ -149,9 +149,11 @@ six-task pack without changing model-turn, worker-artifact or spending limits.
 
 Execution continues to use the existing AssessmentService, executors, grants,
 attempts and receipts. The LangGraph SDK adapter delegates approved executor
-calls and checkpoints task/evidence references; its current recovery scope needs
-real SDK verification. The Cisco bridge retains finding identifiers, categories,
-severity and analyzer failures without snippets; its scanner runtime has not run.
+calls and checkpoints task/evidence references. Recorded SDK checks cover bounded
+conditional flow and same-runtime recovery; full domain composition remains open.
+The Cisco bridge now has a completed ordinary CLI scan on source `c2eb4a3d`, with
+finding identifiers, categories, severity and analyzer failures retained without
+snippets. That scan establishes neither candidate safety nor usefulness.
 
 The six SkillsBench source tasks and two externally hosted PDF/Excel inputs are
 retained privately with Git-blob and SHA-256 identities. Only hashes and metadata
@@ -181,8 +183,9 @@ engineering review does not authorize installations or model disclosure by itsel
 The Agent Framework core adapter now composes a bounded sequence of approved
 executors. Steps bind fingerprints, action IDs and canonical predecessor receipt
 references. It refuses a silent restart after failure or cancellation and does
-not restore SDK checkpoints. Its real SDK runtime, interruption accounting and
-ordinary CLI composition remain unverified; fixture checks do not pass the gate.
+not restore SDK checkpoints. Its recorded SDK check passed five owned execution/accounting cases on
+source `e363cfa5`. Ordinary CLI domain composition remains unverified; bounded SDK
+checks do not pass that gate.
 
 ## External scheduling through the same workflow
 
@@ -397,5 +400,11 @@ Actual approved Cisco checks on source `e363cfa5` passed containment and both
 selected/control scans. The selected format-json payload had one informational
 missing-license finding, four analyzers and no reported analyzer failures.
 The control had four findings, including two high/critical. All five operations
-remain charged. The new ordinary CLI bridge still needs its own current-source
-contained execution check. Read the [evidence and next review](../../reports/toolkit-v2/c13/workflow-scanner-20261102/README.md).
+remain charged. The ordinary CLI bridge subsequently passed its own contained execution check on
+source `c2eb4a3d`: one scan, four analyzers, one INFO missing-license finding and
+no analyzer failures, with canonical receipt/journal, settled costs and verified
+cleanup. Both named configurations accept that same exact candidate/runtime
+record; this was not two task evaluations. The original wheel and 32 cached
+dependencies also passed the installed checks and remain retained. Read the
+[completed evidence](../../reports/toolkit-v2/c13/coverage-completion-20261103/RESULTS.md).
+All-integration and both complete domain workflows remain open.

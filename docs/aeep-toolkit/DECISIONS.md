@@ -2614,3 +2614,15 @@ scope; no repeat is justified merely to add test counts. The generic all-stack
 probe contract still needs truthful bindings from each component's actual record.
 Do not manufacture probe events or broaden this scan into a task/utility result.
 Continue the real evaluator and protected task-pack paths; comparisons stay paused.
+
+## November 3: verify real ASE SDK behavior before controlled model execution
+
+Use the retained pinned scheduler/grader and production AgentHarness bridge on
+explicit certificate fixtures before preparing a model-backed journey. This
+check selects no FakeHarness and makes no task, worker or usefulness claim.
+Keep parent-owned responses and candidate bytes read-only to the SDK; use the
+restricted, fingerprint-bound local Git helper. Record actual SDK costs in the
+existing shared ledger, preserving ceilings, counters and unresolved old work.
+The [prepared review](../../reports/toolkit-v2/c13/ase-runtime-contract-20261103/README.md)
+needs applicable upstream execution authority. The successful current-source,
+scanner, wheel and original-input docs checks are reused within their scopes.

@@ -1,5 +1,28 @@
 # 0.8 plan coverage and remaining work
 
+<!-- ase-runtime-contract-20261103:start -->
+## November 3: ASE SDK boundary and real-runtime review prepared
+
+The [exact preparation](../toolkit-v2/c13/ase-runtime-contract-20261103/README.md)
+reuses the retained ASE 0.7.0 runtime and current bridge, with two explicit grade
+certificate fixtures. Seven real standard-library/Git boundary checks and three
+substituted parent protocol/accounting cases pass. All upstream hashes match;
+no ASE import or main-ledger mutation occurred. First-party preparation failures
+and repairs remain recorded. Current source remains verified `c2eb4a3d`.
+
+Actual execution requires its own exact upstream-software approval. Proposed
+maximum: three operations / 120 reserved seconds on the original shared grant,
+zero models/cash, no install/download/service/image change or cleanup. A separate
+component checks the 72 current docs inputs with the same cached offline tools,
+at most two attempts; settled SDK failures leave docs eligible. Current guide
+status now links the actual scanner/wheel result; older docs evidence is not
+retroactively broadened. A finite
+expiry amendment under standing delegation preserves current ceilings, counters
+and old unresolved records. This is SDK conformance only; real controlled Codex,
+ordinary complete domain workflows and the all-integration gate remain open.
+Comparisons, usefulness, resources and release remain separate and unadvanced.
+<!-- ase-runtime-contract-20261103:end -->
+
 <!-- scanner-completion-results-20261103:start -->
 ## November 3: current-source scanner and retained installed wheel verified
 

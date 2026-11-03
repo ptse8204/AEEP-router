@@ -1,0 +1,455 @@
+{
+  "source": "c2eb4a3dab740304934e9a590892ff5db18fcfe0c998dc303e15ead5c238c839",
+  "runtime": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/upstream-stack-runtimes-20261102/corrected-composed-runtime",
+  "runtime_tree_sha256": "060c9a90b8b95a6757376420936321f7d752dfeb7d2a0e30e5516715cc38ccb4",
+  "runtime_current_child_files": {
+    "ase_child.py": "9d131c29f9542a71c5234d8f31d51e90e696a2279ad4dde9cb57234183148f14",
+    "ase_contract.py": "ce93f546e1dd345c1039cdbefbf2128e3ccb3d55cec86116f5839f1810b25ee6"
+  },
+  "read_bytes_function_equivalent": true,
+  "database": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/aeep.sqlite3",
+  "profiles": {
+    "preparation": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/ase-runtime-contract-20261103/preparation.sb",
+    "native-boundary": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/ase-runtime-contract-20261103/native-boundary.sb",
+    "positive": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/ase-runtime-contract-20261103/positive.sb",
+    "negative": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/ase-runtime-contract-20261103/negative.sb"
+  },
+  "specs": {
+    "preparation": {
+      "id": "toolkit.ase-sdk-preparation",
+      "capability": "toolkit.upstream-engineering@1",
+      "kind": "command",
+      "description": "First-party native sandbox/Git boundary; no upstream import",
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "output_schema": null,
+      "estimate": {
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 0.0,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        },
+        "cash": {
+          "amount_usd": null,
+          "upper_bound_usd": null,
+          "evidence": {
+            "status": "unavailable",
+            "source": "unavailable",
+            "trust": "untrusted",
+            "evidence_id": null,
+            "source_reference": null,
+            "digest": null,
+            "observed_at": null
+          }
+        },
+        "subscription_usage": [],
+        "success_probability": 0.95,
+        "quality_score": 0.95,
+        "risk_score": 0.05,
+        "confidence": 0.5,
+        "source": "static",
+        "sample_size": 0,
+        "uncertainty": null
+      },
+      "side_effect": "write",
+      "locality": "local",
+      "requires_network": false,
+      "data_residency": [],
+      "idempotent": true,
+      "safe_to_auto_execute": true,
+      "enabled": true,
+      "tags": [],
+      "resource_pool": null,
+      "provider_id": null,
+      "validators": [],
+      "config": {
+        "argv": [
+          "/usr/bin/sandbox-exec",
+          "-f",
+          "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/ase-runtime-contract-20261103/preparation.sb",
+          "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/upstream-stack-runtimes-20261102/corrected-composed-runtime/bin/python",
+          "-I",
+          "-B",
+          "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/ase-runtime-contract-20261103/native-boundary.py"
+        ],
+        "argv_literal": true,
+        "inherit_env": false,
+        "stdin_json": true,
+        "cwd": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-engineering-work-20261103/scheduler/preparation",
+        "env": {
+          "PATH": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-engineering-tools-20261103/bin:/usr/bin:/bin",
+          "HOME": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-engineering-work-20261103/scheduler/preparation/home",
+          "TMPDIR": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-engineering-work-20261103/scheduler/preparation/tmp",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONNOUSERSITE": "1",
+          "LC_ALL": "C"
+        },
+        "timeout_seconds": 25,
+        "max_output_bytes": 65536,
+        "output": {
+          "type": "json"
+        }
+      }
+    },
+    "native-boundary": {
+      "id": "toolkit.ase-sdk-native-boundary",
+      "capability": "toolkit.upstream-engineering@1",
+      "kind": "command",
+      "description": "First-party native sandbox/Git boundary; no upstream import",
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "output_schema": null,
+      "estimate": {
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 0.0,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        },
+        "cash": {
+          "amount_usd": null,
+          "upper_bound_usd": null,
+          "evidence": {
+            "status": "unavailable",
+            "source": "unavailable",
+            "trust": "untrusted",
+            "evidence_id": null,
+            "source_reference": null,
+            "digest": null,
+            "observed_at": null
+          }
+        },
+        "subscription_usage": [],
+        "success_probability": 0.95,
+        "quality_score": 0.95,
+        "risk_score": 0.05,
+        "confidence": 0.5,
+        "source": "static",
+        "sample_size": 0,
+        "uncertainty": null
+      },
+      "side_effect": "write",
+      "locality": "local",
+      "requires_network": false,
+      "data_residency": [],
+      "idempotent": true,
+      "safe_to_auto_execute": true,
+      "enabled": true,
+      "tags": [],
+      "resource_pool": null,
+      "provider_id": null,
+      "validators": [],
+      "config": {
+        "argv": [
+          "/usr/bin/sandbox-exec",
+          "-f",
+          "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/ase-runtime-contract-20261103/native-boundary.sb",
+          "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/upstream-stack-runtimes-20261102/corrected-composed-runtime/bin/python",
+          "-I",
+          "-B",
+          "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/ase-runtime-contract-20261103/native-boundary.py"
+        ],
+        "argv_literal": true,
+        "inherit_env": false,
+        "stdin_json": true,
+        "cwd": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-engineering-work-20261103/scheduler/native-boundary",
+        "env": {
+          "PATH": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-engineering-tools-20261103/bin:/usr/bin:/bin",
+          "HOME": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-engineering-work-20261103/scheduler/native-boundary/home",
+          "TMPDIR": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-engineering-work-20261103/scheduler/native-boundary/tmp",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONNOUSERSITE": "1",
+          "LC_ALL": "C"
+        },
+        "timeout_seconds": 25,
+        "max_output_bytes": 65536,
+        "output": {
+          "type": "json"
+        }
+      }
+    },
+    "positive": {
+      "id": "toolkit.ase-sdk-positive",
+      "capability": "toolkit.upstream-engineering@1",
+      "kind": "command",
+      "description": "Reviewed actual ASE scheduler/grader contract check with first-party certificates; no model worker or benefit claim",
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "output_schema": null,
+      "estimate": {
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 0.0,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        },
+        "cash": {
+          "amount_usd": null,
+          "upper_bound_usd": null,
+          "evidence": {
+            "status": "unavailable",
+            "source": "unavailable",
+            "trust": "untrusted",
+            "evidence_id": null,
+            "source_reference": null,
+            "digest": null,
+            "observed_at": null
+          }
+        },
+        "subscription_usage": [],
+        "success_probability": 0.95,
+        "quality_score": 0.95,
+        "risk_score": 0.05,
+        "confidence": 0.5,
+        "source": "static",
+        "sample_size": 0,
+        "uncertainty": null
+      },
+      "side_effect": "write",
+      "locality": "local",
+      "requires_network": false,
+      "data_residency": [],
+      "idempotent": true,
+      "safe_to_auto_execute": true,
+      "enabled": true,
+      "tags": [],
+      "resource_pool": null,
+      "provider_id": null,
+      "validators": [],
+      "config": {
+        "argv": [
+          "/usr/bin/sandbox-exec",
+          "-f",
+          "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/ase-runtime-contract-20261103/positive.sb",
+          "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/upstream-stack-runtimes-20261102/corrected-composed-runtime/bin/python",
+          "-I",
+          "-B",
+          "-m",
+          "aeep_toolkit.ase_child"
+        ],
+        "argv_literal": true,
+        "inherit_env": false,
+        "stdin_json": true,
+        "cwd": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-engineering-work-20261103/scheduler/positive",
+        "env": {
+          "PATH": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-engineering-tools-20261103/bin:/usr/bin:/bin",
+          "HOME": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-engineering-work-20261103/scheduler/positive/home",
+          "TMPDIR": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-engineering-work-20261103/scheduler/positive/tmp",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONNOUSERSITE": "1",
+          "LC_ALL": "C"
+        },
+        "timeout_seconds": 40,
+        "max_output_bytes": 65536,
+        "output": {
+          "type": "jsonl",
+          "match": {
+            "kind": "done"
+          }
+        }
+      }
+    },
+    "negative": {
+      "id": "toolkit.ase-sdk-negative",
+      "capability": "toolkit.upstream-engineering@1",
+      "kind": "command",
+      "description": "Reviewed actual ASE scheduler/grader contract check with first-party certificates; no model worker or benefit claim",
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "output_schema": null,
+      "estimate": {
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 0.0,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        },
+        "cash": {
+          "amount_usd": null,
+          "upper_bound_usd": null,
+          "evidence": {
+            "status": "unavailable",
+            "source": "unavailable",
+            "trust": "untrusted",
+            "evidence_id": null,
+            "source_reference": null,
+            "digest": null,
+            "observed_at": null
+          }
+        },
+        "subscription_usage": [],
+        "success_probability": 0.95,
+        "quality_score": 0.95,
+        "risk_score": 0.05,
+        "confidence": 0.5,
+        "source": "static",
+        "sample_size": 0,
+        "uncertainty": null
+      },
+      "side_effect": "write",
+      "locality": "local",
+      "requires_network": false,
+      "data_residency": [],
+      "idempotent": true,
+      "safe_to_auto_execute": true,
+      "enabled": true,
+      "tags": [],
+      "resource_pool": null,
+      "provider_id": null,
+      "validators": [],
+      "config": {
+        "argv": [
+          "/usr/bin/sandbox-exec",
+          "-f",
+          "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/ase-runtime-contract-20261103/negative.sb",
+          "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/upstream-stack-runtimes-20261102/corrected-composed-runtime/bin/python",
+          "-I",
+          "-B",
+          "-m",
+          "aeep_toolkit.ase_child"
+        ],
+        "argv_literal": true,
+        "inherit_env": false,
+        "stdin_json": true,
+        "cwd": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-engineering-work-20261103/scheduler/negative",
+        "env": {
+          "PATH": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-engineering-tools-20261103/bin:/usr/bin:/bin",
+          "HOME": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-engineering-work-20261103/scheduler/negative/home",
+          "TMPDIR": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-engineering-work-20261103/scheduler/negative/tmp",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONNOUSERSITE": "1",
+          "LC_ALL": "C"
+        },
+        "timeout_seconds": 40,
+        "max_output_bytes": 65536,
+        "output": {
+          "type": "jsonl",
+          "match": {
+            "kind": "done"
+          }
+        }
+      }
+    }
+  },
+  "conditions": {
+    "positive": {
+      "canonical_valid": true,
+      "certificate_fixture_sha256": "561ea984decdbee8f482641ed6bd6239b1b230db1ddea103c746b9e6e737fd13",
+      "input": {
+        "slots": [
+          "0"
+        ],
+        "run_token": "291f587974ae7395f942e31a0fdf97871ae096ead0eac3358b22bb8f39d8713e",
+        "skill_name": "format-json",
+        "response_timeout": 15.0
+      },
+      "prepared_tree_sha256": "4de5d7c1b132714517bfee95d370bf9f47ab79f5522e5d5e7547cd8fd8c82a66"
+    },
+    "negative": {
+      "canonical_valid": false,
+      "certificate_fixture_sha256": "517c118894a30a53a7cfb74cfe31900370b8df5c9e8e10f2f42a3977ca9a79b9",
+      "input": {
+        "slots": [
+          "0"
+        ],
+        "run_token": "adb2b230f8816f1fcb670d5a8a356c33d6c95624c20a23dfe15c9112dc357d7c",
+        "skill_name": "format-json",
+        "response_timeout": 15.0
+      },
+      "prepared_tree_sha256": "4de5d7c1b132714517bfee95d370bf9f47ab79f5522e5d5e7547cd8fd8c82a66"
+    }
+  },
+  "prepared_trees": {
+    "preparation": "11aa65046544675744c7a0bfc9130c0f75667938e9f8a105944acf608337a7ab",
+    "native-boundary": "11aa65046544675744c7a0bfc9130c0f75667938e9f8a105944acf608337a7ab",
+    "positive": "4de5d7c1b132714517bfee95d370bf9f47ab79f5522e5d5e7547cd8fd8c82a66",
+    "negative": "4de5d7c1b132714517bfee95d370bf9f47ab79f5522e5d5e7547cd8fd8c82a66"
+  },
+  "native_payload": {
+    "outside_canary": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-engineering-outside-canary-20261103.txt",
+    "outside_write": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-engineering-outside-write-20261103.txt",
+    "git_wrapper": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-engineering-tools-20261103/bin/git",
+    "outside_tmp_canary": "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-sdk-outside-canary-g7zivi39.txt"
+  },
+  "executable_dependencies": {
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-engineering-tools-20261103/bin/git": "c5f19006e8d461f2151a8fc354ba2c0df135f11ee88d012792343099fb7fb051",
+    "/Applications/Xcode.app/Contents/Developer/usr/bin/git": "775851091335fd0f0e3eba68e92667b95115208e57ad5ca312936d10edb9ffd3",
+    "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3.13": "20c9c2144a9f5202177620417e67643fb551aa31586e5d3c1361627b920cadb0",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/upstream-stack-runtimes-20261102/corrected-composed-runtime/lib/python3.13/site-packages/agent_skill_eval/__init__.py": "cea726bf89140d96cd24fe459bf58988801e3c1cbbc0da57cad577821ddd44fe",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/upstream-stack-runtimes-20261102/corrected-composed-runtime/lib/python3.13/site-packages/agent_skill_eval/__main__.py": "c9ddeaab5083783ab6f90721dd6ef063c4ee78c5cfdd989ceb22168c7e6ca2f4",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/upstream-stack-runtimes-20261102/corrected-composed-runtime/lib/python3.13/site-packages/agent_skill_eval/cli.py": "7877e62d8a3fd5aa821c1359e721a2bbf8fff5429bb856995bc7ee394a4a3c0f",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/upstream-stack-runtimes-20261102/corrected-composed-runtime/lib/python3.13/site-packages/agent_skill_eval/fixtures.py": "5adc40b3f9f91d7d4d7599ee0f890a59058b0881505c46a8a2f0d7145435234c",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/upstream-stack-runtimes-20261102/corrected-composed-runtime/lib/python3.13/site-packages/agent_skill_eval/git_state.py": "d06f4cda0f859fa038f0da9799aabb54cc371d83995a939cf725eb79cc3f8f32",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/upstream-stack-runtimes-20261102/corrected-composed-runtime/lib/python3.13/site-packages/agent_skill_eval/graders/__init__.py": "28d30ab74122cc45ea9d4b98191fb59698e8b4b71d41e694e5702de8bb122c7a",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/upstream-stack-runtimes-20261102/corrected-composed-runtime/lib/python3.13/site-packages/agent_skill_eval/harnesses/__init__.py": "348b9cc731fb6470a6dfe38000c090bb743094cdc183156e27ba2b37a8a11bb0",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/upstream-stack-runtimes-20261102/corrected-composed-runtime/lib/python3.13/site-packages/agent_skill_eval/hooks.py": "6a47adab2c6037dfcc15b2a831085c03b68f73e9d31cfae7c22bf796e0eefe39",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/upstream-stack-runtimes-20261102/corrected-composed-runtime/lib/python3.13/site-packages/agent_skill_eval/models.py": "210f95b99f035092564d5503da7e228b4a1d13c9c4f96f5744ce22df8b6b443c",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/upstream-stack-runtimes-20261102/corrected-composed-runtime/lib/python3.13/site-packages/agent_skill_eval/openrouter.py": "eec81fb1714cae82d276626884184e23ca718098adef3ad4cbf009a3b84373c2",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/upstream-stack-runtimes-20261102/corrected-composed-runtime/lib/python3.13/site-packages/agent_skill_eval/progress.py": "369f0c0e00fd38e19ef1327d022861ce543d10632ea859843cabbbe8b77fc807",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/upstream-stack-runtimes-20261102/corrected-composed-runtime/lib/python3.13/site-packages/agent_skill_eval/runner.py": "a37df1cddbfcf4d0437835c2f582ee539724758d9d257f86ac47e8c39484ca27",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/upstream-stack-runtimes-20261102/corrected-composed-runtime/lib/python3.13/site-packages/agent_skill_eval/skills.py": "977cb376bfdd2954361abf5fa39abb657aa2b2613443cac122da35a36fdf9c64",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/upstream-stack-runtimes-20261102/corrected-composed-runtime/lib/python3.13/site-packages/agent_skill_eval/summary.py": "035ef3946a8f92d3c0822caaa7f407745e7ec5299af8cd8290605cebe7f140ff",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/upstream-stack-runtimes-20261102/corrected-composed-runtime/lib/python3.13/site-packages/agent_skill_eval/validation.py": "ddf201c8564b8671693a054033f8ead3ebced257b817a7f28d9201605720c874",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/upstream-stack-runtimes-20261102/corrected-composed-runtime/lib/python3.13/site-packages/agent_skill_eval/workspace.py": "a2969a72e74860d6c0117e8506819cd4e79c5061ee5bc191501a025bf47224e3",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/ase-runtime-contract-20261103/native-boundary.py": "4b757075c859b4a3a6e3c6b1ee977defff3ae59f564b9ac256822211f3ec5276",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/ase-runtime-contract-20261103/native-boundary.sb": "9883d61e69f93d4addea948761d44d6e02dddb9615feaced84a8343ebcfc1279",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/ase-runtime-contract-20261103/positive.sb": "8262a1934b6529509d4ab9621908a43574355df1a7fa0ea5fea68095416efaa0",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/ase-runtime-contract-20261103/negative.sb": "c297c41d1cd063b1e9c84878032b0e1d0056127167de6a502982f4a28bd3def4",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/upstream-stack-runtimes-20261102/corrected-composed-runtime/lib/python3.13/site-packages/aeep_toolkit/ase_child.py": "9d131c29f9542a71c5234d8f31d51e90e696a2279ad4dde9cb57234183148f14",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/upstream-stack-runtimes-20261102/corrected-composed-runtime/lib/python3.13/site-packages/aeep_toolkit/ase_contract.py": "ce93f546e1dd345c1039cdbefbf2128e3ccb3d55cec86116f5839f1810b25ee6",
+    "/usr/bin/sandbox-exec": "e3d7a792c58a5d3783d2f7274c82d70062393830d8cb1ded713ca554a470bd2f",
+    "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-sdk-outside-canary-8z6z6qyo.txt": "8f74c4beb0fa0e000b5dffa4c1d3398a1257637873b2f11d5918cffee5293b92",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-engineering-outside-canary-20261103.txt": "8339c7e401580a50e0971be099e4dbba12a51fdb7a81de7916c6b14d5f95fc99",
+    "/var/folders/_g/bvzl9cms7cx1d0wdpc981n9w0000gn/T/aeep-sdk-outside-canary-g7zivi39.txt": "8f74c4beb0fa0e000b5dffa4c1d3398a1257637873b2f11d5918cffee5293b92"
+  },
+  "profile_scope": "Existing native SDK boundary with explicit denial of all user homes, mounted volumes and shared temp data; allow the retained SDK/tools and own current case. OS file access outside those protected roots remains broader. This does not qualify model workers or all native process behavior."
+}

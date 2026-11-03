@@ -1,5 +1,36 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- ase-runtime-contract-20261103:start -->
+**November 3: real ASE SDK contract check prepared; execution approval pending.**
+After the scanner/wheel completion, the next [bounded component review](../../reports/toolkit-v2/c13/ase-runtime-contract-20261103/README.md)
+uses the retained 0.7.0 runtime and current production AgentHarness bridge on two
+explicit certificate fixtures, not task results. Seven actual native/Git boundary
+checks and three substituted parent protocol/accounting controls pass, including
+forged-grade rejection. All 16 ASE source hashes match; two child modules match
+current source and the read helper is equivalent. Other installed AEEP modules
+retain the older runtime's scope. No upstream SDK, model or grant amendment ran.
+
+The review proposes one fresh native probe and two actual SDK invocations: at
+most three existing-grant operations / 120 reserved seconds, zero models/cash.
+No install, download, Docker change, service, credentials or release. A separate
+component checks the 72 current docs inputs with the same cached offline tools,
+at most two attempts; settled SDK failures leave docs eligible. Current guide
+status now links the actual scanner/wheel result; older docs evidence is not
+retroactively broadened. It retains
+the runtime and receipts. The shared grant's expiry amendment is prepared under
+standing finite delegation, preserving current ceilings, counters and two older
+unresolved reservations; no replay or invented measurements. Source remains
+`c2eb4a3d` with all 13 gates passed. Successful checks are not repeated.
+
+This SDK check cannot close controlled Codex execution, complete workflow
+composition or either SkillsBench journey. The next model-backed engineering
+review needs its own worker, task/grader, destination and finite authority; no
+Ponytail or comparative campaign resumes. All-integration, candidate usefulness,
+selection usefulness, resources and release remain separate open gates. Verify
+the exact operation-review hash, obtain applicable upstream-execution approval,
+then run its existing helper once. Parent `5b5aa30`; unrelated CI work preserved.
+<!-- ase-runtime-contract-20261103:end -->
+
 <!-- scanner-completion-results-20261103:start -->
 **November 3: source verification, actual ordinary CLI scanner and retained wheel passed.**
 Approved `7aef8a4a` completed once. All 13 gates pass on unchanged source
