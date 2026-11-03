@@ -1866,3 +1866,15 @@ Git checks and three substituted parent controls passed. The
 permits zero-model positive/negative certificate fixtures only after exact
 approval. FakeHarness is not selected; real controlled Codex and full workflow
 integration remain unverified. No upstream or model result is claimed.
+
+## November 3: actual ASE SDK contract verified
+
+Agent-skill-eval 0.7.0 (`59de161f657b82bfaf8f6abe83dfff38552deb21`, wheel
+`5e29aff9fc354475c7e3e652659475e89cbb438603ee55d0392f0c845dbcf07f`)
+ran its real scheduler and JSONPath grader through ControlledAgentHarness.
+Positive/negative certificate fixtures passed; no FakeHarness or model worker
+ran. Current bridge modules and all 16 upstream source hashes match the retained
+runtime. Other installed AEEP modules retain their recorded older scope.
+[Results and ledger](../../reports/toolkit-v2/c13/ase-runtime-contract-20261103/RESULTS.md)
+establish SDK conformance, while controlled execution and both SkillsBench
+workflow journeys remain open. Offline docs passed on their 72 recorded inputs.

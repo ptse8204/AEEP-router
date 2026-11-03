@@ -2626,3 +2626,12 @@ existing shared ledger, preserving ceilings, counters and unresolved old work.
 The [prepared review](../../reports/toolkit-v2/c13/ase-runtime-contract-20261103/README.md)
 needs applicable upstream execution authority. The successful current-source,
 scanner, wheel and original-input docs checks are reused within their scopes.
+
+## November 3: retain actual ASE contract evidence without claiming worker execution
+
+Approved `85ba0df6` passed the real scheduler/grader bridge and offline docs.
+Record the two synthetic certificate fixtures as SDK conformance only. A future
+controlled-model task needs its own reviewed worker, proxy, task, grader and
+finite authority. Preserve existing costs, the two older unresolved reservations,
+all runtimes and successful exact-source checks. Keep comparisons paused. See
+[actual results](../../reports/toolkit-v2/c13/ase-runtime-contract-20261103/RESULTS.md).

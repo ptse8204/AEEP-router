@@ -1,0 +1,167 @@
+{
+  "passed": true,
+  "models": 0,
+  "full_stack_complete": false,
+  "controlled_model_worker_verified": false,
+  "candidate_usefulness": "NOT_ASSESSED",
+  "selection_usefulness": "NOT_ASSESSED",
+  "authority_record": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/ase-runtime-contract-20261103/execution/applied-authority-1793747897050539000.json",
+  "native_boundary": {
+    "passed": true,
+    "error_type": null,
+    "seconds": 0.558056834153831,
+    "observed_slot_requests": 0,
+    "models": 0,
+    "cleanup_uncertain": false
+  },
+  "positive": {
+    "passed": true,
+    "error_type": null,
+    "seconds": 1.6673210002481937,
+    "observed_slot_requests": 1,
+    "models": 0,
+    "cleanup_uncertain": false
+  },
+  "negative": {
+    "passed": true,
+    "error_type": null,
+    "seconds": 1.5807756655849516,
+    "observed_slot_requests": 1,
+    "models": 0,
+    "cleanup_uncertain": false
+  },
+  "runtime_unchanged": true,
+  "operation_ledger": {
+    "plan_id": "conformance_probe_ase_sdk_contract_20261103",
+    "operations": [
+      {
+        "operation_id": "conformance_probe_ase_sdk_contract_20261103:native-boundary",
+        "plan_id": "conformance_probe_ase_sdk_contract_20261103",
+        "stage": "ase_sdk_contract_native-boundary",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 30.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-11-03T23:18:17.538976Z",
+        "elapsed_seconds": 0.558056834153831,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 556.4210000447929,
+          "cpu_ms": 58.188581,
+          "memory_mb_seconds": 5.578574025348644,
+          "peak_memory_mb": 38.15625,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 70,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      },
+      {
+        "operation_id": "conformance_probe_ase_sdk_contract_20261103:negative",
+        "plan_id": "conformance_probe_ase_sdk_contract_20261103",
+        "stage": "ase_sdk_contract_negative",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 45.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-11-03T23:18:19.860474Z",
+        "elapsed_seconds": 1.5807756655849516,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 1579.647583886981,
+          "cpu_ms": 536.084264,
+          "memory_mb_seconds": 83.61234534871619,
+          "peak_memory_mb": 95.296875,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 39,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      },
+      {
+        "operation_id": "conformance_probe_ase_sdk_contract_20261103:positive",
+        "plan_id": "conformance_probe_ase_sdk_contract_20261103",
+        "stage": "ase_sdk_contract_positive",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 45.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-11-03T23:18:18.145002Z",
+        "elapsed_seconds": 1.6673210002481937,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [],
+          "model_usage": [],
+          "tool_footprint": null
+        },
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 1666.3719159550965,
+          "cpu_ms": 551.5683839999999,
+          "memory_mb_seconds": 89.70902974604542,
+          "peak_memory_mb": 91.921875,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 39,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      }
+    ]
+  },
+  "grant_after": {
+    "revoked": 0,
+    "operations": 13661,
+    "model_turns": 3796,
+    "elapsed_seconds": 125275.12695347611,
+    "cash_usd": "0.0"
+  },
+  "old_operation_states_after": {
+    "conformance_probe_85882b1252ac409aa073fcb3c33b87bb-native-client": "reserved",
+    "assessment_12735a46eb364c9c9cd2aa4868f290e1:report": "reserved"
+  },
+  "old_operations_not_replayed_or_settled_by_this_driver": true,
+  "source_unchanged": true,
+  "cleanup_uncertain": false
+}

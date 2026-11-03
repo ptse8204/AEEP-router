@@ -1,5 +1,32 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- ase-contract-results-20261103:start -->
+**November 3: real ASE SDK contract and offline documentation checks passed.**
+Approved `85ba0df6` completed once. The actual 0.7.0 scheduler and JSONPath grader
+used the production ControlledAgentHarness on positive/negative certificate
+fixtures, with one reviewed slot each and no FakeHarness. The fresh native probe
+also passed. No controlled Codex worker, real benchmark task or model ran. Native
+upstream Codex launching remains unsupported. This is SDK conformance only; the
+all-stack and both-domain journeys remain open.
+
+The [actual results](../../reports/toolkit-v2/c13/ase-runtime-contract-20261103/RESULTS.md)
+retain three settled operations / 3.806153500 seconds, unchanged source/runtime
+and verified owned scratch cleanup. The finite expiry amendment preserves
+ceilings and counters; two older reservations stay unresolved and untouched.
+Model turns remain 3,796, cash zero. Docs passed attempt one on 72 recorded inputs
+using unchanged cached offline tools. Later progress notes keep separate scope.
+No installation, download, Docker change, credential access, service or release.
+All 13 exact-source gates remain passed on `c2eb4a3d`; no full-suite replay.
+
+Next: connect the real scheduler to an existing controlled worker and protected
+repository grader through the ordinary CLI. Prepare the exact finite worker/
+proxy/task review before model-backed integration execution; no candidate-value
+comparison is permitted. Keep SkillsBench document/data and software work equally
+prioritized, Waza blocked on absent supported access, and all other integration,
+usefulness, resource and release gates open. Parent `95c3789`; unrelated CI work
+preserved. No controller remains running.
+<!-- ase-contract-results-20261103:end -->
+
 <!-- ase-runtime-contract-20261103:start -->
 **November 3: real ASE SDK contract check prepared; execution approval pending.**
 After the scanner/wheel completion, the next [bounded component review](../../reports/toolkit-v2/c13/ase-runtime-contract-20261103/README.md)
