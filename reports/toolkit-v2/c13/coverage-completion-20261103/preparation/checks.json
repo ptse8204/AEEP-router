@@ -1,0 +1,78 @@
+{
+  "source_before": "c2eb4a3dab740304934e9a590892ff5db18fcfe0c998dc303e15ead5c238c839",
+  "source_after": "c2eb4a3dab740304934e9a590892ff5db18fcfe0c998dc303e15ead5c238c839",
+  "checks": [
+    {
+      "name": "compileall",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.09186691604554653
+    },
+    {
+      "name": "schemas",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.8945541251450777
+    },
+    {
+      "name": "assessment-policy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.19799462519586086
+    },
+    {
+      "name": "ruff",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.08493245905265212
+    },
+    {
+      "name": "mypy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.6047037499956787
+    },
+    {
+      "name": "build",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "build",
+        "--no-isolation",
+        "--outdir",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/scanner-fixture-continuation-20261103/preparation/dist"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.0563386660069227
+    }
+  ],
+  "models": 0,
+  "full_source_checks_complete": false,
+  "scope": "Test-only fixture correction; production src bytes identical to approved1503d8d2. Old source failure retained. Parent wheel remains the installation artifact; this build verifies current packaging only."
+}

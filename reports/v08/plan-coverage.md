@@ -1,5 +1,33 @@
 # 0.8 plan coverage and remaining work
 
+<!-- coverage-completion-20261103:start -->
+## November 3: regression passed; coverage-only completion review
+
+Approved `6265bd49` completed the exact-source full suite: 2,021 passed / 21 skipped.
+Coverage stopped at 1,539 passes when the shared-host net-capacity guard crossed
+1.25 GiB; 61.88 GiB usable remained. This is a controller interruption, not a test
+failure or actual storage shortage. Preserve raw logs, partial database, samples
+and all historical counters. Scanner, package and real grant amendments remain
+unstarted; documentation passed previously on its recorded inputs.
+
+The [completion review](../toolkit-v2/c13/coverage-completion-20261103/README.md)
+proposes only branch coverage and downstream gates, reusing the full regression
+pass and other exact-source successes. Source and component dispatch return to
+the normal 50 GiB actual reserve; net changes are diagnostic only. Same source,
+image, original wheel / 32 dependencies, sandbox, original unstarted attempts and
+expiry. No full pytest/docs replay, models, installs beyond the original scoped
+plan, downloads, services, image changes or old-resource cleanup. Approval is
+pending because the preceding exact review forbids retry. Current-source
+verification and actual CLI/installed-wheel evidence remain incomplete.
+Nine substituted guard/gate controls pass; 217 production files, 33 wheel hashes
+and both original ledger baselines match. This is preparation, not execution.
+
+Read-only next-integration preparation verified 16 ASE source hashes and reviewed
+six SkillsBench runtime declarations without executing upstream code. All-stack,
+both-domain, candidate usefulness, selection usefulness, resources and release
+remain open and comparisons paused. Unrelated CI edits stay separate.
+<!-- coverage-completion-20261103:end -->
+
 ## October 19: Toolkit V2 actual comparison completed
 
 The repaired worker completed the fresh optional-use four-arm comparison once:

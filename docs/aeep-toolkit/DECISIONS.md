@@ -2590,3 +2590,16 @@ grant counters, backups and existing Docker resources. The
 [grouped correction](../../reports/toolkit-v2/c13/scanner-storage-review-20261103/README.md)
 locks scanner/package execution behind all 13 source gates. Benchmark, utility,
 model authority and release requirements are unchanged.
+
+## November 3: use actual free space for the shared-host source guard
+
+The completed regression run passed 2,021 tests / 21 skips. The subsequent coverage
+run was interrupted by a 1.25 GiB net-host-space limit while 61.88 GiB remained free.
+A net change on a shared host cannot identify this task's allocations. Preserve
+those observations and partial coverage; propose one coverage-only completion
+using the normal 50 GiB actual free-space floor. Keep net changes as diagnostics.
+Reuse exact-source successful checks rather than replaying the full regression
+suite. The original installation plan and its own controls remain unchanged.
+See the [bounded completion](../../reports/toolkit-v2/c13/coverage-completion-20261103/README.md).
+Exact approval remains required because the preceding review allowed one attempt.
+Comparisons stay paused and no integration or usefulness gate closes here.

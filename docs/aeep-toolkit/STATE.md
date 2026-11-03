@@ -1,5 +1,41 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- coverage-completion-20261103:start -->
+**November 3: full regression passed; coverage stopped on an overly broad host-space rule.**
+Approved `6265bd49` ran once. Exact source c2eb4a3d passed 2,021 tests with 21 skips.
+Coverage stopped after 1,539 passes because net host free space dropped 1.25 GiB,
+although 61.88 GiB remained free. No test failure caused that interruption. Raw
+logs, samples and partial coverage remain; a bound copy protects the interrupted
+database. Scanner, package installation and real grant amendments stayed
+unstarted. The completed documentation check keeps its original input scope.
+
+The [coverage-only completion](../../reports/toolkit-v2/c13/coverage-completion-20261103/README.md)
+reuses all completed exact-source gates, including full pytest and build. It
+proposes one coverage/downstream-check attempt with the normal 50 GiB actual free
+reserve; net host-space changes are diagnostics only. This corrects the shared-
+host monitor without changing product budgets or evidence thresholds. The source
+and 217 production files are unchanged. Only the original unstarted scanner and
+package follow all 13 source gates, using unchanged image, wheel/dependencies,
+programs, sandbox, counters and expiry. No full pytest or docs replay. Previous
+failed/interrupted attempts remain terminal. Its exact approval is pending
+because `6265bd49` allowed one source attempt and bound the old stop condition.
+Nine first-party substituted guard/gate controls pass. All 217 production files,
+33 wheel hashes and current ledger baselines match; no component was started.
+
+Read-only preparation separately checked 16 retained agent-skill-eval source hashes
+and original environment requirements for all six selected SkillsBench tasks.
+No upstream import, worker, install, service or model ran. Actual scheduler/
+controlled-worker execution and asset/runtime reviews remain open. Existing
+Docker services belong to unrelated work and are preserved. Comparisons remain
+paused until every required integration and both domain journeys pass. No
+candidate/selection usefulness, resource or release gate closes here.
+
+Next: verify the completion review hash and original expiry, obtain its exact
+approval, then run run-completion.py --execute-approved DIGEST --component all.
+Preserve all old markers and the completed regression pass. Parent `d270111`;
+source `c2eb4a3dab740304934e9a590892ff5db18fcfe0c998dc303e15ead5c238c839`.
+<!-- coverage-completion-20261103:end -->
+
 <!-- scanner-fixture-continuation-20261103:start -->
 **November 3: approved source run failed two harness checks; docs passed; test-only continuation prepared.**
 Approved1ca962cc completed pytest:2019 passed,2 failed,21 skipped. Coverage did

@@ -1835,3 +1835,14 @@ Source tests use labeled first-party substitutes. Current-source contained CLI
 execution is pending its own review; the old scanner result cannot close that
 gate. The complete stack and both SkillsBench domain journeys remain incomplete,
 and comparative campaigns remain paused.
+
+### November 3: preserve the source pass and finish interrupted coverage only
+
+No upstream pin changes. Cisco 2.2.1 image `1cf3c440` and the original 33-wheel native
+plan remain unstarted behind source verification. Exact source `c2eb4a3d` passed
+2,021 tests / 21 skips; coverage was controller-interrupted with 61.88 GiB free. The
+[completion review](../../reports/toolkit-v2/c13/coverage-completion-20261103/README.md)
+reuses completed checks and proposes the normal 50 GiB actual-space guard.
+Read-only preparation verified 16 retained ASE source hashes and recorded runtime
+requirements for all six SkillsBench tasks. This is not upstream execution or
+reference-task evidence. All-integration/both-domain acceptance stays open.
