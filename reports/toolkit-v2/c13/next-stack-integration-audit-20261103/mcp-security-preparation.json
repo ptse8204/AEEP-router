@@ -1,0 +1,78 @@
+{
+  "evidence_kind": "static_source_review_only",
+  "candidate_task": "postgres/security/user_permission_audit",
+  "files": [
+    {
+      "repository": "eval-sys/mcpmark",
+      "path": "tasks/postgres/standard/security/user_permission_audit/prepare_environment.py",
+      "sha256": "9672316c5c33fd4ef487ceada517e1b727be8e9a7c1dce47ecabc74edb1c97ea",
+      "imports": [
+        "import os",
+        "import psycopg2",
+        "from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT",
+        "import sys"
+      ],
+      "possible_database_drop": true,
+      "possible_role_drop": true,
+      "summary_completeness_control_required": false,
+      "executed": false
+    },
+    {
+      "repository": "eval-sys/mcpmark",
+      "path": "tasks/postgres/standard/security/user_permission_audit/verify.py",
+      "sha256": "5de56723cfbd844f87b0a548675c1a007c51e86f81818c5103002d94ca17f01f",
+      "imports": [
+        "import os",
+        "import psycopg2",
+        "import sys"
+      ],
+      "possible_database_drop": false,
+      "possible_role_drop": false,
+      "summary_completeness_control_required": true,
+      "executed": false
+    },
+    {
+      "repository": "SalesforceAIResearch/MCP-Universe",
+      "path": "mcpuniverse/evaluator/mcpmark/postgres/security/user_permission_audit/prepare_environment.py",
+      "sha256": "efa94546cb0bd2c00d03604bb19704ea74d34f7d481d6fd298f12d9553cc728a",
+      "imports": [
+        "import os",
+        "import sys",
+        "import psycopg2",
+        "from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT"
+      ],
+      "possible_database_drop": true,
+      "possible_role_drop": true,
+      "summary_completeness_control_required": false,
+      "executed": false
+    },
+    {
+      "repository": "SalesforceAIResearch/MCP-Universe",
+      "path": "mcpuniverse/evaluator/mcpmark/postgres/security/user_permission_audit/verify.py",
+      "sha256": "3e6abb58c915fc80e1fb4b62e29f5affd108bfe678fd4b5e2ec19b0e649e4ed8",
+      "imports": [
+        "import os",
+        "import sys",
+        "import psycopg2"
+      ],
+      "possible_database_drop": false,
+      "possible_role_drop": false,
+      "summary_completeness_control_required": true,
+      "executed": false
+    }
+  ],
+  "task_selection_rationale": "Both pinned packs include an authored setup/reference/verifier without requiring file_context.zip. Keep pack-specific instructions and verifiers separate; these are not independent usefulness observations.",
+  "runtime_boundary": "New private owned PostgreSQL container and synthetic database roles only; never an existing database or volume. Setup can terminate sessions and drop matching databases/roles. No shared-service access.",
+  "remaining": [
+    "Bind complete psycopg2/runtime closure and retained image identity",
+    "Review task-specific notices; retain upstream attribution",
+    "Prepare private MCP server and ToolHive artifact/permission/lifecycle review",
+    "Protect setup/reference/verifier code from the agent",
+    "Validate reference success, destructive/incomplete outputs, empty summary and infrastructure failures under bounded authority",
+    "Document original-source differences and all environment/path adaptations"
+  ],
+  "task_executed": false,
+  "model_calls": 0,
+  "services_started": false,
+  "functional_gate_pass": false
+}

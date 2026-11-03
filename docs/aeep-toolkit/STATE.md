@@ -1,5 +1,37 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- scanner-completion-results-20261103:start -->
+**November 3: source verification, actual ordinary CLI scanner and retained wheel passed.**
+Approved `7aef8a4a` completed once. All 13 gates pass on unchanged source
+`c2eb4a3d`; coverage independently passed 2,021 tests / 21 skips, with 82.5766%
+combined coverage and both branch gates. The earlier regression/build/docs
+successes were reused, with their input scopes preserved. Minimum sampled usable
+space was 67.0124 GiB. No controller remains running.
+
+The [completed result](../../reports/toolkit-v2/c13/coverage-completion-20261103/RESULTS.md)
+includes one real Cisco 2.2.1 scan through the ordinary workflow CLI, a fresh
+containment/bootstrap check, canonical receipt/journal and applicability to both
+named configurations. Four analyzers returned one INFO missing-license finding
+and no analyzer failures; safety remains NOT_ESTABLISHED. Three fresh operations
+are settled; the old failed operation and 0.511 seconds remain. Wrapper timing
+excludes nested execution; unmeasured resources remain unknown. Owned-container
+cleanup verified; all images, volumes and unrelated services remain.
+
+The original wheel and 32 cached dependencies passed private idempotent setup,
+installed source/schema/CLI checks and outside-read/write/network denial. Runtime
+code matches current source; three retained older progress-document snapshots
+are disclosed. The unchanged private runtime remains installed. No model, paid
+call, credential read, service start, activation or release occurred.
+
+Next work is real ASE-controlled workflow execution and protected SkillsBench
+verifier/runtime integration, followed by the remaining upstream components.
+Independent preparation pins a restricted local Git helper and possible authored
+MCP permission-audit tasks; no upstream program ran in that preparation. Existing
+required all-integration/both-domain, candidate usefulness, selection usefulness,
+resource and release gates remain open. Do not fabricate generic stack probe
+records or resume comparisons. Preserve unrelated CI work. Parent `ea348e2`.
+<!-- scanner-completion-results-20261103:end -->
+
 <!-- coverage-completion-20261103:start -->
 **November 3: full regression passed; coverage stopped on an overly broad host-space rule.**
 Approved `6265bd49` ran once. Exact source c2eb4a3d passed 2,021 tests with 21 skips.

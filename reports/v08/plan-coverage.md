@@ -1,5 +1,28 @@
 # 0.8 plan coverage and remaining work
 
+<!-- scanner-completion-results-20261103:start -->
+## November 3: current-source scanner and retained installed wheel verified
+
+Approved `7aef8a4a` completed once: all 13 source gates, 2,021 coverage-suite
+passes / 21 skips, 82.5766% combined coverage and both branch gates. Completed
+regression/build/docs evidence was reused within its recorded scope. The normal
+50 GiB actual-space guard held; minimum sampled usable space was 67.0124 GiB.
+
+The [actual results](../toolkit-v2/c13/coverage-completion-20261103/RESULTS.md)
+retain one ordinary CLI Cisco scan, four analyzers, one INFO missing-license
+finding and no analyzer failures. Canonical receipt, execution journal, exclusive
+wrapper measurement and verified cleanup are present. All three fresh operations
+settled; the old failed scanner charge remains. The original wheel/32 dependencies
+passed idempotent setup and installed source/schema/CLI/boundary checks; runtime
+is retained. No models, cash, new image, credentials, services or release.
+
+Actual functional evidence stays separate from the generic stack-completion
+probe contract, which has not been fabricated or bypassed. Both full SkillsBench
+journeys and remaining integrations are open. Candidate/selection usefulness,
+resources and release remain separate; comparisons stay paused. Unrelated CI
+edits and all historical records/resources remain.
+<!-- scanner-completion-results-20261103:end -->
+
 <!-- coverage-completion-20261103:start -->
 ## November 3: regression passed; coverage-only completion review
 

@@ -1,0 +1,53 @@
+{
+  "scan_ref": "aa92b7f9fe87f4cae9236a267a90d19b2dc54de8cdbfd9cd7dc073b0cb149308",
+  "schema_version": "aeep.toolkit.workflow-scan.v1",
+  "definition_ref": "05d97cf47aa7ecca6dbb8ae95ca35c2a5c5157034bd315438dd4810762fc9e3d",
+  "implementation_source": "c2eb4a3dab740304934e9a590892ff5db18fcfe0c998dc303e15ead5c238c839",
+  "candidate_sha256": "c91039731c19735e818c150508e6f857a218482a2371b239e4bf7b033aabbca6",
+  "environment_digest": "b470662f09bb2a18322e26603d9c58df62f495c21d3015e7a6414e1a19d40078",
+  "wrapper_operation_id": "workflow:recipe_generation_5efe8d5cb42a468091122b514aa143e2:reviewed-static-scan",
+  "operation_id": "workflow:recipe_generation_5efe8d5cb42a468091122b514aa143e2:reviewed-static-scan:skill-scanner",
+  "request_plan_id": "recipe_generation_e34ed21d981f4288ab0d1d0dddb1fa62",
+  "authorization_id": "workflow-scanner-scanner-0116d754bc7a",
+  "receipt_ref": "764ef2bbc59a2bf455dd62b90c25681c07eb56f2fd8df41bb9ab90ccf6523c1e",
+  "execution_evidence_ref": "3c7364da29fd55f278c762add0cfa82e971e3ccac8fa0ba779b088e7c1e11614",
+  "observations": {
+    "findings": [
+      {
+        "id": "MANIFEST_MISSING_LICENSE_c5ae9be793",
+        "rule_id": "MANIFEST_MISSING_LICENSE",
+        "category": "policy_violation",
+        "severity": "INFO",
+        "analyzer": "static",
+        "line_number": null
+      }
+    ],
+    "findings_count": 1,
+    "analyzer_failures": [],
+    "failed_analyzers": 0,
+    "analyzers_executed": 4,
+    "analyzers_used": [
+      "static_analyzer",
+      "bytecode",
+      "pipeline",
+      "correlation"
+    ],
+    "upstream_report_sha256": "78abb33d6cbb57f2a62f81c95f66a79bb79672491d5291cda3019e510187585c",
+    "safety_verdict": "NOT_ESTABLISHED",
+    "scanner_version": "2.2.1",
+    "scanner_artifact_sha256": "e5e6a3d7f956afccae73c7326e3a1a2d43203a431b7cbd598333f6098b3190e6",
+    "scanner_source_files_verified": 217
+  },
+  "cleanup_verified": true,
+  "workflow_accounting": {
+    "definition_ref": "e48234a2438fad86c93210818792ddf83c7fa80b92a1ab7cf585289930d2194e",
+    "operation_id": "workflow:recipe_generation_5efe8d5cb42a468091122b514aa143e2:reviewed-static-scan",
+    "assessment_plan_ids": [],
+    "ledger": "existing assessment operation_start / operation_measurement",
+    "measurement_scope": "exclusive wrapper wall time and process CPU; canonical execution intervals excluded",
+    "token_memory_cash_measurements": "UNKNOWN; no zero values inferred",
+    "completion": "resolve the terminal operation_measurement after this command returns"
+  },
+  "candidate_usefulness": "NOT_ASSESSED",
+  "selection_usefulness": "NOT_ASSESSED"
+}

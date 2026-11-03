@@ -1,0 +1,136 @@
+{
+  "receipt_id": "rcpt_367c351d0e684b8eb1dbdf380a3ec56c",
+  "decision_id": "workflow-installed-source-cli",
+  "action_id": "act_f408356cbe1f4a78bffe8d0e2cc68d89",
+  "capability": "toolkit.upstream-engineering@1",
+  "executor_id": "toolkit.installed-source-cli",
+  "executor_kind": "command",
+  "status": "success",
+  "attempt": 1,
+  "started_at": "2026-11-03T22:16:50.303523Z",
+  "ended_at": "2026-11-03T22:16:52.457735Z",
+  "estimated": {
+    "resources": {
+      "monetary_usd": 0.0,
+      "latency_ms": 0.0,
+      "cpu_ms": 0.0,
+      "memory_mb_seconds": 0.0,
+      "peak_memory_mb": 0.0,
+      "gpu_ms": 0.0,
+      "network_bytes": 0,
+      "context_tokens": 0,
+      "input_tokens": 0,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_output_tokens": 0,
+      "subscription_units": 0.0
+    },
+    "cash": {
+      "amount_usd": null,
+      "upper_bound_usd": null,
+      "evidence": {
+        "status": "unavailable",
+        "source": "unavailable",
+        "trust": "untrusted",
+        "evidence_id": null,
+        "source_reference": null,
+        "digest": null,
+        "observed_at": null
+      }
+    },
+    "subscription_usage": [],
+    "success_probability": 0.95,
+    "quality_score": 0.95,
+    "risk_score": 0.05,
+    "confidence": 0.5,
+    "source": "static",
+    "sample_size": 0,
+    "uncertainty": null
+  },
+  "executor_fingerprint": null,
+  "cohort_digest": null,
+  "action_features": null,
+  "actual_resources": {
+    "monetary_usd": 0.0,
+    "latency_ms": 2153.724166098982,
+    "cpu_ms": 754.029048,
+    "memory_mb_seconds": 139.52515774648055,
+    "peak_memory_mb": 102.765625,
+    "gpu_ms": 0.0,
+    "network_bytes": 0,
+    "context_tokens": 116,
+    "input_tokens": 0,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 0,
+    "reasoning_output_tokens": 0,
+    "subscription_units": 0.0
+  },
+  "accounting": {
+    "cash": {
+      "status": "unavailable",
+      "components": []
+    },
+    "subscription_usage": [],
+    "model_usage": [],
+    "tool_footprint": null
+  },
+  "cache_affinity": null,
+  "approval_id": null,
+  "transport_success": null,
+  "execution_success": true,
+  "schema_valid": null,
+  "task_valid": null,
+  "quality_score": null,
+  "validation_results": [],
+  "output_valid": null,
+  "error_type": null,
+  "error_message": null,
+  "trace_id": null,
+  "metadata": {
+    "review_sha256": "7aef8a4ac729396763234658b7a5b0adfbf0f06910d49b746b79f72a4d55e472",
+    "executable": "/usr/bin/sandbox-exec",
+    "stdout_bytes": 487,
+    "stderr_bytes": 0,
+    "stdout_truncated": false,
+    "stderr_truncated": false,
+    "execution_evidence": {
+      "schema_version": "execution.evidence.v1",
+      "attempt_id": "act_f408356cbe1f4a78bffe8d0e2cc68d89",
+      "adapter": "CommandExecutor",
+      "events": [
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "228ba701098c4c88a06cf54a3398dcb9",
+          "attempt_id": "act_f408356cbe1f4a78bffe8d0e2cc68d89",
+          "sequence": 0,
+          "kind": "execution.started",
+          "source_id": "start",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "228ba701098c4c88a06cf54a3398dcb9",
+          "attempt_id": "act_f408356cbe1f4a78bffe8d0e2cc68d89",
+          "sequence": 1,
+          "kind": "execution.completed",
+          "source_id": "terminal",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        }
+      ],
+      "complete": true,
+      "cancellation_confirmed": false,
+      "identity_digest": null,
+      "boundary_digest": null,
+      "journal_id": "228ba701098c4c88a06cf54a3398dcb9"
+    },
+    "execution_evidence_digest": "f7a8bcae4ea47be5486302e179862dd592d9189ec4f5a769d65afc20f8127e45"
+  }
+}

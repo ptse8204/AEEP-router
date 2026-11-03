@@ -1846,3 +1846,13 @@ reuses completed checks and proposes the normal 50 GiB actual-space guard.
 Read-only preparation verified 16 retained ASE source hashes and recorded runtime
 requirements for all six SkillsBench tasks. This is not upstream execution or
 reference-task evidence. All-integration/both-domain acceptance stays open.
+
+### November 3: actual scanner through ordinary CLI; retained wheel verified
+
+Approved `7aef8a4a` passes all 13 source gates on `c2eb4a3d`, the real Cisco 2.2.1
+CLI scan, fresh containment and original installed-wheel checks. Four analyzers,
+one INFO missing-license finding, zero analyzer failures; safety unknown. The
+canonical scan reference, receipt/journal and settled exclusive costs are in the
+[completed result](../../reports/toolkit-v2/c13/coverage-completion-20261103/RESULTS.md).
+The image and private runtime are retained. This does not complete either task
+domain or any usefulness/resource/release gate. Upstream pins are unchanged.

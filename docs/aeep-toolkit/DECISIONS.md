@@ -2603,3 +2603,14 @@ suite. The original installation plan and its own controls remain unchanged.
 See the [bounded completion](../../reports/toolkit-v2/c13/coverage-completion-20261103/README.md).
 Exact approval remains required because the preceding review allowed one attempt.
 Comparisons stay paused and no integration or usefulness gate closes here.
+
+## November 3: retain the verified scanner/runtime and reuse completed checks
+
+The actual ordinary CLI scan now passes on `c2eb4a3d`, together with all 13 source
+gates and the original retained-wheel check. Keep its canonical scan record,
+receipt, journal and settled costs. Report the INFO missing-license finding and
+unknown safety. Reuse this evidence within its exact source/runtime/candidate
+scope; no repeat is justified merely to add test counts. The generic all-stack
+probe contract still needs truthful bindings from each component's actual record.
+Do not manufacture probe events or broaden this scan into a task/utility result.
+Continue the real evaluator and protected task-pack paths; comparisons stay paused.

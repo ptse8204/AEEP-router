@@ -1,0 +1,139 @@
+{
+  "receipt_id": "rcpt_fe0a1af0d31d4b14aeffb160f989c154",
+  "decision_id": "workflow-scanner:7aef8a4ac729396763234658b7a5b0adfbf0f06910d49b746b79f72a4d55e472:launch-boundary",
+  "action_id": "act_79ea0e7e1b3548bcb3cf0d9c6010f75c",
+  "capability": "toolkit.static-scan@1",
+  "executor_id": "toolkit.scanner-bootstrap",
+  "executor_kind": "command",
+  "status": "success",
+  "attempt": 1,
+  "started_at": "2026-11-03T22:16:40.288454Z",
+  "ended_at": "2026-11-03T22:16:41.454609Z",
+  "estimated": {
+    "resources": {
+      "monetary_usd": 0.0,
+      "latency_ms": 0.0,
+      "cpu_ms": 0.0,
+      "memory_mb_seconds": 0.0,
+      "peak_memory_mb": 0.0,
+      "gpu_ms": 0.0,
+      "network_bytes": 0,
+      "context_tokens": 0,
+      "input_tokens": 0,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_output_tokens": 0,
+      "subscription_units": 0.0
+    },
+    "cash": {
+      "amount_usd": null,
+      "upper_bound_usd": null,
+      "evidence": {
+        "status": "unavailable",
+        "source": "unavailable",
+        "trust": "untrusted",
+        "evidence_id": null,
+        "source_reference": null,
+        "digest": null,
+        "observed_at": null
+      }
+    },
+    "subscription_usage": [],
+    "success_probability": 0.95,
+    "quality_score": 0.95,
+    "risk_score": 0.05,
+    "confidence": 0.5,
+    "source": "static",
+    "sample_size": 0,
+    "uncertainty": null
+  },
+  "executor_fingerprint": null,
+  "cohort_digest": null,
+  "action_features": null,
+  "actual_resources": {
+    "monetary_usd": 0.0,
+    "latency_ms": 1164.894083980471,
+    "cpu_ms": 0.0,
+    "memory_mb_seconds": 0.0,
+    "peak_memory_mb": 0.0,
+    "gpu_ms": 0.0,
+    "network_bytes": 0,
+    "context_tokens": 0,
+    "input_tokens": 0,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 0,
+    "reasoning_output_tokens": 0,
+    "subscription_units": 0.0
+  },
+  "accounting": {
+    "cash": {
+      "status": "unavailable",
+      "components": []
+    },
+    "subscription_usage": [],
+    "model_usage": [],
+    "tool_footprint": null
+  },
+  "cache_affinity": null,
+  "approval_id": null,
+  "transport_success": null,
+  "execution_success": true,
+  "schema_valid": null,
+  "task_valid": null,
+  "quality_score": null,
+  "validation_results": [],
+  "output_valid": null,
+  "error_type": null,
+  "error_message": null,
+  "trace_id": null,
+  "metadata": {
+    "executable": "/Applications/Docker.app/Contents/Resources/bin/docker",
+    "stdout_bytes": 444,
+    "stderr_bytes": 0,
+    "stdout_truncated": false,
+    "stderr_truncated": false,
+    "execution_evidence": {
+      "schema_version": "execution.evidence.v1",
+      "attempt_id": "workflow-scanner:7aef8a4ac729396763234658b7a5b0adfbf0f06910d49b746b79f72a4d55e472:launch-boundary",
+      "adapter": "CommandExecutor",
+      "events": [
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "37292d4b48e041cb851f30664cbc203b",
+          "attempt_id": "workflow-scanner:7aef8a4ac729396763234658b7a5b0adfbf0f06910d49b746b79f72a4d55e472:launch-boundary",
+          "sequence": 0,
+          "kind": "execution.started",
+          "source_id": "start",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "37292d4b48e041cb851f30664cbc203b",
+          "attempt_id": "workflow-scanner:7aef8a4ac729396763234658b7a5b0adfbf0f06910d49b746b79f72a4d55e472:launch-boundary",
+          "sequence": 1,
+          "kind": "execution.completed",
+          "source_id": "terminal",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        }
+      ],
+      "complete": true,
+      "cancellation_confirmed": false,
+      "identity_digest": null,
+      "boundary_digest": null,
+      "journal_id": "37292d4b48e041cb851f30664cbc203b"
+    },
+    "execution_evidence_digest": "628eb00878cc5c50b7ab07084b3f60d6d01b410e24b09fcfe3d1554d6b2951e8",
+    "process_status": "success",
+    "cleanup_verified": true,
+    "review_sha256": "7aef8a4ac729396763234658b7a5b0adfbf0f06910d49b746b79f72a4d55e472",
+    "container_resource_usage": "unavailable"
+  }
+}
