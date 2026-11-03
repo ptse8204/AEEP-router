@@ -5,6 +5,7 @@ import os
 import sys
 
 import pytest
+from test_toolkit_runtime_install import installer_fixture_capacity as installer_fixture_capacity
 
 from aeep_toolkit.candidate import inspect
 from aeep_toolkit.cli import main
@@ -69,7 +70,7 @@ def test_cli_has_only_hashes_and_captured_mutation_is_rejected(tmp_path, capsys)
     assert not (tmp_path / "destination").exists()
 
 
-def test_staged_cli_subject_excludes_answers_and_preserves_user_work(tmp_path, capsys):
+def test_staged_cli_subject_excludes_answers_and_preserves_user_work(tmp_path, capsys, installer_fixture_capacity):
     from aeep.assessment.models import AssessmentSubject
     from aeep.assessment.repository import AssessmentRepository
     from aeep.models import Manifest

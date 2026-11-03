@@ -1,5 +1,45 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- scanner-fixture-continuation-20261103:start -->
+**November 3: approved source run failed two harness checks; docs passed; test-only continuation prepared.**
+Approved1ca962cc completed pytest:2019 passed,2 failed,21 skipped. Coverage did
+not start. Scanner calls, package installation and real grant amendments stayed
+unstarted behind the source gate. The host monitor did not stop execution;
+minimum observed usable space was42.399 GiB. Docs attempt1 found one extra blank
+line; the permitted whitespace-only repair and attempt2 passed with unchanged
+tools. Preserve those actual results and their exact input scope.
+
+The [test-only correction](../../reports/toolkit-v2/c13/scanner-fixture-continuation-20261103/README.md)
+moves synthetic installer capacity out of root conftest into explicitly selected
+test modules, and adds it to the candidate-staging unit case. Root conftest is
+restored to the original locked hash; no verifier lock is rewritten. Both failed
+nodes and3 related checks pass. All217 production code/execution-asset files are
+unchanged. The original approved installation wheel remains selected. The new
+source build differs only in3 progress-doc snapshots and RECORD; runtime code/
+execution assets match. Six preparation gates and3 substituted driver controls
+pass on c2eb4a3d; full pytest/coverage remain pending for this corrected context.
+
+A fresh source-only monitor baseline proposes a1.25 GiB net-capacity stop threshold
+above the observed0.943 GiB drop, with a proposed41 GiB source-test-only floor.
+Scanner/native keep42 GiB and the original expiry. Native
+installation retains its original1 GiB controls and exact33 wheels, sandbox,
+programs and workspace. Source retry needs explicit amendment because1ca962cc
+allowed one source attempt and forbade source repair/retry. The proposed review
+carries forward only unstarted scanner/package work; no new docs execution.
+Original grants, one failed scanner charge/0.511s, and all old samples stay.
+Nested pytest retention is now propagated through the controller environment;
+some prior temporary unit roots expired through ordinary nested-test retention,
+while full failure logs and controller evidence remain. No real benchmark data,
+Docker resource, backup, old runtime or unrelated work was deleted.
+
+Next: verify the exact continuation review and expiry; obtain its approval; run
+run-continuation.py --execute-approved DIGEST --component all. Never rerun the
+terminal parent source attempt. Keep comparisons paused. Both SkillsBench
+journeys, all-stack integration, candidate/selection usefulness, resources and
+release remain open. Unrelated CI edits remain separate. Parent1ade8f6;
+sourcec2eb4a3dab740304934e9a590892ff5db18fcfe0c998dc303e15ead5c238c839.
+<!-- scanner-fixture-continuation-20261103:end -->
+
 <!-- scanner-storage-review-20261103:start -->
 **November 3: temporary storage exception and grouped correction prepared; execution approval pending.**
 The operator selected preparation of a lower-reserve exception after actual space

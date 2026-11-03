@@ -3,7 +3,6 @@ from __future__ import annotations
 import os
 import socket
 import sys
-from types import SimpleNamespace
 from typing import Any
 
 import pytest
@@ -17,30 +16,6 @@ from aeep.models import (
     RouteEstimate,
     SideEffect,
 )
-
-
-@pytest.fixture
-def installer_fixture_capacity(monkeypatch):
-    """Synthetic unit-test capacity, never an observation or runtime exception.
-
-    Only tests explicitly requesting this fixture use it. The real standalone
-    installer and review drivers always query actual host capacity.
-    """
-    import shutil
-
-    from aeep import component_setup
-    from aeep_toolkit import install_runtime
-
-    class FixtureFilesystem:
-        def disk_usage(self, _path):
-            return SimpleNamespace(free=60 * 1024**3)
-
-        def __getattr__(self, name):
-            return getattr(shutil, name)
-
-    view = FixtureFilesystem()
-    monkeypatch.setattr(install_runtime, "shutil", view)
-    monkeypatch.setattr(component_setup, "shutil", view)
 
 
 @pytest.fixture(autouse=True)

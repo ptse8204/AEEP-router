@@ -6,6 +6,7 @@ from pathlib import Path
 
 import pytest
 from test_toolkit_runtime_install import fake_install, installation
+from test_toolkit_runtime_install import installer_fixture_capacity as installer_fixture_capacity
 from test_toolkit_workflow_accounting import accounting
 from test_toolkit_workflow_v2 import definition
 

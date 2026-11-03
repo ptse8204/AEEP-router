@@ -11,6 +11,7 @@ from datetime import timedelta
 from pathlib import Path
 
 import pytest
+from test_toolkit_runtime_install import installer_fixture_capacity as installer_fixture_capacity
 from test_toolkit_workflow_v2 import definition
 from test_v08_executable_recipes import definition as recipe_definition
 from test_v08_incremental import environment as differential_environment

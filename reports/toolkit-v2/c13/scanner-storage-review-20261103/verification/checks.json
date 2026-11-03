@@ -1,0 +1,3108 @@
+{
+  "source_before": "1503d8d2f53969a46d51558ebfa198439f9e42eeda10be29688c518e718064f3",
+  "source_after": "1503d8d2f53969a46d51558ebfa198439f9e42eeda10be29688c518e718064f3",
+  "checks": [
+    {
+      "name": "compileall",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.08112320769578218
+    },
+    {
+      "name": "schemas",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.8784277089871466
+    },
+    {
+      "name": "assessment-policy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.19940116722136736
+    },
+    {
+      "name": "ruff",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.08283737488090992
+    },
+    {
+      "name": "mypy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.3147189998999238
+    },
+    {
+      "name": "pytest",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest",
+        "-p",
+        "aeep_fixture_cleanup",
+        "-o",
+        "tmp_path_retention_policy=all",
+        "-o",
+        "tmp_path_retention_count=10000"
+      ],
+      "exit_code": 1,
+      "process_exit_code": 1,
+      "elapsed_seconds": 619.1846117917448,
+      "monitor_stop": null
+    }
+  ],
+  "reused_exact_source_preparation": [
+    "compileall",
+    "schemas",
+    "assessment-policy",
+    "ruff",
+    "mypy",
+    "build"
+  ],
+  "scope": "First-party engineering only. Explicit synthetic capacity in selected installer unit fixtures is not a host measurement. Actual source-process capacity monitoring remains independent.",
+  "models": 0,
+  "comparisons": "PAUSED",
+  "capacity_samples": [
+    {
+      "observed_at": "2026-11-03T19:28:51.415904+00:00",
+      "available_free_bytes": 46538076160,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:28:52.444869+00:00",
+      "available_free_bytes": 46537936896,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:28:53.470169+00:00",
+      "available_free_bytes": 46537859072,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:28:54.501059+00:00",
+      "available_free_bytes": 46537846784,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:28:55.528654+00:00",
+      "available_free_bytes": 46537584640,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:28:56.553782+00:00",
+      "available_free_bytes": 46537580544,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:28:57.587257+00:00",
+      "available_free_bytes": 46538584064,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:28:58.615373+00:00",
+      "available_free_bytes": 46538522624,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:28:59.656737+00:00",
+      "available_free_bytes": 46538514432,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:00.703126+00:00",
+      "available_free_bytes": 46538772480,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:01.752075+00:00",
+      "available_free_bytes": 46538735616,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:02.803392+00:00",
+      "available_free_bytes": 46538715136,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:03.846745+00:00",
+      "available_free_bytes": 46537572352,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:04.874051+00:00",
+      "available_free_bytes": 46537547776,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:05.909874+00:00",
+      "available_free_bytes": 46537797632,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:06.937810+00:00",
+      "available_free_bytes": 46538592256,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:07.979444+00:00",
+      "available_free_bytes": 46538584064,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:09.019807+00:00",
+      "available_free_bytes": 46538563584,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:10.054137+00:00",
+      "available_free_bytes": 46538543104,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:11.082699+00:00",
+      "available_free_bytes": 46538518528,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:12.110729+00:00",
+      "available_free_bytes": 46537781248,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:13.137877+00:00",
+      "available_free_bytes": 46537547776,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:14.166752+00:00",
+      "available_free_bytes": 46536306688,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:15.193785+00:00",
+      "available_free_bytes": 46534836224,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:16.220391+00:00",
+      "available_free_bytes": 46534811648,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:17.246849+00:00",
+      "available_free_bytes": 46536065024,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:18.271333+00:00",
+      "available_free_bytes": 46536470528,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:19.298636+00:00",
+      "available_free_bytes": 46536437760,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:20.321349+00:00",
+      "available_free_bytes": 46540591104,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:21.346361+00:00",
+      "available_free_bytes": 46539038720,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:22.371409+00:00",
+      "available_free_bytes": 46538993664,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:23.400112+00:00",
+      "available_free_bytes": 46540374016,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:24.427364+00:00",
+      "available_free_bytes": 46540271616,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:25.454939+00:00",
+      "available_free_bytes": 46540193792,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:26.482842+00:00",
+      "available_free_bytes": 46540275712,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:27.511099+00:00",
+      "available_free_bytes": 46540099584,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:28.536975+00:00",
+      "available_free_bytes": 46540115968,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:29.565658+00:00",
+      "available_free_bytes": 46537469952,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:30.591017+00:00",
+      "available_free_bytes": 46525865984,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:31.619247+00:00",
+      "available_free_bytes": 46537359360,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:32.646386+00:00",
+      "available_free_bytes": 46526201856,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:33.674921+00:00",
+      "available_free_bytes": 46528892928,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:34.704848+00:00",
+      "available_free_bytes": 46539624448,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:35.732013+00:00",
+      "available_free_bytes": 46539624448,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:36.760359+00:00",
+      "available_free_bytes": 46539108352,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:37.783968+00:00",
+      "available_free_bytes": 46538326016,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:38.808976+00:00",
+      "available_free_bytes": 46538313728,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:39.836094+00:00",
+      "available_free_bytes": 46537875456,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:40.864201+00:00",
+      "available_free_bytes": 46537666560,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:41.908297+00:00",
+      "available_free_bytes": 46531633152,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:42.936228+00:00",
+      "available_free_bytes": 46522671104,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:43.959937+00:00",
+      "available_free_bytes": 46537551872,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:44.983300+00:00",
+      "available_free_bytes": 46537261056,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:46.010731+00:00",
+      "available_free_bytes": 46536949760,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:47.038450+00:00",
+      "available_free_bytes": 46536847360,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:48.067321+00:00",
+      "available_free_bytes": 46536589312,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:49.095542+00:00",
+      "available_free_bytes": 46538043392,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:50.123203+00:00",
+      "available_free_bytes": 46537879552,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:51.150157+00:00",
+      "available_free_bytes": 46537859072,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:52.177057+00:00",
+      "available_free_bytes": 46536445952,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:53.207887+00:00",
+      "available_free_bytes": 46536859648,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:54.233982+00:00",
+      "available_free_bytes": 46535065600,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:55.258027+00:00",
+      "available_free_bytes": 46530990080,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:56.286437+00:00",
+      "available_free_bytes": 46534144000,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:57.312732+00:00",
+      "available_free_bytes": 46533873664,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:58.341273+00:00",
+      "available_free_bytes": 46533738496,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:29:59.367317+00:00",
+      "available_free_bytes": 46534909952,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:00.394789+00:00",
+      "available_free_bytes": 46534893568,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:01.423269+00:00",
+      "available_free_bytes": 46534950912,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:02.450420+00:00",
+      "available_free_bytes": 46533492736,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:03.478957+00:00",
+      "available_free_bytes": 46534373376,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:04.518320+00:00",
+      "available_free_bytes": 46515163136,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:05.541779+00:00",
+      "available_free_bytes": 46511505408,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:06.568701+00:00",
+      "available_free_bytes": 46511427584,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:07.595424+00:00",
+      "available_free_bytes": 46499827712,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:08.617667+00:00",
+      "available_free_bytes": 46525284352,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:09.642286+00:00",
+      "available_free_bytes": 46520725504,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:10.670821+00:00",
+      "available_free_bytes": 46521970688,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:11.697634+00:00",
+      "available_free_bytes": 46519111680,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:12.723988+00:00",
+      "available_free_bytes": 46519103488,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:13.749665+00:00",
+      "available_free_bytes": 46525169664,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:14.775615+00:00",
+      "available_free_bytes": 46521647104,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:15.799937+00:00",
+      "available_free_bytes": 46513033216,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:16.825601+00:00",
+      "available_free_bytes": 46501150720,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:17.852244+00:00",
+      "available_free_bytes": 46490972160,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:18.875591+00:00",
+      "available_free_bytes": 46477824000,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:19.901422+00:00",
+      "available_free_bytes": 46463930368,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:20.927488+00:00",
+      "available_free_bytes": 46450946048,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:21.950581+00:00",
+      "available_free_bytes": 46438055936,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:22.975563+00:00",
+      "available_free_bytes": 46423826432,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:24.001922+00:00",
+      "available_free_bytes": 46409654272,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:25.029155+00:00",
+      "available_free_bytes": 46396776448,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:26.054721+00:00",
+      "available_free_bytes": 46383771648,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:27.081080+00:00",
+      "available_free_bytes": 46370746368,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:28.107054+00:00",
+      "available_free_bytes": 46356803584,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:29.132729+00:00",
+      "available_free_bytes": 46341582848,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:30.158447+00:00",
+      "available_free_bytes": 46328795136,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:31.185317+00:00",
+      "available_free_bytes": 46314971136,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:32.208882+00:00",
+      "available_free_bytes": 46301831168,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:33.233921+00:00",
+      "available_free_bytes": 46288764928,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:34.258760+00:00",
+      "available_free_bytes": 46275858432,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:35.285269+00:00",
+      "available_free_bytes": 46263218176,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:36.311856+00:00",
+      "available_free_bytes": 46249779200,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:37.338280+00:00",
+      "available_free_bytes": 46236848128,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:38.365682+00:00",
+      "available_free_bytes": 46223974400,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:39.391462+00:00",
+      "available_free_bytes": 46216638464,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:40.417965+00:00",
+      "available_free_bytes": 46516559872,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:41.444480+00:00",
+      "available_free_bytes": 46504648704,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:42.470773+00:00",
+      "available_free_bytes": 46492938240,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:43.498660+00:00",
+      "available_free_bytes": 46517878784,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:44.525370+00:00",
+      "available_free_bytes": 46508945408,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:45.551387+00:00",
+      "available_free_bytes": 46495444992,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:46.576190+00:00",
+      "available_free_bytes": 46482907136,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:47.602849+00:00",
+      "available_free_bytes": 46470397952,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:48.630021+00:00",
+      "available_free_bytes": 46456565760,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:49.657321+00:00",
+      "available_free_bytes": 46442782720,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:50.683301+00:00",
+      "available_free_bytes": 46429257728,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:51.710015+00:00",
+      "available_free_bytes": 46416695296,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:52.736026+00:00",
+      "available_free_bytes": 46402965504,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:53.762367+00:00",
+      "available_free_bytes": 46389235712,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:54.789138+00:00",
+      "available_free_bytes": 46375149568,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:55.817590+00:00",
+      "available_free_bytes": 46362746880,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:56.839935+00:00",
+      "available_free_bytes": 46349131776,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:57.867484+00:00",
+      "available_free_bytes": 46336700416,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:58.894542+00:00",
+      "available_free_bytes": 46321684480,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:30:59.921584+00:00",
+      "available_free_bytes": 46307282944,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:00.947014+00:00",
+      "available_free_bytes": 46294179840,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:01.973247+00:00",
+      "available_free_bytes": 46281220096,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:03.000442+00:00",
+      "available_free_bytes": 46268596224,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:04.027709+00:00",
+      "available_free_bytes": 46256467968,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:05.055993+00:00",
+      "available_free_bytes": 46242807808,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:06.083806+00:00",
+      "available_free_bytes": 46230282240,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:07.107853+00:00",
+      "available_free_bytes": 46217691136,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:08.133771+00:00",
+      "available_free_bytes": 46205296640,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:09.160860+00:00",
+      "available_free_bytes": 46195286016,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:10.183761+00:00",
+      "available_free_bytes": 46195281920,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:11.210174+00:00",
+      "available_free_bytes": 46181044224,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:12.232221+00:00",
+      "available_free_bytes": 46157189120,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:13.257658+00:00",
+      "available_free_bytes": 46133657600,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:14.283748+00:00",
+      "available_free_bytes": 46108602368,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:15.310880+00:00",
+      "available_free_bytes": 46086750208,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:16.338160+00:00",
+      "available_free_bytes": 46063730688,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:17.364990+00:00",
+      "available_free_bytes": 46040109056,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:18.391796+00:00",
+      "available_free_bytes": 46016425984,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:19.418322+00:00",
+      "available_free_bytes": 45995282432,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:20.442059+00:00",
+      "available_free_bytes": 45969154048,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:21.468555+00:00",
+      "available_free_bytes": 45945327616,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:22.492056+00:00",
+      "available_free_bytes": 45921742848,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:23.518381+00:00",
+      "available_free_bytes": 45900488704,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:24.542041+00:00",
+      "available_free_bytes": 45876678656,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:25.567050+00:00",
+      "available_free_bytes": 45852266496,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:26.593504+00:00",
+      "available_free_bytes": 45827506176,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:27.617032+00:00",
+      "available_free_bytes": 45803880448,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:28.643894+00:00",
+      "available_free_bytes": 45780250624,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:29.667034+00:00",
+      "available_free_bytes": 45755404288,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:30.693500+00:00",
+      "available_free_bytes": 45732515840,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:31.717658+00:00",
+      "available_free_bytes": 45708824576,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:32.742016+00:00",
+      "available_free_bytes": 45685108736,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:33.768795+00:00",
+      "available_free_bytes": 45661433856,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:34.792744+00:00",
+      "available_free_bytes": 45637984256,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:35.815312+00:00",
+      "available_free_bytes": 45614407680,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:36.843180+00:00",
+      "available_free_bytes": 45593006080,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:37.867992+00:00",
+      "available_free_bytes": 45569363968,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:38.895999+00:00",
+      "available_free_bytes": 45545857024,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:39.921892+00:00",
+      "available_free_bytes": 45526183936,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:40.949224+00:00",
+      "available_free_bytes": 45526036480,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:41.975776+00:00",
+      "available_free_bytes": 45526028288,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:43.002701+00:00",
+      "available_free_bytes": 46515658752,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:44.029819+00:00",
+      "available_free_bytes": 46506045440,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:45.057127+00:00",
+      "available_free_bytes": 46489477120,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:46.083683+00:00",
+      "available_free_bytes": 46474272768,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:47.109111+00:00",
+      "available_free_bytes": 46458445824,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:48.139725+00:00",
+      "available_free_bytes": 46443352064,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:49.166899+00:00",
+      "available_free_bytes": 46428348416,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:50.193213+00:00",
+      "available_free_bytes": 46413045760,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:51.221658+00:00",
+      "available_free_bytes": 46397906944,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:52.247804+00:00",
+      "available_free_bytes": 46383779840,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:53.272940+00:00",
+      "available_free_bytes": 46369550336,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:54.300279+00:00",
+      "available_free_bytes": 46354161664,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:55.328023+00:00",
+      "available_free_bytes": 46339526656,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:56.353380+00:00",
+      "available_free_bytes": 46324326400,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:57.375262+00:00",
+      "available_free_bytes": 46309281792,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:58.399310+00:00",
+      "available_free_bytes": 46294351872,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:31:59.426180+00:00",
+      "available_free_bytes": 46279294976,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:00.450253+00:00",
+      "available_free_bytes": 46265425920,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:01.475250+00:00",
+      "available_free_bytes": 46251515904,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:02.502103+00:00",
+      "available_free_bytes": 46236225536,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:03.528481+00:00",
+      "available_free_bytes": 46221299712,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:04.553998+00:00",
+      "available_free_bytes": 46210560000,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:05.578487+00:00",
+      "available_free_bytes": 46510071808,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:06.605317+00:00",
+      "available_free_bytes": 46500884480,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:07.632088+00:00",
+      "available_free_bytes": 46485831680,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:08.656969+00:00",
+      "available_free_bytes": 46471049216,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:09.684422+00:00",
+      "available_free_bytes": 46456193024,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:10.731569+00:00",
+      "available_free_bytes": 46441676800,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:11.759538+00:00",
+      "available_free_bytes": 46426382336,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:12.787373+00:00",
+      "available_free_bytes": 46410526720,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:13.815551+00:00",
+      "available_free_bytes": 46395899904,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:14.843809+00:00",
+      "available_free_bytes": 46381166592,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:15.868741+00:00",
+      "available_free_bytes": 46366236672,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:16.897283+00:00",
+      "available_free_bytes": 46351507456,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:17.921896+00:00",
+      "available_free_bytes": 46336540672,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:18.946268+00:00",
+      "available_free_bytes": 46321524736,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:19.972949+00:00",
+      "available_free_bytes": 46306979840,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:21.000188+00:00",
+      "available_free_bytes": 46293131264,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:22.025180+00:00",
+      "available_free_bytes": 46278115328,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:23.050180+00:00",
+      "available_free_bytes": 46263414784,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:24.075172+00:00",
+      "available_free_bytes": 46249005056,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:25.100171+00:00",
+      "available_free_bytes": 46235029504,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:26.127392+00:00",
+      "available_free_bytes": 46220427264,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:27.153404+00:00",
+      "available_free_bytes": 46204452864,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:28.175164+00:00",
+      "available_free_bytes": 46189715456,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:29.198195+00:00",
+      "available_free_bytes": 46515900416,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:30.226240+00:00",
+      "available_free_bytes": 46510931968,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:31.250152+00:00",
+      "available_free_bytes": 46496456704,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:32.274212+00:00",
+      "available_free_bytes": 46481874944,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:33.299266+00:00",
+      "available_free_bytes": 46468067328,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:34.325143+00:00",
+      "available_free_bytes": 46453465088,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:35.352081+00:00",
+      "available_free_bytes": 46440783872,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:36.379213+00:00",
+      "available_free_bytes": 46427340800,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:37.406429+00:00",
+      "available_free_bytes": 46414856192,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:38.430473+00:00",
+      "available_free_bytes": 46401073152,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:39.457862+00:00",
+      "available_free_bytes": 46387466240,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:40.484626+00:00",
+      "available_free_bytes": 46374854656,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:41.508448+00:00",
+      "available_free_bytes": 46361247744,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:42.533446+00:00",
+      "available_free_bytes": 46347653120,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:43.560264+00:00",
+      "available_free_bytes": 46333931520,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:44.588150+00:00",
+      "available_free_bytes": 46320656384,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:45.610499+00:00",
+      "available_free_bytes": 46308032512,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:46.633429+00:00",
+      "available_free_bytes": 46294487040,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:47.660202+00:00",
+      "available_free_bytes": 46281924608,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:48.683433+00:00",
+      "available_free_bytes": 46268698624,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:49.710854+00:00",
+      "available_free_bytes": 46255931392,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:50.737676+00:00",
+      "available_free_bytes": 46243606528,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:51.765149+00:00",
+      "available_free_bytes": 46229835776,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:52.791497+00:00",
+      "available_free_bytes": 46215188480,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:53.816660+00:00",
+      "available_free_bytes": 46202728448,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:54.844296+00:00",
+      "available_free_bytes": 46190366720,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:55.866764+00:00",
+      "available_free_bytes": 46183702528,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:56.893818+00:00",
+      "available_free_bytes": 46509064192,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:57.921845+00:00",
+      "available_free_bytes": 46513979392,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:58.950747+00:00",
+      "available_free_bytes": 46514167808,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:32:59.975056+00:00",
+      "available_free_bytes": 46508298240,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:01.002280+00:00",
+      "available_free_bytes": 46499258368,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:02.028296+00:00",
+      "available_free_bytes": 46485635072,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:03.055117+00:00",
+      "available_free_bytes": 46472028160,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:04.078272+00:00",
+      "available_free_bytes": 46442024960,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:05.105101+00:00",
+      "available_free_bytes": 46404218880,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:06.132481+00:00",
+      "available_free_bytes": 46391513088,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:07.156987+00:00",
+      "available_free_bytes": 46377672704,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:08.183329+00:00",
+      "available_free_bytes": 46363938816,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:09.210207+00:00",
+      "available_free_bytes": 46350749696,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:10.237527+00:00",
+      "available_free_bytes": 46337761280,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:11.264019+00:00",
+      "available_free_bytes": 46325301248,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:12.290732+00:00",
+      "available_free_bytes": 46311759872,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:13.317158+00:00",
+      "available_free_bytes": 46299000832,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:14.344929+00:00",
+      "available_free_bytes": 46284562432,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:15.372658+00:00",
+      "available_free_bytes": 46272188416,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:16.400346+00:00",
+      "available_free_bytes": 46258532352,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:17.427223+00:00",
+      "available_free_bytes": 46246260736,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:18.449989+00:00",
+      "available_free_bytes": 46232477696,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:19.474985+00:00",
+      "available_free_bytes": 46220189696,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:20.502565+00:00",
+      "available_free_bytes": 46206513152,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:21.529526+00:00",
+      "available_free_bytes": 46194200576,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:22.557098+00:00",
+      "available_free_bytes": 46181318656,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:23.584415+00:00",
+      "available_free_bytes": 46167568384,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:24.607373+00:00",
+      "available_free_bytes": 46155173888,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:25.634514+00:00",
+      "available_free_bytes": 46146187264,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:26.658509+00:00",
+      "available_free_bytes": 46470000640,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:27.687795+00:00",
+      "available_free_bytes": 46469967872,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:28.716166+00:00",
+      "available_free_bytes": 46469033984,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:29.746432+00:00",
+      "available_free_bytes": 46469865472,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:30.769906+00:00",
+      "available_free_bytes": 46469824512,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:31.796985+00:00",
+      "available_free_bytes": 46469791744,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:32.830536+00:00",
+      "available_free_bytes": 46465413120,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:33.853027+00:00",
+      "available_free_bytes": 46455439360,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:34.879837+00:00",
+      "available_free_bytes": 46441549824,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:35.901924+00:00",
+      "available_free_bytes": 46425116672,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:36.927622+00:00",
+      "available_free_bytes": 46412251136,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:37.954835+00:00",
+      "available_free_bytes": 46398550016,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:38.979823+00:00",
+      "available_free_bytes": 46385876992,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:40.011760+00:00",
+      "available_free_bytes": 46372335616,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:41.034549+00:00",
+      "available_free_bytes": 46358659072,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:42.065976+00:00",
+      "available_free_bytes": 46345072640,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:43.091876+00:00",
+      "available_free_bytes": 46332387328,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:44.117576+00:00",
+      "available_free_bytes": 46318653440,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:45.146471+00:00",
+      "available_free_bytes": 46305136640,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:46.171400+00:00",
+      "available_free_bytes": 46292623360,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:47.196492+00:00",
+      "available_free_bytes": 46279266304,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:48.228655+00:00",
+      "available_free_bytes": 46266781696,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:49.260878+00:00",
+      "available_free_bytes": 46252986368,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:50.282663+00:00",
+      "available_free_bytes": 46240698368,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:51.313111+00:00",
+      "available_free_bytes": 46227218432,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:52.342253+00:00",
+      "available_free_bytes": 46214791168,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:53.374282+00:00",
+      "available_free_bytes": 46201012224,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:54.405707+00:00",
+      "available_free_bytes": 46186352640,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:55.429768+00:00",
+      "available_free_bytes": 46173126656,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:56.454768+00:00",
+      "available_free_bytes": 46159659008,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:57.486405+00:00",
+      "available_free_bytes": 46146043904,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:58.517871+00:00",
+      "available_free_bytes": 46134792192,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:33:59.549879+00:00",
+      "available_free_bytes": 46134738944,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:00.578628+00:00",
+      "available_free_bytes": 46466048000,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:01.610691+00:00",
+      "available_free_bytes": 46455308288,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:02.638081+00:00",
+      "available_free_bytes": 46440706048,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:03.662492+00:00",
+      "available_free_bytes": 46424899584,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:04.692602+00:00",
+      "available_free_bytes": 46411653120,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:05.721455+00:00",
+      "available_free_bytes": 46398779392,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:06.752836+00:00",
+      "available_free_bytes": 46385127424,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:07.784438+00:00",
+      "available_free_bytes": 46372130816,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:08.813099+00:00",
+      "available_free_bytes": 46358810624,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:09.841598+00:00",
+      "available_free_bytes": 46345162752,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:10.866896+00:00",
+      "available_free_bytes": 46332735488,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:11.899285+00:00",
+      "available_free_bytes": 46319165440,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:12.921376+00:00",
+      "available_free_bytes": 46306639872,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:13.946220+00:00",
+      "available_free_bytes": 46293958656,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:14.978709+00:00",
+      "available_free_bytes": 46279331840,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:16.008925+00:00",
+      "available_free_bytes": 46265802752,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:17.041454+00:00",
+      "available_free_bytes": 46253309952,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:18.072151+00:00",
+      "available_free_bytes": 46239645696,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:19.103022+00:00",
+      "available_free_bytes": 46226059264,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:20.134926+00:00",
+      "available_free_bytes": 46212571136,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:21.163012+00:00",
+      "available_free_bytes": 46199787520,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:22.196337+00:00",
+      "available_free_bytes": 46186455040,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:23.229789+00:00",
+      "available_free_bytes": 46173052928,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:24.261496+00:00",
+      "available_free_bytes": 46160461824,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:25.290511+00:00",
+      "available_free_bytes": 46147764224,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:26.322820+00:00",
+      "available_free_bytes": 46134349824,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:27.346329+00:00",
+      "available_free_bytes": 46134546432,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:28.378714+00:00",
+      "available_free_bytes": 46466433024,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:29.404665+00:00",
+      "available_free_bytes": 46457769984,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:30.429650+00:00",
+      "available_free_bytes": 46445527040,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:31.461417+00:00",
+      "available_free_bytes": 46434623488,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:32.492758+00:00",
+      "available_free_bytes": 46422106112,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:33.519645+00:00",
+      "available_free_bytes": 46411317248,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:34.546299+00:00",
+      "available_free_bytes": 46399741952,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:35.573384+00:00",
+      "available_free_bytes": 46388789248,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:36.605730+00:00",
+      "available_free_bytes": 46377979904,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:37.637572+00:00",
+      "available_free_bytes": 46365487104,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:38.659486+00:00",
+      "available_free_bytes": 46354735104,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:39.707553+00:00",
+      "available_free_bytes": 46343200768,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:40.739734+00:00",
+      "available_free_bytes": 46332276736,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:41.772165+00:00",
+      "available_free_bytes": 46319845376,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:42.796273+00:00",
+      "available_free_bytes": 46309576704,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:43.829615+00:00",
+      "available_free_bytes": 46297473024,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:44.861149+00:00",
+      "available_free_bytes": 46286508032,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:45.887942+00:00",
+      "available_free_bytes": 46273183744,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:46.912937+00:00",
+      "available_free_bytes": 46263410688,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:47.937116+00:00",
+      "available_free_bytes": 46250967040,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:48.965457+00:00",
+      "available_free_bytes": 46239506432,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:49.999035+00:00",
+      "available_free_bytes": 46228512768,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:51.029580+00:00",
+      "available_free_bytes": 46217027584,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:52.058181+00:00",
+      "available_free_bytes": 46206492672,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:53.090227+00:00",
+      "available_free_bytes": 46195675136,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:54.112905+00:00",
+      "available_free_bytes": 46183297024,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:55.135764+00:00",
+      "available_free_bytes": 46173028352,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:56.159241+00:00",
+      "available_free_bytes": 46160809984,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:57.196554+00:00",
+      "available_free_bytes": 46150041600,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:58.221233+00:00",
+      "available_free_bytes": 46139101184,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:34:59.243403+00:00",
+      "available_free_bytes": 46127509504,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:00.275835+00:00",
+      "available_free_bytes": 46115946496,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:01.304545+00:00",
+      "available_free_bytes": 46105153536,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:02.329545+00:00",
+      "available_free_bytes": 46093393920,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:03.361549+00:00",
+      "available_free_bytes": 46082654208,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:04.389389+00:00",
+      "available_free_bytes": 46071840768,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:05.421039+00:00",
+      "available_free_bytes": 46058639360,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:06.446479+00:00",
+      "available_free_bytes": 46053613568,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:07.471190+00:00",
+      "available_free_bytes": 46041120768,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:08.502821+00:00",
+      "available_free_bytes": 46030356480,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:09.525696+00:00",
+      "available_free_bytes": 46018805760,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:10.554507+00:00",
+      "available_free_bytes": 46007980032,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:11.581574+00:00",
+      "available_free_bytes": 45997084672,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:12.613696+00:00",
+      "available_free_bytes": 45984792576,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:13.645625+00:00",
+      "available_free_bytes": 45974040576,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:14.677648+00:00",
+      "available_free_bytes": 45963096064,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:15.711089+00:00",
+      "available_free_bytes": 45952245760,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:16.745571+00:00",
+      "available_free_bytes": 45941317632,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:17.773646+00:00",
+      "available_free_bytes": 45930151936,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:18.802809+00:00",
+      "available_free_bytes": 45918740480,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:19.829477+00:00",
+      "available_free_bytes": 45907865600,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:20.861144+00:00",
+      "available_free_bytes": 45896957952,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:21.883624+00:00",
+      "available_free_bytes": 45884878848,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:22.913664+00:00",
+      "available_free_bytes": 45873307648,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:23.945598+00:00",
+      "available_free_bytes": 45862543360,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:24.975002+00:00",
+      "available_free_bytes": 45851652096,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:26.003845+00:00",
+      "available_free_bytes": 45840818176,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:27.036116+00:00",
+      "available_free_bytes": 45830127616,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:28.068102+00:00",
+      "available_free_bytes": 45817692160,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:29.099903+00:00",
+      "available_free_bytes": 45806129152,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:30.131765+00:00",
+      "available_free_bytes": 45797666816,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:31.156796+00:00",
+      "available_free_bytes": 45786890240,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:32.186604+00:00",
+      "available_free_bytes": 45774438400,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:33.208610+00:00",
+      "available_free_bytes": 45763706880,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:34.230856+00:00",
+      "available_free_bytes": 45752131584,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:35.258594+00:00",
+      "available_free_bytes": 45741240320,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:36.290494+00:00",
+      "available_free_bytes": 45730390016,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:37.316928+00:00",
+      "available_free_bytes": 45719605248,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:38.341913+00:00",
+      "available_free_bytes": 45707292672,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:39.368374+00:00",
+      "available_free_bytes": 46469345280,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:40.391905+00:00",
+      "available_free_bytes": 46466572288,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:41.423647+00:00",
+      "available_free_bytes": 46469459968,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:42.450152+00:00",
+      "available_free_bytes": 46460514304,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:43.482077+00:00",
+      "available_free_bytes": 46448275456,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:44.508566+00:00",
+      "available_free_bytes": 46437597184,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:45.536757+00:00",
+      "available_free_bytes": 46427029504,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:46.558554+00:00",
+      "available_free_bytes": 46416162816,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:47.590094+00:00",
+      "available_free_bytes": 46405464064,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:48.616561+00:00",
+      "available_free_bytes": 46394761216,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:49.641931+00:00",
+      "available_free_bytes": 46384078848,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:50.673606+00:00",
+      "available_free_bytes": 46371635200,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:51.699177+00:00",
+      "available_free_bytes": 46361432064,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:52.731372+00:00",
+      "available_free_bytes": 46349807616,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:53.765165+00:00",
+      "available_free_bytes": 46338478080,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:54.797942+00:00",
+      "available_free_bytes": 46326915072,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:55.825501+00:00",
+      "available_free_bytes": 46315991040,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:56.861031+00:00",
+      "available_free_bytes": 46305275904,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:57.885398+00:00",
+      "available_free_bytes": 46294528000,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:58.916936+00:00",
+      "available_free_bytes": 46283776000,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:35:59.949317+00:00",
+      "available_free_bytes": 46272835584,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:00.975172+00:00",
+      "available_free_bytes": 46261284864,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:01.997884+00:00",
+      "available_free_bytes": 46250000384,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:03.031933+00:00",
+      "available_free_bytes": 46239264768,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:04.063746+00:00",
+      "available_free_bytes": 46228389888,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:05.086432+00:00",
+      "available_free_bytes": 46217359360,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:06.118620+00:00",
+      "available_free_bytes": 46207107072,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:07.150662+00:00",
+      "available_free_bytes": 46195548160,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:08.182240+00:00",
+      "available_free_bytes": 46184796160,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:09.208472+00:00",
+      "available_free_bytes": 46173937664,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:10.231772+00:00",
+      "available_free_bytes": 46163251200,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:11.263621+00:00",
+      "available_free_bytes": 46152441856,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:12.295576+00:00",
+      "available_free_bytes": 46141575168,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:13.327699+00:00",
+      "available_free_bytes": 46130962432,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:14.360439+00:00",
+      "available_free_bytes": 46118375424,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:15.384995+00:00",
+      "available_free_bytes": 46107521024,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:16.410665+00:00",
+      "available_free_bytes": 46098407424,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:17.435878+00:00",
+      "available_free_bytes": 46087684096,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:18.469080+00:00",
+      "available_free_bytes": 46466461696,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:19.502242+00:00",
+      "available_free_bytes": 46457405440,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:20.534219+00:00",
+      "available_free_bytes": 46448168960,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:21.558505+00:00",
+      "available_free_bytes": 46439055360,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:22.591182+00:00",
+      "available_free_bytes": 46430142464,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:23.619749+00:00",
+      "available_free_bytes": 46419730432,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:24.641754+00:00",
+      "available_free_bytes": 46410420224,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:25.665693+00:00",
+      "available_free_bytes": 46401228800,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:26.697872+00:00",
+      "available_free_bytes": 46392049664,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:27.725080+00:00",
+      "available_free_bytes": 46383218688,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:28.750928+00:00",
+      "available_free_bytes": 46374195200,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:29.776130+00:00",
+      "available_free_bytes": 46365057024,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:30.806709+00:00",
+      "available_free_bytes": 46354669568,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:31.835135+00:00",
+      "available_free_bytes": 46345371648,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:32.866914+00:00",
+      "available_free_bytes": 46336290816,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:33.891304+00:00",
+      "available_free_bytes": 46326079488,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:34.926118+00:00",
+      "available_free_bytes": 46316797952,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:35.950339+00:00",
+      "available_free_bytes": 46308646912,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:36.982755+00:00",
+      "available_free_bytes": 46299652096,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:38.012352+00:00",
+      "available_free_bytes": 46288261120,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:39.044174+00:00",
+      "available_free_bytes": 46279135232,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:40.067040+00:00",
+      "available_free_bytes": 46269997056,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:41.098531+00:00",
+      "available_free_bytes": 46260682752,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:42.124498+00:00",
+      "available_free_bytes": 46251532288,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:43.150019+00:00",
+      "available_free_bytes": 46242410496,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:44.181369+00:00",
+      "available_free_bytes": 46234312704,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:45.204826+00:00",
+      "available_free_bytes": 46225207296,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:46.232954+00:00",
+      "available_free_bytes": 46215991296,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:47.257851+00:00",
+      "available_free_bytes": 46206803968,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:48.283328+00:00",
+      "available_free_bytes": 46195863552,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:49.315053+00:00",
+      "available_free_bytes": 46186749952,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:50.346629+00:00",
+      "available_free_bytes": 46177464320,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:51.372227+00:00",
+      "available_free_bytes": 46168248320,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:52.400007+00:00",
+      "available_free_bytes": 46159265792,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:53.432028+00:00",
+      "available_free_bytes": 46150127616,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:54.458343+00:00",
+      "available_free_bytes": 46140997632,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:55.485201+00:00",
+      "available_free_bytes": 46137856000,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:56.508322+00:00",
+      "available_free_bytes": 46464327680,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:57.533703+00:00",
+      "available_free_bytes": 46464319488,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:58.558302+00:00",
+      "available_free_bytes": 46464315392,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:36:59.583634+00:00",
+      "available_free_bytes": 46463938560,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:00.608327+00:00",
+      "available_free_bytes": 46463922176,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:01.641820+00:00",
+      "available_free_bytes": 46463918080,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:02.691632+00:00",
+      "available_free_bytes": 46464069632,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:03.725466+00:00",
+      "available_free_bytes": 46463967232,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:04.779616+00:00",
+      "available_free_bytes": 46463942656,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:05.808124+00:00",
+      "available_free_bytes": 46463021056,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:06.841820+00:00",
+      "available_free_bytes": 46463066112,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:07.891589+00:00",
+      "available_free_bytes": 46463873024,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:08.939647+00:00",
+      "available_free_bytes": 46462992384,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:09.991736+00:00",
+      "available_free_bytes": 46463787008,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:11.028828+00:00",
+      "available_free_bytes": 46462656512,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:12.058264+00:00",
+      "available_free_bytes": 46462107648,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:13.089941+00:00",
+      "available_free_bytes": 46461898752,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:14.123224+00:00",
+      "available_free_bytes": 46463426560,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:15.156503+00:00",
+      "available_free_bytes": 46463385600,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:16.192171+00:00",
+      "available_free_bytes": 46463365120,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:17.225262+00:00",
+      "available_free_bytes": 46463352832,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:18.259119+00:00",
+      "available_free_bytes": 46463332352,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:19.291820+00:00",
+      "available_free_bytes": 46462255104,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:20.316884+00:00",
+      "available_free_bytes": 46451310592,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:21.342925+00:00",
+      "available_free_bytes": 46441521152,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:22.374993+00:00",
+      "available_free_bytes": 46432845824,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:23.399888+00:00",
+      "available_free_bytes": 46420586496,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:24.431772+00:00",
+      "available_free_bytes": 46406782976,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:25.463125+00:00",
+      "available_free_bytes": 46394765312,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:26.490049+00:00",
+      "available_free_bytes": 46382415872,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:27.522395+00:00",
+      "available_free_bytes": 46368604160,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:28.550304+00:00",
+      "available_free_bytes": 46356172800,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:29.583548+00:00",
+      "available_free_bytes": 46342504448,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:30.609418+00:00",
+      "available_free_bytes": 46330109952,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:31.633178+00:00",
+      "available_free_bytes": 46316441600,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:32.658175+00:00",
+      "available_free_bytes": 46303895552,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:33.681712+00:00",
+      "available_free_bytes": 46290092032,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:34.714446+00:00",
+      "available_free_bytes": 46277795840,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:35.747204+00:00",
+      "available_free_bytes": 46266544128,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:36.779950+00:00",
+      "available_free_bytes": 46252756992,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:37.813371+00:00",
+      "available_free_bytes": 46239940608,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:38.841525+00:00",
+      "available_free_bytes": 46227279872,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:39.874552+00:00",
+      "available_free_bytes": 46214721536,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:40.902403+00:00",
+      "available_free_bytes": 46198702080,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:41.928488+00:00",
+      "available_free_bytes": 46186147840,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:42.955112+00:00",
+      "available_free_bytes": 46174650368,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:43.986130+00:00",
+      "available_free_bytes": 46161846272,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:45.019496+00:00",
+      "available_free_bytes": 46155177984,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:46.054038+00:00",
+      "available_free_bytes": 46143684608,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:47.083152+00:00",
+      "available_free_bytes": 46128865280,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:48.117519+00:00",
+      "available_free_bytes": 46115495936,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:49.151645+00:00",
+      "available_free_bytes": 46104264704,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:50.176399+00:00",
+      "available_free_bytes": 46093189120,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:51.208112+00:00",
+      "available_free_bytes": 46087331840,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:52.241621+00:00",
+      "available_free_bytes": 46447214592,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:53.268334+00:00",
+      "available_free_bytes": 46441574400,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:54.299987+00:00",
+      "available_free_bytes": 46434164736,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:55.333097+00:00",
+      "available_free_bytes": 46421286912,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:56.363901+00:00",
+      "available_free_bytes": 46409883648,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:57.391423+00:00",
+      "available_free_bytes": 46397181952,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:58.424348+00:00",
+      "available_free_bytes": 46384422912,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:37:59.458578+00:00",
+      "available_free_bytes": 46372757504,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:00.499744+00:00",
+      "available_free_bytes": 46363877376,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:01.524379+00:00",
+      "available_free_bytes": 46352388096,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:02.549766+00:00",
+      "available_free_bytes": 46339600384,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:03.583894+00:00",
+      "available_free_bytes": 46328455168,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:04.618653+00:00",
+      "available_free_bytes": 46316056576,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:05.651987+00:00",
+      "available_free_bytes": 46303346688,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:06.683052+00:00",
+      "available_free_bytes": 46291111936,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:07.711397+00:00",
+      "available_free_bytes": 46278504448,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:08.737721+00:00",
+      "available_free_bytes": 46265475072,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:09.771065+00:00",
+      "available_free_bytes": 46252965888,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:10.804548+00:00",
+      "available_free_bytes": 46239006720,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:11.832973+00:00",
+      "available_free_bytes": 46225141760,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:12.858048+00:00",
+      "available_free_bytes": 46212894720,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:13.881692+00:00",
+      "available_free_bytes": 46197129216,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:14.906580+00:00",
+      "available_free_bytes": 46190927872,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:15.933028+00:00",
+      "available_free_bytes": 46178177024,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:16.964700+00:00",
+      "available_free_bytes": 46165626880,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:17.997424+00:00",
+      "available_free_bytes": 46152876032,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:19.024673+00:00",
+      "available_free_bytes": 46139179008,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:20.049674+00:00",
+      "available_free_bytes": 46126858240,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:21.078742+00:00",
+      "available_free_bytes": 46114041856,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:22.103132+00:00",
+      "available_free_bytes": 46100365312,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:23.132989+00:00",
+      "available_free_bytes": 46087725056,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:24.165163+00:00",
+      "available_free_bytes": 46080528384,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:25.197606+00:00",
+      "available_free_bytes": 46453190656,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:26.231057+00:00",
+      "available_free_bytes": 46445854720,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:27.257983+00:00",
+      "available_free_bytes": 46435713024,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:28.290322+00:00",
+      "available_free_bytes": 46425329664,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:29.322315+00:00",
+      "available_free_bytes": 46415785984,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:30.349775+00:00",
+      "available_free_bytes": 46405033984,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:31.375079+00:00",
+      "available_free_bytes": 46394748928,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:32.407547+00:00",
+      "available_free_bytes": 46384533504,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:33.432953+00:00",
+      "available_free_bytes": 46374686720,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:34.458095+00:00",
+      "available_free_bytes": 46363271168,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:35.489876+00:00",
+      "available_free_bytes": 46352928768,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:36.519272+00:00",
+      "available_free_bytes": 46343139328,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:37.549356+00:00",
+      "available_free_bytes": 46332497920,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:38.581293+00:00",
+      "available_free_bytes": 46322307072,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:39.610936+00:00",
+      "available_free_bytes": 46310842368,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:40.642421+00:00",
+      "available_free_bytes": 46301769728,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:41.674594+00:00",
+      "available_free_bytes": 46290927616,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:42.699687+00:00",
+      "available_free_bytes": 46280704000,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:43.731887+00:00",
+      "available_free_bytes": 46270222336,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:44.757908+00:00",
+      "available_free_bytes": 46261059584,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:45.790049+00:00",
+      "available_free_bytes": 46250430464,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:46.823220+00:00",
+      "available_free_bytes": 46239989760,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:47.849565+00:00",
+      "available_free_bytes": 46229798912,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:48.881360+00:00",
+      "available_free_bytes": 46219640832,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:49.907177+00:00",
+      "available_free_bytes": 46209806336,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:50.940276+00:00",
+      "available_free_bytes": 46199431168,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:51.972746+00:00",
+      "available_free_bytes": 46188752896,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:53.004579+00:00",
+      "available_free_bytes": 46177492992,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:54.033210+00:00",
+      "available_free_bytes": 46167257088,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:55.056223+00:00",
+      "available_free_bytes": 46157746176,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:56.083037+00:00",
+      "available_free_bytes": 46147305472,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:57.114315+00:00",
+      "available_free_bytes": 46136852480,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:58.141193+00:00",
+      "available_free_bytes": 46126555136,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:38:59.173347+00:00",
+      "available_free_bytes": 46120779776,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:39:00.199523+00:00",
+      "available_free_bytes": 46456008704,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:39:01.233609+00:00",
+      "available_free_bytes": 46456004608,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:39:02.267772+00:00",
+      "available_free_bytes": 46454370304,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:39:03.297395+00:00",
+      "available_free_bytes": 46455083008,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:39:04.352756+00:00",
+      "available_free_bytes": 46455070720,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:39:05.391727+00:00",
+      "available_free_bytes": 46455070720,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:39:06.441166+00:00",
+      "available_free_bytes": 46454902784,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:39:07.474524+00:00",
+      "available_free_bytes": 46454693888,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:39:08.507844+00:00",
+      "available_free_bytes": 46455672832,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:39:09.541927+00:00",
+      "available_free_bytes": 46454616064,
+      "host_delta_is_not_task_attribution": true
+    },
+    {
+      "observed_at": "2026-11-03T19:39:10.575253+00:00",
+      "available_free_bytes": 46456066048,
+      "host_delta_is_not_task_attribution": true
+    }
+  ]
+}

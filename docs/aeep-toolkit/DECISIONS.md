@@ -2565,7 +2565,6 @@ launch has changed worker/user/mount bindings and therefore needs its own exact
 execution review. These engineering checks supply no task, usefulness, resource
 or release result. No comparative campaign resumes while the stack gate is open.
 
-
 ## November 2: separate protocol and scanner interpreters
 
 Use the existing parent-image Python for AEEP's containment protocol. Use Cisco's

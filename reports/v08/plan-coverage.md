@@ -6843,3 +6843,27 @@ paused. Model, workload, selection, resource, full-stack and release gates remai
 open. No existing resource deletion; unrelated local CI edits stay separate.
 make docs-check remains pending under the new exact input review. Parent eec0cff.
 <!-- scanner-storage-review-20261103:end -->
+
+<!-- scanner-fixture-continuation-20261103:start -->
+### November 3 — source harness correction; original docs check completed
+
+Approved1ca962cc:2019 pytest passes,2 failures,21 skips; no coverage/scanner/package
+or grant amendment started. Minimum observed free42.399 GiB; no capacity stop.
+Docs attempt2 passed after the permitted one-blank-line repair. Later handoff
+notes retain their own scope; the completed checker is not rerun for counts.
+[Correction packet](../toolkit-v2/c13/scanner-fixture-continuation-20261103/README.md)
+restores the original locked conftest and confines synthetic capacity to selected
+unit modules. Both failures plus3 related checks pass; no verifier lock changed.
+All217 production code/execution files match the approved source. The original
+33-wheel installation, sandbox, programs, workspace and remaining attempt stay.
+Six preparation gates and3 substituted controls pass on c2eb4a3d; full regression
+and coverage still need a fresh expressly approved source attempt. The proposed
+source-only1.25 GiB stop threshold proposes41 GiB for source tests; scanner/native
+keep42 GiB and original expiry;
+native installation keeps its original1 GiB controls. No new docs/model/download/
+build-image/service/release/old-resource cleanup requested. Preserve historical
+failure evidence, original counters and unrelated work. Nested test retention
+is now propagated; some earlier temporary unit roots expired through ordinary
+pytest retention. No real benchmark/campaign evidence was stored there.
+All integration/usefulness/resource/release gates remain open; comparisons paused.
+<!-- scanner-fixture-continuation-20261103:end -->

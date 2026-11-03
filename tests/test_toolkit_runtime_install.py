@@ -6,6 +6,7 @@ import subprocess
 import sys
 import zipfile
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 from test_toolkit_installation import manifest, policy
@@ -17,6 +18,34 @@ from aeep_toolkit.models import ExtensionRegistry
 
 pytestmark = [pytest.mark.skipif(sys.platform == 'win32', reason='private runtime installer requires POSIX no-follow files and locks'),
               pytest.mark.usefixtures('installer_fixture_capacity')]
+
+
+@pytest.fixture
+def installer_fixture_capacity(monkeypatch):
+    """Synthetic unit-test capacity, never an observation or runtime exception.
+
+    Only tests explicitly requesting this fixture use it. The real standalone
+    installer and review drivers always query actual host capacity.
+    """
+    import shutil
+
+    if sys.platform == "win32":
+        pytest.skip("private runtime fixtures require POSIX no-follow paths")
+
+    from aeep import component_setup
+    from aeep_toolkit import install_runtime
+
+    class FixtureFilesystem:
+        def disk_usage(self, _path):
+            return SimpleNamespace(free=60 * 1024**3)
+
+        def __getattr__(self, name):
+            return getattr(shutil, name)
+
+    view = FixtureFilesystem()
+    monkeypatch.setattr(install_runtime, "shutil", view)
+    monkeypatch.setattr(component_setup, "shutil", view)
+
 
 def installation(tmp_path, *, extra=None, requires='', filename=None, selected_platform=None, name='aeep-installer-fixture'):
     wheelhouse = tmp_path / 'wheels'
