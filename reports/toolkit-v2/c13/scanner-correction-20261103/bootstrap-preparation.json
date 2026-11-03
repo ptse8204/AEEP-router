@@ -1,0 +1,25 @@
+{
+  "command": [
+    "python3",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/scanner-correction-20261103/check-preparation.py"
+  ],
+  "exit_code": 0,
+  "result": {
+    "passed": true,
+    "checks": [
+      "verified protocol path and bytes permit the reviewed import",
+      "source drift blocks import",
+      "wrong protocol path blocks import",
+      "missing known dependency is retained without exception text",
+      "unknown missing module name is minimized",
+      "other import failure fails closed without exception text",
+      "imported module from another location is rejected"
+    ],
+    "evidence_kind": "first_party_in_memory_substitutes",
+    "container_execution": false,
+    "actual_protocol_import": false,
+    "upstream_execution": false,
+    "full_source_verification": false
+  },
+  "capture": "Completed command output transcribed into persistent evidence; no second execution."
+}

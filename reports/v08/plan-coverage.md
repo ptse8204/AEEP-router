@@ -6800,3 +6800,23 @@ review with fresh bootstrap diagnostics and preserved counters. Do not retry old
 terminal scanner calls or replay successful docs. All-stack,both task domains,
 usefulness,selection,resource and release stay open; comparisons remain paused.
 <!-- scanner-carrier-20261102:end -->
+
+<!-- scanner-capacity-recheck-20261103:start -->
+### November 3 — scanner correction preparation; host reserve still unmet
+
+Read-only capacity checks report43.65 then43.62 GiB usable, below the50 GiB
+reserve. No full verification, installation or actual scanner/container ran.
+[Preparation artifacts](../toolkit-v2/c13/scanner-correction-20261103/README.md)
+retain a proposed minimized bootstrap, an installed-wheel interpreter assertion,
+seven passing in-memory controls and a passing source-command check that rejects
+the old launch. None is actual upstream or installed-runtime proof. All32 cached
+wheel hashes and retained image1cf3c440 match. Product source remains2df307d7;
+only its existing five source gates pass, and the full source gate remains open.
+The draft is not executable or ready for approval. Need52 GiB usable working
+headroom, then complete the controller, source/wheel bindings and exact review.
+Current docs verification also remains open: STATE.md and DECISIONS.md differ
+from the prior successful72-input check; make docs-check was not replayed under
+obsolete bindings. Preserve the old boundary charge and canonical ledger; no
+amendments, cleanup, Docker changes, models, services or release occurred.
+Comparisons stay paused. Unrelated CI edits remain separate. Parentd28b6e7.
+<!-- scanner-capacity-recheck-20261103:end -->

@@ -1,5 +1,33 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- scanner-capacity-recheck-20261103:start -->
+**November 3: scanner correction prepared; usable host capacity still blocks verification.**
+After the operator reported more free space, df and Python both measured about
+43.65 GiB usable on the repository volume; the later sample was43.62 GiB.
+This remains below the50 GiB reserve. No full suite, installation, scanner,
+container, service, model, image change or cleanup ran. Docker metadata inspection
+confirmed the retained image and unchanged resource inventory.
+
+The [correction preparation](../../reports/toolkit-v2/c13/scanner-correction-20261103/README.md)
+adds a proposed parent-Python bootstrap with minimized import diagnostics and an
+installed-wheel interpreter assertion. Seven in-memory bootstrap controls pass;
+inert source command generation passes and rejects the old private-Python carrier.
+These are first-party preparation checks, not actual containment or installed-wheel
+proof. All32 cached dependency hashes still match. Product source remains2df307d7;
+its five successful gates and incomplete full run retain their original scope.
+
+The draft review is explicitly non-executable and not ready for approval. Restore
+at least52 GiB actual usable capacity, then resume the existing full-source controller
+once. After all gates pass, freeze corrected source, bind the built wheel and
+complete a grouped scanner/package/current-docs review. Preserve the existing
+canonical ledger and failed charge; prepare finite original-grant amendments with
+unchanged model/cash ceilings and preserved counters. No amendment was applied.
+Two of the prior docs check's72 inputs changed (STATE.md and DECISIONS.md); that
+success remains historical and current-docs verification stays open. Comparisons
+remain paused, both SkillsBench journeys and all-stack acceptance remain open,
+and unrelated local CI edits stay outside implementation commits. Parentd28b6e7.
+<!-- scanner-capacity-recheck-20261103:end -->
+
 <!-- scanner-carrier-20261102:start -->
 **November 2 later: docs passed; scanner carrier corrected; current verification is capacity-blocked.**
 Approved8f4ab6d3 ran once. The boundary failed before Cisco loaded, cleanup was
