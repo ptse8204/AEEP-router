@@ -1,5 +1,12 @@
 # Upstream source review and reuse decisions
 
+November 3 engineering preparation adds a proposed scoped storage exception,
+not another upstream integration. The [current scanner review](../../reports/toolkit-v2/c13/scanner-storage-review-20261103/README.md)
+reuses retained Cisco 2.2.1 image `1cf3c440` and 32 unchanged native package dependency
+pins. Actual corrected-source scan/package checks are unstarted. No upstream
+pin, backend selection or full-stack acceptance status changes; comparisons stay
+paused until the complete integration gate passes.
+
 Current delivery follows [STACK_COMPLETION.md](STACK_COMPLETION.md): every
 required integration and both document/data and software workflows need current
 functional evidence before comparisons resume. The C01 DEFER labels and older

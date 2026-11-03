@@ -133,6 +133,7 @@ def main(argv: list[str] | None = None) -> int:
     install_plan.add_argument('--wheels', type=Path, required=True)
     install_plan.add_argument('--wheelhouse', type=Path, required=True)
     install_plan.add_argument('--destination', type=Path, required=True)
+    install_plan.add_argument('--storage-exception', type=Path, help='Operator-only exact temporary storage exception; remains inert until plan review')
     for name in ('install', 'remove'):
         operation = sub.add_parser(name, help='Operator-only private runtime installation/removal')
         operation.add_argument('--installation', type=Path, required=True)
@@ -261,11 +262,14 @@ def main(argv: list[str] | None = None) -> int:
 
             from .install_runtime import RuntimeInstallation, Wheel, apply, digest, prepare, remove
             from .installation import InstallationPreview
+            from .storage import StorageReserveException
             try:
                 if args.command == 'install-plan':
                     installation = prepare(InstallationPreview.model_validate(read_json(args.preview)),
                                            PreviewPolicy.model_validate(read_json(args.policy)), args.destination,
-                                           args.wheelhouse, tuple(Wheel.model_validate(w) for w in read_json(args.wheels)))
+                                           args.wheelhouse, tuple(Wheel.model_validate(w) for w in read_json(args.wheels)),
+                                           storage_exception=StorageReserveException.model_validate(read_json(args.storage_exception))
+                                           if args.storage_exception else None)
                     install_result = {'review_sha256': digest(installation), 'installation': installation.model_dump(mode='json')}
                 else:
                     installation = RuntimeInstallation.model_validate(read_json(args.installation)['installation'])

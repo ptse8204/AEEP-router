@@ -1,5 +1,44 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- scanner-storage-review-20261103:start -->
+**November 3: temporary storage exception and grouped correction prepared; execution approval pending.**
+The operator selected preparation of a lower-reserve exception after actual space
+remained below 50 GiB. The [current packet](../../reports/toolkit-v2/c13/scanner-storage-review-20261103/README.md)
+proposes 42 GiB usable, a 1 GiB net host-capacity stop threshold and a 24-hour
+expiry. It does not lower the default policy or authorize execution. V2 preview/
+installation plans bind one destination, filesystem device and wheel set; legacy
+v1 serialized meanings and the recorded old review digest remain unchanged.
+Actual free-space readings, expiry checks, failed journals and no-replay controls
+remain. Synthetic capacity in selected installer unit fixtures is explicit test
+input, distinct from real controller/installation measurements.
+
+Source1503d8d2 passes six preparation gates (compile, schemas, policy, Ruff, mypy,
+packaging) and41 focused tests. Full pytest/coverage remain pending. Three
+substituted driver cases preserve a seeded prior counter and correctly label
+success, failed bootstrap and uncertain cleanup; no real Docker or grant changes.
+The actual standard-library native sandbox denies outside reads/writes and
+network. The corrected wheel and32 unchanged dependencies are cached and bound;
+no runtime installation or actual scanner has started. Earlier unapproved91007228
+preparation and its inert normalization/fixture errors are retained separately.
+
+The exact grouped review covers the remaining source gates, then one parent-
+Python bootstrap and one ordinary CLI scan, independent corrected-wheel checks
+and cached offline docs. Scanner/package execution is locked behind all13 source
+gates. Preserve original scanner/wrapper grants, old failed operation and0.511s;
+only prepared finite amendments add current-source scope and an absolute scanner
+ceiling of3operations/240seconds. New reservations total3operations/240seconds;
+zero models or cash. No amendments have been applied. No downloads, image builds,
+credentials, services, release or old-resource cleanup. All Docker resources,
+backups, earlier runtimes and unrelated local CI edits remain. Comparisons stay
+paused; both SkillsBench journeys and all-stack acceptance remain open.
+
+Next: verify operation-review.json SHA-256 and current expiry, obtain exact
+approval, inspect all component markers, then run run-review.py with the approved
+digest and --component all. Full regression and branch coverage are not yet
+passed. Do not run the old52-GiB controller or superseded unapproved drafts.
+Parent eec0cff; current source1503d8d2f53969a46d51558ebfa198439f9e42eeda10be29688c518e718064f3.
+<!-- scanner-storage-review-20261103:end -->
+
 <!-- scanner-capacity-recheck-20261103:start -->
 **November 3: scanner correction prepared; usable host capacity still blocks verification.**
 After the operator reported more free space, df and Python both measured about

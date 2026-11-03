@@ -10,6 +10,7 @@ from typing import Any, Literal
 from pydantic import Field, SerializerFunctionWrapHandler, model_serializer, model_validator
 
 from .models import ContractModel, Count, Digest, ExtensionManifest, ExtensionRegistry, Identifier
+from .storage import DEFAULT_RESERVE_BYTES, StorageReserveException
 
 PROFILES = {
     "essentials": {"name": "Evaluation Essentials", "roles": ("evaluator", "benchmark", "support", "isolation")},
@@ -75,7 +76,8 @@ class PreviewItem(ContractModel):
 
 
 class InstallationPreview(ContractModel):
-    schema_version: Literal["aeep.toolkit.installation-preview.v1"] = "aeep.toolkit.installation-preview.v1"
+    schema_version: Literal["aeep.toolkit.installation-preview.v1", "aeep.toolkit.installation-preview.v2"] = "aeep.toolkit.installation-preview.v1"
+    storage_exception_sha256: Digest | None = None
     profile: Profile
     selected: tuple[Identifier, ...]
     items: tuple[PreviewItem, ...]
@@ -90,6 +92,19 @@ class InstallationPreview(ContractModel):
         "This preview performs no installation and cannot authorize execution or spending.",
     )
 
+    @model_validator(mode="after")
+    def versioned_storage(self) -> InstallationPreview:
+        if (self.schema_version.endswith(".v2")) != (self.storage_exception_sha256 is not None):
+            raise ValueError("temporary storage exceptions require preview v2")
+        return self
+
+    @model_serializer(mode="wrap")
+    def preserve_v1(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
+        value: dict[str, Any] = handler(self)
+        if self.storage_exception_sha256 is None:
+            value.pop("storage_exception_sha256", None)
+        return value
+
 
 def preview(
     registry: ExtensionRegistry,
@@ -98,6 +113,7 @@ def preview(
     *,
     profile: Profile = "essentials",
     observations: tuple[InstalledObservation, ...] = (),
+    storage_exception: StorageReserveException | None = None,
 ) -> InstallationPreview:
     """Resolve explicit selection and its dependency closure without touching the host."""
     if profile not in PROFILES:
@@ -180,10 +196,15 @@ def preview(
     known_disk = sum(item.manifest.disk_bytes or 0 for item in items)
     if policy.free_disk_bytes is None:
         global_problems.append("free disk space unknown")
-    elif policy.free_disk_bytes - known_disk < 50 * 1024**3:
-        global_problems.append("selected stack would cross the 50 GiB free-space reserve")
+    elif policy.free_disk_bytes - known_disk < (
+        storage_exception.minimum_free_bytes if storage_exception else DEFAULT_RESERVE_BYTES
+    ):
+        global_problems.append("selected stack would cross the reviewed temporary free-space reserve"
+                               if storage_exception else "selected stack would cross the 50 GiB free-space reserve")
     blockers = tuple(global_problems + [f"{item.manifest.extension_id}: {reason}" for item in items for reason in item.blockers])
     result = InstallationPreview(
+        schema_version="aeep.toolkit.installation-preview.v2" if storage_exception else "aeep.toolkit.installation-preview.v1",
+        storage_exception_sha256=storage_exception.digest() if storage_exception else None,
         profile=profile, selected=selected, items=items, blockers=blockers,
         known_disk_bytes=known_disk,
         disk_complete=all(item.manifest.disk_bytes is not None for item in items) and len(items) == len(graph),

@@ -15,7 +15,8 @@ from aeep_toolkit.cli import main
 from aeep_toolkit.installation import preview
 from aeep_toolkit.models import ExtensionRegistry
 
-pytestmark = pytest.mark.skipif(sys.platform == 'win32', reason='private runtime installer requires POSIX no-follow files and locks')
+pytestmark = [pytest.mark.skipif(sys.platform == 'win32', reason='private runtime installer requires POSIX no-follow files and locks'),
+              pytest.mark.usefixtures('installer_fixture_capacity')]
 
 def installation(tmp_path, *, extra=None, requires='', filename=None, selected_platform=None, name='aeep-installer-fixture'):
     wheelhouse = tmp_path / 'wheels'

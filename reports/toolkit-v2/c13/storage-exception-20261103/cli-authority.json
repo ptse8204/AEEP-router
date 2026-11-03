@@ -1,0 +1,335 @@
+{
+  "definitions": {
+    "b1b215a4a756d22cf367fbf9dc723823c82f41f45eca8ee41b4d78e1a2f2f8d9": {
+      "schema_version": "assessment.subject.v1",
+      "subject_id": "subject_8100bb64e75e79e14bc4f977b882ec8469c294f01b76362a9eaa89fc434fd305",
+      "kind": "skill",
+      "location": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-scanner-20261102/candidate",
+      "dependency_digests": {
+        "SKILL.md": "693924858cb5447be6dd0e6b9d43dd9c9fcb38bfce6b0d85bb0db347af7e9a06",
+        "resources/guidance.txt": "d25f953390dea431c1bed43295780611d9b889213ad962978986b0117965d772"
+      },
+      "description": "Synthetic candidate used to test the isolated evaluation workflow.",
+      "input_schema": null,
+      "output_schema": null,
+      "declarations": {
+        "tools": [],
+        "skills": [
+          {
+            "name": "format-json",
+            "description": "Synthetic candidate used to test the isolated evaluation workflow.",
+            "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-scanner-20261102/candidate/SKILL.md",
+            "sha256": "693924858cb5447be6dd0e6b9d43dd9c9fcb38bfce6b0d85bb0db347af7e9a06"
+          }
+        ],
+        "workflows": [],
+        "missing": [
+          "Skills need a reviewed task mapping and supported Codex sandbox access."
+        ]
+      }
+    },
+    "e2ee90b8918b8d33f64f35599e8c69808fb3ad5e0f8ebe8bb45453dfa2f35145": {
+      "role": "scanner-recipe",
+      "source": "91007228ee1c693eb91b32bd65c84f3b72ba36354e6becdc7c8086311b1dae7d",
+      "purpose": "Bounded ordinary CLI scanner engineering; no benchmark or model execution"
+    },
+    "b470662f09bb2a18322e26603d9c58df62f495c21d3015e7a6414e1a19d40078": {
+      "environment_id": "reviewed-cisco-cli-20261102",
+      "kind": "container",
+      "identity": {
+        "scanner_version": "2.2.1",
+        "scanner_wheel": "e5e6a3d7f956afccae73c7326e3a1a2d43203a431b7cbd598333f6098b3190e6"
+      },
+      "network": false,
+      "container_image": "sha256:1cf3c4405db2f9b4721a35e10534f72a6b428fda49b3ee1114ef27d4f8a17eb4",
+      "cpu_count": 2.0,
+      "memory_mb": 1024,
+      "process_limit": 128,
+      "container_runtime": "/Applications/Docker.app/Contents/Resources/bin/docker",
+      "container_socket": "/Users/edwintse/.docker/run/docker.sock",
+      "read_only_roots": []
+    },
+    "6d42b44f68d016833b73e783f0e5920fb102f235923caf46f0aacfaecf2064dc": {
+      "role": "scanner-mapping",
+      "source": "91007228ee1c693eb91b32bd65c84f3b72ba36354e6becdc7c8086311b1dae7d",
+      "purpose": "Bounded ordinary CLI scanner engineering; no benchmark or model execution"
+    },
+    "7ae3f98cff1e8ecbbc32135f24fa77971317043d11896efacb9457bab1e6b229": {
+      "schema_version": "assessment.recipe-materialization.v1",
+      "plan_id": "recipe_generation_9fb6a0684c374f19a91781856b0b9f25",
+      "subject_digest": "b1b215a4a756d22cf367fbf9dc723823c82f41f45eca8ee41b4d78e1a2f2f8d9",
+      "recipe_digest": "e2ee90b8918b8d33f64f35599e8c69808fb3ad5e0f8ebe8bb45453dfa2f35145",
+      "mapping_digest": "6d42b44f68d016833b73e783f0e5920fb102f235923caf46f0aacfaecf2064dc",
+      "environment_digest": "b470662f09bb2a18322e26603d9c58df62f495c21d3015e7a6414e1a19d40078",
+      "authorization_id": "workflow-scanner-scanner-0116d754bc7a",
+      "definition_digests": [
+        "b1b215a4a756d22cf367fbf9dc723823c82f41f45eca8ee41b4d78e1a2f2f8d9",
+        "e2ee90b8918b8d33f64f35599e8c69808fb3ad5e0f8ebe8bb45453dfa2f35145",
+        "b470662f09bb2a18322e26603d9c58df62f495c21d3015e7a6414e1a19d40078",
+        "6d42b44f68d016833b73e783f0e5920fb102f235923caf46f0aacfaecf2064dc"
+      ],
+      "seed": 0
+    },
+    "93cd3fcf81ca60e08318a455a03c7c38379dba68c2b6507b8ac8ab6732005f87": {
+      "role": "wrapper-recipe",
+      "source": "91007228ee1c693eb91b32bd65c84f3b72ba36354e6becdc7c8086311b1dae7d",
+      "purpose": "Bounded ordinary CLI scanner engineering; no benchmark or model execution"
+    },
+    "1ab58f6a6fd38da6f6c6b6061202c1d2e7011175ebc50bc51070d968a5d1b288": {
+      "environment_id": "ordinary-cli-wrapper-20261102",
+      "kind": "codex_sandbox",
+      "identity": {},
+      "network": false,
+      "container_image": null,
+      "cpu_count": 1.0,
+      "memory_mb": 256,
+      "process_limit": 64,
+      "container_runtime": null,
+      "container_socket": null,
+      "read_only_roots": []
+    },
+    "3d8beaebd623e2accefa69a2248e5b8b1e1f98e00c2714a927ada2a62a4b61dc": {
+      "role": "wrapper-mapping",
+      "source": "91007228ee1c693eb91b32bd65c84f3b72ba36354e6becdc7c8086311b1dae7d",
+      "purpose": "Bounded ordinary CLI scanner engineering; no benchmark or model execution"
+    },
+    "5cd1617aa4329e13d13a4e6aea1409fd08bee37d37db9fc6547293fd80dca19c": {
+      "schema_version": "assessment.recipe-materialization.v1",
+      "plan_id": "recipe_generation_8fa36d3612304e85a0de6a9512277099",
+      "subject_digest": "b1b215a4a756d22cf367fbf9dc723823c82f41f45eca8ee41b4d78e1a2f2f8d9",
+      "recipe_digest": "93cd3fcf81ca60e08318a455a03c7c38379dba68c2b6507b8ac8ab6732005f87",
+      "mapping_digest": "3d8beaebd623e2accefa69a2248e5b8b1e1f98e00c2714a927ada2a62a4b61dc",
+      "environment_digest": "1ab58f6a6fd38da6f6c6b6061202c1d2e7011175ebc50bc51070d968a5d1b288",
+      "authorization_id": "workflow-scanner-wrapper-0116d754bc7a",
+      "definition_digests": [
+        "b1b215a4a756d22cf367fbf9dc723823c82f41f45eca8ee41b4d78e1a2f2f8d9",
+        "93cd3fcf81ca60e08318a455a03c7c38379dba68c2b6507b8ac8ab6732005f87",
+        "1ab58f6a6fd38da6f6c6b6061202c1d2e7011175ebc50bc51070d968a5d1b288",
+        "3d8beaebd623e2accefa69a2248e5b8b1e1f98e00c2714a927ada2a62a4b61dc"
+      ],
+      "seed": 0
+    },
+    "d8783ea2059a87fa1b330eaa539903610a20986849904940f46c1a83f67af9c5": {
+      "schema_version": "aeep.toolkit.scanner-runtime.v1",
+      "source_revision": "c3d7fd9fee50cf2ea45f0b381eb61f857360f825",
+      "environment": {
+        "environment_id": "reviewed-cisco-cli-20261102",
+        "kind": "container",
+        "identity": {
+          "scanner_version": "2.2.1",
+          "scanner_wheel": "e5e6a3d7f956afccae73c7326e3a1a2d43203a431b7cbd598333f6098b3190e6"
+        },
+        "network": false,
+        "container_image": "sha256:1cf3c4405db2f9b4721a35e10534f72a6b428fda49b3ee1114ef27d4f8a17eb4",
+        "cpu_count": 2.0,
+        "memory_mb": 1024,
+        "process_limit": 128,
+        "container_runtime": "/Applications/Docker.app/Contents/Resources/bin/docker",
+        "container_socket": "/Users/edwintse/.docker/run/docker.sock",
+        "read_only_roots": []
+      },
+      "request": {
+        "schema_version": "assessment.recipe-materialization.v1",
+        "plan_id": "recipe_generation_9fb6a0684c374f19a91781856b0b9f25",
+        "subject_digest": "b1b215a4a756d22cf367fbf9dc723823c82f41f45eca8ee41b4d78e1a2f2f8d9",
+        "recipe_digest": "e2ee90b8918b8d33f64f35599e8c69808fb3ad5e0f8ebe8bb45453dfa2f35145",
+        "mapping_digest": "6d42b44f68d016833b73e783f0e5920fb102f235923caf46f0aacfaecf2064dc",
+        "environment_digest": "b470662f09bb2a18322e26603d9c58df62f495c21d3015e7a6414e1a19d40078",
+        "authorization_id": "workflow-scanner-scanner-0116d754bc7a",
+        "definition_digests": [
+          "b1b215a4a756d22cf367fbf9dc723823c82f41f45eca8ee41b4d78e1a2f2f8d9",
+          "e2ee90b8918b8d33f64f35599e8c69808fb3ad5e0f8ebe8bb45453dfa2f35145",
+          "b470662f09bb2a18322e26603d9c58df62f495c21d3015e7a6414e1a19d40078",
+          "6d42b44f68d016833b73e783f0e5920fb102f235923caf46f0aacfaecf2064dc"
+        ],
+        "seed": 0
+      },
+      "candidate_sha256": "c91039731c19735e818c150508e6f857a218482a2371b239e4bf7b033aabbca6",
+      "worker_sha256": "2b240314b0d631d186e2c59f55bf453935309426932b4fe089f361c19838546d",
+      "executable_dependencies": {
+        "/Applications/Docker.app/Contents/Resources/bin/docker": "a6822407e207ff0b687419ccbe55700ffbf389d77de58ef625b3b1790d88747c",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-frozen-source-91007228ee1c/src/aeep_toolkit/scanner_worker.py": "2b240314b0d631d186e2c59f55bf453935309426932b4fe089f361c19838546d"
+      },
+      "timeout_seconds": 125
+    },
+    "b60f518d69bc150d1cf0f7a27e0c88a1aeab5cf5825dce485e0b266460d82813": {
+      "schema_version": "aeep.toolkit.workflow-accounting.v3",
+      "workflow_sha256": "831451a973635772690ce65d6291e8e1c5d4fe584ec0e7ac3b344cfd7d4885bb",
+      "configurations": [
+        "document-data",
+        "software-engineering"
+      ],
+      "operations": [
+        "scan"
+      ],
+      "source_digest": "91007228ee1c693eb91b32bd65c84f3b72ba36354e6becdc7c8086311b1dae7d",
+      "manifest_path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/storage-exception-20261103/cli-manifest.json",
+      "manifest_sha256": "89168c55ae92ef4c221d576b6cc8e16a879441ef1e34a49549d0cdcdf4bb23de",
+      "request": {
+        "schema_version": "assessment.recipe-materialization.v1",
+        "plan_id": "recipe_generation_8fa36d3612304e85a0de6a9512277099",
+        "subject_digest": "b1b215a4a756d22cf367fbf9dc723823c82f41f45eca8ee41b4d78e1a2f2f8d9",
+        "recipe_digest": "93cd3fcf81ca60e08318a455a03c7c38379dba68c2b6507b8ac8ab6732005f87",
+        "mapping_digest": "3d8beaebd623e2accefa69a2248e5b8b1e1f98e00c2714a927ada2a62a4b61dc",
+        "environment_digest": "1ab58f6a6fd38da6f6c6b6061202c1d2e7011175ebc50bc51070d968a5d1b288",
+        "authorization_id": "workflow-scanner-wrapper-0116d754bc7a",
+        "definition_digests": [
+          "b1b215a4a756d22cf367fbf9dc723823c82f41f45eca8ee41b4d78e1a2f2f8d9",
+          "93cd3fcf81ca60e08318a455a03c7c38379dba68c2b6507b8ac8ab6732005f87",
+          "1ab58f6a6fd38da6f6c6b6061202c1d2e7011175ebc50bc51070d968a5d1b288",
+          "3d8beaebd623e2accefa69a2248e5b8b1e1f98e00c2714a927ada2a62a4b61dc"
+        ],
+        "seed": 0
+      },
+      "maximum_overhead_seconds": 30
+    }
+  },
+  "scope_amendments": [
+    {
+      "schema_version": "assessment.scope-amendment.v1",
+      "amendment_id": "amendment_b43c0f1f5df44926a1dc1490f1a41cc9",
+      "authorization_id": "workflow-scanner-scanner-0116d754bc7a",
+      "authorization_digest": "e0cce7904426e641357f1bc76ab56ab2c7405c3d3b43f635bc45027430f1dc87",
+      "subject_digests": [
+        "b1b215a4a756d22cf367fbf9dc723823c82f41f45eca8ee41b4d78e1a2f2f8d9"
+      ],
+      "recipe_digests": [
+        "e2ee90b8918b8d33f64f35599e8c69808fb3ad5e0f8ebe8bb45453dfa2f35145"
+      ],
+      "environment_digests": [
+        "b470662f09bb2a18322e26603d9c58df62f495c21d3015e7a6414e1a19d40078"
+      ],
+      "reviewed_digests": [
+        "b1b215a4a756d22cf367fbf9dc723823c82f41f45eca8ee41b4d78e1a2f2f8d9",
+        "e2ee90b8918b8d33f64f35599e8c69808fb3ad5e0f8ebe8bb45453dfa2f35145",
+        "b470662f09bb2a18322e26603d9c58df62f495c21d3015e7a6414e1a19d40078",
+        "6d42b44f68d016833b73e783f0e5920fb102f235923caf46f0aacfaecf2064dc",
+        "7ae3f98cff1e8ecbbc32135f24fa77971317043d11896efacb9457bab1e6b229",
+        "93cd3fcf81ca60e08318a455a03c7c38379dba68c2b6507b8ac8ab6732005f87",
+        "1ab58f6a6fd38da6f6c6b6061202c1d2e7011175ebc50bc51070d968a5d1b288",
+        "3d8beaebd623e2accefa69a2248e5b8b1e1f98e00c2714a927ada2a62a4b61dc",
+        "5cd1617aa4329e13d13a4e6aea1409fd08bee37d37db9fc6547293fd80dca19c",
+        "d8783ea2059a87fa1b330eaa539903610a20986849904940f46c1a83f67af9c5",
+        "b60f518d69bc150d1cf0f7a27e0c88a1aeab5cf5825dce485e0b266460d82813"
+      ],
+      "issued_at": "2026-11-03T18:56:11.915655Z"
+    },
+    {
+      "schema_version": "assessment.scope-amendment.v1",
+      "amendment_id": "amendment_1ea67674716a4a3ea4af622dace2471f",
+      "authorization_id": "workflow-scanner-wrapper-0116d754bc7a",
+      "authorization_digest": "b73e0fc3849e129deac664f6d49494dda78de1e30fbbe73dcfe2a6178f9911dc",
+      "subject_digests": [
+        "b1b215a4a756d22cf367fbf9dc723823c82f41f45eca8ee41b4d78e1a2f2f8d9"
+      ],
+      "recipe_digests": [
+        "93cd3fcf81ca60e08318a455a03c7c38379dba68c2b6507b8ac8ab6732005f87"
+      ],
+      "environment_digests": [
+        "1ab58f6a6fd38da6f6c6b6061202c1d2e7011175ebc50bc51070d968a5d1b288"
+      ],
+      "reviewed_digests": [
+        "b1b215a4a756d22cf367fbf9dc723823c82f41f45eca8ee41b4d78e1a2f2f8d9",
+        "e2ee90b8918b8d33f64f35599e8c69808fb3ad5e0f8ebe8bb45453dfa2f35145",
+        "b470662f09bb2a18322e26603d9c58df62f495c21d3015e7a6414e1a19d40078",
+        "6d42b44f68d016833b73e783f0e5920fb102f235923caf46f0aacfaecf2064dc",
+        "7ae3f98cff1e8ecbbc32135f24fa77971317043d11896efacb9457bab1e6b229",
+        "93cd3fcf81ca60e08318a455a03c7c38379dba68c2b6507b8ac8ab6732005f87",
+        "1ab58f6a6fd38da6f6c6b6061202c1d2e7011175ebc50bc51070d968a5d1b288",
+        "3d8beaebd623e2accefa69a2248e5b8b1e1f98e00c2714a927ada2a62a4b61dc",
+        "5cd1617aa4329e13d13a4e6aea1409fd08bee37d37db9fc6547293fd80dca19c",
+        "d8783ea2059a87fa1b330eaa539903610a20986849904940f46c1a83f67af9c5",
+        "b60f518d69bc150d1cf0f7a27e0c88a1aeab5cf5825dce485e0b266460d82813"
+      ],
+      "issued_at": "2026-11-03T18:56:11.915900Z"
+    }
+  ],
+  "budget_amendment": {
+    "schema_version": "assessment.budget-amendment.v1",
+    "amendment_id": "budget_amendment_b216c4c52f38449ab637d45709c9a2e0",
+    "authorization_id": "workflow-scanner-scanner-0116d754bc7a",
+    "authorization_digest": "e0cce7904426e641357f1bc76ab56ab2c7405c3d3b43f635bc45027430f1dc87",
+    "previous_amendment_digest": null,
+    "limits": {
+      "max_operations": 3,
+      "max_model_turns": 0,
+      "max_elapsed_seconds": 240.0,
+      "max_cash_usd": "0"
+    },
+    "expires_at": "2026-11-09T22:25:29.231445Z",
+    "issued_at": "2026-11-03T18:56:11.915951Z"
+  },
+  "baseline": {
+    "workflow-scanner-scanner-0116d754bc7a": {
+      "revoked": 0,
+      "operations": 1,
+      "model_turns": 0,
+      "elapsed_seconds": 0.5110439579002559,
+      "cash_usd": "0"
+    },
+    "workflow-scanner-wrapper-0116d754bc7a": {
+      "revoked": 0,
+      "operations": 0,
+      "model_turns": 0,
+      "elapsed_seconds": 0.0,
+      "cash_usd": "0"
+    }
+  },
+  "original_grants": [
+    {
+      "schema_version": "assessment.authorization.v1",
+      "authorization_id": "workflow-scanner-scanner-0116d754bc7a",
+      "subject_digests": [
+        "b1b215a4a756d22cf367fbf9dc723823c82f41f45eca8ee41b4d78e1a2f2f8d9"
+      ],
+      "recipe_digests": [
+        "4c69ccade8a168989e1f0a80461b8941eaa6b080a409fcc16f82dcfe60927570"
+      ],
+      "environment_digests": [
+        "b470662f09bb2a18322e26603d9c58df62f495c21d3015e7a6414e1a19d40078"
+      ],
+      "limits": {
+        "max_operations": 2,
+        "max_model_turns": 0,
+        "max_elapsed_seconds": 210,
+        "max_cash_usd": "0"
+      },
+      "remote_disclosure": false,
+      "allowed_destinations": [
+        "local"
+      ],
+      "automatic_admission": false,
+      "issued_at": "2026-11-02T22:25:29.231493Z",
+      "expires_at": "2026-11-09T22:25:29.231445Z"
+    },
+    {
+      "schema_version": "assessment.authorization.v1",
+      "authorization_id": "workflow-scanner-wrapper-0116d754bc7a",
+      "subject_digests": [
+        "b1b215a4a756d22cf367fbf9dc723823c82f41f45eca8ee41b4d78e1a2f2f8d9"
+      ],
+      "recipe_digests": [
+        "1e5d5c4d4f7c000841fb46abc60cba90bdbd10d3150198951cfeb7bc91e3b412"
+      ],
+      "environment_digests": [
+        "1ab58f6a6fd38da6f6c6b6061202c1d2e7011175ebc50bc51070d968a5d1b288"
+      ],
+      "limits": {
+        "max_operations": 1,
+        "max_model_turns": 0,
+        "max_elapsed_seconds": 30,
+        "max_cash_usd": "0"
+      },
+      "remote_disclosure": false,
+      "allowed_destinations": [
+        "local"
+      ],
+      "automatic_admission": false,
+      "issued_at": "2026-11-02T22:25:29.232031Z",
+      "expires_at": "2026-11-09T22:25:29.232023Z"
+    }
+  ],
+  "previous_scanner_plan_id": "recipe-c8ba8d2612754cd2909e088875cda2bb",
+  "authority_applied": false,
+  "existing_counters_reset": false
+}

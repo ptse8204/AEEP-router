@@ -457,7 +457,7 @@ def test_small_task_set_cannot_relax_formal_counts_or_acquire_value_semantics(tm
         asyncio.run(service.router.close())
 
 
-def test_canonical_export_retains_runtime_consumer_bindings(tmp_path, monkeypatch):
+def test_canonical_export_retains_runtime_consumer_bindings(tmp_path, monkeypatch, installer_fixture_capacity):
     from test_toolkit_runtime_install import installation
 
     from aeep_toolkit.installation import manifest_digest

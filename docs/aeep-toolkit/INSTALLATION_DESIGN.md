@@ -90,6 +90,22 @@ component and dependency. Each wheel hash must match its manifest. Preparation
 reads local wheels and the interpreter without starting either or writing files.
 The destination must be absent and its parent must already exist.
 
+The default reserve remains 50 GiB. A temporary operator exception uses a v2
+installation plan and binds one exact destination, filesystem device and wheel
+set. It expires within 24 hours and declares a lower reserve and a maximum
+additional allocation reservation. It grants no execution, model, service or
+cleanup authority. Pass its reviewed JSON file to `install-plan` with
+`--storage-exception /absolute/storage-exception.json`; review the entire new
+installation digest before `install`. V1 plans retain their original meaning.
+
+Preparation and installation read actual usable capacity. Installation rechecks
+the floor and observed host free-space change between steps; other host activity
+can therefore stop it. These checks cannot interrupt an in-progress pip step and
+do not establish a continuous peak-usage bound. Failed or expired work retains
+its journal and is not retried automatically. Expiry does not prevent removal
+of an unchanged owned runtime. The same exception cannot authorize another
+destination, filesystem or wheel set.
+
 ```bash
 PYTHONPATH=src python3 -m aeep_toolkit.cli install-plan \
   --preview selected-preview.json --policy policy.json --wheels wheels.json \

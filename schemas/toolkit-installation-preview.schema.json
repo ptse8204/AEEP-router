@@ -376,10 +376,26 @@
   "additionalProperties": false,
   "properties": {
     "schema_version": {
-      "const": "aeep.toolkit.installation-preview.v1",
       "default": "aeep.toolkit.installation-preview.v1",
+      "enum": [
+        "aeep.toolkit.installation-preview.v1",
+        "aeep.toolkit.installation-preview.v2"
+      ],
       "title": "Schema Version",
       "type": "string"
+    },
+    "storage_exception_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Storage Exception Sha256"
     },
     "profile": {
       "enum": [

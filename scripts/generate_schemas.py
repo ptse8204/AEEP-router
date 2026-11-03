@@ -193,6 +193,7 @@ from aeep_toolkit.models import (
     ExtensionRegistry,
 )
 from aeep_toolkit.selection import SelectionEvaluation
+from aeep_toolkit.storage import StorageReserveException
 from aeep_toolkit.workflow import EvaluationWorkflow, StackWorkflow
 from aeep_toolkit.workflow_accounting import WorkflowAccountingDefinition
 from aeep_toolkit.workflow_security import ScannerRuntimeDefinition, WorkflowScanRecord
@@ -201,6 +202,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_DIR = ROOT / "schemas"
 
 MODEL_FILES = {
+    "toolkit-storage-exception.schema.json": StorageReserveException,
     "assessment-repository-case.schema.json": RepositoryCase,
     "assessment-repository-suite-case.schema.json": RepositorySuiteCase,
     "toolkit-selection-evaluation.schema.json": SelectionEvaluation,

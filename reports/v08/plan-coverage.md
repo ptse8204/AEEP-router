@@ -6820,3 +6820,26 @@ obsolete bindings. Preserve the old boundary charge and canonical ledger; no
 amendments, cleanup, Docker changes, models, services or release occurred.
 Comparisons stay paused. Unrelated CI edits remain separate. Parentd28b6e7.
 <!-- scanner-capacity-recheck-20261103:end -->
+
+<!-- scanner-storage-review-20261103:start -->
+### November 3 — scoped storage exception prepared, execution not authorized
+
+The operator chose preparation of a temporary lower-reserve exception. The
+[bound correction packet](../toolkit-v2/c13/scanner-storage-review-20261103/README.md)
+proposes42 GiB usable, a1 GiB net host-capacity stop threshold and at most24hours.
+Default50 GiB and v1 plan digests remain. V2 binds destination/device/wheels,
+checks real capacity and expiry, and retains failure readings/journals. Explicit
+unit capacity fixtures do not stand in for host measurements.
+
+Source1503d8d2 passes compile, schemas, policy, Ruff, mypy, packaging and41 focused
+tests; full pytest/coverage remain pending. Three substituted driver controls and
+an actual standard-library native denial probe pass with limited evidence scope.
+No actual scanner, corrected-runtime installation or real grant amendment ran.
+The grouped review binds the built current wheel,32 unchanged cached dependencies,
+retained Cisco image, source controller and offline docs. Actual scanner/package
+execution requires all13 source gates. Preserve the old failed charge and original
+grant counters; finite amendments are prepared only. All comparisons remain
+paused. Model, workload, selection, resource, full-stack and release gates remain
+open. No existing resource deletion; unrelated local CI edits stay separate.
+make docs-check remains pending under the new exact input review. Parent eec0cff.
+<!-- scanner-storage-review-20261103:end -->

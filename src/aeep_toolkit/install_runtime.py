@@ -14,6 +14,7 @@ import subprocess
 import sys
 import venv
 import zipfile
+from datetime import UTC, datetime
 from email.parser import BytesParser
 from pathlib import Path
 from typing import Any, Literal
@@ -23,10 +24,11 @@ from packaging.specifiers import SpecifierSet
 from packaging.tags import parse_tag, sys_tags
 from packaging.utils import parse_wheel_filename
 from packaging.version import Version
-from pydantic import Field, model_validator
+from pydantic import Field, SerializerFunctionWrapHandler, model_serializer, model_validator
 
 from .installation import InstallationPreview, PreviewPolicy, preview, require_compatible
 from .models import ContractModel, Digest, ExtensionRegistry, Identifier
+from .storage import StorageReserveException
 
 
 class Wheel(ContractModel):
@@ -38,7 +40,8 @@ class Wheel(ContractModel):
 
 
 class RuntimeInstallation(ContractModel):
-    schema_version: Literal['aeep.toolkit.runtime-installation.v1'] = 'aeep.toolkit.runtime-installation.v1'
+    schema_version: Literal['aeep.toolkit.runtime-installation.v1', 'aeep.toolkit.runtime-installation.v2'] = 'aeep.toolkit.runtime-installation.v1'
+    storage_exception: StorageReserveException | None = None
     preview: InstallationPreview
     policy: PreviewPolicy
     destination: str
@@ -59,10 +62,19 @@ class RuntimeInstallation(ContractModel):
 
     @model_validator(mode='after')
     def exact_closure(self) -> RuntimeInstallation:
+        if self.schema_version.endswith('.v2') != (self.storage_exception is not None):
+            raise ValueError('temporary storage exceptions require runtime installation v2')
+        if self.storage_exception is not None:
+            exception = self.storage_exception
+            if (self.destination != exception.destination
+                    or digest([w.model_dump(mode='json') for w in self.wheels]) != exception.wheel_set_sha256
+                    or storage_effect(exception) not in self.effects):
+                raise ValueError('storage exception differs from the exact destination, wheels or effects')
         original = self.preview
         rebuilt = preview(ExtensionRegistry(extensions=tuple(i.manifest for i in original.items)),
                           original.selected, self.policy, profile=original.profile,
-                          observations=tuple(i.observation for i in original.items))
+                          observations=tuple(i.observation for i in original.items),
+                          storage_exception=self.storage_exception)
         if rebuilt != original:
             raise ValueError('preview differs from resolved policy/manifest closure')
         require_compatible(rebuilt)
@@ -75,6 +87,45 @@ class RuntimeInstallation(ContractModel):
             if wheel.sha256 != items[wheel.extension_id].source.artifact_sha256:
                 raise ValueError('wheel does not match selected manifest artifact')
         return self
+
+    @model_serializer(mode='wrap')
+    def preserve_v1(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
+        value: dict[str, Any] = handler(self)
+        if self.storage_exception is None:
+            value.pop('storage_exception', None)
+        return value
+
+
+def storage_effect(exception: StorageReserveException) -> str:
+    return (f'Temporary storage exception {exception.exception_id}: reserve '
+            f'{exception.minimum_free_bytes} bytes, maximum additional reservation '
+            f'{exception.maximum_additional_bytes} bytes, expires {exception.expires_at.isoformat()}.')
+
+
+class StorageReserveError(ValueError):
+    def __init__(self, observation: dict[str, Any]) -> None:
+        super().__init__('temporary storage exception expired, changed filesystem or insufficient real capacity')
+        self.observation = observation
+
+
+def exception_space(plan: RuntimeInstallation, required: int, *, baseline_free: int | None = None) -> dict[str, Any]:
+    """Measure actual host capacity; a reviewed exception never fabricates free space."""
+    exception = plan.storage_exception
+    if exception is None:
+        raise ValueError('no scoped storage exception')
+    parent = canonical(plan.destination).parent
+    now = datetime.now(UTC)
+    free = shutil.disk_usage(parent).free
+    observation = {'observed_at': now.isoformat(), 'available_free_bytes': free,
+                   'required_additional_bytes': required, 'minimum_free_bytes': exception.minimum_free_bytes,
+                   'exception_sha256': exception.digest(), 'host_delta_is_not_task_attribution': True}
+    if (not exception.issued_at <= now < exception.expires_at
+            or parent.stat().st_dev != exception.filesystem_device
+            or required > exception.maximum_additional_bytes
+            or free - required < exception.minimum_free_bytes
+            or (baseline_free is not None and baseline_free - free > exception.maximum_additional_bytes)):
+        raise StorageReserveError(observation | {'accepted': False})
+    return observation | {'accepted': True}
 
 
 def normalize(name: str) -> str:
@@ -234,18 +285,30 @@ def check_closure(source: Path, wheels: tuple[Wheel, ...], selected_platform: st
 
 
 def prepare(plan: InstallationPreview, policy: PreviewPolicy, destination: Path,
-            wheelhouse: Path, wheels: tuple[Wheel, ...]) -> RuntimeInstallation:
+            wheelhouse: Path, wheels: tuple[Wheel, ...], *,
+            storage_exception: StorageReserveException | None = None) -> RuntimeInstallation:
     """Read local inputs, producing an inert exact review document without writes."""
     target, source = canonical(str(destination)), canonical(str(wheelhouse))
     if not target.parent.is_dir() or target.exists() or not source.is_dir():
         raise ValueError('destination must be absent with an existing parent; wheelhouse must exist')
     interpreter = Path(sys.executable).resolve(strict=True)
+    options: dict[str, Any] = {}
+    if storage_exception is not None:
+        plan = preview(ExtensionRegistry(extensions=tuple(i.manifest for i in plan.items)),
+                       plan.selected, policy, profile=plan.profile,
+                       observations=tuple(i.observation for i in plan.items), storage_exception=storage_exception)
+        effects = list(RuntimeInstallation.model_fields['effects'].default)
+        effects[2] = storage_effect(storage_exception)
+        options = {'schema_version': 'aeep.toolkit.runtime-installation.v2',
+                   'storage_exception': storage_exception, 'effects': tuple(effects)}
     result = RuntimeInstallation(preview=plan, policy=policy, destination=str(target), wheelhouse=str(source),
                                  interpreter=str(interpreter), interpreter_sha256=file_digest(interpreter),
                                  python_version=platform.python_version(), system=sys.platform, machine=platform.machine(),
-                                 wheels=wheels)
+                                 wheels=wheels, **options)
     required = max(plan.known_disk_bytes, 500 * 1024**2 + check_closure(source, wheels, policy.platform))
-    if shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
+    if storage_exception is not None:
+        exception_space(result, required)
+    elif shutil.disk_usage(target.parent).free - required < 50 * 1024**3:
         raise ValueError('actual wheel closure would cross the 50 GiB free-space reserve')
     return result
 
@@ -327,7 +390,9 @@ def apply(plan: RuntimeInstallation, reviewed_digest: str) -> dict[str, Any]:
     # Validate every artifact and reserve before any destination/journal effects.
     required = max(plan.preview.known_disk_bytes,
                    500 * 1024**2 + check_closure(source, plan.wheels, plan.policy.platform))
-    require_space(root, required)
+    storage_checks = [exception_space(plan, required)] if plan.storage_exception else []
+    if plan.storage_exception is None:
+        require_space(root, required)
     if (root.exists() or root.is_symlink()) and not journal.exists():
         raise ValueError('destination already exists; preserved')
     with file_lock(journal):
@@ -340,11 +405,24 @@ def apply(plan: RuntimeInstallation, reviewed_digest: str) -> dict[str, Any]:
             raise ValueError('destination already exists; preserved')
         state = {'schema': 'aeep.toolkit.installation-state.v1', 'plan_sha256': identity,
                  'destination': str(root), 'original': 'absent', 'status': 'installing', 'automatic_retry': False}
+        if storage_checks:
+            state['storage_checks'] = storage_checks
         write_json(journal, state, before=before)
         before, _ = load_state(journal)
         try:
+            def check_progress() -> None:
+                if plan.storage_exception:
+                    try:
+                        observation = exception_space(plan, 0, baseline_free=storage_checks[0]['available_free_bytes'])
+                    except StorageReserveError as error:
+                        storage_checks.append(error.observation)
+                        raise
+                    storage_checks.append(observation)
+
+            check_progress()
             root.mkdir(mode=0o700)
             venv.EnvBuilder(with_pip=False).create(root)
+            check_progress()
             # Stage captured, rechecked wheel bytes; later wheelhouse edits cannot change pip input.
             stage = root / '.aeep-wheels'
             stage.mkdir(mode=0o700)
@@ -356,14 +434,18 @@ def apply(plan: RuntimeInstallation, reviewed_digest: str) -> dict[str, Any]:
                         raise ValueError('wheel changed before staging')
                     shutil.copyfileobj(src, dst)
                 check_wheel(stage / wheel.filename, wheel)
+                check_progress()
             lock = root / '.aeep-requirements.txt'
             lock.write_text(''.join(f'{w.name}=={w.version} --hash=sha256:{w.sha256}\n' for w in plan.wheels))
             python = str(root / ('Scripts/python.exe' if os.name == 'nt' else 'bin/python'))
             run([python, '-I', '-B', '-m', 'ensurepip', '--upgrade', '--default-pip'], root)
+            check_progress()
             run([python, '-I', '-B', '-m', 'pip', '--isolated', '--disable-pip-version-check',
                  'install', '--no-deps', '--no-index', '--find-links', str(stage), '--no-cache-dir', '--only-binary=:all:',
                  '--require-hashes', '--no-compile', '-r', str(lock)], root)
+            check_progress()
             run([python, '-I', '-B', '-m', 'pip', '--isolated', '--disable-pip-version-check', 'check'], root)
+            check_progress()
             state.update(status='installed', applied_tree_sha256=snapshot(root), enabled=False, qualified=False)
         except BaseException:
             state['status'] = 'failed'

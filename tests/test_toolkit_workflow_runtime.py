@@ -19,6 +19,8 @@ from aeep_toolkit.workflow import StackWorkflow
 from aeep_toolkit.workflow_accounting import WorkflowAccountingDefinition
 from aeep_toolkit.workflow_runtime import lifecycle, lifecycle_preview
 
+pytestmark = pytest.mark.usefixtures("installer_fixture_capacity")
+
 
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()

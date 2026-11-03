@@ -229,10 +229,26 @@
       "additionalProperties": false,
       "properties": {
         "schema_version": {
-          "const": "aeep.toolkit.installation-preview.v1",
           "default": "aeep.toolkit.installation-preview.v1",
+          "enum": [
+            "aeep.toolkit.installation-preview.v1",
+            "aeep.toolkit.installation-preview.v2"
+          ],
           "title": "Schema Version",
           "type": "string"
+        },
+        "storage_exception_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Storage Exception Sha256"
         },
         "profile": {
           "enum": [
@@ -578,6 +594,78 @@
       "title": "SourcePin",
       "type": "object"
     },
+    "StorageReserveException": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "aeep.toolkit.storage-exception.v1",
+          "default": "aeep.toolkit.storage-exception.v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "exception_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+          "title": "Exception Id",
+          "type": "string"
+        },
+        "purpose": {
+          "const": "toolkit-engineering",
+          "default": "toolkit-engineering",
+          "title": "Purpose",
+          "type": "string"
+        },
+        "destination": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "title": "Destination",
+          "type": "string"
+        },
+        "filesystem_device": {
+          "minimum": 0,
+          "title": "Filesystem Device",
+          "type": "integer"
+        },
+        "wheel_set_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Wheel Set Sha256",
+          "type": "string"
+        },
+        "minimum_free_bytes": {
+          "exclusiveMaximum": 53687091200,
+          "exclusiveMinimum": 0,
+          "title": "Minimum Free Bytes",
+          "type": "integer"
+        },
+        "maximum_additional_bytes": {
+          "exclusiveMinimum": 0,
+          "maximum": 2147483648,
+          "title": "Maximum Additional Bytes",
+          "type": "integer"
+        },
+        "issued_at": {
+          "format": "date-time",
+          "title": "Issued At",
+          "type": "string"
+        },
+        "expires_at": {
+          "format": "date-time",
+          "title": "Expires At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "exception_id",
+        "destination",
+        "filesystem_device",
+        "wheel_set_sha256",
+        "minimum_free_bytes",
+        "maximum_additional_bytes",
+        "issued_at",
+        "expires_at"
+      ],
+      "title": "StorageReserveException",
+      "type": "object"
+    },
     "Wheel": {
       "additionalProperties": false,
       "properties": {
@@ -621,10 +709,24 @@
   "additionalProperties": false,
   "properties": {
     "schema_version": {
-      "const": "aeep.toolkit.runtime-installation.v1",
       "default": "aeep.toolkit.runtime-installation.v1",
+      "enum": [
+        "aeep.toolkit.runtime-installation.v1",
+        "aeep.toolkit.runtime-installation.v2"
+      ],
       "title": "Schema Version",
       "type": "string"
+    },
+    "storage_exception": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/StorageReserveException"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
     },
     "preview": {
       "$ref": "#/$defs/InstallationPreview"

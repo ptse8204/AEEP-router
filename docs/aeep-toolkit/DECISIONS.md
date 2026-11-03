@@ -2576,3 +2576,18 @@ The source regression binds both interpreter choices. Current full verification
 is blocked by real host headroom,not marked passed. Preserve the successful docs,
 failed charge,all backups and Docker resources. Resume from the
 [carrier handoff](../../reports/toolkit-v2/c13/workflow-scanner-carrier-20261102/README.md).
+
+## November 3: prepare a temporary storage exception
+
+The operator selected preparation of a temporary lower-reserve exception after
+usable capacity stayed below 50 GiB. The proposed bundle uses a 42 GiB floor,
+1 GiB net host-capacity stop threshold and maximum 24-hour window. Execution
+needs exact approval. The default 50 GiB policy and v1 review digests stay.
+
+V2 installation/preview contracts bind one destination, filesystem device and
+wheel set. Recheck real space and expiry, retaining failed effects and readings.
+Synthetic unit-test capacity cannot replace host measurements. Preserve original
+grant counters, backups and existing Docker resources. The
+[grouped correction](../../reports/toolkit-v2/c13/scanner-storage-review-20261103/README.md)
+locks scanner/package execution behind all 13 source gates. Benchmark, utility,
+model authority and release requirements are unchanged.
