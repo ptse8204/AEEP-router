@@ -1,5 +1,44 @@
 # 0.8 plan coverage and remaining work
 
+<!-- skillrank-cli-results-20261104:start -->
+**November 4: wheel and offline docs passed; CLI stopped at the containment probe.**
+Approved `c0227f6f` completed actual file setup/idempotency and byte/ownership
+readiness from both named configurations. The containment call failed before
+any upstream catalog query. Cleanup and accounting are settled. The driver kept
+only its own assertion and discarded the inner error, so the cause is unknown.
+Its write-denial handler also misses `EROFS`; this is a demonstrated source
+weakness, not proof of the old call's cause. Do not mark the runtime passed.
+
+[Actual results](../toolkit-v2/c13/workflow-skillrank-20261103/RESULTS.md)
+retain all receipts, the failed attempt and charges. The original grant now has
+24 operations / zero models / 57.9077160009183 measured seconds. Updated wheel
+`d05ed8778893` plus 32 cached dependencies passed the private installed checks;
+the unchanged runtime remains. Offline docs passed on attempt 1 over 72 exact
+inputs with unchanged tools. Their checked versions are archived. No package,
+source suite or docs rerun is needed for this first-party probe correction.
+Product source remains `f2c7a3e9b923` and its all-13-gate proof stays applicable.
+Later progress prose is outside the completed docs input binding.
+
+The [runtime-only continuation](../toolkit-v2/c13/skillrank-cli-continuation-20261104/operation-review.json)
+(`1a091b2b`) is prepared, unapproved and unstarted. It records actual denial errno,
+network categories, upstream binary version and executor errors, then permits
+only the three unstarted catalog queries and selective-removal checks. Same
+binary, image, permissions, source and workflow. At most four calls / 18 extra
+operations / 765 reserved seconds; no models or cash. A prepared delegated finite
+amendment raises only the operation ceiling from 40 to 42 for the two extra
+probe/driver operations, preserving all 24 old charges. It is not applied. Native
+source compilation, new services, installs, downloads, release and old-resource
+cleanup remain outside this review. Normal 50 GiB reserve; all resources kept.
+
+After exact approval: read the review and execute its `run-runtime.py` with the
+full reviewed digest, preserving the original terminal component. Until then,
+continue independent MCP task-pack/state-output preparation. SkillRank bounded
+core evaluation and both real SkillsBench domains remain open. Waza has no
+supported backend access. Stack integration, candidate usefulness, selection
+usefulness, resources and release remain separate. Comparisons stay paused.
+Parent `0db170f`; unrelated CI work and old private databases/workspaces preserved.
+<!-- skillrank-cli-results-20261104:end -->
+
 <!-- file-runtime-implementation-20261103:start -->
 **November 3: ordinary file-runtime and selected catalog integration implemented; all 13 source gates pass.**
 The new file-runtime contract extends the existing installer journal and ordinary

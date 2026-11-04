@@ -1,0 +1,286 @@
+{
+  "workflow": {
+    "schema_version": "aeep.toolkit.workflow.v2",
+    "registry": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-skillrank-20261103/registry.json",
+      "sha256": "6d77f81b57da37e5890be20303d013cffbc19cc9fc978671323db2aba2a3610f"
+    },
+    "policy": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-skillrank-20261103/policy.json",
+      "sha256": "768be4aad8ad7a148dbfa1af020a5b6031c0d8e049b8173130b258320063f478"
+    },
+    "configurations": {
+      "document-data": {
+        "evaluator": "managed",
+        "candidate": {
+          "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-scanner-20261102/candidate",
+          "sha256": "c91039731c19735e818c150508e6f857a218482a2371b239e4bf7b033aabbca6"
+        },
+        "benchmark": {
+          "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-transport-20261103/task-only-pack.json",
+          "sha256": "c41ec39a459b537d9c1b16d35cda1e7ca8857f75b46128e8640c23d86349b5f9"
+        },
+        "asset_root": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5",
+        "task_ids": [
+          "financial-modeling-qa",
+          "pdf-excel-diff",
+          "sales-pivot-analysis"
+        ],
+        "components": [
+          "aeep-evaluator",
+          "skillsbench",
+          "skillrank"
+        ],
+        "assessment": null,
+        "benchmark_recipe": null,
+        "preparation": null,
+        "catalog": {
+          "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-skillrank-20261103/catalog-runtime.json",
+          "sha256": "908aea95aa534dae0123c8af3496784aaf2a99be846cbe6fd51a5c1ad13f9f54"
+        },
+        "runtimes": {
+          "skillrank-files": {
+            "installation": {
+              "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-skillrank-20261103/retained-installation.json",
+              "sha256": "d8fb8d4ebe0edb1dba9dec8f74a21cc525c2a62f191da77d4fcfdac5d8be85b3"
+            },
+            "components": {
+              "skillrank": "skillrank"
+            }
+          },
+          "disposable-files": {
+            "installation": {
+              "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-skillrank-20261103/disposable-installation.json",
+              "sha256": "6e2c0571e61c1b51c602d6081bb22344b0e43735496d672aeb4f4dfb870cfba4"
+            },
+            "components": {
+              "skillrank": "skillrank"
+            }
+          }
+        }
+      },
+      "software-engineering": {
+        "evaluator": "managed",
+        "candidate": {
+          "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-scanner-20261102/candidate",
+          "sha256": "c91039731c19735e818c150508e6f857a218482a2371b239e4bf7b033aabbca6"
+        },
+        "benchmark": {
+          "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-transport-20261103/task-only-pack.json",
+          "sha256": "c41ec39a459b537d9c1b16d35cda1e7ca8857f75b46128e8640c23d86349b5f9"
+        },
+        "asset_root": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5",
+        "task_ids": [
+          "spring-boot-jakarta-migration",
+          "react-performance-debugging",
+          "software-dependency-audit"
+        ],
+        "components": [
+          "aeep-evaluator",
+          "skillsbench",
+          "skillrank"
+        ],
+        "assessment": null,
+        "benchmark_recipe": null,
+        "preparation": null,
+        "catalog": {
+          "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-skillrank-20261103/catalog-runtime.json",
+          "sha256": "908aea95aa534dae0123c8af3496784aaf2a99be846cbe6fd51a5c1ad13f9f54"
+        },
+        "runtimes": {
+          "skillrank-files": {
+            "installation": {
+              "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-skillrank-20261103/retained-installation.json",
+              "sha256": "d8fb8d4ebe0edb1dba9dec8f74a21cc525c2a62f191da77d4fcfdac5d8be85b3"
+            },
+            "components": {
+              "skillrank": "skillrank"
+            }
+          }
+        }
+      }
+    }
+  },
+  "configuration": "document-data",
+  "operation": "readiness",
+  "runtime_ids": [
+    "skillrank-files"
+  ],
+  "installation_plans": {
+    "skillrank-files": {
+      "schema_version": "aeep.toolkit.file-runtime-installation.v1",
+      "preview": {
+        "schema_version": "aeep.toolkit.installation-preview.v1",
+        "profile": "evaluation",
+        "selected": [
+          "skillrank"
+        ],
+        "items": [
+          {
+            "manifest": {
+              "schema_version": "aeep.toolkit.extension.v1",
+              "extension_id": "skillrank",
+              "purpose": "Retain Linux arm64 SkillRank and query reviewed local metadata only inside the pinned offline Linux worker.",
+              "role": "catalog",
+              "source": {
+                "repository": "https://github.com/buildbetter-app/skillrank",
+                "revision": "5216bae9149b4ff8a7f9e014b6889fb094cee8e1",
+                "artifact_sha256": "0996e6d80ad59046140f2763cf067e979941135a020a8489e0752d23653d8708",
+                "license_expression": "MIT",
+                "data_rights": "Private retained MIT SkillRank core binary; locked dependency notices retained. No redistribution clearance or external registry use."
+              },
+              "hosts": [
+                "codex"
+              ],
+              "platforms": [
+                "darwin-arm64"
+              ],
+              "dependencies": [],
+              "permissions": {
+                "network_destinations": [],
+                "filesystem_scope": "workspace",
+                "authentication": "none",
+                "financial_exposure": "none"
+              },
+              "disk_bytes": 4820241,
+              "memory_bytes": null,
+              "install_effects": [
+                "Copy reviewed Linux binary and license records into a private Mac-owned directory; no host execution or activation."
+              ],
+              "rollback": "Stop owned catalog workers; remove only an unchanged unreferenced installation through its retained journal.",
+              "status": "experimental",
+              "qualification_ref": null,
+              "blockers": []
+            },
+            "manifest_sha256": "89c7f79c2d18774a0db0dae5a73512000fee603b484fdb916c2c14bcde794094",
+            "selection": "direct",
+            "observation": {
+              "extension_id": "skillrank",
+              "installed": null,
+              "enabled": null,
+              "manifest_sha256": null,
+              "source_ref": null
+            },
+            "blockers": []
+          }
+        ],
+        "blockers": [],
+        "known_disk_bytes": 4820241,
+        "disk_complete": true,
+        "status": "ready_for_review",
+        "execution_authorized": false,
+        "limitations": [
+          "Metadata and supplied observations are declarations, not authenticated installation or conformance evidence.",
+          "Memory figures are per component; simultaneous runtime consumption is unmeasured.",
+          "This preview performs no installation and cannot authorize execution or spending.",
+          "The operator preview policy accepts unknown memory requirements; actual runtime memory remains unmeasured."
+        ]
+      },
+      "policy": {
+        "host": "codex",
+        "platform": "darwin-arm64",
+        "allowed_licenses": [
+          "MIT",
+          "Apache-2.0"
+        ],
+        "allowed_data_rights": [
+          "First-party code only. No task or provider-disclosure authority granted.",
+          "Repository notice only. Task-specific assets and bundled skills remain unreviewed; no rights grant inferred.",
+          "Private retained MIT SkillRank core binary; locked dependency notices retained. No redistribution clearance or external registry use.",
+          "First-party engineering catalog only; no benchmark answers or third-party skill distribution."
+        ],
+        "allowed_network_destinations": [],
+        "allowed_filesystem_scopes": [
+          "workspace"
+        ],
+        "allowed_authentication": [
+          "none"
+        ],
+        "allowed_financial_exposure": [
+          "none"
+        ],
+        "free_disk_bytes": 71682498560,
+        "allow_unknown_memory": true,
+        "reviewed_dependency_manifests": [
+          "a656f2dd58f2c318cf3e8d53a63bcba8457fdb91457b096b32491f184f07b1f0",
+          "ffe55c45566e86413dfe7b7b47472e11842e9410dc834b34bbabecf5943cfebe",
+          "89c7f79c2d18774a0db0dae5a73512000fee603b484fdb916c2c14bcde794094"
+        ]
+      },
+      "destination": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-skillrank-20261103/retained-runtime",
+      "artifact_root": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-skillrank-20261103/artifacts",
+      "files": [
+        {
+          "extension_id": "skillrank",
+          "source": "skillrank",
+          "destination": "bin/skillrank",
+          "sha256": "0996e6d80ad59046140f2763cf067e979941135a020a8489e0752d23653d8708",
+          "size_bytes": 4778696,
+          "executable": true,
+          "primary": true
+        },
+        {
+          "extension_id": "skillrank",
+          "source": "LICENSE",
+          "destination": "licenses/skillrank-MIT.txt",
+          "sha256": "359783483c51de36b7963864b1c43f929d372f8706371ab112c40eac6e22af4b",
+          "size_bytes": 1068,
+          "executable": false,
+          "primary": false
+        },
+        {
+          "extension_id": "skillrank",
+          "source": "dependency-license-records.json",
+          "destination": "licenses/dependencies.json",
+          "sha256": "d62569c5a10e1597d4b82d48e18d863a6575db49dda9bd0de0bd42b4bf87320a",
+          "size_bytes": 40477,
+          "executable": false,
+          "primary": false
+        }
+      ],
+      "installer_python": "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3.13",
+      "installer_python_sha256": "20c9c2144a9f5202177620417e67643fb551aa31586e5d3c1361627b920cadb0",
+      "python_version": "3.13.1",
+      "system": "darwin",
+      "machine": "arm64",
+      "effects": [
+        "Copy exact local artifacts into a new private owned tree; no download, build or execution.",
+        "Write the existing sibling installation journal and lock; no host activation or service startup.",
+        "Keep executable files at0555 and other files at0444; permissions confer no execution authority.",
+        "Keep the normal50GiB actual host reserve and staged/allocated file headroom.",
+        "Retain failed/interrupted state; remove only an unchanged owned runtime and preserve conflicts."
+      ]
+    }
+  },
+  "shared_references": {
+    "skillrank-files": []
+  },
+  "implementation_source": "f2c7a3e9b923fb95fb550287dd0f0e59c681c8633fd235a773cb7c3f92e1515e",
+  "review_sha256": "882105b95cc08ac9f8b0be6095e48fb14744d7a7bb3119c823e2297e432c4702",
+  "blockers": [],
+  "observations": {
+    "skillrank-files": {
+      "destination": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-skillrank-20261103/retained-runtime",
+      "installed": true,
+      "installer_status": "installed",
+      "enabled": null,
+      "execution_permission": "NOT_VERIFIED",
+      "functional_readiness": "NOT_VERIFIED",
+      "usefulness": "NOT_ASSESSED",
+      "journal_sha256": "7f3aafaa6c4e10282aa15fb7487b34d2a33324b802e1d00e3db1946b95ea713c",
+      "tree_matches": true,
+      "installer_enabled_declaration": false
+    }
+  },
+  "execution_authorized": false,
+  "notice": "Private owned-runtime lifecycle only. Exact execution/removal authority and an accounting v2 scope are required for writes. Installation does not establish enablement, execution permission, functional readiness or usefulness. Shared workflow references and changed/unfinished resources are preserved.",
+  "workflow_accounting": {
+    "definition_ref": "e3cc7098eef2b2a49090f04e8863246a0eb40ca1d6409a92650c9a4a6e2f840f",
+    "operation_id": "workflow:skillrank-workflow-f2c7a3e9b923:document-data-readiness-preview",
+    "assessment_plan_ids": [],
+    "ledger": "existing assessment operation_start / operation_measurement",
+    "measurement_scope": "exclusive wrapper wall time and process CPU; canonical execution intervals excluded",
+    "token_memory_cash_measurements": "UNKNOWN; no zero values inferred",
+    "completion": "resolve the terminal operation_measurement after this command returns"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "evidence_kind": "first_party_substitutes_only",
+  "cases": [
+    {
+      "root_write_errno": 1,
+      "expected_passed": true
+    },
+    {
+      "root_write_errno": 13,
+      "expected_passed": true
+    },
+    {
+      "root_write_errno": 30,
+      "expected_passed": true
+    },
+    {
+      "root_write_errno": 5,
+      "expected_passed": false
+    },
+    {
+      "root_write_errno": null,
+      "expected_passed": false
+    }
+  ],
+  "container_or_upstream_execution": false,
+  "original_real_failure_cause": "UNKNOWN: original driver did not retain inner status/error fields"
+}

@@ -1,5 +1,44 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- skillrank-cli-results-20261104:start -->
+**November 4: wheel and offline docs passed; CLI stopped at the containment probe.**
+Approved `c0227f6f` completed actual file setup/idempotency and byte/ownership
+readiness from both named configurations. The containment call failed before
+any upstream catalog query. Cleanup and accounting are settled. The driver kept
+only its own assertion and discarded the inner error, so the cause is unknown.
+Its write-denial handler also misses `EROFS`; this is a demonstrated source
+weakness, not proof of the old call's cause. Do not mark the runtime passed.
+
+[Actual results](../../reports/toolkit-v2/c13/workflow-skillrank-20261103/RESULTS.md)
+retain all receipts, the failed attempt and charges. The original grant now has
+24 operations / zero models / 57.9077160009183 measured seconds. Updated wheel
+`d05ed8778893` plus 32 cached dependencies passed the private installed checks;
+the unchanged runtime remains. Offline docs passed on attempt 1 over 72 exact
+inputs with unchanged tools. Their checked versions are archived. No package,
+source suite or docs rerun is needed for this first-party probe correction.
+Product source remains `f2c7a3e9b923` and its all-13-gate proof stays applicable.
+Later progress prose is outside the completed docs input binding.
+
+The [runtime-only continuation](../../reports/toolkit-v2/c13/skillrank-cli-continuation-20261104/operation-review.json)
+(`1a091b2b`) is prepared, unapproved and unstarted. It records actual denial errno,
+network categories, upstream binary version and executor errors, then permits
+only the three unstarted catalog queries and selective-removal checks. Same
+binary, image, permissions, source and workflow. At most four calls / 18 extra
+operations / 765 reserved seconds; no models or cash. A prepared delegated finite
+amendment raises only the operation ceiling from 40 to 42 for the two extra
+probe/driver operations, preserving all 24 old charges. It is not applied. Native
+source compilation, new services, installs, downloads, release and old-resource
+cleanup remain outside this review. Normal 50 GiB reserve; all resources kept.
+
+After exact approval: read the review and execute its `run-runtime.py` with the
+full reviewed digest, preserving the original terminal component. Until then,
+continue independent MCP task-pack/state-output preparation. SkillRank bounded
+core evaluation and both real SkillsBench domains remain open. Waza has no
+supported backend access. Stack integration, candidate usefulness, selection
+usefulness, resources and release remain separate. Comparisons stay paused.
+Parent `0db170f`; unrelated CI work and old private databases/workspaces preserved.
+<!-- skillrank-cli-results-20261104:end -->
+
 <!-- file-runtime-implementation-20261103:start -->
 **November 3: ordinary file-runtime and selected catalog integration implemented; all 13 source gates pass.**
 The new file-runtime contract extends the existing installer journal and ordinary
@@ -927,7 +966,7 @@ checkpoint_status:
 last_verified_commit: 'df9eee7f2535a47e957418da0747c2d428641f26'
 last_check_command: 'stack-delivery-20261030/validation/checks.json:13/13 on working source24dccd3e;1798passed/21skipped per full run. Actual732f attempt reconciled; no retry.'
 last_check_result: 'Source24dccd3e13gates passed,82%coverage,both branch gates. Source includes preserved CI inputs. Named workflow software checks passed; no new live stack/value/selection pass.732f buildCLI failed125,no image/tool check;2operations and2.255710876sec retained. Corrected review pending. OriginalPonytail14/19both preserved.'
-next_action: 'Keep comparisons paused. All13 source gates pass. Obtain workflow-skillrank-20261103 grouped CLI runtime/wheel/docs approval; run only after exact applicable approval. Then connect bounded SkillRank evaluation and remaining required upstream integrations and both SkillsBench domains. Waza is blocked without supported backend access. Preserve unrelated CI work and all prior charges/resources.'
+next_action: 'Comparisons paused. c0227f6f wheel/docs passed; runtime terminal after probe with unknown inner cause,24 ops charged. Obtain exact skillrank-cli-continuation-20261104 review1a091b2b before fresh containment/catalog/removal execution. No source/package/docs replay. Continue MCP task-pack/state-output implementation independently. Preserve original charges, all resources and unrelated CI work.'
 blocked_actions:
   - 'Helped report comprehension is recorded. The operator removed the concrete control exercise from the critical path on October29;control-use qualification remains unmeasured and is not an engineering/comparison blocker.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'

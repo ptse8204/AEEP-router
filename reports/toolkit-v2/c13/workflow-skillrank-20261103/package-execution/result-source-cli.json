@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "installed_source": "432a07e55650510f5c453f0cf891478b62b52b86910ecaf03ce0cf1fd124e6a4",
+  "checks": [
+    "workflow prepare-worker-readiness --control-request",
+    "workflow run --configuration",
+    "workflow scan --reviewed-digest",
+    "workflow catalog --accounting",
+    "workflow define-catalog --file",
+    "install-files-plan --artifact-root",
+    "eval managed run --scheduler",
+    "eval managed run --engineering-review",
+    "installed repository-URL task-family normalization",
+    "installed file/catalog contracts and inert query validation"
+  ],
+  "legacy_and_current_workflow_schemas": true,
+  "upstream_executed": false,
+  "models": 0
+}

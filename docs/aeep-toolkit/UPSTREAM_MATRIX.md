@@ -2017,3 +2017,24 @@ review reuses the original grant and its remaining operations, preserving all
 old charges. Real catalog queries stay offline; query/result contents are
 transient and canonical records retain digests and receipt/journal references.
 Comparisons remain paused and no complete-stack gate is promoted.
+
+## November 4 — retain completed installation/docs and isolate the failed probe
+
+The [actual grouped results](../../reports/toolkit-v2/c13/workflow-skillrank-20261103/RESULTS.md)
+passed setup/idempotency, both ownership inspections, installed wheel and offline
+docs. The containment call failed before catalog execution. Its discarded inner
+error cannot be reconstructed from the retained assertion; the cause remains
+unknown. Accepting only `PermissionError` also misses read-only-filesystem denial.
+
+The [remaining runtime review](../../reports/toolkit-v2/c13/skillrank-cli-continuation-20261104/README.md)
+adds explicit diagnostic categories and a pinned-binary version check. Preserve
+all 24 old operations and passed components. Only first-party probe/driver code
+changes; product source and its all-13-gate proof remain unchanged. The finite
+two-operation amendment is delegated and prepared, not applied. New contained
+execution still requires exact authority. No rerun of source, wheel or docs.
+
+Independent MCP work must represent real database-table outputs, not invent a
+file output for the selected state-changing upstream tasks. Preserve the two
+packs' different prompts, protected verifiers and grading semantics. No database
+service or task is executed by this preparation. All stack/usefulness/release
+gates stay separate and comparisons remain paused.

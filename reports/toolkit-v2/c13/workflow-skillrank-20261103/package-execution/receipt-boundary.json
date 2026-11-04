@@ -1,0 +1,136 @@
+{
+  "receipt_id": "rcpt_247cf3ad4e624d7ba862119bb7065154",
+  "decision_id": "workflow-installed-boundary",
+  "action_id": "act_568a77511ea94b43ba0748a4c365b771",
+  "capability": "toolkit.upstream-engineering@1",
+  "executor_id": "toolkit.installed-boundary",
+  "executor_kind": "command",
+  "status": "success",
+  "attempt": 1,
+  "started_at": "2026-11-04T19:49:00.932969Z",
+  "ended_at": "2026-11-04T19:49:00.964038Z",
+  "estimated": {
+    "resources": {
+      "monetary_usd": 0.0,
+      "latency_ms": 0.0,
+      "cpu_ms": 0.0,
+      "memory_mb_seconds": 0.0,
+      "peak_memory_mb": 0.0,
+      "gpu_ms": 0.0,
+      "network_bytes": 0,
+      "context_tokens": 0,
+      "input_tokens": 0,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_output_tokens": 0,
+      "subscription_units": 0.0
+    },
+    "cash": {
+      "amount_usd": null,
+      "upper_bound_usd": null,
+      "evidence": {
+        "status": "unavailable",
+        "source": "unavailable",
+        "trust": "untrusted",
+        "evidence_id": null,
+        "source_reference": null,
+        "digest": null,
+        "observed_at": null
+      }
+    },
+    "subscription_usage": [],
+    "success_probability": 0.95,
+    "quality_score": 0.95,
+    "risk_score": 0.05,
+    "confidence": 0.5,
+    "source": "static",
+    "sample_size": 0,
+    "uncertainty": null
+  },
+  "executor_fingerprint": null,
+  "cohort_digest": null,
+  "action_features": null,
+  "actual_resources": {
+    "monetary_usd": 0.0,
+    "latency_ms": 30.40841594338417,
+    "cpu_ms": 17.088373999999998,
+    "memory_mb_seconds": 0.21076922887004912,
+    "peak_memory_mb": 14.71875,
+    "gpu_ms": 0.0,
+    "network_bytes": 0,
+    "context_tokens": 23,
+    "input_tokens": 0,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 0,
+    "reasoning_output_tokens": 0,
+    "subscription_units": 0.0
+  },
+  "accounting": {
+    "cash": {
+      "status": "unavailable",
+      "components": []
+    },
+    "subscription_usage": [],
+    "model_usage": [],
+    "tool_footprint": null
+  },
+  "cache_affinity": null,
+  "approval_id": null,
+  "transport_success": null,
+  "execution_success": true,
+  "schema_valid": null,
+  "task_valid": null,
+  "quality_score": null,
+  "validation_results": [],
+  "output_valid": null,
+  "error_type": null,
+  "error_message": null,
+  "trace_id": null,
+  "metadata": {
+    "review_sha256": "c0227f6f3e84a950c31bc51b6c9dd542650236b1e00811acbe8830f008c2a5d0",
+    "executable": "/usr/bin/sandbox-exec",
+    "stdout_bytes": 100,
+    "stderr_bytes": 0,
+    "stdout_truncated": false,
+    "stderr_truncated": false,
+    "execution_evidence": {
+      "schema_version": "execution.evidence.v1",
+      "attempt_id": "act_568a77511ea94b43ba0748a4c365b771",
+      "adapter": "CommandExecutor",
+      "events": [
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e852cee94d2d441282dcf43481131374",
+          "attempt_id": "act_568a77511ea94b43ba0748a4c365b771",
+          "sequence": 0,
+          "kind": "execution.started",
+          "source_id": "start",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e852cee94d2d441282dcf43481131374",
+          "attempt_id": "act_568a77511ea94b43ba0748a4c365b771",
+          "sequence": 1,
+          "kind": "execution.completed",
+          "source_id": "terminal",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        }
+      ],
+      "complete": true,
+      "cancellation_confirmed": false,
+      "identity_digest": null,
+      "boundary_digest": null,
+      "journal_id": "e852cee94d2d441282dcf43481131374"
+    },
+    "execution_evidence_digest": "bfc54fad4eb98fc68d921f873b255bc7fab8be1a8857b0ac71ca2030579ced52"
+  }
+}

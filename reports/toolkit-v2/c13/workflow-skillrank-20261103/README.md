@@ -80,3 +80,10 @@ completed its real protected reference/control journey. Waza still lacks a
 supported backend because no Copilot subscription is available. The remaining
 upstream integrations, composed stack gate, candidate usefulness, selection
 usefulness, resource qualification and release retain separate open records.
+
+## November 4 execution outcome
+
+[Actual results](RESULTS.md) retain passed setup/idempotency/readiness, installed
+wheel and offline docs. The containment probe failed before catalog queries;
+its inner error was not retained. The exact runtime attempt is terminal. Preserve
+its charges and use only a separately approved remaining-phase continuation.

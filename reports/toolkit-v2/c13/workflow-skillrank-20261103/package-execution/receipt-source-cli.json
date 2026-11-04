@@ -1,0 +1,136 @@
+{
+  "receipt_id": "rcpt_f280e08b2224435b991907f393c55797",
+  "decision_id": "workflow-installed-source-cli",
+  "action_id": "act_43b4d77c5b524b4da5969d1eb16f224e",
+  "capability": "toolkit.upstream-engineering@1",
+  "executor_id": "toolkit.installed-source-cli",
+  "executor_kind": "command",
+  "status": "success",
+  "attempt": 1,
+  "started_at": "2026-11-04T19:49:01.117853Z",
+  "ended_at": "2026-11-04T19:49:02.914913Z",
+  "estimated": {
+    "resources": {
+      "monetary_usd": 0.0,
+      "latency_ms": 0.0,
+      "cpu_ms": 0.0,
+      "memory_mb_seconds": 0.0,
+      "peak_memory_mb": 0.0,
+      "gpu_ms": 0.0,
+      "network_bytes": 0,
+      "context_tokens": 0,
+      "input_tokens": 0,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_output_tokens": 0,
+      "subscription_units": 0.0
+    },
+    "cash": {
+      "amount_usd": null,
+      "upper_bound_usd": null,
+      "evidence": {
+        "status": "unavailable",
+        "source": "unavailable",
+        "trust": "untrusted",
+        "evidence_id": null,
+        "source_reference": null,
+        "digest": null,
+        "observed_at": null
+      }
+    },
+    "subscription_usage": [],
+    "success_probability": 0.95,
+    "quality_score": 0.95,
+    "risk_score": 0.05,
+    "confidence": 0.5,
+    "source": "static",
+    "sample_size": 0,
+    "uncertainty": null
+  },
+  "executor_fingerprint": null,
+  "cohort_digest": null,
+  "action_features": null,
+  "actual_resources": {
+    "monetary_usd": 0.0,
+    "latency_ms": 1796.6701667755842,
+    "cpu_ms": 802.397896,
+    "memory_mb_seconds": 123.95337406246108,
+    "peak_memory_mb": 110.5625,
+    "gpu_ms": 0.0,
+    "network_bytes": 0,
+    "context_tokens": 150,
+    "input_tokens": 0,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 0,
+    "reasoning_output_tokens": 0,
+    "subscription_units": 0.0
+  },
+  "accounting": {
+    "cash": {
+      "status": "unavailable",
+      "components": []
+    },
+    "subscription_usage": [],
+    "model_usage": [],
+    "tool_footprint": null
+  },
+  "cache_affinity": null,
+  "approval_id": null,
+  "transport_success": null,
+  "execution_success": true,
+  "schema_valid": null,
+  "task_valid": null,
+  "quality_score": null,
+  "validation_results": [],
+  "output_valid": null,
+  "error_type": null,
+  "error_message": null,
+  "trace_id": null,
+  "metadata": {
+    "review_sha256": "c0227f6f3e84a950c31bc51b6c9dd542650236b1e00811acbe8830f008c2a5d0",
+    "executable": "/usr/bin/sandbox-exec",
+    "stdout_bytes": 620,
+    "stderr_bytes": 0,
+    "stdout_truncated": false,
+    "stderr_truncated": false,
+    "execution_evidence": {
+      "schema_version": "execution.evidence.v1",
+      "attempt_id": "act_43b4d77c5b524b4da5969d1eb16f224e",
+      "adapter": "CommandExecutor",
+      "events": [
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "ed5ac252b0d64d85b33125ffcb96a4c3",
+          "attempt_id": "act_43b4d77c5b524b4da5969d1eb16f224e",
+          "sequence": 0,
+          "kind": "execution.started",
+          "source_id": "start",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "ed5ac252b0d64d85b33125ffcb96a4c3",
+          "attempt_id": "act_43b4d77c5b524b4da5969d1eb16f224e",
+          "sequence": 1,
+          "kind": "execution.completed",
+          "source_id": "terminal",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        }
+      ],
+      "complete": true,
+      "cancellation_confirmed": false,
+      "identity_digest": null,
+      "boundary_digest": null,
+      "journal_id": "ed5ac252b0d64d85b33125ffcb96a4c3"
+    },
+    "execution_evidence_digest": "d9cca7dd1b214a30f3158d1809513e60e46445a767b3713e250a125c8b5649de"
+  }
+}
