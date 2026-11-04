@@ -1,0 +1,436 @@
+{
+  "image": "cgr.dev/chainguard/minio@sha256:f4c90d3148e56e4b720a5663a9e45428bac3e38c39681bbc0d8692ed1086ff09",
+  "config_digest": "sha256:4d0d6ab2e1545cc19c46e06e71cca3ef453477c17830defc3df3b1599c3df4ba",
+  "config": {
+    "Entrypoint": [
+      "/usr/bin/minio"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/sbin:/bin",
+      "SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt"
+    ],
+    "Labels": {
+      "dev.chainguard.image.title": "minio",
+      "dev.chainguard.package.main": "",
+      "org.opencontainers.image.authors": "Chainguard Team https://www.chainguard.dev/",
+      "org.opencontainers.image.created": "2026-10-29T14:33:12Z",
+      "org.opencontainers.image.source": "https://github.com/chainguard-images/images/tree/main/images/minio",
+      "org.opencontainers.image.title": "minio",
+      "org.opencontainers.image.url": "https://images.chainguard.dev/directory/image/minio/overview",
+      "org.opencontainers.image.vendor": "Chainguard"
+    },
+    "User": "65532"
+  },
+  "final_entries": {
+    "usr/bin": {
+      "kind": "directory",
+      "mode": "0o755",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 0
+    },
+    "usr/bin/docker-entrypoint.sh": {
+      "kind": "file",
+      "mode": "0o755",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 675,
+      "sha256": "c6a01decb5d104ef7327d0d642ce34bcc2396e600a1b7ba03568ac65b3d473be"
+    },
+    "usr/bin/minio": {
+      "kind": "file",
+      "mode": "0o755",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 102367392,
+      "sha256": "32623e25839fc27a125d76bca19ed5d6c2cff2771912a05e26b7b6c682778743"
+    },
+    "usr/lib": {
+      "kind": "directory",
+      "mode": "0o755",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 0
+    },
+    "var/lib": {
+      "kind": "directory",
+      "mode": "0o755",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 0
+    },
+    "var/lib/db/sbom/minio-0.20261023.200651-r2.spdx.json": {
+      "kind": "file",
+      "mode": "0o644",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 349241,
+      "sha256": "8c675a2c861f90eea53c544335d1b65199eab7a4281e8495665a1770cb5b950a"
+    },
+    "usr/bin/mc": {
+      "kind": "file",
+      "mode": "0o755",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 32083960,
+      "sha256": "b4b52a0c7a29f42af14b86d673cb205a144a3de01c2a0312ed6789143e0d135d"
+    },
+    "var/lib/db/sbom/mc-0.20250813.083541-r27.spdx.json": {
+      "kind": "file",
+      "mode": "0o644",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 143610,
+      "sha256": "35711cf4ce6ec37e38083c34df34bf50bc30c0d1caf686e5653d9b8dfb08532b"
+    },
+    "var/lib/db/sbom/glibc-2.44-2.44-r11.spdx.json": {
+      "kind": "file",
+      "mode": "0o644",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 5869,
+      "sha256": "baa9a9f1b415b9e77d30d252abe354f4bf85e5202fca6f90fb11dfaf405c7f62"
+    },
+    "var/lib/db/sbom/glibc-2.44-locale-posix-2.44-r11.spdx.json": {
+      "kind": "file",
+      "mode": "0o644",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 6087,
+      "sha256": "ceb0af1d82929417c64c260d7f12939ad1781f2d9fc42652bd5ab3f8f498df78"
+    },
+    "var/lib/db/sbom/ld-linux-2.44-2.44-r11.spdx.json": {
+      "kind": "file",
+      "mode": "0o644",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 5925,
+      "sha256": "3c25a2d7c1856c24a328fe005125ddf61a872f57f495e8b22222ef3d048a5f2a"
+    },
+    "var/lib/db/sbom/openssl-4.0-libcrypto-4.0.3-r8.spdx.json": {
+      "kind": "file",
+      "mode": "0o644",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 5821,
+      "sha256": "a1ebdee91e0a8b6ca13446b53ada32592ea93ae12b2909ccefb290f631d9dedd"
+    },
+    "var/lib/db/sbom/ncurses-6.6.20261024-r0.spdx.json": {
+      "kind": "file",
+      "mode": "0o644",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 5537,
+      "sha256": "0ad2b37da3174fc5b6b3a1b0505bea2b56f00d358a9686c5a6f65750584d9ec5"
+    },
+    "var/lib/db/sbom/ncurses-terminfo-base-6.6.20261024-r0.spdx.json": {
+      "kind": "file",
+      "mode": "0o644",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 5770,
+      "sha256": "79c3d857b4f2e719d505ddb7194220f03a864bbd11f037ba7a6fa09a7c6bf69f"
+    },
+    "var/lib/db/sbom/libselinux-3.11-r2.spdx.json": {
+      "kind": "file",
+      "mode": "0o644",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 5343,
+      "sha256": "9b6e8f9c54fc0d86647cb3cabf5daaad7d96adf40a4717419c0ef0d3afdda5dd"
+    },
+    "usr/bin/chown": {
+      "kind": "symlink",
+      "mode": "0o777",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 0,
+      "target": "coreutils"
+    },
+    "usr/bin/coreutils": {
+      "kind": "file",
+      "mode": "0o755",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 1697056,
+      "sha256": "586e2b925c3bc615028e7c56d70d300f3f0bc388e02b8be1b2fbe4434a184d5b"
+    },
+    "usr/bin/mkdir": {
+      "kind": "symlink",
+      "mode": "0o777",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 0,
+      "target": "coreutils"
+    },
+    "usr/libexec/coreutils": {
+      "kind": "directory",
+      "mode": "0o755",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 0
+    },
+    "var/lib/db/sbom/coreutils-9.12-r7.spdx.json": {
+      "kind": "file",
+      "mode": "0o644",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 5408,
+      "sha256": "314ba45aa9a3c23eec5babbf6ad4102807e09259f4f0267fe16bfcea5806e6e3"
+    },
+    "usr/bin/bash": {
+      "kind": "file",
+      "mode": "0o755",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 1655160,
+      "sha256": "0776d787c2ab3443770871566c05d5403b6b3ddf6a2a2130e8fa4222de973e58"
+    },
+    "usr/bin/sh": {
+      "kind": "symlink",
+      "mode": "0o777",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 0,
+      "target": "bash"
+    },
+    "var/lib/db/sbom/bash-5.3-r14.spdx.json": {
+      "kind": "file",
+      "mode": "0o644",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 5294,
+      "sha256": "8ef5d298d331210708e48d55a6ce7678c1694aae13811e32a41ebd37988e9a59"
+    },
+    "var/lib/db/sbom/bash-binsh-5.3-r14.spdx.json": {
+      "kind": "file",
+      "mode": "0o644",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 5343,
+      "sha256": "97c6be4fdb3282a7b7fc95e4c97f5cbbaaa6af4600ef77cc70e646e6e86e51b7"
+    },
+    "var/lib/db/sbom/libsepol-3.11-r3.spdx.json": {
+      "kind": "file",
+      "mode": "0o644",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 5286,
+      "sha256": "2bd9d86e067d92830cf1011c765a7f9fa753ef6e9bb845a8f43088bdbbfa278f"
+    },
+    "bin": {
+      "kind": "symlink",
+      "mode": "0o777",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 0,
+      "target": "usr/bin"
+    },
+    "lib": {
+      "kind": "symlink",
+      "mode": "0o777",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 0,
+      "target": "usr/lib"
+    },
+    "lib64": {
+      "kind": "symlink",
+      "mode": "0o777",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 0,
+      "target": "usr/lib"
+    },
+    "sbin": {
+      "kind": "symlink",
+      "mode": "0o777",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 0,
+      "target": "usr/bin"
+    },
+    "usr/lib64": {
+      "kind": "symlink",
+      "mode": "0o777",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 0,
+      "target": "lib"
+    },
+    "usr/local/lib": {
+      "kind": "directory",
+      "mode": "0o755",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 0
+    },
+    "usr/local/lib64": {
+      "kind": "symlink",
+      "mode": "0o777",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 0,
+      "target": "lib"
+    },
+    "usr/sbin": {
+      "kind": "symlink",
+      "mode": "0o777",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 0,
+      "target": "bin"
+    },
+    "var/lib/db/sbom/ca-certificates-bundle-20261020-r0.spdx.json": {
+      "kind": "file",
+      "mode": "0o644",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 5697,
+      "sha256": "b51b12338610fbfa5e70c575134caea9720d739915d3a62ecbb0c075c3061fd5"
+    },
+    "var/lib/db/sbom/libacl1-2.4.0-r4.spdx.json": {
+      "kind": "file",
+      "mode": "0o644",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 5431,
+      "sha256": "1aa764585c668bd23ee08204afd36ce8c8ab8c3c6bd1ebdb2a96c6f900b178cd"
+    },
+    "var/lib/db/sbom/libattr1-2.6.0-r4.spdx.json": {
+      "kind": "file",
+      "mode": "0o644",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 5399,
+      "sha256": "3682fccc6aee5068dd57833c0a0a9469fe713cff95ea9413b82bdd661fb63028"
+    },
+    "var/lib/db/sbom/libbrotlicommon1-1.2.1-r2.spdx.json": {
+      "kind": "file",
+      "mode": "0o644",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 5247,
+      "sha256": "741a6db6278f617c9d1b960a80058e4196bc3c4cead91cfb8f03a4fa9b1e973e"
+    },
+    "var/lib/db/sbom/libbrotlidec1-1.2.1-r2.spdx.json": {
+      "kind": "file",
+      "mode": "0o644",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 5199,
+      "sha256": "ae16cae204a4a440d6757bca119177ec563efde4798b0d7edc346c94b6cb76d6"
+    },
+    "var/lib/db/sbom/libbrotlienc1-1.2.1-r2.spdx.json": {
+      "kind": "file",
+      "mode": "0o644",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 5199,
+      "sha256": "727b06efbc1fbdffb2cf233cf8e55625486677d895c40d24abaac5a4cdba9b54"
+    },
+    "var/lib/db/sbom/libgcc-16.2.0-r2.spdx.json": {
+      "kind": "file",
+      "mode": "0o644",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 5622,
+      "sha256": "bbacbd8f7f367564acf866e984c2feff44bffdf7acbe2780dd7fefa090455888"
+    },
+    "var/lib/db/sbom/libpcre2-8-0-10.49-r1.spdx.json": {
+      "kind": "file",
+      "mode": "0o644",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 5308,
+      "sha256": "c77a096d9462948500595881926e155298557f4a8711d66ce2744d738e5c2361"
+    },
+    "var/lib/db/sbom/openssl-provider-legacy-allowed-4.1.0-r0.spdx.json": {
+      "kind": "file",
+      "mode": "0o644",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 5745,
+      "sha256": "4d4e188fee56ea1e487f41a8fed84ca75e25a23950c53114a8479c6b18173ee7"
+    },
+    "var/lib/db/sbom/wolfi-baselayout-20230201-r31.spdx.json": {
+      "kind": "file",
+      "mode": "0o644",
+      "uid": 0,
+      "gid": 0,
+      "bytes": 4388,
+      "sha256": "917156d7cc8f457ff7529a165fc90695ba61b938b29cc4ace1266a8512191db1"
+    }
+  },
+  "layers": [
+    {
+      "name": "blobs/sha256/2f8766d253a0983c1322a61454ffba8b8d6aabbc989909e086ee601212c41185",
+      "diff_id": "sha256:2f15c64c3a24c9f5b5126cf6f1acb7aa451166f8400e2c63e60c315ae027b50b",
+      "uncompressed_bytes": 102727168,
+      "headers": 13
+    },
+    {
+      "name": "blobs/sha256/ddbac42402060babf993a3fad5dbafd3d87f57603f1b52ef3f2dd53663e6be3d",
+      "diff_id": "sha256:0fd7637ac50d5dbe415170db40c2d0de490452e99e962a761fe5860744824ede",
+      "uncompressed_bytes": 32235520,
+      "headers": 12
+    },
+    {
+      "name": "blobs/sha256/f05b55f7f9cc9b79077ecb1e43f7f739e90a9cb56992b30b2782c5c262b3ed71",
+      "diff_id": "sha256:8b340dbcb0724e2a02fa7143b83ec353125c6dfa83864281e581610d3e400a9a",
+      "uncompressed_bytes": 6318080,
+      "headers": 59
+    },
+    {
+      "name": "blobs/sha256/883a507b291c9d9667bfa9a2462fbfea50f43423fe1dc18f59d080861940e390",
+      "diff_id": "sha256:319dd8614e6c77dec676e9995fb8cffae2f0baa9bae8a33720298ddd2bf093a5",
+      "uncompressed_bytes": 5276160,
+      "headers": 17
+    },
+    {
+      "name": "blobs/sha256/799c2619d4069081d98a3f4cdddabde542a51e2aca33109f4d4739ee0fa7d84f",
+      "diff_id": "sha256:cafeb078aaa8644434956b62af200104395c085aa2d9ccfe0a060cca4ae25929",
+      "uncompressed_bytes": 2956800,
+      "headers": 373
+    },
+    {
+      "name": "blobs/sha256/2f1805e56f7cc99eebc43b5f3886e6dfeaf823d2f29c8e87c8aa46ef68fb795b",
+      "diff_id": "sha256:39eeef0a486fa46c451387c10e0b11b60aff4ca7fe0a62bb1ae0e791fc8dafe5",
+      "uncompressed_bytes": 2748416,
+      "headers": 44
+    },
+    {
+      "name": "blobs/sha256/ec170df007e471a7af667823284781cb2c1ff454514875a2a379c3a70aca31e5",
+      "diff_id": "sha256:83caf59605fe3a23108f89ccdfcd64c8541cd5699b32e4dd1fbca06202dd8d79",
+      "uncompressed_bytes": 1839616,
+      "headers": 116
+    },
+    {
+      "name": "blobs/sha256/c678a45b3ec2d34021982e366822fe1da8f16f7406e27e5baab6e2963af47831",
+      "diff_id": "sha256:aac859efc4ef11d1d7d0ee84a5c6a62eca5c6b37bf2248e941e623dd75a8527a",
+      "uncompressed_bytes": 1675776,
+      "headers": 14
+    },
+    {
+      "name": "blobs/sha256/c2f6afa078e4733e6ea5a24e0f60a580249696cf0eb35f629a50512710afea1a",
+      "diff_id": "sha256:146ad02118a9d28948e9c1f174c5e8058c53732a5867a64013c621037d0e6b1d",
+      "uncompressed_bytes": 1424384,
+      "headers": 19
+    },
+    {
+      "name": "blobs/sha256/5351d5b2902240c3bcfa7b2161e9c6aeca610567b97cd5eafc26e3418fd78575",
+      "diff_id": "sha256:bdc2f516ca0c12ef5780163630becb25e9fad73a2d378bc9b32949090eac03af",
+      "uncompressed_bytes": 3346944,
+      "headers": 93
+    },
+    {
+      "name": "blobs/sha256/28f95674cff65f6e8ab1db21e07f51928a981518bb4a5ce03bdabbf720b306cf",
+      "diff_id": "sha256:8566104bf8c6e3f7534955e6acb35dda342cd5c8ce2ae5882728354c4d5cf4fe",
+      "uncompressed_bytes": 107008,
+      "headers": 98
+    }
+  ],
+  "license_notices_private_file": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-telemetry-20261104/image-notices/chainguard-minio.json",
+  "license_notices_sha256": "41b90ee43d947b7aa170948cc2ff99959f8c7a659af3d5f2922dd8be7a9031e7",
+  "guest_execution": false
+}

@@ -7389,3 +7389,15 @@ is now propagated; some earlier temporary unit roots expired through ordinary
 pytest retention. No real benchmark/campaign evidence was stored there.
 All integration/usefulness/resource/release gates remain open; comparisons paused.
 <!-- scanner-fixture-continuation-20261103:end -->
+
+<!-- workflow-telemetry-artifacts-pass-20261104:start -->
+## November 4: acquired artifacts verified; Langfuse service remains unstarted
+
+[Actual artifact results](../toolkit-v2/c13/workflow-telemetry-20261104/RESULTS.md) pass six image pulls, twelve static audits and
+thirteen installed CLI checks under approved d7f05c3f. No service, guest program
+or model ran. Reuse the retained runtime and images. Artifact accounting is
+26/0/77.50283324997872seconds; old SkillRank counters remain42/0/63.68363312864676.
+Both grants are settled. Docs attempt1 failed six duplicate blank lines; the
+correction awaits the next service/docs review. Original input evidence remains.
+Stack, candidate and selection gates stay open and comparisons remain paused.
+<!-- workflow-telemetry-artifacts-pass-20261104:end -->

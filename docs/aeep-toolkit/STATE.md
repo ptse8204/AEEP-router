@@ -1,5 +1,31 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- workflow-telemetry-artifacts-pass-20261104:start -->
+**November 4: approved image/static-audit and installed CLI checks pass.**
+[Actual results](../../reports/toolkit-v2/c13/workflow-telemetry-20261104/RESULTS.md)
+retain exact approval d7f05c3f and every component attempt. Six immutable ARM64
+images passed acquisition/configuration checks and twelve streamed static audits;
+no guest program or service ran. Wheel5fe1fa9ba780 plus32 unchanged dependencies
+passed the boundary and13 installed checks. Its reusable runtime remains.
+
+The artifact grant is settled at26operations/0models/77.50283324997872measured
+seconds. The old SkillRank grant remains42/0/63.68363312864676. No reservations
+remain. Cash and other unmeasured dimensions stay unknown. All185 images,
+13containers,25volumes and unrelated work are preserved; usable host space62.84GiB.
+
+Docs attempt1 failed six duplicate blank lines. Only those lines were corrected;
+old logs and exact input bindings remain. Changed docs will join the next service
+review. No successful source, package or image check needs replay. Source5a13a630
+and all13 source gates remain applicable; report preparation changes no product code.
+
+Next: prepare the exact private Langfuse service/CLI ingestion/linkage/disablement
+and corrected offline-docs review. No service or new credential is authorized by
+the completed artifact review. Continue independent stack work. Waza lacks backend
+access. Both SkillsBench domains and remaining component journeys stay open.
+Comparisons remain paused; stack integration, candidate usefulness, selection
+usefulness, resources and release remain separate. Parent1781ef2.
+<!-- workflow-telemetry-artifacts-pass-20261104:end -->
+
 <!-- workflow-telemetry-implementation-20261104:start -->
 **November 4: ordinary receipt export implemented; all 13 source gates pass.**
 The approved SkillRank CLI continuation passed and is pushed as5ecad73. Its

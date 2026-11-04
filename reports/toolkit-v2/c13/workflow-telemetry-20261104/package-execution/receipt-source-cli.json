@@ -1,0 +1,136 @@
+{
+  "receipt_id": "rcpt_ca6ac157d7324b1092c1cbca40d29e7c",
+  "decision_id": "workflow-installed-source-cli",
+  "action_id": "act_0a579e457c814f8590819ed8ca896707",
+  "capability": "toolkit.upstream-engineering@1",
+  "executor_id": "toolkit.installed-source-cli",
+  "executor_kind": "command",
+  "status": "success",
+  "attempt": 1,
+  "started_at": "2026-11-04T22:37:22.741137Z",
+  "ended_at": "2026-11-04T22:37:24.658188Z",
+  "estimated": {
+    "resources": {
+      "monetary_usd": 0.0,
+      "latency_ms": 0.0,
+      "cpu_ms": 0.0,
+      "memory_mb_seconds": 0.0,
+      "peak_memory_mb": 0.0,
+      "gpu_ms": 0.0,
+      "network_bytes": 0,
+      "context_tokens": 0,
+      "input_tokens": 0,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_output_tokens": 0,
+      "subscription_units": 0.0
+    },
+    "cash": {
+      "amount_usd": null,
+      "upper_bound_usd": null,
+      "evidence": {
+        "status": "unavailable",
+        "source": "unavailable",
+        "trust": "untrusted",
+        "evidence_id": null,
+        "source_reference": null,
+        "digest": null,
+        "observed_at": null
+      }
+    },
+    "subscription_usage": [],
+    "success_probability": 0.95,
+    "quality_score": 0.95,
+    "risk_score": 0.05,
+    "confidence": 0.5,
+    "source": "static",
+    "sample_size": 0,
+    "uncertainty": null
+  },
+  "executor_fingerprint": null,
+  "cohort_digest": null,
+  "action_features": null,
+  "actual_resources": {
+    "monetary_usd": 0.0,
+    "latency_ms": 1916.5975404903293,
+    "cpu_ms": 770.5675839999999,
+    "memory_mb_seconds": 133.0885782376572,
+    "peak_memory_mb": 112.03125,
+    "gpu_ms": 0.0,
+    "network_bytes": 0,
+    "context_tokens": 191,
+    "input_tokens": 0,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 0,
+    "reasoning_output_tokens": 0,
+    "subscription_units": 0.0
+  },
+  "accounting": {
+    "cash": {
+      "status": "unavailable",
+      "components": []
+    },
+    "subscription_usage": [],
+    "model_usage": [],
+    "tool_footprint": null
+  },
+  "cache_affinity": null,
+  "approval_id": null,
+  "transport_success": null,
+  "execution_success": true,
+  "schema_valid": null,
+  "task_valid": null,
+  "quality_score": null,
+  "validation_results": [],
+  "output_valid": null,
+  "error_type": null,
+  "error_message": null,
+  "trace_id": null,
+  "metadata": {
+    "review_sha256": "d7f05c3f6c0e726cee3b499c1bd185038a16c369dc64781b559fbe3eae66086c",
+    "executable": "/usr/bin/sandbox-exec",
+    "stdout_bytes": 785,
+    "stderr_bytes": 0,
+    "stdout_truncated": false,
+    "stderr_truncated": false,
+    "execution_evidence": {
+      "schema_version": "execution.evidence.v1",
+      "attempt_id": "act_0a579e457c814f8590819ed8ca896707",
+      "adapter": "CommandExecutor",
+      "events": [
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "c0dbd3a3e632419bba8cc66cb9fd04bb",
+          "attempt_id": "act_0a579e457c814f8590819ed8ca896707",
+          "sequence": 0,
+          "kind": "execution.started",
+          "source_id": "start",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "c0dbd3a3e632419bba8cc66cb9fd04bb",
+          "attempt_id": "act_0a579e457c814f8590819ed8ca896707",
+          "sequence": 1,
+          "kind": "execution.completed",
+          "source_id": "terminal",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        }
+      ],
+      "complete": true,
+      "cancellation_confirmed": false,
+      "identity_digest": null,
+      "boundary_digest": null,
+      "journal_id": "c0dbd3a3e632419bba8cc66cb9fd04bb"
+    },
+    "execution_evidence_digest": "f1d3e24920b125e1339e555ca0cc991d1d3568125a47e6c39817ec794324cc4b"
+  }
+}

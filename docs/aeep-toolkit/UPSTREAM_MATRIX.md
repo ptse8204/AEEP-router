@@ -2039,7 +2039,6 @@ packs' different prompts, protected verifiers and grading semantics. No database
 service or task is executed by this preparation. All stack/usefulness/release
 gates stay separate and comparisons remain paused.
 
-
 ## November 4 — represent database outputs without changing file-pack v1
 
 The [MCP state-pack increment](../../reports/toolkit-v2/c13/mcp-state-packs-20261104/README.md)
@@ -2063,7 +2062,6 @@ module/license and service permission closure remains open. SkillRank continuati
 review1a091b2b stays frozen and pending, independently of these source changes.
 All resources, historical charges and comparisons-paused policy are preserved.
 
-
 ## November 4 — retain the completed SkillRank CLI journey
 
 The [approved runtime continuation](../../reports/toolkit-v2/c13/skillrank-cli-continuation-20261104/RESULTS.md)
@@ -2079,7 +2077,6 @@ Root writes were denied withEROFS30 and external networking had no route(errno10
 Retain that distinction; the earlier discarded inner failure stays unknown.
 SkillRank bounded evaluation remains open. Continue independent Langfuse and
 ToolHive/MCP work; no comparative campaign or full-stack readiness is inferred.
-
 
 ## November 4 — connect minimized receipt export and bind a published Langfuse runtime
 
@@ -2112,3 +2109,15 @@ existing database, preserving every old grant/counter. The50GiB reserve remains;
 no host/Docker memory change is inferred from upstream production sizing advice.
 Full-stack, usefulness, resource and release gates remain separate; comparisons
 stay paused. Waza still lacks supported backend access.
+
+<!-- workflow-telemetry-artifacts-pass-20261104:start -->
+## November 4: acquired artifacts verified; Langfuse service remains unstarted
+
+[Actual artifact results](../../reports/toolkit-v2/c13/workflow-telemetry-20261104/RESULTS.md) pass six image pulls, twelve static audits and
+thirteen installed CLI checks under approved d7f05c3f. No service, guest program
+or model ran. Reuse the retained runtime and images. Artifact accounting is
+26/0/77.50283324997872seconds; old SkillRank counters remain42/0/63.68363312864676.
+Both grants are settled. Docs attempt1 failed six duplicate blank lines; the
+correction awaits the next service/docs review. Original input evidence remains.
+Stack, candidate and selection gates stay open and comparisons remain paused.
+<!-- workflow-telemetry-artifacts-pass-20261104:end -->
