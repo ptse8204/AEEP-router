@@ -29,3 +29,11 @@ must consume the original reward and test results, preserve binary scoring, and
 distinguish skips from infrastructure failures. Reference success and
 incomplete/destructive-output counterexamples remain unexecuted. These six tasks
 cannot close formal usefulness, resource or release gates.
+
+The [protected verifier contract audit](verifier-contracts.json) now binds seven
+original verifier modules and seven reference assets across the six tasks.
+Collection identities remain unknown until the reference runs; static function
+counts cannot replace them. Original rewards and AEEP observation validity must
+be reported separately. A skipped or broken verifier cannot establish success,
+even if an upstream shell exits zero. React's broad process cleanup must stay
+inside its owned verifier container. No upstream program ran during this audit.
