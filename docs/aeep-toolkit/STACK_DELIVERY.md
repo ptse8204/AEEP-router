@@ -229,3 +229,39 @@ file-output task transport and canonical file-recipe preparation reject these
 packs. Execution remains blocked until the private backend, tool permissions,
 original grader, reference/counterexample checks and cleanup are reviewed and
 connected. Database outputs must not be replaced with an invented report file.
+
+## Export a minimized canonical receipt
+
+Select both `langfuse` and `opentelemetry`, and bind a reviewed
+`aeep.toolkit.receipt-export.v1` definition under the configuration's `telemetry`
+field. The definition names a separately reviewed private deployment and a
+loopback port. It defaults to disabled. Setup and authentication for that owned
+deployment require their own applicable authority; this command provisions no
+service and reads no provider credentials.
+
+Inspect one receipt from the accounting scope's existing canonical store:
+
+```bash
+PYTHONPATH=src python3 -m aeep_toolkit workflow export-telemetry \
+  --workflow /absolute/workflow.json --configuration document-data \
+  --receipt-id CANONICAL_RECEIPT_ID --accounting /absolute/accounting.json \
+  --operation-id receipt-export-preview
+```
+
+The preview sends nothing. Applying its exact digest through
+`--reviewed-digest EXACT_PREVIEW_SHA256`, with a fresh operation ID, requires the
+reviewed definition, deployment reference and existing grant. Only task-owned
+local authentication from `AEEP_LANGFUSE_LOCAL_AUTH` is eligible. Prompts, paths,
+artifact contents and credential values are excluded from the exported span.
+Receipt digests and timing can still identify an operation.
+
+Export uses the existing HTTP executor and ledger. Source or authority drift
+stops invocation. Disabled definitions send nothing; revoking the exact export
+definition through the existing operator review controls blocks further sends.
+Each definition/receipt pair has one durable attempt, including failures. A new
+CLI operation ID cannot replay it. Keep partial evidence and inspect uncertain
+effects before proposing a new exact review.
+
+An accepted HTTP response establishes transport acceptance. Actual Langfuse
+ingestion and receipt/trace linkage need separate observations. Current checks
+use first-party transport substitutes; no Langfuse deployment has been qualified.

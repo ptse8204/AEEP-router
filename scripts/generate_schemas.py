@@ -200,11 +200,14 @@ from aeep_toolkit.workflow import EvaluationWorkflow, StackWorkflow
 from aeep_toolkit.workflow_accounting import WorkflowAccountingDefinition
 from aeep_toolkit.workflow_catalog import CatalogRuntimeDefinition, WorkflowCatalogRecord
 from aeep_toolkit.workflow_security import ScannerRuntimeDefinition, WorkflowScanRecord
+from aeep_toolkit.workflow_telemetry import ReceiptExportDefinition, ReceiptExportRecord
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_DIR = ROOT / "schemas"
 
 MODEL_FILES = {
+    "toolkit-receipt-export.schema.json": ReceiptExportDefinition,
+    "toolkit-receipt-export-record.schema.json": ReceiptExportRecord,
     "toolkit-mcp-state-pack.schema.json": MCPStatePack,
     "toolkit-catalog-runtime.schema.json": CatalogRuntimeDefinition,
     "toolkit-workflow-catalog.schema.json": WorkflowCatalogRecord,

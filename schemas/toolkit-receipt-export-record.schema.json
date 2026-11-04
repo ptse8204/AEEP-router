@@ -1,0 +1,75 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.toolkit.receipt-export-record.v1",
+      "default": "aeep.toolkit.receipt-export-record.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "definition_ref": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Definition Ref",
+      "type": "string"
+    },
+    "deployment_review_ref": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Deployment Review Ref",
+      "type": "string"
+    },
+    "source_receipt_id": {
+      "title": "Source Receipt Id",
+      "type": "string"
+    },
+    "source_receipt_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Receipt Sha256",
+      "type": "string"
+    },
+    "trace_id": {
+      "title": "Trace Id",
+      "type": "string"
+    },
+    "span_id": {
+      "title": "Span Id",
+      "type": "string"
+    },
+    "operation_id": {
+      "title": "Operation Id",
+      "type": "string"
+    },
+    "transport_receipt_ref": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Transport Receipt Ref",
+      "type": "string"
+    },
+    "executor_fingerprint": {
+      "title": "Executor Fingerprint",
+      "type": "string"
+    },
+    "transport_accepted": {
+      "title": "Transport Accepted",
+      "type": "boolean"
+    },
+    "ingestion_verified": {
+      "const": false,
+      "default": false,
+      "title": "Ingestion Verified",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "definition_ref",
+    "deployment_review_ref",
+    "source_receipt_id",
+    "source_receipt_sha256",
+    "trace_id",
+    "span_id",
+    "operation_id",
+    "transport_receipt_ref",
+    "executor_fingerprint",
+    "transport_accepted"
+  ],
+  "title": "ReceiptExportRecord",
+  "type": "object"
+}

@@ -88,6 +88,8 @@ class HTTPExecutor(BaseExecutor):
             )
 
         try:
+            if context.invocation_check is not None:
+                context.invocation_check()
             async with (
                 httpx.AsyncClient(
                     timeout=timeout,

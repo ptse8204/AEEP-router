@@ -73,6 +73,7 @@ class StackConfiguration(ContractModel):
     scheduler: WorkflowFile | None = None
     scanner: WorkflowFile | None = None
     catalog: WorkflowFile | None = None
+    telemetry: WorkflowFile | None = None
     runtimes: dict[Identifier, WorkflowRuntimeBinding] = Field(default_factory=dict, max_length=16)
 
     @model_serializer(mode='wrap')
@@ -84,6 +85,8 @@ class StackConfiguration(ContractModel):
             result.pop('scanner', None)
         if self.catalog is None:
             result.pop('catalog', None)
+        if self.telemetry is None:
+            result.pop('telemetry', None)
         if not self.runtimes:
             result.pop('runtimes', None)
         return result
@@ -98,6 +101,8 @@ class StackConfiguration(ContractModel):
             raise ValueError('scanner binding requires explicit component selection')
         if self.catalog is not None and 'skillrank' not in self.components:
             raise ValueError('catalog binding requires explicit SkillRank selection')
+        if self.telemetry is not None and not {'langfuse', 'opentelemetry'} <= set(self.components):
+            raise ValueError('telemetry binding requires explicit Langfuse and OpenTelemetry selection')
         if self.assessment is not None and self.preparation is not None:
             raise ValueError('select either an existing assessment or canonical preparation inputs')
         return self
@@ -299,6 +304,17 @@ def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
             raise ValueError('catalog definition refers to an unselected runtime')
         facts['catalog'] = {'definition_ref':content_digest(catalog_definition),
                             'functional_readiness':'NOT_VERIFIED_BY_PREVIEW'}
+    if selected.telemetry is not None:
+        from .workflow_telemetry import ReceiptExportDefinition, spec_for
+
+        _, telemetry_raw = _read(selected.telemetry, root)
+        telemetry_definition = ReceiptExportDefinition.model_validate_json(telemetry_raw)
+        facts['telemetry'] = {'definition_ref':content_digest(telemetry_definition),
+                              'deployment_review_ref':telemetry_definition.deployment_review_ref,
+                              'enabled':telemetry_definition.enabled,
+                              'endpoint':spec_for(telemetry_definition).config['url'],
+                              'export_performed':False, 'ingestion_verified':False,
+                              'requires_task_owned_authentication':'AEEP_LANGFUSE_LOCAL_AUTH'}
     return {**facts, 'review_sha256':content_digest(facts), 'blockers':blockers,
             'gates':{'stack_integration':'NOT_VERIFIED_BY_PREVIEW', 'candidate_usefulness':'NOT_ASSESSED',
                      'selection_usefulness':'NOT_ASSESSED'},
@@ -366,6 +382,16 @@ def main(argv: list[str] | None = None) -> None:
     catalog_command.add_argument('--accounting', type=Path)
     catalog_command.add_argument('--operation-id')
     catalog_command.add_argument('--reviewed-digest', help='Omit for inert preview; execution requires an accounting v4 scope')
+    telemetry = commands.add_parser('export-telemetry', help='Export one canonical minimized receipt to reviewed local Langfuse')
+    telemetry.add_argument('--workflow', type=Path, required=True)
+    telemetry.add_argument('--configuration', required=True)
+    telemetry.add_argument('--receipt-id', required=True)
+    telemetry.add_argument('--accounting', type=Path)
+    telemetry.add_argument('--operation-id')
+    telemetry.add_argument('--reviewed-digest', help='Exact receipt/destination preview; omit for inspection only')
+    define_telemetry = commands.add_parser('define-telemetry', help='Store an inert exact local receipt-export definition; no review or execution')
+    define_telemetry.add_argument('--file', type=Path, required=True)
+    define_telemetry.add_argument('--manifest', type=Path, required=True)
     worker_readiness = commands.add_parser('prepare-worker-readiness',
         help='Draft canonical readiness from settled paired-worker observations; no review or execution')
     worker_readiness.add_argument('--manifest', type=Path, required=True)
@@ -392,6 +418,13 @@ def main(argv: list[str] | None = None) -> None:
             print(json.dumps(catalog(args.workflow,args.configuration,args.mode,args.value,
                 accounting=args.accounting,operation_key=args.operation_id,reviewed_digest=args.reviewed_digest),indent=2))
             return
+        if args.operation == 'export-telemetry':
+            from .workflow_telemetry import export_receipt
+
+            print(json.dumps(export_receipt(args.workflow, args.configuration, args.receipt_id,
+                accounting=args.accounting, operation_key=args.operation_id,
+                reviewed_digest=args.reviewed_digest), indent=2))
+            return
         if args.operation == 'prepare-worker-readiness':
             import asyncio
 
@@ -414,7 +447,7 @@ def main(argv: list[str] | None = None) -> None:
             finally:
                 asyncio.run(router.close())
             return
-        if args.operation in {'define-rights', 'define-scheduler', 'define-accounting', 'define-scanner', 'define-catalog'}:
+        if args.operation in {'define-rights', 'define-scheduler', 'define-accounting', 'define-scanner', 'define-catalog', 'define-telemetry'}:
             import asyncio
 
             from aeep.assessment.repository import AssessmentRepository
@@ -425,20 +458,22 @@ def main(argv: list[str] | None = None) -> None:
             from .workflow_catalog import CatalogRuntimeDefinition
             from .workflow_preparation import TaskRightsReview
             from .workflow_security import ScannerRuntimeDefinition
+            from .workflow_telemetry import ReceiptExportDefinition
 
             record = (TaskRightsReview.model_validate_json(read_bytes(args.file)) if args.operation == 'define-rights'
                       else WorkflowAccountingDefinition.model_validate_json(read_bytes(args.file)) if args.operation == 'define-accounting'
                       else ScannerRuntimeDefinition.model_validate_json(read_bytes(args.file)) if args.operation == 'define-scanner'
                       else CatalogRuntimeDefinition.model_validate_json(read_bytes(args.file)) if args.operation == 'define-catalog'
+                      else ReceiptExportDefinition.model_validate_json(read_bytes(args.file)) if args.operation == 'define-telemetry'
                       else SchedulerDefinition.model_validate_json(read_bytes(args.file)))
             kind = ('toolkit_task_rights' if args.operation == 'define-rights' else
-                    'toolkit_workflow_accounting' if args.operation == 'define-accounting' else 'toolkit_scanner_runtime' if args.operation == 'define-scanner' else 'toolkit_catalog_runtime' if args.operation == 'define-catalog' else 'scheduler')
+                    'toolkit_workflow_accounting' if args.operation == 'define-accounting' else 'toolkit_scanner_runtime' if args.operation == 'define-scanner' else 'toolkit_catalog_runtime' if args.operation == 'define-catalog' else 'toolkit_receipt_export' if args.operation == 'define-telemetry' else 'scheduler')
             router = Router.from_manifest(args.manifest)
             try:
                 from aeep.assessment.models import content_digest
 
                 ref = AssessmentRepository(router.store).put(kind, content_digest(record), record)
-                print(json.dumps({'rights_review_ref' if args.operation == 'define-rights' else 'accounting_ref' if args.operation == 'define-accounting' else 'scanner_ref' if args.operation == 'define-scanner' else 'catalog_ref' if args.operation == 'define-catalog' else 'scheduler_ref':ref,
+                print(json.dumps({'rights_review_ref' if args.operation == 'define-rights' else 'accounting_ref' if args.operation == 'define-accounting' else 'scanner_ref' if args.operation == 'define-scanner' else 'catalog_ref' if args.operation == 'define-catalog' else 'telemetry_ref' if args.operation == 'define-telemetry' else 'scheduler_ref':ref,
                                   'reviewed':False, 'execution_authorized':False}))
             finally:
                 asyncio.run(router.close())

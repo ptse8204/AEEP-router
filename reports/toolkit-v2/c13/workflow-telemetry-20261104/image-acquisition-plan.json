@@ -1,0 +1,59 @@
+{
+  "purpose": "Acquire the six exact ARM64 Langfuse4.55.0/support images and inspect immutable references. No container/app/service/credential execution. Read-only static image audits may follow before a separate service review.",
+  "selected_langfuse_revision": "5e4db922e9021083500cd066249b220a414b7dfe",
+  "images": [
+    {
+      "key": "langfuse-langfuse",
+      "reference": "docker.langfuse.com/langfuse/langfuse@sha256:30da3fc4e5ebda606bca1598a477fb6da68ed004248e9218f6655f2d9ff7d988",
+      "manifest_digest": "sha256:30da3fc4e5ebda606bca1598a477fb6da68ed004248e9218f6655f2d9ff7d988",
+      "config_digest": "sha256:86a950d244b1cc7e51926ac2930e27afccbc3e3518804d65b60673590e93f5aa",
+      "compressed_layer_bytes": 306763513
+    },
+    {
+      "key": "langfuse-langfuse-worker",
+      "reference": "docker.langfuse.com/langfuse/langfuse-worker@sha256:18f884c4b8231988aeedc1edb230167013e3286fddfc8d81471a002fa51dbc60",
+      "manifest_digest": "sha256:18f884c4b8231988aeedc1edb230167013e3286fddfc8d81471a002fa51dbc60",
+      "config_digest": "sha256:98a6460c2727496d3d42c2bbf795ef772559c7d1024b6469c707482acfa37366",
+      "compressed_layer_bytes": 367003554
+    },
+    {
+      "key": "clickhouse-clickhouse-server",
+      "reference": "docker.io/clickhouse/clickhouse-server@sha256:0d643ec0036ceb52ae65e5d8465e155ad6069d771f33a79a9e71dc4334e029e6",
+      "manifest_digest": "sha256:0d643ec0036ceb52ae65e5d8465e155ad6069d771f33a79a9e71dc4334e029e6",
+      "config_digest": "sha256:2e46929e49593232e1f58afd97c33935f132357c0e7484fe792c516963c9cf19",
+      "compressed_layer_bytes": 228578842
+    },
+    {
+      "key": "chainguard-minio",
+      "reference": "cgr.dev/chainguard/minio@sha256:f4c90d3148e56e4b720a5663a9e45428bac3e38c39681bbc0d8692ed1086ff09",
+      "manifest_digest": "sha256:f4c90d3148e56e4b720a5663a9e45428bac3e38c39681bbc0d8692ed1086ff09",
+      "config_digest": "sha256:4d0d6ab2e1545cc19c46e06e71cca3ef453477c17830defc3df3b1599c3df4ba",
+      "compressed_layer_bytes": 58391803
+    },
+    {
+      "key": "library-redis",
+      "reference": "docker.io/library/redis@sha256:70906c24c6bcde0712573cce29bb3d30331fec36aaefd503bc570c18ba431c26",
+      "manifest_digest": "sha256:70906c24c6bcde0712573cce29bb3d30331fec36aaefd503bc570c18ba431c26",
+      "config_digest": "sha256:0acd23d1d2114463235a759bca46f8d4b3c768df692bae3cfe71b16f14aa16bb",
+      "compressed_layer_bytes": 43500166
+    },
+    {
+      "key": "library-postgres",
+      "reference": "docker.io/library/postgres@sha256:ac359420747e1f5f8ac4d23f40d7ce022c0a39090ed6cdd8dde5f596affbe41d",
+      "manifest_digest": "sha256:ac359420747e1f5f8ac4d23f40d7ce022c0a39090ed6cdd8dde5f596affbe41d",
+      "config_digest": "sha256:bbdfc26f27f4b2fecdc289b63295a0228cab33657a7b859afe54dc78d184dd1d",
+      "compressed_layer_bytes": 159981836
+    }
+  ],
+  "compressed_layer_total_bytes": 1164219714,
+  "maximum_pull_attempts_per_image": 2,
+  "maximum_docker_image_inspections": 6,
+  "maximum_later_streamed_image_audits": 12,
+  "image_layers_executed": 0,
+  "models": 0,
+  "cash_authority_usd": "0",
+  "actual_network_bytes": "UNKNOWN",
+  "minimum_host_free_bytes": 53687091200,
+  "start_headroom_bytes": 6442450944,
+  "cleanup": "Keep every image, container, volume, backup and old runtime. No pruning or image removal. Streamed inspection writes no disk archive and extracts no executable onto host."
+}

@@ -154,6 +154,17 @@
           ],
           "default": null
         },
+        "telemetry": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/WorkflowFile"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "runtimes": {
           "maxProperties": 16,
           "patternProperties": {

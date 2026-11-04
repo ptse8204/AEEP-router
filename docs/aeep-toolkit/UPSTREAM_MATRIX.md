@@ -2079,3 +2079,36 @@ Root writes were denied withEROFS30 and external networking had no route(errno10
 Retain that distinction; the earlier discarded inner failure stays unknown.
 SkillRank bounded evaluation remains open. Continue independent Langfuse and
 ToolHive/MCP work; no comparative campaign or full-stack readiness is inferred.
+
+
+## November 4 — connect minimized receipt export and bind a published Langfuse runtime
+
+The [ordinary CLI increment](../../reports/toolkit-v2/c13/workflow-telemetry-20261104/README.md)
+uses the existing HTTP executor, receipt store and assessment ledger. It adds no
+background exporter, scheduler or database implementation. Exact definitions and
+receipt hashes, disabled configuration, revoked/source-drift guards and durable
+one-attempt identities control export. HTTP now performs its final invocation
+check before creating the request client. Raw transport dimensions and exclusive
+wrapper measurements remain; accepted HTTP does not prove ingestion or linkage.
+
+All13 source gates pass on5a13a630:2134tests/21skips twice,82.697017447269%combined
+coverage,both branch gates and packaging. First-party HTTP/driver substitutes do
+not qualify Langfuse. New wheel5fe1fa9ba780 and changed offline docs remain unstarted
+pending the concrete grouped review. The tested mixed working tree is preserved
+in a408-file private snapshot; unrelated operator CI changes stay out of this commit.
+
+Resolve the observed source/artifact mismatch by selecting the actual published
+Langfuse4.55.0 commit5e4db922e9021083500cd066249b220a414b7dfe. Originalc106bb3d has
+no matching SHA image in either queried registry. Both releases have the identical
+OTLP API Git blob3ff63598128b16a2b701c72788a636fbc305a598. Preserve the old pin's
+evidence and assert interface compatibility only. All6 ARM64 image/config pins
+are verified as metadata. No layer was downloaded or guest program executed.
+
+The grouped review proposes bounded image acquisition/static inspection and
+independent current-wheel/offline-doc checks, retaining all resources. Source
+license and startup inspection precede a separate service/owned-credential review.
+A new31-operation/zero-model/4200-second/$0 engineering grant is prepared in the
+existing database, preserving every old grant/counter. The50GiB reserve remains;
+no host/Docker memory change is inferred from upstream production sizing advice.
+Full-stack, usefulness, resource and release gates remain separate; comparisons
+stay paused. Waza still lacks supported backend access.

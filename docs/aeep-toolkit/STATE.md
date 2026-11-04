@@ -1,5 +1,64 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- workflow-telemetry-implementation-20261104:start -->
+**November 4: ordinary receipt export implemented; all 13 source gates pass.**
+The approved SkillRank CLI continuation passed and is pushed as5ecad73. Its
+original grant remains42operations/0model turns/63.68363312864676measured seconds;
+no old charge or resource was reset or discarded. Comparisons remain paused.
+
+[The receipt-export increment](../../reports/toolkit-v2/c13/workflow-telemetry-20261104/README.md) connects explicit Langfuse/OpenTelemetry
+selection to the existing HTTP executor, canonical receipt store and ledger.
+Export defaults to disabled. Exact preview and invocation checks bind receipt,
+destination, definition, exporter fingerprint and source. Prompts, paths,
+artifacts and credential values are excluded. Wrapper/nested intervals are
+separate. Failed charges remain, and another CLI key cannot replay the same
+receipt. Accepted transport does not establish ingestion or trace linkage.
+
+Source5a13a630a89aa0c6b4940be4eed0a30dd80ab5a822ee15f7f25f78f521c11c4b passes
+2134tests/21skips in each full run,82.697017447269%combined coverage,both branch
+gates,schemas,policy,lint,typing,integration fixtures and build. Minimum sampled
+host free space66.60GiB. The408-file frozen inventory preserves the exact tested
+working tree, including the separate operator CI test/dev pin, which remain
+outside the feature commit. No source suite needs replay for these first-party
+review/preparation records. Wheel5fe1fa9ba780 is built, not installed.
+
+Langfuse now selects published4.55.0 release5e4db922e902. Both queried registries
+returned404 for originalc106bb3d SHA images;4.55.0 config labels bind5e4db922.
+Their original OTLP API Git blob is identical. This records interface compatibility,
+not whole-runtime equivalence. All6 ARM64 image/config pins resolve; compressed
+layer inventory1,164,219,714bytes. No layers, container, service or local credential
+have been created. The root license retains MIT-core/enterprise/third-party
+boundaries; static artifact inspection remains necessary before service execution.
+
+The grouped acquisition/current-wheel/offline-doc review is prepared at
+workflow-telemetry-20261104/operation-review.json. It is unapproved and unstarted;
+read/hash that file for its exact current identity. Separate component asset
+bindings let independent work continue after settled failures. The artifact phase
+proposes6 immutable image downloads, up to2 attempts per reference, metadata and
+bounded read-only streamed image audits; no guest/app/service execution or disk
+archive. A new finite engineering grant is prepared in the existing canonical
+database:31operations/0models/4200reserved seconds/$0cash authority. No old grant
+changes. Five substituted driver scenarios preserve old counters; a standard-
+library-only package boundary probe passes. Neither is upstream execution proof.
+
+The changed wheel binds32 unchanged cached dependency wheels and a retained
+private runtime. Docs use the existing cached tools over72 exact inputs. These
+components need the new exact approval, not replay of terminal old checks. The
+acquisition requires6GiB start headroom over the50GiB host reserve, monitored
+while pulling. Keep all images,containers,volumes,backups and retained runtimes.
+Docker's7.75GiB VM on this24GiB host and four unrelated databases are preserved.
+No Docker restart, memory setting, credential or service setup is proposed.
+
+Next: obtain the exact grouped review approval, then run acquisition and the
+independent package/docs components. Inspect acquired license/startup files and
+prepare a separate private Langfuse service/ingestion/linkage/disablement review.
+Continue other safe stack work; do not start comparative campaigns. Bounded
+SkillRank evaluation,ToolHive/MCP,both SkillsBench domains and other integrations
+remain open. Waza has no supported backend access. Stack integration,candidate
+usefulness,selection usefulness,resources and release remain separate. Parent5ecad73;
+unrelated CI edits and every historical result/approval/resource are preserved.
+<!-- workflow-telemetry-implementation-20261104:end -->
+
 <!-- skillrank-cli-pass-20261104:start -->
 **November 4: approved SkillRank CLI continuation passed.**
 [Actual results](../../reports/toolkit-v2/c13/skillrank-cli-continuation-20261104/RESULTS.md) retain the successful single attempt under exact review
@@ -1036,7 +1095,7 @@ checkpoint_status:
 last_verified_commit: 'df9eee7f2535a47e957418da0747c2d428641f26'
 last_check_command: 'stack-delivery-20261030/validation/checks.json:13/13 on working source24dccd3e;1798passed/21skipped per full run. Actual732f attempt reconciled; no retry.'
 last_check_result: 'Source24dccd3e13gates passed,82%coverage,both branch gates. Source includes preserved CI inputs. Named workflow software checks passed; no new live stack/value/selection pass.732f buildCLI failed125,no image/tool check;2operations and2.255710876sec retained. Corrected review pending. OriginalPonytail14/19both preserved.'
-next_action: 'Comparisons paused. Approved1a091b2b SkillRank CLI continuation passed; original grant42 operations/0 models/63.68363312864676seconds settled. Preserve all charges/runtime and passed wheel/docs. Continue private Langfuse receipt export and ToolHive/MCP runtime/dependency closure; bounded SkillRank evaluation and both SkillsBench journeys remain open. Waza lacks supported access. Maintain50GiB and unrelated CI work.'
+next_action: 'Comparisons paused. Telemetry source5a13a630 passes all13 gates:2134tests/21skips twice,82.697%coverage,both branch gates. Frozen source408files and wheel5fe1fa9b prepared. Obtain exact workflow-telemetry-20261104/operation-review.json approval before six-image acquisition,current-wheel/offline-doc execution; no services or credentials authorized. Preserve50GiB/all old resources and42 settled SkillRank charges. After acquisition,static license/startup audit then separate Langfuse service review. Unrelated CI work remains.'
 blocked_actions:
   - 'Helped report comprehension is recorded. The operator removed the concrete control exercise from the critical path on October29;control-use qualification remains unmeasured and is not an engineering/comparison blocker.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'

@@ -1,0 +1,84 @@
+{
+  "observed_at": "2026-11-04T21:34:21.216334+00:00",
+  "scope": "original pinned supporting image metadata, no execution",
+  "images": [
+    {
+      "registry": "registry-1.docker.io",
+      "repository": "clickhouse/clickhouse-server",
+      "linux_arm64_manifest_digest": "sha256:0d643ec0036ceb52ae65e5d8465e155ad6069d771f33a79a9e71dc4334e029e6",
+      "previous_tag": "25.12",
+      "status": "METADATA_VERIFIED",
+      "config_digest": "sha256:2e46929e49593232e1f58afd97c33935f132357c0e7484fe792c516963c9cf19",
+      "compressed_layer_bytes": 228578842,
+      "labels": {
+        "com.clickhouse.build.version": "25.12.11.4",
+        "org.opencontainers.image.version": "22.04"
+      },
+      "user": null,
+      "entrypoint": [
+        "/entrypoint.sh"
+      ],
+      "command": null
+    },
+    {
+      "registry": "cgr.dev",
+      "repository": "chainguard/minio",
+      "linux_arm64_manifest_digest": "sha256:f4c90d3148e56e4b720a5663a9e45428bac3e38c39681bbc0d8692ed1086ff09",
+      "previous_tag": "latest",
+      "status": "METADATA_VERIFIED",
+      "config_digest": "sha256:4d0d6ab2e1545cc19c46e06e71cca3ef453477c17830defc3df3b1599c3df4ba",
+      "compressed_layer_bytes": 58391803,
+      "labels": {
+        "dev.chainguard.image.title": "minio",
+        "dev.chainguard.package.main": "",
+        "org.opencontainers.image.authors": "Chainguard Team https://www.chainguard.dev/",
+        "org.opencontainers.image.created": "2026-10-29T14:33:12Z",
+        "org.opencontainers.image.source": "https://github.com/chainguard-images/images/tree/main/images/minio",
+        "org.opencontainers.image.title": "minio",
+        "org.opencontainers.image.url": "https://images.chainguard.dev/directory/image/minio/overview",
+        "org.opencontainers.image.vendor": "Chainguard"
+      },
+      "user": "65532",
+      "entrypoint": [
+        "/usr/bin/minio"
+      ],
+      "command": null
+    },
+    {
+      "registry": "registry-1.docker.io",
+      "repository": "library/redis",
+      "linux_arm64_manifest_digest": "sha256:70906c24c6bcde0712573cce29bb3d30331fec36aaefd503bc570c18ba431c26",
+      "previous_tag": "7",
+      "status": "METADATA_VERIFIED",
+      "config_digest": "sha256:0acd23d1d2114463235a759bca46f8d4b3c768df692bae3cfe71b16f14aa16bb",
+      "compressed_layer_bytes": 43500166,
+      "labels": {},
+      "user": null,
+      "entrypoint": [
+        "docker-entrypoint.sh"
+      ],
+      "command": [
+        "redis-server"
+      ]
+    },
+    {
+      "registry": "registry-1.docker.io",
+      "repository": "library/postgres",
+      "linux_arm64_manifest_digest": "sha256:ac359420747e1f5f8ac4d23f40d7ce022c0a39090ed6cdd8dde5f596affbe41d",
+      "previous_tag": "17",
+      "status": "METADATA_VERIFIED",
+      "config_digest": "sha256:bbdfc26f27f4b2fecdc289b63295a0228cab33657a7b859afe54dc78d184dd1d",
+      "compressed_layer_bytes": 159981836,
+      "labels": {},
+      "user": null,
+      "entrypoint": [
+        "docker-entrypoint.sh"
+      ],
+      "command": [
+        "postgres"
+      ]
+    }
+  ],
+  "image_layers_downloaded": 0,
+  "services_started": 0
+}
