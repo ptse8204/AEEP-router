@@ -1,0 +1,4236 @@
+{
+  "plan_sha256": "ac40582f1c0f40914dcb35c74f2a837f4f8e098ebcdf1965f415ffbbe7f803e0",
+  "report_sha256": "faa17bf2824059668ff11bc97786047fe81078de69ca05dc268573a33af2cc4c",
+  "campaign_sha256": "72f6a46cc3941578537f834a729806d4e19726a054b74b6f85048985029a698b",
+  "operation_ledger_sha256": "1b9973d3abb9056bd564509b6d0e94fb39762e4f9d77a089762a8d025ca4f090",
+  "canonical_trials": 1,
+  "expected_trial_positions": 1,
+  "missing_trial_positions": 0,
+  "unexpected_trial_positions": 0,
+  "duplicate_trial_positions": 0,
+  "unresolved_operations": 0,
+  "normalized_primary_trials": 1,
+  "normalization_gaps": [],
+  "telemetry_capture": {
+    "trial_plan_845bb483f77b4d44a7700c70d0cf282f_matthewwithanm__python-markdownify-200_toolkit-ase-stack-20261103.treatment_fresh-worker_0": {
+      "tokens": {
+        "status": "verified",
+        "receipt_ref": "b6a65eb96c095048ef8d53358ea301e50760f529d0b15f6310c431a1c619de50",
+        "journal_ref": "775118c19c582b8a9437173768a0432656ff113c851aa1b928fec9aadac28e62",
+        "known_fields": [
+          "input_tokens",
+          "cached_input_tokens",
+          "cache_write_input_tokens",
+          "output_tokens",
+          "reasoning_output_tokens"
+        ],
+        "provider_usage_independently_verified": false,
+        "source": "provider_report",
+        "trust": "self_asserted"
+      },
+      "candidate": {
+        "instructions_loaded": true,
+        "invoked": null,
+        "delivery_complete": false,
+        "snapshot_ref": "fc5a4adce71d9640d00526e2dc72d5b468a91d89f640e0321a79631dc36eea92",
+        "skill_sha256": "e18a979532105161910d8cc7891959a704048b19194e23707828f21bfd8d68ec",
+        "invoke_types": [
+          "explicit"
+        ]
+      }
+    }
+  },
+  "telemetry_capture_summary": {
+    "runs": 1,
+    "verified": 1,
+    "partial": 0,
+    "unknown": 0,
+    "instructions_loaded": 1,
+    "candidate_loading_unknown": 0,
+    "notice": "Capture verification checks retained journal-to-receipt consistency. Token quantities remain provider-reported; independent provider usage is unverified. Positive skill injection proves instructions loaded, not semantic use. Missing metrics never prove non-use."
+  },
+  "execution_journals": {
+    "775118c19c582b8a9437173768a0432656ff113c851aa1b928fec9aadac28e62": {
+      "schema_version": "execution.evidence.v1",
+      "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+      "adapter": "ManagedHostExecutor",
+      "events": [
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 0,
+          "kind": "execution.started",
+          "source_id": "start",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 1,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:4f0d41e0e3da8f300f9600a28b5b386b160c76c0b859bb446df9f9e89df41150",
+          "action_digest": "4f0d41e0e3da8f300f9600a28b5b386b160c76c0b859bb446df9f9e89df41150",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 2,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:488953a09d349cf52dbc386a63721d8fc2531a3312b8b6f387436912bc6094ba",
+          "action_digest": "488953a09d349cf52dbc386a63721d8fc2531a3312b8b6f387436912bc6094ba",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 3,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:f6933fdcc8b9c38bbd2d7c183e52f72a29fdd31ebb98b9b50e132ade77c4bed1",
+          "action_digest": "be6ea49df2d5a5d71afcbe6701b4287bd31c92da0560f56bd0b87d8d9ddb0c88",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 4,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:9d1780a1a65be3c345dfcc2bc51815076b2ede264cb868c5d4170bee26841a47",
+          "action_digest": "be6ea49df2d5a5d71afcbe6701b4287bd31c92da0560f56bd0b87d8d9ddb0c88",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 5,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:dc61cf5283e5ffe64225982041dfc8e80eee723e826887fbb18d57047bba3de3",
+          "action_digest": "dc61cf5283e5ffe64225982041dfc8e80eee723e826887fbb18d57047bba3de3",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 6,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:ddf3ae715cb4a4f38ccb47dcf7e0d91545a83c78da28b9743f8525bb6d672783",
+          "action_digest": "ddf3ae715cb4a4f38ccb47dcf7e0d91545a83c78da28b9743f8525bb6d672783",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 7,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:230e18d758afecb40fd9c11887ad5ccf54a02e7c12e4acf53dc4dbc3f6de4439",
+          "action_digest": "e8d9d88e677737cd1629cdc34c273139548708e6a19bdecff708b614c8d926ac",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 8,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:c9217b5cf4103bbb7ec83a0d177e7181a7f0d5543d92f14352e240671838f76b",
+          "action_digest": "41c79cb4f1e97d66af56430aa4f8f190ed65a3ec4e21b57620ae771646f74247",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 9,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:27a2b42e85676c1c7f489eb04973f50ce69165ac783cc86f99373a93e1c2a588",
+          "action_digest": "27a2b42e85676c1c7f489eb04973f50ce69165ac783cc86f99373a93e1c2a588",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 10,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:3ca5094f1cff1b6acb933b5fb3293bab9529350084986b54005c1cdf0cbcec25",
+          "action_digest": "3ca5094f1cff1b6acb933b5fb3293bab9529350084986b54005c1cdf0cbcec25",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 11,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:1172fd709bd6b5ba77ff55d106dbcd8370df5569823899cb525efa350705b9bd",
+          "action_digest": "3d11506d1b4217d5df01cc8d7996eb8dfd6692e6c89e64eb8fdec52442cca3f7",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 12,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:57b7ecd99a8eb9d544af094d193a036adfa92773af0ba15a978bd92f3beffe24",
+          "action_digest": "b653d2d4ade7cd462370f5fe6d2d7482b3be1b9c6625192dcf9f790266481a78",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 13,
+          "kind": "usage.reported",
+          "source_id": "adapter:usage:d1bdd61dcedc44cf871e57c375ef2b63:13",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": {
+            "cash": {
+              "status": "unavailable",
+              "components": []
+            },
+            "subscription_usage": [
+              {
+                "provider": "openai",
+                "resource_pool": "unknown",
+                "unit": "provider_unit",
+                "consumed": null,
+                "source": {
+                  "status": "unavailable",
+                  "source": "unavailable",
+                  "trust": "untrusted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": null
+                },
+                "included_or_paid": "unknown",
+                "rate_snapshot_id": null,
+                "usage_fingerprint": null
+              }
+            ],
+            "model_usage": [
+              {
+                "provider": "openai",
+                "model": "gpt-6-astra",
+                "access_channel": "subscription",
+                "input_tokens": 8520,
+                "cached_input_tokens": 0,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 96,
+                "reasoning_output_tokens": 0,
+                "evidence": {
+                  "status": "partial",
+                  "source": "provider_report",
+                  "trust": "self_asserted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": "2026-11-04T02:16:22.245875Z"
+                }
+              }
+            ],
+            "tool_footprint": null
+          },
+          "accounting_mode": "cumulative"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 14,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:abb174457a6dc9be688048796f6ddbc1e5a784b484ed7c400b15424969d3bf35",
+          "action_digest": "abb174457a6dc9be688048796f6ddbc1e5a784b484ed7c400b15424969d3bf35",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 15,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:36119be20fbbe3a50964dc33132a10a7b7f09abee891dcda784f44e858401837",
+          "action_digest": "36119be20fbbe3a50964dc33132a10a7b7f09abee891dcda784f44e858401837",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 16,
+          "kind": "usage.reported",
+          "source_id": "adapter:usage:d1bdd61dcedc44cf871e57c375ef2b63:16",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": {
+            "cash": {
+              "status": "unavailable",
+              "components": []
+            },
+            "subscription_usage": [
+              {
+                "provider": "openai",
+                "resource_pool": "unknown",
+                "unit": "provider_unit",
+                "consumed": null,
+                "source": {
+                  "status": "unavailable",
+                  "source": "unavailable",
+                  "trust": "untrusted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": null
+                },
+                "included_or_paid": "unknown",
+                "rate_snapshot_id": null,
+                "usage_fingerprint": null
+              }
+            ],
+            "model_usage": [
+              {
+                "provider": "openai",
+                "model": "gpt-6-astra",
+                "access_channel": "subscription",
+                "input_tokens": 17603,
+                "cached_input_tokens": 8448,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 202,
+                "reasoning_output_tokens": 0,
+                "evidence": {
+                  "status": "partial",
+                  "source": "provider_report",
+                  "trust": "self_asserted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": "2026-11-04T02:16:26.100431Z"
+                }
+              }
+            ],
+            "tool_footprint": null
+          },
+          "accounting_mode": "cumulative"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 17,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:966f41b51fda7cf4120a6c7085a3909e384243459dd9dfea89c2cba9df6a0dc9",
+          "action_digest": "966f41b51fda7cf4120a6c7085a3909e384243459dd9dfea89c2cba9df6a0dc9",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 18,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:da550aba965af4a0b41d3270b6d0687d3c27df12845f8d822806a34875490902",
+          "action_digest": "da550aba965af4a0b41d3270b6d0687d3c27df12845f8d822806a34875490902",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 19,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:6e68351617c2444418482bed0517dcf9c8b4334dca39054e60d23a7ad2949785",
+          "action_digest": "6e68351617c2444418482bed0517dcf9c8b4334dca39054e60d23a7ad2949785",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 20,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:2651dd6035156e9dad9941d95a226dd1585a8c2b7faeaac1bba1e49554227160",
+          "action_digest": "2651dd6035156e9dad9941d95a226dd1585a8c2b7faeaac1bba1e49554227160",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 21,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:35fa226a842bb435b8e1042778933ee747f3434077bd2413b90854f961fd6c64",
+          "action_digest": "6168d304d1b28dcd8a4ffbf057f6913a55659b2405920ee9f186dbbc6f0351a8",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 22,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:bed9849d5dcb813ef45f27d5814cd4a228539111f719ae41671894f6d06f7452",
+          "action_digest": "605bf48471a63424f20e4350b542f9216e8446027f50cc885ad2d321d04bb23e",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 23,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:329b898a6675ac1ecc1ba434306e1455c022537eef2d0f53b9c47a20f4e0ac96",
+          "action_digest": "b37b93c5f8bc5197345aef1198e062ffbfeee2c067b6d79db477d3a7eeaf00e7",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 24,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:cfa3a618e8d7e59f63cb10ea495183a55c8f1d20513238d94529df72376db0df",
+          "action_digest": "91db0579593e7ad6812285d9ebf2db831a08fbc6a22e48653fe5b98cc9354ded",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 25,
+          "kind": "usage.reported",
+          "source_id": "adapter:usage:d1bdd61dcedc44cf871e57c375ef2b63:25",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": {
+            "cash": {
+              "status": "unavailable",
+              "components": []
+            },
+            "subscription_usage": [
+              {
+                "provider": "openai",
+                "resource_pool": "unknown",
+                "unit": "provider_unit",
+                "consumed": null,
+                "source": {
+                  "status": "unavailable",
+                  "source": "unavailable",
+                  "trust": "untrusted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": null
+                },
+                "included_or_paid": "unknown",
+                "rate_snapshot_id": null,
+                "usage_fingerprint": null
+              }
+            ],
+            "model_usage": [
+              {
+                "provider": "openai",
+                "model": "gpt-6-astra",
+                "access_channel": "subscription",
+                "input_tokens": 26851,
+                "cached_input_tokens": 17408,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 329,
+                "reasoning_output_tokens": 0,
+                "evidence": {
+                  "status": "partial",
+                  "source": "provider_report",
+                  "trust": "self_asserted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": "2026-11-04T02:16:30.134627Z"
+                }
+              }
+            ],
+            "tool_footprint": null
+          },
+          "accounting_mode": "cumulative"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 26,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:b682c6254056e4167641c0baea8ac167ae6b52858906c946318cd1769810976b",
+          "action_digest": "b682c6254056e4167641c0baea8ac167ae6b52858906c946318cd1769810976b",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 27,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:3bcce80340262fff050fa23dd438c281ed4740b57afbcf36962dbf47b2325c89",
+          "action_digest": "3bcce80340262fff050fa23dd438c281ed4740b57afbcf36962dbf47b2325c89",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 28,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:a3d8cc0dee58c2ce96af96a619f7ad918d3b62ff3af7a81c8c25e4134fd562c1",
+          "action_digest": "54007073ddf791d645a52f733995a61b831459969d9751a84b682f0aa405eac6",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 29,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:bdf3c6c1c61d6d4d0afb0b7e8d065dc22a7ba84bb72a0bfc9eea4ca22341afae",
+          "action_digest": "54007073ddf791d645a52f733995a61b831459969d9751a84b682f0aa405eac6",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 30,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:9402b99215709dcc60bff5c5a9570d0e80b9e591383b23bd77a50aa0e9f20578",
+          "action_digest": "9402b99215709dcc60bff5c5a9570d0e80b9e591383b23bd77a50aa0e9f20578",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 31,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:a275fde81eb1f8a432aed06333ff7c4cfb770d3eb2b322af177839cc021475dc",
+          "action_digest": "a275fde81eb1f8a432aed06333ff7c4cfb770d3eb2b322af177839cc021475dc",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 32,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:85c40c5571a6cf829ef8187cfca2d367022202f953b3fff0dab43e208ed38a46",
+          "action_digest": "3d573389a23c9750d7c0168a034059af6fd41ff25c1137d96b6b39457a0f2257",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 33,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:a8c3fb212a502cad5a9a40a69ac7f50174d7c904ec37497cd6714a3581d7d26c",
+          "action_digest": "103c5b9f9c8092e77f029b1900dc94266781b47e1e00a13567515d34da619fb7",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 34,
+          "kind": "usage.reported",
+          "source_id": "adapter:usage:d1bdd61dcedc44cf871e57c375ef2b63:34",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": {
+            "cash": {
+              "status": "unavailable",
+              "components": []
+            },
+            "subscription_usage": [
+              {
+                "provider": "openai",
+                "resource_pool": "unknown",
+                "unit": "provider_unit",
+                "consumed": null,
+                "source": {
+                  "status": "unavailable",
+                  "source": "unavailable",
+                  "trust": "untrusted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": null
+                },
+                "included_or_paid": "unknown",
+                "rate_snapshot_id": null,
+                "usage_fingerprint": null
+              }
+            ],
+            "model_usage": [
+              {
+                "provider": "openai",
+                "model": "gpt-6-astra",
+                "access_channel": "subscription",
+                "input_tokens": 43567,
+                "cached_input_tokens": 26624,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 422,
+                "reasoning_output_tokens": 18,
+                "evidence": {
+                  "status": "partial",
+                  "source": "provider_report",
+                  "trust": "self_asserted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": "2026-11-04T02:16:33.251291Z"
+                }
+              }
+            ],
+            "tool_footprint": null
+          },
+          "accounting_mode": "cumulative"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 35,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:79480c0235536c7e6bf17d508594164aef9a0ff0fe626f8aa42895f6bcd84865",
+          "action_digest": "79480c0235536c7e6bf17d508594164aef9a0ff0fe626f8aa42895f6bcd84865",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 36,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:3293957d5376043ce7a7ab66303ae148a8de878d27a382498d0958bd9a41e7a8",
+          "action_digest": "3293957d5376043ce7a7ab66303ae148a8de878d27a382498d0958bd9a41e7a8",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 37,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:f712d293066247778574445c08329d08be1834cb54744a9f835335775b1d7257",
+          "action_digest": "c50b58de168c17247e523381d6d88f66cd79b1e0e49ff1c96cfa95de50a3f0f1",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 38,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:c7ff569433b3dbdea875b753f6581687faa4f800024f3b958c8c9e6d910e910b",
+          "action_digest": "5630127b6f70529dd33b52ee0433cb5a449edf614b25f1c795c8e77ffc559aed",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 39,
+          "kind": "usage.reported",
+          "source_id": "adapter:usage:d1bdd61dcedc44cf871e57c375ef2b63:39",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": {
+            "cash": {
+              "status": "unavailable",
+              "components": []
+            },
+            "subscription_usage": [
+              {
+                "provider": "openai",
+                "resource_pool": "unknown",
+                "unit": "provider_unit",
+                "consumed": null,
+                "source": {
+                  "status": "unavailable",
+                  "source": "unavailable",
+                  "trust": "untrusted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": null
+                },
+                "included_or_paid": "unknown",
+                "rate_snapshot_id": null,
+                "usage_fingerprint": null
+              }
+            ],
+            "model_usage": [
+              {
+                "provider": "openai",
+                "model": "gpt-6-astra",
+                "access_channel": "subscription",
+                "input_tokens": 61809,
+                "cached_input_tokens": 43264,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 478,
+                "reasoning_output_tokens": 18,
+                "evidence": {
+                  "status": "partial",
+                  "source": "provider_report",
+                  "trust": "self_asserted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": "2026-11-04T02:16:35.580538Z"
+                }
+              }
+            ],
+            "tool_footprint": null
+          },
+          "accounting_mode": "cumulative"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 40,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:95b1155dd2384883f1678beb13d22362b191e0cfff998cac6d4e4e5e51e03b40",
+          "action_digest": "95b1155dd2384883f1678beb13d22362b191e0cfff998cac6d4e4e5e51e03b40",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 41,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:857a3a8b1260495cd68645634e5f361813f5d59a9b280a6f7c1d6b9aaaba06a4",
+          "action_digest": "dfb4a89ebd0f3902eb31e54807ca837f13084e7bae8a4cdb93cfe1fc53ed2346",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 42,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:a14ec32170229754c4d9615265f786647a11ca1fa8e1aeebd46d505da6f87647",
+          "action_digest": "dfb4a89ebd0f3902eb31e54807ca837f13084e7bae8a4cdb93cfe1fc53ed2346",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 43,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:b76e2c687f23a9ebe6cbc9148c238241a0814b2bd83785c9981c6401cae49efd",
+          "action_digest": "699929de29d870ecea264fa83755ca2f7bf51b016199edee4e9538de7b7e0417",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 44,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:05d58de7fdcd3167942b4a3b2d60bafd97aad6f638c101dc69081b9711656fc9",
+          "action_digest": "05d58de7fdcd3167942b4a3b2d60bafd97aad6f638c101dc69081b9711656fc9",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 45,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:25dee3ca61c07ec86ea6f000796a1cf10c8ca975f0747d407404a66c1f472797",
+          "action_digest": "25dee3ca61c07ec86ea6f000796a1cf10c8ca975f0747d407404a66c1f472797",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 46,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:cf1148cf217eb9d76d68fd1b3628716a74e89e428956a10c84d7a879f284e4aa",
+          "action_digest": "ed88a55864a40f60194adbadc879fed48756f04979b0ec92d047665084b68fa8",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 47,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:f544de39061ab34b4854428d8dac5ca6e20ab975e4ad2b5e0780ded3b84eac1c",
+          "action_digest": "f544de39061ab34b4854428d8dac5ca6e20ab975e4ad2b5e0780ded3b84eac1c",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 48,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:b76f98e5d65bc81920eba25fd65d2488363605df1612267766810bd4adaf0a56",
+          "action_digest": "e8d2d238377d9837974711e4cdc936e7258117118b587937514e9ec83af669ee",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 49,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:c6aec785f48cffae74e0b5d3ea52a1780a6f7357426721a3c8f5c5553bd4e028",
+          "action_digest": "5e9cd40b959989921014eb516500d15063169c5e898f6a8ea9dfe2f7eefd45f9",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 50,
+          "kind": "usage.reported",
+          "source_id": "adapter:usage:d1bdd61dcedc44cf871e57c375ef2b63:50",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": {
+            "cash": {
+              "status": "unavailable",
+              "components": []
+            },
+            "subscription_usage": [
+              {
+                "provider": "openai",
+                "resource_pool": "unknown",
+                "unit": "provider_unit",
+                "consumed": null,
+                "source": {
+                  "status": "unavailable",
+                  "source": "unavailable",
+                  "trust": "untrusted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": null
+                },
+                "included_or_paid": "unknown",
+                "rate_snapshot_id": null,
+                "usage_fingerprint": null
+              }
+            ],
+            "model_usage": [
+              {
+                "provider": "openai",
+                "model": "gpt-6-astra",
+                "access_channel": "subscription",
+                "input_tokens": 82560,
+                "cached_input_tokens": 61440,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 699,
+                "reasoning_output_tokens": 29,
+                "evidence": {
+                  "status": "partial",
+                  "source": "provider_report",
+                  "trust": "self_asserted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": "2026-11-04T02:16:41.188014Z"
+                }
+              }
+            ],
+            "tool_footprint": null
+          },
+          "accounting_mode": "cumulative"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 51,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:c0228de60cde18344c3ef7c1ff829351058dfaa1647010aa496b30585e5c843a",
+          "action_digest": "c0228de60cde18344c3ef7c1ff829351058dfaa1647010aa496b30585e5c843a",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 52,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:42ed2185e8cbc554dd46d4f2bcab5f80c6b7ba07b393f6c76824111aefeaf452",
+          "action_digest": "42ed2185e8cbc554dd46d4f2bcab5f80c6b7ba07b393f6c76824111aefeaf452",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 53,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:989e6d5c252a484badc38ecf63439a9ada6812682cc5ae11ff234ccb8a5f79ca",
+          "action_digest": "bb5b885135b9504031b3e72b75480ced0d13b8a1cdef5d28afea09f97e22767c",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 54,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:de44450fc2e4be5353667992e220edbc96d345258cb6f49bd5320ab801662132",
+          "action_digest": "19bde7805130cf464425e2677b49b49fe36664ee765b39b19050822abd48a87f",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 55,
+          "kind": "usage.reported",
+          "source_id": "adapter:usage:d1bdd61dcedc44cf871e57c375ef2b63:55",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": {
+            "cash": {
+              "status": "unavailable",
+              "components": []
+            },
+            "subscription_usage": [
+              {
+                "provider": "openai",
+                "resource_pool": "unknown",
+                "unit": "provider_unit",
+                "consumed": null,
+                "source": {
+                  "status": "unavailable",
+                  "source": "unavailable",
+                  "trust": "untrusted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": null
+                },
+                "included_or_paid": "unknown",
+                "rate_snapshot_id": null,
+                "usage_fingerprint": null
+              }
+            ],
+            "model_usage": [
+              {
+                "provider": "openai",
+                "model": "gpt-6-astra",
+                "access_channel": "subscription",
+                "input_tokens": 103589,
+                "cached_input_tokens": 82176,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 744,
+                "reasoning_output_tokens": 29,
+                "evidence": {
+                  "status": "partial",
+                  "source": "provider_report",
+                  "trust": "self_asserted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": "2026-11-04T02:16:43.187248Z"
+                }
+              }
+            ],
+            "tool_footprint": null
+          },
+          "accounting_mode": "cumulative"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 56,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:03bd712c7aba5d1c27ec19f65f4c940f2b41137cf698eb0dfb48569a8c937e6f",
+          "action_digest": "03bd712c7aba5d1c27ec19f65f4c940f2b41137cf698eb0dfb48569a8c937e6f",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 57,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:d339188905a99f22bf3c6166262205121f628e936eeea954c00b7e4ad6ad4520",
+          "action_digest": "d339188905a99f22bf3c6166262205121f628e936eeea954c00b7e4ad6ad4520",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 58,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:1a2f82bf5c12a12211321c3ebd156ca96e099b6f5f0eef189e934364adcdd996",
+          "action_digest": "1a2f82bf5c12a12211321c3ebd156ca96e099b6f5f0eef189e934364adcdd996",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 59,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:5bdda8335584b8859bc2fb9c56ddda117db6a9c68e0916b4bf7ac204fd782e63",
+          "action_digest": "5bdda8335584b8859bc2fb9c56ddda117db6a9c68e0916b4bf7ac204fd782e63",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 60,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:aaf114a8c0d6cfa7e705ced3ddf67092d35338804f8d7e2550a0cb8afb36887a",
+          "action_digest": "aaf114a8c0d6cfa7e705ced3ddf67092d35338804f8d7e2550a0cb8afb36887a",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 61,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:a78c5b5d86c81ccb7c6fc152bc1d1a91370c160eae08f026dc41aed9208b1402",
+          "action_digest": "a78c5b5d86c81ccb7c6fc152bc1d1a91370c160eae08f026dc41aed9208b1402",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 62,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:b6aa886110423db3e5ad8a653d5140eb12d9ce3b21458977f32a19d177baf6e2",
+          "action_digest": "bba9c78ab473496f244d7ab7ca03f2a7fdb7e93153f4f92a4ef1af029240b686",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 63,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:1979826cafdc2f5b12985b6ca4a2ef8e7028e1566aaef7eb15d93086cbfd8fb9",
+          "action_digest": "d76c250a5c95ca4378958af32319c5d7903bd02de43f65c0c725ae92a7c2ccb2",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 64,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:73edf8a9882d756b8c2ee1fe067ee9cf4c4814a1a94801d784b0bd8dd0b20782",
+          "action_digest": "3356429daeb20c3b9bc865f04c1e6d76e164ed1db4e4e5cb44203e9fbaf88e2d",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 65,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:e745c6407c0052688397771c0e4034e50664a443971a83d10e6a824ed46f1be7",
+          "action_digest": "d218ae930222329faad7fe18836c0554e35391f085c75f5441006ab56b614c97",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 66,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:eea37a6ca34e8bbd70f7599730183a9444162138084f750b35378577a37f04d6",
+          "action_digest": "be8984c539ce3fd893364d251a59f5db9b837b96cb768f94e88dc59f8bec67d0",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 67,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:81ad6bedda5b136af95eee6498f884a91b0f72dbedb43a91524d9b3c95c4a00d",
+          "action_digest": "e6aa6f32351350f4d143f4d5939a2050583e6172fb8189ebd9ed56e37de1d1dd",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 68,
+          "kind": "usage.reported",
+          "source_id": "adapter:usage:d1bdd61dcedc44cf871e57c375ef2b63:68",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": {
+            "cash": {
+              "status": "unavailable",
+              "components": []
+            },
+            "subscription_usage": [
+              {
+                "provider": "openai",
+                "resource_pool": "unknown",
+                "unit": "provider_unit",
+                "consumed": null,
+                "source": {
+                  "status": "unavailable",
+                  "source": "unavailable",
+                  "trust": "untrusted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": null
+                },
+                "included_or_paid": "unknown",
+                "rate_snapshot_id": null,
+                "usage_fingerprint": null
+              }
+            ],
+            "model_usage": [
+              {
+                "provider": "openai",
+                "model": "gpt-6-astra",
+                "access_channel": "subscription",
+                "input_tokens": 124772,
+                "cached_input_tokens": 103040,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 925,
+                "reasoning_output_tokens": 29,
+                "evidence": {
+                  "status": "partial",
+                  "source": "provider_report",
+                  "trust": "self_asserted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": "2026-11-04T02:16:48.795861Z"
+                }
+              }
+            ],
+            "tool_footprint": null
+          },
+          "accounting_mode": "cumulative"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 69,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:270ba6a1618df7c7779d5b69ce2718ca0a79ed7ab395d2d96cd8fca8d3f0f16e",
+          "action_digest": "270ba6a1618df7c7779d5b69ce2718ca0a79ed7ab395d2d96cd8fca8d3f0f16e",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 70,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:554fffb344c5c8bfede024158122cde2036330b8c764350df9db4c7a4bf827cd",
+          "action_digest": "554fffb344c5c8bfede024158122cde2036330b8c764350df9db4c7a4bf827cd",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 71,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:206cbb1afb14446a27a65c2e94d8f37c49e072f89b3886d961cf92a648ad3f9e",
+          "action_digest": "206cbb1afb14446a27a65c2e94d8f37c49e072f89b3886d961cf92a648ad3f9e",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 72,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:3dac2434d03b6643c9d64618ddeda4acdc59eb5d3aae808f74813b9ba89459cb",
+          "action_digest": "3dac2434d03b6643c9d64618ddeda4acdc59eb5d3aae808f74813b9ba89459cb",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 73,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:cec122dd85285e441f8a29cfbcdc6b72de4dc9d4fe447ee1e1420f86dec70ef7",
+          "action_digest": "cec122dd85285e441f8a29cfbcdc6b72de4dc9d4fe447ee1e1420f86dec70ef7",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 74,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:88c9d8a18efac31b9a5574260ba84082175f52abd775acc3ec05377134bbca95",
+          "action_digest": "88c9d8a18efac31b9a5574260ba84082175f52abd775acc3ec05377134bbca95",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 75,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:9de23ed50f81b90a8e2c3c8816685d59d3ddeb4c9dd2e5868434daa1e72713f5",
+          "action_digest": "9de23ed50f81b90a8e2c3c8816685d59d3ddeb4c9dd2e5868434daa1e72713f5",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 76,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:f60fb0c73ab223ca8c2e71b06b89da273e9450e2429dcdb059bd4ce58e91c002",
+          "action_digest": "fddc7e5bb3522abda51217b819c6b9b7a69b3ad05b924230a5038ef01ea2e7be",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 77,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:2922f39ca123e4ed11ddb9243584f01d596a5257ccc061d7336d963e043a2dc1",
+          "action_digest": "1c64013dac1400f697449a110625da4c23a7fc81b92a183c9bba1a7fa29d1cc1",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 78,
+          "kind": "usage.reported",
+          "source_id": "adapter:usage:d1bdd61dcedc44cf871e57c375ef2b63:78",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": {
+            "cash": {
+              "status": "unavailable",
+              "components": []
+            },
+            "subscription_usage": [
+              {
+                "provider": "openai",
+                "resource_pool": "unknown",
+                "unit": "provider_unit",
+                "consumed": null,
+                "source": {
+                  "status": "unavailable",
+                  "source": "unavailable",
+                  "trust": "untrusted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": null
+                },
+                "included_or_paid": "unknown",
+                "rate_snapshot_id": null,
+                "usage_fingerprint": null
+              }
+            ],
+            "model_usage": [
+              {
+                "provider": "openai",
+                "model": "gpt-6-astra",
+                "access_channel": "subscription",
+                "input_tokens": 146236,
+                "cached_input_tokens": 124288,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1236,
+                "reasoning_output_tokens": 29,
+                "evidence": {
+                  "status": "partial",
+                  "source": "provider_report",
+                  "trust": "self_asserted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": "2026-11-04T02:16:57.908086Z"
+                }
+              }
+            ],
+            "tool_footprint": null
+          },
+          "accounting_mode": "cumulative"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 79,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:54a399fa3cf41644d82b7afa125b108aefe4198dc0387570c2cdfcdae55bf67e",
+          "action_digest": "54a399fa3cf41644d82b7afa125b108aefe4198dc0387570c2cdfcdae55bf67e",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 80,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:18b61e850445f6743494eade052e67f8a03cbd9080d5985b8e987a814fd23692",
+          "action_digest": "18b61e850445f6743494eade052e67f8a03cbd9080d5985b8e987a814fd23692",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 81,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:fc234836d15a87ff2a8c39b60b4c652c051b1bb8f4a3c09917a01a01b1a5cf23",
+          "action_digest": "fc234836d15a87ff2a8c39b60b4c652c051b1bb8f4a3c09917a01a01b1a5cf23",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 82,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:2df0a8eff4829a7017b447bf46d292554678d36d24bb90ba18945eadc6af7cf5",
+          "action_digest": "82a61aac887a33f8410f53face3030d68c57888038881b28a3cc06fdc609aebc",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 83,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:41bb012912c8b7a47b40e9bb3ba7c8e9db61576167a9f2c197a7e053f0cc17a6",
+          "action_digest": "82a61aac887a33f8410f53face3030d68c57888038881b28a3cc06fdc609aebc",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 84,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:7f700e1aa109ff1ffad14b3ffa8d2140e3fbd2fbc05e3aa4363463dff9b90210",
+          "action_digest": "830deb1adf01c2cf23b2147bddd54935c869db094bd5e39cfda1008672071d6a",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 85,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:3216e1e8e0d3c77d0ad3d930931ea763fd624161da09b0ac734ad437d0e56099",
+          "action_digest": "3216e1e8e0d3c77d0ad3d930931ea763fd624161da09b0ac734ad437d0e56099",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 86,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:7dc084607de4d31b1e540414f85c247aa11943ae6f888e52d8ed55e83a046803",
+          "action_digest": "03eff059e26c8d31a0c61687513b3693c9d9ed9410b9674ca0303d2ce81fc525",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 87,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:72a058ea39b531bc1d5b8b1d18b0202751fa5bbc0ae30e9f9d74ed31765438a1",
+          "action_digest": "72a058ea39b531bc1d5b8b1d18b0202751fa5bbc0ae30e9f9d74ed31765438a1",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 88,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:ef946440be322b31f218da6b89c10a3ca6ccb9c748a29ab1deecd79d9f757be9",
+          "action_digest": "ef946440be322b31f218da6b89c10a3ca6ccb9c748a29ab1deecd79d9f757be9",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 89,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:b4542b7293a573f2ffdedcaa17e2f29a732912f1e1143cd167072ffdd63f9264",
+          "action_digest": "b4542b7293a573f2ffdedcaa17e2f29a732912f1e1143cd167072ffdd63f9264",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 90,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:82a735543b326d538fb3550a637ecc2c4030ed2fa8a9f12078fdee595b4080c8",
+          "action_digest": "82a735543b326d538fb3550a637ecc2c4030ed2fa8a9f12078fdee595b4080c8",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 91,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:2eff1ab5af00a852a02bd51c0ce7c334129c42f62c0cd94f1c66e112f1af45ff",
+          "action_digest": "2eff1ab5af00a852a02bd51c0ce7c334129c42f62c0cd94f1c66e112f1af45ff",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 92,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:49a8eefcf289f7cb031ac7228168e51c73377199859e15966b634aa747d62e1d",
+          "action_digest": "49a8eefcf289f7cb031ac7228168e51c73377199859e15966b634aa747d62e1d",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 93,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:8920800b2acb0b366e446631cdfbad908d23f65678aaed3e68f1fa14068365a2",
+          "action_digest": "8920800b2acb0b366e446631cdfbad908d23f65678aaed3e68f1fa14068365a2",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 94,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:706aac010de8dda4624fd9218875f4f4cd8217ee81c9a5c34259b915053441ef",
+          "action_digest": "31fe8e7edb2e675b850ff7a05ba278fe8b8833275bd4c76f70cadf39c1bf10ea",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 95,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:db68e035d937e4311c902e36fe52638037cafb79f21787347bb5f7d7609dd766",
+          "action_digest": "fd21c2a31130951a70bc649809648ae3fc44aeb2291707277a7b58fe49dc8e57",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 96,
+          "kind": "usage.reported",
+          "source_id": "adapter:usage:d1bdd61dcedc44cf871e57c375ef2b63:96",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": {
+            "cash": {
+              "status": "unavailable",
+              "components": []
+            },
+            "subscription_usage": [
+              {
+                "provider": "openai",
+                "resource_pool": "unknown",
+                "unit": "provider_unit",
+                "consumed": null,
+                "source": {
+                  "status": "unavailable",
+                  "source": "unavailable",
+                  "trust": "untrusted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": null
+                },
+                "included_or_paid": "unknown",
+                "rate_snapshot_id": null,
+                "usage_fingerprint": null
+              }
+            ],
+            "model_usage": [
+              {
+                "provider": "openai",
+                "model": "gpt-6-astra",
+                "access_channel": "subscription",
+                "input_tokens": 168149,
+                "cached_input_tokens": 145920,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1632,
+                "reasoning_output_tokens": 39,
+                "evidence": {
+                  "status": "partial",
+                  "source": "provider_report",
+                  "trust": "self_asserted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": "2026-11-04T02:17:14.536029Z"
+                }
+              }
+            ],
+            "tool_footprint": null
+          },
+          "accounting_mode": "cumulative"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 97,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:47ad008857ca1bba54f2030338f88a5298981c693f38a11838a30e17d5139461",
+          "action_digest": "47ad008857ca1bba54f2030338f88a5298981c693f38a11838a30e17d5139461",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 98,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:1818d782077df11325c5104e2923d48832d544901c0691d1f095ba4cc90d1e65",
+          "action_digest": "c5c2f26ad866159e63eb41c20df7fa61e3c00f3bbe378952a0bad05d6d1e3180",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 99,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:f0e12a3b73cd1f35cb0fc46d990442b3a0424d0dce46e50b6f93a0987bd07e07",
+          "action_digest": "43cdd5e748fc3d8c541eee6a0c3f075eefa96ac9a05469aef0edc2b4090fbc08",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 100,
+          "kind": "usage.reported",
+          "source_id": "adapter:usage:d1bdd61dcedc44cf871e57c375ef2b63:100",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": {
+            "cash": {
+              "status": "unavailable",
+              "components": []
+            },
+            "subscription_usage": [
+              {
+                "provider": "openai",
+                "resource_pool": "unknown",
+                "unit": "provider_unit",
+                "consumed": null,
+                "source": {
+                  "status": "unavailable",
+                  "source": "unavailable",
+                  "trust": "untrusted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": null
+                },
+                "included_or_paid": "unknown",
+                "rate_snapshot_id": null,
+                "usage_fingerprint": null
+              }
+            ],
+            "model_usage": [
+              {
+                "provider": "openai",
+                "model": "gpt-6-astra",
+                "access_channel": "subscription",
+                "input_tokens": 190532,
+                "cached_input_tokens": 145920,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1647,
+                "reasoning_output_tokens": 39,
+                "evidence": {
+                  "status": "partial",
+                  "source": "provider_report",
+                  "trust": "self_asserted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": "2026-11-04T02:17:16.783497Z"
+                }
+              }
+            ],
+            "tool_footprint": null
+          },
+          "accounting_mode": "cumulative"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 101,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:1b672e3482344ca95e9b69460c6548a279c8b6fa2731e4e16fd3c68d08c6c9d4",
+          "action_digest": "1b672e3482344ca95e9b69460c6548a279c8b6fa2731e4e16fd3c68d08c6c9d4",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 102,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:fc5a4adce71d9640d00526e2dc72d5b468a91d89f640e0321a79631dc36eea92",
+          "action_digest": "fc5a4adce71d9640d00526e2dc72d5b468a91d89f640e0321a79631dc36eea92",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 103,
+          "kind": "usage.reported",
+          "source_id": "adapter:turn-usage",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": {
+            "cash": {
+              "status": "unavailable",
+              "components": []
+            },
+            "subscription_usage": [
+              {
+                "provider": "openai",
+                "resource_pool": "codex.self",
+                "unit": "provider_unit",
+                "consumed": null,
+                "source": {
+                  "status": "unavailable",
+                  "source": "unavailable",
+                  "trust": "untrusted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": null
+                },
+                "included_or_paid": "unknown",
+                "rate_snapshot_id": null,
+                "usage_fingerprint": null
+              }
+            ],
+            "model_usage": [
+              {
+                "provider": "openai",
+                "model": "gpt-6-astra",
+                "access_channel": "subscription",
+                "input_tokens": 190532,
+                "cached_input_tokens": 145920,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1647,
+                "reasoning_output_tokens": 39,
+                "evidence": {
+                  "status": "complete",
+                  "source": "provider_report",
+                  "trust": "self_asserted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": "2026-11-04T02:17:16.784840Z"
+                }
+              }
+            ],
+            "tool_footprint": null
+          },
+          "accounting_mode": "cumulative"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "2041a003160e4536afe9e4e34818f1ed",
+          "attempt_id": "attempt_285a7eb3ca14410f9b46a92a161343ea",
+          "sequence": 104,
+          "kind": "execution.completed",
+          "source_id": "terminal",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        }
+      ],
+      "complete": true,
+      "cancellation_confirmed": false,
+      "identity_digest": "bf17099fffd98c160190e23ae5c3e52e7b2ba5f651f2e1a69e739663e92059f4",
+      "boundary_digest": "a3f937bc3da8d56b30f11eb8d533a3ca52561c8bd9c363365042901a419a8178",
+      "journal_id": "2041a003160e4536afe9e4e34818f1ed"
+    }
+  },
+  "auxiliary_trial_ids": [],
+  "assessment_analysis": {
+    "comparison": {
+      "schema_version": "assessment.comparison.v2",
+      "structure": "controlled_agent",
+      "candidate": {
+        "executor_id": "toolkit-ase-stack-20261103.treatment",
+        "fingerprint": "4c76468d0b06bda5dc399428c4b6cf4b6f80379b251da0534384a9af2db46c0a",
+        "dependencies": {},
+        "host_config": {
+          "adapter_id": "codex-app-server:aeep-stack-treatment-20261103",
+          "argv": [
+            "/opt/codex/codex",
+            "app-server"
+          ],
+          "executable_sha256": null,
+          "instructions": "Complete the repository maintenance task using the tools available in your isolated workspace. Read the current task,unpack the supplied repository.tar.gz into that workspace,and inspect the relevant Python source. This is a required skill-loading integration check; follow the reviewed selected skill when supplied. Do not install software or access external services. Only change listed existing editable Python files; preserve omitted files. Write the output artifact as UTF-8 JSON with exactly base_sha256(the supplied canonical hash) and files(a mapping of changed existing paths to full replacement text). An empty files mapping is valid when no change is needed. The output path is supplied by the host. Do not put base64 bytes in the final answer. Independent protected tests run outside your workspace; report completion after writing the artifact.\nCurrent task JSON and bound artifact paths:\n{input}",
+          "model_constraints": {
+            "allowed_model_ids": [
+              "gpt-6-astra"
+            ],
+            "required_capabilities": [],
+            "minimum_context_tokens": null
+          },
+          "reasoning_efforts": [
+            "medium"
+          ],
+          "working_directory_policy": "inherit",
+          "working_directory": null,
+          "sandbox_policy": "workspace_write",
+          "approval_ceiling": "read",
+          "output_mode": "json",
+          "timeout_seconds": 300.0,
+          "max_message_bytes": 16777216,
+          "environment_allowlist": [],
+          "store_prompt": false,
+          "store_output": false,
+          "redaction_policy": "default",
+          "invocation": {
+            "mode": "skill",
+            "skill_name": "stack-check",
+            "skill_path": "/opt/dependencies/stack-check/SKILL.md",
+            "skill_sha256": "e18a979532105161910d8cc7891959a704048b19194e23707828f21bfd8d68ec",
+            "server": null,
+            "tool": null,
+            "tool_sha256": null,
+            "exposure": "required",
+            "local_profile": "capable_local"
+          },
+          "assessment_adapter": {
+            "input_transform": "repository_archive:1",
+            "read_only_roots": [
+              "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public"
+            ]
+          },
+          "managed_worker": {
+            "schema_version": "execution.worker.v2",
+            "worker_id": "aeep-stack-treatment-20261103",
+            "runtime": "/usr/local/bin/docker",
+            "socket": "/Users/edwintse/.docker/run/docker.sock",
+            "image": "sha256:bf4581894c1d43808baaf580888c0b5f1dfdf4e1ea4caf0b8f2a7956d0fdd6d9",
+            "platform": "linux/arm64",
+            "binary": "/opt/codex/codex",
+            "binary_sha256": "9b7c1c7abdc26fc3c4f47c77656a8e9121def5483dbae830ef1ee561758448a9",
+            "configuration_digest": "f413bd97ca1f040cd977829205706b6b4d276a3c193bcf3ad924b93284e91aac",
+            "dependencies_digest": "af960af068c861aedc144224f0ade3a2780678acd7d257e57e7d34fc219230af",
+            "cpu_count": 1.0,
+            "memory_mb": 1024,
+            "process_limit": 64,
+            "network_id": "8f657f861de8897d53df66efdf595c6d2e202b174af81f2827db409fe53f19d6",
+            "model_proxy_url": "http://172.18.0.2:3128",
+            "credential_volume": "aeep-auth-incremental-treatment",
+            "seccomp_profile": {
+              "archMap": [
+                {
+                  "architecture": "SCMP_ARCH_X86_64",
+                  "subArchitectures": [
+                    "SCMP_ARCH_X86",
+                    "SCMP_ARCH_X32"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_AARCH64",
+                  "subArchitectures": [
+                    "SCMP_ARCH_ARM"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_MIPS64",
+                  "subArchitectures": [
+                    "SCMP_ARCH_MIPS",
+                    "SCMP_ARCH_MIPS64N32"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_MIPS64N32",
+                  "subArchitectures": [
+                    "SCMP_ARCH_MIPS",
+                    "SCMP_ARCH_MIPS64"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_MIPSEL64",
+                  "subArchitectures": [
+                    "SCMP_ARCH_MIPSEL",
+                    "SCMP_ARCH_MIPSEL64N32"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_MIPSEL64N32",
+                  "subArchitectures": [
+                    "SCMP_ARCH_MIPSEL",
+                    "SCMP_ARCH_MIPSEL64"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_S390X",
+                  "subArchitectures": [
+                    "SCMP_ARCH_S390"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_RISCV64",
+                  "subArchitectures": null
+                },
+                {
+                  "architecture": "SCMP_ARCH_LOONGARCH64",
+                  "subArchitectures": null
+                }
+              ],
+              "defaultAction": "SCMP_ACT_ERRNO",
+              "defaultErrnoRet": 1,
+              "syscalls": [
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "names": [
+                    "accept",
+                    "accept4",
+                    "access",
+                    "adjtimex",
+                    "alarm",
+                    "bind",
+                    "brk",
+                    "cachestat",
+                    "capget",
+                    "capset",
+                    "chdir",
+                    "chmod",
+                    "chown",
+                    "chown32",
+                    "clock_adjtime",
+                    "clock_adjtime64",
+                    "clock_getres",
+                    "clock_getres_time64",
+                    "clock_gettime",
+                    "clock_gettime64",
+                    "clock_nanosleep",
+                    "clock_nanosleep_time64",
+                    "close",
+                    "close_range",
+                    "connect",
+                    "copy_file_range",
+                    "creat",
+                    "dup",
+                    "dup2",
+                    "dup3",
+                    "epoll_create",
+                    "epoll_create1",
+                    "epoll_ctl",
+                    "epoll_ctl_old",
+                    "epoll_pwait",
+                    "epoll_pwait2",
+                    "epoll_wait",
+                    "epoll_wait_old",
+                    "eventfd",
+                    "eventfd2",
+                    "execve",
+                    "execveat",
+                    "exit",
+                    "exit_group",
+                    "faccessat",
+                    "faccessat2",
+                    "fadvise64",
+                    "fadvise64_64",
+                    "fallocate",
+                    "fanotify_mark",
+                    "fchdir",
+                    "fchmod",
+                    "fchmodat",
+                    "fchmodat2",
+                    "fchown",
+                    "fchown32",
+                    "fchownat",
+                    "fcntl",
+                    "fcntl64",
+                    "fdatasync",
+                    "fgetxattr",
+                    "flistxattr",
+                    "flock",
+                    "fork",
+                    "fremovexattr",
+                    "fsetxattr",
+                    "fstat",
+                    "fstat64",
+                    "fstatat64",
+                    "fstatfs",
+                    "fstatfs64",
+                    "fsync",
+                    "ftruncate",
+                    "ftruncate64",
+                    "futex",
+                    "futex_requeue",
+                    "futex_time64",
+                    "futex_wait",
+                    "futex_waitv",
+                    "futex_wake",
+                    "futimesat",
+                    "getcpu",
+                    "getcwd",
+                    "getdents",
+                    "getdents64",
+                    "getegid",
+                    "getegid32",
+                    "geteuid",
+                    "geteuid32",
+                    "getgid",
+                    "getgid32",
+                    "getgroups",
+                    "getgroups32",
+                    "getitimer",
+                    "getpeername",
+                    "getpgid",
+                    "getpgrp",
+                    "getpid",
+                    "getppid",
+                    "getpriority",
+                    "getrandom",
+                    "getresgid",
+                    "getresgid32",
+                    "getresuid",
+                    "getresuid32",
+                    "getrlimit",
+                    "get_robust_list",
+                    "getrusage",
+                    "getsid",
+                    "getsockname",
+                    "getsockopt",
+                    "get_thread_area",
+                    "gettid",
+                    "gettimeofday",
+                    "getuid",
+                    "getuid32",
+                    "getxattr",
+                    "getxattrat",
+                    "inotify_add_watch",
+                    "inotify_init",
+                    "inotify_init1",
+                    "inotify_rm_watch",
+                    "io_cancel",
+                    "ioctl",
+                    "io_destroy",
+                    "io_getevents",
+                    "io_pgetevents",
+                    "io_pgetevents_time64",
+                    "ioprio_get",
+                    "ioprio_set",
+                    "io_setup",
+                    "io_submit",
+                    "ipc",
+                    "kill",
+                    "landlock_add_rule",
+                    "landlock_create_ruleset",
+                    "landlock_restrict_self",
+                    "lchown",
+                    "lchown32",
+                    "lgetxattr",
+                    "link",
+                    "linkat",
+                    "listen",
+                    "listmount",
+                    "listxattr",
+                    "listxattrat",
+                    "llistxattr",
+                    "_llseek",
+                    "lremovexattr",
+                    "lseek",
+                    "lsetxattr",
+                    "lstat",
+                    "lstat64",
+                    "madvise",
+                    "map_shadow_stack",
+                    "membarrier",
+                    "memfd_create",
+                    "memfd_secret",
+                    "mincore",
+                    "mkdir",
+                    "mkdirat",
+                    "mknod",
+                    "mknodat",
+                    "mlock",
+                    "mlock2",
+                    "mlockall",
+                    "mmap",
+                    "mmap2",
+                    "mprotect",
+                    "mq_getsetattr",
+                    "mq_notify",
+                    "mq_open",
+                    "mq_timedreceive",
+                    "mq_timedreceive_time64",
+                    "mq_timedsend",
+                    "mq_timedsend_time64",
+                    "mq_unlink",
+                    "mremap",
+                    "mseal",
+                    "msgctl",
+                    "msgget",
+                    "msgrcv",
+                    "msgsnd",
+                    "msync",
+                    "munlock",
+                    "munlockall",
+                    "munmap",
+                    "name_to_handle_at",
+                    "nanosleep",
+                    "newfstatat",
+                    "_newselect",
+                    "open",
+                    "openat",
+                    "openat2",
+                    "pause",
+                    "pidfd_open",
+                    "pidfd_send_signal",
+                    "pipe",
+                    "pipe2",
+                    "pkey_alloc",
+                    "pkey_free",
+                    "pkey_mprotect",
+                    "poll",
+                    "ppoll",
+                    "ppoll_time64",
+                    "prctl",
+                    "pread64",
+                    "preadv",
+                    "preadv2",
+                    "prlimit64",
+                    "process_mrelease",
+                    "pselect6",
+                    "pselect6_time64",
+                    "pwrite64",
+                    "pwritev",
+                    "pwritev2",
+                    "read",
+                    "readahead",
+                    "readlink",
+                    "readlinkat",
+                    "readv",
+                    "recv",
+                    "recvfrom",
+                    "recvmmsg",
+                    "recvmmsg_time64",
+                    "recvmsg",
+                    "remap_file_pages",
+                    "removexattr",
+                    "removexattrat",
+                    "rename",
+                    "renameat",
+                    "renameat2",
+                    "restart_syscall",
+                    "riscv_hwprobe",
+                    "rmdir",
+                    "rseq",
+                    "rt_sigaction",
+                    "rt_sigpending",
+                    "rt_sigprocmask",
+                    "rt_sigqueueinfo",
+                    "rt_sigreturn",
+                    "rt_sigsuspend",
+                    "rt_sigtimedwait",
+                    "rt_sigtimedwait_time64",
+                    "rt_tgsigqueueinfo",
+                    "sched_getaffinity",
+                    "sched_getattr",
+                    "sched_getparam",
+                    "sched_get_priority_max",
+                    "sched_get_priority_min",
+                    "sched_getscheduler",
+                    "sched_rr_get_interval",
+                    "sched_rr_get_interval_time64",
+                    "sched_setaffinity",
+                    "sched_setattr",
+                    "sched_setparam",
+                    "sched_setscheduler",
+                    "sched_yield",
+                    "seccomp",
+                    "select",
+                    "semctl",
+                    "semget",
+                    "semop",
+                    "semtimedop",
+                    "semtimedop_time64",
+                    "send",
+                    "sendfile",
+                    "sendfile64",
+                    "sendmmsg",
+                    "sendmsg",
+                    "sendto",
+                    "setfsgid",
+                    "setfsgid32",
+                    "setfsuid",
+                    "setfsuid32",
+                    "setgid",
+                    "setgid32",
+                    "setgroups",
+                    "setgroups32",
+                    "setitimer",
+                    "setpgid",
+                    "setpriority",
+                    "setregid",
+                    "setregid32",
+                    "setresgid",
+                    "setresgid32",
+                    "setresuid",
+                    "setresuid32",
+                    "setreuid",
+                    "setreuid32",
+                    "setrlimit",
+                    "set_robust_list",
+                    "setsid",
+                    "setsockopt",
+                    "set_thread_area",
+                    "set_tid_address",
+                    "setuid",
+                    "setuid32",
+                    "setxattr",
+                    "setxattrat",
+                    "shmat",
+                    "shmctl",
+                    "shmdt",
+                    "shmget",
+                    "shutdown",
+                    "sigaltstack",
+                    "signalfd",
+                    "signalfd4",
+                    "sigprocmask",
+                    "sigreturn",
+                    "socketcall",
+                    "socketpair",
+                    "splice",
+                    "stat",
+                    "stat64",
+                    "statfs",
+                    "statfs64",
+                    "statmount",
+                    "statx",
+                    "symlink",
+                    "symlinkat",
+                    "sync",
+                    "sync_file_range",
+                    "syncfs",
+                    "sysinfo",
+                    "tee",
+                    "tgkill",
+                    "time",
+                    "timer_create",
+                    "timer_delete",
+                    "timer_getoverrun",
+                    "timer_gettime",
+                    "timer_gettime64",
+                    "timer_settime",
+                    "timer_settime64",
+                    "timerfd_create",
+                    "timerfd_gettime",
+                    "timerfd_gettime64",
+                    "timerfd_settime",
+                    "timerfd_settime64",
+                    "times",
+                    "tkill",
+                    "truncate",
+                    "truncate64",
+                    "ugetrlimit",
+                    "umask",
+                    "uname",
+                    "unlink",
+                    "unlinkat",
+                    "uretprobe",
+                    "utime",
+                    "utimensat",
+                    "utimensat_time64",
+                    "utimes",
+                    "vfork",
+                    "vmsplice",
+                    "wait4",
+                    "waitid",
+                    "waitpid",
+                    "write",
+                    "writev"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "minKernel": "4.8"
+                  },
+                  "names": [
+                    "process_vm_readv",
+                    "process_vm_writev",
+                    "ptrace"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_LT",
+                      "value": 38
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 39
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 41
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 42
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 43
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 44
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 45
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 0
+                    }
+                  ],
+                  "names": [
+                    "personality"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 8
+                    }
+                  ],
+                  "names": [
+                    "personality"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 131072
+                    }
+                  ],
+                  "names": [
+                    "personality"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 131080
+                    }
+                  ],
+                  "names": [
+                    "personality"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 4294967295
+                    }
+                  ],
+                  "names": [
+                    "personality"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "arches": [
+                      "ppc64le"
+                    ]
+                  },
+                  "names": [
+                    "sync_file_range2",
+                    "swapcontext"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "arches": [
+                      "arm",
+                      "arm64"
+                    ]
+                  },
+                  "names": [
+                    "arm_fadvise64_64",
+                    "arm_sync_file_range",
+                    "sync_file_range2",
+                    "breakpoint",
+                    "cacheflush",
+                    "set_tls"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "arches": [
+                      "amd64",
+                      "x32"
+                    ]
+                  },
+                  "names": [
+                    "arch_prctl"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "arches": [
+                      "amd64",
+                      "x32",
+                      "x86"
+                    ]
+                  },
+                  "names": [
+                    "modify_ldt"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "arches": [
+                      "s390",
+                      "s390x"
+                    ]
+                  },
+                  "names": [
+                    "s390_pci_mmio_read",
+                    "s390_pci_mmio_write",
+                    "s390_runtime_instr"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "arches": [
+                      "riscv64"
+                    ]
+                  },
+                  "names": [
+                    "riscv_flush_icache"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_DAC_READ_SEARCH"
+                    ]
+                  },
+                  "names": [
+                    "open_by_handle_at"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_ADMIN"
+                    ]
+                  },
+                  "names": [
+                    "bpf",
+                    "clone",
+                    "clone3",
+                    "fanotify_init",
+                    "fsconfig",
+                    "fsmount",
+                    "fsopen",
+                    "fspick",
+                    "lookup_dcookie",
+                    "lsm_get_self_attr",
+                    "lsm_list_modules",
+                    "lsm_set_self_attr",
+                    "mount",
+                    "mount_setattr",
+                    "move_mount",
+                    "open_tree",
+                    "perf_event_open",
+                    "quotactl",
+                    "quotactl_fd",
+                    "setdomainname",
+                    "sethostname",
+                    "setns",
+                    "syslog",
+                    "umount",
+                    "umount2",
+                    "unshare"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_MASKED_EQ",
+                      "value": 2114060288
+                    }
+                  ],
+                  "excludes": {
+                    "arches": [
+                      "s390",
+                      "s390x"
+                    ],
+                    "caps": [
+                      "CAP_SYS_ADMIN"
+                    ]
+                  },
+                  "names": [
+                    "clone"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 1,
+                      "op": "SCMP_CMP_MASKED_EQ",
+                      "value": 2114060288
+                    }
+                  ],
+                  "comment": "s390 parameter ordering for clone is different",
+                  "excludes": {
+                    "caps": [
+                      "CAP_SYS_ADMIN"
+                    ]
+                  },
+                  "includes": {
+                    "arches": [
+                      "s390",
+                      "s390x"
+                    ]
+                  },
+                  "names": [
+                    "clone"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ERRNO",
+                  "errnoRet": 38,
+                  "excludes": {
+                    "caps": [
+                      "CAP_SYS_ADMIN"
+                    ]
+                  },
+                  "names": [
+                    "clone3"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_BOOT"
+                    ]
+                  },
+                  "names": [
+                    "reboot"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_CHROOT"
+                    ]
+                  },
+                  "names": [
+                    "chroot"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_MODULE"
+                    ]
+                  },
+                  "names": [
+                    "delete_module",
+                    "init_module",
+                    "finit_module"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_PACCT"
+                    ]
+                  },
+                  "names": [
+                    "acct"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_PTRACE"
+                    ]
+                  },
+                  "names": [
+                    "kcmp",
+                    "pidfd_getfd",
+                    "process_madvise",
+                    "process_vm_readv",
+                    "process_vm_writev",
+                    "ptrace"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_RAWIO"
+                    ]
+                  },
+                  "names": [
+                    "iopl",
+                    "ioperm"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_TIME"
+                    ]
+                  },
+                  "names": [
+                    "settimeofday",
+                    "stime",
+                    "clock_settime",
+                    "clock_settime64"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_TTY_CONFIG"
+                    ]
+                  },
+                  "names": [
+                    "vhangup"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_NICE"
+                    ]
+                  },
+                  "names": [
+                    "get_mempolicy",
+                    "mbind",
+                    "set_mempolicy",
+                    "set_mempolicy_home_node"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYSLOG"
+                    ]
+                  },
+                  "names": [
+                    "syslog"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_BPF"
+                    ]
+                  },
+                  "names": [
+                    "bpf"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_PERFMON"
+                    ]
+                  },
+                  "names": [
+                    "perf_event_open"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "names": [
+                    "unshare",
+                    "mount",
+                    "umount2",
+                    "pivot_root",
+                    "sethostname",
+                    "setdomainname",
+                    "setns"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_MASKED_EQ",
+                      "value": 268435456,
+                      "valueTwo": 268435456
+                    }
+                  ],
+                  "names": [
+                    "clone"
+                  ]
+                }
+              ]
+            },
+            "permissions_profile": "aeep",
+            "reviewed_files": {
+              "/opt/aeep/codex_metrics.py": "9c3f22e393835347380f74b90edb588f97a216a4f634fbce48f98c84103676d3",
+              "/opt/dependencies/stack-check/LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+              "/opt/dependencies/stack-check/SKILL.md": "e18a979532105161910d8cc7891959a704048b19194e23707828f21bfd8d68ec"
+            }
+          },
+          "artifact": {
+            "input_field": "source_b64",
+            "output_field": "patch_b64",
+            "input_name": "repository.tar.gz",
+            "output_name": "patch.json",
+            "max_bytes": 650000
+          },
+          "adapter_options": {
+            "experimental_api": true,
+            "output_schema_mode": "prompt",
+            "catalog_metrics": true
+          }
+        }
+      },
+      "baseline": {
+        "executor_id": "toolkit-ase-stack-20261103.control",
+        "fingerprint": "905161dc85b5e45bcadd23bf3c7c4943032dd4d44ece546b8ff82a51ef093307",
+        "dependencies": {},
+        "host_config": {
+          "adapter_id": "codex-app-server:aeep-stack-control-20261103",
+          "argv": [
+            "/opt/codex/codex",
+            "app-server"
+          ],
+          "executable_sha256": null,
+          "instructions": "Complete the repository maintenance task using the tools available in your isolated workspace. Read the current task,unpack the supplied repository.tar.gz into that workspace,and inspect the relevant Python source. This is a required skill-loading integration check; follow the reviewed selected skill when supplied. Do not install software or access external services. Only change listed existing editable Python files; preserve omitted files. Write the output artifact as UTF-8 JSON with exactly base_sha256(the supplied canonical hash) and files(a mapping of changed existing paths to full replacement text). An empty files mapping is valid when no change is needed. The output path is supplied by the host. Do not put base64 bytes in the final answer. Independent protected tests run outside your workspace; report completion after writing the artifact.\nCurrent task JSON and bound artifact paths:\n{input}",
+          "model_constraints": {
+            "allowed_model_ids": [
+              "gpt-6-astra"
+            ],
+            "required_capabilities": [],
+            "minimum_context_tokens": null
+          },
+          "reasoning_efforts": [
+            "medium"
+          ],
+          "working_directory_policy": "inherit",
+          "working_directory": null,
+          "sandbox_policy": "workspace_write",
+          "approval_ceiling": "read",
+          "output_mode": "json",
+          "timeout_seconds": 300.0,
+          "max_message_bytes": 16777216,
+          "environment_allowlist": [],
+          "store_prompt": false,
+          "store_output": false,
+          "redaction_policy": "default",
+          "invocation": {
+            "mode": "turn",
+            "skill_name": null,
+            "skill_path": null,
+            "skill_sha256": null,
+            "server": null,
+            "tool": null,
+            "tool_sha256": null,
+            "local_profile": "capable_local"
+          },
+          "assessment_adapter": {
+            "input_transform": "repository_archive:1",
+            "read_only_roots": [
+              "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public"
+            ]
+          },
+          "managed_worker": {
+            "schema_version": "execution.worker.v2",
+            "worker_id": "aeep-stack-control-20261103",
+            "runtime": "/usr/local/bin/docker",
+            "socket": "/Users/edwintse/.docker/run/docker.sock",
+            "image": "sha256:0c05b495931e8558baf76b099c01c3b80a4b5136b5640d387db2d8ee644cf1db",
+            "platform": "linux/arm64",
+            "binary": "/opt/codex/codex",
+            "binary_sha256": "9b7c1c7abdc26fc3c4f47c77656a8e9121def5483dbae830ef1ee561758448a9",
+            "configuration_digest": "f413bd97ca1f040cd977829205706b6b4d276a3c193bcf3ad924b93284e91aac",
+            "dependencies_digest": "af960af068c861aedc144224f0ade3a2780678acd7d257e57e7d34fc219230af",
+            "cpu_count": 1.0,
+            "memory_mb": 1024,
+            "process_limit": 64,
+            "network_id": "8f657f861de8897d53df66efdf595c6d2e202b174af81f2827db409fe53f19d6",
+            "model_proxy_url": "http://172.18.0.2:3128",
+            "credential_volume": "aeep-auth-incremental-control",
+            "seccomp_profile": {
+              "archMap": [
+                {
+                  "architecture": "SCMP_ARCH_X86_64",
+                  "subArchitectures": [
+                    "SCMP_ARCH_X86",
+                    "SCMP_ARCH_X32"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_AARCH64",
+                  "subArchitectures": [
+                    "SCMP_ARCH_ARM"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_MIPS64",
+                  "subArchitectures": [
+                    "SCMP_ARCH_MIPS",
+                    "SCMP_ARCH_MIPS64N32"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_MIPS64N32",
+                  "subArchitectures": [
+                    "SCMP_ARCH_MIPS",
+                    "SCMP_ARCH_MIPS64"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_MIPSEL64",
+                  "subArchitectures": [
+                    "SCMP_ARCH_MIPSEL",
+                    "SCMP_ARCH_MIPSEL64N32"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_MIPSEL64N32",
+                  "subArchitectures": [
+                    "SCMP_ARCH_MIPSEL",
+                    "SCMP_ARCH_MIPSEL64"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_S390X",
+                  "subArchitectures": [
+                    "SCMP_ARCH_S390"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_RISCV64",
+                  "subArchitectures": null
+                },
+                {
+                  "architecture": "SCMP_ARCH_LOONGARCH64",
+                  "subArchitectures": null
+                }
+              ],
+              "defaultAction": "SCMP_ACT_ERRNO",
+              "defaultErrnoRet": 1,
+              "syscalls": [
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "names": [
+                    "accept",
+                    "accept4",
+                    "access",
+                    "adjtimex",
+                    "alarm",
+                    "bind",
+                    "brk",
+                    "cachestat",
+                    "capget",
+                    "capset",
+                    "chdir",
+                    "chmod",
+                    "chown",
+                    "chown32",
+                    "clock_adjtime",
+                    "clock_adjtime64",
+                    "clock_getres",
+                    "clock_getres_time64",
+                    "clock_gettime",
+                    "clock_gettime64",
+                    "clock_nanosleep",
+                    "clock_nanosleep_time64",
+                    "close",
+                    "close_range",
+                    "connect",
+                    "copy_file_range",
+                    "creat",
+                    "dup",
+                    "dup2",
+                    "dup3",
+                    "epoll_create",
+                    "epoll_create1",
+                    "epoll_ctl",
+                    "epoll_ctl_old",
+                    "epoll_pwait",
+                    "epoll_pwait2",
+                    "epoll_wait",
+                    "epoll_wait_old",
+                    "eventfd",
+                    "eventfd2",
+                    "execve",
+                    "execveat",
+                    "exit",
+                    "exit_group",
+                    "faccessat",
+                    "faccessat2",
+                    "fadvise64",
+                    "fadvise64_64",
+                    "fallocate",
+                    "fanotify_mark",
+                    "fchdir",
+                    "fchmod",
+                    "fchmodat",
+                    "fchmodat2",
+                    "fchown",
+                    "fchown32",
+                    "fchownat",
+                    "fcntl",
+                    "fcntl64",
+                    "fdatasync",
+                    "fgetxattr",
+                    "flistxattr",
+                    "flock",
+                    "fork",
+                    "fremovexattr",
+                    "fsetxattr",
+                    "fstat",
+                    "fstat64",
+                    "fstatat64",
+                    "fstatfs",
+                    "fstatfs64",
+                    "fsync",
+                    "ftruncate",
+                    "ftruncate64",
+                    "futex",
+                    "futex_requeue",
+                    "futex_time64",
+                    "futex_wait",
+                    "futex_waitv",
+                    "futex_wake",
+                    "futimesat",
+                    "getcpu",
+                    "getcwd",
+                    "getdents",
+                    "getdents64",
+                    "getegid",
+                    "getegid32",
+                    "geteuid",
+                    "geteuid32",
+                    "getgid",
+                    "getgid32",
+                    "getgroups",
+                    "getgroups32",
+                    "getitimer",
+                    "getpeername",
+                    "getpgid",
+                    "getpgrp",
+                    "getpid",
+                    "getppid",
+                    "getpriority",
+                    "getrandom",
+                    "getresgid",
+                    "getresgid32",
+                    "getresuid",
+                    "getresuid32",
+                    "getrlimit",
+                    "get_robust_list",
+                    "getrusage",
+                    "getsid",
+                    "getsockname",
+                    "getsockopt",
+                    "get_thread_area",
+                    "gettid",
+                    "gettimeofday",
+                    "getuid",
+                    "getuid32",
+                    "getxattr",
+                    "getxattrat",
+                    "inotify_add_watch",
+                    "inotify_init",
+                    "inotify_init1",
+                    "inotify_rm_watch",
+                    "io_cancel",
+                    "ioctl",
+                    "io_destroy",
+                    "io_getevents",
+                    "io_pgetevents",
+                    "io_pgetevents_time64",
+                    "ioprio_get",
+                    "ioprio_set",
+                    "io_setup",
+                    "io_submit",
+                    "ipc",
+                    "kill",
+                    "landlock_add_rule",
+                    "landlock_create_ruleset",
+                    "landlock_restrict_self",
+                    "lchown",
+                    "lchown32",
+                    "lgetxattr",
+                    "link",
+                    "linkat",
+                    "listen",
+                    "listmount",
+                    "listxattr",
+                    "listxattrat",
+                    "llistxattr",
+                    "_llseek",
+                    "lremovexattr",
+                    "lseek",
+                    "lsetxattr",
+                    "lstat",
+                    "lstat64",
+                    "madvise",
+                    "map_shadow_stack",
+                    "membarrier",
+                    "memfd_create",
+                    "memfd_secret",
+                    "mincore",
+                    "mkdir",
+                    "mkdirat",
+                    "mknod",
+                    "mknodat",
+                    "mlock",
+                    "mlock2",
+                    "mlockall",
+                    "mmap",
+                    "mmap2",
+                    "mprotect",
+                    "mq_getsetattr",
+                    "mq_notify",
+                    "mq_open",
+                    "mq_timedreceive",
+                    "mq_timedreceive_time64",
+                    "mq_timedsend",
+                    "mq_timedsend_time64",
+                    "mq_unlink",
+                    "mremap",
+                    "mseal",
+                    "msgctl",
+                    "msgget",
+                    "msgrcv",
+                    "msgsnd",
+                    "msync",
+                    "munlock",
+                    "munlockall",
+                    "munmap",
+                    "name_to_handle_at",
+                    "nanosleep",
+                    "newfstatat",
+                    "_newselect",
+                    "open",
+                    "openat",
+                    "openat2",
+                    "pause",
+                    "pidfd_open",
+                    "pidfd_send_signal",
+                    "pipe",
+                    "pipe2",
+                    "pkey_alloc",
+                    "pkey_free",
+                    "pkey_mprotect",
+                    "poll",
+                    "ppoll",
+                    "ppoll_time64",
+                    "prctl",
+                    "pread64",
+                    "preadv",
+                    "preadv2",
+                    "prlimit64",
+                    "process_mrelease",
+                    "pselect6",
+                    "pselect6_time64",
+                    "pwrite64",
+                    "pwritev",
+                    "pwritev2",
+                    "read",
+                    "readahead",
+                    "readlink",
+                    "readlinkat",
+                    "readv",
+                    "recv",
+                    "recvfrom",
+                    "recvmmsg",
+                    "recvmmsg_time64",
+                    "recvmsg",
+                    "remap_file_pages",
+                    "removexattr",
+                    "removexattrat",
+                    "rename",
+                    "renameat",
+                    "renameat2",
+                    "restart_syscall",
+                    "riscv_hwprobe",
+                    "rmdir",
+                    "rseq",
+                    "rt_sigaction",
+                    "rt_sigpending",
+                    "rt_sigprocmask",
+                    "rt_sigqueueinfo",
+                    "rt_sigreturn",
+                    "rt_sigsuspend",
+                    "rt_sigtimedwait",
+                    "rt_sigtimedwait_time64",
+                    "rt_tgsigqueueinfo",
+                    "sched_getaffinity",
+                    "sched_getattr",
+                    "sched_getparam",
+                    "sched_get_priority_max",
+                    "sched_get_priority_min",
+                    "sched_getscheduler",
+                    "sched_rr_get_interval",
+                    "sched_rr_get_interval_time64",
+                    "sched_setaffinity",
+                    "sched_setattr",
+                    "sched_setparam",
+                    "sched_setscheduler",
+                    "sched_yield",
+                    "seccomp",
+                    "select",
+                    "semctl",
+                    "semget",
+                    "semop",
+                    "semtimedop",
+                    "semtimedop_time64",
+                    "send",
+                    "sendfile",
+                    "sendfile64",
+                    "sendmmsg",
+                    "sendmsg",
+                    "sendto",
+                    "setfsgid",
+                    "setfsgid32",
+                    "setfsuid",
+                    "setfsuid32",
+                    "setgid",
+                    "setgid32",
+                    "setgroups",
+                    "setgroups32",
+                    "setitimer",
+                    "setpgid",
+                    "setpriority",
+                    "setregid",
+                    "setregid32",
+                    "setresgid",
+                    "setresgid32",
+                    "setresuid",
+                    "setresuid32",
+                    "setreuid",
+                    "setreuid32",
+                    "setrlimit",
+                    "set_robust_list",
+                    "setsid",
+                    "setsockopt",
+                    "set_thread_area",
+                    "set_tid_address",
+                    "setuid",
+                    "setuid32",
+                    "setxattr",
+                    "setxattrat",
+                    "shmat",
+                    "shmctl",
+                    "shmdt",
+                    "shmget",
+                    "shutdown",
+                    "sigaltstack",
+                    "signalfd",
+                    "signalfd4",
+                    "sigprocmask",
+                    "sigreturn",
+                    "socketcall",
+                    "socketpair",
+                    "splice",
+                    "stat",
+                    "stat64",
+                    "statfs",
+                    "statfs64",
+                    "statmount",
+                    "statx",
+                    "symlink",
+                    "symlinkat",
+                    "sync",
+                    "sync_file_range",
+                    "syncfs",
+                    "sysinfo",
+                    "tee",
+                    "tgkill",
+                    "time",
+                    "timer_create",
+                    "timer_delete",
+                    "timer_getoverrun",
+                    "timer_gettime",
+                    "timer_gettime64",
+                    "timer_settime",
+                    "timer_settime64",
+                    "timerfd_create",
+                    "timerfd_gettime",
+                    "timerfd_gettime64",
+                    "timerfd_settime",
+                    "timerfd_settime64",
+                    "times",
+                    "tkill",
+                    "truncate",
+                    "truncate64",
+                    "ugetrlimit",
+                    "umask",
+                    "uname",
+                    "unlink",
+                    "unlinkat",
+                    "uretprobe",
+                    "utime",
+                    "utimensat",
+                    "utimensat_time64",
+                    "utimes",
+                    "vfork",
+                    "vmsplice",
+                    "wait4",
+                    "waitid",
+                    "waitpid",
+                    "write",
+                    "writev"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "minKernel": "4.8"
+                  },
+                  "names": [
+                    "process_vm_readv",
+                    "process_vm_writev",
+                    "ptrace"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_LT",
+                      "value": 38
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 39
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 41
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 42
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 43
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 44
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 45
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 0
+                    }
+                  ],
+                  "names": [
+                    "personality"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 8
+                    }
+                  ],
+                  "names": [
+                    "personality"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 131072
+                    }
+                  ],
+                  "names": [
+                    "personality"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 131080
+                    }
+                  ],
+                  "names": [
+                    "personality"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 4294967295
+                    }
+                  ],
+                  "names": [
+                    "personality"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "arches": [
+                      "ppc64le"
+                    ]
+                  },
+                  "names": [
+                    "sync_file_range2",
+                    "swapcontext"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "arches": [
+                      "arm",
+                      "arm64"
+                    ]
+                  },
+                  "names": [
+                    "arm_fadvise64_64",
+                    "arm_sync_file_range",
+                    "sync_file_range2",
+                    "breakpoint",
+                    "cacheflush",
+                    "set_tls"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "arches": [
+                      "amd64",
+                      "x32"
+                    ]
+                  },
+                  "names": [
+                    "arch_prctl"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "arches": [
+                      "amd64",
+                      "x32",
+                      "x86"
+                    ]
+                  },
+                  "names": [
+                    "modify_ldt"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "arches": [
+                      "s390",
+                      "s390x"
+                    ]
+                  },
+                  "names": [
+                    "s390_pci_mmio_read",
+                    "s390_pci_mmio_write",
+                    "s390_runtime_instr"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "arches": [
+                      "riscv64"
+                    ]
+                  },
+                  "names": [
+                    "riscv_flush_icache"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_DAC_READ_SEARCH"
+                    ]
+                  },
+                  "names": [
+                    "open_by_handle_at"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_ADMIN"
+                    ]
+                  },
+                  "names": [
+                    "bpf",
+                    "clone",
+                    "clone3",
+                    "fanotify_init",
+                    "fsconfig",
+                    "fsmount",
+                    "fsopen",
+                    "fspick",
+                    "lookup_dcookie",
+                    "lsm_get_self_attr",
+                    "lsm_list_modules",
+                    "lsm_set_self_attr",
+                    "mount",
+                    "mount_setattr",
+                    "move_mount",
+                    "open_tree",
+                    "perf_event_open",
+                    "quotactl",
+                    "quotactl_fd",
+                    "setdomainname",
+                    "sethostname",
+                    "setns",
+                    "syslog",
+                    "umount",
+                    "umount2",
+                    "unshare"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_MASKED_EQ",
+                      "value": 2114060288
+                    }
+                  ],
+                  "excludes": {
+                    "arches": [
+                      "s390",
+                      "s390x"
+                    ],
+                    "caps": [
+                      "CAP_SYS_ADMIN"
+                    ]
+                  },
+                  "names": [
+                    "clone"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 1,
+                      "op": "SCMP_CMP_MASKED_EQ",
+                      "value": 2114060288
+                    }
+                  ],
+                  "comment": "s390 parameter ordering for clone is different",
+                  "excludes": {
+                    "caps": [
+                      "CAP_SYS_ADMIN"
+                    ]
+                  },
+                  "includes": {
+                    "arches": [
+                      "s390",
+                      "s390x"
+                    ]
+                  },
+                  "names": [
+                    "clone"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ERRNO",
+                  "errnoRet": 38,
+                  "excludes": {
+                    "caps": [
+                      "CAP_SYS_ADMIN"
+                    ]
+                  },
+                  "names": [
+                    "clone3"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_BOOT"
+                    ]
+                  },
+                  "names": [
+                    "reboot"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_CHROOT"
+                    ]
+                  },
+                  "names": [
+                    "chroot"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_MODULE"
+                    ]
+                  },
+                  "names": [
+                    "delete_module",
+                    "init_module",
+                    "finit_module"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_PACCT"
+                    ]
+                  },
+                  "names": [
+                    "acct"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_PTRACE"
+                    ]
+                  },
+                  "names": [
+                    "kcmp",
+                    "pidfd_getfd",
+                    "process_madvise",
+                    "process_vm_readv",
+                    "process_vm_writev",
+                    "ptrace"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_RAWIO"
+                    ]
+                  },
+                  "names": [
+                    "iopl",
+                    "ioperm"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_TIME"
+                    ]
+                  },
+                  "names": [
+                    "settimeofday",
+                    "stime",
+                    "clock_settime",
+                    "clock_settime64"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_TTY_CONFIG"
+                    ]
+                  },
+                  "names": [
+                    "vhangup"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_NICE"
+                    ]
+                  },
+                  "names": [
+                    "get_mempolicy",
+                    "mbind",
+                    "set_mempolicy",
+                    "set_mempolicy_home_node"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYSLOG"
+                    ]
+                  },
+                  "names": [
+                    "syslog"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_BPF"
+                    ]
+                  },
+                  "names": [
+                    "bpf"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_PERFMON"
+                    ]
+                  },
+                  "names": [
+                    "perf_event_open"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "names": [
+                    "unshare",
+                    "mount",
+                    "umount2",
+                    "pivot_root",
+                    "sethostname",
+                    "setdomainname",
+                    "setns"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_MASKED_EQ",
+                      "value": 268435456,
+                      "valueTwo": 268435456
+                    }
+                  ],
+                  "names": [
+                    "clone"
+                  ]
+                }
+              ]
+            },
+            "permissions_profile": "aeep",
+            "reviewed_files": {
+              "/opt/aeep/codex_metrics.py": "9c3f22e393835347380f74b90edb588f97a216a4f634fbce48f98c84103676d3"
+            }
+          },
+          "artifact": {
+            "input_field": "source_b64",
+            "output_field": "patch_b64",
+            "input_name": "repository.tar.gz",
+            "output_name": "patch.json",
+            "max_bytes": 650000
+          },
+          "adapter_options": {
+            "experimental_api": true,
+            "output_schema_mode": "prompt",
+            "catalog_metrics": true
+          }
+        }
+      },
+      "reference": null,
+      "primary_metric": "wall_time_ms",
+      "primary_condition": "fresh-worker",
+      "experiment": {
+        "schema_version": "assessment.experiment.v1",
+        "stage": "qualification",
+        "exposure": "required",
+        "environment": {
+          "shared_definition_digest": "1b87c536695c9610d01d09f5e78ba64e3cc05fc8b76bf8fc8a1aa8e96770b2db",
+          "control_inventory": {
+            "codex": "9b7c1c7abdc26fc3c4f47c77656a8e9121def5483dbae830ef1ee561758448a9",
+            "shared_dependencies": "af960af068c861aedc144224f0ade3a2780678acd7d257e57e7d34fc219230af",
+            "collector": "9c3f22e393835347380f74b90edb588f97a216a4f634fbce48f98c84103676d3",
+            "common_profile": "1b87c536695c9610d01d09f5e78ba64e3cc05fc8b76bf8fc8a1aa8e96770b2db"
+          },
+          "treatment_inventory": {
+            "codex": "9b7c1c7abdc26fc3c4f47c77656a8e9121def5483dbae830ef1ee561758448a9",
+            "shared_dependencies": "af960af068c861aedc144224f0ade3a2780678acd7d257e57e7d34fc219230af",
+            "collector": "9c3f22e393835347380f74b90edb588f97a216a4f634fbce48f98c84103676d3",
+            "common_profile": "1b87c536695c9610d01d09f5e78ba64e3cc05fc8b76bf8fc8a1aa8e96770b2db",
+            "skill:stack-check": "e18a979532105161910d8cc7891959a704048b19194e23707828f21bfd8d68ec"
+          },
+          "candidate_inventory": {
+            "skill:stack-check": "e18a979532105161910d8cc7891959a704048b19194e23707828f21bfd8d68ec"
+          },
+          "candidate_paths": [
+            "/opt/dependencies/stack-check/SKILL.md",
+            "/etc/codex/skills/stack-check/SKILL.md",
+            "/opt/dependencies/stack-check"
+          ],
+          "candidate_aliases": [
+            "stack-check"
+          ]
+        },
+        "utility": {
+          "benefit_dimensions": [
+            "wall_time_ms"
+          ],
+          "guardrail_dimensions": [
+            "wall_time_ms"
+          ],
+          "minimum_resource_benefit": 0.1,
+          "minimum_success_gain": 0.05,
+          "maximum_resource_regression": 0.1,
+          "family_error_rate": 0.05
+        },
+        "higher_compute": null,
+        "reusable_tool": null,
+        "reusable_artifact_digest": null,
+        "reusable_build_operation_ids": [],
+        "feasible_challengers": [],
+        "qualification_report_digest": null,
+        "catalog_definition_digest": null,
+        "marginal_report_digest": null
+      }
+    },
+    "feature_combinations": [],
+    "schema_version": "assessment.report.v3",
+    "report_id": "fit_c22d45c6718045768fa756717414688e",
+    "plan_digest": "ac40582f1c0f40914dcb35c74f2a837f4f8e098ebcdf1965f415ffbbe7f803e0",
+    "outcome": "insufficient_evidence",
+    "qualification_passed": false,
+    "distinct_holdout_cases": 0,
+    "distinct_paired_cases": 0,
+    "correctness_failures": 0,
+    "execution_failures": 0,
+    "tested_variations": [],
+    "condition_comparisons": {
+      "fresh-worker": {
+        "paired_savings": {
+          "wall_time_ms": null,
+          "local.cpu_ms": null,
+          "local.gpu_ms": null,
+          "local.memory_mb_seconds": null,
+          "local.network_bytes": null,
+          "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+          "model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+          "model.openai.gpt-6-astra.subscription.input_tokens": null,
+          "model.openai.gpt-6-astra.subscription.output_tokens": null,
+          "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+          "subscription.openai.codex.self.provider_unit": null
+        },
+        "savings_interval": {},
+        "paired_measurement_cases": {
+          "wall_time_ms": 0,
+          "local.cpu_ms": 0,
+          "local.gpu_ms": 0,
+          "local.memory_mb_seconds": 0,
+          "local.network_bytes": 0,
+          "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": 0,
+          "model.openai.gpt-6-astra.subscription.cached_input_tokens": 0,
+          "model.openai.gpt-6-astra.subscription.input_tokens": 0,
+          "model.openai.gpt-6-astra.subscription.output_tokens": 0,
+          "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": 0,
+          "subscription.openai.codex.self.provider_unit": 0
+        },
+        "break_even_uses": {
+          "wall_time_ms": null,
+          "local.cpu_ms": null,
+          "local.gpu_ms": null,
+          "local.memory_mb_seconds": null,
+          "local.network_bytes": null,
+          "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+          "model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+          "model.openai.gpt-6-astra.subscription.input_tokens": null,
+          "model.openai.gpt-6-astra.subscription.output_tokens": null,
+          "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+          "subscription.openai.codex.self.provider_unit": null
+        }
+      }
+    },
+    "utility_evidence": {
+      "metrics": {
+        "wall_time_ms": {
+          "relative_saving": null,
+          "success_gain": null,
+          "interval": [],
+          "distinct_pairs": 0,
+          "zero_baseline_regression": false
+        }
+      },
+      "complete": false,
+      "benefit": false,
+      "guardrails_passed": false,
+      "challengers": {},
+      "dominated": false,
+      "stage": "qualification",
+      "family_error_rate": 0.05,
+      "analysis": "all_assigned_cases",
+      "candidate_selection_filter": false
+    },
+    "measured_usage": {
+      "campaign_wall_time_ms": 63996.416167356074,
+      "known_campaign_wall_time_ms": 63996.416167356074,
+      "known_overhead_wall_time_ms": 56508.82016541436,
+      "assessment_wall_time_ms": 120505.23633277044,
+      "included_routing_overhead_ms": 11.335625313222408,
+      "included_invocation_guard_ms": 122.26091604679823,
+      "known_campaign_subtotal.local.cpu_ms": null,
+      "campaign_total.local.cpu_ms": null,
+      "known_overhead_subtotal.local.cpu_ms": 11073.755000000001,
+      "assessment_total.local.cpu_ms": null,
+      "known_campaign_subtotal.local.gpu_ms": null,
+      "campaign_total.local.gpu_ms": null,
+      "known_overhead_subtotal.local.gpu_ms": null,
+      "assessment_total.local.gpu_ms": null,
+      "known_campaign_subtotal.local.memory_mb_seconds": null,
+      "campaign_total.local.memory_mb_seconds": null,
+      "known_overhead_subtotal.local.memory_mb_seconds": null,
+      "assessment_total.local.memory_mb_seconds": null,
+      "known_campaign_subtotal.local.network_bytes": null,
+      "campaign_total.local.network_bytes": null,
+      "known_overhead_subtotal.local.network_bytes": null,
+      "assessment_total.local.network_bytes": null,
+      "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "campaign_total.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "assessment_total.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "campaign_total.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "assessment_total.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "campaign_total.model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "assessment_total.model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "campaign_total.model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "assessment_total.model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "campaign_total.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "assessment_total.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "known_campaign_subtotal.subscription.openai.codex.self.provider_unit": null,
+      "campaign_total.subscription.openai.codex.self.provider_unit": null,
+      "known_overhead_subtotal.subscription.openai.codex.self.provider_unit": null,
+      "assessment_total.subscription.openai.codex.self.provider_unit": null
+    },
+    "measurement_coverage": {
+      "local.cpu_ms": "0/1",
+      "local.gpu_ms": "0/1",
+      "local.memory_mb_seconds": "0/1",
+      "local.network_bytes": "0/1",
+      "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": "0/1",
+      "model.openai.gpt-6-astra.subscription.cached_input_tokens": "0/1",
+      "model.openai.gpt-6-astra.subscription.input_tokens": "0/1",
+      "model.openai.gpt-6-astra.subscription.output_tokens": "0/1",
+      "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": "0/1",
+      "subscription.openai.codex.self.provider_unit": "0/1"
+    },
+    "paired_measurement_cases": {
+      "wall_time_ms": 0,
+      "local.cpu_ms": 0,
+      "local.gpu_ms": 0,
+      "local.memory_mb_seconds": 0,
+      "local.network_bytes": 0,
+      "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": 0,
+      "model.openai.gpt-6-astra.subscription.cached_input_tokens": 0,
+      "model.openai.gpt-6-astra.subscription.input_tokens": 0,
+      "model.openai.gpt-6-astra.subscription.output_tokens": 0,
+      "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": 0,
+      "subscription.openai.codex.self.provider_unit": 0
+    },
+    "paired_savings": {
+      "wall_time_ms": null,
+      "local.cpu_ms": null,
+      "local.gpu_ms": null,
+      "local.memory_mb_seconds": null,
+      "local.network_bytes": null,
+      "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "subscription.openai.codex.self.provider_unit": null
+    },
+    "savings_interval": {},
+    "break_even_uses": {
+      "wall_time_ms": null,
+      "local.cpu_ms": null,
+      "local.gpu_ms": null,
+      "local.memory_mb_seconds": null,
+      "local.network_bytes": null,
+      "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "subscription.openai.codex.self.provider_unit": null
+    },
+    "estimated_production_savings": {},
+    "campaign_digest": "72f6a46cc3941578537f834a729806d4e19726a054b74b6f85048985029a698b",
+    "operation_ledger_digest": "1b9973d3abb9056bd564509b6d0e94fb39762e4f9d77a089762a8d025ca4f090",
+    "grader_validation_digest": "ddbb8479411de071c08804e792ce0e250eac4952ebc0d24af6f5ce1807b21131",
+    "host_runtime_digests": {
+      "toolkit-ase-stack-20261103.treatment": "bf17099fffd98c160190e23ae5c3e52e7b2ba5f651f2e1a69e739663e92059f4"
+    },
+    "deterministic_reference_comparison": {},
+    "explanations": [
+      "Correctness counts distinct held-out cases; repetitions measure variability.",
+      "Latency includes routing and grading. The interval resamples template families and cases.",
+      "No cash, subscription or production savings are inferred from an unexecuted baseline.",
+      "Assessment overhead is charged once; incomplete operations leave the total and break-even unknown.",
+      "Comparison structure: controlled_agent; admission uses predeclared utility and guardrails under fresh-worker. Conditions are never pooled.",
+      "Controlled comparison requires the same resolved model in both arms; identity evidence is missing or differs.",
+      "Stack integration only: upstream reference tasks do not establish candidate or selection usefulness and cannot authorize admission."
+    ],
+    "created_at": "2026-11-04T02:17:19.643867Z"
+  },
+  "timing_scope": "Trial wall time includes routing and preflight; separately measured grading is excluded by BenchmarkRunner.",
+  "notice": "All primary and auxiliary costs remain in the canonical ledger. Normalization alone is not efficacy or release qualification.",
+  "workflow_accounting": {
+    "coverage": "NOT_RECORDED",
+    "notice": "No workflow overhead scope was selected; execution ledger alone is incomplete composed cost coverage."
+  },
+  "engineering_scope": {
+    "review_ref": "56dfa5524575ebebd8684749624d7b3c6a204c3060c77a29b15092bdf24eed2e",
+    "purpose": "stack_integration_only",
+    "candidate_usefulness": "NOT_ASSESSED",
+    "selection_usefulness": "NOT_ASSESSED"
+  }
+}

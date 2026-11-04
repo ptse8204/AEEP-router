@@ -49,3 +49,7 @@ then `run-components.py --component package --execute-approved REVIEW_SHA256` an
 the corresponding `--component docs` command. Inspect started/result files before
 any invocation. Component retries are not implied. Successful old components
 retain their old scope and are not replayed.
+
+The preparation record above is historical. The approved execution has finished;
+see [the actual results](RESULTS.md) before resuming. Neither engine may replay
+under the exhausted two-turn allowance.

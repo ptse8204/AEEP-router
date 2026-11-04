@@ -1934,3 +1934,21 @@ SkillRank's [pinned source audit](../../reports/toolkit-v2/c13/skillrank-interfa
 identifies its actual core callback interfaces and loopback server, with registry
 licensing separate. It is preparation only;86 locked packages are not cached and
 no SkillRank code ran. All stack/usefulness/resource/release gates stay separate.
+
+## November 3 — retain real evaluator execution and report-only repairs
+
+[The completed engineering bundle](../../reports/toolkit-v2/c13/integration-snapshot-correction-20261103/RESULTS.md)
+establishes actual ASE scheduler/grader dispatch into controlled workers and a
+separately selected managed-engine journey. Both protected binary grades passed.
+Keep the one-task scope, provider-report token trust, unknown semantic invocation,
+all controller failures and original counters explicit. The original two-turn
+allowance is exhausted. Do not rerun the tasks to repair serialization.
+
+Encode non-identifier family labels one-to-one at the report boundary and retain
+their original labels, without changing canonical tasks or weakening the existing
+wire schema. The current ASE report uses an explicitly adapted read-only export;
+ordinary adapter support is the next engineering correction. The managed ordinary
+CLI export already passed after pretrial metadata encoding. This is stack evidence,
+not candidate benefit, selection benefit or either SkillsBench domain journey.
+All-stack remains open and comparisons remain paused. Waza still lacks supported
+backend access; independent safe integration work continues.

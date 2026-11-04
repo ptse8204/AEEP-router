@@ -1,0 +1,3998 @@
+{
+  "plan_sha256": "a7063c2933cbc35ac03a762cd24c6b323d0036c5a3c325ea46d6f02c90a42b77",
+  "report_sha256": "fb043b1225f5ffb87662e996e7c69b4ba77225fa33154207418250136e46d751",
+  "campaign_sha256": "0d2ccfd99b519c46d8d2dd143b07672f8bd2dc4ed80a0d161413999f8d91f925",
+  "operation_ledger_sha256": "2b92478ae75a3b321535caa605497fc1084c58e6ab40bd38a7f7ee21fa31929d",
+  "canonical_trials": 1,
+  "expected_trial_positions": 1,
+  "missing_trial_positions": 0,
+  "unexpected_trial_positions": 0,
+  "duplicate_trial_positions": 0,
+  "unresolved_operations": 0,
+  "normalized_primary_trials": 1,
+  "normalization_gaps": [],
+  "telemetry_capture": {
+    "trial_plan_f966c3a56138439aa2aedd84cfe511cd_matthewwithanm__python-markdownify-200_toolkit-ase-stack-20261103.treatment_fresh-worker_0": {
+      "tokens": {
+        "status": "verified",
+        "receipt_ref": "c23c117c28d9ee2a197e318bdd1da3d5f51a3a96fcecefb1a778dba3c90bb231",
+        "journal_ref": "06b1eb958a27342bd2fa8182e13d3b30e1a5adbc32f0820cb09c2b3420f1caf8",
+        "known_fields": [
+          "input_tokens",
+          "cached_input_tokens",
+          "cache_write_input_tokens",
+          "output_tokens",
+          "reasoning_output_tokens"
+        ],
+        "provider_usage_independently_verified": false,
+        "source": "provider_report",
+        "trust": "self_asserted"
+      },
+      "candidate": {
+        "instructions_loaded": true,
+        "invoked": null,
+        "delivery_complete": false,
+        "snapshot_ref": "df11fb618f0ee7f3070e2426a009cc8f4f63db862a283211f68cf73a613898af",
+        "skill_sha256": "e18a979532105161910d8cc7891959a704048b19194e23707828f21bfd8d68ec",
+        "invoke_types": [
+          "explicit"
+        ]
+      }
+    }
+  },
+  "telemetry_capture_summary": {
+    "runs": 1,
+    "verified": 1,
+    "partial": 0,
+    "unknown": 0,
+    "instructions_loaded": 1,
+    "candidate_loading_unknown": 0,
+    "notice": "Capture verification checks retained journal-to-receipt consistency. Token quantities remain provider-reported; independent provider usage is unverified. Positive skill injection proves instructions loaded, not semantic use. Missing metrics never prove non-use."
+  },
+  "execution_journals": {
+    "06b1eb958a27342bd2fa8182e13d3b30e1a5adbc32f0820cb09c2b3420f1caf8": {
+      "schema_version": "execution.evidence.v1",
+      "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+      "adapter": "ManagedHostExecutor",
+      "events": [
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 0,
+          "kind": "execution.started",
+          "source_id": "start",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 1,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:5a7855e66472a68dcfa42b4e084950823f5b4fe83dadb28ddbf8b49487e8e351",
+          "action_digest": "5a7855e66472a68dcfa42b4e084950823f5b4fe83dadb28ddbf8b49487e8e351",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 2,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:0994302865c7e1935cb9dec7f59d82da6315d5705143aa8c473c721555a9c0e0",
+          "action_digest": "0994302865c7e1935cb9dec7f59d82da6315d5705143aa8c473c721555a9c0e0",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 3,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:e5d7e2caf4aa1867435466068764a0bb102ad4d60a72dde9d0ee1d46889f66d9",
+          "action_digest": "e5d7e2caf4aa1867435466068764a0bb102ad4d60a72dde9d0ee1d46889f66d9",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 4,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:7cb1350d00340751d468cf3107006eaabd2bd3b67d199d7c9f1dd088fedf52bb",
+          "action_digest": "32bc9638e8b89680b068baf5871071318e75fd59ac937563c7873d3d3bde95ea",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 5,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:60ea6e3a09d08f823b7843da256ad984eb17ff07cd73ace23f4dd95f5864d973",
+          "action_digest": "32bc9638e8b89680b068baf5871071318e75fd59ac937563c7873d3d3bde95ea",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 6,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:65a09b6444c4e507602125956b81365ee7f7b4d032816d000c847646a07d5ad6",
+          "action_digest": "65a09b6444c4e507602125956b81365ee7f7b4d032816d000c847646a07d5ad6",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 7,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:031074e50d8ad7d46139242020e8cca45d1da4af5f988337c324f6ee939bd1de",
+          "action_digest": "e42e3a0e3c22730b61453fa0b04a9f2424de2fb8a9227cf9ee5854363207f70c",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 8,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:66a245361b56003c877beef03bf882d871ce67ecdc88736aea2aaf544d062a7f",
+          "action_digest": "66a245361b56003c877beef03bf882d871ce67ecdc88736aea2aaf544d062a7f",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 9,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:7aba616e0497576599e1050e8064931f0be6b89507fe440b1c87368708d083d4",
+          "action_digest": "a2f397b5bbc0dcabdaab102eb375a8e11b46ce0e3b6875f4f36094bc1ff31b2b",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 10,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:2d607a351d5d615b22afb6220188115d2f0dc015ab47cbafb30b1a03abbd0aaf",
+          "action_digest": "2d607a351d5d615b22afb6220188115d2f0dc015ab47cbafb30b1a03abbd0aaf",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 11,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:4a322fe89a7e652f32ebd6ed1308071e2efdbc53be0118af351cf75138122e8f",
+          "action_digest": "5c900997344ceb13d0bbc4fb54cdf35f40d3a80e605cdaa2ae6dfb1b3f76e3f0",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 12,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:5accc744c098bb0d3bfc86512053143e2d3a33f9710d47b85de3c51c03cbf717",
+          "action_digest": "99df3438321db5bd9be572a731be4ee47fe1166d21a5009540c4f72e554a80ed",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 13,
+          "kind": "usage.reported",
+          "source_id": "adapter:usage:fd42540efd22421da285475f906d30f5:13",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": {
+            "cash": {
+              "status": "unavailable",
+              "components": []
+            },
+            "subscription_usage": [
+              {
+                "provider": "openai",
+                "resource_pool": "unknown",
+                "unit": "provider_unit",
+                "consumed": null,
+                "source": {
+                  "status": "unavailable",
+                  "source": "unavailable",
+                  "trust": "untrusted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": null
+                },
+                "included_or_paid": "unknown",
+                "rate_snapshot_id": null,
+                "usage_fingerprint": null
+              }
+            ],
+            "model_usage": [
+              {
+                "provider": "openai",
+                "model": "gpt-6-astra",
+                "access_channel": "subscription",
+                "input_tokens": 8523,
+                "cached_input_tokens": 0,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 81,
+                "reasoning_output_tokens": 0,
+                "evidence": {
+                  "status": "partial",
+                  "source": "provider_report",
+                  "trust": "self_asserted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": "2026-11-04T02:02:54.902094Z"
+                }
+              }
+            ],
+            "tool_footprint": null
+          },
+          "accounting_mode": "cumulative"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 14,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:9f51e1d9dfd2ceb1cb602c0230e3c71296baa7ffbd394b270bfd9c8e703eb182",
+          "action_digest": "9f51e1d9dfd2ceb1cb602c0230e3c71296baa7ffbd394b270bfd9c8e703eb182",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 15,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:bab89b7d42b57cbb6eec1c1e65c3ed2a4a2406df65f8f5388431440f4da17bf5",
+          "action_digest": "bab89b7d42b57cbb6eec1c1e65c3ed2a4a2406df65f8f5388431440f4da17bf5",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 16,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:b4c4f8ad9e8c1b87682d31a6b885c4972cde8eba33cab0db4f22369920b41b65",
+          "action_digest": "6c7a6a64b3689883e34607dd209d5abaad30e2b49179a5aa4ba09051d82f599e",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 17,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:5fa4962e3dc3d2e5b0f74466979748c54a63af5fcbf1e43fe13baa24d4badbc6",
+          "action_digest": "b9b9f691293ac0c164acaef606864d42c05440c8245659a484dc5e6db4b49cb2",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 18,
+          "kind": "usage.reported",
+          "source_id": "adapter:usage:fd42540efd22421da285475f906d30f5:18",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": {
+            "cash": {
+              "status": "unavailable",
+              "components": []
+            },
+            "subscription_usage": [
+              {
+                "provider": "openai",
+                "resource_pool": "unknown",
+                "unit": "provider_unit",
+                "consumed": null,
+                "source": {
+                  "status": "unavailable",
+                  "source": "unavailable",
+                  "trust": "untrusted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": null
+                },
+                "included_or_paid": "unknown",
+                "rate_snapshot_id": null,
+                "usage_fingerprint": null
+              }
+            ],
+            "model_usage": [
+              {
+                "provider": "openai",
+                "model": "gpt-6-astra",
+                "access_channel": "subscription",
+                "input_tokens": 17442,
+                "cached_input_tokens": 8448,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 161,
+                "reasoning_output_tokens": 0,
+                "evidence": {
+                  "status": "partial",
+                  "source": "provider_report",
+                  "trust": "self_asserted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": "2026-11-04T02:02:57.650429Z"
+                }
+              }
+            ],
+            "tool_footprint": null
+          },
+          "accounting_mode": "cumulative"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 19,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:55df5b82dfefe3592131cefda3f15d2c8c145e52a1bf89a946b169839f80a2ff",
+          "action_digest": "55df5b82dfefe3592131cefda3f15d2c8c145e52a1bf89a946b169839f80a2ff",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 20,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:8dc905cc0d92ee35be05620e3f5116d952f87f44c32404bc20a70eeaf2ad6b08",
+          "action_digest": "8dc905cc0d92ee35be05620e3f5116d952f87f44c32404bc20a70eeaf2ad6b08",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 21,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:0d73317a596f278b5c2f33d8cec1cc075ad8c3414776baf38bcb90ecfc0ed629",
+          "action_digest": "0d73317a596f278b5c2f33d8cec1cc075ad8c3414776baf38bcb90ecfc0ed629",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 22,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:586800a806e6eb5a37348e5ebf759d37d023bd0c629387bc93ad3e46afbd04ba",
+          "action_digest": "9b9ef80e5c496a3335cbcc22baa755ac4c7cddf76fc99472d64a10642331c868",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 23,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:757a23e824d1bc0d5dbd89d9c026276ae41d0fc59b6f6cc40bfcdcce8e304c1a",
+          "action_digest": "c93e44a81dfad41961e7a538ccf3337f585380909f4eeead9034e4fdef26cbaf",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 24,
+          "kind": "usage.reported",
+          "source_id": "adapter:usage:fd42540efd22421da285475f906d30f5:24",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": {
+            "cash": {
+              "status": "unavailable",
+              "components": []
+            },
+            "subscription_usage": [
+              {
+                "provider": "openai",
+                "resource_pool": "unknown",
+                "unit": "provider_unit",
+                "consumed": null,
+                "source": {
+                  "status": "unavailable",
+                  "source": "unavailable",
+                  "trust": "untrusted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": null
+                },
+                "included_or_paid": "unknown",
+                "rate_snapshot_id": null,
+                "usage_fingerprint": null
+              }
+            ],
+            "model_usage": [
+              {
+                "provider": "openai",
+                "model": "gpt-6-astra",
+                "access_channel": "subscription",
+                "input_tokens": 29659,
+                "cached_input_tokens": 17280,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 235,
+                "reasoning_output_tokens": 0,
+                "evidence": {
+                  "status": "partial",
+                  "source": "provider_report",
+                  "trust": "self_asserted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": "2026-11-04T02:03:00.284275Z"
+                }
+              }
+            ],
+            "tool_footprint": null
+          },
+          "accounting_mode": "cumulative"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 25,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:65cd7267953d574f84c34181946c401552215c7cbee7d3858b96527544ae88f4",
+          "action_digest": "65cd7267953d574f84c34181946c401552215c7cbee7d3858b96527544ae88f4",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 26,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:abb977666fd790c0943926b416325dfd60d59570b2cf64b50019b3f21cb7a142",
+          "action_digest": "f8a9e65d5366536f71ee6e866f43eb9c5e557153194b3c8d6f8e79d2da737993",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 27,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:a1f3613c88cc6841502ecbebc835c4afc0b6959cddcf4cbc5b80f42a08debab1",
+          "action_digest": "f8a9e65d5366536f71ee6e866f43eb9c5e557153194b3c8d6f8e79d2da737993",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 28,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:d9030ccb0a2455e93177c6bf4fc0d039ec769b59adb466b9cc292a381ca532d1",
+          "action_digest": "d9030ccb0a2455e93177c6bf4fc0d039ec769b59adb466b9cc292a381ca532d1",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 29,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:eb2e741e329f4a37f1fd592c769eec0cdf6a47f446b7afb709546e571d81b944",
+          "action_digest": "d6f7fe6270749e37b90d7995e71647512f0b79defb7aab79cf9a5c8b56d81f58",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 30,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:3db37e813bf9799178028fbffaca7e0e63ce1bb54172f1262dc058adeabe7061",
+          "action_digest": "3db37e813bf9799178028fbffaca7e0e63ce1bb54172f1262dc058adeabe7061",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 31,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:cfa2a8bd1d93ff20c9699591e902a5d1f041b6c3223d4a30cad7a9070b30a113",
+          "action_digest": "385ef12e2c68af1556fe3f43c569be9385cb6d9f464ad2fc3ba9c9f47595fd04",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 32,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:56aa05be3db712d73e735a9ef840498fc5a5cb5048d66d76d3a8d4621a7d9158",
+          "action_digest": "56aa05be3db712d73e735a9ef840498fc5a5cb5048d66d76d3a8d4621a7d9158",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 33,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:2c4d922a27b2520bdde08a9dc2302f9df1b7b99d5efcf685e9bfb0a37b8a1ad8",
+          "action_digest": "2c4d922a27b2520bdde08a9dc2302f9df1b7b99d5efcf685e9bfb0a37b8a1ad8",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 34,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:8c9fc86cf6bce81e6caa415d20d8add1e2690ee4a667c8c2deb95473aa562e79",
+          "action_digest": "bdfb1c303229dd20604a22109b780256de4e28dcb9c0d7d56bdea25d9367cd5c",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 35,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:1e5253058651621917440bfa477a2e8b8495e1b2cf475c93e04353d27dcab483",
+          "action_digest": "347c1b1aa8f2a5612b4928723a0c3e99c04c11dc589bc77960c63532de180bd8",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 36,
+          "kind": "usage.reported",
+          "source_id": "adapter:usage:fd42540efd22421da285475f906d30f5:36",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": {
+            "cash": {
+              "status": "unavailable",
+              "components": []
+            },
+            "subscription_usage": [
+              {
+                "provider": "openai",
+                "resource_pool": "unknown",
+                "unit": "provider_unit",
+                "consumed": null,
+                "source": {
+                  "status": "unavailable",
+                  "source": "unavailable",
+                  "trust": "untrusted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": null
+                },
+                "included_or_paid": "unknown",
+                "rate_snapshot_id": null,
+                "usage_fingerprint": null
+              }
+            ],
+            "model_usage": [
+              {
+                "provider": "openai",
+                "model": "gpt-6-astra",
+                "access_channel": "subscription",
+                "input_tokens": 45411,
+                "cached_input_tokens": 29440,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 455,
+                "reasoning_output_tokens": 26,
+                "evidence": {
+                  "status": "partial",
+                  "source": "provider_report",
+                  "trust": "self_asserted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": "2026-11-04T02:03:05.608180Z"
+                }
+              }
+            ],
+            "tool_footprint": null
+          },
+          "accounting_mode": "cumulative"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 37,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:f60bd1de108cc9ec50ea8b82bbb66ecc7b6d5143a7d35b0bf147ae2772f5a86b",
+          "action_digest": "f60bd1de108cc9ec50ea8b82bbb66ecc7b6d5143a7d35b0bf147ae2772f5a86b",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 38,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:c0698e2322b2517ab2973b5be39098a238715e64c49f21202ffca307e6f52559",
+          "action_digest": "c0698e2322b2517ab2973b5be39098a238715e64c49f21202ffca307e6f52559",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 39,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:a931a5af24724fed3baea8a0fe5857dc501a26478a830fc5b5c2d50860626166",
+          "action_digest": "a931a5af24724fed3baea8a0fe5857dc501a26478a830fc5b5c2d50860626166",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 40,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:1cbcc123c19f6e925f670d8f996049ded1e221e0a54ac9eeabffea16380c13b8",
+          "action_digest": "843bfd93524b1a5803817c817afb6a80868dda425d3664c648d43bfda043ef7d",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 41,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:e526c21ae5bcf5f919eff185bc11cd7572b37c4c3c7e3ff7377df04a2582c3eb",
+          "action_digest": "a7fcc65ef90bc629009602d6247d7251945dc6a4df781d8e2442acaa2c1db7bd",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 42,
+          "kind": "usage.reported",
+          "source_id": "adapter:usage:fd42540efd22421da285475f906d30f5:42",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": {
+            "cash": {
+              "status": "unavailable",
+              "components": []
+            },
+            "subscription_usage": [
+              {
+                "provider": "openai",
+                "resource_pool": "unknown",
+                "unit": "provider_unit",
+                "consumed": null,
+                "source": {
+                  "status": "unavailable",
+                  "source": "unavailable",
+                  "trust": "untrusted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": null
+                },
+                "included_or_paid": "unknown",
+                "rate_snapshot_id": null,
+                "usage_fingerprint": null
+              }
+            ],
+            "model_usage": [
+              {
+                "provider": "openai",
+                "model": "gpt-6-astra",
+                "access_channel": "subscription",
+                "input_tokens": 61440,
+                "cached_input_tokens": 45184,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 502,
+                "reasoning_output_tokens": 26,
+                "evidence": {
+                  "status": "partial",
+                  "source": "provider_report",
+                  "trust": "self_asserted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": "2026-11-04T02:03:08.560450Z"
+                }
+              }
+            ],
+            "tool_footprint": null
+          },
+          "accounting_mode": "cumulative"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 43,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:8f93c1a7e51742421301630c9f05cfe60c8cf4b7acfacd2617ec518afbd1ce70",
+          "action_digest": "8f93c1a7e51742421301630c9f05cfe60c8cf4b7acfacd2617ec518afbd1ce70",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 44,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:a69469401bc1828085d149039b9067ab740072c4c09965835d05212b7892e822",
+          "action_digest": "a69469401bc1828085d149039b9067ab740072c4c09965835d05212b7892e822",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 45,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:31df8912805dd4b79bc938ce9b9d9b98293ae7c99dce515306cb1c9abf2c793f",
+          "action_digest": "31df8912805dd4b79bc938ce9b9d9b98293ae7c99dce515306cb1c9abf2c793f",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 46,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:0b1070f314e69a80df0b2e865216e01cd545e490d4f3c2b9dfe02583d56246e5",
+          "action_digest": "0b1070f314e69a80df0b2e865216e01cd545e490d4f3c2b9dfe02583d56246e5",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 47,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:126eda7365951e63c3329f87935d6380876f0377c527b6d640b4f6f405ab6744",
+          "action_digest": "1412542419255fd0bc4d203956a83f404fcbce46b129a0a79e390ab74553e7d9",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 48,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:e1103e74d088167d69de5635e57f5acebdaf2c2c5eb7f4750d29abf0aec68f89",
+          "action_digest": "5861f4c5f46adcfa1d206ae40e0ea674562523f2766fd9b2e52712be76018fff",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 49,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:76e0862cf55d09bf30f1c80574b26c8eff956b043056b69f3db3c03e225ad62c",
+          "action_digest": "462e333feba9a3c85b1ddfe155c5cc62a238fbc981053a96ce625643d6748c09",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 50,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:e073c46bdaaff4d4013fcf22ffe1da1a8b2112e441f867a5e249c9efa441acce",
+          "action_digest": "1cde9ac62e78f76d55ca6bbdc6efc34941852717e842a01a10c5b8ed23a013b4",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 51,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:689e65d66d205aee75ec660c6f45094710fb1564621bf9ba72ff1344e0ef7536",
+          "action_digest": "d3b51d0cf8a86e4ca25007ef18336626c18105a79ec2e40924e7fe8b8ddcbcdd",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 52,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:ff629f1487d971e63ed1596b7aeb6143eeb36e70f3b07a4766b34d293b529257",
+          "action_digest": "b206e9fcf6d9738a8cc0a71442f5567c7f2da0b563e02c7270b4b475b3176ca9",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 53,
+          "kind": "usage.reported",
+          "source_id": "adapter:usage:fd42540efd22421da285475f906d30f5:53",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": {
+            "cash": {
+              "status": "unavailable",
+              "components": []
+            },
+            "subscription_usage": [
+              {
+                "provider": "openai",
+                "resource_pool": "unknown",
+                "unit": "provider_unit",
+                "consumed": null,
+                "source": {
+                  "status": "unavailable",
+                  "source": "unavailable",
+                  "trust": "untrusted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": null
+                },
+                "included_or_paid": "unknown",
+                "rate_snapshot_id": null,
+                "usage_fingerprint": null
+              }
+            ],
+            "model_usage": [
+              {
+                "provider": "openai",
+                "model": "gpt-6-astra",
+                "access_channel": "subscription",
+                "input_tokens": 77678,
+                "cached_input_tokens": 61056,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 669,
+                "reasoning_output_tokens": 26,
+                "evidence": {
+                  "status": "partial",
+                  "source": "provider_report",
+                  "trust": "self_asserted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": "2026-11-04T02:03:12.898129Z"
+                }
+              }
+            ],
+            "tool_footprint": null
+          },
+          "accounting_mode": "cumulative"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 54,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:3fe173a6f09e4e399a71f73f2b266781f4318afd068e0c4fc6dbe8d064e15bfb",
+          "action_digest": "3fe173a6f09e4e399a71f73f2b266781f4318afd068e0c4fc6dbe8d064e15bfb",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 55,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:839fd830e15cff433e8f507c88b01ef606a19c7d8423942bbd9679cebc027636",
+          "action_digest": "839fd830e15cff433e8f507c88b01ef606a19c7d8423942bbd9679cebc027636",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 56,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:178cb983b84cfe410c13787b9ac92f67bf853a65682efcd8d513c49beb25bf8b",
+          "action_digest": "e6ae3ec47f2e7c56c9654185062bf7755f981aec4eb0347e0ebc47ad933eb426",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 57,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:ac05dd56d786d9e18d5625b234a2c271ab761bb800a54a6c6c170b2410886f6c",
+          "action_digest": "e6ae3ec47f2e7c56c9654185062bf7755f981aec4eb0347e0ebc47ad933eb426",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 58,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:1ad8241786624a39fcfc77de375ba8d05e84fe0d63f513a9631fb080eb131793",
+          "action_digest": "1ad8241786624a39fcfc77de375ba8d05e84fe0d63f513a9631fb080eb131793",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 59,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:20f328f4f03a8428057340593f6d759d960b9a5e3e862b606059f1b3cf6f4fdc",
+          "action_digest": "20f328f4f03a8428057340593f6d759d960b9a5e3e862b606059f1b3cf6f4fdc",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 60,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:d0d9c1f433578f1e62a6c4a2bfd2713bc5bb6e2e3e5d20d147f700121aa655c9",
+          "action_digest": "d0d9c1f433578f1e62a6c4a2bfd2713bc5bb6e2e3e5d20d147f700121aa655c9",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 61,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:4f1a0ab08bb4aebb15de59db55a320ca65cd8a6938236b452856ad09dc463c11",
+          "action_digest": "4f1a0ab08bb4aebb15de59db55a320ca65cd8a6938236b452856ad09dc463c11",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 62,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:1f796f2839f53f161628757088964f120914252dae5ab68f4bb5921967093aa4",
+          "action_digest": "1f796f2839f53f161628757088964f120914252dae5ab68f4bb5921967093aa4",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 63,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:5d0a186f6a424a74740cdcd5fd84b11de127f12f51a52b7bd2bd87442d8edf88",
+          "action_digest": "5d0a186f6a424a74740cdcd5fd84b11de127f12f51a52b7bd2bd87442d8edf88",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 64,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:538a8ae00abfd634ab152d7fe7639b8a57e2fb105a8bd1d6acfb44b1010ad4f2",
+          "action_digest": "538a8ae00abfd634ab152d7fe7639b8a57e2fb105a8bd1d6acfb44b1010ad4f2",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 65,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:3352506d5b4829359ff65233a655d9fd0acf46caea2cdca776d36e820010c916",
+          "action_digest": "a05a6607e6732dc795bc37ea7f10a86c5c553f1e37fb9cd75a7d8e88ded316d0",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 66,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:31a963a17440c847ce9b281f2e59bf1dd3ceb12bdebad3661f1fcb708fca3c0a",
+          "action_digest": "70760bef346b5dd34b0080748f05560d37933ef2a3007c0fe94dd1e88988026c",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 67,
+          "kind": "usage.reported",
+          "source_id": "adapter:usage:fd42540efd22421da285475f906d30f5:67",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": {
+            "cash": {
+              "status": "unavailable",
+              "components": []
+            },
+            "subscription_usage": [
+              {
+                "provider": "openai",
+                "resource_pool": "unknown",
+                "unit": "provider_unit",
+                "consumed": null,
+                "source": {
+                  "status": "unavailable",
+                  "source": "unavailable",
+                  "trust": "untrusted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": null
+                },
+                "included_or_paid": "unknown",
+                "rate_snapshot_id": null,
+                "usage_fingerprint": null
+              }
+            ],
+            "model_usage": [
+              {
+                "provider": "openai",
+                "model": "gpt-6-astra",
+                "access_channel": "subscription",
+                "input_tokens": 94183,
+                "cached_input_tokens": 77312,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 998,
+                "reasoning_output_tokens": 36,
+                "evidence": {
+                  "status": "partial",
+                  "source": "provider_report",
+                  "trust": "self_asserted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": "2026-11-04T02:03:22.174112Z"
+                }
+              }
+            ],
+            "tool_footprint": null
+          },
+          "accounting_mode": "cumulative"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 68,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:ddb33a839e403d08732e0375ae96669be56536b3c1d7f647b4208337f361c8e8",
+          "action_digest": "ddb33a839e403d08732e0375ae96669be56536b3c1d7f647b4208337f361c8e8",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 69,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:7f734db3480d1d06677217c74cf7e14b206669d277abedc8303f91f4a51decaf",
+          "action_digest": "df1deed93fe7ddce82739e417cb07f717b31987b3bd361d8908d16148460324b",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 70,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:f77a6c7651217d4a4125e2e3e97b787c43f85f0f31892faa8043417d31d5b36f",
+          "action_digest": "df1deed93fe7ddce82739e417cb07f717b31987b3bd361d8908d16148460324b",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 71,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:1b8748388e9f55842541cfc0baa42834c6e72cc18b149b12a8bb2097165db7ed",
+          "action_digest": "7e960d8cc9d122a262444f20de2cd08ebeb90555274c49bbd6ae87bdb78129ae",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 72,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:c8861b1047536867eafcc44923121f8f28ee350246839dd4820cbb4229c853fb",
+          "action_digest": "c8861b1047536867eafcc44923121f8f28ee350246839dd4820cbb4229c853fb",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 73,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:65e04c9a06ae5c863a54567332699457d751dd55fbf34f7b7626720749131e47",
+          "action_digest": "a62d6b871e1e58a0fec4e2f54eb4eb3895f84d2c559d03389130d6c28550e510",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 74,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:7d59e7db436ba1031bdcaf1a4f09238597e80375b5fac9e37ef453480ff90327",
+          "action_digest": "7d59e7db436ba1031bdcaf1a4f09238597e80375b5fac9e37ef453480ff90327",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 75,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:b3c4efffdf3a4431f9c59ca06926586e7ebd5f2148e84d86f4c96faca2b50aea",
+          "action_digest": "b3c4efffdf3a4431f9c59ca06926586e7ebd5f2148e84d86f4c96faca2b50aea",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 76,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:a84cb902d2f0f37e882da94b8e1911746827a8ebe63c191e0c62ac11e2597f89",
+          "action_digest": "a84cb902d2f0f37e882da94b8e1911746827a8ebe63c191e0c62ac11e2597f89",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 77,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:efb55e20f9490394dc2d1359e4009e1a825be1f19e5a05287855c814df9674a5",
+          "action_digest": "efb55e20f9490394dc2d1359e4009e1a825be1f19e5a05287855c814df9674a5",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 78,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:d279f14a7f626016bf0ceb71df322c78da0ae8916e5a2a54f5c071b08ca4e6db",
+          "action_digest": "d279f14a7f626016bf0ceb71df322c78da0ae8916e5a2a54f5c071b08ca4e6db",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 79,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:40785eb165861ef0e6920b7ff11e9b8e2b99eff21a25d7b329b68f58d758511a",
+          "action_digest": "40785eb165861ef0e6920b7ff11e9b8e2b99eff21a25d7b329b68f58d758511a",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 80,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:7177c5373ed8e17ab212458dd1a06841d77421e9e709c350e588b9e1c0b8e3f6",
+          "action_digest": "88d8d4869c8955a9ccbfb18ae7343ec3cee7fb218f62d9f6f6195ec6145036e9",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 81,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:e4bae8b273f5efb2720f0e4805dbf5258599e42ed7008bbc77b7e67e3962fa63",
+          "action_digest": "8b72ded36cb1920cf1fafe68b5d0b4448425e209ad6c8d6e518c9d607e64715d",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 82,
+          "kind": "usage.reported",
+          "source_id": "adapter:usage:fd42540efd22421da285475f906d30f5:82",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": {
+            "cash": {
+              "status": "unavailable",
+              "components": []
+            },
+            "subscription_usage": [
+              {
+                "provider": "openai",
+                "resource_pool": "unknown",
+                "unit": "provider_unit",
+                "consumed": null,
+                "source": {
+                  "status": "unavailable",
+                  "source": "unavailable",
+                  "trust": "untrusted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": null
+                },
+                "included_or_paid": "unknown",
+                "rate_snapshot_id": null,
+                "usage_fingerprint": null
+              }
+            ],
+            "model_usage": [
+              {
+                "provider": "openai",
+                "model": "gpt-6-astra",
+                "access_channel": "subscription",
+                "input_tokens": 111153,
+                "cached_input_tokens": 93952,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1429,
+                "reasoning_output_tokens": 68,
+                "evidence": {
+                  "status": "partial",
+                  "source": "provider_report",
+                  "trust": "self_asserted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": "2026-11-04T02:03:31.933133Z"
+                }
+              }
+            ],
+            "tool_footprint": null
+          },
+          "accounting_mode": "cumulative"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 83,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:88acf096a206a4c35539c4dcdd7fe2bac4b8d5a38d307fd803583718faf9cc08",
+          "action_digest": "88acf096a206a4c35539c4dcdd7fe2bac4b8d5a38d307fd803583718faf9cc08",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 84,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:2467c891d8c8b7acf109c0e5b38e7de44ddc932b0503dc69ab744270145c991f",
+          "action_digest": "2467c891d8c8b7acf109c0e5b38e7de44ddc932b0503dc69ab744270145c991f",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 85,
+          "kind": "action.started",
+          "source_id": "adapter:sha256:a251b6e9f9085441c0a3381288c353e4872562f52a6c737668d62a58bc977d4f",
+          "action_digest": "69e0741115c7ab2af4fb5f0314461192ab373903414621eafc8a079e68e9ad76",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 86,
+          "kind": "action.completed",
+          "source_id": "adapter:sha256:fb1e1d275afbb725dc2784b250d8aca04d2b7d5526a8c5d6eea89ef512621e53",
+          "action_digest": "e3fd7b5083ccd8d5ac4d669a87ee9fec969f9ae532d407e170889fa32ae91bd9",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 87,
+          "kind": "usage.reported",
+          "source_id": "adapter:usage:fd42540efd22421da285475f906d30f5:87",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": {
+            "cash": {
+              "status": "unavailable",
+              "components": []
+            },
+            "subscription_usage": [
+              {
+                "provider": "openai",
+                "resource_pool": "unknown",
+                "unit": "provider_unit",
+                "consumed": null,
+                "source": {
+                  "status": "unavailable",
+                  "source": "unavailable",
+                  "trust": "untrusted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": null
+                },
+                "included_or_paid": "unknown",
+                "rate_snapshot_id": null,
+                "usage_fingerprint": null
+              }
+            ],
+            "model_usage": [
+              {
+                "provider": "openai",
+                "model": "gpt-6-astra",
+                "access_channel": "subscription",
+                "input_tokens": 128909,
+                "cached_input_tokens": 111232,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1444,
+                "reasoning_output_tokens": 68,
+                "evidence": {
+                  "status": "partial",
+                  "source": "provider_report",
+                  "trust": "self_asserted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": "2026-11-04T02:03:34.294416Z"
+                }
+              }
+            ],
+            "tool_footprint": null
+          },
+          "accounting_mode": "cumulative"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 88,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:d4aa0a4172cf832d7852ae14fb06afd8aaa64ab609efa2487e4767bb8bd2d9a6",
+          "action_digest": "d4aa0a4172cf832d7852ae14fb06afd8aaa64ab609efa2487e4767bb8bd2d9a6",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 89,
+          "kind": "message.received",
+          "source_id": "adapter:catalog:df11fb618f0ee7f3070e2426a009cc8f4f63db862a283211f68cf73a613898af",
+          "action_digest": "df11fb618f0ee7f3070e2426a009cc8f4f63db862a283211f68cf73a613898af",
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 90,
+          "kind": "usage.reported",
+          "source_id": "adapter:turn-usage",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": {
+            "cash": {
+              "status": "unavailable",
+              "components": []
+            },
+            "subscription_usage": [
+              {
+                "provider": "openai",
+                "resource_pool": "codex.self",
+                "unit": "provider_unit",
+                "consumed": null,
+                "source": {
+                  "status": "unavailable",
+                  "source": "unavailable",
+                  "trust": "untrusted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": null
+                },
+                "included_or_paid": "unknown",
+                "rate_snapshot_id": null,
+                "usage_fingerprint": null
+              }
+            ],
+            "model_usage": [
+              {
+                "provider": "openai",
+                "model": "gpt-6-astra",
+                "access_channel": "subscription",
+                "input_tokens": 128909,
+                "cached_input_tokens": 111232,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1444,
+                "reasoning_output_tokens": 68,
+                "evidence": {
+                  "status": "complete",
+                  "source": "provider_report",
+                  "trust": "self_asserted",
+                  "evidence_id": null,
+                  "source_reference": null,
+                  "digest": null,
+                  "observed_at": "2026-11-04T02:03:34.295849Z"
+                }
+              }
+            ],
+            "tool_footprint": null
+          },
+          "accounting_mode": "cumulative"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c",
+          "attempt_id": "attempt_9da95da4e9ea43b2a9a66e9494d5df27",
+          "sequence": 91,
+          "kind": "execution.completed",
+          "source_id": "terminal",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        }
+      ],
+      "complete": true,
+      "cancellation_confirmed": false,
+      "identity_digest": "bf17099fffd98c160190e23ae5c3e52e7b2ba5f651f2e1a69e739663e92059f4",
+      "boundary_digest": "a3f937bc3da8d56b30f11eb8d533a3ca52561c8bd9c363365042901a419a8178",
+      "journal_id": "e5af8c3ff62e44a5a9798d92121eb12c"
+    }
+  },
+  "auxiliary_trial_ids": [],
+  "assessment_analysis": {
+    "comparison": {
+      "schema_version": "assessment.comparison.v2",
+      "structure": "controlled_agent",
+      "candidate": {
+        "executor_id": "toolkit-ase-stack-20261103.treatment",
+        "fingerprint": "4c76468d0b06bda5dc399428c4b6cf4b6f80379b251da0534384a9af2db46c0a",
+        "dependencies": {},
+        "host_config": {
+          "adapter_id": "codex-app-server:aeep-stack-treatment-20261103",
+          "argv": [
+            "/opt/codex/codex",
+            "app-server"
+          ],
+          "executable_sha256": null,
+          "instructions": "Complete the repository maintenance task using the tools available in your isolated workspace. Read the current task,unpack the supplied repository.tar.gz into that workspace,and inspect the relevant Python source. This is a required skill-loading integration check; follow the reviewed selected skill when supplied. Do not install software or access external services. Only change listed existing editable Python files; preserve omitted files. Write the output artifact as UTF-8 JSON with exactly base_sha256(the supplied canonical hash) and files(a mapping of changed existing paths to full replacement text). An empty files mapping is valid when no change is needed. The output path is supplied by the host. Do not put base64 bytes in the final answer. Independent protected tests run outside your workspace; report completion after writing the artifact.\nCurrent task JSON and bound artifact paths:\n{input}",
+          "model_constraints": {
+            "allowed_model_ids": [
+              "gpt-6-astra"
+            ],
+            "required_capabilities": [],
+            "minimum_context_tokens": null
+          },
+          "reasoning_efforts": [
+            "medium"
+          ],
+          "working_directory_policy": "inherit",
+          "working_directory": null,
+          "sandbox_policy": "workspace_write",
+          "approval_ceiling": "read",
+          "output_mode": "json",
+          "timeout_seconds": 300.0,
+          "max_message_bytes": 16777216,
+          "environment_allowlist": [],
+          "store_prompt": false,
+          "store_output": false,
+          "redaction_policy": "default",
+          "invocation": {
+            "mode": "skill",
+            "skill_name": "stack-check",
+            "skill_path": "/opt/dependencies/stack-check/SKILL.md",
+            "skill_sha256": "e18a979532105161910d8cc7891959a704048b19194e23707828f21bfd8d68ec",
+            "server": null,
+            "tool": null,
+            "tool_sha256": null,
+            "exposure": "required",
+            "local_profile": "capable_local"
+          },
+          "assessment_adapter": {
+            "input_transform": "repository_archive:1",
+            "read_only_roots": [
+              "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public"
+            ]
+          },
+          "managed_worker": {
+            "schema_version": "execution.worker.v2",
+            "worker_id": "aeep-stack-treatment-20261103",
+            "runtime": "/usr/local/bin/docker",
+            "socket": "/Users/edwintse/.docker/run/docker.sock",
+            "image": "sha256:bf4581894c1d43808baaf580888c0b5f1dfdf4e1ea4caf0b8f2a7956d0fdd6d9",
+            "platform": "linux/arm64",
+            "binary": "/opt/codex/codex",
+            "binary_sha256": "9b7c1c7abdc26fc3c4f47c77656a8e9121def5483dbae830ef1ee561758448a9",
+            "configuration_digest": "f413bd97ca1f040cd977829205706b6b4d276a3c193bcf3ad924b93284e91aac",
+            "dependencies_digest": "af960af068c861aedc144224f0ade3a2780678acd7d257e57e7d34fc219230af",
+            "cpu_count": 1.0,
+            "memory_mb": 1024,
+            "process_limit": 64,
+            "network_id": "8f657f861de8897d53df66efdf595c6d2e202b174af81f2827db409fe53f19d6",
+            "model_proxy_url": "http://172.18.0.2:3128",
+            "credential_volume": "aeep-auth-incremental-treatment",
+            "seccomp_profile": {
+              "archMap": [
+                {
+                  "architecture": "SCMP_ARCH_X86_64",
+                  "subArchitectures": [
+                    "SCMP_ARCH_X86",
+                    "SCMP_ARCH_X32"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_AARCH64",
+                  "subArchitectures": [
+                    "SCMP_ARCH_ARM"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_MIPS64",
+                  "subArchitectures": [
+                    "SCMP_ARCH_MIPS",
+                    "SCMP_ARCH_MIPS64N32"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_MIPS64N32",
+                  "subArchitectures": [
+                    "SCMP_ARCH_MIPS",
+                    "SCMP_ARCH_MIPS64"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_MIPSEL64",
+                  "subArchitectures": [
+                    "SCMP_ARCH_MIPSEL",
+                    "SCMP_ARCH_MIPSEL64N32"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_MIPSEL64N32",
+                  "subArchitectures": [
+                    "SCMP_ARCH_MIPSEL",
+                    "SCMP_ARCH_MIPSEL64"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_S390X",
+                  "subArchitectures": [
+                    "SCMP_ARCH_S390"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_RISCV64",
+                  "subArchitectures": null
+                },
+                {
+                  "architecture": "SCMP_ARCH_LOONGARCH64",
+                  "subArchitectures": null
+                }
+              ],
+              "defaultAction": "SCMP_ACT_ERRNO",
+              "defaultErrnoRet": 1,
+              "syscalls": [
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "names": [
+                    "accept",
+                    "accept4",
+                    "access",
+                    "adjtimex",
+                    "alarm",
+                    "bind",
+                    "brk",
+                    "cachestat",
+                    "capget",
+                    "capset",
+                    "chdir",
+                    "chmod",
+                    "chown",
+                    "chown32",
+                    "clock_adjtime",
+                    "clock_adjtime64",
+                    "clock_getres",
+                    "clock_getres_time64",
+                    "clock_gettime",
+                    "clock_gettime64",
+                    "clock_nanosleep",
+                    "clock_nanosleep_time64",
+                    "close",
+                    "close_range",
+                    "connect",
+                    "copy_file_range",
+                    "creat",
+                    "dup",
+                    "dup2",
+                    "dup3",
+                    "epoll_create",
+                    "epoll_create1",
+                    "epoll_ctl",
+                    "epoll_ctl_old",
+                    "epoll_pwait",
+                    "epoll_pwait2",
+                    "epoll_wait",
+                    "epoll_wait_old",
+                    "eventfd",
+                    "eventfd2",
+                    "execve",
+                    "execveat",
+                    "exit",
+                    "exit_group",
+                    "faccessat",
+                    "faccessat2",
+                    "fadvise64",
+                    "fadvise64_64",
+                    "fallocate",
+                    "fanotify_mark",
+                    "fchdir",
+                    "fchmod",
+                    "fchmodat",
+                    "fchmodat2",
+                    "fchown",
+                    "fchown32",
+                    "fchownat",
+                    "fcntl",
+                    "fcntl64",
+                    "fdatasync",
+                    "fgetxattr",
+                    "flistxattr",
+                    "flock",
+                    "fork",
+                    "fremovexattr",
+                    "fsetxattr",
+                    "fstat",
+                    "fstat64",
+                    "fstatat64",
+                    "fstatfs",
+                    "fstatfs64",
+                    "fsync",
+                    "ftruncate",
+                    "ftruncate64",
+                    "futex",
+                    "futex_requeue",
+                    "futex_time64",
+                    "futex_wait",
+                    "futex_waitv",
+                    "futex_wake",
+                    "futimesat",
+                    "getcpu",
+                    "getcwd",
+                    "getdents",
+                    "getdents64",
+                    "getegid",
+                    "getegid32",
+                    "geteuid",
+                    "geteuid32",
+                    "getgid",
+                    "getgid32",
+                    "getgroups",
+                    "getgroups32",
+                    "getitimer",
+                    "getpeername",
+                    "getpgid",
+                    "getpgrp",
+                    "getpid",
+                    "getppid",
+                    "getpriority",
+                    "getrandom",
+                    "getresgid",
+                    "getresgid32",
+                    "getresuid",
+                    "getresuid32",
+                    "getrlimit",
+                    "get_robust_list",
+                    "getrusage",
+                    "getsid",
+                    "getsockname",
+                    "getsockopt",
+                    "get_thread_area",
+                    "gettid",
+                    "gettimeofday",
+                    "getuid",
+                    "getuid32",
+                    "getxattr",
+                    "getxattrat",
+                    "inotify_add_watch",
+                    "inotify_init",
+                    "inotify_init1",
+                    "inotify_rm_watch",
+                    "io_cancel",
+                    "ioctl",
+                    "io_destroy",
+                    "io_getevents",
+                    "io_pgetevents",
+                    "io_pgetevents_time64",
+                    "ioprio_get",
+                    "ioprio_set",
+                    "io_setup",
+                    "io_submit",
+                    "ipc",
+                    "kill",
+                    "landlock_add_rule",
+                    "landlock_create_ruleset",
+                    "landlock_restrict_self",
+                    "lchown",
+                    "lchown32",
+                    "lgetxattr",
+                    "link",
+                    "linkat",
+                    "listen",
+                    "listmount",
+                    "listxattr",
+                    "listxattrat",
+                    "llistxattr",
+                    "_llseek",
+                    "lremovexattr",
+                    "lseek",
+                    "lsetxattr",
+                    "lstat",
+                    "lstat64",
+                    "madvise",
+                    "map_shadow_stack",
+                    "membarrier",
+                    "memfd_create",
+                    "memfd_secret",
+                    "mincore",
+                    "mkdir",
+                    "mkdirat",
+                    "mknod",
+                    "mknodat",
+                    "mlock",
+                    "mlock2",
+                    "mlockall",
+                    "mmap",
+                    "mmap2",
+                    "mprotect",
+                    "mq_getsetattr",
+                    "mq_notify",
+                    "mq_open",
+                    "mq_timedreceive",
+                    "mq_timedreceive_time64",
+                    "mq_timedsend",
+                    "mq_timedsend_time64",
+                    "mq_unlink",
+                    "mremap",
+                    "mseal",
+                    "msgctl",
+                    "msgget",
+                    "msgrcv",
+                    "msgsnd",
+                    "msync",
+                    "munlock",
+                    "munlockall",
+                    "munmap",
+                    "name_to_handle_at",
+                    "nanosleep",
+                    "newfstatat",
+                    "_newselect",
+                    "open",
+                    "openat",
+                    "openat2",
+                    "pause",
+                    "pidfd_open",
+                    "pidfd_send_signal",
+                    "pipe",
+                    "pipe2",
+                    "pkey_alloc",
+                    "pkey_free",
+                    "pkey_mprotect",
+                    "poll",
+                    "ppoll",
+                    "ppoll_time64",
+                    "prctl",
+                    "pread64",
+                    "preadv",
+                    "preadv2",
+                    "prlimit64",
+                    "process_mrelease",
+                    "pselect6",
+                    "pselect6_time64",
+                    "pwrite64",
+                    "pwritev",
+                    "pwritev2",
+                    "read",
+                    "readahead",
+                    "readlink",
+                    "readlinkat",
+                    "readv",
+                    "recv",
+                    "recvfrom",
+                    "recvmmsg",
+                    "recvmmsg_time64",
+                    "recvmsg",
+                    "remap_file_pages",
+                    "removexattr",
+                    "removexattrat",
+                    "rename",
+                    "renameat",
+                    "renameat2",
+                    "restart_syscall",
+                    "riscv_hwprobe",
+                    "rmdir",
+                    "rseq",
+                    "rt_sigaction",
+                    "rt_sigpending",
+                    "rt_sigprocmask",
+                    "rt_sigqueueinfo",
+                    "rt_sigreturn",
+                    "rt_sigsuspend",
+                    "rt_sigtimedwait",
+                    "rt_sigtimedwait_time64",
+                    "rt_tgsigqueueinfo",
+                    "sched_getaffinity",
+                    "sched_getattr",
+                    "sched_getparam",
+                    "sched_get_priority_max",
+                    "sched_get_priority_min",
+                    "sched_getscheduler",
+                    "sched_rr_get_interval",
+                    "sched_rr_get_interval_time64",
+                    "sched_setaffinity",
+                    "sched_setattr",
+                    "sched_setparam",
+                    "sched_setscheduler",
+                    "sched_yield",
+                    "seccomp",
+                    "select",
+                    "semctl",
+                    "semget",
+                    "semop",
+                    "semtimedop",
+                    "semtimedop_time64",
+                    "send",
+                    "sendfile",
+                    "sendfile64",
+                    "sendmmsg",
+                    "sendmsg",
+                    "sendto",
+                    "setfsgid",
+                    "setfsgid32",
+                    "setfsuid",
+                    "setfsuid32",
+                    "setgid",
+                    "setgid32",
+                    "setgroups",
+                    "setgroups32",
+                    "setitimer",
+                    "setpgid",
+                    "setpriority",
+                    "setregid",
+                    "setregid32",
+                    "setresgid",
+                    "setresgid32",
+                    "setresuid",
+                    "setresuid32",
+                    "setreuid",
+                    "setreuid32",
+                    "setrlimit",
+                    "set_robust_list",
+                    "setsid",
+                    "setsockopt",
+                    "set_thread_area",
+                    "set_tid_address",
+                    "setuid",
+                    "setuid32",
+                    "setxattr",
+                    "setxattrat",
+                    "shmat",
+                    "shmctl",
+                    "shmdt",
+                    "shmget",
+                    "shutdown",
+                    "sigaltstack",
+                    "signalfd",
+                    "signalfd4",
+                    "sigprocmask",
+                    "sigreturn",
+                    "socketcall",
+                    "socketpair",
+                    "splice",
+                    "stat",
+                    "stat64",
+                    "statfs",
+                    "statfs64",
+                    "statmount",
+                    "statx",
+                    "symlink",
+                    "symlinkat",
+                    "sync",
+                    "sync_file_range",
+                    "syncfs",
+                    "sysinfo",
+                    "tee",
+                    "tgkill",
+                    "time",
+                    "timer_create",
+                    "timer_delete",
+                    "timer_getoverrun",
+                    "timer_gettime",
+                    "timer_gettime64",
+                    "timer_settime",
+                    "timer_settime64",
+                    "timerfd_create",
+                    "timerfd_gettime",
+                    "timerfd_gettime64",
+                    "timerfd_settime",
+                    "timerfd_settime64",
+                    "times",
+                    "tkill",
+                    "truncate",
+                    "truncate64",
+                    "ugetrlimit",
+                    "umask",
+                    "uname",
+                    "unlink",
+                    "unlinkat",
+                    "uretprobe",
+                    "utime",
+                    "utimensat",
+                    "utimensat_time64",
+                    "utimes",
+                    "vfork",
+                    "vmsplice",
+                    "wait4",
+                    "waitid",
+                    "waitpid",
+                    "write",
+                    "writev"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "minKernel": "4.8"
+                  },
+                  "names": [
+                    "process_vm_readv",
+                    "process_vm_writev",
+                    "ptrace"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_LT",
+                      "value": 38
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 39
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 41
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 42
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 43
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 44
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 45
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 0
+                    }
+                  ],
+                  "names": [
+                    "personality"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 8
+                    }
+                  ],
+                  "names": [
+                    "personality"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 131072
+                    }
+                  ],
+                  "names": [
+                    "personality"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 131080
+                    }
+                  ],
+                  "names": [
+                    "personality"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 4294967295
+                    }
+                  ],
+                  "names": [
+                    "personality"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "arches": [
+                      "ppc64le"
+                    ]
+                  },
+                  "names": [
+                    "sync_file_range2",
+                    "swapcontext"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "arches": [
+                      "arm",
+                      "arm64"
+                    ]
+                  },
+                  "names": [
+                    "arm_fadvise64_64",
+                    "arm_sync_file_range",
+                    "sync_file_range2",
+                    "breakpoint",
+                    "cacheflush",
+                    "set_tls"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "arches": [
+                      "amd64",
+                      "x32"
+                    ]
+                  },
+                  "names": [
+                    "arch_prctl"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "arches": [
+                      "amd64",
+                      "x32",
+                      "x86"
+                    ]
+                  },
+                  "names": [
+                    "modify_ldt"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "arches": [
+                      "s390",
+                      "s390x"
+                    ]
+                  },
+                  "names": [
+                    "s390_pci_mmio_read",
+                    "s390_pci_mmio_write",
+                    "s390_runtime_instr"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "arches": [
+                      "riscv64"
+                    ]
+                  },
+                  "names": [
+                    "riscv_flush_icache"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_DAC_READ_SEARCH"
+                    ]
+                  },
+                  "names": [
+                    "open_by_handle_at"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_ADMIN"
+                    ]
+                  },
+                  "names": [
+                    "bpf",
+                    "clone",
+                    "clone3",
+                    "fanotify_init",
+                    "fsconfig",
+                    "fsmount",
+                    "fsopen",
+                    "fspick",
+                    "lookup_dcookie",
+                    "lsm_get_self_attr",
+                    "lsm_list_modules",
+                    "lsm_set_self_attr",
+                    "mount",
+                    "mount_setattr",
+                    "move_mount",
+                    "open_tree",
+                    "perf_event_open",
+                    "quotactl",
+                    "quotactl_fd",
+                    "setdomainname",
+                    "sethostname",
+                    "setns",
+                    "syslog",
+                    "umount",
+                    "umount2",
+                    "unshare"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_MASKED_EQ",
+                      "value": 2114060288
+                    }
+                  ],
+                  "excludes": {
+                    "arches": [
+                      "s390",
+                      "s390x"
+                    ],
+                    "caps": [
+                      "CAP_SYS_ADMIN"
+                    ]
+                  },
+                  "names": [
+                    "clone"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 1,
+                      "op": "SCMP_CMP_MASKED_EQ",
+                      "value": 2114060288
+                    }
+                  ],
+                  "comment": "s390 parameter ordering for clone is different",
+                  "excludes": {
+                    "caps": [
+                      "CAP_SYS_ADMIN"
+                    ]
+                  },
+                  "includes": {
+                    "arches": [
+                      "s390",
+                      "s390x"
+                    ]
+                  },
+                  "names": [
+                    "clone"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ERRNO",
+                  "errnoRet": 38,
+                  "excludes": {
+                    "caps": [
+                      "CAP_SYS_ADMIN"
+                    ]
+                  },
+                  "names": [
+                    "clone3"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_BOOT"
+                    ]
+                  },
+                  "names": [
+                    "reboot"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_CHROOT"
+                    ]
+                  },
+                  "names": [
+                    "chroot"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_MODULE"
+                    ]
+                  },
+                  "names": [
+                    "delete_module",
+                    "init_module",
+                    "finit_module"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_PACCT"
+                    ]
+                  },
+                  "names": [
+                    "acct"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_PTRACE"
+                    ]
+                  },
+                  "names": [
+                    "kcmp",
+                    "pidfd_getfd",
+                    "process_madvise",
+                    "process_vm_readv",
+                    "process_vm_writev",
+                    "ptrace"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_RAWIO"
+                    ]
+                  },
+                  "names": [
+                    "iopl",
+                    "ioperm"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_TIME"
+                    ]
+                  },
+                  "names": [
+                    "settimeofday",
+                    "stime",
+                    "clock_settime",
+                    "clock_settime64"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_TTY_CONFIG"
+                    ]
+                  },
+                  "names": [
+                    "vhangup"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_NICE"
+                    ]
+                  },
+                  "names": [
+                    "get_mempolicy",
+                    "mbind",
+                    "set_mempolicy",
+                    "set_mempolicy_home_node"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYSLOG"
+                    ]
+                  },
+                  "names": [
+                    "syslog"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_BPF"
+                    ]
+                  },
+                  "names": [
+                    "bpf"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_PERFMON"
+                    ]
+                  },
+                  "names": [
+                    "perf_event_open"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "names": [
+                    "unshare",
+                    "mount",
+                    "umount2",
+                    "pivot_root",
+                    "sethostname",
+                    "setdomainname",
+                    "setns"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_MASKED_EQ",
+                      "value": 268435456,
+                      "valueTwo": 268435456
+                    }
+                  ],
+                  "names": [
+                    "clone"
+                  ]
+                }
+              ]
+            },
+            "permissions_profile": "aeep",
+            "reviewed_files": {
+              "/opt/aeep/codex_metrics.py": "9c3f22e393835347380f74b90edb588f97a216a4f634fbce48f98c84103676d3",
+              "/opt/dependencies/stack-check/LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+              "/opt/dependencies/stack-check/SKILL.md": "e18a979532105161910d8cc7891959a704048b19194e23707828f21bfd8d68ec"
+            }
+          },
+          "artifact": {
+            "input_field": "source_b64",
+            "output_field": "patch_b64",
+            "input_name": "repository.tar.gz",
+            "output_name": "patch.json",
+            "max_bytes": 650000
+          },
+          "adapter_options": {
+            "experimental_api": true,
+            "output_schema_mode": "prompt",
+            "catalog_metrics": true
+          }
+        }
+      },
+      "baseline": {
+        "executor_id": "toolkit-ase-stack-20261103.control",
+        "fingerprint": "905161dc85b5e45bcadd23bf3c7c4943032dd4d44ece546b8ff82a51ef093307",
+        "dependencies": {},
+        "host_config": {
+          "adapter_id": "codex-app-server:aeep-stack-control-20261103",
+          "argv": [
+            "/opt/codex/codex",
+            "app-server"
+          ],
+          "executable_sha256": null,
+          "instructions": "Complete the repository maintenance task using the tools available in your isolated workspace. Read the current task,unpack the supplied repository.tar.gz into that workspace,and inspect the relevant Python source. This is a required skill-loading integration check; follow the reviewed selected skill when supplied. Do not install software or access external services. Only change listed existing editable Python files; preserve omitted files. Write the output artifact as UTF-8 JSON with exactly base_sha256(the supplied canonical hash) and files(a mapping of changed existing paths to full replacement text). An empty files mapping is valid when no change is needed. The output path is supplied by the host. Do not put base64 bytes in the final answer. Independent protected tests run outside your workspace; report completion after writing the artifact.\nCurrent task JSON and bound artifact paths:\n{input}",
+          "model_constraints": {
+            "allowed_model_ids": [
+              "gpt-6-astra"
+            ],
+            "required_capabilities": [],
+            "minimum_context_tokens": null
+          },
+          "reasoning_efforts": [
+            "medium"
+          ],
+          "working_directory_policy": "inherit",
+          "working_directory": null,
+          "sandbox_policy": "workspace_write",
+          "approval_ceiling": "read",
+          "output_mode": "json",
+          "timeout_seconds": 300.0,
+          "max_message_bytes": 16777216,
+          "environment_allowlist": [],
+          "store_prompt": false,
+          "store_output": false,
+          "redaction_policy": "default",
+          "invocation": {
+            "mode": "turn",
+            "skill_name": null,
+            "skill_path": null,
+            "skill_sha256": null,
+            "server": null,
+            "tool": null,
+            "tool_sha256": null,
+            "local_profile": "capable_local"
+          },
+          "assessment_adapter": {
+            "input_transform": "repository_archive:1",
+            "read_only_roots": [
+              "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public"
+            ]
+          },
+          "managed_worker": {
+            "schema_version": "execution.worker.v2",
+            "worker_id": "aeep-stack-control-20261103",
+            "runtime": "/usr/local/bin/docker",
+            "socket": "/Users/edwintse/.docker/run/docker.sock",
+            "image": "sha256:0c05b495931e8558baf76b099c01c3b80a4b5136b5640d387db2d8ee644cf1db",
+            "platform": "linux/arm64",
+            "binary": "/opt/codex/codex",
+            "binary_sha256": "9b7c1c7abdc26fc3c4f47c77656a8e9121def5483dbae830ef1ee561758448a9",
+            "configuration_digest": "f413bd97ca1f040cd977829205706b6b4d276a3c193bcf3ad924b93284e91aac",
+            "dependencies_digest": "af960af068c861aedc144224f0ade3a2780678acd7d257e57e7d34fc219230af",
+            "cpu_count": 1.0,
+            "memory_mb": 1024,
+            "process_limit": 64,
+            "network_id": "8f657f861de8897d53df66efdf595c6d2e202b174af81f2827db409fe53f19d6",
+            "model_proxy_url": "http://172.18.0.2:3128",
+            "credential_volume": "aeep-auth-incremental-control",
+            "seccomp_profile": {
+              "archMap": [
+                {
+                  "architecture": "SCMP_ARCH_X86_64",
+                  "subArchitectures": [
+                    "SCMP_ARCH_X86",
+                    "SCMP_ARCH_X32"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_AARCH64",
+                  "subArchitectures": [
+                    "SCMP_ARCH_ARM"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_MIPS64",
+                  "subArchitectures": [
+                    "SCMP_ARCH_MIPS",
+                    "SCMP_ARCH_MIPS64N32"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_MIPS64N32",
+                  "subArchitectures": [
+                    "SCMP_ARCH_MIPS",
+                    "SCMP_ARCH_MIPS64"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_MIPSEL64",
+                  "subArchitectures": [
+                    "SCMP_ARCH_MIPSEL",
+                    "SCMP_ARCH_MIPSEL64N32"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_MIPSEL64N32",
+                  "subArchitectures": [
+                    "SCMP_ARCH_MIPSEL",
+                    "SCMP_ARCH_MIPSEL64"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_S390X",
+                  "subArchitectures": [
+                    "SCMP_ARCH_S390"
+                  ]
+                },
+                {
+                  "architecture": "SCMP_ARCH_RISCV64",
+                  "subArchitectures": null
+                },
+                {
+                  "architecture": "SCMP_ARCH_LOONGARCH64",
+                  "subArchitectures": null
+                }
+              ],
+              "defaultAction": "SCMP_ACT_ERRNO",
+              "defaultErrnoRet": 1,
+              "syscalls": [
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "names": [
+                    "accept",
+                    "accept4",
+                    "access",
+                    "adjtimex",
+                    "alarm",
+                    "bind",
+                    "brk",
+                    "cachestat",
+                    "capget",
+                    "capset",
+                    "chdir",
+                    "chmod",
+                    "chown",
+                    "chown32",
+                    "clock_adjtime",
+                    "clock_adjtime64",
+                    "clock_getres",
+                    "clock_getres_time64",
+                    "clock_gettime",
+                    "clock_gettime64",
+                    "clock_nanosleep",
+                    "clock_nanosleep_time64",
+                    "close",
+                    "close_range",
+                    "connect",
+                    "copy_file_range",
+                    "creat",
+                    "dup",
+                    "dup2",
+                    "dup3",
+                    "epoll_create",
+                    "epoll_create1",
+                    "epoll_ctl",
+                    "epoll_ctl_old",
+                    "epoll_pwait",
+                    "epoll_pwait2",
+                    "epoll_wait",
+                    "epoll_wait_old",
+                    "eventfd",
+                    "eventfd2",
+                    "execve",
+                    "execveat",
+                    "exit",
+                    "exit_group",
+                    "faccessat",
+                    "faccessat2",
+                    "fadvise64",
+                    "fadvise64_64",
+                    "fallocate",
+                    "fanotify_mark",
+                    "fchdir",
+                    "fchmod",
+                    "fchmodat",
+                    "fchmodat2",
+                    "fchown",
+                    "fchown32",
+                    "fchownat",
+                    "fcntl",
+                    "fcntl64",
+                    "fdatasync",
+                    "fgetxattr",
+                    "flistxattr",
+                    "flock",
+                    "fork",
+                    "fremovexattr",
+                    "fsetxattr",
+                    "fstat",
+                    "fstat64",
+                    "fstatat64",
+                    "fstatfs",
+                    "fstatfs64",
+                    "fsync",
+                    "ftruncate",
+                    "ftruncate64",
+                    "futex",
+                    "futex_requeue",
+                    "futex_time64",
+                    "futex_wait",
+                    "futex_waitv",
+                    "futex_wake",
+                    "futimesat",
+                    "getcpu",
+                    "getcwd",
+                    "getdents",
+                    "getdents64",
+                    "getegid",
+                    "getegid32",
+                    "geteuid",
+                    "geteuid32",
+                    "getgid",
+                    "getgid32",
+                    "getgroups",
+                    "getgroups32",
+                    "getitimer",
+                    "getpeername",
+                    "getpgid",
+                    "getpgrp",
+                    "getpid",
+                    "getppid",
+                    "getpriority",
+                    "getrandom",
+                    "getresgid",
+                    "getresgid32",
+                    "getresuid",
+                    "getresuid32",
+                    "getrlimit",
+                    "get_robust_list",
+                    "getrusage",
+                    "getsid",
+                    "getsockname",
+                    "getsockopt",
+                    "get_thread_area",
+                    "gettid",
+                    "gettimeofday",
+                    "getuid",
+                    "getuid32",
+                    "getxattr",
+                    "getxattrat",
+                    "inotify_add_watch",
+                    "inotify_init",
+                    "inotify_init1",
+                    "inotify_rm_watch",
+                    "io_cancel",
+                    "ioctl",
+                    "io_destroy",
+                    "io_getevents",
+                    "io_pgetevents",
+                    "io_pgetevents_time64",
+                    "ioprio_get",
+                    "ioprio_set",
+                    "io_setup",
+                    "io_submit",
+                    "ipc",
+                    "kill",
+                    "landlock_add_rule",
+                    "landlock_create_ruleset",
+                    "landlock_restrict_self",
+                    "lchown",
+                    "lchown32",
+                    "lgetxattr",
+                    "link",
+                    "linkat",
+                    "listen",
+                    "listmount",
+                    "listxattr",
+                    "listxattrat",
+                    "llistxattr",
+                    "_llseek",
+                    "lremovexattr",
+                    "lseek",
+                    "lsetxattr",
+                    "lstat",
+                    "lstat64",
+                    "madvise",
+                    "map_shadow_stack",
+                    "membarrier",
+                    "memfd_create",
+                    "memfd_secret",
+                    "mincore",
+                    "mkdir",
+                    "mkdirat",
+                    "mknod",
+                    "mknodat",
+                    "mlock",
+                    "mlock2",
+                    "mlockall",
+                    "mmap",
+                    "mmap2",
+                    "mprotect",
+                    "mq_getsetattr",
+                    "mq_notify",
+                    "mq_open",
+                    "mq_timedreceive",
+                    "mq_timedreceive_time64",
+                    "mq_timedsend",
+                    "mq_timedsend_time64",
+                    "mq_unlink",
+                    "mremap",
+                    "mseal",
+                    "msgctl",
+                    "msgget",
+                    "msgrcv",
+                    "msgsnd",
+                    "msync",
+                    "munlock",
+                    "munlockall",
+                    "munmap",
+                    "name_to_handle_at",
+                    "nanosleep",
+                    "newfstatat",
+                    "_newselect",
+                    "open",
+                    "openat",
+                    "openat2",
+                    "pause",
+                    "pidfd_open",
+                    "pidfd_send_signal",
+                    "pipe",
+                    "pipe2",
+                    "pkey_alloc",
+                    "pkey_free",
+                    "pkey_mprotect",
+                    "poll",
+                    "ppoll",
+                    "ppoll_time64",
+                    "prctl",
+                    "pread64",
+                    "preadv",
+                    "preadv2",
+                    "prlimit64",
+                    "process_mrelease",
+                    "pselect6",
+                    "pselect6_time64",
+                    "pwrite64",
+                    "pwritev",
+                    "pwritev2",
+                    "read",
+                    "readahead",
+                    "readlink",
+                    "readlinkat",
+                    "readv",
+                    "recv",
+                    "recvfrom",
+                    "recvmmsg",
+                    "recvmmsg_time64",
+                    "recvmsg",
+                    "remap_file_pages",
+                    "removexattr",
+                    "removexattrat",
+                    "rename",
+                    "renameat",
+                    "renameat2",
+                    "restart_syscall",
+                    "riscv_hwprobe",
+                    "rmdir",
+                    "rseq",
+                    "rt_sigaction",
+                    "rt_sigpending",
+                    "rt_sigprocmask",
+                    "rt_sigqueueinfo",
+                    "rt_sigreturn",
+                    "rt_sigsuspend",
+                    "rt_sigtimedwait",
+                    "rt_sigtimedwait_time64",
+                    "rt_tgsigqueueinfo",
+                    "sched_getaffinity",
+                    "sched_getattr",
+                    "sched_getparam",
+                    "sched_get_priority_max",
+                    "sched_get_priority_min",
+                    "sched_getscheduler",
+                    "sched_rr_get_interval",
+                    "sched_rr_get_interval_time64",
+                    "sched_setaffinity",
+                    "sched_setattr",
+                    "sched_setparam",
+                    "sched_setscheduler",
+                    "sched_yield",
+                    "seccomp",
+                    "select",
+                    "semctl",
+                    "semget",
+                    "semop",
+                    "semtimedop",
+                    "semtimedop_time64",
+                    "send",
+                    "sendfile",
+                    "sendfile64",
+                    "sendmmsg",
+                    "sendmsg",
+                    "sendto",
+                    "setfsgid",
+                    "setfsgid32",
+                    "setfsuid",
+                    "setfsuid32",
+                    "setgid",
+                    "setgid32",
+                    "setgroups",
+                    "setgroups32",
+                    "setitimer",
+                    "setpgid",
+                    "setpriority",
+                    "setregid",
+                    "setregid32",
+                    "setresgid",
+                    "setresgid32",
+                    "setresuid",
+                    "setresuid32",
+                    "setreuid",
+                    "setreuid32",
+                    "setrlimit",
+                    "set_robust_list",
+                    "setsid",
+                    "setsockopt",
+                    "set_thread_area",
+                    "set_tid_address",
+                    "setuid",
+                    "setuid32",
+                    "setxattr",
+                    "setxattrat",
+                    "shmat",
+                    "shmctl",
+                    "shmdt",
+                    "shmget",
+                    "shutdown",
+                    "sigaltstack",
+                    "signalfd",
+                    "signalfd4",
+                    "sigprocmask",
+                    "sigreturn",
+                    "socketcall",
+                    "socketpair",
+                    "splice",
+                    "stat",
+                    "stat64",
+                    "statfs",
+                    "statfs64",
+                    "statmount",
+                    "statx",
+                    "symlink",
+                    "symlinkat",
+                    "sync",
+                    "sync_file_range",
+                    "syncfs",
+                    "sysinfo",
+                    "tee",
+                    "tgkill",
+                    "time",
+                    "timer_create",
+                    "timer_delete",
+                    "timer_getoverrun",
+                    "timer_gettime",
+                    "timer_gettime64",
+                    "timer_settime",
+                    "timer_settime64",
+                    "timerfd_create",
+                    "timerfd_gettime",
+                    "timerfd_gettime64",
+                    "timerfd_settime",
+                    "timerfd_settime64",
+                    "times",
+                    "tkill",
+                    "truncate",
+                    "truncate64",
+                    "ugetrlimit",
+                    "umask",
+                    "uname",
+                    "unlink",
+                    "unlinkat",
+                    "uretprobe",
+                    "utime",
+                    "utimensat",
+                    "utimensat_time64",
+                    "utimes",
+                    "vfork",
+                    "vmsplice",
+                    "wait4",
+                    "waitid",
+                    "waitpid",
+                    "write",
+                    "writev"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "minKernel": "4.8"
+                  },
+                  "names": [
+                    "process_vm_readv",
+                    "process_vm_writev",
+                    "ptrace"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_LT",
+                      "value": 38
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 39
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 41
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 42
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 43
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 44
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 45
+                    }
+                  ],
+                  "names": [
+                    "socket"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 0
+                    }
+                  ],
+                  "names": [
+                    "personality"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 8
+                    }
+                  ],
+                  "names": [
+                    "personality"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 131072
+                    }
+                  ],
+                  "names": [
+                    "personality"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 131080
+                    }
+                  ],
+                  "names": [
+                    "personality"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_EQ",
+                      "value": 4294967295
+                    }
+                  ],
+                  "names": [
+                    "personality"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "arches": [
+                      "ppc64le"
+                    ]
+                  },
+                  "names": [
+                    "sync_file_range2",
+                    "swapcontext"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "arches": [
+                      "arm",
+                      "arm64"
+                    ]
+                  },
+                  "names": [
+                    "arm_fadvise64_64",
+                    "arm_sync_file_range",
+                    "sync_file_range2",
+                    "breakpoint",
+                    "cacheflush",
+                    "set_tls"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "arches": [
+                      "amd64",
+                      "x32"
+                    ]
+                  },
+                  "names": [
+                    "arch_prctl"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "arches": [
+                      "amd64",
+                      "x32",
+                      "x86"
+                    ]
+                  },
+                  "names": [
+                    "modify_ldt"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "arches": [
+                      "s390",
+                      "s390x"
+                    ]
+                  },
+                  "names": [
+                    "s390_pci_mmio_read",
+                    "s390_pci_mmio_write",
+                    "s390_runtime_instr"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "arches": [
+                      "riscv64"
+                    ]
+                  },
+                  "names": [
+                    "riscv_flush_icache"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_DAC_READ_SEARCH"
+                    ]
+                  },
+                  "names": [
+                    "open_by_handle_at"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_ADMIN"
+                    ]
+                  },
+                  "names": [
+                    "bpf",
+                    "clone",
+                    "clone3",
+                    "fanotify_init",
+                    "fsconfig",
+                    "fsmount",
+                    "fsopen",
+                    "fspick",
+                    "lookup_dcookie",
+                    "lsm_get_self_attr",
+                    "lsm_list_modules",
+                    "lsm_set_self_attr",
+                    "mount",
+                    "mount_setattr",
+                    "move_mount",
+                    "open_tree",
+                    "perf_event_open",
+                    "quotactl",
+                    "quotactl_fd",
+                    "setdomainname",
+                    "sethostname",
+                    "setns",
+                    "syslog",
+                    "umount",
+                    "umount2",
+                    "unshare"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_MASKED_EQ",
+                      "value": 2114060288
+                    }
+                  ],
+                  "excludes": {
+                    "arches": [
+                      "s390",
+                      "s390x"
+                    ],
+                    "caps": [
+                      "CAP_SYS_ADMIN"
+                    ]
+                  },
+                  "names": [
+                    "clone"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 1,
+                      "op": "SCMP_CMP_MASKED_EQ",
+                      "value": 2114060288
+                    }
+                  ],
+                  "comment": "s390 parameter ordering for clone is different",
+                  "excludes": {
+                    "caps": [
+                      "CAP_SYS_ADMIN"
+                    ]
+                  },
+                  "includes": {
+                    "arches": [
+                      "s390",
+                      "s390x"
+                    ]
+                  },
+                  "names": [
+                    "clone"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ERRNO",
+                  "errnoRet": 38,
+                  "excludes": {
+                    "caps": [
+                      "CAP_SYS_ADMIN"
+                    ]
+                  },
+                  "names": [
+                    "clone3"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_BOOT"
+                    ]
+                  },
+                  "names": [
+                    "reboot"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_CHROOT"
+                    ]
+                  },
+                  "names": [
+                    "chroot"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_MODULE"
+                    ]
+                  },
+                  "names": [
+                    "delete_module",
+                    "init_module",
+                    "finit_module"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_PACCT"
+                    ]
+                  },
+                  "names": [
+                    "acct"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_PTRACE"
+                    ]
+                  },
+                  "names": [
+                    "kcmp",
+                    "pidfd_getfd",
+                    "process_madvise",
+                    "process_vm_readv",
+                    "process_vm_writev",
+                    "ptrace"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_RAWIO"
+                    ]
+                  },
+                  "names": [
+                    "iopl",
+                    "ioperm"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_TIME"
+                    ]
+                  },
+                  "names": [
+                    "settimeofday",
+                    "stime",
+                    "clock_settime",
+                    "clock_settime64"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_TTY_CONFIG"
+                    ]
+                  },
+                  "names": [
+                    "vhangup"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYS_NICE"
+                    ]
+                  },
+                  "names": [
+                    "get_mempolicy",
+                    "mbind",
+                    "set_mempolicy",
+                    "set_mempolicy_home_node"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_SYSLOG"
+                    ]
+                  },
+                  "names": [
+                    "syslog"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_BPF"
+                    ]
+                  },
+                  "names": [
+                    "bpf"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "includes": {
+                    "caps": [
+                      "CAP_PERFMON"
+                    ]
+                  },
+                  "names": [
+                    "perf_event_open"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "names": [
+                    "unshare",
+                    "mount",
+                    "umount2",
+                    "pivot_root",
+                    "sethostname",
+                    "setdomainname",
+                    "setns"
+                  ]
+                },
+                {
+                  "action": "SCMP_ACT_ALLOW",
+                  "args": [
+                    {
+                      "index": 0,
+                      "op": "SCMP_CMP_MASKED_EQ",
+                      "value": 268435456,
+                      "valueTwo": 268435456
+                    }
+                  ],
+                  "names": [
+                    "clone"
+                  ]
+                }
+              ]
+            },
+            "permissions_profile": "aeep",
+            "reviewed_files": {
+              "/opt/aeep/codex_metrics.py": "9c3f22e393835347380f74b90edb588f97a216a4f634fbce48f98c84103676d3"
+            }
+          },
+          "artifact": {
+            "input_field": "source_b64",
+            "output_field": "patch_b64",
+            "input_name": "repository.tar.gz",
+            "output_name": "patch.json",
+            "max_bytes": 650000
+          },
+          "adapter_options": {
+            "experimental_api": true,
+            "output_schema_mode": "prompt",
+            "catalog_metrics": true
+          }
+        }
+      },
+      "reference": null,
+      "primary_metric": "wall_time_ms",
+      "primary_condition": "fresh-worker",
+      "experiment": {
+        "schema_version": "assessment.experiment.v1",
+        "stage": "qualification",
+        "exposure": "required",
+        "environment": {
+          "shared_definition_digest": "1b87c536695c9610d01d09f5e78ba64e3cc05fc8b76bf8fc8a1aa8e96770b2db",
+          "control_inventory": {
+            "codex": "9b7c1c7abdc26fc3c4f47c77656a8e9121def5483dbae830ef1ee561758448a9",
+            "shared_dependencies": "af960af068c861aedc144224f0ade3a2780678acd7d257e57e7d34fc219230af",
+            "collector": "9c3f22e393835347380f74b90edb588f97a216a4f634fbce48f98c84103676d3",
+            "common_profile": "1b87c536695c9610d01d09f5e78ba64e3cc05fc8b76bf8fc8a1aa8e96770b2db"
+          },
+          "treatment_inventory": {
+            "codex": "9b7c1c7abdc26fc3c4f47c77656a8e9121def5483dbae830ef1ee561758448a9",
+            "shared_dependencies": "af960af068c861aedc144224f0ade3a2780678acd7d257e57e7d34fc219230af",
+            "collector": "9c3f22e393835347380f74b90edb588f97a216a4f634fbce48f98c84103676d3",
+            "common_profile": "1b87c536695c9610d01d09f5e78ba64e3cc05fc8b76bf8fc8a1aa8e96770b2db",
+            "skill:stack-check": "e18a979532105161910d8cc7891959a704048b19194e23707828f21bfd8d68ec"
+          },
+          "candidate_inventory": {
+            "skill:stack-check": "e18a979532105161910d8cc7891959a704048b19194e23707828f21bfd8d68ec"
+          },
+          "candidate_paths": [
+            "/opt/dependencies/stack-check/SKILL.md",
+            "/etc/codex/skills/stack-check/SKILL.md",
+            "/opt/dependencies/stack-check"
+          ],
+          "candidate_aliases": [
+            "stack-check"
+          ]
+        },
+        "utility": {
+          "benefit_dimensions": [
+            "wall_time_ms"
+          ],
+          "guardrail_dimensions": [
+            "wall_time_ms"
+          ],
+          "minimum_resource_benefit": 0.1,
+          "minimum_success_gain": 0.05,
+          "maximum_resource_regression": 0.1,
+          "family_error_rate": 0.05
+        },
+        "higher_compute": null,
+        "reusable_tool": null,
+        "reusable_artifact_digest": null,
+        "reusable_build_operation_ids": [],
+        "feasible_challengers": [],
+        "qualification_report_digest": null,
+        "catalog_definition_digest": null,
+        "marginal_report_digest": null
+      }
+    },
+    "feature_combinations": [],
+    "schema_version": "assessment.report.v3",
+    "report_id": "fit_5bf9a118c44d4fb38e38f92b4e16a900",
+    "plan_digest": "a7063c2933cbc35ac03a762cd24c6b323d0036c5a3c325ea46d6f02c90a42b77",
+    "outcome": "insufficient_evidence",
+    "qualification_passed": false,
+    "distinct_holdout_cases": 0,
+    "distinct_paired_cases": 0,
+    "correctness_failures": 0,
+    "execution_failures": 0,
+    "tested_variations": [],
+    "condition_comparisons": {
+      "fresh-worker": {
+        "paired_savings": {
+          "wall_time_ms": null,
+          "local.cpu_ms": null,
+          "local.gpu_ms": null,
+          "local.memory_mb_seconds": null,
+          "local.network_bytes": null,
+          "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+          "model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+          "model.openai.gpt-6-astra.subscription.input_tokens": null,
+          "model.openai.gpt-6-astra.subscription.output_tokens": null,
+          "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+          "subscription.openai.codex.self.provider_unit": null
+        },
+        "savings_interval": {},
+        "paired_measurement_cases": {
+          "wall_time_ms": 0,
+          "local.cpu_ms": 0,
+          "local.gpu_ms": 0,
+          "local.memory_mb_seconds": 0,
+          "local.network_bytes": 0,
+          "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": 0,
+          "model.openai.gpt-6-astra.subscription.cached_input_tokens": 0,
+          "model.openai.gpt-6-astra.subscription.input_tokens": 0,
+          "model.openai.gpt-6-astra.subscription.output_tokens": 0,
+          "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": 0,
+          "subscription.openai.codex.self.provider_unit": 0
+        },
+        "break_even_uses": {
+          "wall_time_ms": null,
+          "local.cpu_ms": null,
+          "local.gpu_ms": null,
+          "local.memory_mb_seconds": null,
+          "local.network_bytes": null,
+          "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+          "model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+          "model.openai.gpt-6-astra.subscription.input_tokens": null,
+          "model.openai.gpt-6-astra.subscription.output_tokens": null,
+          "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+          "subscription.openai.codex.self.provider_unit": null
+        }
+      }
+    },
+    "utility_evidence": {
+      "metrics": {
+        "wall_time_ms": {
+          "relative_saving": null,
+          "success_gain": null,
+          "interval": [],
+          "distinct_pairs": 0,
+          "zero_baseline_regression": false
+        }
+      },
+      "complete": false,
+      "benefit": false,
+      "guardrails_passed": false,
+      "challengers": {},
+      "dominated": false,
+      "stage": "qualification",
+      "family_error_rate": 0.05,
+      "analysis": "all_assigned_cases",
+      "candidate_selection_filter": false
+    },
+    "measured_usage": {
+      "campaign_wall_time_ms": 49341.09479095787,
+      "known_campaign_wall_time_ms": 49341.09479095787,
+      "known_overhead_wall_time_ms": 59322.77283538133,
+      "assessment_wall_time_ms": 108663.8676263392,
+      "included_routing_overhead_ms": 4.397000186145306,
+      "included_invocation_guard_ms": 128.33595741540194,
+      "known_campaign_subtotal.local.cpu_ms": null,
+      "campaign_total.local.cpu_ms": null,
+      "known_overhead_subtotal.local.cpu_ms": 12055.832223999998,
+      "assessment_total.local.cpu_ms": null,
+      "known_campaign_subtotal.local.gpu_ms": null,
+      "campaign_total.local.gpu_ms": null,
+      "known_overhead_subtotal.local.gpu_ms": null,
+      "assessment_total.local.gpu_ms": null,
+      "known_campaign_subtotal.local.memory_mb_seconds": null,
+      "campaign_total.local.memory_mb_seconds": null,
+      "known_overhead_subtotal.local.memory_mb_seconds": 3314.0037600942233,
+      "assessment_total.local.memory_mb_seconds": null,
+      "known_campaign_subtotal.local.network_bytes": null,
+      "campaign_total.local.network_bytes": null,
+      "known_overhead_subtotal.local.network_bytes": null,
+      "assessment_total.local.network_bytes": null,
+      "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "campaign_total.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "assessment_total.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "campaign_total.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "assessment_total.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "campaign_total.model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "assessment_total.model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "campaign_total.model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "assessment_total.model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "campaign_total.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "assessment_total.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "known_campaign_subtotal.subscription.openai.codex.self.provider_unit": null,
+      "campaign_total.subscription.openai.codex.self.provider_unit": null,
+      "known_overhead_subtotal.subscription.openai.codex.self.provider_unit": null,
+      "assessment_total.subscription.openai.codex.self.provider_unit": null
+    },
+    "measurement_coverage": {
+      "local.cpu_ms": "0/1",
+      "local.gpu_ms": "0/1",
+      "local.memory_mb_seconds": "0/1",
+      "local.network_bytes": "0/1",
+      "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": "0/1",
+      "model.openai.gpt-6-astra.subscription.cached_input_tokens": "0/1",
+      "model.openai.gpt-6-astra.subscription.input_tokens": "0/1",
+      "model.openai.gpt-6-astra.subscription.output_tokens": "0/1",
+      "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": "0/1",
+      "subscription.openai.codex.self.provider_unit": "0/1"
+    },
+    "paired_measurement_cases": {
+      "wall_time_ms": 0,
+      "local.cpu_ms": 0,
+      "local.gpu_ms": 0,
+      "local.memory_mb_seconds": 0,
+      "local.network_bytes": 0,
+      "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": 0,
+      "model.openai.gpt-6-astra.subscription.cached_input_tokens": 0,
+      "model.openai.gpt-6-astra.subscription.input_tokens": 0,
+      "model.openai.gpt-6-astra.subscription.output_tokens": 0,
+      "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": 0,
+      "subscription.openai.codex.self.provider_unit": 0
+    },
+    "paired_savings": {
+      "wall_time_ms": null,
+      "local.cpu_ms": null,
+      "local.gpu_ms": null,
+      "local.memory_mb_seconds": null,
+      "local.network_bytes": null,
+      "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "subscription.openai.codex.self.provider_unit": null
+    },
+    "savings_interval": {},
+    "break_even_uses": {
+      "wall_time_ms": null,
+      "local.cpu_ms": null,
+      "local.gpu_ms": null,
+      "local.memory_mb_seconds": null,
+      "local.network_bytes": null,
+      "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "subscription.openai.codex.self.provider_unit": null
+    },
+    "estimated_production_savings": {},
+    "campaign_digest": "0d2ccfd99b519c46d8d2dd143b07672f8bd2dc4ed80a0d161413999f8d91f925",
+    "operation_ledger_digest": "2b92478ae75a3b321535caa605497fc1084c58e6ab40bd38a7f7ee21fa31929d",
+    "grader_validation_digest": "01b0884730d4e2a6f903dfd5da8b96dc274484fb09a953862c3054d970e1648b",
+    "host_runtime_digests": {
+      "toolkit-ase-stack-20261103.treatment": "bf17099fffd98c160190e23ae5c3e52e7b2ba5f651f2e1a69e739663e92059f4"
+    },
+    "deterministic_reference_comparison": {},
+    "explanations": [
+      "Correctness counts distinct held-out cases; repetitions measure variability.",
+      "Latency includes routing and grading. The interval resamples template families and cases.",
+      "No cash, subscription or production savings are inferred from an unexecuted baseline.",
+      "Assessment overhead is charged once; incomplete operations leave the total and break-even unknown.",
+      "Comparison structure: controlled_agent; admission uses predeclared utility and guardrails under fresh-worker. Conditions are never pooled.",
+      "Controlled comparison requires the same resolved model in both arms; identity evidence is missing or differs.",
+      "Stack integration only: upstream reference tasks do not establish candidate or selection usefulness and cannot authorize admission."
+    ],
+    "created_at": "2026-11-04T02:03:37.330374Z"
+  },
+  "timing_scope": "Trial wall time includes routing and preflight; separately measured grading is excluded by BenchmarkRunner.",
+  "notice": "All primary and auxiliary costs remain in the canonical ledger. Normalization alone is not efficacy or release qualification.",
+  "external_scheduler": {
+    "definition_ref": "87c7fb76c223579a8f76f0c66c89113b56969f6225d7738eecae34690792a67b",
+    "process_receipt_ref": "a6e59aa8e1c26e7d7a4fc136a7430c50f5eaf6936fd563e6b7ffc50c24e68704",
+    "trial_refs": {
+      "0": "215f843e0c01cea9d477f8d1428c3907298fbbc6cb1f0957f1fd345c2d29e66f"
+    },
+    "grade_summaries": {
+      "0": {
+        "passed": 1,
+        "failed": 0,
+        "total": 1,
+        "pass_rate": 1.0,
+        "skipped": 0
+      }
+    },
+    "grading_semantics": "ASE assertion over the existing protected task-grade certificate",
+    "upstream_timing_is_compatibility_only": true
+  },
+  "workflow_accounting": {
+    "coverage": "NOT_RECORDED",
+    "notice": "No workflow overhead scope was selected; execution ledger alone is incomplete composed cost coverage."
+  }
+}

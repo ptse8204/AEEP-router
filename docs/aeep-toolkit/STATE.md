@@ -1,48 +1,47 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
 <!-- integration-snapshot-correction-20261103:start -->
-**November 3: corrected image/readiness, wheel and docs passed; engine dependency fixed.**
-Approved review `9d7a7ec5` retained image `bf4581894c1d`, passed all eleven actual
-probe groups in each worker plus collector denial, and completed ordinary CLI
-readiness preparation and reviewed consumption. The installed wheel and cached
-offline docs passed. Its ASE-selected engine stopped before protected grading,
-SDK execution or model use because the scoped snapshot omitted the new integration
-case-set dependency. The managed-engine phase stayed unstarted. All old results
-remain bound to source `c48e931b`; zero trials cannot establish usefulness.
+**November 3: both controlled evaluator journeys passed; comparisons remain paused.**
+Review `319d18e4` completed fresh current-source worker/collector checks, ordinary
+readiness consumption, one actual ASE-scheduled task and one separately selected
+managed-engine task. Each protected binary grade is1, with zero retries and
+confirmed worker cleanup. This is one public Markdownify task through two engines,
+not two independent benchmark cases or usefulness evidence. Native ASE Codex
+behavior remains unsupported; the controlled bridge is the proven path.
 
-[Actual results](../../reports/toolkit-v2/c13/worker-readiness-correction-20261103/RESULTS.md)
-retain ten additional operations /28.594314792seconds. The original cumulative
-ledger now includes fourteen operations /40.628755166seconds and zero new model
-turns. The proxy is stopped, owned workers are removed, and no new unresolved
-operations remain. Both old reservations and every image/volume/runtime stay.
+The [actual results](../../reports/toolkit-v2/c13/integration-snapshot-correction-20261103/RESULTS.md) and
+[read-only reconciliation](../../reports/toolkit-v2/c13/integration-snapshot-correction-20261103/completion-audit.json)
+bind scores, raw token categories, journal references and all failures. ASE used
+its real scheduler and graders. Its completed task required an explicit read-only
+URI-family serialization repair; the original failed export remains. The managed
+engine's ordinary CLI report passed after one-to-one family-label encoding before
+its first trial. An immutable-scope preparation failure and a later controller
+result-hashing failure remain recorded. No model/task was replayed.
 
-The [snapshot correction](../../reports/toolkit-v2/c13/integration-snapshot-correction-20261103/README.md)
-resolves only a v7/v8 plan's exact integration set and matching request ID; it
-excludes unrelated task sets and keeps legacy rules. Twenty-three focused tests
-and the actual stored-plan constructor check pass, with no executor dispatch or
-grant changes. All thirteen source gates passed on
-`cfc36a2aeda4e220046722dbdbc81fbf2376deb12b9f7266abdab81bddcec9e1`: both
-full runs passed2,052tests/21skips,82.63%coverage,and both branch gates. The process
-is finished. Exact source is retained privately, including unrelated CI edits kept
-outside these commits. The [fresh continuation review](../../reports/toolkit-v2/c13/integration-snapshot-correction-20261103/operation-review.json)
-binds the retained image,current wheel+32unchanged dependencies,current offline
-docs,fresh readiness and at most two engineering turns. Nothing under this new
-review has executed. Next: record its applicable approval, inspect started/result
-files, then run its driver and independent package/docs components. The original
-144-operation/6,200-second/two-turn ceiling stays;14operations remain charged.
-Each engine must fit its full preview after actual prior costs settle; otherwise
-leave it unstarted. No build,download,new destination,credential or cash is proposed. Never replay
-the terminal attempt or repeat unchanged successful checks. Source/installed
-artifact changes and a fresh engine attempt require applicable review.
+Both runs recorded positive instruction loading; semantic invocation remains
+unknown and full-catalog delivery remains false. Token receipt/journal consistency
+passed, with provider-report trust unchanged. No savings or admission is claimed.
+The original cumulative envelope used57operations /2model reservations /
+234.26983733428642 grant seconds, inside144/2/6,200 and $0cash authority. Both turns
+are exhausted. Old reservations remain; no new operation is unresolved. The proxy
+is stopped; all images,volumes,runtimes,backups and unrelated edits stay.
 
-SkillsBench task transports and protected-verifier contracts are prepared only;
-rights, runtimes and reference/control journeys remain open. Waza still lacks
-supported backend access. All-stack, both-domain, candidate usefulness, selection
-usefulness, resources and release stay separate. Comparisons remain paused.
-The [SkillRank interface audit](../../reports/toolkit-v2/c13/skillrank-interface-preparation-20261103/README.md)
-verified twelve pinned source files and its reusable runner/verifier traits. Its
-86 locked registry dependencies are not cached; no runtime, service or integration
-pass is claimed. Parent `41e40e0`; unrelated CI work is preserved.
+All thirteen source gates passed on
+`cfc36a2aeda4e220046722dbdbc81fbf2376deb12b9f7266abdab81bddcec9e1`:
+2,052tests/21skips in both full runs,82.63%coverage,both branch gates. The corrected
+wheel plus32unchanged dependencies and cached offline docs passed. The exact72
+checked document inputs were preserved before these later progress edits. Source
+and installed evidence keep that scope; no unchanged successful check is replayed.
+
+Next: fix URI-family serialization in the ordinary adapter and prepare SkillRank's
+controlled callbacks and exact runtime closure. Its pinned MIT local registry can
+support real search/show without another registry implementation; no SkillRank
+runtime has executed. SkillsBench rights,runtimes,reference/control checks and both
+CLI domains remain open. Waza lacks supported backend access. Generic current-stack
+evidence ingestion and every remaining integration still require functional proof.
+All-stack,candidate usefulness,selection usefulness,resources and release remain
+separate. No further model turn is authorized by this completed bundle.
+Parent `8f8f5f3`; unrelated CI edits remain outside this feature commit.
 <!-- integration-snapshot-correction-20261103:end -->
 
 <!-- worker-readiness-review-20261103:start -->

@@ -1,0 +1,74 @@
+{
+  "schema_version": "aeep.toolkit.evidence.v1",
+  "candidate": {
+    "repository": "https://github.com/ptse8204/AEEP-router",
+    "revision": "f8f9fba391f32942ebc2471b702c95df936313e7",
+    "artifact_sha256": "6b33e3c324a91e011d9da16e4441d8f3f521daec958b8eeaf6ffa9cfb40c89bd",
+    "license_expression": "Apache-2.0",
+    "data_rights": "Repository-authored nonrecursive engineering fixture; no usefulness established"
+  },
+  "adapter": {
+    "schema_version": "aeep.toolkit.adapter.v1",
+    "adapter_id": "aeep.benchmark-runner.codex:external-scheduler",
+    "implementation_sha256": "cfc36a2aeda4e220046722dbdbc81fbf2376deb12b9f7266abdab81bddcec9e1",
+    "hosts": [
+      "codex"
+    ],
+    "candidate_types": [
+      "skill"
+    ],
+    "optional_invocation": false,
+    "telemetry": [
+      "tokens",
+      "agent_wall_seconds",
+      "verification_wall_seconds"
+    ],
+    "containment": "unverified",
+    "conformance_ref": null
+  },
+  "runs": [
+    {
+      "schema_version": "aeep.toolkit.run.v1",
+      "run_id": "trial_plan_f966c3a56138439aa2aedd84cfe511cd_matthewwithanm__python-markdownify-200_toolkit-ase-stack-20261103.treatment_fresh-worker_0",
+      "plan_ref": "a7063c2933cbc35ac03a762cd24c6b323d0036c5a3c325ea46d6f02c90a42b77",
+      "candidate_sha256": "6b33e3c324a91e011d9da16e4441d8f3f521daec958b8eeaf6ffa9cfb40c89bd",
+      "adapter_sha256": "cfc36a2aeda4e220046722dbdbc81fbf2376deb12b9f7266abdab81bddcec9e1",
+      "host": "codex",
+      "host_version": "aeep-agent-router/0.154.0 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+      "model": "gpt-6-astra",
+      "effort": "medium",
+      "shared_environment_sha256": "1b87c536695c9610d01d09f5e78ba64e3cc05fc8b76bf8fc8a1aa8e96770b2db",
+      "worker_sha256": "cd2bc552e4cf336a7339a2748017afaf5f678f96aa4f04e7601a819ae38c3e14",
+      "task_sha256": "e003465927fc639a463748a7c21b55d3508cd7c86ba9314abd8ee0c967204d4d",
+      "task_family": "source-family:ff6bbbb351dc943479c91b2ac8eb920238bb018bc543a86ac76712d58f006a14",
+      "verifier_sha256": "7533162c0501758c34858a06fe26db2c4f1092fe2cc1372d5f651e75d15fde99",
+      "prompt_sha256": "46eb0d233cb4fe9642426d31f633792ab92ba3414e1bf23f47a0915ff50b2c45",
+      "arm": "treatment",
+      "mode": "forced_diagnostic",
+      "candidate_exposed": null,
+      "candidate_invoked": null,
+      "verification": "pass",
+      "verification_ref": "215f843e0c01cea9d477f8d1428c3907298fbbc6cb1f0957f1fd345c2d29e66f",
+      "status": "completed",
+      "retries": 0,
+      "evidence_kind": "live",
+      "receipt_refs": [
+        "c23c117c28d9ee2a197e318bdd1da3d5f51a3a96fcecefb1a778dba3c90bb231"
+      ],
+      "tokens": {
+        "source_ref": "c23c117c28d9ee2a197e318bdd1da3d5f51a3a96fcecefb1a778dba3c90bb231",
+        "input_tokens": 128909,
+        "output_tokens": 1444,
+        "cached_input_tokens": 111232,
+        "reasoning_output_tokens": 68,
+        "cached_semantics": "included_in_input",
+        "reasoning_semantics": "included_in_output"
+      },
+      "agent_wall_seconds": 49.34109479095787,
+      "verification_wall_seconds": 2.0914121670648456,
+      "setup_wall_seconds": null,
+      "timing_source_ref": "215f843e0c01cea9d477f8d1428c3907298fbbc6cb1f0957f1fd345c2d29e66f",
+      "cash_accounting_ref": "c23c117c28d9ee2a197e318bdd1da3d5f51a3a96fcecefb1a778dba3c90bb231"
+    }
+  ]
+}

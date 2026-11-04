@@ -1,0 +1,132 @@
+{
+  "passed": false,
+  "engines": {},
+  "models_ceiling": 2,
+  "comparisons": "PAUSED",
+  "historical_static_inspection_preserved": {
+    "cost_id": "setup_cost_42230aae382b4717a11f0b76ac87ec28",
+    "cost_digest": "9ceade21cd47a9d33321ead68e05fc756ffd47979b25b5953495d44e5ae5a8f4",
+    "request_id": "ase-stack-owned-build-20261103",
+    "request_digest": "3c52ce0a3e95f4fd5720ac9828b970fa977c2c82b871e2f39a0a4fbc1d70c417",
+    "elapsed_seconds": 0.0025820829905569553
+  },
+  "collector_boundary": {
+    "11c915577c0146d4149950b065bcf7aa583f3137a274c86ce744de8826c87a0d": {
+      "collector_connection_denied": true,
+      "program_sha256": "c5f30e5078416f867e05cfa11e2c393822e89c38e0b93694dd18ce8361ce6749",
+      "scope_sha256": "b4e506382de6827a9872b5caffc5055487f136ffbf20fade2a161d155df4b97d"
+    },
+    "cd2bc552e4cf336a7339a2748017afaf5f678f96aa4f04e7601a819ae38c3e14": {
+      "collector_connection_denied": true,
+      "program_sha256": "b7d78740280ae3e8b1079262387a1175a3fa482031adac9468dead29d8716ec6",
+      "scope_sha256": "b558c78ac736eee035474e9100d29b10a40c7da46ae092f85087c5641c6d1992"
+    }
+  },
+  "error_type": "ConfigurationError",
+  "error_message": "assessment record identity is immutable",
+  "proxy_restored_stopped": true,
+  "wrapper_accounting": {
+    "exclusive_seconds": 6.866368249990046,
+    "canonical_execution_intervals_excluded_seconds": 6.31070449994877,
+    "setup_cost_intervals_excluded_seconds": 0.14025704190135002,
+    "setup_cost_ids": [
+      "setup_37419344cf874b968e524237775ab696",
+      "setup_cost_7a9b342d29f24b30b1f14052964c00d6"
+    ],
+    "unstarted_setup_costs_are_not_inferred_paid": true
+  },
+  "auxiliary_operations": {
+    "plan_id": "integration-snapshot-owned-preparation-20261103",
+    "operations": [
+      {
+        "operation_id": "integration-snapshot-owned-preparation-20261103:proxy-exclusive-overhead",
+        "plan_id": "integration-snapshot-owned-preparation-20261103",
+        "stage": "owned_proxy_exclusive_overhead",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 120.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-11-04T01:51:10.049591Z",
+        "elapsed_seconds": 6.866368249990046,
+        "accounting": null,
+        "resources": null
+      },
+      {
+        "operation_id": "setup_37419344cf874b968e524237775ab696",
+        "plan_id": "integration-snapshot-owned-preparation-20261103",
+        "stage": "generation_and_proposal",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 0.1345396670512855,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-11-04T01:51:22.667153Z",
+        "elapsed_seconds": 0.1345396670512855,
+        "accounting": null,
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 134.5396670512855,
+          "cpu_ms": 68.32199999999978,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      },
+      {
+        "operation_id": "setup_cost_7a9b342d29f24b30b1f14052964c00d6",
+        "plan_id": "integration-snapshot-owned-preparation-20261103",
+        "stage": "static_inspection",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 0.005717374850064516,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-11-04T01:51:22.683057Z",
+        "elapsed_seconds": 0.005717374850064516,
+        "accounting": null,
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 5.717374850064516,
+          "cpu_ms": 2.5900000000000922,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      }
+    ]
+  },
+  "old_operation_states_after": {
+    "conformance_probe_85882b1252ac409aa073fcb3c33b87bb-native-client": "reserved",
+    "assessment_12735a46eb364c9c9cd2aa4868f290e1:report": "reserved"
+  },
+  "newly_unresolved_operations": [],
+  "grant_after": [
+    13680,
+    3796,
+    125335.15171489166,
+    "0.0"
+  ],
+  "source_unchanged": true,
+  "runtime_unchanged": true,
+  "retained_images_and_runtimes": true
+}

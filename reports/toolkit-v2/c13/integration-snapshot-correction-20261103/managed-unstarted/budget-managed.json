@@ -1,0 +1,223 @@
+{
+  "campaign_allowance": {
+    "scope": "fresh_campaign_reservations",
+    "stages": [
+      {
+        "stage": "trial",
+        "calls_minimum": 1,
+        "calls_upper": 1,
+        "operations_upper": 1,
+        "model_turns": 1,
+        "elapsed_reservation_upper_seconds": 305.0,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "warmup",
+        "calls_minimum": 0,
+        "calls_upper": 0,
+        "operations_upper": 0,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 0.0,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "router_setup",
+        "calls_minimum": 2,
+        "calls_upper": 2,
+        "operations_upper": 2,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 60,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "grader_validation",
+        "calls_minimum": 1,
+        "calls_upper": 1,
+        "operations_upper": 1,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 30,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "report_generation",
+        "calls_minimum": 1,
+        "calls_upper": 1,
+        "operations_upper": 1,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 30,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "grader_reference",
+        "calls_minimum": 0,
+        "calls_upper": 0,
+        "operations_upper": 0,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 0.0,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "grader_probe",
+        "calls_minimum": 1,
+        "calls_upper": 59,
+        "operations_upper": 59,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 2065.0,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "recipe_grading",
+        "calls_minimum": 0,
+        "calls_upper": 1,
+        "operations_upper": 1,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 35.0,
+        "cash_reservation_upper_usd": "0"
+      },
+      {
+        "stage": "generation_and_proposal",
+        "calls_minimum": 1,
+        "calls_upper": 1,
+        "operations_upper": 1,
+        "model_turns": 0,
+        "elapsed_reservation_upper_seconds": 0.12488125031813979,
+        "cash_reservation_upper_usd": "0"
+      }
+    ],
+    "upper_allowance": {
+      "operations": 66,
+      "model_turns": 1,
+      "elapsed_seconds": 2525.124881250318,
+      "cash_usd": "0"
+    },
+    "prior_operations": [
+      {
+        "operation_id": "pair-inspection:conformance_probe_5023c5d8ff054d6ebb8c9113fad6727e",
+        "stage": "worker_pair_inspection",
+        "state": "complete",
+        "elapsed_seconds": 7.3021867498755455,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "pair-inspection:conformance_probe_86c0d13f34114b02898154ecc0893690",
+        "stage": "worker_pair_inspection",
+        "state": "complete",
+        "elapsed_seconds": 6.1916031669825315,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "pair-inspection:conformance_probe_c15559364bf247739deafa4059969e2c",
+        "stage": "worker_pair_inspection",
+        "state": "complete",
+        "elapsed_seconds": 7.298875375185162,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "pair-inspection:conformance_probe_d4e4ab3be499481e8b60f758dd7f51a0",
+        "stage": "worker_pair_inspection",
+        "state": "complete",
+        "elapsed_seconds": 3.9170334157533944,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "pair-inspection:conformance_probe_ef9a998e9d844bc684518d9ed621b496",
+        "stage": "worker_pair_inspection",
+        "state": "complete",
+        "elapsed_seconds": 6.197777790948749,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "setup_cost_4c74d132c4294aa6973961f0c056efd3",
+        "stage": "static_inspection",
+        "state": "complete",
+        "elapsed_seconds": 0.001974250189960003,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 0.001974250189960003,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "operation_id": "setup_cost_7a9b342d29f24b30b1f14052964c00d6",
+        "stage": "static_inspection",
+        "state": "complete",
+        "elapsed_seconds": 0.005717374850064516,
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 0.005717374850064516,
+          "max_cash_usd": "0"
+        }
+      }
+    ],
+    "gaps": [],
+    "fits_remaining": true,
+    "authorization_changed": false,
+    "automatic_retries": 0,
+    "explanation": "Bounds cover the frozen campaign including setup, warm-ups, grading and reporting. They are reservation ceilings, not measured consumption or execution approval. Early failures can use less. Prior operations are already charged and are not added again. Preparation must finish before a plan is reviewed; unplanned future planning, conformance, reusable-tool construction and interventions require their own reviewed allowances. Production monitoring uses receipts and launches no comparison calls."
+  },
+  "purpose": "stack_integration_only",
+  "adapter_eligibility": [
+    {
+      "executor_id": "toolkit-ase-stack-20261103.treatment",
+      "adapter": "codex-app-server:aeep-stack-treatment-20261103",
+      "adapter_version": "1",
+      "support_status": "unknown",
+      "eligible": false,
+      "missing_capabilities": [
+        "identity",
+        "usage"
+      ],
+      "permission_verification": "checked_separately_before_invocation",
+      "managed_worker_configured": true
+    }
+  ],
+  "minimum_trial_model_turns": 1,
+  "trial_elapsed_upper_seconds": 305.0,
+  "evaluation_stage": "qualification",
+  "screening_trial_model_turns": 1,
+  "workers": [
+    {
+      "role": "candidate",
+      "executor_id": "toolkit-ase-stack-20261103.treatment",
+      "model_worker_profiles": [
+        "codex-app-server:aeep-stack-treatment-20261103"
+      ]
+    }
+  ],
+  "model_worker_profile_count": 1,
+  "measurement_concurrency": 1,
+  "remaining": {
+    "model_turns": 2203,
+    "elapsed_seconds": 479263.71677244036,
+    "operations": 36300,
+    "cash_usd": "0"
+  },
+  "explanation": "Counts adapter model turns, not internal inference steps. Full planned trials exclude planning, warm-ups and retries. Profiles use fresh conversations per trial; timed trials run sequentially. Early rejection can use less; elapsed time is unknown until measured. Per-operation limits remain enforced."
+}

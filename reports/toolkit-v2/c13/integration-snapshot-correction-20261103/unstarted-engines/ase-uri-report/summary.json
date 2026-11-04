@@ -1,0 +1,515 @@
+{
+  "schema": "aeep.toolkit.descriptive-summary.v1",
+  "evidence_sha256": "b43dcfc494d719fd7d76304b17a917bb39f58299c8a3c2160f3c61e410d74eb7",
+  "outcome": "NOT_ASSESSED",
+  "cohorts": [
+    {
+      "binding": {
+        "plan_ref": "a7063c2933cbc35ac03a762cd24c6b323d0036c5a3c325ea46d6f02c90a42b77",
+        "candidate_sha256": "6b33e3c324a91e011d9da16e4441d8f3f521daec958b8eeaf6ffa9cfb40c89bd",
+        "adapter_sha256": "cfc36a2aeda4e220046722dbdbc81fbf2376deb12b9f7266abdab81bddcec9e1",
+        "host": "codex",
+        "host_version": "aeep-agent-router/0.154.0 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+        "model": "gpt-6-astra",
+        "effort": "medium",
+        "shared_environment_sha256": "1b87c536695c9610d01d09f5e78ba64e3cc05fc8b76bf8fc8a1aa8e96770b2db",
+        "verifier_sha256": "7533162c0501758c34858a06fe26db2c4f1092fe2cc1372d5f651e75d15fde99",
+        "mode": "forced_diagnostic",
+        "evidence_kind": "live"
+      },
+      "families": [
+        {
+          "task_family": "source-family:ff6bbbb351dc943479c91b2ac8eb920238bb018bc543a86ac76712d58f006a14",
+          "observed_tasks": 1,
+          "observed_pairs": 0,
+          "graded_pairs": 0,
+          "rejected_tasks": [
+            {
+              "task_sha256": "e003465927fc639a463748a7c21b55d3508cd7c86ba9314abd8ee0c967204d4d",
+              "reasons": [
+                "Exactly one observed run per arm is required; missing or repeated arms cannot be paired.",
+                "Forced invocation is diagnostic only.",
+                "Candidate exposure is missing or inconsistent."
+              ]
+            }
+          ],
+          "arms": {
+            "control": {
+              "runs": 0,
+              "execution": {},
+              "verification": {
+                "pass": 0,
+                "fail": 0,
+                "skipped": 0,
+                "unknown": 0
+              },
+              "candidate_invoked": {
+                "yes": 0,
+                "no": 0,
+                "unknown": 0
+              },
+              "metrics": {
+                "tokens": {
+                  "known_runs": 0,
+                  "total_runs": 0,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "agent_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 0,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "verification_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 0,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                },
+                "setup_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 0,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                }
+              },
+              "cash_accounting_references": 0,
+              "actual_cash": null,
+              "cost_per_verified_success": null
+            },
+            "treatment": {
+              "runs": 1,
+              "execution": {
+                "completed": 1
+              },
+              "verification": {
+                "pass": 1,
+                "fail": 0,
+                "skipped": 0,
+                "unknown": 0
+              },
+              "candidate_invoked": {
+                "yes": 0,
+                "no": 0,
+                "unknown": 1
+              },
+              "metrics": {
+                "tokens": {
+                  "known_runs": 1,
+                  "total_runs": 1,
+                  "known_subtotal": 130353,
+                  "complete_total": 130353,
+                  "median_observed": 130353,
+                  "maximum_observed": 130353
+                },
+                "agent_wall_seconds": {
+                  "known_runs": 1,
+                  "total_runs": 1,
+                  "known_subtotal": 49.34109479095787,
+                  "complete_total": 49.34109479095787,
+                  "median_observed": 49.34109479095787,
+                  "maximum_observed": 49.34109479095787
+                },
+                "verification_wall_seconds": {
+                  "known_runs": 1,
+                  "total_runs": 1,
+                  "known_subtotal": 2.0914121670648456,
+                  "complete_total": 2.0914121670648456,
+                  "median_observed": 2.0914121670648456,
+                  "maximum_observed": 2.0914121670648456
+                },
+                "setup_wall_seconds": {
+                  "known_runs": 0,
+                  "total_runs": 1,
+                  "known_subtotal": null,
+                  "complete_total": null,
+                  "median_observed": null,
+                  "maximum_observed": null
+                }
+              },
+              "cash_accounting_references": 1,
+              "actual_cash": null,
+              "cost_per_verified_success": null
+            }
+          },
+          "success_rate_treatment_minus_control": null,
+          "metric_differences": {
+            "tokens": {
+              "measured_pairs": 0,
+              "observed_pairs": 0,
+              "mean_observed_control": null,
+              "mean_observed_treatment": null,
+              "mean_control_minus_treatment": null,
+              "relative_mean_control_minus_treatment": null,
+              "median_control_minus_treatment": null,
+              "confidence_interval": null
+            },
+            "agent_wall_seconds": {
+              "measured_pairs": 0,
+              "observed_pairs": 0,
+              "mean_observed_control": null,
+              "mean_observed_treatment": null,
+              "mean_control_minus_treatment": null,
+              "relative_mean_control_minus_treatment": null,
+              "median_control_minus_treatment": null,
+              "confidence_interval": null
+            },
+            "verification_wall_seconds": {
+              "measured_pairs": 0,
+              "observed_pairs": 0,
+              "mean_observed_control": null,
+              "mean_observed_treatment": null,
+              "mean_control_minus_treatment": null,
+              "relative_mean_control_minus_treatment": null,
+              "median_control_minus_treatment": null,
+              "confidence_interval": null
+            },
+            "setup_wall_seconds": {
+              "measured_pairs": 0,
+              "observed_pairs": 0,
+              "mean_observed_control": null,
+              "mean_observed_treatment": null,
+              "mean_control_minus_treatment": null,
+              "relative_mean_control_minus_treatment": null,
+              "median_control_minus_treatment": null,
+              "confidence_interval": null
+            }
+          },
+          "task_comparisons": [],
+          "task_observations": [
+            {
+              "task_sha256": "e003465927fc639a463748a7c21b55d3508cd7c86ba9314abd8ee0c967204d4d",
+              "arm": "treatment",
+              "run_id": "trial_plan_f966c3a56138439aa2aedd84cfe511cd_matthewwithanm__python-markdownify-200_toolkit-ase-stack-20261103.treatment_fresh-worker_0",
+              "verification": "pass",
+              "binary_task_score": 1,
+              "tokens": 130353,
+              "raw_tokens": {
+                "source_ref": "c23c117c28d9ee2a197e318bdd1da3d5f51a3a96fcecefb1a778dba3c90bb231",
+                "input_tokens": 128909,
+                "output_tokens": 1444,
+                "cached_input_tokens": 111232,
+                "reasoning_output_tokens": 68,
+                "cached_semantics": "included_in_input",
+                "reasoning_semantics": "included_in_output"
+              },
+              "agent_wall_seconds": 49.34109479095787,
+              "verification_wall_seconds": 2.0914121670648456,
+              "retries": 0,
+              "execution_status": "completed",
+              "receipt_refs": [
+                "c23c117c28d9ee2a197e318bdd1da3d5f51a3a96fcecefb1a778dba3c90bb231"
+              ],
+              "verification_ref": "215f843e0c01cea9d477f8d1428c3907298fbbc6cb1f0957f1fd345c2d29e66f"
+            }
+          ],
+          "cash": {
+            "currency": "USD",
+            "arms": {
+              "control": {
+                "known_runs": 0,
+                "total_runs": 0,
+                "known_subtotal": null,
+                "complete_total": null,
+                "cost_per_verified_success": null
+              },
+              "treatment": {
+                "known_runs": 0,
+                "total_runs": 1,
+                "known_subtotal": null,
+                "complete_total": null,
+                "cost_per_verified_success": null
+              }
+            },
+            "fee_scenario": null,
+            "evaluation_overhead_cash": null,
+            "notice": "Receipt contents must be resolved by the caller. Hash consistency is not billing attestation. Fees are supplied scenarios, not observed charges; evaluation overhead is separate.",
+            "break_even_scenario": null
+          }
+        }
+      ]
+    }
+  ],
+  "candidate": {
+    "repository": "https://github.com/ptse8204/AEEP-router",
+    "revision": "f8f9fba391f32942ebc2471b702c95df936313e7",
+    "artifact_sha256": "6b33e3c324a91e011d9da16e4441d8f3f521daec958b8eeaf6ffa9cfb40c89bd",
+    "license_expression": "Apache-2.0",
+    "data_rights": "Repository-authored nonrecursive engineering fixture; no usefulness established"
+  },
+  "adapter": {
+    "schema_version": "aeep.toolkit.adapter.v1",
+    "adapter_id": "aeep.benchmark-runner.codex:external-scheduler",
+    "implementation_sha256": "cfc36a2aeda4e220046722dbdbc81fbf2376deb12b9f7266abdab81bddcec9e1",
+    "hosts": [
+      "codex"
+    ],
+    "candidate_types": [
+      "skill"
+    ],
+    "optional_invocation": false,
+    "telemetry": [
+      "tokens",
+      "agent_wall_seconds",
+      "verification_wall_seconds"
+    ],
+    "containment": "unverified",
+    "conformance_ref": null
+  },
+  "inspection_references": [
+    {
+      "task_sha256": "e003465927fc639a463748a7c21b55d3508cd7c86ba9314abd8ee0c967204d4d",
+      "arm": "treatment",
+      "receipt_refs": [
+        "c23c117c28d9ee2a197e318bdd1da3d5f51a3a96fcecefb1a778dba3c90bb231"
+      ],
+      "verification_ref": "215f843e0c01cea9d477f8d1428c3907298fbbc6cb1f0957f1fd345c2d29e66f"
+    }
+  ],
+  "limitations": [
+    "Artifact contents and file changes are not included in these normalized records. Resolve receipt and verification references in the originating run; grades alone do not describe edits.",
+    "Access ceilings, spending permission, pending approvals and activation state are not established by this summary. Consult the exact reviewed plan and installation record before further execution.",
+    "Describes supplied records; this command does not authenticate referenced receipts, worker conformance or grading evidence.",
+    "Only observed tasks are checked. Entire missing pairs cannot be detected without the reviewed plan's expected cases.",
+    "Different cohort bindings are never pooled. Repetitions lack a pairing index and are rejected rather than counted as independent cases.",
+    "Partial measurements are labeled as known subsets. Resource differences do not override task failures or establish benefit.",
+    "Per-task binary scores restate recorded independent pass/fail; they introduce no partial-credit quality rubric. Unknown/skipped grades have no numeric score.",
+    "Synthetic and replay records cannot establish real model value. Invocation is not evidence of causation.",
+    "Confidence and value verdicts require the existing reviewed analysis. Supplied receipt accounting is descriptive; recurring fees are explicit scenarios, not incurred charges or a demonstrated benefit.",
+    "Upstream scheduler timing/token defaults are compatibility artifacts. Only canonical AEEP receipts supply measured usage; the upstream JSON assertion checks the existing protected grade certificate.",
+    "Canonical campaign: 1 trials; 1 normalized primary trials; 0 normalization gaps; 0 auxiliary trials.",
+    "Canonical analysis includes its frozen conditions, repetitions and auxiliary arms. Descriptive tables below cover only normalized primary trials; they cannot replace the complete campaign or cost ledger.",
+    "The canonical verdict is the assessment service's recorded conclusion, not a new toolkit qualification, independent attestation or release approval.",
+    "Read-only URI-family serialization adaptation; original label is retained in source-family-map.json. The earlier failed export remains unchanged. This is the same single canonical trial, never an additional observation."
+  ],
+  "managed_analysis": {
+    "analysis_ref": "fb043b1225f5ffb87662e996e7c69b4ba77225fa33154207418250136e46d751",
+    "plan_ref": "a7063c2933cbc35ac03a762cd24c6b323d0036c5a3c325ea46d6f02c90a42b77",
+    "campaign_ref": "0d2ccfd99b519c46d8d2dd143b07672f8bd2dc4ed80a0d161413999f8d91f925",
+    "operation_ledger_ref": "2b92478ae75a3b321535caa605497fc1084c58e6ab40bd38a7f7ee21fa31929d",
+    "outcome": "insufficient_evidence",
+    "qualification_passed": false,
+    "distinct_holdout_cases": 0,
+    "distinct_paired_cases": 0,
+    "correctness_failures": 0,
+    "execution_failures": 0,
+    "expected_trial_positions": 1,
+    "missing_trial_positions": 0,
+    "unexpected_trial_positions": 0,
+    "duplicate_trial_positions": 0,
+    "unresolved_operations": 0,
+    "paired_measurement_cases": {
+      "wall_time_ms": 0,
+      "local.cpu_ms": 0,
+      "local.gpu_ms": 0,
+      "local.memory_mb_seconds": 0,
+      "local.network_bytes": 0,
+      "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": 0,
+      "model.openai.gpt-6-astra.subscription.cached_input_tokens": 0,
+      "model.openai.gpt-6-astra.subscription.input_tokens": 0,
+      "model.openai.gpt-6-astra.subscription.output_tokens": 0,
+      "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": 0,
+      "subscription.openai.codex.self.provider_unit": 0
+    },
+    "paired_savings": {
+      "wall_time_ms": null,
+      "local.cpu_ms": null,
+      "local.gpu_ms": null,
+      "local.memory_mb_seconds": null,
+      "local.network_bytes": null,
+      "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "subscription.openai.codex.self.provider_unit": null
+    },
+    "savings_interval": {},
+    "condition_comparisons": {
+      "fresh-worker": {
+        "paired_savings": {
+          "wall_time_ms": null,
+          "local.cpu_ms": null,
+          "local.gpu_ms": null,
+          "local.memory_mb_seconds": null,
+          "local.network_bytes": null,
+          "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+          "model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+          "model.openai.gpt-6-astra.subscription.input_tokens": null,
+          "model.openai.gpt-6-astra.subscription.output_tokens": null,
+          "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+          "subscription.openai.codex.self.provider_unit": null
+        },
+        "savings_interval": {},
+        "paired_measurement_cases": {
+          "wall_time_ms": 0,
+          "local.cpu_ms": 0,
+          "local.gpu_ms": 0,
+          "local.memory_mb_seconds": 0,
+          "local.network_bytes": 0,
+          "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": 0,
+          "model.openai.gpt-6-astra.subscription.cached_input_tokens": 0,
+          "model.openai.gpt-6-astra.subscription.input_tokens": 0,
+          "model.openai.gpt-6-astra.subscription.output_tokens": 0,
+          "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": 0,
+          "subscription.openai.codex.self.provider_unit": 0
+        },
+        "break_even_uses": {
+          "wall_time_ms": null,
+          "local.cpu_ms": null,
+          "local.gpu_ms": null,
+          "local.memory_mb_seconds": null,
+          "local.network_bytes": null,
+          "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+          "model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+          "model.openai.gpt-6-astra.subscription.input_tokens": null,
+          "model.openai.gpt-6-astra.subscription.output_tokens": null,
+          "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+          "subscription.openai.codex.self.provider_unit": null
+        }
+      }
+    },
+    "utility_evidence": {
+      "metrics": {
+        "wall_time_ms": {
+          "relative_saving": null,
+          "success_gain": null,
+          "interval": [],
+          "distinct_pairs": 0,
+          "zero_baseline_regression": false
+        }
+      },
+      "complete": false,
+      "benefit": false,
+      "guardrails_passed": false,
+      "challengers": {},
+      "dominated": false,
+      "stage": "qualification",
+      "family_error_rate": 0.05,
+      "analysis": "all_assigned_cases",
+      "candidate_selection_filter": false
+    },
+    "measured_usage": {
+      "campaign_wall_time_ms": 49341.09479095787,
+      "known_campaign_wall_time_ms": 49341.09479095787,
+      "known_overhead_wall_time_ms": 59322.77283538133,
+      "assessment_wall_time_ms": 108663.8676263392,
+      "included_routing_overhead_ms": 4.397000186145306,
+      "included_invocation_guard_ms": 128.33595741540194,
+      "known_campaign_subtotal.local.cpu_ms": null,
+      "campaign_total.local.cpu_ms": null,
+      "known_overhead_subtotal.local.cpu_ms": 12055.832223999998,
+      "assessment_total.local.cpu_ms": null,
+      "known_campaign_subtotal.local.gpu_ms": null,
+      "campaign_total.local.gpu_ms": null,
+      "known_overhead_subtotal.local.gpu_ms": null,
+      "assessment_total.local.gpu_ms": null,
+      "known_campaign_subtotal.local.memory_mb_seconds": null,
+      "campaign_total.local.memory_mb_seconds": null,
+      "known_overhead_subtotal.local.memory_mb_seconds": 3314.0037600942233,
+      "assessment_total.local.memory_mb_seconds": null,
+      "known_campaign_subtotal.local.network_bytes": null,
+      "campaign_total.local.network_bytes": null,
+      "known_overhead_subtotal.local.network_bytes": null,
+      "assessment_total.local.network_bytes": null,
+      "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "campaign_total.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "assessment_total.model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "campaign_total.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "assessment_total.model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "campaign_total.model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "assessment_total.model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "campaign_total.model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "assessment_total.model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "known_campaign_subtotal.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "campaign_total.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "known_overhead_subtotal.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "assessment_total.model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "known_campaign_subtotal.subscription.openai.codex.self.provider_unit": null,
+      "campaign_total.subscription.openai.codex.self.provider_unit": null,
+      "known_overhead_subtotal.subscription.openai.codex.self.provider_unit": null,
+      "assessment_total.subscription.openai.codex.self.provider_unit": null
+    },
+    "measurement_coverage": {
+      "local.cpu_ms": "0/1",
+      "local.gpu_ms": "0/1",
+      "local.memory_mb_seconds": "0/1",
+      "local.network_bytes": "0/1",
+      "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": "0/1",
+      "model.openai.gpt-6-astra.subscription.cached_input_tokens": "0/1",
+      "model.openai.gpt-6-astra.subscription.input_tokens": "0/1",
+      "model.openai.gpt-6-astra.subscription.output_tokens": "0/1",
+      "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": "0/1",
+      "subscription.openai.codex.self.provider_unit": "0/1"
+    },
+    "break_even_uses": {
+      "wall_time_ms": null,
+      "local.cpu_ms": null,
+      "local.gpu_ms": null,
+      "local.memory_mb_seconds": null,
+      "local.network_bytes": null,
+      "model.openai.gpt-6-astra.subscription.cache_write_input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.cached_input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.input_tokens": null,
+      "model.openai.gpt-6-astra.subscription.output_tokens": null,
+      "model.openai.gpt-6-astra.subscription.reasoning_output_tokens": null,
+      "subscription.openai.codex.self.provider_unit": null
+    },
+    "timing_scope": "Trial wall time includes routing and preflight; separately measured grading is excluded by BenchmarkRunner.",
+    "telemetry_capture": {
+      "runs": 1,
+      "verified": 1,
+      "partial": 0,
+      "unknown": 0,
+      "instructions_loaded": 1,
+      "candidate_loading_unknown": 0,
+      "notice": "Capture verification checks retained journal-to-receipt consistency. Token quantities remain provider-reported; independent provider usage is unverified. Positive skill injection proves instructions loaded, not semantic use. Missing metrics never prove non-use."
+    },
+    "workflow_accounting": {
+      "coverage": "NOT_RECORDED",
+      "notice": "No workflow overhead scope was selected; execution ledger alone is incomplete composed cost coverage."
+    }
+  },
+  "external_scheduler": {
+    "definition_ref": "87c7fb76c223579a8f76f0c66c89113b56969f6225d7738eecae34690792a67b",
+    "process_receipt_ref": "a6e59aa8e1c26e7d7a4fc136a7430c50f5eaf6936fd563e6b7ffc50c24e68704",
+    "trial_refs": {
+      "0": "215f843e0c01cea9d477f8d1428c3907298fbbc6cb1f0957f1fd345c2d29e66f"
+    },
+    "grade_summaries": {
+      "0": {
+        "passed": 1,
+        "failed": 0,
+        "total": 1,
+        "pass_rate": 1.0,
+        "skipped": 0
+      }
+    },
+    "grading_semantics": "ASE assertion over the existing protected task-grade certificate",
+    "upstream_timing_is_compatibility_only": true
+  },
+  "serialization_adaptation": {
+    "source_family_map": {
+      "source-family:ff6bbbb351dc943479c91b2ac8eb920238bb018bc543a86ac76712d58f006a14": "https://github.com/matthewwithanm/python-markdownify"
+    },
+    "reporter_sha256": "31c6d88b84cb88415f877f85a6cfc59d60391f76a826c38539c2aad81e701444",
+    "canonical_plan_trial_receipts_and_statistics_unchanged": true,
+    "new_model_or_trial_executions": 0
+  }
+}
