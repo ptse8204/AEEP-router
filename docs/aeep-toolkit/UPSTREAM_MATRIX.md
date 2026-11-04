@@ -2038,3 +2038,27 @@ file output for the selected state-changing upstream tasks. Preserve the two
 packs' different prompts, protected verifiers and grading semantics. No database
 service or task is executed by this preparation. All stack/usefulness/release
 gates stay separate and comparisons remain paused.
+
+
+## November 4 — represent database outputs without changing file-pack v1
+
+The [MCP state-pack increment](../../reports/toolkit-v2/c13/mcp-state-packs-20261104/README.md)
+adds a separate versioned contract for original PostgreSQL table outputs. Ordinary
+inspection verifies the selected assets; the existing file transport and canonical
+file preparation reject these tasks until a reviewed MCP runtime and protected
+database verifier are connected. Preserve MCPMark's separate oracle and MCP-Universe's
+embedded answers, different prompts and original assertions. Their related tasks
+cannot increase independent usefulness counts.
+
+All 13 source gates pass on the exact recorded working tree: 2,115 tests/21 skips
+in each full run, 82.65568708183221% combined coverage and both branch gates. A
+retained source snapshot and inventory preserve separate uncommitted CI inputs;
+the feature commit does not take those edits. The new wheel is built only. The
+new guide is outside the earlier completed documentation check. First-party
+contract tests establish no MCP reference journey or component qualification.
+
+ToolHive retains its selected source pin and can start from the fingerprinted
+installed Go compiler; no compiler or dependency was executed. Complete source,
+module/license and service permission closure remains open. SkillRank continuation
+review1a091b2b stays frozen and pending, independently of these source changes.
+All resources, historical charges and comparisons-paused policy are preserved.

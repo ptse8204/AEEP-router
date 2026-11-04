@@ -169,7 +169,7 @@ def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
     """Inspect the selected stack; canonical preparation is a separate explicit step."""
     from aeep.assessment.models import content_digest
 
-    from .benchmarks import BenchmarkPack, inspect_pack
+    from .benchmarks import BenchmarkPack, inspect_pack, parse_pack
     from .candidate import inspect
     from .cli import read_json
     from .installation import PreviewPolicy, preview
@@ -185,7 +185,7 @@ def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
     registry = ExtensionRegistry.model_validate_json(registry_raw)
     policy = PreviewPolicy.model_validate_json(policy_raw)
     pack_path, pack_raw = _read(selected.benchmark, root)
-    pack = BenchmarkPack.model_validate_json(pack_raw)
+    pack = parse_pack(json.loads(pack_raw))
     candidate_path = Path(selected.candidate.path)
     candidate_path = candidate_path if candidate_path.is_absolute() else root/candidate_path
     candidate = inspect(candidate_path.absolute())
@@ -199,6 +199,8 @@ def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
     if engine not in selected.components or pack.pack_id not in selected.components:
         raise ValueError('selected evaluator and benchmark pack must be explicit components')
     blockers = list(installation.blockers)
+    if not isinstance(pack, BenchmarkPack):
+        blockers.append('MCP state-output execution requires a reviewed ToolHive/server binding and protected database verifier; file recipes cannot execute this pack')
     if any(task.rights_review_ref is None for task in pack.tasks if task.task_id in selected.task_ids):
         blockers.append('selected task asset rights have no exact review reference')
     assessment = None

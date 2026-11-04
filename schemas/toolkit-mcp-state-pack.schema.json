@@ -1,0 +1,261 @@
+{
+  "$defs": {
+    "MCPStateTask": {
+      "additionalProperties": false,
+      "properties": {
+        "task_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+          "title": "Task Id",
+          "type": "string"
+        },
+        "domain": {
+          "const": "mcp",
+          "default": "mcp",
+          "title": "Domain",
+          "type": "string"
+        },
+        "difficulty": {
+          "enum": [
+            "easy",
+            "medium",
+            "hard",
+            "unknown"
+          ],
+          "title": "Difficulty",
+          "type": "string"
+        },
+        "assets": {
+          "items": {
+            "$ref": "#/$defs/TaskAsset"
+          },
+          "maxItems": 4096,
+          "minItems": 4,
+          "title": "Assets",
+          "type": "array"
+        },
+        "instruction_json_key": {
+          "anyOf": [
+            {
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Instruction Json Key"
+        },
+        "oracle_layout": {
+          "enum": [
+            "separate_asset",
+            "embedded_in_verifier"
+          ],
+          "title": "Oracle Layout",
+          "type": "string"
+        },
+        "state_outputs": {
+          "items": {
+            "$ref": "#/$defs/TableOutput"
+          },
+          "maxItems": 128,
+          "minItems": 1,
+          "title": "State Outputs",
+          "type": "array"
+        },
+        "upstream_score": {
+          "enum": [
+            "binary",
+            "native_reward"
+          ],
+          "title": "Upstream Score",
+          "type": "string"
+        },
+        "rights_review_ref": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rights Review Ref"
+        },
+        "adaptations": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Adaptations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "task_id",
+        "difficulty",
+        "assets",
+        "oracle_layout",
+        "state_outputs",
+        "upstream_score"
+      ],
+      "title": "MCPStateTask",
+      "type": "object"
+    },
+    "SourcePin": {
+      "additionalProperties": false,
+      "properties": {
+        "repository": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "title": "Repository",
+          "type": "string"
+        },
+        "revision": {
+          "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$",
+          "title": "Revision",
+          "type": "string"
+        },
+        "artifact_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Artifact Sha256",
+          "type": "string"
+        },
+        "license_expression": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "License Expression",
+          "type": "string"
+        },
+        "data_rights": {
+          "maxLength": 1000,
+          "minLength": 1,
+          "title": "Data Rights",
+          "type": "string"
+        }
+      },
+      "required": [
+        "repository",
+        "revision",
+        "artifact_sha256",
+        "license_expression",
+        "data_rights"
+      ],
+      "title": "SourcePin",
+      "type": "object"
+    },
+    "TableOutput": {
+      "additionalProperties": false,
+      "description": "An opaque reviewed backend alias and table identity, never SQL or credentials.",
+      "properties": {
+        "kind": {
+          "const": "postgresql_table",
+          "default": "postgresql_table",
+          "title": "Kind",
+          "type": "string"
+        },
+        "backend_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+          "title": "Backend Id",
+          "type": "string"
+        },
+        "schema_name": {
+          "default": "public",
+          "pattern": "^[a-z_][a-z0-9_]{0,62}$",
+          "title": "Schema Name",
+          "type": "string"
+        },
+        "table_name": {
+          "pattern": "^[a-z_][a-z0-9_]{0,62}$",
+          "title": "Table Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "backend_id",
+        "table_name"
+      ],
+      "title": "TableOutput",
+      "type": "object"
+    },
+    "TaskAsset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "maximum": 1073741824,
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        },
+        "role": {
+          "enum": [
+            "instruction",
+            "input",
+            "candidate_skill",
+            "oracle",
+            "verifier",
+            "environment",
+            "license"
+          ],
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes",
+        "role"
+      ],
+      "title": "TaskAsset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.toolkit.mcp-state-pack.v1",
+      "default": "aeep.toolkit.mcp-state-pack.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "pack_id": {
+      "enum": [
+        "mcpmark",
+        "mcp-universe"
+      ],
+      "title": "Pack Id",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/SourcePin"
+    },
+    "tasks": {
+      "items": {
+        "$ref": "#/$defs/MCPStateTask"
+      },
+      "maxItems": 256,
+      "minItems": 1,
+      "title": "Tasks",
+      "type": "array"
+    }
+  },
+  "required": [
+    "pack_id",
+    "source",
+    "tasks"
+  ],
+  "title": "MCPStatePack",
+  "type": "object"
+}

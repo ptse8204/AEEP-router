@@ -202,3 +202,30 @@ wiring have first-party checks; actual current-source CLI catalog execution stil
 needs its reviewed functional check. SkillRank bounded evaluation remains open.
 The component audit and [persistent state](STATE.md) identify the remaining work.
 Neither component checks nor this guide close the complete-stack gate.
+
+## Inspect MCP tasks with database outputs
+
+MCP tasks can produce database state instead of files. The separate
+`aeep.toolkit.mcp-state-pack.v1` contract names an opaque backend alias and exact
+PostgreSQL schema/table outputs. It contains no connection URL, credential, SQL
+command or authority. Existing file-pack v1 contracts retain their meanings.
+
+Use the ordinary inspector with a reviewed state-pack file:
+
+```bash
+PYTHONPATH=src python3 -m aeep_toolkit benchmark inspect \
+  --pack /absolute/mcp-state-pack.json --root /absolute/pinned-assets \
+  --task postgres.security.user_permission_audit
+```
+
+The inspector verifies original file hashes and shows state outputs separately.
+Instructions and public inputs can be staged locally; environment setup, reference
+answers and verifiers remain protected. A task can declare that its oracle is
+embedded in the protected verifier. An instruction stored in upstream JSON keeps
+its original bytes and declares the relevant top-level key.
+
+Inspection does not start PostgreSQL, ToolHive, an MCP server or a worker. The
+file-output task transport and canonical file-recipe preparation reject these
+packs. Execution remains blocked until the private backend, tool permissions,
+original grader, reference/counterexample checks and cleanup are reviewed and
+connected. Database outputs must not be replaced with an invented report file.

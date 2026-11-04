@@ -1,0 +1,58 @@
+{
+  "evidence_kind": "pinned_source_binding_and_local_input_separation_only",
+  "packs": [
+    {
+      "pack": "mcpmark",
+      "source_revision": "cd45b7f57923b9b3985467f5139927575f83141c",
+      "original_assets": 6,
+      "asset_root": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/mcp-stack-protected-candidate-20261103/eval-sys__mcpmark",
+      "public_staging": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/mcp-state-packs-20261104/mcpmark",
+      "staged_sha256": {
+        "tasks/postgres/standard/security/user_permission_audit/description.md": "30a564772fd4be46bf3dd453e6c593a7d2ae204279e1bae8e83990620b902ccd",
+        "tasks/postgres/standard/security/user_permission_audit/meta.json": "27e25698c3eb79a0d7ea947c7d019bdea1d01b7eda5d9ad9d3789c8a190f4c95"
+      },
+      "protected_roles_not_staged": [
+        "oracle",
+        "verifier",
+        "environment",
+        "license"
+      ],
+      "state_tables": [
+        "security_audit_results",
+        "security_audit_details"
+      ],
+      "rights_reviewed": false,
+      "runtime_qualified": false,
+      "task_executed": false,
+      "functional_gate_pass": false
+    },
+    {
+      "pack": "mcp-universe",
+      "source_revision": "0df6c42717f2a618d34f5b271efd05be462b9e4d",
+      "original_assets": 5,
+      "asset_root": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/mcp-stack-protected-candidate-20261103/SalesforceAIResearch__MCP-Universe",
+      "public_staging": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/mcp-state-packs-20261104/mcp-universe",
+      "staged_sha256": {
+        "mcpuniverse/benchmark/configs/mcpmark/configs/postgres/security/user_permission_audit.json": "0f14ca64848f821c26dd08ed4123e47e3acc078f06124360bd69549b99339bce"
+      },
+      "protected_roles_not_staged": [
+        "oracle",
+        "verifier",
+        "environment",
+        "license"
+      ],
+      "state_tables": [
+        "security_audit_results",
+        "security_audit_details"
+      ],
+      "rights_reviewed": false,
+      "runtime_qualified": false,
+      "task_executed": false,
+      "functional_gate_pass": false
+    }
+  ],
+  "models": 0,
+  "services_started": false,
+  "upstream_programs_executed": false,
+  "comparisons": "PAUSED"
+}

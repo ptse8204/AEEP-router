@@ -1,0 +1,74 @@
+{
+  "schema_version": "aeep.toolkit.mcp-state-pack.v1",
+  "pack_id": "mcp-universe",
+  "source": {
+    "repository": "https://github.com/SalesforceAIResearch/MCP-Universe",
+    "revision": "0df6c42717f2a618d34f5b271efd05be462b9e4d",
+    "artifact_sha256": "cec7b91002080c383dd5252c49d9063c14eb8f2f773ffc2286bdae4ca1a4608e",
+    "license_expression": "Apache-2.0",
+    "data_rights": "Pinned repository notices only; exact task-use determination and runtime authority remain pending. No execution, provider disclosure or redistribution clearance inferred."
+  },
+  "tasks": [
+    {
+      "task_id": "postgres.security.user_permission_audit",
+      "domain": "mcp",
+      "difficulty": "unknown",
+      "assets": [
+        {
+          "path": "mcpuniverse/evaluator/mcpmark/postgres/security/user_permission_audit/prepare_environment.py",
+          "sha256": "efa94546cb0bd2c00d03604bb19704ea74d34f7d481d6fd298f12d9553cc728a",
+          "bytes": 16692,
+          "role": "environment"
+        },
+        {
+          "path": "mcpuniverse/evaluator/mcpmark/postgres/security/user_permission_audit/verify.py",
+          "sha256": "3e6abb58c915fc80e1fb4b62e29f5affd108bfe678fd4b5e2ec19b0e649e4ed8",
+          "bytes": 11441,
+          "role": "verifier"
+        },
+        {
+          "path": "mcpuniverse/benchmark/configs/mcpmark/configs/postgres/security/user_permission_audit.json",
+          "sha256": "0f14ca64848f821c26dd08ed4123e47e3acc078f06124360bd69549b99339bce",
+          "bytes": 1938,
+          "role": "instruction"
+        },
+        {
+          "path": "LICENSE.txt",
+          "sha256": "a32115015c1eea6186e519fa03ab3b77844170a75cf57ddbeb57f15dae44729a",
+          "bytes": 11444,
+          "role": "license"
+        },
+        {
+          "path": "license_info.md",
+          "sha256": "9e79568f197cc950767a627e7079ae87f16cc67b7bcf0a7b5dba654d094d94f2",
+          "bytes": 14563,
+          "role": "license"
+        }
+      ],
+      "instruction_json_key": "question",
+      "oracle_layout": "embedded_in_verifier",
+      "state_outputs": [
+        {
+          "kind": "postgresql_table",
+          "backend_id": "owned-postgres-audit",
+          "schema_name": "public",
+          "table_name": "security_audit_results"
+        },
+        {
+          "kind": "postgresql_table",
+          "backend_id": "owned-postgres-audit",
+          "schema_name": "public",
+          "table_name": "security_audit_details"
+        }
+      ],
+      "upstream_score": "binary",
+      "rights_review_ref": null,
+      "adaptations": [
+        "Original asset bytes are unchanged. Runtime, private database mapping, protected grader invocation and cleanup remain unreviewed.",
+        "The backend alias is inert metadata, not a database URL, credential or permission. No state is synthesized as a file artifact.",
+        "Keep pack-specific prompts and verifier assertions separate. The two packs reuse a related underlying task and are not independent usefulness cases.",
+        "Original question remains in its original JSON asset. It omits explicit table-schema deliverables present in MCPMark; this difference is preserved and requires task-contract review before model trials."
+      ]
+    }
+  ]
+}

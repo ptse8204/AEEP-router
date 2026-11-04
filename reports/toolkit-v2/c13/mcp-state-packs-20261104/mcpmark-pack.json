@@ -1,0 +1,79 @@
+{
+  "schema_version": "aeep.toolkit.mcp-state-pack.v1",
+  "pack_id": "mcpmark",
+  "source": {
+    "repository": "https://github.com/eval-sys/mcpmark",
+    "revision": "cd45b7f57923b9b3985467f5139927575f83141c",
+    "artifact_sha256": "3e7ea7265d5a17a2501f35195bc44da82b59668207de0e1740ee537c5924bd06",
+    "license_expression": "Apache-2.0",
+    "data_rights": "Pinned repository notices only; exact task-use determination and runtime authority remain pending. No execution, provider disclosure or redistribution clearance inferred."
+  },
+  "tasks": [
+    {
+      "task_id": "postgres.security.user_permission_audit",
+      "domain": "mcp",
+      "difficulty": "unknown",
+      "assets": [
+        {
+          "path": "tasks/postgres/standard/security/user_permission_audit/prepare_environment.py",
+          "sha256": "9672316c5c33fd4ef487ceada517e1b727be8e9a7c1dce47ecabc74edb1c97ea",
+          "bytes": 16233,
+          "role": "environment"
+        },
+        {
+          "path": "tasks/postgres/standard/security/user_permission_audit/verify.py",
+          "sha256": "5de56723cfbd844f87b0a548675c1a007c51e86f81818c5103002d94ca17f01f",
+          "bytes": 11337,
+          "role": "verifier"
+        },
+        {
+          "path": "LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "bytes": 11357,
+          "role": "license"
+        },
+        {
+          "path": "tasks/postgres/standard/security/user_permission_audit/description.md",
+          "sha256": "30a564772fd4be46bf3dd453e6c593a7d2ae204279e1bae8e83990620b902ccd",
+          "bytes": 5294,
+          "role": "instruction"
+        },
+        {
+          "path": "tasks/postgres/standard/security/user_permission_audit/ground_truth.sql",
+          "sha256": "5262cbe37e97c4e00a76c19c90f56919a321f8937e66aa35885a85fff3728ae4",
+          "bytes": 22353,
+          "role": "oracle"
+        },
+        {
+          "path": "tasks/postgres/standard/security/user_permission_audit/meta.json",
+          "sha256": "27e25698c3eb79a0d7ea947c7d019bdea1d01b7eda5d9ad9d3789c8a190f4c95",
+          "bytes": 5236,
+          "role": "input"
+        }
+      ],
+      "instruction_json_key": null,
+      "oracle_layout": "separate_asset",
+      "state_outputs": [
+        {
+          "kind": "postgresql_table",
+          "backend_id": "owned-postgres-audit",
+          "schema_name": "public",
+          "table_name": "security_audit_results"
+        },
+        {
+          "kind": "postgresql_table",
+          "backend_id": "owned-postgres-audit",
+          "schema_name": "public",
+          "table_name": "security_audit_details"
+        }
+      ],
+      "upstream_score": "binary",
+      "rights_review_ref": null,
+      "adaptations": [
+        "Original asset bytes are unchanged. Runtime, private database mapping, protected grader invocation and cleanup remain unreviewed.",
+        "The backend alias is inert metadata, not a database URL, credential or permission. No state is synthesized as a file artifact.",
+        "Keep pack-specific prompts and verifier assertions separate. The two packs reuse a related underlying task and are not independent usefulness cases."
+      ]
+    }
+  ]
+}

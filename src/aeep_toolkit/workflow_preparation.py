@@ -24,7 +24,7 @@ from aeep.errors import ConfigurationError
 from aeep.models import StrictModel
 from aeep.router import Router
 
-from .benchmarks import BenchmarkPack, task_input
+from .benchmarks import BenchmarkPack, parse_pack, task_input
 from .models import Digest
 from .workflow import StackWorkflow, WorkflowFile, _read, prepare_stack
 
@@ -119,7 +119,11 @@ def prepare_canonical(
         )
     root = definition.absolute().parent
     _, pack_raw = _read(selected.benchmark, root)
-    pack = BenchmarkPack.model_validate_json(pack_raw)
+    import json
+
+    pack = parse_pack(json.loads(pack_raw))
+    if not isinstance(pack, BenchmarkPack):
+        raise ConfigurationError('state-output tasks require a reviewed MCP execution adapter')
     assert selected.benchmark_recipe is not None
     _, recipe_raw = _read(selected.benchmark_recipe, root)
     recipe = RecipeDefinition.model_validate_json(recipe_raw)

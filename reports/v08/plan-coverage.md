@@ -1,5 +1,47 @@
 # 0.8 plan coverage and remaining work
 
+<!-- mcp-state-pack-implementation-20261104:start -->
+**November 4: MCP database-output contracts implemented; all 13 source gates pass.**
+The separate `aeep.toolkit.mcp-state-pack.v1` contract represents actual PostgreSQL
+table outputs through an opaque backend alias. Ordinary CLI inspection verifies
+original assets and keeps setup, answers and verifiers protected. File-pack v1
+serialization is unchanged. State tasks cannot enter the file transport or
+canonical file-recipe preparation before a controlled MCP runtime/verifier is
+bound. No database output is replaced with a file artifact.
+
+[Preparation and source evidence](../toolkit-v2/c13/mcp-state-packs-20261104/README.md)
+bind two selected packs and 11 original Git-verified assets. MCP-Universe retains
+its embedded oracle and less explicit JSON question; MCPMark retains its separate
+SQL reference and fuller prompt. They are related integration targets. Asset-use
+rights, protected reference/counterexample grading, ToolHive invocation and state
+cleanup remain open. No MCP/database/upstream task or model ran.
+
+Source `7424fc37900bfa06711b169b895b10c590b85ee5b574e3ea1165ce805fb0a6a0`
+passed 2,115 tests with 21 skips in each full run, 82.65568708183221% combined
+coverage, both branch gates, schemas, policy, lint, typing, integration fixtures
+and build. The 406-file inventory and retained private snapshot bind the exact
+tested working tree, including the separate operator CI test/development pin.
+Those unrelated edits remain outside this feature commit. Minimum sampled free
+space was 65.66 GiB. New wheel `a73e5967dbfc` is built, not installed. Changed guide
+prose is outside the completed c022 docs binding and awaits an applicable review;
+do not rerun terminal package/docs checks under older approvals.
+
+Read-only ToolHive preparation preserves pin33ba170aad63. Source requires Go1.27.0;
+the installed Go1.27.1 binary is fingerprinted. The release config disables CGO.
+None of the 464 checksum-listed module archives was cached. No compiler, download,
+installation or service ran. Complete dependency/license and permission closure
+is needed before a concrete runtime review.
+
+Next: exact review1a091b2b is still pending for the remaining SkillRank CLI probe,
+three catalog queries and selective-removal checks. It binds the frozen f2c7a3e9
+coordinator, unchanged binary/image and old charges; MCP edits do not change that
+review. Do not replay passed installation/docs. Independent MCP/ToolHive and other
+stack preparation remains eligible. Waza has no supported backend access.
+Comparisons remain paused; stack integration, candidate usefulness, selection
+usefulness, resources and release stay separate. Parent27fd134; user CI work and
+all existing resources/charges are preserved.
+<!-- mcp-state-pack-implementation-20261104:end -->
+
 <!-- skillrank-cli-results-20261104:start -->
 **November 4: wheel and offline docs passed; CLI stopped at the containment probe.**
 Approved `c0227f6f` completed actual file setup/idempotency and byte/ownership

@@ -194,6 +194,7 @@ from aeep_toolkit.models import (
     ExtensionRegistry,
 )
 from aeep_toolkit.selection import SelectionEvaluation
+from aeep_toolkit.state_benchmarks import MCPStatePack
 from aeep_toolkit.storage import StorageReserveException
 from aeep_toolkit.workflow import EvaluationWorkflow, StackWorkflow
 from aeep_toolkit.workflow_accounting import WorkflowAccountingDefinition
@@ -204,6 +205,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_DIR = ROOT / "schemas"
 
 MODEL_FILES = {
+    "toolkit-mcp-state-pack.schema.json": MCPStatePack,
     "toolkit-catalog-runtime.schema.json": CatalogRuntimeDefinition,
     "toolkit-workflow-catalog.schema.json": WorkflowCatalogRecord,
     "toolkit-file-runtime-installation.schema.json": FileRuntimeInstallation,

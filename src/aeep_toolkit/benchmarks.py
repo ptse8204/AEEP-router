@@ -10,11 +10,14 @@ import os
 import stat
 import zipfile
 from pathlib import Path, PurePosixPath
-from typing import Any, Literal
+from typing import TYPE_CHECKING, Any, Literal
 
 from pydantic import Field, model_validator
 
 from .models import ContractModel, Count, Digest, Identifier, SourcePin
+
+if TYPE_CHECKING:
+    from .state_benchmarks import MCPStatePack
 
 SKILLSBENCH_REVISION = "9a1f4dd5f7659f75707435da3ce854b6e48321d1"
 INITIAL_TASKS: tuple[
@@ -118,6 +121,14 @@ class BenchmarkPack(ContractModel):
         raise ValueError("unknown benchmark task")
 
 
+def parse_pack(value: Any) -> BenchmarkPack | MCPStatePack:
+    if isinstance(value, dict) and value.get('schema_version') == 'aeep.toolkit.mcp-state-pack.v1':
+        from .state_benchmarks import MCPStatePack
+
+        return MCPStatePack.model_validate(value)
+    return BenchmarkPack.model_validate(value)
+
+
 def asset_path(root: Path, asset: TaskAsset) -> Path:
     from .install_runtime import canonical
 
@@ -140,7 +151,7 @@ def asset_path(root: Path, asset: TaskAsset) -> Path:
     return path
 
 
-def inspect_pack(pack: BenchmarkPack, root: Path, task_ids: tuple[str, ...]) -> dict[str, Any]:
+def inspect_pack(pack: BenchmarkPack | MCPStatePack, root: Path, task_ids: tuple[str, ...]) -> dict[str, Any]:
     """Hash reviewed files only; neither Dockerfiles nor task programs execute."""
     if not task_ids or len(task_ids) != len(set(task_ids)):
         raise ValueError("select distinct benchmark tasks explicitly")
@@ -149,6 +160,7 @@ def inspect_pack(pack: BenchmarkPack, root: Path, task_ids: tuple[str, ...]) -> 
         for asset in task.assets:
             asset_path(root, asset)
     from .install_runtime import digest
+    from .state_benchmarks import MCPStateTask
 
     return {
         "pack": pack.pack_id,
@@ -170,12 +182,15 @@ def inspect_pack(pack: BenchmarkPack, root: Path, task_ids: tuple[str, ...]) -> 
                 "protected_assets": [
                     a.model_dump(mode="json")
                     for a in task.assets
-                    if a.role in {"oracle", "verifier"}
+                    if a.role in {"oracle", "verifier"} or (isinstance(task, MCPStateTask) and a.role == 'environment')
                 ],
                 "rights_review_ref": task.rights_review_ref,
                 "adaptations": list(task.adaptations),
                 "upstream_score": task.upstream_score,
-                "output_paths": list(task.output_paths),
+                **({'state_outputs':[output.model_dump(mode='json') for output in task.state_outputs],
+                    'oracle_layout':task.oracle_layout, 'instruction_json_key':task.instruction_json_key,
+                    'runtime_binding':'REQUIRED_NOT_VERIFIED'} if isinstance(task, MCPStateTask)
+                   else {"output_paths": list(task.output_paths)}),
             }
             for task in selected
         ],
@@ -186,7 +201,7 @@ def inspect_pack(pack: BenchmarkPack, root: Path, task_ids: tuple[str, ...]) -> 
 
 
 def stage_agent_assets(
-    pack: BenchmarkPack,
+    pack: BenchmarkPack | MCPStatePack,
     root: Path,
     task_id: str,
     destination: Path,
@@ -219,7 +234,7 @@ def stage_agent_assets(
             stream.write(raw)
 
 
-def task_input(pack: BenchmarkPack, root: Path, task_id: str) -> dict[str, Any]:
+def task_input(pack: BenchmarkPack | MCPStatePack, root: Path, task_id: str) -> dict[str, Any]:
     """Preserve original public bytes in the existing single-file worker transport.
 
     This is packaging only. The operator still resolves rights, runtime/path
@@ -229,6 +244,8 @@ def task_input(pack: BenchmarkPack, root: Path, task_id: str) -> dict[str, Any]:
     from aeep.assessment.models import content_digest
 
     task = pack.task(task_id)
+    if not isinstance(task, BenchmarkTask):
+        raise ValueError('state-output tasks require a reviewed MCP runtime/verifier binding; file transport is unsupported')
     inspect_pack(pack, root, (task_id,))
     public = [asset for asset in task.assets if asset.role in {'instruction', 'input'}]
     if sum(asset.bytes for asset in public) > 16_000_000:
@@ -387,7 +404,7 @@ def main(argv: list[str] | None = None) -> None:
             value = skillsbench_manifest(args.root, args.inventory_sha256).model_dump(mode="json")
         else:
             value = inspect_pack(
-                BenchmarkPack.model_validate(read_json(args.pack)), args.root, tuple(args.task)
+                parse_pack(read_json(args.pack)), args.root, tuple(args.task)
             )
         print(json.dumps(value, indent=2))
     except (ValueError, OSError):

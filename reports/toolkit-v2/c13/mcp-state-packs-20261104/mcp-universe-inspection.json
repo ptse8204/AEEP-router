@@ -1,0 +1,63 @@
+{
+  "pack": "mcp-universe",
+  "source_revision": "0df6c42717f2a618d34f5b271efd05be462b9e4d",
+  "pack_sha256": "088a96f82b4196978b1110d1125d8aa9211161964d7e680dd021a9cc6655b07a",
+  "tasks": [
+    {
+      "task_id": "postgres.security.user_permission_audit",
+      "domain": "mcp",
+      "difficulty": "unknown",
+      "agent_assets": [
+        {
+          "path": "mcpuniverse/benchmark/configs/mcpmark/configs/postgres/security/user_permission_audit.json",
+          "sha256": "0f14ca64848f821c26dd08ed4123e47e3acc078f06124360bd69549b99339bce",
+          "bytes": 1938,
+          "role": "instruction"
+        }
+      ],
+      "candidate_assets": [],
+      "protected_assets": [
+        {
+          "path": "mcpuniverse/evaluator/mcpmark/postgres/security/user_permission_audit/prepare_environment.py",
+          "sha256": "efa94546cb0bd2c00d03604bb19704ea74d34f7d481d6fd298f12d9553cc728a",
+          "bytes": 16692,
+          "role": "environment"
+        },
+        {
+          "path": "mcpuniverse/evaluator/mcpmark/postgres/security/user_permission_audit/verify.py",
+          "sha256": "3e6abb58c915fc80e1fb4b62e29f5affd108bfe678fd4b5e2ec19b0e649e4ed8",
+          "bytes": 11441,
+          "role": "verifier"
+        }
+      ],
+      "rights_review_ref": null,
+      "adaptations": [
+        "Original asset bytes are unchanged. Runtime, private database mapping, protected grader invocation and cleanup remain unreviewed.",
+        "The backend alias is inert metadata, not a database URL, credential or permission. No state is synthesized as a file artifact.",
+        "Keep pack-specific prompts and verifier assertions separate. The two packs reuse a related underlying task and are not independent usefulness cases.",
+        "Original question remains in its original JSON asset. It omits explicit table-schema deliverables present in MCPMark; this difference is preserved and requires task-contract review before model trials."
+      ],
+      "upstream_score": "binary",
+      "state_outputs": [
+        {
+          "kind": "postgresql_table",
+          "backend_id": "owned-postgres-audit",
+          "schema_name": "public",
+          "table_name": "security_audit_results"
+        },
+        {
+          "kind": "postgresql_table",
+          "backend_id": "owned-postgres-audit",
+          "schema_name": "public",
+          "table_name": "security_audit_details"
+        }
+      ],
+      "oracle_layout": "embedded_in_verifier",
+      "instruction_json_key": "question",
+      "runtime_binding": "REQUIRED_NOT_VERIFIED"
+    }
+  ],
+  "executed": false,
+  "official_benchmark_reproduction": false,
+  "notice": "File identity and separation only. Runtime, rights reviews, independent grader calibration and authority must be resolved before execution."
+}
