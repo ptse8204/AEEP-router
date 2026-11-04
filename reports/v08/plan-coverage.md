@@ -1,5 +1,50 @@
 # 0.8 plan coverage and remaining work
 
+<!-- report-family-skillrank-review-20261103:start -->
+**November 3: ordinary report correction verified; grouped SkillRank/wheel/docs review prepared.**
+Repository URLs and other family labels now export through the ordinary managed
+adapter. Valid legacy identifiers remain unchanged; non-identifier labels receive
+collision-safe keys and their original text remains in detailed/readable reports.
+Canonical tasks, scores, receipts and analysis are unchanged. The completed ASE
+and managed engineering tasks are not replayed; their original failures and
+explicit read-only adaptation keep source `cfc36a2a` scope.
+
+All thirteen [source gates](../../reports/toolkit-v2/c13/report-family-serialization-20261103/verification/checks.json)
+pass on `e48eec5f3039cfdbb8dcf24145e1b8835b3b4057de4f21eb7bf598fa22948c74`:
+2,054tests/21skips in both full runs,82.64%coverage,both branch gates,and package
+build. The initial lint-only stop stays recorded. Exact tested source,including
+unrelated CI edits excluded from this feature commit,is retained privately.
+New wheel `dac05704efc85fc09aa57f1977b70331351b56e934a45ac07c9cfa5b4083c3bd`
+and its32unchanged cached dependencies are prepared,not installed.
+
+The [grouped review](../../reports/toolkit-v2/c13/skillrank-build-preparation-20261103/operation-review.json)
+proposes one pinned official Rust image pull (272,448,628 compressed bytes),86
+exact Cargo archives (64MiB aggregate ceiling),one offline build of unchanged
+SkillRank pin`5216bae9149b`,actual upstream local search/show and boundary/stop
+checks. Reuse existing Docker/executors/receipts; keep the resulting runtime/image.
+Maximum40isolated zero-model engineering operations/4,500reserved seconds/$0cash
+authority. Package and current72-input offline docs checks are independent.
+Nothing in this review has executed. All existing images,volumes,runtimes,backups
+and user work stay. The normal50GiB reserve and runtime8GiB start headroom apply.
+
+The published0.1.5 binary is not substituted: its release commit changes six
+compiled files relative to the selected pin. All35 build-source blobs are verified.
+Eight synthetic archive controls and eight inert preflight controls pass; they
+establish no upstream execution. SkillRank's bounded evaluation callback and
+ordinary workflow selection remain open after this build/search/show check.
+
+Next: record applicable approval for that exact review,inspect started/result
+markers,and run its independent package/docs components and runtime driver once.
+Changed artifacts and new untrusted installation/execution/container provisioning
+need this approval under CONTINUATION.md; no architecture decision is requested.
+Waza still lacks supported backend access. SkillsBench asset rights,runtime and
+reference/control checks,both ordinary CLI domains,remaining integrations and
+canonical stack evidence remain open. All-stack,candidate usefulness,selection
+usefulness,resources and release stay separate. Comparisons remain paused.
+The old two-model-turn allowance is exhausted; this new review allows zero models.
+Parent `1b3797e`; unrelated CI work is preserved outside this feature commit.
+<!-- report-family-skillrank-review-20261103:end -->
+
 <!-- integration-snapshot-correction-20261103:start -->
 **November 3: both controlled evaluator journeys passed; comparisons remain paused.**
 Review `319d18e4` completed fresh current-source worker/collector checks, ordinary

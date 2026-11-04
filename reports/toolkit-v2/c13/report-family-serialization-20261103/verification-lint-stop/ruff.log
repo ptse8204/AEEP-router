@@ -1,0 +1,35 @@
+SIM105 Use `contextlib.suppress(ValidationError)` instead of `try`-`except`-`pass`
+  --> src/aeep_toolkit/managed.py:54:9
+   |
+52 |       result = {}
+53 |       for label in sorted(labels):
+54 | /         try:
+55 | |             result[label] = identifier.validate_python(label)
+56 | |         except ValidationError:
+57 | |             pass
+   | |________________^
+58 |       reserved = set(result.values())
+59 |       for label in sorted(labels - result.keys()):
+   |
+help: Replace `try`-`except`-`pass` with `with contextlib.suppress(ValidationError): ...`
+
+I001 [*] Import block is un-sorted or un-formatted
+   --> tests/test_toolkit_managed.py:493:5
+    |
+491 |       assert keys[url] != hash_shaped_identifier
+492 |       assert adapter_module._report_family_keys(set(reversed(sorted(labels)))) == keys
+493 | /     from pydantic import TypeAdapter
+494 | |     from aeep_toolkit.models import Identifier
+    | |______________________________________________^
+495 |       for key in keys.values():
+496 |           assert TypeAdapter(Identifier).validate_python(key) == key
+    |
+help: Organize imports
+    |
+493 |     from pydantic import TypeAdapter
+494 +
+495 |     from aeep_toolkit.models import Identifier
+    |
+
+Found 2 errors.
+[*] 1 fixable with the `--fix` option (1 hidden fix can be enabled with the `--unsafe-fixes` option).

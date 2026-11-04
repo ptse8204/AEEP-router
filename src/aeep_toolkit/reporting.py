@@ -247,6 +247,9 @@ def render(summary: dict[str, Any], format: str) -> str:
         lines += [f"Cohort {index}: {binding['host']} {json.dumps(binding['host_version'])} / {binding['model']} / {binding['effort']}",
                   f"Evidence: {binding['evidence_kind']}; plan: {binding['plan_ref']}", ""]
         for family in cohort["families"]:
+            original = summary.get('task_family_labels', {}).get(family['task_family'])
+            if original is not None:
+                lines.append('Original task-family label: ' + json.dumps(original, ensure_ascii=True))
             lines += [f"Task family: {family['task_family']}",
                       f"Observed pairs: {family['observed_pairs']}; rejected tasks: {len(family['rejected_tasks'])}"]
             delta = family['success_rate_treatment_minus_control']

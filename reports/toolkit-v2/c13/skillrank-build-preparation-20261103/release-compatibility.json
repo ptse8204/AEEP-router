@@ -1,0 +1,65 @@
+{
+  "source_revision": "5216bae9149b4ff8a7f9e014b6889fb094cee8e1",
+  "release": "v0.1.5",
+  "release_revision": "c624849a7a307eaf7f9acf13c95be0a32cbf03ca",
+  "release_url": "https://github.com/buildbetter-app/skillrank/releases/tag/v0.1.5",
+  "assets": [
+    {
+      "name": "skillrank-linux-aarch64",
+      "sha256": "sha256:197c201180fa1ccacb81428ffe5b0cd0966fe093643946057007c7b1df014b9e",
+      "size_bytes": 4793752,
+      "url": "https://github.com/buildbetter-app/skillrank/releases/download/v0.1.5/skillrank-linux-aarch64"
+    },
+    {
+      "name": "skillrank-linux-aarch64.sha256",
+      "sha256": "sha256:bb5a63bbd837b50e8d6eb045b764a48d73ba85b13d319621ddac266ca88b551d",
+      "size_bytes": 65,
+      "url": "https://github.com/buildbetter-app/skillrank/releases/download/v0.1.5/skillrank-linux-aarch64.sha256"
+    },
+    {
+      "name": "skillrank-linux-x64",
+      "sha256": "sha256:bb375c523d025db1f41e2e49ee5decdc747ab5ad9a83b5f00bf86e24ccfacd76",
+      "size_bytes": 5020496,
+      "url": "https://github.com/buildbetter-app/skillrank/releases/download/v0.1.5/skillrank-linux-x64"
+    },
+    {
+      "name": "skillrank-linux-x64.sha256",
+      "sha256": "sha256:5653893c325c96d074153286d3aa1d599615c4a850be5a8df22a228251f89ce5",
+      "size_bytes": 65,
+      "url": "https://github.com/buildbetter-app/skillrank/releases/download/v0.1.5/skillrank-linux-x64.sha256"
+    },
+    {
+      "name": "skillrank-macos-aarch64",
+      "sha256": "sha256:eb319f9c6b62a9c316d2a1c885f960b1dec6ac7621842df340d0f318fe650ef0",
+      "size_bytes": 4222224,
+      "url": "https://github.com/buildbetter-app/skillrank/releases/download/v0.1.5/skillrank-macos-aarch64"
+    },
+    {
+      "name": "skillrank-macos-aarch64.sha256",
+      "sha256": "sha256:50a9da99bb5bb07fbbc840f9929ab771a6b83532d6c84fb0ff1c2a9b7087ed72",
+      "size_bytes": 65,
+      "url": "https://github.com/buildbetter-app/skillrank/releases/download/v0.1.5/skillrank-macos-aarch64.sha256"
+    },
+    {
+      "name": "skillrank-macos-x64",
+      "sha256": "sha256:ca63f5ab7657621d3393182d42d44b91456d206f4ed3df4cdcf5e645fd5dca4c",
+      "size_bytes": 4525344,
+      "url": "https://github.com/buildbetter-app/skillrank/releases/download/v0.1.5/skillrank-macos-x64"
+    },
+    {
+      "name": "skillrank-macos-x64.sha256",
+      "sha256": "sha256:27fdad76d115c890196f3d92858d7a1a413cb6899b6d35f00a18f099f3960077",
+      "size_bytes": 65,
+      "url": "https://github.com/buildbetter-app/skillrank/releases/download/v0.1.5/skillrank-macos-x64.sha256"
+    }
+  ],
+  "compiled_changes": [
+    "crates/skillrank-core/src/client.rs",
+    "crates/skillrank-core/src/runner/fixture.rs",
+    "crates/skillrank-core/src/runner/mod.rs",
+    "crates/skillrank-core/src/types.rs",
+    "crates/skillrank/src/eval.rs",
+    "crates/skillrank/src/main.rs"
+  ],
+  "decision": "Do not substitute this binary for the pinned source: six compiled files differ. Compile the existing exact pin in a bounded offline runtime instead; no release binary downloaded or executed."
+}

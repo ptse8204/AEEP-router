@@ -1,0 +1,97 @@
+{
+  "source_before": "062357fa33f251367adfd4a0b8a7f0b70a5ec258dfff176fae26da45488d1793",
+  "source_after": "062357fa33f251367adfd4a0b8a7f0b70a5ec258dfff176fae26da45488d1793",
+  "checks": [
+    {
+      "name": "compileall",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0535198752768338,
+      "monitor_stop": null
+    },
+    {
+      "name": "schemas",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0495572090148926,
+      "monitor_stop": null
+    },
+    {
+      "name": "assessment-policy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0556481247767806,
+      "monitor_stop": null
+    },
+    {
+      "name": "ruff",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 1,
+      "process_exit_code": 1,
+      "elapsed_seconds": 2.051494374871254,
+      "monitor_stop": null
+    }
+  ],
+  "models": 0,
+  "comparisons": "PAUSED",
+  "real_execution_selectors_removed": [],
+  "scope": "Ordinary managed report family-label encoding, collision preservation and synthetic canonical CLI exports. No SDK, scanner, container, service, model or benchmark execution. Existing unrelated CI work is present but excluded from implementation commits.",
+  "capacity_samples": [
+    {
+      "observed_at": "2026-11-04T02:39:47.237537+00:00",
+      "free_bytes": 75819417600
+    },
+    {
+      "observed_at": "2026-11-04T02:39:49.269082+00:00",
+      "free_bytes": 75816288256
+    },
+    {
+      "observed_at": "2026-11-04T02:39:49.337206+00:00",
+      "free_bytes": 75816153088
+    },
+    {
+      "observed_at": "2026-11-04T02:39:51.365246+00:00",
+      "free_bytes": 75830591488
+    },
+    {
+      "observed_at": "2026-11-04T02:39:51.433451+00:00",
+      "free_bytes": 75828346880
+    },
+    {
+      "observed_at": "2026-11-04T02:39:53.467969+00:00",
+      "free_bytes": 75810000896
+    },
+    {
+      "observed_at": "2026-11-04T02:39:53.536240+00:00",
+      "free_bytes": 75804385280
+    },
+    {
+      "observed_at": "2026-11-04T02:39:55.563824+00:00",
+      "free_bytes": 75817373696
+    }
+  ]
+}

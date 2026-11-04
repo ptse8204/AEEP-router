@@ -6,10 +6,14 @@ assessment records retain all costs, including trials that cannot be normalized.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import sqlite3
+from contextlib import suppress
 from pathlib import Path
 from typing import Any
+
+from pydantic import TypeAdapter, ValidationError
 
 from aeep.assessment import verification
 from aeep.assessment.boundary import require_conformance
@@ -35,11 +39,35 @@ from aeep_toolkit.models import (
     AdapterCapabilities,
     EvaluationRun,
     EvidenceBundle,
+    Identifier,
     SourcePin,
     TokenObservation,
 )
 from aeep_toolkit.stack_readiness import require_engineering_run, require_stack_complete
 from aeep_toolkit.telemetry import bound_journal, candidate_loading, capture_summary, token_capture
+
+
+def _report_family_keys(labels: set[str]) -> dict[str, str]:
+    """Preserve legacy identifiers and encode other labels without merging families."""
+    identifier = TypeAdapter(Identifier)
+    result = {}
+    for label in sorted(labels):
+        with suppress(ValidationError):
+            result[label] = identifier.validate_python(label)
+    reserved = set(result.values())
+    for label in sorted(labels - result.keys()):
+        # Reserve all original identifiers first, including any hash-shaped names.
+        # At most len(labels) keys can collide; a finite extra slot always remains.
+        for salt in range(len(labels) + 1):
+            raw = label if salt == 0 else f"aeep.toolkit.family.v1:{salt}:{label}"
+            key = "source-family:" + hashlib.sha256(raw.encode("utf-8")).hexdigest()
+            if key not in reserved:
+                result[label] = key
+                reserved.add(key)
+                break
+        else:
+            raise ConfigurationError("task-family labels cannot be encoded uniquely")
+    return result
 
 
 def plan_preview(plan: AssessmentPlan, source: SourcePin) -> dict[str, Any]:
@@ -126,6 +154,9 @@ class AEEPAssessmentAdapter:
         )
         self.details: dict[str, Any] = {}
         self.accounting_records: dict[str, Any] = {}
+        self._family_keys = _report_family_keys({
+            case.template_family or self.recipe.recipe_id for case in self.plan.suite.cases
+        })
 
     @property
     def review_digest(self) -> str:
@@ -347,6 +378,9 @@ class AEEPAssessmentAdapter:
             "unresolved_operations": sum(item.elapsed_seconds is None for item in ledger.operations),
             "normalized_primary_trials": len(runs),
             "normalization_gaps": gaps,
+            "task_family_labels": {
+                key: label for label, key in self._family_keys.items() if key != label
+            },
             "telemetry_capture": captures,
             "telemetry_capture_summary": capture_summary(captures),
             "execution_journals": journals,
@@ -508,7 +542,7 @@ class AEEPAssessmentAdapter:
                 shared_environment_sha256=comparison.experiment.environment.shared_definition_digest,
                 worker_sha256=metadata["worker_digest"],
                 task_sha256=content_digest(case),
-                task_family=case.template_family or self.recipe.recipe_id,
+                task_family=self._family_keys[case.template_family or self.recipe.recipe_id],
                 verifier_sha256=self.plan.recipe_digest,
                 prompt_sha256=metadata["task_instruction_sha256"],
                 arm="treatment" if trial.route_id == self.plan.candidate_id else "control",
@@ -574,6 +608,8 @@ def comparison_summary(adapter: AEEPAssessmentAdapter, bundle: EvidenceBundle) -
     if 'external_scheduler' in details:
         summary['external_scheduler'] = details['external_scheduler']
         summary['limitations'].append('Upstream scheduler timing/token defaults are compatibility artifacts. Only canonical AEEP receipts supply measured usage; the upstream JSON assertion checks the existing protected grade certificate.')
+    if details.get('task_family_labels'):
+        summary['task_family_labels'] = details['task_family_labels']
     summary["limitations"].extend([
         f"Canonical campaign: {details['canonical_trials']} trials; {len(bundle.runs)} normalized primary trials; "
         f"{len(details['normalization_gaps'])} normalization gaps; {len(details['auxiliary_trial_ids'])} auxiliary trials.",

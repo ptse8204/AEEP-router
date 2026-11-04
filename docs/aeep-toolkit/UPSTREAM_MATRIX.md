@@ -1952,3 +1952,22 @@ CLI export already passed after pretrial metadata encoding. This is stack eviden
 not candidate benefit, selection benefit or either SkillsBench domain journey.
 All-stack remains open and comparisons remain paused. Waza still lacks supported
 backend access; independent safe integration work continues.
+
+## November 3 — preserve source pins and fix ordinary family-label export
+
+The [ordinary report correction](../../reports/toolkit-v2/c13/report-family-serialization-20261103/README.md)
+encodes non-identifier family labels without changing canonical tasks, merging
+families or changing the v1 wire contract. All thirteen source gates pass; prior
+actual evaluator evidence keeps its original source and explicit adaptation scope.
+No model is replayed for formatting. The new wheel and current docs need their
+own applicable execution review.
+
+Keep SkillRank pin`5216bae9149b4ff8a7f9e014b6889fb094cee8e1`. Its published0.1.5
+binary is built from another commit with six compiled-file differences. The
+[grouped preparation](../../reports/toolkit-v2/c13/skillrank-build-preparation-20261103/README.md)
+therefore proposes an offline source build using existing Docker controls, followed
+by actual upstream local search/show and stop checks. No substitute registry,
+compiler installation on the host, native unqualified agent launch or model call
+is proposed. The runtime and compiler image remain reusable. Bounded evaluation
+callbacks and ordinary workflow composition still need implementation/verification;
+search/show cannot close that gate. All comparisons remain paused.

@@ -24,6 +24,13 @@ optional invocation and observed candidate exposure. Missing or repeated arms,
 unresolved execution and retries remain visible as rejected pairs. Repetitions
 have no pairing index in the current contract; the report cannot guess one.
 
+Managed exports preserve existing task-family identifiers. Other labels, including
+repository URLs, receive deterministic identifiers; `task_family_labels` retains
+their original text in the detailed evidence and summary. Readable reports show
+both. Encoding cannot merge distinct families, even when an original identifier
+resembles an encoded label. Canonical tasks, scores and receipt references do not
+change. Earlier exports retain their original bytes and source scope.
+
 Each arm shows execution and grading counts. Token totals respect explicit cache
 and reasoning overlap semantics. Unknown categories do not become zero. Timing
 and token summaries distinguish a known subtotal from a complete total and show

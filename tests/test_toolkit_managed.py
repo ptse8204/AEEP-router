@@ -1,6 +1,7 @@
 """Synthetic canonical-record tests. No live host, conformance or grant is inferred."""
 
 import asyncio
+import hashlib
 import json
 import sqlite3
 import sys
@@ -32,7 +33,7 @@ from aeep_toolkit import managed as adapter_module
 from aeep_toolkit.models import SourcePin
 
 
-def prepared(tmp_path, monkeypatch):
+def prepared(tmp_path, monkeypatch, *, family=None):
     router, service, original, grant = setup_assessment(tmp_path)
     source = SourcePin(
         repository="https://example.test/fixture",
@@ -83,6 +84,8 @@ def prepared(tmp_path, monkeypatch):
         experiment=experiment,
     )
     suite = original.suite.model_copy(deep=True)
+    if family is not None:
+        suite.cases[0].template_family = family
     suite.routes = [
         BenchmarkRoute(route_id=spec.id, executor_id=spec.id) for spec in mapping.subjects
     ]
@@ -424,8 +427,9 @@ def test_file_preview_does_not_open_a_database_host_or_output(tmp_path, monkeypa
         asyncio.run(router.close())
 
 
-def test_cli_exports_canonical_report_without_another_dispatch(tmp_path, monkeypatch, capsys):
-    router, service, adapter, path, _ = prepared(tmp_path, monkeypatch)
+@pytest.mark.parametrize('family', [None, 'https://github.com/example/repository'])
+def test_cli_exports_canonical_report_without_another_dispatch(tmp_path, monkeypatch, capsys, family):
+    router, service, adapter, path, _ = prepared(tmp_path, monkeypatch, family=family)
     report = record(service, adapter, path)
     plan_file, source_file = tmp_path / "plan.json", tmp_path / "source.json"
     plan_file.write_text(adapter.plan.model_dump_json())
@@ -464,8 +468,33 @@ def test_cli_exports_canonical_report_without_another_dispatch(tmp_path, monkeyp
     assert json.loads((output / "operation.json").read_text())["state"] == "exported"
     evidence = json.loads((output / "managed-evidence.json").read_text())
     assert evidence["canonical_trials"] == 3 and not evidence["normalization_gaps"]
+    if family is not None:
+        key = 'source-family:' + hashlib.sha256(family.encode()).hexdigest()
+        assert evidence['task_family_labels'] == {key: family}
+        exported = json.loads((output / 'toolkit-evidence.json').read_text())
+        assert {run['task_family'] for run in exported['runs']} == {key}
+        assert all(run['task_sha256'] == content_digest(adapter.plan.suite.cases[0])
+                   for run in exported['runs'])
+        assert family in (output / 'report.md').read_text()
     assert json.loads((output / "summary.json").read_text())["outcome"] == "NOT_ASSESSED"
     assert (output / "report.html").exists() and (output / "report.md").exists()
+
+
+def test_family_encoding_preserves_distinct_labels_and_legacy_identifiers():
+    url = 'https://github.com/example/repository'
+    hash_shaped_identifier = 'source-family:' + hashlib.sha256(url.encode()).hexdigest()
+    labels = {'legacy.family:v1', url, hash_shaped_identifier, '<script>\nvalue', 'é' * 201}
+    keys = adapter_module._report_family_keys(labels)
+    assert len(set(keys.values())) == len(labels)
+    assert keys['legacy.family:v1'] == 'legacy.family:v1'
+    assert keys[hash_shaped_identifier] == hash_shaped_identifier
+    assert keys[url] != hash_shaped_identifier
+    assert adapter_module._report_family_keys(set(reversed(sorted(labels)))) == keys
+    from pydantic import TypeAdapter
+
+    from aeep_toolkit.models import Identifier
+    for key in keys.values():
+        assert TypeAdapter(Identifier).validate_python(key) == key
 
 
 @pytest.mark.asyncio
