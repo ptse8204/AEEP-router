@@ -1,0 +1,142 @@
+--- original-reviewed-driver
++++ corrected-driver
+@@ -3,14 +3,16 @@
+ import argparse, asyncio, base64, hashlib, json, os, secrets, shutil, socket, sys, time
+ from datetime import UTC, datetime
+ from pathlib import Path
++sys.path.insert(0,str(Path(__file__).resolve().parent.parent/'langfuse-service-20261104'))
+ from service_plan import PROJECT, LABEL, PORT, SECRETS, SERVICES, compose, mc_config, ingestion_match
+ 
+ HERE = Path(__file__).resolve().parent
+ ROOT = HERE.parents[3]
++INPUT = HERE.parent/'langfuse-service-20261104'
+ OLD = HERE.parent/'workflow-telemetry-20261104'
+ SOURCE = Path(json.loads((OLD/'source-snapshot.json').read_bytes())['coordinator_source_snapshot'])
+ sys.path.insert(0, str(SOURCE/'src'))
+-from aeep.assessment.models import AssessmentAuthorization, AssessmentLimits, RecipeMaterializationRequest, content_digest
++from aeep.assessment.models import AssessmentAuthorization, AssessmentBudgetAmendment, AssessmentLimits, RecipeMaterializationRequest, content_digest
+ from aeep.assessment.repository import AssessmentRepository
+ from aeep.assessment.verification import verification_source_digest
+ from aeep.executors.base import ExecutionContext
+@@ -42,6 +44,14 @@
+     # Cleanup never expands to a changed binary/socket or another project.
+     for p,h in review['executables'].items(): assert sha(Path(p).resolve())==h,p
+ 
++def validate_image_record(key,line,review):
++    decoder=json.JSONDecoder()
++    ident,idx=decoder.raw_decode(line);rest=line[idx:].lstrip()
++    digests,idx=decoder.raw_decode(rest);layers=json.loads(rest[idx:].lstrip())
++    assert ident==review['image_ids'][key]
++    assert layers==review['image_layer_diff_ids'][key]
++    assert any(d.endswith('@'+review['images'][key].split('@')[1]) for d in digests)
++
+ class Journey:
+     def __init__(self, review, repository, request, identity):
+         self.review,self.repo,self.request,self.identity=review,repository,request,identity
+@@ -67,7 +77,7 @@
+         """Use the existing executor; retain receipts, not secret-bearing streams."""
+         validate(self.review,cleanup=cleanup)
+         self.number+=1;assert self.number<=self.review['maximum_driver_commands']
+-        op=self.request.plan_id+':command:'+str(self.number)+':'+name
++        op=self.request.plan_id+':identity-correction-command:'+str(self.number)+':'+name
+         child_request=self.request.model_copy(update={'plan_id':self.request.plan_id+':driver-commands'})
+         if not cleanup:
+             self.repo.reserve(child_request,op,AssessmentLimits(max_operations=1,max_model_turns=0,max_elapsed_seconds=seconds+10),stage='langfuse_service_engineering')
+@@ -127,18 +137,20 @@
+ 
+     def inspect(self, names, *, cleanup=False):
+         # Never request Config.Env, health logs, or raw logs.
+-        template='{{json .Id}} {{json .Name}} {{json .Image}} {{json .Config.Labels}} {{json .State.Status}} {{json .State.ExitCode}}'
++        template='{{json .Id}} {{json .Name}} {{json .Image}} {{json .Config.Labels}} {{json .State.Status}} {{json .State.ExitCode}} {{json .Config.Image}}'
+         text=self.command('identity-inspection',self.docker('inspect','--format',template,*names),cleanup=cleanup)
+         decoder=json.JSONDecoder();rows=[]
+         for line in text.splitlines():
+             values=[]
+             while line.strip():
+                 value,idx=decoder.raw_decode(line.lstrip());values.append(value);line=line.lstrip()[idx:]
+-            assert len(values)==6
+-            ident,name,image,labels,status,code=values
++            assert len(values)==7
++            ident,name,image,labels,status,code,image_reference=values
+             service=labels.get('com.docker.compose.service');assert service in SERVICES
+             assert labels.get(LABEL)==PROJECT and labels.get('com.docker.compose.project')==PROJECT
+-            assert name=='/'+PROJECT+'-'+service and image==self.review['service_image_ids'][service]
++            assert name=='/'+PROJECT+'-'+service
++            assert image in self.review['service_image_allowed_ids'][service]
++            assert image_reference in self.review['service_image_allowed_references'][service]
+             if service in self.owned:assert self.owned[service]==ident
+             self.owned[service]=ident;rows.append({'id':ident,'name':name,'service':service,'status':status,'exit_code':code})
+         assert len(rows)==len(names);return rows
+@@ -182,9 +194,9 @@
+ 
+     def cli(self,name,workflow,scope,receipt_id,auth=None,reviewed=None,configuration='document-data'):
+         assert snapshot(Path(self.review['installed_runtime']))==self.review['installed_runtime_snapshot']
+-        args=['/usr/bin/sandbox-exec','-f',str(HERE/'cli.sb'),self.review['python'],'-I','-B','-m','aeep_toolkit.cli',
+-            'workflow','export-telemetry','--workflow',str(HERE/workflow),'--configuration',configuration,
+-            '--receipt-id',receipt_id,'--accounting',str(HERE/scope),'--operation-id',name]
++        args=['/usr/bin/sandbox-exec','-f',str(INPUT/'cli.sb'),self.review['python'],'-I','-B','-m','aeep_toolkit.cli',
++            'workflow','export-telemetry','--workflow',str(INPUT/workflow),'--configuration',configuration,
++            '--receipt-id',receipt_id,'--accounting',str(INPUT/scope),'--operation-id',name]
+         if reviewed:args+=['--reviewed-digest',reviewed]
+         env={**self.env,'HOME':str(self.work/'home'),'TMPDIR':str(self.work/'tmp')}
+         if auth:env['AEEP_LANGFUSE_LOCAL_AUTH']=auth
+@@ -242,6 +254,8 @@
+ 
+ def execute(review,identity):
+     validate(review)
++    controls=load(HERE/'identity-controls.json')
++    assert controls['passed'] and controls['fixture_source_sha256']==sha(HERE/'check-identity-guard.py')
+     assert snapshot(Path(review['installed_runtime']))==review['installed_runtime_snapshot']
+     result={'passed':False,'models':0,'comparisons':'PAUSED','all_stack_complete':False,
+             'cleanup_uncertain':False,'accounting_uncertain':False,'ingestion_verified':False}
+@@ -253,18 +267,20 @@
+     with (HERE/'service-started.json').open('x') as f:json.dump({'review_sha256':identity},f)
+     out=HERE/'service-execution';out.mkdir(mode=0o700)
+     with ReceiptStore(review['ledger']) as store:
+-        repo=AssessmentRepository(store);prepared=load(HERE/'prepared.json')
++        repo=AssessmentRepository(store);prepared=load(INPUT/'prepared.json')
+         grant=AssessmentAuthorization.model_validate(prepared['grant']);request=RecipeMaterializationRequest.model_validate(prepared['request'])
+-        assert not store._connection.execute('SELECT 1 FROM assessment_grants WHERE id=?',(grant.authorization_id,)).fetchone()
++        assert list(store._connection.execute('SELECT operations,model_turns,elapsed_seconds,cash_usd FROM assessment_grants WHERE id=?',(grant.authorization_id,)).fetchone())==review['counters_before']
++        amendment=AssessmentBudgetAmendment.model_validate(load(HERE/'budget-amendment.json'))
++        repo.approve_budget_amendment(amendment)
+         for ref,value in prepared['scopes'].items():assert repo.put('toolkit_langfuse_service_scope',ref,Scope.model_validate(value))==ref;repo.review(ref)
+         for kind,file,model in [('toolkit_receipt_export','enabled-export.json',ReceiptExportDefinition),('toolkit_receipt_export','disabled-export.json',ReceiptExportDefinition),
+                                 ('toolkit_workflow_accounting','enabled-accounting.json',WorkflowAccountingDefinition),('toolkit_workflow_accounting','disabled-accounting.json',WorkflowAccountingDefinition)]:
+-            value=model.model_validate(load(HERE/file));repo.review(repo.put(kind,content_digest(value),value))
+-        repo.grant(grant)
++            value=model.model_validate(load(INPUT/file));repo.review(repo.put(kind,content_digest(value),value))
++        # Reuse the original grant; never reset or re-grant its counters.
+         journey=Journey(review,repo,request,identity)
+-        outer=request.plan_id+':exclusive-driver';outer_request=request.model_copy(update={'plan_id':request.plan_id+':overhead'})
++        outer=request.plan_id+':identity-correction-exclusive-driver';outer_request=request.model_copy(update={'plan_id':request.plan_id+':overhead'})
+         repo.reserve(outer_request,outer,AssessmentLimits(max_operations=1,max_model_turns=0,max_elapsed_seconds=300),stage='langfuse_driver_overhead')
+-        cleanup=request.plan_id+':reserved-cleanup'
++        cleanup=request.plan_id+':identity-correction-reserved-cleanup'
+         cleanup_request=request.model_copy(update={'plan_id':request.plan_id+':cleanup'})
+         repo.reserve(cleanup_request,cleanup,AssessmentLimits(max_operations=1,max_model_turns=0,max_elapsed_seconds=650),stage='langfuse_owned_cleanup')
+         began=time.perf_counter()
+@@ -274,12 +290,10 @@
+                               ('network',['network','ls','-q','--filter','name=^'+PROJECT+'-private$']),
+                               ('volume',['volume','ls','-q','--filter','name=^'+PROJECT+'-'])]:
+                 assert not journey.command('collision-'+kind,journey.docker(*args)).strip()
+-            pins=journey.command('image-pins',journey.docker('image','inspect','--format','{{json .Id}} {{json .RepoDigests}}',*review['images'].values()))
++            pins=journey.command('image-pins',journey.docker('image','inspect','--format','{{json .Id}} {{json .RepoDigests}} {{json .RootFS.Layers}}',*review['images'].values()))
+             decoder=json.JSONDecoder()
+             for key,line in zip(review['images'],pins.splitlines(),strict=True):
+-                ident,idx=decoder.raw_decode(line);digests=json.loads(line[idx:].lstrip())
+-                assert ident==review['image_ids'][key]
+-                assert any(d.endswith('@'+review['images'][key].split('@')[1]) for d in digests)
++                validate_image_record(key,line,review)
+             generated={key:secrets.token_hex(32) for key in SECRETS}
+             config=compose(review['images'],work,generated)
+             for file,value in [('compose.json',config),('mc/config.json',mc_config(generated))]:
+@@ -294,7 +308,7 @@
+             assert journey.poll('/api/public/health',attempts=20),'WebNotReady'
+             journey.command('worker-start',journey.composition('up','--detach','--wait','--wait-timeout','30','--no-deps','--no-build','--pull','never','worker'),60)
+             journey.inspect([PROJECT+'-'+s for s in SERVICES]);journey.inspect_security()
+-            probe=Path(HERE/'network-probe.js').read_text()
++            probe=Path(INPUT/'network-probe.js').read_text()
+             probe_result=json.loads(journey.command('egress-probe',journey.docker('exec',PROJECT+'-worker','node','-e',probe),15))
+             assert probe_result.get('external_connect_denied') is True
+             write(out/'network-probe.json',probe_result)

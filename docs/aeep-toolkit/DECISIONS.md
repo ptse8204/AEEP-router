@@ -2895,3 +2895,17 @@ local HTTP permission and remains a visible workflow limitation. Both SkillsBenc
 domains and remaining integrations stay open. Waza lacks supported access.
 Comparisons remain paused; stack, candidate and selection gates stay separate.
 <!-- langfuse-service-review-20261104:end -->
+
+<!-- pipeline-authority-and-langfuse-result-20261104:start -->
+## November 4: new pipelines delegated; repeated attempts require approval
+
+The operator approves new finite pipeline work and requires approval for repeats.
+Existing paid/credential/release/comparison/storage boundaries remain.
+[The approved service/docs result](../../reports/toolkit-v2/c13/langfuse-service-20261104/RESULTS.md) passes the72-input offline docs
+check. The service stopped before startup on a manifest/config-ID assumption;
+its6operations/0models/0.5966351674869657seconds remain charged and settled.
+The corrected service and repaired first-party fixture repeats are prepared,
+not run. No passed wheel/source/docs check is repeated. New independent ToolHive
+preparation remains eligible. All-stack and both domain journeys remain open.
+Comparisons stay paused; candidate and selection usefulness remain separate.
+<!-- pipeline-authority-and-langfuse-result-20261104:end -->

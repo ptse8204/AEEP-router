@@ -1,5 +1,35 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- pipeline-authority-and-langfuse-result-20261104:start -->
+**November 4: first-attempt pipeline authority recorded; docs pass, service identity correction needs repeat approval.**
+The operator delegates new finite pipeline work without another prompt and requires
+approval before repeating a specific test or pipeline. The exact instruction and
+preserved boundaries are in reports/toolkit-v2/c13/pipeline-standing-authority-20261104.json.
+This approves pending171748f0; it does not expand paid access, credential handling,
+publication, release, comparative dispatch or old-resource deletion.
+
+[Actual service/docs results](../../reports/toolkit-v2/c13/langfuse-service-20261104/RESULTS.md)
+retain the passed72-input offline docs check. The service stopped before Compose,
+keys or any new resource: Docker reported manifest IDs where my guard expected
+config digests. Repository references match; config/layer audit proof remains.
+The original grant is settled at6operations/0models/0.5966351674869657seconds.
+No old charge or resource is removed. Do not rerun passed docs/wheel/source checks.
+
+The exact langfuse-identity-correction-20261104/operation-review.json proposes one
+corrected service attempt with original images, software and private scope. It
+checks ID/reference/layers distinctly and binds each container's literal immutable
+reference. Delegated69-operation amendment preserves counters and other ceilings.
+A new identity-fixture stub failed before external execution; its dummy method is
+fixed, but its repeat and the service retry await explicit approval. Read/hash the
+review for its identity. No correction attempt has run.
+
+Continue first-attempt independent ToolHive/MCP and remaining stack integration
+under concrete recorded reviews. Maintain50GiB reserve and preserve existing
+Docker/user work. Waza lacks supported backend access. Both workload journeys and
+all-stack integration remain open; candidate/selection usefulness, resources and
+release remain separate. Comparisons remain paused. Parentf1eea5f.
+<!-- pipeline-authority-and-langfuse-result-20261104:end -->
+
 <!-- langfuse-service-review-20261104:start -->
 **November 4: private Langfuse service and corrected docs review prepared.**
 [The exact component packet](../../reports/toolkit-v2/c13/langfuse-service-20261104/README.md)
