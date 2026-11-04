@@ -1,0 +1,48 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 493B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/aeep-toolkit-v2/capture-policy-local-tag-20261021:control
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/6] FROM docker.io/aeep-toolkit-v2/capture-policy-local-tag-20261021:control@sha256:0c05b495931e8558baf76b099c01c3b80a4b5136b5640d387db2d8ee644cf1db
+#4 resolve docker.io/aeep-toolkit-v2/capture-policy-local-tag-20261021:control@sha256:0c05b495931e8558baf76b099c01c3b80a4b5136b5640d387db2d8ee644cf1db done
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 12.21kB done
+#5 DONE 0.0s
+
+#6 [2/6] COPY --chmod=0444 candidate/SKILL.md /opt/dependencies/stack-check/SKILL.md
+#6 DONE 0.0s
+
+#7 [3/6] COPY --chmod=0444 candidate/LICENSE /opt/dependencies/stack-check/LICENSE
+#7 DONE 0.0s
+
+#8 [4/6] RUN ["/bin/mkdir", "-p", "/etc/codex/skills"]
+#8 DONE 0.1s
+
+#9 [5/6] RUN ["/bin/chmod", "0555", "/opt/dependencies/stack-check", "/etc/codex/skills"]
+#9 DONE 0.1s
+
+#10 [6/6] RUN ["/bin/ln", "-s", "/opt/dependencies/stack-check", "/etc/codex/skills/stack-check"]
+#10 DONE 0.0s
+
+#11 exporting to image
+#11 exporting layers 0.1s done
+#11 exporting manifest sha256:ada531dd6e696d7e936642ff0dc9b2890433e6e8618edfee94773aad93249b57 done
+#11 exporting config sha256:3decb32d68677a37f604781e3768f207a4b61199b117e547d7a7db069b30465c done
+#11 exporting attestation manifest sha256:9b58ddb1b27d9da9410d4a5a4191f13cee6a720b646d50cace817af944b64a85 done
+#11 exporting manifest list sha256:bf4581894c1d43808baaf580888c0b5f1dfdf4e1ea4caf0b8f2a7956d0fdd6d9
+#11 exporting manifest list sha256:bf4581894c1d43808baaf580888c0b5f1dfdf4e1ea4caf0b8f2a7956d0fdd6d9 done
+#11 naming to docker.io/aeep-toolkit-v2/stack-check:readiness-20261103 done
+#11 unpacking to docker.io/aeep-toolkit-v2/stack-check:readiness-20261103 0.0s done
+#11 DONE 0.2s
+
+View build details: docker-desktop://dashboard/build/default/default/9yrk0gelqsc58x6fg3ew7fp8f

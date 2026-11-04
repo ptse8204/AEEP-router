@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "installed_source": "193bfe66c43f4aaf936524847948d812b92d787a82a5ad24954b6dbd781c9500",
+  "checks": [
+    "workflow prepare-worker-readiness --control-request",
+    "workflow run --configuration",
+    "workflow scan --reviewed-digest",
+    "eval managed run --scheduler",
+    "eval managed run --engineering-review"
+  ],
+  "legacy_and_current_workflow_schemas": true,
+  "upstream_executed": false,
+  "models": 0
+}

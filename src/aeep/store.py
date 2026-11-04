@@ -1427,7 +1427,7 @@ class ReceiptStore:
         bulky = {
             "plan", "mapping", "boundary_probe_definition", "boundary_probe",
             "boundary_conformance", "execution_evidence", "execution_event",
-            "operation_ledger", "campaign", "recipe_case_set", "conformance_request",
+            "operation_ledger", "campaign", "recipe_case_set", "integration_case_set", "conformance_request",
             "recipe_receipt", "host_inventory", "worker_pair_definition",
             "worker_pair_inspection", "planning_request", "planning_mapping",
             "recipe_materialization_request", "report", "comparison", "probe_runtime",
@@ -1511,10 +1511,26 @@ class ReceiptStore:
                     identities = document.get("preparation_request_ids") or []
                     if row["kind"] == "recipe_case_set" and document.get("request_id"):
                         identities = [document["request_id"]]
+                    integration = None
+                    if row["kind"] == "plan" and document.get("schema_version") in {
+                        "assessment.plan.v7", "assessment.plan.v8",
+                    }:
+                        integration = document.get("integration_case_set_digest")
+                        case_sets = [json.loads(item["payload_json"]) for item in
+                                     (by_digest.get(integration, []) if isinstance(integration, str) else [])
+                                     if item["kind"] == "integration_case_set"]
+                        if (not case_sets or any(item.get("schema_version") != "assessment.integration-cases.v1"
+                                                 or identities != [item.get("request_id")]
+                                                 or not item.get("request_id") for item in case_sets)):
+                            raise ConfigurationError("scoped snapshot integration preparation definition is missing")
                     for identity in identities:
-                        matches = {by_identity[kind, identity] for kind in
-                                   {"recipe_materialization_request", "plan"}
-                                   if (kind, identity) in by_identity}
+                        # Integration sets are content-addressed; request_id is
+                        # their preparation identity, not a materialization alias.
+                        # Only the exact set bound by this v7/v8 plan may satisfy it.
+                        matches = ({integration} if integration is not None else
+                                   {by_identity[kind, identity] for kind in
+                                    {"recipe_materialization_request", "plan"}
+                                    if (kind, identity) in by_identity})
                         if not matches:
                             raise ConfigurationError("scoped snapshot preparation definition is missing")
                         references.update(matches)

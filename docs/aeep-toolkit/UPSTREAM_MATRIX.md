@@ -1909,3 +1909,15 @@ the skill guard. See the [bounded correction](../../reports/toolkit-v2/c13/worke
 The [six-task transport audit](../../reports/toolkit-v2/c13/skillsbench-transport-20261103/README.md)
 is static preparation only: original tasks fit, restricted skills are excluded,
 and asset rights/runtime/reference gates remain open. No comparison resumes.
+
+## November 3 — actual worker readiness and scoped integration preparation
+
+Review `9d7a7ec5` passed the corrected image, actual paired worker/collector
+checks, ordinary readiness CLI and reviewed consumption on source `c48e931b`.
+The wheel and offline docs passed independently. The engine stopped before
+grading, SDK dispatch or any model turn because scoped preparation omitted
+integration case sets. Preserve the [actual results](../../reports/toolkit-v2/c13/worker-readiness-correction-20261103/RESULTS.md).
+The narrow resolver correction accepts only the exact bound v7/v8 task set and
+excludes unrelated tasks; it does not create a legacy alias. Focused and actual
+stored-plan constructor checks pass. Full source verification is running. No
+evaluator, SkillsBench, usefulness, resource or release gate is closed by this.

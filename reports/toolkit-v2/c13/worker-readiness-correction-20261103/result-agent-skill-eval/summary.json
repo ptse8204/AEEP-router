@@ -1,0 +1,165 @@
+{
+  "schema": "aeep.toolkit.descriptive-summary.v1",
+  "evidence_sha256": "8eb6c0d87bec882835ad5bfdbb122f9d43413ffe9b68a95302c5954a005d40ac",
+  "outcome": "NOT_ASSESSED",
+  "cohorts": [],
+  "candidate": {
+    "repository": "https://github.com/ptse8204/AEEP-router",
+    "revision": "f8f9fba391f32942ebc2471b702c95df936313e7",
+    "artifact_sha256": "6b33e3c324a91e011d9da16e4441d8f3f521daec958b8eeaf6ffa9cfb40c89bd",
+    "license_expression": "Apache-2.0",
+    "data_rights": "Repository-authored nonrecursive engineering fixture; no usefulness established"
+  },
+  "adapter": {
+    "schema_version": "aeep.toolkit.adapter.v1",
+    "adapter_id": "aeep.benchmark-runner.codex:external-scheduler",
+    "implementation_sha256": "c48e931b47647a400d87f7e1236821ff4243c2ca20f2d6f1dd8f5e4ec5d10659",
+    "hosts": [
+      "codex"
+    ],
+    "candidate_types": [
+      "skill"
+    ],
+    "optional_invocation": false,
+    "telemetry": [
+      "tokens",
+      "agent_wall_seconds",
+      "verification_wall_seconds"
+    ],
+    "containment": "unverified",
+    "conformance_ref": null
+  },
+  "inspection_references": [],
+  "limitations": [
+    "Artifact contents and file changes are not included in these normalized records. Resolve receipt and verification references in the originating run; grades alone do not describe edits.",
+    "Access ceilings, spending permission, pending approvals and activation state are not established by this summary. Consult the exact reviewed plan and installation record before further execution.",
+    "Describes supplied records; this command does not authenticate referenced receipts, worker conformance or grading evidence.",
+    "Only observed tasks are checked. Entire missing pairs cannot be detected without the reviewed plan's expected cases.",
+    "Different cohort bindings are never pooled. Repetitions lack a pairing index and are rejected rather than counted as independent cases.",
+    "Partial measurements are labeled as known subsets. Resource differences do not override task failures or establish benefit.",
+    "Per-task binary scores restate recorded independent pass/fail; they introduce no partial-credit quality rubric. Unknown/skipped grades have no numeric score.",
+    "Synthetic and replay records cannot establish real model value. Invocation is not evidence of causation.",
+    "Confidence and value verdicts require the existing reviewed analysis. Supplied receipt accounting is descriptive; recurring fees are explicit scenarios, not incurred charges or a demonstrated benefit.",
+    "Upstream scheduler timing/token defaults are compatibility artifacts. Only canonical AEEP receipts supply measured usage; the upstream JSON assertion checks the existing protected grade certificate.",
+    "Canonical campaign: 0 trials; 0 normalized primary trials; 0 normalization gaps; 0 auxiliary trials.",
+    "Canonical analysis includes its frozen conditions, repetitions and auxiliary arms. Descriptive tables below cover only normalized primary trials; they cannot replace the complete campaign or cost ledger.",
+    "The canonical verdict is the assessment service's recorded conclusion, not a new toolkit qualification, independent attestation or release approval."
+  ],
+  "managed_analysis": {
+    "analysis_ref": "39d0503e2b796e5fdfb68223d563491f047cef5f68ad6f67a8991b052b04d00b",
+    "plan_ref": "a51c1a9e42e804c4a8c2862ccacdcd18b279bde5d3ded669842da78feb3c29f9",
+    "campaign_ref": "dd19ece2130ba678ba7f6939b39d25f1955ebb520c8f7fce180a6d260e6ac26c",
+    "operation_ledger_ref": "ea874372fea03ec01b907f18c6b6b248f1defe6e01a7d3f0d3362ccd756d01d2",
+    "outcome": "insufficient_evidence",
+    "qualification_passed": false,
+    "distinct_holdout_cases": 0,
+    "distinct_paired_cases": 0,
+    "correctness_failures": 0,
+    "execution_failures": 0,
+    "expected_trial_positions": 1,
+    "missing_trial_positions": 1,
+    "unexpected_trial_positions": 0,
+    "duplicate_trial_positions": 0,
+    "unresolved_operations": 0,
+    "paired_measurement_cases": {
+      "wall_time_ms": 0
+    },
+    "paired_savings": {
+      "wall_time_ms": null
+    },
+    "savings_interval": {},
+    "condition_comparisons": {
+      "fresh-worker": {
+        "paired_savings": {
+          "wall_time_ms": null
+        },
+        "savings_interval": {},
+        "paired_measurement_cases": {
+          "wall_time_ms": 0
+        },
+        "break_even_uses": {
+          "wall_time_ms": null,
+          "local.cpu_ms": null,
+          "local.gpu_ms": null,
+          "local.memory_mb_seconds": null,
+          "local.network_bytes": null
+        }
+      }
+    },
+    "utility_evidence": {
+      "metrics": {
+        "wall_time_ms": {
+          "relative_saving": null,
+          "success_gain": null,
+          "interval": [],
+          "distinct_pairs": 0,
+          "zero_baseline_regression": false
+        }
+      },
+      "complete": false,
+      "benefit": false,
+      "guardrails_passed": false,
+      "challengers": {},
+      "dominated": false,
+      "stage": "qualification",
+      "family_error_rate": 0.05,
+      "analysis": "all_assigned_cases",
+      "candidate_selection_filter": false
+    },
+    "measured_usage": {
+      "campaign_wall_time_ms": null,
+      "known_campaign_wall_time_ms": 0.0,
+      "known_overhead_wall_time_ms": 19022.151459008455,
+      "assessment_wall_time_ms": null,
+      "included_routing_overhead_ms": null,
+      "included_invocation_guard_ms": null,
+      "known_campaign_subtotal.local.cpu_ms": null,
+      "campaign_total.local.cpu_ms": null,
+      "known_overhead_subtotal.local.cpu_ms": 319.6469999999998,
+      "assessment_total.local.cpu_ms": null,
+      "known_campaign_subtotal.local.gpu_ms": null,
+      "campaign_total.local.gpu_ms": null,
+      "known_overhead_subtotal.local.gpu_ms": null,
+      "assessment_total.local.gpu_ms": null,
+      "known_campaign_subtotal.local.memory_mb_seconds": null,
+      "campaign_total.local.memory_mb_seconds": null,
+      "known_overhead_subtotal.local.memory_mb_seconds": null,
+      "assessment_total.local.memory_mb_seconds": null,
+      "known_campaign_subtotal.local.network_bytes": null,
+      "campaign_total.local.network_bytes": null,
+      "known_overhead_subtotal.local.network_bytes": null,
+      "assessment_total.local.network_bytes": null
+    },
+    "measurement_coverage": {
+      "local.cpu_ms": "0/0",
+      "local.gpu_ms": "0/0",
+      "local.memory_mb_seconds": "0/0",
+      "local.network_bytes": "0/0"
+    },
+    "break_even_uses": {
+      "wall_time_ms": null,
+      "local.cpu_ms": null,
+      "local.gpu_ms": null,
+      "local.memory_mb_seconds": null,
+      "local.network_bytes": null
+    },
+    "timing_scope": "Trial wall time includes routing and preflight; separately measured grading is excluded by BenchmarkRunner.",
+    "telemetry_capture": {
+      "runs": 0,
+      "verified": 0,
+      "partial": 0,
+      "unknown": 0,
+      "instructions_loaded": 0,
+      "candidate_loading_unknown": 0,
+      "notice": "Capture verification checks retained journal-to-receipt consistency. Token quantities remain provider-reported; independent provider usage is unverified. Positive skill injection proves instructions loaded, not semantic use. Missing metrics never prove non-use."
+    },
+    "workflow_accounting": {
+      "coverage": "NOT_RECORDED",
+      "notice": "No workflow overhead scope was selected; execution ledger alone is incomplete composed cost coverage."
+    }
+  },
+  "external_scheduler": {
+    "definition_ref": "87c7fb76c223579a8f76f0c66c89113b56969f6225d7738eecae34690792a67b",
+    "completion": "UNKNOWN"
+  }
+}

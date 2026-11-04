@@ -1,0 +1,87 @@
+{
+  "passed": false,
+  "engines": {},
+  "models_ceiling": 2,
+  "comparisons": "PAUSED",
+  "historical_static_inspection_settled": {
+    "cost_id": "setup_cost_42230aae382b4717a11f0b76ac87ec28",
+    "cost_digest": "9ceade21cd47a9d33321ead68e05fc756ffd47979b25b5953495d44e5ae5a8f4",
+    "request_id": "ase-stack-owned-build-20261103",
+    "request_digest": "3c52ce0a3e95f4fd5720ac9828b970fa977c2c82b871e2f39a0a4fbc1d70c417",
+    "elapsed_seconds": 0.0025820829905569553
+  },
+  "collector_boundary": {
+    "11c915577c0146d4149950b065bcf7aa583f3137a274c86ce744de8826c87a0d": {
+      "collector_connection_denied": true,
+      "program_sha256": "e8871d533914b68aaaacabf95e8876b18ddcc400352806b0a1f507eb3d6c19e5",
+      "scope_sha256": "bae2d24a5d75dad6d358c964daf79d950436f1699949745d2de176c4d5ab3d0f"
+    },
+    "cd2bc552e4cf336a7339a2748017afaf5f678f96aa4f04e7601a819ae38c3e14": {
+      "collector_connection_denied": true,
+      "program_sha256": "8fd1f2b71f41a2e30db382b3901ac4b33a23c2e5a34c4b736aaa853a8ad2ee4a",
+      "scope_sha256": "97a4e690f9f8b7d2fdaf170b2d6c458d833e10f15fed398be4029407f9923440"
+    }
+  },
+  "error_type": "RuntimeError",
+  "error_message": "Engineering task did not settle completely",
+  "proxy_restored_stopped": true,
+  "wrapper_accounting": {
+    "exclusive_seconds": 7.008859248831868,
+    "canonical_execution_intervals_excluded_seconds": 15.638229666743428,
+    "setup_cost_intervals_excluded_seconds": 0.12746045924723148,
+    "setup_cost_ids": [
+      "setup_cost_4c74d132c4294aa6973961f0c056efd3",
+      "setup_43ba12223d6e434abbd3c89bd30871ce"
+    ],
+    "unstarted_setup_costs_are_not_inferred_paid": true
+  },
+  "auxiliary_operations": {
+    "plan_id": "stack-readiness-owned-build-20261103",
+    "operations": [
+      {
+        "operation_id": "stack-readiness-owned-build-20261103:copy-image",
+        "plan_id": "stack-readiness-owned-build-20261103",
+        "stage": "owned_copy_image_build",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 180.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-11-04T01:10:56.745418Z",
+        "elapsed_seconds": 6.477755417115986,
+        "accounting": null,
+        "resources": null
+      },
+      {
+        "operation_id": "stack-readiness-owned-build-20261103:proxy-exclusive-overhead",
+        "plan_id": "stack-readiness-owned-build-20261103",
+        "stage": "owned_proxy_exclusive_overhead",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 120.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-11-04T01:10:56.731199Z",
+        "elapsed_seconds": 7.008859248831868,
+        "accounting": null,
+        "resources": null
+      }
+    ]
+  },
+  "old_operation_states_after": {
+    "conformance_probe_85882b1252ac409aa073fcb3c33b87bb-native-client": "reserved",
+    "assessment_12735a46eb364c9c9cd2aa4868f290e1:report": "reserved"
+  },
+  "newly_unresolved_operations": [],
+  "grant_after": [
+    13675,
+    3796,
+    125315.75570864184,
+    "0.0"
+  ],
+  "source_unchanged": true,
+  "runtime_unchanged": true,
+  "retained_images_and_runtimes": true
+}

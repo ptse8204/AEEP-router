@@ -1,5 +1,40 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- integration-snapshot-correction-20261103:start -->
+**November 3: corrected image/readiness, wheel and docs passed; engine dependency fixed.**
+Approved review `9d7a7ec5` retained image `bf4581894c1d`, passed all eleven actual
+probe groups in each worker plus collector denial, and completed ordinary CLI
+readiness preparation and reviewed consumption. The installed wheel and cached
+offline docs passed. Its ASE-selected engine stopped before protected grading,
+SDK execution or model use because the scoped snapshot omitted the new integration
+case-set dependency. The managed-engine phase stayed unstarted. All old results
+remain bound to source `c48e931b`; zero trials cannot establish usefulness.
+
+[Actual results](../../reports/toolkit-v2/c13/worker-readiness-correction-20261103/RESULTS.md)
+retain ten additional operations /28.594314792seconds. The original cumulative
+ledger now includes fourteen operations /40.628755166seconds and zero new model
+turns. The proxy is stopped, owned workers are removed, and no new unresolved
+operations remain. Both old reservations and every image/volume/runtime stay.
+
+The [snapshot correction](../../reports/toolkit-v2/c13/integration-snapshot-correction-20261103/README.md)
+resolves only a v7/v8 plan's exact integration set and matching request ID; it
+excludes unrelated task sets and keeps legacy rules. Twenty-three focused tests
+and the actual stored-plan constructor check pass, with no executor dispatch or
+grant changes. All thirteen source gates are running on
+`cfc36a2aeda4e220046722dbdbc81fbf2376deb12b9f7266abdab81bddcec9e1`.
+Do not edit source while session80083 runs. Next: inspect that verification,
+then prepare one current-source continuation using the retained corrected image,
+fresh worker evidence and the original two-turn cumulative envelope. Never replay
+the terminal attempt or repeat unchanged successful checks. Source/installed
+artifact changes and a fresh engine attempt require applicable review.
+
+SkillsBench task transports and protected-verifier contracts are prepared only;
+rights, runtimes and reference/control journeys remain open. Waza still lacks
+supported backend access. All-stack, both-domain, candidate usefulness, selection
+usefulness, resources and release stay separate. Comparisons remain paused.
+Parent `2804ddf`; unrelated CI work is preserved.
+<!-- integration-snapshot-correction-20261103:end -->
+
 <!-- worker-readiness-review-20261103:start -->
 **November 3: current readiness source verified; corrected execution bundle awaiting approval.**
 All thirteen gates pass on source

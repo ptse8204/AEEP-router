@@ -156,6 +156,11 @@ qualify or admit a capability, or establish candidate or selection usefulness.
 The formal `assessment.recipe-cases.v1` contract still requires 141 cases and
 keeps its existing screening, training and holdout requirements.
 
+Scoped snapshots retain the exact content-addressed integration set and its
+preparation request ID for v7/v8 plans. Unrelated sets and matching legacy names
+cannot substitute for it. Missing or inconsistent preparation stops execution
+before protected grading or model dispatch.
+
 The task-input adapter packages original instructions and inputs into the existing
 single-file worker transport. It excludes bundled skills, installers, answers and
 verifiers. Preparation compares the complete case input against those bytes and

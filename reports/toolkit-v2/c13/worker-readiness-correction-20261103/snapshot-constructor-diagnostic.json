@@ -1,0 +1,10 @@
+{
+  "inert_campaign_constructor_only": true,
+  "upstream_execution": false,
+  "models": 0,
+  "passed": false,
+  "error_type": "ConfigurationError",
+  "message": "scoped snapshot preparation definition is missing",
+  "traceback": "Traceback (most recent call last):\n  File \"<stdin>\", line 18, in check\n  File \"/Users/edwintse/Documents/aeep-toolkit-v2/src/aeep/router.py\", line 5384, in _campaign_router\n    snapshot = self.store.campaign_snapshot(database, bound_digests=snapshot_bound_digests)\n  File \"/Users/edwintse/Documents/aeep-toolkit-v2/src/aeep/store.py\", line 1409, in campaign_snapshot\n    rows = self._scoped_campaign_records(rows, bound_digests)\n  File \"/Users/edwintse/Documents/aeep-toolkit-v2/src/aeep/store.py\", line 1538, in _scoped_campaign_records\n    visit(root)\n    ~~~~~^^^^^^\n  File \"/Users/edwintse/Documents/aeep-toolkit-v2/src/aeep/store.py\", line 1519, in visit\n    raise ConfigurationError(\"scoped snapshot preparation definition is missing\")\naeep.errors.ConfigurationError: scoped snapshot preparation definition is missing\n",
+  "grant_unchanged": true
+}
