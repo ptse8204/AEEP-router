@@ -1878,3 +1878,13 @@ runtime. Other installed AEEP modules retain their recorded older scope.
 [Results and ledger](../../reports/toolkit-v2/c13/ase-runtime-contract-20261103/RESULTS.md)
 establish SDK conformance, while controlled execution and both SkillsBench
 workflow journeys remain open. Offline docs passed on their 72 recorded inputs.
+
+## November 3: controlled ASE/managed execution prepared, not yet verified
+
+The real ASE0.7 scheduler/grader contract has actual SDK evidence. A separate
+[worker-backed review](../../reports/toolkit-v2/c13/ase-controlled-workflow-20261103/README.md)
+now binds the same retained runtime to normal CLI execution, a neutral source-
+pinned skill and an existing protected repository task. The managed fallback is
+a separate frozen engine check, never an automatic response to ASE failure.
+No worker, service, build or model has run under this pending review. Both
+SkillsBench domain journeys and the all-integration gate remain open.

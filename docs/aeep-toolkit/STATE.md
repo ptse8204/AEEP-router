@@ -1,5 +1,40 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- ase-controlled-workflow-prepared-20261103:start -->
+**November 3: two controlled evaluator engineering checks prepared; exact execution approval pending.**
+The [grouped review](../../reports/toolkit-v2/c13/ase-controlled-workflow-20261103/README.md)
+(`b01793ac8e3baa0bb9d723e32498813ea224eb0672a95c51090764fc598a9600`) selects actual ASE and managed engines before execution. Each gets
+one required-use turn on the same existing public Markdownify task through normal
+`eval managed run`, with protected upstream grading and canonical reports. This
+is an evaluator component check, not either complete SkillsBench journey or a
+candidate/selection comparison. Ponytail and comparative campaigns stay paused.
+
+One proposed COPY-only image contains neutral repository-authored skill/license
+bytes from `38be4c0`; the retained control, grader, ASE runtime and model proxy are
+reused. Fresh worker/collector containment must pass before models. At most two
+model reservations, 144 original-grant operations and 6,200 reserved seconds,
+zero cash. No install, download, pull, credential read, new destination, activation,
+admission or release. Restore the proxy stopped; keep all images/runtimes/volumes.
+Preserve old charges and two unresolved reservations. No execution has started.
+
+Preparation passed six synthetic construction controls, ten inert controller
+checks, seven existing budget guards, two rendered-task controls and six actual
+stdlib/Git native controls. Placeholder images/temporary grants are fixtures,
+not conformance. The current artifact-encoding guard caught a legacy gzip profile;
+the new shared profile now matches the original task's plain JSON contract.
+Source remains `c2eb4a3d` with all 13 gates passed; successful scanner, wheel and
+72-input docs evidence is reused within its scope. No full-suite replay. Usable
+host space at review preparation was about 74.6 GiB, above the normal reserve.
+
+Next: verify exact review, record applicable approval, then run `run.py DIGEST`
+once. Do not run without that authority: completed `85ba0df6` allowed zero models,
+Docker changes or services. Continue independent SkillsBench rights/runtime and
+remaining component preparation meanwhile. Waza still lacks supported backend
+access. All-integration/both-domain, candidate usefulness, selection usefulness,
+resource and release gates remain open. Parent `38be4c0`; unrelated CI work stays
+separate. Later handoff notes are outside the completed docs snapshot.
+<!-- ase-controlled-workflow-prepared-20261103:end -->
+
 <!-- ase-contract-results-20261103:start -->
 **November 3: real ASE SDK contract and offline documentation checks passed.**
 Approved `85ba0df6` completed once. The actual 0.7.0 scheduler and JSONPath grader

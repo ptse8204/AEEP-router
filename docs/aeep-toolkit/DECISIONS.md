@@ -2635,3 +2635,14 @@ controlled-model task needs its own reviewed worker, proxy, task, grader and
 finite authority. Preserve existing costs, the two older unresolved reservations,
 all runtimes and successful exact-source checks. Keep comparisons paused. See
 [actual results](../../reports/toolkit-v2/c13/ase-runtime-contract-20261103/RESULTS.md).
+
+## November 3: test controlled evaluator execution through the ordinary CLI
+
+After the actual ASE contract passed, prepare one real task per explicitly
+selected engine. Use a neutral source-bound skill and the established public
+repository grader; no Ponytail or usefulness campaign resumes. Preserve the
+original task's plain JSON output contract in both workers. Keep the full
+SkillsBench domain journeys as separate unfinished milestones. The
+[exact grouped review](../../reports/toolkit-v2/c13/ase-controlled-workflow-20261103/README.md)
+requires two model reservations maximum and actual fresh containment/capture.
+Existing successful checks and old charges are retained, not replayed for counts.
