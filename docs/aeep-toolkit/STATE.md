@@ -1,48 +1,42 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
 <!-- report-family-skillrank-review-20261103:start -->
-**November 3: corrected wheel/docs passed; remaining SkillRank runtime needs exact correction authority.**
-Review`d6fbbad3` installed and checked wheel`dac05704` with32unchanged cached
-dependencies. Installed source`ed0348db` passed ordinary CLI/schema/family-helper
-checks and denied outside read/write/network access. The runtime remains unchanged
-and retained. All72 cached offline docs inputs passed on attempt one; their exact
-pre-progress-edit bytes are retained. No successful component is replayed.
+**November 3: pinned SkillRank build/search/show/lifecycle passed; ordinary workflow integration next.**
+Approved review`6057c786` verified all86 locked archive hashes and their exact
+manifest license expressions, then built source`5216bae9149b` offline. Actual
+upstream SkillRank0.1.5 served search/show from its own local registry. Missing
+records failed explicitly. Host-file/root-write/socket/external-network denial,
+selected loopback and owned writes passed. All three new containers are gone;
+all pre-existing images,volumes,runtimes,backups and unrelated edits remain.
 
-The [actual runtime result](../../reports/toolkit-v2/c13/skillrank-build-preparation-20261103/RESULTS.md)
-stopped while inspecting the first verified Cargo archive. My first-party guard
-omitted0BSD from`0BSD OR MIT OR Apache-2.0`,rejecting an expression with already
-accepted alternatives. No Rust image pull,compiler,upstream binary,container or
-service ran. Two isolated engineering operations/2.7450645421631634grant seconds
-remain charged;zero models. No cleanup/accounting uncertainty or new unresolved
-operation remains. Existing images,volumes,runtimes,backups and user work stay.
+[Actual results](../../reports/toolkit-v2/c13/skillrank-license-correction-20261103/RESULTS.md)
+bind binary`0996e6d80ad5`,retained Rust image`c596ad3e4f5f`,Rust1.94.1 and vendor
+tree`0daffbb992a6`. The original grant now records16operations /zero models /
+55.93853883491829seconds,inside40/0/4,500 and $0cash authority. Its old charges stay;
+only expiry was extended. No accounting/cleanup uncertainty remains. The initial
+missing-parent setup failure is retained with a delegated preparation amendment;
+no reviewed executable bytes changed and no upstream phase was replayed.
 
-The [remaining-only review](../../reports/toolkit-v2/c13/skillrank-license-correction-20261103/operation-review.json)
-binds the corrected guard to all86 exact registry version/checksum/license records.
-The actual archive manifests must match before compilation. Reuse the verified
-Adler archive;download only85unstarted archives. Same source pin`5216bae9149b`,same
-compiler image,same single offline build/search/show/containment/stop journey.
-Preserve the ORIGINAL40-operation/4,500-second/zero-model/$0cash envelope and old
-two charges. No package/docs rerun or new dependency/image is proposed. The normal
-50GiB reserve and8GiB runtime start headroom stay. A finite expiry-only amendment
-may retain the same grant/counters under standing delegation.
-
-All thirteen product source gates remain passed on
+Corrected wheel`dac05704` and72-input cached offline docs passed under`d6fbbad3`
+and were not repeated. All13 product source gates still pass on
 `e48eec5f3039cfdbb8dcf24145e1b8835b3b4057de4f21eb7bf598fa22948c74`:
-2,054tests/21skips in both full runs,82.64%coverage,both branch gates. Product source
-is unchanged; only first-party review/data-preparation helpers change. The exact
-checked coordinator snapshot now isolates runtime execution from independent
-implementation. The license/archive mismatch controls and actual read-only
-review/counter/expiry-constructor checks pass without running upstream code.
+2,054tests/21skips in both full runs,82.64%coverage,both branch gates. Exact source
+and document snapshots retain their scope. Core source has not yet changed.
 
-Next: record applicable approval for the remaining-only review,inspect markers,
-then run its driver once. The completed attempt cannot be replayed under its old
-artifact binding. Changed untrusted execution/provisioning needs the correction
-review;no architecture or larger-ceiling decision is requested. SkillRank bounded
-evaluation and ordinary workflow selection remain open. SkillsBench rights,
+Next: connect the retained SkillRank runtime through the ordinary operator
+workflow. The current owned installer accepts Python wheels only; add narrow
+hash-bound file-artifact support using its existing journal,preview,space checks,
+idempotency and conflict-preserving removal. Preserve v1/v2 wheel contracts.
+Then wire catalog search/show and the bounded core evaluation callback through
+existing reviewed executors/accounting. No new scheduler,database,registry or
+host activation. Installation,enablement,execution permission,functional readiness
+and usefulness stay separate. No model turn is authorized by this runtime review.
+
+Search/show alone does not close SkillRank integration. SkillsBench rights,
 runtimes,reference/control checks,both ordinary CLI domains and remaining upstream
 integrations still need functional evidence. Waza lacks supported backend access.
 All-stack,candidate usefulness,selection usefulness,resources and release remain
-separate. Comparisons remain paused. Parent`b494e4e`;unrelated CI edits are preserved.
+separate. Comparisons remain paused. Parent`252b1dd`;unrelated CI work is preserved.
 <!-- report-family-skillrank-review-20261103:end -->
 
 <!-- integration-snapshot-correction-20261103:start -->

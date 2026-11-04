@@ -1,0 +1,71 @@
+{
+  "Id": "4f382a2a47578a4de3a27fc70303fd4afd902ad3748bde8aa420904df3487798",
+  "Image": "sha256:c596ad3e4f5fbe2498d6f71498349691b9ee219288e298ec78f1f3dcd41124e8",
+  "NetworkMode": "none",
+  "ReadonlyRootfs": true,
+  "User": "65534:65534",
+  "CapDrop": [
+    "ALL"
+  ],
+  "SecurityOpt": [
+    "no-new-privileges"
+  ],
+  "Mounts": [
+    {
+      "Destination": "/source",
+      "Mode": "",
+      "Propagation": "rprivate",
+      "RW": false,
+      "Source": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillrank-build-preparation-20261103/context/source",
+      "Type": "bind"
+    },
+    {
+      "Destination": "/vendor",
+      "Mode": "",
+      "Propagation": "rprivate",
+      "RW": false,
+      "Source": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillrank-license-correction-20261103/runtime/vendor",
+      "Type": "bind"
+    },
+    {
+      "Destination": "/checks",
+      "Mode": "",
+      "Propagation": "rprivate",
+      "RW": false,
+      "Source": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillrank-build-preparation-20261103/context/checks",
+      "Type": "bind"
+    },
+    {
+      "Destination": "/catalog.json",
+      "Mode": "",
+      "Propagation": "rprivate",
+      "RW": false,
+      "Source": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillrank-build-preparation-20261103/context/catalog.json",
+      "Type": "bind"
+    },
+    {
+      "Destination": "/work",
+      "Mode": "",
+      "Propagation": "rprivate",
+      "RW": true,
+      "Source": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillrank-license-correction-20261103/runtime/session",
+      "Type": "bind"
+    },
+    {
+      "Destination": "/opt/skillrank",
+      "Mode": "",
+      "Propagation": "rprivate",
+      "RW": false,
+      "Source": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillrank-license-correction-20261103/runtime/work/target/release/skillrank",
+      "Type": "bind"
+    },
+    {
+      "Destination": "/opt/aeep-boundary",
+      "Mode": "",
+      "Propagation": "rprivate",
+      "RW": false,
+      "Source": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillrank-license-correction-20261103/runtime/work/boundary",
+      "Type": "bind"
+    }
+  ]
+}

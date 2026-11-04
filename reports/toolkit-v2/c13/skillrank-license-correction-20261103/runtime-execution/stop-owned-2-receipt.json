@@ -1,0 +1,138 @@
+{
+  "receipt_id": "rcpt_0c777d1748b647e9a561017fa0654db9",
+  "decision_id": "skillrank:6057c78685bec9ef71ae938f284381e057ae04de4126b72a98e8196b73c40b7c:stop-owned-2",
+  "action_id": "act_1cb49d5815204774a6be0a07f92c08ef",
+  "capability": "toolkit.upstream-engineering@1",
+  "executor_id": "skillrank-stop-owned-2",
+  "executor_kind": "command",
+  "status": "success",
+  "attempt": 1,
+  "started_at": "2026-11-04T05:42:54.992283Z",
+  "ended_at": "2026-11-04T05:43:00.058498Z",
+  "estimated": {
+    "resources": {
+      "monetary_usd": 0.0,
+      "latency_ms": 0.0,
+      "cpu_ms": 0.0,
+      "memory_mb_seconds": 0.0,
+      "peak_memory_mb": 0.0,
+      "gpu_ms": 0.0,
+      "network_bytes": 0,
+      "context_tokens": 0,
+      "input_tokens": 0,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_output_tokens": 0,
+      "subscription_units": 0.0
+    },
+    "cash": {
+      "amount_usd": null,
+      "upper_bound_usd": null,
+      "evidence": {
+        "status": "unavailable",
+        "source": "unavailable",
+        "trust": "untrusted",
+        "evidence_id": null,
+        "source_reference": null,
+        "digest": null,
+        "observed_at": null
+      }
+    },
+    "subscription_usage": [],
+    "success_probability": 0.95,
+    "quality_score": 0.95,
+    "risk_score": 0.05,
+    "confidence": 0.5,
+    "source": "static",
+    "sample_size": 0,
+    "uncertainty": null
+  },
+  "executor_fingerprint": null,
+  "cohort_digest": null,
+  "action_features": null,
+  "actual_resources": {
+    "monetary_usd": 0.0,
+    "latency_ms": 5065.387957729399,
+    "cpu_ms": 9.660124,
+    "memory_mb_seconds": 135.70176968733722,
+    "peak_memory_mb": 26.859375,
+    "gpu_ms": 0.0,
+    "network_bytes": 0,
+    "context_tokens": 30,
+    "input_tokens": 0,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 0,
+    "reasoning_output_tokens": 0,
+    "subscription_units": 0.0
+  },
+  "accounting": {
+    "cash": {
+      "status": "unavailable",
+      "components": []
+    },
+    "subscription_usage": [],
+    "model_usage": [],
+    "tool_footprint": null
+  },
+  "cache_affinity": null,
+  "approval_id": null,
+  "transport_success": null,
+  "execution_success": true,
+  "schema_valid": null,
+  "task_valid": null,
+  "quality_score": null,
+  "validation_results": [],
+  "output_valid": null,
+  "error_type": null,
+  "error_message": null,
+  "trace_id": null,
+  "metadata": {
+    "review_sha256": "6057c78685bec9ef71ae938f284381e057ae04de4126b72a98e8196b73c40b7c",
+    "scope": "isolated_component_engineering",
+    "client_resources_are_not_container_resources": true,
+    "executable": "/usr/local/bin/docker",
+    "stdout_bytes": 120,
+    "stderr_bytes": 0,
+    "stdout_truncated": false,
+    "stderr_truncated": false,
+    "execution_evidence": {
+      "schema_version": "execution.evidence.v1",
+      "attempt_id": "skillrank:6057c78685bec9ef71ae938f284381e057ae04de4126b72a98e8196b73c40b7c:stop-owned-2",
+      "adapter": "CommandExecutor",
+      "events": [
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "a23ca06bc64a4df5ba504a6a439cdb4c",
+          "attempt_id": "skillrank:6057c78685bec9ef71ae938f284381e057ae04de4126b72a98e8196b73c40b7c:stop-owned-2",
+          "sequence": 0,
+          "kind": "execution.started",
+          "source_id": "start",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "a23ca06bc64a4df5ba504a6a439cdb4c",
+          "attempt_id": "skillrank:6057c78685bec9ef71ae938f284381e057ae04de4126b72a98e8196b73c40b7c:stop-owned-2",
+          "sequence": 1,
+          "kind": "execution.completed",
+          "source_id": "terminal",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        }
+      ],
+      "complete": true,
+      "cancellation_confirmed": false,
+      "identity_digest": null,
+      "boundary_digest": null,
+      "journal_id": "a23ca06bc64a4df5ba504a6a439cdb4c"
+    },
+    "execution_evidence_digest": "9b3d1f527d31a747f8796eb2fa6f00491b1afb1b9d819d147adb11c6581661f4"
+  }
+}

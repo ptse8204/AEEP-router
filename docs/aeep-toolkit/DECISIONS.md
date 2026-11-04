@@ -2747,3 +2747,17 @@ never reset counters or replay package/docs. Retain the checked coordinator
 snapshot so independent implementation can continue. No source or architecture
 selection changes,redistribution clearance or capability benefit is inferred.
 Comparisons remain paused;all-stack and bounded SkillRank evaluation remain open.
+
+## November 3 — retain the built SkillRank runtime and connect ordinary lifecycle
+
+The [approved source build and upstream registry checks](../../reports/toolkit-v2/c13/skillrank-license-correction-20261103/RESULTS.md)
+passed with the original grant/counters and source pin. Retain the binary,image,
+verified dependency cache and receipts. Search/show is executable component
+evidence; bounded evaluation and ordinary workflow integration remain open.
+
+Extend the existing owned installer with hash-bound file artifacts for reviewed
+upstream binaries, retaining its journal,space guard,exact preview,idempotency
+and conflict-preserving removal. This fills its observed Python-wheel-only gap
+without another installer service or registry. Keep wheel v1/v2 behavior and
+source/permissions/accounting boundaries. No installation toggle becomes execution
+permission,qualification or usefulness. Comparative campaigns remain paused.
