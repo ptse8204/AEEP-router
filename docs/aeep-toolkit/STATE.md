@@ -1,5 +1,38 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- langfuse-service-review-20261104:start -->
+**November 4: private Langfuse service and corrected docs review prepared.**
+[The exact component packet](../../reports/toolkit-v2/c13/langfuse-service-20261104/README.md)
+reuses the acquired six images and current installed CLI. It proposes one actual
+minimized receipt export, protected local observations-API linkage and disabled
+export, using upstream Compose and existing executors/ledger. Eight new owned
+containers include two initialization steps; five volumes and one internal network
+remain private. Only127.0.0.1:39067 is exposed. New local keys would be generated
+only after approval; no provider/operator/Codex credentials are accessed.
+
+Eleven first-party driver controls pass. The standard-library sandbox probe passes
+outside-read/write and external-network denial plus local-port permission. Its
+initial profile parse failure and correction are retained. None is actual Langfuse
+execution evidence. Exact startup scripts and license notices are bound; generic
+v1 HTTPS-only setup metadata cannot express local HTTP, so general setup readiness
+stays visibly open. Actual ingestion, both full workload journeys and all-stack
+completion remain unverified.
+
+The prepared isolated grant proposes63operations/0models/3200reserved seconds/$0
+cash authority without resetting prior counters. A4GiB service cap is only an
+engineering proposal for one receipt, not a product resource threshold. Maintain
+50GiB host reserve and preserve all existing resources. The corrected72-input
+cached offline docs check is independent; passed wheel/source/image checks are
+not repeated. No service, secret or new grant is created during preparation.
+
+Next: obtain the exact langfuse-service-20261104/operation-review.json approval;
+read/hash the file for its current identity. Run docs and service independently,
+then record actual evidence and continue remaining integrations. No new architecture
+or paid access is requested. Waza lacks supported backend access. Comparisons
+remain paused; stack integration,candidate usefulness,selection usefulness,
+resources and release remain separate. Parentdc87982; unrelated CI edits preserved.
+<!-- langfuse-service-review-20261104:end -->
+
 <!-- workflow-telemetry-artifacts-pass-20261104:start -->
 **November 4: approved image/static-audit and installed CLI checks pass.**
 [Actual results](../../reports/toolkit-v2/c13/workflow-telemetry-20261104/RESULTS.md)

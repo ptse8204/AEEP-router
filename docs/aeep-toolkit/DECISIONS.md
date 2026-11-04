@@ -2880,3 +2880,18 @@ Both grants are settled. Docs attempt1 failed six duplicate blank lines; the
 correction awaits the next service/docs review. Original input evidence remains.
 Stack, candidate and selection gates stay open and comparisons remain paused.
 <!-- workflow-telemetry-artifacts-pass-20261104:end -->
+
+<!-- langfuse-service-review-20261104:start -->
+## November 4: actual receipt ingestion is the next component gate
+
+[The concrete service/docs review](../../reports/toolkit-v2/c13/langfuse-service-20261104/README.md) reuses the current installed CLI and
+six acquired images. One local receipt export, exact trace/span/hash readback and
+disablement must pass before claiming Langfuse ingestion readiness. The proposed
+63-operation/zero-model/3200-second grant changes no existing counter. The4GiB
+service cap is an engineering proposal, not product resource acceptance.
+First-party driver and standard-library sandbox controls pass; actual startup
+remains unapproved/unstarted. General v1 HTTPS-only setup cannot represent this
+local HTTP permission and remains a visible workflow limitation. Both SkillsBench
+domains and remaining integrations stay open. Waza lacks supported access.
+Comparisons remain paused; stack, candidate and selection gates stay separate.
+<!-- langfuse-service-review-20261104:end -->

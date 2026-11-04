@@ -1,0 +1,153 @@
+{
+  "schema_version": "aeep.toolkit.registry.v1",
+  "extensions": [
+    {
+      "schema_version": "aeep.toolkit.extension.v1",
+      "extension_id": "aeep-evaluator",
+      "purpose": "Explicit selected aeep-evaluator declaration; functional gate remains open.",
+      "role": "evaluator",
+      "source": {
+        "repository": "https://github.com/ptse8204/AEEP-router",
+        "revision": "0116d754bc7a7f86ddaf018043b13ef95789be114b2509b71e243bad32ae3ec5",
+        "artifact_sha256": "a1b12d268c69a772ec45d2a4e9390247fd47eee4f72d5ce8ba01caa2168c4663",
+        "license_expression": "Apache-2.0",
+        "data_rights": "First-party code only. No task or provider-disclosure authority granted."
+      },
+      "hosts": [
+        "codex"
+      ],
+      "platforms": [
+        "darwin-arm64"
+      ],
+      "dependencies": [],
+      "permissions": {
+        "network_destinations": [],
+        "filesystem_scope": "workspace",
+        "authentication": "none",
+        "financial_exposure": "none"
+      },
+      "disk_bytes": 0,
+      "memory_bytes": null,
+      "install_effects": [
+        "Declaration only; setup/model/task execution blocked."
+      ],
+      "rollback": "No setup occurred.",
+      "status": "blocked",
+      "qualification_ref": null,
+      "blockers": [
+        "Managed worker/service/plan/grader readiness and execution authority remain required."
+      ]
+    },
+    {
+      "schema_version": "aeep.toolkit.extension.v1",
+      "extension_id": "skillsbench",
+      "purpose": "Explicit selected skillsbench declaration; functional gate remains open.",
+      "role": "benchmark",
+      "source": {
+        "repository": "https://github.com/benchflow-ai/skillsbench",
+        "revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+        "artifact_sha256": "5d5903df2d53f2480638d014856164dfc11736177c64b7e30afae046ff375160",
+        "license_expression": "Apache-2.0",
+        "data_rights": "Repository notice only. Task-specific assets and bundled skills remain unreviewed; no rights grant inferred."
+      },
+      "hosts": [
+        "codex"
+      ],
+      "platforms": [
+        "darwin-arm64"
+      ],
+      "dependencies": [],
+      "permissions": {
+        "network_destinations": [],
+        "filesystem_scope": "workspace",
+        "authentication": "none",
+        "financial_exposure": "none"
+      },
+      "disk_bytes": 0,
+      "memory_bytes": null,
+      "install_effects": [
+        "Declaration only; setup/model/task execution blocked."
+      ],
+      "rollback": "No setup occurred.",
+      "status": "blocked",
+      "qualification_ref": null,
+      "blockers": [
+        "Task-specific asset rights, reviewed runtimes and protected verifier/reference journeys remain required."
+      ]
+    },
+    {
+      "schema_version": "aeep.toolkit.extension.v1",
+      "extension_id": "langfuse",
+      "purpose": "Explicit local minimized receipt telemetry; generic v1 HTTPS setup metadata cannot express this local HTTP permission",
+      "role": "observability",
+      "source": {
+        "repository": "https://github.com/langfuse/langfuse",
+        "revision": "5e4db922e9021083500cd066249b220a414b7dfe",
+        "artifact_sha256": "86a950d244b1cc7e51926ac2930e27afccbc3e3518804d65b60673590e93f5aa",
+        "license_expression": "MIT",
+        "data_rights": "Core-only private receipt observability; enterprise features off; upstream and image third-party notices retained. No redistribution."
+      },
+      "hosts": [
+        "codex"
+      ],
+      "platforms": [
+        "darwin-arm64"
+      ],
+      "dependencies": [],
+      "permissions": {
+        "network_destinations": [],
+        "filesystem_scope": "workspace",
+        "authentication": "operator_setup",
+        "financial_exposure": "none"
+      },
+      "disk_bytes": null,
+      "memory_bytes": null,
+      "install_effects": [
+        "Separate exact service review and ReceiptExportDefinition bind the loopback HTTP exception; this metadata grants no service or network authority."
+      ],
+      "rollback": "Stop only owned containers; retain data and receipts.",
+      "status": "blocked",
+      "qualification_ref": null,
+      "blockers": [
+        "Generic v1 HTTPS-only setup preview cannot express loopback HTTP; use the separate exact receipt-export/service review. Functional ingestion remains unverified."
+      ]
+    },
+    {
+      "schema_version": "aeep.toolkit.extension.v1",
+      "extension_id": "opentelemetry",
+      "purpose": "Explicit local minimized receipt telemetry; generic v1 HTTPS setup metadata cannot express this local HTTP permission",
+      "role": "observability",
+      "source": {
+        "repository": "https://github.com/ptse8204/AEEP-router",
+        "revision": "5a13a630a89aa0c6b4940be4eed0a30dd80ab5a822ee15f7f25f78f521c11c4b",
+        "artifact_sha256": "cd41c31d03fced77e009883142ebcbc721be8dd8feff01ba9e6bcd7428395e8d",
+        "license_expression": "Apache-2.0",
+        "data_rights": "Existing AEEP receipt instrumentation; no prompts, artifact contents or provider credentials."
+      },
+      "hosts": [
+        "codex"
+      ],
+      "platforms": [
+        "darwin-arm64"
+      ],
+      "dependencies": [],
+      "permissions": {
+        "network_destinations": [],
+        "filesystem_scope": "workspace",
+        "authentication": "operator_setup",
+        "financial_exposure": "none"
+      },
+      "disk_bytes": null,
+      "memory_bytes": null,
+      "install_effects": [
+        "Separate exact service review and ReceiptExportDefinition bind the loopback HTTP exception; this metadata grants no service or network authority."
+      ],
+      "rollback": "Stop only owned containers; retain data and receipts.",
+      "status": "blocked",
+      "qualification_ref": null,
+      "blockers": [
+        "Generic v1 HTTPS-only setup preview cannot express loopback HTTP; use the separate exact receipt-export/service review. Functional ingestion remains unverified."
+      ]
+    }
+  ]
+}

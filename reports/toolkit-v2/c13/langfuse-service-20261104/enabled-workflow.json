@@ -1,0 +1,73 @@
+{
+  "schema_version": "aeep.toolkit.workflow.v2",
+  "registry": {
+    "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/langfuse-service-20261104/registry.json",
+    "sha256": "98beb6f93f8f3a47a845ed811c4eafb84334300d37f146c07b4449fed1a61081"
+  },
+  "policy": {
+    "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-skillrank-20261103/policy.json",
+    "sha256": "768be4aad8ad7a148dbfa1af020a5b6031c0d8e049b8173130b258320063f478"
+  },
+  "configurations": {
+    "document-data": {
+      "evaluator": "managed",
+      "candidate": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-scanner-20261102/candidate",
+        "sha256": "c91039731c19735e818c150508e6f857a218482a2371b239e4bf7b033aabbca6"
+      },
+      "benchmark": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-transport-20261103/task-only-pack.json",
+        "sha256": "c41ec39a459b537d9c1b16d35cda1e7ca8857f75b46128e8640c23d86349b5f9"
+      },
+      "asset_root": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5",
+      "task_ids": [
+        "financial-modeling-qa",
+        "pdf-excel-diff",
+        "sales-pivot-analysis"
+      ],
+      "components": [
+        "aeep-evaluator",
+        "skillsbench",
+        "langfuse",
+        "opentelemetry"
+      ],
+      "assessment": null,
+      "benchmark_recipe": null,
+      "preparation": null,
+      "telemetry": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/langfuse-service-20261104/enabled-export.json",
+        "sha256": "aba9040a350105b3fd925a6e25e516f5d2107d63074b1d196243dfac4031ddec"
+      }
+    },
+    "software-engineering": {
+      "evaluator": "managed",
+      "candidate": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-scanner-20261102/candidate",
+        "sha256": "c91039731c19735e818c150508e6f857a218482a2371b239e4bf7b033aabbca6"
+      },
+      "benchmark": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-transport-20261103/task-only-pack.json",
+        "sha256": "c41ec39a459b537d9c1b16d35cda1e7ca8857f75b46128e8640c23d86349b5f9"
+      },
+      "asset_root": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5",
+      "task_ids": [
+        "spring-boot-jakarta-migration",
+        "react-performance-debugging",
+        "software-dependency-audit"
+      ],
+      "components": [
+        "aeep-evaluator",
+        "skillsbench",
+        "langfuse",
+        "opentelemetry"
+      ],
+      "assessment": null,
+      "benchmark_recipe": null,
+      "preparation": null,
+      "telemetry": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/langfuse-service-20261104/enabled-export.json",
+        "sha256": "aba9040a350105b3fd925a6e25e516f5d2107d63074b1d196243dfac4031ddec"
+      }
+    }
+  }
+}

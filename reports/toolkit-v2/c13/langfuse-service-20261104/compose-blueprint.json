@@ -1,0 +1,589 @@
+{
+  "name": "aeep-langfuse-engineering-20261104",
+  "services": {
+    "minio-owner": {
+      "restart": "no",
+      "pull_policy": "never",
+      "read_only": true,
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "networks": [
+        "private"
+      ],
+      "pids_limit": 256,
+      "cpus": 1.0,
+      "labels": {
+        "com.aeep.engineering.owner": "aeep-langfuse-engineering-20261104"
+      },
+      "logging": {
+        "driver": "json-file",
+        "options": {
+          "max-size": "1m",
+          "max-file": "1"
+        }
+      },
+      "image": "cgr.dev/chainguard/minio@sha256:f4c90d3148e56e4b720a5663a9e45428bac3e38c39681bbc0d8692ed1086ff09",
+      "mem_limit": "64m",
+      "memswap_limit": "64m",
+      "container_name": "aeep-langfuse-engineering-20261104-minio-owner",
+      "user": "0:0",
+      "entrypoint": [
+        "/usr/bin/chown"
+      ],
+      "command": [
+        "65532:65532",
+        "/data"
+      ],
+      "cap_add": [
+        "CHOWN"
+      ],
+      "volumes": [
+        "minio-data:/data"
+      ],
+      "tmpfs": {
+        "/tmp": "rw,noexec,nosuid,size=64m"
+      }
+    },
+    "postgres": {
+      "restart": "no",
+      "pull_policy": "never",
+      "read_only": true,
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "networks": [
+        "private"
+      ],
+      "pids_limit": 256,
+      "cpus": 1.0,
+      "labels": {
+        "com.aeep.engineering.owner": "aeep-langfuse-engineering-20261104"
+      },
+      "logging": {
+        "driver": "json-file",
+        "options": {
+          "max-size": "1m",
+          "max-file": "1"
+        }
+      },
+      "image": "docker.io/library/postgres@sha256:ac359420747e1f5f8ac4d23f40d7ce022c0a39090ed6cdd8dde5f596affbe41d",
+      "mem_limit": "512m",
+      "memswap_limit": "512m",
+      "container_name": "aeep-langfuse-engineering-20261104-postgres",
+      "cap_add": [
+        "CHOWN",
+        "DAC_OVERRIDE",
+        "FOWNER",
+        "SETUID",
+        "SETGID"
+      ],
+      "environment": {
+        "POSTGRES_USER": "postgres",
+        "POSTGRES_DB": "langfuse",
+        "POSTGRES_PASSWORD": "REVIEWED_NEW_LOCAL_POSTGRES",
+        "TZ": "UTC",
+        "PGTZ": "UTC"
+      },
+      "volumes": [
+        "postgres-data:/var/lib/postgresql/data"
+      ],
+      "tmpfs": {
+        "/tmp": "rw,noexec,nosuid,size=64m",
+        "/var/run/postgresql": "rw,nosuid,size=16m,uid=999,gid=999"
+      },
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "pg_isready",
+          "-U",
+          "postgres",
+          "-d",
+          "langfuse"
+        ],
+        "interval": "2s",
+        "timeout": "2s",
+        "retries": 20,
+        "start_period": "3s"
+      }
+    },
+    "clickhouse": {
+      "restart": "no",
+      "pull_policy": "never",
+      "read_only": false,
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "networks": [
+        "private"
+      ],
+      "pids_limit": 256,
+      "cpus": 1.0,
+      "labels": {
+        "com.aeep.engineering.owner": "aeep-langfuse-engineering-20261104"
+      },
+      "logging": {
+        "driver": "json-file",
+        "options": {
+          "max-size": "1m",
+          "max-file": "1"
+        }
+      },
+      "image": "docker.io/clickhouse/clickhouse-server@sha256:0d643ec0036ceb52ae65e5d8465e155ad6069d771f33a79a9e71dc4334e029e6",
+      "mem_limit": "1024m",
+      "memswap_limit": "1024m",
+      "container_name": "aeep-langfuse-engineering-20261104-clickhouse",
+      "user": "101:101",
+      "environment": {
+        "CLICKHOUSE_DB": "default",
+        "CLICKHOUSE_USER": "clickhouse",
+        "CLICKHOUSE_PASSWORD": "REVIEWED_NEW_LOCAL_CLICKHOUSE"
+      },
+      "volumes": [
+        "clickhouse-data:/var/lib/clickhouse",
+        "clickhouse-logs:/var/log/clickhouse-server"
+      ],
+      "tmpfs": {
+        "/tmp": "rw,noexec,nosuid,size=64m"
+      },
+      "ulimits": {
+        "nofile": {
+          "soft": 262144,
+          "hard": 262144
+        }
+      },
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "wget",
+          "--no-verbose",
+          "--tries=1",
+          "--spider",
+          "http://localhost:8123/ping"
+        ],
+        "interval": "2s",
+        "timeout": "2s",
+        "retries": 20,
+        "start_period": "3s"
+      }
+    },
+    "redis": {
+      "restart": "no",
+      "pull_policy": "never",
+      "read_only": true,
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "networks": [
+        "private"
+      ],
+      "pids_limit": 256,
+      "cpus": 1.0,
+      "labels": {
+        "com.aeep.engineering.owner": "aeep-langfuse-engineering-20261104"
+      },
+      "logging": {
+        "driver": "json-file",
+        "options": {
+          "max-size": "1m",
+          "max-file": "1"
+        }
+      },
+      "image": "docker.io/library/redis@sha256:70906c24c6bcde0712573cce29bb3d30331fec36aaefd503bc570c18ba431c26",
+      "mem_limit": "128m",
+      "memswap_limit": "128m",
+      "container_name": "aeep-langfuse-engineering-20261104-redis",
+      "cap_add": [
+        "CHOWN",
+        "DAC_OVERRIDE",
+        "FOWNER",
+        "SETUID",
+        "SETGID"
+      ],
+      "environment": {
+        "REDISCLI_AUTH": "REVIEWED_NEW_LOCAL_REDIS"
+      },
+      "command": [
+        "redis-server",
+        "--requirepass",
+        "REVIEWED_NEW_LOCAL_REDIS",
+        "--maxmemory",
+        "96mb",
+        "--maxmemory-policy",
+        "noeviction"
+      ],
+      "volumes": [
+        "redis-data:/data"
+      ],
+      "tmpfs": {
+        "/tmp": "rw,noexec,nosuid,size=64m"
+      },
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "redis-cli",
+          "ping"
+        ],
+        "interval": "2s",
+        "timeout": "2s",
+        "retries": 20,
+        "start_period": "3s"
+      }
+    },
+    "minio": {
+      "restart": "no",
+      "pull_policy": "never",
+      "read_only": true,
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "networks": [
+        "private"
+      ],
+      "pids_limit": 256,
+      "cpus": 1.0,
+      "labels": {
+        "com.aeep.engineering.owner": "aeep-langfuse-engineering-20261104"
+      },
+      "logging": {
+        "driver": "json-file",
+        "options": {
+          "max-size": "1m",
+          "max-file": "1"
+        }
+      },
+      "image": "cgr.dev/chainguard/minio@sha256:f4c90d3148e56e4b720a5663a9e45428bac3e38c39681bbc0d8692ed1086ff09",
+      "mem_limit": "384m",
+      "memswap_limit": "384m",
+      "container_name": "aeep-langfuse-engineering-20261104-minio",
+      "user": "65532:65532",
+      "command": [
+        "server",
+        "--address",
+        ":9000",
+        "--console-address",
+        ":9001",
+        "/data"
+      ],
+      "environment": {
+        "MINIO_ROOT_USER": "aeepminio",
+        "MINIO_ROOT_PASSWORD": "REVIEWED_NEW_LOCAL_MINIO"
+      },
+      "volumes": [
+        "minio-data:/data"
+      ],
+      "tmpfs": {
+        "/tmp": "rw,noexec,nosuid,size=64m"
+      },
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "mc",
+          "--config-dir",
+          "/tmp/mc-ready",
+          "ready",
+          "local"
+        ],
+        "interval": "2s",
+        "timeout": "2s",
+        "retries": 20,
+        "start_period": "3s"
+      }
+    },
+    "minio-bucket": {
+      "restart": "no",
+      "pull_policy": "never",
+      "read_only": true,
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "networks": [
+        "private"
+      ],
+      "pids_limit": 256,
+      "cpus": 1.0,
+      "labels": {
+        "com.aeep.engineering.owner": "aeep-langfuse-engineering-20261104"
+      },
+      "logging": {
+        "driver": "json-file",
+        "options": {
+          "max-size": "1m",
+          "max-file": "1"
+        }
+      },
+      "image": "cgr.dev/chainguard/minio@sha256:f4c90d3148e56e4b720a5663a9e45428bac3e38c39681bbc0d8692ed1086ff09",
+      "mem_limit": "128m",
+      "memswap_limit": "128m",
+      "container_name": "aeep-langfuse-engineering-20261104-minio-bucket",
+      "user": "501:20",
+      "entrypoint": [
+        "/usr/bin/mc"
+      ],
+      "command": [
+        "--config-dir",
+        "/run/mc",
+        "mb",
+        "--ignore-existing",
+        "aeep/langfuse"
+      ],
+      "volumes": [
+        {
+          "type": "bind",
+          "source": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/langfuse-service-20261104/mc",
+          "target": "/run/mc",
+          "read_only": false
+        }
+      ],
+      "tmpfs": {
+        "/tmp": "rw,noexec,nosuid,size=64m"
+      }
+    },
+    "web": {
+      "restart": "no",
+      "pull_policy": "never",
+      "read_only": true,
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "networks": [
+        "private"
+      ],
+      "pids_limit": 256,
+      "cpus": 1.0,
+      "labels": {
+        "com.aeep.engineering.owner": "aeep-langfuse-engineering-20261104"
+      },
+      "logging": {
+        "driver": "json-file",
+        "options": {
+          "max-size": "1m",
+          "max-file": "1"
+        }
+      },
+      "image": "docker.langfuse.com/langfuse/langfuse@sha256:30da3fc4e5ebda606bca1598a477fb6da68ed004248e9218f6655f2d9ff7d988",
+      "mem_limit": "1024m",
+      "memswap_limit": "1024m",
+      "container_name": "aeep-langfuse-engineering-20261104-web",
+      "user": "1001:1001",
+      "command": [
+        "node",
+        "web/server.js",
+        "--keepAliveTimeout",
+        "110000"
+      ],
+      "environment": {
+        "NEXTAUTH_URL": "http://127.0.0.1:39067",
+        "DATABASE_URL": "postgresql://postgres:REVIEWED_NEW_LOCAL_POSTGRES@postgres:5432/langfuse",
+        "SALT": "REVIEWED_NEW_LOCAL_SALT",
+        "ENCRYPTION_KEY": "REVIEWED_NEW_LOCAL_ENCRYPTION",
+        "TELEMETRY_ENABLED": "false",
+        "LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES": "false",
+        "LANGFUSE_IN_APP_AGENT_ENABLED": "false",
+        "LANGFUSE_REQUIRE_FIPS": "false",
+        "LANGFUSE_S3_BATCH_EXPORT_ENABLED": "false",
+        "LANGFUSE_USE_AZURE_BLOB": "false",
+        "LANGFUSE_USE_OCI_NATIVE_OBJECT_STORAGE": "false",
+        "CLICKHOUSE_MIGRATION_URL": "clickhouse://clickhouse:9000",
+        "CLICKHOUSE_URL": "http://clickhouse:8123",
+        "CLICKHOUSE_USER": "clickhouse",
+        "CLICKHOUSE_PASSWORD": "REVIEWED_NEW_LOCAL_CLICKHOUSE",
+        "CLICKHOUSE_CLUSTER_ENABLED": "false",
+        "REDIS_HOST": "redis",
+        "REDIS_PORT": "6379",
+        "REDIS_AUTH": "REVIEWED_NEW_LOCAL_REDIS",
+        "REDIS_TLS_ENABLED": "false",
+        "NODE_OPTIONS": "--max-old-space-size=640",
+        "LANGFUSE_S3_EVENT_UPLOAD_BUCKET": "langfuse",
+        "LANGFUSE_S3_EVENT_UPLOAD_REGION": "auto",
+        "LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID": "aeepminio",
+        "LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY": "REVIEWED_NEW_LOCAL_MINIO",
+        "LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT": "http://minio:9000",
+        "LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE": "true",
+        "LANGFUSE_S3_EVENT_UPLOAD_PREFIX": "events/",
+        "LANGFUSE_S3_MEDIA_UPLOAD_BUCKET": "langfuse",
+        "LANGFUSE_S3_MEDIA_UPLOAD_REGION": "auto",
+        "LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID": "aeepminio",
+        "LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY": "REVIEWED_NEW_LOCAL_MINIO",
+        "LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT": "http://minio:9000",
+        "LANGFUSE_S3_MEDIA_UPLOAD_FORCE_PATH_STYLE": "true",
+        "LANGFUSE_S3_MEDIA_UPLOAD_PREFIX": "media/",
+        "LANGFUSE_AI_API_KEY": "",
+        "LANGFUSE_AI_PROVIDER": "",
+        "LANGFUSE_AI_MODEL": "",
+        "LANGFUSE_AI_BASE_URL": "",
+        "LANGFUSE_EE_LICENSE_KEY": "",
+        "SMTP_CONNECTION_URL": "",
+        "EMAIL_FROM_ADDRESS": "",
+        "LANGFUSE_INGESTION_CLICKHOUSE_WRITE_INTERVAL_MS": "1000",
+        "LANGFUSE_INGESTION_QUEUE_DELAY_MS": "1000",
+        "HOSTNAME": "0.0.0.0",
+        "PORT": "3000",
+        "NEXTAUTH_SECRET": "REVIEWED_NEW_LOCAL_NEXTAUTH",
+        "LANGFUSE_INIT_ORG_ID": "cm0000000000000000000aeep0",
+        "LANGFUSE_INIT_ORG_NAME": "AEEP private engineering",
+        "LANGFUSE_INIT_PROJECT_ID": "cm0000000000000000000aeep1",
+        "LANGFUSE_INIT_PROJECT_NAME": "Receipt linkage engineering",
+        "LANGFUSE_INIT_PROJECT_PUBLIC_KEY": "pk-lf-REVIEWED_NEW_LOCAL_PUBLIC",
+        "LANGFUSE_INIT_PROJECT_SECRET_KEY": "sk-lf-REVIEWED_NEW_LOCAL_SECRET",
+        "LANGFUSE_INIT_USER_EMAIL": "aeep-local@example.invalid",
+        "LANGFUSE_INIT_USER_NAME": "Local engineering operator",
+        "LANGFUSE_INIT_USER_PASSWORD": "REVIEWED_NEW_LOCAL_PASSWORD"
+      },
+      "ports": [
+        {
+          "target": 3000,
+          "published": "39067",
+          "host_ip": "127.0.0.1",
+          "protocol": "tcp"
+        }
+      ],
+      "tmpfs": {
+        "/tmp": "rw,noexec,nosuid,size=64m",
+        "/app/web/.next/cache": "rw,noexec,nosuid,size=32m,uid=1001,gid=1001"
+      }
+    },
+    "worker": {
+      "restart": "no",
+      "pull_policy": "never",
+      "read_only": true,
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "networks": [
+        "private"
+      ],
+      "pids_limit": 256,
+      "cpus": 1.0,
+      "labels": {
+        "com.aeep.engineering.owner": "aeep-langfuse-engineering-20261104"
+      },
+      "logging": {
+        "driver": "json-file",
+        "options": {
+          "max-size": "1m",
+          "max-file": "1"
+        }
+      },
+      "image": "docker.langfuse.com/langfuse/langfuse-worker@sha256:18f884c4b8231988aeedc1edb230167013e3286fddfc8d81471a002fa51dbc60",
+      "mem_limit": "1024m",
+      "memswap_limit": "1024m",
+      "container_name": "aeep-langfuse-engineering-20261104-worker",
+      "user": "1001:1001",
+      "environment": {
+        "NEXTAUTH_URL": "http://127.0.0.1:39067",
+        "DATABASE_URL": "postgresql://postgres:REVIEWED_NEW_LOCAL_POSTGRES@postgres:5432/langfuse",
+        "SALT": "REVIEWED_NEW_LOCAL_SALT",
+        "ENCRYPTION_KEY": "REVIEWED_NEW_LOCAL_ENCRYPTION",
+        "TELEMETRY_ENABLED": "false",
+        "LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES": "false",
+        "LANGFUSE_IN_APP_AGENT_ENABLED": "false",
+        "LANGFUSE_REQUIRE_FIPS": "false",
+        "LANGFUSE_S3_BATCH_EXPORT_ENABLED": "false",
+        "LANGFUSE_USE_AZURE_BLOB": "false",
+        "LANGFUSE_USE_OCI_NATIVE_OBJECT_STORAGE": "false",
+        "CLICKHOUSE_MIGRATION_URL": "clickhouse://clickhouse:9000",
+        "CLICKHOUSE_URL": "http://clickhouse:8123",
+        "CLICKHOUSE_USER": "clickhouse",
+        "CLICKHOUSE_PASSWORD": "REVIEWED_NEW_LOCAL_CLICKHOUSE",
+        "CLICKHOUSE_CLUSTER_ENABLED": "false",
+        "REDIS_HOST": "redis",
+        "REDIS_PORT": "6379",
+        "REDIS_AUTH": "REVIEWED_NEW_LOCAL_REDIS",
+        "REDIS_TLS_ENABLED": "false",
+        "NODE_OPTIONS": "--max-old-space-size=640",
+        "LANGFUSE_S3_EVENT_UPLOAD_BUCKET": "langfuse",
+        "LANGFUSE_S3_EVENT_UPLOAD_REGION": "auto",
+        "LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID": "aeepminio",
+        "LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY": "REVIEWED_NEW_LOCAL_MINIO",
+        "LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT": "http://minio:9000",
+        "LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE": "true",
+        "LANGFUSE_S3_EVENT_UPLOAD_PREFIX": "events/",
+        "LANGFUSE_S3_MEDIA_UPLOAD_BUCKET": "langfuse",
+        "LANGFUSE_S3_MEDIA_UPLOAD_REGION": "auto",
+        "LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID": "aeepminio",
+        "LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY": "REVIEWED_NEW_LOCAL_MINIO",
+        "LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT": "http://minio:9000",
+        "LANGFUSE_S3_MEDIA_UPLOAD_FORCE_PATH_STYLE": "true",
+        "LANGFUSE_S3_MEDIA_UPLOAD_PREFIX": "media/",
+        "LANGFUSE_AI_API_KEY": "",
+        "LANGFUSE_AI_PROVIDER": "",
+        "LANGFUSE_AI_MODEL": "",
+        "LANGFUSE_AI_BASE_URL": "",
+        "LANGFUSE_EE_LICENSE_KEY": "",
+        "SMTP_CONNECTION_URL": "",
+        "EMAIL_FROM_ADDRESS": "",
+        "LANGFUSE_INGESTION_CLICKHOUSE_WRITE_INTERVAL_MS": "1000",
+        "LANGFUSE_INGESTION_QUEUE_DELAY_MS": "1000"
+      },
+      "tmpfs": {
+        "/tmp": "rw,noexec,nosuid,size=64m"
+      }
+    }
+  },
+  "networks": {
+    "private": {
+      "name": "aeep-langfuse-engineering-20261104-private",
+      "internal": true,
+      "labels": {
+        "com.aeep.engineering.owner": "aeep-langfuse-engineering-20261104"
+      }
+    }
+  },
+  "volumes": {
+    "postgres-data": {
+      "name": "aeep-langfuse-engineering-20261104-postgres-data",
+      "labels": {
+        "com.aeep.engineering.owner": "aeep-langfuse-engineering-20261104"
+      }
+    },
+    "clickhouse-data": {
+      "name": "aeep-langfuse-engineering-20261104-clickhouse-data",
+      "labels": {
+        "com.aeep.engineering.owner": "aeep-langfuse-engineering-20261104"
+      }
+    },
+    "clickhouse-logs": {
+      "name": "aeep-langfuse-engineering-20261104-clickhouse-logs",
+      "labels": {
+        "com.aeep.engineering.owner": "aeep-langfuse-engineering-20261104"
+      }
+    },
+    "minio-data": {
+      "name": "aeep-langfuse-engineering-20261104-minio-data",
+      "labels": {
+        "com.aeep.engineering.owner": "aeep-langfuse-engineering-20261104"
+      }
+    },
+    "redis-data": {
+      "name": "aeep-langfuse-engineering-20261104-redis-data",
+      "labels": {
+        "com.aeep.engineering.owner": "aeep-langfuse-engineering-20261104"
+      }
+    }
+  }
+}
