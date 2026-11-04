@@ -1,5 +1,37 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- worker-readiness-review-20261103:start -->
+**November 3: current readiness source verified; corrected execution bundle awaiting approval.**
+All thirteen gates pass on source
+`c48e931b47647a400d87f7e1236821ff4243c2ca20f2d6f1dd8f5e4ec5d10659`:
+2,041 tests /21 skips in each full run,82.62% combined coverage,both branch gates,
+and package build. The [evidence and next action](../../reports/toolkit-v2/c13/worker-readiness-correction-20261103/README.md)
+separate first-party fixtures from actual execution. The exact tested source is retained locally, including unrelated CI edits kept
+outside this feature commit. No source-check process remains. Next: record applicable approval for that exact
+review, then run `run.py REVIEW_SHA256` and the separate `run-components.py`
+package/docs commands in its directory. Inspect started/result files before
+any command; never replay a terminal attempt.
+
+The prepared correction uses the retained original control parent,0555 directories,
+0444 files and the existing native directory-symlink pattern. The new neutral
+`stack-check` source is pinned at`f8f9fba`; the recursive-skill guard is unchanged.
+The terminal`b01793ac` attempt retains its image,four charges and zero used turns.
+No corrected build,worker or model has run. The continuation uses the ordinary
+readiness CLI and existing exact review before the two unstarted engine checks.
+The original cumulative144operations/6,200seconds/two-turn ceiling stays intact.
+The [grouped review](../../reports/toolkit-v2/c13/worker-readiness-correction-20261103/operation-review.json)
+binds the current wheel plus 32 cached dependencies and current offline docs. Normal50GiB storage controls apply; all Docker resources stay.
+
+[Balanced SkillsBench transport preparation](../../reports/toolkit-v2/c13/skillsbench-transport-20261103/README.md)
+retains all six original tasks and excludes restricted bundled skills. All fit
+the existing transport without executing upstream code. Asset-use determinations,
+reviewed runtimes,protected reference/counterexample checks and both CLI journeys
+remain open. External reconciliation inputs have no discovered license; no model
+disclosure is inferred. Waza still lacks supported backend access. All-stack,
+candidate usefulness,selection usefulness,resources and release remain separate.
+Comparative campaigns stay paused. Parent`f8f9fba`;unrelated CI work is preserved.
+<!-- worker-readiness-review-20261103:end -->
+
 <!-- worker-readiness-implementation-20261103:start -->
 **November 3: ordinary CLI readiness preparation implemented; full source checks running.**
 `workflow prepare-worker-readiness` now connects actual paired inspection records

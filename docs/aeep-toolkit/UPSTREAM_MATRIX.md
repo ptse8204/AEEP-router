@@ -1898,3 +1898,14 @@ synthetic guards cannot close that requirement. The
 retain the original two-turn ceiling. The ASE0.7 SDK contract passed earlier;
 controlled dispatch, managed-engine completion and both SkillsBench domain
 journeys remain open. No upstream pin or dependency changed.
+
+## November 3 — canonical readiness and corrected engineering fixture
+
+The ordinary readiness command is verified on current source through all thirteen
+source gates. Actual controlled ASE/managed dispatch is still unproven. The
+stopped review retains its costs and image; no model ran. The prepared correction
+uses the existing symlink strategy and a nonrecursive neutral fixture, preserving
+the skill guard. See the [bounded correction](../../reports/toolkit-v2/c13/worker-readiness-correction-20261103/README.md).
+The [six-task transport audit](../../reports/toolkit-v2/c13/skillsbench-transport-20261103/README.md)
+is static preparation only: original tasks fit, restricted skills are excluded,
+and asset rights/runtime/reference gates remain open. No comparison resumes.

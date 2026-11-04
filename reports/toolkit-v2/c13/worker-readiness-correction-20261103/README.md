@@ -1,39 +1,61 @@
-# Canonical worker readiness and permission correction
+# Controlled evaluator correction and ordinary readiness
 
-The ordinary workflow CLI now drafts canonical readiness from settled paired
-inspections. It reuses the existing worker, probe, journal, operation, conformance
-and review contracts. No service, database, scheduler or model-facing authority
-was added. Existing v1/v2 workflow definitions keep their meanings.
+The ordinary workflow CLI now prepares canonical readiness from settled paired
+inspections. It reuses the existing worker, probe, journal, accounting, conformance
+and review contracts. Existing v1/v2 workflow definitions keep their meanings.
 
-`workflow prepare-worker-readiness` requires the actual two request IDs and a
-new output file. It verifies all eleven probe identities per worker, the matching
-terminal journal, current source dependencies and settled charges on the same
-grant. Selected collectors also require a denial observation in that journal.
-It creates unreviewed definitions and an amendment proposal. The existing
-operator review and conformance checks still control consumption. It never starts
-workers, grants access, replays inspections or overwrites output files.
+`workflow prepare-worker-readiness` verifies the two request IDs, all eleven
+probe identities per worker, terminal journals, current source, worker identity
+and settled same-grant charges. Selected collectors require a denial observation
+in the same journal. It stores unreviewed definitions and an amendment proposal;
+existing operator review and conformance checks still control consumption. It
+starts no worker, grants no authority and never replays an inspection.
 
-Twenty focused first-party tests pass, including journal/worker drift, missing
-or conflicting probes, source drift, foreign grants, unmeasured costs and a
-collector flag without journal evidence. Synthetic grants and protocol substitutes
-stay inside temporary test databases. These tests are not actual conformance.
-The full thirteen source gates are running on `c48e931b47647a400d87f7e1236821ff4243c2ca20f2d6f1dd8f5e4ec5d10659`;
-[checks.json](verification/checks.json) is the current record. All old results keep
-their original source scope. Unrelated CI edits are preserved outside these
-implementation commits.
+All thirteen [source checks](verification/checks.json) pass on
+`c48e931b47647a400d87f7e1236821ff4243c2ca20f2d6f1dd8f5e4ec5d10659`.
+Both full test runs passed 2,041 tests, with 21 intentional skips. Total combined
+coverage is 82.62%; both required branch gates pass. The installed wheel check is
+prepared, not executed. The [source inventory](source-snapshot.json) preserves the
+exact tested checkout in a private local snapshot, including unrelated CI edits
+that remain outside these feature commits. The source digest describes those
+bytes; it is not a claim that the feature commit includes someone else's edits. Twenty focused readiness tests use temporary synthetic
+state and do not establish actual worker conformance.
 
-The approved `b01793ac` attempt built image `10a756a7d479`, then stopped at worker
-readiness before models. Its [results](../ase-controlled-workflow-20261103/RESULTS.md)
-retain four operations and zero model turns. Read-only layer inspection proved
-that three directories have mode0444. The proposed Dockerfile changes only those
-directories to0555, keeps file bytes/modes unchanged, and returns to the original
-nonroot user. It uses the existing `/bin/chmod`, with no download or installation.
-This build is not authorized or executed yet.
+The approved `b01793ac` attempt retained image `10a756a7d479`, then stopped at
+worker readiness before models. Its [results](../ase-controlled-workflow-20261103/RESULTS.md)
+retain four operations and zero model turns. COPY set required directories to
+0444. Further static inspection found that Codex needs the existing directory-
+symlink alias pattern and rejects the fixture's recursive `aeep-` name.
 
-Next: complete source verification, bind the new wheel and unchanged cached
-dependencies, then prepare one grouped correction/build/containment/CLI/wheel/docs
-review. Include the ordinary readiness command and the original two unstarted
-engine turns. Keep the original cumulative144-operation/6,200-second ceiling and
-all charges. Verify directory modes before fresh workers; keep every image.
-No comparative campaign resumes. Both SkillsBench journeys, other upstream
-integrations, usefulness, resource acceptance and release remain open.
+The correction uses the retained original control image, explicit 0555 directory
+modes, 0444 files and a directory symlink. It pins the renamed `stack-check`
+fixture at commit `f8f9fba391f32942ebc2471b702c95df936313e7`; the recursion guard
+stays unchanged. No corrected image has been built. First-party
+[packaging controls](packaging-controls.json) verify constructor, catalog mapping,
+recursion rejection and alias behavior; actual Codex inventory is still unobserved.
+
+The proposed run verifies the new layers before fresh workers, preserves partial
+inspection failures, and uses the ordinary readiness command before preparing
+one ASE and one explicitly selected managed-engine task. Both are required-use
+engineering checks on the same previously exposed public task. They are not a
+capability comparison, a SkillsBench journey or qualification evidence.
+
+The original cumulative ceiling remains 144 operations, 6,200 reserved seconds,
+two model turns and zero cash. The four charged operations remain inside it.
+The measured historical static inspection is reconciled once under its original
+scope; no duration is inferred or refunded. Canonical execution and setup
+intervals are excluded from wrapper timing to avoid double counting. Complete
+product-wide workflow accounting remains a separate open gate.
+
+One grouped review also binds the current wheel with 32 unchanged cached
+dependencies and the 72 current documentation inputs with retained offline tools.
+Components have separate attempts. No downloads, pulls, new destinations,
+credentials, admission or release are proposed. All images, runtimes, volumes,
+backups and unrelated work stay. The proxy must return to its original stopped
+state. Keep the normal 50 GiB actual-free-space reserve.
+
+Next: obtain applicable approval for this changed image/candidate, fresh worker
+attempt and changed installed artifact. Then run each component once under that
+review and inspect canonical evidence before continuing. Do not replay terminal
+attempts or transfer older source evidence. Comparisons stay paused; all-stack,
+both-domain, usefulness, resource and release acceptance remain open.
