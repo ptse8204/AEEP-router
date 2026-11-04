@@ -340,6 +340,12 @@ def main(argv: list[str] | None = None) -> None:
     define_scanner = commands.add_parser('define-scanner', help='Store an inert scanner runtime definition; no review or execution')
     define_scanner.add_argument('--file', type=Path, required=True)
     define_scanner.add_argument('--manifest', type=Path, required=True)
+    worker_readiness = commands.add_parser('prepare-worker-readiness',
+        help='Draft canonical readiness from settled paired-worker observations; no review or execution')
+    worker_readiness.add_argument('--manifest', type=Path, required=True)
+    worker_readiness.add_argument('--control-request', required=True)
+    worker_readiness.add_argument('--treatment-request', required=True)
+    worker_readiness.add_argument('--output', type=Path, required=True)
     for name in ('setup', 'readiness', 'remove'):
         command = commands.add_parser(name, help='Selected private Python runtimes; functional evidence remains separate')
         command.add_argument('--workflow', type=Path, required=True)
@@ -354,6 +360,28 @@ def main(argv: list[str] | None = None) -> None:
             from .workflow_security import scan
             print(json.dumps(scan(args.workflow, args.configuration, accounting=args.accounting,
                 operation_key=args.operation_id, reviewed_digest=args.reviewed_digest), indent=2))
+            return
+        if args.operation == 'prepare-worker-readiness':
+            import asyncio
+
+            from aeep.assessment.service import AssessmentService
+            from aeep.router import Router
+
+            from .worker_readiness import prepare_readiness
+
+            if args.output.exists() or not args.output.parent.is_dir():
+                raise ValueError('worker readiness output requires a new file in an existing directory')
+            router = Router.from_manifest(args.manifest)
+            try:
+                service = AssessmentService(router, args.manifest.absolute().parent / '.aeep/assessments')
+                result = prepare_readiness(service, args.control_request, args.treatment_request)
+                with args.output.open('x') as stream:
+                    json.dump(result, stream, indent=2)
+                    stream.write('\n')
+                print(json.dumps({'output':str(args.output.absolute()), 'reviewed':False,
+                    'execution_authorized':False, 'workers_started':False}))
+            finally:
+                asyncio.run(router.close())
             return
         if args.operation in {'define-rights', 'define-scheduler', 'define-accounting', 'define-scanner'}:
             import asyncio

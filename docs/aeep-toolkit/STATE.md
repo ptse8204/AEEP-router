@@ -1,5 +1,33 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- worker-readiness-implementation-20261103:start -->
+**November 3: ordinary CLI readiness preparation implemented; full source checks running.**
+`workflow prepare-worker-readiness` now connects actual paired inspection records
+to existing canonical conformance definitions. It verifies eleven probes per
+worker, terminal journals, identity/source bindings, same-grant settled costs and
+selected collector denial. Output remains unreviewed; no authority, worker,
+service, model or replay is created. Existing output files are preserved. Twenty
+focused first-party tests pass; all synthetic state stays in temporary test DBs.
+
+The [source verification record](../../reports/toolkit-v2/c13/worker-readiness-correction-20261103/README.md)
+is running all thirteen required gates on `c48e931b47647a400d87f7e1236821ff4243c2ca20f2d6f1dd8f5e4ec5d10659`.
+Five quick gates passed; full regression/coverage are pending. This rerun is needed
+because readiness code changed, not to add benchmark counts. Do not edit source
+while its controller runs. Prior source/scanner/wheel/docs results keep their
+original scope; all-stack current-source acceptance stays open.
+
+A directory-only correction is prepared for retained image10a756a7d479: chmod0555
+on the three proven nontraversable directories, unchanged files and nonroot runtime.
+No new build has run. After verification/build, prepare a grouped current-wheel,
+permission-image, fresh-containment, two unstarted CLI engine turns and offline
+docs review. Preserve the original cumulative144operations/6,200seconds, old four
+charges and zero used model turns. Do not repeat the terminal parent attempt.
+Continue balanced SkillsBench input/rights/runtime preparation. Comparisons,
+usefulness, resources and release remain separate and open. Parent `0b88950`;
+unrelated CI work preserved. Verification controller session87970 is active.
+<!-- worker-readiness-implementation-20261103:end -->
+
+
 <!-- ase-controlled-failure-20261103:start -->
 **November 3: approved controlled engineering attempt stopped before models.**
 Review `b01793ac` built and retained image `10a756a7d479`; paired inspection then

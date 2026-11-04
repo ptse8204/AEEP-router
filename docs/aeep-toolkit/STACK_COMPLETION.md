@@ -125,9 +125,29 @@ definitions, change a grant, install components, enqueue work or start a model.
 Existing subject, recipe, environment, experiment and task-set records are
 required. Interrupted preparation retains its intent and requires inspection;
 completed preparation can export the same canonical draft again to a new directory.
-An explicit ASE scheduling definition now connects external scheduling to the
-same canonical trial runner. Its new runtime has not been executed; previews
-still cannot establish functional readiness.
+An explicit ASE scheduling definition connects external scheduling to the same
+canonical trial runner. The retained runtime has passed its actual scheduler and
+grader contract check on synthetic certificates. Controlled model dispatch still
+needs applicable evidence; previews cannot establish functional readiness.
+
+After a reviewed paired inspection settles, prepare its canonical readiness
+definitions through the ordinary CLI:
+
+```bash
+PYTHONPATH=src python3 -m aeep_toolkit workflow prepare-worker-readiness \
+  --manifest /absolute/path/manifest.json \
+  --control-request CONTROL_REQUEST --treatment-request TREATMENT_REQUEST \
+  --output /absolute/path/new-readiness-review.json
+```
+
+This resolves the actual inspection records, all eleven canonical probes per
+worker, their terminal journals and settled costs. A selected trusted collector
+also requires its denial observation in the same journal. Failed, missing or
+conflicting evidence stops preparation. The command stores unreviewed definitions
+and an exact scope-amendment proposal. It starts no worker, changes no grant and
+does not approve its own result. Existing operator review and conformance checks
+are still required before a plan consumes those records. Preparation preserves
+existing output files and never replays an inspection.
 
 `assessment.integration-cases.v1`, setup v2 and plan v7 cover one to six distinct
 upstream tasks for stack checks. They require a reviewed, required-use experiment,

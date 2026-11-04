@@ -2646,3 +2646,14 @@ SkillsBench domain journeys as separate unfinished milestones. The
 [exact grouped review](../../reports/toolkit-v2/c13/ase-controlled-workflow-20261103/README.md)
 requires two model reservations maximum and actual fresh containment/capture.
 Existing successful checks and old charges are retained, not replayed for counts.
+
+## November 3: make canonical worker readiness an ordinary preparation step
+
+Paired inspection and canonical conformance are separate records. The ordinary
+CLI now prepares the latter from actual settled observations, retaining the
+existing operator review before use. No reported pass flag or metadata preview
+can supply missing probes, identity, cleanup, source or charge evidence. Preserve
+historical semantics and keep this command outside model-facing tools. The
+[implementation and verification](../../reports/toolkit-v2/c13/worker-readiness-correction-20261103/README.md)
+remain separate from actual worker/model execution. Correct image directory modes
+under a new bounded review; do not replay the failed parent attempt.

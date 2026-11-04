@@ -1888,3 +1888,13 @@ pinned skill and an existing protected repository task. The managed fallback is
 a separate frozen engine check, never an automatic response to ASE failure.
 No worker, service, build or model has run under this pending review. Both
 SkillsBench domain journeys and the all-integration gate remain open.
+
+## November 3: reusable worker-readiness preparation implemented
+
+The ordinary workflow CLI now prepares existing conformance definitions from
+charged paired inspections. Actual worker execution of the new source is pending;
+synthetic guards cannot close that requirement. The
+[source checks and proposed directory correction](../../reports/toolkit-v2/c13/worker-readiness-correction-20261103/README.md)
+retain the original two-turn ceiling. The ASE0.7 SDK contract passed earlier;
+controlled dispatch, managed-engine completion and both SkillsBench domain
+journeys remain open. No upstream pin or dependency changed.
