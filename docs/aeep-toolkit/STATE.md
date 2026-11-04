@@ -20,11 +20,18 @@ The [snapshot correction](../../reports/toolkit-v2/c13/integration-snapshot-corr
 resolves only a v7/v8 plan's exact integration set and matching request ID; it
 excludes unrelated task sets and keeps legacy rules. Twenty-three focused tests
 and the actual stored-plan constructor check pass, with no executor dispatch or
-grant changes. All thirteen source gates are running on
-`cfc36a2aeda4e220046722dbdbc81fbf2376deb12b9f7266abdab81bddcec9e1`.
-Do not edit source while session80083 runs. Next: inspect that verification,
-then prepare one current-source continuation using the retained corrected image,
-fresh worker evidence and the original two-turn cumulative envelope. Never replay
+grant changes. All thirteen source gates passed on
+`cfc36a2aeda4e220046722dbdbc81fbf2376deb12b9f7266abdab81bddcec9e1`: both
+full runs passed2,052tests/21skips,82.63%coverage,and both branch gates. The process
+is finished. Exact source is retained privately, including unrelated CI edits kept
+outside these commits. The [fresh continuation review](../../reports/toolkit-v2/c13/integration-snapshot-correction-20261103/operation-review.json)
+binds the retained image,current wheel+32unchanged dependencies,current offline
+docs,fresh readiness and at most two engineering turns. Nothing under this new
+review has executed. Next: record its applicable approval, inspect started/result
+files, then run its driver and independent package/docs components. The original
+144-operation/6,200-second/two-turn ceiling stays;14operations remain charged.
+Each engine must fit its full preview after actual prior costs settle; otherwise
+leave it unstarted. No build,download,new destination,credential or cash is proposed. Never replay
 the terminal attempt or repeat unchanged successful checks. Source/installed
 artifact changes and a fresh engine attempt require applicable review.
 
@@ -32,7 +39,10 @@ SkillsBench task transports and protected-verifier contracts are prepared only;
 rights, runtimes and reference/control journeys remain open. Waza still lacks
 supported backend access. All-stack, both-domain, candidate usefulness, selection
 usefulness, resources and release stay separate. Comparisons remain paused.
-Parent `2804ddf`; unrelated CI work is preserved.
+The [SkillRank interface audit](../../reports/toolkit-v2/c13/skillrank-interface-preparation-20261103/README.md)
+verified twelve pinned source files and its reusable runner/verifier traits. Its
+86 locked registry dependencies are not cached; no runtime, service or integration
+pass is claimed. Parent `41e40e0`; unrelated CI work is preserved.
 <!-- integration-snapshot-correction-20261103:end -->
 
 <!-- worker-readiness-review-20261103:start -->

@@ -2680,3 +2680,16 @@ The narrow resolver correction accepts only the exact bound v7/v8 task set and
 excludes unrelated tasks; it does not create a legacy alias. Focused and actual
 stored-plan constructor checks pass. Full source verification is running. No
 evaluator, SkillsBench, usefulness, resource or release gate is closed by this.
+
+## November 3 — verified integration snapshot correction
+
+All thirteen source gates pass on `cfc36a2a`, with2,052tests/21skips in each
+full run,82.63%combined coverage and both branch gates. The corrected stored-plan
+constructor passes without upstream execution. The [fresh review](../../reports/toolkit-v2/c13/integration-snapshot-correction-20261103/README.md)
+reuses image`bf4581894c1d`; it proposes no new build or dependencies. Fourteen
+operations remain charged inside the original cumulative envelope. Engine turns
+are still unstarted and need applicable current-artifact execution authority.
+SkillRank's [pinned source audit](../../reports/toolkit-v2/c13/skillrank-interface-preparation-20261103/README.md)
+identifies its actual core callback interfaces and loopback server, with registry
+licensing separate. It is preparation only;86 locked packages are not cached and
+no SkillRank code ran. All stack/usefulness/resource/release gates stay separate.
