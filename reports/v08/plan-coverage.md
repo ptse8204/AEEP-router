@@ -1,5 +1,21 @@
 # 0.8 plan coverage and remaining work
 
+<!-- toolhive-native-static-preparation-20261104:start -->
+**November 4: additional read-only ToolHive preparation.**
+[The native dependency inventory](../toolkit-v2/c13/toolhive-native-preparation-20261104/README.md)
+preserves pin33ba170aad63 and distinguishes343 declared versions from464
+checksum-listed zip versions. Every declared version has both upstream h1
+checksums. The existing Go1.27.1 SDK and15,570 entries are fingerprinted; no
+compiler, module download or service ran. Native build closure and licenses
+remain unverified. No source pin changes or compiler installation is proposed.
+
+This independent metadata work leaves pending Langfuse reviewd7f05c3f and all of
+its source/docs/artifact bindings unchanged. Its source proof remains5a13a630;
+all13 gates passed. The source/documentation state is preserved until the scoped
+components run or are explicitly superseded. No approval or gate pass is inferred.
+Comparisons remain paused. Parentd534bd9; unrelated CI work/resources are preserved.
+<!-- toolhive-native-static-preparation-20261104:end -->
+
 <!-- workflow-telemetry-implementation-20261104:start -->
 **November 4: ordinary receipt export implemented; all 13 source gates pass.**
 The approved SkillRank CLI continuation passed and is pushed as5ecad73. Its
