@@ -1,0 +1,73 @@
+{
+  "passed": false,
+  "engines": {},
+  "models_ceiling": 2,
+  "comparisons": "PAUSED",
+  "collector_boundary": {
+    "11c915577c0146d4149950b065bcf7aa583f3137a274c86ce744de8826c87a0d": {
+      "collector_connection_denied": true,
+      "program_sha256": "c40f1554d6daf49e2254b9d01800f46f864ab39d46b5fce2965fda479b644487",
+      "scope_sha256": "222237e5c8133ab6a4a72a3f57d9fab8d0272617aed601a774947fa64350dfd1"
+    }
+  },
+  "error_type": "RuntimeError",
+  "error_message": "Fresh worker qualification is incomplete",
+  "proxy_restored_stopped": true,
+  "wrapper_accounting": {
+    "exclusive_seconds": 3.0422997078858316,
+    "canonical_execution_intervals_excluded_seconds": 4.025429041590542,
+    "setup_cost_intervals_excluded_seconds": 0.0025820829905569553,
+    "setup_cost_ids": [
+      "setup_cost_42230aae382b4717a11f0b76ac87ec28"
+    ],
+    "unstarted_setup_costs_are_not_inferred_paid": true
+  },
+  "auxiliary_operations": {
+    "plan_id": "ase-stack-owned-build-20261103",
+    "operations": [
+      {
+        "operation_id": "ase-stack-owned-build-20261103:copy-image",
+        "plan_id": "ase-stack-owned-build-20261103",
+        "stage": "owned_copy_image_build",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 180.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-11-04T00:03:55.657573Z",
+        "elapsed_seconds": 1.171338832937181,
+        "accounting": null,
+        "resources": null
+      },
+      {
+        "operation_id": "ase-stack-owned-build-20261103:proxy-exclusive-overhead",
+        "plan_id": "ase-stack-owned-build-20261103",
+        "stage": "owned_proxy_exclusive_overhead",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 120.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-11-04T00:03:57.860876Z",
+        "elapsed_seconds": 3.0422997078858316,
+        "accounting": null,
+        "resources": null
+      }
+    ]
+  },
+  "old_operation_states_after": {
+    "conformance_probe_85882b1252ac409aa073fcb3c33b87bb-native-client": "reserved",
+    "assessment_12735a46eb364c9c9cd2aa4868f290e1:report": "reserved"
+  },
+  "grant_after": [
+    13665,
+    3796,
+    125287.16139384964,
+    "0.0"
+  ],
+  "source_unchanged": true,
+  "runtime_unchanged": true,
+  "retained_images_and_runtimes": true
+}

@@ -1,5 +1,28 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- ase-controlled-failure-20261103:start -->
+**November 3: approved controlled engineering attempt stopped before models.**
+Review `b01793ac` built and retained image `10a756a7d479`; paired inspection then
+failed at treatment identity/policy. Zero model turns were used. Four original-
+grant operations / 12.034440374 seconds remain charged; counters now record
+13,665 operations and 3,796 turns. Both new workers were removed, the proxy is
+stopped, and all old reservations/images/volumes/runtimes remain. Source is still
+`c2eb4a3d`; successful source/scanner/wheel/docs evidence keeps its exact scope.
+
+The [actual results](../../reports/toolkit-v2/c13/ase-controlled-workflow-20261103/RESULTS.md)
+include read-only proof that COPY applied mode0444 to three required directories.
+Prepare a directory-only correction to0555, keeping all file bytes/modes. Do not
+repeat the terminal attempt. Static review also found a missing canonical
+conformance-assembly step and a wrapper that lost partial failed observations.
+Connect truthful readiness preparation to the ordinary CLI, verify the changed
+source, then prepare one grouped correction/runtime/wheel/docs review. The old
+two-turn ceiling and cumulative144operations/6,200seconds remain; no refund,
+automatic replay or extra model authority. Continue independent SkillsBench
+source/rights/runtime preparation; no corpus expansion or comparison resumes.
+All stack/both-domain, usefulness, resource and release gates remain open.
+Parent `d31cf75`; unrelated CI work preserved.
+<!-- ase-controlled-failure-20261103:end -->
+
 <!-- ase-controlled-workflow-prepared-20261103:start -->
 **November 3: two controlled evaluator engineering checks prepared; exact execution approval pending.**
 The [grouped review](../../reports/toolkit-v2/c13/ase-controlled-workflow-20261103/README.md)
