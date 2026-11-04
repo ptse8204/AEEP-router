@@ -13,9 +13,10 @@ and BenchmarkRunner; it adds no scheduler, database or hosted service.
 
 The [component audit](../../reports/toolkit-v2/c13/stack-delivery-20261030/README.md)
 distinguishes actual upstream execution from report import, fixtures and research.
-The managed fallback remains selected under D40. Agent-skill-eval 0.7.0 remains
-the preferred upstream for its supported scripted path; its tested Codex contract
-does not satisfy managed evaluation requirements.
+The managed fallback remains selected under D40. Agent-skill-eval 0.7.0 also has
+a controlled AEEP worker bridge. Its upstream-native Codex harness remains
+unsupported. The [two-engine engineering record](../../reports/toolkit-v2/c13/integration-snapshot-correction-20261103/RESULTS.md)
+records actual scheduling and grading through each explicitly selected engine.
 
 ## Select an existing assessment
 
@@ -102,7 +103,9 @@ become product requirements because a fixture meets them.
 
 ## Differentiated capabilities and configurations
 
-The next demonstration targets repository maintenance with executable specialists:
+The following repository-specialist proposal is parked until the
+[complete-stack gate](STACK_COMPLETION.md) passes. It describes a later comparison,
+not the current delivery step. The proposal targets repository maintenance with executable specialists:
 Ruff's selected safe automatic fixes and LibCST's structural codemods. Their
 mechanisms differ from a general instruction skill: one applies lint-rule fixes;
 the other transforms Python syntax with metadata. These are candidate hypotheses,
@@ -142,10 +145,60 @@ The existing Ponytail comparisons remain valid negative/inconclusive evidence fo
 their tested scopes. Preserve their reports, charged turns and source bindings.
 They are not another run in this demonstration or a reason to fill test counts.
 
+## Retain and query a selected local catalog
+
+An operator can retain a reviewed upstream executable without installing it in
+the host environment. The file-runtime plan copies exact local artifacts into
+an owned private directory. Prepare it with `install-files-plan`, then bind its
+`installation` object as a JSON file under the selected configuration's `runtimes`.
+See the [installation guide](INSTALLATION_DESIGN.md#reviewed-file-runtimes).
+
+The existing `workflow setup`, `workflow readiness` and `workflow remove` commands
+accept both wheel and file installations. Select each runtime with `--runtime`.
+Omit `--reviewed-digest` for a preview. Setup and removal require the exact preview
+digest and a reviewed accounting scope. Readiness checks bytes and ownership;
+it does not establish functional readiness or execution permission. Removal
+preserves changed files and runtimes referenced by other configurations.
+
+For local SkillRank queries, select `skillrank`, its runtime binding, and an exact
+`catalog` file reference in the configuration. The referenced
+`aeep.toolkit.catalog-runtime.v1` definition binds the source revision, reviewed
+catalog data and rights, worker image, Docker executable, controller and existing
+authorization. Store that inert definition with the following command; it neither
+reviews nor executes it. Create the reviewed control directory before dispatch.
+
+```bash
+PYTHONPATH=src python3 -m aeep_toolkit workflow define-catalog \
+  --file /absolute/catalog-runtime.json --manifest /absolute/aeep.yaml
+```
+
+```bash
+PYTHONPATH=src python3 -m aeep_toolkit workflow catalog \
+  --workflow /absolute/workflow.json \
+  --configuration document-data \
+  --mode search --value spreadsheet
+```
+
+This previews the selected lookup without opening Docker or starting SkillRank.
+To execute after applicable approval, supply `--reviewed-digest` from that preview,
+`--accounting /absolute/accounting-v4.json` and a fresh `--operation-id`. Use
+`--mode show --value owner/skill` for one record. Accounting v4 adds explicit
+catalog authority; older accounting scopes keep their original stages.
+
+Execution mounts only the verified binary and AEEP packages read-only in the
+existing offline worker. SkillRank's upstream local server starts on container
+loopback, serves the reviewed catalog, and stops before worker removal. Every
+query reserves an operation; receipts and execution journals persist. Wrapper
+overhead excludes the nested lookup interval. Failed or interrupted work retains
+its charge, and uncertain cleanup blocks another dispatch. Catalog contents and
+query text are transient; canonical records retain their digests and references.
+Search results and upstream ratings do not establish safety or usefulness.
+
 ## Current verification boundary
 
-The new workflow interface has offline contract tests, including canonical report
-export from explicit synthetic records. An actual historical plan was bound and
-previewed without execution. Neither supplies fresh worker conformance or a new
-live end-to-end run. The component audit and its execution record identify the
-remaining work; no gate is promoted by this guide.
+Actual evaluator journeys and the pinned SkillRank build/search/show checks have
+their own source-bound records. The new file lifecycle and workflow catalog
+wiring have first-party checks; actual current-source CLI catalog execution still
+needs its reviewed functional check. SkillRank bounded evaluation remains open.
+The component audit and [persistent state](STATE.md) identify the remaining work.
+Neither component checks nor this guide close the complete-stack gate.

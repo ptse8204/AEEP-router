@@ -1,0 +1,349 @@
+{
+  "$defs": {
+    "AssessmentEnvironment": {
+      "additionalProperties": false,
+      "properties": {
+        "environment_id": {
+          "title": "Environment Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "trusted_local",
+            "container",
+            "codex_sandbox"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "identity": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Identity",
+          "type": "object"
+        },
+        "network": {
+          "default": false,
+          "title": "Network",
+          "type": "boolean"
+        },
+        "container_image": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Container Image"
+        },
+        "cpu_count": {
+          "default": 1,
+          "exclusiveMinimum": 0,
+          "maximum": 64,
+          "title": "Cpu Count",
+          "type": "number"
+        },
+        "memory_mb": {
+          "default": 256,
+          "maximum": 65536,
+          "minimum": 32,
+          "title": "Memory Mb",
+          "type": "integer"
+        },
+        "process_limit": {
+          "default": 64,
+          "maximum": 1024,
+          "minimum": 1,
+          "title": "Process Limit",
+          "type": "integer"
+        },
+        "container_runtime": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Container Runtime"
+        },
+        "container_socket": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Container Socket"
+        },
+        "read_only_roots": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Read Only Roots",
+          "type": "array"
+        },
+        "conformance_digests": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "pattern": "^[a-f0-9]{64}$",
+                "type": "string"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Conformance Digests"
+        },
+        "differential_conformance_digest": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Differential Conformance Digest"
+        }
+      },
+      "required": [
+        "environment_id",
+        "kind",
+        "identity"
+      ],
+      "title": "AssessmentEnvironment",
+      "type": "object"
+    },
+    "RecipeMaterializationRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "default": "assessment.recipe-materialization.v1",
+          "enum": [
+            "assessment.recipe-materialization.v1",
+            "assessment.recipe-materialization.v2"
+          ],
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "plan_id": {
+          "title": "Plan Id",
+          "type": "string"
+        },
+        "subject_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Subject Digest",
+          "type": "string"
+        },
+        "recipe_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Recipe Digest",
+          "type": "string"
+        },
+        "mapping_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Mapping Digest",
+          "type": "string"
+        },
+        "environment_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Environment Digest",
+          "type": "string"
+        },
+        "authorization_id": {
+          "title": "Authorization Id",
+          "type": "string"
+        },
+        "definition_digests": {
+          "items": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "title": "Definition Digests",
+          "type": "array"
+        },
+        "seed": {
+          "title": "Seed",
+          "type": "integer"
+        },
+        "runtime_dependencies": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "pattern": "^[a-f0-9]{64}$",
+                "type": "string"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Runtime Dependencies"
+        }
+      },
+      "required": [
+        "subject_digest",
+        "recipe_digest",
+        "mapping_digest",
+        "environment_digest",
+        "authorization_id",
+        "definition_digests",
+        "seed"
+      ],
+      "title": "RecipeMaterializationRequest",
+      "type": "object"
+    },
+    "SourcePin": {
+      "additionalProperties": false,
+      "properties": {
+        "repository": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "title": "Repository",
+          "type": "string"
+        },
+        "revision": {
+          "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$",
+          "title": "Revision",
+          "type": "string"
+        },
+        "artifact_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Artifact Sha256",
+          "type": "string"
+        },
+        "license_expression": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "License Expression",
+          "type": "string"
+        },
+        "data_rights": {
+          "maxLength": 1000,
+          "minLength": 1,
+          "title": "Data Rights",
+          "type": "string"
+        }
+      },
+      "required": [
+        "repository",
+        "revision",
+        "artifact_sha256",
+        "license_expression",
+        "data_rights"
+      ],
+      "title": "SourcePin",
+      "type": "object"
+    },
+    "WorkflowFile": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "title": "WorkflowFile",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.toolkit.catalog-runtime.v1",
+      "default": "aeep.toolkit.catalog-runtime.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_revision": {
+      "const": "5216bae9149b4ff8a7f9e014b6889fb094cee8e1",
+      "default": "5216bae9149b4ff8a7f9e014b6889fb094cee8e1",
+      "title": "Source Revision",
+      "type": "string"
+    },
+    "runtime_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+      "title": "Runtime Id",
+      "type": "string"
+    },
+    "environment": {
+      "$ref": "#/$defs/AssessmentEnvironment"
+    },
+    "request": {
+      "$ref": "#/$defs/RecipeMaterializationRequest"
+    },
+    "catalog": {
+      "$ref": "#/$defs/WorkflowFile"
+    },
+    "catalog_source": {
+      "$ref": "#/$defs/SourcePin"
+    },
+    "control_root": {
+      "title": "Control Root",
+      "type": "string"
+    },
+    "worker_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Worker Sha256",
+      "type": "string"
+    },
+    "executable_dependencies": {
+      "additionalProperties": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "maxProperties": 32,
+      "minProperties": 1,
+      "title": "Executable Dependencies",
+      "type": "object"
+    },
+    "timeout_seconds": {
+      "default": 45,
+      "maximum": 300,
+      "minimum": 10,
+      "title": "Timeout Seconds",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "runtime_id",
+    "environment",
+    "request",
+    "catalog",
+    "catalog_source",
+    "control_root",
+    "worker_sha256",
+    "executable_dependencies"
+  ],
+  "title": "CatalogRuntimeDefinition",
+  "type": "object"
+}

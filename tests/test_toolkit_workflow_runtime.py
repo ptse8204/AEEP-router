@@ -23,6 +23,41 @@ from aeep_toolkit.workflow_runtime import lifecycle, lifecycle_preview
 pytestmark = pytest.mark.usefixtures("installer_fixture_capacity")
 
 
+def test_file_runtime_uses_existing_workflow_setup_readiness_and_removal(tmp_path):
+    from aeep_toolkit.file_runtime import RuntimeFile, prepare_files
+
+    value = configured(tmp_path)
+    path, plans, router, repo, scope, accounting_file = value
+    try:
+        old = plans['python-0']
+        wheel = old.wheels[0]
+        source = Path(old.wheelhouse) / wheel.filename
+        # First-party synthetic wheel bytes are inert file data here, never installed/executed.
+        plan = prepare_files(old.preview, old.policy, Path(old.destination), Path(old.wheelhouse),
+            (RuntimeFile(extension_id=wheel.extension_id, source=wheel.filename,
+                         destination='data/fixture.whl', sha256=wheel.sha256,
+                         size_bytes=source.stat().st_size, primary=True),))
+        data = json.loads(path.read_text())
+        binding = data['configurations']['document-data']['runtimes']['python-0']['installation']
+        target = Path(binding['path'])
+        target.write_text(plan.model_dump_json())
+        binding['sha256'] = sha(target)
+        path.write_text(json.dumps(data))
+        scope.workflow_sha256 = sha(path)
+        accounting_file.write_text(scope.model_dump_json())
+        repo.review(repo.put('toolkit_workflow_accounting', content_digest(scope), scope))
+        setup = run(value, 'setup', 'file-setup')
+        assert setup['results'][0]['status'] == 'installed'
+        ready = run(value, 'readiness', 'file-readiness')
+        assert ready['observations']['python-0']['installed'] is True
+        assert ready['observations']['python-0']['functional_readiness'] == 'NOT_VERIFIED'
+        removed = run(value, 'remove', 'file-remove')
+        assert removed['results'][0]['status'] == 'removed'
+        assert not Path(plan.destination).exists()
+    finally:
+        router.store.close()
+
+
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 

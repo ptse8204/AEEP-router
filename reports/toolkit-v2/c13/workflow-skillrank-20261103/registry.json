@@ -1,0 +1,114 @@
+{
+  "schema_version": "aeep.toolkit.registry.v1",
+  "extensions": [
+    {
+      "schema_version": "aeep.toolkit.extension.v1",
+      "extension_id": "aeep-evaluator",
+      "purpose": "Explicit selected aeep-evaluator declaration; functional gate remains open.",
+      "role": "evaluator",
+      "source": {
+        "repository": "https://github.com/ptse8204/AEEP-router",
+        "revision": "0116d754bc7a7f86ddaf018043b13ef95789be114b2509b71e243bad32ae3ec5",
+        "artifact_sha256": "a1b12d268c69a772ec45d2a4e9390247fd47eee4f72d5ce8ba01caa2168c4663",
+        "license_expression": "Apache-2.0",
+        "data_rights": "First-party code only. No task or provider-disclosure authority granted."
+      },
+      "hosts": [
+        "codex"
+      ],
+      "platforms": [
+        "darwin-arm64"
+      ],
+      "dependencies": [],
+      "permissions": {
+        "network_destinations": [],
+        "filesystem_scope": "workspace",
+        "authentication": "none",
+        "financial_exposure": "none"
+      },
+      "disk_bytes": 0,
+      "memory_bytes": null,
+      "install_effects": [
+        "Declaration only; setup/model/task execution blocked."
+      ],
+      "rollback": "No setup occurred.",
+      "status": "blocked",
+      "qualification_ref": null,
+      "blockers": [
+        "Managed worker/service/plan/grader readiness and execution authority remain required."
+      ]
+    },
+    {
+      "schema_version": "aeep.toolkit.extension.v1",
+      "extension_id": "skillsbench",
+      "purpose": "Explicit selected skillsbench declaration; functional gate remains open.",
+      "role": "benchmark",
+      "source": {
+        "repository": "https://github.com/benchflow-ai/skillsbench",
+        "revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+        "artifact_sha256": "5d5903df2d53f2480638d014856164dfc11736177c64b7e30afae046ff375160",
+        "license_expression": "Apache-2.0",
+        "data_rights": "Repository notice only. Task-specific assets and bundled skills remain unreviewed; no rights grant inferred."
+      },
+      "hosts": [
+        "codex"
+      ],
+      "platforms": [
+        "darwin-arm64"
+      ],
+      "dependencies": [],
+      "permissions": {
+        "network_destinations": [],
+        "filesystem_scope": "workspace",
+        "authentication": "none",
+        "financial_exposure": "none"
+      },
+      "disk_bytes": 0,
+      "memory_bytes": null,
+      "install_effects": [
+        "Declaration only; setup/model/task execution blocked."
+      ],
+      "rollback": "No setup occurred.",
+      "status": "blocked",
+      "qualification_ref": null,
+      "blockers": [
+        "Task-specific asset rights, reviewed runtimes and protected verifier/reference journeys remain required."
+      ]
+    },
+    {
+      "schema_version": "aeep.toolkit.extension.v1",
+      "extension_id": "skillrank",
+      "purpose": "Retain Linux arm64 SkillRank and query reviewed local metadata only inside the pinned offline Linux worker.",
+      "role": "catalog",
+      "source": {
+        "repository": "https://github.com/buildbetter-app/skillrank",
+        "revision": "5216bae9149b4ff8a7f9e014b6889fb094cee8e1",
+        "artifact_sha256": "0996e6d80ad59046140f2763cf067e979941135a020a8489e0752d23653d8708",
+        "license_expression": "MIT",
+        "data_rights": "Private retained MIT SkillRank core binary; locked dependency notices retained. No redistribution clearance or external registry use."
+      },
+      "hosts": [
+        "codex"
+      ],
+      "platforms": [
+        "darwin-arm64"
+      ],
+      "dependencies": [],
+      "permissions": {
+        "network_destinations": [],
+        "filesystem_scope": "workspace",
+        "authentication": "none",
+        "financial_exposure": "none"
+      },
+      "disk_bytes": 4820241,
+      "memory_bytes": null,
+      "install_effects": [
+        "Copy reviewed Linux binary and license records into a private Mac-owned directory; no host execution or activation."
+      ],
+      "rollback": "Stop owned catalog workers; remove only an unchanged unreferenced installation through its retained journal.",
+      "status": "experimental",
+      "qualification_ref": null,
+      "blockers": []
+    }
+  ]
+}

@@ -1,0 +1,3427 @@
+{
+  "source_before": "f2c7a3e9b923fb95fb550287dd0f0e59c681c8633fd235a773cb7c3f92e1515e",
+  "source_after": "f2c7a3e9b923fb95fb550287dd0f0e59c681c8633fd235a773cb7c3f92e1515e",
+  "checks": [
+    {
+      "name": "compileall",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.03740420890972,
+      "monitor_stop": null
+    },
+    {
+      "name": "schemas",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0414393339306116,
+      "monitor_stop": null
+    },
+    {
+      "name": "assessment-policy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0357500412501395,
+      "monitor_stop": null
+    },
+    {
+      "name": "ruff",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.027368875220418,
+      "monitor_stop": null
+    },
+    {
+      "name": "mypy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.034224708098918,
+      "monitor_stop": null
+    },
+    {
+      "name": "pytest",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest",
+        "-p",
+        "aeep_fixture_cleanup"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 643.3328389576636,
+      "monitor_stop": null
+    },
+    {
+      "name": "coverage-tests",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest",
+        "-p",
+        "aeep_fixture_cleanup"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 947.5334991668351,
+      "monitor_stop": null
+    },
+    {
+      "name": "coverage-json",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-skillrank-20261103/verification/coverage.json"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0419585411436856,
+      "monitor_stop": null
+    },
+    {
+      "name": "coverage-report",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0520612499676645,
+      "monitor_stop": null
+    },
+    {
+      "name": "critical-coverage",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_critical_coverage.py",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-skillrank-20261103/verification/coverage.json"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0550765423104167,
+      "monitor_stop": null
+    },
+    {
+      "name": "assessment-coverage",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_coverage.py",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-skillrank-20261103/verification/coverage.json"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.046841917093843,
+      "monitor_stop": null
+    },
+    {
+      "name": "toolkit-integration-fixtures",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest",
+        "integrations/toolkit"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0590078332461417,
+      "monitor_stop": null
+    },
+    {
+      "name": "build",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "build",
+        "--no-isolation",
+        "--outdir",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-skillrank-20261103/verification/dist"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 4.069704916328192,
+      "monitor_stop": null
+    }
+  ],
+  "models": 0,
+  "comparisons": "PAUSED",
+  "real_execution_selectors_removed": [],
+  "scope": "Owned file-runtime lifecycle and selected SkillRank catalog CLI wiring, minimized canonical accounting, source drift, interruption and cleanup barriers. Synthetic first-party substitutes only; no upstream binary, SDK, model, container or benchmark executes. Existing unrelated CI edits are present but excluded from implementation commits.",
+  "capacity_samples": [
+    {
+      "observed_at": "2026-11-04T06:20:51.105673+00:00",
+      "free_bytes": 71803469824
+    },
+    {
+      "observed_at": "2026-11-04T06:20:53.146840+00:00",
+      "free_bytes": 71803584512
+    },
+    {
+      "observed_at": "2026-11-04T06:20:53.194883+00:00",
+      "free_bytes": 71803564032
+    },
+    {
+      "observed_at": "2026-11-04T06:20:55.234364+00:00",
+      "free_bytes": 71802589184
+    },
+    {
+      "observed_at": "2026-11-04T06:20:55.288231+00:00",
+      "free_bytes": 71802589184
+    },
+    {
+      "observed_at": "2026-11-04T06:20:57.323188+00:00",
+      "free_bytes": 71801094144
+    },
+    {
+      "observed_at": "2026-11-04T06:20:57.370926+00:00",
+      "free_bytes": 71801094144
+    },
+    {
+      "observed_at": "2026-11-04T06:20:59.398496+00:00",
+      "free_bytes": 71800467456
+    },
+    {
+      "observed_at": "2026-11-04T06:20:59.446337+00:00",
+      "free_bytes": 71800451072
+    },
+    {
+      "observed_at": "2026-11-04T06:21:01.481072+00:00",
+      "free_bytes": 71799726080
+    },
+    {
+      "observed_at": "2026-11-04T06:21:01.527426+00:00",
+      "free_bytes": 71799726080
+    },
+    {
+      "observed_at": "2026-11-04T06:21:03.556064+00:00",
+      "free_bytes": 71798448128
+    },
+    {
+      "observed_at": "2026-11-04T06:21:05.595173+00:00",
+      "free_bytes": 71795871744
+    },
+    {
+      "observed_at": "2026-11-04T06:21:07.622658+00:00",
+      "free_bytes": 71796383744
+    },
+    {
+      "observed_at": "2026-11-04T06:21:09.648965+00:00",
+      "free_bytes": 71795339264
+    },
+    {
+      "observed_at": "2026-11-04T06:21:11.674707+00:00",
+      "free_bytes": 71793303552
+    },
+    {
+      "observed_at": "2026-11-04T06:21:13.706007+00:00",
+      "free_bytes": 71792324608
+    },
+    {
+      "observed_at": "2026-11-04T06:21:15.739950+00:00",
+      "free_bytes": 71790620672
+    },
+    {
+      "observed_at": "2026-11-04T06:21:17.774939+00:00",
+      "free_bytes": 71789182976
+    },
+    {
+      "observed_at": "2026-11-04T06:21:19.805186+00:00",
+      "free_bytes": 71787552768
+    },
+    {
+      "observed_at": "2026-11-04T06:21:21.834396+00:00",
+      "free_bytes": 71785721856
+    },
+    {
+      "observed_at": "2026-11-04T06:21:23.866120+00:00",
+      "free_bytes": 71785316352
+    },
+    {
+      "observed_at": "2026-11-04T06:21:25.898633+00:00",
+      "free_bytes": 71783952384
+    },
+    {
+      "observed_at": "2026-11-04T06:21:27.924900+00:00",
+      "free_bytes": 71782158336
+    },
+    {
+      "observed_at": "2026-11-04T06:21:29.960959+00:00",
+      "free_bytes": 71781920768
+    },
+    {
+      "observed_at": "2026-11-04T06:21:31.996814+00:00",
+      "free_bytes": 71781199872
+    },
+    {
+      "observed_at": "2026-11-04T06:21:34.032758+00:00",
+      "free_bytes": 71779028992
+    },
+    {
+      "observed_at": "2026-11-04T06:21:36.058806+00:00",
+      "free_bytes": 71776346112
+    },
+    {
+      "observed_at": "2026-11-04T06:21:38.095519+00:00",
+      "free_bytes": 71775678464
+    },
+    {
+      "observed_at": "2026-11-04T06:21:40.122269+00:00",
+      "free_bytes": 71774650368
+    },
+    {
+      "observed_at": "2026-11-04T06:21:42.147280+00:00",
+      "free_bytes": 71772622848
+    },
+    {
+      "observed_at": "2026-11-04T06:21:44.172332+00:00",
+      "free_bytes": 71756890112
+    },
+    {
+      "observed_at": "2026-11-04T06:21:46.206571+00:00",
+      "free_bytes": 71756599296
+    },
+    {
+      "observed_at": "2026-11-04T06:21:48.234082+00:00",
+      "free_bytes": 71756427264
+    },
+    {
+      "observed_at": "2026-11-04T06:21:50.265048+00:00",
+      "free_bytes": 71768481792
+    },
+    {
+      "observed_at": "2026-11-04T06:21:52.291347+00:00",
+      "free_bytes": 71767203840
+    },
+    {
+      "observed_at": "2026-11-04T06:21:54.326362+00:00",
+      "free_bytes": 71766175744
+    },
+    {
+      "observed_at": "2026-11-04T06:21:56.360949+00:00",
+      "free_bytes": 71765053440
+    },
+    {
+      "observed_at": "2026-11-04T06:21:58.390088+00:00",
+      "free_bytes": 71766790144
+    },
+    {
+      "observed_at": "2026-11-04T06:22:00.425793+00:00",
+      "free_bytes": 71765725184
+    },
+    {
+      "observed_at": "2026-11-04T06:22:02.451705+00:00",
+      "free_bytes": 71763554304
+    },
+    {
+      "observed_at": "2026-11-04T06:22:04.480991+00:00",
+      "free_bytes": 71762198528
+    },
+    {
+      "observed_at": "2026-11-04T06:22:06.506823+00:00",
+      "free_bytes": 71761289216
+    },
+    {
+      "observed_at": "2026-11-04T06:22:08.540492+00:00",
+      "free_bytes": 71760703488
+    },
+    {
+      "observed_at": "2026-11-04T06:22:10.569933+00:00",
+      "free_bytes": 71755939840
+    },
+    {
+      "observed_at": "2026-11-04T06:22:12.600170+00:00",
+      "free_bytes": 71751749632
+    },
+    {
+      "observed_at": "2026-11-04T06:22:14.627304+00:00",
+      "free_bytes": 71758422016
+    },
+    {
+      "observed_at": "2026-11-04T06:22:16.658937+00:00",
+      "free_bytes": 71756255232
+    },
+    {
+      "observed_at": "2026-11-04T06:22:18.693044+00:00",
+      "free_bytes": 71755915264
+    },
+    {
+      "observed_at": "2026-11-04T06:22:20.745376+00:00",
+      "free_bytes": 71754641408
+    },
+    {
+      "observed_at": "2026-11-04T06:22:22.774494+00:00",
+      "free_bytes": 71755624448
+    },
+    {
+      "observed_at": "2026-11-04T06:22:24.800876+00:00",
+      "free_bytes": 71755722752
+    },
+    {
+      "observed_at": "2026-11-04T06:22:26.831242+00:00",
+      "free_bytes": 71752695808
+    },
+    {
+      "observed_at": "2026-11-04T06:22:28.857857+00:00",
+      "free_bytes": 71751454720
+    },
+    {
+      "observed_at": "2026-11-04T06:22:30.885568+00:00",
+      "free_bytes": 71747567616
+    },
+    {
+      "observed_at": "2026-11-04T06:22:32.915767+00:00",
+      "free_bytes": 71746265088
+    },
+    {
+      "observed_at": "2026-11-04T06:22:34.951712+00:00",
+      "free_bytes": 71746809856
+    },
+    {
+      "observed_at": "2026-11-04T06:22:36.977166+00:00",
+      "free_bytes": 71739502592
+    },
+    {
+      "observed_at": "2026-11-04T06:22:39.009124+00:00",
+      "free_bytes": 71725481984
+    },
+    {
+      "observed_at": "2026-11-04T06:22:41.042686+00:00",
+      "free_bytes": 71721463808
+    },
+    {
+      "observed_at": "2026-11-04T06:22:43.075527+00:00",
+      "free_bytes": 71716651008
+    },
+    {
+      "observed_at": "2026-11-04T06:22:45.108280+00:00",
+      "free_bytes": 71716175872
+    },
+    {
+      "observed_at": "2026-11-04T06:22:47.140879+00:00",
+      "free_bytes": 71713038336
+    },
+    {
+      "observed_at": "2026-11-04T06:22:49.174200+00:00",
+      "free_bytes": 71688118272
+    },
+    {
+      "observed_at": "2026-11-04T06:22:51.204918+00:00",
+      "free_bytes": 71662411776
+    },
+    {
+      "observed_at": "2026-11-04T06:22:53.231123+00:00",
+      "free_bytes": 71637565440
+    },
+    {
+      "observed_at": "2026-11-04T06:22:55.254226+00:00",
+      "free_bytes": 71612395520
+    },
+    {
+      "observed_at": "2026-11-04T06:22:57.287987+00:00",
+      "free_bytes": 71591067648
+    },
+    {
+      "observed_at": "2026-11-04T06:22:59.325466+00:00",
+      "free_bytes": 71565770752
+    },
+    {
+      "observed_at": "2026-11-04T06:23:01.352427+00:00",
+      "free_bytes": 71540408320
+    },
+    {
+      "observed_at": "2026-11-04T06:23:03.376849+00:00",
+      "free_bytes": 71514492928
+    },
+    {
+      "observed_at": "2026-11-04T06:23:05.410771+00:00",
+      "free_bytes": 71494000640
+    },
+    {
+      "observed_at": "2026-11-04T06:23:07.451092+00:00",
+      "free_bytes": 71469694976
+    },
+    {
+      "observed_at": "2026-11-04T06:23:09.485568+00:00",
+      "free_bytes": 71445745664
+    },
+    {
+      "observed_at": "2026-11-04T06:23:11.518765+00:00",
+      "free_bytes": 71420825600
+    },
+    {
+      "observed_at": "2026-11-04T06:23:13.547677+00:00",
+      "free_bytes": 71714230272
+    },
+    {
+      "observed_at": "2026-11-04T06:23:15.579014+00:00",
+      "free_bytes": 71693004800
+    },
+    {
+      "observed_at": "2026-11-04T06:23:17.613314+00:00",
+      "free_bytes": 71707856896
+    },
+    {
+      "observed_at": "2026-11-04T06:23:19.637865+00:00",
+      "free_bytes": 71688638464
+    },
+    {
+      "observed_at": "2026-11-04T06:23:21.670675+00:00",
+      "free_bytes": 71663632384
+    },
+    {
+      "observed_at": "2026-11-04T06:23:23.702973+00:00",
+      "free_bytes": 71635546112
+    },
+    {
+      "observed_at": "2026-11-04T06:23:25.729143+00:00",
+      "free_bytes": 71610519552
+    },
+    {
+      "observed_at": "2026-11-04T06:23:27.756785+00:00",
+      "free_bytes": 71585660928
+    },
+    {
+      "observed_at": "2026-11-04T06:23:29.785333+00:00",
+      "free_bytes": 71561469952
+    },
+    {
+      "observed_at": "2026-11-04T06:23:31.812636+00:00",
+      "free_bytes": 71535255552
+    },
+    {
+      "observed_at": "2026-11-04T06:23:33.842414+00:00",
+      "free_bytes": 71512485888
+    },
+    {
+      "observed_at": "2026-11-04T06:23:35.872870+00:00",
+      "free_bytes": 71488929792
+    },
+    {
+      "observed_at": "2026-11-04T06:23:37.902594+00:00",
+      "free_bytes": 71465152512
+    },
+    {
+      "observed_at": "2026-11-04T06:23:39.931137+00:00",
+      "free_bytes": 71439126528
+    },
+    {
+      "observed_at": "2026-11-04T06:23:41.964488+00:00",
+      "free_bytes": 71412391936
+    },
+    {
+      "observed_at": "2026-11-04T06:23:43.997081+00:00",
+      "free_bytes": 71387377664
+    },
+    {
+      "observed_at": "2026-11-04T06:23:46.022784+00:00",
+      "free_bytes": 71375249408
+    },
+    {
+      "observed_at": "2026-11-04T06:23:48.045445+00:00",
+      "free_bytes": 71341133824
+    },
+    {
+      "observed_at": "2026-11-04T06:23:50.072750+00:00",
+      "free_bytes": 71294459904
+    },
+    {
+      "observed_at": "2026-11-04T06:23:52.104715+00:00",
+      "free_bytes": 71249485824
+    },
+    {
+      "observed_at": "2026-11-04T06:23:54.135076+00:00",
+      "free_bytes": 71203713024
+    },
+    {
+      "observed_at": "2026-11-04T06:23:56.164399+00:00",
+      "free_bytes": 71159504896
+    },
+    {
+      "observed_at": "2026-11-04T06:23:58.187495+00:00",
+      "free_bytes": 71112007680
+    },
+    {
+      "observed_at": "2026-11-04T06:24:00.216847+00:00",
+      "free_bytes": 71067205632
+    },
+    {
+      "observed_at": "2026-11-04T06:24:02.251222+00:00",
+      "free_bytes": 71020834816
+    },
+    {
+      "observed_at": "2026-11-04T06:24:04.280942+00:00",
+      "free_bytes": 70975197184
+    },
+    {
+      "observed_at": "2026-11-04T06:24:06.306070+00:00",
+      "free_bytes": 70929629184
+    },
+    {
+      "observed_at": "2026-11-04T06:24:08.338796+00:00",
+      "free_bytes": 70881845248
+    },
+    {
+      "observed_at": "2026-11-04T06:24:10.373479+00:00",
+      "free_bytes": 70837161984
+    },
+    {
+      "observed_at": "2026-11-04T06:24:12.405582+00:00",
+      "free_bytes": 70792265728
+    },
+    {
+      "observed_at": "2026-11-04T06:24:14.430985+00:00",
+      "free_bytes": 70747336704
+    },
+    {
+      "observed_at": "2026-11-04T06:24:16.456331+00:00",
+      "free_bytes": 70705025024
+    },
+    {
+      "observed_at": "2026-11-04T06:24:18.488458+00:00",
+      "free_bytes": 70705012736
+    },
+    {
+      "observed_at": "2026-11-04T06:24:20.514311+00:00",
+      "free_bytes": 71682072576
+    },
+    {
+      "observed_at": "2026-11-04T06:24:22.545940+00:00",
+      "free_bytes": 71654043648
+    },
+    {
+      "observed_at": "2026-11-04T06:24:24.572715+00:00",
+      "free_bytes": 71623598080
+    },
+    {
+      "observed_at": "2026-11-04T06:24:26.606465+00:00",
+      "free_bytes": 71595569152
+    },
+    {
+      "observed_at": "2026-11-04T06:24:28.632679+00:00",
+      "free_bytes": 71566221312
+    },
+    {
+      "observed_at": "2026-11-04T06:24:30.664618+00:00",
+      "free_bytes": 71537405952
+    },
+    {
+      "observed_at": "2026-11-04T06:24:32.689052+00:00",
+      "free_bytes": 71508385792
+    },
+    {
+      "observed_at": "2026-11-04T06:24:34.724009+00:00",
+      "free_bytes": 71471452160
+    },
+    {
+      "observed_at": "2026-11-04T06:24:36.751731+00:00",
+      "free_bytes": 71442190336
+    },
+    {
+      "observed_at": "2026-11-04T06:24:38.778068+00:00",
+      "free_bytes": 71414136832
+    },
+    {
+      "observed_at": "2026-11-04T06:24:40.810105+00:00",
+      "free_bytes": 71385227264
+    },
+    {
+      "observed_at": "2026-11-04T06:24:42.842158+00:00",
+      "free_bytes": 71678078976
+    },
+    {
+      "observed_at": "2026-11-04T06:24:44.874411+00:00",
+      "free_bytes": 71649415168
+    },
+    {
+      "observed_at": "2026-11-04T06:24:46.907893+00:00",
+      "free_bytes": 71619510272
+    },
+    {
+      "observed_at": "2026-11-04T06:24:48.935019+00:00",
+      "free_bytes": 71589892096
+    },
+    {
+      "observed_at": "2026-11-04T06:24:50.960005+00:00",
+      "free_bytes": 71560343552
+    },
+    {
+      "observed_at": "2026-11-04T06:24:52.984906+00:00",
+      "free_bytes": 71529857024
+    },
+    {
+      "observed_at": "2026-11-04T06:24:55.017708+00:00",
+      "free_bytes": 71500767232
+    },
+    {
+      "observed_at": "2026-11-04T06:24:57.050218+00:00",
+      "free_bytes": 71471431680
+    },
+    {
+      "observed_at": "2026-11-04T06:24:59.082454+00:00",
+      "free_bytes": 71441854464
+    },
+    {
+      "observed_at": "2026-11-04T06:25:01.106215+00:00",
+      "free_bytes": 71412547584
+    },
+    {
+      "observed_at": "2026-11-04T06:25:03.137833+00:00",
+      "free_bytes": 71382921216
+    },
+    {
+      "observed_at": "2026-11-04T06:25:05.167998+00:00",
+      "free_bytes": 71690891264
+    },
+    {
+      "observed_at": "2026-11-04T06:25:07.201537+00:00",
+      "free_bytes": 71677259776
+    },
+    {
+      "observed_at": "2026-11-04T06:25:09.226594+00:00",
+      "free_bytes": 71647723520
+    },
+    {
+      "observed_at": "2026-11-04T06:25:11.250734+00:00",
+      "free_bytes": 71621521408
+    },
+    {
+      "observed_at": "2026-11-04T06:25:13.283069+00:00",
+      "free_bytes": 71597301760
+    },
+    {
+      "observed_at": "2026-11-04T06:25:15.312398+00:00",
+      "free_bytes": 71571103744
+    },
+    {
+      "observed_at": "2026-11-04T06:25:17.334913+00:00",
+      "free_bytes": 71546208256
+    },
+    {
+      "observed_at": "2026-11-04T06:25:19.367154+00:00",
+      "free_bytes": 71519899648
+    },
+    {
+      "observed_at": "2026-11-04T06:25:21.398587+00:00",
+      "free_bytes": 71493627904
+    },
+    {
+      "observed_at": "2026-11-04T06:25:23.422336+00:00",
+      "free_bytes": 71467143168
+    },
+    {
+      "observed_at": "2026-11-04T06:25:25.454654+00:00",
+      "free_bytes": 71441457152
+    },
+    {
+      "observed_at": "2026-11-04T06:25:27.482844+00:00",
+      "free_bytes": 71416459264
+    },
+    {
+      "observed_at": "2026-11-04T06:25:29.512396+00:00",
+      "free_bytes": 71390269440
+    },
+    {
+      "observed_at": "2026-11-04T06:25:31.535485+00:00",
+      "free_bytes": 71365361664
+    },
+    {
+      "observed_at": "2026-11-04T06:25:33.566942+00:00",
+      "free_bytes": 71688413184
+    },
+    {
+      "observed_at": "2026-11-04T06:25:35.599837+00:00",
+      "free_bytes": 71680049152
+    },
+    {
+      "observed_at": "2026-11-04T06:25:37.630654+00:00",
+      "free_bytes": 71666184192
+    },
+    {
+      "observed_at": "2026-11-04T06:25:39.662544+00:00",
+      "free_bytes": 71642439680
+    },
+    {
+      "observed_at": "2026-11-04T06:25:41.694650+00:00",
+      "free_bytes": 71616065536
+    },
+    {
+      "observed_at": "2026-11-04T06:25:43.719811+00:00",
+      "free_bytes": 71591124992
+    },
+    {
+      "observed_at": "2026-11-04T06:25:45.747285+00:00",
+      "free_bytes": 71565000704
+    },
+    {
+      "observed_at": "2026-11-04T06:25:47.778923+00:00",
+      "free_bytes": 71539818496
+    },
+    {
+      "observed_at": "2026-11-04T06:25:49.805661+00:00",
+      "free_bytes": 71514673152
+    },
+    {
+      "observed_at": "2026-11-04T06:25:51.830596+00:00",
+      "free_bytes": 71488565248
+    },
+    {
+      "observed_at": "2026-11-04T06:25:53.855612+00:00",
+      "free_bytes": 71463976960
+    },
+    {
+      "observed_at": "2026-11-04T06:25:55.880707+00:00",
+      "free_bytes": 71437664256
+    },
+    {
+      "observed_at": "2026-11-04T06:25:57.913403+00:00",
+      "free_bytes": 71412768768
+    },
+    {
+      "observed_at": "2026-11-04T06:25:59.945564+00:00",
+      "free_bytes": 71386800128
+    },
+    {
+      "observed_at": "2026-11-04T06:26:01.972217+00:00",
+      "free_bytes": 71362097152
+    },
+    {
+      "observed_at": "2026-11-04T06:26:04.002023+00:00",
+      "free_bytes": 71680851968
+    },
+    {
+      "observed_at": "2026-11-04T06:26:06.030554+00:00",
+      "free_bytes": 71680962560
+    },
+    {
+      "observed_at": "2026-11-04T06:26:08.064221+00:00",
+      "free_bytes": 71680880640
+    },
+    {
+      "observed_at": "2026-11-04T06:26:10.091555+00:00",
+      "free_bytes": 71673053184
+    },
+    {
+      "observed_at": "2026-11-04T06:26:12.120664+00:00",
+      "free_bytes": 71651639296
+    },
+    {
+      "observed_at": "2026-11-04T06:26:14.147180+00:00",
+      "free_bytes": 71620935680
+    },
+    {
+      "observed_at": "2026-11-04T06:26:16.178798+00:00",
+      "free_bytes": 71594635264
+    },
+    {
+      "observed_at": "2026-11-04T06:26:18.211032+00:00",
+      "free_bytes": 71568465920
+    },
+    {
+      "observed_at": "2026-11-04T06:26:20.234433+00:00",
+      "free_bytes": 71542263808
+    },
+    {
+      "observed_at": "2026-11-04T06:26:22.263800+00:00",
+      "free_bytes": 71517245440
+    },
+    {
+      "observed_at": "2026-11-04T06:26:24.285762+00:00",
+      "free_bytes": 71490097152
+    },
+    {
+      "observed_at": "2026-11-04T06:26:26.318348+00:00",
+      "free_bytes": 71464312832
+    },
+    {
+      "observed_at": "2026-11-04T06:26:28.350815+00:00",
+      "free_bytes": 71438094336
+    },
+    {
+      "observed_at": "2026-11-04T06:26:30.380437+00:00",
+      "free_bytes": 71412056064
+    },
+    {
+      "observed_at": "2026-11-04T06:26:32.412100+00:00",
+      "free_bytes": 71385690112
+    },
+    {
+      "observed_at": "2026-11-04T06:26:34.434751+00:00",
+      "free_bytes": 71361646592
+    },
+    {
+      "observed_at": "2026-11-04T06:26:36.466210+00:00",
+      "free_bytes": 71348428800
+    },
+    {
+      "observed_at": "2026-11-04T06:26:38.497069+00:00",
+      "free_bytes": 71672303616
+    },
+    {
+      "observed_at": "2026-11-04T06:26:40.521972+00:00",
+      "free_bytes": 71643586560
+    },
+    {
+      "observed_at": "2026-11-04T06:26:42.547287+00:00",
+      "free_bytes": 71616368640
+    },
+    {
+      "observed_at": "2026-11-04T06:26:44.579769+00:00",
+      "free_bytes": 71590273024
+    },
+    {
+      "observed_at": "2026-11-04T06:26:46.609525+00:00",
+      "free_bytes": 71563919360
+    },
+    {
+      "observed_at": "2026-11-04T06:26:48.634475+00:00",
+      "free_bytes": 71537737728
+    },
+    {
+      "observed_at": "2026-11-04T06:26:50.659495+00:00",
+      "free_bytes": 71510425600
+    },
+    {
+      "observed_at": "2026-11-04T06:26:52.681091+00:00",
+      "free_bytes": 71483588608
+    },
+    {
+      "observed_at": "2026-11-04T06:26:54.709426+00:00",
+      "free_bytes": 71457341440
+    },
+    {
+      "observed_at": "2026-11-04T06:26:56.734511+00:00",
+      "free_bytes": 71432671232
+    },
+    {
+      "observed_at": "2026-11-04T06:26:58.767170+00:00",
+      "free_bytes": 71405412352
+    },
+    {
+      "observed_at": "2026-11-04T06:27:00.792807+00:00",
+      "free_bytes": 71378403328
+    },
+    {
+      "observed_at": "2026-11-04T06:27:02.824795+00:00",
+      "free_bytes": 71352401920
+    },
+    {
+      "observed_at": "2026-11-04T06:27:04.850117+00:00",
+      "free_bytes": 71679389696
+    },
+    {
+      "observed_at": "2026-11-04T06:27:06.884457+00:00",
+      "free_bytes": 71663648768
+    },
+    {
+      "observed_at": "2026-11-04T06:27:08.922103+00:00",
+      "free_bytes": 71641096192
+    },
+    {
+      "observed_at": "2026-11-04T06:27:10.954051+00:00",
+      "free_bytes": 71619559424
+    },
+    {
+      "observed_at": "2026-11-04T06:27:12.986192+00:00",
+      "free_bytes": 71597809664
+    },
+    {
+      "observed_at": "2026-11-04T06:27:15.038033+00:00",
+      "free_bytes": 71574421504
+    },
+    {
+      "observed_at": "2026-11-04T06:27:17.061958+00:00",
+      "free_bytes": 71552778240
+    },
+    {
+      "observed_at": "2026-11-04T06:27:19.095256+00:00",
+      "free_bytes": 71532105728
+    },
+    {
+      "observed_at": "2026-11-04T06:27:21.125141+00:00",
+      "free_bytes": 71507804160
+    },
+    {
+      "observed_at": "2026-11-04T06:27:23.157432+00:00",
+      "free_bytes": 71484538880
+    },
+    {
+      "observed_at": "2026-11-04T06:27:25.191950+00:00",
+      "free_bytes": 71462174720
+    },
+    {
+      "observed_at": "2026-11-04T06:27:27.220704+00:00",
+      "free_bytes": 71440617472
+    },
+    {
+      "observed_at": "2026-11-04T06:27:29.252671+00:00",
+      "free_bytes": 71417417728
+    },
+    {
+      "observed_at": "2026-11-04T06:27:31.284803+00:00",
+      "free_bytes": 71395000320
+    },
+    {
+      "observed_at": "2026-11-04T06:27:33.308186+00:00",
+      "free_bytes": 71373348864
+    },
+    {
+      "observed_at": "2026-11-04T06:27:35.340812+00:00",
+      "free_bytes": 71350132736
+    },
+    {
+      "observed_at": "2026-11-04T06:27:37.372811+00:00",
+      "free_bytes": 71328493568
+    },
+    {
+      "observed_at": "2026-11-04T06:27:39.406113+00:00",
+      "free_bytes": 71306121216
+    },
+    {
+      "observed_at": "2026-11-04T06:27:41.429105+00:00",
+      "free_bytes": 71282819072
+    },
+    {
+      "observed_at": "2026-11-04T06:27:43.461110+00:00",
+      "free_bytes": 71260205056
+    },
+    {
+      "observed_at": "2026-11-04T06:27:45.484308+00:00",
+      "free_bytes": 71237029888
+    },
+    {
+      "observed_at": "2026-11-04T06:27:47.516946+00:00",
+      "free_bytes": 71216263168
+    },
+    {
+      "observed_at": "2026-11-04T06:27:49.549521+00:00",
+      "free_bytes": 71193169920
+    },
+    {
+      "observed_at": "2026-11-04T06:27:51.578941+00:00",
+      "free_bytes": 71169978368
+    },
+    {
+      "observed_at": "2026-11-04T06:27:53.609267+00:00",
+      "free_bytes": 71149031424
+    },
+    {
+      "observed_at": "2026-11-04T06:27:55.634335+00:00",
+      "free_bytes": 71126069248
+    },
+    {
+      "observed_at": "2026-11-04T06:27:57.667119+00:00",
+      "free_bytes": 71102984192
+    },
+    {
+      "observed_at": "2026-11-04T06:27:59.692578+00:00",
+      "free_bytes": 71081488384
+    },
+    {
+      "observed_at": "2026-11-04T06:28:01.717792+00:00",
+      "free_bytes": 71059918848
+    },
+    {
+      "observed_at": "2026-11-04T06:28:03.742556+00:00",
+      "free_bytes": 71037706240
+    },
+    {
+      "observed_at": "2026-11-04T06:28:05.774774+00:00",
+      "free_bytes": 71019970560
+    },
+    {
+      "observed_at": "2026-11-04T06:28:07.806627+00:00",
+      "free_bytes": 70996733952
+    },
+    {
+      "observed_at": "2026-11-04T06:28:09.838786+00:00",
+      "free_bytes": 70975774720
+    },
+    {
+      "observed_at": "2026-11-04T06:28:11.870524+00:00",
+      "free_bytes": 70952652800
+    },
+    {
+      "observed_at": "2026-11-04T06:28:13.900852+00:00",
+      "free_bytes": 70930944000
+    },
+    {
+      "observed_at": "2026-11-04T06:28:15.933282+00:00",
+      "free_bytes": 70914060288
+    },
+    {
+      "observed_at": "2026-11-04T06:28:17.959088+00:00",
+      "free_bytes": 71674552320
+    },
+    {
+      "observed_at": "2026-11-04T06:28:19.990846+00:00",
+      "free_bytes": 71659933696
+    },
+    {
+      "observed_at": "2026-11-04T06:28:22.014724+00:00",
+      "free_bytes": 71637684224
+    },
+    {
+      "observed_at": "2026-11-04T06:28:24.042471+00:00",
+      "free_bytes": 71616516096
+    },
+    {
+      "observed_at": "2026-11-04T06:28:26.074541+00:00",
+      "free_bytes": 71595036672
+    },
+    {
+      "observed_at": "2026-11-04T06:28:28.100788+00:00",
+      "free_bytes": 71572692992
+    },
+    {
+      "observed_at": "2026-11-04T06:28:30.125780+00:00",
+      "free_bytes": 71551377408
+    },
+    {
+      "observed_at": "2026-11-04T06:28:32.157435+00:00",
+      "free_bytes": 71529877504
+    },
+    {
+      "observed_at": "2026-11-04T06:28:34.184095+00:00",
+      "free_bytes": 71508348928
+    },
+    {
+      "observed_at": "2026-11-04T06:28:36.215265+00:00",
+      "free_bytes": 71485259776
+    },
+    {
+      "observed_at": "2026-11-04T06:28:38.240691+00:00",
+      "free_bytes": 71463874560
+    },
+    {
+      "observed_at": "2026-11-04T06:28:40.267406+00:00",
+      "free_bytes": 71442452480
+    },
+    {
+      "observed_at": "2026-11-04T06:28:42.299054+00:00",
+      "free_bytes": 71421165568
+    },
+    {
+      "observed_at": "2026-11-04T06:28:44.331342+00:00",
+      "free_bytes": 71400906752
+    },
+    {
+      "observed_at": "2026-11-04T06:28:46.357289+00:00",
+      "free_bytes": 71377993728
+    },
+    {
+      "observed_at": "2026-11-04T06:28:48.384035+00:00",
+      "free_bytes": 71356248064
+    },
+    {
+      "observed_at": "2026-11-04T06:28:50.416400+00:00",
+      "free_bytes": 71336243200
+    },
+    {
+      "observed_at": "2026-11-04T06:28:52.446624+00:00",
+      "free_bytes": 71298027520
+    },
+    {
+      "observed_at": "2026-11-04T06:28:54.479351+00:00",
+      "free_bytes": 71276552192
+    },
+    {
+      "observed_at": "2026-11-04T06:28:56.512556+00:00",
+      "free_bytes": 71648415744
+    },
+    {
+      "observed_at": "2026-11-04T06:28:58.545050+00:00",
+      "free_bytes": 71630131200
+    },
+    {
+      "observed_at": "2026-11-04T06:29:00.571964+00:00",
+      "free_bytes": 71611793408
+    },
+    {
+      "observed_at": "2026-11-04T06:29:02.603774+00:00",
+      "free_bytes": 71593517056
+    },
+    {
+      "observed_at": "2026-11-04T06:29:04.635823+00:00",
+      "free_bytes": 71575093248
+    },
+    {
+      "observed_at": "2026-11-04T06:29:06.658907+00:00",
+      "free_bytes": 71557943296
+    },
+    {
+      "observed_at": "2026-11-04T06:29:08.692149+00:00",
+      "free_bytes": 71539728384
+    },
+    {
+      "observed_at": "2026-11-04T06:29:10.721434+00:00",
+      "free_bytes": 71522394112
+    },
+    {
+      "observed_at": "2026-11-04T06:29:12.749588+00:00",
+      "free_bytes": 71504130048
+    },
+    {
+      "observed_at": "2026-11-04T06:29:14.781713+00:00",
+      "free_bytes": 71486824448
+    },
+    {
+      "observed_at": "2026-11-04T06:29:16.813090+00:00",
+      "free_bytes": 71467364352
+    },
+    {
+      "observed_at": "2026-11-04T06:29:18.845176+00:00",
+      "free_bytes": 71449157632
+    },
+    {
+      "observed_at": "2026-11-04T06:29:20.870667+00:00",
+      "free_bytes": 71430082560
+    },
+    {
+      "observed_at": "2026-11-04T06:29:22.895661+00:00",
+      "free_bytes": 71411761152
+    },
+    {
+      "observed_at": "2026-11-04T06:29:24.919987+00:00",
+      "free_bytes": 71393325056
+    },
+    {
+      "observed_at": "2026-11-04T06:29:26.946529+00:00",
+      "free_bytes": 71375978496
+    },
+    {
+      "observed_at": "2026-11-04T06:29:28.970639+00:00",
+      "free_bytes": 71358033920
+    },
+    {
+      "observed_at": "2026-11-04T06:29:30.994672+00:00",
+      "free_bytes": 71339298816
+    },
+    {
+      "observed_at": "2026-11-04T06:29:33.020643+00:00",
+      "free_bytes": 71658192896
+    },
+    {
+      "observed_at": "2026-11-04T06:29:35.048926+00:00",
+      "free_bytes": 71658192896
+    },
+    {
+      "observed_at": "2026-11-04T06:29:37.075291+00:00",
+      "free_bytes": 71657877504
+    },
+    {
+      "observed_at": "2026-11-04T06:29:39.106313+00:00",
+      "free_bytes": 71660933120
+    },
+    {
+      "observed_at": "2026-11-04T06:29:41.137338+00:00",
+      "free_bytes": 71660871680
+    },
+    {
+      "observed_at": "2026-11-04T06:29:43.167387+00:00",
+      "free_bytes": 71659892736
+    },
+    {
+      "observed_at": "2026-11-04T06:29:45.194857+00:00",
+      "free_bytes": 71659700224
+    },
+    {
+      "observed_at": "2026-11-04T06:29:47.224830+00:00",
+      "free_bytes": 71660683264
+    },
+    {
+      "observed_at": "2026-11-04T06:29:49.252310+00:00",
+      "free_bytes": 71659241472
+    },
+    {
+      "observed_at": "2026-11-04T06:29:51.281833+00:00",
+      "free_bytes": 71660744704
+    },
+    {
+      "observed_at": "2026-11-04T06:29:53.315134+00:00",
+      "free_bytes": 71660736512
+    },
+    {
+      "observed_at": "2026-11-04T06:29:55.343990+00:00",
+      "free_bytes": 71660556288
+    },
+    {
+      "observed_at": "2026-11-04T06:29:57.375886+00:00",
+      "free_bytes": 71646515200
+    },
+    {
+      "observed_at": "2026-11-04T06:29:59.405916+00:00",
+      "free_bytes": 71628476416
+    },
+    {
+      "observed_at": "2026-11-04T06:30:01.433876+00:00",
+      "free_bytes": 71602487296
+    },
+    {
+      "observed_at": "2026-11-04T06:30:03.461195+00:00",
+      "free_bytes": 71577821184
+    },
+    {
+      "observed_at": "2026-11-04T06:30:05.488532+00:00",
+      "free_bytes": 71551709184
+    },
+    {
+      "observed_at": "2026-11-04T06:30:07.516499+00:00",
+      "free_bytes": 71525617664
+    },
+    {
+      "observed_at": "2026-11-04T06:30:09.543892+00:00",
+      "free_bytes": 71499644928
+    },
+    {
+      "observed_at": "2026-11-04T06:30:11.570531+00:00",
+      "free_bytes": 71470944256
+    },
+    {
+      "observed_at": "2026-11-04T06:30:13.598923+00:00",
+      "free_bytes": 71448870912
+    },
+    {
+      "observed_at": "2026-11-04T06:30:15.623473+00:00",
+      "free_bytes": 71423533056
+    },
+    {
+      "observed_at": "2026-11-04T06:30:17.650787+00:00",
+      "free_bytes": 71398846464
+    },
+    {
+      "observed_at": "2026-11-04T06:30:19.678073+00:00",
+      "free_bytes": 71372505088
+    },
+    {
+      "observed_at": "2026-11-04T06:30:21.704369+00:00",
+      "free_bytes": 71345623040
+    },
+    {
+      "observed_at": "2026-11-04T06:30:23.731342+00:00",
+      "free_bytes": 71320059904
+    },
+    {
+      "observed_at": "2026-11-04T06:30:25.759566+00:00",
+      "free_bytes": 71294742528
+    },
+    {
+      "observed_at": "2026-11-04T06:30:27.786756+00:00",
+      "free_bytes": 71651168256
+    },
+    {
+      "observed_at": "2026-11-04T06:30:29.813592+00:00",
+      "free_bytes": 71634898944
+    },
+    {
+      "observed_at": "2026-11-04T06:30:31.841014+00:00",
+      "free_bytes": 71608004608
+    },
+    {
+      "observed_at": "2026-11-04T06:30:33.862972+00:00",
+      "free_bytes": 71581515776
+    },
+    {
+      "observed_at": "2026-11-04T06:30:35.892234+00:00",
+      "free_bytes": 71552524288
+    },
+    {
+      "observed_at": "2026-11-04T06:30:37.916870+00:00",
+      "free_bytes": 71530471424
+    },
+    {
+      "observed_at": "2026-11-04T06:30:39.941704+00:00",
+      "free_bytes": 71503790080
+    },
+    {
+      "observed_at": "2026-11-04T06:30:41.965023+00:00",
+      "free_bytes": 71478464512
+    },
+    {
+      "observed_at": "2026-11-04T06:30:43.993639+00:00",
+      "free_bytes": 71452991488
+    },
+    {
+      "observed_at": "2026-11-04T06:30:46.020450+00:00",
+      "free_bytes": 71425540096
+    },
+    {
+      "observed_at": "2026-11-04T06:30:48.047399+00:00",
+      "free_bytes": 71400288256
+    },
+    {
+      "observed_at": "2026-11-04T06:30:50.071174+00:00",
+      "free_bytes": 71373619200
+    },
+    {
+      "observed_at": "2026-11-04T06:30:52.095283+00:00",
+      "free_bytes": 71348523008
+    },
+    {
+      "observed_at": "2026-11-04T06:30:54.120296+00:00",
+      "free_bytes": 71321817088
+    },
+    {
+      "observed_at": "2026-11-04T06:30:56.147343+00:00",
+      "free_bytes": 71296385024
+    },
+    {
+      "observed_at": "2026-11-04T06:30:58.175175+00:00",
+      "free_bytes": 71656132608
+    },
+    {
+      "observed_at": "2026-11-04T06:31:00.203422+00:00",
+      "free_bytes": 71643402240
+    },
+    {
+      "observed_at": "2026-11-04T06:31:02.229181+00:00",
+      "free_bytes": 71622520832
+    },
+    {
+      "observed_at": "2026-11-04T06:31:04.256359+00:00",
+      "free_bytes": 71602343936
+    },
+    {
+      "observed_at": "2026-11-04T06:31:06.282635+00:00",
+      "free_bytes": 71581630464
+    },
+    {
+      "observed_at": "2026-11-04T06:31:08.310321+00:00",
+      "free_bytes": 71561793536
+    },
+    {
+      "observed_at": "2026-11-04T06:31:10.334023+00:00",
+      "free_bytes": 71540580352
+    },
+    {
+      "observed_at": "2026-11-04T06:31:12.360421+00:00",
+      "free_bytes": 71519752192
+    },
+    {
+      "observed_at": "2026-11-04T06:31:14.385920+00:00",
+      "free_bytes": 71496073216
+    },
+    {
+      "observed_at": "2026-11-04T06:31:16.411847+00:00",
+      "free_bytes": 71479087104
+    },
+    {
+      "observed_at": "2026-11-04T06:31:18.439652+00:00",
+      "free_bytes": 71459368960
+    },
+    {
+      "observed_at": "2026-11-04T06:31:20.468287+00:00",
+      "free_bytes": 71439347712
+    },
+    {
+      "observed_at": "2026-11-04T06:31:22.494981+00:00",
+      "free_bytes": 71420002304
+    },
+    {
+      "observed_at": "2026-11-04T06:31:24.522685+00:00",
+      "free_bytes": 71398830080
+    },
+    {
+      "observed_at": "2026-11-04T06:31:26.549544+00:00",
+      "free_bytes": 71377457152
+    },
+    {
+      "observed_at": "2026-11-04T06:31:28.578022+00:00",
+      "free_bytes": 71357202432
+    },
+    {
+      "observed_at": "2026-11-04T06:31:30.603455+00:00",
+      "free_bytes": 71337656320
+    },
+    {
+      "observed_at": "2026-11-04T06:31:32.629912+00:00",
+      "free_bytes": 71641755648
+    },
+    {
+      "observed_at": "2026-11-04T06:31:34.657540+00:00",
+      "free_bytes": 71656460288
+    },
+    {
+      "observed_at": "2026-11-04T06:31:36.686967+00:00",
+      "free_bytes": 71655673856
+    },
+    {
+      "observed_at": "2026-11-04T06:31:38.738924+00:00",
+      "free_bytes": 71655669760
+    },
+    {
+      "observed_at": "2026-11-04T06:31:40.786164+00:00",
+      "free_bytes": 71655407616
+    },
+    {
+      "observed_at": "2026-11-04T06:31:42.814981+00:00",
+      "free_bytes": 71655346176
+    },
+    {
+      "observed_at": "2026-11-04T06:31:44.844942+00:00",
+      "free_bytes": 71655460864
+    },
+    {
+      "observed_at": "2026-11-04T06:31:44.904924+00:00",
+      "free_bytes": 71655424000
+    },
+    {
+      "observed_at": "2026-11-04T06:31:46.935763+00:00",
+      "free_bytes": 71655305216
+    },
+    {
+      "observed_at": "2026-11-04T06:31:48.961710+00:00",
+      "free_bytes": 71654305792
+    },
+    {
+      "observed_at": "2026-11-04T06:31:50.989353+00:00",
+      "free_bytes": 71654445056
+    },
+    {
+      "observed_at": "2026-11-04T06:31:53.017650+00:00",
+      "free_bytes": 71655301120
+    },
+    {
+      "observed_at": "2026-11-04T06:31:55.047438+00:00",
+      "free_bytes": 71655202816
+    },
+    {
+      "observed_at": "2026-11-04T06:31:57.095038+00:00",
+      "free_bytes": 71655387136
+    },
+    {
+      "observed_at": "2026-11-04T06:31:59.143051+00:00",
+      "free_bytes": 71655358464
+    },
+    {
+      "observed_at": "2026-11-04T06:32:01.169995+00:00",
+      "free_bytes": 71655260160
+    },
+    {
+      "observed_at": "2026-11-04T06:32:03.198405+00:00",
+      "free_bytes": 71654973440
+    },
+    {
+      "observed_at": "2026-11-04T06:32:05.265568+00:00",
+      "free_bytes": 71654592512
+    },
+    {
+      "observed_at": "2026-11-04T06:32:07.317067+00:00",
+      "free_bytes": 71653928960
+    },
+    {
+      "observed_at": "2026-11-04T06:32:09.345047+00:00",
+      "free_bytes": 71654006784
+    },
+    {
+      "observed_at": "2026-11-04T06:32:11.382736+00:00",
+      "free_bytes": 71653703680
+    },
+    {
+      "observed_at": "2026-11-04T06:32:13.414540+00:00",
+      "free_bytes": 71651844096
+    },
+    {
+      "observed_at": "2026-11-04T06:32:15.445068+00:00",
+      "free_bytes": 71651786752
+    },
+    {
+      "observed_at": "2026-11-04T06:32:17.470215+00:00",
+      "free_bytes": 71653040128
+    },
+    {
+      "observed_at": "2026-11-04T06:32:19.500309+00:00",
+      "free_bytes": 71652171776
+    },
+    {
+      "observed_at": "2026-11-04T06:32:21.529890+00:00",
+      "free_bytes": 71652864000
+    },
+    {
+      "observed_at": "2026-11-04T06:32:23.557668+00:00",
+      "free_bytes": 71650304000
+    },
+    {
+      "observed_at": "2026-11-04T06:32:25.584849+00:00",
+      "free_bytes": 71649021952
+    },
+    {
+      "observed_at": "2026-11-04T06:32:27.611631+00:00",
+      "free_bytes": 71638876160
+    },
+    {
+      "observed_at": "2026-11-04T06:32:29.638318+00:00",
+      "free_bytes": 71651450880
+    },
+    {
+      "observed_at": "2026-11-04T06:32:31.667100+00:00",
+      "free_bytes": 71651340288
+    },
+    {
+      "observed_at": "2026-11-04T06:32:33.694875+00:00",
+      "free_bytes": 71718305792
+    },
+    {
+      "observed_at": "2026-11-04T06:32:35.723516+00:00",
+      "free_bytes": 71719067648
+    },
+    {
+      "observed_at": "2026-11-04T06:32:37.751711+00:00",
+      "free_bytes": 71714582528
+    },
+    {
+      "observed_at": "2026-11-04T06:32:39.781982+00:00",
+      "free_bytes": 71704903680
+    },
+    {
+      "observed_at": "2026-11-04T06:32:41.811436+00:00",
+      "free_bytes": 71723397120
+    },
+    {
+      "observed_at": "2026-11-04T06:32:43.840981+00:00",
+      "free_bytes": 71723220992
+    },
+    {
+      "observed_at": "2026-11-04T06:32:45.870602+00:00",
+      "free_bytes": 71723130880
+    },
+    {
+      "observed_at": "2026-11-04T06:32:47.899013+00:00",
+      "free_bytes": 71723040768
+    },
+    {
+      "observed_at": "2026-11-04T06:32:49.927663+00:00",
+      "free_bytes": 71723061248
+    },
+    {
+      "observed_at": "2026-11-04T06:32:51.969346+00:00",
+      "free_bytes": 71724036096
+    },
+    {
+      "observed_at": "2026-11-04T06:32:53.993665+00:00",
+      "free_bytes": 71723851776
+    },
+    {
+      "observed_at": "2026-11-04T06:32:56.021686+00:00",
+      "free_bytes": 71723880448
+    },
+    {
+      "observed_at": "2026-11-04T06:32:58.051087+00:00",
+      "free_bytes": 71722729472
+    },
+    {
+      "observed_at": "2026-11-04T06:33:00.079510+00:00",
+      "free_bytes": 71722610688
+    },
+    {
+      "observed_at": "2026-11-04T06:33:02.103069+00:00",
+      "free_bytes": 71722418176
+    },
+    {
+      "observed_at": "2026-11-04T06:33:04.128061+00:00",
+      "free_bytes": 71704457216
+    },
+    {
+      "observed_at": "2026-11-04T06:33:06.152793+00:00",
+      "free_bytes": 71673880576
+    },
+    {
+      "observed_at": "2026-11-04T06:33:08.178039+00:00",
+      "free_bytes": 71671099392
+    },
+    {
+      "observed_at": "2026-11-04T06:33:10.203034+00:00",
+      "free_bytes": 71671996416
+    },
+    {
+      "observed_at": "2026-11-04T06:33:12.232390+00:00",
+      "free_bytes": 71660228608
+    },
+    {
+      "observed_at": "2026-11-04T06:33:14.260655+00:00",
+      "free_bytes": 71671005184
+    },
+    {
+      "observed_at": "2026-11-04T06:33:16.287689+00:00",
+      "free_bytes": 71670714368
+    },
+    {
+      "observed_at": "2026-11-04T06:33:18.311979+00:00",
+      "free_bytes": 71670362112
+    },
+    {
+      "observed_at": "2026-11-04T06:33:20.336326+00:00",
+      "free_bytes": 71669084160
+    },
+    {
+      "observed_at": "2026-11-04T06:33:22.361321+00:00",
+      "free_bytes": 71668350976
+    },
+    {
+      "observed_at": "2026-11-04T06:33:24.387553+00:00",
+      "free_bytes": 71669379072
+    },
+    {
+      "observed_at": "2026-11-04T06:33:26.417517+00:00",
+      "free_bytes": 71668260864
+    },
+    {
+      "observed_at": "2026-11-04T06:33:28.446632+00:00",
+      "free_bytes": 71667535872
+    },
+    {
+      "observed_at": "2026-11-04T06:33:30.472651+00:00",
+      "free_bytes": 71661572096
+    },
+    {
+      "observed_at": "2026-11-04T06:33:32.502708+00:00",
+      "free_bytes": 71667310592
+    },
+    {
+      "observed_at": "2026-11-04T06:33:34.533723+00:00",
+      "free_bytes": 71664779264
+    },
+    {
+      "observed_at": "2026-11-04T06:33:36.563420+00:00",
+      "free_bytes": 71665741824
+    },
+    {
+      "observed_at": "2026-11-04T06:33:38.593291+00:00",
+      "free_bytes": 71664132096
+    },
+    {
+      "observed_at": "2026-11-04T06:33:40.620103+00:00",
+      "free_bytes": 71664582656
+    },
+    {
+      "observed_at": "2026-11-04T06:33:42.669601+00:00",
+      "free_bytes": 71661027328
+    },
+    {
+      "observed_at": "2026-11-04T06:33:44.694554+00:00",
+      "free_bytes": 71648534528
+    },
+    {
+      "observed_at": "2026-11-04T06:33:46.724060+00:00",
+      "free_bytes": 71643148288
+    },
+    {
+      "observed_at": "2026-11-04T06:33:48.751941+00:00",
+      "free_bytes": 71640977408
+    },
+    {
+      "observed_at": "2026-11-04T06:33:50.781255+00:00",
+      "free_bytes": 71647784960
+    },
+    {
+      "observed_at": "2026-11-04T06:33:52.804849+00:00",
+      "free_bytes": 71647051776
+    },
+    {
+      "observed_at": "2026-11-04T06:33:54.832410+00:00",
+      "free_bytes": 71642832896
+    },
+    {
+      "observed_at": "2026-11-04T06:33:56.859514+00:00",
+      "free_bytes": 71640907776
+    },
+    {
+      "observed_at": "2026-11-04T06:33:58.882171+00:00",
+      "free_bytes": 71641608192
+    },
+    {
+      "observed_at": "2026-11-04T06:34:00.908867+00:00",
+      "free_bytes": 71624404992
+    },
+    {
+      "observed_at": "2026-11-04T06:34:02.935773+00:00",
+      "free_bytes": 71608025088
+    },
+    {
+      "observed_at": "2026-11-04T06:34:04.963320+00:00",
+      "free_bytes": 71591399424
+    },
+    {
+      "observed_at": "2026-11-04T06:34:06.990769+00:00",
+      "free_bytes": 71575085056
+    },
+    {
+      "observed_at": "2026-11-04T06:34:09.015282+00:00",
+      "free_bytes": 71559024640
+    },
+    {
+      "observed_at": "2026-11-04T06:34:11.042791+00:00",
+      "free_bytes": 71530995712
+    },
+    {
+      "observed_at": "2026-11-04T06:34:13.069816+00:00",
+      "free_bytes": 71514394624
+    },
+    {
+      "observed_at": "2026-11-04T06:34:15.094000+00:00",
+      "free_bytes": 71498080256
+    },
+    {
+      "observed_at": "2026-11-04T06:34:17.118373+00:00",
+      "free_bytes": 71479791616
+    },
+    {
+      "observed_at": "2026-11-04T06:34:19.146341+00:00",
+      "free_bytes": 71463632896
+    },
+    {
+      "observed_at": "2026-11-04T06:34:21.174470+00:00",
+      "free_bytes": 71446282240
+    },
+    {
+      "observed_at": "2026-11-04T06:34:23.201062+00:00",
+      "free_bytes": 71428943872
+    },
+    {
+      "observed_at": "2026-11-04T06:34:25.224454+00:00",
+      "free_bytes": 71412654080
+    },
+    {
+      "observed_at": "2026-11-04T06:34:27.251375+00:00",
+      "free_bytes": 71395811328
+    },
+    {
+      "observed_at": "2026-11-04T06:34:29.275552+00:00",
+      "free_bytes": 71379693568
+    },
+    {
+      "observed_at": "2026-11-04T06:34:31.302687+00:00",
+      "free_bytes": 71362551808
+    },
+    {
+      "observed_at": "2026-11-04T06:34:33.329920+00:00",
+      "free_bytes": 71346163712
+    },
+    {
+      "observed_at": "2026-11-04T06:34:35.357588+00:00",
+      "free_bytes": 71330058240
+    },
+    {
+      "observed_at": "2026-11-04T06:34:37.380926+00:00",
+      "free_bytes": 71634993152
+    },
+    {
+      "observed_at": "2026-11-04T06:34:39.406829+00:00",
+      "free_bytes": 71620333568
+    },
+    {
+      "observed_at": "2026-11-04T06:34:41.431871+00:00",
+      "free_bytes": 71605878784
+    },
+    {
+      "observed_at": "2026-11-04T06:34:43.456833+00:00",
+      "free_bytes": 71627653120
+    },
+    {
+      "observed_at": "2026-11-04T06:34:45.484630+00:00",
+      "free_bytes": 71615750144
+    },
+    {
+      "observed_at": "2026-11-04T06:34:47.512042+00:00",
+      "free_bytes": 71598551040
+    },
+    {
+      "observed_at": "2026-11-04T06:34:49.536573+00:00",
+      "free_bytes": 71581933568
+    },
+    {
+      "observed_at": "2026-11-04T06:34:51.564275+00:00",
+      "free_bytes": 71565901824
+    },
+    {
+      "observed_at": "2026-11-04T06:34:53.590122+00:00",
+      "free_bytes": 71549943808
+    },
+    {
+      "observed_at": "2026-11-04T06:34:55.615087+00:00",
+      "free_bytes": 71532818432
+    },
+    {
+      "observed_at": "2026-11-04T06:34:57.640083+00:00",
+      "free_bytes": 71516893184
+    },
+    {
+      "observed_at": "2026-11-04T06:34:59.667463+00:00",
+      "free_bytes": 71499907072
+    },
+    {
+      "observed_at": "2026-11-04T06:35:01.691762+00:00",
+      "free_bytes": 71483752448
+    },
+    {
+      "observed_at": "2026-11-04T06:35:03.715050+00:00",
+      "free_bytes": 71466909696
+    },
+    {
+      "observed_at": "2026-11-04T06:35:05.742530+00:00",
+      "free_bytes": 71448879104
+    },
+    {
+      "observed_at": "2026-11-04T06:35:07.770974+00:00",
+      "free_bytes": 71432720384
+    },
+    {
+      "observed_at": "2026-11-04T06:35:09.798174+00:00",
+      "free_bytes": 71416963072
+    },
+    {
+      "observed_at": "2026-11-04T06:35:11.822865+00:00",
+      "free_bytes": 71396880384
+    },
+    {
+      "observed_at": "2026-11-04T06:35:13.850524+00:00",
+      "free_bytes": 71382073344
+    },
+    {
+      "observed_at": "2026-11-04T06:35:15.877566+00:00",
+      "free_bytes": 71364894720
+    },
+    {
+      "observed_at": "2026-11-04T06:35:17.904817+00:00",
+      "free_bytes": 71348019200
+    },
+    {
+      "observed_at": "2026-11-04T06:35:19.931719+00:00",
+      "free_bytes": 71331262464
+    },
+    {
+      "observed_at": "2026-11-04T06:35:21.958553+00:00",
+      "free_bytes": 71315251200
+    },
+    {
+      "observed_at": "2026-11-04T06:35:23.985405+00:00",
+      "free_bytes": 71305265152
+    },
+    {
+      "observed_at": "2026-11-04T06:35:26.012906+00:00",
+      "free_bytes": 71302569984
+    },
+    {
+      "observed_at": "2026-11-04T06:35:28.039952+00:00",
+      "free_bytes": 71290445824
+    },
+    {
+      "observed_at": "2026-11-04T06:35:30.064979+00:00",
+      "free_bytes": 71266308096
+    },
+    {
+      "observed_at": "2026-11-04T06:35:32.089933+00:00",
+      "free_bytes": 71240691712
+    },
+    {
+      "observed_at": "2026-11-04T06:35:34.116953+00:00",
+      "free_bytes": 71216087040
+    },
+    {
+      "observed_at": "2026-11-04T06:35:36.143853+00:00",
+      "free_bytes": 71189942272
+    },
+    {
+      "observed_at": "2026-11-04T06:35:38.171805+00:00",
+      "free_bytes": 71166095360
+    },
+    {
+      "observed_at": "2026-11-04T06:35:40.199182+00:00",
+      "free_bytes": 71140741120
+    },
+    {
+      "observed_at": "2026-11-04T06:35:42.223224+00:00",
+      "free_bytes": 71115374592
+    },
+    {
+      "observed_at": "2026-11-04T06:35:44.250214+00:00",
+      "free_bytes": 71091519488
+    },
+    {
+      "observed_at": "2026-11-04T06:35:46.276497+00:00",
+      "free_bytes": 71067357184
+    },
+    {
+      "observed_at": "2026-11-04T06:35:48.303848+00:00",
+      "free_bytes": 71042060288
+    },
+    {
+      "observed_at": "2026-11-04T06:35:50.331146+00:00",
+      "free_bytes": 71018418176
+    },
+    {
+      "observed_at": "2026-11-04T06:35:52.358274+00:00",
+      "free_bytes": 70992113664
+    },
+    {
+      "observed_at": "2026-11-04T06:35:54.381571+00:00",
+      "free_bytes": 70968356864
+    },
+    {
+      "observed_at": "2026-11-04T06:35:56.406521+00:00",
+      "free_bytes": 70942404608
+    },
+    {
+      "observed_at": "2026-11-04T06:35:58.433526+00:00",
+      "free_bytes": 70917095424
+    },
+    {
+      "observed_at": "2026-11-04T06:36:00.456481+00:00",
+      "free_bytes": 70891716608
+    },
+    {
+      "observed_at": "2026-11-04T06:36:02.481474+00:00",
+      "free_bytes": 70868189184
+    },
+    {
+      "observed_at": "2026-11-04T06:36:04.506477+00:00",
+      "free_bytes": 70844719104
+    },
+    {
+      "observed_at": "2026-11-04T06:36:06.531460+00:00",
+      "free_bytes": 70818721792
+    },
+    {
+      "observed_at": "2026-11-04T06:36:08.558514+00:00",
+      "free_bytes": 70795182080
+    },
+    {
+      "observed_at": "2026-11-04T06:36:10.585957+00:00",
+      "free_bytes": 70769082368
+    },
+    {
+      "observed_at": "2026-11-04T06:36:12.613306+00:00",
+      "free_bytes": 70744756224
+    },
+    {
+      "observed_at": "2026-11-04T06:36:14.640634+00:00",
+      "free_bytes": 70721110016
+    },
+    {
+      "observed_at": "2026-11-04T06:36:16.668079+00:00",
+      "free_bytes": 70695747584
+    },
+    {
+      "observed_at": "2026-11-04T06:36:18.695132+00:00",
+      "free_bytes": 70671474688
+    },
+    {
+      "observed_at": "2026-11-04T06:36:20.722124+00:00",
+      "free_bytes": 70646104064
+    },
+    {
+      "observed_at": "2026-11-04T06:36:22.749040+00:00",
+      "free_bytes": 70629691392
+    },
+    {
+      "observed_at": "2026-11-04T06:36:24.776230+00:00",
+      "free_bytes": 70629687296
+    },
+    {
+      "observed_at": "2026-11-04T06:36:26.803263+00:00",
+      "free_bytes": 71015952384
+    },
+    {
+      "observed_at": "2026-11-04T06:36:28.833119+00:00",
+      "free_bytes": 71620194304
+    },
+    {
+      "observed_at": "2026-11-04T06:36:30.860521+00:00",
+      "free_bytes": 71602737152
+    },
+    {
+      "observed_at": "2026-11-04T06:36:32.887784+00:00",
+      "free_bytes": 71587811328
+    },
+    {
+      "observed_at": "2026-11-04T06:36:34.915569+00:00",
+      "free_bytes": 71569985536
+    },
+    {
+      "observed_at": "2026-11-04T06:36:36.942600+00:00",
+      "free_bytes": 71552978944
+    },
+    {
+      "observed_at": "2026-11-04T06:36:38.970453+00:00",
+      "free_bytes": 71534432256
+    },
+    {
+      "observed_at": "2026-11-04T06:36:40.997582+00:00",
+      "free_bytes": 71517020160
+    },
+    {
+      "observed_at": "2026-11-04T06:36:43.021189+00:00",
+      "free_bytes": 71497003008
+    },
+    {
+      "observed_at": "2026-11-04T06:36:45.049394+00:00",
+      "free_bytes": 71482425344
+    },
+    {
+      "observed_at": "2026-11-04T06:36:47.076031+00:00",
+      "free_bytes": 71464955904
+    },
+    {
+      "observed_at": "2026-11-04T06:36:49.103868+00:00",
+      "free_bytes": 71445757952
+    },
+    {
+      "observed_at": "2026-11-04T06:36:51.128212+00:00",
+      "free_bytes": 71428710400
+    },
+    {
+      "observed_at": "2026-11-04T06:36:53.155466+00:00",
+      "free_bytes": 71410331648
+    },
+    {
+      "observed_at": "2026-11-04T06:36:55.182509+00:00",
+      "free_bytes": 71393144832
+    },
+    {
+      "observed_at": "2026-11-04T06:36:57.209758+00:00",
+      "free_bytes": 71377190912
+    },
+    {
+      "observed_at": "2026-11-04T06:36:59.256290+00:00",
+      "free_bytes": 71358734336
+    },
+    {
+      "observed_at": "2026-11-04T06:37:01.282055+00:00",
+      "free_bytes": 71341658112
+    },
+    {
+      "observed_at": "2026-11-04T06:37:03.309249+00:00",
+      "free_bytes": 71323291648
+    },
+    {
+      "observed_at": "2026-11-04T06:37:05.333298+00:00",
+      "free_bytes": 71628828672
+    },
+    {
+      "observed_at": "2026-11-04T06:37:07.359949+00:00",
+      "free_bytes": 71618609152
+    },
+    {
+      "observed_at": "2026-11-04T06:37:09.387257+00:00",
+      "free_bytes": 71599955968
+    },
+    {
+      "observed_at": "2026-11-04T06:37:11.414337+00:00",
+      "free_bytes": 71582711808
+    },
+    {
+      "observed_at": "2026-11-04T06:37:13.437680+00:00",
+      "free_bytes": 71564066816
+    },
+    {
+      "observed_at": "2026-11-04T06:37:15.465073+00:00",
+      "free_bytes": 71545716736
+    },
+    {
+      "observed_at": "2026-11-04T06:37:17.491891+00:00",
+      "free_bytes": 71527411712
+    },
+    {
+      "observed_at": "2026-11-04T06:37:19.514488+00:00",
+      "free_bytes": 71509254144
+    },
+    {
+      "observed_at": "2026-11-04T06:37:21.541511+00:00",
+      "free_bytes": 71491153920
+    },
+    {
+      "observed_at": "2026-11-04T06:37:23.569056+00:00",
+      "free_bytes": 71472320512
+    },
+    {
+      "observed_at": "2026-11-04T06:37:25.598067+00:00",
+      "free_bytes": 71453765632
+    },
+    {
+      "observed_at": "2026-11-04T06:37:27.622154+00:00",
+      "free_bytes": 71436144640
+    },
+    {
+      "observed_at": "2026-11-04T06:37:29.647782+00:00",
+      "free_bytes": 71417565184
+    },
+    {
+      "observed_at": "2026-11-04T06:37:31.674849+00:00",
+      "free_bytes": 71399432192
+    },
+    {
+      "observed_at": "2026-11-04T06:37:33.702172+00:00",
+      "free_bytes": 71382315008
+    },
+    {
+      "observed_at": "2026-11-04T06:37:35.729223+00:00",
+      "free_bytes": 71364128768
+    },
+    {
+      "observed_at": "2026-11-04T06:37:37.756136+00:00",
+      "free_bytes": 71345823744
+    },
+    {
+      "observed_at": "2026-11-04T06:37:39.783937+00:00",
+      "free_bytes": 71328759808
+    },
+    {
+      "observed_at": "2026-11-04T06:37:41.806061+00:00",
+      "free_bytes": 71310364672
+    },
+    {
+      "observed_at": "2026-11-04T06:37:43.833317+00:00",
+      "free_bytes": 71632912384
+    },
+    {
+      "observed_at": "2026-11-04T06:37:45.860921+00:00",
+      "free_bytes": 71618875392
+    },
+    {
+      "observed_at": "2026-11-04T06:37:47.888769+00:00",
+      "free_bytes": 71589507072
+    },
+    {
+      "observed_at": "2026-11-04T06:37:49.914361+00:00",
+      "free_bytes": 71562334208
+    },
+    {
+      "observed_at": "2026-11-04T06:37:51.942149+00:00",
+      "free_bytes": 71536209920
+    },
+    {
+      "observed_at": "2026-11-04T06:37:53.969473+00:00",
+      "free_bytes": 71509950464
+    },
+    {
+      "observed_at": "2026-11-04T06:37:55.996913+00:00",
+      "free_bytes": 71484768256
+    },
+    {
+      "observed_at": "2026-11-04T06:37:58.024594+00:00",
+      "free_bytes": 71458607104
+    },
+    {
+      "observed_at": "2026-11-04T06:38:00.049360+00:00",
+      "free_bytes": 71431544832
+    },
+    {
+      "observed_at": "2026-11-04T06:38:02.076096+00:00",
+      "free_bytes": 71406592000
+    },
+    {
+      "observed_at": "2026-11-04T06:38:04.102610+00:00",
+      "free_bytes": 71380418560
+    },
+    {
+      "observed_at": "2026-11-04T06:38:06.127897+00:00",
+      "free_bytes": 71354458112
+    },
+    {
+      "observed_at": "2026-11-04T06:38:08.155493+00:00",
+      "free_bytes": 71326285824
+    },
+    {
+      "observed_at": "2026-11-04T06:38:10.179500+00:00",
+      "free_bytes": 71302352896
+    },
+    {
+      "observed_at": "2026-11-04T06:38:12.205946+00:00",
+      "free_bytes": 71625760768
+    },
+    {
+      "observed_at": "2026-11-04T06:38:14.235292+00:00",
+      "free_bytes": 71629451264
+    },
+    {
+      "observed_at": "2026-11-04T06:38:16.263439+00:00",
+      "free_bytes": 71629533184
+    },
+    {
+      "observed_at": "2026-11-04T06:38:18.289979+00:00",
+      "free_bytes": 71621980160
+    },
+    {
+      "observed_at": "2026-11-04T06:38:20.321278+00:00",
+      "free_bytes": 71605338112
+    },
+    {
+      "observed_at": "2026-11-04T06:38:22.343515+00:00",
+      "free_bytes": 71589023744
+    },
+    {
+      "observed_at": "2026-11-04T06:38:24.368749+00:00",
+      "free_bytes": 71573032960
+    },
+    {
+      "observed_at": "2026-11-04T06:38:26.398280+00:00",
+      "free_bytes": 71557091328
+    },
+    {
+      "observed_at": "2026-11-04T06:38:28.432243+00:00",
+      "free_bytes": 71539982336
+    },
+    {
+      "observed_at": "2026-11-04T06:38:30.458619+00:00",
+      "free_bytes": 71524089856
+    },
+    {
+      "observed_at": "2026-11-04T06:38:32.485832+00:00",
+      "free_bytes": 71507681280
+    },
+    {
+      "observed_at": "2026-11-04T06:38:34.518054+00:00",
+      "free_bytes": 71490998272
+    },
+    {
+      "observed_at": "2026-11-04T06:38:36.548232+00:00",
+      "free_bytes": 71474946048
+    },
+    {
+      "observed_at": "2026-11-04T06:38:38.580326+00:00",
+      "free_bytes": 71457837056
+    },
+    {
+      "observed_at": "2026-11-04T06:38:40.612393+00:00",
+      "free_bytes": 71440166912
+    },
+    {
+      "observed_at": "2026-11-04T06:38:42.639873+00:00",
+      "free_bytes": 71423877120
+    },
+    {
+      "observed_at": "2026-11-04T06:38:44.665538+00:00",
+      "free_bytes": 71408033792
+    },
+    {
+      "observed_at": "2026-11-04T06:38:46.689790+00:00",
+      "free_bytes": 71392112640
+    },
+    {
+      "observed_at": "2026-11-04T06:38:48.721895+00:00",
+      "free_bytes": 71375257600
+    },
+    {
+      "observed_at": "2026-11-04T06:38:50.753630+00:00",
+      "free_bytes": 71359426560
+    },
+    {
+      "observed_at": "2026-11-04T06:38:52.785862+00:00",
+      "free_bytes": 71343599616
+    },
+    {
+      "observed_at": "2026-11-04T06:38:54.810040+00:00",
+      "free_bytes": 71327576064
+    },
+    {
+      "observed_at": "2026-11-04T06:38:56.837636+00:00",
+      "free_bytes": 71310782464
+    },
+    {
+      "observed_at": "2026-11-04T06:38:58.864834+00:00",
+      "free_bytes": 71303983104
+    },
+    {
+      "observed_at": "2026-11-04T06:39:00.890449+00:00",
+      "free_bytes": 71629230080
+    },
+    {
+      "observed_at": "2026-11-04T06:39:02.926457+00:00",
+      "free_bytes": 71628505088
+    },
+    {
+      "observed_at": "2026-11-04T06:39:04.961515+00:00",
+      "free_bytes": 71629086720
+    },
+    {
+      "observed_at": "2026-11-04T06:39:06.994937+00:00",
+      "free_bytes": 71629123584
+    },
+    {
+      "observed_at": "2026-11-04T06:39:09.023108+00:00",
+      "free_bytes": 71621320704
+    },
+    {
+      "observed_at": "2026-11-04T06:39:11.051574+00:00",
+      "free_bytes": 71608512512
+    },
+    {
+      "observed_at": "2026-11-04T06:39:13.083535+00:00",
+      "free_bytes": 71588282368
+    },
+    {
+      "observed_at": "2026-11-04T06:39:15.115369+00:00",
+      "free_bytes": 71573479424
+    },
+    {
+      "observed_at": "2026-11-04T06:39:17.142225+00:00",
+      "free_bytes": 71556366336
+    },
+    {
+      "observed_at": "2026-11-04T06:39:19.174697+00:00",
+      "free_bytes": 71540412416
+    },
+    {
+      "observed_at": "2026-11-04T06:39:21.206778+00:00",
+      "free_bytes": 71523241984
+    },
+    {
+      "observed_at": "2026-11-04T06:39:23.238711+00:00",
+      "free_bytes": 71506309120
+    },
+    {
+      "observed_at": "2026-11-04T06:39:25.264451+00:00",
+      "free_bytes": 71490367488
+    },
+    {
+      "observed_at": "2026-11-04T06:39:27.297070+00:00",
+      "free_bytes": 71473184768
+    },
+    {
+      "observed_at": "2026-11-04T06:39:29.326134+00:00",
+      "free_bytes": 71456190464
+    },
+    {
+      "observed_at": "2026-11-04T06:39:31.354738+00:00",
+      "free_bytes": 71440076800
+    },
+    {
+      "observed_at": "2026-11-04T06:39:33.385820+00:00",
+      "free_bytes": 71422107648
+    },
+    {
+      "observed_at": "2026-11-04T06:39:35.412470+00:00",
+      "free_bytes": 71405441024
+    },
+    {
+      "observed_at": "2026-11-04T06:39:37.435587+00:00",
+      "free_bytes": 71390466048
+    },
+    {
+      "observed_at": "2026-11-04T06:39:39.467269+00:00",
+      "free_bytes": 71373316096
+    },
+    {
+      "observed_at": "2026-11-04T06:39:41.495216+00:00",
+      "free_bytes": 71355674624
+    },
+    {
+      "observed_at": "2026-11-04T06:39:43.529378+00:00",
+      "free_bytes": 71339515904
+    },
+    {
+      "observed_at": "2026-11-04T06:39:45.561387+00:00",
+      "free_bytes": 71322476544
+    },
+    {
+      "observed_at": "2026-11-04T06:39:47.588707+00:00",
+      "free_bytes": 71305904128
+    },
+    {
+      "observed_at": "2026-11-04T06:39:49.618777+00:00",
+      "free_bytes": 71295332352
+    },
+    {
+      "observed_at": "2026-11-04T06:39:51.647195+00:00",
+      "free_bytes": 71299129344
+    },
+    {
+      "observed_at": "2026-11-04T06:39:53.679895+00:00",
+      "free_bytes": 71624765440
+    },
+    {
+      "observed_at": "2026-11-04T06:39:55.712173+00:00",
+      "free_bytes": 71613460480
+    },
+    {
+      "observed_at": "2026-11-04T06:39:57.744020+00:00",
+      "free_bytes": 71594434560
+    },
+    {
+      "observed_at": "2026-11-04T06:39:59.775918+00:00",
+      "free_bytes": 71575097344
+    },
+    {
+      "observed_at": "2026-11-04T06:40:01.808008+00:00",
+      "free_bytes": 71558164480
+    },
+    {
+      "observed_at": "2026-11-04T06:40:03.834493+00:00",
+      "free_bytes": 71542009856
+    },
+    {
+      "observed_at": "2026-11-04T06:40:05.866729+00:00",
+      "free_bytes": 71525142528
+    },
+    {
+      "observed_at": "2026-11-04T06:40:07.899222+00:00",
+      "free_bytes": 71508111360
+    },
+    {
+      "observed_at": "2026-11-04T06:40:09.929992+00:00",
+      "free_bytes": 71492157440
+    },
+    {
+      "observed_at": "2026-11-04T06:40:11.960306+00:00",
+      "free_bytes": 71474827264
+    },
+    {
+      "observed_at": "2026-11-04T06:40:13.991979+00:00",
+      "free_bytes": 71458103296
+    },
+    {
+      "observed_at": "2026-11-04T06:40:16.021649+00:00",
+      "free_bytes": 71441997824
+    },
+    {
+      "observed_at": "2026-11-04T06:40:18.051950+00:00",
+      "free_bytes": 71425052672
+    },
+    {
+      "observed_at": "2026-11-04T06:40:20.084400+00:00",
+      "free_bytes": 71407890432
+    },
+    {
+      "observed_at": "2026-11-04T06:40:22.115705+00:00",
+      "free_bytes": 71390920704
+    },
+    {
+      "observed_at": "2026-11-04T06:40:24.143583+00:00",
+      "free_bytes": 71376367616
+    },
+    {
+      "observed_at": "2026-11-04T06:40:26.176237+00:00",
+      "free_bytes": 71359168512
+    },
+    {
+      "observed_at": "2026-11-04T06:40:28.201907+00:00",
+      "free_bytes": 71342280704
+    },
+    {
+      "observed_at": "2026-11-04T06:40:30.233972+00:00",
+      "free_bytes": 71325376512
+    },
+    {
+      "observed_at": "2026-11-04T06:40:32.260221+00:00",
+      "free_bytes": 71309500416
+    },
+    {
+      "observed_at": "2026-11-04T06:40:34.292550+00:00",
+      "free_bytes": 71294922752
+    },
+    {
+      "observed_at": "2026-11-04T06:40:36.322489+00:00",
+      "free_bytes": 71294930944
+    },
+    {
+      "observed_at": "2026-11-04T06:40:38.354807+00:00",
+      "free_bytes": 71624093696
+    },
+    {
+      "observed_at": "2026-11-04T06:40:40.386986+00:00",
+      "free_bytes": 71613267968
+    },
+    {
+      "observed_at": "2026-11-04T06:40:42.422151+00:00",
+      "free_bytes": 71597117440
+    },
+    {
+      "observed_at": "2026-11-04T06:40:44.450122+00:00",
+      "free_bytes": 71581884416
+    },
+    {
+      "observed_at": "2026-11-04T06:40:46.476706+00:00",
+      "free_bytes": 71567429632
+    },
+    {
+      "observed_at": "2026-11-04T06:40:48.501132+00:00",
+      "free_bytes": 71552290816
+    },
+    {
+      "observed_at": "2026-11-04T06:40:50.532003+00:00",
+      "free_bytes": 71536955392
+    },
+    {
+      "observed_at": "2026-11-04T06:40:52.558758+00:00",
+      "free_bytes": 71521746944
+    },
+    {
+      "observed_at": "2026-11-04T06:40:54.592214+00:00",
+      "free_bytes": 71506518016
+    },
+    {
+      "observed_at": "2026-11-04T06:40:56.625474+00:00",
+      "free_bytes": 71492042752
+    },
+    {
+      "observed_at": "2026-11-04T06:40:58.653056+00:00",
+      "free_bytes": 71476785152
+    },
+    {
+      "observed_at": "2026-11-04T06:41:00.683568+00:00",
+      "free_bytes": 71460913152
+    },
+    {
+      "observed_at": "2026-11-04T06:41:02.714767+00:00",
+      "free_bytes": 71446343680
+    },
+    {
+      "observed_at": "2026-11-04T06:41:04.740634+00:00",
+      "free_bytes": 71431196672
+    },
+    {
+      "observed_at": "2026-11-04T06:41:06.773340+00:00",
+      "free_bytes": 71415386112
+    },
+    {
+      "observed_at": "2026-11-04T06:41:08.802573+00:00",
+      "free_bytes": 71400706048
+    },
+    {
+      "observed_at": "2026-11-04T06:41:10.825837+00:00",
+      "free_bytes": 71385571328
+    },
+    {
+      "observed_at": "2026-11-04T06:41:12.851315+00:00",
+      "free_bytes": 71371042816
+    },
+    {
+      "observed_at": "2026-11-04T06:41:14.883835+00:00",
+      "free_bytes": 71356051456
+    },
+    {
+      "observed_at": "2026-11-04T06:41:16.910433+00:00",
+      "free_bytes": 71341547520
+    },
+    {
+      "observed_at": "2026-11-04T06:41:18.940040+00:00",
+      "free_bytes": 71325528064
+    },
+    {
+      "observed_at": "2026-11-04T06:41:20.972333+00:00",
+      "free_bytes": 71309729792
+    },
+    {
+      "observed_at": "2026-11-04T06:41:23.004605+00:00",
+      "free_bytes": 71295193088
+    },
+    {
+      "observed_at": "2026-11-04T06:41:25.036662+00:00",
+      "free_bytes": 71280160768
+    },
+    {
+      "observed_at": "2026-11-04T06:41:27.061726+00:00",
+      "free_bytes": 71264133120
+    },
+    {
+      "observed_at": "2026-11-04T06:41:29.091981+00:00",
+      "free_bytes": 71248510976
+    },
+    {
+      "observed_at": "2026-11-04T06:41:31.118817+00:00",
+      "free_bytes": 71233355776
+    },
+    {
+      "observed_at": "2026-11-04T06:41:33.150990+00:00",
+      "free_bytes": 71217848320
+    },
+    {
+      "observed_at": "2026-11-04T06:41:35.183251+00:00",
+      "free_bytes": 71202557952
+    },
+    {
+      "observed_at": "2026-11-04T06:41:37.212406+00:00",
+      "free_bytes": 71186800640
+    },
+    {
+      "observed_at": "2026-11-04T06:41:39.234570+00:00",
+      "free_bytes": 71172382720
+    },
+    {
+      "observed_at": "2026-11-04T06:41:41.264558+00:00",
+      "free_bytes": 71157239808
+    },
+    {
+      "observed_at": "2026-11-04T06:41:43.294310+00:00",
+      "free_bytes": 71141748736
+    },
+    {
+      "observed_at": "2026-11-04T06:41:45.329430+00:00",
+      "free_bytes": 71126908928
+    },
+    {
+      "observed_at": "2026-11-04T06:41:47.361231+00:00",
+      "free_bytes": 71111581696
+    },
+    {
+      "observed_at": "2026-11-04T06:41:49.393387+00:00",
+      "free_bytes": 71097139200
+    },
+    {
+      "observed_at": "2026-11-04T06:41:51.421090+00:00",
+      "free_bytes": 71082070016
+    },
+    {
+      "observed_at": "2026-11-04T06:41:53.469847+00:00",
+      "free_bytes": 71065899008
+    },
+    {
+      "observed_at": "2026-11-04T06:41:55.502002+00:00",
+      "free_bytes": 71051649024
+    },
+    {
+      "observed_at": "2026-11-04T06:41:57.529665+00:00",
+      "free_bytes": 71036313600
+    },
+    {
+      "observed_at": "2026-11-04T06:41:59.561653+00:00",
+      "free_bytes": 71022182400
+    },
+    {
+      "observed_at": "2026-11-04T06:42:01.593842+00:00",
+      "free_bytes": 71006904320
+    },
+    {
+      "observed_at": "2026-11-04T06:42:03.617613+00:00",
+      "free_bytes": 70991335424
+    },
+    {
+      "observed_at": "2026-11-04T06:42:05.650732+00:00",
+      "free_bytes": 70977454080
+    },
+    {
+      "observed_at": "2026-11-04T06:42:07.683342+00:00",
+      "free_bytes": 70961188864
+    },
+    {
+      "observed_at": "2026-11-04T06:42:09.707858+00:00",
+      "free_bytes": 70948216832
+    },
+    {
+      "observed_at": "2026-11-04T06:42:11.738649+00:00",
+      "free_bytes": 70932922368
+    },
+    {
+      "observed_at": "2026-11-04T06:42:13.771344+00:00",
+      "free_bytes": 70916993024
+    },
+    {
+      "observed_at": "2026-11-04T06:42:15.796500+00:00",
+      "free_bytes": 70901690368
+    },
+    {
+      "observed_at": "2026-11-04T06:42:17.828559+00:00",
+      "free_bytes": 70887301120
+    },
+    {
+      "observed_at": "2026-11-04T06:42:19.854857+00:00",
+      "free_bytes": 70871224320
+    },
+    {
+      "observed_at": "2026-11-04T06:42:21.879864+00:00",
+      "free_bytes": 70858285056
+    },
+    {
+      "observed_at": "2026-11-04T06:42:23.904288+00:00",
+      "free_bytes": 71621701632
+    },
+    {
+      "observed_at": "2026-11-04T06:42:25.929934+00:00",
+      "free_bytes": 71621332992
+    },
+    {
+      "observed_at": "2026-11-04T06:42:27.954919+00:00",
+      "free_bytes": 72036249600
+    },
+    {
+      "observed_at": "2026-11-04T06:42:29.979915+00:00",
+      "free_bytes": 72028987392
+    },
+    {
+      "observed_at": "2026-11-04T06:42:32.010421+00:00",
+      "free_bytes": 72014467072
+    },
+    {
+      "observed_at": "2026-11-04T06:42:34.033939+00:00",
+      "free_bytes": 71999016960
+    },
+    {
+      "observed_at": "2026-11-04T06:42:36.063187+00:00",
+      "free_bytes": 71982657536
+    },
+    {
+      "observed_at": "2026-11-04T06:42:38.093715+00:00",
+      "free_bytes": 71968276480
+    },
+    {
+      "observed_at": "2026-11-04T06:42:40.121323+00:00",
+      "free_bytes": 71952306176
+    },
+    {
+      "observed_at": "2026-11-04T06:42:42.149020+00:00",
+      "free_bytes": 71937994752
+    },
+    {
+      "observed_at": "2026-11-04T06:42:44.181222+00:00",
+      "free_bytes": 71922610176
+    },
+    {
+      "observed_at": "2026-11-04T06:42:46.214600+00:00",
+      "free_bytes": 71908118528
+    },
+    {
+      "observed_at": "2026-11-04T06:42:48.246764+00:00",
+      "free_bytes": 71892008960
+    },
+    {
+      "observed_at": "2026-11-04T06:42:50.278716+00:00",
+      "free_bytes": 71877652480
+    },
+    {
+      "observed_at": "2026-11-04T06:42:52.310140+00:00",
+      "free_bytes": 71862366208
+    },
+    {
+      "observed_at": "2026-11-04T06:42:54.342282+00:00",
+      "free_bytes": 71848013824
+    },
+    {
+      "observed_at": "2026-11-04T06:42:56.374173+00:00",
+      "free_bytes": 71832743936
+    },
+    {
+      "observed_at": "2026-11-04T06:42:58.396679+00:00",
+      "free_bytes": 71817355264
+    },
+    {
+      "observed_at": "2026-11-04T06:43:00.428682+00:00",
+      "free_bytes": 71801958400
+    },
+    {
+      "observed_at": "2026-11-04T06:43:02.460800+00:00",
+      "free_bytes": 71786647552
+    },
+    {
+      "observed_at": "2026-11-04T06:43:04.488324+00:00",
+      "free_bytes": 71770251264
+    },
+    {
+      "observed_at": "2026-11-04T06:43:06.521481+00:00",
+      "free_bytes": 71754321920
+    },
+    {
+      "observed_at": "2026-11-04T06:43:08.544136+00:00",
+      "free_bytes": 71739023360
+    },
+    {
+      "observed_at": "2026-11-04T06:43:10.571106+00:00",
+      "free_bytes": 71724654592
+    },
+    {
+      "observed_at": "2026-11-04T06:43:12.596727+00:00",
+      "free_bytes": 71709384704
+    },
+    {
+      "observed_at": "2026-11-04T06:43:14.628401+00:00",
+      "free_bytes": 71694970880
+    },
+    {
+      "observed_at": "2026-11-04T06:43:16.655086+00:00",
+      "free_bytes": 71679922176
+    },
+    {
+      "observed_at": "2026-11-04T06:43:18.681265+00:00",
+      "free_bytes": 71665537024
+    },
+    {
+      "observed_at": "2026-11-04T06:43:20.713779+00:00",
+      "free_bytes": 71650488320
+    },
+    {
+      "observed_at": "2026-11-04T06:43:22.745801+00:00",
+      "free_bytes": 72029704192
+    },
+    {
+      "observed_at": "2026-11-04T06:43:24.770976+00:00",
+      "free_bytes": 72017084416
+    },
+    {
+      "observed_at": "2026-11-04T06:43:26.804984+00:00",
+      "free_bytes": 72004427776
+    },
+    {
+      "observed_at": "2026-11-04T06:43:28.836933+00:00",
+      "free_bytes": 71991799808
+    },
+    {
+      "observed_at": "2026-11-04T06:43:30.863261+00:00",
+      "free_bytes": 71978786816
+    },
+    {
+      "observed_at": "2026-11-04T06:43:32.896596+00:00",
+      "free_bytes": 71965253632
+    },
+    {
+      "observed_at": "2026-11-04T06:43:34.928622+00:00",
+      "free_bytes": 71953514496
+    },
+    {
+      "observed_at": "2026-11-04T06:43:36.956466+00:00",
+      "free_bytes": 71939829760
+    },
+    {
+      "observed_at": "2026-11-04T06:43:38.987556+00:00",
+      "free_bytes": 71926452224
+    },
+    {
+      "observed_at": "2026-11-04T06:43:41.013469+00:00",
+      "free_bytes": 71913332736
+    },
+    {
+      "observed_at": "2026-11-04T06:43:43.045486+00:00",
+      "free_bytes": 71895568384
+    },
+    {
+      "observed_at": "2026-11-04T06:43:45.077597+00:00",
+      "free_bytes": 71883370496
+    },
+    {
+      "observed_at": "2026-11-04T06:43:47.105071+00:00",
+      "free_bytes": 71870242816
+    },
+    {
+      "observed_at": "2026-11-04T06:43:49.132599+00:00",
+      "free_bytes": 71857553408
+    },
+    {
+      "observed_at": "2026-11-04T06:43:51.155168+00:00",
+      "free_bytes": 71842992128
+    },
+    {
+      "observed_at": "2026-11-04T06:43:53.186932+00:00",
+      "free_bytes": 71831486464
+    },
+    {
+      "observed_at": "2026-11-04T06:43:55.218802+00:00",
+      "free_bytes": 71818682368
+    },
+    {
+      "observed_at": "2026-11-04T06:43:57.250314+00:00",
+      "free_bytes": 71805198336
+    },
+    {
+      "observed_at": "2026-11-04T06:43:59.281873+00:00",
+      "free_bytes": 71792443392
+    },
+    {
+      "observed_at": "2026-11-04T06:44:01.313380+00:00",
+      "free_bytes": 71780093952
+    },
+    {
+      "observed_at": "2026-11-04T06:44:03.345598+00:00",
+      "free_bytes": 71767904256
+    },
+    {
+      "observed_at": "2026-11-04T06:44:05.378530+00:00",
+      "free_bytes": 71754264576
+    },
+    {
+      "observed_at": "2026-11-04T06:44:07.405155+00:00",
+      "free_bytes": 71740190720
+    },
+    {
+      "observed_at": "2026-11-04T06:44:09.436771+00:00",
+      "free_bytes": 71722291200
+    },
+    {
+      "observed_at": "2026-11-04T06:44:11.461659+00:00",
+      "free_bytes": 71710601216
+    },
+    {
+      "observed_at": "2026-11-04T06:44:13.487960+00:00",
+      "free_bytes": 71697813504
+    },
+    {
+      "observed_at": "2026-11-04T06:44:15.513492+00:00",
+      "free_bytes": 71692775424
+    },
+    {
+      "observed_at": "2026-11-04T06:44:17.545826+00:00",
+      "free_bytes": 72019824640
+    },
+    {
+      "observed_at": "2026-11-04T06:44:19.573224+00:00",
+      "free_bytes": 72019668992
+    },
+    {
+      "observed_at": "2026-11-04T06:44:21.607014+00:00",
+      "free_bytes": 72019652608
+    },
+    {
+      "observed_at": "2026-11-04T06:44:23.633353+00:00",
+      "free_bytes": 72019566592
+    },
+    {
+      "observed_at": "2026-11-04T06:44:25.663910+00:00",
+      "free_bytes": 72017272832
+    },
+    {
+      "observed_at": "2026-11-04T06:44:27.695294+00:00",
+      "free_bytes": 72017231872
+    },
+    {
+      "observed_at": "2026-11-04T06:44:29.722067+00:00",
+      "free_bytes": 72011620352
+    },
+    {
+      "observed_at": "2026-11-04T06:44:31.766521+00:00",
+      "free_bytes": 72010711040
+    },
+    {
+      "observed_at": "2026-11-04T06:44:33.822716+00:00",
+      "free_bytes": 72010100736
+    },
+    {
+      "observed_at": "2026-11-04T06:44:35.871970+00:00",
+      "free_bytes": 72009170944
+    },
+    {
+      "observed_at": "2026-11-04T06:44:37.905309+00:00",
+      "free_bytes": 72008359936
+    },
+    {
+      "observed_at": "2026-11-04T06:44:39.933749+00:00",
+      "free_bytes": 72009924608
+    },
+    {
+      "observed_at": "2026-11-04T06:44:41.958602+00:00",
+      "free_bytes": 72009859072
+    },
+    {
+      "observed_at": "2026-11-04T06:44:43.994495+00:00",
+      "free_bytes": 72009904128
+    },
+    {
+      "observed_at": "2026-11-04T06:44:46.022043+00:00",
+      "free_bytes": 72009818112
+    },
+    {
+      "observed_at": "2026-11-04T06:44:48.054461+00:00",
+      "free_bytes": 71996772352
+    },
+    {
+      "observed_at": "2026-11-04T06:44:50.086140+00:00",
+      "free_bytes": 71985901568
+    },
+    {
+      "observed_at": "2026-11-04T06:44:52.112435+00:00",
+      "free_bytes": 71971631104
+    },
+    {
+      "observed_at": "2026-11-04T06:44:54.138683+00:00",
+      "free_bytes": 71956209664
+    },
+    {
+      "observed_at": "2026-11-04T06:44:56.163692+00:00",
+      "free_bytes": 71939227648
+    },
+    {
+      "observed_at": "2026-11-04T06:44:58.196201+00:00",
+      "free_bytes": 71922487296
+    },
+    {
+      "observed_at": "2026-11-04T06:45:00.222045+00:00",
+      "free_bytes": 71906430976
+    },
+    {
+      "observed_at": "2026-11-04T06:45:02.254291+00:00",
+      "free_bytes": 71890219008
+    },
+    {
+      "observed_at": "2026-11-04T06:45:04.277128+00:00",
+      "free_bytes": 71874031616
+    },
+    {
+      "observed_at": "2026-11-04T06:45:06.305392+00:00",
+      "free_bytes": 71855792128
+    },
+    {
+      "observed_at": "2026-11-04T06:45:08.328447+00:00",
+      "free_bytes": 71840370688
+    },
+    {
+      "observed_at": "2026-11-04T06:45:10.360981+00:00",
+      "free_bytes": 71822958592
+    },
+    {
+      "observed_at": "2026-11-04T06:45:12.388696+00:00",
+      "free_bytes": 71806648320
+    },
+    {
+      "observed_at": "2026-11-04T06:45:14.410551+00:00",
+      "free_bytes": 71789473792
+    },
+    {
+      "observed_at": "2026-11-04T06:45:16.438750+00:00",
+      "free_bytes": 71773392896
+    },
+    {
+      "observed_at": "2026-11-04T06:45:18.463756+00:00",
+      "free_bytes": 71757344768
+    },
+    {
+      "observed_at": "2026-11-04T06:45:20.489055+00:00",
+      "free_bytes": 71740907520
+    },
+    {
+      "observed_at": "2026-11-04T06:45:22.521297+00:00",
+      "free_bytes": 71725060096
+    },
+    {
+      "observed_at": "2026-11-04T06:45:24.552971+00:00",
+      "free_bytes": 71708999680
+    },
+    {
+      "observed_at": "2026-11-04T06:45:26.583735+00:00",
+      "free_bytes": 71691505664
+    },
+    {
+      "observed_at": "2026-11-04T06:45:28.617553+00:00",
+      "free_bytes": 71674281984
+    },
+    {
+      "observed_at": "2026-11-04T06:45:30.649015+00:00",
+      "free_bytes": 71658393600
+    },
+    {
+      "observed_at": "2026-11-04T06:45:32.672116+00:00",
+      "free_bytes": 71642238976
+    },
+    {
+      "observed_at": "2026-11-04T06:45:34.703954+00:00",
+      "free_bytes": 71633039360
+    },
+    {
+      "observed_at": "2026-11-04T06:45:36.732966+00:00",
+      "free_bytes": 71991971840
+    },
+    {
+      "observed_at": "2026-11-04T06:45:38.755500+00:00",
+      "free_bytes": 71980544000
+    },
+    {
+      "observed_at": "2026-11-04T06:45:40.788037+00:00",
+      "free_bytes": 71968440320
+    },
+    {
+      "observed_at": "2026-11-04T06:45:42.810071+00:00",
+      "free_bytes": 71951847424
+    },
+    {
+      "observed_at": "2026-11-04T06:45:44.838482+00:00",
+      "free_bytes": 71935254528
+    },
+    {
+      "observed_at": "2026-11-04T06:45:46.868156+00:00",
+      "free_bytes": 71918755840
+    },
+    {
+      "observed_at": "2026-11-04T06:45:48.900049+00:00",
+      "free_bytes": 71902199808
+    },
+    {
+      "observed_at": "2026-11-04T06:45:50.931420+00:00",
+      "free_bytes": 71885864960
+    },
+    {
+      "observed_at": "2026-11-04T06:45:52.963412+00:00",
+      "free_bytes": 71868055552
+    },
+    {
+      "observed_at": "2026-11-04T06:45:54.995447+00:00",
+      "free_bytes": 71851335680
+    },
+    {
+      "observed_at": "2026-11-04T06:45:57.022247+00:00",
+      "free_bytes": 71834849280
+    },
+    {
+      "observed_at": "2026-11-04T06:45:59.050214+00:00",
+      "free_bytes": 71818506240
+    },
+    {
+      "observed_at": "2026-11-04T06:46:01.080589+00:00",
+      "free_bytes": 71801872384
+    },
+    {
+      "observed_at": "2026-11-04T06:46:03.111996+00:00",
+      "free_bytes": 71784951808
+    },
+    {
+      "observed_at": "2026-11-04T06:46:05.138891+00:00",
+      "free_bytes": 71767687168
+    },
+    {
+      "observed_at": "2026-11-04T06:46:07.164478+00:00",
+      "free_bytes": 71750750208
+    },
+    {
+      "observed_at": "2026-11-04T06:46:09.189854+00:00",
+      "free_bytes": 71734288384
+    },
+    {
+      "observed_at": "2026-11-04T06:46:11.223067+00:00",
+      "free_bytes": 71717834752
+    },
+    {
+      "observed_at": "2026-11-04T06:46:13.254168+00:00",
+      "free_bytes": 71701590016
+    },
+    {
+      "observed_at": "2026-11-04T06:46:15.282101+00:00",
+      "free_bytes": 71684849664
+    },
+    {
+      "observed_at": "2026-11-04T06:46:17.309098+00:00",
+      "free_bytes": 71668379648
+    },
+    {
+      "observed_at": "2026-11-04T06:46:19.334830+00:00",
+      "free_bytes": 71651913728
+    },
+    {
+      "observed_at": "2026-11-04T06:46:21.367776+00:00",
+      "free_bytes": 71635308544
+    },
+    {
+      "observed_at": "2026-11-04T06:46:23.391368+00:00",
+      "free_bytes": 71622811648
+    },
+    {
+      "observed_at": "2026-11-04T06:46:25.418149+00:00",
+      "free_bytes": 71999090688
+    },
+    {
+      "observed_at": "2026-11-04T06:46:27.452708+00:00",
+      "free_bytes": 71989112832
+    },
+    {
+      "observed_at": "2026-11-04T06:46:29.474594+00:00",
+      "free_bytes": 71976177664
+    },
+    {
+      "observed_at": "2026-11-04T06:46:31.508180+00:00",
+      "free_bytes": 71949406208
+    },
+    {
+      "observed_at": "2026-11-04T06:46:33.537124+00:00",
+      "free_bytes": 71936401408
+    },
+    {
+      "observed_at": "2026-11-04T06:46:35.567517+00:00",
+      "free_bytes": 71922462720
+    },
+    {
+      "observed_at": "2026-11-04T06:46:37.599914+00:00",
+      "free_bytes": 71907876864
+    },
+    {
+      "observed_at": "2026-11-04T06:46:39.626491+00:00",
+      "free_bytes": 71894302720
+    },
+    {
+      "observed_at": "2026-11-04T06:46:41.658150+00:00",
+      "free_bytes": 71879725056
+    },
+    {
+      "observed_at": "2026-11-04T06:46:43.684835+00:00",
+      "free_bytes": 71866093568
+    },
+    {
+      "observed_at": "2026-11-04T06:46:45.715111+00:00",
+      "free_bytes": 71853035520
+    },
+    {
+      "observed_at": "2026-11-04T06:46:47.759845+00:00",
+      "free_bytes": 71839076352
+    },
+    {
+      "observed_at": "2026-11-04T06:46:49.787156+00:00",
+      "free_bytes": 71825399808
+    },
+    {
+      "observed_at": "2026-11-04T06:46:51.812846+00:00",
+      "free_bytes": 71812218880
+    },
+    {
+      "observed_at": "2026-11-04T06:46:53.844168+00:00",
+      "free_bytes": 71798599680
+    },
+    {
+      "observed_at": "2026-11-04T06:46:55.868209+00:00",
+      "free_bytes": 71785934848
+    },
+    {
+      "observed_at": "2026-11-04T06:46:57.897665+00:00",
+      "free_bytes": 71772045312
+    },
+    {
+      "observed_at": "2026-11-04T06:46:59.929825+00:00",
+      "free_bytes": 71759413248
+    },
+    {
+      "observed_at": "2026-11-04T06:47:01.962523+00:00",
+      "free_bytes": 71741399040
+    },
+    {
+      "observed_at": "2026-11-04T06:47:03.988845+00:00",
+      "free_bytes": 71728627712
+    },
+    {
+      "observed_at": "2026-11-04T06:47:06.013097+00:00",
+      "free_bytes": 71714525184
+    },
+    {
+      "observed_at": "2026-11-04T06:47:08.043238+00:00",
+      "free_bytes": 71701237760
+    },
+    {
+      "observed_at": "2026-11-04T06:47:10.068388+00:00",
+      "free_bytes": 71687831552
+    },
+    {
+      "observed_at": "2026-11-04T06:47:12.093217+00:00",
+      "free_bytes": 71673421824
+    },
+    {
+      "observed_at": "2026-11-04T06:47:14.125393+00:00",
+      "free_bytes": 71660621824
+    },
+    {
+      "observed_at": "2026-11-04T06:47:16.154509+00:00",
+      "free_bytes": 71648018432
+    },
+    {
+      "observed_at": "2026-11-04T06:47:18.187226+00:00",
+      "free_bytes": 71978909696
+    },
+    {
+      "observed_at": "2026-11-04T06:47:20.219965+00:00",
+      "free_bytes": 71978790912
+    },
+    {
+      "observed_at": "2026-11-04T06:47:22.251628+00:00",
+      "free_bytes": 71977914368
+    },
+    {
+      "observed_at": "2026-11-04T06:47:24.283601+00:00",
+      "free_bytes": 71977746432
+    },
+    {
+      "observed_at": "2026-11-04T06:47:26.340285+00:00",
+      "free_bytes": 71977725952
+    },
+    {
+      "observed_at": "2026-11-04T06:47:28.367689+00:00",
+      "free_bytes": 71977553920
+    },
+    {
+      "observed_at": "2026-11-04T06:47:30.404822+00:00",
+      "free_bytes": 71978811392
+    },
+    {
+      "observed_at": "2026-11-04T06:47:32.446452+00:00",
+      "free_bytes": 71975845888
+    },
+    {
+      "observed_at": "2026-11-04T06:47:32.514067+00:00",
+      "free_bytes": 71975759872
+    },
+    {
+      "observed_at": "2026-11-04T06:47:34.549267+00:00",
+      "free_bytes": 71972601856
+    },
+    {
+      "observed_at": "2026-11-04T06:47:34.603198+00:00",
+      "free_bytes": 71972601856
+    },
+    {
+      "observed_at": "2026-11-04T06:47:36.637433+00:00",
+      "free_bytes": 71971831808
+    },
+    {
+      "observed_at": "2026-11-04T06:47:36.703587+00:00",
+      "free_bytes": 71971827712
+    },
+    {
+      "observed_at": "2026-11-04T06:47:38.739182+00:00",
+      "free_bytes": 71971831808
+    },
+    {
+      "observed_at": "2026-11-04T06:47:38.808915+00:00",
+      "free_bytes": 71971823616
+    },
+    {
+      "observed_at": "2026-11-04T06:47:40.835580+00:00",
+      "free_bytes": 71971799040
+    },
+    {
+      "observed_at": "2026-11-04T06:47:40.905649+00:00",
+      "free_bytes": 71971799040
+    },
+    {
+      "observed_at": "2026-11-04T06:47:42.940655+00:00",
+      "free_bytes": 71971205120
+    },
+    {
+      "observed_at": "2026-11-04T06:47:43.014340+00:00",
+      "free_bytes": 71971201024
+    },
+    {
+      "observed_at": "2026-11-04T06:47:45.049224+00:00",
+      "free_bytes": 71939514368
+    },
+    {
+      "observed_at": "2026-11-04T06:47:47.076799+00:00",
+      "free_bytes": 71966314496
+    }
+  ]
+}

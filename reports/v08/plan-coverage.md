@@ -1,5 +1,41 @@
 # 0.8 plan coverage and remaining work
 
+<!-- file-runtime-implementation-20261103:start -->
+**November 3: ordinary file-runtime and selected catalog integration implemented; all 13 source gates pass.**
+The new file-runtime contract extends the existing installer journal and ordinary
+setup/readiness/removal commands. SkillRank catalog selection uses its real local
+server/CLI through the existing contained executor and canonical ledger. Query
+contents are transient; receipts bind source, artifact, query/result digests and
+cleanup. Accounting v4 adds explicit catalog authority. Legacy wheel/workflow
+contracts retain their meaning, and unselected components remain inert.
+
+[Current evidence and grouped preparation](../toolkit-v2/c13/workflow-skillrank-20261103/README.md)
+bind source `f2c7a3e9b923fb95fb550287dd0f0e59c681c8633fd235a773cb7c3f92e1515e`
+and its 404-file coordinator snapshot. Both full runs passed 2,102 tests with 21 skips. Coverage is 82.62687593080535%;
+both branch gates, schemas, policy, lint, typing, integration fixtures and build pass. Focused lifecycle,
+catalog, accounting, drift, interruption and cleanup checks pass with first-party
+substitutes. The entire review driver passes a synthetic CLI journey with exactly
+24 additional operations. No upstream binary runs in that control.
+
+Actual current-source CLI catalog execution, installed-wheel verification and
+changed offline docs need the concrete grouped review. Its runtime component
+reuses the original SkillRank grant and remaining 24 operations; old 16 charges,
+55.93853883491829 seconds, ceilings and all resources remain. Definitions/artifacts
+are prepared but the new scope amendment is not applied. No models, downloads,
+builds, pulls, credentials, host activation, old-resource deletion or release.
+The actual 50 GiB reserve stays. Unrelated CI work remains unstaged/preserved.
+
+Next: obtain the [exact grouped execution review](../toolkit-v2/c13/workflow-skillrank-20261103/operation-review.json)
+and run the new CLI journey plus changed-wheel and offline-docs components.
+Wheel `d05ed8778893` and 32 unchanged dependencies are prepared, not installed.
+The source-check minimum was 65.77 GiB free. Offline docs remain pending their
+new exact-input approval; earlier passed checks retain their old scope. Bounded
+SkillRank evaluation, both SkillsBench task domains and remaining upstream
+integrations stay open. Waza has no supported backend access. Stack integration,
+candidate usefulness and selection usefulness remain separate; comparisons stay
+paused. The prior upstream build/search/show PASS keeps its e48eec5f scope.
+<!-- file-runtime-implementation-20261103:end -->
+
 <!-- report-family-skillrank-review-20261103:start -->
 **November 3: pinned SkillRank build/search/show/lifecycle passed; ordinary workflow integration next.**
 Approved review`6057c786` verified all86 locked archive hashes and their exact

@@ -90,7 +90,8 @@
       "enum": [
         "aeep.toolkit.workflow-accounting.v1",
         "aeep.toolkit.workflow-accounting.v2",
-        "aeep.toolkit.workflow-accounting.v3"
+        "aeep.toolkit.workflow-accounting.v3",
+        "aeep.toolkit.workflow-accounting.v4"
       ],
       "title": "Schema Version",
       "type": "string"
@@ -120,11 +121,12 @@
           "setup",
           "readiness",
           "remove",
-          "scan"
+          "scan",
+          "catalog"
         ],
         "type": "string"
       },
-      "maxItems": 8,
+      "maxItems": 9,
       "minItems": 1,
       "title": "Operations",
       "type": "array"

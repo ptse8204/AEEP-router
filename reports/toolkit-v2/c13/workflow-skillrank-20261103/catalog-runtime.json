@@ -1,0 +1,53 @@
+{
+  "schema_version": "aeep.toolkit.catalog-runtime.v1",
+  "source_revision": "5216bae9149b4ff8a7f9e014b6889fb094cee8e1",
+  "runtime_id": "skillrank-files",
+  "environment": {
+    "environment_id": "skillrank-cli-retained-grader",
+    "kind": "container",
+    "identity": {},
+    "network": false,
+    "container_image": "sha256:35dc1bcb7e8162c2a0cef6cbd30bc4bf276c082b11b6e5fc259b6800e8c5ca04",
+    "cpu_count": 1.0,
+    "memory_mb": 1024,
+    "process_limit": 128,
+    "container_runtime": "/Applications/Docker.app/Contents/Resources/bin/docker",
+    "container_socket": "/Users/edwintse/.docker/run/docker.sock",
+    "read_only_roots": []
+  },
+  "request": {
+    "schema_version": "assessment.recipe-materialization.v1",
+    "plan_id": "skillrank-workflow-f2c7a3e9b923",
+    "subject_digest": "a2c3aa14a6a57732f5a9699a21b24a3262897cd49e872ab56e4123d56f396fb7",
+    "recipe_digest": "1fbbb54f8a54febd5b25ff843ffa96f247c108706abe20359f80b0eb251e59f8",
+    "mapping_digest": "a31ca5160704b60b8fbfa4b724c617774a31bec303ac4d89e356446deb36445c",
+    "environment_digest": "0a00988cca37bdedc0224b4896a3949bb81e14419bf9a76e9b9118a92a6b6dbb",
+    "authorization_id": "skillrank-engineering-d6fbbad37ecac25b1900d434a0c6c38fedb1758cb15e1f3fbbbfe0430230cdbd",
+    "definition_digests": [
+      "a2c3aa14a6a57732f5a9699a21b24a3262897cd49e872ab56e4123d56f396fb7",
+      "1fbbb54f8a54febd5b25ff843ffa96f247c108706abe20359f80b0eb251e59f8",
+      "7a0fa2d9e81826a4710962eeb7945eee79c12be85b8f0c16fc0c0a0a33be2c75",
+      "a31ca5160704b60b8fbfa4b724c617774a31bec303ac4d89e356446deb36445c",
+      "0a00988cca37bdedc0224b4896a3949bb81e14419bf9a76e9b9118a92a6b6dbb"
+    ],
+    "seed": 0
+  },
+  "catalog": {
+    "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-skillrank-20261103/catalog.json",
+    "sha256": "2058d163d3c62f6b532a8479cffd517217069acd222553da39a2f53ce803524e"
+  },
+  "catalog_source": {
+    "repository": "https://github.com/ptse8204/AEEP-router",
+    "revision": "f2c7a3e9b923fb95fb550287dd0f0e59c681c8633fd235a773cb7c3f92e1515e",
+    "artifact_sha256": "2058d163d3c62f6b532a8479cffd517217069acd222553da39a2f53ce803524e",
+    "license_expression": "Apache-2.0",
+    "data_rights": "First-party engineering catalog only; no benchmark answers or third-party skill distribution."
+  },
+  "control_root": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-skillrank-20261103/control",
+  "worker_sha256": "d15bc1a5695a3cb00292a40bdd75c97f2141c23cafbdfa0b354ba57142d781f9",
+  "executable_dependencies": {
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-frozen-source-f2c7a3e9b923/src/aeep_toolkit/catalog_worker.py": "d15bc1a5695a3cb00292a40bdd75c97f2141c23cafbdfa0b354ba57142d781f9",
+    "/Applications/Docker.app/Contents/Resources/bin/docker": "a6822407e207ff0b687419ccbe55700ffbf389d77de58ef625b3b1790d88747c"
+  },
+  "timeout_seconds": 45
+}

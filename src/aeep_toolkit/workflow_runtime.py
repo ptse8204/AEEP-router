@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import subprocess
 from pathlib import Path
-from typing import Any, Literal
+from typing import TYPE_CHECKING, Any, Literal
 
 from aeep.assessment.identity import protected_directory
 from aeep.assessment.models import content_digest
@@ -19,6 +20,7 @@ from .install_runtime import (
     canonical,
     digest,
     load_state,
+    parse_installation,
     paths,
     remove,
     snapshot,
@@ -27,6 +29,9 @@ from .installation import PreviewPolicy, preview
 from .models import ExtensionRegistry
 from .workflow import StackWorkflow, _read
 from .workflow_accounting import account_workflow
+
+if TYPE_CHECKING:
+    from .file_runtime import FileRuntimeInstallation
 
 
 class RuntimeLifecycleRecord(StrictModel):
@@ -52,7 +57,7 @@ def runtime_target(value: str) -> Path:
     return target
 
 
-def observe(plan: RuntimeInstallation) -> dict[str, Any]:
+def observe(plan: RuntimeInstallation | FileRuntimeInstallation) -> dict[str, Any]:
     """Inspect owned bytes only; never import a package, probe a backend or sign in."""
     root, journal = paths(plan)
     runtime_target(str(root))
@@ -101,7 +106,7 @@ def lifecycle_preview(
     runtime_ids: tuple[str, ...],
     *,
     operation: Literal["setup", "readiness", "remove"],
-) -> tuple[dict[str, Any], dict[str, RuntimeInstallation]]:
+) -> tuple[dict[str, Any], dict[str, RuntimeInstallation | FileRuntimeInstallation]]:
     from .cli import read_json
 
     workflow = StackWorkflow.model_validate(read_json(definition))
@@ -121,13 +126,13 @@ def lifecycle_preview(
     _, policy_raw = _read(workflow.policy, root)
     registry = ExtensionRegistry.model_validate_json(registry_raw)
     policy = PreviewPolicy.model_validate_json(policy_raw)
-    plans: dict[str, RuntimeInstallation] = {}
+    plans: dict[str, RuntimeInstallation | FileRuntimeInstallation] = {}
     blockers: list[str] = []
     targets: dict[str, str] = {}
     for identity in runtime_ids:
         binding = selected.runtimes[identity]
         _, raw = _read(binding.installation, root)
-        plan = RuntimeInstallation.model_validate_json(raw)
+        plan = parse_installation(json.loads(raw))
         runtime_target(plan.destination)
         packages = {item.manifest.extension_id: item.manifest for item in plan.preview.items}
         for component, package in binding.components.items():
@@ -175,7 +180,7 @@ def lifecycle_preview(
                     continue
                 try:
                     _, raw = _read(binding.installation, root)
-                    other = RuntimeInstallation.model_validate_json(raw)
+                    other = parse_installation(json.loads(raw))
                     destination = canonical(other.destination)
                 except (ValueError, OSError):
                     blockers.append(
@@ -205,7 +210,7 @@ def lifecycle_preview(
                 for name, config in parent.configurations.items():
                     for identity, binding in config.runtimes.items():
                         _, data = _read(binding.installation, path.parent)
-                        linked = RuntimeInstallation.model_validate_json(data)
+                        linked = parse_installation(json.loads(data))
                         destination = canonical(linked.destination)
                         for chosen, target in selected_targets:
                             if target.is_relative_to(destination) or destination.is_relative_to(
@@ -239,7 +244,7 @@ def lifecycle_preview(
         "blockers": sorted(set(blockers)),
         "observations": observations,
         "execution_authorized": False,
-        "notice": "Private Python installation lifecycle only. Exact execution/removal authority and an accounting v2 scope are required for writes. Installation does not establish enablement, execution permission, functional readiness or usefulness. Shared workflow references and changed/unfinished resources are preserved.",
+        "notice": "Private owned-runtime lifecycle only. Exact execution/removal authority and an accounting v2 scope are required for writes. Installation does not establish enablement, execution permission, functional readiness or usefulness. Shared workflow references and changed/unfinished resources are preserved.",
     }, plans
 
 
@@ -270,7 +275,7 @@ def lifecycle(
             return details
         if reviewed_digest != details["review_sha256"] or details["blockers"]:
             raise ConfigurationError("exact unblocked runtime lifecycle review required")
-        if meter is None or meter.scope is None or meter.scope.schema_version not in {"aeep.toolkit.workflow-accounting.v2", "aeep.toolkit.workflow-accounting.v3"}:
+        if meter is None or meter.scope is None or meter.scope.schema_version not in {"aeep.toolkit.workflow-accounting.v2", "aeep.toolkit.workflow-accounting.v3", "aeep.toolkit.workflow-accounting.v4"}:
             raise ConfigurationError("runtime changes require an exact accounting v2 or v3 scope")
         assert meter.repository is not None
         results = []

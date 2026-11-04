@@ -134,6 +134,12 @@ def main(argv: list[str] | None = None) -> int:
     install_plan.add_argument('--wheelhouse', type=Path, required=True)
     install_plan.add_argument('--destination', type=Path, required=True)
     install_plan.add_argument('--storage-exception', type=Path, help='Operator-only exact temporary storage exception; remains inert until plan review')
+    file_plan = sub.add_parser('install-files-plan', help='Review exact local runtime files; no build, execution or activation')
+    file_plan.add_argument('--preview', type=Path, required=True)
+    file_plan.add_argument('--policy', type=Path, required=True)
+    file_plan.add_argument('--files', type=Path, required=True)
+    file_plan.add_argument('--artifact-root', type=Path, required=True)
+    file_plan.add_argument('--destination', type=Path, required=True)
     for name in ('install', 'remove'):
         operation = sub.add_parser(name, help='Operator-only private runtime installation/removal')
         operation.add_argument('--installation', type=Path, required=True)
@@ -257,13 +263,23 @@ def main(argv: list[str] | None = None) -> int:
                       if args.stage is not None else inspect(args.path.absolute()).describe())
             print(json.dumps(candidate_result, indent=2))
             return 0
-        if args.command in {'install-plan', 'install', 'remove'}:
+        if args.command in {'install-plan', 'install-files-plan', 'install', 'remove'}:
             from aeep.errors import ConfigurationError
 
-            from .install_runtime import RuntimeInstallation, Wheel, apply, digest, prepare, remove
+            from .file_runtime import FileRuntimeInstallation, RuntimeFile, prepare_files
+            from .install_runtime import (
+                RuntimeInstallation,
+                Wheel,
+                apply,
+                digest,
+                parse_installation,
+                prepare,
+                remove,
+            )
             from .installation import InstallationPreview
             from .storage import StorageReserveException
             try:
+                installation: RuntimeInstallation | FileRuntimeInstallation
                 if args.command == 'install-plan':
                     installation = prepare(InstallationPreview.model_validate(read_json(args.preview)),
                                            PreviewPolicy.model_validate(read_json(args.policy)), args.destination,
@@ -271,8 +287,13 @@ def main(argv: list[str] | None = None) -> int:
                                            storage_exception=StorageReserveException.model_validate(read_json(args.storage_exception))
                                            if args.storage_exception else None)
                     install_result = {'review_sha256': digest(installation), 'installation': installation.model_dump(mode='json')}
+                elif args.command == 'install-files-plan':
+                    installation = prepare_files(InstallationPreview.model_validate(read_json(args.preview)),
+                        PreviewPolicy.model_validate(read_json(args.policy)), args.destination,
+                        args.artifact_root, tuple(RuntimeFile.model_validate(f) for f in read_json(args.files)))
+                    install_result = {'review_sha256': digest(installation), 'installation': installation.model_dump(mode='json')}
                 else:
-                    installation = RuntimeInstallation.model_validate(read_json(args.installation)['installation'])
+                    installation = parse_installation(read_json(args.installation)['installation'])
                     install_result = (apply if args.command == 'install' else remove)(installation, args.reviewed_digest)
                 print(json.dumps(install_result, indent=2))
                 return 0

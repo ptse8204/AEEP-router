@@ -1,0 +1,32 @@
+{
+  "source_revision": "5216bae9149b4ff8a7f9e014b6889fb094cee8e1",
+  "read_only_source_audit": true,
+  "executed": false,
+  "files": {
+    "crates/skillrank-core/src/runner/mod.rs": "2d2c4b95c3a2c5fb43b8c939904b772e9019a6c85945d4fb5312a324076b58cc",
+    "crates/skillrank-core/src/runner/agent.rs": "d57162989e551d0fc0367bb1cf10332b0cdb0da913f547df8e51b89e9992f517",
+    "crates/skillrank-core/src/runner/fixture.rs": "ef60c1255e1f252580a5234454b0b738b314fc2ce1ffebb4f56e62a219de3065",
+    "crates/skillrank/src/eval.rs": "66d147e4a8da1a6a5c449b42aec26795964e0e9f61d7e5388b5f0f42b54285bb"
+  },
+  "reuse_points": [
+    "skillrank_core::runner::run_eval",
+    "AgentRunner",
+    "FixtureProvider",
+    "Verifier"
+  ],
+  "default_cli_gaps": [
+    "Direct model CLI process spawning is outside AEEP trial reservations and controlled-worker dispatch.",
+    "The default verifier executes local scripts; Docker presence labels do not prove actual isolation.",
+    "The runner is forced-mode and cannot establish optional-use value.",
+    "Default numeric usage fields on errors are not observed zero usage; canonical evidence masks must override those defaults."
+  ],
+  "next_required_implementation": "A narrow core callback bridge to existing reviewed executor/trial/grade operations. Execute upstream runner outside coordinator; no raw model/provider CLI or verifier execution on host. Preserve canonical raw categories, partial charges, source/drift checks and protected graders.",
+  "not_equivalent": [
+    "Search/show success",
+    "Import or compilation",
+    "A replay of historical trial certificates",
+    "First-party substitutes"
+  ],
+  "status": "OPEN",
+  "comparisons": "PAUSED"
+}

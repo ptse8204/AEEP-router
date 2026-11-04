@@ -1,0 +1,65 @@
+{
+  "version": "0.8",
+  "database": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillrank-build-preparation-20261103/runtime-execution/canonical.sqlite3",
+  "default_policy": "balanced",
+  "persistence": {
+    "store_action_inputs": false,
+    "store_action_context": false
+  },
+  "signing": null,
+  "budget": null,
+  "economic_evidence": {
+    "enabled": false,
+    "settlement_currency": "USD",
+    "live_quotes": {
+      "enabled": false,
+      "top_k": 3,
+      "per_provider_timeout_seconds": 2.0,
+      "total_timeout_seconds": 4.0,
+      "maximum_response_bytes": 262144,
+      "maximum_clock_skew_seconds": 30,
+      "maximum_quote_ttl_seconds": 600
+    },
+    "requirements": {
+      "require_binding_quote_for_paid_routes": true,
+      "allow_verified_static_offer": true,
+      "allow_static_prior": false,
+      "minimum_evidence_level": "SIGNED_QUOTE",
+      "quote_failure_policy": "REQUIRE_BINDING_QUOTE",
+      "pinned_rate_cards": {}
+    },
+    "market_aggregates": {
+      "enabled": false,
+      "maximum_age_seconds": 86400,
+      "minimum_sample_size": 20,
+      "minimum_settlement_verified_fraction": "0.80"
+    },
+    "network": {
+      "allowed_quote_hosts": [],
+      "allow_private_addresses": false,
+      "allow_redirects": false,
+      "trust_environment_proxy": false
+    },
+    "trust_store": {
+      "path": "~/.config/aeep/provider-keys.json"
+    },
+    "payment": {
+      "adapter": "free",
+      "unlimited_budget": false
+    }
+  },
+  "provider_packages": {
+    "artifact_root": ".aeep/artifacts",
+    "maximum_artifact_bytes": 52428800,
+    "allow_remote_artifacts": false,
+    "allowed_artifact_hosts": [],
+    "allow_private_addresses": false,
+    "allow_self_asserted_priors": true,
+    "require_local_smoke": true
+  },
+  "policies": {},
+  "capabilities": [],
+  "resources": [],
+  "registries": [],
+  "executors": []
+}

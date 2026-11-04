@@ -72,6 +72,7 @@ class StackConfiguration(ContractModel):
     preparation: SetupFiles | None = None
     scheduler: WorkflowFile | None = None
     scanner: WorkflowFile | None = None
+    catalog: WorkflowFile | None = None
     runtimes: dict[Identifier, WorkflowRuntimeBinding] = Field(default_factory=dict, max_length=16)
 
     @model_serializer(mode='wrap')
@@ -81,6 +82,8 @@ class StackConfiguration(ContractModel):
             result.pop('scheduler', None)
         if self.scanner is None:
             result.pop('scanner', None)
+        if self.catalog is None:
+            result.pop('catalog', None)
         if not self.runtimes:
             result.pop('runtimes', None)
         return result
@@ -93,6 +96,8 @@ class StackConfiguration(ContractModel):
             raise ValueError('runtime bindings may provide selected components only')
         if self.scanner is not None and 'skill-scanner' not in self.components:
             raise ValueError('scanner binding requires explicit component selection')
+        if self.catalog is not None and 'skillrank' not in self.components:
+            raise ValueError('catalog binding requires explicit SkillRank selection')
         if self.assessment is not None and self.preparation is not None:
             raise ValueError('select either an existing assessment or canonical preparation inputs')
         return self
@@ -284,6 +289,14 @@ def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
         facts['scanner'] = scanner_preview
     if runtime_setup is not None:
         facts['runtime_setup'] = {name:runtime_setup[name] for name in ('review_sha256','installation_plans','observations','blockers')}
+    if selected.catalog is not None:
+        from .workflow_catalog import CatalogRuntimeDefinition
+        _, catalog_raw = _read(selected.catalog, root)
+        catalog_definition = CatalogRuntimeDefinition.model_validate_json(catalog_raw)
+        if catalog_definition.runtime_id not in selected.runtimes:
+            raise ValueError('catalog definition refers to an unselected runtime')
+        facts['catalog'] = {'definition_ref':content_digest(catalog_definition),
+                            'functional_readiness':'NOT_VERIFIED_BY_PREVIEW'}
     return {**facts, 'review_sha256':content_digest(facts), 'blockers':blockers,
             'gates':{'stack_integration':'NOT_VERIFIED_BY_PREVIEW', 'candidate_usefulness':'NOT_ASSESSED',
                      'selection_usefulness':'NOT_ASSESSED'},
@@ -340,6 +353,17 @@ def main(argv: list[str] | None = None) -> None:
     define_scanner = commands.add_parser('define-scanner', help='Store an inert scanner runtime definition; no review or execution')
     define_scanner.add_argument('--file', type=Path, required=True)
     define_scanner.add_argument('--manifest', type=Path, required=True)
+    define_catalog = commands.add_parser('define-catalog', help='Store an inert exact catalog runtime definition; no review or execution')
+    define_catalog.add_argument('--file', type=Path, required=True)
+    define_catalog.add_argument('--manifest', type=Path, required=True)
+    catalog_command = commands.add_parser('catalog', help='Explicit selected SkillRank search/show through a reviewed offline worker')
+    catalog_command.add_argument('--workflow', type=Path, required=True)
+    catalog_command.add_argument('--configuration', required=True)
+    catalog_command.add_argument('--mode', choices=('search','show'), required=True)
+    catalog_command.add_argument('--value', required=True, help='Metadata query or owner/skill identifier; never flags or a URL')
+    catalog_command.add_argument('--accounting', type=Path)
+    catalog_command.add_argument('--operation-id')
+    catalog_command.add_argument('--reviewed-digest', help='Omit for inert preview; execution requires an accounting v4 scope')
     worker_readiness = commands.add_parser('prepare-worker-readiness',
         help='Draft canonical readiness from settled paired-worker observations; no review or execution')
     worker_readiness.add_argument('--manifest', type=Path, required=True)
@@ -347,7 +371,7 @@ def main(argv: list[str] | None = None) -> None:
     worker_readiness.add_argument('--treatment-request', required=True)
     worker_readiness.add_argument('--output', type=Path, required=True)
     for name in ('setup', 'readiness', 'remove'):
-        command = commands.add_parser(name, help='Selected private Python runtimes; functional evidence remains separate')
+        command = commands.add_parser(name, help='Selected private runtimes; functional evidence remains separate')
         command.add_argument('--workflow', type=Path, required=True)
         command.add_argument('--configuration', required=True)
         command.add_argument('--runtime', action='append', required=True, help='Explicit runtime binding; repeat for independent runtimes')
@@ -360,6 +384,11 @@ def main(argv: list[str] | None = None) -> None:
             from .workflow_security import scan
             print(json.dumps(scan(args.workflow, args.configuration, accounting=args.accounting,
                 operation_key=args.operation_id, reviewed_digest=args.reviewed_digest), indent=2))
+            return
+        if args.operation == 'catalog':
+            from .workflow_catalog import catalog
+            print(json.dumps(catalog(args.workflow,args.configuration,args.mode,args.value,
+                accounting=args.accounting,operation_key=args.operation_id,reviewed_digest=args.reviewed_digest),indent=2))
             return
         if args.operation == 'prepare-worker-readiness':
             import asyncio
@@ -383,7 +412,7 @@ def main(argv: list[str] | None = None) -> None:
             finally:
                 asyncio.run(router.close())
             return
-        if args.operation in {'define-rights', 'define-scheduler', 'define-accounting', 'define-scanner'}:
+        if args.operation in {'define-rights', 'define-scheduler', 'define-accounting', 'define-scanner', 'define-catalog'}:
             import asyncio
 
             from aeep.assessment.repository import AssessmentRepository
@@ -391,21 +420,23 @@ def main(argv: list[str] | None = None) -> None:
             from aeep.router import Router
 
             from .workflow_accounting import WorkflowAccountingDefinition
+            from .workflow_catalog import CatalogRuntimeDefinition
             from .workflow_preparation import TaskRightsReview
             from .workflow_security import ScannerRuntimeDefinition
 
             record = (TaskRightsReview.model_validate_json(read_bytes(args.file)) if args.operation == 'define-rights'
                       else WorkflowAccountingDefinition.model_validate_json(read_bytes(args.file)) if args.operation == 'define-accounting'
                       else ScannerRuntimeDefinition.model_validate_json(read_bytes(args.file)) if args.operation == 'define-scanner'
+                      else CatalogRuntimeDefinition.model_validate_json(read_bytes(args.file)) if args.operation == 'define-catalog'
                       else SchedulerDefinition.model_validate_json(read_bytes(args.file)))
             kind = ('toolkit_task_rights' if args.operation == 'define-rights' else
-                    'toolkit_workflow_accounting' if args.operation == 'define-accounting' else 'toolkit_scanner_runtime' if args.operation == 'define-scanner' else 'scheduler')
+                    'toolkit_workflow_accounting' if args.operation == 'define-accounting' else 'toolkit_scanner_runtime' if args.operation == 'define-scanner' else 'toolkit_catalog_runtime' if args.operation == 'define-catalog' else 'scheduler')
             router = Router.from_manifest(args.manifest)
             try:
                 from aeep.assessment.models import content_digest
 
                 ref = AssessmentRepository(router.store).put(kind, content_digest(record), record)
-                print(json.dumps({'rights_review_ref' if args.operation == 'define-rights' else 'accounting_ref' if args.operation == 'define-accounting' else 'scanner_ref' if args.operation == 'define-scanner' else 'scheduler_ref':ref,
+                print(json.dumps({'rights_review_ref' if args.operation == 'define-rights' else 'accounting_ref' if args.operation == 'define-accounting' else 'scanner_ref' if args.operation == 'define-scanner' else 'catalog_ref' if args.operation == 'define-catalog' else 'scheduler_ref':ref,
                                   'reviewed':False, 'execution_authorized':False}))
             finally:
                 asyncio.run(router.close())

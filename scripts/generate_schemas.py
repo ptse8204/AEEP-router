@@ -181,6 +181,7 @@ from aeep.tasks import TaskActivation, TaskReconciliation
 from aeep.verification import RouterCompletionReport
 from aeep.workflow import WorkflowExecutionOutcome, WorkflowRequest
 from aeep.x402 import X402BatchRecord, X402CapacityCommitment, X402ConformanceReport
+from aeep_toolkit.file_runtime import FileRuntimeInstallation
 from aeep_toolkit.install_runtime import RuntimeInstallation
 from aeep_toolkit.installation import InstallationPreview, InstalledObservation, PreviewPolicy
 from aeep_toolkit.models import (
@@ -196,12 +197,16 @@ from aeep_toolkit.selection import SelectionEvaluation
 from aeep_toolkit.storage import StorageReserveException
 from aeep_toolkit.workflow import EvaluationWorkflow, StackWorkflow
 from aeep_toolkit.workflow_accounting import WorkflowAccountingDefinition
+from aeep_toolkit.workflow_catalog import CatalogRuntimeDefinition, WorkflowCatalogRecord
 from aeep_toolkit.workflow_security import ScannerRuntimeDefinition, WorkflowScanRecord
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_DIR = ROOT / "schemas"
 
 MODEL_FILES = {
+    "toolkit-catalog-runtime.schema.json": CatalogRuntimeDefinition,
+    "toolkit-workflow-catalog.schema.json": WorkflowCatalogRecord,
+    "toolkit-file-runtime-installation.schema.json": FileRuntimeInstallation,
     "toolkit-storage-exception.schema.json": StorageReserveException,
     "assessment-repository-case.schema.json": RepositoryCase,
     "assessment-repository-suite-case.schema.json": RepositorySuiteCase,

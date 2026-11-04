@@ -178,3 +178,40 @@ The acknowledgment is included in the exact review digest and the preview's
 limitations; memory remains null. It does not waive disk reserve, package or
 permission checks, or authorize execution. Existing policies omit the false
 value when serialized, preserving prior installation review hashes.
+
+## Reviewed file runtimes
+
+Use a file-runtime plan to retain a reviewed standalone binary and its notices
+in a private owned directory. This supports upstream tools that do not use Python
+wheels. The installer copies exact bytes; it does not run, download or compile
+them, start a service, or alter the host's executable search path.
+
+```bash
+PYTHONPATH=src python3 -m aeep_toolkit install-files-plan \
+  --preview /absolute/preview.json --policy /absolute/policy.json \
+  --files /absolute/runtime-files.json \
+  --artifact-root /absolute/reviewed-artifacts \
+  --destination /absolute/new-private-runtime
+```
+
+`runtime-files.json` is an array of `RuntimeFile` entries. Each binds its
+`extension_id`, relative `source` and `destination`, `sha256`, `size_bytes`, and
+explicit `executable`/`primary` flags. Exactly one primary file per component must
+match the selected manifest's artifact hash. The generated
+`aeep.toolkit.file-runtime-installation.v1` plan also binds the installer Python,
+platform, preview and policy. The command returns an envelope containing
+`review_sha256` and `installation`. Save that envelope for the existing `install`
+and `remove` commands. For a workflow runtime binding, save just its `installation`
+object in a separate JSON file and bind that file's exact hash.
+
+The source and destination must be separate canonical trees. Linked files,
+credential paths, traversal and destination collisions are rejected. Setup keeps
+the normal 50 GiB actual free-space reserve, copies executables with mode 0555 and
+other files with mode 0444, and retains the existing ownership journal. A repeated
+successful setup verifies the owned tree. Failed or interrupted setup cannot
+automatically retry; changed files block removal and remain intact.
+
+Copied binaries still need applicable execution authority and a functional check
+on the selected backend. Installation does not establish architecture compatibility,
+effective enablement, isolation, qualification or usefulness. Wheel installation
+v1/v2 contracts retain their meaning and compatibility checks.

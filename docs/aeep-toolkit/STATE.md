@@ -1,5 +1,41 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- file-runtime-implementation-20261103:start -->
+**November 3: ordinary file-runtime and selected catalog integration implemented; all 13 source gates pass.**
+The new file-runtime contract extends the existing installer journal and ordinary
+setup/readiness/removal commands. SkillRank catalog selection uses its real local
+server/CLI through the existing contained executor and canonical ledger. Query
+contents are transient; receipts bind source, artifact, query/result digests and
+cleanup. Accounting v4 adds explicit catalog authority. Legacy wheel/workflow
+contracts retain their meaning, and unselected components remain inert.
+
+[Current evidence and grouped preparation](../../reports/toolkit-v2/c13/workflow-skillrank-20261103/README.md)
+bind source `f2c7a3e9b923fb95fb550287dd0f0e59c681c8633fd235a773cb7c3f92e1515e`
+and its 404-file coordinator snapshot. Both full runs passed 2,102 tests with 21 skips. Coverage is 82.62687593080535%;
+both branch gates, schemas, policy, lint, typing, integration fixtures and build pass. Focused lifecycle,
+catalog, accounting, drift, interruption and cleanup checks pass with first-party
+substitutes. The entire review driver passes a synthetic CLI journey with exactly
+24 additional operations. No upstream binary runs in that control.
+
+Actual current-source CLI catalog execution, installed-wheel verification and
+changed offline docs need the concrete grouped review. Its runtime component
+reuses the original SkillRank grant and remaining 24 operations; old 16 charges,
+55.93853883491829 seconds, ceilings and all resources remain. Definitions/artifacts
+are prepared but the new scope amendment is not applied. No models, downloads,
+builds, pulls, credentials, host activation, old-resource deletion or release.
+The actual 50 GiB reserve stays. Unrelated CI work remains unstaged/preserved.
+
+Next: obtain the [exact grouped execution review](../../reports/toolkit-v2/c13/workflow-skillrank-20261103/operation-review.json)
+and run the new CLI journey plus changed-wheel and offline-docs components.
+Wheel `d05ed8778893` and 32 unchanged dependencies are prepared, not installed.
+The source-check minimum was 65.77 GiB free. Offline docs remain pending their
+new exact-input approval; earlier passed checks retain their old scope. Bounded
+SkillRank evaluation, both SkillsBench task domains and remaining upstream
+integrations stay open. Waza has no supported backend access. Stack integration,
+candidate usefulness and selection usefulness remain separate; comparisons stay
+paused. The prior upstream build/search/show PASS keeps its e48eec5f scope.
+<!-- file-runtime-implementation-20261103:end -->
+
 <!-- report-family-skillrank-review-20261103:start -->
 **November 3: pinned SkillRank build/search/show/lifecycle passed; ordinary workflow integration next.**
 Approved review`6057c786` verified all86 locked archive hashes and their exact
@@ -21,7 +57,7 @@ Corrected wheel`dac05704` and72-input cached offline docs passed under`d6fbbad3`
 and were not repeated. All13 product source gates still pass on
 `e48eec5f3039cfdbb8dcf24145e1b8835b3b4057de4f21eb7bf598fa22948c74`:
 2,054tests/21skips in both full runs,82.64%coverage,both branch gates. Exact source
-and document snapshots retain their scope. Core source has not yet changed.
+and document snapshots retain their scope. These checks predate the new interface above; current source has changed.
 
 Next: connect the retained SkillRank runtime through the ordinary operator
 workflow. The current owned installer accepts Python wheels only; add narrow
@@ -891,7 +927,7 @@ checkpoint_status:
 last_verified_commit: 'df9eee7f2535a47e957418da0747c2d428641f26'
 last_check_command: 'stack-delivery-20261030/validation/checks.json:13/13 on working source24dccd3e;1798passed/21skipped per full run. Actual732f attempt reconciled; no retry.'
 last_check_result: 'Source24dccd3e13gates passed,82%coverage,both branch gates. Source includes preserved CI inputs. Named workflow software checks passed; no new live stack/value/selection pass.732f buildCLI failed125,no image/tool check;2operations and2.255710876sec retained. Corrected review pending. OriginalPonytail14/19both preserved.'
-next_action: 'Toolkit: inspect stack-delivery-20261030/launcher-correction/specialist-runtime-review.json and actual approval before one new bounded build; old732f9cdd is terminal. Then generic skill conformance, preserved ordinary inventory, validated real-task comparisons and equal-inventory selection. Keep independent CI-only branch/evidence separate; no historical replay or new model authority.'
+next_action: 'Keep comparisons paused. All13 source gates pass. Obtain workflow-skillrank-20261103 grouped CLI runtime/wheel/docs approval; run only after exact applicable approval. Then connect bounded SkillRank evaluation and remaining required upstream integrations and both SkillsBench domains. Waza is blocked without supported backend access. Preserve unrelated CI work and all prior charges/resources.'
 blocked_actions:
   - 'Helped report comprehension is recorded. The operator removed the concrete control exercise from the critical path on October29;control-use qualification remains unmeasured and is not an engineering/comparison blocker.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'

@@ -35,16 +35,16 @@ from aeep.router import Router
 
 from .models import Digest, Identifier
 
-WorkflowStage = Literal["plan", "prepare", "run", "report", "setup", "readiness", "remove", "scan"]
+WorkflowStage = Literal["plan", "prepare", "run", "report", "setup", "readiness", "remove", "scan", "catalog"]
 
 
 class WorkflowAccountingDefinition(StrictModel):
     """An inert, reviewed scope; it cannot create or extend a grant."""
 
-    schema_version: Literal["aeep.toolkit.workflow-accounting.v1", "aeep.toolkit.workflow-accounting.v2", "aeep.toolkit.workflow-accounting.v3"] = "aeep.toolkit.workflow-accounting.v1"
+    schema_version: Literal["aeep.toolkit.workflow-accounting.v1", "aeep.toolkit.workflow-accounting.v2", "aeep.toolkit.workflow-accounting.v3", "aeep.toolkit.workflow-accounting.v4"] = "aeep.toolkit.workflow-accounting.v1"
     workflow_sha256: Digest
     configurations: tuple[Identifier, ...] = Field(min_length=1, max_length=16)
-    operations: tuple[WorkflowStage, ...] = Field(min_length=1, max_length=8)
+    operations: tuple[WorkflowStage, ...] = Field(min_length=1, max_length=9)
     source_digest: Digest
     manifest_path: str = Field(min_length=1, max_length=4096)
     manifest_sha256: Digest
@@ -62,6 +62,8 @@ class WorkflowAccountingDefinition(StrictModel):
             raise ValueError("lifecycle stages and larger reservations require accounting v2")
         if self.schema_version.endswith('.v2') and 'scan' in self.operations:
             raise ValueError('scanner execution requires explicit accounting v3')
+        if not self.schema_version.endswith('.v4') and ('catalog' in self.operations or len(self.operations)>8):
+            raise ValueError('catalog execution requires explicit accounting v4')
         return self
 
 

@@ -139,6 +139,7 @@ class ScanContainerExecutor(ContainerExecutor):
     """Reuse containment; clean up only a proven owned container by immutable ID."""
 
     cleanup_verified = False
+    ownership_label = 'aeep.workflow-scan'
 
     def __init__(self, environment: AssessmentEnvironment, *, runtime_digest: str) -> None:
         super().__init__(environment)
@@ -171,7 +172,7 @@ class ScanContainerExecutor(ContainerExecutor):
         # The parent image provides the qualified AEEP protocol dependencies.
         # Only scan_spec's child uses Cisco's independent private environment.
         index = argv.index("run") + 1
-        argv[index:index] = ["--label", "aeep.workflow-scan=" + str(context.attempt_id)]
+        argv[index:index] = ["--label", self.ownership_label + "=" + str(context.attempt_id)]
         return argv, name
 
     async def execute(self, context: ExecutionContext) -> RawExecution:
@@ -195,7 +196,7 @@ class ScanContainerExecutor(ContainerExecutor):
             found = json.loads(output)[0]
             if (
                 found["Image"] != self.environment.container_image
-                or found["Config"].get("Labels", {}).get("aeep.workflow-scan") != attempt_id
+                or found["Config"].get("Labels", {}).get(self.ownership_label) != attempt_id
             ):
                 return False
             identity = found["Id"]

@@ -17,7 +17,7 @@ import zipfile
 from datetime import UTC, datetime
 from email.parser import BytesParser
 from pathlib import Path
-from typing import Any, Literal
+from typing import TYPE_CHECKING, Any, Literal
 
 from packaging.requirements import Requirement
 from packaging.specifiers import SpecifierSet
@@ -29,6 +29,9 @@ from pydantic import Field, SerializerFunctionWrapHandler, model_serializer, mod
 from .installation import InstallationPreview, PreviewPolicy, preview, require_compatible
 from .models import ContractModel, Digest, ExtensionRegistry, Identifier
 from .storage import StorageReserveException
+
+if TYPE_CHECKING:
+    from .file_runtime import FileRuntimeInstallation
 
 
 class Wheel(ContractModel):
@@ -339,7 +342,15 @@ def snapshot(root: Path) -> str:
     return digest(rows)
 
 
-def paths(plan: RuntimeInstallation) -> tuple[Path, Path]:
+def parse_installation(value: Any) -> RuntimeInstallation | FileRuntimeInstallation:
+    if isinstance(value, dict) and value.get('schema_version') == 'aeep.toolkit.file-runtime-installation.v1':
+        from .file_runtime import FileRuntimeInstallation
+
+        return FileRuntimeInstallation.model_validate(value)
+    return RuntimeInstallation.model_validate(value)
+
+
+def paths(plan: RuntimeInstallation | FileRuntimeInstallation) -> tuple[Path, Path]:
     root = canonical(plan.destination)
     if not root.parent.is_dir():
         raise ValueError('runtime parent must already exist')
@@ -371,8 +382,12 @@ def run(argv: list[str], root: Path) -> None:
             raise subprocess.CalledProcessError(status, argv)
 
 
-def apply(plan: RuntimeInstallation, reviewed_digest: str) -> dict[str, Any]:
+def apply(plan: RuntimeInstallation | FileRuntimeInstallation, reviewed_digest: str) -> dict[str, Any]:
     """Operator CLI only; a model-facing call must never supply this review."""
+    from .file_runtime import FileRuntimeInstallation, apply_files
+
+    if isinstance(plan, FileRuntimeInstallation):
+        return apply_files(plan, reviewed_digest)
     from aeep.component_setup import require_space
     from aeep.connections import file_lock, write_json
 
@@ -455,10 +470,10 @@ def apply(plan: RuntimeInstallation, reviewed_digest: str) -> dict[str, Any]:
         return state
 
 
-def remove(plan: RuntimeInstallation, reviewed_digest: str) -> dict[str, Any]:
+def remove(plan: RuntimeInstallation | FileRuntimeInstallation, reviewed_digest: str) -> dict[str, Any]:
     from aeep.connections import file_lock, write_json
 
-    plan = RuntimeInstallation.model_validate(plan.model_dump(mode='json'))
+    plan = parse_installation(plan.model_dump(mode='json'))
     identity = digest(plan)
     if reviewed_digest != identity:
         raise ValueError('exact installation review required for removal')

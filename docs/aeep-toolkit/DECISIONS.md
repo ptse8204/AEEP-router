@@ -2761,3 +2761,18 @@ and conflict-preserving removal. This fills its observed Python-wheel-only gap
 without another installer service or registry. Keep wheel v1/v2 behavior and
 source/permissions/accounting boundaries. No installation toggle becomes execution
 permission,qualification or usefulness. Comparative campaigns remain paused.
+
+## November 3 — select the retained catalog through the ordinary CLI
+
+The [file-runtime/catalog increment](../../reports/toolkit-v2/c13/workflow-skillrank-20261103/README.md)
+extends the existing installer and contained executor. It adds no registry,
+scheduler, database or host activation. The selected binary is the one already
+built from SkillRank pin `5216bae9149b4ff8a7f9e014b6889fb094cee8e1`; no pin changes.
+Installation, functional catalog execution and bounded evaluation stay distinct.
+
+Current-source CLI execution is pending its concrete grouped review. First-party
+wiring checks and the synthetic driver journey are not upstream proof. The
+review reuses the original grant and its remaining operations, preserving all
+old charges. Real catalog queries stay offline; query/result contents are
+transient and canonical records retain digests and receipt/journal references.
+Comparisons remain paused and no complete-stack gate is promoted.
