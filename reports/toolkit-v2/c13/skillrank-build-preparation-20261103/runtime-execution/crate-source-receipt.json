@@ -1,0 +1,138 @@
+{
+  "receipt_id": "rcpt_7ad2d92e559b4226bc88efd2eefeb58d",
+  "decision_id": "skillrank:d6fbbad37ecac25b1900d434a0c6c38fedb1758cb15e1f3fbbbfe0430230cdbd:crate-source",
+  "action_id": "act_fa022e3f6ea146878aa52b5b7028cc5a",
+  "capability": "toolkit.upstream-engineering@1",
+  "executor_id": "skillrank-crate-source",
+  "executor_kind": "command",
+  "status": "failed",
+  "attempt": 1,
+  "started_at": "2026-11-04T04:06:09.662979Z",
+  "ended_at": "2026-11-04T04:06:09.805945Z",
+  "estimated": {
+    "resources": {
+      "monetary_usd": 0.0,
+      "latency_ms": 0.0,
+      "cpu_ms": 0.0,
+      "memory_mb_seconds": 0.0,
+      "peak_memory_mb": 0.0,
+      "gpu_ms": 0.0,
+      "network_bytes": 0,
+      "context_tokens": 0,
+      "input_tokens": 0,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_output_tokens": 0,
+      "subscription_units": 0.0
+    },
+    "cash": {
+      "amount_usd": null,
+      "upper_bound_usd": null,
+      "evidence": {
+        "status": "unavailable",
+        "source": "unavailable",
+        "trust": "untrusted",
+        "evidence_id": null,
+        "source_reference": null,
+        "digest": null,
+        "observed_at": null
+      }
+    },
+    "subscription_usage": [],
+    "success_probability": 0.95,
+    "quality_score": 0.95,
+    "risk_score": 0.05,
+    "confidence": 0.5,
+    "source": "static",
+    "sample_size": 0,
+    "uncertainty": null
+  },
+  "executor_fingerprint": null,
+  "cohort_digest": null,
+  "action_features": null,
+  "actual_resources": {
+    "monetary_usd": 0.0,
+    "latency_ms": 119.80262491852045,
+    "cpu_ms": 63.033497999999994,
+    "memory_mb_seconds": 2.8096386560137034,
+    "peak_memory_mb": 30.484375,
+    "gpu_ms": 0.0,
+    "network_bytes": 0,
+    "context_tokens": 1,
+    "input_tokens": 0,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 0,
+    "reasoning_output_tokens": 0,
+    "subscription_units": 0.0
+  },
+  "accounting": {
+    "cash": {
+      "status": "unavailable",
+      "components": []
+    },
+    "subscription_usage": [],
+    "model_usage": [],
+    "tool_footprint": null
+  },
+  "cache_affinity": null,
+  "approval_id": null,
+  "transport_success": null,
+  "execution_success": false,
+  "schema_valid": null,
+  "task_valid": null,
+  "quality_score": null,
+  "validation_results": [],
+  "output_valid": null,
+  "error_type": "CommandExitError",
+  "error_message": null,
+  "trace_id": null,
+  "metadata": {
+    "review_sha256": "d6fbbad37ecac25b1900d434a0c6c38fedb1758cb15e1f3fbbbfe0430230cdbd",
+    "scope": "isolated_component_engineering",
+    "client_resources_are_not_container_resources": true,
+    "executable": "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+    "stdout_bytes": 0,
+    "stderr_bytes": 1347,
+    "stdout_truncated": false,
+    "stderr_truncated": false,
+    "execution_evidence": {
+      "schema_version": "execution.evidence.v1",
+      "attempt_id": "skillrank:d6fbbad37ecac25b1900d434a0c6c38fedb1758cb15e1f3fbbbfe0430230cdbd:crate-source",
+      "adapter": "CommandExecutor",
+      "events": [
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "b88efc79f5d746438e2529f0f0abc8ae",
+          "attempt_id": "skillrank:d6fbbad37ecac25b1900d434a0c6c38fedb1758cb15e1f3fbbbfe0430230cdbd:crate-source",
+          "sequence": 0,
+          "kind": "execution.started",
+          "source_id": "start",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        },
+        {
+          "schema_version": "execution.event.v2",
+          "journal_id": "b88efc79f5d746438e2529f0f0abc8ae",
+          "attempt_id": "skillrank:d6fbbad37ecac25b1900d434a0c6c38fedb1758cb15e1f3fbbbfe0430230cdbd:crate-source",
+          "sequence": 1,
+          "kind": "execution.failed",
+          "source_id": "terminal",
+          "action_digest": null,
+          "evidence_ref": null,
+          "accounting": null,
+          "accounting_mode": "incremental"
+        }
+      ],
+      "complete": true,
+      "cancellation_confirmed": false,
+      "identity_digest": null,
+      "boundary_digest": null,
+      "journal_id": "b88efc79f5d746438e2529f0f0abc8ae"
+    },
+    "execution_evidence_digest": "246321ec97943d8bc8d3bf239db51f2e7a26616f4e838283e285ec86d330589f"
+  }
+}

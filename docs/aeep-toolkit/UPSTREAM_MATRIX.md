@@ -1971,3 +1971,20 @@ compiler installation on the host, native unqualified agent launch or model call
 is proposed. The runtime and compiler image remain reusable. Bounded evaluation
 callbacks and ordinary workflow composition still need implementation/verification;
 search/show cannot close that gate. All comparisons remain paused.
+
+## November 3 — retain installed report verification and audit the entire Cargo license closure
+
+The [actual grouped results](../../reports/toolkit-v2/c13/skillrank-build-preparation-20261103/RESULTS.md)
+passed the corrected wheel and72-input offline docs check. Preserve those completed
+checks. SkillRank stopped at the first-party SPDX allowlist before the image pull
+or any upstream executable. The verified Adler source offers0BSD,MIT or Apache;
+its token rejection is our guard defect,not a failed upstream build.
+
+The [remaining-only review](../../reports/toolkit-v2/c13/skillrank-license-correction-20261103/README.md)
+compares every actual manifest against the86-version checksum-bound license
+inventory. It preserves source/dependency/compiler pins,old charges and the
+original40-operation/4,500-second/zero-model grant. Extend only expiry if needed;
+never reset counters or replay package/docs. Retain the checked coordinator
+snapshot so independent implementation can continue. No source or architecture
+selection changes,redistribution clearance or capability benefit is inferred.
+Comparisons remain paused;all-stack and bounded SkillRank evaluation remain open.
