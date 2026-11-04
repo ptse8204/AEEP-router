@@ -1,5 +1,33 @@
 # 0.8 plan coverage and remaining work
 
+<!-- skillrank-cli-pass-20261104:start -->
+**November 4: approved SkillRank CLI continuation passed.**
+[Actual results](../toolkit-v2/c13/skillrank-cli-continuation-20261104/RESULTS.md) retain the successful single attempt under exact review
+`1a091b2b`. The frozen f2c7a3e9 coordinator executed the real retained SkillRank0.1.5
+binary through ordinary CLI search/show and explicit missing-record handling.
+Catalog entries are authored engineering controls. This passes query integration,
+not hosted-registry content, bounded core evaluation or candidate usefulness.
+
+The boundary observed EROFS30 for root writes and ENETUNREACH101 for external
+networking, with verified binary/version and absent host/socket/credential access.
+The old discarded failure remains unknown. Four new containers were cleaned up.
+The shared installation was preserved; a modified disposable copy was preserved
+as a conflict, then removed after only the authored control note was undone.
+No accounting or cleanup uncertainty remains.
+
+The delegated operation ceiling amendment40→42 was applied without resetting
+counters. All24 old charges stay;18 new operations bring the grant to42operations,
+zero models and63.68363312864676measured seconds. Cash authority is$0; cash
+measurement remains unknown. Passed wheel/docs were not replayed. No image,
+volume, backup or old runtime was deleted. Final free space67.69GiB.
+
+Next: continue remaining stack integration, starting with private Langfuse export
+and ToolHive/MCP runtime closure. SkillRank bounded evaluation and both protected
+SkillsBench domain journeys remain open. Waza lacks supported backend access.
+All-stack, candidate usefulness, selection usefulness, resources and release stay
+separate; comparisons remain paused. Parent3c78662; unrelated CI edits preserved.
+<!-- skillrank-cli-pass-20261104:end -->
+
 <!-- mcp-state-pack-implementation-20261104:start -->
 **November 4: MCP database-output contracts implemented; all 13 source gates pass.**
 The separate `aeep.toolkit.mcp-state-pack.v1` contract represents actual PostgreSQL

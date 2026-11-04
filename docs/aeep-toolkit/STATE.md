@@ -1,5 +1,33 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- skillrank-cli-pass-20261104:start -->
+**November 4: approved SkillRank CLI continuation passed.**
+[Actual results](../../reports/toolkit-v2/c13/skillrank-cli-continuation-20261104/RESULTS.md) retain the successful single attempt under exact review
+`1a091b2b`. The frozen f2c7a3e9 coordinator executed the real retained SkillRank0.1.5
+binary through ordinary CLI search/show and explicit missing-record handling.
+Catalog entries are authored engineering controls. This passes query integration,
+not hosted-registry content, bounded core evaluation or candidate usefulness.
+
+The boundary observed EROFS30 for root writes and ENETUNREACH101 for external
+networking, with verified binary/version and absent host/socket/credential access.
+The old discarded failure remains unknown. Four new containers were cleaned up.
+The shared installation was preserved; a modified disposable copy was preserved
+as a conflict, then removed after only the authored control note was undone.
+No accounting or cleanup uncertainty remains.
+
+The delegated operation ceiling amendment40→42 was applied without resetting
+counters. All24 old charges stay;18 new operations bring the grant to42operations,
+zero models and63.68363312864676measured seconds. Cash authority is$0; cash
+measurement remains unknown. Passed wheel/docs were not replayed. No image,
+volume, backup or old runtime was deleted. Final free space67.69GiB.
+
+Next: continue remaining stack integration, starting with private Langfuse export
+and ToolHive/MCP runtime closure. SkillRank bounded evaluation and both protected
+SkillsBench domain journeys remain open. Waza lacks supported backend access.
+All-stack, candidate usefulness, selection usefulness, resources and release stay
+separate; comparisons remain paused. Parent3c78662; unrelated CI edits preserved.
+<!-- skillrank-cli-pass-20261104:end -->
+
 <!-- mcp-state-pack-implementation-20261104:start -->
 **November 4: MCP database-output contracts implemented; all 13 source gates pass.**
 The separate `aeep.toolkit.mcp-state-pack.v1` contract represents actual PostgreSQL
@@ -1008,7 +1036,7 @@ checkpoint_status:
 last_verified_commit: 'df9eee7f2535a47e957418da0747c2d428641f26'
 last_check_command: 'stack-delivery-20261030/validation/checks.json:13/13 on working source24dccd3e;1798passed/21skipped per full run. Actual732f attempt reconciled; no retry.'
 last_check_result: 'Source24dccd3e13gates passed,82%coverage,both branch gates. Source includes preserved CI inputs. Named workflow software checks passed; no new live stack/value/selection pass.732f buildCLI failed125,no image/tool check;2operations and2.255710876sec retained. Corrected review pending. OriginalPonytail14/19both preserved.'
-next_action: 'Comparisons paused. MCP state-pack source7424fc37 passes all13 gates; retained source snapshot/inventory bind mixed working tree. Await exact SkillRank runtime-only review1a091b2b before probe/catalog/removal; preserve24 old charges and passed wheel/docs. Continue ToolHive dependency/license/permission and MCP protected runtime preparation. New guide docs and new wheel are not execution-verified. Preserve all resources and unrelated CI work.'
+next_action: 'Comparisons paused. Approved1a091b2b SkillRank CLI continuation passed; original grant42 operations/0 models/63.68363312864676seconds settled. Preserve all charges/runtime and passed wheel/docs. Continue private Langfuse receipt export and ToolHive/MCP runtime/dependency closure; bounded SkillRank evaluation and both SkillsBench journeys remain open. Waza lacks supported access. Maintain50GiB and unrelated CI work.'
 blocked_actions:
   - 'Helped report comprehension is recorded. The operator removed the concrete control exercise from the critical path on October29;control-use qualification remains unmeasured and is not an engineering/comparison blocker.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'

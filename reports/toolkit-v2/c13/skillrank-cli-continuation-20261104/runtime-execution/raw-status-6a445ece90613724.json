@@ -1,0 +1,28 @@
+{
+  "status": "success",
+  "error_type": null,
+  "error_message_category": null,
+  "exit_code": 0,
+  "cleanup_verified": true,
+  "result": {
+    "passed": true,
+    "checks": {
+      "binary_hash_verified": true,
+      "owned_tmp_read_write": true,
+      "host_canary_absent": true,
+      "docker_socket_absent": true,
+      "credential_environment_absent": true,
+      "root_write_denied": true,
+      "external_network_boundary": true,
+      "upstream_cli_version": true
+    },
+    "diagnostics": {
+      "root_write_errno": 30,
+      "network_error_type": "OSError",
+      "network_errno": 101,
+      "network_observation": "namespace_has_no_route",
+      "version_exit_code": 0
+    }
+  },
+  "execution_evidence": null
+}

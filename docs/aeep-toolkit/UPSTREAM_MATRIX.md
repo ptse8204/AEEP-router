@@ -2062,3 +2062,20 @@ installed Go compiler; no compiler or dependency was executed. Complete source,
 module/license and service permission closure remains open. SkillRank continuation
 review1a091b2b stays frozen and pending, independently of these source changes.
 All resources, historical charges and comparisons-paused policy are preserved.
+
+
+## November 4 — retain the completed SkillRank CLI journey
+
+The [approved runtime continuation](../../reports/toolkit-v2/c13/skillrank-cli-continuation-20261104/RESULTS.md)
+passed actual upstream version/search/show and missing-record handling through the
+ordinary CLI. Authored local catalog entries establish query integration only.
+Shared installation and conflict preservation passed; the new disposable copy
+and four owned containers were removed. All old resources and charges remain.
+The grant now has42operations,zero models and63.68363312864676measured seconds;
+the delegated40→42amendment changed no time/model/cash ceiling. Accounting and
+cleanup are settled. Passed package/docs components were not replayed.
+
+Root writes were denied withEROFS30 and external networking had no route(errno101).
+Retain that distinction; the earlier discarded inner failure stays unknown.
+SkillRank bounded evaluation remains open. Continue independent Langfuse and
+ToolHive/MCP work; no comparative campaign or full-stack readiness is inferred.
