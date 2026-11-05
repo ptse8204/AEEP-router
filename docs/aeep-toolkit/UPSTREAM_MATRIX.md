@@ -2227,3 +2227,36 @@ standing first-attempt authority. Both full domain workflows and all integration
 must pass before comparisons resume. Passed source,wheel,docs checks are reused;
 new progress prose is outside the earlier docs snapshot. Parent3f10631.
 <!-- approved-corrections-results-20261104:end -->
+
+<!-- mcp-packaging-result-20261104:start -->
+**November 4: both approved corrections ran; two concrete runtime repeats now need approval. Waza sign-in stays deferred.**
+ToolHive review 1da90882 passed retained-binary audit/version/help without a build
+or download. Langfuse review 2a0abaf4 passed image identity, then failed Compose
+validation before startup. Its corrected temporary-mount review is
+2dede925b424091d4fddb55666bd8fbd9105829a2b4eecc906c11ff63b0b1b9b.
+No service retry has executed. All 13 Langfuse operations remain settled.
+
+Independent ToolHive MCP review 9bad9397 ran its first attempt under standing
+authority. The parent/name checks passed, but the legacy builder rejected my
+COPY --chmod instruction. Read-only inspection found no owned output image,
+container, network or volume. No MCP controller/server/client check ran. Its
+five operations / zero models / 0.5746463751420379 seconds remain settled.
+No shared accounting or cleanup uncertainty remains.
+
+The portable-COPY correction is prepared at
+reports/toolkit-v2/c13/toolhive-mcp-packaging-correction-20261104/operation-review.json,
+SHA-256 96552b4eece46a4c56cdfbc29e05f024223ae8a7b67781e9dbb19cb98d37d542.
+It preserves file bytes/mode, parent, binary, permissions and existing charges.
+It adds no package, download, pull, plugin or installation. Its single build and
+still-unstarted MCP lifecycle require exact approval under the repeat rule.
+Both reviews preserve old Docker resources, user work and the 50 GiB reserve.
+
+Do not run or request Waza sign-in while independent work remains eligible. The
+operator explicitly deferred it; no provider credentials or model calls were
+used. Product source 5a13a630 and its passed source/wheel checks are unchanged.
+New operator scripts have syntax, model and static preparation checks; no passed
+source, wheel or docs pipeline was replayed. New prose is outside the prior docs
+snapshot. Both full domain journeys and all integrations remain open; comparisons
+stay paused. Candidate usefulness, selection usefulness, resources and release
+remain separate. Parent 0b01262.
+<!-- mcp-packaging-result-20261104:end -->

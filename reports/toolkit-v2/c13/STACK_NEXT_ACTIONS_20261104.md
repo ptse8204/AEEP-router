@@ -1,5 +1,23 @@
 # Resume the current stack work
 
+Current continuation (supersedes older pending-review bullets below):
+- Approved ToolHive1da90882 PASSED. Never repeat its compiler/audit/info work.
+- Approved Langfuse2a0abaf4 is terminal after Compose config failure, before
+  service startup. Actual repeat approval is pending for2dede925 (tmpfs list form).
+- ToolHive first MCP attempt9bad9397 stopped at the legacy builder's rejection of
+  COPY --chmod. No output image or MCP resource exists. Its5charges are settled.
+  Actual repeat approval is pending for96552b4eece46a4c56cdfbc29e05f024223ae8a7b67781e9dbb19cb98d37d542.
+  It uses portable COPY and mode0444 on the same server source, not new software.
+- Waza sign-in is explicitly DEFERRED until a real supported backend check
+  absolutely requires it. Do not ask again now or run the terminal-only helper.
+- Both corrected runtime drivers are unstarted. Neither review permits model
+  calls, docs/wheel/source replay, new dependencies or old-resource deletion.
+  Host free space is above61GiB; keep50GiB. SQLite and .aeep artifacts stay private.
+- Product source5a13a630 remains unchanged. Continue new independent finite stack
+  work under standing authority; specific repeats need actual approval. Keep
+  comparisons paused until all required integrations and both domain journeys pass.
+
+
 Checkout: /Users/edwintse/Documents/aeep-toolkit-v2, branch codex/toolkit-v2-implementation.
 Read AGENTS.md, docs/ASSESSMENT_TESTING.md and the latest STATE.md block first.
 The user delegates concrete new first-attempt pipeline work. Ask before repeating
