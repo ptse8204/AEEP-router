@@ -1,5 +1,21 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- toolkit-protected-references-verified-20261105:start -->
+**November 5. Protected references passed in both selected domains.**
+
+The [protected reference evidence](../../reports/toolkit-v2/c13/protected-reference-results-20261105/results.json)
+records 23 passed checks and three intentional skips for Sales Pivot
+and ten passed checks for Spring Boot. Each original grader rejected
+two negative controls. The successful runs are protected local
+reference evidence. Both ordinary CLI domain journeys remain open.
+
+The [MCPMark correction review](../../reports/toolkit-v2/c13/mcpmark-postgres-receipt-correction-20261105/operation-review.json)
+awaits approval after a receipt construction failure. No container
+started. The prior reservation stays charged with unknown elapsed time.
+The Langfuse heap repeat remains pending. Candidate and selection
+comparisons remain paused.
+<!-- toolkit-protected-references-verified-20261105:end -->
+
 <!-- skillsbench-and-mcp-runtime-20261105:start -->
 **November 5. Protected SkillsBench runtime preparation and PostgreSQL
 image acquisition.**

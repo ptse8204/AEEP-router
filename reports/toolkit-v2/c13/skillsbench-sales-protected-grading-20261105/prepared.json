@@ -1,0 +1,88 @@
+{
+  "scopes": {
+    "af51aafa5e32f3dfa09172620b23d812c98be9415a9e37434d01fdf369d778a4": {
+      "role": "subject",
+      "plan_sha256": "9f47cc1db3f5cefff51610f2881328003c9d3b432535c519045bf800eede1da4"
+    },
+    "92edf1f60badddb9188df57f78258c35dd9018d9f14d589637e599c200932af8": {
+      "role": "recipe",
+      "plan_sha256": "9f47cc1db3f5cefff51610f2881328003c9d3b432535c519045bf800eede1da4"
+    },
+    "8bdc1adbfdfd58006b011969a8da50a1b5a49b664d75c5195d57829b850f7d8e": {
+      "role": "environment",
+      "plan_sha256": "9f47cc1db3f5cefff51610f2881328003c9d3b432535c519045bf800eede1da4"
+    },
+    "4f286e2194cea61a2da4b4742c0517340f5849be8cada6138877a7291e51b116": {
+      "role": "mapping",
+      "plan_sha256": "9f47cc1db3f5cefff51610f2881328003c9d3b432535c519045bf800eede1da4"
+    },
+    "380a4dbbeb596db22726d724bb764e0ba79dbd0d379501ac84a12c848d69ad42": {
+      "role": "optional-volume-guard-correction",
+      "plan_sha256": "1e61d75a3e6081eae90bc176077aafb35c12a3063cf4838b214dfdb507565e96"
+    },
+    "b2d8bfafc869ada833f37485faf1590772b078747b8ca25f63520dd4236be989": {
+      "role": "protected-reference-continuation",
+      "plan_sha256": "e0b1b0ea1a8ad8ec007514fd5c53aec5d99d27bbbd8b546a6cda3234b0c54969"
+    }
+  },
+  "grant": {
+    "schema_version": "assessment.authorization.v1",
+    "authorization_id": "skillsbench-sales-reference-20261105",
+    "subject_digests": [
+      "af51aafa5e32f3dfa09172620b23d812c98be9415a9e37434d01fdf369d778a4"
+    ],
+    "recipe_digests": [
+      "92edf1f60badddb9188df57f78258c35dd9018d9f14d589637e599c200932af8"
+    ],
+    "environment_digests": [
+      "8bdc1adbfdfd58006b011969a8da50a1b5a49b664d75c5195d57829b850f7d8e"
+    ],
+    "limits": {
+      "max_operations": 20,
+      "max_model_turns": 0,
+      "max_elapsed_seconds": 1400,
+      "max_cash_usd": "0"
+    },
+    "remote_disclosure": false,
+    "allowed_destinations": [
+      "local"
+    ],
+    "automatic_admission": false,
+    "issued_at": "2026-11-05T07:03:44.337630+00:00",
+    "expires_at": "2026-11-08T12:00:00+00:00"
+  },
+  "request": {
+    "schema_version": "assessment.recipe-materialization.v1",
+    "plan_id": "skillsbench-sales-protected-grading-20261105",
+    "authorization_id": "skillsbench-sales-reference-20261105",
+    "subject_digest": "af51aafa5e32f3dfa09172620b23d812c98be9415a9e37434d01fdf369d778a4",
+    "recipe_digest": "92edf1f60badddb9188df57f78258c35dd9018d9f14d589637e599c200932af8",
+    "environment_digest": "8bdc1adbfdfd58006b011969a8da50a1b5a49b664d75c5195d57829b850f7d8e",
+    "mapping_digest": "4f286e2194cea61a2da4b4742c0517340f5849be8cada6138877a7291e51b116",
+    "definition_digests": [
+      "af51aafa5e32f3dfa09172620b23d812c98be9415a9e37434d01fdf369d778a4",
+      "92edf1f60badddb9188df57f78258c35dd9018d9f14d589637e599c200932af8",
+      "8bdc1adbfdfd58006b011969a8da50a1b5a49b664d75c5195d57829b850f7d8e",
+      "4f286e2194cea61a2da4b4742c0517340f5849be8cada6138877a7291e51b116",
+      "380a4dbbeb596db22726d724bb764e0ba79dbd0d379501ac84a12c848d69ad42",
+      "b2d8bfafc869ada833f37485faf1590772b078747b8ca25f63520dd4236be989"
+    ],
+    "seed": 0
+  },
+  "applied": false,
+  "amendment": {
+    "schema_version": "assessment.budget-amendment.v1",
+    "amendment_id": "skillsbench-sales-protected-grading-20261105",
+    "authorization_id": "skillsbench-sales-reference-20261105",
+    "authorization_digest": "2061f5b98274b4f41f3248bef05fd4af71130808e5f493c3ccd0e4a23aec92a5",
+    "previous_amendment_digest": "61015c5f1688e16e7e9c40f40dc53d884bdf187f88e2d80b94dcfe59c4818ce4",
+    "limits": {
+      "max_operations": 24,
+      "max_model_turns": 0,
+      "max_elapsed_seconds": 1400,
+      "max_cash_usd": "0"
+    },
+    "expires_at": "2026-11-08T12:00:00+00:00",
+    "issued_at": "2026-11-05T18:37:35.155069+00:00"
+  }
+}

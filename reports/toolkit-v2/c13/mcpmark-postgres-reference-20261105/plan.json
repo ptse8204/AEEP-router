@@ -1,0 +1,100 @@
+{
+  "scope": "First real MCPMark reference journey with the original PostgreSQL fixture and verifier and the upstream SQL transaction via AEEP MCP stdio.",
+  "task_id": "postgres.security.user_permission_audit",
+  "source_revision": "cd45b7f57923b9b3985467f5139927575f83141c",
+  "license": "Apache-2.0",
+  "work": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/mcpmark-postgres-reference-20261105",
+  "images": {
+    "db": {
+      "ref": "docker.io/library/postgres@sha256:ac359420747e1f5f8ac4d23f40d7ce022c0a39090ed6cdd8dde5f596affbe41d",
+      "id": "sha256:ac359420747e1f5f8ac4d23f40d7ce022c0a39090ed6cdd8dde5f596affbe41d",
+      "arch": "arm64",
+      "layers": [
+        "sha256:685889762157cefb6370119253b3c709f70bb2622402052065c92243e3d9105f",
+        "sha256:a35959c366a049623db307f00c0138352e33423a5d033d7a3c8ed8a151d5a6d0",
+        "sha256:032813f57b91d0e4176ffcaea380472be7d0b2eaec21551c26555dd9aee5760f",
+        "sha256:da61dcb38e5434bd27aa733ef8dba685ba4cc243e009c3b3f9896823fa38dc39",
+        "sha256:b999a7ec73cd57e8c65a18b7362e469245df55e6a10adadf9f8465b4cc19a110",
+        "sha256:62ba092436cf73bcb832a60180a71cb9b6bd8922f2af45209b22d5b9c6ddfd17",
+        "sha256:a058973ad4954e2c0aec869452640c61a2ba835bdd62b7f8b40c243c977e18bc",
+        "sha256:d1ff7e9b995486b40f9a16d65a3d5b3c6aa5ac4cc3887762d6b586ab3bbd4821",
+        "sha256:bc89e32033b0b7b0144672375aeb11e16264cdff7465982a0d2904fedb1a3bd5",
+        "sha256:da6e63648dcdb0d7143db71f8ed49c5424ce6d8475051de35c42fc79300ef923",
+        "sha256:7434c836a1634c44a96099f9046e9e86970c13fc58ecb63291ac805445ab4514",
+        "sha256:33255416b70108a7c43fec1ec3c1b37b007f02707baf960e3d35227827fafd86",
+        "sha256:b7010eac933e4fb8cd9ab4b01cc175345f0205c218a6e47a95752f4cf9053113",
+        "sha256:ccb19428bc2d6b3c9202c521cecd149bc7c13f34ed8b5af66e8b23a962d00171"
+      ],
+      "declared_volumes": [
+        "/var/lib/postgresql/data"
+      ]
+    },
+    "mcp": {
+      "ref": "docker.io/crystaldba/postgres-mcp@sha256:c04abcb08d7901e28f6f3ee11b6d799f42ae94b64b160175e9905274121294d2",
+      "id": "sha256:c04abcb08d7901e28f6f3ee11b6d799f42ae94b64b160175e9905274121294d2",
+      "arch": "amd64",
+      "layers": [
+        "sha256:6c4c763d22d0c5f9b2c5901dfa667fbbc4713cee6869336b8fd5022185071f1c",
+        "sha256:4838683321842876f5a414714cbb6e9f6bf4b1800ae581111b95bc2764b71c14",
+        "sha256:e3e96daabd9ce0fe9b79cfff9bcb4e228567d3ff1676e2d1c9b8a75efc13417b",
+        "sha256:a2d1379e01a0d6c344e3f8e86bcf20e7354a27d7f876b4269aed38806e0e6dbf",
+        "sha256:e4985c56da260648d898c6d844f9fa94c3be11d3f94264dc3c08d0d6091eecc8",
+        "sha256:573e2ee71ac4171bcc953fc43c1f39bfd3cfe33c5b8d36b4334a9b4ffeb95e90",
+        "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+        "sha256:2d205d9bac5bfdb8bb1edcee44df6f14ab295d7e47b421281aa1be2d5b6ff25d"
+      ],
+      "declared_volumes": []
+    }
+  },
+  "tool_inventory": {
+    "psycopg2_binary-2.9.10.dist-info/LICENSE": "9614b85dfc9a72c5b2ca33144c1d7e1ed3b1c297459d9fb28a6a5762c2e8d71b",
+    "psycopg2_binary-2.9.10.dist-info/top_level.txt": "edd1c6a4ba90df0faf1a6184567fbbb8af74a94f5fcab19d5968bb4be8137273",
+    "psycopg2_binary-2.9.10.dist-info/RECORD": "8972cde03cdf98b73ea01937c44d21ca1b45dd9f653c93a86cee448ef1c7e825",
+    "psycopg2_binary-2.9.10.dist-info/METADATA": "9ca7e583f7ce8ec66a2316891050f2cb397423c60d707b843785ab33af111b91",
+    "psycopg2_binary-2.9.10.dist-info/WHEEL": "ec1e279c8775e134e8407b802a9c5b0cb0896cd722a81b15fa6bd71368552c97",
+    "psycopg2_binary.libs/libpq-e8a033dd.so.5.16": "11925f9eabaaedc9afb9bf4984d1f403a5b783d3e9ac50902985d521045c04e0",
+    "psycopg2_binary.libs/libk5crypto-b1f99d5c.so.3.1": "9844e5009e70a6ad2fb22b587306810fe2a7b1b9f6b9922daa1c78ba3466de27",
+    "psycopg2_binary.libs/libkrb5support-d0bcff84.so.0.1": "6a71f57d748fef79b4e736d5348875545d0a224fa8928b5d62a3cf2647fc109f",
+    "psycopg2_binary.libs/libselinux-0922c95c.so.1": "d4fa8e7fb3add960a68325a59c9694244aea3213fd739a50815cb067c4965654",
+    "psycopg2_binary.libs/libkrb5-fcafa220.so.3.3": "b2aab528ff4cab2144e5ce01b246ac09f574a072a53ff63ea81d6bb29b26b8f1",
+    "psycopg2_binary.libs/liblber-e0f57070.so.2.0.200": "2d4f618ec21eb206b2ae556766193aeab01cb9dd587452d8b1ba4ebe634a8652",
+    "psycopg2_binary.libs/libcom_err-2abe824b.so.2.1": "5426dcb54dd01c9eedda05e2179f0e47114e8b48a534ffe9e94916e79471b257",
+    "psycopg2_binary.libs/libkeyutils-dfe70bd6.so.1.5": "c29e41b03cf4b2dffbfb4960946e2b42f82c0ca5d53d231d3f0fc597ba274488",
+    "psycopg2_binary.libs/libcrypto-ea28cefb.so.1.1": "05a1713b118c6aaae2dbdb078038979bdc06742d8cff93bb17bdf89992415099",
+    "psycopg2_binary.libs/libssl-3e69114b.so.1.1": "7baa37e2e2cc77b5d42a3077c3442ed9cbc76dfa3a7e33d17ff34b24a86fe6ab",
+    "psycopg2_binary.libs/libpcre-9513aab5.so.1.2.0": "02eda850e04931656d8af81f5171bff74d8bec1553d3d85c3d32d7fc5efe8864",
+    "psycopg2_binary.libs/libgssapi_krb5-497db0c6.so.2.2": "2a74b0330ee973281b26f8ebe4acef0ebf9ee99c6b68497cf9151fff6c4c34e1",
+    "psycopg2_binary.libs/libldap-c37ed727.so.2.0.200": "4acfdbc03ef18ee003125c235e67ea1964313f14c2d8363402c442789f485889",
+    "psycopg2_binary.libs/libsasl2-883649fd.so.3.0.0": "182f02d5e474db227cda83abac7413d431d487c6c01afd0cd741e140cedc0f3a",
+    "psycopg2/pool.py": "50612df0874fdf135cd8f1983651b8b10be0f2785fe1a7829f3dfd8534741fc2",
+    "psycopg2/errors.py": "6804b8749c938356ec0f3243091400301fecef3bfe438c81e98be2876e88fb43",
+    "psycopg2/_json.py": "5cf9f83e7cdb4e0d4372acfb9f524cbf974a841e55155ebcdf8184b7149ac2dd",
+    "psycopg2/extensions.py": "086d241b9bcbf0eb79d375069435d724915d1562e0e07136fdcd7e94b38b73c3",
+    "psycopg2/extras.py": "a017eb76fb569fc213c5cdf1fa1da1e88c0752c59d56a09d7f81a985bd09a98f",
+    "psycopg2/sql.py": "39c144026a5ed9a31faf1d0c124e0bc74d17bd75c90a6be595a3956c963eca81",
+    "psycopg2/_range.py": "b1779e9c6ada244130d88de673c46598d8afcb68cc83bcd6a1a9c37acd98c29f",
+    "psycopg2/_psycopg.cpython-312-x86_64-linux-gnu.so": "179455721f89ed8d2c4faa79c6f5a0346b4bb534bd31b4130ceb5a3de7996aa1",
+    "psycopg2/_ipaddress.py": "8e4bb284b82a50644170b3560ccf10272b15eaad4da5cfd1607e3f904ec964f5",
+    "psycopg2/tz.py": "afde642bb7864a9398aff96e0b262cce71ccce3979dac2e3b2748f5e45cbcd12",
+    "psycopg2/__init__.py": "f66a3941dd2e587884071d82768806a2cda436ab6534d1b36ed625182d21592f",
+    "psycopg2/errorcodes.py": "928d26d08dbde01ead6fad0602efe0aafa15ca4a9fe9ccab18cecc2e3e29d108"
+  },
+  "reference_sql_sha256": "f02c1c4c816638c2b888bc6a64a03418db9810f8b5327dcb696b87a910086fe1",
+  "container_scope": "One PostgreSQL container with network none and loopback-only trust for owned fixture state. Four peers join only its existing network namespace. No ports, writable host mounts, named volumes, unrelated database access or provider credentials.",
+  "verification": "Original seed, original verifier rejecting missing outputs, original SQL transaction through actual execute_sql, original verifier accepting outputs. Drop only fixture tmpfs on stop; retain every container.",
+  "data_scope": "Upstream public synthetic fixtures for local engineering only. No raw records, fixture passwords, SQL, stderr or provider output persist in repository receipts.",
+  "maximum_operations": 32,
+  "maximum_reserved_seconds": 1250,
+  "models": 0,
+  "cash_authority_usd": "0",
+  "automatic_retries": false,
+  "docker_usage_before": [
+    "TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE",
+    "Images          189       14        46.16GB   19.41GB (42%)",
+    "Containers      47        4         72.73MB   71.17MB (97%)",
+    "Local Volumes   40        21        145.5GB   6.965GB (4%)",
+    "Build Cache     1146      51        72.32GB   12.72GB"
+  ],
+  "free_bytes_before": 62768480256,
+  "comparison_eligible": false
+}

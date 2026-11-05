@@ -1,5 +1,32 @@
 # Resume the current stack work
 
+## November 5 verified protected references
+
+Sales Pivot passed 23 upstream checks with three intentional skips.
+Spring Boot passed all ten checks. Both rejected each of their two
+negative controls. The [joined evidence](protected-reference-results-20261105/results.json)
+binds the two actual protected-verifier results and settled canonical
+counters. Preserve these reference journeys and skip replay. These
+specific isolated checks do not close either ordinary CLI journey or
+the complete stack gate.
+
+Sales Pivot retained the original solver output. The prior driver
+stopped because Rosetta wrote a separate cache under its home directory.
+The successful grading used only the three pinned workbook variants.
+Spring's Maven process completed before the host receipt driver
+referenced a local variable too early. The retained-cache audit verified
+101 dependency nodes, 211 required files and 92 new artifact checksums.
+The final solver and graders ran offline against that verified cache.
+
+MCPMark's first scope completed only a read-only image inspect. Its
+receipt builder used the wrong estimate type, leaving the 35-second
+reservation charged with unknown measured latency. No container
+started. The [exact MCPMark correction](mcpmark-postgres-receipt-correction-20261105/operation-review.json)
+requires specific approval. The Langfuse heap review also remains
+pending. The original MCP-Universe reference and ordinary CLI domain
+composition remain open. Keep comparisons paused and preserve the
+50 GiB reserve.
+
 ## November 5 continuation
 
 Keep all comparisons paused. The three reviews below cover repeats and

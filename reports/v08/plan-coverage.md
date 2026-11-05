@@ -1,5 +1,16 @@
 # 0.8 plan coverage and remaining work
 
+<!-- toolkit-protected-references-verified-20261105:start -->
+**November 5. C13 protected task references passed.**
+
+[Two SkillsBench references](../toolkit-v2/c13/protected-reference-results-20261105/results.json)
+passed their protected upstream graders and rejected both controls per
+task. The ordinary CLI workload journeys, complete stack integration
+and comparative gates remain open. Retain original counters and
+all Docker resources. The MCPMark receipt correction and Langfuse heap
+repeat require specific approvals. No production source changed.
+<!-- toolkit-protected-references-verified-20261105:end -->
+
 <!-- toolkit-v2-runtime-preparation-20261105:start -->
 **November 5. Protected task and backend preparation.**
 

@@ -1,0 +1,89 @@
+{
+  "task_id": "spring-boot-jakarta-migration",
+  "revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+  "license": "Apache-2.0",
+  "task_pack_sha256": "c41ec39a459b537d9c1b16d35cda1e7ca8857f75b46128e8640c23d86349b5f9",
+  "workspace_inputs": [
+    "pom.xml",
+    "src/main/java/com/example/userservice/UserServiceApplication.java",
+    "src/main/java/com/example/userservice/config/CustomUserDetailsService.java",
+    "src/main/java/com/example/userservice/config/SecurityConfig.java",
+    "src/main/java/com/example/userservice/config/UserSecurity.java",
+    "src/main/java/com/example/userservice/controller/UserController.java",
+    "src/main/java/com/example/userservice/dto/CreateUserRequest.java",
+    "src/main/java/com/example/userservice/dto/UserDTO.java",
+    "src/main/java/com/example/userservice/exception/GlobalExceptionHandler.java",
+    "src/main/java/com/example/userservice/model/Role.java",
+    "src/main/java/com/example/userservice/model/User.java",
+    "src/main/java/com/example/userservice/repository/UserRepository.java",
+    "src/main/java/com/example/userservice/service/ExternalApiService.java",
+    "src/main/java/com/example/userservice/service/UserService.java",
+    "src/main/resources/application.properties",
+    "src/test/java/com/example/userservice/UserServiceApplicationTests.java",
+    "src/test/resources/application-test.properties"
+  ],
+  "upstream_verifier_sha256": "bfc7a5e8c8fd1bfa3c1ddf58c9c819a237ae07022f52671c845538c50af3aac8",
+  "upstream_oracle_sha256": "212d4bf7328ad1fa223e518f8a90d9160cc7b4a134832bd72e3735b7a9c11da9",
+  "migrated_pom_sha256": "dde49d5da62c1f0062967367649434c1de08c01399d7a9e92e4b54c1f9a5d67a",
+  "test_identities": [
+    "test_outputs.py::TestJakartaNamespace::test_no_javax_validation",
+    "test_outputs.py::TestJakartaNamespace::test_jakarta_persistence_present",
+    "test_outputs.py::TestJakartaNamespace::test_jakarta_validation_present",
+    "test_outputs.py::TestSpringSecurityMigration::test_enable_method_security",
+    "test_outputs.py::TestSpringSecurityMigration::test_request_matchers_used",
+    "test_outputs.py::TestRestClientMigration::test_rest_client_used",
+    "test_outputs.py::TestBuildAndCompile::test_maven_compile",
+    "test_outputs.py::TestBuildAndCompile::test_maven_test",
+    "test_outputs.py::TestDependencyUpdates::test_no_old_jaxb_api",
+    "test_outputs.py::TestDependencyUpdates::test_no_old_jjwt"
+  ],
+  "tool_inventory_sha256": "1a3d15b34cb3980e366a2f2bbb78f703d1e75e4c2825df457174666ca72f9958",
+  "expected_controls": {
+    "reference": {
+      "reward": 1,
+      "passed": 10
+    },
+    "missing": {
+      "reward": 0,
+      "required_fail": "test_jakarta_persistence_present"
+    },
+    "legacy-namespace": {
+      "reward": 0,
+      "required_fail": "test_no_javax_validation"
+    }
+  },
+  "settings": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-spring-maven-20261105/maven-settings.xml",
+  "python_archive": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-spring-runtime-20261105/cpython-3.12.16+20261026-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz",
+  "adaptations": [
+    "Portable CPython 3.12.16 and six checksum-pinned pure wheels replace mutable apt/uv bootstrap.",
+    "Maven is offline with digest-bound cache copies and the same mirror ID.",
+    "The protected pytest/CTRF bridge retains upstream test assertions and binary reward.",
+    "The solver and protected grader are separate owned containers with bounded writable task mounts.",
+    "Engineering reference calibration only. No bundled skills, candidate, agent, or official benchmark reproduction."
+  ],
+  "scope": "One offline repeat of the original Spring solver with the verified Maven cache, followed by the unstarted original verifier and two frozen controls.",
+  "work": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-spring-offline-reference-20261105",
+  "maven_artifact_lock_sha256": "51133fdee34229e93075db8e153eb7ba95409a0b0d9f5c2bb608922277be00ea",
+  "verified_cache_files": 2728,
+  "verified_project_graph_nodes": 101,
+  "container_names": {
+    "solve": "aeep-sb-spring-offline-solve-20261105",
+    "reference": "aeep-sb-spring-offline-reference-20261105",
+    "missing": "aeep-sb-spring-offline-missing-20261105",
+    "legacy-namespace": "aeep-sb-spring-offline-legacy-namespace-20261105"
+  },
+  "effects": "At most four owned offline containers retained stopped. No registry or network access, downloads, installation, image changes, credentials, deletion or release.",
+  "counters_before": [
+    6,
+    0,
+    9.761760583147407,
+    "0"
+  ],
+  "maximum_additional_operations": 20,
+  "maximum_cumulative_operations": 26,
+  "maximum_reserved_seconds": 2400.0,
+  "automatic_retries": false,
+  "models": 0,
+  "cash_authority_usd": "0",
+  "comparison_eligible": false
+}
