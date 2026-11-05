@@ -7541,6 +7541,36 @@ stay paused. Candidate usefulness, selection usefulness, resources and release
 remain separate. Parent 0b01262.
 <!-- mcp-packaging-result-20261104:end -->
 
+<!-- runtime-capacity-results-20261104:start -->
+**November 4. Both approved runtime attempts ended with known blockers.**
+
+Langfuse 62d7049b started the new datastores. The smaller scheduling pools
+initialized, but ClickHouse rejected its mutation threshold of 20 against a
+capacity of 16. All five owned containers stopped and remain intact. The
+[read-only diagnosis](../toolkit-v2/c13/langfuse-pool-diagnosis-20261104/README.md)
+records the diagnostic-template failure, its retained charges and the bounded
+inspection that established the constraint. The canonical grant is settled at
+43 operations, zero models and 127.24288708437234 seconds. Web, worker and
+receipt export did not run. The [merge-capacity review](../toolkit-v2/c13/langfuse-merge-capacity-20261104/operation-review.json)
+6567f311 preserves the PID cap, service images and stopped state. It needs
+specific repeat approval.
+
+ToolHive 7ce23fdc passed the retained image and controller checks. Its actual
+[foreground launch](../toolkit-v2/c13/toolhive-mcp-launch-continuation-20261104/RESULTS.md)
+exited before container creation. The controller profile denied ToolHive's
+required TCP and UDP binds on port 39068. The grant is settled at 17
+operations, zero models and 9.603700499981642 seconds. The
+[listener correction](../toolkit-v2/c13/toolhive-loopback-bind-20261104/operation-review.json)
+f61f8542 requires specific repeat approval. The OS can allow a wildcard on
+that port. The reviewed executable must actually bind loopback before an MCP
+message is sent.
+
+Both approved runs used frozen source 5a13a630. These attempts supply engineering
+evidence only. Waza protected setup stays deferred. Preserve all images, volumes,
+stopped evidence, existing charges and unrelated edits. The stack gate and
+both SkillsBench workflows remain open. Comparisons stay paused.
+<!-- runtime-capacity-results-20261104:end -->
+
 <!-- runtime-diagnosis-results-20261104:start -->
 **November 4: approved retries ran; ClickHouse startup and a ToolHive record-path defect are now diagnosed. Waza remains deferred.**
 The operator's “Continue” approved the two exact pending reviews 2dede925 and

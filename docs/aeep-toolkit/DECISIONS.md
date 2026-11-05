@@ -3055,3 +3055,12 @@ was replayed. New progress prose is outside the old docs snapshot. Both domain
 journeys and the complete stack remain open; comparisons stay paused. Parent
 137caed. Preserve unrelated CI edits and all SQLite/.aeep/private runtime state.
 <!-- runtime-diagnosis-results-20261104:end -->
+
+### Retain both terminal runtime attempts
+
+Langfuse and ToolHive each reached a different runtime prerequisite after the
+approved corrections. Keep the terminal receipts and their charges. The next
+Langfuse attempt changes one merge-pool setting and uses an unused namespace.
+The next ToolHive attempt explicitly reviews a fixed-port sandbox change and
+checks its actual listener before invocation. Keep both integrations blocked
+until actual lifecycle evidence passes. The repeat rule applies independently.

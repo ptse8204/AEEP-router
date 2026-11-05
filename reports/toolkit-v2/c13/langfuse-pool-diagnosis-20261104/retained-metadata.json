@@ -1,0 +1,77 @@
+{
+  "stopped_state_and_health_codes": {
+    "minio-owner": {
+      "id": "c5ba3b3aefdd0e7342133cfbfbe8f96ba7de2f50d1f6fcb4d9a8c8fa13424365",
+      "exit": 0,
+      "oom": false,
+      "health": null,
+      "probes": []
+    },
+    "postgres": {
+      "id": "b66689b743c64b593c5a7f5e4b75a73cc8d412a17e03ea5780e7751979cfbf70",
+      "exit": 0,
+      "oom": false,
+      "health": "unhealthy",
+      "probes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "clickhouse": {
+      "id": "5d65ac720bf74f24057967327f652bf0a1db3ae406aa5dbe21c5a5b9710710d7",
+      "exit": 137,
+      "oom": false,
+      "health": "unhealthy",
+      "probes": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "redis": {
+      "id": "7d1ccb0b539bf727e28990b9317b11c187276e81dd58114281fa030eb65e60cc",
+      "exit": 0,
+      "oom": false,
+      "health": "unhealthy",
+      "probes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "minio": {
+      "id": "00c5d06d135cc8b6923b7c6c7234e452eca9eae147c6d49b8a1c2bad94a4a6c5",
+      "exit": 0,
+      "oom": false,
+      "health": "unhealthy",
+      "probes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "clickhouse_pid_memory_mounts": "256 1073741824 \"/etc/clickhouse-server/config.d/zz-aeep-engineering-pools.xml\" false \"/var/lib/clickhouse\" true \"/var/log/clickhouse-server\" true",
+  "clickhouse_engine_log_tail": {
+    "bytes": 447,
+    "sha256": "c6f45f441e239a1e8e649c0eb71b6753644d638dacc63c6399e5d22fa1f59de1",
+    "categories": [
+      "merging configuration file",
+      "zz-aeep-engineering-pools.xml",
+      "error"
+    ],
+    "error_codes": []
+  },
+  "raw_log_retained": false,
+  "read_only_operator_inspection": "not metered separately; the failed reviewed diagnostic charges remain",
+  "reviewed_diagnostic_defect": "Go template dereferenced absent .State.Health on the completed one-shot container"
+}

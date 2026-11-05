@@ -1,0 +1,82 @@
+{
+  "source": "5a13a630a89aa0c6b4940be4eed0a30dd80ab5a822ee15f7f25f78f521c11c4b",
+  "coordinator_source_snapshot": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-frozen-source-5a13a630a89a",
+  "work": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/langfuse-threadpool-correction-20261104",
+  "ledger": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillrank-build-preparation-20261103/runtime-execution/canonical.sqlite3",
+  "docker": "/Applications/Docker.app/Contents/Resources/bin/docker",
+  "docker_socket": "/Users/edwintse/.docker/run/docker.sock",
+  "docker_config": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-telemetry-20261104/docker-config",
+  "docker_config_sha256": "5e8ca882ff273c94f40baa34979ce5a5c8873ec61a0f10bd539db5d8843722fa",
+  "executables": {
+    "/Applications/Docker.app/Contents/Resources/bin/docker": "a6822407e207ff0b687419ccbe55700ffbf389d77de58ef625b3b1790d88747c",
+    "/Applications/Docker.app/Contents/Resources/cli-plugins/docker-compose": "0087dac03e594e665bb432bd406325d9ba3f6e032c08c4f1c50db29167da4333",
+    "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3.13": "20c9c2144a9f5202177620417e67643fb551aa31586e5d3c1361627b920cadb0",
+    "/usr/bin/sandbox-exec": "e3d7a792c58a5d3783d2f7274c82d70062393830d8cb1ded713ca554a470bd2f"
+  },
+  "expires_at": "2026-11-08T12:00:00Z",
+  "project": "aeep-langfuse-threadpool-20261104",
+  "service_image_allowed_ids": {
+    "minio-owner": [
+      "sha256:f4c90d3148e56e4b720a5663a9e45428bac3e38c39681bbc0d8692ed1086ff09",
+      "sha256:4d0d6ab2e1545cc19c46e06e71cca3ef453477c17830defc3df3b1599c3df4ba"
+    ],
+    "postgres": [
+      "sha256:ac359420747e1f5f8ac4d23f40d7ce022c0a39090ed6cdd8dde5f596affbe41d",
+      "sha256:bbdfc26f27f4b2fecdc289b63295a0228cab33657a7b859afe54dc78d184dd1d"
+    ],
+    "clickhouse": [
+      "sha256:0d643ec0036ceb52ae65e5d8465e155ad6069d771f33a79a9e71dc4334e029e6",
+      "sha256:2e46929e49593232e1f58afd97c33935f132357c0e7484fe792c516963c9cf19"
+    ],
+    "redis": [
+      "sha256:70906c24c6bcde0712573cce29bb3d30331fec36aaefd503bc570c18ba431c26",
+      "sha256:0acd23d1d2114463235a759bca46f8d4b3c768df692bae3cfe71b16f14aa16bb"
+    ],
+    "minio": [
+      "sha256:f4c90d3148e56e4b720a5663a9e45428bac3e38c39681bbc0d8692ed1086ff09",
+      "sha256:4d0d6ab2e1545cc19c46e06e71cca3ef453477c17830defc3df3b1599c3df4ba"
+    ],
+    "minio-bucket": [
+      "sha256:f4c90d3148e56e4b720a5663a9e45428bac3e38c39681bbc0d8692ed1086ff09",
+      "sha256:4d0d6ab2e1545cc19c46e06e71cca3ef453477c17830defc3df3b1599c3df4ba"
+    ],
+    "web": [
+      "sha256:30da3fc4e5ebda606bca1598a477fb6da68ed004248e9218f6655f2d9ff7d988",
+      "sha256:86a950d244b1cc7e51926ac2930e27afccbc3e3518804d65b60673590e93f5aa"
+    ],
+    "worker": [
+      "sha256:18f884c4b8231988aeedc1edb230167013e3286fddfc8d81471a002fa51dbc60",
+      "sha256:98a6460c2727496d3d42c2bbf795ef772559c7d1024b6469c707482acfa37366"
+    ]
+  },
+  "purpose": "Read new stopped pool-correction container state and extract bounded ClickHouse constraint diagnostics. No restart, guest program, credentials, raw log retention, models or provisioning.",
+  "owned_container_ids": {
+    "minio-owner": "c5ba3b3aefdd0e7342133cfbfbe8f96ba7de2f50d1f6fcb4d9a8c8fa13424365",
+    "postgres": "b66689b743c64b593c5a7f5e4b75a73cc8d412a17e03ea5780e7751979cfbf70",
+    "clickhouse": "5d65ac720bf74f24057967327f652bf0a1db3ae406aa5dbe21c5a5b9710710d7",
+    "redis": "7d1ccb0b539bf727e28990b9317b11c187276e81dd58114281fa030eb65e60cc",
+    "minio": "00c5d06d135cc8b6923b7c6c7234e452eca9eae147c6d49b8a1c2bad94a4a6c5"
+  },
+  "counters_before": [
+    41,
+    0,
+    127.06920483428985,
+    "0"
+  ],
+  "maximum_additional_operations": 2,
+  "maximum_reserved_seconds": 70,
+  "maximum_driver_commands": 1,
+  "diagnostic_python": "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3.13",
+  "service_assets": {
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/langfuse-pool-diagnosis-20261104/run.py": "b492be112d4cbf14ae210b27bfa406977023feb1d189cc2258ab89d486e1a730",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/langfuse-pool-diagnosis-20261104/observe.py": "84f8ee657a8f1ff701b86501f29ae09ffd12c3966de5847fe664de7245740a18",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/langfuse-threadpool-correction-20261104/operation-review.json": "62d7049b8f0962feac1546d2e751599777994ff2a9580ba3ccc40d9afc869ae1",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/langfuse-threadpool-correction-20261104/prepared.json": "3ef4252920af6e821a75ad49523d79905780438a87bab8e140809b3b9dd3b7ee",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/langfuse-threadpool-correction-20261104/run-service.py": "b049e3c4b8e39ce48627f397701e5e9c956c75bb3a135e3df7e5b3ee567b1c46",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/langfuse-threadpool-correction-20261104/compose_adaptation.py": "dba4f010865ca25ff6a9064d14ff32826b739d1f5a625808ada57daeb030f16a",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/langfuse-threadpool-correction-20261104/service-execution/stop-verdict.json": "ea9006bfb4f29ebd12423fb76b8a43ddba12736f825b7dd0da16a3855e213de9",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/langfuse-threadpool-correction-20261104/service-execution/summary.json": "68eaf52d132bc0cf45895185529c03b1a33fbd28460dd4b86bd9b3dd75145615",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/langfuse-service-20261104/service_plan.py": "b26eab634a8b55449648d39b1c9be3cbf1bf0d898c7e5e3e9085da00bfa7e6c2",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/pipeline-standing-authority-20261104.json": "f0f86d6af2600817eb6de50dd12ac4f861f09ac36f90a27bc84e4ae6f044635c"
+  }
+}

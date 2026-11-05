@@ -2296,3 +2296,14 @@ was replayed. New progress prose is outside the old docs snapshot. Both domain
 journeys and the complete stack remain open; comparisons stay paused. Parent
 137caed. Preserve unrelated CI edits and all SQLite/.aeep/private runtime state.
 <!-- runtime-diagnosis-results-20261104:end -->
+
+### November 4 datastore and listener results
+
+Langfuse 4.55.0 started its smaller scheduling pools, then ClickHouse rejected
+the merge-capacity settings. Receipt ingestion and disablement remain open.
+See the [stopped diagnosis](../../reports/toolkit-v2/c13/langfuse-pool-diagnosis-20261104/README.md).
+
+The pinned ToolHive binary executed its foreground launch and rejected the
+proxy port under the controller sandbox. The image and worker permissions
+remain bound. Actual MCP invocation and stop remain open. See the
+[launch result](../../reports/toolkit-v2/c13/toolhive-mcp-launch-continuation-20261104/RESULTS.md).

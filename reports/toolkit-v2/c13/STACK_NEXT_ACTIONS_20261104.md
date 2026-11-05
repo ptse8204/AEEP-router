@@ -1,5 +1,34 @@
 # Resume the current stack work
 
+## Current handoff after the approved service attempts
+
+- Langfuse 62d7049b reached datastore readiness. The scheduler pools started.
+  ClickHouse then rejected mutation threshold 20 against merge capacity 16.
+  All five owned containers stopped. No web, worker or receipt export ran.
+  The failed read-only diagnostic driver assumed a health field on the one-shot
+  container. Its charges remain. A narrow unmetered retained-file inspection
+  recovered the exact constraint. Grant settled at 43 operations, zero models
+  and 127.24288708437234 seconds.
+- Langfuse 6567f3116a9a64c989c7c955caf8c6ffbaaf8d42135b0a4f28d763a178e04057
+  awaits specific repeat approval. It uses the same images and PID 256 with a
+  16-thread merge pool and a fresh owned namespace. No actual attempt yet.
+- ToolHive 7ce23fdc verified the image and controller boundary. Its actual
+  foreground launch failed before container creation because the sandbox
+  denied both binds required by the upstream port check. Grant settled at
+  17 operations, zero models and 9.603700499981642 seconds.
+- ToolHive f61f8542b9a37f836409ca228d5b90e86da27183b9aa83bc3b2a31857f5437cc
+  awaits specific repeat approval. It reuses the same binary/image and permits
+  only port 39068 in the controller. A wildcard bind is possible at the OS
+  layer. A verified 127.0.0.1 listener is required before MCP traffic.
+- Independent Sponsors CLI work is under workflow-sponsors-20261104. The pinned
+  GitHub funding declaration produced a source-bound preview. Full current
+  source verification is running separately. The two runtime reviews above
+  still bind frozen source 5a13a630 and reuse its completed checks.
+- Keep Waza operator sign-in deferred, all Docker resources and the 50 GiB
+  host reserve. No comparatives, models or release. The all-integration gate
+  and both ordinary SkillsBench domain journeys remain open.
+
+
 Current continuation after the approved 2dede925/96552b4e attempts:
 - Langfuse: Compose passed; ClickHouse requested512 background threads under
   PID256. The five owned containers are stopped and retained. Read-only audits
