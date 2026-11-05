@@ -3064,3 +3064,14 @@ Langfuse attempt changes one merge-pool setting and uses an unused namespace.
 The next ToolHive attempt explicitly reviews a fixed-port sandbox change and
 checks its actual listener before invocation. Keep both integrations blocked
 until actual lifecycle evidence passes. The repeat rule applies independently.
+
+### Preserve the passing lifecycle scope
+
+ToolHive's reviewed formatter journey passed and retains its reusable binary
+and image. The optional Router executed its existing data fixture through
+the installed CLI. Preserve both results as component evidence. Keep the
+upstream MCP task checks and full composed workload checks separate.
+
+Langfuse passed datastore startup after the merge-pool correction. A new web
+heap failure requires one specific operator-approved repeat. Preserve the
+stopped resources and charged operations.

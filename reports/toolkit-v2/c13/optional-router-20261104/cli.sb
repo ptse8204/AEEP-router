@@ -1,0 +1,8 @@
+(version 1)
+(allow default)
+(deny network*)
+(deny file-write*)
+(deny file-read* (subpath "/Users"))
+(allow file-read* (subpath "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/optional-router-20261104") (subpath "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-telemetry-20261104/package/installed-runtime"))
+(allow file-write* (literal "/dev/null") (subpath "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/optional-router-20261104"))
+(allow file-read-metadata (literal "/Users") (literal "/Users/edwintse") (literal "/Users/edwintse/Documents") (literal "/Users/edwintse/Documents/aeep-toolkit-v2") (literal "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep") (literal "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-telemetry-20261104") (literal "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-telemetry-20261104/package"))

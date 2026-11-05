@@ -5741,6 +5741,45 @@ stay paused. Candidate usefulness, selection usefulness, resources and release
 remain separate. Parent 0b01262.
 <!-- mcp-packaging-result-20261104:end -->
 
+<!-- runtime-loopback-and-heap-results-20261104:start -->
+**November 4. ToolHive passed its MCP lifecycle. Langfuse reached web startup.**
+
+ToolHive f61f8542 verified the actual loopback listener, listed tools, passed
+the server access checks, invoked the reviewed formatter through AEEP's MCP
+executor, and stopped the owned container. Its [lifecycle evidence](../../reports/toolkit-v2/c13/toolhive-loopback-bind-20261104/RESULTS.md)
+retains the scoped limitations and settled grant of 32 operations, zero
+models and 43.33603483438492 seconds. Reuse the runtime and image. The two
+upstream MCP benchmark journeys still need protected reference evidence.
+
+Langfuse 6567f311 passed all datastore and bucket checks. The web process
+applied migrations and reached Next.js startup, then aborted on V8 heap
+exhaustion at its 640 MiB cap. The [terminal evidence](../../reports/toolkit-v2/c13/langfuse-merge-capacity-20261104/RESULTS.md)
+records seven stopped owned containers and 76 settled operations, zero
+models and 179.64111808408052 seconds. No worker or receipt export ran.
+The [heap correction](../../reports/toolkit-v2/c13/langfuse-web-heap-20261104/operation-review.json)
+17af458f requires specific repeat approval. It preserves images, all old
+resources, PID 256 and the 3,200-second time ceiling.
+
+The [optional Router check](../../reports/toolkit-v2/c13/optional-router-20261104/README.md)
+completed the installed CLI's exact-review four-node data fixture. Four
+canonical receipts passed, and Essentials stayed unselected. The new
+[Sponsors preview](../../reports/toolkit-v2/c13/workflow-sponsors-20261104/README.md)
+verified the original pinned funding declaration through the ordinary CLI.
+Focused checks passed. Full source verification is in progress and the new
+wheel remains unverified. This work used zero models.
+
+The [official SkillsBench image audit](../../reports/toolkit-v2/c13/skillsbench-prebuilt-runtime-20261104/README.md)
+covers all six selected tasks. Each Dockerfile matches the pinned task source,
+with Linux amd64 manifests only. Verify exact embedded assets, skill exclusion
+and task rights before pulling and executing. No candidate comparison, task
+execution or model ran in this audit. Preserve the existing source revision.
+
+Waza protected sign-in remains deferred. Continue other independent work
+before requesting it. Both full SkillsBench journeys and all-integration
+readiness remain open, with comparative campaigns paused. Preserve the
+50 GiB reserve and every existing Docker resource and ledger charge.
+<!-- runtime-loopback-and-heap-results-20261104:end -->
+
 <!-- runtime-capacity-results-20261104:start -->
 **November 4. Both approved runtime attempts ended with known blockers.**
 

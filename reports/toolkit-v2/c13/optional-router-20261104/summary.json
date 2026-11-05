@@ -1,0 +1,191 @@
+{
+  "passed": true,
+  "models": 0,
+  "provider_calls": 0,
+  "comparisons": "PAUSED",
+  "canonical_route_receipts": [
+    {
+      "receipt_id": "rcpt_0c432d84c98d48419bd367938fc5d5e0",
+      "executor": "data.ingest",
+      "status": "success",
+      "receipt_sha256": "9d6ce4227985ce0a099a7cf9b2f3b024e48eefb4651b96943269905da1e462de",
+      "latency_ms": 0.09474996477365494
+    },
+    {
+      "receipt_id": "rcpt_5bd51479bbc94517bbb2d17e3f8e6176",
+      "executor": "data.transform",
+      "status": "success",
+      "receipt_sha256": "7d99bf03c37c0d1e7d002c264e48c5dbfb8cb38084227130aa52fd768ba0c793",
+      "latency_ms": 0.07579196244478226
+    },
+    {
+      "receipt_id": "rcpt_8f4e5f548c354d7b95085f8f2531610a",
+      "executor": "data.summarize",
+      "status": "success",
+      "receipt_sha256": "84ef32d1ec41503494f1d31ca3d6b06cb963fd0ab8ccc69449f0435a27cf2944",
+      "latency_ms": 0.07533282041549683
+    },
+    {
+      "receipt_id": "rcpt_72966afdc0be44078af80a6fce8f7e77",
+      "executor": "data.verify",
+      "status": "success",
+      "receipt_sha256": "b731677a4866a082bf6f8d0fa0dc53e6c24fe89214a0b40c916d2ef31d333ba7",
+      "latency_ms": 0.07770955562591553
+    }
+  ],
+  "proposal_digest": "5245f8feea63ead13161e945fe8c6611393ba4c13d3c721c57e9a43ab34c2e88",
+  "unreviewed_preflight_denied": true,
+  "standing_activation_created": false,
+  "basic_catalog_router_inert": true,
+  "artifact_sha256": "47111fc87de6a91f23f4aadc7de4647a92a88c34dd0a60ecf02e297eb12eecb2",
+  "retained_runtime_unchanged": true,
+  "cli_intervals": [
+    {
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/optional-router-20261104/cli.sb",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-telemetry-20261104/package/installed-runtime/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "aeep",
+        "stack",
+        "-m",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/optional-router-20261104/manifest.json",
+        "propose",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/optional-router-20261104/goal.json"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.838354917243123,
+      "stdout_sha256": "e6c8458042953d3f6cc8639af9b41e49c8de931339b7f0e526d3e9dbbcd76c89",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/optional-router-20261104/cli.sb",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-telemetry-20261104/package/installed-runtime/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "aeep",
+        "stack",
+        "-m",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/optional-router-20261104/manifest.json",
+        "preflight",
+        "stack_b6375722fa5b99cc2b81d5d976eb0803b09df0f43172e09cd1cd95a76a6a8b78"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.7752217911183834,
+      "stdout_sha256": "66dd1b9bf7c224070090cd8c1c06138a1cb120ca3e940c87b8f363e548db875f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/optional-router-20261104/cli.sb",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-telemetry-20261104/package/installed-runtime/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "aeep",
+        "assess",
+        "-m",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/optional-router-20261104/manifest.json",
+        "review",
+        "5245f8feea63ead13161e945fe8c6611393ba4c13d3c721c57e9a43ab34c2e88"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.7819716250523925,
+      "stdout_sha256": "00a593366bae8f1bd615eb6a9126198489a387e5df536a7e6f761856b9875d4b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/optional-router-20261104/cli.sb",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-telemetry-20261104/package/installed-runtime/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "aeep",
+        "stack",
+        "-m",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/optional-router-20261104/manifest.json",
+        "preflight",
+        "stack_b6375722fa5b99cc2b81d5d976eb0803b09df0f43172e09cd1cd95a76a6a8b78"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.7768759587779641,
+      "stdout_sha256": "5ba7a32691c57b36852b5bbd96b18fe09e9295c86f75c8aff429a74aae409538",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/optional-router-20261104/cli.sb",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-telemetry-20261104/package/installed-runtime/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "aeep",
+        "stack",
+        "-m",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/optional-router-20261104/manifest.json",
+        "assemble",
+        "stack_b6375722fa5b99cc2b81d5d976eb0803b09df0f43172e09cd1cd95a76a6a8b78"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.8041680827736855,
+      "stdout_sha256": "62a59bb94918f30d3ecd3960263239a4f50d7057ab306a51450baf127204c440",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/optional-router-20261104/cli.sb",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-telemetry-20261104/package/installed-runtime/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "aeep",
+        "stack",
+        "-m",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/optional-router-20261104/manifest.json",
+        "run",
+        "stack_b6375722fa5b99cc2b81d5d976eb0803b09df0f43172e09cd1cd95a76a6a8b78",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/optional-router-20261104/inputs.json"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.844201291911304,
+      "stdout_sha256": "0003894a297975ff045aa5dc5735dc883306eff4ff8fe10ca81bd27fddfc875a",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/optional-router-20261104/cli.sb",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-telemetry-20261104/package/installed-runtime/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "aeep_toolkit",
+        "list",
+        "essentials"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.17436504177749157,
+      "stdout_sha256": "d31d8644b295180a83d8e68bb16f2a3c7277f00c136aebc21eaffbd47f5cdf4b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "accounting": "Separate CLI wall durations and canonical node receipts. CLI run contains node execution. Do not add their durations.",
+  "fixture_scope": "Actual Router/StackRuntime execution on the existing synthetic data example. No upstream task, model or usefulness claim."
+}

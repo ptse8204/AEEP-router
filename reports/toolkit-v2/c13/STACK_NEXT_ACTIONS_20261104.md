@@ -1,5 +1,31 @@
 # Resume the current stack work
 
+## Current handoff after verified ToolHive and Router lifecycles
+
+- ToolHive f61f8542 PASSED launch, listener, list, permission probe, AEEP
+  MCP invocation and stop. Retain its binary and image. The grant is
+  32 operations / zero models / 43.33603483438492 seconds, settled.
+  Do not repeat those checks. The upstream MCP pack journeys remain open.
+- Langfuse 6567f311 passed datastores and bucket setup. Web migrations passed
+  before V8 heap exhaustion at 640 MiB. All seven owned containers stopped;
+  grant 76 operations / zero models / 179.64111808408052 seconds, settled.
+  No worker, export or ingestion. Repeat review
+  17af458ff38e47ca655c72b798a6bf1e756d8eee392c75ec0cb8068a9875fd48
+  is unstarted and requires actual approval. Same images, datastores, PID cap
+  and time ceiling. Web/worker heap 1024 MiB and container 1536 MiB.
+- The installed optional Router CLI passed exact review, four route receipts
+  and Essentials inertness under 54a0635e. Preserve its private store.
+- Sponsors export-preview uses exact source and funding binding with no
+  payment or publication. Actual pinned declaration and focused tests pass.
+  Full checks on a3e99a50 are running under workflow-sponsors-20261104.
+- Official prebuilt SkillsBench metadata provides six digest-pinned runtime
+  candidates with Dockerfiles matching 9a1f4dd5. All are Linux amd64. Require
+  asset, license and runtime validation before pulling or running them.
+- Waza sign-in remains deferred. Full component readiness and both ordinary
+  CLI workload journeys are open. Candidate/selection comparisons stay
+  paused. Keep 50 GiB free and preserve all old Docker and user resources.
+
+
 ## Current handoff after the approved service attempts
 
 - Langfuse 62d7049b reached datastore readiness. The scheduler pools started.

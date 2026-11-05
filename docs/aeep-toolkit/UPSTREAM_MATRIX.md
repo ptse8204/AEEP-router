@@ -2307,3 +2307,22 @@ The pinned ToolHive binary executed its foreground launch and rejected the
 proxy port under the controller sandbox. The image and worker permissions
 remain bound. Actual MCP invocation and stop remain open. See the
 [launch result](../../reports/toolkit-v2/c13/toolhive-mcp-launch-continuation-20261104/RESULTS.md).
+
+### November 4 ToolHive, Router and runtime progress
+
+ToolHive passed the actual scoped MCP lifecycle with AEEP invocation and
+cleanup. Its [permission and lifecycle evidence](../../reports/toolkit-v2/c13/toolhive-loopback-bind-20261104/RESULTS.md)
+covers the reviewed formatter. The upstream stateful benchmark runs are still
+open.
+
+The [installed Router journey](../../reports/toolkit-v2/c13/optional-router-20261104/README.md)
+passed exact operator review and four verified route receipts on the existing
+synthetic data fixture. Essentials remains independently usable.
+
+Langfuse reached the web process after successful datastores and migrations.
+The process hit its V8 heap cap, so ingestion and disablement remain open.
+See the [heap review](../../reports/toolkit-v2/c13/langfuse-web-heap-20261104/README.md).
+
+The [SkillsBench runtime audit](../../reports/toolkit-v2/c13/skillsbench-prebuilt-runtime-20261104/README.md)
+binds publisher metadata for six candidate images. Task-specific rights,
+embedded asset equality and protected reference execution remain separate.
