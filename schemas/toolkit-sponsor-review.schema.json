@@ -1,0 +1,89 @@
+{
+  "$defs": {
+    "SourcePin": {
+      "additionalProperties": false,
+      "properties": {
+        "repository": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "title": "Repository",
+          "type": "string"
+        },
+        "revision": {
+          "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$",
+          "title": "Revision",
+          "type": "string"
+        },
+        "artifact_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Artifact Sha256",
+          "type": "string"
+        },
+        "license_expression": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "License Expression",
+          "type": "string"
+        },
+        "data_rights": {
+          "maxLength": 1000,
+          "minLength": 1,
+          "title": "Data Rights",
+          "type": "string"
+        }
+      },
+      "required": [
+        "repository",
+        "revision",
+        "artifact_sha256",
+        "license_expression",
+        "data_rights"
+      ],
+      "title": "SourcePin",
+      "type": "object"
+    },
+    "WorkflowFile": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "title": "WorkflowFile",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.toolkit.sponsor-review.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/SourcePin"
+    },
+    "funding": {
+      "$ref": "#/$defs/WorkflowFile"
+    }
+  },
+  "required": [
+    "schema_version",
+    "source",
+    "funding"
+  ],
+  "title": "SponsorReview",
+  "type": "object"
+}

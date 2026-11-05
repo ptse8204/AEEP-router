@@ -8,6 +8,7 @@ import json
 import re
 from collections import Counter, defaultdict
 from decimal import Decimal
+from pathlib import Path
 from statistics import mean, median
 from typing import Any
 
@@ -399,8 +400,17 @@ def fee_break_even(pairs: list[dict[str, EvaluationRun]], cash: dict[str, Any]) 
             'interpretation':'Scenario using observed cost per verified success, including failed-run costs. Assumes the same future task mix and success rates; not a confidence-supported forecast. Excludes assessment overhead.'}
 
 def portable_summary(bundle: EvidenceBundle, *, disclose_source: bool = False,
-                     developer: DeveloperIdentity | None = None) -> dict[str, Any]:
+                     developer: DeveloperIdentity | None = None,
+                     sponsors_review: tuple[Path, str] | None = None) -> dict[str, Any]:
     """Prepare minimized local sharing bytes; this neither publishes nor authenticates."""
+    if sponsors_review is not None:
+        from .sponsors import resolve
+        from .workflow import WorkflowFile
+
+        if developer is not None or not disclose_source:
+            raise ValueError('Sponsors requires explicit source disclosure and one attribution source')
+        path, reviewed_sha256 = sponsors_review
+        developer = resolve(bundle.candidate, WorkflowFile(path=path.name, sha256=reviewed_sha256), path.absolute().parent)
     summary = summarize(bundle)
     if developer is not None and (not disclose_source or developer.source != bundle.candidate):
         raise ValueError('developer assertion requires the exact disclosed candidate source')
@@ -428,8 +438,9 @@ def portable_summary(bundle: EvidenceBundle, *, disclose_source: bool = False,
         'cohorts': cohorts,
         'source': bundle.candidate.model_dump(mode='json') if disclose_source else None,
         'developer': ({'assertion': developer.model_dump(mode='json'),
-                       'status': 'operator_supplied_unverified',
-                       'notice': 'Ownership and destination are unverified. A donation is optional support; a purchase link is not price or payment authority.'}
+                       'status': 'reviewed_source_declaration' if sponsors_review else 'operator_supplied_unverified',
+                       'notice': ('The pinned funding file names the source repository account. Identity, eligibility and payment authority are unverified.'
+                                  if sponsors_review else 'Ownership and destination are unverified. A donation is optional support; a purchase link is not price or payment authority.')}
                       if developer else None),
         'publication_performed': False,
         'limitations': [

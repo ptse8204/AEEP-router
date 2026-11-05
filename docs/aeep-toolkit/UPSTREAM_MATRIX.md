@@ -2326,3 +2326,19 @@ See the [heap review](../../reports/toolkit-v2/c13/langfuse-web-heap-20261104/RE
 The [SkillsBench runtime audit](../../reports/toolkit-v2/c13/skillsbench-prebuilt-runtime-20261104/README.md)
 binds publisher metadata for six candidate images. Task-specific rights,
 embedded asset equality and protected reference execution remain separate.
+
+### November 4 installed attribution and task image inputs
+
+The [installed Sponsors preview](../../reports/toolkit-v2/c13/workflow-sponsors-20261104/README.md)
+resolved the GitHub repository account from the original reviewed funding
+declaration. The verified link is optional. Live account eligibility, identity
+and payment remain outside the preview.
+
+The [two SkillsBench image checks](../../reports/toolkit-v2/c13/skillsbench-prebuilt-acquisition-20261104/README.md)
+verified the original embedded inputs for Sales Pivot and Spring Boot. The
+remaining four images are metadata candidates. Protected reference execution
+and the full domain journeys remain open.
+
+The [PostgreSQL backend preparation](../../reports/toolkit-v2/c13/mcp-postgres-closure-20261104/README.md)
+pins MCPMark's real server wheel for the next isolated reference run. The
+two packs still need separate database setup, tool and verifier evidence.

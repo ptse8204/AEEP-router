@@ -5741,6 +5741,44 @@ stay paused. Candidate usefulness, selection usefulness, resources and release
 remain separate. Parent 0b01262.
 <!-- mcp-packaging-result-20261104:end -->
 
+<!-- sponsors-and-pinned-task-inputs-20261104:start -->
+**November 4. Installed Sponsors preview passed. Two SkillsBench images now
+bind original embedded inputs.**
+
+The [Sponsors source, wheel and docs checks](../../reports/toolkit-v2/c13/workflow-sponsors-20261104/verification-summary.json)
+passed all 13 source gates, 2,135 tests with 21 skips in each full run, and
+both branch gates. The exact source is a3e99a502dd5ec5101e1bf3e7c5f4da04995cd648effba00bbfb8901f8c93efa.
+The new retained wheel is 9f8b4d22346385909ca83ed2660ac5020f44e311cad23ee6a7f87fbc85d1d2d7.
+Its actual installed CLI validates the pinned funding file, selected source,
+exact review and shipped schema. The change supports matching GitHub
+repository accounts. The old unverified developer assertion remains
+available. No payment, publication, model or candidate evaluation ran.
+Source checks include separate local CI edits, which remain unstaged.
+Later progress prose is outside the exact completed docs snapshot.
+
+The [SkillsBench acquisition](../../reports/toolkit-v2/c13/skillsbench-prebuilt-acquisition-20261104/README.md)
+retains two exact upstream amd64 task images. It settled five operations and
+zero models. The [embedded-input result](../../reports/toolkit-v2/c13/skillsbench-embedded-inputs-20261104/summary.json)
+matches both Sales Pivot inputs and all 17 Spring Boot workspace files.
+Two owned inspection containers remain never started. No reference,
+verifier or model ran. All six candidate environment and verifier source
+trees match the pinned task files. Retain the original instructions, which
+differ from the newer published task instructions. Rights, skill exclusion
+and protected offline runtime closure remain open.
+
+The [MCP backend record](../../reports/toolkit-v2/c13/mcp-postgres-closure-20261104/README.md)
+pins the real postgres-mcp 0.3.0 wheel. MCPMark uses that exact version.
+MCP-Universe uses the same backend without a pin. Confirm compatibility
+against both protected task contracts. The wheel was read and cached
+privately. Its transitive closure and actual DB/MCP reference runs remain open.
+
+ToolHive and optional Router lifecycle evidence remain scoped as recorded
+below. Langfuse heap repeat 17af458f is unstarted and needs explicit approval.
+Waza sign-in stays deferred. The all-integration gate and both full CLI
+domain workflows remain open. Keep comparisons paused, all prior evidence
+and charges intact, and at least 50 GiB free.
+<!-- sponsors-and-pinned-task-inputs-20261104:end -->
+
 <!-- runtime-loopback-and-heap-results-20261104:start -->
 **November 4. ToolHive passed its MCP lifecycle. Langfuse reached web startup.**
 

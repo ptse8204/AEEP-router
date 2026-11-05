@@ -1,0 +1,38 @@
+{
+  "sources": {
+    "https://raw.githubusercontent.com/eval-sys/mcpmark/cd45b7f57923b9b3985467f5139927575f83141c/Dockerfile": "c0299a3e1c44cf8b1123ba1d41a331096a838c109d09b4e77324b206d402c097",
+    "https://raw.githubusercontent.com/SalesforceAIResearch/MCP-Universe/0df6c42717f2a618d34f5b271efd05be462b9e4d/mcpuniverse/mcp/configs/server_list.json": "8d92109f5b2b5cd99d25b88e7361ddd5bffa1b0ed08f8d28af801dfd7ee6343f",
+    "https://pypi.org/pypi/postgres-mcp/0.3.0/json": "2f93e5d1dc7cb5565eee4936160d4bef473b1b2638a7af72005d596de1982168"
+  },
+  "mcpmark_selected_version": "0.3.0",
+  "mcp_universe_selected_backend": "postgres-pro",
+  "mcp_universe_upstream_version": "unpinned",
+  "compatibility_candidate": "Try the same upstream server at the MCPMark pin. Confirm against both tasks before readiness.",
+  "wheel": {
+    "url": "https://files.pythonhosted.org/packages/00/69/eff3720bc60311299c9819560783aaf3ae62c5d67a45c7d672cbab3346a4/postgres_mcp-0.3.0-py3-none-any.whl",
+    "sha256": "455dd71ed8deab77a67af2468e6f059dd0f114e05c0031ab47306a7048dc30bf",
+    "bytes": 91091,
+    "requirements": [
+      "attrs>=25.3.0",
+      "humanize>=4.8.0",
+      "instructor>=1.7.9",
+      "mcp[cli]>=1.5.0",
+      "pglast==7.2.0",
+      "psycopg-pool>=3.2.6",
+      "psycopg[binary]>=3.2.6"
+    ],
+    "requires_python": ">=3.12",
+    "license_fields": {
+      "License-Expression": "MIT"
+    },
+    "license_file_hashes": {
+      "postgres_mcp-0.3.0.dist-info/licenses/LICENSE": "013c8daa80c427b5f98cf7ff16c0c79f2adc2a5bd29e05aef7775f43f6c00fdd"
+    },
+    "entry_points": "[console_scripts]\npostgres-mcp = postgres_mcp:main\n"
+  },
+  "runtime_limits": "Only a fresh owned database may receive unrestricted SQL. Original preparation scripts can terminate connections and drop matching databases or roles.",
+  "upstream_imported_or_executed": false,
+  "dependency_installation": false,
+  "models": 0,
+  "comparisons": "PAUSED"
+}

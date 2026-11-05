@@ -194,6 +194,7 @@ from aeep_toolkit.models import (
     ExtensionRegistry,
 )
 from aeep_toolkit.selection import SelectionEvaluation
+from aeep_toolkit.sponsors import SponsorReview
 from aeep_toolkit.state_benchmarks import MCPStatePack
 from aeep_toolkit.storage import StorageReserveException
 from aeep_toolkit.workflow import EvaluationWorkflow, StackWorkflow
@@ -223,6 +224,7 @@ MODEL_FILES = {
     "toolkit-adapter.schema.json": AdapterCapabilities,
     "toolkit-comparison.schema.json": ComparisonReport,
     "toolkit-developer.schema.json": DeveloperIdentity,
+    "toolkit-sponsor-review.schema.json": SponsorReview,
     "toolkit-run.schema.json": EvaluationRun,
     "toolkit-evidence.schema.json": EvidenceBundle,
     "toolkit-extension.schema.json": ExtensionManifest,

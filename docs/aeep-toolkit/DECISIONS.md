@@ -3075,3 +3075,14 @@ upstream MCP task checks and full composed workload checks separate.
 Langfuse passed datastore startup after the merge-pool correction. A new web
 heap failure requires one specific operator-approved repeat. Preserve the
 stopped resources and charged operations.
+
+### Reuse the checked funding declaration and published task environments
+
+Keep developer support in the existing export preview with explicit source
+disclosure and an exact review of the pinned funding file. Preserve the
+legacy developer assertion and the separate trust labels.
+
+Consider the exact upstream SkillsBench images before rebuilding dependency
+closures. The selected source trees match except for newer instructions.
+Use the original instructions and protected verifier for the pinned task.
+Rights, hidden skill exclusion and reference behavior need their own checks.

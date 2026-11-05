@@ -99,3 +99,57 @@ def test_catalog_distinguishes_working_adapters_from_unqualified_options(capsys)
     assert entries["waza"]["status"] == "experimental"
     assert entries["waza"]["qualification"] == "mock_engineering_only"
     assert entries["waza"]["installed"] is None
+
+
+def test_sponsors_preview_requires_exact_source_and_reviewed_funding(tmp_path, capsys, monkeypatch):
+    from aeep_toolkit.cli import main
+
+    value = bundle()
+    value.candidate.repository = "https://github.com/example-dev/project"
+    evidence = tmp_path / "evidence.json"
+    evidence.write_text(value.model_dump_json())
+    funding = tmp_path / "FUNDING.yml"
+    funding.write_text("github: [other, example-dev]\ncustom: https://example.net/pay\n")
+    review = tmp_path / "sponsors.json"
+    details = {
+        "schema_version": "aeep.toolkit.sponsor-review.v1",
+        "source": value.candidate.model_dump(mode="json"),
+        "funding": {"path": funding.name, "sha256": hashlib.sha256(funding.read_bytes()).hexdigest()},
+    }
+    review.write_text(json.dumps(details))
+    digest = hashlib.sha256(review.read_bytes()).hexdigest()
+    args = ["export-preview", "--evidence", str(evidence), "--sponsors-review", str(review),
+            "--reviewed-digest", digest]
+
+    def denied(*_args, **_kwargs):
+        raise AssertionError("preview executed or accessed network")
+
+    monkeypatch.setattr("socket.socket", denied)
+    monkeypatch.setattr("subprocess.Popen", denied)
+    with pytest.raises(SystemExit):
+        main(args)
+    assert main([*args, "--disclose-source"]) == 0
+    result = json.loads(capsys.readouterr().out)["document"]
+    support = result["developer"]
+    assert support["status"] == "reviewed_source_declaration"
+    assert support["assertion"]["assertion_ref"] == digest
+    assert support["assertion"]["support_url"] == "https://github.com/sponsors/example-dev"
+    assert "example.net" not in json.dumps(result) and not result["publication_performed"]
+
+    value.candidate.revision = "f" * 40
+    evidence.write_text(value.model_dump_json())
+    with pytest.raises(SystemExit):
+        main([*args, "--disclose-source"])
+    value.candidate.revision = details["source"]["revision"]
+    evidence.write_text(value.model_dump_json())
+    funding.write_text("github: other\n")
+    with pytest.raises(SystemExit):
+        main([*args, "--disclose-source"])
+    details["funding"]["sha256"] = hashlib.sha256(funding.read_bytes()).hexdigest()
+    review.write_text(json.dumps(details))
+    with pytest.raises(SystemExit):
+        main([*args, "--disclose-source"])
+    # An exact new review still cannot attribute a different funding recipient.
+    args[-1] = hashlib.sha256(review.read_bytes()).hexdigest()
+    with pytest.raises(SystemExit):
+        main([*args, "--disclose-source"])

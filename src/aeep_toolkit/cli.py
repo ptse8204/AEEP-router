@@ -124,7 +124,10 @@ def main(argv: list[str] | None = None) -> int:
     portable = sub.add_parser('export-preview', help='Prepare a minimized local sharing document; never publishes')
     portable.add_argument('--evidence', type=Path, required=True)
     portable.add_argument('--disclose-source', action='store_true', help='Include supplied public source metadata in the preview')
-    portable.add_argument('--developer', type=Path, help='Exact-source developer assertion; requires --disclose-source and remains unverified')
+    support = portable.add_mutually_exclusive_group()
+    support.add_argument('--developer', type=Path, help='Exact-source developer assertion; requires --disclose-source and remains unverified')
+    support.add_argument('--sponsors-review', type=Path, help='Reviewed GitHub funding declaration; requires source disclosure and an exact review digest')
+    portable.add_argument('--reviewed-digest', help='Exact SHA-256 of the selected Sponsors review')
     trace_preview = sub.add_parser('trace-preview', help='Prepare minimized OTLP/HTTP JSON from a receipt; no exporter or network')
     trace_preview.add_argument('--receipt', type=Path, required=True)
     install_plan = sub.add_parser('install-plan', help='Review a selected closure of local wheels; no writes or execution')
@@ -302,9 +305,14 @@ def main(argv: list[str] | None = None) -> int:
         if args.command == 'export-preview':
             from .models import DeveloperIdentity
             from .reporting import portable_summary
-            exported = portable_summary(EvidenceBundle.model_validate(read_json(args.evidence)),
-                                      disclose_source=args.disclose_source,
-                                      developer=DeveloperIdentity.model_validate(read_json(args.developer)) if args.developer else None)
+            if (args.sponsors_review is None) != (args.reviewed_digest is None):
+                raise ValueError('Sponsors review and its exact digest must be supplied together')
+            exported = portable_summary(
+                EvidenceBundle.model_validate(read_json(args.evidence)),
+                disclose_source=args.disclose_source,
+                developer=DeveloperIdentity.model_validate(read_json(args.developer)) if args.developer else None,
+                sponsors_review=(args.sponsors_review.absolute(), args.reviewed_digest) if args.sponsors_review else None,
+            )
             print(json.dumps(exported, indent=2, allow_nan=False))
             return 0
         if args.command == 'report':

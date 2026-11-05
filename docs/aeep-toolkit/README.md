@@ -112,6 +112,13 @@ links remain unverified assertions. Donation links are optional support; purchas
 links do not establish a price or permission to pay. The preview retains synthetic
 labels and unknown measurements and makes no independent efficacy claim.
 
+For a GitHub repository account named in its pinned `FUNDING.yml`, select
+`--sponsors-review` with the exact `--reviewed-digest` and
+`--disclose-source`. The [review schema](../../schemas/toolkit-sponsor-review.schema.json)
+binds the candidate source and the funding file. The preview shows the matching
+repository account and GitHub Sponsors link. Account eligibility and ownership
+remain unverified. Payments stay outside the preview.
+
 ## Search and inspect optional upstream results
 
 Discovery reuses the existing configured ARD, MCP Registry and local readers. It

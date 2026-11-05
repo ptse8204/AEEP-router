@@ -1,5 +1,31 @@
 # Resume the current stack work
 
+## Current resumption
+
+- Langfuse 17af458ff38e47ca655c72b798a6bf1e756d8eee392c75ec0cb8068a9875fd48
+  is the only pending repeat review. It is unstarted. Require actual operator
+  approval and verify the 76-operation settled starting counters before run.
+  Use its run.py and new namespace. Preserve all existing service resources.
+- ToolHive f61f8542 and optional Router 54a0635e passed their bounded
+  lifecycles. Retain and reuse. Do not replay the completed pipelines.
+- Sponsors source a3e99a50 and installed wheel 9f8b4d22 passed source, installed
+  feature, sandbox and exact offline docs checks. Private frozen source is
+  .aeep/stack-frozen-source-a3e99a502dd5. The installed runtime is under
+  .aeep/workflow-sponsors-20261104/package/installed-runtime. The working
+  source includes local CI edits that are outside feature commits.
+- The two retained official SkillsBench images contain all 19 checked pinned
+  inputs. The no-execution inspection containers remain created only. Proceed
+  with rights and restricted-skill checks plus an exact protected reference
+  runtime. Keep pinned original task instructions and verifiers.
+- MCPMark pins postgres-mcp 0.3.0. MCP-Universe selects postgres-pro without a
+  version pin. Reuse the cached exact server wheel only after dependency and
+  permission closure. Use separate owned PostgreSQL state and original
+  verifiers. No MCP benchmark reference has run.
+- Waza sign-in remains deferred. Both composed SkillsBench domains, complete
+  stack readiness and candidate/selection comparisons remain open. Preserve
+  the 50 GiB reserve, private artifacts and all unrelated work.
+
+
 ## Current handoff after verified ToolHive and Router lifecycles
 
 - ToolHive f61f8542 PASSED launch, listener, list, permission probe, AEEP
