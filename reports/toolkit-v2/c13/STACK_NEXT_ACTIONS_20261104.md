@@ -68,3 +68,12 @@ Latest continuation:
 - Actual repeat approvals 2a0abaf4/1da90882 are still pending. No compiler/docs/
   wheel/source replays are allowed by these scopes. Continue other new finite
   component work under standing authority; keep comparisons paused.
+
+Approved corrections ran:
+- ToolHive1da90882 passed: do not recompile or repeat info/audit. Next: new MCP
+  launch/inspect/invoke/stop pipeline under exact first-attempt review.
+- Langfuse2a0abaf4 cleared identity but failed Compose config before service
+  startup. No new containers/volumes/network. New tmpfs-correction review needs
+  actual repeat approval; all13oldcharges remain. No automatic retry.
+- Operator explicitly DEFERRED Waza sign-in until absolutely necessary. Do not
+  ask again or execute protected-login.py during independent work. No model use.

@@ -2199,3 +2199,31 @@ The new progress/setup prose is outside the passed docs snapshot; no current
 docs-check pass is claimed for those edits. Group its next check with an
 approved repeat rather than replaying the completed docs pipeline.
 <!-- waza-native-preparation-20261104:end -->
+
+<!-- approved-corrections-results-20261104:start -->
+**November 4: ToolHive post-build checks passed; Langfuse cleared identity but failed Compose validation; Waza sign-in is deferred.**
+The operator approved reviews1da90882 and2a0abaf4, and asked to postpone protected
+Waza setup until a real backend check requires it. Exact replies are recorded in
+each approval file and waza-native-backend-20261104/OPERATOR_DEFERRAL_20261104.json.
+
+ToolHive's existing binary passed audit,actual version/help and build provenance.
+All1,264 original artifacts are preserved with exact hashes,including21 restored
+JSON encodings. No recompile/download occurred. Native grant9ops/0models/
+90.18843654170632seconds retains the old4charges; preservation1op/0models/
+0.7585593750700355seconds is separately settled. MCP lifecycle remains open.
+
+Langfuse passed the repaired OCI fixtures and actual image/reference/layer checks.
+Compose configuration validation then exited nonzero before any service resource
+was created or started. The service grant13ops/0models/1.335084417834878seconds
+retains all earlier charges; accounting/cleanup are resolved. Static inspection
+found tmpfs mappings where Compose requires a string/list. The exact corrected
+review is under langfuse-tmpfs-correction-20261104. Its first-party shape checks
+pass; actual service execution remains unstarted pending specific repeat approval.
+
+Waza sign-in must not run or be requested again while independent work can
+continue. Its terminal-only helper/grant remain unapplied; no auth directory or
+model call was created. New ToolHive/MCP lifecycle work remains eligible under
+standing first-attempt authority. Both full domain workflows and all integrations
+must pass before comparisons resume. Passed source,wheel,docs checks are reused;
+new progress prose is outside the earlier docs snapshot. Parent3f10631.
+<!-- approved-corrections-results-20261104:end -->
