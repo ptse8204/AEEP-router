@@ -1,5 +1,28 @@
 # Resume the current stack work
 
+Current continuation after the approved 2dede925/96552b4e attempts:
+- Langfuse: Compose passed; ClickHouse requested512 background threads under
+  PID256. The five owned containers are stopped and retained. Read-only audits
+  passed,without raw log/key retention or guest execution. Original service grant
+  is31ops/0models/64.60480687581003seconds,settled. No receipt export occurred.
+- Langfuse pending exact repeat: 62d7049b8f0962feac1546d2e751599777994ff2a9580ba3ccc40d9afc869ae1.
+  New small-workload XML pool settings and a new owned namespace preserve all
+  old containers/volumes/network/keys. Same images/PID cap; no installs/pulls.
+  New readonly XML mount and scoped client HOME/tmp profile are bound. Unstarted.
+- ToolHive: portable build PASSED. Reuse image3c0b4f876d9148e5a037033a3dbf60c5075a4cce8a251447d729546bacfda1ff,
+  tag aeep-toolkit-v2/toolhive-mcp:formatting-control-20261104. Do not rebuild.
+  Driver failed on HERE/server.py while writing its build record; no controller,
+  profile,MCPserver or MCPclient ran. Grant11ops/0models/8.105458749458194seconds,
+  settled. Explicit bound source/profile inputs now pass five development guards.
+- ToolHive pending exact repeat: 7ce23fdccd090ccbda424a2f957ce064f666b24a773bc5cf29e8519ee6c2e05c. Reuse built image and
+  unchanged original37-op/1800-second ceiling; only unstarted MCP work. Unstarted.
+- Both actual approval files are absent. Ask only for these specific repeats.
+  Keep Waza sign-in DEFERRED; do not inspect or run its terminal-only helper.
+- Source5a13a630 and passed source/wheel checks remain unchanged. No model,
+  candidate or selection comparison is authorized; all-integration gate remains
+  open. Keep50GiB host free and preserve all unknown/old Docker resources.
+
+
 Current continuation (supersedes older pending-review bullets below):
 - Approved ToolHive1da90882 PASSED. Never repeat its compiler/audit/info work.
 - Approved Langfuse2a0abaf4 is terminal after Compose config failure, before

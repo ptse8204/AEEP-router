@@ -1,0 +1,329 @@
+{
+  "passed": true,
+  "models": 0,
+  "service_programs_executed": false,
+  "raw_logs_retained": false,
+  "comparisons": "PAUSED",
+  "accounting_uncertain": false,
+  "cleanup_uncertain": false,
+  "services": [
+    {
+      "service": "minio-owner",
+      "id": "57c26ed0f80d3ee2c833509d994f5ddb3d77a617908ab02872b4e0cab1281a40",
+      "status": "exited",
+      "exit_code": 0,
+      "OOMKilled": false,
+      "health_status": null,
+      "health_log": []
+    },
+    {
+      "service": "postgres",
+      "id": "a972cbbefd449511f332179e946bcd16a1eefd0e8d66884d40d3e859909e2812",
+      "status": "exited",
+      "exit_code": 0,
+      "OOMKilled": false,
+      "health_status": "unhealthy",
+      "health_log": [
+        {
+          "exit_code": 0,
+          "diagnostic": {
+            "bytes": 49,
+            "sha256": "6e168fc3b5a0662104b5e5da92e87b870e8b7c65fec827d267115b5123d18614",
+            "categories": [],
+            "public_paths": [
+              "/var/run/postgresql"
+            ],
+            "raw_text_retained": false
+          }
+        },
+        {
+          "exit_code": 0,
+          "diagnostic": {
+            "bytes": 49,
+            "sha256": "6e168fc3b5a0662104b5e5da92e87b870e8b7c65fec827d267115b5123d18614",
+            "categories": [],
+            "public_paths": [
+              "/var/run/postgresql"
+            ],
+            "raw_text_retained": false
+          }
+        },
+        {
+          "exit_code": 0,
+          "diagnostic": {
+            "bytes": 49,
+            "sha256": "6e168fc3b5a0662104b5e5da92e87b870e8b7c65fec827d267115b5123d18614",
+            "categories": [],
+            "public_paths": [
+              "/var/run/postgresql"
+            ],
+            "raw_text_retained": false
+          }
+        },
+        {
+          "exit_code": 0,
+          "diagnostic": {
+            "bytes": 49,
+            "sha256": "6e168fc3b5a0662104b5e5da92e87b870e8b7c65fec827d267115b5123d18614",
+            "categories": [],
+            "public_paths": [
+              "/var/run/postgresql"
+            ],
+            "raw_text_retained": false
+          }
+        },
+        {
+          "exit_code": 0,
+          "diagnostic": {
+            "bytes": 49,
+            "sha256": "6e168fc3b5a0662104b5e5da92e87b870e8b7c65fec827d267115b5123d18614",
+            "categories": [],
+            "public_paths": [
+              "/var/run/postgresql"
+            ],
+            "raw_text_retained": false
+          }
+        }
+      ],
+      "startup_log": {
+        "bytes": 3100,
+        "sha256": "a51f4ec5e8a4308a7b85aff0048d42c2cc1b880b038aec3fea1b9195ca1e81db",
+        "categories": [
+          "listening"
+        ],
+        "public_paths": [
+          "/var/lib/postgresql",
+          "/var/run/postgresql",
+          "/data"
+        ],
+        "raw_text_retained": false,
+        "docker_exit_code": 0
+      }
+    },
+    {
+      "service": "clickhouse",
+      "id": "31d2193eaadc908bc1de9c5c273ab5dbccd5cac24febf0c3b3a35680c22f2454",
+      "status": "exited",
+      "exit_code": 137,
+      "OOMKilled": false,
+      "health_status": "unhealthy",
+      "health_log": [
+        {
+          "exit_code": 4,
+          "diagnostic": {
+            "bytes": 56,
+            "sha256": "c31b8fdc755480833faf04631175c83af7e27ebfe099ce301232446f53c93f98",
+            "categories": [
+              "connection refused"
+            ],
+            "public_paths": [],
+            "raw_text_retained": false
+          }
+        },
+        {
+          "exit_code": 4,
+          "diagnostic": {
+            "bytes": 56,
+            "sha256": "c31b8fdc755480833faf04631175c83af7e27ebfe099ce301232446f53c93f98",
+            "categories": [
+              "connection refused"
+            ],
+            "public_paths": [],
+            "raw_text_retained": false
+          }
+        },
+        {
+          "exit_code": 4,
+          "diagnostic": {
+            "bytes": 56,
+            "sha256": "c31b8fdc755480833faf04631175c83af7e27ebfe099ce301232446f53c93f98",
+            "categories": [
+              "connection refused"
+            ],
+            "public_paths": [],
+            "raw_text_retained": false
+          }
+        },
+        {
+          "exit_code": 4,
+          "diagnostic": {
+            "bytes": 56,
+            "sha256": "c31b8fdc755480833faf04631175c83af7e27ebfe099ce301232446f53c93f98",
+            "categories": [
+              "connection refused"
+            ],
+            "public_paths": [],
+            "raw_text_retained": false
+          }
+        },
+        {
+          "exit_code": 4,
+          "diagnostic": {
+            "bytes": 56,
+            "sha256": "c31b8fdc755480833faf04631175c83af7e27ebfe099ce301232446f53c93f98",
+            "categories": [
+              "connection refused"
+            ],
+            "public_paths": [],
+            "raw_text_retained": false
+          }
+        }
+      ],
+      "startup_log": {
+        "bytes": 539,
+        "sha256": "da444246010e239352b644df306483b1728dd545b8c4579b1d06d3c4998097e1",
+        "categories": [
+          "error"
+        ],
+        "public_paths": [
+          "/etc/clickhouse-server",
+          "/var/log/clickhouse-server"
+        ],
+        "raw_text_retained": false,
+        "docker_exit_code": 0
+      }
+    },
+    {
+      "service": "redis",
+      "id": "f503a2d94c4593a8c7a0d2b4a196899bef383bf8f2a07025c0d1584684727919",
+      "status": "exited",
+      "exit_code": 0,
+      "OOMKilled": false,
+      "health_status": "unhealthy",
+      "health_log": [
+        {
+          "exit_code": 0,
+          "diagnostic": {
+            "bytes": 5,
+            "sha256": "9597e5d74f44f182ebb56b65a79c6b1b84829735af1ff583d44c3384d8a0a45e",
+            "categories": [],
+            "public_paths": [],
+            "raw_text_retained": false
+          }
+        },
+        {
+          "exit_code": 0,
+          "diagnostic": {
+            "bytes": 5,
+            "sha256": "9597e5d74f44f182ebb56b65a79c6b1b84829735af1ff583d44c3384d8a0a45e",
+            "categories": [],
+            "public_paths": [],
+            "raw_text_retained": false
+          }
+        },
+        {
+          "exit_code": 0,
+          "diagnostic": {
+            "bytes": 5,
+            "sha256": "9597e5d74f44f182ebb56b65a79c6b1b84829735af1ff583d44c3384d8a0a45e",
+            "categories": [],
+            "public_paths": [],
+            "raw_text_retained": false
+          }
+        },
+        {
+          "exit_code": 0,
+          "diagnostic": {
+            "bytes": 5,
+            "sha256": "9597e5d74f44f182ebb56b65a79c6b1b84829735af1ff583d44c3384d8a0a45e",
+            "categories": [],
+            "public_paths": [],
+            "raw_text_retained": false
+          }
+        },
+        {
+          "exit_code": 0,
+          "diagnostic": {
+            "bytes": 5,
+            "sha256": "9597e5d74f44f182ebb56b65a79c6b1b84829735af1ff583d44c3384d8a0a45e",
+            "categories": [],
+            "public_paths": [],
+            "raw_text_retained": false
+          }
+        }
+      ],
+      "startup_log": {
+        "bytes": 812,
+        "sha256": "aba9e536eb60ad83769e369cca3ff22cec303f56b729004d8dd4646f1db5f6b5",
+        "categories": [],
+        "public_paths": [],
+        "raw_text_retained": false,
+        "docker_exit_code": 0
+      }
+    },
+    {
+      "service": "minio",
+      "id": "8ccc53be3a088189661a63fce6612826c5c1bf875f22bea4bfae4b3e50de922a",
+      "status": "exited",
+      "exit_code": 0,
+      "OOMKilled": false,
+      "health_status": "unhealthy",
+      "health_log": [
+        {
+          "exit_code": 0,
+          "diagnostic": {
+            "bytes": 29,
+            "sha256": "bf4e8cdf47c8ced2c4e62203846cde56a48c82afde577b46e0fed0d01eba24df",
+            "categories": [],
+            "public_paths": [],
+            "raw_text_retained": false
+          }
+        },
+        {
+          "exit_code": 0,
+          "diagnostic": {
+            "bytes": 29,
+            "sha256": "bf4e8cdf47c8ced2c4e62203846cde56a48c82afde577b46e0fed0d01eba24df",
+            "categories": [],
+            "public_paths": [],
+            "raw_text_retained": false
+          }
+        },
+        {
+          "exit_code": 0,
+          "diagnostic": {
+            "bytes": 29,
+            "sha256": "bf4e8cdf47c8ced2c4e62203846cde56a48c82afde577b46e0fed0d01eba24df",
+            "categories": [],
+            "public_paths": [],
+            "raw_text_retained": false
+          }
+        },
+        {
+          "exit_code": 0,
+          "diagnostic": {
+            "bytes": 29,
+            "sha256": "bf4e8cdf47c8ced2c4e62203846cde56a48c82afde577b46e0fed0d01eba24df",
+            "categories": [],
+            "public_paths": [],
+            "raw_text_retained": false
+          }
+        },
+        {
+          "exit_code": 0,
+          "diagnostic": {
+            "bytes": 29,
+            "sha256": "bf4e8cdf47c8ced2c4e62203846cde56a48c82afde577b46e0fed0d01eba24df",
+            "categories": [],
+            "public_paths": [],
+            "raw_text_retained": false
+          }
+        }
+      ],
+      "startup_log": {
+        "bytes": 641,
+        "sha256": "7539bcb41ba7f2bb53a25c74a1f066c9172f065bfe655a3f297f871d5f96d8cc",
+        "categories": [],
+        "public_paths": [],
+        "raw_text_retained": false,
+        "docker_exit_code": 0
+      }
+    }
+  ],
+  "grant_counters": [
+    29,
+    0,
+    64.39243433438241,
+    "0"
+  ]
+}

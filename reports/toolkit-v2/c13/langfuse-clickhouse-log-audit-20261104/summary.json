@@ -1,0 +1,101 @@
+{
+  "passed": true,
+  "models": 0,
+  "service_programs_executed": false,
+  "raw_content_retained": false,
+  "accounting_uncertain": false,
+  "cleanup_uncertain": false,
+  "comparisons": "PAUSED",
+  "files": [
+    {
+      "path": "/var/log/clickhouse-server/clickhouse-server.err.log",
+      "raw_content_retained": false,
+      "bytes": 3860,
+      "sha256": "2976f1a83be22e7aa1acd4b499c96a812a91b0bed58260ec04b99768542881ba",
+      "categories": [
+        "couldn't get",
+        "global thread pool",
+        "backgroundschedulepool",
+        "fatal",
+        "not enough threads"
+      ],
+      "error_codes": [],
+      "thread_counts": [
+        512
+      ],
+      "public_pool_settings": {
+        "background_schedule_pool_size": [],
+        "background_buffer_flush_schedule_pool_size": [],
+        "background_distributed_schedule_pool_size": [],
+        "background_message_broker_schedule_pool_size": [],
+        "max_thread_pool_size": []
+      },
+      "read": true
+    },
+    {
+      "path": "/var/log/clickhouse-server/clickhouse-server.log",
+      "raw_content_retained": false,
+      "bytes": 9490,
+      "sha256": "f2b2d14b2686efb60e5f7a4e7bdeedf7795a998eec62d27c54370b99697040cd",
+      "categories": [
+        "couldn't get",
+        "global thread pool",
+        "backgroundschedulepool",
+        "fatal",
+        "not enough threads"
+      ],
+      "error_codes": [
+        198
+      ],
+      "thread_counts": [
+        512
+      ],
+      "public_pool_settings": {
+        "background_schedule_pool_size": [],
+        "background_buffer_flush_schedule_pool_size": [],
+        "background_distributed_schedule_pool_size": [],
+        "background_message_broker_schedule_pool_size": [],
+        "max_thread_pool_size": []
+      },
+      "read": true
+    },
+    {
+      "path": "/etc/clickhouse-server/config.xml",
+      "raw_content_retained": false,
+      "bytes": 95625,
+      "sha256": "00c4dc007ba6c3a6481bbe0594fcb5b05a4042b6ea0474bec0d01dc6c9f29863",
+      "categories": [
+        "global thread pool",
+        "fatal"
+      ],
+      "error_codes": [],
+      "thread_counts": [
+        10000
+      ],
+      "public_pool_settings": {
+        "background_schedule_pool_size": [
+          128
+        ],
+        "background_buffer_flush_schedule_pool_size": [
+          16
+        ],
+        "background_distributed_schedule_pool_size": [
+          16
+        ],
+        "background_message_broker_schedule_pool_size": [
+          16
+        ],
+        "max_thread_pool_size": [
+          10000
+        ]
+      },
+      "read": true
+    }
+  ],
+  "grant_counters": [
+    31,
+    0,
+    64.60480687581003,
+    "0"
+  ]
+}

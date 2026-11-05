@@ -2260,3 +2260,39 @@ snapshot. Both full domain journeys and all integrations remain open; comparison
 stay paused. Candidate usefulness, selection usefulness, resources and release
 remain separate. Parent 0b01262.
 <!-- mcp-packaging-result-20261104:end -->
+
+<!-- runtime-diagnosis-results-20261104:start -->
+**November 4: approved retries ran; ClickHouse startup and a ToolHive record-path defect are now diagnosed. Waza remains deferred.**
+The operator's “Continue” approved the two exact pending reviews 2dede925 and
+96552b4e. Both approval records preserve that context and forbid automatic retry.
+
+Langfuse passed Compose validation and started the datastore phase. ClickHouse
+failed while requesting 512 background scheduler threads under the 256-PID cap.
+Read-only health and file audits retained only hashes and bounded diagnostics;
+PostgreSQL, Redis and Minio health logs contain successful probes. All five owned
+containers are stopped; their volumes, network, keys and images remain. No
+web/worker or receipt export ran. Its grant now has 31 operations / zero models /
+64.60480687581003 seconds, with settled accounting and cleanup.
+
+The prepared small-workload pool correction keeps PID 256 and the same images,
+uses one readonly XML fragment and a new owned namespace, and preserves all old
+state. Its exact review is 62d7049b8f0962feac1546d2e751599777994ff2a9580ba3ccc40d9afc869ae1.
+A fresh service/ingestion attempt remains unstarted and needs repeat approval.
+The pool values are engineering proposals for one receipt, not production budgets.
+
+ToolHive's portable-COPY image build passed and is retained as image 3c0b4f87.
+The following build-record write referenced the wrong source location and stopped
+before controller/profile/MCP execution. Its 11 operations / zero models /
+8.105458749458194 seconds remain charged and settled. A retained-image continuation
+fixes the source path and adds input preflight. Five preparation fixtures pass;
+actual upstream lifecycle remains open. Exact review: 7ce23fdccd090ccbda424a2f957ce064f666b24a773bc5cf29e8519ee6c2e05c.
+It performs no rebuild, download or installation and keeps the original ceiling.
+
+Both corrected runtime attempts await actual approval under the repeat rule.
+New first-attempt read-only diagnostics were covered by standing authority.
+Waza sign-in remains explicitly deferred; do not request or run it now. Product
+source 5a13a630 is unchanged. No passed source/wheel/docs/build/info/audit check
+was replayed. New progress prose is outside the old docs snapshot. Both domain
+journeys and the complete stack remain open; comparisons stay paused. Parent
+137caed. Preserve unrelated CI edits and all SQLite/.aeep/private runtime state.
+<!-- runtime-diagnosis-results-20261104:end -->

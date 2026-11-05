@@ -1,0 +1,17 @@
+{
+  "purpose": "First read-only audit of two log files and the public configuration in the stopped owned ClickHouse container. No restart,guest program or service execution.",
+  "container_id": "31d2193eaadc908bc1de9c5c273ab5dbccd5cac24febf0c3b3a35680c22f2454",
+  "files": [
+    "/var/log/clickhouse-server/clickhouse-server.err.log",
+    "/var/log/clickhouse-server/clickhouse-server.log",
+    "/etc/clickhouse-server/config.xml"
+  ],
+  "maximum_archive_bytes_per_file": 8388608,
+  "maximum_operations": 2,
+  "maximum_reserved_seconds": 120,
+  "models": 0,
+  "cash_authority_usd": "0",
+  "comparison": "PAUSED",
+  "retention": "Only hashes,known categories,numeric error codes/thread counts and selected numeric public pool settings. No raw file,log,SQL,config values or keys.",
+  "no_credential_access": true
+}

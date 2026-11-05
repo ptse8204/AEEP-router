@@ -1,0 +1,23 @@
+{
+  "purpose": "First read-only inspection of retained stopped Langfuse health states and bounded startup-log categories. No service retry or guest program execution.",
+  "owned_container_ids": {
+    "minio-owner": "57c26ed0f80d3ee2c833509d994f5ddb3d77a617908ab02872b4e0cab1281a40",
+    "postgres": "a972cbbefd449511f332179e946bcd16a1eefd0e8d66884d40d3e859909e2812",
+    "clickhouse": "31d2193eaadc908bc1de9c5c273ab5dbccd5cac24febf0c3b3a35680c22f2454",
+    "redis": "f503a2d94c4593a8c7a0d2b4a196899bef383bf8f2a07025c0d1584684727919",
+    "minio": "8ccc53be3a088189661a63fce6612826c5c1bf875f22bea4bfae4b3e50de922a"
+  },
+  "maximum_commands": 6,
+  "maximum_additional_operations": 7,
+  "maximum_reserved_seconds": 210,
+  "models": 0,
+  "cash_authority_usd": "0",
+  "counter_preservation": true,
+  "comparisons": "PAUSED",
+  "permitted_output": "Container identity/state/exit/OOM/health codes,hashes and fixed diagnostic categories/paths only. No raw logs,config values or keys.",
+  "not_authorized": [
+    "Service start/restart or guest executable",
+    "New image,download,install,container/network/volume creation",
+    "Credentials,provider setup,model,cash,release or old resource cleanup"
+  ]
+}
