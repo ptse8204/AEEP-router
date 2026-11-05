@@ -1,5 +1,16 @@
 # Resume the current stack work
 
+## November 5 ordinary CLI preparation
+
+Use the [two selected task previews](skillsbench-ordinary-cli-preparation-20261105/README.md)
+to bind exact rights, recipes, setup requests and worker evidence. The
+passing protected reference checks are already retained. The existing
+30-second executable recipe cap cannot cover the observed 42.97-second
+Spring verifier command in its current form. Verify the protected
+grader path before enabling the software configuration. The host is
+still below the start reserve and the Docker socket remains absent.
+The MCPMark approval is already recorded.
+
 ## November 5 MCPMark host preflight
 
 The operator approved `bf56dd26`. The [preflight record](mcpmark-postgres-receipt-correction-20261105/host-preflight-20261105.json)

@@ -3100,3 +3100,12 @@ Preserve the Postgres MCP 0.3.0 version. The publisher image supplies a
 candidate for the unavailable PyPI dependency. Review the actual bundled
 runtime before using the server in a fresh owned database. Retain the
 separate original verifiers and count each pack's readiness separately.
+
+### Bound the Spring verifier with observed workload evidence
+
+The [ordinary CLI preparation](../../reports/toolkit-v2/c13/skillsbench-ordinary-cli-preparation-20261105/README.md)
+records a 42.97-second protected Spring grader command. The current
+executable recipe caps a command at 30 seconds. Review a compatible
+grading path with the original assertions before enabling that
+configuration. Keep the task's binary score and the prior protected
+reference results at their recorded scope.

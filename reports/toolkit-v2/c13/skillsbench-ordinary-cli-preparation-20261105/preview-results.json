@@ -1,0 +1,67 @@
+{
+  "workflow_file_sha256": "3231bb2161451147da5115633a075c0159d0fbe58c5812d35068cc3d38a43689",
+  "source_pack_sha256": "c41ec39a459b537d9c1b16d35cda1e7ca8857f75b46128e8640c23d86349b5f9",
+  "reference_evidence_sha256": "b4fef20cff4824ba51bc1de2a68dd577c08d4403ea8b13bbe7a5834d80c2937d",
+  "configuration_checks": [
+    {
+      "configuration": "document-data",
+      "task_id": "sales-pivot-analysis",
+      "upstream_score": "binary",
+      "declared_output_paths": [
+        "demographic_analysis.xlsx"
+      ],
+      "implementation_source": "a3e99a502dd5ec5101e1bf3e7c5f4da04995cd648effba00bbfb8901f8c93efa",
+      "workflow_review_sha256": "c502bada5d9de7ca94d458ad45a19670f382c7d169ec213dc600c1bfb9679ef5",
+      "reference_summary_sha256": "938747afc16b881612cb604ab78e88a35306bf735cf21454cd8aceda04f58230",
+      "reference_command_receipt_sha256": "20067c1b76e966db75b103d3f62076c26dd93886df4e4006ce4f3de4be25894a",
+      "reference_command_wall_seconds": 1.7345870835706592,
+      "agent_asset_count": 3,
+      "protected_asset_count": 3,
+      "rights_review_ref": null,
+      "provider_disclosure_authorized": false,
+      "preview_evidence": "Ordinary CLI preview passed initial assertions. Metadata re-read to retain the digest.",
+      "canonical_prepare_evidence": "Ordinary CLI returned its sanitized rejection. The audit originally expected its internal message.",
+      "canonical_prepare_internal_rejection": "exact managed workflow preparation review required",
+      "canonical_plan_written": false,
+      "blockers": [
+        "aeep-evaluator: extension is blocked: Managed worker/service/plan/grader readiness and execution authority remain required.",
+        "skillsbench: extension is blocked: Task-specific asset rights, reviewed runtimes and protected verifier/reference journeys remain required.",
+        "selected task asset rights have no exact review reference",
+        "canonical assessment preparation and applicable worker/grader evidence remain required"
+      ]
+    },
+    {
+      "configuration": "software-engineering",
+      "task_id": "spring-boot-jakarta-migration",
+      "upstream_score": "binary",
+      "declared_output_paths": [
+        "workspace"
+      ],
+      "implementation_source": "a3e99a502dd5ec5101e1bf3e7c5f4da04995cd648effba00bbfb8901f8c93efa",
+      "workflow_review_sha256": "dcf3385d83329af0b9767ff3f08610c2949f3a19491c066836fc899f3956f66e",
+      "reference_summary_sha256": "f2ae765ce5d414ccb23d69d70473eaf6ca85918e1190bbe29587c6b0d272b5f0",
+      "reference_command_receipt_sha256": "0fcb4df79078f40a46b583e0372caadfcc28c7cc045ad15677fd2b75f3e6e260",
+      "reference_command_wall_seconds": 42.96629545837641,
+      "agent_asset_count": 18,
+      "protected_asset_count": 3,
+      "rights_review_ref": null,
+      "provider_disclosure_authorized": false,
+      "preview_evidence": "Ordinary CLI returned the selected preview with exit code 0.",
+      "canonical_prepare_evidence": "Ordinary CLI returned the sanitized rejection with exit code 2.",
+      "canonical_prepare_internal_rejection": "exact managed workflow preparation review required",
+      "canonical_plan_written": false,
+      "blockers": [
+        "aeep-evaluator: extension is blocked: Managed worker/service/plan/grader readiness and execution authority remain required.",
+        "skillsbench: extension is blocked: Task-specific asset rights, reviewed runtimes and protected verifier/reference journeys remain required.",
+        "selected task asset rights have no exact review reference",
+        "canonical assessment preparation and applicable worker/grader evidence remain required"
+      ]
+    }
+  ],
+  "preview_candidate_scope": "Previously inspected format-json fixture used to satisfy the v2 metadata contract for preview. No task relevance or trial eligibility established.",
+  "comparison_eligible": false,
+  "model_turns": 0,
+  "docker_calls": 0,
+  "budget_mutations": 0,
+  "ordinary_cli_end_to_end": "OPEN"
+}

@@ -1,5 +1,17 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- skillsbench-cli-preparation-20261105:start -->
+**November 5. The two verified SkillsBench tasks have ordinary CLI previews.**
+
+The [CLI preparation](../../reports/toolkit-v2/c13/skillsbench-ordinary-cli-preparation-20261105/README.md)
+binds Sales Pivot and Spring Boot to their original pack and protected
+reference evidence. Canonical preparation stopped on the incomplete
+definitions. Task-use determinations, grader recipes and controlled
+worker evidence are still needed. The observed Spring grader command
+exceeds the 30-second executable recipe cap. The current host check
+still blocks approved MCPMark dispatch. Comparisons remain paused.
+<!-- skillsbench-cli-preparation-20261105:end -->
+
 <!-- mcpmark-approved-host-preflight-20261105:start -->
 **November 5. MCPMark correction approved and awaiting host readiness.**
 

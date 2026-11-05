@@ -1,5 +1,14 @@
 # 0.8 plan coverage and remaining work
 
+<!-- skillsbench-cli-preparation-20261105:start -->
+[SkillsBench CLI preparation](../toolkit-v2/c13/skillsbench-ordinary-cli-preparation-20261105/README.md)
+verified the two named metadata configurations and the canonical
+preparation guard. The protected Spring reference command took about
+43 seconds under its measured boundary. Both ordinary CLI execution
+journeys remain open. Local links and whitespace checks passed. The full
+documentation check awaits the normal storage reserve.
+<!-- skillsbench-cli-preparation-20261105:end -->
+
 <!-- mcpmark-approved-host-preflight-20261105:start -->
 The [MCPMark preflight](../toolkit-v2/c13/mcpmark-postgres-receipt-correction-20261105/host-preflight-20261105.json)
 records the exact approval, absent Docker socket and insufficient host

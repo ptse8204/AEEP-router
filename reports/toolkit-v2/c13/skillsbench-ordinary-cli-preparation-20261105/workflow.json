@@ -1,0 +1,51 @@
+{
+  "schema_version": "aeep.toolkit.workflow.v2",
+  "registry": {
+    "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-scanner-20261102/cli-registry.json",
+    "sha256": "e137e335b6fdfa618654f609db167f27d3850ca194ec9cb0a133f8b395e28344"
+  },
+  "policy": {
+    "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-scanner-20261102/cli-policy.json",
+    "sha256": "5c04a544bfdceb07fd34b58c06d231bf2eef215f465167e181833071f1a9a36d"
+  },
+  "configurations": {
+    "document-data": {
+      "evaluator": "managed",
+      "candidate": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-scanner-20261102/candidate",
+        "sha256": "c91039731c19735e818c150508e6f857a218482a2371b239e4bf7b033aabbca6"
+      },
+      "benchmark": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-transport-20261103/task-only-pack.json",
+        "sha256": "c41ec39a459b537d9c1b16d35cda1e7ca8857f75b46128e8640c23d86349b5f9"
+      },
+      "asset_root": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5",
+      "task_ids": [
+        "sales-pivot-analysis"
+      ],
+      "components": [
+        "aeep-evaluator",
+        "skillsbench"
+      ]
+    },
+    "software-engineering": {
+      "evaluator": "managed",
+      "candidate": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-scanner-20261102/candidate",
+        "sha256": "c91039731c19735e818c150508e6f857a218482a2371b239e4bf7b033aabbca6"
+      },
+      "benchmark": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-transport-20261103/task-only-pack.json",
+        "sha256": "c41ec39a459b537d9c1b16d35cda1e7ca8857f75b46128e8640c23d86349b5f9"
+      },
+      "asset_root": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5",
+      "task_ids": [
+        "spring-boot-jakarta-migration"
+      ],
+      "components": [
+        "aeep-evaluator",
+        "skillsbench"
+      ]
+    }
+  }
+}
