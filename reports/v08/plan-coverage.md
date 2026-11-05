@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+<!-- mcpmark-approved-host-preflight-20261105:start -->
+The [MCPMark preflight](../toolkit-v2/c13/mcpmark-postgres-receipt-correction-20261105/host-preflight-20261105.json)
+records the exact approval, absent Docker socket and insufficient host
+space. The review is unstarted. Full documentation verification awaits
+the normal storage reserve. The new local links were checked.
+<!-- mcpmark-approved-host-preflight-20261105:end -->
+
 <!-- toolkit-protected-references-verified-20261105:start -->
 **November 5. C13 protected task references passed.**
 

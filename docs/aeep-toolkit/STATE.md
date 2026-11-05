@@ -1,5 +1,16 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- mcpmark-approved-host-preflight-20261105:start -->
+**November 5. MCPMark correction approved and awaiting host readiness.**
+
+The [host preflight](../../reports/toolkit-v2/c13/mcpmark-postgres-receipt-correction-20261105/host-preflight-20261105.json)
+records approval for `bf56dd26` and matching artifact pins. The reviewed
+52 GiB start threshold was not met and the Docker socket was absent.
+The correction is unstarted and has zero new charges. Restore usable
+space and Docker readiness before using the recorded approval. The
+Langfuse repeat has separate pending approval.
+<!-- mcpmark-approved-host-preflight-20261105:end -->
+
 <!-- toolkit-protected-references-verified-20261105:start -->
 **November 5. Protected references passed in both selected domains.**
 

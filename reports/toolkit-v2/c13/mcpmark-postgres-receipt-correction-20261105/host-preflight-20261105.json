@@ -1,0 +1,38 @@
+{
+  "checked_at": "2026-11-05T23:02:19.039426+00:00",
+  "review_sha256": "bf56dd261d0a3aa199fb722fed451de178af1bbd5ae12868a17f4f6c25a90437",
+  "approval_recorded": true,
+  "review_expires_at": "2026-11-08T12:00:00+00:00",
+  "state": "APPROVED_UNSTARTED_HOST_BLOCKED",
+  "filesystem_available_bytes": 13075906560,
+  "required_start_available_bytes": 55834574848,
+  "available_bytes_shortfall": 42758668288,
+  "docker_reviewed_socket_exists": false,
+  "docker_api_preflight": "ENOENT",
+  "canonical_grant_created": false,
+  "operations_charged": 0,
+  "parent_counters_unchanged": [
+    2,
+    0,
+    35.0003509176895,
+    "0"
+  ],
+  "task_workspace_allocated_bytes_from_du": 10087129088,
+  "cleanup_candidates_for_separate_review": [
+    {
+      "relative_path": ".aeep/skillsbench-spring-runtime-20261105/interpreter",
+      "allocated_bytes": 103845888,
+      "scope": "Incomplete host extraction from the earlier case-folding failure. Original verified archive and passing guest runtime remain."
+    },
+    {
+      "relative_path": ".aeep/mcp-postgres-runtime-preparation-20261105/image.tar",
+      "allocated_bytes": 98791424,
+      "scope": "Reproducible read-only export of the retained MCP image. No planned runtime mounts this file."
+    }
+  ],
+  "candidate_allocated_bytes": 202637312,
+  "actual_reclaimed_bytes": null,
+  "resources_removed": 0,
+  "verification": "All 22 reviewed asset bindings matched. No container lifecycle or guest task started.",
+  "next_action": "Restore actual usable free space to at least 52 GiB, make the reviewed Docker socket available, and verify the approval remains within expiry."
+}

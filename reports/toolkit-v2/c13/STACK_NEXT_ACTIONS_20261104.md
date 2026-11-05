@@ -1,5 +1,15 @@
 # Resume the current stack work
 
+## November 5 MCPMark host preflight
+
+The operator approved `bf56dd26`. The [preflight record](mcpmark-postgres-receipt-correction-20261105/host-preflight-20261105.json)
+confirms the review is unstarted, has zero new charges and remains
+bound to all 22 verified assets. The actual host space fell below the
+52 GiB start threshold and the reviewed Docker socket was absent.
+Once both host conditions pass, recheck the approved digest, original
+reservation and expiry before dispatch. Langfuse retains its own
+approval requirement. Keep comparisons paused.
+
 ## November 5 verified protected references
 
 Sales Pivot passed 23 upstream checks with three intentional skips.
