@@ -5598,3 +5598,50 @@ The three gates remain open. Generic skill inspection, actual baseline inventory
 validated real-task intents, frozen comparisons and actual selection behavior
 remain explicit engineering work. Do not substitute a mock or a refusal-to-admit
 check for those outcomes. No new model authority is inferred.
+
+<!-- toolhive-first-pipelines-20261104:start -->
+**November 4: ToolHive artifacts verified; native compile produced a binary; post-build audit repeat is pending.**
+The standing first-attempt delegation was applied to concrete recorded ToolHive
+reviews. [Acquisition](../../reports/toolkit-v2/c13/toolhive-acquisition-20261104/README.md)
+passed2,877 pinned source blobs and1,264 dependency payloads, with no version
+change. Source/module response bodies333,827,348bytes; wire traffic is unknown.
+Its two operations are settled at63.101071333512664seconds/zero models.
+
+[The native result](../../reports/toolkit-v2/c13/toolhive-native-build-20261104/RESULTS.md)
+passed the actual new sandbox boundary, Go1.27.1 version and source/SDK integrity.
+The compile command exited0 and produced128,306,930-byte ToolHive binaryd74830a8.
+The post-build audit then failed because Go reordered21 cached metadata JSON
+files. Source, ZIP and module-file bytes are unchanged; each original metadata
+hash is reproducible by field ordering alone. Four operations remain settled at
+85.84042441658676seconds/zero models. Keep the original null compiler flag and
+raw failure alongside the separate compile/output evidence. No ToolHive program
+or MCP lifecycle ran. No runtime, cache, Docker resource or unrelated work was deleted.
+
+The prepared toolhive-post-build-continuation-20261104/operation-review.json
+requests immutable artifact preservation, one corrected audit repeat and three
+unstarted info commands on the existing binary. Read/hash the review for its
+identity. No recompilation or download is proposed. The nested preservation
+recipe's attempted delegation was withdrawn before any execution because it
+belongs to this correction. Both require actual repeat approval. Original native
+7-operation ceiling amendment to9 preserves all4charges and the other limits.
+
+Langfuse repeat review2a0abaf4 is also pending. The passed72-input docs, installed
+wheel and source suites are not repeated. Main product source remains5a13a630;
+all new work here is operator pipeline/evidence code. New progress prose is
+outside the completed docs input binding. Cash/CPU/memory stay unknown.
+
+Read-only Waza research confirms its0.38.9 release tag points to the existing
+pinnede534d149 source and bundles Copilot1.0.85. Current GitHub docs say CLI is
+available on all Copilot plans, so a paid-only assumption is insufficient; actual
+account access remains unverified and protected operator login is still needed.
+No Waza/Copilot runtime, provider credential or model was used in this research.
+Go module archives contain23 source funding declarations, available for the
+required source-bound Sponsors adapter; no payment or new attribution claim is made.
+
+Next: obtain the specific Langfuse and ToolHive repeat approvals, then execute
+only their bound remaining work. Independent first-attempt Waza backend setup,
+Sponsors resolution and other stack implementation remain eligible under the
+standing delegation. All required integrations and both SkillsBench domains must
+pass before comparisons resume. Candidate usefulness, selection usefulness,
+resources and release stay separate. Host reserve remains50GiB. Parent48d7ae4.
+<!-- toolhive-first-pipelines-20261104:end -->

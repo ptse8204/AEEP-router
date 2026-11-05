@@ -1,0 +1,159 @@
+{
+  "purpose": "First native offline build of pinned ToolHive33ba170a using the existing Go1.27.1 SDK and exact verified cached source/modules, then source-bound version/help. No MCP server lifecycle yet.",
+  "source": "5a13a630a89aa0c6b4940be4eed0a30dd80ab5a822ee15f7f25f78f521c11c4b",
+  "source_revision": "33ba170aad633e20520f380500a45cd158f24aed",
+  "assets": {
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/toolhive-native-build-20261104/run.py": "74e91daa30616236a10d74b6c4ca6c6ce09dd31dbabcbea384f85ea4f8217c2a",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/toolhive-native-build-20261104/plan.json": "48242f47561b94054d79baaa3c354bdaa73d412934166d8e04a3be68170d7e1f",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/toolhive-native-build-20261104/prepared.json": "39a1a0e7f0af71c6c937c2a1551d3985a1685fb5a44989e7cbb546cf1d7c6a60",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/toolhive-native-build-20261104/license-review.json": "68ac51bdbceb54ae9cfe1e8747d4417dff872867617c5e43148d091d1d429c88",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/toolhive-native-build-20261104/boundary.py": "8ff427b12dec2aa55b710e12670581fb0c3b2398d8746bcdfb22fa52b53f8c82",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/toolhive-native-build-20261104/native.sb": "a8a684e2912eecdfffaba706f38dd7f6311192868e2698fac522bed7536a9f3b",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/toolhive-acquisition-20261104/acquisition-result.json": "594e971b7a2e4a755992f2eebf33565a5f10c374cfad172877585b460e39adf5",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/toolhive-acquisition-20261104/plan.json": "3538965c70327cfd540fe580cea51598098123707a1e5eaaa103d1a86988ee1b",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/toolhive-acquisition-20261104/summary.json": "d5948e78d1d8b0434bd2f63802e05abc5bad62bda119f1a13835c33718229eb5",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/toolhive-native-preparation-20261104/sdk-source-inventory.json": "94e59a25cf13dd59c0350abf6e1733c6ab64a46f212575e294e1fb46e57007d6",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/toolhive-native-preparation-20261104/dependency-inventory.json": "3cd9f11108b910b0d27ed106aa9bfd131baf3679fb95da297101b744002e4355",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/pipeline-standing-authority-20261104.json": "f0f86d6af2600817eb6de50dd12ac4f861f09ac36f90a27bc84e4ae6f044635c",
+    "/usr/local/Cellar/go/1.27.1/libexec/bin/go": "548608a910c46de32c65a3934f461b1787acf6ddd371044826068d8503b8509b",
+    "/usr/local/Cellar/go/1.27.1/LICENSE": "911f8f5782931320f5b8d1160a76365b83aea6447ee6c04fa6d5591467db9dad",
+    "/usr/local/Cellar/go/1.27.1/libexec/PATENTS": "96f408bfae65bf137fc2525d3ecb030271c50c1e90799f87abf8846d8dd505cc",
+    "/usr/bin/sandbox-exec": "e3d7a792c58a5d3783d2f7274c82d70062393830d8cb1ded713ca554a470bd2f",
+    "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3.13": "20c9c2144a9f5202177620417e67643fb551aa31586e5d3c1361627b920cadb0"
+  },
+  "work": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-native-build-20261104",
+  "artifact_work": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-acquisition-20261104",
+  "source_directory": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-acquisition-20261104/source",
+  "binary": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-native-build-20261104/bin/thv",
+  "sdk_inventory": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/toolhive-native-preparation-20261104/sdk-source-inventory.json",
+  "acquisition_plan": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/toolhive-acquisition-20261104/plan.json",
+  "acquisition_result": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/toolhive-acquisition-20261104/acquisition-result.json",
+  "commands": [
+    {
+      "name": "boundary",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3.13",
+        "-I",
+        "-B",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/toolhive-native-build-20261104/boundary.py"
+      ],
+      "timeout_seconds": 20
+    },
+    {
+      "name": "go-version",
+      "argv": [
+        "/usr/local/Cellar/go/1.27.1/libexec/bin/go",
+        "version"
+      ],
+      "timeout_seconds": 20
+    },
+    {
+      "name": "compile",
+      "argv": [
+        "/usr/local/Cellar/go/1.27.1/libexec/bin/go",
+        "build",
+        "-mod=readonly",
+        "-trimpath",
+        "-tags=netgo",
+        "-buildvcs=false",
+        "-p",
+        "2",
+        "-ldflags",
+        "-s -w -X github.com/stacklok/toolhive/pkg/versions.Version=build-aeep-33ba170a -X github.com/stacklok/toolhive/pkg/versions.Commit=33ba170aad633e20520f380500a45cd158f24aed -X github.com/stacklok/toolhive/pkg/versions.BuildType=engineering",
+        "-o",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-native-build-20261104/bin/thv",
+        "./cmd/thv"
+      ],
+      "timeout_seconds": 1800
+    },
+    {
+      "name": "build-info",
+      "argv": [
+        "/usr/local/Cellar/go/1.27.1/libexec/bin/go",
+        "version",
+        "-m",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-native-build-20261104/bin/thv"
+      ],
+      "timeout_seconds": 20
+    },
+    {
+      "name": "toolhive-version",
+      "argv": [
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-native-build-20261104/bin/thv",
+        "version",
+        "--format",
+        "json"
+      ],
+      "timeout_seconds": 20,
+      "compiled_binary": true
+    },
+    {
+      "name": "toolhive-help",
+      "argv": [
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-native-build-20261104/bin/thv"
+      ],
+      "timeout_seconds": 20,
+      "compiled_binary": true
+    }
+  ],
+  "environment": {
+    "PATH": "/usr/bin:/bin",
+    "HOME": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-native-build-20261104/home",
+    "TMPDIR": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-native-build-20261104/tmp",
+    "LC_ALL": "C",
+    "GOENV": "off",
+    "GOTOOLCHAIN": "local",
+    "GOWORK": "off",
+    "GOPROXY": "off",
+    "GOSUMDB": "off",
+    "GOTELEMETRY": "off",
+    "CGO_ENABLED": "0",
+    "GO111MODULE": "on",
+    "GOOS": "darwin",
+    "GOARCH": "arm64",
+    "GOROOT": "/usr/local/Cellar/go/1.27.1/libexec",
+    "GOCACHE": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-native-build-20261104/cache",
+    "GOPATH": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-native-build-20261104/gopath",
+    "GOMODCACHE": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-acquisition-20261104/mod-cache",
+    "GOMAXPROCS": "2",
+    "GOMEMLIMIT": "2GiB",
+    "XDG_CONFIG_HOME": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-native-build-20261104/xdg-config",
+    "XDG_DATA_HOME": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-native-build-20261104/xdg-data",
+    "XDG_CACHE_HOME": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-native-build-20261104/xdg-cache",
+    "XDG_STATE_HOME": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-native-build-20261104/xdg-state",
+    "TOOLHIVE_SKIP_UPDATE_CHECK": "true",
+    "CI": "true"
+  },
+  "ledger": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillrank-build-preparation-20261103/runtime-execution/canonical.sqlite3",
+  "expires_at": "2026-11-07T00:22:28.920435Z",
+  "maximum_operations": 7,
+  "maximum_reserved_seconds": 2400,
+  "models": 0,
+  "cash_authority_usd": "0",
+  "dependencies": "Retain exact343 ZIP/version artifacts and578 module files from completed acquisition. Before dispatch validate all2877 source blobs, all1264 downloaded files and the exact15570-entry SDK inventory including absence of extra files. No downloads, implicit network, go generate, shell installers or compiler replacement.",
+  "source_adaptations": "Source file bytes and safe symlink match Git; regular source files are read-only. Reuse upstream CGO0/trimpath/netgo flags. Engineering version and exact source commit are linker-bound; build date stays unknown, with no vendor-release or notarization claim.",
+  "binary_binding": "After compilation, bind actual output hash to this exact source/dependency/build review and store the derived identity before ToolHive invocation. Informational commands only; no Docker socket or host config access.",
+  "licensing": "Root standard notices retained for all343 module versions; three hyphenated Apache notice names recovered in static review. SDK BSD LICENSE is at the Homebrew package root and PATENTS inside libexec; both hashes bound. Mixed/embedded terms stay; redistribution/hosted-service clearance is not inferred.",
+  "isolation": "Native profile denies all networking and unrelated /Users reads/writes. Only owned build/cache paths writable. HOME/XDG/Go caches private; no host credential or Docker access. Default no-args ToolHive help avoids upstream run-help runtime checks.",
+  "storage": {
+    "minimum_free_bytes": 53687091200,
+    "required_start_free_bytes": 60129542144,
+    "actual_free_bytes": 69023653888,
+    "estimated_build_footprint": "UNKNOWN; monitor actual50GiB reserve",
+    "GOMEMLIMIT": "2GiB soft per-Go-process proposal; not hard RSS evidence or a product budget",
+    "parallel_compile_processes": 2
+  },
+  "authority": "Actual operator standing delegation for new finite first-attempt pipelines. Exact review recorded before dispatch. Repetition requires user approval.",
+  "first_attempt": true,
+  "no_old_resource_deletion": true,
+  "retain_new_runtime": true,
+  "all_stack_complete": false,
+  "MCP_lifecycle": "OPEN",
+  "comparisons": "PAUSED",
+  "not_authorized": [
+    "Downloads, dependency changes, installs or global configuration",
+    "MCP server/container/service startup, Docker access, model calls or credentials",
+    "Release, publication, notarization, payment or old resource deletion",
+    "Automatic retries or repeating a failed phase under this review"
+  ]
+}

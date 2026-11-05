@@ -2909,3 +2909,18 @@ not run. No passed wheel/source/docs check is repeated. New independent ToolHive
 preparation remains eligible. All-stack and both domain journeys remain open.
 Comparisons stay paused; candidate and selection usefulness remain separate.
 <!-- pipeline-authority-and-langfuse-result-20261104:end -->
+
+<!-- toolhive-first-pipelines-20261104:start -->
+## November 4: ToolHive first pipelines retain a successful compile and failed audit
+
+[Actual results](../../reports/toolkit-v2/c13/toolhive-native-build-20261104/RESULTS.md) retain the source/dependency acquisition pass,
+actual native boundary/version pass and successful compile. Go reordered21 cache
+metadata JSON files; the post-build byte guard failed afterward. Exact original
+hashes are recoverable without value changes; no source/ZIP/module bytes changed.
+The2-operation acquisition and4-operation native costs remain settled. No ToolHive
+program, MCP lifecycle, model or comparative trial ran. The corrected audit and
+immutable artifact preservation require actual repeat approval; the existing binary
+will be reused without recompilation. Langfuse2a0abaf4 also awaits repeat approval.
+No passed docs/wheel/source pipeline is repeated. All-stack and both domain
+journeys remain open. First new independent work remains delegated.
+<!-- toolhive-first-pipelines-20261104:end -->

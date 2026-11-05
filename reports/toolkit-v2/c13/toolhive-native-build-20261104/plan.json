@@ -1,0 +1,102 @@
+{
+  "source_revision": "33ba170aad633e20520f380500a45cd158f24aed",
+  "commands": [
+    {
+      "name": "boundary",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3.13",
+        "-I",
+        "-B",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/toolhive-native-build-20261104/boundary.py"
+      ],
+      "timeout_seconds": 20
+    },
+    {
+      "name": "go-version",
+      "argv": [
+        "/usr/local/Cellar/go/1.27.1/libexec/bin/go",
+        "version"
+      ],
+      "timeout_seconds": 20
+    },
+    {
+      "name": "compile",
+      "argv": [
+        "/usr/local/Cellar/go/1.27.1/libexec/bin/go",
+        "build",
+        "-mod=readonly",
+        "-trimpath",
+        "-tags=netgo",
+        "-buildvcs=false",
+        "-p",
+        "2",
+        "-ldflags",
+        "-s -w -X github.com/stacklok/toolhive/pkg/versions.Version=build-aeep-33ba170a -X github.com/stacklok/toolhive/pkg/versions.Commit=33ba170aad633e20520f380500a45cd158f24aed -X github.com/stacklok/toolhive/pkg/versions.BuildType=engineering",
+        "-o",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-native-build-20261104/bin/thv",
+        "./cmd/thv"
+      ],
+      "timeout_seconds": 1800
+    },
+    {
+      "name": "build-info",
+      "argv": [
+        "/usr/local/Cellar/go/1.27.1/libexec/bin/go",
+        "version",
+        "-m",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-native-build-20261104/bin/thv"
+      ],
+      "timeout_seconds": 20
+    },
+    {
+      "name": "toolhive-version",
+      "argv": [
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-native-build-20261104/bin/thv",
+        "version",
+        "--format",
+        "json"
+      ],
+      "timeout_seconds": 20,
+      "compiled_binary": true
+    },
+    {
+      "name": "toolhive-help",
+      "argv": [
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-native-build-20261104/bin/thv"
+      ],
+      "timeout_seconds": 20,
+      "compiled_binary": true
+    }
+  ],
+  "environment": {
+    "PATH": "/usr/bin:/bin",
+    "HOME": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-native-build-20261104/home",
+    "TMPDIR": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-native-build-20261104/tmp",
+    "LC_ALL": "C",
+    "GOENV": "off",
+    "GOTOOLCHAIN": "local",
+    "GOWORK": "off",
+    "GOPROXY": "off",
+    "GOSUMDB": "off",
+    "GOTELEMETRY": "off",
+    "CGO_ENABLED": "0",
+    "GO111MODULE": "on",
+    "GOOS": "darwin",
+    "GOARCH": "arm64",
+    "GOROOT": "/usr/local/Cellar/go/1.27.1/libexec",
+    "GOCACHE": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-native-build-20261104/cache",
+    "GOPATH": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-native-build-20261104/gopath",
+    "GOMODCACHE": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-acquisition-20261104/mod-cache",
+    "GOMAXPROCS": "2",
+    "GOMEMLIMIT": "2GiB",
+    "XDG_CONFIG_HOME": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-native-build-20261104/xdg-config",
+    "XDG_DATA_HOME": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-native-build-20261104/xdg-data",
+    "XDG_CACHE_HOME": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-native-build-20261104/xdg-cache",
+    "XDG_STATE_HOME": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-native-build-20261104/xdg-state",
+    "TOOLHIVE_SKIP_UPDATE_CHECK": "true",
+    "CI": "true"
+  },
+  "binary": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-native-build-20261104/bin/thv",
+  "source_directory": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/toolhive-acquisition-20261104/source",
+  "license_review_sha256": "68ac51bdbceb54ae9cfe1e8747d4417dff872867617c5e43148d091d1d429c88"
+}
