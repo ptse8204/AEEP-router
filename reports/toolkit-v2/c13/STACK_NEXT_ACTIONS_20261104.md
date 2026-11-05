@@ -53,3 +53,18 @@ so far is first-party operator pipeline code only. Historical docs scan binds it
 archived72 versions; later state prose is not covered and needs a future grouped
 review when appropriate. Raw diffs/logs may contain formatting whitespace; retain
 historical bytes rather than editing passed/failed evidence to clean it.
+
+Latest continuation:
+- Commits: ToolHive first-attempt evidence ef7124c is pushed. New Waza data/native
+  checks b9897f6b/87cc0c41 pass, two grants settled 7 total ops/0models. Their scripts,
+  exact reviews and receipt evidence are under waza-native-artifacts-20261104 and
+  waza-native-backend-20261104. Product source remains unchanged.
+- Waza source revision matches embedded VCS; vcs.modified=true prevents a clean
+  source-to-binary equivalence claim. No Waza guest/model execution occurred.
+- protected-login.py and review dd60853d are OPERATOR TERMINAL ONLY. Do not run
+  that helper through agent tools. Do not inspect or hash its private credential
+  area after setup. Only the operator can provide account access; no paid plan
+  or credential transfer is authorized. Concrete instructions are OPERATOR_SETUP.md.
+- Actual repeat approvals 2a0abaf4/1da90882 are still pending. No compiler/docs/
+  wheel/source replays are allowed by these scopes. Continue other new finite
+  component work under standing authority; keep comparisons paused.

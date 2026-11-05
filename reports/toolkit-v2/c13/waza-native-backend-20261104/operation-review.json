@@ -1,0 +1,108 @@
+{
+  "source_revision": "e534d149d89ae77ea158469fb4d2003804b2ee76",
+  "copilot_version": "1.0.85",
+  "purpose": "First native Copilot backend bootstrap checks and Waza static Go build provenance. Do not repeat old Waza mock/version tests. No account sign-in, SDK agent session, models or provider credentials.",
+  "work": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-backend-20261104",
+  "artifacts": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-artifacts-20261104",
+  "commands": [
+    {
+      "name": "boundary",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3.13",
+        "-I",
+        "-B",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-native-backend-20261104/boundary.py"
+      ],
+      "timeout_seconds": 15
+    },
+    {
+      "name": "waza-build-provenance",
+      "argv": [
+        "/usr/local/Cellar/go/1.27.1/libexec/bin/go",
+        "version",
+        "-m",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-artifacts-20261104/waza/microsoft-azd-waza-darwin-arm64"
+      ],
+      "timeout_seconds": 20
+    },
+    {
+      "name": "copilot-version",
+      "argv": [
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-artifacts-20261104/copilot/copilot",
+        "--version"
+      ],
+      "timeout_seconds": 30
+    },
+    {
+      "name": "copilot-help",
+      "argv": [
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-artifacts-20261104/copilot/copilot",
+        "--help"
+      ],
+      "timeout_seconds": 30
+    }
+  ],
+  "minimum_free_bytes": 53687091200,
+  "models": 0,
+  "cash_authority_usd": "0",
+  "retry_count": 0,
+  "retain_runtime": true,
+  "comparisons": "PAUSED",
+  "source": "5a13a630a89aa0c6b4940be4eed0a30dd80ab5a822ee15f7f25f78f521c11c4b",
+  "source_directory": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-backend-20261104",
+  "expires_at": "2026-11-07T01:03:34.553496Z",
+  "ledger": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillrank-build-preparation-20261103/runtime-execution/canonical.sqlite3",
+  "maximum_operations": 5,
+  "maximum_reserved_seconds": 195,
+  "actual_free_bytes_before": 64477728768,
+  "canary": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-boundary-20261104.txt",
+  "canary_sha256": "31e332f7aa79ccc0bc05a4b522e474f31745eaaa01b076f001f307464d72d601",
+  "binary_sha256": {
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-artifacts-20261104/waza/microsoft-azd-waza-darwin-arm64": "10879de7375699e02dfd9b90a6540ed1c3dc551b1118b2486cd7961c0fc56b03",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-artifacts-20261104/copilot/copilot": "29034a478e514e2d6c8cb33e16a7e94067ef4f80cc737aec93ecac9dd12b8557"
+  },
+  "environment": {
+    "PATH": "/usr/bin:/bin",
+    "HOME": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-backend-20261104/home",
+    "TMPDIR": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-backend-20261104/tmp",
+    "COPILOT_HOME": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-backend-20261104/copilot-home",
+    "XDG_CONFIG_HOME": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-backend-20261104/xdg-config",
+    "XDG_DATA_HOME": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-backend-20261104/xdg-data",
+    "XDG_CACHE_HOME": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-backend-20261104/xdg-cache",
+    "XDG_STATE_HOME": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-backend-20261104/xdg-state",
+    "LC_ALL": "C",
+    "NO_COLOR": "1",
+    "CI": "true",
+    "DO_NOT_TRACK": "1",
+    "WAZA_NO_UPDATE_CHECK": "1",
+    "GOENV": "off",
+    "GOTOOLCHAIN": "local",
+    "GOTELEMETRY": "off"
+  },
+  "license_review": "Waza MIT and Copilot v1.0.85 proprietary CLI local install/run grant reviewed and retained. No redistribution/service entitlement inferred. Actual backend account access remains unverified.",
+  "internal_executor_labels": "Reuses exact canonical native-command helper with legacy toolhive.native.* IDs; argv, stage, review and source bindings identify Waza/Copilot operations explicitly. No ToolHive MCP execution claimed.",
+  "measurement_limits": "Initial preparation/source/license inspection is NOT_RECORDED. Runtime command/driver intervals enter ledger with exclusive timing. CPU,memory,wire bytes,cash observations remain unknown.",
+  "no_credential_access": true,
+  "no_Waza_guest_execution": true,
+  "assets": {
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-native-backend-20261104/run.py": "1a269643815e7cd7fb1055ba4595cf5133d1d31d93d21599225614cd38bbcbc7",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-native-backend-20261104/plan.json": "4a0fbbcd6935be9a6962e90a0e12c29cf911f3547ec739e4bd7e0345eb00deb7",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-native-backend-20261104/prepared.json": "b404a57a3339f6a81a51d63fe0300e7ae67cbac2a692ea6258264a38b7b8c016",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-native-backend-20261104/native.sb": "43c0c6d28f1fede61775b748a13f3e52385f476a464ebc129b22f2a594bd5cb9",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-native-backend-20261104/boundary.py": "dfd279b1a041b976c7f3bf760a36ddaf1f313882c2cf30c0de026b30bd7e9765",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-native-backend-20261104/preparation-controls.json": "3bde146c0267120320f38ca872df6955b08d7c904dc3f10f90c0db70816ad98a",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/toolhive-native-build-20261104/run.py": "74e91daa30616236a10d74b6c4ca6c6ce09dd31dbabcbea384f85ea4f8217c2a",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/pipeline-standing-authority-20261104.json": "f0f86d6af2600817eb6de50dd12ac4f861f09ac36f90a27bc84e4ae6f044635c",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-telemetry-20261104/source-snapshot.json": "aa2bcb462453e3f666d2e3d4f2572f72702ad21f664df770b37a79bc0b7ade05",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-native-artifacts-20261104/operation-review.json": "b9897f6b11faf98788df960fa46e2cf6737201b220d5d097e843479238f63a69",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-native-artifacts-20261104/acquisition-result.json": "49972b454145f132b38fbf5708a881b766ea617f5d2802387c9fb0219f7c7286",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-native-artifacts-20261104/summary.json": "ba2f110a1587c7085acef7e12684f3991591ec1a9c20d3cf90c39fcba1a367bd",
+    "/usr/bin/sandbox-exec": "e3d7a792c58a5d3783d2f7274c82d70062393830d8cb1ded713ca554a470bd2f",
+    "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3.13": "20c9c2144a9f5202177620417e67643fb551aa31586e5d3c1361627b920cadb0",
+    "/usr/local/Cellar/go/1.27.1/libexec/bin/go": "548608a910c46de32c65a3934f461b1787acf6ddd371044826068d8503b8509b",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-backend-preparation-20261104/github__copilot-cli__LICENSE.md": "c694e2d9b3f3bb40704ca9bdc823dc90269999ab4c013dfd8a52c407046074b4",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-backend-preparation-20261104/microsoft__waza__LICENSE": "7df20dcdf9197e9945c14858d41c60f11b52b93e5b69e2b63416b874d598d322",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-backend-preparation-20261104/license-source-records.json": "4e68255dad75c2ce101a830df720d5515469346e1f9e715c449bdd7fdbf583ae",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-backend-preparation-20261104/waza-release-tag.json": "8dc360f0f38be7b18074b1ee882c6de840303fedb62c23fcd8b89ff804faacf0"
+  }
+}

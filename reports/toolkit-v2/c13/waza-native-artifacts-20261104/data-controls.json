@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "first_party_only": true,
+  "controls": [
+    {
+      "denied_url": "http://github.com/a",
+      "passed": true
+    },
+    {
+      "denied_url": "https://github.com:444/a",
+      "passed": true
+    },
+    {
+      "denied_url": "https://user@github.com/a",
+      "passed": true
+    },
+    {
+      "denied_url": "https://example.com/a",
+      "passed": true
+    },
+    {
+      "denied_path": "/etc/x",
+      "passed": true
+    },
+    {
+      "denied_path": "../x",
+      "passed": true
+    },
+    {
+      "denied_path": "x/../../y",
+      "passed": true
+    },
+    {
+      "denied_path": "a\\b",
+      "passed": true
+    }
+  ],
+  "safe_path_and_exact_https_allowed": true,
+  "syntax": "PASS",
+  "upstream_execution": false
+}

@@ -1,0 +1,21 @@
+{
+  "purpose": "Operator-terminal-only Copilot authentication setup. Implementation agent must never execute this script or capture sign-in. No model/task requests, paid enrollment or credential inspection.",
+  "private_home": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-protected-auth-20261104",
+  "argv": [
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-artifacts-20261104/copilot/copilot",
+    "--no-auto-update",
+    "--no-remote",
+    "--no-remote-export",
+    "--no-custom-instructions",
+    "--disable-builtin-mcps",
+    "login"
+  ],
+  "maximum_operations": 1,
+  "maximum_reserved_seconds": 1200,
+  "models": 0,
+  "cash_authority_usd": "0",
+  "automatic_retry": false,
+  "account_access": "UNKNOWN",
+  "isolation": "Clean child environment and private HOME/XDG/COPILOT_HOME. Protected operator action; no native worker sandbox or provider entitlement inferred. Client may use OS authentication services.",
+  "credential_output": "Never captured or inspected by agent/coordinator; inherited operator terminal only."
+}

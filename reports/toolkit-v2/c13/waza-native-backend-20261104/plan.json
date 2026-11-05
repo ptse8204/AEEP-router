@@ -1,0 +1,51 @@
+{
+  "source_revision": "e534d149d89ae77ea158469fb4d2003804b2ee76",
+  "copilot_version": "1.0.85",
+  "purpose": "First native Copilot backend bootstrap checks and Waza static Go build provenance. Do not repeat old Waza mock/version tests. No account sign-in, SDK agent session, models or provider credentials.",
+  "work": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-backend-20261104",
+  "artifacts": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-artifacts-20261104",
+  "commands": [
+    {
+      "name": "boundary",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3.13",
+        "-I",
+        "-B",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-native-backend-20261104/boundary.py"
+      ],
+      "timeout_seconds": 15
+    },
+    {
+      "name": "waza-build-provenance",
+      "argv": [
+        "/usr/local/Cellar/go/1.27.1/libexec/bin/go",
+        "version",
+        "-m",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-artifacts-20261104/waza/microsoft-azd-waza-darwin-arm64"
+      ],
+      "timeout_seconds": 20
+    },
+    {
+      "name": "copilot-version",
+      "argv": [
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-artifacts-20261104/copilot/copilot",
+        "--version"
+      ],
+      "timeout_seconds": 30
+    },
+    {
+      "name": "copilot-help",
+      "argv": [
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-artifacts-20261104/copilot/copilot",
+        "--help"
+      ],
+      "timeout_seconds": 30
+    }
+  ],
+  "minimum_free_bytes": 53687091200,
+  "models": 0,
+  "cash_authority_usd": "0",
+  "retry_count": 0,
+  "retain_runtime": true,
+  "comparisons": "PAUSED"
+}

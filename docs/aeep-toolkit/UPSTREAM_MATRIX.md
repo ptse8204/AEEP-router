@@ -2165,3 +2165,37 @@ will be reused without recompilation. Langfuse2a0abaf4 also awaits repeat approv
 No passed docs/wheel/source pipeline is repeated. All-stack and both domain
 journeys remain open. First new independent work remains delegated.
 <!-- toolhive-first-pipelines-20261104:end -->
+
+<!-- waza-native-preparation-20261104:start -->
+**November 4: native Waza/Copilot artifacts and first backend bootstrap passed; protected sign-in is next.**
+The new first-attempt pipelines used exact standing-authority reviews b9897f6b
+and 87cc0c41. Two publisher-hash archives and all three regular files are retained.
+Native containment, Waza static Go provenance and actual Copilot 1.0.85 version/help
+passed. The Waza binary embeds pinned e534d149 but reports vcs.modified=true;
+release/hash provenance is not exact clean-source build reproduction. Waza itself
+has not run a real backend task. No models, provider credentials, Docker resources,
+old tests or successful source/wheel/docs checks were used or replayed.
+
+Canonical costs settled 2 ops/0models/6.269825874827802seconds and 5 ops/0models/
+3.513753082603216seconds in the existing ledger. Wrapper time excludes children.
+Preparation overhead is NOT_RECORDED;CPU, memory, wire bytes and cash are unknown.
+Review counters were not reset. Host usable space remains above 50 GiB.
+Read reports/toolkit-v2/c13/waza-native-backend-20261104/RESULTS.md.
+
+GitHub now lists Copilot CLI in Free, with no credit card required. Earlier
+paid-only assumptions were too broad; actual account eligibility remains unknown.
+The concrete OPERATOR_SETUP.md links the terminal-only login helper and exact
+review dd60853d. Neither helper nor its one-operation grant has executed; the
+private credential directory is not created. Only the human operator may sign in.
+Never capture sign-in or enumerate/hash/copy credential contents afterward.
+
+Actual intervention pending: Langfuse repeat 2a0abaf4, ToolHive post-build repeat
+1da90882, and protected Copilot setup. No compiler rerun is proposed. The current
+public source pins, historical charges, Docker resources and user work remain.
+Continue independent safe stack work; both SkillsBench domains and all required
+integrations must pass before comparisons resume. No usefulness, resource or
+release gate is closed. Product source 5a13a630 is unchanged. Parent ef7124c.
+The new progress/setup prose is outside the passed docs snapshot; no current
+docs-check pass is claimed for those edits. Group its next check with an
+approved repeat rather than replaying the completed docs pipeline.
+<!-- waza-native-preparation-20261104:end -->
