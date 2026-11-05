@@ -1,0 +1,54 @@
+{
+  "images": [
+    {
+      "task_id": "postgres-mcp-0.3.0",
+      "reference": "docker.io/crystaldba/postgres-mcp@sha256:c04abcb08d7901e28f6f3ee11b6d799f42ae94b64b160175e9905274121294d2",
+      "tag": "0.3.0",
+      "index": "sha256:dbbd346860d29f1543e991f30f3284bf4ab5f096d049ecc3426528f20b1b6e6b",
+      "config": "sha256:6a415ab285c67e5e731605ab92923228f1dc88d9d298adfcf2273b3367a1f567",
+      "allowed_engine_ids": [
+        "sha256:6a415ab285c67e5e731605ab92923228f1dc88d9d298adfcf2273b3367a1f567",
+        "sha256:c04abcb08d7901e28f6f3ee11b6d799f42ae94b64b160175e9905274121294d2"
+      ],
+      "diff_ids": [
+        "sha256:6c4c763d22d0c5f9b2c5901dfa667fbbc4713cee6869336b8fd5022185071f1c",
+        "sha256:4838683321842876f5a414714cbb6e9f6bf4b1800ae581111b95bc2764b71c14",
+        "sha256:e3e96daabd9ce0fe9b79cfff9bcb4e228567d3ff1676e2d1c9b8a75efc13417b",
+        "sha256:a2d1379e01a0d6c344e3f8e86bcf20e7354a27d7f876b4269aed38806e0e6dbf",
+        "sha256:e4985c56da260648d898c6d844f9fa94c3be11d3f94264dc3c08d0d6091eecc8",
+        "sha256:573e2ee71ac4171bcc953fc43c1f39bfd3cfe33c5b8d36b4334a9b4ffeb95e90",
+        "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+        "sha256:2d205d9bac5bfdb8bb1edcee44df6f14ab295d7e47b421281aa1be2d5b6ff25d"
+      ],
+      "compressed_layer_bytes": 98763562,
+      "labels": {
+        "org.opencontainers.image.licenses": "Apache-2.0",
+        "org.opencontainers.image.source": "https://github.com/crystaldba/postgres-mcp"
+      },
+      "entrypoint": [
+        "/app/docker-entrypoint.sh",
+        "postgres-mcp"
+      ],
+      "user": null,
+      "declared_volumes": []
+    }
+  ],
+  "scope": "First exact pull and identity inspection of the official Postgres MCP 0.3.0 image. No guest code, service, tasks or credentials.",
+  "max_operations": 4,
+  "max_reserved_seconds": 350,
+  "models": 0,
+  "cash_authority_usd": "0",
+  "retries": 0,
+  "minimum_start_free_bytes": 57982058496,
+  "minimum_free_bytes": 53687091200,
+  "stop_before_reserve_bytes": 54760833024,
+  "resource_effects": "Retain image and existing Docker/user resources. No container creation, image build, deletion or release.",
+  "docker_usage_before": [
+    "TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE",
+    "Images          188       14        45.74GB   19GB (41%)",
+    "Containers      37        4         72.57MB   71.01MB (97%)",
+    "Local Volumes   40        21        145.5GB   6.965GB (4%)",
+    "Build Cache     1146      51        72.32GB   12.72GB"
+  ],
+  "free_bytes_before": 64373501952
+}

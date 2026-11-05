@@ -1,0 +1,135 @@
+{
+  "source": "5a13a630a89aa0c6b4940be4eed0a30dd80ab5a822ee15f7f25f78f521c11c4b",
+  "coordinator_source_snapshot": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-frozen-source-5a13a630a89a",
+  "ledger": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillrank-build-preparation-20261103/runtime-execution/canonical.sqlite3",
+  "docker": "/Applications/Docker.app/Contents/Resources/bin/docker",
+  "docker_config": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-telemetry-20261104/docker-config",
+  "docker_socket": "/Users/edwintse/.docker/run/docker.sock",
+  "scope": "First pinned Maven resolver-only artifact acquisition. Use existing images, existing Maven and a temporary restricted transport for Maven Central.",
+  "artifact_registry": "https://repo.maven.apache.org/maven2/",
+  "allowed_methods": [
+    "GET",
+    "HEAD"
+  ],
+  "maven_goal": "org.apache.maven.plugins:maven-dependency-plugin:3.6.1:go-offline",
+  "protected_project_input": "Exact migrated POM only. No Java task source, oracle program, verifier, user files or credentials are mounted.",
+  "images": {
+    "relay": {
+      "task_id": "sales-pivot-analysis",
+      "reference": "ghcr.io/benchflow-ai/skillsbench-task-env@sha256:5b65a93d4629c2c71aa8fd5ae5ad7bcfb2807105b5b4cc7fc96a24c4d603d278",
+      "allowed_engine_ids": [
+        "sha256:4bebaa2b131461e1f953d7638a8a2869296e2bc02f137ca0e3e247cd7decf61e",
+        "sha256:5b65a93d4629c2c71aa8fd5ae5ad7bcfb2807105b5b4cc7fc96a24c4d603d278"
+      ],
+      "diff_ids": [
+        "sha256:98effb2dfe85d4c431f97d90482075f19e5fc3a57c2dd423d8bdfd4813620043",
+        "sha256:df046f80aa7edf9481a2d2cb765b8abd8ec7e4720257507136ea0eb6588efceb",
+        "sha256:722bdc6b26e25ffe1752b7b7547ef1e0bcaa06bb23964ad4338b5c78eb48cc4f",
+        "sha256:9237e5ef128a6e414ced2a596f59cfeed69b04e671dfbddfbd236a9a07d3e9bb",
+        "sha256:9641e68506a79efa7e9f48fdb2c917866bf6e23f323fb635b29d4b64f0db381d",
+        "sha256:5b18efa6b32b882ffc0f0e0cf99b258dadedbdbbbb24ca7480cb47465eeec317",
+        "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      ],
+      "compressed_layer_bytes": 251069312,
+      "image_id": "sha256:5b65a93d4629c2c71aa8fd5ae5ad7bcfb2807105b5b4cc7fc96a24c4d603d278"
+    },
+    "resolver": {
+      "task_id": "spring-boot-jakarta-migration",
+      "reference": "ghcr.io/benchflow-ai/skillsbench-task-env@sha256:e5629dccdad649d150791dd7bd291ba8b0d244761e970c4bd2abcc8646114d9b",
+      "allowed_engine_ids": [
+        "sha256:dd8c07692c4730ad38f5c8410c5d78a65259960b78ccea87535aec680a7e0dd3",
+        "sha256:e5629dccdad649d150791dd7bd291ba8b0d244761e970c4bd2abcc8646114d9b"
+      ],
+      "diff_ids": [
+        "sha256:98effb2dfe85d4c431f97d90482075f19e5fc3a57c2dd423d8bdfd4813620043",
+        "sha256:962b883286a194222cf57e978cc692bafd3d48a677ca21cc90513bb5f04b3db7",
+        "sha256:67b9e964c2be3b782b8950d094295e0d1d04cce17173696f0d00e0b7c319a1dd",
+        "sha256:ce984fc9f9f0f7d01bd51b0a7fa56b1b44961922af47332e6e73c2055ed59087",
+        "sha256:f78b0966cabc466f4c1b68a21a52439fa9623759a02afa97e39c84474b18817e",
+        "sha256:52218b2048ab46ff2ad5610b55142e33b3f035e69bddfab75c126a282bdd0d79",
+        "sha256:9da909c9e320ef0c66ca1bb8fd5f14e93abed7dc6313c0be615d150c4e56f428",
+        "sha256:7c9a3e6501844ce1c57c1f84b2faf16d64a8041e5041fc032892e55c8936855d",
+        "sha256:ec08549915750a5e1e9f6d807f74c4a52d50b36db4d6e82bcb75fd18c2ccabd6",
+        "sha256:71df04fcdc338e8526b8e783a1ab4a4cfc7e78f6d16e124119b107ce24a993b4",
+        "sha256:770dfede59e54dc18edb6434dd81734a2b13feab7758450b585cd1b734a11f94"
+      ],
+      "compressed_layer_bytes": 836356522,
+      "image_id": "sha256:e5629dccdad649d150791dd7bd291ba8b0d244761e970c4bd2abcc8646114d9b"
+    }
+  },
+  "names": {
+    "internal": "aeep-sb-mvn-internal-20261105",
+    "egress": "aeep-sb-mvn-egress-20261105",
+    "relay": "aeep-sb-mvn-relay-20261105",
+    "resolver": "aeep-sb-mvn-resolver-20261105"
+  },
+  "network": "Resolver only on an internal network. Relay on owned internal and egress networks, listening only at the internal IP. Fixed HTTPS origin, no redirects, no private destinations or host ports.",
+  "network_response_limits": {
+    "requests": 1800,
+    "bytes": 536870912,
+    "per_file_bytes": 25165824
+  },
+  "storage_minimum_bytes": 57982058496,
+  "maximum_operations": 22,
+  "maximum_reserved_seconds": 1000,
+  "models": 0,
+  "cash_authority_usd": "0",
+  "automatic_retries": false,
+  "resource_effects": "Two owned containers and networks. Retain stopped. Only private resolver cache and existing Docker content are used.",
+  "availability": "The resolver goal can establish download inventory. The offline task solver and grader still need exact local verification.",
+  "work": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-spring-maven-20261105",
+  "expires_at": "2026-11-08T12:00:00+00:00",
+  "pins": {
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-spring-maven-20261105/run.py": "43a85403890db7c6ebf745b6252155160706b181ee8e28e25a85e21af7918cc1",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-spring-maven-20261105/central-relay.py": "62be81dbd41c41b6b557942d1c7e477b3c479d14c6b4165b5c8a772a145d7905",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-spring-maven-20261105/maven-settings.xml": "89b282daafef5f28b35df7e799feb090413e8c95ca5dbcbb7e88af13b5269677",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-spring-maven-20261105/plan.json": "34ed56ac109c562ca8256cff3e0cf63349da6e8cf96445578eddc134b447e753",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-spring-maven-20261105/prepared.json": "11d6e963aa1a1cc741085a795cb03e1e41ff34d6fd04c6ee4d6819c576500759",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-spring-maven-20261105/pom.xml": "287958b156c9ff30f442e8a3581d88dfa7c5ae6dd09ae39a2431f5c4ae3b9d0b",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/pipeline-standing-authority-20261104.json": "f0f86d6af2600817eb6de50dd12ac4f861f09ac36f90a27bc84e4ae6f044635c",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-spring-runtime-20261105/runtime-execution/summary.json": "93fd8e9e71e05d1adb4c72b48f1883e3f7988749d45b1a6698081a145db33fce",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-spring-runtime-20261105/staged-roots.json": "17ea6c6bfb9406db0015545dc25e527e0ecd67667c64785849f21723bd7b2a19",
+    "/Applications/Docker.app/Contents/Resources/bin/docker": "a6822407e207ff0b687419ccbe55700ffbf389d77de58ef625b3b1790d88747c",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-telemetry-20261104/docker-config/config.json": "5e8ca882ff273c94f40baa34979ce5a5c8873ec61a0f10bd539db5d8843722fa",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-spring-maven-20261105/maven-cache/io/jsonwebtoken/jjwt-jackson/0.12.3/jjwt-jackson-0.12.3.pom": "c38722cb3d366e8145e27e23530b6ecb83469aeda28d65b5918161cdb7984849",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-spring-maven-20261105/maven-cache/io/jsonwebtoken/jjwt-jackson/0.12.3/jjwt-jackson-0.12.3.jar": "cd9a28261323bd926add4344f786220b40937de476270a02e849486f940b30cb",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-spring-maven-20261105/maven-cache/io/jsonwebtoken/jjwt-api/0.12.3/jjwt-api-0.12.3.jar": "013dd3189fa62b433a0781eb6cfce1986aa00d1ea08d2f44a5c5047c7fab4722",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-spring-maven-20261105/maven-cache/io/jsonwebtoken/jjwt-api/0.12.3/jjwt-api-0.12.3.pom": "c58fda74c1b142fb1b41dc4de1be9fce7f6bfc180f1bc85bbef46d762e2168db",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-spring-maven-20261105/maven-cache/io/jsonwebtoken/jjwt-impl/0.12.3/jjwt-impl-0.12.3.jar": "6bbba1fc9ff3fc06aa3e6f2b85d5269373cd60ece47d923e1078b179c83bb45c",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-spring-maven-20261105/maven-cache/io/jsonwebtoken/jjwt-impl/0.12.3/jjwt-impl-0.12.3.pom": "356db38019a9b48c5c103e56d1b1d523caaa7f653e63e420e31f8431a608e472",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-spring-maven-20261105/maven-cache/org/springframework/boot/spring-boot-starter-parent/3.2.0/spring-boot-starter-parent-3.2.0.pom": "eb9256927bdd5c42e448e017a0d450ce5bfc76e2ba567181bb7b4b4683cbd341",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-spring-maven-20261105/maven-cache/org/springframework/boot/spring-boot-dependencies/3.2.0/spring-boot-dependencies-3.2.0.pom": "d38f834cc0ebf3980a3c75ffbf151eecb9eaf671928ebf9027247861a2418b91"
+  },
+  "free_bytes_before": 65057288192,
+  "docker_usage": [
+    {
+      "Active": "14",
+      "Reclaimable": "19GB (41%)",
+      "Size": "45.74GB",
+      "TotalCount": "188",
+      "Type": "Images"
+    },
+    {
+      "Active": "4",
+      "Reclaimable": "70.96MB (97%)",
+      "Size": "72.52MB",
+      "TotalCount": "33",
+      "Type": "Containers"
+    },
+    {
+      "Active": "21",
+      "Reclaimable": "6.965GB (4%)",
+      "Size": "145.5GB",
+      "TotalCount": "40",
+      "Type": "Local Volumes"
+    },
+    {
+      "Active": "51",
+      "Reclaimable": "12.72GB",
+      "Size": "72.32GB",
+      "TotalCount": "1146",
+      "Type": "Build Cache"
+    }
+  ],
+  "preflight_no_internal_subnet_overlap": true
+}

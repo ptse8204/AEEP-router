@@ -2342,3 +2342,16 @@ and the full domain journeys remain open.
 The [PostgreSQL backend preparation](../../reports/toolkit-v2/c13/mcp-postgres-closure-20261104/README.md)
 pins MCPMark's real server wheel for the next isolated reference run. The
 two packs still need separate database setup, tool and verifier evidence.
+
+### November 5 protected task and PostgreSQL preparation
+
+The [SkillsBench continuation](../../reports/toolkit-v2/c13/STACK_NEXT_ACTIONS_20261104.md)
+records a verified Spring toolchain and incomplete dependency closure.
+Sales Pivot's attributed local inputs are ready for the corrected
+reference pipeline. Both original verifiers and the two composed
+ordinary CLI workload journeys remain unverified.
+
+The [Postgres MCP preparation](../../reports/toolkit-v2/c13/mcp-postgres-runtime-preparation-20261105/README.md)
+retains and identifies the official 0.3.0 image. The backend still
+requires bundled dependency inspection, owned database fixtures and
+actual reference execution through both upstream pack contracts.

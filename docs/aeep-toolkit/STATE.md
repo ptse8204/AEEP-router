@@ -1,5 +1,37 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- skillsbench-and-mcp-runtime-20261105:start -->
+**November 5. Protected SkillsBench runtime preparation and PostgreSQL
+image acquisition.**
+
+The [Sales Pivot asset review](../../reports/toolkit-v2/c13/skillsbench-sales-reference-20261105/ASSET_RIGHTS.md)
+identifies both ABS sources and limits use to private local reference
+execution. The first attempt stopped at image inspection because the
+driver expected an optional Docker metadata field. The
+[exact correction](../../reports/toolkit-v2/c13/skillsbench-sales-reference-correction-20261105/operation-review.json)
+is unstarted and requires approval under the repeat rule.
+
+The [Spring guest probe](../../reports/toolkit-v2/c13/skillsbench-spring-runtime-20261105/runtime-execution/summary.json)
+verified CPython 3.12.16, Java 21.0.2 and Maven 3.9.6 offline. The Maven
+Central attempt stopped on HTTP 429. The subsequent dependency tree
+omitted transitive dependencies because nine selected POMs were missing.
+The original solver stopped at compilation. The verifier did not run.
+The [dependency repair review](../../reports/toolkit-v2/c13/skillsbench-spring-descriptor-repair-20261105/operation-review.json)
+binds the missing-descriptor check and awaits repeat approval.
+
+The [Postgres MCP artifact preparation](../../reports/toolkit-v2/c13/mcp-postgres-runtime-preparation-20261105/README.md)
+retained the official 0.3.0 image and the protected grader's exact wheel.
+The released server wheel depends on a PyPI version that is no longer
+served. The pull succeeded, while its strict repository string check
+failed. Separate read-only verification matched the actual digest and
+all layers. Both original MCP packs still need protected reference runs.
+
+Use the [current continuation](../../reports/toolkit-v2/c13/STACK_NEXT_ACTIONS_20261104.md)
+for the exact approvals and scopes. Langfuse and both SkillsBench domains
+remain open. Comparisons stay paused. No product source or formal gate
+changed in this increment.
+<!-- skillsbench-and-mcp-runtime-20261105:end -->
+
 <!-- pipeline-authority-and-langfuse-result-20261104:start -->
 **November 4: first-attempt pipeline authority recorded; docs pass, service identity correction needs repeat approval.**
 The operator delegates new finite pipeline work without another prompt and requires

@@ -3086,3 +3086,17 @@ Consider the exact upstream SkillsBench images before rebuilding dependency
 closures. The selected source trees match except for newer instructions.
 Use the original instructions and protected verifier for the pinned task.
 Rights, hidden skill exclusion and reference behavior need their own checks.
+
+### Verify complete dependency descriptors before protected task execution
+
+Treat Maven's offline tree as partial until every selected artifact has
+both its descriptor and binary. The first Spring solver reached
+compilation with missing Jakarta, JPA and servlet dependencies. The
+[diagnosis](../../reports/toolkit-v2/c13/skillsbench-spring-descriptor-repair-20261105/diagnosis.json)
+binds that failure and the nine missing descriptors. Use the reviewed
+resolver repair before preparing a solver repeat.
+
+Preserve the Postgres MCP 0.3.0 version. The publisher image supplies a
+candidate for the unavailable PyPI dependency. Review the actual bundled
+runtime before using the server in a fresh owned database. Retain the
+separate original verifiers and count each pack's readiness separately.

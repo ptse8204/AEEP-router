@@ -1,5 +1,18 @@
 # 0.8 plan coverage and remaining work
 
+<!-- toolkit-v2-runtime-preparation-20261105:start -->
+**November 5. Protected task and backend preparation.**
+
+The [C13 continuation](../toolkit-v2/c13/STACK_NEXT_ACTIONS_20261104.md)
+records the observed Sales Pivot metadata failure, Spring Boot dependency
+closure failure and retained Postgres MCP runtime. Current checks preserve
+the original inputs and graders, canonical charges and stopped resources.
+The standalone Spring toolchain probe passed. Neither SkillsBench
+reference journey completed. Both MCP benchmark journeys remain open.
+Three exact repeats require approval. No comparison, resource
+qualification, release or ordinary routing gate changed.
+<!-- toolkit-v2-runtime-preparation-20261105:end -->
+
 <!-- toolhive-native-static-preparation-20261104:start -->
 **November 4: additional read-only ToolHive preparation.**
 [The native dependency inventory](../toolkit-v2/c13/toolhive-native-preparation-20261104/README.md)

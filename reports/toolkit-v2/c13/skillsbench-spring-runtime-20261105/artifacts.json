@@ -1,0 +1,26 @@
+{
+  "purpose": "Stage data-only artifacts needed by the protected Spring Boot reference runtime.",
+  "task_pin": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+  "python": {
+    "publisher": "astral-sh/python-build-standalone",
+    "release": "20261026",
+    "asset_id": 678575315,
+    "name": "cpython-3.12.16+20261026-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz",
+    "sha256": "ce4f6d0a6cfdb3bed6e44c2f9affd85943c76a42e25ad3a259002f31d6fb8a20",
+    "size": 34505639,
+    "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20261026/cpython-3.12.16%2B20261026-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz",
+    "reason": "The retained Spring image lacks Python. Supply the protected verifier with a pinned relocatable Linux amd64 interpreter instead of running the upstream network bootstrap."
+  },
+  "maven_origins": [
+    "org/springframework/boot/spring-boot-starter-parent/3.2.0/spring-boot-starter-parent-3.2.0.pom",
+    "org/springframework/boot/spring-boot-dependencies/3.2.0/spring-boot-dependencies-3.2.0.pom",
+    "io/jsonwebtoken/jjwt-api/0.12.3/jjwt-api-0.12.3.pom",
+    "io/jsonwebtoken/jjwt-api/0.12.3/jjwt-api-0.12.3.jar",
+    "io/jsonwebtoken/jjwt-impl/0.12.3/jjwt-impl-0.12.3.pom",
+    "io/jsonwebtoken/jjwt-impl/0.12.3/jjwt-impl-0.12.3.jar",
+    "io/jsonwebtoken/jjwt-jackson/0.12.3/jjwt-jackson-0.12.3.pom",
+    "io/jsonwebtoken/jjwt-jackson/0.12.3/jjwt-jackson-0.12.3.jar"
+  ],
+  "not_executed": ["CPython", "Maven", "oracle", "verifier", "agent"],
+  "maven_transitive_closure": "Open"
+}

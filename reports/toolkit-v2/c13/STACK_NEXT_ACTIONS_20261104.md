@@ -1,5 +1,40 @@
 # Resume the current stack work
 
+## November 5 continuation
+
+Keep all comparisons paused. The three reviews below cover repeats and
+require the operator's specific approval. No approval file exists for any
+of these reviews when this record was written.
+
+| Pending review | Reason and next action |
+| --- | --- |
+| [Sales Pivot 5042f535](skillsbench-sales-reference-correction-20261105/operation-review.json) | The first driver assumed Docker always emits Config.Volumes. The image omits it. No container started. Use the corrected offline solver and three protected verifier cases after approval. Preserve two original operations. |
+| [Spring descriptor repair a0fd3598](skillsbench-spring-descriptor-repair-20261105/operation-review.json) | Maven's first resolver stopped on HTTP 429. The offline tree selected 69 nodes but lacked nine POMs. The original solver then stopped at compilation and the protected verifier stayed unstarted. Approve only the reviewed acquisition and offline closure check. A solver repeat needs a separate review after the complete cache is known. |
+| [Langfuse 17af458f](langfuse-web-heap-20261104/operation-review.json) | Datastores and migrations passed, then the web process hit its V8 heap cap. Use the exact new namespace and existing images after approval. Verify the 76 settled starting operations. |
+
+The [Spring guest probe](skillsbench-spring-runtime-20261105/runtime-execution/summary.json)
+passed portable CPython 3.12.16, Java 21.0.2 and Maven 3.9.6. Use the
+case-sensitive guest extraction and original pinned task assets. The
+[failed solver](skillsbench-spring-reference-20261105/execution/summary.json)
+retains its six operations and stopped container. Its [diagnosis](skillsbench-spring-descriptor-repair-20261105/diagnosis.json)
+lists the exact missing descriptors. Preserve the partial resolver caches,
+stopped containers, review bindings and all charges.
+
+The [PostgreSQL runtime record](mcp-postgres-runtime-preparation-20261105/README.md)
+retains the publisher's digest-pinned 0.3.0 image and the protected
+psycopg2-binary 2.9.10 wheel. Do not repeat wheel resolution or image pulls.
+Inspect the image's bundled packages and notices, then use separate
+owned PostgreSQL fixtures and the original protected seed and verifier for
+each pack. The failed acquisition string guard and its charges remain
+recorded, with a separate normalized identity check.
+
+Keep Waza sign-in deferred. Reuse passing ToolHive, Router, Sponsors and
+evaluator evidence at its recorded scope. Continue first-attempt safe
+component preparation independently. Neither ordinary CLI SkillsBench
+domain, the full integration gate, candidate usefulness, selection
+usefulness, resource qualification nor release is complete. Keep the
+50 GiB host reserve and preserve unrelated files and Docker resources.
+
 ## Current resumption
 
 - Langfuse 17af458ff38e47ca655c72b798a6bf1e756d8eee392c75ec0cb8068a9875fd48
