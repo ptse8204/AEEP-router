@@ -3,6 +3,8 @@
 import asyncio
 import hashlib
 import json
+import shutil
+from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
@@ -11,15 +13,24 @@ from test_toolkit_workflow_preparation import configured
 from test_v08_campaign_foundations import suite_for
 
 from aeep.assessment.models import AssessmentPlan, AssessmentSetupRequest, content_digest
-from aeep.assessment.scheduling import SchedulerDefinition, require_scheduler
+from aeep.assessment.scheduling import SKILLRANK_DIAGNOSTIC, SchedulerDefinition, require_scheduler
 from aeep.benchmarking import BenchmarkRoute, BenchmarkRunner, BenchmarkTrial
 from aeep.errors import ConfigurationError
 from aeep.models import ExecutorSpec, RawExecution
 from aeep.router import Router
 from aeep_toolkit import ase_scheduler
 from aeep_toolkit.ase_scheduler import ASE_ARTIFACT, ASE_REVISION, AgentSkillEvalCoordinator
+from aeep_toolkit.install_runtime import snapshot
 from aeep_toolkit.installation import manifest_digest
 from aeep_toolkit.models import ExtensionManifest
+from aeep_toolkit.skillrank_scheduler import (
+    BINARY_NAME,
+    CASE_SLOT,
+    REVISION,
+    SANDBOX,
+    SkillRankCoordinator,
+    boundary_profile,
+)
 from aeep_toolkit.workflow import prepare_stack
 from aeep_toolkit.workflow_preparation import prepare_canonical
 
@@ -71,16 +82,46 @@ def scheduler_definition(tmp_path):
     )
 
 
-def external_plan(tmp_path, monkeypatch):
-    path, service, _cases, _rights = configured(tmp_path)
+def external_plan(tmp_path, monkeypatch, *, engine="agent-skill-eval", native_binary=None):
+    path, service, _cases, _rights = configured(tmp_path, grader_container=engine == "skillrank")
     definition = scheduler_definition(tmp_path)
+    if engine == "skillrank":
+        runtime = tmp_path / "runtime"
+        binary = runtime / "bin" / BINARY_NAME
+        binary.parent.mkdir(parents=True)
+        if native_binary is None:
+            binary.write_text("first-party substitute; never executed")
+        else:
+            shutil.copyfile(native_binary, binary)
+            binary.chmod(0o555)
+        binary_sha = hashlib.sha256(binary.read_bytes()).hexdigest()
+        profile = tmp_path / "scheduler.sb"
+        profile.write_text(boundary_profile(runtime, tmp_path / "owned-scheduler"))
+        executor = definition.executor.model_copy(deep=True)
+        executor.config["argv"] = [SANDBOX, "-f", str(profile), str(binary)]
+        definition = SchedulerDefinition.model_validate(
+            definition.model_dump(mode="json") | {
+                "adapter_id": SKILLRANK_DIAGNOSTIC, "source_revision": REVISION,
+                "artifact_sha256": binary_sha, "maximum_requests": 2,
+                "runtime_tree_digest": snapshot(runtime), "executor": executor.model_dump(mode="json"),
+                "executable_dependencies": {
+                    SANDBOX: hashlib.sha256(Path(SANDBOX).read_bytes()).hexdigest() if native_binary else "c" * 64,
+                    str(profile): hashlib.sha256(profile.read_bytes()).hexdigest(),
+                    str(binary): binary_sha,
+                },
+            }
+        )
+        # This fixture supplies no host runtime and never executes the substitute.
+        if native_binary is None:
+            monkeypatch.setattr("aeep.assessment.scheduling.verify_dependencies", lambda _: None)
     source = tmp_path / "agent_skill_eval/__init__.py"
     source.parent.mkdir()
     source.write_text("synthetic fixture")
     sha = hashlib.sha256(source.read_bytes()).hexdigest()
     definition.executable_dependencies[str(source)] = sha
     monkeypatch.setattr(ase_scheduler, "ASE_SOURCE_FILES", {"agent_skill_eval/__init__.py": sha})
-    monkeypatch.setattr(ase_scheduler, "snapshot", lambda _: "a" * 64)
+    if engine == "agent-skill-eval":
+        monkeypatch.setattr(ase_scheduler, "snapshot", lambda _: "a" * 64)
     ref = service.repository.put("scheduler", content_digest(definition), definition)
     service.repository.review(ref)
     request_path = tmp_path / "request.json"
@@ -92,8 +133,8 @@ def external_plan(tmp_path, monkeypatch):
     request_path.write_text(request.model_dump_json())
     data = json.loads(path.read_text())
     selected = data["configurations"]["document-data"]
-    selected["evaluator"] = "agent-skill-eval"
-    selected["components"] = ["agent-skill-eval", "skillsbench"]
+    selected["evaluator"] = engine
+    selected["components"] = [engine, "skillsbench"]
     selected["preparation"]["request"]["sha256"] = hashlib.sha256(
         request_path.read_bytes()
     ).hexdigest()
@@ -107,7 +148,7 @@ def external_plan(tmp_path, monkeypatch):
     registry = json.loads(registry_path.read_text())
     entry = registry["extensions"][0]
     old_digest = manifest_digest(ExtensionManifest.model_validate(entry))
-    entry["extension_id"] = "agent-skill-eval"
+    entry["extension_id"] = engine
     registry_path.write_text(json.dumps(registry))
     new_digest = manifest_digest(ExtensionManifest.model_validate(entry))
     policy_path = tmp_path / "policy.json"
@@ -344,3 +385,115 @@ async def test_scheduling_port_reuses_actual_first_party_execution_and_receipts(
         assert runner.connection.execute("SELECT count(*) FROM trial_receipts").fetchone()[0] == 1
     finally:
         runner.connection.close()
+
+
+def test_skillrank_plan_preserves_exact_pair_and_cannot_be_read_as_ase(tmp_path, monkeypatch):
+    service, plan, definition, _ = external_plan(tmp_path, monkeypatch, engine="skillrank")
+    try:
+        assert plan.schema_version == "assessment.plan.v9"
+        assert [route.executor_id for route in plan.suite.routes] == [plan.baseline_id, plan.candidate_id]
+        coordinator = SkillRankCoordinator(service.repository, plan)
+        payload = coordinator.prepare_payload(tmp_path, ("0", "1"), "a" * 64)
+        assert payload["case_id"] == CASE_SLOT and payload["timeout_seconds"] == 15
+        assert "task" not in payload and "files" not in payload
+        with pytest.raises(ConfigurationError, match="reviewed ASE"):
+            AgentSkillEvalCoordinator(service.repository, plan)
+        data = plan.model_dump(mode="json")
+        with pytest.raises(ValueError, match="bounded required-use"):
+            AssessmentPlan.model_validate(data | {"schema_version": "assessment.plan.v8"})
+        data["suite"]["routes"].reverse()
+        with pytest.raises(ValueError, match="control then treatment"):
+            AssessmentPlan.model_validate(data)
+        unrelated = tmp_path / "runtime" / "unrelated"
+        unrelated.write_text("out of scope")
+        with pytest.raises(ConfigurationError, match="only the reviewed bridge"):
+            coordinator.require_runtime()
+        unrelated.unlink()
+        profile = tmp_path / "scheduler.sb"
+        profile.write_text("(allow default)")
+        with pytest.raises(ConfigurationError, match="bounded SkillRank"):
+            SkillRankCoordinator(service.repository, plan)
+        assert definition.maximum_requests == 2
+    finally:
+        service.router.store.close()
+
+
+@pytest.fixture
+def skillrank_external(tmp_path, monkeypatch):
+    value = external_plan(tmp_path, monkeypatch, engine="skillrank")
+    yield value
+    value[0].router.store.close()
+
+
+@pytest.mark.parametrize("fault", [None, "swapped", "forged", "missing"])
+async def test_skillrank_callbacks_keep_grades_and_charges_canonical(
+    tmp_path, monkeypatch, skillrank_external, fault
+):
+    service, plan, _, _ = skillrank_external
+    coordinator = SkillRankCoordinator(service.repository, plan)
+    completed = []
+
+    async def execute(slot):
+        completed.append(slot)
+        return BenchmarkTrial(
+            trial_id=f"synthetic-{slot}", run_id="synthetic", suite_id=plan.suite.suite_id,
+            case_id=plan.suite.cases[0].case_id,
+            route_id=(plan.baseline_id, plan.candidate_id)[int(slot)],
+            condition="fresh-worker", repetition=0, phase="qualification",
+            state="complete", valid=slot == "0",
+        )
+
+    class ChildFixture:
+        def __init__(self, *, stdout_observer):
+            self.observe = stdout_observer
+
+        async def start(self, context):
+            async def program():
+                token = context.request.input["run_token"]
+                workspace = tmp_path / "owned-scheduler/responses"
+                rows = []
+                for arm in ("control", "treatment"):
+                    sent = "treatment" if fault == "swapped" else arm
+                    self.observe((json.dumps({"kind": "trial", "case_id": CASE_SLOT,
+                                              "run_token": token, "arm": sent}) + "\n").encode())
+                    if fault == "missing" and arm == "control":
+                        return RawExecution(status="failed")
+                    target = workspace / (arm + ".json")
+                    for _ in range(500):
+                        if target.exists():
+                            break
+                        await asyncio.sleep(0.002)
+                    row = json.loads(target.read_text())
+                    rows.append({key: row[key] for key in ("arm", "canonical_valid", "trial_ref")})
+                if fault == "forged":
+                    rows[0]["canonical_valid"] = False
+                return RawExecution(status="success", output={
+                    "kind": "done", "run_token": token, "harness": "skillrank-runner",
+                    "harness_version": "0.1.0", "upstream_numeric_fields_excluded": True,
+                    "trials": rows,
+                })
+            return SimpleNamespace(task=asyncio.create_task(program()))
+
+        async def cancel(self, handle):
+            handle.task.cancel()
+
+        async def close(self):
+            pass
+
+    monkeypatch.setattr(ase_scheduler, "CommandExecutor", ChildFixture)
+    if fault:
+        with pytest.raises(ConfigurationError):
+            await coordinator.coordinate(("0", "1"), execute)
+    else:
+        await coordinator.coordinate(("0", "1"), execute)
+        record = service.repository.get("scheduler_observation", plan.plan_id)
+        assert record["grade_summaries"]["0"]["passed"] == 1
+        assert record["grade_summaries"]["1"]["failed"] == 1
+        assert record["grading_semantics"].startswith("SkillRank")
+        assert completed == ["0", "1"]
+    if fault == "swapped":
+        assert completed == []
+    if fault == "missing":
+        assert "1" not in completed
+    ops = service.repository.operation_ledger(plan.plan_id).operations
+    assert len(ops) == 1 and ops[0].elapsed_seconds is not None

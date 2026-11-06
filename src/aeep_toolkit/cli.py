@@ -60,7 +60,7 @@ def read_plan_bytes(path: Path) -> bytes:
     raw = _read_bounded_bytes(path, INTEGRATION_PLAN_BYTES)
     if len(raw) > METADATA_BYTES:
         value = json.loads(raw)
-        if not isinstance(value, dict) or value.get('schema_version') not in {'assessment.plan.v7', 'assessment.plan.v8'}:
+        if not isinstance(value, dict) or value.get('schema_version') not in {'assessment.plan.v7', 'assessment.plan.v8', 'assessment.plan.v9'}:
             raise ValueError('large plan files require the bounded v7 integration contract')
     return raw
 

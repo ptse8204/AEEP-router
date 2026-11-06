@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "first_party_probe": true,
+  "models": 0,
+  "initial_signal": "SIGABRT from dyld before probe main",
+  "observed_deny": "file-read-data /",
+  "change": "Allow read-data on the literal root directory entry only",
+  "probe_source_sha256": "061b4d19a26013f1bb41cd0fbcf118fae57291431d9897b6c6850561f2a7eb25",
+  "verified_profile_sha256": "fcc46768140fdc645d0a150ce90d6561e0b2f32441f4c3d4026da9f1f1a5195a",
+  "verified": [
+    "read parent certificate",
+    "reject replacement",
+    "reject new certificate",
+    "deny unrelated read",
+    "deny loopback bind",
+    "deny child execution"
+  ],
+  "live_diagnostic": "UNSTARTED"
+}

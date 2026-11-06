@@ -3143,3 +3143,14 @@ for the forced diagnostic. The AEEP parent owns worker execution,
 protected grading and accounting. Keep upstream compatibility
 defaults out of measurements. The synthetic proof does not
 authorize a live run or supply candidate usefulness evidence.
+
+## D164. Keep SkillRank's required-use pair within an engineering plan
+
+Use the same reviewed coordinator and canonical trial runner as ASE.
+V9 adds exactly one fresh control and treatment, with an engineering
+review and a pinned read-only native SkillRank carrier. Only protected
+grade certificates cross the scheduler boundary. The one-route v8 ASE
+contract remains in effect. A real native synthetic check is recorded
+separately from any future controlled-worker run.
+
+[Native carrier and limitations](../../reports/toolkit-v2/c13/skillrank-native-carrier-20261105/README.md).

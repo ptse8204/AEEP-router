@@ -51,7 +51,7 @@ from aeep_toolkit.workflow import prepare_stack
 from aeep_toolkit.workflow_preparation import TaskRightsReview, prepare_canonical
 
 
-def configured(tmp_path, *, large=False):
+def configured(tmp_path, *, large=False, grader_container=False):
     path, data, skill = definition(tmp_path)
     selected = data["configurations"]["document-data"]
     benchmark_path = path.parent / "benchmark.json"
@@ -117,7 +117,11 @@ def configured(tmp_path, *, large=False):
     repo = service.repository
     subject = service.inspect_local(skill, kind="skill")
     environment = AssessmentEnvironment(
-        environment_id="synthetic-container", kind="codex_sandbox", identity={}
+        environment_id="synthetic-container", identity={},
+        kind="container" if grader_container else "codex_sandbox",
+        container_image="sha256:" + "a" * 64 if grader_container else None,
+        container_runtime=str(tmp_path / "fixture-container") if grader_container else None,
+        container_socket=str(tmp_path / "fixture-container.sock") if grader_container else None,
     )
     recipe_ref = repo.put("recipe", recipe.recipe_id, recipe)
     env_ref = repo.put("environment", environment.environment_id, environment)

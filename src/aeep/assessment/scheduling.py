@@ -14,6 +14,8 @@ from .identity import verify_dependencies
 from .models import Digest, content_digest
 from .repository import AssessmentRepository
 
+SKILLRANK_DIAGNOSTIC = "skillrank.controlled-diagnostic.v1"
+
 
 class SchedulerDefinition(StrictModel):
     schema_version: Literal["assessment.scheduler.v1"] = "assessment.scheduler.v1"
@@ -71,6 +73,8 @@ class SchedulerDefinition(StrictModel):
             raise ValueError(
                 "scheduler requires a finite reviewed sandbox command and owned workspace"
             )
+        if self.adapter_id == SKILLRANK_DIAGNOSTIC and self.maximum_requests != 2:
+            raise ValueError("SkillRank requires exactly two diagnostic slots")
         return self
 
 

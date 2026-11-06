@@ -2387,3 +2387,9 @@ deployment. Both composed workloads still need applicable evidence.
 ran its real `0.1.0` harness over two synthetic AEEP callback
 positions. Search/show remains independently verified. The
 ordinary CLI live diagnostic remains open.
+
+The [SkillRank native carrier](../../reports/toolkit-v2/c13/skillrank-native-carrier-20261105/README.md)
+runs the pinned core through the ordinary v9 scheduler on synthetic
+grade certificates. It records an actual settled scheduler charge.
+The live diagnostic gate stays open. The previous Linux proof and
+ordinary search/show results retain their original scope.

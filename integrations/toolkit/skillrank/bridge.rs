@@ -17,6 +17,10 @@ use std::time::{Duration, Instant};
 
 const MAX_FRAME: u64 = 8192;
 const ARMS: [&str; 2] = ["control", "treatment"];
+#[cfg(target_os = "macos")]
+const RESPONSES: &str = "responses";
+#[cfg(not(target_os = "macos"))]
+const RESPONSES: &str = "/responses";
 
 #[derive(Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -77,8 +81,8 @@ struct Bridge {
 
 impl Bridge {
     fn certificate(&self, arm: &str) -> Result<Certificate, String> {
-        // The parent is the sole writer of this read-only mounted directory.
-        let path = Path::new("/responses").join(format!("{arm}.json"));
+        // The reviewed launcher makes the parent the sole writer.
+        let path = Path::new(RESPONSES).join(format!("{arm}.json"));
         let deadline = Instant::now() + Duration::from_secs(u64::from(self.request.timeout_seconds));
         loop {
             match File::open(&path) {
@@ -108,7 +112,7 @@ impl FixtureProvider for Bridge {
         if task_id != self.request.case_id {
             return Err("unreviewed fixture slot".into());
         }
-        Ok(PreparedWorkspace { path: PathBuf::from("/responses"), cleanup_root: None })
+        Ok(PreparedWorkspace { path: PathBuf::from(RESPONSES), cleanup_root: None })
     }
 
     fn isolation(&self) -> Isolation {
@@ -128,7 +132,7 @@ impl AgentRunner for Bridge {
 
     fn run_task(&self, spec: &RunSpec) -> Result<RunOutcome, String> {
         let arm = ARMS.get(self.next.get()).ok_or("unreviewed trial")?;
-        if spec.working_dir != Path::new("/responses")
+        if spec.working_dir != Path::new(RESPONSES)
             || spec.instruction != self.request.case_id
             || spec.skill_slug != self.request.skill_slug
             || spec.skill_installed != (*arm == "treatment")
@@ -152,7 +156,7 @@ impl AgentRunner for Bridge {
 impl Verifier for Bridge {
     fn verify(&self, working_dir: &Path, task_id: &str) -> Result<Verdict, String> {
         let certificate = self.pending.take().ok_or("grade certificate was not dispatched")?;
-        if working_dir != Path::new("/responses") || task_id != certificate.case_id {
+        if working_dir != Path::new(RESPONSES) || task_id != certificate.case_id {
             return Err("upstream verifier changed the selected slot".into());
         }
         self.verified.set(self.verified.get() + 1);

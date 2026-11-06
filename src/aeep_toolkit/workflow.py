@@ -256,11 +256,14 @@ def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
                       'backend_review':plan_preview(plan, source)}
     scheduler_binding: dict[str, str] | None = None
     if selected.scheduler is not None:
-        from aeep.assessment.scheduling import SchedulerDefinition
+        from aeep.assessment.scheduling import SKILLRANK_DIAGNOSTIC, SchedulerDefinition
 
         scheduler_path, scheduler_raw = _read(selected.scheduler, root)
         scheduler = SchedulerDefinition.model_validate_json(scheduler_raw)
-        if selected.evaluator != 'agent-skill-eval' or scheduler.adapter_id != 'agent-skill-eval.controlled.v1':
+        if scheduler.adapter_id != {
+            'agent-skill-eval': 'agent-skill-eval.controlled.v1',
+            'skillrank': SKILLRANK_DIAGNOSTIC,
+        }.get(selected.evaluator):
             raise ValueError('selected evaluator differs from the scheduling definition')
         reference = content_digest(scheduler)
         if preparation is not None and request.scheduler_digest != reference:
@@ -268,7 +271,7 @@ def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
         if assessment is not None and plan.scheduler_digest != reference:
             raise ValueError('canonical plan differs from the selected scheduler')
         scheduler_binding = {'path':str(scheduler_path), 'definition_ref':reference}
-    if selected.evaluator not in {'managed', 'agent-skill-eval'} or (selected.evaluator == 'agent-skill-eval' and scheduler_binding is None):
+    if selected.evaluator != 'managed' and scheduler_binding is None:
         blockers.append('selected external evaluator workflow dispatch is not implemented; no fallback is inferred')
     if selected.evaluator == 'managed' and (
             (preparation is not None and request.scheduler_digest is not None)

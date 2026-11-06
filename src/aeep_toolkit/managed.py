@@ -28,6 +28,7 @@ from aeep.assessment.models import (
     content_digest,
 )
 from aeep.assessment.reporting import fit_report
+from aeep.assessment.scheduling import TrialCoordinator
 from aeep.assessment.service import AssessmentService
 from aeep.assessment.verification import verification_source_digest
 from aeep.benchmarking import BenchmarkCampaignReport, BenchmarkPhase, BenchmarkTrial
@@ -205,6 +206,8 @@ class AEEPAssessmentAdapter:
             require_engineering_run(self.service.repository, engineering_review_ref,
                                     plan=self.plan, source_digest=self.capabilities.implementation_sha256)
         else:
+            if self.plan.schema_version == "assessment.plan.v9":
+                raise ConfigurationError("SkillRank diagnostic requires exact engineering authority")
             require_stack_complete(self.service.repository, stack_readiness_ref,
                                    source_digest=self.capabilities.implementation_sha256)
         # The service owns all authorization, reservation, execution and recovery.
@@ -607,7 +610,7 @@ def comparison_summary(adapter: AEEPAssessmentAdapter, bundle: EvidenceBundle) -
     }
     if 'external_scheduler' in details:
         summary['external_scheduler'] = details['external_scheduler']
-        summary['limitations'].append('Upstream scheduler timing/token defaults are compatibility artifacts. Only canonical AEEP receipts supply measured usage; the upstream JSON assertion checks the existing protected grade certificate.')
+        summary['limitations'].append('Upstream scheduler timing/token defaults are compatibility artifacts. Only canonical AEEP receipts supply measured usage; the upstream verdict checks the existing protected grade certificate.')
     if details.get('task_family_labels'):
         summary['task_family_labels'] = details['task_family_labels']
     summary["limitations"].extend([
@@ -651,7 +654,7 @@ def main(argv: list[str] | None = None) -> None:
         source = SourcePin.model_validate(read_json(args.source))
         scheduler = None
         if args.scheduler is not None:
-            from aeep.assessment.scheduling import SchedulerDefinition
+            from aeep.assessment.scheduling import SKILLRANK_DIAGNOSTIC, SchedulerDefinition
 
             scheduler = SchedulerDefinition.model_validate(read_json(args.scheduler))
             if content_digest(scheduler) != plan.scheduler_digest:
@@ -674,11 +677,15 @@ def main(argv: list[str] | None = None) -> None:
                     router,
                     args.directory or args.manifest.resolve().parent / ".aeep" / "assessments",
                 )
-                coordinator = None
-                if scheduler is not None:
+                coordinator: TrialCoordinator | None = None
+                if scheduler is not None and args.operation == "run":
                     from .ase_scheduler import AgentSkillEvalCoordinator
+                    from .skillrank_scheduler import SkillRankCoordinator
 
-                    coordinator = AgentSkillEvalCoordinator(service.repository, plan)
+                    if scheduler.adapter_id == SKILLRANK_DIAGNOSTIC:
+                        coordinator = SkillRankCoordinator(service.repository, plan)
+                    else:
+                        coordinator = AgentSkillEvalCoordinator(service.repository, plan)
                 adapter = AEEPAssessmentAdapter(service, plan.plan_id, source, coordinator=coordinator)
                 if content_digest(adapter.plan) != content_digest(plan):
                     raise ConfigurationError("supplied plan differs from canonical record")

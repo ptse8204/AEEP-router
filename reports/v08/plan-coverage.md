@@ -1,5 +1,14 @@
 # 0.8 plan coverage and remaining work
 
+<!-- skillrank-native-v9-20261105:start -->
+[SkillRank native integration](../toolkit-v2/c13/skillrank-native-carrier-20261105/README.md)
+adds a versioned one-task engineering pair to the ordinary CLI. The
+real native scheduler accepted one passing and one failing synthetic
+grade, with a settled operation. Its sandbox denies writes, unrelated
+file reads, network binds and child execution. The live managed-worker
+diagnostic and full stack completion remain open.
+<!-- skillrank-native-v9-20261105:end -->
+
 <!-- langfuse-ingestion-skillrank-callback-20261105:start -->
 [Private Langfuse](../toolkit-v2/c13/langfuse-ingestion-readback-20261105/README.md)
 returned the exact prior trace, span and source receipt hash.

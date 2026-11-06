@@ -102,7 +102,8 @@ def prepare_canonical(
     selected = workflow.configurations[configuration]
     if (
         preview["review_sha256"] != reviewed_digest
-        or selected.evaluator not in {"managed", "agent-skill-eval"}
+        or selected.evaluator not in {"managed", "agent-skill-eval", "skillrank"}
+        or (selected.evaluator != "managed" and "scheduler" not in preview)
         or selected.preparation is None
         or preview["preparation"] is None
     ):

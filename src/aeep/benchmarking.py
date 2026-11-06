@@ -1836,9 +1836,21 @@ class BenchmarkRunner:
         finally:
             await router.close()
 
-    async def run(self, suite: BenchmarkSuite, *, coordinator: TrialCoordinator | None = None) -> BenchmarkCampaignReport:
+    async def run(
+        self, suite: BenchmarkSuite, *, coordinator: TrialCoordinator | None = None,
+        diagnostic_pair: tuple[str, str] | None = None,
+    ) -> BenchmarkCampaignReport:
+        if diagnostic_pair is not None and (
+                coordinator is None or len(suite.cases) != 1 or not suite.paired_order
+                or suite.conditions != [AssessmentBenchmarkCondition.FRESH_WORKER]
+                or diagnostic_pair[0] == diagnostic_pair[1]
+                or tuple((route.route_id, route.executor_id) for route in suite.routes)
+                != tuple((identity, identity) for identity in diagnostic_pair)):
+            raise ConfigurationError("paired scheduling requires one fixed fresh-worker diagnostic")
         if coordinator is not None and (
-                not 1 <= len(suite.cases) <= 6 or len(suite.routes) != 1 or suite.repetitions != 1
+                not 1 <= len(suite.cases) <= 6
+                or len(suite.routes) != (2 if diagnostic_pair is not None else 1)
+                or suite.repetitions != 1
                 or len(suite.conditions) != 1 or suite.warmup_cases
                 or suite.conditions[0] not in {BenchmarkCondition.PROCESS_COLD,
                     AssessmentBenchmarkCondition.ROUTER_FRESH, AssessmentBenchmarkCondition.FRESH_WORKER}

@@ -1513,7 +1513,7 @@ class ReceiptStore:
                         identities = [document["request_id"]]
                     integration = None
                     if row["kind"] == "plan" and document.get("schema_version") in {
-                        "assessment.plan.v7", "assessment.plan.v8",
+                        "assessment.plan.v7", "assessment.plan.v8", "assessment.plan.v9",
                     }:
                         integration = document.get("integration_case_set_digest")
                         case_sets = [json.loads(item["payload_json"]) for item in
@@ -1526,7 +1526,7 @@ class ReceiptStore:
                     for identity in identities:
                         # Integration sets are content-addressed; request_id is
                         # their preparation identity, not a materialization alias.
-                        # Only the exact set bound by this v7/v8 plan may satisfy it.
+                        # Only the exact set bound by this integration plan may satisfy it.
                         matches = ({integration} if integration is not None else
                                    {by_identity[kind, identity] for kind in
                                     {"recipe_materialization_request", "plan"}

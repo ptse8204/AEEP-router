@@ -564,7 +564,7 @@ class PilotPolicy(StrictModel):
 
 
 class AssessmentPlan(ComparisonEvidence):
-    schema_version: Literal["assessment.plan.v1", "assessment.plan.v2", "assessment.plan.v3", "assessment.plan.v4", "assessment.plan.v5", "assessment.plan.v6", "assessment.plan.v7", "assessment.plan.v8"] = "assessment.plan.v1"
+    schema_version: Literal["assessment.plan.v1", "assessment.plan.v2", "assessment.plan.v3", "assessment.plan.v4", "assessment.plan.v5", "assessment.plan.v6", "assessment.plan.v7", "assessment.plan.v8", "assessment.plan.v9"] = "assessment.plan.v1"
     plan_id: str = Field(default_factory=lambda: new_id("plan"))
     subject_digest: Digest
     recipe_digest: Digest
@@ -592,9 +592,10 @@ class AssessmentPlan(ComparisonEvidence):
     @model_validator(mode="after")
     def bound_comparison(self) -> AssessmentPlan:
         incremental = self.comparison is not None and self.comparison.experiment is not None
-        integration = self.schema_version in {"assessment.plan.v7", "assessment.plan.v8"}
-        if (self.schema_version == "assessment.plan.v8") != (self.scheduler_digest is not None):
-            raise ValueError("external scheduling requires an explicit v8 plan")
+        diagnostic_pair = self.schema_version == "assessment.plan.v9"
+        integration = diagnostic_pair or self.schema_version in {"assessment.plan.v7", "assessment.plan.v8"}
+        if (diagnostic_pair or self.schema_version == "assessment.plan.v8") != (self.scheduler_digest is not None):
+            raise ValueError("external scheduling requires an explicit v8 or v9 plan")
         if self.scheduler_digest is not None and self.scheduler_digest not in self.definition_digests:
             raise ValueError("scheduler must be frozen in the reviewed plan definitions")
         if integration != (self.integration_case_set_digest is not None):
@@ -610,8 +611,16 @@ class AssessmentPlan(ComparisonEvidence):
                     or len({case.case_id for case in self.suite.cases}) != len(self.suite.cases)
                     or any(case.split.value != "qualification" for case in self.suite.cases)
                     or self.suite.repetitions != 1 or len(self.suite.conditions) != 1
-                    or self.suite.warmup_cases or len(self.suite.routes) != 1
-                    or self.suite.routes[0].executor_id != self.candidate_id):
+                    or self.suite.warmup_cases):
+                raise ValueError("integration plans are bounded required-use checks, never value campaigns")
+            routes = [(route.route_id, route.executor_id) for route in self.suite.routes]
+            if diagnostic_pair:
+                if (len(self.suite.cases) != 1 or self.candidate_id == self.baseline_id
+                        or routes != [(self.baseline_id, self.baseline_id), (self.candidate_id, self.candidate_id)]
+                        or self.suite.conditions[0].value != "fresh-worker"
+                        or not self.suite.paired_order or self.suite.baseline_route_id != self.baseline_id):
+                    raise ValueError("v9 requires one fresh diagnostic in control then treatment order")
+            elif len(routes) != 1 or routes[0][1] != self.candidate_id:
                 raise ValueError("integration plans are bounded required-use checks, never value campaigns")
             if self.scheduler_digest is not None and self.suite.conditions[0].value not in {
                     "process-cold", "router-fresh", "fresh-worker"}:

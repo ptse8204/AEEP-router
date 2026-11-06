@@ -1,5 +1,23 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- skillrank-native-v9-20261105:start -->
+**November 5. SkillRank uses the ordinary scheduler path.**
+
+The [native carrier](../../reports/toolkit-v2/c13/skillrank-native-carrier-20261105/README.md)
+builds from the retained upstream source and Cargo lock. The real
+native process passed the ordinary v9 scheduler on two synthetic grade
+certificates. Its charge settled, and the sandbox denied certificate
+writes, unrelated reads, network binds and child launches. Source guards
+bound to the final branch change are tracked separately.
+
+V9 permits one fresh ordinary control and one required-use treatment
+under an exact engineering review. It cannot qualify or admit a skill.
+The live SkillRank diagnostic still requires current paired worker
+evidence, one exact public task and bounded authority for the two turns.
+EvoAgentX, AFlow, Waza and the remaining SkillsBench tasks have separate
+open gates. Comparisons remain paused. C13 stays in progress.
+<!-- skillrank-native-v9-20261105:end -->
+
 <!-- langfuse-ingestion-skillrank-callback-20261105:start -->
 **November 5. Langfuse ingestion and disablement verified.**
 

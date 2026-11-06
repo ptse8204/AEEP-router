@@ -95,6 +95,14 @@ their serialized meanings. A new profile does not inherit worker qualification.
 The generic profile currently exposes one primary skill with its pinned package
 files; multiple independently exposed skills and tool bundles still need work.
 
+Select SkillRank for a bounded diagnostic of one reviewed task and primary skill.
+The v9 assessment plan binds a fresh ordinary control followed by the same task
+with required skill use. Its native scheduler receives only opaque identifiers
+and protected grade certificates. Run it with a separate exact engineering
+review. The v7 managed and v8 ASE plans preserve their one-route rules.
+The [carrier and verification record](../../reports/toolkit-v2/c13/skillrank-native-carrier-20261105/README.md)
+tracks the native runtime and the remaining live diagnostic gate.
+
 ```bash
 PYTHONPATH=src python3 -m aeep_toolkit stack-status
 PYTHONPATH=src python3 -m aeep_toolkit benchmark list

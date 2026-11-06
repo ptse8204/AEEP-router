@@ -10,6 +10,7 @@ import time
 from collections.abc import Awaitable, Callable
 from contextlib import suppress
 from pathlib import Path
+from typing import Any
 
 from aeep.assessment.models import (
     AssessmentLimits,
@@ -47,40 +48,36 @@ class SchedulerObservation(StrictModel):
     upstream_timing_is_compatibility_only: bool = True
 
 
-class AgentSkillEvalCoordinator:
+class ControlledScheduler:
+    grading_semantics = SchedulerObservation.model_fields["grading_semantics"].default
+
+    def validate_definition(self) -> None:
+        raise NotImplementedError
+
+    def prepare_payload(
+        self, workspace: Path, trial_ids: tuple[str, ...], token: str
+    ) -> dict[str, object]:
+        raise NotImplementedError
+
+    def requested_slot(self, message: dict[str, Any], token: str) -> str:
+        raise NotImplementedError
+
+    def certificate(self, slot: str, trial: BenchmarkTrial, token: str) -> tuple[str, dict[str, Any]]:
+        raise NotImplementedError
+
+    def validate_completion(
+        self, output: object, trials: dict[str, BenchmarkTrial], token: str
+    ) -> dict[str, dict[str, int | float]]:
+        raise NotImplementedError
+
     def __init__(self, repository: AssessmentRepository, plan: AssessmentPlan):
         self.repository, self.plan = repository, plan
         if plan.scheduler_digest is None:
             raise ConfigurationError("external evaluator is absent from the frozen plan")
         self.definition_digest = plan.scheduler_digest
         self.definition = require_scheduler(repository, self.definition_digest)
-        if (
-            self.definition.adapter_id != "agent-skill-eval.controlled.v1"
-            or self.definition.source_revision != ASE_REVISION
-            or self.definition.artifact_sha256 != ASE_ARTIFACT
-        ):
-            raise ConfigurationError("scheduler differs from the reviewed ASE contract")
-        expected_argv = [
-            "/usr/bin/sandbox-exec",
-            "-f",
-            self.definition.boundary_profile,
-            str(Path(self.definition.runtime_root) / "bin/python"),
-            "-I",
-            "-B",
-            "-m",
-            "aeep_toolkit.ase_child",
-        ]
-        if self.definition.executor.config["argv"] != expected_argv:
-            raise ConfigurationError("scheduler entrypoint differs from the reviewed child")
+        self.validate_definition()
         self.require_runtime()
-        for name, expected in ASE_SOURCE_FILES.items():
-            matches = [
-                value
-                for path, value in self.definition.executable_dependencies.items()
-                if path.endswith("/" + name)
-            ]
-            if matches != [expected]:
-                raise ConfigurationError("scheduler must bind every pinned ASE source file")
 
     def authorize(self) -> None:
         self.repository.authorize(self.plan)
@@ -120,54 +117,14 @@ class AgentSkillEvalCoordinator:
         trials: dict[str, BenchmarkTrial] = {}
         grade_summaries = {}
         try:
-            subject = AssessmentSubject.model_validate(
-                repository.get("subject", plan.subject_digest)
-            )
-            payload = inspect(Path(subject.location))
-            if payload.describe()["files"] != subject.dependency_digests:
-                raise ConfigurationError(
-                    "scheduler candidate snapshot differs from the canonical subject"
-                )
             workspace.mkdir(mode=0o700)
-            (workspace / "responses").mkdir(mode=0o700)
-            for directory in ("home", "tmp", "candidate"):
+            for directory in ("responses", "home", "tmp"):
                 (workspace / directory).mkdir(mode=0o700)
-            # The candidate copy is coordinator metadata only. Actual exposure
-            # continues to be verified in the existing isolated worker profiles.
-            mapping = ReviewedMapping.model_validate(repository.get("mapping", plan.mapping_digest))
-            invocation = mapping.candidate.managed_host_config().invocation
-            if invocation is None or invocation.mode != "skill" or not invocation.skill_name:
-                raise ConfigurationError("ASE bridge requires the reviewed primary skill mapping")
-            skill_name = invocation.skill_name
-            payload.stage(workspace / "candidate" / skill_name)
-            evaluations = workspace / "candidate" / skill_name / "evals"
-            evaluations.mkdir()
-            (evaluations / "evals.json").write_text(
-                json.dumps(
-                    {
-                        "skill_name": skill_name,
-                        "evals": [
-                            {
-                                "id": slot,
-                                "prompt": slot,
-                                "expected_output": "Canonical protected task grade",
-                                "assertions": [
-                                    {
-                                        "type": "json_path",
-                                        "json_path": "canonical_valid",
-                                        "equals": True,
-                                    }
-                                ],
-                            }
-                            for slot in trial_ids
-                        ],
-                    }
-                )
-            )
             token = content_digest(
                 {"plan": content_digest(plan), "scheduler": self.definition_digest}
             )
-            queue: asyncio.Queue[dict[str, str]] = asyncio.Queue(maxsize=6)
+            payload = self.prepare_payload(workspace, trial_ids, token)
+            queue: asyncio.Queue[str] = asyncio.Queue(maxsize=6)
             buffer = bytearray()
 
             def observe(chunk: bytes) -> None:
@@ -182,19 +139,12 @@ class AgentSkillEvalCoordinator:
                         raise ConfigurationError("scheduler protocol requires an object")
                     if message.get("kind") == "done":
                         continue
-                    if (
-                        set(message) != {"kind", "slot", "run_token"}
-                        or message["kind"] != "trial"
-                        or message["run_token"] != token
-                    ):
-                        raise ConfigurationError("scheduler requested an unreviewed operation")
-                    queue.put_nowait(message)
+                    queue.put_nowait(self.requested_slot(message, token))
 
             async def dispatch() -> None:
                 nonlocal nested
                 for slot in trial_ids:
-                    message = await queue.get()
-                    if message["slot"] != slot:
+                    if await queue.get() != slot:
                         raise ConfigurationError(
                             "scheduler reordered, repeated or invented a trial"
                         )
@@ -208,33 +158,22 @@ class AgentSkillEvalCoordinator:
                     if trial is None or trial.state != "complete" or type(trial.valid) is not bool:
                         raise ConfigurationError("canonical trial is skipped or unresolved")
                     trials[slot] = trial
-                    response = {
-                        "run_token": token,
-                        "slot": slot,
-                        "trial_ref": content_digest(trial),
-                        "canonical_valid": trial.valid,
-                    }
-                    target = workspace / "responses" / (slot + ".json")
-                    # A malicious child cannot replace the canonical answer with a link.
-                    temporary = workspace / "responses" / (slot + ".tmp")
+                    name, response = self.certificate(slot, trial, token)
+                    target = workspace / "responses" / (name + ".json")
+                    # Publish the complete record without replacing a child-created path.
+                    temporary = target.with_suffix(".tmp")
                     fd = os.open(
                         temporary, os.O_CREAT | os.O_EXCL | os.O_WRONLY | os.O_NOFOLLOW, 0o600
                     )
                     with os.fdopen(fd, "w") as stream:
                         json.dump(response, stream)
-                    # Publish a whole JSON record without replacing a child-created path.
                     os.link(temporary, target, follow_symlinks=False)
                     temporary.unlink()
 
             action = ActionRequest(
                 action_id=operation,
                 capability=definition.executor.capability,
-                input={
-                    "slots": list(trial_ids),
-                    "run_token": token,
-                    "skill_name": skill_name,
-                    "response_timeout": float(definition.executor.config["timeout_seconds"]),
-                },
+                input=payload,
             )
             context = ExecutionContext(
                 request=action,
@@ -266,31 +205,7 @@ class AgentSkillEvalCoordinator:
                 or buffer
             ):
                 raise ConfigurationError("upstream scheduler failed; receipts and charges retained")
-            output = raw.output
-            if (
-                not isinstance(output, dict)
-                or set(output) != {"kind", "grades", "upstream_timing_is_compatibility_only"}
-                or output["kind"] != "done"
-                or output["upstream_timing_is_compatibility_only"] is not True
-                or len(output["grades"]) != len(trial_ids)
-            ):
-                raise ConfigurationError("upstream grader completion differs from its contract")
-            for slot, grade in zip(trial_ids, output["grades"], strict=True):
-                expected = int(trials[slot].valid is True)
-                summary = {
-                    "passed": expected,
-                    "failed": 1 - expected,
-                    "total": 1,
-                    "pass_rate": float(expected),
-                    "skipped": 0,
-                }
-                if grade != {"slot": slot, "summary": summary} or any(
-                    type(grade["summary"][key]) is not type(value) for key, value in summary.items()
-                ):
-                    raise ConfigurationError(
-                        "upstream grade differs from the canonical protected grade"
-                    )
-                grade_summaries[slot] = summary
+            grade_summaries = self.validate_completion(raw.output, trials, token)
         except BaseException as caught:
             error = caught
         finally:
@@ -342,7 +257,7 @@ class AgentSkillEvalCoordinator:
             )
         if error is not None:
             raise ConfigurationError(
-                "controlled ASE scheduling stopped; inspect canonical evidence"
+                "controlled scheduling stopped; inspect canonical evidence"
             ) from error
         assert receipt_ref is not None
         observation = SchedulerObservation(
@@ -350,5 +265,135 @@ class AgentSkillEvalCoordinator:
             process_receipt_ref=receipt_ref,
             trial_refs={slot: content_digest(trial) for slot, trial in trials.items()},
             grade_summaries=grade_summaries,
+            grading_semantics=self.grading_semantics,
         )
         repository.put("scheduler_observation", plan.plan_id, observation)
+
+
+class AgentSkillEvalCoordinator(ControlledScheduler):
+    def validate_definition(self) -> None:
+        if (
+            self.definition.adapter_id != "agent-skill-eval.controlled.v1"
+            or self.definition.source_revision != ASE_REVISION
+            or self.definition.artifact_sha256 != ASE_ARTIFACT
+        ):
+            raise ConfigurationError("scheduler differs from the reviewed ASE contract")
+        expected_argv = [
+            "/usr/bin/sandbox-exec",
+            "-f",
+            self.definition.boundary_profile,
+            str(Path(self.definition.runtime_root) / "bin/python"),
+            "-I",
+            "-B",
+            "-m",
+            "aeep_toolkit.ase_child",
+        ]
+        if self.definition.executor.config["argv"] != expected_argv:
+            raise ConfigurationError("scheduler entrypoint differs from the reviewed child")
+        for name, expected in ASE_SOURCE_FILES.items():
+            matches = [
+                value
+                for path, value in self.definition.executable_dependencies.items()
+                if path.endswith("/" + name)
+            ]
+            if matches != [expected]:
+                raise ConfigurationError("scheduler must bind every pinned ASE source file")
+
+    def prepare_payload(
+        self, workspace: Path, trial_ids: tuple[str, ...], token: str
+    ) -> dict[str, object]:
+        subject = AssessmentSubject.model_validate(
+            self.repository.get("subject", self.plan.subject_digest)
+        )
+        payload = inspect(Path(subject.location))
+        if payload.describe()["files"] != subject.dependency_digests:
+            raise ConfigurationError(
+                "scheduler candidate snapshot differs from the canonical subject"
+            )
+        (workspace / "candidate").mkdir(mode=0o700)
+        # The candidate copy is coordinator metadata only. Actual exposure
+        # continues to be verified in the existing isolated worker profiles.
+        mapping = ReviewedMapping.model_validate(self.repository.get("mapping", self.plan.mapping_digest))
+        invocation = mapping.candidate.managed_host_config().invocation
+        if invocation is None or invocation.mode != "skill" or not invocation.skill_name:
+            raise ConfigurationError("ASE bridge requires the reviewed primary skill mapping")
+        skill_name = invocation.skill_name
+        payload.stage(workspace / "candidate" / skill_name)
+        evaluations = workspace / "candidate" / skill_name / "evals"
+        evaluations.mkdir()
+        (evaluations / "evals.json").write_text(
+            json.dumps(
+                {
+                    "skill_name": skill_name,
+                    "evals": [
+                        {
+                            "id": slot,
+                            "prompt": slot,
+                            "expected_output": "Canonical protected task grade",
+                            "assertions": [
+                                {
+                                    "type": "json_path",
+                                    "json_path": "canonical_valid",
+                                    "equals": True,
+                                }
+                            ],
+                        }
+                        for slot in trial_ids
+                    ],
+                }
+            )
+        )
+        return {
+            "slots": list(trial_ids),
+            "run_token": token,
+            "skill_name": skill_name,
+            "response_timeout": float(self.definition.executor.config["timeout_seconds"]),
+        }
+
+    def requested_slot(self, message: dict[str, Any], token: str) -> str:
+        if (
+            set(message) != {"kind", "slot", "run_token"}
+            or message["kind"] != "trial"
+            or message["run_token"] != token
+            or not isinstance(message["slot"], str)
+        ):
+            raise ConfigurationError("scheduler requested an unreviewed operation")
+        return message["slot"]
+
+    def certificate(self, slot: str, trial: BenchmarkTrial, token: str) -> tuple[str, dict[str, Any]]:
+        return slot, {
+            "run_token": token,
+            "slot": slot,
+            "trial_ref": content_digest(trial),
+            "canonical_valid": trial.valid,
+        }
+
+    def validate_completion(
+        self, output: object, trials: dict[str, BenchmarkTrial], token: str
+    ) -> dict[str, dict[str, int | float]]:
+        grade_summaries = {}
+        if (
+            not isinstance(output, dict)
+            or set(output) != {"kind", "grades", "upstream_timing_is_compatibility_only"}
+            or output["kind"] != "done"
+            or output["upstream_timing_is_compatibility_only"] is not True
+            or len(output["grades"]) != len(trials)
+        ):
+            raise ConfigurationError("upstream grader completion differs from its contract")
+        for slot, grade in zip(trials, output["grades"], strict=True):
+            expected = int(trials[slot].valid is True)
+            summary = {
+                "passed": expected,
+                "failed": 1 - expected,
+                "total": 1,
+                "pass_rate": float(expected),
+                "skipped": 0,
+            }
+            if grade != {"slot": slot, "summary": summary} or any(
+                type(grade["summary"][key]) is not type(value) for key, value in summary.items()
+            ):
+                raise ConfigurationError(
+                    "upstream grade differs from the canonical protected grade"
+                )
+            grade_summaries[slot] = summary
+        return grade_summaries

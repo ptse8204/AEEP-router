@@ -70,7 +70,7 @@ from .recipes import (
 )
 from .reporting import apply_assessment_costs, fit_report
 from .repository import AssessmentRepository
-from .scheduling import TrialCoordinator, require_scheduler
+from .scheduling import SKILLRANK_DIAGNOSTIC, TrialCoordinator, require_scheduler
 
 
 def benchmark_route(spec: ExecutorSpec) -> BenchmarkRoute:
@@ -321,6 +321,14 @@ class AssessmentService:
             preceding_pilot = AssessmentPlan.model_validate(self.repository.get("plan", pilot_report.plan_digest))
         pilot_digest = self.repository.put("pilot_policy", content_digest(pilot), pilot) if pilot else None
         scheduler = require_scheduler(self.repository, scheduler_digest) if scheduler_digest else None
+        skillrank_pair = scheduler is not None and scheduler.adapter_id == SKILLRANK_DIAGNOSTIC
+        if skillrank_pair and (
+            environment.kind not in {"container", "codex_sandbox"}
+            or len(cases) != 1
+            or any(route.kind != ExecutorKind.MANAGED_HOST
+                   or route.managed_host_config().managed_worker is None for route in (baseline, spec))
+        ):
+            raise ConfigurationError("SkillRank requires one diagnostic case and two controlled workers")
         if scheduler is not None and (integration_cases is None or len(cases) > scheduler.maximum_requests):
             raise ConfigurationError("external scheduler requires its bounded integration cases")
         if scheduler is not None and any(
@@ -328,7 +336,7 @@ class AssessmentService:
                 for path, value in scheduler.executable_dependencies.items()):
             raise ConfigurationError("scheduler cannot replace canonical executable dependencies")
         plan = AssessmentPlan(
-            schema_version="assessment.plan.v8" if scheduler else "assessment.plan.v7" if integration_cases else "assessment.plan.v6" if pilot_report else "assessment.plan.v5" if pilot else "assessment.plan.v4" if experiment else "assessment.plan.v3" if case_set is not None else "assessment.plan.v2",
+            schema_version="assessment.plan.v9" if skillrank_pair else "assessment.plan.v8" if scheduler else "assessment.plan.v7" if integration_cases else "assessment.plan.v6" if pilot_report else "assessment.plan.v5" if pilot else "assessment.plan.v4" if experiment else "assessment.plan.v3" if case_set is not None else "assessment.plan.v2",
             scheduler_digest=scheduler_digest,
             pilot=pilot,
             pilot_report_digest=content_digest(pilot_report) if pilot_report else None,
@@ -356,14 +364,14 @@ class AssessmentService:
                 repetitions=1,
                 routes=[
                     benchmark_route(item)
-                    for item in ((spec,) if experiment and experiment.stage == "qualification" else (spec, baseline, *challengers, *([reference] if reference else [])))
+                    for item in ((baseline, spec) if skillrank_pair else (spec,) if experiment and experiment.stage == "qualification" else (spec, baseline, *challengers, *([reference] if reference else [])))
                 ],
                 cases=cases,
                 conditions=[AssessmentBenchmarkCondition(comparison.primary_condition)],
                 sequential_stages=True,
                 paired_order=experiment is None or experiment.stage != "aeep_value",
                 stop_on_screening_failure=pilot is None,
-                baseline_route_id=None if experiment and experiment.stage == "qualification" else baseline_id,
+                baseline_route_id=None if experiment and experiment.stage == "qualification" and not skillrank_pair else baseline_id,
                 max_total_cash_usd=Decimal(0),
                 deterministic_tools_available=True,
                 allow_zero_subscription_weight=True,
@@ -755,7 +763,8 @@ class AssessmentService:
         verify_dependencies(plan.executable_dependencies)
         if plan.scheduler_digest is not None:
             scheduler = require_scheduler(self.repository, plan.scheduler_digest)
-            if (len(plan.suite.cases) > scheduler.maximum_requests
+            if ((plan.schema_version == "assessment.plan.v9") != (scheduler.adapter_id == SKILLRANK_DIAGNOSTIC)
+                    or len(plan.suite.cases) > scheduler.maximum_requests
                     or any(plan.executable_dependencies.get(path) != value
                            for path, value in scheduler.executable_dependencies.items())):
                 raise ConfigurationError("scheduler dependencies differ from the reviewed plan")
@@ -1299,7 +1308,13 @@ class AssessmentService:
 
             finally:
                 self.repository.finish_operation(operation_id, elapsed_seconds=max(0, time.perf_counter() - started - sum(program_seconds)), resources=ResourceVector(cpu_ms=(time.process_time() - cpu_started) * 1000))
-            campaign = await runner.run(plan.suite, coordinator=coordinator) if coordinator else await runner.run(plan.suite)
+            if plan.schema_version == "assessment.plan.v9":
+                campaign = await runner.run(
+                    plan.suite, coordinator=coordinator,
+                    diagnostic_pair=(plan.baseline_id, plan.candidate_id),
+                )
+            else:
+                campaign = await runner.run(plan.suite, coordinator=coordinator) if coordinator else await runner.run(plan.suite)
         except ConfigurationError:
             error_code = "assessment_blocked_or_budget_exhausted"
             trials = [
