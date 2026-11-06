@@ -1,0 +1,20 @@
+{
+  "docker_engine": "29.7.2",
+  "only_internal_bridge": true,
+  "requested_port_binding": {
+    "3000/tcp": [
+      {
+        "HostIp": "127.0.0.1",
+        "HostPort": "39067"
+      }
+    ]
+  },
+  "retained_realized_bindings": {},
+  "prior_health_failures": 20,
+  "prior_next_js_ready_signal": true,
+  "source": "https://github.com/moby/moby/discussions/53256",
+  "supported_inference": "Internal-only bridge has no default-gateway network for host port publication.",
+  "current_readonly_inspect_is_post_stop": true,
+  "upstream_ingestion_reverified": false,
+  "new_subnet_disjoint": true
+}

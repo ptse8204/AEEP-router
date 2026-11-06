@@ -1,0 +1,76 @@
+{
+  "purpose": "One Sales Pivot ordinary CLI repeat after the ungraded worker handoff failure.",
+  "previous_review_sha256": "036e3cb4c53b06437d9ee336ea800897fc871288b54d161aafd25452bb50277f",
+  "source_sha256": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+  "cases": [
+    {
+      "configuration": "document-data",
+      "rights_review_ref": "48fbc98fe0e810bd6c8a42f5a59227c01759d211e267dd992607bde3f95e3599",
+      "task_id": "sales-pivot-analysis",
+      "archive_sha256": "347fad995448f6b7a48420cadae4d5206ecdfa9481b2e6076f49aeeec18e384f",
+      "recipe_digest": "483628f76cebe586005a145d33e4c223cae83480ab52206c0c65167b1022f792",
+      "integration_case_set_id": "300cf7cb8d1eadc89aa69c13ca0faa29803b7030ab6ed580171f7fe66cfeecc8",
+      "grader_environment_digest": "81f23314a5d22fc2428116351c21897904dd7fde084d49a30ce32bc1c3167971",
+      "grader_image_id": "sha256:4474cf22f867c681aa6120ce2f98d809413f89755cf11a445444b1b993754ea1",
+      "plan_draft_created": false,
+      "model_turns": 0,
+      "preview_sha256": "6f47fee5eda598392006f3ef501f22e237dbfaee4715b5ec90bf4bb1f9319c6d",
+      "remaining_blockers": [
+        "aeep-evaluator: extension is blocked: Managed worker/service/plan/grader readiness and execution authority remain required.",
+        "skillsbench: extension is blocked: Task-specific asset rights, reviewed runtimes and protected verifier/reference journeys remain required.",
+        "canonical assessment preparation and applicable worker/grader evidence remain required"
+      ]
+    }
+  ],
+  "worker_image_ids": {
+    "sales-control": "sha256:5116daa2007110be23d7d5407d22a3cfacc3967e103471181addede1126a2704",
+    "sales-candidate": "sha256:4d7e4882f696f1aecda936ae28aa1940a50ac5b8b14f0e2278a3ba13ae44d865"
+  },
+  "proxy": {
+    "proxy_name": "aeep-reviewed-model-proxy",
+    "proxy_id": "5f9a44f86633409a250d11a78cf59357495da2078724ee0261bc73acff57f0f3",
+    "proxy_image": "sha256:5bf590eb0bf8a06187ff092f0f75cf83b540cc27bd6a75fd8bd91305ca7b13de"
+  },
+  "pair_sha256": "d0d59d9c45aa3d477592a6f4746fe1ad1a7e139213f323c2dd839d8dd9672a48",
+  "instruction_sha256": "0a01bae3c1f0599d451031f696f87146d22e08945eb0ffb91b4c5533a42e32c0",
+  "changes": "Clarify only archive extraction, original /root path mapping, and exact file/size check.",
+  "workload_unchanged": true,
+  "allowed_destination": "codex",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "medium",
+  "evaluator": "managed",
+  "counters_before": [
+    13757,
+    3800,
+    125834.3580499764,
+    "0.0"
+  ],
+  "maximum_operations": 48,
+  "maximum_reserved_seconds": 3200,
+  "maximum_model_turns": 1,
+  "maximum_cash_usd": "0",
+  "phases": [
+    "One fresh paired zero-turn isolation check",
+    "One new canonical CLI plan for Sales",
+    "One required-use model turn and original protected grading",
+    "Report and restore stopped proxy"
+  ],
+  "no_spring_replay": true,
+  "automatic_retries": false,
+  "comparisons": "PAUSED",
+  "pins": {
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-sales-handoff-20261105/run.py": "9dd0e74ca20f9b40f912f5908b60c058258bdeacb5fb2cea937d634ab2f563ca",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-managed-worker-preparation-20261105/run-engineering.py": "9f652c4a4dc1bf609df863f4473ef187b83dcb570484c9b4b3ceb686f8f202ac",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-managed-worker-preparation-20261105/audit-trial.py": "8fcf0609cc55d1b7e205d0d34b9b5a944490732340924c3ee5e7f5e93e4d9546",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-managed-worker-preparation-20261105/engineering-result.json": "7faff16177f10cc9cb7127b91f17388f89148f849f47ee112474e92f923c60ce",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-managed-worker-preparation-20261105/engineering-sales-trial-audit.json": "7a39219560eda5a16f9c4c38b33eb9aecaac5e1b53ff4a625a7fafed725410a2",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-managed-worker-preparation-20261105/engineering-spring-result.json": "e4f117dad31cb81ca40ae422b404a609abc8551f05517be02f1cf2d9dba10df9",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-sales-artifact-diagnostic-20261105/result.json": "13e08c3c1beac67ad50c9eb2b23c742d00bd436805eec6e617357bd311844aea",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/integration-snapshot-correction-20261103/source.json": "76c68c2add9b8f1de613d1f1a224d23b2ea1f38012bf0bf14840a12cf7198817",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-contained-graders-20261105/rights-bound/sales-recipe.json": "9a7cdfeba8b4382b682c23751f77043bcd6467e67a0ba16ff4c3c11582c41e89",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-contained-graders-20261105/rights-bound/sales-integration-cases.json": "de439ed9f6d31edfa5df55b8878b253e8c81e1ff5bf0795ca309d264ca5cd60c"
+  },
+  "expiry_unchanged": "2026-11-08T12:00:00Z",
+  "initial_failure_cause_known": false,
+  "started": false
+}

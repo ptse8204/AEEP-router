@@ -1,0 +1,77 @@
+{
+  "purpose": "First ordinary CLI lifecycle of the two exact SkillsBench task-file packages.",
+  "authority_sha256": "f0f86d6af2600817eb6de50dd12ac4f861f09ac36f90a27bc84e4ae6f044635c",
+  "source_sha256": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+  "expires_at": "2026-11-08T12:00:00Z",
+  "workflow": {
+    "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-workflow-runtime-20261105/workflow.json",
+    "sha256": "59dc7068d53913d21e558a095e89959b1b5cce1f50849d13a80641877d7294b1"
+  },
+  "registry": {
+    "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-workflow-runtime-20261105/registry.json",
+    "sha256": "60c34b27df680a19c0212193ab10a2b7c63da83e246bd12ae733524dce04676b"
+  },
+  "policy": {
+    "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-workflow-runtime-20261105/policy.json",
+    "sha256": "95fde84c3e1701dddcdd2506bac15b216fb8c44a96ef27838fa47570cd28db9c"
+  },
+  "manifest": {
+    "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-workflow-runtime-20261105/aeep.json",
+    "sha256": "e87ab069cd2daea4e4c280655ebec628d038c4d735f129742a68d7adcbd3f227"
+  },
+  "ledger": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-workflow-runtime-20261105/receipts.sqlite3",
+  "installations": {
+    "document-data": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-workflow-runtime-20261105/document-data-installation.json",
+      "sha256": "1f239ca27a98eaf1a2140ae22ea215ec67c2c0cab48b6536b2b0199b94c287bf"
+    },
+    "software-engineering": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-workflow-runtime-20261105/software-engineering-installation.json",
+      "sha256": "d55df608a4662ad820e10f6c8527366d77a448002f85d1f4c71aa07d56a9faf6"
+    },
+    "sales-removal-check": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-workflow-runtime-20261105/sales-removal-check-installation.json",
+      "sha256": "edebb3b842e946da92da7c2790464b73fd43d552b347fde3338b43e4693149c3"
+    }
+  },
+  "actions": [
+    [
+      "document-data",
+      "setup",
+      "87ac72b92a34e162f75adafd79f429732fed5c9f286dceee6912782e2c350df8"
+    ],
+    [
+      "document-data",
+      "readiness",
+      "cee939717157e2a0c441d598f721fed0ff74c3588d1d5db5b49d0914d7e9d495"
+    ],
+    [
+      "software-engineering",
+      "setup",
+      "7af33faa20cd77413654a5b11b25bd6be7be5e654aad34b1097fd495bbb96003"
+    ],
+    [
+      "software-engineering",
+      "readiness",
+      "4df9d2f9ed10b82b99731a358a5d848e6baa4535465bc31574461629f0990bf5"
+    ],
+    [
+      "sales-removal-check",
+      "setup",
+      "7d95112aa0a111b52d678da96ecb1731996762e33aa75d8905d08ee903dbb88a"
+    ],
+    [
+      "sales-removal-check",
+      "remove",
+      "065ba8fb884e080bc72cc90717342e669b160a3a7f7fd52d782818b00cbfecd2"
+    ]
+  ],
+  "max_operations": 6,
+  "max_overhead_seconds": 45,
+  "models": 0,
+  "cash_usd": "0",
+  "no_docker_effects": true,
+  "only_remove_unreferenced_disposable_copy": true,
+  "original_private_sources_preserved": true,
+  "runner_sha256": "664167716aad9876cbe4cc81ec74d31cf2a92df67daefcf5ec670f691b5c65d3"
+}

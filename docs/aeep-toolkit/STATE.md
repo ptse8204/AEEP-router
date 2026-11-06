@@ -1,5 +1,28 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- skillsbench-ordinary-cli-live-20261105:start -->
+**November 5. Both selected SkillsBench workflows reached protected grading.**
+
+[Spring Boot](../../reports/toolkit-v2/c13/skillsbench-managed-worker-preparation-20261105/README.md)
+scored 1/1 through the ordinary CLI. The first Sales Pivot attempt
+stopped on workbook retrieval before grading. The [approved Sales
+correction](../../reports/toolkit-v2/c13/skillsbench-sales-handoff-20261105/README.md)
+delivered a workbook and the protected verifier scored it 0/1.
+Both graded attempts retain verified token capture, task receipts
+and ordinary CLI reports. The failed handoff and all charges remain.
+
+The [owned task-file lifecycle](../../reports/toolkit-v2/c13/skillsbench-workflow-runtime-20261105/README.md)
+installed and verified both private packages. Selective removal
+removed a disposable copy and preserved both retained packages.
+The two named configurations resolve those packages and the actual
+plans. No model comparison ran.
+
+The [Langfuse carrier review](../../reports/toolkit-v2/c13/langfuse-loopback-carrier-20261105/README.md)
+addresses Docker's absent host port publication. Ingestion and
+export disablement remain open. The full integration gate stays
+open. Comparisons remain paused.
+<!-- skillsbench-ordinary-cli-live-20261105:end -->
+
 <!-- skillsbench-packaged-graders-and-langfuse-20261105:start -->
 **November 5. Both packaged SkillsBench graders passed.**
 

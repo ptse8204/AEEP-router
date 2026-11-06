@@ -1,5 +1,15 @@
 # 0.8 plan coverage and remaining work
 
+<!-- skillsbench-ordinary-cli-live-20261105:start -->
+The [ordinary CLI SkillsBench lifecycle](../toolkit-v2/c13/skillsbench-workflow-runtime-20261105/README.md)
+verified the two task packages, ownership and selective removal.
+Spring Boot scored 1/1 and Sales Pivot scored 0/1 after the approved
+handoff repair. Both graded attempts retain verified token capture,
+reports and settled costs. The first ungraded Sales attempt remains.
+The private Langfuse carrier repeat is separately reviewed.
+No comparison, resource qualification or release gate closed.
+<!-- skillsbench-ordinary-cli-live-20261105:end -->
+
 <!-- skillsbench-packaged-graders-and-langfuse-20261105:start -->
 [C13 packaged SkillsBench graders](../toolkit-v2/c13/skillsbench-contained-graders-20261105/README.md)
 passed both protected reference and negative controls. The ordinary CLI
