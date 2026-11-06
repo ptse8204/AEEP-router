@@ -1,5 +1,28 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- invoice-substitution-and-aflow-repeat-20261106:start -->
+**November 6. Invoice Fraud selected for local integration. C13 remains open.**
+
+The operator approved the conditional replacement of Financial Modeling QA
+with hard Invoice Fraud Detection at the same SkillsBench revision. The
+[asset review](../../reports/toolkit-v2/c13/skillsbench-invoice-fraud-20261106/README.md)
+cleared the pinned files for private engineering checks. The published Linux
+image is retained and matches its platform manifest and layer list. The first
+offline reference attempt stopped in the coordinator before container creation
+because the command result lacked its execution journal. Both operations
+settled. The [corrected review](../../reports/toolkit-v2/c13/skillsbench-invoice-fraud-20261106/continuation/reference-operation-review.json)
+awaits approval for the five unstarted checks. The existing composed domain
+runs and their original task bindings stay unchanged.
+
+The approved AFlow repeat stopped at the
+[guest interface assertion](../../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/namespace-check/diagnosis.json)
+before importing upstream code. Its operation settled and the container was
+removed. The [bounded observation](../../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/namespace-observation/operation-review.json)
+awaits repeat approval. It records the actual boundary and only imports
+AFlow if isolation passes. Optimizer calibration and actual workflow
+generation remain open. Comparisons stay paused.
+<!-- invoice-substitution-and-aflow-repeat-20261106:end -->
+
 <!-- aflow-retained-runtime-20261105:start -->
 **November 5. AFlow runtime built. The corrected check awaits approval.**
 

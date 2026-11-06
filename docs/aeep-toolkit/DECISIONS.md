@@ -3166,3 +3166,17 @@ Keep the original selection until the operator approves a change.
 The AFlow lock remains unchanged. Use the retained Linux ARM64
 CPython 3.12 target for the reviewed wheel closure and protect the
 generated-code and grading boundary before running its optimizer.
+
+## D166. Use Invoice Fraud for the local document/data integration
+
+The operator approved the hard same-revision replacement after asset
+and runtime review. The [asset and acquisition record](../../reports/toolkit-v2/c13/skillsbench-invoice-fraud-20261106/README.md)
+binds the original fixtures and Apache-2.0 notice. Use the retained
+image and keep the original verifier and ground truth outside workers.
+Financial Modeling QA stays parked pending a rights record. Provider
+disclosure and model dispatch remain separate approvals.
+
+Keep the two terminal AFlow boundary failures and their charges. The next
+review measures the retained runtime's interface and route counts before
+upstream import. It keeps the pinned image and offline policy. A successful
+import or graph parse still leaves finite calibration open.

@@ -2398,3 +2398,18 @@ ordinary search/show results retain their original scope.
 resolves the existing EvoAgentX and AFlow source pins. AFlow's 31
 exact wheels are acquired and its target metadata closure passes.
 Actual proposal generation and optimization remain open.
+
+### November 6 Invoice Fraud and AFlow runtime follow-up
+
+[SkillsBench Invoice Fraud](../../reports/toolkit-v2/c13/skillsbench-invoice-fraud-20261106/README.md)
+uses the same benchmark revision as the original selection. The
+fixture review and exact image acquisition passed. The first reference
+driver stopped before guest execution after a successful Docker image
+inspection returned without a command journal. Its two charges settled.
+Protected grading and provider authority remain open.
+
+The [AFlow repeat](../../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/namespace-check/diagnosis.json)
+failed its interface assertion before optimizer import. The next
+[boundary review](../../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/namespace-observation/operation-review.json)
+records interface and route counts and fails closed if isolation is
+unproven. Actual calibration remains open.

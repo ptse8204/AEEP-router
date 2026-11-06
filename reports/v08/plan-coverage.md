@@ -1,5 +1,15 @@
 # 0.8 plan coverage and remaining work
 
+<!-- invoice-substitution-and-aflow-repeat-20261106:start -->
+The operator conditionally selected hard Invoice Fraud Detection in place of
+Financial Modeling QA. The [local asset review and image acquisition](../toolkit-v2/c13/skillsbench-invoice-fraud-20261106/README.md)
+passed. Protected reference grading remains open after a settled coordinator
+failure before container creation. The corrected driver awaits repeat approval.
+The [AFlow boundary failure](../toolkit-v2/c13/proposal-optimizer-preparation-20261105/namespace-check/diagnosis.json)
+also settled before upstream import. A bounded diagnostic awaits approval.
+Comparative campaigns remain paused.
+<!-- invoice-substitution-and-aflow-repeat-20261106:end -->
+
 <!-- skillsbench-financial-audit-and-optimizer-20261105:start -->
 The [next balanced SkillsBench pair](../toolkit-v2/c13/skillsbench-financial-audit-assets-20261105/README.md)
 has verified original inputs in two retained images. Financial Modeling

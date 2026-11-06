@@ -44,9 +44,14 @@ Use SkillsBench revision `9a1f4dd5f7659f75707435da3ce854b6e48321d1`:
 
 | Document/data | Software engineering |
 | --- | --- |
-| financial-modeling-qa | spring-boot-jakarta-migration |
+| invoice-fraud-detection | spring-boot-jakarta-migration |
 | pdf-excel-diff | react-performance-debugging |
 | sales-pivot-analysis | software-dependency-audit |
+
+The operator approved the hard Invoice Fraud substitute after a local
+asset review. Financial Modeling QA stays parked pending a rights record.
+The [substitution record](../../reports/toolkit-v2/c13/skillsbench-invoice-fraud-20261106/README.md)
+tracks the pending protected reference checks and separate provider authority.
 
 Review asset rights and all runtime dependencies. Preserve task instructions,
 assets, upstream verifier assertions and scoring semantics. Replace mutable
