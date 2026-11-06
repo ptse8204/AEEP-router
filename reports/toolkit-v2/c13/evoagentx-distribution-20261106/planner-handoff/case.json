@@ -1,0 +1,10 @@
+{
+  "goal": "Plan a data workflow to summarize and verify a small synthetic sales table using the available stages: ingest rows, aggregate amounts by category, summarize the aggregate totals, and verify the summary.",
+  "suggestion": "Return one JSON object with sub_tasks. Use only the available stage names ingest, transform, summarize and verify. Use the input port goal for the initial ingest and give each stage one string output named after its stage, except verify whose output is named verified. Each successor consumes the previous stage's output by the same port name. Include name, description, inputs and outputs on each subtask and name, type and description on each port. No tools, code, agents, paths, destinations or credentials. Output only JSON.",
+  "ports": {
+    "ingest": {"input": "goal", "output": "ingest"},
+    "transform": {"input": "ingest", "output": "transform"},
+    "summarize": {"input": "transform", "output": "summarize"},
+    "verify": {"input": "summarize", "output": "verified"}
+  }
+}

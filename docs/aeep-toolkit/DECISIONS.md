@@ -3193,3 +3193,13 @@ protected calibration still needs a separate review.
 The [Invoice Fraud pack](../../reports/toolkit-v2/c13/skillsbench-invoice-fraud-20261106/task-pack.json)
 keeps its binary upstream reward and protected assets. A local rights draft
 cannot authorize provider disclosure.
+
+## D168. Keep the EvoAgentX proposal behind a single reviewed relay
+
+Use the real upstream planner and graph builder from the retained
+[proposal-only image](../../reports/toolkit-v2/c13/evoagentx-distribution-20261106/proposal-runtime/evoagentx-runtime-result.json).
+Freeze the [request digest](../../reports/toolkit-v2/c13/evoagentx-distribution-20261106/planner-handoff/result.json)
+before reviewing disclosure. The reply path admits only the reviewed JSON
+nodes and ports before the upstream parser sees them. Pass the normalized
+graph to the existing AEEP stack planner as an inert proposal. Keep
+provider authority and stack execution authority separate.

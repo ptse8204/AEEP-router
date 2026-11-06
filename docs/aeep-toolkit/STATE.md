@@ -1,5 +1,24 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- evoagentx-real-planner-handoff-20261106:start -->
+**November 6. EvoAgentX graph builder and planner handoff passed.**
+
+The [approved overlay repeat](../../reports/toolkit-v2/c13/evoagentx-distribution-20261106/proposal-runtime/evoagentx-runtime-result.json)
+built the retained image and passed the original graph-builder method on typed
+inputs. The guest permitted a private Unix socketpair and denied new network
+sockets. Both operations settled and the check container was removed.
+
+The [real planner handoff](../../reports/toolkit-v2/c13/evoagentx-distribution-20261106/planner-handoff/result.json)
+ran the pinned `generate_plan` method up to its single relay callback.
+It captured a 10,156-byte request privately and dispatched no model.
+A [separate local fixture](../../reports/toolkit-v2/c13/evoagentx-distribution-20261106/planner-handoff/stack-shape-check.json)
+checked the handoff into the existing inert AEEP stack planner and rejected
+mismatched request digests, nodes, bindings and generated-code claims.
+The next step is an exact managed-worker review for this captured request,
+then validation of the actual provider reply. C13 remains open and
+comparisons stay paused.
+<!-- evoagentx-real-planner-handoff-20261106:end -->
+
 <!-- invoice-aflow-evoagentx-results-20261106:start -->
 **November 6. Invoice Fraud reference and AFlow isolation passed.**
 

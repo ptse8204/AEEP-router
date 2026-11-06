@@ -55,3 +55,23 @@ profile permits private Unix socketpairs for asyncio and still denies new
 network sockets and connections. The proposed check exercises the real
 graph builder on typed local inputs. It requires approval under the repeat
 rule. Provider-backed proposal generation remains a separate gate.
+
+## Approved repeat and planner handoff result
+
+The [approved repeat](proposal-runtime/evoagentx-runtime-result.json)
+passed. The retained image ran the real graph builder on typed inputs.
+The sandbox verified private Unix socketpair communication and denied
+other socket creation. The build and check settled 2 operations.
+
+The [planner handoff](planner-handoff/result.json) then ran the actual
+`generate_plan` method up to its one reply callback. It captured
+10,156 bytes in a private file, with only the request hash and boundary
+observations retained in Git. This check settled one operation with
+zero models. The separate [local fixture](planner-handoff/stack-shape-check.json)
+exercised the inert AEEP planner and four refusal cases. Neither supplied
+a provider response.
+
+Prepare a separate, exact managed-worker review before disclosing the
+captured request or starting a model turn. The reply must pass the
+reviewed schema and port checks before it reaches the upstream parser.
+An accepted graph remains an inert AEEP proposal.

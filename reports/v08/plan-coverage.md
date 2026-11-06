@@ -1,5 +1,14 @@
 # 0.8 plan coverage and remaining work
 
+<!-- evoagentx-real-planner-handoff-20261106:start -->
+The [EvoAgentX overlay repeat](../toolkit-v2/c13/evoagentx-distribution-20261106/proposal-runtime/evoagentx-runtime-result.json)
+passed the real graph builder. The [planner handoff](../toolkit-v2/c13/evoagentx-distribution-20261106/planner-handoff/result.json)
+captured one request from the actual upstream planner. No model ran. A
+separate local fixture resolved an inert AEEP proposal and exercised four
+refusals. Actual proposal generation and finite AFlow calibration remain
+open. Comparisons stay paused.
+<!-- evoagentx-real-planner-handoff-20261106:end -->
+
 <!-- invoice-aflow-evoagentx-results-20261106:start -->
 [Invoice Fraud protected reference](../toolkit-v2/c13/skillsbench-invoice-fraud-20261106/continuation/reference-execution/result.json)
 and task-pack inspection passed. Provider disclosure and managed task execution

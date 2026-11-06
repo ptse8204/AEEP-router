@@ -2429,3 +2429,13 @@ This evidence covers the retained offline runtime. Finite calibration remains op
 built a retained image from the pinned source and 87 reviewed wheels.
 Eager import of the optional Docker SDK stopped the graph-builder check.
 Actual workflow proposal generation remains open.
+
+### November 6 EvoAgentX planner handoff
+
+The [approved repeat](../../reports/toolkit-v2/c13/evoagentx-distribution-20261106/proposal-runtime/evoagentx-runtime-result.json)
+verified the actual EvoAgentX graph builder on typed local inputs and
+retained the proposal-only image. The
+[planner relay](../../reports/toolkit-v2/c13/evoagentx-distribution-20261106/planner-handoff/result.json)
+captured the real upstream planner's single request inside the same
+sandbox. The request stayed local. The inert AEEP validation controls
+passed independently. Actual provider-backed proposal generation remains open.
