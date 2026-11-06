@@ -2393,3 +2393,8 @@ runs the pinned core through the ordinary v9 scheduler on synthetic
 grade certificates. It records an actual settled scheduler charge.
 The live diagnostic gate stays open. The previous Linux proof and
 ordinary search/show results retain their original scope.
+
+[Proposer and optimizer preparation](../../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/README.md)
+resolves the existing EvoAgentX and AFlow source pins. AFlow's 31
+exact wheels are acquired and its target metadata closure passes.
+Actual proposal generation and optimization remain open.

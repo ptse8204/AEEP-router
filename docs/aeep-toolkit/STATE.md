@@ -1,5 +1,27 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- skillsbench-financial-audit-and-optimizer-20261105:start -->
+**November 5. Two more SkillsBench runtimes pinned and inspected.**
+
+The [asset audit](../../reports/toolkit-v2/c13/skillsbench-financial-audit-assets-20261105/README.md)
+matched both Financial Modeling inputs and the Dependency Audit lockfile
+against the exact upstream bytes. Both images and inspection containers
+are retained. No task process ran. ModelOff asset-use permission is
+unresolved. The operator has been asked whether to substitute the hard
+Invoice Fraud task at the same revision, subject to its own review.
+
+Dependency Audit has a private protected grader context binding all
+seven test identities and a verified Trivy snapshot metadata record.
+Base compatibility and reference execution remain open.
+
+The [upstream proposer and optimizer preparation](../../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/README.md)
+pins the EvoAgentX planning path and AFlow optimizer boundary. All 31
+AFlow lock wheels are retained for Linux ARM64 CPython 3.12 with
+verified metadata closure. No optimizer or model ran. Continue the
+protected verifier and isolated SDK work independently. C13 is open
+and comparisons remain paused.
+<!-- skillsbench-financial-audit-and-optimizer-20261105:end -->
+
 <!-- skillrank-native-v9-20261105:start -->
 **November 5. SkillRank uses the ordinary scheduler path.**
 

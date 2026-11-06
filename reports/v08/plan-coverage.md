@@ -1,5 +1,17 @@
 # 0.8 plan coverage and remaining work
 
+<!-- skillsbench-financial-audit-and-optimizer-20261105:start -->
+The [next balanced SkillsBench pair](../toolkit-v2/c13/skillsbench-financial-audit-assets-20261105/README.md)
+has verified original inputs in two retained images. Financial Modeling
+requires a rights record or an approved substitute. Dependency Audit
+has a private verifier context with seven preserved identities and
+still needs runtime and reference evidence.
+
+The [proposer and optimizer source record](../toolkit-v2/c13/proposal-optimizer-preparation-20261105/README.md)
+pins both upstream entry points and an acquired 31-wheel AFlow closure.
+Live proposal and protected optimization remain open.
+<!-- skillsbench-financial-audit-and-optimizer-20261105:end -->
+
 <!-- skillrank-native-v9-20261105:start -->
 [SkillRank native integration](../toolkit-v2/c13/skillrank-native-carrier-20261105/README.md)
 adds a versioned one-task engineering pair to the ordinary CLI. The

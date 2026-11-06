@@ -3154,3 +3154,15 @@ contract remains in effect. A real native synthetic check is recorded
 separately from any future controlled-worker run.
 
 [Native carrier and limitations](../../reports/toolkit-v2/c13/skillrank-native-carrier-20261105/README.md).
+
+## D165. Preserve SkillsBench asset gates after image acquisition
+
+Record image and embedded-input identity independently from rights to
+execute, disclose or redistribute those assets. Financial Modeling QA
+has a matched third-party source and an unresolved rights record.
+Invoice Fraud Detection is a proposed hard same-revision replacement.
+Keep the original selection until the operator approves a change.
+
+The AFlow lock remains unchanged. Use the retained Linux ARM64
+CPython 3.12 target for the reviewed wheel closure and protect the
+generated-code and grading boundary before running its optimizer.

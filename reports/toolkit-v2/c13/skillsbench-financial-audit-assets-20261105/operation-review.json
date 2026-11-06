@@ -1,0 +1,59 @@
+{
+  "docker": "/Applications/Docker.app/Contents/Resources/bin/docker",
+  "docker_config": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-telemetry-20261104/docker-config",
+  "docker_socket": "/Users/edwintse/.docker/run/docker.sock",
+  "purpose": "First static byte audit of the three original inputs in the two newly retained SkillsBench images.",
+  "maximum_commands": 11,
+  "no_guest_execution": true,
+  "model_turns": 0,
+  "cash_usd": "0",
+  "automatic_retries": false,
+  "tasks": [
+    {
+      "task_id": "financial-modeling-qa",
+      "reference": "ghcr.io/benchflow-ai/skillsbench-task-env@sha256:cdc3b839dd0a8f068218af7e93a529269ea0e8bfef62f595e73dbbb01d9accd9",
+      "image_id": "sha256:cdc3b839dd0a8f068218af7e93a529269ea0e8bfef62f595e73dbbb01d9accd9",
+      "name": "aeep-sb-static-financial-modeling-qa-20261105",
+      "selectors": {
+        "/root/background.pdf": {
+          "background.pdf": {
+            "sha256": "832ea5a99da6aeba8ed25f719c7d3ed035720871493a07ed43cae030463d8273",
+            "bytes": 176266
+          }
+        },
+        "/root/data.xlsx": {
+          "data.xlsx": {
+            "sha256": "b07809fca2e61dfe75dd3b43f0f6d5839d64697ed2f0a34c78367cf6dd204195",
+            "bytes": 390301
+          }
+        }
+      }
+    },
+    {
+      "task_id": "software-dependency-audit",
+      "reference": "ghcr.io/benchflow-ai/skillsbench-task-env@sha256:865fb9fb24a9b88a64a82814328d4f8d426a0cff784beb9b0ec1b3cd9409fffb",
+      "image_id": "sha256:865fb9fb24a9b88a64a82814328d4f8d426a0cff784beb9b0ec1b3cd9409fffb",
+      "name": "aeep-sb-static-software-dependency-audit-20261105",
+      "selectors": {
+        "/root/package-lock.json": {
+          "package-lock.json": {
+            "sha256": "a2a42a3255e814e75bed9958c40cd9b35de7331b310bfeb8f93306d806643d44",
+            "bytes": 559093
+          }
+        }
+      }
+    }
+  ],
+  "pins": {
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-financial-audit-assets-20261105/run.py": "15aadff9a3e4e5dda7065424773b1d94a23c2bcf5cf8063bfa93f9044afb7a97",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-transport-20261103/task-only-pack.json": "c41ec39a459b537d9c1b16d35cda1e7ca8857f75b46128e8640c23d86349b5f9",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/pipeline-standing-authority-20261104.json": "f0f86d6af2600817eb6de50dd12ac4f861f09ac36f90a27bc84e4ae6f044635c",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-financial-audit-acquisition-20261105/acquisition/summary.json": "6223c12cd31ab7aef79708e50cb085e2cdab2b4ed4a4b6d6463966a10c49eea0",
+    "/Applications/Docker.app/Contents/Resources/bin/docker": "a6822407e207ff0b687419ccbe55700ffbf389d77de58ef625b3b1790d88747c",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-telemetry-20261104/docker-config/config.json": "5e8ca882ff273c94f40baa34979ce5a5c8873ec61a0f10bd539db5d8843722fa",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5/tasks/financial-modeling-qa/environment/background.pdf": "832ea5a99da6aeba8ed25f719c7d3ed035720871493a07ed43cae030463d8273",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5/tasks/financial-modeling-qa/environment/data.xlsx": "b07809fca2e61dfe75dd3b43f0f6d5839d64697ed2f0a34c78367cf6dd204195",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5/tasks/software-dependency-audit/environment/package-lock.json": "a2a42a3255e814e75bed9958c40cd9b35de7331b310bfeb8f93306d806643d44"
+  },
+  "expires_at": "2026-11-06T07:39:10.032769+00:00"
+}
