@@ -47,3 +47,11 @@ completion and a forged verdict. The earlier
 remains bound to its original artifacts. The live ordinary CLI diagnostic
 still requires a current worker pair, a reviewed public case and bounded
 model authority. Neither check establishes candidate or selection benefit.
+
+
+## Current-source verification
+
+All 13 [source and packaging checks](source-verification.json) passed on
+`91cf3e9`. Both full runs passed 2,142 tests with 21 skips. The combined
+coverage and both branch gates passed. The wheel and sdist are built.
+The new wheel has a separate installed-runtime check pending.

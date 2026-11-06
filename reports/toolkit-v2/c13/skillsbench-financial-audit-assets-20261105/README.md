@@ -28,7 +28,11 @@ revision. The task is labeled hard and asks the agent to reconcile PDFs,
 a workbook and purchase-order CSV with protected grading. Its files are
 committed in the upstream task tree. It needs its own asset-rights and runtime
 review before use. Replacing the named original requires the operator's
-decision. [Pinned candidate task](https://github.com/benchflow-ai/skillsbench/tree/9a1f4dd5f7659f75707435da3ce854b6e48321d1/tasks/invoice-fraud-detection).
+decision. The original contribution records the addition of deliberately
+clean and fraudulent samples and the switch to a static ground truth.
+This supports a separate provenance review of the proposed replacement.
+[Pinned candidate task](https://github.com/benchflow-ai/skillsbench/tree/9a1f4dd5f7659f75707435da3ce854b6e48321d1/tasks/invoice-fraud-detection),
+[original contribution](https://github.com/benchflow-ai/skillsbench/pull/105).
 
 ## Dependency Audit runtime data
 

@@ -1,0 +1,243 @@
+{
+  "source_commit": "91cf3e9b5392c8c6d70f866d26ce1491372b1fad",
+  "source_snapshot": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillrank-native-carrier-20261105/final-source",
+  "source_before": "26c215905742a4837eff469a7ece6bcd23cd6956f4b5eeb357ffa0ceb09682a6",
+  "source_after": "26c215905742a4837eff469a7ece6bcd23cd6956f4b5eeb357ffa0ceb09682a6",
+  "checks": [
+    {
+      "name": "compileall",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0375000839994755,
+      "monitor_stop": null,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "schemas",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0516250419968856,
+      "monitor_stop": null,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "assessment-policy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.046799000003375,
+      "monitor_stop": null,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "ruff",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0500428329978604,
+      "monitor_stop": null,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "name": "mypy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 6.102888584005996,
+      "monitor_stop": null,
+      "log_sha256": "94882b1e63fe8106bb88760dee36f04ff9da4c04c4a227407a77f38bb94eada1"
+    },
+    {
+      "name": "pytest",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest",
+        "--basetemp",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillrank-native-carrier-20261105/final-source/.aeep/skillrank-native-carrier-20261105/verification/pytest-tmp"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 706.655163250005,
+      "monitor_stop": null,
+      "log_sha256": "5ddd351e0c1af6dbe13df477444e610489c38d08e555f27a5a8f017fcf8f767c"
+    },
+    {
+      "name": "coverage-tests",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest",
+        "--basetemp",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillrank-native-carrier-20261105/final-source/.aeep/skillrank-native-carrier-20261105/verification/coverage-tests-tmp"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 1013.6324470830004,
+      "monitor_stop": null,
+      "log_sha256": "649b63dfb24d9b095571d2354bb629aa13608c854d333170626a668890fe9965"
+    },
+    {
+      "name": "coverage-json",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillrank-native-carrier-20261105/final-source/.aeep/skillrank-native-carrier-20261105/verification/coverage.json"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 4.079425542004174,
+      "monitor_stop": null,
+      "log_sha256": "15efc93eb0a4e8baab25ca21d2976db750100a337273e8707a72393e68138974"
+    },
+    {
+      "name": "coverage-report",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.057189915998606,
+      "monitor_stop": null,
+      "log_sha256": "bef6b43e60d4dbb0439bfd121190abe8d2690e3875da3bdee6e63e8bb4308717"
+    },
+    {
+      "name": "critical-coverage",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_critical_coverage.py",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillrank-native-carrier-20261105/final-source/.aeep/skillrank-native-carrier-20261105/verification/coverage.json"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0543891249981243,
+      "monitor_stop": null,
+      "log_sha256": "f88894cb084bb60370ed94016bfb259c38ff869167dcf9b3c2b11c2055f88695"
+    },
+    {
+      "name": "assessment-coverage",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_coverage.py",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillrank-native-carrier-20261105/final-source/.aeep/skillrank-native-carrier-20261105/verification/coverage.json"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.047425500000827,
+      "monitor_stop": null,
+      "log_sha256": "8995cbed8d8e93f15ee8ec27b6759d8906c509ac9d830e4d9bef09836948294a"
+    },
+    {
+      "name": "toolkit-integration-fixtures",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest",
+        "integrations/toolkit",
+        "--basetemp",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillrank-native-carrier-20261105/final-source/.aeep/skillrank-native-carrier-20261105/verification/toolkit-integration-fixtures-tmp"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 4.083585000000312,
+      "monitor_stop": null,
+      "log_sha256": "b0624e755822922a407e1e0b6c4a5bc781dbdd6a7b7c57410bf3a7e60092b700"
+    },
+    {
+      "name": "build",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "build",
+        "--no-isolation",
+        "--outdir",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillrank-native-carrier-20261105/final-source/.aeep/skillrank-native-carrier-20261105/verification/dist"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 4.079668665995996,
+      "monitor_stop": null,
+      "log_sha256": "0294df4d5c33ab6c49e3a69e8028041487c6c436bfb7eabb9d19a56291152131"
+    }
+  ],
+  "test_counts": {
+    "pytest": {
+      "passed": 2142,
+      "skipped": 21,
+      "warning": 1
+    },
+    "coverage-tests": {
+      "passed": 2142,
+      "skipped": 21,
+      "warning": 1
+    },
+    "toolkit-integration-fixtures": {
+      "passed": 74,
+      "subtests passed": 24
+    }
+  },
+  "coverage": {
+    "percent_covered": 82.69728759096493,
+    "covered_branches": 9979,
+    "num_branches": 13656,
+    "covered_lines": 33772,
+    "num_statements": 39249
+  },
+  "artifacts": [
+    {
+      "name": "aeep_agent_router-0.8.2-py3-none-any.whl",
+      "sha256": "13bd8a38a56736eeecf6a724f12932af1273aade349d86b2b55ad36600d71e31",
+      "bytes": 2198641
+    },
+    {
+      "name": "aeep_agent_router-0.8.2.tar.gz",
+      "sha256": "af9c50e1c7fba9f3ebda6240e58ec74dba0f84ae2fd6b3f0b613456033c78b4e",
+      "bytes": 2405740
+    }
+  ],
+  "minimum_free_bytes": 118050619392,
+  "models": 0,
+  "comparisons": "PAUSED",
+  "installed_current_wheel_check": "OPEN",
+  "native_runtime_functional_proof": "Prior exact source snapshot with unchanged bridge and launch profile. Final-source fixtures additionally exercise runtime-tree and protected-container binding guards.",
+  "docs_check_sha256": "b0df9c3e52f1bc55d176ff687da0d2f9d2e14ea09f1c208f6af759d3c48696c3"
+}

@@ -1,0 +1,107 @@
+{
+  "purpose": "First offline build and bounded actual AFlow graph-parser check. No optimizer cycle or model authority.",
+  "implementation_source": "8b626082c2bd9218809bddfe95fe27996c7ee595b7a9e3bf430d64beafa10114",
+  "upstream_revision": "3f457218fc716093fe53f6df8a5d5e6379d66346",
+  "context": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/proposal-optimizer-preparation-20261105/aflow-linux-build-context",
+  "context_inventory_sha256": "7055075d01daf19a1c74c660fcd05b0ce5256f679098b4051b6dc989eaade618",
+  "base_reference": "python:3.13-slim",
+  "base_identity": [
+    "sha256:8d9d0b8bcf6506481eae4907c18f5e3e7902e629f5f6d684f9e7c32e85e3ddf0",
+    "arm64",
+    "linux",
+    [
+      "sha256:8227a1264c7ff2f8bd125b585e62c1cec77dd2099c985c33e08d34292d06144f",
+      "sha256:8a6da6eb1b282a3bab8da6e094b7259bf3f21335dd8e803b4dcede1afecc1716",
+      "sha256:d81ccc5a95666f072f57d6526d725c3e6c25eda2ee84b88e43fb8f7db5f47411",
+      "sha256:8fd7bcc5bf0ec20486b3ee0761eef560a3298d92e46ce7aed301a38b532ce945"
+    ]
+  ],
+  "docker": [
+    "/Applications/Docker.app/Contents/Resources/bin/docker",
+    "--config",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-contained-graders-20261105/buildx-docker-config",
+    "--host",
+    "unix:///Users/edwintse/.docker/run/docker.sock"
+  ],
+  "environment": {
+    "PATH": "/usr/bin:/bin",
+    "HOME": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/proposal-optimizer-preparation-20261105",
+    "LC_ALL": "C",
+    "DOCKER_BUILDKIT": "1"
+  },
+  "tag": "aeep-toolkit-v2/aflow:3f457218-cp312-arm64-20261105",
+  "container_name": "aeep-aflow-runtime-first-check-20261105",
+  "docker_usage": [
+    "Images 51.61GB",
+    "Containers 73.12MB",
+    "Local Volumes 145.8GB",
+    "Build Cache 36.67GB"
+  ],
+  "assets": {
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/run-aflow-runtime.py": "d783b34cdcc1f407cd1582de612c511fe0e8a4c3ed825649e4eef01617f9ac3e",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/prepare-aflow-runtime.py": "77b571053d38c3bd550a2f8407fde52fb6de4c2d58f1e5ce9053831a39a59cc7",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/check-aflow-runtime.py": "8cf38e0db46022a8238d2fd87c4510a5bfe8539b858b21a4bf00cb03f558c0a5",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/aflow-runtime-inputs-result.json": "1b02f3b9393a6cb0a0a8d241146ab41a88cb47234e6f56d6a328cf31b38f24c3",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/aflow-wheel-acquisition-result.json": "27ea6c787262e244e0cb98851979f2fd0c5821b145b78fcee2a5d0859bc4e685",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/aflow-source-closure.json": "b69c461549b09ea3fba2ace4dc87b107eb9e5a90e69c02689f0d0a581d445c7e",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/pipeline-standing-authority-20261104.json": "f0f86d6af2600817eb6de50dd12ac4f861f09ac36f90a27bc84e4ae6f044635c",
+    "/Applications/Docker.app/Contents/Resources/bin/docker": "a6822407e207ff0b687419ccbe55700ffbf389d77de58ef625b3b1790d88747c",
+    "/Applications/Docker.app/Contents/Resources/cli-plugins/docker-buildx": "172198b843a176b83f4f3235f74dc7cbc8c6015fece0e0bf04b8d111e30dd410",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-contained-graders-20261105/buildx-docker-config/config.json": "042bab2aad8ab69bf7226ceb4a443f004311772de877d384db420c4da223f9bd"
+  },
+  "build_command": [
+    "/Applications/Docker.app/Contents/Resources/bin/docker",
+    "--config",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-contained-graders-20261105/buildx-docker-config",
+    "--host",
+    "unix:///Users/edwintse/.docker/run/docker.sock",
+    "build",
+    "--pull=false",
+    "--network=none",
+    "--platform=linux/arm64",
+    "--provenance=false",
+    "--sbom=false",
+    "--tag",
+    "aeep-toolkit-v2/aflow:3f457218-cp312-arm64-20261105",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/proposal-optimizer-preparation-20261105/aflow-linux-build-context"
+  ],
+  "check_prefix": [
+    "/Applications/Docker.app/Contents/Resources/bin/docker",
+    "--config",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-contained-graders-20261105/buildx-docker-config",
+    "--host",
+    "unix:///Users/edwintse/.docker/run/docker.sock",
+    "run",
+    "--pull=never",
+    "--rm",
+    "--name",
+    "aeep-aflow-runtime-first-check-20261105",
+    "--network=none",
+    "--read-only",
+    "--user",
+    "65534:65534",
+    "--cap-drop=ALL",
+    "--security-opt=no-new-privileges",
+    "--cpus=1",
+    "--memory=512m",
+    "--memory-swap=512m",
+    "--pids-limit=64",
+    "--tmpfs",
+    "/tmp:rw,noexec,nosuid,nodev,size=32m",
+    "--workdir",
+    "/tmp",
+    "--entrypoint",
+    "/opt/portable/python/bin/python3.12"
+  ],
+  "check_args": [
+    "-I",
+    "-B",
+    "/opt/check-aflow-runtime.py"
+  ],
+  "ledger": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillrank-build-preparation-20261103/runtime-execution/canonical.sqlite3",
+  "expires_at": "2026-11-06T07:59:19.767960+00:00",
+  "cash_usd": "0",
+  "models": 0,
+  "automatic_retries": false,
+  "retention": "Keep new runtime and existing resources. Remove only the new disposable check container."
+}

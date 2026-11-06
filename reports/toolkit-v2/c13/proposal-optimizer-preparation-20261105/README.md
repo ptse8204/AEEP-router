@@ -39,6 +39,28 @@ The [wheel selection](aflow-wheel-selection.json) resolves the unchanged
 audit](aflow-wheel-acquisition-result.json) verified all 31 files, reused 12
 local artifacts and found zero unresolved wheel requirements for that target.
 The artifact total is 43,017,107 bytes. The private wheelhouse is retained.
-Installation, actual import checks and the finite protected calibration
-remain open. The source capture and wheel acquisition provide no
+The [runtime input acquisition](aflow-runtime-inputs-result.json)
+also verifies 24 original source files and the exact portable CPython
+3.12.16 Linux ARM64 archive. The retained Spring interpreter is x86-64.
+The ARM64 artifact uses the same upstream release and matches the
+compiled AFlow wheels. The optimizer imports the upstream benchmark
+modules; close that source dependency set and bind the protected
+calibration adapter before installation and execution. The source capture and wheel acquisition provide no
 candidate or selection evidence.
+
+
+## Retained offline build and pending check
+
+The [offline build](aflow-runtime-build-receipt.json) installed the exact
+wheel lock in the case-sensitive Linux guest and produced the retained
+ARM64 image. The first [runtime check](aflow-runtime-result.json) stopped
+before importing AFlow because the first-party sysfs interface-list
+assertion failed. Both operations settled. The check container was
+removed and the runtime image remains available.
+
+The [exact continuation](namespace-check/operation-review.json) changes
+only the probe. It checks the guest socket interface index and route
+table, then runs the original AFlow graph-parser check. It uses the
+same image with a single read-only probe mount, one offline operation,
+and no model turn. The previous terminal check cannot be repeated
+under its original authority. The continuation awaits operator approval.

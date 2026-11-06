@@ -1,5 +1,23 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- aflow-retained-runtime-20261105:start -->
+**November 5. AFlow runtime built. The corrected check awaits approval.**
+
+The [offline AFlow build](../../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/README.md)
+retains an ARM64 image with all 31 reviewed wheels and portable
+CPython 3.12.16. Its first check stopped before upstream import at a
+first-party network-interface assertion. Both charges settled.
+The [exact corrected check](../../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/namespace-check/operation-review.json)
+reuses that image for one offline operation and requires specific
+repeat approval. Optimizer calibration and model dispatch are separate.
+
+The Financial Modeling replacement decision remains pending. The
+Dependency Audit grader is staged privately and retains seven test
+identities. The [EvoAgentX requirement audit](../../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/evoagentx-base-requirements.json)
+binds the 18 base requirements without optional extras.
+C13 remains open and comparisons stay paused.
+<!-- aflow-retained-runtime-20261105:end -->
+
 <!-- skillsbench-financial-audit-and-optimizer-20261105:start -->
 **November 5. Two more SkillsBench runtimes pinned and inspected.**
 
@@ -29,8 +47,9 @@ The [native carrier](../../reports/toolkit-v2/c13/skillrank-native-carrier-20261
 builds from the retained upstream source and Cargo lock. The real
 native process passed the ordinary v9 scheduler on two synthetic grade
 certificates. Its charge settled, and the sandbox denied certificate
-writes, unrelated reads, network binds and child launches. Source guards
-bound to the final branch change are tracked separately.
+writes, unrelated reads, network binds and child launches. The [final-source verification](../../reports/toolkit-v2/c13/skillrank-native-carrier-20261105/source-verification.json)
+passed all 13 source and packaging checks on `91cf3e9`, including two
+2,142-test runs and both branch gates.
 
 V9 permits one fresh ordinary control and one required-use treatment
 under an exact engineering review. It cannot qualify or admit a skill.
