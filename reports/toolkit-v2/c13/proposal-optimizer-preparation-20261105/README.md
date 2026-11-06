@@ -76,3 +76,16 @@ The guest also found zero inherited sockets and no non-loopback route
 devices. It imported the real optimizer and passed the real graph parser.
 Both operations settled, and both disposable containers were removed.
 Finite protected calibration remains open.
+
+## Protected calibration preparation
+
+The [calibration preparation](calibration/calibration-preparation.json)
+freezes three public synthetic text cases covering present fields, a
+missing field and duplicate labels. The existing AEEP text reference
+validated all three contracts and stored the expected outputs in a
+private file. This work starts no optimizer or model.
+
+The finite integration design allows one upstream round, one proposal
+request and two protected grade batches. The provider handoff must stop
+on a second request. Keep generated source and grading in separate
+reviewed boundaries. These cases are reserved for engineering calibration.

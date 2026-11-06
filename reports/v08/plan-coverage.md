@@ -1,5 +1,14 @@
 # 0.8 plan coverage and remaining work
 
+<!-- evoagentx-managed-turn-review-20261106:start -->
+The [exact EvoAgentX review](../toolkit-v2/c13/evoagentx-distribution-20261106/managed-turn/operation-review.json)
+binds one managed turn on the existing grant, two zero-turn worker
+inspections, a bounded offline reply validation, and proxy cleanup.
+The [reply fixture](../toolkit-v2/c13/evoagentx-distribution-20261106/managed-turn/reply-fixture-result.json)
+passed without model use. Approval for the captured public request and
+model turn is pending. Comparisons remain paused.
+<!-- evoagentx-managed-turn-review-20261106:end -->
+
 <!-- evoagentx-real-planner-handoff-20261106:start -->
 The [EvoAgentX overlay repeat](../toolkit-v2/c13/evoagentx-distribution-20261106/proposal-runtime/evoagentx-runtime-result.json)
 passed the real graph builder. The [planner handoff](../toolkit-v2/c13/evoagentx-distribution-20261106/planner-handoff/result.json)

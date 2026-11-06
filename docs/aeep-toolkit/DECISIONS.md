@@ -3203,3 +3203,16 @@ before reviewing disclosure. The reply path admits only the reviewed JSON
 nodes and ports before the upstream parser sees them. Pass the normalized
 graph to the existing AEEP stack planner as an inert proposal. Keep
 provider authority and stack execution authority separate.
+
+## D169. Validate the actual proposal reply on the existing managed grant
+
+Use one exact Codex worker turn on the existing onboarding grant. Bind
+the real planner's captured public request and the final provider text
+digest. Use the existing paired worker and collector checks and the
+candidate-absent control route. Keep the retained worker profile. The
+prompt forbids tool use and any recorded tool activity rejects the reply.
+Store reply and graph evidence as hashes and inert references.
+
+The [exact operation review](../../reports/toolkit-v2/c13/evoagentx-distribution-20261106/managed-turn/operation-review.json)
+requires separate disclosure and execution approval. Close the proxy
+and retain the ledger after the single attempt.

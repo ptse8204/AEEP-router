@@ -1,5 +1,29 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- evoagentx-managed-turn-review-20261106:start -->
+**November 6. Exact EvoAgentX managed-turn review is ready.**
+
+The [exact review](../../reports/toolkit-v2/c13/evoagentx-distribution-20261106/managed-turn/operation-review.json)
+binds the captured public request and response schema, the retained
+worker and proxy, and the existing grant. Read-only preflight passed.
+The [offline reply fixture](../../reports/toolkit-v2/c13/evoagentx-distribution-20261106/managed-turn/reply-fixture-result.json)
+passed the real upstream parser, graph builder and inert AEEP planner
+without a model. The [preparation controls](../../reports/toolkit-v2/c13/evoagentx-distribution-20261106/managed-turn/preparation-controls.json)
+verify the two zero-turn inspection definitions, the exclusive control
+route and the budget guard. The retained worker profile exposes local
+tools. The prompt forbids their use and recorded tool activity rejects
+the reply.
+
+The review permits five operations, at most one managed Codex turn and
+zero cash. It requires fresh worker and collector isolation before the
+turn, then validates the actual reply offline. Approval is pending.
+The [AFlow calibration preparation](../../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/calibration/calibration-preparation.json)
+binds three first-party public cases to the existing AEEP text reference.
+Expected outputs stay private. The finite upstream round remains open.
+
+C13 remains open and comparative trials remain paused.
+<!-- evoagentx-managed-turn-review-20261106:end -->
+
 <!-- evoagentx-real-planner-handoff-20261106:start -->
 **November 6. EvoAgentX graph builder and planner handoff passed.**
 

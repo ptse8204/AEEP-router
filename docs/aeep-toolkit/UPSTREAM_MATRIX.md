@@ -2439,3 +2439,12 @@ retained the proposal-only image. The
 captured the real upstream planner's single request inside the same
 sandbox. The request stayed local. The inert AEEP validation controls
 passed independently. Actual provider-backed proposal generation remains open.
+
+### November 6 exact EvoAgentX managed review
+
+The [exact managed turn](../../reports/toolkit-v2/c13/evoagentx-distribution-20261106/managed-turn/operation-review.json)
+binds one existing Codex route, the public request and schema, fresh
+zero-turn worker and collector checks, and local validation of the reply.
+The [first-party offline fixture](../../reports/toolkit-v2/c13/evoagentx-distribution-20261106/managed-turn/reply-fixture-result.json)
+passed the parser, graph builder and inert planner. Live disclosure and
+dispatch await approval.

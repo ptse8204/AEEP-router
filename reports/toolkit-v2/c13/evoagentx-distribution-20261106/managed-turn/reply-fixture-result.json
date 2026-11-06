@@ -1,0 +1,37 @@
+{
+  "review_sha256": "a2c0e9a8cf2aab342979d1a0ccece399be1304a50bb1d15ade3728ad985e52f8",
+  "kind": "first_party_contract_fixture",
+  "passed": true,
+  "models": 0,
+  "provider_reply_validated": false,
+  "provider_disclosure": false,
+  "validation": {
+    "goal_sha256": "853a220b7828d80e75cafbdff2d287088bdbee1084adaf4304872b21d2b02508",
+    "proposal_id": "stack_7d04436af83c4cb82c3bf6eb14659de158c2d61769b9d42d017503bf010331da",
+    "request_sha256": "723eb965117e353e847e9bd955f9bc536030c9e78460e0d9416550b608f3f2c0",
+    "nodes": [
+      "ingest",
+      "summarize",
+      "transform",
+      "verify"
+    ],
+    "bindings": [
+      [
+        "ingest",
+        "transform"
+      ],
+      [
+        "summarize",
+        "verify"
+      ],
+      [
+        "transform",
+        "summarize"
+      ]
+    ],
+    "execution_authorized": false,
+    "executors_started": 0
+  },
+  "accounting_settled": true,
+  "cleanup_verified": true
+}

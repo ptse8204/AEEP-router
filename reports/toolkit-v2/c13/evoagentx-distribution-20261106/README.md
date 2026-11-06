@@ -75,3 +75,21 @@ Prepare a separate, exact managed-worker review before disclosing the
 captured request or starting a model turn. The reply must pass the
 reviewed schema and port checks before it reaches the upstream parser.
 An accepted graph remains an inert AEEP proposal.
+
+## Exact managed-worker turn
+
+The [review](managed-turn/operation-review.json) freezes one Codex turn,
+the captured public text and response schema, the worker and proxy
+identities, and the existing onboarding grant. It permits two zero-turn
+worker inspections and one offline reply validation. The local worker
+profile still exposes ordinary local tools. The prompt forbids their
+use and the validator rejects recorded tool activity.
+
+The [first-party reply fixture](managed-turn/reply-fixture-result.json)
+passed through the real upstream parser and graph builder and through
+the inert AEEP stack planner with zero models. The
+[preparation controls](managed-turn/preparation-controls.json) passed
+on an isolated in-memory grant. The [final preflight](managed-turn/preflight-result.json)
+confirmed the stopped proxy, exact retained images and available
+allowance. It started no worker. The actual provider reply remains
+unobserved pending operator approval.

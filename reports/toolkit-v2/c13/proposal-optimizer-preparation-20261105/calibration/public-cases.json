@@ -1,0 +1,8 @@
+{
+  "scope": "AFlow integration calibration with first-party synthetic public text",
+  "cases": [
+    {"id":"aflow-present","input":{"text":"project: Iris\nstatus: ready\nowner: Sample","fields":["project","status"]}},
+    {"id":"aflow-absent","input":{"text":"priority: low\nregion: fixture","fields":["priority","owner"]}},
+    {"id":"aflow-duplicate","input":{"text":"status: queued\nstatus: checked","fields":["status"]}}
+  ]
+}
