@@ -3127,3 +3127,19 @@ Keep the legacy fixture minimums and formal case thresholds.
 A separate worker closure and reviewed dispatch are required for each
 ordinary CLI journey. For [Langfuse](../../reports/toolkit-v2/c13/langfuse-static-redis-20261105/README.md),
 isolate the connection failure before another complete repeat.
+
+### Reconcile private trace ingestion without replay
+
+Retain the [failed export and successful readback](../../reports/toolkit-v2/c13/langfuse-ingestion-readback-20261105/README.md)
+as separate observations. The original transport failure stays
+terminal. Readback matched the exact canonical receipt and
+disablement left the POST count unchanged. Keep this evidence
+scoped to the exact installed exporter and private deployment.
+
+### Keep SkillRank's upstream callback bounded
+
+Use the [pinned upstream core callback](../../reports/toolkit-v2/c13/skillrank-callback-proof-20261105/README.md)
+for the forced diagnostic. The AEEP parent owns worker execution,
+protected grading and accounting. Keep upstream compatibility
+defaults out of measurements. The synthetic proof does not
+authorize a live run or supply candidate usefulness evidence.

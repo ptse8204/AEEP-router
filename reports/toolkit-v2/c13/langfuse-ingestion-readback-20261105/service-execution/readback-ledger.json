@@ -1,0 +1,95 @@
+{
+  "plan_id": "langfuse-ingestion-readback-20261105",
+  "operations": [
+    {
+      "operation_id": "langfuse-ingestion-readback-20261105:cleanup",
+      "plan_id": "langfuse-ingestion-readback-20261105",
+      "stage": "owned_reconciliation_cleanup",
+      "reserved": {
+        "max_operations": 1,
+        "max_model_turns": 0,
+        "max_elapsed_seconds": 100.0,
+        "max_cash_usd": "0"
+      },
+      "started_at": "2026-11-06T05:04:49.034870Z",
+      "elapsed_seconds": 18.38604420899719,
+      "accounting": null,
+      "resources": null
+    },
+    {
+      "operation_id": "langfuse-ingestion-readback-20261105:overhead",
+      "plan_id": "langfuse-ingestion-readback-20261105",
+      "stage": "readback_driver_overhead",
+      "reserved": {
+        "max_operations": 1,
+        "max_model_turns": 0,
+        "max_elapsed_seconds": 180.0,
+        "max_cash_usd": "0"
+      },
+      "started_at": "2026-11-06T05:04:49.035217Z",
+      "elapsed_seconds": 8.868578875000821,
+      "accounting": null,
+      "resources": null
+    },
+    {
+      "operation_id": "langfuse-ingestion-readback-20261105:readback:0",
+      "plan_id": "langfuse-ingestion-readback-20261105",
+      "stage": "langfuse_readonly_reconciliation",
+      "reserved": {
+        "max_operations": 1,
+        "max_model_turns": 0,
+        "max_elapsed_seconds": 9.0,
+        "max_cash_usd": "0"
+      },
+      "started_at": "2026-11-06T05:05:03.271425Z",
+      "elapsed_seconds": 4.009432666000066,
+      "accounting": null,
+      "resources": {
+        "monetary_usd": 0.0,
+        "latency_ms": 4009.432666000066,
+        "cpu_ms": 0.0,
+        "memory_mb_seconds": 0.0,
+        "peak_memory_mb": 0.0,
+        "gpu_ms": 0.0,
+        "network_bytes": 0,
+        "context_tokens": 0,
+        "input_tokens": 0,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 0,
+        "reasoning_output_tokens": 0,
+        "subscription_units": 0.0
+      }
+    },
+    {
+      "operation_id": "langfuse-ingestion-readback-20261105:readback:1",
+      "plan_id": "langfuse-ingestion-readback-20261105",
+      "stage": "langfuse_readonly_reconciliation",
+      "reserved": {
+        "max_operations": 1,
+        "max_model_turns": 0,
+        "max_elapsed_seconds": 9.0,
+        "max_cash_usd": "0"
+      },
+      "started_at": "2026-11-06T05:05:09.286744Z",
+      "elapsed_seconds": 3.1277641669985314,
+      "accounting": null,
+      "resources": {
+        "monetary_usd": 0.0,
+        "latency_ms": 3127.7641669985314,
+        "cpu_ms": 0.0,
+        "memory_mb_seconds": 0.0,
+        "peak_memory_mb": 0.0,
+        "gpu_ms": 0.0,
+        "network_bytes": 0,
+        "context_tokens": 0,
+        "input_tokens": 0,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 0,
+        "reasoning_output_tokens": 0,
+        "subscription_units": 0.0
+      }
+    }
+  ]
+}

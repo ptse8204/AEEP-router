@@ -1,0 +1,43 @@
+{
+  "passed": false,
+  "models": 0,
+  "comparisons": "PAUSED",
+  "isolated_synthetic_probe": true,
+  "cases": {
+    "static_ip": {
+      "addresses": [
+        "172.31.247.30"
+      ],
+      "result": "authenticated_ping"
+    },
+    "static_dns": {
+      "addresses": [
+        "172.31.247.30"
+      ],
+      "result": "authenticated_ping"
+    },
+    "static_hosts_entry": {
+      "addresses": [
+        "172.31.247.30"
+      ],
+      "result": "authenticated_ping"
+    },
+    "dynamic_ip": {
+      "addresses": [
+        "172.31.247.2"
+      ],
+      "result": "authenticated_ping"
+    },
+    "dynamic_dns": {
+      "addresses": [
+        "172.31.247.2"
+      ],
+      "result": "authenticated_ping"
+    }
+  },
+  "static_redis_ip": "172.31.247.30",
+  "dynamic_redis_ip": "172.31.247.2",
+  "owned_cleanup_verified": false,
+  "cleanup_error_type": "AssertionError",
+  "accounting_settled": false
+}

@@ -2374,3 +2374,16 @@ managed runs still require ready task workers and execution authority.
 The [latest Langfuse repeat](../../reports/toolkit-v2/c13/langfuse-static-redis-20261105/README.md)
 reached logged web readiness, but host health failed and export stayed
 unstarted.
+
+### November 5 Langfuse linkage and SkillRank callback
+
+[Langfuse 4.55.0](../../reports/toolkit-v2/c13/langfuse-ingestion-readback-20261105/README.md)
+returned the exact trace and receipt linkage for the one prior
+POST. The ordinary CLI verified disablement with no network.
+This applies to the retained installed exporter and private
+deployment. Both composed workloads still need applicable evidence.
+
+[SkillRank 0.1.5](../../reports/toolkit-v2/c13/skillrank-callback-proof-20261105/README.md)
+ran its real `0.1.0` harness over two synthetic AEEP callback
+positions. Search/show remains independently verified. The
+ordinary CLI live diagnostic remains open.

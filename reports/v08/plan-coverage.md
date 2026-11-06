@@ -1,5 +1,18 @@
 # 0.8 plan coverage and remaining work
 
+<!-- langfuse-ingestion-skillrank-callback-20261105:start -->
+[Private Langfuse](../toolkit-v2/c13/langfuse-ingestion-readback-20261105/README.md)
+returned the exact prior trace, span and source receipt hash.
+Disablement passed in a deny-all network sandbox. The sole POST
+charge and transport failure stay terminal. The readback added no
+POST, and all services stopped with a settled grant.
+
+[SkillRank's real core](../toolkit-v2/c13/skillrank-callback-proof-20261105/README.md)
+requested and graded two contained synthetic fixture positions through
+its callback bridge. Four operations settled. The ordinary CLI
+live diagnostic remains open, and no comparison or release gate closed.
+<!-- langfuse-ingestion-skillrank-callback-20261105:end -->
+
 <!-- skillsbench-ordinary-cli-live-20261105:start -->
 The [ordinary CLI SkillsBench lifecycle](../toolkit-v2/c13/skillsbench-workflow-runtime-20261105/README.md)
 verified the two task packages, ownership and selective removal.

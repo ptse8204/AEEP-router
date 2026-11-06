@@ -1,5 +1,23 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- langfuse-ingestion-skillrank-callback-20261105:start -->
+**November 5. Langfuse ingestion and disablement verified.**
+
+The [approved readback](../../reports/toolkit-v2/c13/langfuse-ingestion-readback-20261105/README.md)
+matched the exact trace, span and source receipt hash without a
+second POST. The ordinary CLI passed disablement with all networking
+denied. The original unverified POST result remains terminal. The
+private Langfuse grant settled at 203 operations with zero model
+turns, and all services stopped. This evidence binds the retained
+Langfuse 4.55.0 deployment and installed exporter source.
+
+The [real SkillRank callback proof](../../reports/toolkit-v2/c13/skillrank-callback-proof-20261105/README.md)
+used two isolated synthetic fixtures and settled all four operations.
+Its ordinary CLI model-backed diagnostic remains open. Reuse the
+bounded scheduler boundary and preserve the one-route ASE default.
+Comparisons remain paused. C13 stays in progress.
+<!-- langfuse-ingestion-skillrank-callback-20261105:end -->
+
 <!-- skillsbench-ordinary-cli-live-20261105:start -->
 **November 5. Both selected SkillsBench workflows reached protected grading.**
 
