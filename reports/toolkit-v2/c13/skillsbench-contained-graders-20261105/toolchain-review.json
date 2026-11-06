@@ -1,0 +1,26 @@
+{
+  "purpose": "Acquire exact compatible Linux arm64 Temurin 21.0.2+13 and portable Maven 3.9.6 for the protected Spring grader on the retained arm64 AEEP runtime.",
+  "reason": "The published Spring image contains amd64 Java. The selected existing AEEP container runtime and its Python dependencies are Linux arm64. Keep the exact Java and Maven versions.",
+  "authority_sha256": "f0f86d6af2600817eb6de50dd12ac4f861f09ac36f90a27bc84e4ae6f044635c",
+  "maximum_requests": 2,
+  "automatic_retries": false,
+  "models": 0,
+  "cash_usd": "0",
+  "minimum_host_free_bytes": 55834574848,
+  "work": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-contained-graders-20261105",
+  "artifacts": [
+    {
+      "filename": "OpenJDK21U-jdk_aarch64_linux_hotspot_21.0.2_13.tar.gz",
+      "url": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.2%2B13/OpenJDK21U-jdk_aarch64_linux_hotspot_21.0.2_13.tar.gz",
+      "checksum": "sha256:3ce6a2b357e2ef45fd6b53d6587aa05bfec7771e7fb982f2c964f6b771b7526a",
+      "maximum_bytes": 230686720
+    },
+    {
+      "filename": "apache-maven-3.9.6-bin.tar.gz",
+      "url": "https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.9.6/apache-maven-3.9.6-bin.tar.gz",
+      "checksum": "sha512:706f01b20dec0305a822ab614d51f32b07ee11d0218175e55450242e49d2156386483b506b3a4e8a03ac8611bae96395fd5eec15f50d3013d5deed6d1ee18224",
+      "maximum_bytes": 10485760
+    }
+  ],
+  "limits": "No archive executable is run on the host. Only artifact retrieval and checksum verification in this phase."
+}

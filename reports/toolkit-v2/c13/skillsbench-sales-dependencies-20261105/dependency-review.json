@@ -1,0 +1,64 @@
+{
+  "scope": "One metadata-only package origin check and two exact data-only wheel downloads if missing.",
+  "first_attempt": true,
+  "images": [
+    "sha256:7e382b09d1f3d8fee477d25a1a8913c7f6fc4bb934e52c788654c2dbbe47562f"
+  ],
+  "docker_argv": [
+    "/Applications/Docker.app/Contents/Resources/bin/docker",
+    "--config",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-contained-graders-20261105/buildx-docker-config",
+    "--host",
+    "unix:///Users/edwintse/.docker/run/docker.sock",
+    "run",
+    "--pull=never",
+    "--rm",
+    "--name",
+    "aeep-sales-module-origin-20261105",
+    "--network",
+    "none",
+    "--read-only",
+    "--user",
+    "65534:65534",
+    "--cap-drop",
+    "ALL",
+    "--security-opt",
+    "no-new-privileges",
+    "--memory",
+    "128m",
+    "--memory-swap",
+    "128m",
+    "--pids-limit",
+    "24",
+    "--entrypoint",
+    "python3",
+    "sha256:7e382b09d1f3d8fee477d25a1a8913c7f6fc4bb934e52c788654c2dbbe47562f",
+    "-I",
+    "-B",
+    "-c",
+    "import importlib.util,json;print(json.dumps({p:importlib.util.find_spec(p) is not None for p in (\"openpyxl\",\"et_xmlfile\")}))"
+  ],
+  "wheels": [
+    {
+      "filename": "openpyxl-3.1.5-py2.py3-none-any.whl",
+      "bytes": 250910,
+      "sha256": "5282c12b107bffeef825f4617dc029afaf41d0ea60823bbb665ef3079dc79de2",
+      "url": "https://files.pythonhosted.org/packages/c0/da/977ded879c29cbd04de313843e76868e6e13408a94ed6b987245dc7c8506/openpyxl-3.1.5-py2.py3-none-any.whl",
+      "package": "openpyxl",
+      "license_expression": "MIT"
+    },
+    {
+      "filename": "et_xmlfile-2.0.0-py3-none-any.whl",
+      "bytes": 18059,
+      "sha256": "7a91720bc756843502c3b7504c77b8fe44217c85c537d85037f0f536151b2caa",
+      "url": "https://files.pythonhosted.org/packages/c1/8b/5fe2cc11fee489817272089c4203e679c63b570a5aaeb18d852ae3cbba6a/et_xmlfile-2.0.0-py3-none-any.whl",
+      "package": "et_xmlfile",
+      "license_expression": "MIT"
+    }
+  ],
+  "maximum_download_bytes": 268969,
+  "model_turns": 0,
+  "cash_usd": "0",
+  "origin": "Pinned PyPI release metadata. No package import, install, grader, build, worker, solver, or release.",
+  "standing_authority_sha256": "f0f86d6af2600817eb6de50dd12ac4f861f09ac36f90a27bc84e4ae6f044635c"
+}

@@ -1,5 +1,25 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- skillsbench-packaged-graders-and-langfuse-20261105:start -->
+**November 5. Both packaged SkillsBench graders passed.**
+
+[Sales Pivot and Spring Boot](../../reports/toolkit-v2/c13/skillsbench-contained-graders-20261105/README.md)
+accepted their protected references and rejected two controls through
+AEEP's contained executor. The ordinary CLI registered both recipes,
+both operator-reviewed asset-use determinations and two inert task
+case sets. Both worker tool closures, plan review and actual ordinary
+CLI execution remain open. No provider disclosure or model ran.
+
+Langfuse review `17af458f` stayed unstarted after macOS changed the
+sandbox executable. The approved [sandbox correction](../../reports/toolkit-v2/c13/langfuse-host-sandbox-20261105/README.md)
+reached web startup and hit Redis name-resolution errors. The approved
+[Redis correction](../../reports/toolkit-v2/c13/langfuse-static-redis-20261105/README.md)
+reached logged Next.js readiness, but host health still failed.
+All 142 charged operations remain, including the 66 new operations.
+All owned service resources are stopped and retained. Ingestion and
+disablement remain open. Comparisons stay paused.
+<!-- skillsbench-packaged-graders-and-langfuse-20261105:end -->
+
 <!-- mcp-postgres-reference-passed-20261105:start -->
 **November 5. Both pinned MCP PostgreSQL reference tasks passed.**
 

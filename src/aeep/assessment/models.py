@@ -9,6 +9,7 @@ from pathlib import Path, PurePosixPath
 from typing import Annotated, Any, Literal
 
 from pydantic import (
+    ConfigDict,
     Field,
     SerializationInfo,
     SerializerFunctionWrapHandler,
@@ -84,6 +85,12 @@ class RecipeFeatureRule(StrictModel):
 
 
 class ExecutableRecipeExtension(StrictModel):
+    model_config = ConfigDict(json_schema_extra={"allOf": [{
+        "if": {"properties": {"schema_version": {"const": "assessment.recipe-extension.v6"}},
+               "required": ["schema_version"]},
+        "else": {"properties": {"independent_fixtures": {"minItems": 2},
+                                "transformed_fixtures": {"minItems": 1}}},
+    }]})
     schema_version: Literal[
         "assessment.recipe-extension.v1", "assessment.recipe-extension.v2",
         "assessment.recipe-extension.v3", "assessment.recipe-extension.v4",
@@ -92,8 +99,8 @@ class ExecutableRecipeExtension(StrictModel):
     generator: ExecutorSpec
     grader: ExecutorSpec
     reference: ExecutorSpec
-    independent_fixtures: list[RecipeLiteralFixture] = Field(min_length=2, max_length=100)
-    transformed_fixtures: list[RecipeLiteralFixture] = Field(min_length=1, max_length=100)
+    independent_fixtures: list[RecipeLiteralFixture] = Field(max_length=100)
+    transformed_fixtures: list[RecipeLiteralFixture] = Field(max_length=100)
     fault_outputs: list[dict[str, Any]] = Field(min_length=1, max_length=100)
     feature_rules: dict[str, RecipeFeatureRule]
     variation_features: dict[str, dict[str, str | int | bool]]
@@ -112,6 +119,10 @@ class ExecutableRecipeExtension(StrictModel):
 
     @model_validator(mode="after")
     def contained_json_programs(self) -> ExecutableRecipeExtension:
+        # Integration plans already supply reviewed upstream cases and a separate protected reference.
+        if not self.schema_version.endswith('.v6') and (
+                len(self.independent_fixtures) < 2 or not self.transformed_fixtures):
+            raise ValueError('executable recipes require independent and transformed fixtures')
         if (self.schema_version != 'assessment.recipe-extension.v1') != (self.truth_schema is not None):
             raise ValueError("semantic artifact grading requires extension v2/v3 and an explicit truth schema")
         diagnostics = self.schema_version.endswith(('.v3', '.v4', '.v5', '.v6'))

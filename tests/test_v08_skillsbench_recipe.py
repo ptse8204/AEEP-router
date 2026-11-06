@@ -103,6 +103,20 @@ def test_integration_grader_checks_one_bounded_example_at_a_time():
         bounded_batches([{"example": "x" * 750_000}], separate=True)
 
 
+def test_only_integration_recipes_can_calibrate_without_duplicate_literal_fixtures():
+    definition = skillsbench_offer_letter_recipe().model_dump(mode="json")
+    extension = definition["extension"]
+    extension.update(independent_fixtures=[], transformed_fixtures=[])
+    with pytest.raises(ValueError, match="independent and transformed fixtures"):
+        RecipeDefinition.model_validate(definition)
+
+    extension["schema_version"] = "assessment.recipe-extension.v6"
+    definition["dependencies"]["benchmark_pack"] = "a" * 64
+    recipe = RecipeDefinition.model_validate(definition)
+    assert recipe.extension is not None
+    assert recipe.extension.independent_fixtures == recipe.extension.transformed_fixtures == []
+
+
 def test_skillsbench_recipe_cases_are_deterministic_disjoint_and_balanced():
     recipe = skillsbench_offer_letter_recipe()
     extension = recipe.extension

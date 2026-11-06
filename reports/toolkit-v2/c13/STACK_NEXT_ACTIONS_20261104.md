@@ -1,5 +1,20 @@
 # Resume the current stack work
 
+## November 5 protected grader and Langfuse results
+
+The [two packaged SkillsBench graders](skillsbench-contained-graders-20261105/README.md)
+passed their references and two controls. The ordinary CLI registered
+both [asset-use decisions and inert case sets](skillsbench-task-disclosure-20261105/result.json).
+Next supply the missing shared tools in the [retained worker images](skillsbench-managed-worker-preparation-20261105/tool-availability.json),
+verify the current controlled boundaries, and prepare exact engineering
+dispatch. Keep the verifier and calibration contents out of agent images.
+
+The [latest Langfuse attempt](langfuse-static-redis-20261105/README.md)
+reached logged web readiness, but host health still failed and ingestion
+is open. Do a bounded connectivity diagnosis before another service
+repeat. Preserve both terminal attempts, all 142 charges and stopped
+resources. Comparisons remain paused.
+
 ## November 5 approved MCP reference results
 
 Both [pinned MCP reference journeys](mcp-postgres-reference-results-20261105/README.md)

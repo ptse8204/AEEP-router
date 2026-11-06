@@ -1,0 +1,60 @@
+{
+  "scope": "Private COPY-only build-context staging for equal supporting tools in each task worker role.",
+  "contexts": [
+    {
+      "domain": "sales",
+      "role": "control",
+      "context": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-managed-worker-preparation-20261105/sales-control",
+      "base": "aeep-toolkit-v2/capture-policy-local-tag-20261021:control",
+      "base_image_id": "sha256:0c05b495931e8558baf76b099c01c3b80a4b5136b5640d387db2d8ee644cf1db",
+      "files": {
+        "Dockerfile": "ac7e103bbebe3172aa1e3cb28c48c9bad29d7ca547422ef988a7908be732db51",
+        "pypdf-6.21.4-py3-none-any.whl": "33e4fb41ca352810eb4e9838aa0d82d6888a5f8bf682f43e99cce5faa666255c"
+      }
+    },
+    {
+      "domain": "sales",
+      "role": "candidate",
+      "context": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-managed-worker-preparation-20261105/sales-candidate",
+      "base": "aeep-toolkit-v2/stack-check:readiness-20261103",
+      "base_image_id": "sha256:bf4581894c1d43808baaf580888c0b5f1dfdf4e1ea4caf0b8f2a7956d0fdd6d9",
+      "files": {
+        "Dockerfile": "8ec8f6b733250c82352a4153ded4280434f6f316156073727620e10e5f193464",
+        "pypdf-6.21.4-py3-none-any.whl": "33e4fb41ca352810eb4e9838aa0d82d6888a5f8bf682f43e99cce5faa666255c"
+      }
+    },
+    {
+      "domain": "spring",
+      "role": "control",
+      "context": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-managed-worker-preparation-20261105/spring-control",
+      "base": "aeep-toolkit-v2/capture-policy-local-tag-20261021:control",
+      "base_image_id": "sha256:0c05b495931e8558baf76b099c01c3b80a4b5136b5640d387db2d8ee644cf1db",
+      "files": {
+        "Dockerfile": "45d79b58c83161e2ed6f5930f81d24718da76f3cedd97931198504b72b8640d4"
+      }
+    },
+    {
+      "domain": "spring",
+      "role": "candidate",
+      "context": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-managed-worker-preparation-20261105/spring-candidate",
+      "base": "aeep-toolkit-v2/stack-check:readiness-20261103",
+      "base_image_id": "sha256:bf4581894c1d43808baaf580888c0b5f1dfdf4e1ea4caf0b8f2a7956d0fdd6d9",
+      "files": {
+        "Dockerfile": "995da793b893aede4102e0876fdbad85a5f08fd8b39f84c48199f5ffe1ca2e0a"
+      }
+    }
+  ],
+  "spring_toolchain_source_image": "sha256:8d64eb9ddf942bbd1e4bd83d0c588ad2dc4488248529bb4344dfdfe8b9666291",
+  "pdf_artifact": {
+    "name": "pypdf-6.21.4-py3-none-any.whl",
+    "bytes": 410430,
+    "sha256": "33e4fb41ca352810eb4e9838aa0d82d6888a5f8bf682f43e99cce5faa666255c",
+    "url": "https://files.pythonhosted.org/packages/3f/4b/77e8ad4ac42c9d93600f40541a50e9feb3a61d2bbee2d76f659346072051/pypdf-6.21.4-py3-none-any.whl",
+    "license": "BSD-3-Clause"
+  },
+  "has_verifier_or_oracle_files": false,
+  "images_built": 0,
+  "models": 0,
+  "comparisons": "PAUSED",
+  "next": "Review and build the four isolated role images, then verify runtime tools and fresh paired boundaries before a separate exact live engineering dispatch."
+}

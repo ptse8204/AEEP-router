@@ -1,0 +1,243 @@
+{
+  "source_before": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+  "source_after": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+  "checks": [
+    {
+      "name": "compileall",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0550990420015296,
+      "monitor_stop": null,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "schemas",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.055565624999872,
+      "monitor_stop": null,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "assessment-policy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0482215830015775,
+      "monitor_stop": null,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "ruff",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0487322920016595,
+      "monitor_stop": null,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "name": "mypy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 4.084003750002012,
+      "monitor_stop": null,
+      "log_sha256": "d9d12c8bee9454137f2a97af320cf042670ce8556a268e95376f71ca63fff9bd"
+    },
+    {
+      "name": "pytest",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest",
+        "--basetemp",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-contained-graders-20261105/verification/pytest-tmp"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 645.5486139999994,
+      "monitor_stop": null,
+      "log_sha256": "02ad71526d23631d9ddcee18bd1a1bfb5b7b2a610f4a21b2f5a9e17146665a8b"
+    },
+    {
+      "name": "coverage-tests",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest",
+        "--basetemp",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-contained-graders-20261105/verification/coverage-tests-tmp"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 984.2048401249995,
+      "monitor_stop": null,
+      "log_sha256": "a60a4051d48a59387e9d5d57b71b854070e5c53750c5fa88c74b4bb75b03a31e"
+    },
+    {
+      "name": "coverage-json",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-contained-graders-20261105/verification/coverage.json"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 4.081270332997519,
+      "monitor_stop": null,
+      "log_sha256": "1e78ca0ce16156d88011d211b9cf2bc8fb9ab4d07f6c53d7a16bddf47bd2f84d"
+    },
+    {
+      "name": "coverage-report",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0626893330008897,
+      "monitor_stop": null,
+      "log_sha256": "13bd8843b223948411e78c70e27a6733f6e7964846ea41cafe413b81fe27e01f"
+    },
+    {
+      "name": "critical-coverage",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_critical_coverage.py",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-contained-graders-20261105/verification/coverage.json"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0438637920015026,
+      "monitor_stop": null,
+      "log_sha256": "f88894cb084bb60370ed94016bfb259c38ff869167dcf9b3c2b11c2055f88695"
+    },
+    {
+      "name": "assessment-coverage",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_coverage.py",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-contained-graders-20261105/verification/coverage.json"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0602471669990337,
+      "monitor_stop": null,
+      "log_sha256": "8995cbed8d8e93f15ee8ec27b6759d8906c509ac9d830e4d9bef09836948294a"
+    },
+    {
+      "name": "toolkit-integration-fixtures",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest",
+        "integrations/toolkit",
+        "--basetemp",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-contained-graders-20261105/verification/toolkit-integration-fixtures-tmp"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 4.088827707997552,
+      "monitor_stop": null,
+      "log_sha256": "8878cf21dc2e6dfeeeefa485061e98c57d8cc65e9cf0e31d9dfc5da2e3761042"
+    },
+    {
+      "name": "build",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "build",
+        "--no-isolation",
+        "--outdir",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-contained-graders-20261105/verification/dist"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 4.085006583001814,
+      "monitor_stop": null,
+      "log_sha256": "1821a94c856c3762fb3141112120bcb965fd18e058f2770be57b9e9de413e505"
+    }
+  ],
+  "pytest": {
+    "passed": 2138,
+    "skipped": 21,
+    "warnings": 1
+  },
+  "branch_pytest": {
+    "passed": 2138,
+    "skipped": 21,
+    "warnings": 1
+  },
+  "integration_fixtures": {
+    "passed": 74,
+    "subtests_passed": 24
+  },
+  "coverage": {
+    "percent_covered": 82.70659590598939,
+    "covered_branches": 9958,
+    "num_branches": 13624,
+    "covered_lines": 33678,
+    "num_statements": 39136
+  },
+  "docs": {
+    "passed": true,
+    "inputs": 72,
+    "review_sha256": "6d4881537c065a41e3bd5c9e32d4830a94f270888afad8b7f7ba17899799f2ec",
+    "result_sha256": "1e87f2a7e7919b45d92521fc8a60b92c02ff9e1fd20bf4127b184b09d4d1b771"
+  },
+  "artifacts": [
+    {
+      "name": "aeep_agent_router-0.8.2-py3-none-any.whl",
+      "bytes": 2193394,
+      "sha256": "f6d1f907af70f1be9bda25172f73adab755ccbe994cd2362395c1b84ded02d32"
+    },
+    {
+      "name": "aeep_agent_router-0.8.2.tar.gz",
+      "bytes": 2404304,
+      "sha256": "e4a52468cbd10d052b7585678d73465cf112ce535a61397712195ade540de34e"
+    }
+  ],
+  "legacy_fixture_schema_minimums_verified": true,
+  "source_scope": "Working-tree verification includes unrelated CI, pyproject and checkout test edits. Those edits are excluded from the feature commit. Built artifacts retain working-tree scope.",
+  "model_turns": 0,
+  "comparisons": "PAUSED"
+}

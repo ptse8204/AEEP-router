@@ -1,5 +1,14 @@
 # 0.8 plan coverage and remaining work
 
+<!-- skillsbench-packaged-graders-and-langfuse-20261105:start -->
+[C13 packaged SkillsBench graders](../toolkit-v2/c13/skillsbench-contained-graders-20261105/README.md)
+passed both protected reference and negative controls. The ordinary CLI
+registered exact task definitions and operator-reviewed rights. Managed
+worker tools, new conformance and bounded dispatch remain separate.
+Langfuse still lacks an ingestion and disablement result after two
+settled repeats. No comparative or release gate changed.
+<!-- skillsbench-packaged-graders-and-langfuse-20261105:end -->
+
 <!-- mcp-postgres-reference-passed-20261105:start -->
 Both [pinned MCP reference tasks](../toolkit-v2/c13/mcp-postgres-reference-results-20261105/README.md)
 now pass their original graders and negative control through the real

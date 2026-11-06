@@ -2364,3 +2364,13 @@ rejected missing state and accepted the result of actual Postgres MCP
 execution. The five containers per pack stopped and both ledgers settled.
 The packs share the SQL transaction. This evidence covers the two local
 reference journeys and leaves composed workflow verification open.
+
+### November 5 SkillsBench packaged graders and Langfuse health
+
+Both [SkillsBench packaged graders](../../reports/toolkit-v2/c13/skillsbench-contained-graders-20261105/README.md)
+pass their pinned reference and controls. Original instructions,
+test identities and score semantics remain bound. Both ordinary CLI
+managed runs still require ready task workers and execution authority.
+The [latest Langfuse repeat](../../reports/toolkit-v2/c13/langfuse-static-redis-20261105/README.md)
+reached logged web readiness, but host health failed and export stayed
+unstarted.

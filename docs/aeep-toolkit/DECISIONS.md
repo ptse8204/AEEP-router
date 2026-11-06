@@ -3117,3 +3117,13 @@ for the exact two reference-task checks. Keep their distinct databases
 and upstream verifiers bound. Preserve the shared SQL derivation, the
 withdrawn review and all original charges. Keep comparative dispatch
 paused until the full stack gate passes.
+
+### Separate packaged grading from model-backed workload proof
+
+Retain both [passing packaged grader results](../../reports/toolkit-v2/c13/skillsbench-contained-graders-20261105/README.md).
+Integration calibration uses its reviewed task cases and protected
+reference without duplicating the case archive in extra literals.
+Keep the legacy fixture minimums and formal case thresholds.
+A separate worker closure and reviewed dispatch are required for each
+ordinary CLI journey. For [Langfuse](../../reports/toolkit-v2/c13/langfuse-static-redis-20261105/README.md),
+isolate the connection failure before another complete repeat.

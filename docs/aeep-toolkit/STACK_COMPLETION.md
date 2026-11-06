@@ -179,7 +179,9 @@ Executable recipe extension v6 can bind a protected grader command up to
 60 seconds for a reviewed benchmark integration case set. Calibration runs one
 bounded example per command and uses the existing operation reservations.
 Earlier extension versions and all generator and reference command limits
-retain 30 seconds. The [measured Spring command](../../reports/toolkit-v2/c13/skillsbench-ordinary-cli-preparation-20261105/README.md)
+retain 30 seconds. The integration extension can calibrate on the exact
+reviewed task cases and protected reference without extra literal
+fixtures. Earlier extension versions keep their original fixture minimums. The [measured Spring command](../../reports/toolkit-v2/c13/skillsbench-ordinary-cli-preparation-20261105/README.md)
 motivates the opt-in deadline. The actual protected runtime still needs
 verification through the ordinary CLI.
 
@@ -197,8 +199,10 @@ mutable download to commit `2982259afd39ec77df4c324bd29208f77986e9de`; no licens
 was found at that revision. The bundled Anthropic [PDF/spreadsheet skill notice](https://github.com/benchflow-ai/skillsbench/blob/9a1f4dd5f7659f75707435da3ce854b6e48321d1/tasks/financial-modeling-qa/environment/skills/xlsx/LICENSE.txt)
 restricts copying and use outside their services. Do not bundle, execute or send
 these skills to an agent under the repository's Apache notice. Their presence
-establishes no permission. Runtime replacement, asset-rights review, reference
-success and counterexample grading remain open; no SkillsBench program has run.
+establishes no permission. The [packaged Sales Pivot and Spring Boot graders](../../reports/toolkit-v2/c13/skillsbench-contained-graders-20261105/README.md)
+passed their pinned references and controls. Their asset-use determinations
+are recorded. Both managed worker closures and ordinary CLI executions
+remain open. The four remaining SkillsBench tasks retain separate gates.
 
 The operator has no Copilot subscription. Waza's default real backend needs
 authorized Copilot access. Its [documented custom-provider route](https://github.com/microsoft/waza/blob/e534d149d89ae77ea158469fb4d2003804b2ee76/README.md#custom-copilot-sdk-providers) would require

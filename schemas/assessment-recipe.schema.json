@@ -170,6 +170,30 @@
     },
     "ExecutableRecipeExtension": {
       "additionalProperties": false,
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "independent_fixtures": {
+                "minItems": 2
+              },
+              "transformed_fixtures": {
+                "minItems": 1
+              }
+            }
+          },
+          "if": {
+            "properties": {
+              "schema_version": {
+                "const": "assessment.recipe-extension.v6"
+              }
+            },
+            "required": [
+              "schema_version"
+            ]
+          }
+        }
+      ],
       "properties": {
         "schema_version": {
           "default": "assessment.recipe-extension.v1",
@@ -198,7 +222,6 @@
             "$ref": "#/$defs/RecipeLiteralFixture"
           },
           "maxItems": 100,
-          "minItems": 2,
           "title": "Independent Fixtures",
           "type": "array"
         },
@@ -207,7 +230,6 @@
             "$ref": "#/$defs/RecipeLiteralFixture"
           },
           "maxItems": 100,
-          "minItems": 1,
           "title": "Transformed Fixtures",
           "type": "array"
         },

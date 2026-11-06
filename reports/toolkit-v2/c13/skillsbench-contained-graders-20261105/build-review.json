@@ -1,0 +1,68 @@
+{
+  "ledger": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillrank-build-preparation-20261103/runtime-execution/canonical.sqlite3",
+  "docker": "/Applications/Docker.app/Contents/Resources/bin/docker",
+  "docker_config": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-telemetry-20261104/docker-config",
+  "docker_socket": "/Users/edwintse/.docker/run/docker.sock",
+  "work": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-contained-graders-20261105",
+  "private_inventory": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-contained-graders-20261105/build-inputs.json",
+  "grant_id": "skillsbench-protected-grader-build-20261105",
+  "expires_at": "2026-11-08T12:00:00+00:00",
+  "pins": {
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-contained-graders-20261105/build-inputs.json": "ca2f89c140ea9c1c78938955943428f89446109b6b23f85113465c998cc0fa76",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-contained-graders-20261105/build-images.py": "5b9e77aa29d9f3382fef1b44ba4ee8e230069f39d72d9ad6f086a43c8528a2f8",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-contained-graders-20261105/prepare-images.py": "55a60eb393a5b5f70f4b4fa22ee431fe9322fb8168f04362b567086c035066d7",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-contained-graders-20261105/grade.py": "1585c110a2d527ee879cd5fe0fa679da1886319058630181d8c514832f8701f0",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-contained-graders-20261105/toolchain-acquisition.json": "b764bf081756964728bf661ae0602428e820c962a110973b4f8ed1502a9a2b10",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/pipeline-standing-authority-20261104.json": "f0f86d6af2600817eb6de50dd12ac4f861f09ac36f90a27bc84e4ae6f044635c",
+    "/Applications/Docker.app/Contents/Resources/bin/docker": "a6822407e207ff0b687419ccbe55700ffbf389d77de58ef625b3b1790d88747c",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-telemetry-20261104/docker-config/config.json": "5e8ca882ff273c94f40baa34979ce5a5c8873ec61a0f10bd539db5d8843722fa"
+  },
+  "parent": {
+    "reference": "aeep-assessment-runtime:0.8",
+    "id": "sha256:9e3b3712bae59607d06a162f275f0afbd916a70bcb91b544e9f350b6a6712fd7",
+    "layers": [
+      "sha256:8227a1264c7ff2f8bd125b585e62c1cec77dd2099c985c33e08d34292d06144f",
+      "sha256:8a6da6eb1b282a3bab8da6e094b7259bf3f21335dd8e803b4dcede1afecc1716",
+      "sha256:d81ccc5a95666f072f57d6526d725c3e6c25eda2ee84b88e43fb8f7db5f47411",
+      "sha256:8fd7bcc5bf0ec20486b3ee0761eef560a3298d92e46ce7aed301a38b532ce945",
+      "sha256:2dbbecc823b874a53ae196efbddbf171afddd94650d9c21f3dadd3d43466a596"
+    ]
+  },
+  "contexts": [
+    {
+      "role": "sales",
+      "task_id": "sales-pivot-analysis",
+      "context": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-contained-graders-20261105/sales",
+      "image_tag": "aeep-skillsbench-sales:protected-20261105",
+      "dockerfile_sha256": "13b8dbd877fa464592cf8e8ba30453bde2d5837fda48d85cb3086c5038304480",
+      "binding_sha256": "2a443bb3450b780eaa35e61f577646f907983a2dfaeaae3ecff383aa9e0071d3",
+      "runtime_destination": "/opt/aeep-skillsbench-sales",
+      "file_bytes": 1816042,
+      "file_count": 144
+    },
+    {
+      "role": "spring",
+      "task_id": "spring-boot-jakarta-migration",
+      "context": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-contained-graders-20261105/spring",
+      "image_tag": "aeep-skillsbench-spring:protected-20261105",
+      "dockerfile_sha256": "63d5a71c8a963da1a49195f679cdbe147cbfc43114e787dc0e2f1d4efe41805c",
+      "binding_sha256": "9105edc6d770b1b5d13edaa081d2ec1590b8e7626a52291e16a3952c526e4f8d",
+      "runtime_destination": "/opt/aeep-skillsbench-spring",
+      "file_bytes": 507101514,
+      "file_count": 3755
+    }
+  ],
+  "maximum_builds": 2,
+  "maximum_operations": 2,
+  "maximum_reserved_seconds": 300,
+  "models": 0,
+  "cash_usd": "0",
+  "restriction": "No downloads, pulls, grader invocations, provider disclosure, deletion or release. Build private images from two hash-bound contexts.",
+  "docker_usage": [
+    "TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE",
+    "Images          189       15        46.16GB   19GB (41%)",
+    "Containers      69        1         72.95MB   72.93MB (99%)",
+    "Local Volumes   45        26        145.6GB   6.965GB (4%)",
+    "Build Cache     990       0         30.28GB   12.89GB"
+  ]
+}
