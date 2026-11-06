@@ -1,0 +1,99 @@
+{
+  "passed": true,
+  "models": 0,
+  "review_sha256": "356f1b6f46ccf6e6ea006105726c8c3418cc613cf4249c99346100be1e3d3112",
+  "containers": {
+    "oracle": {
+      "id": "ce174ea8cf2c2161067ab6f239c32aa02e745a3daf1a461d23410ed1ad4750d1",
+      "retained": true,
+      "started": true,
+      "preflight_passed": true,
+      "terminal": {
+        "Status": "exited",
+        "ExitCode": 0,
+        "OOMKilled": false
+      }
+    },
+    "reference": {
+      "id": "f5374a798b972aac0108106dddc3fbbbd1fcdf50d247e633da7033415b6eed8e",
+      "retained": true,
+      "started": true,
+      "preflight_passed": true,
+      "terminal": {
+        "Status": "exited",
+        "ExitCode": 0,
+        "OOMKilled": false
+      }
+    },
+    "missing": {
+      "id": "3a8a2faad0d909568aab5f14c57587c018130ac6288a0d311e4ac67aa0c95e8b",
+      "retained": true,
+      "started": true,
+      "preflight_passed": true,
+      "terminal": {
+        "Status": "exited",
+        "ExitCode": 0,
+        "OOMKilled": false
+      }
+    },
+    "empty": {
+      "id": "49222526f30f67b524db85f6eb8bbc20bd1ab96b1f5bff127f873484b969bf43",
+      "retained": true,
+      "started": true,
+      "preflight_passed": true,
+      "terminal": {
+        "Status": "exited",
+        "ExitCode": 0,
+        "OOMKilled": false
+      }
+    },
+    "infrastructure": {
+      "id": "b07705e741465eafbc5ce8c401a32395f0e1cc28e9b546e32f4a7e408971cbba",
+      "retained": true,
+      "started": true,
+      "preflight_passed": true,
+      "terminal": {
+        "Status": "exited",
+        "ExitCode": 0,
+        "OOMKilled": false
+      }
+    }
+  },
+  "phases": {
+    "reference": {
+      "status": "passed",
+      "tests": {
+        "test_outputs.py::TestOutputs::test_file_exists": "PASSED",
+        "test_outputs.py::TestOutputs::test_content": "PASSED"
+      },
+      "exit_code": 0,
+      "intentional_skips": []
+    },
+    "missing": {
+      "status": "rejected",
+      "tests": {
+        "test_outputs.py::TestOutputs::test_file_exists": "FAILED",
+        "test_outputs.py::TestOutputs::test_content": "FAILED"
+      },
+      "exit_code": 1,
+      "intentional_skips": []
+    },
+    "empty": {
+      "status": "rejected",
+      "tests": {
+        "test_outputs.py::TestOutputs::test_file_exists": "PASSED",
+        "test_outputs.py::TestOutputs::test_content": "FAILED"
+      },
+      "exit_code": 1,
+      "intentional_skips": []
+    },
+    "infrastructure": {
+      "status": "infrastructure_error",
+      "cause": "protected_asset_missing"
+    }
+  },
+  "official_benchmark_reproduction": false,
+  "oracle_report_sha256": "07dc93369b7280bad8d1b74b6bb241a4b6a596560dc5b4853a7f195c1267250c",
+  "operations": 21,
+  "unsettled_operations": 0
+}

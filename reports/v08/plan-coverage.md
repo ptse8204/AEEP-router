@@ -1,5 +1,16 @@
 # 0.8 plan coverage and remaining work
 
+<!-- invoice-aflow-evoagentx-results-20261106:start -->
+[Invoice Fraud protected reference](../toolkit-v2/c13/skillsbench-invoice-fraud-20261106/continuation/reference-execution/result.json)
+and task-pack inspection passed. Provider disclosure and managed task execution
+remain open. [AFlow](../toolkit-v2/c13/proposal-optimizer-preparation-20261105/socket-boundary/result.json)
+passed the real optimizer import and graph parser with socket denial verified.
+Finite optimization remains open. [EvoAgentX](../toolkit-v2/c13/evoagentx-distribution-20261106/README.md)
+built its offline image from the pinned source and 87 reviewed wheel hashes.
+An eager import outside the base dependency closure stopped the first check.
+No model turns ran, and comparisons stay paused.
+<!-- invoice-aflow-evoagentx-results-20261106:end -->
+
 <!-- invoice-substitution-and-aflow-repeat-20261106:start -->
 The operator conditionally selected hard Invoice Fraud Detection in place of
 Financial Modeling QA. The [local asset review and image acquisition](../toolkit-v2/c13/skillsbench-invoice-fraud-20261106/README.md)

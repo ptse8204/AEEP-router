@@ -21,3 +21,37 @@ The AEEP adapter must validate that ports and capabilities bind to the
 operator's allowed inventory before passing an inert `GoalSpec` to
 the existing stack planner. The source acquisition does not establish
 a working runtime or proposal. Provider authority remains separate.
+
+## Offline runtime build
+
+The [Linux dependency check](verified-candidates.json) verified 87 wheel
+candidates across 805 requirement-marker checks. The [wheel audit](acquisition-result.json)
+verified all 115,469,721 bytes and found no wheel startup hooks. Four
+packages report license information through package metadata or alternate
+notice names. This is private engineering evidence.
+
+The [runtime](evoagentx-runtime-result.json) built from the pinned source
+and the 87 wheels. The [first check](evoagentx-runtime-diagnosis.json)
+passed its socket boundary and then stopped at an eager Docker SDK import.
+The base dependency list omits the Docker SDK. The traceback also reported
+asyncio selector cleanup after the socketpair restriction. Both operations
+settled. The retained image has no Docker socket mount or provider
+credentials. Graph-builder execution and actual proposal generation
+remain open.
+
+## Proposal-only continuation
+
+The [static audit](proposal-runtime/overlay-report.json) traced the eager
+imports through optional toolkits, long-term memory, storage and code-test
+operators. The proposed overlay changes five support files. It preserves
+the pinned planner and graph-builder methods, excludes optional toolkit
+registration and disables persistent memory for this runtime. The
+remaining 83 upstream modules have no unresolved static imports against
+the existing wheelhouse. This does not verify dynamic imports.
+
+The [exact repeat review](proposal-runtime/evoagentx-runtime-build-review.json)
+uses one COPY-only layer over the retained image. The reviewed syscall
+profile permits private Unix socketpairs for asyncio and still denies new
+network sockets and connections. The proposed check exercises the real
+graph builder on typed local inputs. It requires approval under the repeat
+rule. Provider-backed proposal generation remains a separate gate.

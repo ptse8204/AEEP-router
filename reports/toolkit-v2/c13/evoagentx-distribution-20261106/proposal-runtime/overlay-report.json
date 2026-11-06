@@ -1,0 +1,67 @@
+{
+  "source_revision": "d77fd6b9a3e76c8dd83bebe3374c53a3f5d16f54",
+  "before": {
+    "visited_upstream_modules": 198,
+    "missing_static_modules": [
+      "PIL",
+      "PyPDF2",
+      "bs4",
+      "bson",
+      "datasets",
+      "ddgs",
+      "docker",
+      "faiss",
+      "fastmcp",
+      "feedparser",
+      "google",
+      "google_auth_oauthlib",
+      "googleapiclient",
+      "googlesearch",
+      "html2text",
+      "llama_index",
+      "ollama",
+      "openpyxl",
+      "psycopg2",
+      "pymongo",
+      "pymupdf",
+      "selectolax",
+      "selenium",
+      "sentence_transformers",
+      "spacy",
+      "sympy",
+      "telethon",
+      "voyageai",
+      "wikipedia"
+    ]
+  },
+  "after": {
+    "visited_upstream_modules": 83,
+    "missing_static_modules": []
+  },
+  "changed_support_files": {
+    "evoagentx/tools/__init__.py": {
+      "original_sha256": "3a2a6760188519d413b60507eae5515eb7093e471ead990cb654d3562156eb07",
+      "overlay_sha256": "761a1a95367ab7d4974db9f4ddd9ee9725fc1ccc9ec6a93a17c725e5c9b64ad2"
+    },
+    "evoagentx/memory/__init__.py": {
+      "original_sha256": "ef3c2853e1eb81c28567a960d3b8e0b012b739ba4c80bb9fea62469541750e11",
+      "overlay_sha256": "d22ba7daaf87a3ba948c51d2bda2e00e0435a61d20977450fc6cbc72851e949c"
+    },
+    "evoagentx/agents/agent.py": {
+      "original_sha256": "67b6112bb63922df4131c51391b91509b6339d12f8c10900720062b4da6d2b05",
+      "overlay_sha256": "639d05daf2a423ab5b169d28ec6a9d388c6abcfa0e335d990bf4bf135d608904"
+    },
+    "evoagentx/storages/base.py": {
+      "original_sha256": "0d7de27c88ba96eeadc10a527a6d77fcdb08ed1e093198771ae30524604102d2",
+      "overlay_sha256": "572d77860f5dc12bd50c182d72dc55f67082f96979e607e29d219237e7f53277"
+    },
+    "evoagentx/workflow/operators.py": {
+      "original_sha256": "c4e41d5904f55d81fa161479402f3f5b71444dcadb6b4a15e65b558ffd6a93ce",
+      "overlay_sha256": "e5696f399d378944e5ea1265ce53441552afdcbdeb02d0a4e328c9d19c8374a0"
+    }
+  },
+  "planner_and_graph_source_unchanged": true,
+  "purpose": "Keep optional toolkit, storage and benchmark imports out of the proposal-only path.",
+  "offline_runtime_executed": false,
+  "models": 0
+}

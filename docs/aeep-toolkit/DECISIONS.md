@@ -3180,3 +3180,16 @@ Keep the two terminal AFlow boundary failures and their charges. The next
 review measures the retained runtime's interface and route counts before
 upstream import. It keeps the pinned image and offline policy. A successful
 import or graph parse still leaves finite calibration open.
+
+## D167. Verify the optimizer's socket boundary before loading AFlow
+
+Keep Docker network isolation and the non-root read-only runtime. The
+[reviewed Moby profile](../../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/socket-boundary/profile-source.json)
+removes socket-related permissions from the daemon's pinned default.
+The guest checks socket denial, inherited descriptors and routing before
+importing AFlow. Keep this evidence scoped to import and parsing. A finite
+protected calibration still needs a separate review.
+
+The [Invoice Fraud pack](../../reports/toolkit-v2/c13/skillsbench-invoice-fraud-20261106/task-pack.json)
+keeps its binary upstream reward and protected assets. A local rights draft
+cannot authorize provider disclosure.

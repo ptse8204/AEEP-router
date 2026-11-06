@@ -2413,3 +2413,19 @@ failed its interface assertion before optimizer import. The next
 [boundary review](../../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/namespace-observation/operation-review.json)
 records interface and route counts and fails closed if isolation is
 unproven. Actual calibration remains open.
+
+### November 6 protected reference and runtime results
+
+[Invoice Fraud Detection](../../reports/toolkit-v2/c13/skillsbench-invoice-fraud-20261106/README.md)
+passed its pinned offline solver, protected verifier and three controls.
+The ordinary CLI verified its task pack. Provider disclosure and a composed
+worker journey for this task remain open.
+
+[AFlow](../../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/socket-boundary/result.json)
+passed actual optimizer import and graph parsing with socket creation denied.
+This evidence covers the retained offline runtime. Finite calibration remains open.
+
+[EvoAgentX](../../reports/toolkit-v2/c13/evoagentx-distribution-20261106/README.md)
+built a retained image from the pinned source and 87 reviewed wheels.
+Eager import of the optional Docker SDK stopped the graph-builder check.
+Actual workflow proposal generation remains open.

@@ -1,5 +1,34 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- invoice-aflow-evoagentx-results-20261106:start -->
+**November 6. Invoice Fraud reference and AFlow isolation passed.**
+
+The [Invoice Fraud continuation](../../reports/toolkit-v2/c13/skillsbench-invoice-fraud-20261106/continuation/reference-execution/result.json)
+accepted the original solver result, rejected missing and empty output, and
+reported missing protected data as an infrastructure error. All 21 operations
+settled and the five owned containers are stopped. The
+[CLI pack inspection](../../reports/toolkit-v2/c13/skillsbench-invoice-fraud-20261106/cli-pack-inspect.json)
+covers the new pack. Its four-file public archive excludes the protected solver,
+verifier, and ground truth. Provider disclosure and managed execution remain open.
+
+The [AFlow socket-isolation check](../../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/socket-boundary/result.json)
+retained Docker's network isolation and verified socket denial before importing
+the actual optimizer and checking its graph parser. The earlier
+[interface observation](../../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/namespace-observation/result.json)
+recorded ten non-loopback devices and stopped before import. Both operations
+settled. Finite protected calibration remains open.
+
+[EvoAgentX](../../reports/toolkit-v2/c13/evoagentx-distribution-20261106/README.md)
+has 87 hash-verified Linux ARM64 dependency wheels and a retained offline
+source-based image. The import stopped at an eager Docker SDK import absent
+from the upstream base dependency declaration. Both operations settled.
+The [proposal-only review](../../reports/toolkit-v2/c13/evoagentx-distribution-20261106/proposal-runtime/evoagentx-runtime-build-review.json)
+binds a five-file overlay that keeps optional imports out of the planner's
+path. The real planner and graph-builder methods remain unchanged.
+The static closure has no unresolved imports. The runtime repeat awaits
+operator approval. C13 remains open. Comparisons stay paused.
+<!-- invoice-aflow-evoagentx-results-20261106:end -->
+
 <!-- invoice-substitution-and-aflow-repeat-20261106:start -->
 **November 6. Invoice Fraud selected for local integration. C13 remains open.**
 

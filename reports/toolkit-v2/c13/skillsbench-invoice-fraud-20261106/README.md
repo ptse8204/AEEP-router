@@ -42,3 +42,19 @@ The corrected run requires approval under the operator's repeat rule.
 Provider disclosure and model dispatch require their own authority.
 The results are engineering evidence for the adapted environment.
 Comparative campaigns stay paused.
+
+## Approved continuation result
+
+The [continuation](continuation/reference-execution/result.json) passed.
+Both original tests accepted the solver output. Missing output failed both
+tests, and an empty report failed the content test. Missing ground truth
+returned an infrastructure error before scoring. All five containers exited
+and are retained. The ledger settled 21 operations in 9.121 seconds with
+zero model turns.
+
+The [ordinary CLI inspection](cli-pack-inspect.json) verified the new
+[single-task pack](task-pack.json). Its transient 38,038-byte worker archive
+contains the four exact public files and excludes all protected assets.
+The [local rights draft](local-rights-draft.json) retains the contribution
+basis and leaves provider disclosure disabled. No managed worker received
+this task.

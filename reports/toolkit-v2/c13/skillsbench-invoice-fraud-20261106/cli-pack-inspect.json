@@ -1,0 +1,78 @@
+{
+  "pack": "skillsbench",
+  "source_revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+  "pack_sha256": "51eb16f0119a80e26abae2df3b141d2aaa79f2aed33c23950a741314500a6945",
+  "tasks": [
+    {
+      "task_id": "invoice-fraud-detection",
+      "domain": "document-data",
+      "difficulty": "hard",
+      "agent_assets": [
+        {
+          "path": "tasks/invoice-fraud-detection/task.md",
+          "sha256": "f37803e2c0221b47fe2cd206ea1c995a4c320de3d4ece97cf36d6f3ef88fc44b",
+          "bytes": 2401,
+          "role": "instruction"
+        },
+        {
+          "path": "tasks/invoice-fraud-detection/environment/invoices.pdf",
+          "sha256": "a76ee7651a4e088ba566d3e5d5d9f499e773f1166cb2d7f888ea19291c4a813e",
+          "bytes": 29461,
+          "role": "input"
+        },
+        {
+          "path": "tasks/invoice-fraud-detection/environment/vendors.xlsx",
+          "sha256": "19ff6138112d84c2c695c8369fa315d0de42bd966dfdbd95d5a9553e8e9a08d3",
+          "bytes": 14744,
+          "role": "input"
+        },
+        {
+          "path": "tasks/invoice-fraud-detection/environment/purchase_orders.csv",
+          "sha256": "6f84df07d8195331d71940dbcd65e4369094063acece2fe86ca4883a50e35be8",
+          "bytes": 52085,
+          "role": "input"
+        }
+      ],
+      "candidate_assets": [],
+      "protected_assets": [
+        {
+          "path": "tasks/invoice-fraud-detection/oracle/solve.sh",
+          "sha256": "62a8bc6fc7a6ccf23476a0aa15aaa2156b877e06364c36658fcacc8146073621",
+          "bytes": 3673,
+          "role": "oracle"
+        },
+        {
+          "path": "tasks/invoice-fraud-detection/verifier/test.sh",
+          "sha256": "dfb59780bbce55de353a8c7f25ad136e7c0fc75da3744bd54b273aed42a8bb16",
+          "bytes": 292,
+          "role": "verifier"
+        },
+        {
+          "path": "tasks/invoice-fraud-detection/verifier/test_outputs.py",
+          "sha256": "51365f014273d149a67c19484dadb9f494083fd82f242d524a15014838fd8649",
+          "bytes": 3832,
+          "role": "verifier"
+        },
+        {
+          "path": "tasks/invoice-fraud-detection/verifier/ground_truth.json",
+          "sha256": "1e8e6cf9bd28298f5bb4a8c8e07fcdc8199cb877bdbc9def87d9541f596d385d",
+          "bytes": 10138,
+          "role": "verifier"
+        }
+      ],
+      "rights_review_ref": null,
+      "adaptations": [
+        "Only the original public instruction and inputs are included in agent transport.",
+        "Offline reference run mounts an isolated tmpfs at the original /root path and uses pinned pytest wheels.",
+        "Protected verifier and answers stay outside the agent archive. Binary reward follows the original test assertions."
+      ],
+      "upstream_score": "binary",
+      "output_paths": [
+        "fraud_report.json"
+      ]
+    }
+  ],
+  "executed": false,
+  "official_benchmark_reproduction": false,
+  "notice": "File identity and separation only. Runtime, rights reviews, independent grader calibration and authority must be resolved before execution."
+}

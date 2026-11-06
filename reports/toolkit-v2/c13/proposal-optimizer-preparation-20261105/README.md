@@ -64,3 +64,15 @@ table, then runs the original AFlow graph-parser check. It uses the
 same image with a single read-only probe mount, one offline operation,
 and no model turn. The previous terminal check cannot be repeated
 under its original authority. The continuation awaits operator approval.
+
+## AFlow runtime isolation result
+
+The [namespace observation](namespace-observation/result.json) saw ten
+non-loopback devices and stopped before importing AFlow. The subsequent
+[socket-isolation check](socket-boundary/result.json) retained Docker's
+network isolation and denied socket creation using a subtractive profile
+based on the installed engine's [vendored defaults](socket-boundary/profile-source.json).
+The guest also found zero inherited sockets and no non-loopback route
+devices. It imported the real optimizer and passed the real graph parser.
+Both operations settled, and both disposable containers were removed.
+Finite protected calibration remains open.
