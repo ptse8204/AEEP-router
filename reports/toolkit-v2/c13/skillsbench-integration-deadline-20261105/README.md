@@ -32,5 +32,12 @@ The [verifier contracts](protected-verifier-contracts.json) bind the observed
 test identities and intentional skips to the original verifier and negative
 control records. They give the protected carrier an exact expected collection.
 
+The [carrier audit](carrier-readiness.json) pins an existing nonroot
+Sales parent. A compile-only check verified that the draft Sales verifier
+changes only three file paths. Spring's 2,728 cached Maven files match
+their lock and occupy 122 MiB. Keep that cache in the read-only runtime.
+The build output and protected verdict boundary still need a contained
+engineering check.
+
 The [source verification](source-verification.json) is offline engineering
 evidence. Both ordinary CLI workload execution gates remain open.

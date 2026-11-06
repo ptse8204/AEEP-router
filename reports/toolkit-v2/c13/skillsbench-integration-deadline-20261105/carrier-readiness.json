@@ -1,0 +1,44 @@
+{
+  "scope": "Read-only carrier preparation. No image build, container launch, external verifier or model execution.",
+  "sales_pivot": {
+    "parent": {
+      "reference": "aeep-assessment-runtime:0.8",
+      "id": "sha256:9e3b3712bae59607d06a162f275f0afbd916a70bcb91b544e9f350b6a6712fd7",
+      "platform": "linux/arm64",
+      "declared_volumes": null,
+      "user": "65534:65534",
+      "workdir": "/tmp",
+      "diff_ids": [
+        "sha256:8227a1264c7ff2f8bd125b585e62c1cec77dd2099c985c33e08d34292d06144f",
+        "sha256:8a6da6eb1b282a3bab8da6e094b7259bf3f21335dd8e803b4dcede1afecc1716",
+        "sha256:d81ccc5a95666f072f57d6526d725c3e6c25eda2ee84b88e43fb8f7db5f47411",
+        "sha256:8fd7bcc5bf0ec20486b3ee0761eef560a3298d92e46ce7aed301a38b532ce945",
+        "sha256:2dbbecc823b874a53ae196efbddbf171afddd94650d9c21f3dadd3d43466a596"
+      ]
+    },
+    "original_verifier_sha256": "e8cf8f07ba92961daa3eb5a2f8f173378770e5f80aafdf3626305643040d4ba9",
+    "draft_path_only_verifier_sha256": "b8e904b7b2bd00bb211962a09c47dc2db250ab6c6ebd40f8a143feecd7779e76",
+    "draft_path_substitutions": {
+      "/root/demographic_analysis.xlsx": "/tmp/aeep-skillsbench-sales/demographic_analysis.xlsx",
+      "/root/population.pdf": "/tmp/aeep-skillsbench-sales/population.pdf",
+      "/root/income.xlsx": "/tmp/aeep-skillsbench-sales/income.xlsx"
+    },
+    "other_ast_changes": 0,
+    "compiled_without_execution": true,
+    "collection_and_skip_identities": "protected-verifier-contracts.json",
+    "remaining": "Bind the exact pytest dependencies and protected runtime, then verify through ContainerExecutor. No worker or provider may receive the verifier, retained reference output or calibration cases."
+  },
+  "spring_boot": {
+    "maven_cache_lock_sha256": "87fbe1aebe76dc855d6e8902eb7695849cae484f7f47967231343107a2f28737",
+    "verified_cache_files": 2728,
+    "verified_cache_bytes": 128175431,
+    "contained_scratch_bytes": 33554432,
+    "remaining": "Keep the pinned Maven closure in the read-only runtime. Verify build output fits private scratch. Preserve the Maven compile/test assertions while replacing host-specific SDKMAN setup with the pinned JDK and offline Maven. Candidate-controlled builds are executable and their processes cannot establish their own protected verdict."
+  },
+  "ordinary_cli_workload_execution": {
+    "document_data": "OPEN",
+    "software_engineering": "OPEN"
+  },
+  "model_turns": 0,
+  "comparisons": "PAUSED"
+}
