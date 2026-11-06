@@ -1,0 +1,93 @@
+{
+  "passed": true,
+  "models": 0,
+  "comparisons": "PAUSED",
+  "containers": {
+    "db": {
+      "id": "225883817feff381a04d83727d5277902ddde1c800ff1c16cedd20b5fa423af7",
+      "retained": true,
+      "started": true,
+      "terminal": {
+        "Status": "exited",
+        "ExitCode": 0,
+        "OOMKilled": false
+      }
+    },
+    "seed": {
+      "id": "3febdb48245cd516ec2f5adfdb99069a9fb8bb6c77e9f252a324894e0f38eb28",
+      "started": true,
+      "retained": true,
+      "terminal": {
+        "Status": "exited",
+        "ExitCode": 0,
+        "OOMKilled": false
+      }
+    },
+    "missing": {
+      "id": "1f230b93292a5f85d92f4bd01604edd249be86f904dc55204385bc5c43b9c962",
+      "started": true,
+      "retained": true,
+      "terminal": {
+        "Status": "exited",
+        "ExitCode": 0,
+        "OOMKilled": false
+      }
+    },
+    "server": {
+      "id": "809b562cceef4c1d66e9bdef62badb886ac8eb9c93e3e81de612718dcc826fd1",
+      "started": true,
+      "retained": true,
+      "terminal": {
+        "Status": "exited",
+        "ExitCode": 143,
+        "OOMKilled": false
+      }
+    },
+    "reference": {
+      "id": "ab412f14cf1abd1fba86be904119d8b9a93853c1bd1a7b098bbe7e1170dbaf90",
+      "started": true,
+      "retained": true,
+      "terminal": {
+        "Status": "exited",
+        "ExitCode": 0,
+        "OOMKilled": false
+      }
+    }
+  },
+  "phases": {
+    "seed": {
+      "phase": "seed",
+      "upstream_exit_code": 0,
+      "output_sha256": "15c54b7eee19fb3b389cd4f060ea470cb8077760b233579bfd4a4bcc284560bf",
+      "missing_results": false,
+      "all_checks_passed": false,
+      "runtime_error": false
+    },
+    "missing": {
+      "phase": "grade",
+      "upstream_exit_code": 1,
+      "output_sha256": "0e5cca5c67edb61059769ff105cc2e1c1868a2655c9ac41b6923bee259b56d11",
+      "missing_results": true,
+      "all_checks_passed": false,
+      "runtime_error": false
+    },
+    "reference": {
+      "phase": "grade",
+      "upstream_exit_code": 0,
+      "output_sha256": "861339eed3f773cfaf27954a26212cb827616d12436763154b35f38c26e726c9",
+      "missing_results": false,
+      "all_checks_passed": true,
+      "runtime_error": false
+    }
+  },
+  "reference_reward": 1,
+  "missing_output_reward": 0,
+  "cleanup_uncertain": false,
+  "accounting_uncertain": false,
+  "grant_counters": [
+    25,
+    0,
+    6.844921083000372,
+    "0"
+  ]
+}

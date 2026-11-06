@@ -3109,3 +3109,11 @@ executable recipe caps a command at 30 seconds. Review a compatible
 grading path with the original assertions before enabling that
 configuration. Keep the task's binary score and the prior protected
 reference results at their recorded scope.
+
+### Retain the passing PostgreSQL reference scopes
+
+Use the [passing MCP evidence](../../reports/toolkit-v2/c13/mcp-postgres-reference-results-20261105/README.md)
+for the exact two reference-task checks. Keep their distinct databases
+and upstream verifiers bound. Preserve the shared SQL derivation, the
+withdrawn review and all original charges. Keep comparative dispatch
+paused until the full stack gate passes.

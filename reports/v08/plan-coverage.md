@@ -1,5 +1,13 @@
 # 0.8 plan coverage and remaining work
 
+<!-- mcp-postgres-reference-passed-20261105:start -->
+Both [pinned MCP reference tasks](../toolkit-v2/c13/mcp-postgres-reference-results-20261105/README.md)
+now pass their original graders and negative control through the real
+Postgres MCP tool. The exact repeat authorities, canonical accounting and
+terminal states are bound. This C13 evidence is limited to the two related
+reference journeys and does not close ordinary CLI composition.
+<!-- mcp-postgres-reference-passed-20261105:end -->
+
 <!-- mcpmark-capability-and-integration-deadline-20261105:start -->
 The [C13 integration deadline](../toolkit-v2/c13/skillsbench-integration-deadline-20261105/README.md)
 binds an explicit protected grader deadline to reviewed benchmark

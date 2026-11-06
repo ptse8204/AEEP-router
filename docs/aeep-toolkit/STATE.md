@@ -1,5 +1,21 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- mcp-postgres-reference-passed-20261105:start -->
+**November 5. Both pinned MCP PostgreSQL reference tasks passed.**
+
+The [reference evidence](../../reports/toolkit-v2/c13/mcp-postgres-reference-results-20261105/README.md)
+binds approved repeats `d1979c81` and `2cb9d523`. Each original verifier
+rejected missing output and accepted the state produced through the real
+Postgres MCP tool. Both new ledgers settled, and all ten owned containers
+are stopped and retained. Earlier reservations and charges remain recorded.
+The superseded `4476ae90` review stayed unstarted.
+
+C13 remains in progress. The two SkillsBench ordinary CLI journeys and
+remaining integrations stay open. Continue with the protected grader
+carriers. Langfuse's `17af458f` repeat still requires its own approval.
+Comparisons remain paused.
+<!-- mcp-postgres-reference-passed-20261105:end -->
+
 <!-- mcpmark-capability-and-integration-deadline-20261105:start -->
 **November 5. Host readiness restored. MCPMark reached database creation.**
 

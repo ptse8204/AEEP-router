@@ -1,5 +1,14 @@
 # Resume the current stack work
 
+## November 5 approved MCP reference results
+
+Both [pinned MCP reference journeys](mcp-postgres-reference-results-20261105/README.md)
+passed with settled ledgers and stopped, retained resources. No repeat is
+needed for the passing scope. Keep `4476ae90` withdrawn and retain all
+previous charges. The next independent work is the [protected SkillsBench
+carrier](skillsbench-integration-deadline-20261105/carrier-readiness.json).
+Langfuse's exact heap repeat still awaits approval. Comparisons stay paused.
+
 ## November 5 host restored and reviewed grader deadline
 
 The operator freed host capacity. Docker Desktop started and all ten

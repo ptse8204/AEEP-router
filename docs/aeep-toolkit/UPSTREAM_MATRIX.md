@@ -2355,3 +2355,12 @@ The [Postgres MCP preparation](../../reports/toolkit-v2/c13/mcp-postgres-runtime
 retains and identifies the official 0.3.0 image. The backend still
 requires bundled dependency inspection, owned database fixtures and
 actual reference execution through both upstream pack contracts.
+
+### November 5 PostgreSQL task reference evidence
+
+[MCPMark and MCP-Universe](../../reports/toolkit-v2/c13/mcp-postgres-reference-results-20261105/README.md)
+passed their pinned offline reference tasks. Each original verifier
+rejected missing state and accepted the result of actual Postgres MCP
+execution. The five containers per pack stopped and both ledgers settled.
+The packs share the SQL transaction. This evidence covers the two local
+reference journeys and leaves composed workflow verification open.
