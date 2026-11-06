@@ -1,0 +1,75 @@
+{
+  "passed": false,
+  "models": 0,
+  "comparisons": "PAUSED",
+  "containers": {
+    "db": {
+      "id": "a87e89e32763e06c4d2cde02a674cbf468b4c4c6809102027ae1583253cdee89",
+      "started": true,
+      "retained": true,
+      "terminal": {
+        "Status": "exited",
+        "ExitCode": 0,
+        "OOMKilled": false
+      }
+    },
+    "seed": {
+      "id": "c338ee407b816c392207c4e90e1a419438fc79afcce95a24a4efdfe9774d2a37",
+      "started": true,
+      "retained": true,
+      "terminal": {
+        "Status": "exited",
+        "ExitCode": 0,
+        "OOMKilled": false
+      }
+    },
+    "missing": {
+      "id": "927e009ae0a699c6e6ee2c9d3504637dcf9ea5ac922fae6e8cc5cd9dd15da826",
+      "started": true,
+      "retained": true,
+      "terminal": {
+        "Status": "exited",
+        "ExitCode": 0,
+        "OOMKilled": false
+      }
+    },
+    "server": {
+      "id": "2fee9491657a7a50902cf41a593c9c6e7b65237613ae1f412fa5a4d3d9132033",
+      "started": true,
+      "retained": true,
+      "terminal": {
+        "Status": "exited",
+        "ExitCode": 143,
+        "OOMKilled": false
+      }
+    }
+  },
+  "phases": {
+    "seed": {
+      "phase": "seed",
+      "upstream_exit_code": 0,
+      "output_sha256": "15c54b7eee19fb3b389cd4f060ea470cb8077760b233579bfd4a4bcc284560bf",
+      "missing_results": false,
+      "all_checks_passed": false,
+      "runtime_error": false
+    },
+    "missing": {
+      "phase": "grade",
+      "upstream_exit_code": 1,
+      "output_sha256": "0e5cca5c67edb61059769ff105cc2e1c1868a2655c9ac41b6923bee259b56d11",
+      "missing_results": true,
+      "all_checks_passed": false,
+      "runtime_error": false
+    }
+  },
+  "failure_step": "execute-sql",
+  "error_type": "RuntimeError",
+  "cleanup_uncertain": false,
+  "accounting_uncertain": false,
+  "grant_counters": [
+    24,
+    0,
+    6.661524334000205,
+    "0"
+  ]
+}

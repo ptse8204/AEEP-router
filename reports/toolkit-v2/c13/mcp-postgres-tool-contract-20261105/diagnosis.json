@@ -1,0 +1,16 @@
+{
+  "scope": "Shared pinned Postgres MCP 0.3.0 tool compatibility",
+  "failed_receipt_sha256": "ab3b0e8fc5653e36d9b002ff2975ca1e01650a5eff784752a10161ed7bf392ba",
+  "prior_summary_sha256": "d1c3b6432f020a70379cb7cbbfd8074a7e587e23221d2af7ec7abcb0016836f1",
+  "actual_evidence": "Seed passed. Original missing-output verifier rejected. Tool phase ended with KeyError before any recorded SQL response.",
+  "cause": "Driver demanded schema.required=[sql]. The pinned server defines sql as a string with default all, and its pinned SDK generates a schema without a required key.",
+  "source_file_pins": {
+    "app/.venv/lib/python3.12/site-packages/mcp/server/fastmcp/tools/base.py": "be5127bed53998ee9cdcc1c337fb6fd5e23d164be5e73904807d26f9a4b6903d",
+    "app/src/postgres_mcp/server.py": "94ee952207ee4a5c76dd77a863a26649a1e59a42d5344735dc9d5b5a63f82347",
+    "app/src/postgres_mcp/sql/sql_driver.py": "7dbf09c4c96f1d2ae7830baf4ca1f8979afa822070d1a8b92f6143e8c5f42549"
+  },
+  "sql_transport": "Original explicit transaction sent as the single bound sql argument. The upstream driver handles unparameterized multi-statement results.",
+  "inert_contract_checks_passed": 9,
+  "actual_new_mcp_calls": 0,
+  "raw_fixture_or_protocol_data_retained": false
+}
