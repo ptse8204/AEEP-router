@@ -1,0 +1,256 @@
+{
+  "scope": "First offline source verification of the versioned integration grader deadline. No installed release or comparative claims. Unrelated CI edits remain excluded from the feature commit.",
+  "source_before": "9c5842c5bb998109c57beeab5f1af89d61641229eefc58539f2069bd2d00d2ce",
+  "source_after": "9c5842c5bb998109c57beeab5f1af89d61641229eefc58539f2069bd2d00d2ce",
+  "source_checks_sha256": "24c28fa26c4105e997470aad0d95d3272daad8ac085651e7a6c6e1740c44e768",
+  "checks": [
+    {
+      "name": "compileall",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0618387920003443,
+      "monitor_stop": null,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "schemas",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0570566250007687,
+      "monitor_stop": null,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "assessment-policy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0582386670012056,
+      "monitor_stop": null,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "ruff",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0577699999994365,
+      "monitor_stop": null,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "name": "mypy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 4.085509000000457,
+      "monitor_stop": null,
+      "log_sha256": "d9d12c8bee9454137f2a97af320cf042670ce8556a268e95376f71ca63fff9bd"
+    },
+    {
+      "name": "pytest",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest",
+        "--basetemp",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-integration-deadline-20261105/verification/pytest-tmp"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 685.5021211660005,
+      "monitor_stop": null,
+      "log_sha256": "93ac57a761f68255f89011a81c4f6046b5de30c986ec28d51cdaf039643e743b"
+    },
+    {
+      "name": "coverage-tests",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest",
+        "--basetemp",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-integration-deadline-20261105/verification/coverage-tests-tmp"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 1009.231648125,
+      "monitor_stop": null,
+      "log_sha256": "bc43ac916b8a27024a7cf5e244742738e66d71d0a7a05a1917f9fe130f3df2c2"
+    },
+    {
+      "name": "coverage-json",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-integration-deadline-20261105/verification/coverage.json"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 4.0943407920021855,
+      "monitor_stop": null,
+      "log_sha256": "b5fbe19530b6a3e99321f9da4306bfb9f36d74564a42f1d48b4a8fd0c5316d62"
+    },
+    {
+      "name": "coverage-report",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.059963166997477,
+      "monitor_stop": null,
+      "log_sha256": "cb17d9282d5430d7e0a538ff337920050c5f3cca09146b3241bc21a2a5bfb96e"
+    },
+    {
+      "name": "critical-coverage",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_critical_coverage.py",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-integration-deadline-20261105/verification/coverage.json"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0534481670001696,
+      "monitor_stop": null,
+      "log_sha256": "f88894cb084bb60370ed94016bfb259c38ff869167dcf9b3c2b11c2055f88695"
+    },
+    {
+      "name": "assessment-coverage",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_coverage.py",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-integration-deadline-20261105/verification/coverage.json"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0586843339988263,
+      "monitor_stop": null,
+      "log_sha256": "8995cbed8d8e93f15ee8ec27b6759d8906c509ac9d830e4d9bef09836948294a"
+    },
+    {
+      "name": "toolkit-integration-fixtures",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest",
+        "integrations/toolkit",
+        "--basetemp",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-integration-deadline-20261105/verification/toolkit-integration-fixtures-tmp"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 4.0989780839991,
+      "monitor_stop": null,
+      "log_sha256": "b0624e755822922a407e1e0b6c4a5bc781dbdd6a7b7c57410bf3a7e60092b700"
+    },
+    {
+      "name": "build",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "build",
+        "--no-isolation",
+        "--outdir",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-integration-deadline-20261105/verification/dist"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 4.091629415997886,
+      "monitor_stop": null,
+      "log_sha256": "5353e1aec9b9ed1fe88ac75d54ab835e2a26f16327cdfb1185a3d521519744f4"
+    }
+  ],
+  "test_counts": {
+    "pytest": {
+      "passed": 2137,
+      "skipped": 21,
+      "warnings": 1
+    },
+    "coverage-tests": {
+      "passed": 2137,
+      "skipped": 21,
+      "warnings": 1
+    },
+    "toolkit-integration-fixtures": {
+      "passed": 74,
+      "subtests_passed": 24
+    }
+  },
+  "coverage": {
+    "percent_covered": 82.70495687612548,
+    "covered_branches": 9956,
+    "num_branches": 13622,
+    "covered_lines": 33675,
+    "num_statements": 39133
+  },
+  "docs": {
+    "result": "docs-final/docs-attempt-1.json",
+    "result_sha256": "77752452bafc453d6927bafe9640df8234f8e753d1df3af098f7f993e5138d88",
+    "review_sha256": "85a65b2a1d56bb87c32c45140d9a76f8e49b2c42e5bbe9f27443f13cb90d6b19",
+    "inputs": 72,
+    "exit_code": 0,
+    "network": false,
+    "wall_seconds": 1.5725526660007745
+  },
+  "built_artifacts": [
+    {
+      "name": "aeep_agent_router-0.8.2-py3-none-any.whl",
+      "size_bytes": 2192478,
+      "sha256": "a6cdaa445a3c9c8fe15128944bee9369b76950eeb7b396ff494b87ce82817dac"
+    },
+    {
+      "name": "aeep_agent_router-0.8.2.tar.gz",
+      "size_bytes": 2403281,
+      "sha256": "9f327dca65f4b16d9f490c31d367e574a0542e60d74327f27a31eb7c71b7231d"
+    }
+  ],
+  "capacity": {
+    "monitor_stops": 0
+  },
+  "working_tree_scope": "Verification ran against the working tree, which also contained unrelated CI, CONTRIBUTING, pyproject, checkout-test and historical state edits. Those edits were excluded from the feature commit. The recorded artifacts are working-tree builds.",
+  "ordinary_cli_workload_execution": {
+    "document_data": "OPEN",
+    "software_engineering": "OPEN"
+  },
+  "models": 0,
+  "comparisons": "PAUSED"
+}

@@ -101,6 +101,9 @@ async def invoke(service: AssessmentService, scope: AssessmentPlan | RecipeMater
     require_environment(recipe, environment)
     if recipe.extension is None or spec not in (recipe.extension.generator, recipe.extension.grader, recipe.extension.reference):
         raise ConfigurationError("recipe executor is not in its reviewed definition")
+    if recipe.extension.schema_version.endswith('.v6') and (
+            not isinstance(scope, AssessmentPlan) or scope.integration_case_set_digest is None):
+        raise ConfigurationError('integration recipe requires a bound integration case set')
     service.repository.authorize(scope)
     if isinstance(scope, RecipeMaterializationRequest):
         if not scope.runtime_dependencies or content_digest(RecipeRuntimeBinding(dependencies=scope.runtime_dependencies)) not in scope.definition_digests:
@@ -346,7 +349,9 @@ async def validate_grader(service: AssessmentService, plan: AssessmentPlan, reci
         if observed != decisions:
             raise ConfigurationError('repository grader failed independent correctness/fault validation')
         return literals, sum(not item for item in decisions)
-    for batch in bounded_batches(examples) if extension.truth_schema is not None else [examples]:
+    batches = (bounded_batches(examples, separate=extension.schema_version.endswith('.v6'))
+               if extension.truth_schema is not None else [examples])
+    for batch in batches:
         reply, _elapsed = await invoke(service, plan, extension.grader, {"examples": batch}, stage="grader_probe", elapsed_times=program_seconds)
         observed.extend(result.valid for result in grader_results(reply, extension, len(batch)))
     if observed != decisions:
@@ -355,7 +360,7 @@ async def validate_grader(service: AssessmentService, plan: AssessmentPlan, reci
     return literals, faults
 
 
-def bounded_batches(values: list[dict[str, Any]]) -> list[list[dict[str, Any]]]:
+def bounded_batches(values: list[dict[str, Any]], *, separate: bool = False) -> list[list[dict[str, Any]]]:
     """Leave room for the JSON envelope inside existing one-megabyte stdin bounds."""
     result: list[list[dict[str, Any]]] = []
     batch: list[dict[str, Any]] = []
@@ -364,7 +369,7 @@ def bounded_batches(values: list[dict[str, Any]]) -> list[list[dict[str, Any]]]:
         length = len(json.dumps(value).encode()) + 2
         if length > 750000:
             raise ConfigurationError('recipe validation item exceeds its contained input bound')
-        if batch and size + length > 750000:
+        if batch and (separate or size + length > 750000):
             result.append(batch)
             batch, size = [], 0
         batch.append(value)

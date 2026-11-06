@@ -6,16 +6,24 @@ not run the official SkillsBench verifier or establish campaign evidence.
 
 from __future__ import annotations
 
+import asyncio
 import json
 import subprocess
 import sys
 import tempfile
 from collections import Counter
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
-from aeep.assessment.models import content_digest
+from aeep.assessment.extensions import bounded_batches, invoke
+from aeep.assessment.models import (
+    AssessmentEnvironment,
+    RecipeDefinition,
+    RecipeMaterializationRequest,
+    content_digest,
+)
 from aeep.assessment.skillsbench_recipe import skillsbench_offer_letter_recipe
 from aeep.errors import ConfigurationError
 
@@ -49,6 +57,50 @@ def _generation_request(recipe, seed: int = 29) -> dict:
         ],
         'variations': recipe.variations,
     }
+
+
+def test_integration_grader_deadline_is_opt_in_and_keeps_other_program_bounds():
+    data = skillsbench_offer_letter_recipe().model_dump(mode="json")
+    extension = data["extension"]
+    extension["grader"]["config"]["timeout_seconds"] = 60
+    with pytest.raises(ValueError, match="bounded read-only JSON"):
+        RecipeDefinition.model_validate(data)
+
+    extension["schema_version"] = "assessment.recipe-extension.v6"
+    with pytest.raises(ValueError, match="exact benchmark pack"):
+        RecipeDefinition.model_validate(data)
+    data["dependencies"]["benchmark_pack"] = "a" * 64
+    recipe = RecipeDefinition.model_validate(data)
+    assert recipe.extension.grader.config["timeout_seconds"] == 60
+    for role, invalid, original in (("generator", 31, 30), ("reference", 31, 30), ("grader", 61, 60)):
+        extension[role]["config"]["timeout_seconds"] = invalid
+        with pytest.raises(ValueError, match="bounded read-only JSON"):
+            RecipeDefinition.model_validate(data)
+        extension[role]["config"]["timeout_seconds"] = original
+
+    environment = AssessmentEnvironment(
+        environment_id="test-offline", kind="container", identity={},
+        container_image="sha256:" + "b" * 64,
+        container_runtime="/runtime", container_socket="/socket",
+    )
+    request = RecipeMaterializationRequest(
+        plan_id="ordinary-materialization", authorization_id="test",
+        subject_digest="c" * 64, recipe_digest=content_digest(recipe),
+        environment_digest=content_digest(environment), mapping_digest="d" * 64,
+        definition_digests=[content_digest(recipe)], seed=0,
+    )
+    records = {"recipe": recipe.model_dump(mode="json"), "environment": environment.model_dump(mode="json")}
+    service = SimpleNamespace(repository=SimpleNamespace(get=lambda kind, _: records[kind]))
+    with pytest.raises(ConfigurationError, match="bound integration case set"):
+        asyncio.run(invoke(service, request, recipe.extension.grader, {}, stage="test"))
+
+
+def test_integration_grader_checks_one_bounded_example_at_a_time():
+    examples = [{"example": 1}, {"example": 2}]
+    assert bounded_batches(examples) == [examples]
+    assert bounded_batches(examples, separate=True) == [[item] for item in examples]
+    with pytest.raises(ConfigurationError, match="contained input bound"):
+        bounded_batches([{"example": "x" * 750_000}], separate=True)
 
 
 def test_skillsbench_recipe_cases_are_deterministic_disjoint_and_balanced():

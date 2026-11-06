@@ -1,5 +1,25 @@
 # Resume the current stack work
 
+## November 5 host restored and reviewed grader deadline
+
+The operator freed host capacity. Docker Desktop started and all ten
+[retained image pins](skillsbench-integration-deadline-20261105/retained-runtime-preflight.json)
+matched. MCPMark stopped before starting its owned database because
+Docker reports `CAP_` prefixes. MCP-Universe passed its original seed
+and missing-output verifier, then stopped on the optional SQL schema
+before dispatching SQL. The obsolete `4476ae90` review was withdrawn.
+
+The [MCPMark continuation](mcpmark-postgres-tool-schema-20261105/operation-review.json)
+and [MCP-Universe repeat](mcp-universe-postgres-tool-schema-20261105/operation-review.json)
+require exact approvals. Retain the never-started MCPMark database,
+the stopped MCP-Universe containers and all previous charges. Langfuse
+still has a separate pending review.
+
+The [integration deadline](skillsbench-integration-deadline-20261105/README.md)
+permits a reviewed protected grader command up to 60 seconds in recipe
+extension v6. Next bind the actual protected runtime and input/output
+carrier for each task. The ordinary CLI evidence gates remain open.
+
 ## November 5 ordinary CLI preparation
 
 Use the [two selected task previews](skillsbench-ordinary-cli-preparation-20261105/README.md)

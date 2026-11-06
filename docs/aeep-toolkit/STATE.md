@@ -1,5 +1,24 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- mcpmark-capability-and-integration-deadline-20261105:start -->
+**November 5. Host readiness restored. MCPMark reached database creation.**
+
+The approved [MCPMark result](../../reports/toolkit-v2/c13/mcpmark-postgres-receipt-correction-20261105/execution/summary.json)
+retains a never-started database and five settled operations.
+[MCP-Universe](../../reports/toolkit-v2/c13/mcp-universe-postgres-reference-20261105/execution/summary.json)
+passed the original seed and missing-output check. Its driver then
+rejected the server's optional SQL argument before SQL dispatch.
+The exact [MCPMark continuation](../../reports/toolkit-v2/c13/mcpmark-postgres-tool-schema-20261105/operation-review.json)
+and [MCP-Universe repeat](../../reports/toolkit-v2/c13/mcp-universe-postgres-tool-schema-20261105/operation-review.json)
+bind the corrected tool schema and await specific approval.
+
+The [integration grader deadline](../../reports/toolkit-v2/c13/skillsbench-integration-deadline-20261105/README.md)
+adds a versioned, benchmark-bound path for the Spring workload's
+measured verifier duration. It preserves the existing recipe limits
+and requires canonical integration cases. The protected grader runtime
+and ordinary CLI workload executions remain open. Comparisons stay paused.
+<!-- mcpmark-capability-and-integration-deadline-20261105:end -->
+
 <!-- skillsbench-cli-preparation-20261105:start -->
 **November 5. The two verified SkillsBench tasks have ordinary CLI previews.**
 

@@ -1,0 +1,40 @@
+{
+  "scope": "Unapproved transport bindings for the two specific protected workload configurations",
+  "input_source_sha256": "52c65e94b949c7733e9bd3d34ac3d84b88616491939babbe95a553b523383727",
+  "bindings": [
+    {
+      "task_id": "sales-pivot-analysis",
+      "managed_host_artifact": {
+        "input_field": "task_archive_b64",
+        "output_field": "workbook_b64",
+        "input_name": "skillsbench-task.zip",
+        "output_name": "demographic_analysis.xlsx",
+        "max_bytes": 300000
+      },
+      "original_input_archive_bytes": 217907,
+      "reference_output_file_bytes": 173468,
+      "input_and_maximum_output_base64_bytes": 690544,
+      "protected_reference_record_sha256": "938747afc16b881612cb604ab78e88a35306bf735cf21454cd8aceda04f58230"
+    },
+    {
+      "task_id": "spring-boot-jakarta-migration",
+      "managed_host_artifact": {
+        "input_field": "task_archive_b64",
+        "output_field": "workspace_b64",
+        "input_name": "skillsbench-task.zip",
+        "output_name": "workspace.zip",
+        "max_bytes": 256000
+      },
+      "original_input_archive_bytes": 17025,
+      "reference_output_file_bytes": 14199,
+      "input_and_maximum_output_base64_bytes": 364036,
+      "protected_reference_record_sha256": "1b025bf234b38c267160b0ac59d86b2ebaea9bb19106673ae06e669218543d75"
+    }
+  ],
+  "private_spring_workspace_zip_sha256": "03664838faf030e0a1c9de0ab4967f6c8dd2c488e592f73b25a47d7be8936505",
+  "spring_output_includes_generated_target": false,
+  "artifact_contents_persisted": false,
+  "provider_disclosure_authorized": false,
+  "worker_runs": 0,
+  "grader_runs": 0
+}

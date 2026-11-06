@@ -1,5 +1,15 @@
 # 0.8 plan coverage and remaining work
 
+<!-- mcpmark-capability-and-integration-deadline-20261105:start -->
+The [C13 integration deadline](../toolkit-v2/c13/skillsbench-integration-deadline-20261105/README.md)
+binds an explicit protected grader deadline to reviewed benchmark
+integration cases. Source, schema and full offline verification are
+recorded in its evidence folder. The original reference receipts and
+all existing campaign thresholds retain their scope. MCPMark and
+MCP-Universe require their exact SQL schema continuations. Their
+completed and failed phases remain separately recorded.
+<!-- mcpmark-capability-and-integration-deadline-20261105:end -->
+
 <!-- skillsbench-cli-preparation-20261105:start -->
 [SkillsBench CLI preparation](../toolkit-v2/c13/skillsbench-ordinary-cli-preparation-20261105/README.md)
 verified the two named metadata configurations and the canonical

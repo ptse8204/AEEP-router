@@ -173,7 +173,17 @@ v7 integration plans have a separate 32 MiB file envelope, covering the initial
 six-task pack without changing model-turn, worker-artifact or spending limits.
 
 Execution continues to use the existing AssessmentService, executors, grants,
-attempts and receipts. The LangGraph SDK adapter delegates approved executor
+attempts and receipts.
+
+Executable recipe extension v6 can bind a protected grader command up to
+60 seconds for a reviewed benchmark integration case set. Calibration runs one
+bounded example per command and uses the existing operation reservations.
+Earlier extension versions and all generator and reference command limits
+retain 30 seconds. The [measured Spring command](../../reports/toolkit-v2/c13/skillsbench-ordinary-cli-preparation-20261105/README.md)
+motivates the opt-in deadline. The actual protected runtime still needs
+verification through the ordinary CLI.
+
+The LangGraph SDK adapter delegates approved executor
 calls and checkpoints task/evidence references. Recorded SDK checks cover bounded
 conditional flow and same-runtime recovery; full domain composition remains open.
 The Cisco bridge now has a completed ordinary CLI scan on source `c2eb4a3d`, with

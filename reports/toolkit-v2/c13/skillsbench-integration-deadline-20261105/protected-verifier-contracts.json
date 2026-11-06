@@ -1,0 +1,134 @@
+{
+  "scope": "Reference evidence bindings for the next actual protected grader carrier",
+  "pack_sha256": "c41ec39a459b537d9c1b16d35cda1e7ca8857f75b46128e8640c23d86349b5f9",
+  "cases": [
+    {
+      "task_id": "sales-pivot-analysis",
+      "verifier_assets": {
+        "tasks/sales-pivot-analysis/verifier/test.sh": "89a25f079630a5015cafce30c8bd9d94b314de7efeaf95fbe3b6dffdae1797a1",
+        "tasks/sales-pivot-analysis/verifier/test_outputs.py": "e8cf8f07ba92961daa3eb5a2f8f173378770e5f80aafdf3626305643040d4ba9"
+      },
+      "collected_test_identities": [
+        "test_outputs.py::TestPivotTableConfiguration::test_pivot_row_is_state[Population by State-sum-None]",
+        "test_outputs.py::TestPivotTableConfiguration::test_pivot_row_is_state[Earners by State-sum-None]",
+        "test_outputs.py::TestPivotTableConfiguration::test_pivot_row_is_state[Regions by State-count-None]",
+        "test_outputs.py::TestPivotTableConfiguration::test_pivot_row_is_state[State Income Quartile-sum-quarter]",
+        "test_outputs.py::TestPivotTableConfiguration::test_pivot_uses_correct_aggregation[Population by State-sum-None]",
+        "test_outputs.py::TestPivotTableConfiguration::test_pivot_uses_correct_aggregation[Earners by State-sum-None]",
+        "test_outputs.py::TestPivotTableConfiguration::test_pivot_uses_correct_aggregation[Regions by State-count-None]",
+        "test_outputs.py::TestPivotTableConfiguration::test_pivot_uses_correct_aggregation[State Income Quartile-sum-quarter]",
+        "test_outputs.py::TestPivotTableConfiguration::test_pivot_col_field[Population by State-sum-None]",
+        "test_outputs.py::TestPivotTableConfiguration::test_pivot_col_field[Earners by State-sum-None]",
+        "test_outputs.py::TestPivotTableConfiguration::test_pivot_col_field[Regions by State-count-None]",
+        "test_outputs.py::TestPivotTableConfiguration::test_pivot_col_field[State Income Quartile-sum-quarter]",
+        "test_outputs.py::TestSourceDataSheet::test_source_data_has_required_column[SA2_CODE-<lambda>]",
+        "test_outputs.py::TestSourceDataSheet::test_source_data_has_required_column[SA2_NAME-<lambda>]",
+        "test_outputs.py::TestSourceDataSheet::test_source_data_has_required_column[STATE-<lambda>]",
+        "test_outputs.py::TestSourceDataSheet::test_source_data_has_required_column[POPULATION_2023-<lambda>]",
+        "test_outputs.py::TestSourceDataSheet::test_source_data_has_required_column[EARNERS-<lambda>]",
+        "test_outputs.py::TestSourceDataSheet::test_source_data_has_required_column[MEDIAN_INCOME-<lambda>]",
+        "test_outputs.py::TestSourceDataSheet::test_source_data_has_required_column[Quarter-<lambda>]",
+        "test_outputs.py::TestSourceDataSheet::test_source_data_has_required_column[Total-<lambda>]",
+        "test_outputs.py::TestSourceDataContent::test_source_data_has_reasonable_row_count",
+        "test_outputs.py::TestSourceDataContent::test_quarter_values_are_valid",
+        "test_outputs.py::TestSourceDataContent::test_state_values_are_valid",
+        "test_outputs.py::TestDataTransformationCorrectness::test_pivot_cache_has_fields",
+        "test_outputs.py::TestDataTransformationCorrectness::test_total_equals_earners_times_median_income",
+        "test_outputs.py::TestDataTransformationCorrectness::test_sa2_codes_from_income_file_present"
+      ],
+      "required_passes": [
+        "test_outputs.py::TestPivotTableConfiguration::test_pivot_row_is_state[Population by State-sum-None]",
+        "test_outputs.py::TestPivotTableConfiguration::test_pivot_row_is_state[Earners by State-sum-None]",
+        "test_outputs.py::TestPivotTableConfiguration::test_pivot_row_is_state[Regions by State-count-None]",
+        "test_outputs.py::TestPivotTableConfiguration::test_pivot_row_is_state[State Income Quartile-sum-quarter]",
+        "test_outputs.py::TestPivotTableConfiguration::test_pivot_uses_correct_aggregation[Population by State-sum-None]",
+        "test_outputs.py::TestPivotTableConfiguration::test_pivot_uses_correct_aggregation[Earners by State-sum-None]",
+        "test_outputs.py::TestPivotTableConfiguration::test_pivot_uses_correct_aggregation[Regions by State-count-None]",
+        "test_outputs.py::TestPivotTableConfiguration::test_pivot_uses_correct_aggregation[State Income Quartile-sum-quarter]",
+        "test_outputs.py::TestPivotTableConfiguration::test_pivot_col_field[State Income Quartile-sum-quarter]",
+        "test_outputs.py::TestSourceDataSheet::test_source_data_has_required_column[SA2_CODE-<lambda>]",
+        "test_outputs.py::TestSourceDataSheet::test_source_data_has_required_column[SA2_NAME-<lambda>]",
+        "test_outputs.py::TestSourceDataSheet::test_source_data_has_required_column[STATE-<lambda>]",
+        "test_outputs.py::TestSourceDataSheet::test_source_data_has_required_column[POPULATION_2023-<lambda>]",
+        "test_outputs.py::TestSourceDataSheet::test_source_data_has_required_column[EARNERS-<lambda>]",
+        "test_outputs.py::TestSourceDataSheet::test_source_data_has_required_column[MEDIAN_INCOME-<lambda>]",
+        "test_outputs.py::TestSourceDataSheet::test_source_data_has_required_column[Quarter-<lambda>]",
+        "test_outputs.py::TestSourceDataSheet::test_source_data_has_required_column[Total-<lambda>]",
+        "test_outputs.py::TestSourceDataContent::test_source_data_has_reasonable_row_count",
+        "test_outputs.py::TestSourceDataContent::test_quarter_values_are_valid",
+        "test_outputs.py::TestSourceDataContent::test_state_values_are_valid",
+        "test_outputs.py::TestDataTransformationCorrectness::test_pivot_cache_has_fields",
+        "test_outputs.py::TestDataTransformationCorrectness::test_total_equals_earners_times_median_income",
+        "test_outputs.py::TestDataTransformationCorrectness::test_sa2_codes_from_income_file_present"
+      ],
+      "intentional_skips": [
+        "test_outputs.py::TestPivotTableConfiguration::test_pivot_col_field[Population by State-sum-None]",
+        "test_outputs.py::TestPivotTableConfiguration::test_pivot_col_field[Earners by State-sum-None]",
+        "test_outputs.py::TestPivotTableConfiguration::test_pivot_col_field[Regions by State-count-None]"
+      ],
+      "observed_reference_reward": 1,
+      "reference_verdict_sha256": "0c45d94389014813922b59be91f1e0cb40662330776702b4558e14a957294c42",
+      "counterexamples": [
+        {
+          "control": "missing",
+          "observed_reward": 0,
+          "verdict_sha256": "a6fd3b951111dc46dc21091b01fc865c5eea1bab85a9204c9aa9786c982a42b3"
+        },
+        {
+          "control": "wrong-workbook",
+          "observed_reward": 0,
+          "verdict_sha256": "9bf292d778cb011ef30b8ca5b94a9af036187a0cf33e614c2a40a545e2a53431"
+        }
+      ]
+    },
+    {
+      "task_id": "spring-boot-jakarta-migration",
+      "verifier_assets": {
+        "tasks/spring-boot-jakarta-migration/verifier/test.sh": "b588a9d9a690da244472fd5259f72ada9d766564973689354dea69767e8a6c0c",
+        "tasks/spring-boot-jakarta-migration/verifier/test_outputs.py": "bfc7a5e8c8fd1bfa3c1ddf58c9c819a237ae07022f52671c845538c50af3aac8"
+      },
+      "collected_test_identities": [
+        "test_outputs.py::TestJakartaNamespace::test_no_javax_validation",
+        "test_outputs.py::TestJakartaNamespace::test_jakarta_persistence_present",
+        "test_outputs.py::TestJakartaNamespace::test_jakarta_validation_present",
+        "test_outputs.py::TestSpringSecurityMigration::test_enable_method_security",
+        "test_outputs.py::TestSpringSecurityMigration::test_request_matchers_used",
+        "test_outputs.py::TestRestClientMigration::test_rest_client_used",
+        "test_outputs.py::TestBuildAndCompile::test_maven_compile",
+        "test_outputs.py::TestBuildAndCompile::test_maven_test",
+        "test_outputs.py::TestDependencyUpdates::test_no_old_jaxb_api",
+        "test_outputs.py::TestDependencyUpdates::test_no_old_jjwt"
+      ],
+      "required_passes": [
+        "test_outputs.py::TestJakartaNamespace::test_no_javax_validation",
+        "test_outputs.py::TestJakartaNamespace::test_jakarta_persistence_present",
+        "test_outputs.py::TestJakartaNamespace::test_jakarta_validation_present",
+        "test_outputs.py::TestSpringSecurityMigration::test_enable_method_security",
+        "test_outputs.py::TestSpringSecurityMigration::test_request_matchers_used",
+        "test_outputs.py::TestRestClientMigration::test_rest_client_used",
+        "test_outputs.py::TestBuildAndCompile::test_maven_compile",
+        "test_outputs.py::TestBuildAndCompile::test_maven_test",
+        "test_outputs.py::TestDependencyUpdates::test_no_old_jaxb_api",
+        "test_outputs.py::TestDependencyUpdates::test_no_old_jjwt"
+      ],
+      "intentional_skips": [],
+      "observed_reference_reward": 1,
+      "reference_verdict_sha256": "8673c92cfcc307fa26a74dd4a265d62444f5bdda92a3117e035aef8bbf7eccc5",
+      "counterexamples": [
+        {
+          "control": "missing",
+          "observed_reward": 0,
+          "verdict_sha256": "d97d74ad69b63ece07e24f43eac623e645d27bbee7861fad0c6f397f40524f6d"
+        },
+        {
+          "control": "legacy-namespace",
+          "observed_reward": 0,
+          "verdict_sha256": "8720d693906b89ceae57e4a0d8c3fb63d3e0d373d2b9b97ae3d976f4a99b09e1"
+        }
+      ]
+    }
+  ],
+  "invalid_observation_policy": "Missing test identities, verifier failures and infrastructure errors remain indeterminate. No candidate score is inferred.",
+  "comparison_eligible": false,
+  "new_verifier_invocations": 0
+}

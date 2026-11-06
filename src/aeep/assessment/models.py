@@ -84,7 +84,11 @@ class RecipeFeatureRule(StrictModel):
 
 
 class ExecutableRecipeExtension(StrictModel):
-    schema_version: Literal["assessment.recipe-extension.v1", "assessment.recipe-extension.v2", "assessment.recipe-extension.v3", "assessment.recipe-extension.v4", "assessment.recipe-extension.v5"] = "assessment.recipe-extension.v1"
+    schema_version: Literal[
+        "assessment.recipe-extension.v1", "assessment.recipe-extension.v2",
+        "assessment.recipe-extension.v3", "assessment.recipe-extension.v4",
+        "assessment.recipe-extension.v5", "assessment.recipe-extension.v6",
+    ] = "assessment.recipe-extension.v1"
     generator: ExecutorSpec
     grader: ExecutorSpec
     reference: ExecutorSpec
@@ -110,14 +114,16 @@ class ExecutableRecipeExtension(StrictModel):
     def contained_json_programs(self) -> ExecutableRecipeExtension:
         if (self.schema_version != 'assessment.recipe-extension.v1') != (self.truth_schema is not None):
             raise ValueError("semantic artifact grading requires extension v2/v3 and an explicit truth schema")
-        if (self.schema_version.endswith(('.v3', '.v4', '.v5'))) != (self.failure_codes is not None):
-            raise ValueError('reviewed failure codes require extension v3/v4')
-        if not self.schema_version.endswith(('.v3', '.v4', '.v5')) and any(
+        diagnostics = self.schema_version.endswith(('.v3', '.v4', '.v5', '.v6'))
+        if diagnostics != (self.failure_codes is not None):
+            raise ValueError('reviewed failure codes require extension v3 or later')
+        if not diagnostics and any(
                 fixture.grader_output is not None for fixture in [*self.independent_fixtures, *self.transformed_fixtures]):
-            raise ValueError('independent grader outputs require extension v3')
+            raise ValueError('independent grader outputs require extension v3 or later')
         if self.failure_codes is not None and len(set(self.failure_codes)) != len(self.failure_codes):
             raise ValueError('duplicate reviewed failure code')
-        for spec in (self.generator, self.grader, self.reference):
+        grader_limit = 60 if self.schema_version.endswith('.v6') else 30
+        for spec, timeout_limit in ((self.generator, 30), (self.grader, grader_limit), (self.reference, 30)):
             config = spec.config
             if self.truth_schema is not None and config.get('argv_literal') is not True:
                 raise ValueError('semantic recipe programs require exact literal argv')
@@ -126,7 +132,7 @@ class ExecutableRecipeExtension(StrictModel):
             if (spec.kind.value != "command" or spec.side_effect.value != "read" or not spec.idempotent
                     or config.get("inherit_env") or config.get("env") or config.get("shell")
                     or config.get("stdin_json") is not True or config.get("output") != {"type": "json"}
-                    or isinstance(timeout, bool) or not isinstance(timeout, (int, float)) or not 0 < timeout <= 30
+                    or isinstance(timeout, bool) or not isinstance(timeout, (int, float)) or not 0 < timeout <= timeout_limit
                     or type(bound) is not int or not 0 < bound <= (16_000_000 if self.truth_schema is not None else 1_000_000)):
                 raise ValueError("recipe extensions require bounded read-only JSON command executors")
         if not self.feature_rules or len(self.feature_rules) > 32:
@@ -167,6 +173,8 @@ class RecipeDefinition(StrictModel):
     @model_validator(mode="after")
     def extension_contract(self) -> RecipeDefinition:
         if self.extension is not None:
+            if self.extension.schema_version.endswith('.v6') and 'benchmark_pack' not in self.dependencies:
+                raise ValueError('integration grader requires an exact benchmark pack binding')
             generator = 'curated_repository:1' if self.extension.schema_version.endswith('.v5') else 'contained_json:1'
             if (self.schema_version != "assessment.recipe.v2" or self.generator != generator or self.grader != "contained_json:1"
                     or self.extractor not in {"structural_json:1", "workbook_structure:1"}
