@@ -1,0 +1,48 @@
+{
+  "scope": "Private deterministic carrier preparation with compile-only verification",
+  "source_revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+  "pack_file_sha256": "c41ec39a459b537d9c1b16d35cda1e7ca8857f75b46128e8640c23d86349b5f9",
+  "reference_contracts_sha256": "8a5792e41b04ebe53a0e50e86b63fb696d5c7ec15be2a11aceff30e54dd6b217",
+  "drafts": [
+    {
+      "task_id": "sales-pivot-analysis",
+      "pack_content_digest": "b6c23f615f140dbccc1ca8321374780e6911cf1c8647c3d18e524bc03aa0372f",
+      "case_input_content_digest": "4e776a98c0df5159498e700c50258cd42fd6bd678b9b74391294fa7e266a7a22",
+      "case_archive_sha256": "347fad995448f6b7a48420cadae4d5206ecdfa9481b2e6076f49aeeec18e384f",
+      "original_verifier_sha256": "e8cf8f07ba92961daa3eb5a2f8f173378770e5f80aafdf3626305643040d4ba9",
+      "adapted_verifier_sha256": "b8e904b7b2bd00bb211962a09c47dc2db250ab6c6ebd40f8a143feecd7779e76",
+      "adapted_verifier_bytes": 8834,
+      "substitutions": {
+        "\"/root/demographic_analysis.xlsx\"": "\"/tmp/aeep-skillsbench-sales/demographic_analysis.xlsx\"",
+        "\"/root/population.pdf\"": "\"/tmp/aeep-skillsbench-sales/population.pdf\"",
+        "\"/root/income.xlsx\"": "\"/tmp/aeep-skillsbench-sales/income.xlsx\""
+      },
+      "test_identities": 26,
+      "intentional_skips": 3,
+      "original_assertions_preserved": true
+    },
+    {
+      "task_id": "spring-boot-jakarta-migration",
+      "pack_content_digest": "b6c23f615f140dbccc1ca8321374780e6911cf1c8647c3d18e524bc03aa0372f",
+      "case_input_content_digest": "5055a0bed4f5bf7ec42803d0d9e24a36135b59ef1b02b1c0e15e6cf699e7909e",
+      "case_archive_sha256": "03936ea0ef19023fedd1f0ef8228d8bb231e0b26e35baeca9f813855b2845d59",
+      "original_verifier_sha256": "bfc7a5e8c8fd1bfa3c1ddf58c9c819a237ae07022f52671c845538c50af3aac8",
+      "adapted_verifier_sha256": "6b96d39396b78c8bd195c4cb3cfd0be555ab2ebae69c156c588624fe42e7754b",
+      "adapted_verifier_bytes": 5808,
+      "substitutions": {
+        "\"/workspace\"": "\"/tmp/aeep-skillsbench-spring/workspace\"",
+        "[\"bash\", \"-c\", \"source /root/.sdkman/bin/sdkman-init.sh && sdk use java 21.0.2-tem && mvn clean compile -q\"]": "[\"/opt/aeep-skillsbench-spring/maven/bin/mvn\", \"--offline\", \"--settings\", \"/opt/aeep-skillsbench-spring/settings.xml\", \"-Dmaven.repo.local=/opt/aeep-skillsbench-spring/cache\", \"-Dstyle.color=never\", \"clean\", \"compile\", \"-q\"]",
+        "[\"bash\", \"-c\", \"source /root/.sdkman/bin/sdkman-init.sh && sdk use java 21.0.2-tem && mvn test -q\"]": "[\"/opt/aeep-skillsbench-spring/maven/bin/mvn\", \"--offline\", \"--settings\", \"/opt/aeep-skillsbench-spring/settings.xml\", \"-Dmaven.repo.local=/opt/aeep-skillsbench-spring/cache\", \"-Dstyle.color=never\", \"test\", \"-q\"]"
+      },
+      "test_identities": 10,
+      "intentional_skips": 0,
+      "original_assertions_preserved": true
+    }
+  ],
+  "spring_required_java_home": "/opt/aeep-skillsbench-spring/java",
+  "runtime_built": false,
+  "verifiers_executed": 0,
+  "provider_disclosure_authorized": false,
+  "model_turns": 0,
+  "comparisons": "PAUSED"
+}
