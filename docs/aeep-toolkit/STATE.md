@@ -1,5 +1,40 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- verified-excel-react-and-skillrank-deadline-20261107:start -->
+**November 7. Excel scored 1/1 through the ordinary CLI.**
+
+The [Excel continuation](../../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/excel-unstarted/result.json)
+completed its one authorized turn. The protected grader scored 1/1 and
+the receipt bound 84,913 input tokens and 1,761 output tokens. There were
+zero retries. Cleanup and proxy shutdown passed. The continuation charged
+16 operations and 76.79 seconds. All prior reservations were preserved.
+This is an engineering journey with one arm. No matched token difference
+or candidate usefulness was measured.
+
+The [React receipt correction](../../reports/toolkit-v2/c13/skillsbench-react-reference-20261106/browser-id-continuation/result.json)
+collected and passed all eleven original assertions. Its one offline
+operation settled at 45.47 seconds, and cleanup passed. The reference
+uses the retained solver edits and pinned browser. The [two negative controls](../../reports/toolkit-v2/c13/skillsbench-react-reference-20261106/negative-controls/operation-review.json)
+await specific approval for use of the same protected verifier.
+
+The [SkillRank deadline review](../../reports/toolkit-v2/c13/skillrank-certificate-deadline-20261107/operation-review.json)
+binds the optional per-certificate deadline to the reviewed definition.
+Old definitions retain their timeout and digest. The approved repeat
+allows one offline build and one native check with synthetic grades.
+The [source check](../../reports/toolkit-v2/c13/skillrank-certificate-deadline-20261107/prompt-fixture-source-checks.json)
+had 2,143 passes, 21 skips and one false positive. The sample payload
+`abc` appeared inside an allowed hexadecimal digest. The
+[fixture continuation](../../reports/toolkit-v2/c13/skillrank-certificate-deadline-20261107/source-continuation-review.json)
+binds the corrected fixture and unchanged native inputs. It awaits
+approval. The build and native check have not started.
+
+C13 remains open. Comparisons stay paused. The completed document/data
+and Spring software journeys have protected grade receipts. React still
+needs the control and managed journey checks. Dependency Audit needs
+verified provenance for its original database. Waza still needs access
+to a supported backend.
+<!-- verified-excel-react-and-skillrank-deadline-20261107:end -->
+
 <!-- settled-invoice-and-pinned-react-20261106:start -->
 **November 6. Invoice Fraud completed through the ordinary CLI.**
 

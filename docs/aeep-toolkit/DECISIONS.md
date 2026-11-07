@@ -3285,3 +3285,13 @@ For React, derive the exact expected browser parameter IDs from the
 [retained plugin](../../reports/toolkit-v2/c13/skillsbench-react-reference-20261106/browser-id-continuation/browser-id-proof.json).
 Preserve the solver edits, eleven protected checks, offline boundary and
 binary reward. Keep the rejected receipt as part of the execution history.
+
+## D175. Bind SkillRank certificate timing in the scheduler definition
+
+The [timing audit](../../reports/toolkit-v2/c13/skillrank-native-carrier-20261105/managed-callback-deadline-audit.json)
+found a completed managed task whose agent time exceeded the old certificate
+window before protected grading. Accept a finite, explicitly reviewed deadline
+for the two SkillRank slots and keep both inside the command timeout. Preserve
+the old default and serialized digest. The [native repeat](../../reports/toolkit-v2/c13/skillrank-certificate-deadline-20261107/operation-review.json)
+uses the same upstream revision and Cargo lock. It checks the revised bridge
+with synthetic grades before considering a separate managed diagnostic.

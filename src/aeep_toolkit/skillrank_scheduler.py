@@ -99,12 +99,15 @@ class SkillRankCoordinator(ControlledScheduler):
             or re.fullmatch(r"[a-z0-9-]{1,80}", name) is None
         ):
             raise ConfigurationError("SkillRank requires the reviewed primary skill snapshot")
+        timeout = self.definition.certificate_timeout_seconds
+        if timeout is None:
+            timeout = min(60, int(self.definition.executor.config["timeout_seconds"]) // 2)
         return {
             "case_id": CASE_SLOT,
             "skill_slug": name,
             "skill_sha256": candidate.sha256,
             "run_token": token,
-            "timeout_seconds": min(60, int(self.definition.executor.config["timeout_seconds"]) // 2),
+            "timeout_seconds": timeout,
         }
 
     def requested_slot(self, message: dict[str, Any], token: str) -> str:

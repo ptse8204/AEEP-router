@@ -82,7 +82,9 @@ def scheduler_definition(tmp_path):
     )
 
 
-def external_plan(tmp_path, monkeypatch, *, engine="agent-skill-eval", native_binary=None):
+def external_plan(
+    tmp_path, monkeypatch, *, engine="agent-skill-eval", native_binary=None, certificate_timeout=None
+):
     path, service, _cases, _rights = configured(tmp_path, grader_container=engine == "skillrank")
     definition = scheduler_definition(tmp_path)
     if engine == "skillrank":
@@ -99,10 +101,13 @@ def external_plan(tmp_path, monkeypatch, *, engine="agent-skill-eval", native_bi
         profile.write_text(boundary_profile(runtime, tmp_path / "owned-scheduler"))
         executor = definition.executor.model_copy(deep=True)
         executor.config["argv"] = [SANDBOX, "-f", str(profile), str(binary)]
+        if certificate_timeout is not None:
+            executor.config["timeout_seconds"] = 260
         definition = SchedulerDefinition.model_validate(
             definition.model_dump(mode="json") | {
                 "adapter_id": SKILLRANK_DIAGNOSTIC, "source_revision": REVISION,
                 "artifact_sha256": binary_sha, "maximum_requests": 2,
+                "certificate_timeout_seconds": certificate_timeout,
                 "runtime_tree_digest": snapshot(runtime), "executor": executor.model_dump(mode="json"),
                 "executable_dependencies": {
                     SANDBOX: hashlib.sha256(Path(SANDBOX).read_bytes()).hexdigest() if native_binary else "c" * 64,
@@ -414,6 +419,26 @@ def test_skillrank_plan_preserves_exact_pair_and_cannot_be_read_as_ase(tmp_path,
         with pytest.raises(ConfigurationError, match="bounded SkillRank"):
             SkillRankCoordinator(service.repository, plan)
         assert definition.maximum_requests == 2
+        assert "certificate_timeout_seconds" not in definition.model_dump(mode="json")
+    finally:
+        service.router.store.close()
+
+
+def test_skillrank_certificate_deadline_is_bound_and_finite(tmp_path, monkeypatch):
+    service, plan, definition, _ = external_plan(
+        tmp_path, monkeypatch, engine="skillrank", certificate_timeout=120
+    )
+    try:
+        coordinator = SkillRankCoordinator(service.repository, plan)
+        assert plan.scheduler_digest == content_digest(definition)
+        assert coordinator.prepare_payload(tmp_path, ("0", "1"), "a" * 64)["timeout_seconds"] == 120
+        data = definition.model_dump(mode="json")
+        with pytest.raises(ValueError, match="room for both slots"):
+            SchedulerDefinition.model_validate(data | {"certificate_timeout_seconds": 129})
+        with pytest.raises(ValueError, match="less than or equal to 298"):
+            SchedulerDefinition.model_validate(data | {"certificate_timeout_seconds": 299})
+        with pytest.raises(ValueError, match="requires SkillRank"):
+            SchedulerDefinition.model_validate(data | {"adapter_id": "agent-skill-eval"})
     finally:
         service.router.store.close()
 

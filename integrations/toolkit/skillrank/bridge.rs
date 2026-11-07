@@ -169,7 +169,7 @@ fn run() -> Result<(), String> {
         .map_err(|_| "invalid scheduler request")?;
     if !identity(&request.case_id) || !identity(&request.skill_slug)
         || !digest(&request.skill_sha256) || !digest(&request.run_token)
-        || !(1..=60).contains(&request.timeout_seconds)
+        || !(1..=298).contains(&request.timeout_seconds)
     {
         return Err("request outside reviewed envelope".into());
     }

@@ -1,5 +1,16 @@
 # 0.8 plan coverage and remaining work
 
+<!-- verified-excel-react-and-skillrank-deadline-20261107:start -->
+The [Excel continuation](../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/excel-unstarted/result.json)
+completed a 1/1 protected grade, one accounted turn and verified cleanup.
+The [React reference receipt](../reports/toolkit-v2/c13/skillsbench-react-reference-20261106/browser-id-continuation/result.json)
+accepted all eleven upstream assertions on the pinned image. Their
+comparative acceptance gates remain open. The [SkillRank repeat](../reports/toolkit-v2/c13/skillrank-certificate-deadline-20261107/operation-review.json)
+is approved. Its source gate found one false positive in a prompt
+fixture. The [test-only continuation](../reports/toolkit-v2/c13/skillrank-certificate-deadline-20261107/source-continuation-review.json)
+binds unchanged native inputs and awaits approval and source verification.
+<!-- verified-excel-react-and-skillrank-deadline-20261107:end -->
+
 <!-- settled-invoice-and-pinned-react-20261106:start -->
 The [Invoice Fraud reconciliation](../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/managed-engineering/invoice-reconciliation.json)
 verified one managed CLI trial with protected score 0/1, bound provider

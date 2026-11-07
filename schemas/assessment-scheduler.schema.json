@@ -789,6 +789,20 @@
       "minimum": 1,
       "title": "Maximum Requests",
       "type": "integer"
+    },
+    "certificate_timeout_seconds": {
+      "anyOf": [
+        {
+          "maximum": 298,
+          "minimum": 1,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Certificate Timeout Seconds"
     }
   },
   "required": [

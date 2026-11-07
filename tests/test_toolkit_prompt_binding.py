@@ -14,6 +14,8 @@ from aeep.router import Router
 async def test_actual_managed_task_instruction_is_hashed_without_content_retention():
     host = adapter()
     current = context()
+    payload = "fixture-prompt-payload"
+    request = current.request.model_copy(update={"input": {"text": payload}})
     registry = ManagedHostRegistry()
     registry.register(current.config.adapter_id, host)
     executor = ManagedHostExecutor(registry)
@@ -30,14 +32,14 @@ async def test_actual_managed_task_instruction_is_hashed_without_content_retenti
     try:
         raw = await executor.execute(
             ExecutionContext(
-                request=current.request, spec=spec, estimate=RouteEstimate(), attempt=1
+                request=request, spec=spec, estimate=RouteEstimate(), attempt=1
             )
         )
-        expected = hashlib.sha256(b"Count characters in abc").hexdigest()
+        expected = hashlib.sha256(f"Count characters in {payload}".encode()).hexdigest()
         assert raw.metadata["task_instruction_sha256"] == expected
         retained = Router._safe_receipt_metadata(raw.metadata)
         assert retained["task_instruction_sha256"] == expected
-        assert "abc" not in str(retained) and "Count characters" not in str(retained)
+        assert payload not in str(retained) and "Count characters" not in str(retained)
     finally:
         await executor.close()
 

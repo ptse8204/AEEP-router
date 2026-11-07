@@ -5,7 +5,7 @@ from __future__ import annotations
 from collections.abc import Awaitable, Callable
 from typing import Literal, Protocol
 
-from pydantic import Field, model_validator
+from pydantic import Field, SerializerFunctionWrapHandler, model_serializer, model_validator
 
 from ..benchmarking import BenchmarkTrial
 from ..errors import ConfigurationError
@@ -30,6 +30,14 @@ class SchedulerDefinition(StrictModel):
     boundary_profile: str = Field(min_length=1, max_length=4096)
     overhead_seconds: int = Field(strict=True, ge=1, le=600)
     maximum_requests: int = Field(strict=True, ge=1, le=6)
+    certificate_timeout_seconds: int | None = Field(default=None, strict=True, ge=1, le=298)
+
+    @model_serializer(mode="wrap")
+    def preserve_legacy(self, handler: SerializerFunctionWrapHandler) -> dict[str, object]:
+        data: dict[str, object] = handler(self)
+        if self.certificate_timeout_seconds is None:
+            data.pop("certificate_timeout_seconds", None)
+        return data
 
     @model_validator(mode="after")
     def bounded_command(self) -> SchedulerDefinition:
@@ -75,6 +83,11 @@ class SchedulerDefinition(StrictModel):
             )
         if self.adapter_id == SKILLRANK_DIAGNOSTIC and self.maximum_requests != 2:
             raise ValueError("SkillRank requires exactly two diagnostic slots")
+        if self.certificate_timeout_seconds is not None and (
+            self.adapter_id != SKILLRANK_DIAGNOSTIC
+            or self.maximum_requests * self.certificate_timeout_seconds + 4 > config["timeout_seconds"]
+        ):
+            raise ValueError("certificate deadline requires SkillRank and room for both slots plus scheduler overhead")
         return self
 
 

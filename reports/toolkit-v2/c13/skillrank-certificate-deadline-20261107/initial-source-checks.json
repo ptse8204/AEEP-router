@@ -1,0 +1,122 @@
+{
+  "source_before": "b7251e012445c3d1c757be85e567b12e0236fcdb5d9fb1950ef07135dbcb9b8a",
+  "source_after": "b7251e012445c3d1c757be85e567b12e0236fcdb5d9fb1950ef07135dbcb9b8a",
+  "checks": [
+    {
+      "name": "compileall",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0535905419965275,
+      "monitor_stop": null
+    },
+    {
+      "name": "schemas",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.044783917022869,
+      "monitor_stop": null
+    },
+    {
+      "name": "assessment-policy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.053994584013708,
+      "monitor_stop": null
+    },
+    {
+      "name": "ruff",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0499109579832293,
+      "monitor_stop": null
+    },
+    {
+      "name": "mypy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 1,
+      "process_exit_code": 1,
+      "elapsed_seconds": 4.076794749998953,
+      "monitor_stop": null
+    }
+  ],
+  "models": 0,
+  "comparisons": "PAUSED",
+  "real_execution_selectors_removed": [],
+  "scope": "First offline source verification of the reviewed SkillRank certificate deadline. No installed release or comparative claims. Unrelated CI edits remain excluded from the feature commit.",
+  "capacity_samples": [
+    {
+      "observed_at": "2026-11-07T10:45:10.338679+00:00",
+      "free_bytes": 97464573952
+    },
+    {
+      "observed_at": "2026-11-07T10:45:12.366977+00:00",
+      "free_bytes": 97455587328
+    },
+    {
+      "observed_at": "2026-11-07T10:45:12.440049+00:00",
+      "free_bytes": 97455575040
+    },
+    {
+      "observed_at": "2026-11-07T10:45:14.467179+00:00",
+      "free_bytes": 97454100480
+    },
+    {
+      "observed_at": "2026-11-07T10:45:14.534447+00:00",
+      "free_bytes": 97454100480
+    },
+    {
+      "observed_at": "2026-11-07T10:45:16.565058+00:00",
+      "free_bytes": 97454100480
+    },
+    {
+      "observed_at": "2026-11-07T10:45:16.638190+00:00",
+      "free_bytes": 97454100480
+    },
+    {
+      "observed_at": "2026-11-07T10:45:18.669261+00:00",
+      "free_bytes": 97453936640
+    },
+    {
+      "observed_at": "2026-11-07T10:45:18.738277+00:00",
+      "free_bytes": 97453932544
+    },
+    {
+      "observed_at": "2026-11-07T10:45:20.769285+00:00",
+      "free_bytes": 97452281856
+    },
+    {
+      "observed_at": "2026-11-07T10:45:22.796403+00:00",
+      "free_bytes": 97451196416
+    }
+  ]
+}

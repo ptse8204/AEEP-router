@@ -61,6 +61,11 @@ raise grant ceilings or admit a capability. Runtime and definition drift stop
 dispatch. Uncertain work and costs remain in the existing attempt/receipt ledger.
 An integration plan never supplies formal qualification or usefulness evidence.
 
+A SkillRank v9 diagnostic can bind a per-certificate deadline in the reviewed
+scheduler definition. Both windows must fit inside the finite command timeout
+with time for scheduler work. Definitions without the field keep their previous
+digest and callback deadline. Use a bridge built for the reviewed deadline.
+
 ## Verified C02 scope
 
 The inert registry rejects duplicate IDs and looks up explicit extensions.

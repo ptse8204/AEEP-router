@@ -2508,3 +2508,16 @@ Chromium parameter. Its receipt remains rejected pending the
 [corrected protected check](../../reports/toolkit-v2/c13/skillsbench-react-reference-20261106/browser-id-continuation/operation-review.json).
 The [Dependency Audit attribution review](../../reports/toolkit-v2/c13/skillsbench-financial-audit-assets-20261105/dependency-audit-source-attribution.json)
 keeps the exact external database blocked.
+
+### November 7 protected Excel and React results
+
+The [Excel-in-PowerPoint journey](../../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/excel-unstarted/result.json)
+completed with a protected score of 1/1, an accounted provider turn and
+verified cleanup. The [React reference](../../reports/toolkit-v2/c13/skillsbench-react-reference-20261106/browser-id-continuation/result.json)
+passed the pinned upstream verifier with all eleven original test IDs.
+The React failure controls remain open.
+
+The [SkillRank timeout change](../../reports/toolkit-v2/c13/skillrank-certificate-deadline-20261107/operation-review.json)
+adds a reviewed certificate window while preserving earlier definitions.
+The corrected native build and two-certificate check require current
+source verification. The model-backed diagnostic remains open.
