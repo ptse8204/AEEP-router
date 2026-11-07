@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+<!-- skillrank-source-gate-passed-20261107:start -->
+The [corrected SkillRank source verification](../reports/toolkit-v2/c13/skillrank-certificate-deadline-20261107/source-verification.json)
+passed all thirteen checks, including two full suites and both branch
+coverage gates. The native build and check await the exact fixture-only
+continuation approval. Comparisons stay paused.
+<!-- skillrank-source-gate-passed-20261107:end -->
+
 <!-- verified-excel-react-and-skillrank-deadline-20261107:start -->
 The [Excel continuation](../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/excel-unstarted/result.json)
 completed a 1/1 protected grade, one accounted turn and verified cleanup.

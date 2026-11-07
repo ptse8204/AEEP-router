@@ -1,0 +1,211 @@
+{
+  "source_sha256": "4e2ad243eba875551a542900e686c20f91d719e0df4d4efe2dce0e7d74a82a98",
+  "feature_commit": "f1a88c86084f799bce2d442987513226e061688b",
+  "checks": [
+    {
+      "name": "compileall",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0535061249975115,
+      "monitor_stop": null
+    },
+    {
+      "name": "schemas",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.056613583001308,
+      "monitor_stop": null
+    },
+    {
+      "name": "assessment-policy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0546301669965032,
+      "monitor_stop": null
+    },
+    {
+      "name": "ruff",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.051217624975834,
+      "monitor_stop": null
+    },
+    {
+      "name": "mypy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.055885790992761,
+      "monitor_stop": null
+    },
+    {
+      "name": "pytest",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest",
+        "--basetemp",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillrank-certificate-deadline-20261107/verification/pytest-tmp"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 638.1677091250021,
+      "monitor_stop": null
+    },
+    {
+      "name": "coverage-tests",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest",
+        "--basetemp",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillrank-certificate-deadline-20261107/verification/coverage-tests-tmp"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 949.0707873330102,
+      "monitor_stop": null
+    },
+    {
+      "name": "coverage-json",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillrank-certificate-deadline-20261107/verification/coverage.json"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0368167079868726,
+      "monitor_stop": null
+    },
+    {
+      "name": "coverage-report",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0492504999856465,
+      "monitor_stop": null
+    },
+    {
+      "name": "critical-coverage",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_critical_coverage.py",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillrank-certificate-deadline-20261107/verification/coverage.json"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0478876249981113,
+      "monitor_stop": null
+    },
+    {
+      "name": "assessment-coverage",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_coverage.py",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillrank-certificate-deadline-20261107/verification/coverage.json"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0435169170086738,
+      "monitor_stop": null
+    },
+    {
+      "name": "toolkit-integration-fixtures",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest",
+        "integrations/toolkit",
+        "--basetemp",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillrank-certificate-deadline-20261107/verification/toolkit-integration-fixtures-tmp"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 4.08379641600186,
+      "monitor_stop": null
+    },
+    {
+      "name": "build",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "build",
+        "--no-isolation",
+        "--outdir",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillrank-certificate-deadline-20261107/verification/dist"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 4.085523583984468,
+      "monitor_stop": null
+    }
+  ],
+  "runs": {
+    "pytest": {
+      "passed": 2144,
+      "skipped": 21,
+      "log_sha256": "a9355208d4ae0c1927ec0c7987cf0ca9310d2c93530babe0b90f319e56b558dc"
+    },
+    "coverage-tests": {
+      "passed": 2144,
+      "skipped": 21,
+      "log_sha256": "df9a5d568392a2be38fb6da7953027da1f48dde21cde63acb019421b7a1c316e"
+    }
+  },
+  "combined_coverage_percent": 82.71073068420158,
+  "raw_checks_sha256": "447125aad0fb2ac03cdaa6d70faf74855eddd845710af540f3517120e7d85114",
+  "log_directory": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillrank-certificate-deadline-20261107/verification",
+  "minimum_free_bytes": 78151020544,
+  "built_artifacts_sha256": {
+    "aeep_agent_router-0.8.2-py3-none-any.whl": "405fe819400f9c6943ebc3a611f81879fdf288cfabd86332441a43c7d5b5003e",
+    "aeep_agent_router-0.8.2.tar.gz": "77957db5e85ac07778b41093d237f97bdd4a3f8733e47d610b91d281a02af4b1"
+  },
+  "passed": true,
+  "models": 0,
+  "comparisons": "PAUSED",
+  "native_build_started": false
+}

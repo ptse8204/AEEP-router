@@ -1,5 +1,19 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- skillrank-source-gate-passed-20261107:start -->
+**November 7. SkillRank's corrected source gate passed.**
+
+The [verification record](../../reports/toolkit-v2/c13/skillrank-certificate-deadline-20261107/source-verification.json)
+has all thirteen checks passing. Both full suites passed 2,144 tests with
+21 skips. Combined coverage was 82.71%, both coverage thresholds passed,
+and the wheel and sdist built. The earlier false positive remains recorded.
+The [exact fixture continuation](../../reports/toolkit-v2/c13/skillrank-certificate-deadline-20261107/source-continuation-review.json)
+still needs approval for the offline native build and check. Neither ran.
+
+C13 remains open. The separately reviewed React controls also await
+approval. All prior receipts remain intact and comparisons stay paused.
+<!-- skillrank-source-gate-passed-20261107:end -->
+
 <!-- verified-excel-react-and-skillrank-deadline-20261107:start -->
 **November 7. Excel scored 1/1 through the ordinary CLI.**
 

@@ -2519,5 +2519,7 @@ The React failure controls remain open.
 
 The [SkillRank timeout change](../../reports/toolkit-v2/c13/skillrank-certificate-deadline-20261107/operation-review.json)
 adds a reviewed certificate window while preserving earlier definitions.
-The corrected native build and two-certificate check require current
-source verification. The model-backed diagnostic remains open.
+[Current-source verification](../../reports/toolkit-v2/c13/skillrank-certificate-deadline-20261107/source-verification.json)
+passed all thirteen gates. The native build and two-certificate check
+await the exact continuation approval. The model-backed diagnostic
+remains open.
