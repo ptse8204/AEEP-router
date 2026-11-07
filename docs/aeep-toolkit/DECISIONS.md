@@ -3244,3 +3244,17 @@ The [AFlow bounded cycle](../../reports/toolkit-v2/c13/proposal-optimizer-prepar
 uses the original optimizer and formatter with two reviewed workflow
 choices. A managed reply can select a policy. It cannot supply executable
 code, new prompts, protected labels or additional model turns.
+
+## D172. Reuse the document workers and keep reference outputs protected
+
+The [approved local rights](../../reports/toolkit-v2/c13/skillsbench-document-rights-20261106/result.json)
+allow exact task preparation. Managed execution retains a separate gate.
+Use the existing capable Sales image pair for each document task, with
+an explicit output filename and byte limit. Keep the recovered Invoice
+Fraud reference and the independent Excel reference in private recipes.
+
+Preserve the upstream RapidFuzz version. The [download retry](../../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/rapidfuzz-continuation-review.json)
+changes the license guard, without substituting another version.
+The [Excel build retry](../../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/excel-build-continuation/build-review.json)
+reuses the retained Buildx client profile and the unchanged COPY-only
+context. Both terminal first attempts and their charges remain.

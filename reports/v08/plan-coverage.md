@@ -1,5 +1,19 @@
 # 0.8 plan coverage and remaining work
 
+<!-- document-rights-and-managed-preparation-20261106:start -->
+The [approved asset-use registration](../reports/toolkit-v2/c13/skillsbench-document-rights-20261106/result.json)
+passed through the ordinary CLI for both document tasks. The private
+definitions database contains no model grant. The [retained worker pairs](../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/worker-preparation.json)
+and [protected recipes](../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/recipe-preparation.json)
+are prepared. Their grader images and fresh managed readiness remain open.
+
+The [Excel build](../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/build-execution/summary.json) settled its
+single failed operation before image creation. Its client profile lacked
+Buildx. The [exact build continuation](../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/excel-build-continuation/build-review.json)
+and [RapidFuzz download continuation](../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/rapidfuzz-continuation-review.json)
+await repeat approval. Product source is unchanged. Comparisons stay paused.
+<!-- document-rights-and-managed-preparation-20261106:end -->
+
 <!-- aflow-cycle-and-harder-pack-20261106:start -->
 The [actual AFlow cycle](../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/calibration/finite-cycle/result.json)
 passed. A single provider turn selected a reviewed workflow, the

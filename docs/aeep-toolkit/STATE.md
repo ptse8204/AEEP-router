@@ -1,5 +1,40 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- document-rights-and-managed-preparation-20261106:start -->
+**November 6. Both document/data asset-use determinations are registered.**
+
+The approved [asset-use result](../../reports/toolkit-v2/c13/skillsbench-document-rights-20261106/result.json)
+registered Invoice Fraud and Excel-in-PowerPoint through the ordinary CLI.
+Both bound packs pass `require_rights`. Their private definitions database
+has no model grant. No data was transferred and no model ran.
+
+The [worker definitions](../../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/worker-preparation.json)
+reuse the retained capable Sales control and treatment images. Each pair
+binds the approved task archive, exact artifact name and byte limit.
+The [recipe preparation](../../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/recipe-preparation.json)
+uses the existing protected recipe builder. Both recipes remain private.
+Their reference outputs stay outside workers. Fresh containment, packaged
+grader checks and exact managed execution reviews are still required.
+
+The earlier Invoice Fraud oracle output was recovered from its stopped,
+owned container. It matched the canonical output checksum. The oracle was
+not replayed. Its required RapidFuzz 3.14.3 wheel passed the download checksum,
+then my overly strict license-title check discarded it. The
+[one-download continuation](../../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/rapidfuzz-continuation-review.json)
+awaits approval. It checks the MIT notice text and retains the exact wheel.
+
+The first [Excel grader build](../../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/build-execution/summary.json)
+settled one operation and created no image. It used an older Docker
+client profile without Buildx. The [build-only continuation](../../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/excel-build-continuation/build-review.json)
+binds the retained Buildx profile, unchanged context and both local parents.
+Read-only builder and flag checks passed. This repeat also awaits approval.
+
+C13 remains open. Comparisons remain paused. Product source remains
+`8b626082`. Next run only the approved continuations, verify each packaged
+grader through `ContainerExecutor`, then prepare the ordinary managed
+workflow plans. Preserve all previous charges and Docker resources.
+<!-- document-rights-and-managed-preparation-20261106:end -->
+
 <!-- aflow-cycle-and-harder-pack-20261106:start -->
 **November 6. AFlow's bounded cycle passed. The document pack advanced.**
 

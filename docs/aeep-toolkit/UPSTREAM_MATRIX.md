@@ -2473,3 +2473,13 @@ experience. The certificate and reference stayed local.
 original verifier with an independent reference. The
 [React image audit](../../reports/toolkit-v2/c13/skillsbench-react-assets-20261106/summary.json) verified the retained image's
 application and simulator bytes. Neither task has a managed CLI journey yet.
+
+### November 6 document task rights and managed preparation
+
+The [rights registration](../../reports/toolkit-v2/c13/skillsbench-document-rights-20261106/result.json)
+passed for both exact public task archives. The
+[worker pair preparation](../../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/worker-preparation.json)
+reuses the retained document toolchain and neutral candidate.
+The [protected recipes](../../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/recipe-preparation.json)
+still require packaged grader execution and fresh managed readiness.
+Neither preparation nor the asset-use determination establishes task success.
