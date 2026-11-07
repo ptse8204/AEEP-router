@@ -1,0 +1,25 @@
+{
+  "scope": "Static compatibility check for the existing ordinary protected grader path.",
+  "pinned_files_sha256": {
+    "src/aeep/assessment/containment.py": "995d11e26d9b45c01eb3e39526cd5e1bc9ea1916391dec88e3d11db22811478c",
+    "reports/toolkit-v2/c13/skillsbench-react-reference-20261106/verifier-continuation/reference.py": "7f1c2d67b5304d3a0f3839cfa1005bb5d73938782d027620f4f1639caa0e1b5c",
+    "reports/toolkit-v2/c13/skillsbench-react-reference-20261106/negative-controls/operation-review.json": "4ae8caf0b74f7bff15d4031b609afd7716dfdadfab641895ee28a57dc9a15acb"
+  },
+  "offline_reference_settings": {
+    "uid_gid": "0:0",
+    "tmpfs_limit_mib": 1024,
+    "shm_limit_mib": 256,
+    "browser_path": "/root/.cache/ms-playwright"
+  },
+  "ordinary_executor_settings": {
+    "uid_gid": "65534:65534",
+    "tmpfs_limit_mib": 32,
+    "shm": "Docker default"
+  },
+  "definite_mismatch": "The accepted verifier driver asserts UID 0. The ordinary executor enforces UID 65534.",
+  "unmeasured": "The passing reference cap does not measure required scratch or shared memory. Browser directory access under the nonroot profile has not been verified.",
+  "next_step": "Stage a reviewed candidate-output carrier with an explicit nonroot browser path and bounded patch application. Verify the ordinary contained profile and measure actual scratch before proposing a larger allowance. Keep the original verifier and its assertions unchanged.",
+  "models": 0,
+  "guest_executed": false,
+  "source_changed": false
+}
