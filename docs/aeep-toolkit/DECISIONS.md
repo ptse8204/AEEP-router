@@ -3216,3 +3216,17 @@ Store reply and graph evidence as hashes and inert references.
 The [exact operation review](../../reports/toolkit-v2/c13/evoagentx-distribution-20261106/managed-turn/operation-review.json)
 requires separate disclosure and execution approval. Close the proxy
 and retain the ledger after the single attempt.
+
+## D170. Reconcile a terminal turn from its receipts
+
+Preserve the terminal EvoAgentX driver and settlement records. Recover
+the result through a [read-only audit](../../reports/toolkit-v2/c13/evoagentx-distribution-20261106/managed-turn/audit-settled-turn.py)
+when report serialization fails after settlement. The worker and
+validator receipts distinguish a successful actual reply from a missing
+summary. Do not spend another turn to reproduce that summary.
+
+AFlow's protected grader stores only the score and case outcomes in its
+public integration record. The optimizer receives the existing grade
+digest and aggregate score. The [bounded continuation](../../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/calibration/optimizer-directory-correction/operation-review.json)
+reuses the grade and stops at the first formatted proposal request.
+Provider dispatch and generated-code execution require separate scope.

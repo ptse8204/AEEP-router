@@ -1,5 +1,20 @@
 # 0.8 plan coverage and remaining work
 
+<!-- evoagentx-validated-aflow-directory-20261106:start -->
+The [actual EvoAgentX reply](../reports/toolkit-v2/c13/evoagentx-distribution-20261106/managed-turn/reconciled-result.json)
+passed offline validation after one managed turn and zero recorded tool
+calls. Five charges settled and cleanup passed. The original result writer
+failed after validation and settlement. A read-only audit matched the
+immutable receipts, counters and retained reservations. The proposal
+remained inert.
+
+The [protected AFlow baseline](../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/calibration/handoff-continuation/initial-grade.json)
+scored 2/3. The [capture diagnostic](../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/calibration/optimizer-capture/result.json)
+located a first-party directory check failure before proposal dispatch.
+The [one-operation continuation](../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/calibration/optimizer-directory-correction/operation-review.json)
+awaits approval. All three AFlow charges remain. Comparisons stay paused.
+<!-- evoagentx-validated-aflow-directory-20261106:end -->
+
 <!-- evoagentx-managed-turn-review-20261106:start -->
 The [exact EvoAgentX review](../toolkit-v2/c13/evoagentx-distribution-20261106/managed-turn/operation-review.json)
 binds one managed turn on the existing grant, two zero-turn worker

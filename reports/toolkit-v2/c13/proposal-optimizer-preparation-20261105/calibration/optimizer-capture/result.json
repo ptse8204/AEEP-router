@@ -1,0 +1,38 @@
+{
+  "review_sha256": "60d89d76da41f126be03538fb3d977fc8a22ce0ad2e83856c5d69a22a84494fe",
+  "passed": false,
+  "models": 0,
+  "provider_disclosure": false,
+  "initial_grade_sha256": "0851c75a9000f90c381693505b1a37e9e7f35b1fdc68d2b3cb8543a9ad048c64",
+  "initial_grade_replayed": false,
+  "guest_exit": 1,
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "guest_diagnostic": {
+    "stage": "upstream optimizer and formatter",
+    "error_type": "AssertionError",
+    "locations": [
+      {
+        "file": "/opt/aeep-capture.py",
+        "line": 122,
+        "function": "main"
+      },
+      {
+        "file": "/opt/aeep-capture.py",
+        "line": 76,
+        "function": "capture"
+      },
+      {
+        "file": "/opt/aflow-source/scripts/optimizer.py",
+        "line": 129,
+        "function": "_optimize_graph"
+      },
+      {
+        "file": "/opt/aeep-capture.py",
+        "line": 66,
+        "function": "observed_grade"
+      }
+    ]
+  },
+  "error_type": "AssertionError",
+  "cleanup_verified": true
+}

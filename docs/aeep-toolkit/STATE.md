@@ -1,5 +1,35 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- evoagentx-validated-aflow-directory-20261106:start -->
+**November 6. EvoAgentX accepted the actual proposal. AFlow capture is pending.**
+
+The [read-only reconciliation](../../reports/toolkit-v2/c13/evoagentx-distribution-20261106/managed-turn/reconciled-result.json)
+verified one managed Codex turn, zero recorded tool calls and a successful
+[offline validator receipt](../../reports/toolkit-v2/c13/evoagentx-distribution-20261106/managed-turn/validation-receipt.json).
+The pinned parser, graph builder and inert AEEP planner accepted the reply.
+The provider reported 10,008 input and 529 output tokens. All five
+operations settled in 44.60 measured seconds with no cash charged. The
+worker was cleaned up, the proxy returned to its prior stopped state
+and both earlier reservations matched. The original driver exited after
+the validation and settlement because it could not serialize SQLite
+rows. Its original summary is absent. The read-only audit recovered
+the result without another turn. The accepted graph stayed inert.
+
+AFlow's [protected baseline grade](../../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/calibration/handoff-continuation/initial-grade.json)
+is 2/3. The first driver failed before grading because the scope record
+was missing. The corrected driver settled two operations but stopped at
+a guest assertion before capturing a proposal. The [capture-only repeat](../../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/calibration/optimizer-capture/result.json)
+located a shadowed initial-directory variable in the callback. It settled
+one operation, reused the grade and left no running container. The
+[directory correction](../../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/calibration/optimizer-directory-correction/operation-review.json)
+passed current-source preflight and callback checks. It awaits repeat
+approval. A full AFlow cycle and its model authority remain open.
+
+C13 remains open. Comparison dispatch stays paused. Waza's supported
+backend setup remains deferred. The harder SkillsBench pack and
+SkillRank's managed diagnostic still have separate integration gates.
+<!-- evoagentx-validated-aflow-directory-20261106:end -->
+
 <!-- evoagentx-managed-turn-review-20261106:start -->
 **November 6. Exact EvoAgentX managed-turn review is ready.**
 

@@ -1,0 +1,159 @@
+[
+  {
+    "plan_id": "evoagentx-managed-turn-local-20261106",
+    "operations": [
+      {
+        "operation_id": "evoagentx-managed-turn-local-20261106:overhead",
+        "plan_id": "evoagentx-managed-turn-local-20261106",
+        "stage": "owned_evoagentx_proxy_and_review_overhead",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 180.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-11-07T01:38:29.633467Z",
+        "elapsed_seconds": 9.714764959004242,
+        "accounting": null,
+        "resources": null
+      },
+      {
+        "operation_id": "evoagentx-managed-turn-local-20261106:reply",
+        "plan_id": "evoagentx-managed-turn-local-20261106",
+        "stage": "evoagentx_reply_validation",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 70.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-11-07T01:39:01.054743Z",
+        "elapsed_seconds": 4.5715356250002515,
+        "accounting": null,
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 4571.5356250002515,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      }
+    ]
+  },
+  {
+    "plan_id": "conformance_probe_503659425cb34114b8a853988821f427",
+    "operations": [
+      {
+        "operation_id": "pair-inspection:conformance_probe_503659425cb34114b8a853988821f427",
+        "plan_id": "conformance_probe_503659425cb34114b8a853988821f427",
+        "stage": "worker_pair_inspection",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-11-07T01:38:35.366598Z",
+        "elapsed_seconds": 6.13928291699267,
+        "accounting": null,
+        "resources": null
+      }
+    ]
+  },
+  {
+    "plan_id": "conformance_probe_07460ad982d0416db192a8e6322a2d0c",
+    "operations": [
+      {
+        "operation_id": "pair-inspection:conformance_probe_07460ad982d0416db192a8e6322a2d0c",
+        "plan_id": "conformance_probe_07460ad982d0416db192a8e6322a2d0c",
+        "stage": "worker_pair_inspection",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-11-07T01:38:35.383946Z",
+        "elapsed_seconds": 6.131527207995532,
+        "accounting": null,
+        "resources": null
+      }
+    ]
+  },
+  {
+    "plan_id": "evoagentx-managed-proposal-20261106",
+    "operations": [
+      {
+        "operation_id": "evoagentx-managed-proposal-20261106:turn",
+        "plan_id": "evoagentx-managed-proposal-20261106",
+        "stage": "evoagentx_managed_proposal",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 1,
+          "max_elapsed_seconds": 150.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-11-07T01:38:42.928761Z",
+        "elapsed_seconds": 18.041664290998597,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [
+            {
+              "provider": "openai",
+              "resource_pool": "codex.self",
+              "unit": "provider_unit",
+              "consumed": null,
+              "source": {
+                "status": "unavailable",
+                "source": "unavailable",
+                "trust": "untrusted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": null
+              },
+              "included_or_paid": "unknown",
+              "rate_snapshot_id": null,
+              "usage_fingerprint": null
+            }
+          ],
+          "model_usage": [
+            {
+              "provider": "openai",
+              "model": "gpt-6-astra",
+              "access_channel": "subscription",
+              "input_tokens": 10008,
+              "cached_input_tokens": 0,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 529,
+              "reasoning_output_tokens": 0,
+              "evidence": {
+                "status": "complete",
+                "source": "provider_report",
+                "trust": "self_asserted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": "2026-11-07T01:39:00.734629Z"
+              }
+            }
+          ],
+          "tool_footprint": null
+        },
+        "resources": null
+      }
+    ]
+  }
+]

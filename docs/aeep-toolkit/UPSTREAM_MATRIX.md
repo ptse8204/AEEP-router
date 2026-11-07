@@ -2448,3 +2448,16 @@ zero-turn worker and collector checks, and local validation of the reply.
 The [first-party offline fixture](../../reports/toolkit-v2/c13/evoagentx-distribution-20261106/managed-turn/reply-fixture-result.json)
 passed the parser, graph builder and inert planner. Live disclosure and
 dispatch await approval.
+
+### November 6 managed EvoAgentX result and AFlow grade
+
+The [EvoAgentX reconciliation](../../reports/toolkit-v2/c13/evoagentx-distribution-20261106/managed-turn/reconciled-result.json)
+binds one actual provider reply to the original validated proposal
+receipt. All five operations settled and the owned runtime stopped.
+The proposal-only integration passed on the pinned source. Broader
+composition remains a separate gate.
+
+The [AFlow reference grade](../../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/calibration/handoff-continuation/initial-grade.json)
+scored 2/3. The [upstream capture diagnostic](../../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/calibration/optimizer-capture/result.json)
+reached AFlow's optimizer and stopped in the grade callback before
+the proposal relay. The full optimization cycle remains open.
