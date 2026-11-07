@@ -1,0 +1,95 @@
+{
+  "candidate": "exceltable-in-ppt",
+  "revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+  "difficulty": "medium",
+  "decision": "PENDING_OPERATOR_SUBSTITUTION",
+  "replaces_if_selected": "pdf-excel-diff",
+  "provenance_scope": "Static exact-blob inspection. No public pack, solver, verifier, container or model execution.",
+  "original_blocker": "No license found at the separately hosted input revision; original asset use is uncleared.",
+  "task_source": "https://github.com/benchflow-ai/skillsbench/tree/9a1f4dd5f7659f75707435da3ce854b6e48321d1/tasks/exceltable-in-ppt/",
+  "candidate_license_notice": {
+    "path": "LICENSE",
+    "bytes": 11357,
+    "git_blob": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "assets": [
+    {
+      "path": "tasks/exceltable-in-ppt/task.md",
+      "bytes": 1471,
+      "git_blob": "16ade4c3dabec87b4acaa4cd78ca3b60f871bc22",
+      "sha256": "4056e2263dc15e48730a523ce6400312a075a62b2e5fba2b953ed2ea426e8ae2"
+    },
+    {
+      "path": "tasks/exceltable-in-ppt/environment/Dockerfile",
+      "bytes": 532,
+      "git_blob": "2bfd86b324cf3316209e770c1eb25cc3c16676dc",
+      "sha256": "4a8346450bb5616eeef949e1404fe6f0c0f1d7d3ce7f9658bf3d18e374fa13bf"
+    },
+    {
+      "path": "tasks/exceltable-in-ppt/environment/input.pptx",
+      "bytes": 71685,
+      "git_blob": "e8dde9519d76fe05d1a6e67f880d38c46e611980",
+      "sha256": "23983c078eed6dcff8ed70dd260454be0acdfc7a890db68549e74c12d24a82b7"
+    },
+    {
+      "path": "tasks/exceltable-in-ppt/verifier/test.sh",
+      "bytes": 1031,
+      "git_blob": "5b4b4c853bdefde947905f6ac475aa31b652a499",
+      "sha256": "e1360fbfb1e7577ff66793b3ec27a5953a8e708b8e35d5040086c72e6f315b2f"
+    },
+    {
+      "path": "tasks/exceltable-in-ppt/verifier/test_outputs.py",
+      "bytes": 7142,
+      "git_blob": "fec05bd217bf3b07ff7ee1b2158dc3bc437985bb",
+      "sha256": "5c69a1cb8c95ceb39ff2da566fc24f26ebc90715b8cac8ac92991760ee2ad1ad"
+    },
+    {
+      "path": "tasks/exceltable-in-ppt/oracle/inventory.py",
+      "bytes": 38011,
+      "git_blob": "71b7a72289d341a03e9842d11b97df6e7e2c6480",
+      "sha256": "99c1247a56aa9784e14c32e029cf250c9094f3f454db4a01af04e114a7b1356f"
+    },
+    {
+      "path": "tasks/exceltable-in-ppt/oracle/pack.py",
+      "bytes": 5592,
+      "git_blob": "a75c2e7b402e7ebd4a2ea6be8cc6c86fee1f94ba",
+      "sha256": "806aa0975f11056f3781752213d515dc96d73a2e870130aa8485b9ed585d7a5f"
+    },
+    {
+      "path": "tasks/exceltable-in-ppt/oracle/recalc.py",
+      "bytes": 6260,
+      "git_blob": "51221144da98cd52a06c50728a28aad527af373a",
+      "sha256": "965b80eaa1cacb5477d65afc7a9f9026cae3dc9d8c2722a57d59398529f9cbc9"
+    },
+    {
+      "path": "tasks/exceltable-in-ppt/oracle/solve.sh",
+      "bytes": 13299,
+      "git_blob": "e09e1989b02f2b24ccc9da34847e90a31c42146f",
+      "sha256": "5fcf7308bf193de1d1855e033274ec41d78d85c3b9d8db293f582b6f4585e720"
+    },
+    {
+      "path": "tasks/exceltable-in-ppt/oracle/unpack.py",
+      "bytes": 1038,
+      "git_blob": "2ac3909a7ec9b1f3f8d8d206aefa526b243b513d",
+      "sha256": "8e3325efdade3f86706ee6c5ff87486ba3308c6748212e85723fd6fbd1b7bf6a"
+    }
+  ],
+  "original_verifier_static_tests": [
+    "test_output_file_exists",
+    "test_output_is_valid_pptx",
+    "test_embedded_excel_preserved",
+    "test_exchange_rate_updated",
+    "test_inverse_rate_updated",
+    "test_other_cells_unchanged",
+    "test_formulas_preserved",
+    "test_slide_structure_preserved"
+  ],
+  "original_input": "One committed PowerPoint file containing one embedded Excel workbook.",
+  "boundary": "Exclude bundled skills. Review oracle support-file rights and runtime before running. Provider disclosure is separate.",
+  "archive_scan": {
+    "embedded_excel": 1,
+    "external_deck_relationships": false,
+    "macro_or_workbook_external_link_parts": false
+  }
+}

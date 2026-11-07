@@ -1,5 +1,19 @@
 # 0.8 plan coverage and remaining work
 
+<!-- aflow-cycle-and-harder-pack-20261106:start -->
+The [actual AFlow cycle](../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/calibration/finite-cycle/result.json)
+passed. A single provider turn selected a reviewed workflow, the
+protected grade was 3/3 against a 2/3 baseline, and all five operations
+settled. This is engineering calibration only.
+
+The operator selected Excel-in-PowerPoint. The [protected verifier](../reports/toolkit-v2/c13/skillsbench-document-substitute-20261106/result.json)
+passed its independent reference and rejected both output controls.
+The [CLI pack](../reports/toolkit-v2/c13/skillsbench-document-substitute-20261106/cli-pack-inspect.json) excludes protected
+assets from the public archive. The [React asset audit](../reports/toolkit-v2/c13/skillsbench-react-assets-20261106/summary.json)
+verified all 19 pinned files without running guest code.
+Managed runs for these tasks remain open. Comparisons stay paused.
+<!-- aflow-cycle-and-harder-pack-20261106:end -->
+
 <!-- evoagentx-validated-aflow-directory-20261106:start -->
 The [actual EvoAgentX reply](../reports/toolkit-v2/c13/evoagentx-distribution-20261106/managed-turn/reconciled-result.json)
 passed offline validation after one managed turn and zero recorded tool

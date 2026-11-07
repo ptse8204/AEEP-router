@@ -3230,3 +3230,17 @@ public integration record. The optimizer receives the existing grade
 digest and aggregate score. The [bounded continuation](../../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/calibration/optimizer-directory-correction/operation-review.json)
 reuses the grade and stops at the first formatted proposal request.
 Provider dispatch and generated-code execution require separate scope.
+
+## D171. Keep the approved document substitute and an independent reference
+
+Use `exceltable-in-ppt` at the same SkillsBench revision. The
+[asset review](../../reports/toolkit-v2/c13/skillsbench-document-substitute-20261106/selection-and-oracle-rights.json)
+traces the vendor helpers to restricted bundled skills. Use the
+independent OOXML reference to calibrate the original eight verifier
+assertions. Keep the original inputs and binary reward. Only the
+instruction and input deck enter the agent archive.
+
+The [AFlow bounded cycle](../../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/calibration/finite-cycle/result.json)
+uses the original optimizer and formatter with two reviewed workflow
+choices. A managed reply can select a policy. It cannot supply executable
+code, new prompts, protected labels or additional model turns.

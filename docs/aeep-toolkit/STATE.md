@@ -1,5 +1,41 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- aflow-cycle-and-harder-pack-20261106:start -->
+**November 6. AFlow's bounded cycle passed. The document pack advanced.**
+
+The [AFlow managed result](../../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/calibration/finite-cycle/result.json)
+accepted one actual provider reply, selected duplicate-label rejection,
+and matched the protected 3/3 score against the 2/3 calibration baseline.
+The real optimizer updated its experience record. The guest executed
+the selected, reviewed first-party workflow. The provider supplied only
+a permitted policy name and a short description. All five operations
+settled, the worker cleaned up, and the proxy returned to stopped.
+This is one engineering cycle on three synthetic cases. It supplies
+no candidate or selection evidence.
+
+The operator approved `exceltable-in-ppt` in place of `pdf-excel-diff`
+at the same SkillsBench revision. The [oracle review](../../reports/toolkit-v2/c13/skillsbench-document-substitute-20261106/selection-and-oracle-rights.json)
+found that four vendored helpers derive from the restricted bundled
+skills. They stayed outside the runtime. An independent OOXML reference
+changed two cached values and preserved all six formulas. The
+[original verifier](../../reports/toolkit-v2/c13/skillsbench-document-substitute-20261106/result.json) passed all eight checks,
+rejected unchanged and destructive outputs, and separated missing
+protected inputs from task failure. Only its two absolute paths were
+adapted. The [ordinary CLI](../../reports/toolkit-v2/c13/skillsbench-document-substitute-20261106/cli-pack-inspect.json) verified
+the new pack. The [two-task rights review](../../reports/toolkit-v2/c13/skillsbench-document-rights-20261106/operation-review.json)
+binds the public Invoice Fraud and Excel-in-PowerPoint archives for local
+managed-plan preparation. Provider dispatch remains a separate review.
+
+The [React image inspection](../../reports/toolkit-v2/c13/skillsbench-react-assets-20261106/summary.json) matched all
+16 application inputs and three hidden simulator files at the pinned
+revision. The retained Linux amd64 image and never-started inspection
+container remain. The original browser, timing and functional checks
+still need a protected reference run.
+
+C13 remains open. Comparisons remain paused. The SkillRank managed
+diagnostic, harder task workflows and deferred Waza backend are open.
+<!-- aflow-cycle-and-harder-pack-20261106:end -->
+
 <!-- evoagentx-validated-aflow-directory-20261106:start -->
 **November 6. EvoAgentX accepted the actual proposal. AFlow capture is pending.**
 

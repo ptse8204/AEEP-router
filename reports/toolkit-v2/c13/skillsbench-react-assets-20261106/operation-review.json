@@ -1,0 +1,163 @@
+{
+  "docker": "/Applications/Docker.app/Contents/Resources/bin/docker",
+  "docker_config": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-telemetry-20261104/docker-config",
+  "docker_socket": "/Users/edwintse/.docker/run/docker.sock",
+  "purpose": "First static audit of all 16 React task inputs and three hidden API simulator source and runtime files.",
+  "maximum_commands": 23,
+  "no_guest_execution": true,
+  "model_turns": 0,
+  "cash_usd": "0",
+  "automatic_retries": false,
+  "expires_at": "2026-11-07T08:01:02.253235+00:00",
+  "tasks": [
+    {
+      "task_id": "react-performance-debugging",
+      "reference": "ghcr.io/benchflow-ai/skillsbench-task-env@sha256:6f04cf1668b8ede62e46a48f4454d69f08e17b44d40cc34f743ee63ea355801e",
+      "image_id": "sha256:6f04cf1668b8ede62e46a48f4454d69f08e17b44d40cc34f743ee63ea355801e",
+      "name": "aeep-sb-static-react-performance-debugging-20261106",
+      "selectors": {
+        "/services/api-simulator/package-lock.json": {
+          "package-lock.json": {
+            "sha256": "fbb470fc88383e8442f2ddef5b8b0b28a36cb60abb48d1b679565cc4c270c849",
+            "bytes": 51129
+          }
+        },
+        "/services/api-simulator/package.json": {
+          "package.json": {
+            "sha256": "1322ad5c43a0cee610b0a2e55975f6419d73c9dad398a8fabd403a4f68029ce5",
+            "bytes": 316
+          }
+        },
+        "/services/api-simulator/src/server.ts": {
+          "server.ts": {
+            "sha256": "fa900934e281a9b1843b7b79781072433acb13e4feb2306d50c9781b0b138f88",
+            "bytes": 2220
+          }
+        },
+        "/app/next-env.d.ts": {
+          "next-env.d.ts": {
+            "sha256": "9269d492817e359123ac64c8205e5d05dab63d71a3a7a229e68b5d9a0e8150bf",
+            "bytes": 201
+          }
+        },
+        "/app/next.config.js": {
+          "next.config.js": {
+            "sha256": "2f56853e8f805f6f1f54f7089830759caf364d5f0d06af3dbceee98c4e6ae0b7",
+            "bytes": 62
+          }
+        },
+        "/app/package-lock.json": {
+          "package-lock.json": {
+            "sha256": "2209f62dad35b0047449c2599e2c326a3b886faa36dc7bcbca116b1e4c64efe6",
+            "bytes": 68050
+          }
+        },
+        "/app/package.json": {
+          "package.json": {
+            "sha256": "b1605fe6bf3caa2bbf00ac1f8fcc15b1a18fd397f5e52cd1121873bdba56b295",
+            "bytes": 598
+          }
+        },
+        "/app/postcss.config.js": {
+          "postcss.config.js": {
+            "sha256": "fa650b380adfabb151a0b352f7135e107e6352345f899060f1c5c231228f94bf",
+            "bytes": 83
+          }
+        },
+        "/app/src/app/api/checkout/route.ts": {
+          "route.ts": {
+            "sha256": "b8668d1e67042d12715b5a9cd0aa2aad5b87f500149db947d8d69033802263c4",
+            "bytes": 682
+          }
+        },
+        "/app/src/app/api/products/route.ts": {
+          "route.ts": {
+            "sha256": "4a545d8d1e92f9d0ae3186d6de0c83ddd9c8b4914fa32127b8ce8d20c2a6dce0",
+            "bytes": 545
+          }
+        },
+        "/app/src/app/compare/page.tsx": {
+          "page.tsx": {
+            "sha256": "853b9979a0b9598bb514a26e9b2672fb9c278be46a6fe249fdd85537e3e5b9ff",
+            "bytes": 9764
+          }
+        },
+        "/app/src/app/globals.css": {
+          "globals.css": {
+            "sha256": "cc1a7ad0d019ddb1d32d0ecb588ba0ac26ce41d8625dd6c366348b25f83a28ec",
+            "bytes": 59
+          }
+        },
+        "/app/src/app/layout.tsx": {
+          "layout.tsx": {
+            "sha256": "49ffab50e4234b351fa35e2c1573dfe5fe5a835ac09e468ca59022c0f453b972",
+            "bytes": 360
+          }
+        },
+        "/app/src/app/page.tsx": {
+          "page.tsx": {
+            "sha256": "476c182ae6052d47807ac309466976a22aa869f0ce1bf7d983e18fb9949dc416",
+            "bytes": 1092
+          }
+        },
+        "/app/src/components/ProductCard.tsx": {
+          "ProductCard.tsx": {
+            "sha256": "e6b0e95e181f1fd740bca36bea8bbd7833e4799171f11519dde3539554f92c1e",
+            "bytes": 2170
+          }
+        },
+        "/app/src/components/ProductList.tsx": {
+          "ProductList.tsx": {
+            "sha256": "dcb4652080054c0cf08af05a9b4bf6be6c0feb0785168e71276e892a146da50b",
+            "bytes": 2429
+          }
+        },
+        "/app/src/services/api-client.ts": {
+          "api-client.ts": {
+            "sha256": "8644df9cac54c1586085664f83d86030f4e19c9be7fb02977e4510fbdfeda416",
+            "bytes": 1484
+          }
+        },
+        "/app/tailwind.config.js": {
+          "tailwind.config.js": {
+            "sha256": "4a7a1751c8358afda6064590391ee7bf6ab7a3bf596f44823045863afe145874",
+            "bytes": 153
+          }
+        },
+        "/app/tsconfig.json": {
+          "tsconfig.json": {
+            "sha256": "277b6635bda39e7b67e998107e08218a1459021f3e86038895c0b71581ba85b2",
+            "bytes": 609
+          }
+        }
+      }
+    }
+  ],
+  "pins": {
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-react-assets-20261106/run.py": "696caaa15360927acb4ada36611bc2a28977622d0551cc83f510c949d9dd2e10",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-transport-20261103/task-only-pack.json": "c41ec39a459b537d9c1b16d35cda1e7ca8857f75b46128e8640c23d86349b5f9",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-react-runtime-acquisition-20261106/acquisition/summary.json": "d7c5eb9ba0038726d7acc489fb50812a70549153b3696943cd920f34898025b7",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/pipeline-standing-authority-20261104.json": "f0f86d6af2600817eb6de50dd12ac4f861f09ac36f90a27bc84e4ae6f044635c",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5/tasks/react-performance-debugging/environment/api-simulator/package-lock.json": "fbb470fc88383e8442f2ddef5b8b0b28a36cb60abb48d1b679565cc4c270c849",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5/tasks/react-performance-debugging/environment/api-simulator/package.json": "1322ad5c43a0cee610b0a2e55975f6419d73c9dad398a8fabd403a4f68029ce5",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5/tasks/react-performance-debugging/environment/api-simulator/src/server.ts": "fa900934e281a9b1843b7b79781072433acb13e4feb2306d50c9781b0b138f88",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5/tasks/react-performance-debugging/environment/website/next-env.d.ts": "9269d492817e359123ac64c8205e5d05dab63d71a3a7a229e68b5d9a0e8150bf",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5/tasks/react-performance-debugging/environment/website/next.config.js": "2f56853e8f805f6f1f54f7089830759caf364d5f0d06af3dbceee98c4e6ae0b7",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5/tasks/react-performance-debugging/environment/website/package-lock.json": "2209f62dad35b0047449c2599e2c326a3b886faa36dc7bcbca116b1e4c64efe6",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5/tasks/react-performance-debugging/environment/website/package.json": "b1605fe6bf3caa2bbf00ac1f8fcc15b1a18fd397f5e52cd1121873bdba56b295",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5/tasks/react-performance-debugging/environment/website/postcss.config.js": "fa650b380adfabb151a0b352f7135e107e6352345f899060f1c5c231228f94bf",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5/tasks/react-performance-debugging/environment/website/src/app/api/checkout/route.ts": "b8668d1e67042d12715b5a9cd0aa2aad5b87f500149db947d8d69033802263c4",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5/tasks/react-performance-debugging/environment/website/src/app/api/products/route.ts": "4a545d8d1e92f9d0ae3186d6de0c83ddd9c8b4914fa32127b8ce8d20c2a6dce0",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5/tasks/react-performance-debugging/environment/website/src/app/compare/page.tsx": "853b9979a0b9598bb514a26e9b2672fb9c278be46a6fe249fdd85537e3e5b9ff",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5/tasks/react-performance-debugging/environment/website/src/app/globals.css": "cc1a7ad0d019ddb1d32d0ecb588ba0ac26ce41d8625dd6c366348b25f83a28ec",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5/tasks/react-performance-debugging/environment/website/src/app/layout.tsx": "49ffab50e4234b351fa35e2c1573dfe5fe5a835ac09e468ca59022c0f453b972",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5/tasks/react-performance-debugging/environment/website/src/app/page.tsx": "476c182ae6052d47807ac309466976a22aa869f0ce1bf7d983e18fb9949dc416",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5/tasks/react-performance-debugging/environment/website/src/components/ProductCard.tsx": "e6b0e95e181f1fd740bca36bea8bbd7833e4799171f11519dde3539554f92c1e",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5/tasks/react-performance-debugging/environment/website/src/components/ProductList.tsx": "dcb4652080054c0cf08af05a9b4bf6be6c0feb0785168e71276e892a146da50b",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5/tasks/react-performance-debugging/environment/website/src/services/api-client.ts": "8644df9cac54c1586085664f83d86030f4e19c9be7fb02977e4510fbdfeda416",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5/tasks/react-performance-debugging/environment/website/tailwind.config.js": "4a7a1751c8358afda6064590391ee7bf6ab7a3bf596f44823045863afe145874",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-stack-9a1f4dd5/tasks/react-performance-debugging/environment/website/tsconfig.json": "277b6635bda39e7b67e998107e08218a1459021f3e86038895c0b71581ba85b2",
+    "/Applications/Docker.app/Contents/Resources/bin/docker": "a6822407e207ff0b687419ccbe55700ffbf389d77de58ef625b3b1790d88747c",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-telemetry-20261104/docker-config/config.json": "5e8ca882ff273c94f40baa34979ce5a5c8873ec61a0f10bd539db5d8843722fa"
+  }
+}

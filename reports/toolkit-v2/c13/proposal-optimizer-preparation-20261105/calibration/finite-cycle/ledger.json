@@ -1,0 +1,159 @@
+[
+  {
+    "plan_id": "aflow-managed-turn-local-20261106",
+    "operations": [
+      {
+        "operation_id": "aflow-managed-turn-local-20261106:overhead",
+        "plan_id": "aflow-managed-turn-local-20261106",
+        "stage": "owned_aflow_proxy_and_review_overhead",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 180.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-11-07T02:01:29.362786Z",
+        "elapsed_seconds": 4.3193354989925865,
+        "accounting": null,
+        "resources": null
+      },
+      {
+        "operation_id": "aflow-managed-turn-local-20261106:reply",
+        "plan_id": "aflow-managed-turn-local-20261106",
+        "stage": "aflow_reply_validation",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 70.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-11-07T02:01:46.075325Z",
+        "elapsed_seconds": 2.1736339579947526,
+        "accounting": null,
+        "resources": {
+          "monetary_usd": 0.0,
+          "latency_ms": 2173.6339579947526,
+          "cpu_ms": 0.0,
+          "memory_mb_seconds": 0.0,
+          "peak_memory_mb": 0.0,
+          "gpu_ms": 0.0,
+          "network_bytes": 0,
+          "context_tokens": 0,
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        }
+      }
+    ]
+  },
+  {
+    "plan_id": "conformance_probe_cee9974416fb4c739fbc97afdc06af52",
+    "operations": [
+      {
+        "operation_id": "pair-inspection:conformance_probe_cee9974416fb4c739fbc97afdc06af52",
+        "plan_id": "conformance_probe_cee9974416fb4c739fbc97afdc06af52",
+        "stage": "worker_pair_inspection",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-11-07T02:01:30.394609Z",
+        "elapsed_seconds": 5.784152708991314,
+        "accounting": null,
+        "resources": null
+      }
+    ]
+  },
+  {
+    "plan_id": "conformance_probe_bbbe776b65684330a044dc45e5763d2e",
+    "operations": [
+      {
+        "operation_id": "pair-inspection:conformance_probe_bbbe776b65684330a044dc45e5763d2e",
+        "plan_id": "conformance_probe_bbbe776b65684330a044dc45e5763d2e",
+        "stage": "worker_pair_inspection",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-11-07T02:01:30.409945Z",
+        "elapsed_seconds": 5.78001512499759,
+        "accounting": null,
+        "resources": null
+      }
+    ]
+  },
+  {
+    "plan_id": "aflow-managed-proposal-20261106",
+    "operations": [
+      {
+        "operation_id": "aflow-managed-proposal-20261106:turn",
+        "plan_id": "aflow-managed-proposal-20261106",
+        "stage": "aflow_managed_proposal",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 1,
+          "max_elapsed_seconds": 150.0,
+          "max_cash_usd": "0"
+        },
+        "started_at": "2026-11-07T02:01:37.534355Z",
+        "elapsed_seconds": 8.457489917011117,
+        "accounting": {
+          "cash": {
+            "status": "unavailable",
+            "components": []
+          },
+          "subscription_usage": [
+            {
+              "provider": "openai",
+              "resource_pool": "codex.self",
+              "unit": "provider_unit",
+              "consumed": null,
+              "source": {
+                "status": "unavailable",
+                "source": "unavailable",
+                "trust": "untrusted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": null
+              },
+              "included_or_paid": "unknown",
+              "rate_snapshot_id": null,
+              "usage_fingerprint": null
+            }
+          ],
+          "model_usage": [
+            {
+              "provider": "openai",
+              "model": "gpt-6-astra",
+              "access_channel": "subscription",
+              "input_tokens": 8998,
+              "cached_input_tokens": 0,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 36,
+              "reasoning_output_tokens": 0,
+              "evidence": {
+                "status": "complete",
+                "source": "provider_report",
+                "trust": "self_asserted",
+                "evidence_id": null,
+                "source_reference": null,
+                "digest": null,
+                "observed_at": "2026-11-07T02:01:45.733909Z"
+              }
+            }
+          ],
+          "tool_footprint": null
+        },
+        "resources": null
+      }
+    ]
+  }
+]

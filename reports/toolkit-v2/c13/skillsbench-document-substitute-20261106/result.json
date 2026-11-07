@@ -1,0 +1,71 @@
+{
+  "passed": true,
+  "models": 0,
+  "review_sha256": "3647ad78278b730dbf45db8d4038aac64446539b45b0615f82870a0f6600d82c",
+  "runtime_image_id": "sha256:4e3cb7fa008c768c5d5c56d823a291a37add169eecb81c2f89ede3fd86723d8d",
+  "execution_evidence_ref": "b854cfb5ab8f795a2927a441ee81be71c5d3ca9b3d72548734d2831d46cd94fd",
+  "observed": {
+    "passed": true,
+    "models": 0,
+    "protected_grader": {
+      "reference": {
+        "exit_code": 0,
+        "upstream_binary_reward": 1,
+        "observations": {
+          "test_output_file_exists": "passed",
+          "test_output_is_valid_pptx": "passed",
+          "test_embedded_excel_preserved": "passed",
+          "test_exchange_rate_updated": "passed",
+          "test_inverse_rate_updated": "passed",
+          "test_other_cells_unchanged": "passed",
+          "test_formulas_preserved": "passed",
+          "test_slide_structure_preserved": "passed"
+        },
+        "intentional_skips": 0
+      },
+      "unchanged": {
+        "exit_code": 1,
+        "upstream_binary_reward": 0,
+        "observations": {
+          "test_output_file_exists": "passed",
+          "test_output_is_valid_pptx": "passed",
+          "test_embedded_excel_preserved": "passed",
+          "test_exchange_rate_updated": "failed",
+          "test_inverse_rate_updated": "passed",
+          "test_other_cells_unchanged": "passed",
+          "test_formulas_preserved": "passed",
+          "test_slide_structure_preserved": "passed"
+        },
+        "intentional_skips": 0
+      },
+      "destructive": {
+        "exit_code": 1,
+        "upstream_binary_reward": 0,
+        "observations": {
+          "test_output_file_exists": "passed",
+          "test_output_is_valid_pptx": "passed",
+          "test_embedded_excel_preserved": "failed",
+          "test_exchange_rate_updated": "failed",
+          "test_inverse_rate_updated": "failed",
+          "test_other_cells_unchanged": "failed",
+          "test_formulas_preserved": "failed",
+          "test_slide_structure_preserved": "passed"
+        },
+        "intentional_skips": 0
+      },
+      "missing_protected_input": {
+        "infrastructure_error": "missing_protected_input",
+        "verifier_started": false
+      }
+    },
+    "boundary": {
+      "ipv4_ipv6_unix_netlink_denied": true,
+      "non_unix_socketpair_denied": true,
+      "local_unix_pair_verified": true,
+      "inherited_sockets": 0,
+      "non_loopback_route_devices": 0
+    },
+    "adaptation": "absolute input/output paths only"
+  },
+  "cleanup_verified": true
+}

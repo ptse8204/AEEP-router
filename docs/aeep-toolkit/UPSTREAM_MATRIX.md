@@ -2461,3 +2461,15 @@ The [AFlow reference grade](../../reports/toolkit-v2/c13/proposal-optimizer-prep
 scored 2/3. The [upstream capture diagnostic](../../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/calibration/optimizer-capture/result.json)
 reached AFlow's optimizer and stopped in the grade callback before
 the proposal relay. The full optimization cycle remains open.
+
+### November 6 bounded AFlow cycle and harder SkillsBench tasks
+
+[AFlow](../../reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/calibration/finite-cycle/result.json)
+completed one managed optimization cycle. The selected workflow's
+output matched its protected grade certificate and AFlow recorded the
+experience. The certificate and reference stayed local.
+
+[Excel-in-PowerPoint](../../reports/toolkit-v2/c13/skillsbench-document-substitute-20261106/result.json) passed the
+original verifier with an independent reference. The
+[React image audit](../../reports/toolkit-v2/c13/skillsbench-react-assets-20261106/summary.json) verified the retained image's
+application and simulator bytes. Neither task has a managed CLI journey yet.

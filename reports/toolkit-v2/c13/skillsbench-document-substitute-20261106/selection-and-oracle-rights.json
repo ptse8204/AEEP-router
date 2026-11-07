@@ -1,0 +1,47 @@
+{
+  "approved_selection": "exceltable-in-ppt",
+  "replaces": "pdf-excel-diff",
+  "revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+  "candidate_review_sha256": "0700f97fa4b37ce3ab65d2e379271440e67a4b90f3420084f4d8c87b89d28995",
+  "oracle_support_source_comparison": {
+    "unpack.py": {
+      "path": "tasks/exceltable-in-ppt/environment/skills/pptx/ooxml/scripts/unpack.py",
+      "oracle_sha256": "8e3325efdade3f86706ee6c5ff87486ba3308c6748212e85723fd6fbd1b7bf6a",
+      "bundled_sha256": "0bd17f76a1a4c388aba42c6d1d39015fa84e405c3e0692397fe12762bd632b58",
+      "byte_identical": false,
+      "matching_line_ratio": 0.9491525423728814
+    },
+    "pack.py": {
+      "path": "tasks/exceltable-in-ppt/environment/skills/pptx/ooxml/scripts/pack.py",
+      "oracle_sha256": "806aa0975f11056f3781752213d515dc96d73a2e870130aa8485b9ed585d7a5f",
+      "bundled_sha256": "6fe762f45aff8c63fd95b9fcb1337b28921d6fa454e18a0e8158d4c8708d6d00",
+      "byte_identical": false,
+      "matching_line_ratio": 0.9843260188087775
+    },
+    "inventory.py": {
+      "path": "tasks/exceltable-in-ppt/environment/skills/pptx/scripts/inventory.py",
+      "oracle_sha256": "99c1247a56aa9784e14c32e029cf250c9094f3f454db4a01af04e114a7b1356f",
+      "bundled_sha256": "adead8fe6270e520c397cec9fbee4d606ab10bb80f749e018b42ec894c60d2e5",
+      "byte_identical": false,
+      "matching_line_ratio": 0.957843137254902
+    },
+    "recalc.py": {
+      "path": "tasks/exceltable-in-ppt/environment/skills/xlsx/recalc.py",
+      "oracle_sha256": "965b80eaa1cacb5477d65afc7a9f9026cae3dc9d8c2722a57d59398529f9cbc9",
+      "bundled_sha256": "805ffc3116dacc00cf56c219f328099b7ad538b8d852ffeea60c73163ad410e7",
+      "byte_identical": false,
+      "matching_line_ratio": 0.9747899159663865
+    }
+  },
+  "oracle_support_license_notices": {
+    "tasks/exceltable-in-ppt/environment/skills/pptx/LICENSE.txt": "79f6d8f5b427252fa3b1c11ecdbdb6bf610b944f7530b4de78f770f38741cfaa",
+    "tasks/exceltable-in-ppt/environment/skills/xlsx/LICENSE.txt": "79f6d8f5b427252fa3b1c11ecdbdb6bf610b944f7530b4de78f770f38741cfaa"
+  },
+  "oracle_execution_allowed": false,
+  "bundled_skills_excluded": true,
+  "allowed_source_assets_pinned": 5,
+  "provider_disclosure": false,
+  "models": 0,
+  "verifier_executed": false,
+  "independent_reference_plan": "Use standard OOXML to edit only the affected numeric caches and preserve the original formula and other parts; run the unchanged upstream verifier."
+}
