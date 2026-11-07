@@ -1,0 +1,55 @@
+{
+  "passed": true,
+  "models": 0,
+  "review_sha256": "4ae8caf0b74f7bff15d4031b609afd7716dfdadfab641895ee28a57dc9a15acb",
+  "runtime_image_id": "sha256:6f04cf1668b8ede62e46a48f4454d69f08e17b44d40cc34f743ee63ea355801e",
+  "execution_evidence_ref": "bbf5cd5e2815577b4bf6155fa25ff39ff992639894ceacd7e159fdec2b83b133",
+  "observed": {
+    "passed": false,
+    "models": 0,
+    "network": "loopback only",
+    "official_reproduction": false,
+    "phase": "complete",
+    "solver_replayed": false,
+    "build_exit_code": 0,
+    "verifier_exit_code": 1,
+    "required_test_statuses": {
+      "test_outputs.py::TestAPIPerformance::test_checkout_fast": "FAILED",
+      "test_outputs.py::TestAPIPerformance::test_external_api_actually_called": "PASSED",
+      "test_outputs.py::TestAPIPerformance::test_products_api_fast": "PASSED",
+      "test_outputs.py::TestBundleOptimization::test_compare_page_initial_bundle_small[chromium]": "PASSED",
+      "test_outputs.py::TestClientPerformance::test_memoization_limits_rerenders[chromium]": "PASSED",
+      "test_outputs.py::TestFunctionality::test_cart_add_item[chromium]": "PASSED",
+      "test_outputs.py::TestFunctionality::test_compare_page_works[chromium]": "PASSED",
+      "test_outputs.py::TestFunctionality::test_real_product_data_rendered[chromium]": "PASSED",
+      "test_outputs.py::TestFunctionality::test_testids_preserved[chromium]": "PASSED",
+      "test_outputs.py::TestPagePerformance::test_homepage_has_products": "PASSED",
+      "test_outputs.py::TestPagePerformance::test_homepage_loads_fast": "PASSED"
+    },
+    "missing_collected": [],
+    "unexpected_collected_count": 0,
+    "verifier_log_categories": [
+      "asyncio_plugin",
+      "timeout"
+    ],
+    "upstream_binary_reward": 0,
+    "test_statuses": {
+      "test_outputs.py::TestPagePerformance::test_homepage_loads_fast": "PASSED",
+      "test_outputs.py::TestPagePerformance::test_homepage_has_products": "PASSED",
+      "test_outputs.py::TestAPIPerformance::test_products_api_fast": "PASSED",
+      "test_outputs.py::TestAPIPerformance::test_checkout_fast": "FAILED",
+      "test_outputs.py::TestAPIPerformance::test_external_api_actually_called": "PASSED",
+      "test_outputs.py::TestClientPerformance::test_memoization_limits_rerenders[chromium]": "PASSED",
+      "test_outputs.py::TestBundleOptimization::test_compare_page_initial_bundle_small[chromium]": "PASSED",
+      "test_outputs.py::TestFunctionality::test_testids_preserved[chromium]": "PASSED",
+      "test_outputs.py::TestFunctionality::test_cart_add_item[chromium]": "PASSED",
+      "test_outputs.py::TestFunctionality::test_compare_page_works[chromium]": "PASSED",
+      "test_outputs.py::TestFunctionality::test_real_product_data_rendered[chromium]": "PASSED"
+    },
+    "simulator_log_sha256": "0bfc73ec9916e93a9eaf86ffe7eb4de99b55098fed2aafd934d96ec61400cddf",
+    "build_log_sha256": "626e5b8026627ce07a979017b1e6eb86154433a5867fa6aff2660bb6a0969bc7",
+    "site_log_sha256": "49117b96449371adce4eef03973d8e1b86d781c8824658272024334bf3647236",
+    "pytest_log_sha256": "faaaa3478a1677b2323b51d1bfff93ce170ca6d0336f92a70a715620c3b7366a"
+  },
+  "cleanup_verified": true
+}

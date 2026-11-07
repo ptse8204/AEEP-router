@@ -1,5 +1,38 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- skillrank-native-and-react-controls-passed-20261107:start -->
+**November 7. React's two rejection controls and SkillRank's native repeat passed.**
+
+The pinned React verifier collected all eleven assertions on each case.
+The [partial repair](../../reports/toolkit-v2/c13/skillsbench-react-reference-20261106/negative-controls/incomplete/result.json)
+failed the checkout performance assertion. The
+[broken compare panel](../../reports/toolkit-v2/c13/skillsbench-react-reference-20261106/negative-controls/destructive/result.json)
+failed the Chromium compare-page assertion. Each scored 0/1 with its
+other ten checks passing. The retained reference scored 1/1. Both
+control operations settled and cleanup passed. The solver and reference
+were not replayed.
+
+The [native build](../../reports/toolkit-v2/c13/skillrank-certificate-deadline-20261107/result.json)
+produced ARM64 bridge `48fec717` from the pinned offline inputs. The
+[ordinary v9 coordinator check](../../reports/toolkit-v2/c13/skillrank-certificate-deadline-20261107/native-check/native-check-result.json)
+settled both synthetic grade certificates using the reviewed 120-second
+window. The build and scheduler charges were 34.26 and 0.21 seconds.
+Zero models ran in either approved bundle.
+
+The [React asset-use review](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/operation-review.json)
+passed local preflight on seventeen exact public files. The CLI checked
+that the proposed archive excludes bundled skills and protected assets.
+Approval is pending for local rights registration. Model dispatch would
+need a separate exact review. The [SkillRank carrier](../../reports/toolkit-v2/c13/skillrank-managed-diagnostic-20261107/carrier-preparation.json)
+is staged for the managed diagnostic. Its ordinary
+[scheduler registration](../../reports/toolkit-v2/c13/skillrank-managed-diagnostic-20261107/scheduler-registration.json)
+is inert. Fresh paired worker evidence and a bounded engineering review
+remain required for a managed run.
+
+C13 remains open. Comparisons stay paused. These receipts establish
+component behavior on the reviewed scope.
+<!-- skillrank-native-and-react-controls-passed-20261107:end -->
+
 <!-- skillrank-source-gate-passed-20261107:start -->
 **November 7. SkillRank's corrected source gate passed.**
 

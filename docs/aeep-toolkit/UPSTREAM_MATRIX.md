@@ -2523,3 +2523,16 @@ adds a reviewed certificate window while preserving earlier definitions.
 passed all thirteen gates. The native build and two-certificate check
 await the exact continuation approval. The model-backed diagnostic
 remains open.
+
+### November 7 React rejection controls and SkillRank native repeat
+
+The retained React verifier rejected the
+[partial repair](../../reports/toolkit-v2/c13/skillsbench-react-reference-20261106/negative-controls/incomplete/result.json)
+and [broken compare panel](../../reports/toolkit-v2/c13/skillsbench-react-reference-20261106/negative-controls/destructive/result.json)
+with complete collection. The ordinary CLI inspected the proposed
+seventeen-file React input archive. The managed task remains open.
+
+The [native SkillRank check](../../reports/toolkit-v2/c13/skillrank-certificate-deadline-20261107/native-check/native-check-result.json)
+processed two synthetic grade certificates through the ordinary v9
+coordinator at the reviewed deadline. The rebuilt bridge is staged for
+a separate managed diagnostic.

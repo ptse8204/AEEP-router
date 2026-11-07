@@ -3295,3 +3295,18 @@ for the two SkillRank slots and keep both inside the command timeout. Preserve
 the old default and serialized digest. The [native repeat](../../reports/toolkit-v2/c13/skillrank-certificate-deadline-20261107/operation-review.json)
 uses the same upstream revision and Cargo lock. It checks the revised bridge
 with synthetic grades before considering a separate managed diagnostic.
+
+## D176. Bind only the public React archive for managed preparation
+
+Use the [pinned React pack](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/react-pack.json)
+for the original instruction and website inputs. Keep the simulator,
+solver patches, protected verifier and bundled skills outside the
+archive. The reference and two control receipts bind the same eleven
+upstream assertions. The [asset-use review](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/operation-review.json)
+allows local registration after approval. It gives no authority for
+provider transfer or a model turn.
+
+Reuse the [verified ARM64 SkillRank binary](../../reports/toolkit-v2/c13/skillrank-certificate-deadline-20261107/result.json)
+for a future two-slot diagnostic. The [prepared carrier](../../reports/toolkit-v2/c13/skillrank-managed-diagnostic-20261107/carrier-preparation.json)
+binds the fresh owned workspace and 120-second certificate window.
+Keep worker review and managed dispatch authority separate.

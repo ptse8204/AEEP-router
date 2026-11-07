@@ -1,5 +1,15 @@
 # 0.8 plan coverage and remaining work
 
+<!-- skillrank-native-and-react-controls-passed-20261107:start -->
+The [native SkillRank check](../reports/toolkit-v2/c13/skillrank-certificate-deadline-20261107/native-check/native-check-result.json)
+passed two synthetic grades under the reviewed deadline. Both React
+controls scored 0/1 with the intended failed assertion, complete
+collection and verified cleanup.
+[Partial repair](../reports/toolkit-v2/c13/skillsbench-react-reference-20261106/negative-controls/incomplete/result.json)
+and [broken compare panel](../reports/toolkit-v2/c13/skillsbench-react-reference-20261106/negative-controls/destructive/result.json).
+Managed checks and comparative acceptance remain open.
+<!-- skillrank-native-and-react-controls-passed-20261107:end -->
+
 <!-- skillrank-source-gate-passed-20261107:start -->
 The [corrected SkillRank source verification](../reports/toolkit-v2/c13/skillrank-certificate-deadline-20261107/source-verification.json)
 passed all thirteen checks, including two full suites and both branch
