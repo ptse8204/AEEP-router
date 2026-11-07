@@ -1,0 +1,24 @@
+{
+  "task_id": "software-dependency-audit",
+  "revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+  "rights_status": "BLOCKED",
+  "references": {
+    "task_dockerfile": "https://github.com/benchflow-ai/skillsbench/blob/9a1f4dd5f7659f75707435da3ce854b6e48321d1/tasks/software-dependency-audit/environment/Dockerfile",
+    "task_contribution": "https://github.com/benchflow-ai/skillsbench/pull/560",
+    "archive_listing": "https://huggingface.co/datasets/zodi1121/skillbench-software-db/tree/d005409",
+    "official_schema_two_distribution": "https://github.com/aquasecurity/trivy-db/pkgs/container/trivy-db",
+    "official_license": "https://github.com/aquasecurity/trivy-db/blob/main/LICENSE",
+    "official_notice": "https://github.com/aquasecurity/trivy-db/blob/main/NOTICE"
+  },
+  "retained_metadata_record_sha256": "dceae9ebd1eda26d18706c31441e31473f11d56688ea8101188cbfb8cd9af7bd",
+  "findings": [
+    "The task uses the separately hosted db.zip. Its public listing supplies no rights record.",
+    "The contribution supplies no archive-to-upstream attribution or license record.",
+    "Aqua publishes a schema 2 database under Apache-2.0. The retained January timestamp does not prove its database bytes match an Aqua artifact.",
+    "The protected verifier compares normalized vulnerability records for exact equality. A newer database needs a separately declared adaptation and calibration against all original assertions."
+  ],
+  "next_evidence": "Publisher permission tied to the exact archive or a byte-level match to a licensed official artifact with applicable notices.",
+  "archive_downloaded": false,
+  "archive_executed": false,
+  "models": 0
+}

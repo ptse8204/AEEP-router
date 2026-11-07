@@ -1,5 +1,14 @@
 # 0.8 plan coverage and remaining work
 
+<!-- settled-invoice-and-pinned-react-20261106:start -->
+The [Invoice Fraud reconciliation](../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/managed-engineering/invoice-reconciliation.json)
+verified one managed CLI trial with protected score 0/1, bound provider
+token counts and cleanup. The wrapper stopped on a summary field after
+the canonical report was written. The [unstarted Excel plan review](../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/excel-unstarted/operation-review.json)
+passed preflight and awaits approval. The [React Chromium ID correction](../reports/toolkit-v2/c13/skillsbench-react-reference-20261106/browser-id-continuation/operation-review.json)
+awaits separate verifier-only approval. Comparisons stay paused.
+<!-- settled-invoice-and-pinned-react-20261106:end -->
+
 <!-- packaged-document-graders-and-react-reference-20261106:start -->
 The [packaged document graders](../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/packaged-grading/grader-execution/summary.json)
 passed six ordinary executor checks. The [two-task managed review](../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/managed-engineering/operation-review.json)

@@ -1,0 +1,53 @@
+{
+  "passed": false,
+  "models": 0,
+  "review_sha256": "5e5b9c37fa279cdbe938c1004947c52a7108c9d97a7f28f8a3d20068df535233",
+  "runtime_image_id": "sha256:6f04cf1668b8ede62e46a48f4454d69f08e17b44d40cc34f743ee63ea355801e",
+  "execution_evidence_ref": "5d51fbf50f28f80071ca2281d0b2002ede9e6cf518186ab4bc9778068201e667",
+  "observed": {
+    "passed": false,
+    "models": 0,
+    "network": "loopback only",
+    "official_reproduction": false,
+    "phase": "protected reference verifier",
+    "solver_replayed": false,
+    "build_exit_code": 0,
+    "verifier_exit_code": 0,
+    "required_test_statuses": {
+      "test_outputs.py::TestAPIPerformance::test_checkout_fast": "PASSED",
+      "test_outputs.py::TestAPIPerformance::test_external_api_actually_called": "PASSED",
+      "test_outputs.py::TestAPIPerformance::test_products_api_fast": "PASSED",
+      "test_outputs.py::TestPagePerformance::test_homepage_has_products": "PASSED",
+      "test_outputs.py::TestPagePerformance::test_homepage_loads_fast": "PASSED"
+    },
+    "missing_collected": [
+      "test_outputs.py::TestBundleOptimization::test_compare_page_initial_bundle_small",
+      "test_outputs.py::TestClientPerformance::test_memoization_limits_rerenders",
+      "test_outputs.py::TestFunctionality::test_cart_add_item",
+      "test_outputs.py::TestFunctionality::test_compare_page_works",
+      "test_outputs.py::TestFunctionality::test_real_product_data_rendered",
+      "test_outputs.py::TestFunctionality::test_testids_preserved"
+    ],
+    "unexpected_collected_count": 6,
+    "verifier_log_categories": [
+      "asyncio_plugin"
+    ],
+    "error_type": "AssertionError",
+    "local_frames": [
+      {
+        "line": 163,
+        "function": "<module>"
+      },
+      {
+        "line": 152,
+        "function": "run"
+      }
+    ],
+    "simulator_log_sha256": "0bfc73ec9916e93a9eaf86ffe7eb4de99b55098fed2aafd934d96ec61400cddf",
+    "build_log_sha256": "626e5b8026627ce07a979017b1e6eb86154433a5867fa6aff2660bb6a0969bc7",
+    "site_log_sha256": "f30d7d201add4ad8f357461f07b6d5a0f8d3856dfe43f7dcea9ac66174ad2b9d",
+    "pytest_log_sha256": "29e17198bb56f1a742ecc0c9931a59fdbdc36eaf3083d042706f89e13d530682"
+  },
+  "error_type": "AssertionError",
+  "cleanup_verified": true
+}

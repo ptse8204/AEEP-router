@@ -2494,3 +2494,17 @@ The exact managed dispatch remains pending.
 The [React solver](../../reports/toolkit-v2/c13/skillsbench-react-reference-20261106/result.json) ran on the retained image
 inside private loopback. Protected collection did not match the pinned
 IDs, so React still lacks a verified reference grade.
+
+### November 6 managed Invoice and React verification
+
+The [managed Invoice receipt](../../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/managed-engineering/invoice-reconciliation.json)
+proves one ordinary CLI journey reached the protected SkillsBench grader.
+The submitted artifact scored 0/1. Both document plans cleared readiness.
+The Excel turn is unstarted and its exact continuation awaits approval.
+
+The [React retry](../../reports/toolkit-v2/c13/skillsbench-react-reference-20261106/verifier-continuation/result.json)
+ran the real upstream verifier with exit 0. The pinned IDs omitted the
+Chromium parameter. Its receipt remains rejected pending the
+[corrected protected check](../../reports/toolkit-v2/c13/skillsbench-react-reference-20261106/browser-id-continuation/operation-review.json).
+The [Dependency Audit attribution review](../../reports/toolkit-v2/c13/skillsbench-financial-audit-assets-20261105/dependency-audit-source-attribution.json)
+keeps the exact external database blocked.

@@ -1,0 +1,28 @@
+{
+  "scope": "Read-only diagnostic readiness. No SkillRank scheduler or managed worker executed.",
+  "paths": {
+    "reports/toolkit-v2/c13/integration-snapshot-correction-20261103/completion-audit.json": "c69fd2858b7ba1febea388c3d55339a17fcf56e1749f99ebe52a0d20718e659f",
+    "reports/toolkit-v2/c13/skillrank-native-carrier-20261105/result.json": "61672824d31328b3ff4bcbd58759045035e4c143e89481aa30888abd898b23fa",
+    "integrations/toolkit/skillrank/bridge.rs": "65acb49a828e33e3dce54cbc0834b52434de84b4d3a0c748f04c9d90e857e0fb",
+    "src/aeep_toolkit/skillrank_scheduler.py": "3e887ca559783b44bf60f439db4c73134580dad69dedc015921338aa706d587b"
+  },
+  "retained_bridge_sha256": "931e3a785565d4b66737845d96c008c0ef0b5d96b5d4d971ff39f9710f7843bd",
+  "maximum_seconds_for_one_certificate": 60,
+  "comparable_markdownify_engineering_observations": [
+    {
+      "engine": "agent-skill-eval",
+      "agent_wall_seconds": 49.34109479095787,
+      "protected_grading_seconds": 2.0914121670648456
+    },
+    {
+      "engine": "managed",
+      "agent_wall_seconds": 63.996416167356074,
+      "protected_grading_seconds": 2.037404874805361
+    }
+  ],
+  "finding": "One completed managed task took longer than the current per-certificate deadline before its protected grade. The previously planned Markdownify pair cannot be assumed to fit this diagnostic.",
+  "next": "Keep the pending Excel source frozen. After it settles, choose a short previously reviewed task with measured headroom or update and reverify the exact bounded native bridge and coordinator together. Keep two canonical slots, source and workspace guards, exclusive accounting and no replay.",
+  "models": 0,
+  "comparisons": "PAUSED",
+  "dispatch_ready": false
+}

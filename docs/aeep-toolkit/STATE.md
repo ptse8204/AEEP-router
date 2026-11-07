@@ -1,5 +1,40 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- settled-invoice-and-pinned-react-20261106:start -->
+**November 6. Invoice Fraud completed through the ordinary CLI.**
+
+Both document plans passed fresh zero-turn worker and collector checks.
+The [Invoice reconciliation](../../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/managed-engineering/invoice-reconciliation.json)
+binds the canonical report, transferred artifact, protected binary score
+of 0/1 and verified cleanup. The single turn recorded 116,557 input tokens
+and 1,868 output tokens from the provider. Cached input and reasoning are
+subsets of those counts. No matched arm exists. The grant charged 23
+operations and 102.54 seconds. No new reservations remain unresolved.
+
+The [terminal wrapper](../../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/managed-engineering/result.json)
+used two invalid normalized-run fields after the ordinary CLI report was
+written. Excel never started. The [Excel-only review](../../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/excel-unstarted/operation-review.json)
+`b5e9af4f` passed preflight against the existing plan and worker evidence.
+It awaits approval for one turn, up to 24 operations and 2,200 reserved
+seconds at zero cash. It will reuse the existing route and grade once.
+Keep the settled Invoice result and every prior charge.
+
+The [React verifier retry](../../reports/toolkit-v2/c13/skillsbench-react-reference-20261106/verifier-continuation/result.json)
+exited 0 in upstream pytest. AEEP rejected the run because I omitted
+the default Chromium suffix from six pinned test IDs. The
+[plugin identity proof](../../reports/toolkit-v2/c13/skillsbench-react-reference-20261106/browser-id-continuation/browser-id-proof.json)
+shows the exact correction. The [verifier-only review](../../reports/toolkit-v2/c13/skillsbench-react-reference-20261106/browser-id-continuation/operation-review.json)
+`b27398b9` awaits approval for one offline operation. The earlier solver
+and verifier results remain intact.
+
+C13 remains open at product source `8b626082`. Comparisons stay paused.
+The [Dependency Audit provenance check](../../reports/toolkit-v2/c13/skillsbench-financial-audit-assets-20261105/dependency-audit-source-attribution.json)
+found no verified license or byte-level attribution for the task's
+January Trivy database. Keep it blocked pending exact-source evidence.
+Waza still needs supported backend access. Candidate usefulness and
+selection usefulness remain separate from these integration checks.
+<!-- settled-invoice-and-pinned-react-20261106:end -->
+
 <!-- packaged-document-graders-and-react-reference-20261106:start -->
 **November 6. Both packaged document graders passed.**
 

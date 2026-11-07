@@ -3272,3 +3272,16 @@ The [React reference](../../reports/toolkit-v2/c13/skillsbench-react-reference-2
 the pinned solver exited successfully. Prepare the verifier retry from
 the seven exact source edits in the solver. Bind the installed pytest
 plugins and retain all eleven original assertions and their thresholds.
+
+## D174. Preserve the trial when a workflow summary fails
+
+Reconcile the [Invoice trial](../../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/managed-engineering/invoice-reconciliation.json)
+from its canonical receipt, protected grade and ordinary CLI report.
+A completed task can score zero. A wrapper failure after settlement
+cannot invalidate that grade or authorize another turn. The audit uses
+normalized receipt references and compares timing to the canonical trial.
+
+For React, derive the exact expected browser parameter IDs from the
+[retained plugin](../../reports/toolkit-v2/c13/skillsbench-react-reference-20261106/browser-id-continuation/browser-id-proof.json).
+Preserve the solver edits, eleven protected checks, offline boundary and
+binary reward. Keep the rejected receipt as part of the execution history.
