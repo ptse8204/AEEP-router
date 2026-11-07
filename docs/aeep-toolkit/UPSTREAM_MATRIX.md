@@ -2483,3 +2483,14 @@ reuses the retained document toolchain and neutral candidate.
 The [protected recipes](../../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/recipe-preparation.json)
 still require packaged grader execution and fresh managed readiness.
 Neither preparation nor the asset-use determination establishes task success.
+
+### November 6 packaged document grading and React reference
+
+The [ordinary contained grader proof](../../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/packaged-grading/grader-execution/summary.json)
+passed reference, missing and faulty checks for Invoice Fraud and
+Excel-in-PowerPoint. The CLI previews resolve the reviewed tasks.
+The exact managed dispatch remains pending.
+
+The [React solver](../../reports/toolkit-v2/c13/skillsbench-react-reference-20261106/result.json) ran on the retained image
+inside private loopback. Protected collection did not match the pinned
+IDs, so React still lacks a verified reference grade.

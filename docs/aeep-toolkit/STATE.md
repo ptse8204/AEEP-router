@@ -1,5 +1,40 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- packaged-document-graders-and-react-reference-20261106:start -->
+**November 6. Both packaged document graders passed.**
+
+The [approved RapidFuzz retry](../../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/rapidfuzz-continuation-result.json)
+retained the checksum-verified 3.14.3 ARM64 wheel and verified its MIT
+notice without installing or running the package on the host. The
+[approved Excel build](../../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/excel-build-continuation/build-execution/summary.json)
+and the [first Invoice Fraud build](../../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/invoice-build/build-execution/summary.json)
+produced the exact local protected images. Both build operations settled.
+
+The [ordinary executor proof](../../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/packaged-grading/grader-execution/summary.json)
+accepted both references, rejected missing outputs at the artifact
+boundary and rejected both faulty outputs in their pinned upstream
+verifiers. All six operations settled and the owned containers are gone.
+The [ordinary CLI previews](../../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/managed-engineering/inert-cli-preview.json)
+bind both tasks and their reviewed packs. The
+[exact managed review](../../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/managed-engineering/operation-review.json)
+binds the existing grant, stopped proxy, public archives, worker pairs
+and protected images. It awaits approval for up to two model turns.
+Fresh isolation and both canonical plans must pass before either turn.
+
+The [first React reference run](../../reports/toolkit-v2/c13/skillsbench-react-reference-20261106/result.json) completed the
+pinned solver on the retained image. The verifier's collected IDs did
+not match the expected eleven checks. No grade was established. The
+single operation settled and cleanup passed. The
+[verifier-only retry](../../reports/toolkit-v2/c13/skillsbench-react-reference-20261106/verifier-continuation/operation-review.json)
+binds the seven exact source edits extracted from the pinned solver and
+the three installed pytest plugins. It awaits repeat approval and will
+not replay the solver.
+
+C13 remains open. Comparisons remain paused. Product source is unchanged.
+The managed document review and React verifier retry are independent.
+Preserve the existing grant, earlier charges, images and volumes.
+<!-- packaged-document-graders-and-react-reference-20261106:end -->
+
 <!-- document-rights-and-managed-preparation-20261106:start -->
 **November 6. Both document/data asset-use determinations are registered.**
 

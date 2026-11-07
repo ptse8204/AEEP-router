@@ -3258,3 +3258,17 @@ changes the license guard, without substituting another version.
 The [Excel build retry](../../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/excel-build-continuation/build-review.json)
 reuses the retained Buildx client profile and the unchanged COPY-only
 context. Both terminal first attempts and their charges remain.
+
+## D173. Bind the packaged graders and retain the React solver result
+
+The [document grader proof](../../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/packaged-grading/grader-execution/summary.json)
+passes on the two pinned images through the ordinary container executor.
+Use those images with the two exact reviewed task archives. The next
+[managed review](../../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/managed-engineering/operation-review.json)
+keeps the grant limits and expiry unchanged and requires both plans to
+pass before a model sees public inputs.
+
+The [React reference](../../reports/toolkit-v2/c13/skillsbench-react-reference-20261106/result.json) reached its verifier after
+the pinned solver exited successfully. Prepare the verifier retry from
+the seven exact source edits in the solver. Bind the installed pytest
+plugins and retain all eleven original assertions and their thresholds.

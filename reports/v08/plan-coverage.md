@@ -1,5 +1,17 @@
 # 0.8 plan coverage and remaining work
 
+<!-- packaged-document-graders-and-react-reference-20261106:start -->
+The [packaged document graders](../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/packaged-grading/grader-execution/summary.json)
+passed six ordinary executor checks. The [two-task managed review](../reports/toolkit-v2/c13/skillsbench-document-managed-20261106/managed-engineering/operation-review.json)
+awaits approval. Its fresh worker checks and canonical CLI plans must
+pass before model dispatch.
+
+The [first React reference](../reports/toolkit-v2/c13/skillsbench-react-reference-20261106/result.json) completed the solver
+and stopped when the protected verifier collected different test IDs.
+No grade was established. A [verifier-only retry](../reports/toolkit-v2/c13/skillsbench-react-reference-20261106/verifier-continuation/operation-review.json)
+awaits repeat approval. All prior charges remain. Comparisons stay paused.
+<!-- packaged-document-graders-and-react-reference-20261106:end -->
+
 <!-- document-rights-and-managed-preparation-20261106:start -->
 The [approved asset-use registration](../reports/toolkit-v2/c13/skillsbench-document-rights-20261106/result.json)
 passed through the ordinary CLI for both document tasks. The private

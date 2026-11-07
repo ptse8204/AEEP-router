@@ -1,0 +1,191 @@
+{
+  "scope": "Two SkillsBench document/data managed CLI engineering tasks, one fresh required-use turn each.",
+  "source_sha256": "8b626082c2bd9218809bddfe95fe27996c7ee595b7a9e3bf430d64beafa10114",
+  "database": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/aeep.sqlite3",
+  "grant": {
+    "counters": [
+      13788,
+      3803,
+      126083.54406230834,
+      "0.0"
+    ],
+    "root_sha256": "7cf37077213dd84d02ffb6c8c1106930ecec04d4337780454f6ac308b0bef659",
+    "amendment_sha256": "71ce9e312837f07b7445cb7daaa573befbf4270cde631d61609426a16654d804",
+    "limits": {
+      "max_operations": 50000,
+      "max_model_turns": 6000,
+      "max_elapsed_seconds": 604800.0,
+      "max_cash_usd": "0"
+    },
+    "expires_at": "2026-11-08T12:00:00+00:00",
+    "prior_reservations": 2,
+    "prior_reservations_sha256": "ac3513ae4eb6db604b7358cc892f550c6ceda63f008eb928052b7c6306609837"
+  },
+  "proxy": {
+    "Id": "5f9a44f86633409a250d11a78cf59357495da2078724ee0261bc73acff57f0f3",
+    "Image": "sha256:5bf590eb0bf8a06187ff092f0f75cf83b540cc27bd6a75fd8bd91305ca7b13de",
+    "Running": false,
+    "Memory": 536870912,
+    "MemorySwap": 536870912,
+    "Networks": {
+      "aeep-reviewed-model-egress": {
+        "Aliases": [],
+        "DNSNames": [
+          "aeep-reviewed-model-proxy",
+          "5f9a44f86633"
+        ],
+        "DriverOpts": {},
+        "EndpointID": "",
+        "Gateway": "",
+        "GlobalIPv6Address": "",
+        "GlobalIPv6PrefixLen": 0,
+        "GwPriority": 0,
+        "IPAMConfig": {},
+        "IPAddress": "",
+        "IPPrefixLen": 0,
+        "IPv6Gateway": "",
+        "Links": null,
+        "MacAddress": "",
+        "NetworkID": "dc46efd9e7306a1671da13301e0cea413270af6a7bd9c4634b2f0e3f8aeab4dc"
+      },
+      "aeep-reviewed-model-private": {
+        "Aliases": null,
+        "DNSNames": [
+          "aeep-reviewed-model-proxy",
+          "5f9a44f86633"
+        ],
+        "DriverOpts": null,
+        "EndpointID": "",
+        "Gateway": "",
+        "GlobalIPv6Address": "",
+        "GlobalIPv6PrefixLen": 0,
+        "GwPriority": 0,
+        "IPAMConfig": null,
+        "IPAddress": "",
+        "IPPrefixLen": 0,
+        "IPv6Gateway": "",
+        "Links": null,
+        "MacAddress": "",
+        "NetworkID": "8f657f861de8897d53df66efdf595c6d2e202b174af81f2827db409fe53f19d6"
+      }
+    }
+  },
+  "worker_image_ids": {
+    "control": "sha256:5116daa2007110be23d7d5407d22a3cfacc3967e103471181addede1126a2704",
+    "treatment": "sha256:4d7e4882f696f1aecda936ae28aa1940a50ac5b8b14f0e2278a3ba13ae44d865"
+  },
+  "cases": [
+    {
+      "role": "invoice",
+      "configuration": "document-invoice",
+      "task_id": "invoice-fraud-detection",
+      "pair": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-document-managed-20261106/worker-definitions/invoice-pair.json",
+      "shared": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-document-managed-20261106/worker-definitions/invoice-shared.json",
+      "pair_digest": "d45c7f8d939dba1a8152d6f8c29dc720d9bd44a375896bb8ef04cc45a67e9bef",
+      "recipe": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-document-managed-20261106/recipes/invoice-recipe.json",
+      "recipe_digest": "26aa8713aec22004db572ccc223a59ecded3de3a8be41f5b376acfc035026fb5",
+      "grader_environment": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-document-managed-20261106/packaged-grading/grader-execution/invoice-environment.json",
+      "grader_environment_digest": "c9c8efe708110ccbcd38e68efe96505077698b7c9b69f710842272be85f88370",
+      "grader_image_id": "sha256:1aa5211744f8523b6f18fcc47d85ff36241d13382d443c69717860dd7b7d0a70",
+      "rights": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-document-rights-20261106/invoice-fraud-detection.json",
+      "rights_review_ref": "d5f5912fdbdcb7786b5e396cb23e6bc36e3f9b7b4125e773946ffe7110a7450c",
+      "public_archive_sha256": "79873e82c79f86e89b5078fca62dd6964ff96e3e8f0c68a8096004291b2e3112",
+      "public_files": {
+        "tasks/invoice-fraud-detection/task.md": "f37803e2c0221b47fe2cd206ea1c995a4c320de3d4ece97cf36d6f3ef88fc44b",
+        "tasks/invoice-fraud-detection/environment/invoices.pdf": "a76ee7651a4e088ba566d3e5d5d9f499e773f1166cb2d7f888ea19291c4a813e",
+        "tasks/invoice-fraud-detection/environment/vendors.xlsx": "19ff6138112d84c2c695c8369fa315d0de42bd966dfdbd95d5a9553e8e9a08d3",
+        "tasks/invoice-fraud-detection/environment/purchase_orders.csv": "6f84df07d8195331d71940dbcd65e4369094063acece2fe86ca4883a50e35be8"
+      },
+      "integration_case_set_digest": "6fca7b21a541e434049a94b5cd8e19f74a2da8477bb9a2880821a347d419c09e"
+    },
+    {
+      "role": "excel",
+      "configuration": "document-excel",
+      "task_id": "exceltable-in-ppt",
+      "pair": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-document-managed-20261106/worker-definitions/excel-pair.json",
+      "shared": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-document-managed-20261106/worker-definitions/excel-shared.json",
+      "pair_digest": "23ab3668985248705b3cb2a5055114f7c1055d55cdbb22198b76afc8c07058a9",
+      "recipe": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-document-managed-20261106/recipes/excel-recipe.json",
+      "recipe_digest": "0968b07cedea1c52d7af1ffc4d6363600b4ae8fd3d540dd96078e601e2a319cf",
+      "grader_environment": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-document-managed-20261106/packaged-grading/grader-execution/excel-environment.json",
+      "grader_environment_digest": "80b4a923ddac367c638dd0d2633ddb45a024639a9ff0cb64a651ab0555b12c33",
+      "grader_image_id": "sha256:8eef4a0ccd7102086b16898331e89cc3e7893931d270fdae6a2601a7cbac1efa",
+      "rights": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-document-rights-20261106/exceltable-in-ppt.json",
+      "rights_review_ref": "594cf5fa7af793a3de737b3fec2d46af08d977199c95d9ace5e86b41ff9ddfaa",
+      "public_archive_sha256": "93952a36b542bbcb13021a600a3a3fcea8d52ce656cfee8eef867a398fd9b145",
+      "public_files": {
+        "tasks/exceltable-in-ppt/task.md": "4056e2263dc15e48730a523ce6400312a075a62b2e5fba2b953ed2ea426e8ae2",
+        "tasks/exceltable-in-ppt/environment/input.pptx": "23983c078eed6dcff8ed70dd260454be0acdfc7a890db68549e74c12d24a82b7"
+      },
+      "integration_case_set_digest": "6b25dfb8f0634665ee039be3b4add17d766c3c67f39353eca12a2fbf79461636"
+    }
+  ],
+  "definitions": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-document-managed-20261106/managed-definitions",
+  "work": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-document-managed-20261106/managed-execution",
+  "maximum_operations": 160,
+  "maximum_model_turns": 2,
+  "maximum_reserved_seconds": 8000,
+  "maximum_cash_usd": "0",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "medium",
+  "expires_at": "2026-11-07T16:28:04.386442+00:00",
+  "automatic_retries": false,
+  "comparisons": "PAUSED",
+  "pins": {
+    "/Applications/Docker.app/Contents/Resources/bin/docker": "a6822407e207ff0b687419ccbe55700ffbf389d77de58ef625b3b1790d88747c",
+    "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/aeep.json": "091209e86a89894f5237b00021aa833117a0493d5067d1aa3091843a3ff0becb",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-contained-graders-20261105/rights-bound/workflow.json": "e4419070ef71c41a194320b6c1f1c4fc998acf6f350cd2fc409c422de6414ce9",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-document-managed-20261106/managed-definitions/excel-integration-cases.json": "c1252252e2035eef92f02143dcfbcc0f29b6bd59b54349e13c237ee4350f94da",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-document-managed-20261106/managed-definitions/invoice-integration-cases.json": "c1e846a164ef5dae2e96269742b0e66a365b630c231e561f170a57d21dd202c1",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-document-managed-20261106/managed-definitions/workflow.json": "887bc7d209dc2a9655f481af22a155342663fcd9d535a937b2b5ac12ef71fac8",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-document-managed-20261106/recipes/excel-recipe.json": "460eedb8c3ed46d417d0b248ea65a50e0071f7968090fd22045cd507d0506b47",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-document-managed-20261106/recipes/invoice-recipe.json": "fa2e31446ce8c0645d5b5b72e0d86b2f651e1c42df06acc93993f6d08548f08f",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-document-managed-20261106/worker-definitions/excel-pair.json": "1229e180b401a60d111bce0e73d812bbe1844d1b93d252092a5a860f5d78a521",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-document-managed-20261106/worker-definitions/excel-shared.json": "ad9361f8d222735fcbe77f715a945e44df4f402ece25ba2bdea51bf2f0929eb4",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-document-managed-20261106/worker-definitions/invoice-pair.json": "126b1adaae2b0826f7480351a236f9eb0afcc09358a38956851b9308c32df4d6",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-document-managed-20261106/worker-definitions/invoice-shared.json": "07f1c06dba39c841a6ca96cd5e9e9f89838f183e80bfd20619e4db2f6fed7b1b",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-document-rights-20261106/exceltable-in-ppt-bound-pack.json": "54856d1cb096cd2fd228e4ea6ec7ebb07804542ad147784163cd26db7304d53e",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-document-rights-20261106/invoice-fraud-detection-bound-pack.json": "7f75cbafebbdf23bef0d2cf29de27c7eb2a671b3eb76617092a37690ed053be8",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/integration-snapshot-correction-20261103/integration.py": "cb0acb1922db698d42213c0c12620a4239a1f81892f85a6249c17566d5957d0b",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/integration-snapshot-correction-20261103/operation-review.json": "319d18e4d5fbbebd696f80cebd4cecd39266884f3aed3e7252f6ad049b0e078c",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/integration-snapshot-correction-20261103/run.py": "c06bc2d80cc7f9a9b8ddf9099ae184163bd6a4500d40cffe4a7731e2c4f4c5a1",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/integration-snapshot-correction-20261103/source.json": "76c68c2add9b8f1de613d1f1a224d23b2ea1f38012bf0bf14840a12cf7198817",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/pipeline-standing-authority-20261104.json": "f0f86d6af2600817eb6de50dd12ac4f861f09ac36f90a27bc84e4ae6f044635c",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/calibration/finite-cycle/run.py": "63311363d4b93fcc8968c46d34cea6f805c3b0e57751e5cddbabc1c719df52e5",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/review-budget.py": "dfaf4c305f5323db352044c183a6a42380d76ea20ea5b814bae579f1e688a4a7",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/run-collector.py": "80c877816ef304d4e53bd0d32e3e60738545978500968ccf488807b1e30ad988",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/trial-evidence.py": "4f9c342670774a4ffd62c87d5307114deec8c804c38ebfaad42e4f1a475dc0e0",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-document-managed-20261106/managed-engineering/run.py": "f70ab9f9e2e5977c1bb2a5a6e7612b3547a1b8e75d0c2a10abe6e11af49f2060",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-document-managed-20261106/packaged-grading/grader-execution/excel-environment.json": "888df426dc6185f5123d81b2b878bc2a92d3caf9dd7116de4785922ba9097891",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-document-managed-20261106/packaged-grading/grader-execution/excel-fault-receipt.json": "2d72a6acc8f6c9d69dea8bec1a32a81e3cb319572e7450d1d3b824adf4316a6a",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-document-managed-20261106/packaged-grading/grader-execution/excel-missing-receipt.json": "35f765fb7884d98ebe14ac365af1675db7fff22e7407384dbf2df109d854af3b",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-document-managed-20261106/packaged-grading/grader-execution/excel-reference-receipt.json": "3621bb05474c59731d8e0c261a113567b12922141c8dbef2f32b3bc190ef3ed5",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-document-managed-20261106/packaged-grading/grader-execution/invoice-environment.json": "abe1ceb4a6dbd286112d890ffe47e6119c847f32ac04269642717696d6312494",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-document-managed-20261106/packaged-grading/grader-execution/invoice-fault-receipt.json": "2a10b7d45b9c19025d0b9c435c29bd3943e0b624283a9a597dceb7be74c384ad",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-document-managed-20261106/packaged-grading/grader-execution/invoice-missing-receipt.json": "7cb3720117b6f67dd7f2c5dac6356d53c95099fcc2af56e8ba837e29ce89d365",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-document-managed-20261106/packaged-grading/grader-execution/invoice-reference-receipt.json": "9d1fe0e41ddb37a62edfa0264536cead03624bec7f3a8b74af6ce12168675733",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-document-managed-20261106/packaged-grading/grader-execution/summary.json": "307887ef4f6533ae11078e52bd104671d97ab67c4f021532536dcf227d5c28cb",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-document-managed-20261106/packaged-grading/grader-review.json": "634a94c7e93183f3b546a2e63da681c4164b92c191f3dec38a34ee9a8203981f",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-document-managed-20261106/recipe-preparation.json": "c3adbc431909e180cca22fb1d5fb06bff531fbec2964cac31efedba427440406",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-document-managed-20261106/worker-preparation.json": "cb24ef0e9a468102884ee2e686d1851ce9a67e2952feea9a74992fd8b4715ab7",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-document-rights-20261106/exceltable-in-ppt.json": "9c26f40d0cb92614ea3d3fcb9e7de5dfce58071d956837adc5263613c6b39adb",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-document-rights-20261106/invoice-fraud-detection.json": "60672c5a46b3f452f76a659f55222802044754fc7432cf01e712226fc2cc239d",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-document-rights-20261106/operation-review.json": "e257a1d6ed64ef654792ba553395d689c9124a9eb4ddc24b77cce33654186cc3",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-document-rights-20261106/result.json": "76e3de464a2ec5ad5ed7d3a573f47bb1a09a8a4c5ca47e2f74d7b27913a5aa63",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-managed-worker-preparation-20261105/engineering-dispatch-review.json": "036e3cb4c53b06437d9ee336ea800897fc871288b54d161aafd25452bb50277f",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-managed-worker-preparation-20261105/prepare-engineering.py": "24219254735ef90f903562fa15d53ee81601f5a888ec4fc7281385d8d2fe0a08",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-managed-worker-preparation-20261105/run-engineering.py": "9f652c4a4dc1bf609df863f4473ef187b83dcb570484c9b4b3ceb686f8f202ac",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/worker-readiness-correction-20261103/candidate/LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/worker-readiness-correction-20261103/candidate/SKILL.md": "e18a979532105161910d8cc7891959a704048b19194e23707828f21bfd8d68ec",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/worker-readiness-correction-20261103/integration.py": "f0b8f32925b59a997e75851d970c88336fb801da8a0932b90c45fcf3ac90644c",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-scanner-20261102/cli-policy.json": "5c04a544bfdceb07fd34b58c06d231bf2eef215f465167e181833071f1a9a36d",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-scanner-20261102/cli-registry.json": "e137e335b6fdfa618654f609db167f27d3850ca194ec9cb0a133f8b395e28344"
+  },
+  "authority": "Explicit approval required for exact provider disclosure and two turns. Use the existing grant without amendment.",
+  "requires_before_dispatch": [
+    "Four fresh zero-turn worker and collector checks and exact existing proxy identity.",
+    "Both ordinary CLI plans must pass pinned task, recipe, image, current source, rights, conformance, and remaining budget checks.",
+    "Public input archives and the reviewed stack-check skill only. Verifiers, reference outputs and protected data stay local.",
+    "Stop and account for any indeterminate attempt. Restore the existing proxy to its prior stopped state."
+  ]
+}
