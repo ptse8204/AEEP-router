@@ -1,5 +1,37 @@
 # 0.8 plan coverage and remaining work
 
+<!-- react-managed-sol-only-20261108:start -->
+The operator superseded the unstarted Astra React turn. The
+[Sol-only review](../toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-managed-review.json)
+requires fresh model-bound worker and collector checks before one
+engineering turn. The protected grader and public task remain verified.
+Comparisons stay paused.
+<!-- react-managed-sol-only-20261108:end -->
+
+<!-- react-self-contained-carrier-verified-20261108:start -->
+React's corrected canonical preparation succeeded. The
+[runner's boundary guard](../toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/managed-carrier-boundary.json)
+stopped execution before any model turn because the earlier grader
+used extra host roots. The
+[self-contained grader](../toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/self-contained-result.json)
+passed the real reference and all seven grade probes with the guard
+intact. The [one-turn review](../toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sealed-managed-review.json)
+binds the verified image. Comparisons remain paused.
+<!-- react-self-contained-carrier-verified-20261108:end -->
+
+<!-- react-grader-worker-pair-verified-20261108:start -->
+The [protected React grader](../toolkit-v2/c13/skillsbench-react-readonly-grader-20261108/result.json)
+passed its four reviewed cases. The
+[worker file audit](../toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/worker-image-parity.json)
+confirmed identical React dependencies across both retained images.
+The [managed attempt](../toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/managed-result.json)
+passed fresh containment, then stopped before dispatch on a mismatched
+benchmark selector. The
+[corrected review](../toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/managed-continuation-review.json)
+binds the React task and both existing boundary records. The one-turn
+engineering run remains gated and comparisons stay paused.
+<!-- react-grader-worker-pair-verified-20261108:end -->
+
 <!-- react-export-and-readonly-continuation-20261108:start -->
 The [React source checks](../toolkit-v2/c13/skillsbench-react-ordinary-carrier-20261108/source-verification.json)
 passed all thirteen gates. BuildKit

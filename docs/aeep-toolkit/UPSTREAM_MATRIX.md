@@ -2555,3 +2555,30 @@ has zero observations from that attempt. The
 preserves the original AMD64 image, eleven upstream checks and pinned
 dependencies. The workflow adapter uses the same executor with read-only
 mounts. Approval and real grader observations remain pending.
+
+### November 8 React grader and worker checks
+
+The [protected grader](../../reports/toolkit-v2/c13/skillsbench-react-readonly-grader-20261108/result.json) passed its four
+reviewed checks on the original AMD64 image. Both ARM64 workers
+type-checked the public project using [identical reviewed files](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/worker-image-parity.json).
+The [first managed attempt](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/managed-result.json)
+passed worker and collector boundaries and stopped at a benchmark
+selector mismatch. The [corrected workflow](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/managed-continuation-review.json)
+awaits the one-turn engineering run. Comparisons remain paused.
+
+### November 8 self-contained React recipe runtime
+
+The [ordinary CLI preparation](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/managed-continuation-ready.json)
+bound the React case. Its runner enforced the recipe's no-extra-mount
+rule before dispatch. The [self-contained runtime](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/self-contained-result.json)
+now passes all eight reference and grading invocations under that
+rule. The [one-turn review](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sealed-managed-review.json)
+still needs separate authority and terminal CLI evidence.
+
+### November 8 React model change
+
+The operator selected GPT-6.1 Sol for the unstarted engineering turn.
+The [new review](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-managed-review.json) keeps the
+same public inputs and sealed grader. It awaits exact authority for
+fresh model-bound conformance and the one turn. Account availability
+is unverified. Comparisons remain paused.

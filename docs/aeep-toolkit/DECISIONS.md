@@ -3336,3 +3336,40 @@ The new wrapper changes only those paths. Keep the protected tests
 and score semantics unchanged and keep reference patches outside the
 runtime mounts. The [grader-only review](../../reports/toolkit-v2/c13/skillsbench-react-readonly-grader-20261108/operation-review.json)
 requires approval before dispatch and leaves the managed task separate.
+
+## D179. Verify the managed React payload separately from the protected grader
+
+Keep the [verified AMD64 grader](../../reports/toolkit-v2/c13/skillsbench-react-readonly-grader-20261108/result.json) separate
+from the managed ARM64 workers. Resolve only the platform-appropriate
+packages from the task lockfile and preserve their bundled notices.
+The [image parity audit](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/worker-image-parity.json)
+binds the package bytes and permissions. The worker smoke checks use
+the public project and the existing Node runtime. The protected
+simulator remains available only to grading.
+
+The first managed preparation selected the wrong benchmark. The
+[corrected review](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/managed-continuation-review.json)
+binds the React pack, recipe, task IDs and validated existing worker
+boundaries. Keep the stopped attempt and its accounting. Dispatch
+requires exact authority and evidence from the ordinary CLI.
+
+## D180. Package React's grader without extra host roots
+
+The [canonical plan](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/managed-continuation-ready.json)
+prepared successfully. The [recipe boundary](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/managed-carrier-boundary.json)
+rejected the mounted grader before any model turn. Keep the product
+guard. Package the reviewed assets into the self-contained AMD64 image
+using the filesystem from the verified original container. The
+[approved checks](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/self-contained-result.json) exercised
+the real reference and the seven grade payloads before approving a
+new managed plan. Keep both stopped plans and their charges.
+
+## D181. Pin the unstarted React turn to GPT-6.1 Sol
+
+The operator selected GPT-6.1 Sol. Preserve medium reasoning, the
+same worker images and the verified grader. The
+[Sol review](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-managed-review.json) requires both
+workers to resolve the exact model through the existing Codex
+destination before the ordinary workflow can dispatch. Keep Astra
+receipts under their original identities. No model fallback is enabled.
+[OpenAI model documentation](https://developers.openai.com/api/docs/models/gpt-6.1-sol).

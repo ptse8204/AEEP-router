@@ -1,5 +1,81 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- react-managed-sol-only-20261108:start -->
+**November 8. The React engineering turn is now pinned to GPT-6.1 Sol.**
+
+The operator changed the model before dispatch. The unstarted Astra
+review is superseded. The [Sol review](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-managed-review.json)
+allows one engineering turn at medium reasoning after fresh zero-turn
+model and collector checks on the existing workers. Runtime identity
+includes the model and executor configuration. The earlier Astra
+containment records therefore remain historical. The
+[local preflight](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-managed-preflight.json) verified
+that an Astra-only catalogue cannot select a model for this definition.
+Account availability still needs the reviewed App Server observation.
+The verified grader and public inputs are unchanged. Comparisons stay
+paused and the Sol review needs exact approval.
+[OpenAI model documentation](https://developers.openai.com/api/docs/models/gpt-6.1-sol).
+<!-- react-managed-sol-only-20261108:end -->
+
+<!-- react-self-contained-carrier-verified-20261108:start -->
+**November 8. The self-contained React grader passed the pre-turn cases.**
+
+The [corrected workflow](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/managed-continuation-result.json)
+prepared a canonical React plan. The runner stopped before dispatch.
+The [recorded boundary check](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/managed-carrier-boundary.json)
+shows why. Executable recipes reject extra host roots, which the
+earlier standalone calibration used. Five new operations settled
+with zero model turns and the proxy stopped.
+
+The [staged archive](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/self-contained-staging.json)
+combines the original never-started AMD64 container filesystem with
+the verified browser, Python packages and verifier files. The
+[approved import and checks](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/self-contained-result.json)
+used no extra host roots. The actual reference matched the frozen
+artifact, the positive scored 1/1 and all six faults scored 0/1.
+Nine operations settled in 135.74 seconds and cleanup passed.
+The original recipe guard stays in effect.
+
+The [sealed workflow definition](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sealed-managed-definition.json)
+binds the same public task and both reviewed worker boundaries to the
+verified image. The [exact one-turn review](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sealed-managed-review.json)
+awaits approval. C13 stays open and comparisons stay paused.
+<!-- react-self-contained-carrier-verified-20261108:end -->
+
+<!-- react-grader-worker-pair-verified-20261108:start -->
+**November 8. React's protected grader and both offline workers passed.**
+
+The [approved grader run](../../reports/toolkit-v2/c13/skillsbench-react-readonly-grader-20261108/result.json) scored the
+reference 1/1. The original assertions rejected both the partial and
+destructive patches. The carrier rejected the out-of-scope patch before
+grading. Four operations settled at 141.32 seconds and all four
+containers were removed.
+
+The [ARM64 acquisition](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/node-acquisition-result.json)
+verified 136 archives against the public lockfile. The
+[image audit](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/worker-image-parity.json) matched 14,972
+dependency files, permissions and ownership across the two workers
+and against the frozen context. The raw image export was streamed.
+Both the [control](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/worker-continuation-result.json) and
+[candidate](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/candidate-smoke-result.json) type-checked
+the public project, loaded the native Next.js compiler and passed the
+offline boundary checks. The protected simulator and grader were absent
+from both workers. The first build's receipt error left its full
+150-second reservation charged. The later receipt and build-layer
+checks preserve that failure and the two retained images.
+
+The [approved managed attempt](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/managed-result.json)
+passed fresh worker and collector isolation, then stopped at CLI
+preparation. Its workflow still pointed to the Spring benchmark pack
+and recipe. The proxy returned to its stopped state. Four new
+operations settled with zero model turns. The corrected
+[workflow review](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/managed-continuation-review.json)
+passed [read-only preflight](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/managed-continuation-preflight.json)
+against the stored React task, rights and both worker boundaries.
+The one unstarted provider turn requires exact approval. C13 remains
+open and comparisons stay paused.
+<!-- react-grader-worker-pair-verified-20261108:end -->
+
 <!-- react-export-and-readonly-continuation-20261108:start -->
 **November 8. React's source checks passed. The carrier export failed.**
 
