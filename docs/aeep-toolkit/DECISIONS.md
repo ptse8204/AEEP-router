@@ -3324,3 +3324,15 @@ the prior Python dependency versions. The six platform wheels stay
 separate from the protected reference patches. The
 [ordinary runtime review](../../reports/toolkit-v2/c13/skillsbench-react-ordinary-carrier-20261108/runtime-review.json)
 binds one offline COPY-only build and four output cases.
+
+## D178. Use the original React image with pinned read-only grader mounts
+
+The [export observation](../../reports/toolkit-v2/c13/skillsbench-react-readonly-grader-20261108/export-observation.json)
+records the failed lazy-layer fetch and the tag left behind. Preserve
+both tags and the settled operations. Use the original calibrated
+image through the ordinary container executor. Mount the reviewed
+Chromium, Python dependencies and protected verifier read-only.
+The new wrapper changes only those paths. Keep the protected tests
+and score semantics unchanged and keep reference patches outside the
+runtime mounts. The [grader-only review](../../reports/toolkit-v2/c13/skillsbench-react-readonly-grader-20261108/operation-review.json)
+requires approval before dispatch and leaves the managed task separate.

@@ -1,0 +1,77 @@
+{
+  "id": "skillsbench.react.grader",
+  "capability": "assessment.skillsbench.react@1",
+  "kind": "command",
+  "description": "Original React verifier on a bounded source artifact",
+  "input_schema": {
+    "type": "object",
+    "additionalProperties": true
+  },
+  "output_schema": null,
+  "estimate": {
+    "resources": {
+      "monetary_usd": 0.0,
+      "latency_ms": 0.0,
+      "cpu_ms": 0.0,
+      "memory_mb_seconds": 0.0,
+      "peak_memory_mb": 0.0,
+      "gpu_ms": 0.0,
+      "network_bytes": 0,
+      "context_tokens": 0,
+      "input_tokens": 0,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_output_tokens": 0,
+      "subscription_units": 0.0
+    },
+    "cash": {
+      "amount_usd": null,
+      "upper_bound_usd": null,
+      "evidence": {
+        "status": "unavailable",
+        "source": "unavailable",
+        "trust": "untrusted",
+        "evidence_id": null,
+        "source_reference": null,
+        "digest": null,
+        "observed_at": null
+      }
+    },
+    "subscription_usage": [],
+    "success_probability": 0.95,
+    "quality_score": 0.95,
+    "risk_score": 0.05,
+    "confidence": 0.5,
+    "source": "static",
+    "sample_size": 0,
+    "uncertainty": null
+  },
+  "side_effect": "read",
+  "locality": "local",
+  "requires_network": false,
+  "data_residency": [],
+  "idempotent": true,
+  "safe_to_auto_execute": true,
+  "enabled": true,
+  "tags": [],
+  "resource_pool": null,
+  "provider_id": null,
+  "validators": [],
+  "config": {
+    "argv": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-react-readonly-grader-20261108/protected/grade.py",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/src"
+    ],
+    "argv_literal": true,
+    "stdin_json": true,
+    "timeout_seconds": 60,
+    "max_output_bytes": 32768,
+    "output": {
+      "type": "json"
+    }
+  }
+}

@@ -2545,3 +2545,13 @@ passed under the ordinary executor's UID and GID with a read-only
 browser mount. The scratch sample informed the next carrier's reviewed
 limit. The [ordinary runtime check](../../reports/toolkit-v2/c13/skillsbench-react-ordinary-carrier-20261108/runtime-review.json)
 awaits approval and current-source verification.
+
+### November 8 React export failure and grader-only review
+
+The [carrier build](../../reports/toolkit-v2/c13/skillsbench-react-readonly-grader-20261108/export-observation.json)
+failed after Docker tagged its output. The ordinary React grader
+has zero observations from that attempt. The
+[continuation](../../reports/toolkit-v2/c13/skillsbench-react-readonly-grader-20261108/operation-review.json)
+preserves the original AMD64 image, eleven upstream checks and pinned
+dependencies. The workflow adapter uses the same executor with read-only
+mounts. Approval and real grader observations remain pending.

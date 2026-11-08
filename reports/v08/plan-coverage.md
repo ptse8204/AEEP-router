@@ -1,5 +1,16 @@
 # 0.8 plan coverage and remaining work
 
+<!-- react-export-and-readonly-continuation-20261108:start -->
+The [React source checks](../toolkit-v2/c13/skillsbench-react-ordinary-carrier-20261108/source-verification.json)
+passed all thirteen gates. BuildKit
+[failed during export](../toolkit-v2/c13/skillsbench-react-readonly-grader-20261108/export-observation.json)
+after writing a tag. Both charges settled and all four grader cases
+remain unstarted. The
+[grader-only continuation](../toolkit-v2/c13/skillsbench-react-readonly-grader-20261108/operation-review.json)
+reuses the calibrated image and pinned read-only mounts. It awaits
+exact approval. Comparisons remain paused.
+<!-- react-export-and-readonly-continuation-20261108:end -->
+
 <!-- react-nonroot-and-ordinary-carrier-20261108:start -->
 The [React nonroot calibration](../reports/toolkit-v2/c13/skillsbench-react-nonroot-calibration-20261108/result.json)
 passed all eleven original assertions. Its sampled scratch peak was

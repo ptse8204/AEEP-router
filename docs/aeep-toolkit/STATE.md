@@ -1,5 +1,31 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- react-export-and-readonly-continuation-20261108:start -->
+**November 8. React's source checks passed. The carrier export failed.**
+
+The [source verification](../../reports/toolkit-v2/c13/skillsbench-react-ordinary-carrier-20261108/source-verification.json)
+passed all thirteen gates, including 2,145 tests and 21 skips in each
+full run, both branch coverage gates and wheel and sdist builds.
+Combined coverage was 82.71%. These are local source checks.
+
+The [approved attempt](../../reports/toolkit-v2/c13/skillsbench-react-ordinary-carrier-20261108/runtime-result.json)
+tagged the retained AMD64 parent. The COPY-only build tagged a new
+manifest, then [failed during export](../../reports/toolkit-v2/c13/skillsbench-react-readonly-grader-20261108/export-observation.json).
+BuildKit tried to fetch a lazy layer and the registry rejected access.
+The build left no image-ID file. The new tag is retained with runtime
+readiness unverified. The two operations settled at 22.96 seconds.
+No grader ran.
+
+The [grader-only review](../../reports/toolkit-v2/c13/skillsbench-react-readonly-grader-20261108/operation-review.json)
+uses the original calibrated image with pinned read-only mounts for
+Chromium, Python dependencies and the protected verifier. It preserves
+the 160 MiB scratch limit, original assertions and task archive. Local
+preflight and substituted success and failure accounting checks passed.
+Only the four unstarted cases are in scope, with no build, provider
+transfer or model turns. Exact approval is pending. C13 stays open
+and comparisons stay paused.
+<!-- react-export-and-readonly-continuation-20261108:end -->
+
 <!-- react-nonroot-and-ordinary-carrier-20261108:start -->
 **November 8. React rights are registered and the nonroot reference passed.**
 

@@ -1,0 +1,210 @@
+{
+  "source_sha256": "443a2ee20e6ec04bffb149d9381d73fc750a62f90e1ee56348e91ed80e425de4",
+  "feature_commit": "fb1ea63217508a1efbbeb60fa8e8371c40aa492e",
+  "checks": [
+    {
+      "name": "compileall",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0520160000014585,
+      "monitor_stop": null
+    },
+    {
+      "name": "schemas",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0559044999827165,
+      "monitor_stop": null
+    },
+    {
+      "name": "assessment-policy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.053598124999553,
+      "monitor_stop": null
+    },
+    {
+      "name": "ruff",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0558741250133608,
+      "monitor_stop": null
+    },
+    {
+      "name": "mypy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.04198891701526,
+      "monitor_stop": null
+    },
+    {
+      "name": "pytest",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest",
+        "--basetemp",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-react-ordinary-carrier-20261108/verification/pytest-tmp"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 649.2636637079995,
+      "monitor_stop": null
+    },
+    {
+      "name": "coverage-tests",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "-m",
+        "pytest",
+        "--basetemp",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-react-ordinary-carrier-20261108/verification/coverage-tests-tmp"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 968.6156690839853,
+      "monitor_stop": null
+    },
+    {
+      "name": "coverage-json",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-react-ordinary-carrier-20261108/verification/coverage.json"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0356654159841128,
+      "monitor_stop": null
+    },
+    {
+      "name": "coverage-report",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "coverage",
+        "report",
+        "-m"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.065542666008696,
+      "monitor_stop": null
+    },
+    {
+      "name": "critical-coverage",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_critical_coverage.py",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-react-ordinary-carrier-20261108/verification/coverage.json"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0597160829929635,
+      "monitor_stop": null
+    },
+    {
+      "name": "assessment-coverage",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_coverage.py",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-react-ordinary-carrier-20261108/verification/coverage.json"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.060976583015872,
+      "monitor_stop": null
+    },
+    {
+      "name": "toolkit-integration-fixtures",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest",
+        "integrations/toolkit",
+        "--basetemp",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-react-ordinary-carrier-20261108/verification/toolkit-integration-fixtures-tmp"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 4.101997541991295,
+      "monitor_stop": null
+    },
+    {
+      "name": "build",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "build",
+        "--no-isolation",
+        "--outdir",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-react-ordinary-carrier-20261108/verification/dist"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 4.087117457995191,
+      "monitor_stop": null
+    }
+  ],
+  "runs": {
+    "pytest": {
+      "passed": 2145,
+      "skipped": 21,
+      "log_sha256": "8cb6f115265b66ddf2835f8a23af019a1ff6fed5c2719e449a245ab281801a77"
+    },
+    "coverage-tests": {
+      "passed": 2145,
+      "skipped": 21,
+      "log_sha256": "1b5f02297f637fd001ab1d792719e2871a559a1fb5e1c06c5e78f621f9f9fdb8"
+    }
+  },
+  "combined_coverage_percent": 82.71367036953072,
+  "raw_checks_sha256": "ad931d0d04f4c78e874cdf9438def049c93a41353923915c29d8213c506717e0",
+  "log_directory": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-react-ordinary-carrier-20261108/verification",
+  "minimum_free_bytes": 71421845504,
+  "built_artifacts_sha256": {
+    "aeep_agent_router-0.8.2-py3-none-any.whl": "13d61470d369decebabd264a951cc0d799b01ce5eaac54d9edad8b468abc4500",
+    "aeep_agent_router-0.8.2.tar.gz": "7c33f26e00bdf56747f053d026fa534bd7083f9bea4ef7142cec4d2f79a0064c"
+  },
+  "passed": true,
+  "models": 0,
+  "comparisons": "PAUSED"
+}
