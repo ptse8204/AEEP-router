@@ -275,6 +275,7 @@ class AssessmentEnvironment(StrictModel):
     process_limit: int = Field(default=64, ge=1, le=1024)
     container_runtime: str | None = None
     container_socket: str | None = None
+    container_tmpfs_mb: int | None = Field(default=None, strict=True, ge=32, le=1024)
     read_only_roots: list[str] = Field(default_factory=list)
     conformance_digests: dict[str, Digest] | None = None
     differential_conformance_digest: Digest | None = None
@@ -286,6 +287,8 @@ class AssessmentEnvironment(StrictModel):
             result.pop("conformance_digests", None)
         if self.differential_conformance_digest is None:
             result.pop("differential_conformance_digest", None)
+        if self.container_tmpfs_mb is None:
+            result.pop("container_tmpfs_mb", None)
         return result
 
     @model_validator(mode="after")
@@ -294,6 +297,10 @@ class AssessmentEnvironment(StrictModel):
             self.container_image is None or ("@sha256:" not in self.container_image and not self.container_image.startswith("sha256:"))
         ):
             raise ValueError("container environments require a digest-pinned image")
+        if self.container_tmpfs_mb is not None and (
+            self.kind != "container" or self.container_tmpfs_mb > self.memory_mb
+        ):
+            raise ValueError("container scratch requires a container and must fit its memory limit")
         for path in [
             *self.read_only_roots,
             *([self.container_runtime, self.container_socket] if self.kind == "container" else []),

@@ -1,5 +1,36 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- react-nonroot-and-ordinary-carrier-20261108:start -->
+**November 8. React rights are registered and the nonroot reference passed.**
+
+The [asset-use registration](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/result.json)
+binds the seventeen public task files for local preparation. The
+[nonroot calibration](../../reports/toolkit-v2/c13/skillsbench-react-nonroot-calibration-20261108/result.json)
+ran the same eleven protected assertions under UID and GID 65534.
+The reference scored 1/1. The operation settled in 41.85 seconds with
+verified cleanup. The sampled scratch peak was 116,670,464 bytes
+(111.3 MiB). The shared-memory sample showed no growth. The 209 browser
+files came from the retained image and were mounted read-only.
+
+The ordinary executor now accepts an explicit reviewed scratch limit.
+The default and legacy environment digests are preserved. The proposed
+React environment uses 160 MiB for the next runtime check. Its other
+sandbox flags stay the same.
+
+The [AMD64 wheel lock](../../reports/toolkit-v2/c13/skillsbench-react-ordinary-carrier-20261108/wheel-lock.json)
+preserves the earlier 32 dependency versions. The first wheel matched
+its hash, but literal requirement-string comparison stopped acquisition.
+The [approved continuation](../../reports/toolkit-v2/c13/skillsbench-react-ordinary-carrier-20261108/acquisition-continuation-result.json)
+verified the retained wheel and acquired the five unstarted counterparts.
+No package ran during acquisition.
+
+The [ordinary grader review](../../reports/toolkit-v2/c13/skillsbench-react-ordinary-carrier-20261108/runtime-review.json)
+passed preflight. It awaits approval and all thirteen source gates before
+the COPY-only build and four protected checks. Its image context excludes
+reference patches. The managed provider turn still needs a separate
+engineering review. C13 remains open and comparisons stay paused.
+<!-- react-nonroot-and-ordinary-carrier-20261108:end -->
+
 <!-- skillrank-native-and-react-controls-passed-20261107:start -->
 **November 7. React's two rejection controls and SkillRank's native repeat passed.**
 

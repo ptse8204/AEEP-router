@@ -3310,3 +3310,17 @@ Reuse the [verified ARM64 SkillRank binary](../../reports/toolkit-v2/c13/skillra
 for a future two-slot diagnostic. The [prepared carrier](../../reports/toolkit-v2/c13/skillrank-managed-diagnostic-20261107/carrier-preparation.json)
 binds the fresh owned workspace and 120-second certificate window.
 Keep worker review and managed dispatch authority separate.
+
+## D177. Size the protected React scratch mount from a measured run
+
+The [nonroot reference](../../reports/toolkit-v2/c13/skillsbench-react-nonroot-calibration-20261108/result.json)
+passed the same eleven assertions and used up to 111.3 MiB of scratch
+in 50 ms samples. Use 160 MiB for the next reviewed carrier check. Keep
+32 MiB for legacy environments and the existing default shared memory.
+A single observation does not establish production resource acceptance.
+
+Keep the original AMD64 image. Reuse the archived browser bytes and
+the prior Python dependency versions. The six platform wheels stay
+separate from the protected reference patches. The
+[ordinary runtime review](../../reports/toolkit-v2/c13/skillsbench-react-ordinary-carrier-20261108/runtime-review.json)
+binds one offline COPY-only build and four output cases.

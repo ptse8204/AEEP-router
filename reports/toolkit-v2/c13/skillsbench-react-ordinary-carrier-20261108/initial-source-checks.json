@@ -1,0 +1,164 @@
+{
+  "source_before": "c004ffc52a0f76ceb4039d58b0b0c9702dfd2a14ca36fa84e949cf8012563ac9",
+  "source_after": "c004ffc52a0f76ceb4039d58b0b0c9702dfd2a14ca36fa84e949cf8012563ac9",
+  "checks": [
+    {
+      "name": "compileall",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "examples",
+        "tests"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0536274170153774,
+      "monitor_stop": null
+    },
+    {
+      "name": "schemas",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.053098708973266,
+      "monitor_stop": null
+    },
+    {
+      "name": "assessment-policy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "scripts/check_assessment_policy.py"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.041439791006269,
+      "monitor_stop": null
+    },
+    {
+      "name": "ruff",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 2.0597609160176944,
+      "monitor_stop": null
+    },
+    {
+      "name": "mypy",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "mypy",
+        "src"
+      ],
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "elapsed_seconds": 4.082220083015272,
+      "monitor_stop": null
+    },
+    {
+      "name": "pytest",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+        "-m",
+        "pytest",
+        "--basetemp",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-react-ordinary-carrier-20261108/verification/pytest-tmp"
+      ],
+      "exit_code": 125,
+      "process_exit_code": 2,
+      "elapsed_seconds": 14.3062551250041,
+      "monitor_stop": ""
+    }
+  ],
+  "models": 0,
+  "comparisons": "PAUSED",
+  "real_execution_selectors_removed": [],
+  "scope": "First offline source verification of the reviewed container scratch limit. No installed release or comparative claims. Unrelated CI edits remain excluded from the feature commit.",
+  "capacity_samples": [
+    {
+      "observed_at": "2026-11-08T19:33:32.609791+00:00",
+      "free_bytes": 84929101824
+    },
+    {
+      "observed_at": "2026-11-08T19:33:34.638153+00:00",
+      "free_bytes": 84919853056
+    },
+    {
+      "observed_at": "2026-11-08T19:33:34.709253+00:00",
+      "free_bytes": 84919754752
+    },
+    {
+      "observed_at": "2026-11-08T19:33:36.738456+00:00",
+      "free_bytes": 84919689216
+    },
+    {
+      "observed_at": "2026-11-08T19:33:36.810752+00:00",
+      "free_bytes": 84919689216
+    },
+    {
+      "observed_at": "2026-11-08T19:33:38.838233+00:00",
+      "free_bytes": 84919902208
+    },
+    {
+      "observed_at": "2026-11-08T19:33:38.903709+00:00",
+      "free_bytes": 84919885824
+    },
+    {
+      "observed_at": "2026-11-08T19:33:40.935731+00:00",
+      "free_bytes": 84919791616
+    },
+    {
+      "observed_at": "2026-11-08T19:33:41.013682+00:00",
+      "free_bytes": 84919791616
+    },
+    {
+      "observed_at": "2026-11-08T19:33:43.044420+00:00",
+      "free_bytes": 84919291904
+    },
+    {
+      "observed_at": "2026-11-08T19:33:45.071828+00:00",
+      "free_bytes": 84917792768
+    },
+    {
+      "observed_at": "2026-11-08T19:33:45.145852+00:00",
+      "free_bytes": 84917792768
+    },
+    {
+      "observed_at": "2026-11-08T19:33:47.176714+00:00",
+      "free_bytes": 84917760000
+    },
+    {
+      "observed_at": "2026-11-08T19:33:49.203602+00:00",
+      "free_bytes": 84910563328
+    },
+    {
+      "observed_at": "2026-11-08T19:33:51.232406+00:00",
+      "free_bytes": 84906749952
+    },
+    {
+      "observed_at": "2026-11-08T19:33:53.263040+00:00",
+      "free_bytes": 84902723584
+    },
+    {
+      "observed_at": "2026-11-08T19:33:55.290531+00:00",
+      "free_bytes": 84902612992
+    },
+    {
+      "observed_at": "2026-11-08T19:33:57.335662+00:00",
+      "free_bytes": 84903096320
+    }
+  ]
+}

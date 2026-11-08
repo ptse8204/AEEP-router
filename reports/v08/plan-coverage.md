@@ -1,5 +1,14 @@
 # 0.8 plan coverage and remaining work
 
+<!-- react-nonroot-and-ordinary-carrier-20261108:start -->
+The [React nonroot calibration](../reports/toolkit-v2/c13/skillsbench-react-nonroot-calibration-20261108/result.json)
+passed all eleven original assertions. Its sampled scratch peak was
+111.3 MiB. The optional reviewed scratch limit preserves the existing
+32 MiB default. The [ordinary grader review](../reports/toolkit-v2/c13/skillsbench-react-ordinary-carrier-20261108/runtime-review.json)
+is staged and awaits approval and current-source checks. Comparisons
+remain paused.
+<!-- react-nonroot-and-ordinary-carrier-20261108:end -->
+
 <!-- skillrank-native-and-react-controls-passed-20261107:start -->
 The [native SkillRank check](../reports/toolkit-v2/c13/skillrank-certificate-deadline-20261107/native-check/native-check-result.json)
 passed two synthetic grades under the reviewed deadline. Both React

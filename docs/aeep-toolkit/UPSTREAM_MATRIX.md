@@ -2536,3 +2536,12 @@ The [native SkillRank check](../../reports/toolkit-v2/c13/skillrank-certificate-
 processed two synthetic grade certificates through the ordinary v9
 coordinator at the reviewed deadline. The rebuilt bridge is staged for
 a separate managed diagnostic.
+
+### November 8 React nonroot calibration
+
+The [asset-use record](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/result.json)
+is registered. The [retained reference](../../reports/toolkit-v2/c13/skillsbench-react-nonroot-calibration-20261108/result.json)
+passed under the ordinary executor's UID and GID with a read-only
+browser mount. The scratch sample informed the next carrier's reviewed
+limit. The [ordinary runtime check](../../reports/toolkit-v2/c13/skillsbench-react-ordinary-carrier-20261108/runtime-review.json)
+awaits approval and current-source verification.

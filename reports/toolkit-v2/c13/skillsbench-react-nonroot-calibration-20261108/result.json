@@ -1,0 +1,58 @@
+{
+  "passed": true,
+  "models": 0,
+  "review_sha256": "595e5236bf139b4bf1ab980464d9979c767f58af3021af065b395d20719d31e3",
+  "runtime_image_id": "sha256:6f04cf1668b8ede62e46a48f4454d69f08e17b44d40cc34f743ee63ea355801e",
+  "execution_evidence_ref": "c15ecb94ade8348eafa677554b29c395a71886e3b8497e11c1c06d5fb02cde0c",
+  "observed": {
+    "passed": true,
+    "models": 0,
+    "network": "loopback only",
+    "official_reproduction": false,
+    "uid": 65534,
+    "gid": 65534,
+    "phase": "complete",
+    "solver_replayed": false,
+    "build_exit_code": 0,
+    "verifier_exit_code": 0,
+    "required_test_statuses": {
+      "test_outputs.py::TestAPIPerformance::test_checkout_fast": "PASSED",
+      "test_outputs.py::TestAPIPerformance::test_external_api_actually_called": "PASSED",
+      "test_outputs.py::TestAPIPerformance::test_products_api_fast": "PASSED",
+      "test_outputs.py::TestBundleOptimization::test_compare_page_initial_bundle_small[chromium]": "PASSED",
+      "test_outputs.py::TestClientPerformance::test_memoization_limits_rerenders[chromium]": "PASSED",
+      "test_outputs.py::TestFunctionality::test_cart_add_item[chromium]": "PASSED",
+      "test_outputs.py::TestFunctionality::test_compare_page_works[chromium]": "PASSED",
+      "test_outputs.py::TestFunctionality::test_real_product_data_rendered[chromium]": "PASSED",
+      "test_outputs.py::TestFunctionality::test_testids_preserved[chromium]": "PASSED",
+      "test_outputs.py::TestPagePerformance::test_homepage_has_products": "PASSED",
+      "test_outputs.py::TestPagePerformance::test_homepage_loads_fast": "PASSED"
+    },
+    "missing_collected": [],
+    "unexpected_collected_count": 0,
+    "verifier_log_categories": [
+      "asyncio_plugin"
+    ],
+    "upstream_binary_reward": 1,
+    "test_statuses": {
+      "test_outputs.py::TestPagePerformance::test_homepage_loads_fast": "PASSED",
+      "test_outputs.py::TestPagePerformance::test_homepage_has_products": "PASSED",
+      "test_outputs.py::TestAPIPerformance::test_products_api_fast": "PASSED",
+      "test_outputs.py::TestAPIPerformance::test_checkout_fast": "PASSED",
+      "test_outputs.py::TestAPIPerformance::test_external_api_actually_called": "PASSED",
+      "test_outputs.py::TestClientPerformance::test_memoization_limits_rerenders[chromium]": "PASSED",
+      "test_outputs.py::TestBundleOptimization::test_compare_page_initial_bundle_small[chromium]": "PASSED",
+      "test_outputs.py::TestFunctionality::test_testids_preserved[chromium]": "PASSED",
+      "test_outputs.py::TestFunctionality::test_cart_add_item[chromium]": "PASSED",
+      "test_outputs.py::TestFunctionality::test_compare_page_works[chromium]": "PASSED",
+      "test_outputs.py::TestFunctionality::test_real_product_data_rendered[chromium]": "PASSED"
+    },
+    "sample_interval_ms": 50,
+    "peak_used_bytes_above_start": {
+      "/tmp": 116670464,
+      "/dev/shm": 0
+    },
+    "original_verifier_assertions": 11
+  },
+  "cleanup_verified": true
+}

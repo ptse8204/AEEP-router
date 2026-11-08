@@ -66,6 +66,11 @@ scheduler definition. Both windows must fit inside the finite command timeout
 with time for scheduler work. Definitions without the field keep their previous
 digest and callback deadline. Use a bridge built for the reviewed deadline.
 
+A reviewed assessment container can set an explicit scratch size from 32
+to 1,024 MiB within its memory limit. Unset environments keep the 32 MiB
+mount and their serialized digests. The scratch mount retains its noexec,
+nosuid and nodev flags. Trial inputs cannot choose the allowance.
+
 ## Verified C02 scope
 
 The inert registry rejects duplicate IDs and looks up explicit extensions.

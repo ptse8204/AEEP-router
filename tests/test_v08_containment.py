@@ -9,7 +9,7 @@ from conftest import python_spec
 
 from aeep.assessment.container_worker import run
 from aeep.assessment.containment import ContainerExecutor
-from aeep.assessment.models import AssessmentEnvironment
+from aeep.assessment.models import AssessmentEnvironment, content_digest
 from aeep.errors import ConfigurationError
 from aeep.executors.base import ExecutionContext
 from aeep.executors.command import CommandExecutor
@@ -64,6 +64,31 @@ def environment(tmp_path, runtime):
         container_socket=str(tmp_path / "docker.sock"),
         read_only_roots=[str(tmp_path)],
     )
+
+
+def test_container_scratch_changes_only_the_reviewed_mount_limit(tmp_path):
+    old = environment(tmp_path, tmp_path / "docker")
+    legacy = old.model_dump(mode="json")
+    assert "container_tmpfs_mb" not in legacy
+    assert content_digest(AssessmentEnvironment.model_validate(legacy)) == content_digest(old)
+
+    larger = AssessmentEnvironment.model_validate(legacy | {"container_tmpfs_mb": 160})
+    assert content_digest(larger) != content_digest(old)
+    argv, name = ContainerExecutor(AssessmentEnvironment.model_validate(legacy)).command(controlled_context())
+    mount = argv.index("--tmpfs") + 1
+    assert argv[mount] == "/tmp:rw,noexec,nosuid,nodev,size=32m"
+    argv[mount] = "/tmp:rw,noexec,nosuid,nodev,size=160m"
+    assert ContainerExecutor(larger).command(controlled_context()) == (argv, name)
+
+    for updates in (
+        {"container_tmpfs_mb": 31},
+        {"container_tmpfs_mb": 1025, "memory_mb": 2048},
+        {"container_tmpfs_mb": "160"},
+        {"container_tmpfs_mb": 257},
+        {"container_tmpfs_mb": 160, "kind": "trusted_local"},
+    ):
+        with pytest.raises(ValueError):
+            AssessmentEnvironment.model_validate(legacy | updates)
 
 
 @pytest.mark.skipif(sys.platform == "win32", reason="local Unix container runtime")

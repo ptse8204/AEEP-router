@@ -83,6 +83,20 @@
       "default": null,
       "title": "Container Socket"
     },
+    "container_tmpfs_mb": {
+      "anyOf": [
+        {
+          "maximum": 1024,
+          "minimum": 32,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Container Tmpfs Mb"
+    },
     "read_only_roots": {
       "items": {
         "type": "string"

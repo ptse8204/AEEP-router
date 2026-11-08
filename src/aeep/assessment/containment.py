@@ -92,7 +92,7 @@ class ContainerExecutor(BaseExecutor):
             "--network",
             "bridge" if environment.network else "none",
             "--tmpfs",
-            "/tmp:rw,noexec,nosuid,nodev,size=32m",
+            f"/tmp:rw,noexec,nosuid,nodev,size={environment.container_tmpfs_mb or 32}m",
             "--workdir",
             "/tmp",
             "-i",
