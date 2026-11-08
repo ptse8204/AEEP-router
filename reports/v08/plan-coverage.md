@@ -1,5 +1,15 @@
 # 0.8 plan coverage and remaining work
 
+<!-- react-sol-client-catalogue-block-20261108:start -->
+The [approved React Sol review](../toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-managed-result.json)
+stopped before a model turn. The pinned CLI 0.154.0 control
+[catalogue](../toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-managed-model-blocker.json)
+omitted GPT-6.1 Sol. The exact CLI 0.159.1
+[worker refresh review](../toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-client-worker-review.json)
+stages a zero-turn offline check. Account eligibility and managed
+execution remain open. Comparisons stay paused.
+<!-- react-sol-client-catalogue-block-20261108:end -->
+
 <!-- react-managed-sol-only-20261108:start -->
 The operator superseded the unstarted Astra React turn. The
 [Sol-only review](../toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-managed-review.json)

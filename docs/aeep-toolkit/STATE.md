@@ -1,5 +1,27 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- react-sol-client-catalogue-block-20261108:start -->
+**November 8. The pinned React worker did not advertise GPT-6.1 Sol.**
+
+The [approved run](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-managed-result.json) stopped before
+dispatch. The [retained catalogue observation](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-managed-model-blocker.json)
+lists GPT-6 Astra and GPT-5.6 Sol, Terra and Luna on the Codex 0.154.0
+control worker. The requested GPT-6.1 Sol identity could not be
+resolved. Treatment did not start. The control collector remained
+isolated, worker cleanup passed and the proxy returned to stopped.
+Four operations settled in 10.70 seconds with no model turns or cash
+charge. Comparisons stay paused.
+
+OpenAI's changelog identifies CLI 0.159.1 as adding GPT-6.1 Sol to its
+bundled catalogue. The [Linux ARM64 archive](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-client-acquisition-result.json)
+passed its published checksums and static inspection. The
+[exact refresh review](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-client-worker-review.json)
+stages two local worker overlays with offline, unauthenticated catalogue
+checks. A passing bundled catalogue still requires a separate
+account-backed Sol identity check before any engineering turn.
+[OpenAI changelog](https://learn.chatgpt.com/docs/changelog).
+<!-- react-sol-client-catalogue-block-20261108:end -->
+
 <!-- react-managed-sol-only-20261108:start -->
 **November 8. The React engineering turn is now pinned to GPT-6.1 Sol.**
 

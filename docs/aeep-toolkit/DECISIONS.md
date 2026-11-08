@@ -3373,3 +3373,13 @@ workers to resolve the exact model through the existing Codex
 destination before the ordinary workflow can dispatch. Keep Astra
 receipts under their original identities. No model fallback is enabled.
 [OpenAI model documentation](https://developers.openai.com/api/docs/models/gpt-6.1-sol).
+
+## D182. Check the client catalogue before Sol dispatch
+
+The [approved 0.154.0 worker check](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-managed-model-blocker.json)
+could not select GPT-6.1 Sol, so it spent no model turn. Retain both
+prior workers. The [refresh review](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-client-worker-review.json)
+uses a versioned path for the verified CLI 0.159.1 package and checks
+the bundled catalogue with an empty home and no network. Treat any
+authenticated model availability as a separate observation.
+[OpenAI changelog](https://learn.chatgpt.com/docs/changelog).

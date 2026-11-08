@@ -2582,3 +2582,12 @@ The [new review](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparat
 same public inputs and sealed grader. It awaits exact authority for
 fresh model-bound conformance and the one turn. Account availability
 is unverified. Comparisons remain paused.
+
+### November 8 Sol worker catalogue blocker
+
+The [approved run](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-managed-result.json) stopped
+before model dispatch. CLI 0.154.0 did not advertise the requested
+model. The verified 0.159.1 Linux ARM64 archive and the
+[zero-turn review](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-client-worker-review.json)
+prepare an additive worker upgrade. The old workers and grader remain
+available. Sol availability on the authenticated workers is unverified.
