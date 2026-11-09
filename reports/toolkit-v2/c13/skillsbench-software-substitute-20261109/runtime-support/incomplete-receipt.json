@@ -1,0 +1,147 @@
+{
+  "receipt_id": "rcpt_faa2f2ffba914f00b82d29ff7890e80c",
+  "decision_id": "skillsbench-prefix-cache-with-carrier-support-20261109:incomplete",
+  "action_id": "skillsbench-prefix-cache-with-carrier-support-20261109:incomplete",
+  "capability": "assessment.skillsbench.prefix-cache@1",
+  "executor_id": "skillsbench.prefix-cache.protected",
+  "executor_kind": "command",
+  "status": "success",
+  "attempt": 1,
+  "started_at": "2026-11-09T19:13:23.877854Z",
+  "ended_at": "2026-11-09T19:13:26.294601Z",
+  "estimated": {
+    "resources": {
+      "monetary_usd": 0.0,
+      "latency_ms": 0.0,
+      "cpu_ms": 0.0,
+      "memory_mb_seconds": 0.0,
+      "peak_memory_mb": 0.0,
+      "gpu_ms": 0.0,
+      "network_bytes": 0,
+      "context_tokens": 0,
+      "input_tokens": 0,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_output_tokens": 0,
+      "subscription_units": 0.0
+    },
+    "cash": {
+      "amount_usd": null,
+      "upper_bound_usd": null,
+      "evidence": {
+        "status": "unavailable",
+        "source": "unavailable",
+        "trust": "untrusted",
+        "evidence_id": null,
+        "source_reference": null,
+        "digest": null,
+        "observed_at": null
+      }
+    },
+    "subscription_usage": [],
+    "success_probability": 0.95,
+    "quality_score": 0.95,
+    "risk_score": 0.05,
+    "confidence": 0.5,
+    "source": "static",
+    "sample_size": 0,
+    "uncertainty": null
+  },
+  "executor_fingerprint": null,
+  "cohort_digest": null,
+  "action_features": null,
+  "actual_resources": {
+    "monetary_usd": 0.0,
+    "latency_ms": 2416.7397919809446,
+    "cpu_ms": 0.0,
+    "memory_mb_seconds": 0.0,
+    "peak_memory_mb": 0.0,
+    "gpu_ms": 0.0,
+    "network_bytes": 0,
+    "context_tokens": 0,
+    "input_tokens": 0,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 0,
+    "reasoning_output_tokens": 0,
+    "subscription_units": 0.0
+  },
+  "accounting": {
+    "cash": {
+      "status": "unavailable",
+      "components": []
+    },
+    "subscription_usage": [],
+    "model_usage": [],
+    "tool_footprint": null
+  },
+  "cache_affinity": null,
+  "approval_id": null,
+  "transport_success": null,
+  "execution_success": true,
+  "schema_valid": null,
+  "task_valid": null,
+  "quality_score": null,
+  "validation_results": [],
+  "output_valid": null,
+  "error_type": null,
+  "error_message": null,
+  "trace_id": null,
+  "metadata": {
+    "review_sha256": "4a026b74ccd00f1f71c635fae288099c6dd8c1480763d8fe9f8c77c300ab2ce8",
+    "observation": {
+      "case": "incomplete",
+      "pytest_exit": 1,
+      "pytest_version": "8.4.1",
+      "tests": [
+        {
+          "test_id": "test_schema_and_totals",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_total_hit_tokens",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_overall_hit_rate",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_final_cache_blocks",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_per_request_sample[133]",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_per_request_sample[601]",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_per_request_sample[968]",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_per_request_sample[1459]",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_per_request_sample[1999]",
+          "status": "failure"
+        },
+        {
+          "test_id": "test_per_request_self_consistency",
+          "status": "failure"
+        }
+      ],
+      "verified_upstream_binary_reward": 0,
+      "calibration_case_passed": true,
+      "cleanup_confirmed": true
+    },
+    "observed_resource_dimensions": [
+      "latency_ms"
+    ]
+  }
+}

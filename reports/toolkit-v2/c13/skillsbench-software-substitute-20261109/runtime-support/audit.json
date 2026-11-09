@@ -1,0 +1,60 @@
+{
+  "review_sha256": "4a026b74ccd00f1f71c635fae288099c6dd8c1480763d8fe9f8c77c300ab2ce8",
+  "result_sha256": "07ef65393fe02d3a851ba2d29b7e434a93ac7f276e8822aecdabe441076c0768",
+  "ledger_sha256": "e486cf56266a491626a16e4220b8aef893139c73cdc029aa96e7827502890229",
+  "cases": {
+    "reference": {
+      "receipt_sha256": "a6ae6728dbc95b9b6c0503e25c6d8d8dac4e84b7529be5aa4fff2becd27d432d",
+      "test_counts": {
+        "passed": 10
+      },
+      "pytest_exit": 0,
+      "upstream_binary_reward": 1
+    },
+    "incomplete": {
+      "receipt_sha256": "6dbc401491bb6bb9033d247ef6fc4ad4181f599d9913b6e98d7ea781a7bf6106",
+      "test_counts": {
+        "passed": 8,
+        "failure": 2
+      },
+      "pytest_exit": 1,
+      "upstream_binary_reward": 0
+    },
+    "destructive": {
+      "receipt_sha256": "69b0be9b90f74d3129467c705263ab8276079fc898a017b9143af584de0cd11a",
+      "test_counts": {
+        "passed": 2,
+        "failure": 8
+      },
+      "pytest_exit": 1,
+      "upstream_binary_reward": 0
+    },
+    "intentional_skip": {
+      "receipt_sha256": "a62ee32666752d5335fe95390aac0a53ff455f2bf09a5d4a7ee9a1bcfc94ecdf",
+      "test_counts": {
+        "passed": 9,
+        "skipped": 1
+      },
+      "pytest_exit": 0,
+      "upstream_binary_reward": null
+    },
+    "infrastructure": {
+      "receipt_sha256": "ee2b720d049a22a76c706aab2691ac28c4d275ef85b6a97441e604f11d700db3",
+      "test_counts": {
+        "error": 9,
+        "passed": 1
+      },
+      "pytest_exit": 1,
+      "upstream_binary_reward": null
+    }
+  },
+  "original_driver_passed": false,
+  "infrastructure_blocked_grading": true,
+  "original_driver_error": "Expected all tests to error, including the trace-independent check.",
+  "operations": 5,
+  "elapsed_seconds": 12.598995042964816,
+  "model_turns": 0,
+  "cash_usd": "0",
+  "replayed": false,
+  "comparisons": "PAUSED"
+}

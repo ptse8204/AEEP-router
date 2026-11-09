@@ -1,5 +1,15 @@
 # 0.8 plan coverage and remaining work
 
+<!-- prefix-cache-runtime-calibration-20261109:start -->
+[Prefix Cache Replay](../toolkit-v2/c13/skillsbench-software-substitute-20261109/runtime-support/audit.json)
+scored 1/1 through the protected offline reference. The incomplete and
+destructive controls scored 0/1, and skip and infrastructure controls earned
+no grade. The original driver expected every infrastructure test to error.
+The read-only audit traced the one passing check to an independent fixture.
+Five operations settled in 12.60 seconds with zero model turns and $0 cash.
+Managed Prefix Cache execution and the wider C13 gates remain open.
+<!-- prefix-cache-runtime-calibration-20261109:end -->
+
 <!-- react-sol-complete-20261109:start -->
 [React passed](../toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-permitted-path-live-20261109/completed-run-audit.json)
 protected grading at 1/1 in the ordinary CLI using GPT-6.1 Sol.

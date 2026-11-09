@@ -3440,3 +3440,13 @@ the missing Pydantic import before any task code ran. The
 [correction](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/runtime-support/operation-review.json) binds
 the exact support tree already used with the same grader image.
 It keeps the original solver, assertions, input bytes and sandbox.
+
+## D189. Preserve the Prefix Cache infrastructure observation
+
+The approved [runtime correction](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/runtime-support/operation-review.json)
+needed a [coordinator binding fix](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/runtime-support/dispatch-binding.json)
+before its first reservation. Keep the original approved workload and
+receipts. The [read-only audit](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/runtime-support/audit.json) verifies
+that omitting the trace errored all nine dependent checks and left the
+independent consistency check passing. No grade was issued. Keep the
+failed driver result and use the retained evidence without replay.

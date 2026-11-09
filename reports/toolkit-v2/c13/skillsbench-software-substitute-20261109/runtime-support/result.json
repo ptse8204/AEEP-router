@@ -1,0 +1,257 @@
+{
+  "review_sha256": "4a026b74ccd00f1f71c635fae288099c6dd8c1480763d8fe9f8c77c300ab2ce8",
+  "passed": false,
+  "models": 0,
+  "cases": {
+    "reference": {
+      "case": "reference",
+      "pytest_exit": 0,
+      "pytest_version": "8.4.1",
+      "tests": [
+        {
+          "test_id": "test_schema_and_totals",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_total_hit_tokens",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_overall_hit_rate",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_final_cache_blocks",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_per_request_sample[133]",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_per_request_sample[601]",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_per_request_sample[968]",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_per_request_sample[1459]",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_per_request_sample[1999]",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_per_request_self_consistency",
+          "status": "passed"
+        }
+      ],
+      "verified_upstream_binary_reward": 1,
+      "calibration_case_passed": true,
+      "cleanup_confirmed": true
+    },
+    "incomplete": {
+      "case": "incomplete",
+      "pytest_exit": 1,
+      "pytest_version": "8.4.1",
+      "tests": [
+        {
+          "test_id": "test_schema_and_totals",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_total_hit_tokens",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_overall_hit_rate",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_final_cache_blocks",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_per_request_sample[133]",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_per_request_sample[601]",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_per_request_sample[968]",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_per_request_sample[1459]",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_per_request_sample[1999]",
+          "status": "failure"
+        },
+        {
+          "test_id": "test_per_request_self_consistency",
+          "status": "failure"
+        }
+      ],
+      "verified_upstream_binary_reward": 0,
+      "calibration_case_passed": true,
+      "cleanup_confirmed": true
+    },
+    "destructive": {
+      "case": "destructive",
+      "pytest_exit": 1,
+      "pytest_version": "8.4.1",
+      "tests": [
+        {
+          "test_id": "test_schema_and_totals",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_total_hit_tokens",
+          "status": "failure"
+        },
+        {
+          "test_id": "test_overall_hit_rate",
+          "status": "failure"
+        },
+        {
+          "test_id": "test_final_cache_blocks",
+          "status": "failure"
+        },
+        {
+          "test_id": "test_per_request_sample[133]",
+          "status": "failure"
+        },
+        {
+          "test_id": "test_per_request_sample[601]",
+          "status": "failure"
+        },
+        {
+          "test_id": "test_per_request_sample[968]",
+          "status": "failure"
+        },
+        {
+          "test_id": "test_per_request_sample[1459]",
+          "status": "failure"
+        },
+        {
+          "test_id": "test_per_request_sample[1999]",
+          "status": "failure"
+        },
+        {
+          "test_id": "test_per_request_self_consistency",
+          "status": "passed"
+        }
+      ],
+      "verified_upstream_binary_reward": 0,
+      "calibration_case_passed": true,
+      "cleanup_confirmed": true
+    },
+    "intentional_skip": {
+      "case": "intentional_skip",
+      "pytest_exit": 0,
+      "pytest_version": "8.4.1",
+      "tests": [
+        {
+          "test_id": "test_schema_and_totals",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_total_hit_tokens",
+          "status": "skipped"
+        },
+        {
+          "test_id": "test_overall_hit_rate",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_final_cache_blocks",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_per_request_sample[133]",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_per_request_sample[601]",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_per_request_sample[968]",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_per_request_sample[1459]",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_per_request_sample[1999]",
+          "status": "passed"
+        },
+        {
+          "test_id": "test_per_request_self_consistency",
+          "status": "passed"
+        }
+      ],
+      "verified_upstream_binary_reward": null,
+      "calibration_case_passed": true,
+      "cleanup_confirmed": true
+    }
+  },
+  "unexpected_observation": {
+    "case": "infrastructure",
+    "pytest_exit": 1,
+    "pytest_version": "8.4.1",
+    "tests": [
+      {
+        "test_id": "test_schema_and_totals",
+        "status": "error"
+      },
+      {
+        "test_id": "test_total_hit_tokens",
+        "status": "error"
+      },
+      {
+        "test_id": "test_overall_hit_rate",
+        "status": "error"
+      },
+      {
+        "test_id": "test_final_cache_blocks",
+        "status": "error"
+      },
+      {
+        "test_id": "test_per_request_sample[133]",
+        "status": "error"
+      },
+      {
+        "test_id": "test_per_request_sample[601]",
+        "status": "error"
+      },
+      {
+        "test_id": "test_per_request_sample[968]",
+        "status": "error"
+      },
+      {
+        "test_id": "test_per_request_sample[1459]",
+        "status": "error"
+      },
+      {
+        "test_id": "test_per_request_sample[1999]",
+        "status": "error"
+      },
+      {
+        "test_id": "test_per_request_self_consistency",
+        "status": "passed"
+      }
+    ]
+  },
+  "error_type": "AssertionError",
+  "operations": 5,
+  "accounting_settled": true
+}

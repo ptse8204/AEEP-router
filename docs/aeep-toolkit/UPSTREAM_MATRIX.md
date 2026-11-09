@@ -2637,3 +2637,10 @@ a verified 1/1 React score on GPT-6.1 Sol, with receipt-bound usage.
 The required-use engineering run supports the software workflow
 gate. Prefix Cache calibration, SkillRank bounded evaluation and Waza
 backend access remain open. Comparisons stay paused.
+
+### November 9 protected Prefix Cache reference and controls
+
+The [runtime audit](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/runtime-support/audit.json) confirms a 1/1 reference
+grade with the pinned SkillsBench verifier and Pytest 8.4.1. Faulty outputs
+scored 0/1. The skipped test and missing trace withheld grades.
+The separate managed workflow remains open. Comparisons stay paused.

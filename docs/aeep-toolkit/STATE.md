@@ -1,5 +1,36 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- prefix-cache-runtime-calibration-20261109:start -->
+**November 9. Prefix Cache Replay passed protected reference grading.**
+
+The approved [offline review](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/runtime-support/operation-review.json)
+reused the React grader image and the pinned Python support tree read-only.
+The initial coordinator stopped before reservation. It replaced the grant
+identifier read by the earlier preflight. The
+[dispatch binding](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/runtime-support/dispatch-binding.json) isolates those
+namespaces. The approved environment, executors, workload and budget are
+unchanged. Its [preflight](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/runtime-support/dispatch-preflight.json)
+reached the start-record boundary without executing a case.
+
+The [retained audit](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/runtime-support/audit.json) binds the terminal
+result, all five receipts, the canonical ledger and the protected verifier.
+The reference passed all ten tests and scored 1/1. Incomplete and destructive
+outputs scored 0/1. The skipped test withheld a grade even with exit 0.
+The missing trace produced nine errors and one passing trace-independent
+check. The original driver expected ten errors and recorded an assertion
+failure. The control earned no grade. The audit confirms the expected
+fail-closed behavior without replaying any case.
+
+Run command: `PYTHONPATH=src python3 -B <runtime-support>/dispatch.py
+--execute-approved 4a026b74ccd00f1f71c635fae288099c6dd8c1480763d8fe9f8c77c300ab2ce8`.
+Five operations settled in 12.60 seconds, with zero model turns and $0 cash.
+The prior failed receipts and charges remain. Comparisons stay paused.
+
+C13 remains open for the managed Prefix Cache artifact and grader binding,
+SkillRank's bounded managed diagnostic and Waza's supported backend.
+No provider disclosure for the Prefix Cache task has been approved.
+<!-- prefix-cache-runtime-calibration-20261109:end -->
+
 <!-- react-sol-complete-20261109:start -->
 **November 9. React scored 1/1 through the ordinary CLI on GPT-6.1 Sol.**
 
