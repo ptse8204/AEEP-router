@@ -3383,3 +3383,14 @@ uses a versioned path for the verified CLI 0.159.1 package and checks
 the bundled catalogue with an empty home and no network. Treat any
 authenticated model availability as a separate observation.
 [OpenAI changelog](https://learn.chatgpt.com/docs/changelog).
+
+## D183. Bind the verified Sol client for managed React checks
+
+The [offline worker refresh](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-client-worker-result.json)
+verified the bundled Sol catalogue on both new image digests.
+Retain the prior workers. The [managed review](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-01591-live-20261109/operation-review.json)
+pins the new client path, binary hash and App Server version. It uses
+the existing proxy, isolated workers, public inputs and verified
+grader. The grant amendment changes expiry only. Require a fresh
+account-backed model identity and both boundary checks before
+dispatch.

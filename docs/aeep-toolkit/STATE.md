@@ -1,5 +1,26 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- react-sol-client-offline-pass-20261109:start -->
+**November 9. Both refreshed React workers list GPT-6.1 Sol offline.**
+
+The operator approved the [original review](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-client-worker-review.json)
+after its window expired. The [expiry-only renewal](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-client-worker-renewal-authority.json)
+used the standing first-attempt delegation. The context, scope and
+limits were unchanged. Both additive ARM64 builds and
+[bundled catalogue checks](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-client-worker-result.json)
+passed on Codex CLI 0.159.1. Both workers listed GPT-6.1 Sol at medium
+reasoning with networking denied and an empty home. Four operations
+settled in 21.41 seconds and no model turns ran. The prior worker
+images and self-contained grader remain available.
+
+The [managed review](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-01591-live-20261109/operation-review.json)
+binds the refreshed images and requests fresh account and boundary
+checks before the one unstarted React engineering turn. The current
+grant has expired. The proposed amendment renews its expiry while
+preserving all counters and limits. Exact managed approval is
+pending. Comparisons stay paused.
+<!-- react-sol-client-offline-pass-20261109:end -->
+
 <!-- react-sol-client-catalogue-block-20261108:start -->
 **November 8. The pinned React worker did not advertise GPT-6.1 Sol.**
 

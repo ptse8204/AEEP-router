@@ -2591,3 +2591,12 @@ model. The verified 0.159.1 Linux ARM64 archive and the
 [zero-turn review](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-client-worker-review.json)
 prepare an additive worker upgrade. The old workers and grader remain
 available. Sol availability on the authenticated workers is unverified.
+
+### November 9 Sol worker catalogue passes
+
+Both [refreshed workers](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-client-worker-result.json)
+listed GPT-6.1 Sol at medium reasoning in the 0.159.1 bundled
+catalogue. This is an offline runtime check. The
+[managed review](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-01591-live-20261109/operation-review.json)
+requests a separate account and boundary observation before the
+engineering turn. Comparisons remain paused.

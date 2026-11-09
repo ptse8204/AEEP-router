@@ -1,5 +1,14 @@
 # 0.8 plan coverage and remaining work
 
+<!-- react-sol-client-offline-pass-20261109:start -->
+Both refreshed React workers
+[advertised GPT-6.1 Sol offline](../toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-client-worker-result.json)
+using CLI 0.159.1. Both builds and both catalogue checks passed with
+zero model turns. The [managed review](../toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-01591-live-20261109/operation-review.json)
+awaits approval for fresh account and boundary checks and one
+engineering turn. Comparisons stay paused.
+<!-- react-sol-client-offline-pass-20261109:end -->
+
 <!-- react-sol-client-catalogue-block-20261108:start -->
 The [approved React Sol review](../toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-managed-result.json)
 stopped before a model turn. The pinned CLI 0.154.0 control
