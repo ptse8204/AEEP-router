@@ -1,5 +1,31 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- react-sol-managed-sandbox-block-20261109:start -->
+**November 9. The managed control resolved GPT-6.1 Sol. Sandbox verification stopped before React dispatch.**
+
+The [approved attempt](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-01591-live-20261109/sol-managed-result.json) used the pinned
+Codex 0.159.1 control worker and resolved GPT-6.1 Sol at medium reasoning
+on the managed account. The [inspection record](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-01591-live-20261109/sol-managed-sandbox-blocker.json)
+stopped at the fixed App Server sandbox command. The result lacked a
+bounded observation and retained neither the command exit code nor the
+error category. Two default settings were absent from `config/read`;
+`configRequirements/read` still matched the managed profile, approval
+and web-search limits. The treatment worker did not start.
+
+The control cleaned up and the proxy returned to stopped. Four
+operations settled in 12.96 seconds with zero model turns and $0 cash.
+The [expiry amendment](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-01591-live-20261109/expiry-amendment-result.json) preserved the grant
+limits and counters and extends expiry to November 11 at 11:30 a.m.
+Vancouver time. Keep all prior charges and receipts.
+
+C13 remains open. The [exact offline diagnostic](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-sandbox-offline-20261109/operation-review.json)
+passed static and synthetic preflight. It requires approval because it
+repeats the sandbox command. It uses one retained worker without the
+proxy, network or credential mount. It keeps the managed profile and
+seccomp policy. Resume from the diagnostic receipt before preparing a
+new model review. Comparisons stay paused.
+<!-- react-sol-managed-sandbox-block-20261109:end -->
+
 <!-- react-sol-client-offline-pass-20261109:start -->
 **November 9. Both refreshed React workers list GPT-6.1 Sol offline.**
 

@@ -2600,3 +2600,12 @@ catalogue. This is an offline runtime check. The
 [managed review](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-01591-live-20261109/operation-review.json)
 requests a separate account and boundary observation before the
 engineering turn. Comparisons remain paused.
+
+### November 9 managed Sol and sandbox observations
+
+The [managed control](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-01591-live-20261109/sol-managed-sandbox-blocker.json) resolved
+GPT-6.1 Sol at medium reasoning on CLI 0.159.1. The fixed sandbox
+command did not yield a valid observation. The paired boundary check
+and React dispatch remain open. The [proposed offline diagnostic](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-sandbox-offline-20261109/operation-review.json)
+keeps the same sandbox and can distinguish an RPC rejection, command
+exit, or invalid reply without a provider session. Comparisons stay paused.

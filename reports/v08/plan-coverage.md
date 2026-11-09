@@ -1,5 +1,16 @@
 # 0.8 plan coverage and remaining work
 
+<!-- react-sol-managed-sandbox-block-20261109:start -->
+The [November 9 managed inspection](../toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-01591-live-20261109/sol-managed-sandbox-blocker.json)
+resolved GPT-6.1 Sol on the control account at medium reasoning.
+The App Server sandbox command failed before paired conformance.
+No model turn was reserved. Four operations settled in 12.96 seconds
+and the proxy returned to stopped. The
+[offline diagnostic](../toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-sandbox-offline-20261109/operation-review.json)
+awaits repeat approval. It preserves the sandbox and disables networking
+and the credential mount.
+<!-- react-sol-managed-sandbox-block-20261109:end -->
+
 <!-- react-sol-client-offline-pass-20261109:start -->
 Both refreshed React workers
 [advertised GPT-6.1 Sol offline](../toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-client-worker-result.json)

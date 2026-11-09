@@ -3394,3 +3394,13 @@ the existing proxy, isolated workers, public inputs and verified
 grader. The grant amendment changes expiry only. Require a fresh
 account-backed model identity and both boundary checks before
 dispatch.
+
+## D184. Diagnose the refreshed worker without a provider session
+
+The [managed inspection](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-01591-live-20261109/sol-managed-sandbox-blocker.json)
+resolved the requested model and stopped at the sandbox command.
+Keep the control and treatment bindings, and preserve the strict
+readiness gate. Use the [offline diagnostic](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-sandbox-offline-20261109/operation-review.json)
+to capture a bounded exit code and fixed error categories from the
+same command. An offline result cannot attest to account-backed worker
+conformance. Approval is required for the repeat.
