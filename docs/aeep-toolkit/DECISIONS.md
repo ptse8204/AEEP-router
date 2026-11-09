@@ -3423,3 +3423,20 @@ SkillsBench revision. Its committed trace matches the published Mooncake
 prefix byte for byte. Keep the upstream grading semantics and both
 license notices. Preserve the Dependency Audit history. Provider
 disclosure requires separate authority.
+
+## D187. Recover the completed React observation without a replay
+
+The [canonical report](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-permitted-path-live-20261109/report.html) was written during the
+ordinary CLI run. The follow-on wrapper attempted to read obsolete
+normalized fields. Keep that terminal result and its charges. The
+[read-only audit](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-permitted-path-live-20261109/completed-run-audit.json) verifies the
+settled task, receipt and usage without invoking a worker. Its scope
+is the required-use engineering journey.
+
+## D188. Reuse the known Python support for Prefix Cache Replay
+
+The [first-party canary](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/bootstrap/result.json) identified
+the missing Pydantic import before any task code ran. The
+[correction](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/runtime-support/operation-review.json) binds
+the exact support tree already used with the same grader image.
+It keeps the original solver, assertions, input bytes and sandbox.

@@ -1,5 +1,35 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- react-sol-complete-20261109:start -->
+**November 9. React scored 1/1 through the ordinary CLI on GPT-6.1 Sol.**
+
+The [canonical report](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-permitted-path-live-20261109/report.html) records one required-use
+engineering trial with protected grading. The [read-only audit](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-permitted-path-live-20261109/completed-run-audit.json)
+binds the plan, completed job, trial, verified score and receipt.
+The CLI exited 0. My post-run driver used old normalized field names
+and recorded an AttributeError after the run completed. The audit
+recovered the actual evidence without replaying the turn.
+
+Agent time was 122.87 seconds and grading took 36.72 seconds. The provider
+reported 188,327 input tokens, including 146,560 cached, and 4,721
+output tokens, including 508 reasoning. Receipt and journal capture
+agree. This single trial supplies no matched token difference. The
+worker and proxy cleaned up. Twenty operations settled with one model
+turn, zero retries, no unresolved new reservations and $0 cash.
+
+The [Prefix Cache bootstrap canary](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/bootstrap/result.json)
+found that the carrier was missing its existing Pydantic support.
+Both previous reference attempts exited before grading. The
+[exact runtime correction](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/runtime-support/operation-review.json)
+reuses the already-reviewed Python support tree read-only. It awaits
+approval for one reference retry and four unstarted controls, gated on
+the reference. The earlier charges remain.
+
+C13 is open. The selected Prefix Cache protected and managed checks,
+SkillRank's bounded managed diagnostic and Waza's supported backend
+remain open. Comparisons stay paused.
+<!-- react-sol-complete-20261109:end -->
+
 <!-- react-sol-both-sandboxes-20261109:start -->
 **November 9. Both corrected Sol workers pass offline. The ordinary React CLI started.**
 

@@ -2628,3 +2628,12 @@ passed. Terminal React evidence is separate.
 The [first Prefix Cache reference](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/calibration-result.json)
 exited before grading. Its four controls are unstarted. Comparisons
 remain paused.
+
+### November 9 completed Sol React engineering journey
+
+The [ordinary CLI report](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-permitted-path-live-20261109/report.html) and
+[canonical evidence audit](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-permitted-path-live-20261109/completed-run-audit.json) show
+a verified 1/1 React score on GPT-6.1 Sol, with receipt-bound usage.
+The required-use engineering run supports the software workflow
+gate. Prefix Cache calibration, SkillRank bounded evaluation and Waza
+backend access remain open. Comparisons stay paused.

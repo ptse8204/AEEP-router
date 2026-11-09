@@ -1,0 +1,111 @@
+{
+  "receipt_id": "rcpt_19623f414b034e4297587d1c2ef232b0",
+  "decision_id": "skillsbench-prefix-cache-bootstrap-canary-20261109",
+  "action_id": "skillsbench-prefix-cache-bootstrap-canary-20261109",
+  "capability": "assessment.skillsbench.prefix-cache@1",
+  "executor_id": "skillsbench.prefix-cache.bootstrap",
+  "executor_kind": "command",
+  "status": "failed",
+  "attempt": 1,
+  "started_at": "2026-11-09T19:04:37.773114Z",
+  "ended_at": "2026-11-09T19:04:38.319229Z",
+  "estimated": {
+    "resources": {
+      "monetary_usd": 0.0,
+      "latency_ms": 0.0,
+      "cpu_ms": 0.0,
+      "memory_mb_seconds": 0.0,
+      "peak_memory_mb": 0.0,
+      "gpu_ms": 0.0,
+      "network_bytes": 0,
+      "context_tokens": 0,
+      "input_tokens": 0,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_output_tokens": 0,
+      "subscription_units": 0.0
+    },
+    "cash": {
+      "amount_usd": null,
+      "upper_bound_usd": null,
+      "evidence": {
+        "status": "unavailable",
+        "source": "unavailable",
+        "trust": "untrusted",
+        "evidence_id": null,
+        "source_reference": null,
+        "digest": null,
+        "observed_at": null
+      }
+    },
+    "subscription_usage": [],
+    "success_probability": 0.95,
+    "quality_score": 0.95,
+    "risk_score": 0.05,
+    "confidence": 0.5,
+    "source": "static",
+    "sample_size": 0,
+    "uncertainty": null
+  },
+  "executor_fingerprint": null,
+  "cohort_digest": null,
+  "action_features": null,
+  "actual_resources": {
+    "monetary_usd": 0.0,
+    "latency_ms": 546.0882079787552,
+    "cpu_ms": 0.0,
+    "memory_mb_seconds": 0.0,
+    "peak_memory_mb": 0.0,
+    "gpu_ms": 0.0,
+    "network_bytes": 0,
+    "context_tokens": 0,
+    "input_tokens": 0,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 0,
+    "reasoning_output_tokens": 0,
+    "subscription_units": 0.0
+  },
+  "accounting": {
+    "cash": {
+      "status": "unavailable",
+      "components": []
+    },
+    "subscription_usage": [],
+    "model_usage": [],
+    "tool_footprint": null
+  },
+  "cache_affinity": null,
+  "approval_id": null,
+  "transport_success": null,
+  "execution_success": false,
+  "schema_valid": null,
+  "task_valid": null,
+  "quality_score": null,
+  "validation_results": [],
+  "output_valid": null,
+  "error_type": "CommandExitError",
+  "error_message": null,
+  "trace_id": null,
+  "metadata": {
+    "observation": {
+      "review_sha256": "af007bb24c61a7ec2455b7f47756e2863c2a31110e47b6cc4e3c388a32fbf0d7",
+      "models": 0,
+      "upstream_task_executed": false,
+      "exit_code": 1,
+      "error_type": "CommandExitError",
+      "stderr_categories": [
+        "pydantic_import",
+        "python_import"
+      ],
+      "canary_passed": false,
+      "cleanup_confirmed": true,
+      "elapsed_seconds": 0.5460882079787552
+    },
+    "review_sha256": "af007bb24c61a7ec2455b7f47756e2863c2a31110e47b6cc4e3c388a32fbf0d7",
+    "observed_resource_dimensions": [
+      "latency_ms"
+    ]
+  }
+}

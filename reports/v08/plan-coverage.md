@@ -1,5 +1,15 @@
 # 0.8 plan coverage and remaining work
 
+<!-- react-sol-complete-20261109:start -->
+[React passed](../toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-permitted-path-live-20261109/completed-run-audit.json)
+protected grading at 1/1 in the ordinary CLI using GPT-6.1 Sol.
+The CLI completed; the outer report wrapper used obsolete normalized
+field names. A read-only audit recovered score, timing, token and
+cleanup evidence without a replay. The
+[Prefix Cache carrier correction](../toolkit-v2/c13/skillsbench-software-substitute-20261109/runtime-support/operation-review.json)
+awaits approval. C13 and the separate comparison gates remain open.
+<!-- react-sol-complete-20261109:end -->
+
 <!-- react-sol-both-sandboxes-20261109:start -->
 [Both Sol workers](../toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-sandbox-candidate-20261109/result.json)
 now pass offline sandbox startup. The [React ordinary CLI](../toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-permitted-path-live-20261109/sol-managed-dispatch-ready.json)
