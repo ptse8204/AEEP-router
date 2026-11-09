@@ -1,0 +1,102 @@
+{
+  "candidate": "llm-prefix-cache-replay",
+  "replaces_if_selected": "software-dependency-audit",
+  "revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+  "decision": "PENDING_OPERATOR_SUBSTITUTION",
+  "difficulty": "medium",
+  "original_blocker": "The exact Trivy database archive lacks an applicable rights record.",
+  "task_type": "Implement an S3FIFO block-level prefix cache simulator and emit aggregate and per-request results.",
+  "scope": "Static review only. Public source files and bounded published trace prefix read in memory. No upstream program executed.",
+  "task_source": "https://github.com/benchflow-ai/skillsbench/tree/9a1f4dd5f7659f75707435da3ce854b6e48321d1/tasks/llm-prefix-cache-replay/",
+  "assets": {
+    "LICENSE": {
+      "git_blob": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    "tasks/llm-prefix-cache-replay/task.md": {
+      "git_blob": "458da6fcb784b261b07eb5eef15bea967d8a0936",
+      "bytes": 2428,
+      "sha256": "58ccdd143fa2f59440c9d37ad171b44df61adf9541434e8b48255a998acdcfe8"
+    },
+    "tasks/llm-prefix-cache-replay/environment/Dockerfile": {
+      "git_blob": "e0a1a68af30f44586b2fca17335d9b3193341b18",
+      "bytes": 581,
+      "sha256": "6f4f9f5e86b539a50c7cad44cb7eb948c2c50dbcf5d308c4b9bb34f6ae997d0a"
+    },
+    "tasks/llm-prefix-cache-replay/environment/trace.jsonl": {
+      "git_blob": "05ff4e82d9ca9ba6038f8f6b89a6844666e0d639",
+      "bytes": 514852,
+      "sha256": "9e81b386f0d8cea16d376b041d7a7e8fed5ba65b53e989444c76cef408442c2a"
+    },
+    "tasks/llm-prefix-cache-replay/environment/config.json": {
+      "git_blob": "e43911ef76c11667c59b859ded4d2f82b7bafd6c",
+      "bytes": 140,
+      "sha256": "bf4f44ffb65803b2e0ffe998c144abc6b67418dc7cf1fdcefddd17a3056402b3"
+    },
+    "tasks/llm-prefix-cache-replay/verifier/test_outputs.py": {
+      "git_blob": "064fea061e41628ae0a4307c41fc17ff1f48f7b0",
+      "bytes": 2673,
+      "sha256": "b8442216fbc86ffbd4b75e96c1b9885e3e57d87ec2664b3636c29c343bef53a7"
+    },
+    "tasks/llm-prefix-cache-replay/verifier/oracle_helpers.py": {
+      "git_blob": "8f9a64575a3d346c3b1938ff48335dd68ab9ef77",
+      "bytes": 3636,
+      "sha256": "bc3579ef49fed337c6f707532f3572cb9dd5a82e42dea8184d2e2c278b6b896c"
+    },
+    "tasks/llm-prefix-cache-replay/verifier/test.sh": {
+      "git_blob": "a22cdb4da8f617fcf0f5f63d30542ef9178eda82",
+      "bytes": 295,
+      "sha256": "d0315e6d8e06686f40db287f9cc84b93de2ee9b1866a8349cb18bab73b7715d9"
+    },
+    "tasks/llm-prefix-cache-replay/oracle/solve.sh": {
+      "git_blob": "e0d16c469aad0a02a232e720aff3d97af75e9336",
+      "bytes": 2441,
+      "sha256": "1d12de1082c373c9654f0f2195613bcf442c2fe3724cf2a19a95c244fc0e4e63"
+    }
+  },
+  "input_origin": {
+    "revision": "3cca71daccf2a7afb8fe3f0295358f70e3a69fdb",
+    "release_readme": "https://github.com/kvcache-ai/Mooncake/blob/3cca71daccf2a7afb8fe3f0295358f70e3a69fdb/README.md",
+    "trace": "https://github.com/kvcache-ai/Mooncake/blob/3cca71daccf2a7afb8fe3f0295358f70e3a69fdb/FAST25-release/traces/conversation_trace.jsonl",
+    "license": "https://github.com/kvcache-ai/Mooncake/blob/3cca71daccf2a7afb8fe3f0295358f70e3a69fdb/LICENSE-APACHE",
+    "license_notice": {
+      "bytes": 11357,
+      "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd"
+    },
+    "identical_upstream_prefix": true,
+    "records": 2000,
+    "fields": [
+      "hash_ids",
+      "input_length",
+      "output_length",
+      "timestamp"
+    ],
+    "retain_notices_and_credit": true
+  },
+  "protected_verifier": {
+    "test_functions": [
+      "test_schema_and_totals",
+      "test_total_hit_tokens",
+      "test_overall_hit_rate",
+      "test_final_cache_blocks",
+      "test_per_request_sample",
+      "test_per_request_self_consistency"
+    ],
+    "parametrized_indices": [
+      133,
+      601,
+      968,
+      1459,
+      1999
+    ],
+    "expected_test_instances": 10,
+    "grading": "Retain binary reward, all original assertions and sample identities. Reject partial or malformed reports and infra errors."
+  },
+  "runtime_remaining": "Pin Python and pytest; bind nonroot path adaptations, isolate oracle/helper and run protected reference and controls.",
+  "bundled_skills_in_scope": false,
+  "provider_disclosure_authorized": false,
+  "runtime_authorized": false,
+  "model_turns": 0,
+  "comparisons": "PAUSED"
+}

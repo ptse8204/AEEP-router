@@ -1,0 +1,94 @@
+{
+  "review_sha256": "b674b3ba64fa1660df58badf4747e7ae8b8924de9caac6a037441c563a691b91",
+  "passed": false,
+  "models": 0,
+  "roles": {
+    "control": {
+      "build": {
+        "id": "sha256:3afb108f52517f0c2e786eb94185c15a813e7bfa488a225ec8d1e60fd884ddac",
+        "platform": "linux/arm64",
+        "layers": [
+          "sha256:8227a1264c7ff2f8bd125b585e62c1cec77dd2099c985c33e08d34292d06144f",
+          "sha256:8a6da6eb1b282a3bab8da6e094b7259bf3f21335dd8e803b4dcede1afecc1716",
+          "sha256:d81ccc5a95666f072f57d6526d725c3e6c25eda2ee84b88e43fb8f7db5f47411",
+          "sha256:8fd7bcc5bf0ec20486b3ee0761eef560a3298d92e46ce7aed301a38b532ce945",
+          "sha256:fa5a247b7024c0801f14446852d80c1089e9d872844c36337e897424846a3d32",
+          "sha256:db4ff0c592121aa8e830ce6e718ba352df1a2acf74038ebaa7a682d33f6d1aac",
+          "sha256:2cb6c938671218bf49046ec842a43fd2f4ca01edf186cd638a3b836bf3a44b67",
+          "sha256:52f8d8d7491cf31ce9d75f6063d5ab1b4e32c46e801cc4c02d55925d478c8d3b",
+          "sha256:bf3a192179608084bad34fa785728aa2b40dff894b35cbdf8ed14ada234d2908",
+          "sha256:c6846ecc36ff3c5a0b7adb495e943e1e98d2fe0afd689985bcc205b3ac157eb9",
+          "sha256:4324374c55c7670ea3e591b55bcfa46fbedf93c2e6d5427fc1ac91b00e59159f",
+          "sha256:e36e6aa3e12330a682e193503a7f886aa67c586e8d7e2a64ee5fa27ded5cbd18",
+          "sha256:ca47a6e4819a14aab5dfa6739f8b067996fbb8e0a80bdc60c7a4fc57549518b5",
+          "sha256:1b327e027667bdb8059a519accd0a35583faf99fff4178ebbdb985960b9f3e4e",
+          "sha256:20cd11f4b0ca832db0db8c25b5cb5026e0d02941fceb3bffef3d1f415df260c7",
+          "sha256:ac74b55b387cca330be73f33133e9c7b3128c4448eb8d951ab6899bd419ca71a",
+          "sha256:58f2b876095799436b2409f605af6cec00f81060a58950f37e1cfe53f3c570b8",
+          "sha256:93b7533d71ca26440d9f069318cbfee6e97bad69f06a3946b4e77b4da968f140",
+          "sha256:1d0b0d4174658c3cd8a63b24a323bb6e3ff1eccb1890422f3eb648762fc871a0",
+          "sha256:0940dafe4565d75a55a3cc74985b99ae5c9cd1801dbdebb7bca61c98bfeacaac",
+          "sha256:cddd7bfdf22a43386e632dee5548f5ea41d72f73c38d522fe07e3539b08f7898",
+          "sha256:84d27fc3b03f522c72d4febb8c6c1c8acf9980f91a0fc8cb3d2a858e9119f797",
+          "sha256:bccab603486585a293aea227e3804b2f5493a6632b8cb6c899687d6ff91ba0b0"
+        ],
+        "user": "65534:65534",
+        "volumes": null
+      },
+      "sandbox": {
+        "container_name": "aeep-c84535f29de59fb4f810f9e427f32128",
+        "protocol": "aeep-agent-router/0.159.1 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+        "config/read": {
+          "config/default_permissions": {
+            "present": false,
+            "matches": false,
+            "expected": "aeep"
+          },
+          "config/approval_policy": {
+            "present": false,
+            "matches": false,
+            "expected": "never"
+          }
+        },
+        "configRequirements/read": {
+          "requirements/allowedPermissionProfiles": {
+            "present": true,
+            "matches": true,
+            "expected": {
+              "aeep": true
+            }
+          },
+          "requirements/allowedApprovalPolicies": {
+            "present": true,
+            "matches": true,
+            "expected": [
+              "never"
+            ]
+          }
+        },
+        "canary": {
+          "exit_code": 0,
+          "stderr_categories": [],
+          "observation": {
+            "canary_matched": true
+          }
+        },
+        "original_probe": {
+          "exit_code": 0,
+          "stderr_categories": [],
+          "observation": {
+            "workspace_write": true,
+            "configuration_write": "absent",
+            "proxy": "denied",
+            "direct": "denied"
+          }
+        },
+        "cleanup_confirmed": true
+      }
+    }
+  },
+  "comparisons": "PAUSED",
+  "error_type": "AssertionError",
+  "operations": 2,
+  "accounting_settled": true
+}

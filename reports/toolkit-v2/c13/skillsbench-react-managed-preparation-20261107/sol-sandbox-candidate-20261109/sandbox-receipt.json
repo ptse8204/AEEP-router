@@ -1,0 +1,147 @@
+{
+  "receipt_id": "rcpt_2cb76376460f4a06aed03750dcec97e4",
+  "decision_id": "skillsbench-react-sol-permitted-candidate-20261109:sandbox",
+  "action_id": "skillsbench-react-sol-permitted-candidate-20261109:sandbox",
+  "capability": "assessment.skillsbench.react@1",
+  "executor_id": "skillsbench-react-sol-01591.treatment",
+  "executor_kind": "host_managed",
+  "status": "success",
+  "attempt": 1,
+  "started_at": "2026-11-09T18:57:12.698649Z",
+  "ended_at": "2026-11-09T18:57:16.067855Z",
+  "estimated": {
+    "resources": {
+      "monetary_usd": 0.0,
+      "latency_ms": 0.0,
+      "cpu_ms": 0.0,
+      "memory_mb_seconds": 0.0,
+      "peak_memory_mb": 0.0,
+      "gpu_ms": 0.0,
+      "network_bytes": 0,
+      "context_tokens": 0,
+      "input_tokens": 0,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_output_tokens": 0,
+      "subscription_units": 0.0
+    },
+    "cash": {
+      "amount_usd": "0.0",
+      "upper_bound_usd": "0.0",
+      "evidence": {
+        "status": "complete",
+        "source": "static_estimate",
+        "trust": "self_asserted",
+        "evidence_id": null,
+        "source_reference": null,
+        "digest": null,
+        "observed_at": null
+      }
+    },
+    "subscription_usage": [],
+    "success_probability": 0.95,
+    "quality_score": 0.95,
+    "risk_score": 0.05,
+    "confidence": 0.5,
+    "source": "static",
+    "sample_size": 0,
+    "uncertainty": null
+  },
+  "executor_fingerprint": null,
+  "cohort_digest": null,
+  "action_features": null,
+  "actual_resources": {
+    "monetary_usd": 0.0,
+    "latency_ms": 3369.1835830104537,
+    "cpu_ms": 0.0,
+    "memory_mb_seconds": 0.0,
+    "peak_memory_mb": 0.0,
+    "gpu_ms": 0.0,
+    "network_bytes": 0,
+    "context_tokens": 0,
+    "input_tokens": 0,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 0,
+    "reasoning_output_tokens": 0,
+    "subscription_units": 0.0
+  },
+  "accounting": {
+    "cash": {
+      "status": "unavailable",
+      "components": []
+    },
+    "subscription_usage": [],
+    "model_usage": [],
+    "tool_footprint": null
+  },
+  "cache_affinity": null,
+  "approval_id": null,
+  "transport_success": null,
+  "execution_success": true,
+  "schema_valid": null,
+  "task_valid": null,
+  "quality_score": null,
+  "validation_results": [],
+  "output_valid": null,
+  "error_type": null,
+  "error_message": null,
+  "trace_id": null,
+  "metadata": {
+    "review_sha256": "b53262b188ba0f33d1b911b24ad0b58866851413a1ad4e675f68640e9a05729f",
+    "observation": {
+      "container_name": "aeep-235530e27bdb59ef073221e6856d749a",
+      "protocol": "aeep-agent-router/0.159.1 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+      "config/read": {
+        "config/default_permissions": {
+          "present": false,
+          "matches": false,
+          "expected": "aeep"
+        },
+        "config/approval_policy": {
+          "present": false,
+          "matches": false,
+          "expected": "never"
+        }
+      },
+      "configRequirements/read": {
+        "requirements/allowedPermissionProfiles": {
+          "present": true,
+          "matches": true,
+          "expected": {
+            "aeep": true
+          }
+        },
+        "requirements/allowedApprovalPolicies": {
+          "present": true,
+          "matches": true,
+          "expected": [
+            "never"
+          ]
+        }
+      },
+      "canary": {
+        "exit_code": 0,
+        "stderr_categories": [],
+        "observation": {
+          "canary_matched": true
+        }
+      },
+      "original_probe": {
+        "exit_code": 0,
+        "stderr_categories": [],
+        "observation": {
+          "workspace_write": true,
+          "configuration_write": "absent",
+          "proxy": "denied",
+          "direct": "denied"
+        }
+      },
+      "cleanup_confirmed": true
+    },
+    "observed_resource_dimensions": [
+      "latency_ms"
+    ]
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "receipt_id": "rcpt_2f3b478ecabf4cffbd6c712f5a632eaa",
+  "decision_id": "skillsbench-react-sol-offline-sandbox-20261109",
+  "action_id": "skillsbench-react-sol-offline-sandbox-20261109",
+  "capability": "assessment.skillsbench.react@1",
+  "executor_id": "skillsbench-react-sol-01591.control",
+  "executor_kind": "host_managed",
+  "status": "success",
+  "attempt": 1,
+  "started_at": "2026-11-09T18:45:24.251412Z",
+  "ended_at": "2026-11-09T18:45:26.763312Z",
+  "estimated": {
+    "resources": {
+      "monetary_usd": 0.0,
+      "latency_ms": 0.0,
+      "cpu_ms": 0.0,
+      "memory_mb_seconds": 0.0,
+      "peak_memory_mb": 0.0,
+      "gpu_ms": 0.0,
+      "network_bytes": 0,
+      "context_tokens": 0,
+      "input_tokens": 0,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_output_tokens": 0,
+      "subscription_units": 0.0
+    },
+    "cash": {
+      "amount_usd": "0.0",
+      "upper_bound_usd": "0.0",
+      "evidence": {
+        "status": "complete",
+        "source": "static_estimate",
+        "trust": "self_asserted",
+        "evidence_id": null,
+        "source_reference": null,
+        "digest": null,
+        "observed_at": null
+      }
+    },
+    "subscription_usage": [],
+    "success_probability": 0.95,
+    "quality_score": 0.95,
+    "risk_score": 0.05,
+    "confidence": 0.5,
+    "source": "static",
+    "sample_size": 0,
+    "uncertainty": null
+  },
+  "executor_fingerprint": null,
+  "cohort_digest": null,
+  "action_features": null,
+  "actual_resources": {
+    "monetary_usd": 0.0,
+    "latency_ms": 2511.853166972287,
+    "cpu_ms": 0.0,
+    "memory_mb_seconds": 0.0,
+    "peak_memory_mb": 0.0,
+    "gpu_ms": 0.0,
+    "network_bytes": 0,
+    "context_tokens": 0,
+    "input_tokens": 0,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 0,
+    "reasoning_output_tokens": 0,
+    "subscription_units": 0.0
+  },
+  "accounting": {
+    "cash": {
+      "status": "unavailable",
+      "components": []
+    },
+    "subscription_usage": [],
+    "model_usage": [],
+    "tool_footprint": null
+  },
+  "cache_affinity": null,
+  "approval_id": null,
+  "transport_success": null,
+  "execution_success": true,
+  "schema_valid": null,
+  "task_valid": null,
+  "quality_score": null,
+  "validation_results": [],
+  "output_valid": null,
+  "error_type": null,
+  "error_message": null,
+  "trace_id": null,
+  "metadata": {
+    "review_sha256": "44fbd6661bb080785596e9fa36c30b012b1e740ac153a2bf0caed78e7cb351de",
+    "observation": {
+      "review_sha256": "44fbd6661bb080785596e9fa36c30b012b1e740ac153a2bf0caed78e7cb351de",
+      "container_name": "aeep-32aae3d2f25dce932825763e66b1c917",
+      "models": 0,
+      "passed": true,
+      "cleanup_confirmed": true,
+      "protocol": "aeep-agent-router/0.159.1 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+      "config/read": {
+        "config/default_permissions": {
+          "present": false,
+          "matches": false,
+          "expected": "aeep"
+        },
+        "config/approval_policy": {
+          "present": false,
+          "matches": false,
+          "expected": "never"
+        }
+      },
+      "configRequirements/read": {
+        "requirements/allowedPermissionProfiles": {
+          "present": true,
+          "matches": true,
+          "expected": {
+            "aeep": true
+          }
+        },
+        "requirements/allowedApprovalPolicies": {
+          "present": true,
+          "matches": true,
+          "expected": [
+            "never"
+          ]
+        }
+      },
+      "canary": {
+        "exit_code": 1,
+        "stderr_categories": [
+          "bubblewrap",
+          "missing_program_or_path"
+        ],
+        "observation": null
+      },
+      "original_probe": {
+        "exit_code": 1,
+        "stderr_categories": [
+          "bubblewrap",
+          "missing_program_or_path"
+        ],
+        "observation": null
+      },
+      "error_type": null,
+      "elapsed_seconds": 2.511853166972287,
+      "purpose": "diagnostic only; no worker qualification"
+    },
+    "observed_resource_dimensions": [
+      "latency_ms"
+    ]
+  }
+}

@@ -3404,3 +3404,22 @@ readiness gate. Use the [offline diagnostic](../../reports/toolkit-v2/c13/skills
 to capture a bounded exit code and fixed error categories from the
 same command. An offline result cannot attest to account-backed worker
 conformance. Approval is required for the repeat.
+
+## D185. Put the refreshed client inside the existing read root
+
+The [offline diagnostic](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-sandbox-offline-20261109/result.json) reproduced the
+Bubblewrap failure. The [pinned Codex implementation](https://github.com/openai/codex/blob/rust-v0.159.1/codex-rs/linux-sandbox/src/linux_run_main.rs#L1539)
+re-executes the current client inside the sandbox. The
+[control image](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-sandbox-path-20261109/result.json) restored command startup by
+placing the same bytes within `/opt/codex`. It kept the sandbox policy.
+The [candidate-only continuation](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-sandbox-candidate-20261109/operation-review.json)
+retains the control and all historical charges.
+
+## D186. Use Prefix Cache Replay in the third software slot
+
+The original Dependency Audit database lacks a verified rights record.
+The [approved replacement](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/selection.json) uses the same
+SkillsBench revision. Its committed trace matches the published Mooncake
+prefix byte for byte. Keep the upstream grading semantics and both
+license notices. Preserve the Dependency Audit history. Provider
+disclosure requires separate authority.

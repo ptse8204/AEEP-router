@@ -1,5 +1,25 @@
 # 0.8 plan coverage and remaining work
 
+<!-- react-sol-both-sandboxes-20261109:start -->
+[Both Sol workers](../toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-sandbox-candidate-20261109/result.json)
+now pass offline sandbox startup. The [React ordinary CLI](../toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-permitted-path-live-20261109/sol-managed-dispatch-ready.json)
+prepared an exact plan after fresh paired conformance. Terminal evidence
+remains pending at this record. Prefix Cache Replay's
+[first reference](../toolkit-v2/c13/skillsbench-software-substitute-20261109/calibration-result.json)
+stopped before grading. Its exact diagnostic continuation awaits approval.
+<!-- react-sol-both-sandboxes-20261109:end -->
+
+<!-- react-sol-sandbox-path-control-20261109:start -->
+The [Sol control path check](../toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-sandbox-path-20261109/result.json)
+restored both Bubblewrap commands. Its driver stopped on the hidden
+configuration path before building the candidate. Two operations
+settled in 12.31 seconds with no model turns. The
+[candidate-only continuation](../toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-sandbox-candidate-20261109/operation-review.json)
+awaits approval. The operator approved LLM Prefix Cache Replay as the
+third SkillsBench software task. The ordinary CLI verified its pack
+and public/protected split. Reference grading remains open.
+<!-- react-sol-sandbox-path-control-20261109:end -->
+
 <!-- react-sol-managed-sandbox-block-20261109:start -->
 The [November 9 managed inspection](../toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-01591-live-20261109/sol-managed-sandbox-blocker.json)
 resolved GPT-6.1 Sol on the control account at medium reasoning.

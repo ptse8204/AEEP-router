@@ -46,7 +46,7 @@ Use SkillsBench revision `9a1f4dd5f7659f75707435da3ce854b6e48321d1`:
 | --- | --- |
 | invoice-fraud-detection | spring-boot-jakarta-migration |
 | exceltable-in-ppt | react-performance-debugging |
-| sales-pivot-analysis | software-dependency-audit |
+| sales-pivot-analysis | llm-prefix-cache-replay |
 
 The operator approved the hard Invoice Fraud substitute after a local
 asset review. Financial Modeling QA stays parked pending a rights record.
@@ -56,6 +56,13 @@ also selected `exceltable-in-ppt` for the PDF–Excel slot after the original
 input rights remained unresolved. The [protected verifier](../../reports/toolkit-v2/c13/skillsbench-document-substitute-20261106/result.json)
 passed an independent reference that avoids restricted oracle helpers.
 The original PDF–Excel task remains in the historical inventory.
+
+The operator selected [LLM Prefix Cache Replay](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/selection.json)
+for the Dependency Audit slot after the database rights remained unresolved.
+The task uses the original Mooncake trace prefix, task instructions and
+protected verifier. The [pack inspection](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/cli-pack-inspect.json)
+verifies source bytes and their separation. Runtime calibration and provider
+disclosure remain separate.
 
 Review asset rights and all runtime dependencies. Preserve task instructions,
 assets, upstream verifier assertions and scoring semantics. Replace mutable

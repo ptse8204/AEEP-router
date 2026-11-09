@@ -1,0 +1,56 @@
+{
+  "review_sha256": "44fbd6661bb080785596e9fa36c30b012b1e740ac153a2bf0caed78e7cb351de",
+  "container_name": "aeep-32aae3d2f25dce932825763e66b1c917",
+  "models": 0,
+  "passed": true,
+  "cleanup_confirmed": true,
+  "protocol": "aeep-agent-router/0.159.1 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+  "config/read": {
+    "config/default_permissions": {
+      "present": false,
+      "matches": false,
+      "expected": "aeep"
+    },
+    "config/approval_policy": {
+      "present": false,
+      "matches": false,
+      "expected": "never"
+    }
+  },
+  "configRequirements/read": {
+    "requirements/allowedPermissionProfiles": {
+      "present": true,
+      "matches": true,
+      "expected": {
+        "aeep": true
+      }
+    },
+    "requirements/allowedApprovalPolicies": {
+      "present": true,
+      "matches": true,
+      "expected": [
+        "never"
+      ]
+    }
+  },
+  "canary": {
+    "exit_code": 1,
+    "stderr_categories": [
+      "bubblewrap",
+      "missing_program_or_path"
+    ],
+    "observation": null
+  },
+  "original_probe": {
+    "exit_code": 1,
+    "stderr_categories": [
+      "bubblewrap",
+      "missing_program_or_path"
+    ],
+    "observation": null
+  },
+  "error_type": null,
+  "elapsed_seconds": 2.511853166972287,
+  "purpose": "diagnostic only; no worker qualification",
+  "accounting_settled": true
+}

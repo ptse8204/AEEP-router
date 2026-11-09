@@ -1,0 +1,72 @@
+{
+  "pack": "skillsbench",
+  "source_revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+  "pack_sha256": "8f2350a8bdc6ac7ade40d275db8e9203d431c72e544ebcfa3b7a9eddc9775989",
+  "tasks": [
+    {
+      "task_id": "llm-prefix-cache-replay",
+      "domain": "software-engineering",
+      "difficulty": "medium",
+      "agent_assets": [
+        {
+          "path": "tasks/llm-prefix-cache-replay/task.md",
+          "sha256": "58ccdd143fa2f59440c9d37ad171b44df61adf9541434e8b48255a998acdcfe8",
+          "bytes": 2428,
+          "role": "instruction"
+        },
+        {
+          "path": "tasks/llm-prefix-cache-replay/environment/trace.jsonl",
+          "sha256": "9e81b386f0d8cea16d376b041d7a7e8fed5ba65b53e989444c76cef408442c2a",
+          "bytes": 514852,
+          "role": "input"
+        },
+        {
+          "path": "tasks/llm-prefix-cache-replay/environment/config.json",
+          "sha256": "bf4f44ffb65803b2e0ffe998c144abc6b67418dc7cf1fdcefddd17a3056402b3",
+          "bytes": 140,
+          "role": "input"
+        }
+      ],
+      "candidate_assets": [],
+      "protected_assets": [
+        {
+          "path": "tasks/llm-prefix-cache-replay/verifier/test_outputs.py",
+          "sha256": "b8442216fbc86ffbd4b75e96c1b9885e3e57d87ec2664b3636c29c343bef53a7",
+          "bytes": 2673,
+          "role": "verifier"
+        },
+        {
+          "path": "tasks/llm-prefix-cache-replay/verifier/oracle_helpers.py",
+          "sha256": "bc3579ef49fed337c6f707532f3572cb9dd5a82e42dea8184d2e2c278b6b896c",
+          "bytes": 3636,
+          "role": "verifier"
+        },
+        {
+          "path": "tasks/llm-prefix-cache-replay/verifier/test.sh",
+          "sha256": "d0315e6d8e06686f40db287f9cc84b93de2ee9b1866a8349cb18bab73b7715d9",
+          "bytes": 295,
+          "role": "verifier"
+        },
+        {
+          "path": "tasks/llm-prefix-cache-replay/oracle/solve.sh",
+          "sha256": "1d12de1082c373c9654f0f2195613bcf442c2fe3724cf2a19a95c244fc0e4e63",
+          "bytes": 2441,
+          "role": "oracle"
+        }
+      ],
+      "rights_review_ref": null,
+      "adaptations": [
+        "Original task instructions, config and trace are kept byte-identical.",
+        "The review will map upstream /root paths to isolated nonroot scratch paths.",
+        "Bundled skills, original solver and verifier stay outside the agent archive."
+      ],
+      "upstream_score": "binary",
+      "output_paths": [
+        "report.json"
+      ]
+    }
+  ],
+  "executed": false,
+  "official_benchmark_reproduction": false,
+  "notice": "File identity and separation only. Runtime, rights reviews, independent grader calibration and authority must be resolved before execution."
+}

@@ -1,5 +1,58 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- react-sol-both-sandboxes-20261109:start -->
+**November 9. Both corrected Sol workers pass offline. The ordinary React CLI started.**
+
+The [candidate-only check](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-sandbox-candidate-20261109/result.json) passed.
+Both corrected workers execute the fixed sandbox commands with the
+same managed policy. Each allowed the synthetic workspace write,
+hid the protected config directory and denied both network probes.
+The candidate build and check settled two operations. The control was
+retained without a replay.
+
+The operator approved the [Sol-only continuation](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-permitted-path-live-20261109/operation-review.json)
+on the two corrected images. Fresh paired conformance passed and
+the [ordinary CLI prepared a canonical plan](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-permitted-path-live-20261109/sol-managed-dispatch-ready.json).
+It permits one GPT-6.1 Sol medium engineering turn. The exact approval
+keeps the same inputs, grader, proxy and existing grant. Terminal grade,
+usage and cleanup evidence remain pending at this record.
+
+Prefix Cache Replay's [first protected reference](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/calibration-result.json)
+stopped before producing a grade. One operation settled and the owned
+container is gone. The [continuation review](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/continuation/operation-review.json)
+adds bounded failure stages while preserving original solver, assertions,
+input bytes and policy. It requires approval for one reference retry.
+The four unstarted controls remain gated on a passing reference.
+Comparisons stay paused.
+<!-- react-sol-both-sandboxes-20261109:end -->
+
+<!-- react-sol-sandbox-path-control-20261109:start -->
+**November 9. The Sol control starts its sandbox from the existing read root.**
+
+The [offline diagnostic](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-sandbox-offline-20261109/result.json) reproduced the
+Bubblewrap failure with the client outside `/opt/codex`. One operation
+settled in 2.51 seconds. The [approved correction](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-sandbox-path-20261109/result.json)
+placed the same Codex 0.159.1 bytes under that read root. Both commands
+exited 0 on the new control image. Workspace writes worked, the protected
+config directory was hidden, and both network probes were denied.
+The driver only accepted denied or read-only configuration results,
+so it stopped before the candidate build. Both operations settled
+in 12.31 seconds. Cleanup passed with zero model turns and $0 cash.
+
+The [candidate-only continuation](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-sandbox-candidate-20261109/operation-review.json)
+passed inert preflight. It retains the control image and records a
+sandbox-hidden path as absent. Approval is pending for the one unstarted
+candidate build and its offline sandbox check. Fresh paired conformance
+and the Sol-only React engineering turn remain open.
+
+The operator selected [LLM Prefix Cache Replay](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/selection.json)
+for the third software slot. The [ordinary CLI inspection](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/cli-pack-inspect.json)
+verified the pinned pack. Its archive includes only the original
+instructions, trace and config. The upstream oracle, ten verifier
+instances and license notices stay local. Protected calibration and
+provider disclosure remain separate. Comparisons stay paused.
+<!-- react-sol-sandbox-path-control-20261109:end -->
+
 <!-- react-sol-managed-sandbox-block-20261109:start -->
 **November 9. The managed control resolved GPT-6.1 Sol. Sandbox verification stopped before React dispatch.**
 

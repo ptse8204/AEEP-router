@@ -1,0 +1,90 @@
+{
+  "schema_version": "aeep.toolkit.benchmark-pack.v1",
+  "pack_id": "skillsbench",
+  "source": {
+    "repository": "https://github.com/benchflow-ai/skillsbench",
+    "revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+    "artifact_sha256": "6e28b587de183cc3c462b4cecbaa7220851671bf5158bb8abe7d72c372e13927",
+    "license_expression": "Apache-2.0",
+    "data_rights": "Private integration with retained SkillsBench and Mooncake notices. Provider disclosure needs separate authority."
+  },
+  "tasks": [
+    {
+      "task_id": "llm-prefix-cache-replay",
+      "domain": "software-engineering",
+      "difficulty": "medium",
+      "assets": [
+        {
+          "path": "LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "bytes": 11357,
+          "role": "license"
+        },
+        {
+          "path": "tasks/llm-prefix-cache-replay/task.md",
+          "sha256": "58ccdd143fa2f59440c9d37ad171b44df61adf9541434e8b48255a998acdcfe8",
+          "bytes": 2428,
+          "role": "instruction"
+        },
+        {
+          "path": "tasks/llm-prefix-cache-replay/environment/Dockerfile",
+          "sha256": "6f4f9f5e86b539a50c7cad44cb7eb948c2c50dbcf5d308c4b9bb34f6ae997d0a",
+          "bytes": 581,
+          "role": "environment"
+        },
+        {
+          "path": "tasks/llm-prefix-cache-replay/environment/trace.jsonl",
+          "sha256": "9e81b386f0d8cea16d376b041d7a7e8fed5ba65b53e989444c76cef408442c2a",
+          "bytes": 514852,
+          "role": "input"
+        },
+        {
+          "path": "tasks/llm-prefix-cache-replay/environment/config.json",
+          "sha256": "bf4f44ffb65803b2e0ffe998c144abc6b67418dc7cf1fdcefddd17a3056402b3",
+          "bytes": 140,
+          "role": "input"
+        },
+        {
+          "path": "tasks/llm-prefix-cache-replay/verifier/test_outputs.py",
+          "sha256": "b8442216fbc86ffbd4b75e96c1b9885e3e57d87ec2664b3636c29c343bef53a7",
+          "bytes": 2673,
+          "role": "verifier"
+        },
+        {
+          "path": "tasks/llm-prefix-cache-replay/verifier/oracle_helpers.py",
+          "sha256": "bc3579ef49fed337c6f707532f3572cb9dd5a82e42dea8184d2e2c278b6b896c",
+          "bytes": 3636,
+          "role": "verifier"
+        },
+        {
+          "path": "tasks/llm-prefix-cache-replay/verifier/test.sh",
+          "sha256": "d0315e6d8e06686f40db287f9cc84b93de2ee9b1866a8349cb18bab73b7715d9",
+          "bytes": 295,
+          "role": "verifier"
+        },
+        {
+          "path": "tasks/llm-prefix-cache-replay/oracle/solve.sh",
+          "sha256": "1d12de1082c373c9654f0f2195613bcf442c2fe3724cf2a19a95c244fc0e4e63",
+          "bytes": 2441,
+          "role": "oracle"
+        },
+        {
+          "path": "notices/mooncake-LICENSE-APACHE",
+          "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
+          "bytes": 11357,
+          "role": "license"
+        }
+      ],
+      "output_paths": [
+        "report.json"
+      ],
+      "upstream_score": "binary",
+      "rights_review_ref": null,
+      "adaptations": [
+        "Original task instructions, config and trace are kept byte-identical.",
+        "The review will map upstream /root paths to isolated nonroot scratch paths.",
+        "Bundled skills, original solver and verifier stay outside the agent archive."
+      ]
+    }
+  ]
+}

@@ -2609,3 +2609,22 @@ command did not yield a valid observation. The paired boundary check
 and React dispatch remain open. The [proposed offline diagnostic](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-sandbox-offline-20261109/operation-review.json)
 keeps the same sandbox and can distinguish an RPC rejection, command
 exit, or invalid reply without a provider session. Comparisons stay paused.
+
+### November 9 Sol worker sandbox startup and software workload
+
+Both commands failed in the [offline diagnostic](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-sandbox-offline-20261109/result.json).
+The [corrected control](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-sandbox-path-20261109/result.json) ran both under the
+existing read root. The candidate build and account-backed paired
+check remain open. [Prefix Cache Replay](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/cli-pack-inspect.json)
+replaces Dependency Audit for this integration workload. The pinned
+pack has passed static inspection. Its real grading checks remain open.
+
+### November 9 corrected pair and Prefix Cache Replay
+
+The [candidate-only check](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-sandbox-candidate-20261109/result.json) completes
+both corrected workers' offline startup checks. Fresh managed
+conformance and [plan preparation](../../reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-permitted-path-live-20261109/sol-managed-dispatch-ready.json)
+passed. Terminal React evidence is separate.
+The [first Prefix Cache reference](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/calibration-result.json)
+exited before grading. Its four controls are unstarted. Comparisons
+remain paused.
