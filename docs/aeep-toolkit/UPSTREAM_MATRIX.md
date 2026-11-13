@@ -2644,3 +2644,13 @@ The [runtime audit](../../reports/toolkit-v2/c13/skillsbench-software-substitute
 grade with the pinned SkillsBench verifier and Pytest 8.4.1. Faulty outputs
 scored 0/1. The skipped test and missing trace withheld grades.
 The separate managed workflow remains open. Comparisons stay paused.
+
+### November 12 managed Prefix Cache and SkillRank preflight
+
+The [Prefix Cache recipe and artifact draft](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/result.json)
+passed local contract checks. The protected image build, disclosure and
+managed run are pending. The
+[SkillRank scheduler preflight](../../reports/toolkit-v2/c13/skillrank-managed-diagnostic-20261107/continuation-preflight-20261112.json)
+verified the existing bridge, sandbox profile and stored Sol pair.
+The grant expired and the host is below the storage reserve. Comparisons
+stay paused.

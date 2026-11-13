@@ -1,0 +1,36 @@
+{
+  "purpose": "Prepare one additive offline image for the pinned Prefix Cache grader",
+  "status": "BLOCKED_STORAGE",
+  "implementation_sha256": "d144f09f5db624bf6acad21a89179b39902845cb13f5e32d18212d1f9a2ad83f",
+  "preparation_result_sha256": "4fc52c987a6391cf547feecb8e18e5f9dc5347083ca4ddf27f4573c1856672a1",
+  "context_sha256": "acac78ae939cb171a651af382071a0c3e0458ce13f6e34d3db19c34f806f6b80",
+  "context_bytes": 2223734,
+  "parent_image_id": "sha256:5b0ccd6dacd4b73caca823e5343d0194f0b8d845bec29359ba32559c4b1765d4",
+  "parent_layers": [
+    "sha256:090d5d5890327fccdb47738e5d4ece2c2d21adcd7c636497d925ee0931f3409c"
+  ],
+  "parent_tag": "aeep-skillsbench-react:sealed-amd64-20261108",
+  "docker_client_sha256": "a6822407e207ff0b687419ccbe55700ffbf389d77de58ef625b3b1790d88747c",
+  "proposed_image_tag": "aeep-skillsbench-prefix-cache:sealed-amd64-20261112",
+  "build_flags": [
+    "--pull=false",
+    "--network=none",
+    "--platform=linux/amd64",
+    "--provenance=false",
+    "--sbom=false"
+  ],
+  "minimum_start_free_gib": 52,
+  "minimum_free_gib": 50,
+  "available_bytes": 14815830016,
+  "verification_after_build": [
+    "parent layers and nonroot config",
+    "protected reference",
+    "canonical grader positive and negative payloads",
+    "fail-closed infrastructure handling"
+  ],
+  "previous_offline_calibration_retained": true,
+  "build_started": false,
+  "execution_authorized_by_draft": false,
+  "models": 0,
+  "comparisons": "PAUSED"
+}

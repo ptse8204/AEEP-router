@@ -1,5 +1,17 @@
 # 0.8 plan coverage and remaining work
 
+<!-- managed-prefix-cache-preparation-20261112:start -->
+The [Prefix Cache draft](../toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/result.json)
+binds the managed artifact and protected recipe. The
+[carrier preflight](../toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-preflight.json)
+recorded 13.80 GiB free, below the 50 GiB reserve. The
+[SkillRank preflight](../toolkit-v2/c13/skillrank-managed-diagnostic-20261107/continuation-preflight-20261112.json)
+verified the retained scheduler and observed an expired managed grant.
+The full docs check is blocked by the reserve and the incomplete offline
+runner. The schema check and changed local links passed. Managed dispatch
+and comparisons stay paused.
+<!-- managed-prefix-cache-preparation-20261112:end -->
+
 <!-- prefix-cache-runtime-calibration-20261109:start -->
 [Prefix Cache Replay](../toolkit-v2/c13/skillsbench-software-substitute-20261109/runtime-support/audit.json)
 scored 1/1 through the protected offline reference. The incomplete and

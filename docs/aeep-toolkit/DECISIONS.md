@@ -3450,3 +3450,12 @@ receipts. The [read-only audit](../../reports/toolkit-v2/c13/skillsbench-softwar
 that omitting the trace errored all nine dependent checks and left the
 independent consistency check passing. No grade was issued. Keep the
 failed driver result and use the retained evidence without replay.
+
+## D190. Package the Prefix Cache grader as a local image layer
+
+The managed recipe requires a pinned offline container without extra
+host roots. The [draft](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-preflight.json) adds only
+the protected task files and pinned Pytest closure to the retained
+nonroot React grader image. Use the existing binary grading contract.
+Run the reference and canonical grader checks on the resulting image
+before requesting a model turn. The build waits for the host reserve.

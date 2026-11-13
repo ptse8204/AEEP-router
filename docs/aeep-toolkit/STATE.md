@@ -1,5 +1,39 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- managed-prefix-cache-preparation-20261112:start -->
+**November 12. Prefix Cache grader and worker definitions are staged.**
+
+The [grader draft](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/result.json) binds the original
+SkillsBench verifier and solver, the public archive and all ten test
+identities. A 2.2 MB local build context adds the protected inputs and
+pinned Pytest 8.4.1 wheels to the retained nonroot React grader image.
+The [carrier preflight](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-preflight.json) verifies
+the parent and context by digest. Its proposed image still needs an
+offline build and contained reference and grader checks.
+
+The [worker draft](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/worker-draft.json) binds the retained
+Sol images, shared instructions and a 262,144-byte report artifact.
+Both preparation scripts passed a second invocation with byte-identical
+drafts. Local checks cover the artifact size and shape, failed assertions,
+skip and error rejection, and the canonical request size. The
+[proposed disclosure](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/proposed-disclosure.json) binds the
+three public files for Codex. It awaits the operator's decision.
+
+The [SkillRank preflight](../../reports/toolkit-v2/c13/skillrank-managed-diagnostic-20261107/continuation-preflight-20261112.json)
+verified the native scheduler and both stored worker definitions.
+The managed grant expired November 11 at 10:30 a.m. Vancouver time.
+Record a finite expiry amendment under the existing delegation when the
+bounded review is ready. Fresh conformance and specific managed authority
+are required before dispatch.
+
+C13 remains open. The host had 13.80 GiB immediately free, below the 50
+GiB reserve. Restore at least 52 GiB to start the planned grader build.
+The retained docs runner is also incomplete. Its offline launcher and
+dependency tree need restoration before the full docs check. The schema
+check and changed local links passed. Waza's supported backend remains
+open. Comparisons stay paused.
+<!-- managed-prefix-cache-preparation-20261112:end -->
+
 <!-- prefix-cache-runtime-calibration-20261109:start -->
 **November 9. Prefix Cache Replay passed protected reference grading.**
 
