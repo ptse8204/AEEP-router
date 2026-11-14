@@ -9,9 +9,11 @@ cache, no update check, and no external grader, MCP server or publication.
 
 The ordinary installer retained the pinned Waza executable and its release
 metadata. The [installation journal](waza-runtime-installation-result.json)
-binds the installed tree to the exact review. The fixture is prepared for
-review and Waza has yet to load it. The ordinary import
-path treats supplied reports as upstream claims. The live check must separately
+binds the installed tree to the exact review. Waza's real offline text grader
+scored a synthetic correct reply 1/1 and a synthetic wrong reply 0/1. The
+[offline grade receipt](offline-grader-result.json) records the settled check.
+The ordinary import path treats supplied reports as upstream claims. The live
+check must separately
 link its exact inputs, backend launch, usage fields, grade, settled cost and
 cleanup to an AEEP receipt. Missing usage or ambiguous outcomes keep the
 functional check open.

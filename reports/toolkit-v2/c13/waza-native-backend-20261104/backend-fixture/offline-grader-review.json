@@ -1,0 +1,78 @@
+{
+  "scope": "First actual Waza offline text grader with two labeled synthetic responses. No agent backend.",
+  "source_revision": "e534d149d89ae77ea158469fb4d2003804b2ee76",
+  "pins": {
+    "/usr/bin/sandbox-exec": "10cf4a46a575e4747d2419cf343800db0d11ae6e6e9b8415998d3d8f336b2a92",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-runtime-20261113/bin/waza": "10879de7375699e02dfd9b90a6540ed1c3dc551b1118b2486cd7961c0fc56b03",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-grader-preflight-20261113/offline.sb": "8166a948897ea8327779b7a2de9ff513d7dd2fcb032650fbad519f4f1bcba501",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-grader-preflight-20261113/synthetic-results.json": "951d89a13caa61410596ace8f3c6e466192303a50b3c557d161ea45c482b4545",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-native-backend-20261104/operation-review.json": "87cc0c4102751dde2e66b6e530ed1c666ee550144d74153c2ba8e45b0241bbbd",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-native-backend-20261104/backend-fixture/waza-runtime-installation-result.json": "03bdfec3157646c330fcf72fb6253e047e6cb82be3f3bc37f374f8383ebab665",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/pipeline-standing-authority-20261104.json": "f0f86d6af2600817eb6de50dd12ac4f861f09ac36f90a27bc84e4ae6f044635c",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-native-backend-20261104/backend-fixture/eval.yaml": "a5fad973ce46aa0aa76f90a6838914f7c6fa2f85ae33777bfb7d80132f7834c0",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-native-backend-20261104/backend-fixture/tasks/receipt-total.yaml": "8c1385ba1866e2e2f5392f85a228d786d398bcd6f012b6ba3a0b80cc14775afc",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-native-backend-20261104/backend-fixture/agent/aeep-receipt-check.agent.md": "f8d6d6beba9bd8d71009449254636907ce944c8b1f89d9e9f47073f5919daa13",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-native-backend-20261104/backend-fixture/run-offline-grader.py": "2e88612a3b84b46a605b9609f3de826461c175d967502e2335041d7e0132bbf0",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-native-backend-20261104/prepared.json": "b404a57a3339f6a81a51d63fe0300e7ae67cbac2a692ea6258264a38b7b8c016"
+  },
+  "script": "run-offline-grader.py",
+  "working_directory": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-grader-preflight-20261113",
+  "command": [
+    "/usr/bin/sandbox-exec",
+    "-f",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-grader-preflight-20261113/offline.sb",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-runtime-20261113/bin/waza",
+    "--no-update-check",
+    "grade",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-native-backend-20261104/backend-fixture/eval.yaml",
+    "--task",
+    "receipt-total",
+    "--results",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-grader-preflight-20261113/synthetic-results.json",
+    "--workspace",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-grader-preflight-20261113",
+    "--output",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-grader-preflight-20261113/graded.json"
+  ],
+  "environment": {
+    "PATH": "/usr/bin:/bin",
+    "HOME": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-grader-preflight-20261113/home",
+    "TMPDIR": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-grader-preflight-20261113/tmp",
+    "COPILOT_HOME": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-grader-preflight-20261113/home",
+    "LC_ALL": "C",
+    "WAZA_NO_UPDATE_CHECK": "1",
+    "DO_NOT_TRACK": "1",
+    "CI": "true"
+  },
+  "status": "PREPARED",
+  "model_turns": 0,
+  "max_cash_usd": "0",
+  "maximum_operations": 1,
+  "maximum_reserved_seconds": 40,
+  "allow_network": false,
+  "counter_start": [
+    5,
+    0,
+    3.513753082603216,
+    "0"
+  ],
+  "prior_grant_preserved": "waza-native-backend-info-20261104",
+  "no_retry": true,
+  "amendment": {
+    "schema_version": "assessment.budget-amendment.v1",
+    "amendment_id": "waza-native-offline-grader-20261113",
+    "authorization_id": "waza-native-backend-info-20261104",
+    "authorization_digest": "298e319c7eec25783d1f0eb8b63c880ed3f0aad48fb63f75bbb9ca6ced4ae5cc",
+    "previous_amendment_digest": null,
+    "limits": {
+      "max_operations": 6,
+      "max_model_turns": 0,
+      "max_elapsed_seconds": 195.0,
+      "max_cash_usd": "0"
+    },
+    "expires_at": "2026-11-14T11:25:59.424845Z",
+    "issued_at": "2026-11-14T05:25:59.424722Z"
+  },
+  "implementation_source": "60216438830ae0aa5f59c086de189a7bba0c2dc35920c155824be33d291acb50",
+  "first_party_parser_controls": 3
+}
