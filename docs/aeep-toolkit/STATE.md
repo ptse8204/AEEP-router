@@ -1,5 +1,22 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- domain-telemetry-settlement-20261113:start -->
+**November 13. Both SkillsBench domains verified receipt-linked telemetry.**
+
+The original [Sales Pivot trace](../../reports/toolkit-v2/c13/canonical-stack-verification-20261113/domain-live-result.json)
+and the [Spring Boot continuation](../../reports/toolkit-v2/c13/canonical-stack-verification-20261113/spring-telemetry-result.json)
+passed private Langfuse readback and export disablement. Each sent one POST.
+The CLI did not recognize the acknowledgement, so both transport receipts
+retain their failed status and settled charges. All six services stopped.
+No task was replayed. The [offline docs check](../../reports/toolkit-v2/c13/canonical-stack-verification-20261113/docs/metadata-correction-result.json)
+passed on the 72 reviewed inputs with zero lint or link errors.
+
+The [current evidence index](../../reports/toolkit-v2/c13/canonical-stack-verification-20261113/evidence-index-current.json)
+keeps canonical readiness separate from the verified historical runs. Waza
+still needs [operator sign-in](../../reports/toolkit-v2/c13/waza-native-backend-20261104/operator-setup-20261113/README.md)
+and an actual backend grade. C13 remains open. Comparisons remain paused.
+<!-- domain-telemetry-settlement-20261113:end -->
+
 <!-- skillrank-and-domain-telemetry-20261113:start -->
 **November 13. SkillRank's real diagnostic passed. Domain telemetry is staged.**
 

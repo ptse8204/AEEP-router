@@ -50,13 +50,14 @@ The [runtime audit](skillsbench-runtime-audit.json) verifies six retained
 lifecycle receipts and both installed task trees. The
 [telemetry preflight](domain-telemetry-preflight.json) binds an original trial
 receipt from each named domain. All six [document and software receipts](domain-receipt-bindings.json)
-resolved through their campaign and original attempt stores. Live export,
-readback linked the Sales Pivot trace to its original receipt, and disabled
-export sent no request. The export CLI preserved a failed transport receipt
-because acceptance was unverified. The [paired-domain result](domain-live-result.json)
-records that Spring did not dispatch because the driver reused a settled health
-check ID. All six services stopped cleanly. The Spring-only continuation keeps
-the Sales result and its charges.
+resolved through their campaign and original attempt stores. Sales Pivot and
+Spring Boot each emitted one minimized trace. The [Sales Pivot result](domain-live-result.json)
+and [Spring Boot result](spring-telemetry-result.json) link the exact traces to
+their original receipts and show that disabled export sent no request. Spring
+reused the retained services after the earlier driver stopped before dispatch.
+Both POST receipts remain failed because their acknowledgement was unrecognized.
+Independent readback verified ingestion for each trace. All six services stopped
+cleanly. Sales was not replayed, and no model turns ran.
 The [latest readiness snapshot](readiness-after-telemetry.json) records zero of
 39 checks on this source. The Sponsors receipts above remain valid for the
 earlier source in the first snapshot. Comparisons remain paused. C13 stays open.
@@ -65,7 +66,6 @@ The [source checks](telemetry-source-verification.json) passed on the telemetry
 source. Both full runs passed 2,149 tests with 21 skips. Branch coverage was
 82.71 percent and both required branch gates passed. The wheel and sdist built.
 The [offline wheel smoke check](telemetry-wheel-contents-result.json) imported
-the built package with retained dependencies. The approved docs run reached
-Node, which stopped before either checker loaded because ancestor metadata
-was denied. The [metadata correction](docs/metadata-correction-summary.json)
-preserves that result and binds a new offline attempt.
+the built package with retained dependencies. The [offline docs correction](docs/metadata-correction-result.json) passed on
+the 72 reviewed inputs: zero lint issues and zero link errors. It preserves
+the [earlier startup failure](docs/metadata-correction-summary.json).

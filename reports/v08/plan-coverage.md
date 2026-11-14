@@ -1,5 +1,15 @@
 # 0.8 plan coverage and remaining work
 
+<!-- domain-telemetry-settlement-20261113:start -->
+The [C13 results](../toolkit-v2/c13/canonical-stack-verification-20261113/README.md)
+now link both SkillsBench domains to private Langfuse observations. Sales Pivot
+and Spring Boot each passed trace readback and the disabled export control.
+Their failed POST acknowledgement receipts and all charges remain intact.
+The six services stopped cleanly. The reviewed offline docs check passed.
+Canonical composed workflow proof and Waza's real backend grade remain open.
+C13 is open and comparisons stay paused.
+<!-- domain-telemetry-settlement-20261113:end -->
+
 <!-- readiness-reconciliation-20261113:start -->
 The [C13 results](../toolkit-v2/c13/canonical-stack-verification-20261113/README.md)
 record all six SkillsBench task scores, the settled SkillRank receipts and

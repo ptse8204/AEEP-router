@@ -34,8 +34,9 @@ OBSERVATIONS = {
                               "workflow-telemetry-20261104/runtime-execution/summary.json"],
         "Minimized OTLP and disabled-export checks exist. Current proof must link to each selected workload receipt."),
     "langfuse": (["langfuse-ingestion-readback-20261105/service-execution/summary.json",
-                  "canonical-stack-verification-20261113/domain-live-result.json"],
-        "Private readback linked the Sales Pivot receipt and disabled export sent no POST. The export CLI recorded failed transport. Spring dispatch remains unstarted."),
+                  "canonical-stack-verification-20261113/domain-live-result.json",
+                  "canonical-stack-verification-20261113/spring-telemetry-result.json"],
+        "Both exact receipt-linked traces ingested and disabled export sent no POST. The unrecognized POST acknowledgements remain failed transport receipts. Current canonical proof is pending."),
     "langgraph": (["workflow-accounting-20261101/composed-sdk-runtime/execution/langgraph-sdk.json",
                    "workflow-accounting-20261101/composed-sdk-runtime/execution/summary.json"],
         "Four real SDK checks and six step receipts are retained. The bundle separately failed Agent Framework before its later correction. Current canonical integration binding remains open."),
@@ -53,7 +54,7 @@ OBSERVATIONS = {
     "workflow-document-data": (["canonical-stack-verification-20261113/skillsbench-engineering-outcomes.json"],
         "All three CLI task journeys reached grading. Sales Pivot telemetry linked with a failed CLI transport receipt. Composed canonical workflow registration remains open."),
     "workflow-software-engineering": (["canonical-stack-verification-20261113/skillsbench-engineering-outcomes.json"],
-        "All three CLI task journeys reached grading. Spring telemetry and composed canonical workflow registration remain open."),
+        "All three CLI task journeys reached grading. Spring telemetry readback and disablement passed. Composed canonical workflow registration remains open."),
 }
 
 
