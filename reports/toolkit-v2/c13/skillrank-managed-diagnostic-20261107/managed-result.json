@@ -1,0 +1,154 @@
+{
+  "review_sha256": "308bfc3e8afdfbb0d592a9143600939e0d0b7a5da5add62c7a0345486bb2f506",
+  "passed": true,
+  "comparisons": "PAUSED",
+  "plan_id": "plan_71fbd935f6a44ad0963d20a0aef4743b",
+  "report_id": "fit_2cbb5ec0a4064f58a26949c0e8d162c6",
+  "trials": [
+    {
+      "trial_id": "trial_plan_71fbd935f6a44ad0963d20a0aef4743b_matthewwithanm__python-markdownify-200_skillrank-markdownify-sol.control_fresh-worker_0",
+      "case_id": "matthewwithanm__python-markdownify-200",
+      "canonical_trial_ref": "a79285c5f03506496e584ce0139c12edf6721e54391171473183e616a4b8fa33",
+      "canonical_trial_complete": true,
+      "receipt_ref": "daa52fc6bd99b8e750074bcdd2fd61c9c68dfd5f29f33e0602ebaf0677091956",
+      "worker_cleanup_confirmed": true,
+      "independent_grader_observed": true,
+      "task_grade": true,
+      "task_prompt_bound": true,
+      "token_capture": {
+        "status": "verified",
+        "receipt_ref": "daa52fc6bd99b8e750074bcdd2fd61c9c68dfd5f29f33e0602ebaf0677091956",
+        "journal_ref": "29c6bef1413c6ce08dd80183e74c4fdaca34e584cfe21672030fec4b47211b50",
+        "known_fields": [
+          "input_tokens",
+          "cached_input_tokens",
+          "cache_write_input_tokens",
+          "output_tokens",
+          "reasoning_output_tokens"
+        ],
+        "provider_usage_independently_verified": false,
+        "source": "provider_report",
+        "trust": "self_asserted"
+      },
+      "candidate_loading": {
+        "instructions_loaded": null,
+        "invoked": null,
+        "delivery_complete": false,
+        "snapshot_ref": "0dca11b7df04c850413c32bbba37814d361ac1c40fdc165c6a23e5e0f15edd9b",
+        "skill_sha256": null
+      },
+      "arm": "control",
+      "receipt_id": "rcpt_2985725592954a368f35930ea1eb2b4c",
+      "score": 1.0,
+      "provider_tokens": {
+        "input_tokens": 165873,
+        "cached_input_tokens": 146048,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1525,
+        "reasoning_output_tokens": 104
+      },
+      "wall_time_ms": 51195.00820909161,
+      "grading_wall_time_ms": 1956.1658749589697
+    },
+    {
+      "trial_id": "trial_plan_71fbd935f6a44ad0963d20a0aef4743b_matthewwithanm__python-markdownify-200_skillrank-markdownify-sol.treatment_fresh-worker_0",
+      "case_id": "matthewwithanm__python-markdownify-200",
+      "canonical_trial_ref": "75b9fe991c91ba1e5cdbfc844afdd3c5079f5c89ae476711b6f39737afa3536d",
+      "canonical_trial_complete": true,
+      "receipt_ref": "f036d7e19829c4bc488eec84a35efc0fc7677d020a0f9cd9fa72210578635012",
+      "worker_cleanup_confirmed": true,
+      "independent_grader_observed": true,
+      "task_grade": true,
+      "task_prompt_bound": true,
+      "token_capture": {
+        "status": "verified",
+        "receipt_ref": "f036d7e19829c4bc488eec84a35efc0fc7677d020a0f9cd9fa72210578635012",
+        "journal_ref": "cc67cbd570ea352571eacb00e8f8d624273e1ac8989a7b4d93eaacc5980bb364",
+        "known_fields": [
+          "input_tokens",
+          "cached_input_tokens",
+          "cache_write_input_tokens",
+          "output_tokens",
+          "reasoning_output_tokens"
+        ],
+        "provider_usage_independently_verified": false,
+        "source": "provider_report",
+        "trust": "self_asserted"
+      },
+      "candidate_loading": {
+        "instructions_loaded": true,
+        "invoked": null,
+        "delivery_complete": false,
+        "snapshot_ref": "546136088732869ae7d74317bb27cc2360a447f5855c1071cadbfb0f5bb44417",
+        "skill_sha256": "e18a979532105161910d8cc7891959a704048b19194e23707828f21bfd8d68ec",
+        "invoke_types": [
+          "explicit",
+          "implicit"
+        ]
+      },
+      "arm": "treatment",
+      "receipt_id": "rcpt_05849f32a63e454aaf72700fb97d1aa6",
+      "score": 1.0,
+      "provider_tokens": {
+        "input_tokens": 176420,
+        "cached_input_tokens": 156544,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1646,
+        "reasoning_output_tokens": 101
+      },
+      "wall_time_ms": 57330.67225001287,
+      "grading_wall_time_ms": 1985.0913749542087
+    }
+  ],
+  "scheduler": {
+    "definition_ref": "c17e4ad90d20e624121f84f1c4f2f9b7957a2f2db4c33e02914e1850098886a3",
+    "process_receipt_ref": "39c5c100c34acbc84147c47498a9cf3197b44976df3c9c0fcc6aa5b1a9b49011",
+    "trial_refs": {
+      "0": "a79285c5f03506496e584ce0139c12edf6721e54391171473183e616a4b8fa33",
+      "1": "75b9fe991c91ba1e5cdbfc844afdd3c5079f5c89ae476711b6f39737afa3536d"
+    },
+    "grade_summaries": {
+      "0": {
+        "passed": 1,
+        "failed": 0,
+        "total": 1,
+        "pass_rate": 1.0,
+        "skipped": 0
+      },
+      "1": {
+        "passed": 1,
+        "failed": 0,
+        "total": 1,
+        "pass_rate": 1.0,
+        "skipped": 0
+      }
+    },
+    "grading_semantics": "SkillRank verdict over the existing protected task-grade certificate",
+    "upstream_timing_is_compatibility_only": true
+  },
+  "proxy_restored_stopped": true,
+  "grant_after": [
+    13912,
+    3809,
+    126854.42371709565,
+    "0.0"
+  ],
+  "new_unresolved_reservations": [],
+  "turns": 2,
+  "matched_provider_token_difference_treatment_minus_control": {
+    "input_tokens": 10547,
+    "cached_input_tokens": 10496,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 121,
+    "reasoning_output_tokens": -3
+  },
+  "token_semantics": "Provider-reported categories with verified receipt and journal binding. Cached and reasoning categories are subsets. Single forced-use engineering diagnostic.",
+  "matching_grade_delta": 0.0,
+  "treatment_wall_time_difference_ms": 6135.664040921256,
+  "candidate_usefulness": "NOT_ASSESSED",
+  "selection_usefulness": "NOT_ASSESSED",
+  "report_file_sha256": {
+    "report.md": "261328dcceabf4e3baf70b83eff99d7df09ae24c899cd25b227820f0a30cc69f",
+    "report.html": "b1e9315e4c32585021b588381191e0fe4345152c0a1b01d9031f423ef94c9935"
+  }
+}
