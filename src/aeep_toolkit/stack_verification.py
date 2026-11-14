@@ -228,6 +228,42 @@ def _observe_component(
                                   "receipt_ref": workflow_record.observations["run_receipt_ref"]}
                            for name in REQUIRED_CHECKS[component]},
             }
+    from .stack_receipts import KIND as RECEIPT_KIND
+    from .stack_receipts import StackReceiptEvidence, verify_receipt_evidence
+
+    for ref in _find_records(repository, RECEIPT_KIND, "component", component):
+        try:
+            retained = _resolve(repository, RECEIPT_KIND, ref, StackReceiptEvidence, reviewed=True)
+            receipts = verify_receipt_evidence(
+                repository, retained, component=component, source=source
+            )
+        except (
+            ConfigurationError,
+            ValidationError,
+            OSError,
+            ValueError,
+            KeyError,
+            sqlite3.Error,
+        ) as error:
+            if blocked is None:
+                blocked = (
+                    str(error)
+                    if isinstance(error, ConfigurationError)
+                    else "component receipt evidence is unavailable or changed"
+                )
+            continue
+        return {
+            "component": component,
+            "functional_status": "VERIFIED",
+            "source_revision": retained.source_revision,
+            "implementation_source": source,
+            "original_source": retained.original_source,
+            "integration_evidence_ref": ref,
+            "checks": {
+                name: {"status": "VERIFIED", "evidence_ref": evidence_ref}
+                for name, evidence_ref in receipts.items()
+            },
+        }
     rows: list[dict[str, Any]] = []
     for definition_ref in _find_records(repository, DEFINITION, "component", component):
         entry: dict[str, Any] = {"definition_ref": definition_ref}
@@ -401,6 +437,20 @@ def main(argv: list[str]) -> None:
                     ref = repository.put(KIND, content_digest(workflow), workflow)
                     result = {"workflow_evidence_ref": ref, "component": args.component,
                               "operator_review_required": True}
+                elif raw.get("schema_version") == "aeep.toolkit.stack-receipt-evidence.v1":
+                    from .stack_receipts import KIND as RECEIPT_KIND
+                    from .stack_receipts import StackReceiptEvidence, verify_receipt_evidence
+
+                    retained = StackReceiptEvidence.model_validate(raw)
+                    verify_receipt_evidence(
+                        repository, retained, component=args.component, source=source
+                    )
+                    ref = repository.put(RECEIPT_KIND, content_digest(retained), retained)
+                    result = {
+                        "integration_evidence_ref": ref,
+                        "component": args.component,
+                        "operator_review_required": True,
+                    }
                 else:
                     evidence = IntegrationEvidence.model_validate(raw)
                     verify_integration(

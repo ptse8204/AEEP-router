@@ -23,7 +23,9 @@ from aeep.assessment.models import (
 )
 from aeep.assessment.repository import AssessmentRepository
 from aeep.benchmarking import BenchmarkCampaignReport
+from aeep.economic.prepared import executor_fingerprint
 from aeep.errors import ConfigurationError
+from aeep.execution import ExecutionEvidence
 from aeep.hosts.codex_accounting import TOKEN_FIELDS
 from aeep.models import ExecutionReceipt, StrictModel
 from aeep.store import ReceiptStore
@@ -42,7 +44,12 @@ from .workflow_accounting import (
     WorkflowPlanLink,
 )
 from .workflow_runtime import RuntimeLifecycleRecord, lifecycle_preview
-from .workflow_telemetry import ReceiptExportDefinition, campaign_receipt_and_journal
+from .workflow_telemetry import (
+    ReceiptExportDefinition,
+    ReceiptExportRecord,
+    campaign_receipt_and_journal,
+    spec_for,
+)
 
 KIND = "toolkit_workflow_completion_evidence"
 WORKFLOW_COMPONENTS = {
@@ -632,12 +639,12 @@ def _runtime(
     return records
 
 
-def _telemetry(
+def verify_telemetry_receipts(
     repo: AssessmentRepository,
     links: TelemetryLinks,
-    request: EvidenceRequest,
+    configuration: str,
     plan: AssessmentPlan,
-    run: dict[str, Any],
+    report_ref: str,
     originals: dict[str, ExecutionReceipt],
 ) -> dict[str, Any]:
     receipt, charge = _receipt(
@@ -646,9 +653,11 @@ def _telemetry(
     original_ref = receipt.metadata.get("source_receipt_sha256")
     if original_ref not in originals:
         raise ConfigurationError("telemetry transport belongs to a different trial receipt")
-    span = receipt_otlp_preview(originals[original_ref])["payload"]["resourceSpans"][0][
-        "scopeSpans"
-    ][0]["spans"][0]
+    payload = receipt_otlp_preview(originals[original_ref])["payload"]
+    span = payload["resourceSpans"][0]["scopeSpans"][0]["spans"][0]
+    for attribute in span["attributes"]:
+        if attribute["key"] == "aeep.evidence.trust":
+            attribute["value"] = {"stringValue": "canonical_store_receipt"}
     trace_id, span_id = span["traceId"], span["spanId"]
     definition_ref = receipt.metadata.get("definition_ref")
     if not isinstance(definition_ref, str):
@@ -657,7 +666,7 @@ def _telemetry(
         repo.get("toolkit_receipt_export", definition_ref)
     )
     disabled_workflow = _read_workflow(links.disabled_workflow)
-    selected = disabled_workflow.configurations[request.configuration]
+    selected = disabled_workflow.configurations[configuration]
     if selected.telemetry is None or selected.assessment is None:
         raise ConfigurationError("disabled control requires its bound telemetry and plan")
     disabled = ReceiptExportDefinition.model_validate_json(
@@ -666,7 +675,7 @@ def _telemetry(
     scope, off_charge, off_receipt = _wrapper(
         repo,
         links.disabled,
-        configuration=request.configuration,
+        configuration=configuration,
         stage="report",
         workflow=links.disabled_workflow,
     )
@@ -677,7 +686,7 @@ def _telemetry(
         or content_digest(deployment) != enabled.deployment_review_ref
         or deployment.get("port") != enabled.port
         or disabled != enabled.model_copy(update={"enabled": False})
-        or enabled.assessment_report_ref != run["report_ref"]
+        or enabled.assessment_report_ref != report_ref
         or scope.request != disabled.request
         or content_digest(
             AssessmentPlan.model_validate_json(
@@ -721,10 +730,72 @@ def _telemetry(
     )
     route_id = hashlib.sha256(("/api/public/v2/observations?" + query).encode()).hexdigest()[:12]
     observation = json.loads(_file(links.observed_result))
-    result = observation.get("domains", {}).get(request.configuration, observation)
+    result = observation.get("domains", {}).get(configuration, observation)
     review = json.loads(_file(links.observation_review))
-    scope_binding = review.get("scope", {}).get(request.configuration)
-    if isinstance(scope_binding, dict) and "receipt" in scope_binding:
+    scope_binding = review.get("scope", {}).get(configuration)
+    if enabled.schema_version == "aeep.toolkit.receipt-export.v3":
+        transport = ReceiptExportRecord.model_validate(
+            repo.get("toolkit_receipt_export_record", links.transport.operation_id)
+        )
+        original = originals[original_ref]
+        expected_scope = {
+            "task": plan.suite.cases[0].case_id,
+            "receipt_id": original.receipt_id,
+            "source_receipt_sha256": original_ref,
+            "trace_id": trace_id,
+            "span_id": span_id,
+            "minimized_payload_sha256": content_digest(payload),
+        }
+        parent_path = review["service_review"]
+        parent = json.loads(
+            _file(WorkflowFile(path=parent_path, sha256=review["pins"][parent_path]))
+        )
+        journal_ref = receipt.metadata.get("execution_evidence_ref")
+        journal = ExecutionEvidence.model_validate(
+            repo.get("execution_evidence", journal_ref or "")
+        )
+        scoped = (
+            review["scope"] == observation["scope"] == expected_scope
+            and review["implementation_source"] == scope.source_digest
+            and review["pins"][links.disabled_workflow.path] == links.disabled_workflow.sha256
+            and parent["retained_namespace"] == deployment.get("native_service_namespace")
+            and parent["retained_runtime"]["ledger"] == links.store
+            and review["destination"] == "private existing Langfuse on loopback only"
+            and review["max_post_requests"] == 1
+            and review["model_turns"] == 0
+            and receipt.execution_success is True
+            and receipt.status == "success"
+            and receipt.metadata.get("response_contents_not_retained") is True
+            and receipt.metadata.get("acknowledgement") == enabled.acknowledgement
+            and transport
+            == ReceiptExportRecord(
+                definition_ref=definition_ref,
+                deployment_review_ref=enabled.deployment_review_ref,
+                source_receipt_id=original.receipt_id,
+                source_receipt_sha256=original_ref,
+                trace_id=trace_id,
+                span_id=span_id,
+                operation_id=links.transport.operation_id,
+                transport_receipt_ref=links.transport.receipt_ref,
+                executor_fingerprint=executor_fingerprint(spec_for(enabled)),
+                transport_accepted=True,
+            )
+            and receipt.executor_fingerprint == transport.executor_fingerprint
+            and content_digest(journal) == journal_ref
+            and journal.attempt_id == links.transport.operation_id
+            and journal.adapter == "HTTPExecutor"
+            and journal.complete
+            and journal.events[-1].kind == "execution.completed"
+            and observation["passed"] is True
+            and observation["acknowledgement"] == links.transport.receipt_ref
+            and observation["cleanup_verified"] is True
+        )
+        result = expected_scope | {
+            "ingestion_verified": observation["ingestion"],
+            "disabled_export_verified": observation["disablement"],
+            "post_invocations": observation["posts"],
+        }
+    elif isinstance(scope_binding, dict) and "receipt" in scope_binding:
         scoped = scope_binding == {"receipt": original_ref, "trace": trace_id, "span": span_id}
         scoped = scoped and review.get("retained_namespace") == deployment.get(
             "native_service_namespace"
@@ -737,7 +808,7 @@ def _telemetry(
         scoped = (
             review.get("trace_id") == trace_id
             and review.get("export_operation") == receipt.decision_id
-            and parent["scope"][request.configuration]
+            and parent["scope"][configuration]
             == {"receipt": original_ref, "trace": trace_id, "span": span_id}
             and parent.get("retained_namespace") == deployment.get("native_service_namespace")
         )
@@ -834,7 +905,10 @@ def inspect_workflow(
         _runtime(request.lifecycle, request, selected, benchmark, plan) if request.lifecycle else {}
     )
     facts["telemetry"] = [
-        _telemetry(repo, link, request, plan, facts, originals) for link in request.telemetry
+        verify_telemetry_receipts(
+            repo, link, request.configuration, plan, facts["report_ref"], originals
+        )
+        for link in request.telemetry
     ]
     if len(facts["telemetry"]) != len(
         {entry["source_receipt_sha256"] for entry in facts["telemetry"]}

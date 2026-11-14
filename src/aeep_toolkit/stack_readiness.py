@@ -29,6 +29,7 @@ from aeep.models import ExecutionReceipt, ExecutionStatus, StrictModel
 from .models import Digest, Identifier
 
 if TYPE_CHECKING:
+    from .stack_receipts import StackReceiptEvidence
     from .workflow_evidence import WorkflowEvidence
 
 REQUIRED_CHECKS: dict[str, tuple[str, ...]] = {
@@ -311,7 +312,7 @@ def verify_integration(
 
 def require_integration(
     repository: AssessmentRepository, digest: str, *, component: str, source_digest: str
-) -> IntegrationEvidence | WorkflowEvidence:
+) -> IntegrationEvidence | WorkflowEvidence | StackReceiptEvidence:
     if component in {"workflow-document-data", "workflow-software-engineering"}:
         with repository.store._lock:
             workflow = repository.store._connection.execute(
@@ -324,6 +325,18 @@ def require_integration(
             record = _resolve(repository, KIND, digest, WorkflowEvidence, reviewed=True)
             verify_workflow(repository, record, component=component, source=source_digest)
             return record
+    from .stack_receipts import KIND, StackReceiptEvidence, verify_receipt_evidence
+
+    with repository.store._lock:
+        retained = repository.store._connection.execute(
+            "SELECT 1 FROM assessment_records WHERE kind=? AND digest=?", (KIND, digest)
+        ).fetchone()
+    if retained is not None:
+        retained_record = _resolve(repository, KIND, digest, StackReceiptEvidence, reviewed=True)
+        verify_receipt_evidence(
+            repository, retained_record, component=component, source=source_digest
+        )
+        return retained_record
     evidence = _resolve(repository, "toolkit_integration_evidence", digest, IntegrationEvidence)
     verify_integration(repository, evidence, component=component, source_digest=source_digest)
     return evidence

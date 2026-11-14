@@ -1,0 +1,222 @@
+{
+  "schema_version": "aeep.operator.toolkit-boundary-repeat.v1",
+  "purpose": "Revalidate two local execution boundaries without replaying historical model trials.",
+  "implementation_source": "1a51bddce06f4c299acca3f5fab99bb8111f023ed3af1830c153731f7b30918e",
+  "expires_at": "2026-11-16T03:22:00+00:00",
+  "prepared_by": {
+    "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/canonical-stack-receipts-20261114/prepare-boundary-repeat.py",
+    "sha256": "cfe8c5d208add357d499b18adfbff121b26773bcf633a2b544044e8c717b9d81"
+  },
+  "driver": {
+    "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/canonical-stack-receipts-20261114/run-boundary-repeat.py",
+    "sha256": "ae32dc601ef39858520e9a13e6354f06558aba00f64eee1789a8c61147b3753d"
+  },
+  "scanner": {
+    "original_review": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/scanner-fixture-continuation-20261103/operation-review.json",
+      "sha256": "6265bd497353c79b9aa78a7f6072e492deedd8ce4934d9639f2e9c3c8df040dd"
+    },
+    "historical_scan": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/scanner-fixture-continuation-20261103/cli-execution/scan.json",
+      "sha256": "0dc29c5ca3697083190ad8e70ced1bbaca310309281cf02646201d1cf2b1b4e7"
+    },
+    "runtime_image": "sha256:1cf3c4405db2f9b4721a35e10534f72a6b428fda49b3ee1114ef27d4f8a17eb4 linux/arm64",
+    "executable_change": {
+      "/Applications/Docker.app/Contents/Resources/bin/docker": {
+        "original": "a6822407e207ff0b687419ccbe55700ffbf389d77de58ef625b3b1790d88747c",
+        "current": "8be48df662c5ced38738e7e5dd7f82611a55565f165787cfecebbe416b321b50"
+      }
+    },
+    "baselines": {
+      "scan": {
+        "root": "e0cce7904426e641357f1bc76ab56ab2c7405c3d3b43f635bc45027430f1dc87",
+        "predecessor": "8a9df09da3cb3da9e1973687b0e476090515c72f1d44c81301546dbe6d293ed5",
+        "limits": {
+          "max_operations": 3,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        },
+        "counters": [
+          0,
+          3,
+          0,
+          6.1579216667450964,
+          "0"
+        ],
+        "other_plan_reservations_preserved": [],
+        "expires_at": "2026-11-09T22:25:29.231445+00:00"
+      },
+      "wrapper": {
+        "root": "b73e0fc3849e129deac664f6d49494dda78de1e30fbbe73dcfe2a6178f9911dc",
+        "predecessor": null,
+        "limits": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 30.0,
+          "max_cash_usd": "0"
+        },
+        "counters": [
+          0,
+          1,
+          0,
+          0.19424441596493125,
+          "0"
+        ],
+        "other_plan_reservations_preserved": [],
+        "expires_at": "2026-11-09T22:25:29.232023+00:00"
+      }
+    },
+    "database": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-scanner-20261102/canonical.sqlite3",
+    "runtime": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-receipts-20261114/native-and-scanner-review/scanner-runtime.json",
+      "sha256": "01e9e2444d0259a8ee481f276ca08fc97e9375be8244b4023cca49344d78821c"
+    },
+    "workflow": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-receipts-20261114/native-and-scanner-review/cli-workflow.json",
+      "sha256": "20cfc86e1826d7692b5095e49b238dbcb919099428dc465832efd81dd31e7ed1"
+    },
+    "accounting": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-receipts-20261114/native-and-scanner-review/cli-accounting.json",
+      "sha256": "7f5fa9f2ed0cffa87407f395bd5a9f5c8dd074d5fff30a8cdfd3f682640c063d"
+    },
+    "manifest": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/scanner-fixture-continuation-20261103/cli-manifest.json",
+      "sha256": "89168c55ae92ef4c221d576b6cc8e16a879441ef1e34a49549d0cdcdf4bb23de"
+    },
+    "operation_key": "cisco-readiness-1a51bddce0",
+    "preview": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-receipts-20261114/native-and-scanner-review/cli-preview.json",
+      "sha256": "a22973f1febd7521d9431e2094ec60bbcc30ec86af9e89dd384223cdf4a46a99"
+    },
+    "review_sha256": "19f2cbdbb60d5453e018029382e9e22ddb2bf6b77c25813e08f940123c4ca27e",
+    "maximum_additional_operations": 2,
+    "maximum_reserved_seconds": 195,
+    "command": [
+      "workflow",
+      "scan",
+      "--workflow",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-receipts-20261114/native-and-scanner-review/cli-workflow.json",
+      "--configuration",
+      "document-data",
+      "--accounting",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-receipts-20261114/native-and-scanner-review/cli-accounting.json",
+      "--operation-id",
+      "cisco-readiness-1a51bddce0",
+      "--reviewed-digest",
+      "19f2cbdbb60d5453e018029382e9e22ddb2bf6b77c25813e08f940123c4ca27e"
+    ],
+    "acceptance": "Ordinary CLI finds the exact pinned image and returns a canonical analyzer receipt and settled exclusive wrapper. Abort and retain records if verified cleanup or accounting is absent."
+  },
+  "agent_skill_eval": {
+    "database": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/aeep.sqlite3",
+    "baseline": {
+      "root": "7cf37077213dd84d02ffb6c8c1106930ecec04d4337780454f6ac308b0bef659",
+      "predecessor": "936c036876376d7f456fa0ab3fcc55e2397e497a72f5254755d6380de0f55913",
+      "limits": {
+        "max_operations": 50000,
+        "max_model_turns": 6000,
+        "max_elapsed_seconds": 604800.0,
+        "max_cash_usd": "0"
+      },
+      "counters": [
+        0,
+        13927,
+        3809,
+        126868.15358930455,
+        "0.0"
+      ],
+      "other_plan_reservations_preserved": [
+        "assessment_12735a46eb364c9c9cd2aa4868f290e1:report",
+        "conformance_probe_85882b1252ac409aa073fcb3c33b87bb-native-client"
+      ],
+      "expires_at": "2026-11-16T03:23:44.656789+00:00"
+    },
+    "request": {
+      "schema_version": "assessment.conformance-request.v1",
+      "plan_id": "conformance_probe_ase_sdk_contract_20261103",
+      "subject_digest": "7d55aaaca899f2e4e4a37f12782681a65d8596cd471e0b44308ffc53e5693f7c",
+      "recipe_digest": "dc2ef7a27918200d748fa2891aae9af264512cafa3481ae6e769f28d50c25f09",
+      "mapping_digest": "dc2ef7a27918200d748fa2891aae9af264512cafa3481ae6e769f28d50c25f09",
+      "environment_digest": "13bfce67fbcf1eebf274dd9e118bd4ed0635c4f9e310a976d33986857649944a",
+      "authorization_id": "onboarding",
+      "definition_digests": [
+        "7d55aaaca899f2e4e4a37f12782681a65d8596cd471e0b44308ffc53e5693f7c",
+        "dc2ef7a27918200d748fa2891aae9af264512cafa3481ae6e769f28d50c25f09",
+        "13bfce67fbcf1eebf274dd9e118bd4ed0635c4f9e310a976d33986857649944a"
+      ],
+      "worker_digest": "13bfce67fbcf1eebf274dd9e118bd4ed0635c4f9e310a976d33986857649944a",
+      "executable_dependencies": {
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-engineering-tools-20261103/bin/git": "c5f19006e8d461f2151a8fc354ba2c0df135f11ee88d012792343099fb7fb051"
+      }
+    },
+    "operation_id": "conformance_probe_ase_sdk_contract_20261103:native-readiness-1a51bddce0",
+    "historical_scheduler": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/integration-snapshot-correction-20261103/scheduler.json",
+      "sha256": "b25373bf4fc849f20789b97c599108b52295fab9f02f489106b59233bc060c91"
+    },
+    "historical_profile": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/ase-controlled-workflow-20261103/scheduler.sb",
+      "sha256": "ba12252ffbe4abbfde8ecb4e8a4ed3ec6c152ffa6522041f396e0a081bfd8bd6"
+    },
+    "historical_native_control": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/ase-controlled-workflow-20261103/native-controls.json",
+      "sha256": "84540369eb1eba15b5ed23db684dfb67aeb80600687f94b4e5f50e1734273482"
+    },
+    "historical_definition_ref": "87c7fb76c223579a8f76f0c66c89113b56969f6225d7738eecae34690792a67b",
+    "executable_change": {
+      "/usr/bin/sandbox-exec": {
+        "original": "e3d7a792c58a5d3783d2f7274c82d70062393830d8cb1ded713ca554a470bd2f",
+        "current": "10cf4a46a575e4747d2419cf343800db0d11ae6e6e9b8415998d3d8f336b2a92"
+      }
+    },
+    "runtime_tree_sha256": "060c9a90b8b95a6757376420936321f7d752dfeb7d2a0e30e5516715cc38ccb4",
+    "current_profile": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-receipts-20261114/native-and-scanner-review/scheduler-native-study.sb",
+      "sha256": "fce19844a80f8a62b4c081258a82c7660abad6fa0a77e81494ffada1ede93eb6"
+    },
+    "probe": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/ase-controlled-workflow-20261103/native-check.py",
+      "sha256": "0b29c243040f3a5afc1b180d9b8908f2ce32ac5dff89cbee64383f82f4940086"
+    },
+    "git": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-controlled-workflow-20261103/tools/git",
+      "sha256": "00070481d75ec2b022c932121c0738c5d41a2811130f5cbb6cf51656a6143b3f"
+    },
+    "command": [
+      "/usr/bin/sandbox-exec",
+      "-f",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-receipts-20261114/native-and-scanner-review/scheduler-native-study.sb",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/upstream-stack-runtimes-20261102/corrected-composed-runtime/bin/python",
+      "-I",
+      "-B",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/ase-controlled-workflow-20261103/native-check.py"
+    ],
+    "workspace": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-receipts-20261114/native-and-scanner-review/ase-native-probe",
+    "workspace_tree_sha256": "11aa65046544675744c7a0bfc9130c0f75667938e9f8a105944acf608337a7ab",
+    "environment": {
+      "PATH": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-controlled-workflow-20261103/tools:/usr/bin:/bin",
+      "HOME": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-receipts-20261114/native-and-scanner-review/ase-native-probe/home",
+      "TMPDIR": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-receipts-20261114/native-and-scanner-review/ase-native-probe/tmp",
+      "LC_ALL": "C",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "stdin": {
+      "outside": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-receipts-20261114/native-and-scanner-review/outside-read-canary.txt",
+      "outside_write": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-receipts-20261114/native-and-scanner-review/denied-write",
+      "git": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-controlled-workflow-20261103/tools/git"
+    },
+    "outside_canary": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-receipts-20261114/native-and-scanner-review/outside-read-canary.txt",
+      "sha256": "e20f108aa129085689a3a9c4444afed33d369966433645e58fdaf882ff3665e1"
+    },
+    "maximum_additional_operations": 1,
+    "maximum_reserved_seconds": 35,
+    "acceptance": "Six first-party native isolation/Git observations with verified process exit, journal and settled charge. Exact dependency bridge is used for current readiness after validation. Historical plan and model receipt remain bound to the original scheduler."
+  },
+  "model_turns": 0,
+  "maximum_cash_usd": 0,
+  "network_downloads": 0,
+  "accounting": "Use the existing scanner/ASE grants with exact finite zero-model amendments and preserved predecessor and counters. Native workspace is retained. Scanner cleanup is owned and identity checked.",
+  "limits": "One ordinary static scan and one first-party native boundary check. No retry, provider disclosure, sign-in, credential access, image build/pull/deletion, package install, comparison, admission or release."
+}

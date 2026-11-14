@@ -186,6 +186,18 @@ path before selecting it for a comparison. Component installation, provider
 access and comparison authority have separate controls. Historical reports keep
 their original source and runtime bindings.
 
+### Register retained component receipts
+
+The [retained component receipt record](../../schemas/toolkit-stack-receipt-evidence.schema.json)
+binds the current implementation, the original source and the reviewed
+upstream revision. Supported proofs resolve retained execution and settlement
+evidence for the selected component. Run `stack-verify record` with this
+record, then review the returned digest through the usual `aeep assess review`
+command. `stack-status` revalidates the proof and shows evidence references
+for each accepted check. An exact review of retained evidence cannot authorize
+an execution. See the [receipt audit](../../reports/toolkit-v2/c13/canonical-stack-receipts-20261114/README.md)
+for the component coverage and retained host prerequisites.
+
 ### Register a completed workflow without replay
 
 Use `workflow evidence` on a completed ordinary CLI run to prepare the two

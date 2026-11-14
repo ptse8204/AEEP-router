@@ -1,5 +1,23 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- retained-stack-receipts-20261114:start -->
+**November 14. The managed CLI accepts 33 of 39 required readiness checks.**
+
+The [registration audit](../../reports/toolkit-v2/c13/canonical-stack-receipts-20261114/README.md)
+records the four telemetry checks, both composed workflows and the retained
+evidence for the other accepted entries. The managed ledger added exact
+evidence and reviews. All prior rows, counters and reservations were
+preserved. Both full source test runs, both branch coverage gates and the
+wheel and source distribution builds passed. The offline docs pass remains
+bound to its original 72 inputs.
+
+C13 remains open. The Cisco scan needs a repeat with the current Docker
+binary. The agent-skill-eval native boundary needs a check with the current
+macOS sandbox launcher. The paired exact review passed preflight and awaits
+repeat approval. Waza still requires protected operator sign-in and supported
+backend grading. Comparisons remain paused.
+<!-- retained-stack-receipts-20261114:end -->
+
 <!-- excel-acknowledgement-20261114:start -->
 **November 14. Langfuse acknowledges the Excel receipt and verifies ingestion.**
 

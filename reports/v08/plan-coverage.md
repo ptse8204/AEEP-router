@@ -1,5 +1,15 @@
 # 0.8 plan coverage and remaining work
 
+<!-- retained-stack-receipts-20261114:start -->
+The [C13 retained receipt audit](../toolkit-v2/c13/canonical-stack-receipts-20261114/README.md)
+records 33 of 39 current-source functional readiness checks in the managed
+ledger. Langfuse queue acknowledgement, linked readback and export disablement
+are separately verified. Both composed workflow records and all original
+charges are preserved. Cisco and agent-skill-eval need the reviewed local
+boundary checks. Waza needs protected setup and a live backend grade. C13,
+candidate usefulness, selection usefulness and release remain open.
+<!-- retained-stack-receipts-20261114:end -->
+
 <!-- offline-docs-pipe-20261114:start -->
 The [approved offline docs retry](../toolkit-v2/c13/canonical-stack-verification-20261114/docs-pipe-result.json)
 passed on all 72 bound inputs. Markdownlint reported zero issues and Lychee

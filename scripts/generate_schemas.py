@@ -195,6 +195,7 @@ from aeep_toolkit.models import (
 )
 from aeep_toolkit.selection import SelectionEvaluation
 from aeep_toolkit.sponsors import SponsorReview
+from aeep_toolkit.stack_receipts import StackReceiptEvidence
 from aeep_toolkit.state_benchmarks import MCPStatePack
 from aeep_toolkit.storage import StorageReserveException
 from aeep_toolkit.workflow import EvaluationWorkflow, StackWorkflow
@@ -208,6 +209,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_DIR = ROOT / "schemas"
 
 MODEL_FILES = {
+    "toolkit-stack-receipt-evidence.schema.json": StackReceiptEvidence,
     "toolkit-workflow-evidence-request.schema.json": EvidenceRequest,
     "toolkit-workflow-completion-evidence.schema.json": WorkflowEvidence,
     "toolkit-receipt-export.schema.json": ReceiptExportDefinition,

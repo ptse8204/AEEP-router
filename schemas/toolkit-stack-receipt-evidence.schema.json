@@ -1,0 +1,670 @@
+{
+  "$defs": {
+    "MCPReferenceProof": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "mcp_reference",
+          "title": "Kind",
+          "type": "string"
+        },
+        "review": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "prepared": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "result": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "receipts": {
+          "patternProperties": {
+            "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$": {
+              "$ref": "#/$defs/OperationLink"
+            }
+          },
+          "title": "Receipts",
+          "type": "object"
+        }
+      },
+      "required": [
+        "kind",
+        "review",
+        "prepared",
+        "result",
+        "receipts"
+      ],
+      "title": "MCPReferenceProof",
+      "type": "object"
+    },
+    "ManagedProof": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "managed",
+          "title": "Kind",
+          "type": "string"
+        },
+        "report_ref": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Report Ref",
+          "type": "string"
+        },
+        "recovery_ref": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Recovery Ref",
+          "type": "string"
+        },
+        "recovery_source": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Recovery Source",
+          "type": "string"
+        },
+        "recovery_audit": {
+          "$ref": "#/$defs/WorkflowFile"
+        }
+      },
+      "required": [
+        "kind",
+        "report_ref",
+        "recovery_ref",
+        "recovery_source",
+        "recovery_audit"
+      ],
+      "title": "ManagedProof",
+      "type": "object"
+    },
+    "OperationLink": {
+      "additionalProperties": false,
+      "properties": {
+        "operation_id": {
+          "title": "Operation Id",
+          "type": "string"
+        },
+        "receipt_ref": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Receipt Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operation_id",
+        "receipt_ref"
+      ],
+      "title": "OperationLink",
+      "type": "object"
+    },
+    "ProposalProof": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "proposal",
+          "title": "Kind",
+          "type": "string"
+        },
+        "review": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "result": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "validator": {
+          "$ref": "#/$defs/OperationLink"
+        }
+      },
+      "required": [
+        "kind",
+        "review",
+        "result",
+        "validator"
+      ],
+      "title": "ProposalProof",
+      "type": "object"
+    },
+    "RouterProof": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "router",
+          "title": "Kind",
+          "type": "string"
+        },
+        "review": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "result": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "store": {
+          "title": "Store",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "review",
+        "result",
+        "store"
+      ],
+      "title": "RouterProof",
+      "type": "object"
+    },
+    "SDKProof": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "sdk",
+          "title": "Kind",
+          "type": "string"
+        },
+        "review": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "result": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "process_store": {
+          "title": "Process Store",
+          "type": "string"
+        },
+        "process_receipt_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+          "title": "Process Receipt Id",
+          "type": "string"
+        },
+        "process_receipt_ref": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Process Receipt Ref",
+          "type": "string"
+        },
+        "step_store": {
+          "title": "Step Store",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "review",
+        "result",
+        "process_store",
+        "process_receipt_id",
+        "process_receipt_ref",
+        "step_store"
+      ],
+      "title": "SDKProof",
+      "type": "object"
+    },
+    "ScannerProof": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "scanner",
+          "title": "Kind",
+          "type": "string"
+        },
+        "store": {
+          "title": "Store",
+          "type": "string"
+        },
+        "scan_ref": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Scan Ref",
+          "type": "string"
+        },
+        "configuration": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+          "title": "Configuration",
+          "type": "string"
+        },
+        "workflow": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "wrapper": {
+          "$ref": "#/$defs/OperationLink"
+        }
+      },
+      "required": [
+        "kind",
+        "store",
+        "scan_ref",
+        "configuration",
+        "workflow",
+        "wrapper"
+      ],
+      "title": "ScannerProof",
+      "type": "object"
+    },
+    "ScheduledProof": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "scheduled",
+          "title": "Kind",
+          "type": "string"
+        },
+        "report_ref": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Report Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "report_ref"
+      ],
+      "title": "ScheduledProof",
+      "type": "object"
+    },
+    "SkillRankProof": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "skillrank",
+          "title": "Kind",
+          "type": "string"
+        },
+        "catalog_store": {
+          "title": "Catalog Store",
+          "type": "string"
+        },
+        "catalog_source": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Catalog Source",
+          "type": "string"
+        },
+        "search_ref": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Search Ref",
+          "type": "string"
+        },
+        "show_ref": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Show Ref",
+          "type": "string"
+        },
+        "diagnostic_report_ref": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Diagnostic Report Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "catalog_store",
+        "catalog_source",
+        "search_ref",
+        "show_ref",
+        "diagnostic_report_ref"
+      ],
+      "title": "SkillRankProof",
+      "type": "object"
+    },
+    "SkillsBenchProof": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "skillsbench",
+          "title": "Kind",
+          "type": "string"
+        },
+        "verifier_store": {
+          "title": "Verifier Store",
+          "type": "string"
+        },
+        "runs": {
+          "patternProperties": {
+            "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$": {
+              "$ref": "#/$defs/SkillsBenchRun"
+            }
+          },
+          "title": "Runs",
+          "type": "object"
+        },
+        "verifiers": {
+          "patternProperties": {
+            "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$": {
+              "$ref": "#/$defs/VerifierControl"
+            }
+          },
+          "title": "Verifiers",
+          "type": "object"
+        }
+      },
+      "required": [
+        "kind",
+        "verifier_store",
+        "runs",
+        "verifiers"
+      ],
+      "title": "SkillsBenchProof",
+      "type": "object"
+    },
+    "SkillsBenchRun": {
+      "additionalProperties": false,
+      "properties": {
+        "report_ref": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Report Ref",
+          "type": "string"
+        },
+        "original_source": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Original Source",
+          "type": "string"
+        },
+        "pack": {
+          "$ref": "#/$defs/WorkflowFile"
+        }
+      },
+      "required": [
+        "report_ref",
+        "original_source",
+        "pack"
+      ],
+      "title": "SkillsBenchRun",
+      "type": "object"
+    },
+    "SponsorsProof": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "sponsors",
+          "title": "Kind",
+          "type": "string"
+        },
+        "integration_evidence_ref": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Integration Evidence Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "integration_evidence_ref"
+      ],
+      "title": "SponsorsProof",
+      "type": "object"
+    },
+    "TelemetryLinks": {
+      "additionalProperties": false,
+      "properties": {
+        "store": {
+          "title": "Store",
+          "type": "string"
+        },
+        "readback": {
+          "$ref": "#/$defs/OperationLink"
+        },
+        "transport": {
+          "$ref": "#/$defs/OperationLink"
+        },
+        "disabled": {
+          "$ref": "#/$defs/OperationLink"
+        },
+        "disabled_workflow": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "observation_review": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "observed_result": {
+          "$ref": "#/$defs/WorkflowFile"
+        }
+      },
+      "required": [
+        "store",
+        "readback",
+        "transport",
+        "disabled",
+        "disabled_workflow",
+        "observation_review",
+        "observed_result"
+      ],
+      "title": "TelemetryLinks",
+      "type": "object"
+    },
+    "TelemetryProof": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "telemetry",
+          "title": "Kind",
+          "type": "string"
+        },
+        "configuration": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+          "title": "Configuration",
+          "type": "string"
+        },
+        "export_record_ref": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Export Record Ref",
+          "type": "string"
+        },
+        "receipts": {
+          "$ref": "#/$defs/TelemetryLinks"
+        }
+      },
+      "required": [
+        "kind",
+        "configuration",
+        "export_record_ref",
+        "receipts"
+      ],
+      "title": "TelemetryProof",
+      "type": "object"
+    },
+    "ToolHiveProof": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "toolhive",
+          "title": "Kind",
+          "type": "string"
+        },
+        "review": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "result": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "boundary": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "listener": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "receipts": {
+          "patternProperties": {
+            "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$": {
+              "$ref": "#/$defs/OperationLink"
+            }
+          },
+          "title": "Receipts",
+          "type": "object"
+        }
+      },
+      "required": [
+        "kind",
+        "review",
+        "result",
+        "boundary",
+        "listener",
+        "receipts"
+      ],
+      "title": "ToolHiveProof",
+      "type": "object"
+    },
+    "VerifierControl": {
+      "additionalProperties": false,
+      "properties": {
+        "review": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "reference": {
+          "$ref": "#/$defs/OperationLink"
+        },
+        "negative": {
+          "$ref": "#/$defs/OperationLink"
+        },
+        "reference_result": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "negative_result": {
+          "$ref": "#/$defs/WorkflowFile"
+        }
+      },
+      "required": [
+        "review",
+        "reference",
+        "negative",
+        "reference_result",
+        "negative_result"
+      ],
+      "title": "VerifierControl",
+      "type": "object"
+    },
+    "WorkflowFile": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "title": "WorkflowFile",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.toolkit.stack-receipt-evidence.v1",
+      "default": "aeep.toolkit.stack-receipt-evidence.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "component": {
+      "enum": [
+        "langfuse",
+        "semantic-conventions",
+        "github-sponsors",
+        "skill-scanner",
+        "mcpmark",
+        "mcp-universe",
+        "toolhive",
+        "skillrank",
+        "agent-skill-eval",
+        "aeep-evaluator",
+        "skillsbench",
+        "langgraph",
+        "agent-framework",
+        "evoagentx",
+        "aflow",
+        "aeep-router"
+      ],
+      "title": "Component",
+      "type": "string"
+    },
+    "source_revision": {
+      "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$",
+      "title": "Source Revision",
+      "type": "string"
+    },
+    "implementation_source": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Implementation Source",
+      "type": "string"
+    },
+    "original_source": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Original Source",
+      "type": "string"
+    },
+    "compatibility_basis": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "title": "Compatibility Basis",
+      "type": "string"
+    },
+    "proof": {
+      "discriminator": {
+        "mapping": {
+          "managed": "#/$defs/ManagedProof",
+          "mcp_reference": "#/$defs/MCPReferenceProof",
+          "proposal": "#/$defs/ProposalProof",
+          "router": "#/$defs/RouterProof",
+          "scanner": "#/$defs/ScannerProof",
+          "scheduled": "#/$defs/ScheduledProof",
+          "sdk": "#/$defs/SDKProof",
+          "skillrank": "#/$defs/SkillRankProof",
+          "skillsbench": "#/$defs/SkillsBenchProof",
+          "sponsors": "#/$defs/SponsorsProof",
+          "telemetry": "#/$defs/TelemetryProof",
+          "toolhive": "#/$defs/ToolHiveProof"
+        },
+        "propertyName": "kind"
+      },
+      "oneOf": [
+        {
+          "$ref": "#/$defs/TelemetryProof"
+        },
+        {
+          "$ref": "#/$defs/SponsorsProof"
+        },
+        {
+          "$ref": "#/$defs/ScannerProof"
+        },
+        {
+          "$ref": "#/$defs/MCPReferenceProof"
+        },
+        {
+          "$ref": "#/$defs/ToolHiveProof"
+        },
+        {
+          "$ref": "#/$defs/SkillRankProof"
+        },
+        {
+          "$ref": "#/$defs/ScheduledProof"
+        },
+        {
+          "$ref": "#/$defs/ManagedProof"
+        },
+        {
+          "$ref": "#/$defs/SkillsBenchProof"
+        },
+        {
+          "$ref": "#/$defs/SDKProof"
+        },
+        {
+          "$ref": "#/$defs/ProposalProof"
+        },
+        {
+          "$ref": "#/$defs/RouterProof"
+        }
+      ],
+      "title": "Proof"
+    }
+  },
+  "required": [
+    "component",
+    "source_revision",
+    "implementation_source",
+    "original_source",
+    "compatibility_basis",
+    "proof"
+  ],
+  "title": "StackReceiptEvidence",
+  "type": "object"
+}

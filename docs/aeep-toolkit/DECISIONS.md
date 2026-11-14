@@ -3516,3 +3516,14 @@ The canonical readiness record binds the current implementation and carries
 forward the earlier source hashes under an exact compatibility review. Changes
 to bound evidence or the implementation require a new review. Stack assembly
 and comparison dispatch retain their own approval steps.
+
+## D198. Register verified component receipts without replay
+
+Use typed component evidence to join real upstream executions to the current
+readiness checklist. Store each original implementation fingerprint, upstream
+version and receipt reference under a new exact review. The validator resolves
+the existing receipts, journals and settled accounting before accepting any
+check. The new review covers compatibility of the evidence with the current
+gate. Execution authority stays with the original grants and reviewed inputs.
+Runtime drift leaves the affected check open. See the
+[C13 retained receipt audit](../../reports/toolkit-v2/c13/canonical-stack-receipts-20261114/README.md).
