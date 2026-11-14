@@ -1,5 +1,29 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- skillrank-and-domain-telemetry-20261113:start -->
+**November 13. SkillRank's real diagnostic passed. Domain telemetry is staged.**
+
+Review `308bfc3e` ran the real SkillRank scheduler with two isolated GPT-6.1 Sol
+medium turns on Markdownify. Both protected grades were 1/1, and both receipts,
+the scheduler certificate record and teardown settled. The required-use arm
+reported 10,547 more input and 121 more output tokens. The instructions loaded;
+the independent invocation field remains unknown. This is one engineering pair.
+[Result](../../reports/toolkit-v2/c13/skillrank-managed-diagnostic-20261107/README.md)
+
+The export CLI now resolves a selected campaign receipt from the original
+attempt store. It verified six original receipt hashes read-only. Both retained
+task packages passed current installation readiness. Six earlier setup,
+readiness and selective-removal operations match their original ledger receipts.
+Both domain telemetry definitions are staged for live export/readback.
+[Domain evidence](../../reports/toolkit-v2/c13/canonical-stack-verification-20261113/README.md)
+
+The [latest ledger snapshot](../../reports/toolkit-v2/c13/canonical-stack-verification-20261113/readiness-after-telemetry.json)
+keeps the new-source gate closed. The two Sponsors checks and SkillRank managed
+diagnostic bind the preceding source. Preserve these results without replaying
+the models. Waza still needs the refreshed [operator sign-in](../../reports/toolkit-v2/c13/waza-native-backend-20261104/operator-setup-20261113/README.md).
+C13 remains open and comparisons remain paused.
+<!-- skillrank-and-domain-telemetry-20261113:end -->
+
 <!-- canonical-stack-verification-20261113:start -->
 **November 13. Prefix Cache settled and the canonical stack gate is runnable.**
 

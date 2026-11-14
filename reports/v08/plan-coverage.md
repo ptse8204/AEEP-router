@@ -1,5 +1,18 @@
 # 0.8 plan coverage and remaining work
 
+<!-- skillrank-and-domain-telemetry-20261113:start -->
+The [SkillRank diagnostic](../toolkit-v2/c13/skillrank-managed-diagnostic-20261107/README.md)
+settled two GPT-6.1 Sol medium turns and both protected grades. Scope is one
+required-use engineering pair. No utility or selection claim follows.
+Campaign telemetry now binds the exact original assessment receipt; the six
+real receipt resolutions and both selected domain drafts passed offline.
+Live domain export and readback remain pending. Waza sign-in is operator-only.
+The earlier complete 13-check source run passed at 82.726% coverage. Current
+telemetry source verification is in progress. The approved docs continuation
+stopped before execution because one documentation file changed after review.
+[Verification records](../toolkit-v2/c13/canonical-stack-verification-20261113/README.md)
+<!-- skillrank-and-domain-telemetry-20261113:end -->
+
 <!-- canonical-stack-verification-20261113:start -->
 The [stack verification increment](../toolkit-v2/c13/canonical-stack-verification-20261113/README.md)
 adds operator CLI production and read-only inspection for existing canonical

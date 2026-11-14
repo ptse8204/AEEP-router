@@ -11,7 +11,7 @@ from pathlib import Path
 from aeep.assessment.models import AssessmentPlan, RecipeMaterializationRequest, content_digest
 from aeep.assessment.repository import AssessmentRepository
 from aeep.assessment.verification import verification_source_digest
-from aeep.models import Manifest
+from aeep.models import Manifest, StrictModel
 from aeep.store import ReceiptStore
 from aeep.telemetry import receipt_otlp_preview
 from aeep_toolkit.cli import main as cli
@@ -24,6 +24,13 @@ C13 = HERE.parent
 PREVIOUS = C13 / "langfuse-ingestion-readback-20261105/operation-review.json"
 OPERATOR_WORKFLOW = ROOT / ".aeep/skillsbench-workflow-runtime-20261105/operator-workflow.json"
 PREFIX = C13 / "skillsbench-software-substitute-20261109/managed-preparation/managed-engineering/operation-review.json"
+
+
+class DeploymentBinding(StrictModel):
+    prior_review_sha256: str
+    native_service_namespace: str
+    port: int
+    fixed_purpose: str
 
 
 def read(path):
@@ -53,6 +60,10 @@ def prepare(work):
     work.mkdir(mode=0o700)
     source = verification_source_digest(ROOT)
     ancestor = read(PREVIOUS)
+    deployment = DeploymentBinding(
+        prior_review_sha256=sha(PREVIOUS), native_service_namespace="aeep-langfuse-loopback-20261105",
+        port=39067, fixed_purpose="two original SkillsBench trial-receipt traces, private loopback only",
+    )
     route = read(OPERATOR_WORKFLOW)
     outcomes = read(HERE / "skillsbench-engineering-outcomes.json")
     database = Path(read(PREFIX)["database"])
@@ -79,7 +90,7 @@ def prepare(work):
             )
             definition = ReceiptExportDefinition(
                 schema_version="aeep.toolkit.receipt-export.v2", request=request, port=39067,
-                enabled=True, deployment_review_ref=sha(PREVIOUS), assessment_report_ref=report_ref,
+                enabled=True, deployment_review_ref=content_digest(deployment), assessment_report_ref=report_ref,
             )
             receipt = campaign_receipt(repo, report_ref, row["receipt_id"], plan, request)
             assert content_digest(receipt) == row["receipt_ref"]
@@ -115,6 +126,7 @@ def prepare(work):
                 "minimized_payload_sha256":content_digest(otlp["payload"]),"variants":items,
             }
     return {"implementation_source":source,"database":str(database),"manifest":manifest_ref,
+            "deployment":deployment.model_dump(mode="json"),"deployment_ref":content_digest(deployment),
             "previous_local_deployment_review":sha(PREVIOUS),"retained_service_count":len(ancestor["lifecycle"]["restart_exact_retained_services"]),
             "configurations":config_refs,"models":0,"exports_started":0,
             "status":"OFFLINE_PREPARATION_ONLY; live service review required","comparisons":"PAUSED"}
