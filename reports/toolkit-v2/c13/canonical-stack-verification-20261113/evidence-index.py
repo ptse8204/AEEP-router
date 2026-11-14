@@ -12,11 +12,12 @@ OBSERVATIONS = {
         "Actual controlled dispatch and grading were reconciled. The current stack has no linked readiness probe."),
     "aeep-evaluator": (["integration-snapshot-correction-20261103/completion-audit.json"],
         "Actual managed engine and canonical recovery evidence exist. Register provenance through the current verification path."),
-    "waza": (["waza-native-backend-20261104/summary.json"],
-        "Native client passed version and containment. Operator sign-in and real backend grades are outstanding."),
+    "waza": (["waza-native-backend-20261104/summary.json", "waza-native-backend-20261104/backend-fixture/preflight.json"],
+        "Native client passed version and containment. The first-party task is ready for review. Operator sign-in and real backend grades are outstanding."),
     "skillrank": (["skillrank-cli-continuation-20261104/runtime-execution/summary.json",
-                   "skillrank-managed-diagnostic-20261107/managed-result.json"],
-        "Real search/show and the paired managed diagnostic passed. The gate still needs current canonical bindings for the catalog and scheduler receipts."),
+                   "skillrank-managed-diagnostic-20261107/managed-result.json",
+                   "canonical-stack-verification-20261113/skillrank-ledger-audit.json"],
+        "Real search/show and the paired managed diagnostic passed. Their original ledgers verified read-only. The gate still needs current canonical bindings."),
     "skillsbench": (["canonical-stack-verification-20261113/skillsbench-engineering-outcomes.json"],
         "Six per-task CLI engineering results exist. The current gate still needs a protected-verifier and domain receipt binding."),
     "mcpmark": (["mcpmark-postgres-tool-schema-20261105/execution/summary.json",
@@ -32,10 +33,12 @@ OBSERVATIONS = {
     "semantic-conventions": (["langfuse-ingestion-readback-20261105/service-execution/summary.json",
                               "workflow-telemetry-20261104/runtime-execution/summary.json"],
         "Minimized OTLP and disabled-export checks exist. Current proof must link to each selected workload receipt."),
-    "langfuse": (["langfuse-ingestion-readback-20261105/service-execution/summary.json"],
-        "Private readback verified ingestion of the original trace without replay. Current workload trace links remain open."),
-    "langgraph": (["full-stack-20261030/langgraph-bootstrap-repair/execution/summary.json"],
-        "LangGraph's component check passed within a bundle whose overall result failed on another component. Verify the individual receipt chain."),
+    "langfuse": (["langfuse-ingestion-readback-20261105/service-execution/summary.json",
+                  "canonical-stack-verification-20261113/domain-live-result.json"],
+        "Private readback linked the Sales Pivot receipt and disabled export sent no POST. The export CLI recorded failed transport. Spring dispatch remains unstarted."),
+    "langgraph": (["workflow-accounting-20261101/composed-sdk-runtime/execution/langgraph-sdk.json",
+                   "workflow-accounting-20261101/composed-sdk-runtime/execution/summary.json"],
+        "Four real SDK checks and six step receipts are retained. The bundle separately failed Agent Framework before its later correction. Current canonical integration binding remains open."),
     "evoagentx": (["evoagentx-distribution-20261106/managed-turn/reconciled-result.json",
                    "evoagentx-distribution-20261106/planner-handoff/result.json"],
         "Actual managed proposal and upstream planner handoff exist. Register validation with the current coordinator."),
@@ -46,16 +49,16 @@ OBSERVATIONS = {
     "aeep-router": (["optional-router-20261104/summary.json"],
         "Installed CLI optional execution and independence passed on an earlier source. Current runtime linkage remains open."),
     "github-sponsors": (["canonical-stack-verification-20261113/sponsors-result.json"],
-        "Both current checks have canonical settled receipts at the source in readiness.json."),
+        "Both checks have canonical settled receipts at the earlier source in readiness.json. Their source binding stays intact."),
     "workflow-document-data": (["canonical-stack-verification-20261113/skillsbench-engineering-outcomes.json"],
-        "All three CLI task journeys reached grading. A composed configuration still needs per-receipt telemetry, setup and removal evidence."),
+        "All three CLI task journeys reached grading. Sales Pivot telemetry linked with a failed CLI transport receipt. Composed canonical workflow registration remains open."),
     "workflow-software-engineering": (["canonical-stack-verification-20261113/skillsbench-engineering-outcomes.json"],
-        "All three CLI task journeys reached grading. A composed configuration still needs per-receipt telemetry, setup and removal evidence."),
+        "All three CLI task journeys reached grading. Spring telemetry and composed canonical workflow registration remain open."),
 }
 
 
 def index():
-    snapshot = json.loads((HERE / "readiness.json").read_bytes())
+    snapshot = json.loads((HERE / "readiness-after-telemetry.json").read_bytes())
     assert set(OBSERVATIONS) == {row["component"] for row in snapshot["components"]}
     return {
         "current_source": snapshot["implementation_source"],
