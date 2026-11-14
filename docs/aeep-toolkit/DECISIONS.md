@@ -3474,3 +3474,9 @@ The [verified cleanup](../../reports/toolkit-v2/c13/skillsbench-software-substit
 removed the authorized worker copies. The measured free space stayed
 below the launch requirement. Retain the existing backups and Docker
 resources. Use the current filesystem reading for the build decision.
+
+## D193. Keep local restore points during storage recovery
+
+The [APFS audit](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/apfs-reclaim-audit.json) found pre-cleanup Time Machine
+snapshots. Retain those restore points. Use measured free bytes
+after normal reclamation or an operator-managed space change.

@@ -1,5 +1,21 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- prefix-cache-apfs-audit-20261113:start -->
+**November 13. Local snapshots are the likely source of retained space.**
+
+The [APFS audit](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/apfs-reclaim-audit.json) found 19 purgeable Time Machine
+snapshots, all created before the cleanup. Disk Utility reports
+235.65 GB referenced only by that snapshot set. This is a volume-wide
+measurement. It does not identify the blocks for individual deleted
+databases. No deleted worker database appeared among visible open files.
+
+A filesystem sync left 17.85 GiB immediately usable, 34.15 GiB short
+of the 52 GiB Prefix Cache launch guard. Keep the local restore points
+and Docker resources. macOS may release blocks as snapshots expire.
+The reviewed preflight still passes its pin checks. No grader run
+or model call started. Comparisons stay paused.
+<!-- prefix-cache-apfs-audit-20261113:end -->
+
 <!-- prefix-cache-cleanup-20261113:start -->
 **November 13. Verified pytest cleanup completed. Prefix Cache still needs usable space.**
 

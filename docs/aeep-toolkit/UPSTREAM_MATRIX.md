@@ -2671,3 +2671,9 @@ records the removed pytest copies and unchanged evidence. The
 Prefix Cache runtime is still unverified because usable disk space
 remains below the launch threshold. The reviewed build and grader
 checks remain unstarted.
+
+### November 13 Prefix Cache storage retention
+
+The [APFS audit](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/apfs-reclaim-audit.json) confirms 17.85 GiB usable
+after filesystem sync. The protected Prefix Cache image and grader
+check remain unstarted. The comparison gate stays paused.

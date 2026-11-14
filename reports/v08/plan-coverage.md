@@ -1,5 +1,13 @@
 # 0.8 plan coverage and remaining work
 
+<!-- prefix-cache-apfs-audit-20261113:start -->
+The [APFS inspection](../toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/apfs-reclaim-audit.json)
+found 19 local Time Machine snapshots holding 235.65 GB collectively.
+No deleted worker database had a visible open handle. A sync left
+17.85 GiB immediately usable. The 52 GiB Prefix Cache launch guard
+still blocks the first runtime check. Comparisons stay paused.
+<!-- prefix-cache-apfs-audit-20261113:end -->
+
 <!-- prefix-cache-cleanup-20261113:start -->
 The [authorized pytest cleanup](../toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/cleanup-result.json)
 removed 30,042 worker database copies and verified 392 preserved files
