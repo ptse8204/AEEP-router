@@ -1,0 +1,132 @@
+{
+  "review_sha256": "2e5dd8f0d73c9963ed79b8217e00321d58906b6e645bed524aceafdb3e5b84a9",
+  "installation": {
+    "schema_version": "aeep.toolkit.file-runtime-installation.v1",
+    "preview": {
+      "schema_version": "aeep.toolkit.installation-preview.v1",
+      "profile": "essentials",
+      "selected": [
+        "waza"
+      ],
+      "items": [
+        {
+          "manifest": {
+            "schema_version": "aeep.toolkit.extension.v1",
+            "extension_id": "waza",
+            "purpose": "Retain the Waza CLI for the protected native backend engineering task.",
+            "role": "evaluator",
+            "source": {
+              "repository": "https://github.com/microsoft/waza",
+              "revision": "e534d149d89ae77ea158469fb4d2003804b2ee76",
+              "artifact_sha256": "10879de7375699e02dfd9b90a6540ed1c3dc551b1118b2486cd7961c0fc56b03",
+              "license_expression": "MIT",
+              "data_rights": "Private local copy of the known Waza MIT release binary. No redistribution or backend authority."
+            },
+            "hosts": [
+              "codex"
+            ],
+            "platforms": [
+              "darwin-arm64"
+            ],
+            "dependencies": [],
+            "permissions": {
+              "network_destinations": [],
+              "filesystem_scope": "workspace",
+              "authentication": "none",
+              "financial_exposure": "none"
+            },
+            "disk_bytes": 102532946,
+            "memory_bytes": null,
+            "install_effects": [
+              "Copy the pinned executable and extension metadata into a private owned tree."
+            ],
+            "rollback": "Use the existing installer journal to remove only the unchanged private tree when unreferenced.",
+            "status": "experimental",
+            "qualification_ref": null,
+            "blockers": []
+          },
+          "manifest_sha256": "0a75b31693fab5827f8bf6f94f1dc94e1d1b954281e7ec95d1c5875b7df6617f",
+          "selection": "direct",
+          "observation": {
+            "extension_id": "waza",
+            "installed": null,
+            "enabled": null,
+            "manifest_sha256": null,
+            "source_ref": null
+          },
+          "blockers": []
+        }
+      ],
+      "blockers": [],
+      "known_disk_bytes": 102532946,
+      "disk_complete": true,
+      "status": "ready_for_review",
+      "execution_authorized": false,
+      "limitations": [
+        "Metadata and supplied observations are declarations, not authenticated installation or conformance evidence.",
+        "Memory figures are per component; simultaneous runtime consumption is unmeasured.",
+        "This preview performs no installation and cannot authorize execution or spending.",
+        "The operator preview policy accepts unknown memory requirements; actual runtime memory remains unmeasured."
+      ]
+    },
+    "policy": {
+      "host": "codex",
+      "platform": "darwin-arm64",
+      "allowed_licenses": [
+        "MIT"
+      ],
+      "allowed_data_rights": [
+        "Private local copy of the known Waza MIT release binary. No redistribution or backend authority."
+      ],
+      "allowed_network_destinations": [],
+      "allowed_filesystem_scopes": [
+        "workspace"
+      ],
+      "allowed_authentication": [
+        "none"
+      ],
+      "allowed_financial_exposure": [
+        "none"
+      ],
+      "free_disk_bytes": 221793619968,
+      "allow_unknown_memory": true,
+      "reviewed_dependency_manifests": [
+        "0a75b31693fab5827f8bf6f94f1dc94e1d1b954281e7ec95d1c5875b7df6617f"
+      ]
+    },
+    "destination": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-runtime-20261113",
+    "artifact_root": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-artifacts-20261104",
+    "files": [
+      {
+        "extension_id": "waza",
+        "source": "waza/microsoft-azd-waza-darwin-arm64",
+        "destination": "bin/waza",
+        "sha256": "10879de7375699e02dfd9b90a6540ed1c3dc551b1118b2486cd7961c0fc56b03",
+        "size_bytes": 102532946,
+        "executable": true,
+        "primary": true
+      },
+      {
+        "extension_id": "waza",
+        "source": "waza/extension.yaml",
+        "destination": "extension.yaml",
+        "sha256": "2d411053e26edfcfadbef9e6e56fc3b530d3a20efc33a32057776e512f1dc8c4",
+        "size_bytes": 1151,
+        "executable": false,
+        "primary": false
+      }
+    ],
+    "installer_python": "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3.13",
+    "installer_python_sha256": "20c9c2144a9f5202177620417e67643fb551aa31586e5d3c1361627b920cadb0",
+    "python_version": "3.13.1",
+    "system": "darwin",
+    "machine": "arm64",
+    "effects": [
+      "Copy exact local artifacts into a new private owned tree; no download, build or execution.",
+      "Write the existing sibling installation journal and lock; no host activation or service startup.",
+      "Keep executable files at0555 and other files at0444; permissions confer no execution authority.",
+      "Keep the normal50GiB actual host reserve and staged/allocated file headroom.",
+      "Retain failed/interrupted state; remove only an unchanged owned runtime and preserve conflicts."
+    ]
+  }
+}

@@ -7,7 +7,10 @@ The public disclosure scope consists of the task prompt and agent instructions.
 The grader stays local. The planned run uses one trial, one attempt, no result
 cache, no update check, and no external grader, MCP server or publication.
 
-The fixture is prepared for review. Waza has not loaded it. The ordinary import
+The ordinary installer retained the pinned Waza executable and its release
+metadata. The [installation journal](waza-runtime-installation-result.json)
+binds the installed tree to the exact review. The fixture is prepared for
+review and Waza has yet to load it. The ordinary import
 path treats supplied reports as upstream claims. The live check must separately
 link its exact inputs, backend launch, usage fields, grade, settled cost and
 cleanup to an AEEP receipt. Missing usage or ambiguous outcomes keep the
