@@ -1,5 +1,29 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- prefix-cache-carrier-pass-20261113:start -->
+**November 13. The protected Prefix Cache image and grader checks passed.**
+
+The [snapshot thinning record](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/snapshot-thinning-result.json)
+shows 19 local Time Machine snapshots removed in order. Space was
+36.6 GiB immediately usable
+before the final removal and 237.6 GiB
+after it. External backups and Time Machine settings were preserved.
+
+The [offline execution result](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/result.json) confirms a
+1/1 reference and rejection of all six faults. Five violated the output
+contract. The sixth reached and failed the protected upstream assertions.
+The [execution audit](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/execution-audit.json)
+binds the retained nonroot grader image and nine receipts. All eight
+temporary containers were removed. The ledger settled
+29.64 elapsed seconds with zero model turns
+and $0 cash. The image has no extra host mounts or network access.
+
+The image can now bind the ordinary CLI's managed Prefix Cache workflow.
+That later run needs the recorded public input disclosure determination,
+fresh controlled worker evidence and its own managed engineering authority.
+SkillRank and Waza still have open gates. Comparisons stay paused.
+<!-- prefix-cache-carrier-pass-20261113:end -->
+
 <!-- prefix-cache-apfs-audit-20261113:start -->
 **November 13. Local snapshots are the likely source of retained space.**
 

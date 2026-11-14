@@ -3480,3 +3480,11 @@ resources. Use the current filesystem reading for the build decision.
 The [APFS audit](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/apfs-reclaim-audit.json) found pre-cleanup Time Machine
 snapshots. Retain those restore points. Use measured free bytes
 after normal reclamation or an operator-managed space change.
+
+## D194. Retain the verified protected Prefix Cache image
+
+The [execution audit](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/execution-audit.json)
+confirms the pinned parent, added task layer and settled grader receipts.
+Use that image for managed workflow binding and keep the sealed grader
+outside the model workers. Provider disclosure and the managed task turn
+still require their own authority.

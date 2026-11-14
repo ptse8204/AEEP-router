@@ -2677,3 +2677,11 @@ checks remain unstarted.
 The [APFS audit](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/apfs-reclaim-audit.json) confirms 17.85 GiB usable
 after filesystem sync. The protected Prefix Cache image and grader
 check remain unstarted. The comparison gate stays paused.
+
+### November 13 protected Prefix Cache image and grading
+
+The [retained image check](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/result.json)
+passed the original reference and all six faulty-output checks. Reuse the
+pinned contained environment and canonical receipt ledger. The result
+verifies the offline grader for the selected SkillsBench task. Managed
+execution and comparative use remain open.

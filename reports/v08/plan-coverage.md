@@ -1,5 +1,15 @@
 # 0.8 plan coverage and remaining work
 
+<!-- prefix-cache-carrier-pass-20261113:start -->
+The [protected Prefix Cache grader](../toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/result.json)
+passed the reference and six rejection checks after authorized thinning of
+the oldest local Time Machine snapshots. Nine operations settled in
+29.64 seconds, with zero models or cash.
+The retained image is ready for managed workflow binding. Provider
+disclosure and the managed engineering run remain separate. Comparisons
+stay paused.
+<!-- prefix-cache-carrier-pass-20261113:end -->
+
 <!-- prefix-cache-apfs-audit-20261113:start -->
 The [APFS inspection](../toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/apfs-reclaim-audit.json)
 found 19 local Time Machine snapshots holding 235.65 GB collectively.
