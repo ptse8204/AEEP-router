@@ -2663,3 +2663,11 @@ Docker and Buildx signatures and the current build context passed review.
 The host is below the reserve. No build, grader or model turn ran. The
 [preflight record](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/preflight.json)
 also confirms the retained SkillRank scheduler and the exact docs cache.
+
+### November 13 Prefix Cache storage check after cleanup
+
+The [cleanup result](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/cleanup-result.json)
+records the removed pytest copies and unchanged evidence. The
+Prefix Cache runtime is still unverified because usable disk space
+remains below the launch threshold. The reviewed build and grader
+checks remain unstarted.

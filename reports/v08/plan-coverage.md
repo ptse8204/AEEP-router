@@ -1,5 +1,14 @@
 # 0.8 plan coverage and remaining work
 
+<!-- prefix-cache-cleanup-20261113:start -->
+The [authorized pytest cleanup](../toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/cleanup-result.json)
+removed 30,042 worker database copies and verified 392 preserved files
+by hash. The volume remained at about 18.6 GiB of usable space, below
+the 52 GiB Prefix Cache launch guard. The grader attempt remains
+unstarted. Backups and existing Docker resources were preserved.
+Comparisons stay paused.
+<!-- prefix-cache-cleanup-20261113:end -->
+
 <!-- prefix-cache-sealed-preflight-20261113:start -->
 The [Prefix Cache image review](../toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/operation-review.json)
 pins the local build, reference and seven grader observations. Local

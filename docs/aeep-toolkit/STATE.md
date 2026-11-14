@@ -1,5 +1,29 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- prefix-cache-cleanup-20261113:start -->
+**November 13. Verified pytest cleanup completed. Prefix Cache still needs usable space.**
+
+The operator authorized removal of the reviewed pytest worker database
+copies. The [cleanup record](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/cleanup-result.json)
+confirms removal of all 30,042 files, which had 35.87 GiB allocated.
+All 392 preservation hashes still match, including the primary fixture
+databases, test inputs and verification logs. The cleanup made no
+changes to backups or Docker resources.
+
+The volume still reports about 18.6 GiB immediately free. APFS lists
+19 purgeable local snapshots. The individual blocks they retain were
+unmeasured. Preserve those restore points under the current instruction.
+The Prefix Cache preflight still verifies its inputs, but its launch
+guard requires 52 GiB of immediately usable space. No grader operation
+or model turn started.
+
+After space is restored, run [verify-carrier.py](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/../verify-carrier.py)
+with `PYTHONPATH=src python3 -B`, first with `--preflight` and then
+`--execute-delegated`, each using review digest
+`2afe8dc74f2eb49bfd7355306704745ef14e67cd1a0d285b7524dbd8d6350397`. The first offline
+attempt is authorized. Comparisons stay paused.
+<!-- prefix-cache-cleanup-20261113:end -->
+
 <!-- prefix-cache-sealed-preflight-20261113:start -->
 **November 13. The offline Prefix Cache image check is ready for storage.**
 

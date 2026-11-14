@@ -3467,3 +3467,10 @@ pins the observed Docker and Buildx binaries after verifying their signatures.
 Keep the existing pinned parent image, protected task bytes and verifier.
 Use the standard containment executor and receipt ledger for the first local
 build and grader checks. Wait for measured usable disk space before launch.
+
+## D192. Base Prefix Cache launch on measured usable storage
+
+The [verified cleanup](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/cleanup-result.json)
+removed the authorized worker copies. The measured free space stayed
+below the launch requirement. Retain the existing backups and Docker
+resources. Use the current filesystem reading for the build decision.
