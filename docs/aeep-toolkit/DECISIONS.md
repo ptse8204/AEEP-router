@@ -3488,3 +3488,11 @@ confirms the pinned parent, added task layer and settled grader receipts.
 Use that image for managed workflow binding and keep the sealed grader
 outside the model workers. Provider disclosure and the managed task turn
 still require their own authority.
+
+## D195. Bind the ordinary Prefix Cache workflow to the verified grader
+
+The [exact review](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/managed-engineering/operation-review.json) binds the proposed
+rights reference, the existing worker images and the verified offline
+grader. The public archive and protected assertions remain identical.
+Use one controlled Sol engineering turn after fresh conformance and
+explicit operator approval.

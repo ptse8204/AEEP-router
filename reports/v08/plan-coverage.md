@@ -1,5 +1,14 @@
 # 0.8 plan coverage and remaining work
 
+<!-- prefix-cache-sol-review-20261113:start -->
+The [Prefix Cache engineering review](../toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/managed-engineering/operation-review.json)
+binds the verified grader and exact three public input files to the
+ordinary CLI. An isolated CLI fixture drafted one required-use route
+and rejected unreviewed rights. The existing ledger remains unchanged.
+Provider disclosure, fresh conformance and the one GPT-6.1 Sol medium
+engineering turn remain pending. Comparisons stay paused.
+<!-- prefix-cache-sol-review-20261113:end -->
+
 <!-- prefix-cache-carrier-pass-20261113:start -->
 The [protected Prefix Cache grader](../toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/result.json)
 passed the reference and six rejection checks after authorized thinning of

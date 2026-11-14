@@ -2685,3 +2685,12 @@ passed the original reference and all six faulty-output checks. Reuse the
 pinned contained environment and canonical receipt ledger. The result
 verifies the offline grader for the selected SkillsBench task. Managed
 execution and comparative use remain open.
+
+### November 13 Prefix Cache ordinary CLI preparation
+
+The [CLI fixture](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/managed-engineering/cli-draft-check.json) verified one
+required-use task through the ordinary plan preparation command. Its
+separate database and local-only scope establish preparation behavior.
+The [combined review](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/managed-engineering/operation-review.json) leaves the
+live SkillsBench engineering journey pending explicit authority and
+fresh worker conformance. Comparisons stay paused.

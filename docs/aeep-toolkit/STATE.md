@@ -1,5 +1,35 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- prefix-cache-sol-review-20261113:start -->
+**November 13. The ordinary Prefix Cache workflow is bound and awaits a single approval.**
+
+The [exact operation review](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/managed-engineering/operation-review.json) binds
+the three original public files, the neutral stack-check skill, the retained
+GPT-6.1 Sol medium workers and the verified offline grader image. The archive
+digest stayed unchanged when the proposed rights reference changed the pack
+digest. The revised recipe binds the new pack, with identical grader programs,
+assertions and output contract.
+
+The [isolated CLI check](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/managed-engineering/cli-draft-check.json) rejected
+unreviewed asset rights and drafted one required-use treatment route after
+review inside a separate, local fixture database. It created no job and
+made no provider contact. The real ledger stayed unchanged. The live
+CLI must still bind fresh worker and collector conformance to its plan.
+
+One approval covers registration of the exact rights record and at most
+one engineering turn through the existing Codex proxy. The review caps
+64 operations and 3,900 reserved seconds at $0 cash. An expiry-only
+amendment preserves the existing grant's ceilings and counters. The exact
+review expires November 15 at 7:23 p.m. Vancouver time. Comparisons stay
+paused. No worker or live turn has started.
+
+Resume with [run.py](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/managed-engineering/run.py) and
+`--preflight 6b668486d91ae4ff114eb321eab551f80b72689d4e20c3ee0afbdd2ad9c4f4b7` using
+`PYTHONPATH=src python3 -B`. After explicit approval, record the digest
+in `operator-approval.json` and use `--execute-approved` with the same
+digest. Any interrupted or terminal attempt requires reconciliation.
+<!-- prefix-cache-sol-review-20261113:end -->
+
 <!-- prefix-cache-carrier-pass-20261113:start -->
 **November 13. The protected Prefix Cache image and grader checks passed.**
 
