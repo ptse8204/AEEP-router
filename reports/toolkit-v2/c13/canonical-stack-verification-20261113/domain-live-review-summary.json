@@ -1,0 +1,50 @@
+{
+  "purpose": "Restart only the reviewed private Langfuse containers and verify two exact domain traces",
+  "implementation_source": "60216438830ae0aa5f59c086de189a7bba0c2dc35920c155824be33d291acb50",
+  "retained_namespace": "aeep-langfuse-loopback-20261105",
+  "retained_services": [
+    "postgres",
+    "clickhouse",
+    "redis",
+    "minio",
+    "web",
+    "worker"
+  ],
+  "service_grant_before": [
+    203,
+    0,
+    466.8329188330863,
+    "0"
+  ],
+  "managed_grant_before": [
+    13912,
+    3809,
+    126854.42371709565,
+    "0.0"
+  ],
+  "scope": {
+    "document-data": {
+      "receipt": "b8f0f23507264fd3fd4c7e3c97595b0e72a7f84a93e83f8786701aa498637b44",
+      "trace": "b8f0f23507264fd3fd4c7e3c97595b0e",
+      "span": "72a7f84a93e83f87"
+    },
+    "software-engineering": {
+      "receipt": "4f0dcbfe6a09594ca0075b0092396121373dfadfd40b07931983e9047704b559",
+      "trace": "4f0dcbfe6a09594ca0075b0092396121",
+      "span": "373dfadfd40b0793"
+    }
+  },
+  "maximum_additional_service_operations": 50,
+  "maximum_additional_managed_operations": 10,
+  "maximum_posts": 2,
+  "maximum_readbacks_per_trace": 8,
+  "maximum_model_turns": 0,
+  "maximum_cash_usd": "0",
+  "new_resources": false,
+  "deletion": false,
+  "automatic_retry": false,
+  "comparisons": "PAUSED",
+  "status": "PENDING_EXACT_OPERATOR_RESTART_APPROVAL",
+  "review_path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-telemetry-source.7UC1C6/domain-live-review.json",
+  "review_sha256": "4483025c6f0401cfa0e24f64893ae4a2846b56a2032fca2a5cfaabba87368907"
+}
