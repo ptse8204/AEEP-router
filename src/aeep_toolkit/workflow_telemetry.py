@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+import json
 import os
 import re
 import sqlite3
@@ -185,6 +186,21 @@ def campaign_receipt(
     request: RecipeMaterializationRequest,
 ) -> ExecutionReceipt:
     """Resolve an original trial receipt without copying it into the router's history."""
+    return campaign_receipt_and_journal(
+        repository, report_ref, receipt_id, plan, request, with_journal=False
+    )[0]
+
+
+def campaign_receipt_and_journal(
+    repository: AssessmentRepository,
+    report_ref: str,
+    receipt_id: str,
+    plan: AssessmentPlan,
+    request: RecipeMaterializationRequest,
+    *,
+    with_journal: bool = True,
+) -> tuple[ExecutionReceipt, ExecutionEvidence | None]:
+    """Resolve the receipt and, when requested, its original execution journal."""
     report = AssessmentReport.model_validate(repository.get("report", report_ref))
     if (
         content_digest(report) != report_ref
@@ -250,6 +266,15 @@ def campaign_receipt(
             raise ConfigurationError("telemetry attempt is outside the selected campaign")
         with ReceiptStore(attempt, read_only=True) as store:
             original = store.get_receipt(receipt_id)
+            journal_ref = receipt.metadata.get("execution_evidence_digest")
+            journal_row = (
+                store._connection.execute(
+                    "SELECT payload_json FROM assessment_records WHERE kind='execution_evidence' AND digest=?",
+                    (journal_ref,),
+                ).fetchone()
+                if with_journal and journal_ref
+                else None
+            )
     except (OSError, ValueError, sqlite3.Error) as error:
         raise ConfigurationError(
             "cannot read the canonical telemetry receipt and original attempt"
@@ -263,7 +288,9 @@ def campaign_receipt(
         raise ConfigurationError(
             "telemetry trial receipt, original attempt or worker cleanup differs"
         )
-    return receipt
+    from .telemetry import bound_journal
+
+    return receipt, bound_journal(receipt, json.loads(journal_row[0]) if journal_row else None)
 
 
 def export_receipt(

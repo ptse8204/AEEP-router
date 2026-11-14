@@ -186,6 +186,38 @@ path before selecting it for a comparison. Component installation, provider
 access and comparison authority have separate controls. Historical reports keep
 their original source and runtime bindings.
 
+### Register a completed workflow without replay
+
+Use `workflow evidence` on a completed ordinary CLI run to prepare the two
+checks for the selected SkillsBench domain. Supply a
+[workflow evidence request](../../schemas/toolkit-workflow-evidence-request.schema.json)
+with the configuration, report ID, exact original and selected workflow
+files, and the retained CLI report directory. The request links the lifecycle
+receipts, the original telemetry transport and the separate readback and
+disablement operations. The removal control retains its own disposable
+configuration and installation identity.
+
+```bash
+aeep-toolkit workflow evidence --store DB --file REQUEST
+aeep-toolkit stack-verify record --store DB --component workflow-document-data --file RECORD
+aeep assess --manifest MANIFEST review EVIDENCE_DIGEST
+aeep-toolkit stack-status --store DB
+```
+
+Save the emitted `record` object as `RECORD`. Review the exact emitted digest
+using the assessment manifest for the same database. Use
+`workflow-software-engineering` for the software configuration. A request for
+historical reuse supplies a compatibility basis that explains why the original
+run and component observations still apply. The current CLI resolves the
+original report, protected grades, operation charges, runtime and trace
+bindings before accepting that review. The registered record preserves each
+original source and becomes stale on source or evidence drift.
+
+The command reads retained evidence. It can inspect a run before all supporting
+checks are available. Registration requires both checks, including settled
+lifecycle and telemetry. Accepted workflow evidence is one input to separate
+stack assembly and comparison authorization.
+
 ### Export telemetry from a completed workflow
 
 For a managed campaign, select its prepared assessment and a v2 or v3 receipt-export

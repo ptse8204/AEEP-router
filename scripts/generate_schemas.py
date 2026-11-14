@@ -200,6 +200,7 @@ from aeep_toolkit.storage import StorageReserveException
 from aeep_toolkit.workflow import EvaluationWorkflow, StackWorkflow
 from aeep_toolkit.workflow_accounting import WorkflowAccountingDefinition
 from aeep_toolkit.workflow_catalog import CatalogRuntimeDefinition, WorkflowCatalogRecord
+from aeep_toolkit.workflow_evidence import EvidenceRequest, WorkflowEvidence
 from aeep_toolkit.workflow_security import ScannerRuntimeDefinition, WorkflowScanRecord
 from aeep_toolkit.workflow_telemetry import ReceiptExportDefinition, ReceiptExportRecord
 
@@ -207,6 +208,8 @@ ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_DIR = ROOT / "schemas"
 
 MODEL_FILES = {
+    "toolkit-workflow-evidence-request.schema.json": EvidenceRequest,
+    "toolkit-workflow-completion-evidence.schema.json": WorkflowEvidence,
     "toolkit-receipt-export.schema.json": ReceiptExportDefinition,
     "toolkit-receipt-export-record.schema.json": ReceiptExportRecord,
     "toolkit-mcp-state-pack.schema.json": MCPStatePack,

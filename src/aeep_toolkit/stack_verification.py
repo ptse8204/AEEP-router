@@ -208,6 +208,26 @@ def _find_records(repository: AssessmentRepository, kind: str, key: str, value: 
 def _observe_component(
     repository: AssessmentRepository, component: str, source: str
 ) -> dict[str, Any]:
+    blocked = None
+    if component in {"workflow-document-data", "workflow-software-engineering"}:
+        from .workflow_evidence import KIND, WorkflowEvidence
+
+        for ref in _find_records(repository, KIND, "component", component):
+            try:
+                workflow_record = _resolve(repository, KIND, ref, WorkflowEvidence)
+                require_integration(repository, ref, component=component, source_digest=source)
+            except (ConfigurationError, ValidationError, OSError, ValueError, KeyError, sqlite3.Error) as error:
+                if blocked is None:
+                    blocked = str(error) if isinstance(error, ConfigurationError) else "workflow evidence inputs are unavailable or changed"
+                continue
+            return {
+                "component": component, "functional_status": "VERIFIED",
+                "implementation_source": source, "original_source": workflow_record.original_source,
+                "integration_evidence_ref": ref,
+                "checks": {name: {"status": "VERIFIED", "workflow_evidence_ref": ref,
+                                  "receipt_ref": workflow_record.observations["run_receipt_ref"]}
+                           for name in REQUIRED_CHECKS[component]},
+            }
     rows: list[dict[str, Any]] = []
     for definition_ref in _find_records(repository, DEFINITION, "component", component):
         entry: dict[str, Any] = {"definition_ref": definition_ref}
@@ -284,7 +304,7 @@ def _observe_component(
             "component": component,
             "functional_status": "BLOCKED",
             "checks": {
-                name: {"status": "BLOCKED", "gap": "no canonical integration definition"}
+                name: {"status": "BLOCKED", "gap": blocked or "no canonical integration definition"}
                 for name in REQUIRED_CHECKS[component]
             },
             "source_revision": source_revisions(source)[component],
@@ -316,7 +336,7 @@ def status(repository: AssessmentRepository, source: str) -> dict[str, Any]:
     for ref in _find_records(repository, COMPLETION, "implementation_source", source):
         try:
             require_stack_complete(repository, ref, source_digest=source)
-        except (ConfigurationError, ValidationError, OSError):
+        except (ConfigurationError, ValidationError, OSError, ValueError, KeyError, sqlite3.Error):
             continue
         result.update(
             comparison_dispatch="STACK_GATE_VERIFIED_SEPARATE_EXECUTION_AUTHORITY_REQUIRED",
@@ -370,12 +390,24 @@ def main(argv: list[str]) -> None:
                     )
                 )
             elif args.operation == "record":
-                evidence = IntegrationEvidence.model_validate(read_json(args.file))
-                verify_integration(
-                    repository, evidence, component=args.component, source_digest=source
-                )
-                ref = repository.put(EVIDENCE, content_digest(evidence), evidence)
-                result = {"integration_evidence_ref": ref, "component": args.component}
+                from .workflow_evidence import KIND, WorkflowEvidence, verify_workflow
+
+                raw = read_json(args.file)
+                if not isinstance(raw, dict):
+                    raise ConfigurationError("stack evidence must be a JSON object")
+                if raw.get("schema_version") == "aeep.toolkit.workflow-completion-evidence.v1":
+                    workflow = WorkflowEvidence.model_validate(raw)
+                    verify_workflow(repository, workflow, component=args.component, source=source)
+                    ref = repository.put(KIND, content_digest(workflow), workflow)
+                    result = {"workflow_evidence_ref": ref, "component": args.component,
+                              "operator_review_required": True}
+                else:
+                    evidence = IntegrationEvidence.model_validate(raw)
+                    verify_integration(
+                        repository, evidence, component=args.component, source_digest=source
+                    )
+                    ref = repository.put(EVIDENCE, content_digest(evidence), evidence)
+                    result = {"integration_evidence_ref": ref, "component": args.component}
             else:
                 completion = StackCompletion.model_validate(read_json(args.file))
                 if completion.implementation_source != source:

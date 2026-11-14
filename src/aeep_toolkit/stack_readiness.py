@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any, Literal, TypeVar
+from typing import TYPE_CHECKING, Any, Literal, TypeVar
 
 from pydantic import Field, model_validator
 
@@ -27,6 +27,9 @@ from aeep.execution import ExecutionEvidence
 from aeep.models import ExecutionReceipt, ExecutionStatus, StrictModel
 
 from .models import Digest, Identifier
+
+if TYPE_CHECKING:
+    from .workflow_evidence import WorkflowEvidence
 
 REQUIRED_CHECKS: dict[str, tuple[str, ...]] = {
     "agent-skill-eval": ("controlled_dispatch", "grading_accounting_cleanup"),
@@ -308,7 +311,19 @@ def verify_integration(
 
 def require_integration(
     repository: AssessmentRepository, digest: str, *, component: str, source_digest: str
-) -> IntegrationEvidence:
+) -> IntegrationEvidence | WorkflowEvidence:
+    if component in {"workflow-document-data", "workflow-software-engineering"}:
+        with repository.store._lock:
+            workflow = repository.store._connection.execute(
+                "SELECT 1 FROM assessment_records WHERE kind='toolkit_workflow_completion_evidence' AND digest=?",
+                (digest,),
+            ).fetchone()
+        if workflow is not None:
+            from .workflow_evidence import KIND, WorkflowEvidence, verify_workflow
+
+            record = _resolve(repository, KIND, digest, WorkflowEvidence, reviewed=True)
+            verify_workflow(repository, record, component=component, source=source_digest)
+            return record
     evidence = _resolve(repository, "toolkit_integration_evidence", digest, IntegrationEvidence)
     verify_integration(repository, evidence, component=component, source_digest=source_digest)
     return evidence

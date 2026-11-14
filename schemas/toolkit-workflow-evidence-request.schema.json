@@ -1,0 +1,206 @@
+{
+  "$defs": {
+    "LifecycleLinks": {
+      "additionalProperties": false,
+      "properties": {
+        "store": {
+          "title": "Store",
+          "type": "string"
+        },
+        "workflow": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "operation_review": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "runtime": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+          "title": "Runtime",
+          "type": "string"
+        },
+        "setup": {
+          "$ref": "#/$defs/OperationLink"
+        },
+        "readiness": {
+          "$ref": "#/$defs/OperationLink"
+        },
+        "removal_configuration": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+          "title": "Removal Configuration",
+          "type": "string"
+        },
+        "removal_setup": {
+          "$ref": "#/$defs/OperationLink"
+        },
+        "removal": {
+          "$ref": "#/$defs/OperationLink"
+        }
+      },
+      "required": [
+        "store",
+        "workflow",
+        "operation_review",
+        "runtime",
+        "setup",
+        "readiness",
+        "removal_configuration",
+        "removal_setup",
+        "removal"
+      ],
+      "title": "LifecycleLinks",
+      "type": "object"
+    },
+    "OperationLink": {
+      "additionalProperties": false,
+      "properties": {
+        "operation_id": {
+          "title": "Operation Id",
+          "type": "string"
+        },
+        "receipt_ref": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Receipt Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operation_id",
+        "receipt_ref"
+      ],
+      "title": "OperationLink",
+      "type": "object"
+    },
+    "TelemetryLinks": {
+      "additionalProperties": false,
+      "properties": {
+        "store": {
+          "title": "Store",
+          "type": "string"
+        },
+        "readback": {
+          "$ref": "#/$defs/OperationLink"
+        },
+        "transport": {
+          "$ref": "#/$defs/OperationLink"
+        },
+        "disabled": {
+          "$ref": "#/$defs/OperationLink"
+        },
+        "disabled_workflow": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "observation_review": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "observed_result": {
+          "$ref": "#/$defs/WorkflowFile"
+        }
+      },
+      "required": [
+        "store",
+        "readback",
+        "transport",
+        "disabled",
+        "disabled_workflow",
+        "observation_review",
+        "observed_result"
+      ],
+      "title": "TelemetryLinks",
+      "type": "object"
+    },
+    "WorkflowFile": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "title": "WorkflowFile",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "aeep.toolkit.workflow-evidence-request.v1",
+      "default": "aeep.toolkit.workflow-evidence-request.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "configuration": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+      "title": "Configuration",
+      "type": "string"
+    },
+    "report_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,199}$",
+      "title": "Report Id",
+      "type": "string"
+    },
+    "original_workflow": {
+      "$ref": "#/$defs/WorkflowFile"
+    },
+    "selected_workflow": {
+      "$ref": "#/$defs/WorkflowFile"
+    },
+    "report_directory": {
+      "title": "Report Directory",
+      "type": "string"
+    },
+    "compatibility_basis": {
+      "anyOf": [
+        {
+          "maxLength": 2000,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Compatibility Basis"
+    },
+    "lifecycle": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/LifecycleLinks"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "telemetry": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/TelemetryLinks"
+      },
+      "maxItems": 12,
+      "title": "Telemetry",
+      "type": "array"
+    }
+  },
+  "required": [
+    "configuration",
+    "report_id",
+    "original_workflow",
+    "selected_workflow",
+    "report_directory"
+  ],
+  "title": "EvidenceRequest",
+  "type": "object"
+}

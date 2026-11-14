@@ -1,5 +1,26 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- completed-workflow-evidence-20261114:start -->
+**November 14. Completed workflows now register canonical readiness evidence.**
+
+The ordinary CLI binds retained protected grades, trial receipts, settled
+accounting and both report formats to the exact selected plan. Setup and
+readiness identify the retained task tree. Selective removal was verified
+on a separate disposable configuration. Each trace links to its original
+trial and keeps the transport, readback and disabled-export outcomes separate.
+
+The [registration record](../../reports/toolkit-v2/c13/canonical-stack-verification-20261114/README.md)
+shows four of 39 current-source checks accepted in the managed ledger.
+Sales Pivot scored 0/1 and Spring Boot scored 1/1. Copied-ledger controls
+rejected mismatched, missing, changed, interrupted and revoked evidence.
+No model turn, service restart, grant change or stack assembly occurred.
+
+C13 remains open. Bind remaining component evidence without replaying settled
+work. The exact Excel acknowledgement and current docs repeats require their
+own authority. Waza still needs protected sign-in and a real backend grade.
+Comparisons remain paused.
+<!-- completed-workflow-evidence-20261114:end -->
+
 <!-- langfuse-acknowledgement-20261113:start -->
 **November 13. Langfuse queue acknowledgement handled in the ordinary CLI.**
 

@@ -22,6 +22,11 @@ The strict CLI recorded failed transport acknowledgements. The new v3 export
 definition recognizes the pinned queue response after explicit review. Its
 live check remains open. No upstream version, data scope or acceptance gate changes.
 
+The [completed workflow records](../../reports/toolkit-v2/c13/canonical-stack-verification-20261114/README.md)
+register both named SkillsBench configurations through the ordinary CLI. Four
+of 39 checks resolve on the current implementation. The records preserve
+the pinned tasks, independent Langfuse readbacks and original transport status.
+
 October 19 telemetry correction: D65 reuses the existing Codex 0.154.0 native
 OTLP collector and AEEP execution journal. No new telemetry dependency or hosted
 backend is selected. All 564 old token captures passed a retrospective consistency

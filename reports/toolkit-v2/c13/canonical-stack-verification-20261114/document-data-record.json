@@ -1,0 +1,247 @@
+{
+  "schema_version": "aeep.toolkit.workflow-completion-evidence.v1",
+  "component": "workflow-document-data",
+  "implementation_source": "ecbbed79e6f793cbbca2b9ec5bd54fd9f9d8786337d6eb1b6895779915a76bf6",
+  "original_source": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+  "request": {
+    "schema_version": "aeep.toolkit.workflow-evidence-request.v1",
+    "configuration": "document-data",
+    "report_id": "fit_ad8153443ae7471aad161e1e4e5cbd11",
+    "original_workflow": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-sales-handoff-20261105/sales-prepared/workflow.json",
+      "sha256": "526953337a6bf676136fe516b1131123a20ae3f5a7287d37b0683e5834f44036"
+    },
+    "selected_workflow": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-workflow-runtime-20261105/operator-workflow.json",
+      "sha256": "e118a019842b78aab500da6fc2036e1991b0518c5ca64a5f1f216ed51dd3ae48"
+    },
+    "report_directory": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-sales-handoff-20261105/sales-result",
+    "compatibility_basis": "Current-source inspection verifies the same frozen plan, candidate, protected binary grades, receipt journals, settled accounting and byte-identical HTML/Markdown. The selected private task tree reproduces the original plan inputs and its lifecycle receipts resolve on their own reviewed workflow. The historical Langfuse transport status remains failed. Settled readback and disablement verify the exact original trace. Reuse covers the two required workflow checks only. The new telemetry acknowledgement has separate verification.",
+    "lifecycle": {
+      "store": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-workflow-runtime-20261105/receipts.sqlite3",
+      "workflow": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-workflow-runtime-20261105/workflow.json",
+        "sha256": "59dc7068d53913d21e558a095e89959b1b5cce1f50849d13a80641877d7294b1"
+      },
+      "operation_review": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-workflow-runtime-20261105/operation-review.json",
+        "sha256": "10a8628edef940f4fda7294d63d5d0001dc54204b02e371476d4ce5e001e1f19"
+      },
+      "runtime": "task-assets",
+      "setup": {
+        "operation_id": "workflow:skillsbench-workflow-runtime-20261105:document-data-setup",
+        "receipt_ref": "6f711c41e770074839063c0ae60676ceb44b90f4d35f27069b5c790355db480f"
+      },
+      "readiness": {
+        "operation_id": "workflow:skillsbench-workflow-runtime-20261105:document-data-readiness",
+        "receipt_ref": "d570c560e5763ecf8d76e1c61132f55b4fa44b9351c25d11dfd19a668b9ef59c"
+      },
+      "removal_configuration": "sales-removal-check",
+      "removal_setup": {
+        "operation_id": "workflow:skillsbench-workflow-runtime-20261105:sales-removal-check-setup",
+        "receipt_ref": "25668d0ba12ab1a1a72c2387a335cbb07b953f70d4d071c9991c0bf59a881fb7"
+      },
+      "removal": {
+        "operation_id": "workflow:skillsbench-workflow-runtime-20261105:sales-removal-check-remove",
+        "receipt_ref": "74c3b1d98f0680a7ef9d76eae778e5b8036c0c8dc5541b3d50d31603622b7628"
+      }
+    },
+    "telemetry": [
+      {
+        "store": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillrank-build-preparation-20261103/runtime-execution/canonical.sqlite3",
+        "readback": {
+          "operation_id": "skillsbench-domain-telemetry-20261113:observe:0f5fc90221c2:0",
+          "receipt_ref": "cfaba845fd31ccfef7c1fd5735372e1062386c2a81afd161d05961b70a458de7"
+        },
+        "transport": {
+          "operation_id": "receipt-export:3971ee71c3bd33fa3b32182c312d6a2b767504080f1e634c04c05442beaae294:b8f0f23507264fd3fd4c7e3c97595b0e72a7f84a93e83f8786701aa498637b44",
+          "receipt_ref": "610163c597131e1cfa8bcae74de2647153533075562742b74621dedb4a720f8c"
+        },
+        "disabled": {
+          "operation_id": "workflow:skillsbench-domain-telemetry-document-data-60216438830a:disabled",
+          "receipt_ref": "20e4eba2e3b89b13b18a71ffad6f97953fe89c9535733d163551e4b429d3855d"
+        },
+        "disabled_workflow": {
+          "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-telemetry-source.7UC1C6/domain-telemetry-final/document-data-disabled-workflow.json",
+          "sha256": "34d8818c99d8a4ca18d211922bafd5271bdbbe37748053d66cf89b4dddf1eb03"
+        },
+        "observation_review": {
+          "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-telemetry-source.7UC1C6/domain-live-review.json",
+          "sha256": "4483025c6f0401cfa0e24f64893ae4a2846b56a2032fca2a5cfaabba87368907"
+        },
+        "observed_result": {
+          "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/canonical-stack-verification-20261113/domain-live-result.json",
+          "sha256": "6dbf53641ab685bc99d3c033215cf1ab9c136ba48e106d8ef2796638e142b836"
+        }
+      }
+    ]
+  },
+  "observations": {
+    "original_source": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+    "job_id": "assessment_62f59cf5bb86407daea74b2c8e79eda4",
+    "report_ref": "243226d54c948cb73dcfec82cf7c773a54f14a1a3acf07ab8d29ece9a1e5ed2f",
+    "campaign_ref": "d8fbb252d80cda9e1cf8d55e524e0dc1cd75fdcd7b8e9385a66e20a14fa0e6e1",
+    "ledger_ref": "50a6ea5e9df1d4e446c4a911375d05452b757a9771ce4adca2f15c279250a8cf",
+    "plan_ref": "1e1b8b42be675fdd5c465c93365c1d4c8681c9ab0ebcff79866876b7a9fb88e3",
+    "run_receipt_ref": "f49982aa3494d0c32c15fbdccc9d496a17f2236cc0b51c0affc6711d65432c02",
+    "run_measurement_ref": "b759321922a9fc93917550cedf32839c2838b97d6d23b78dd79a2e275fda8e3b",
+    "trials": [
+      {
+        "case_id": "sales-pivot-analysis",
+        "task_sha256": "480511af29dae88e00759b482d18ad24ed1c131c67ebe134091db9b4785da257",
+        "arm": "treatment",
+        "run_id": "trial_plan_63ff6127a1514a379fcd1ba9e151c8aa_sales-pivot-analysis_skillsbench-sales.treatment_fresh-worker_0",
+        "verification": "fail",
+        "binary_task_score": 0,
+        "tokens": 278533,
+        "raw_tokens": {
+          "source_ref": "b8f0f23507264fd3fd4c7e3c97595b0e72a7f84a93e83f8786701aa498637b44",
+          "input_tokens": 273093,
+          "output_tokens": 5440,
+          "cached_input_tokens": 232704,
+          "reasoning_output_tokens": 322,
+          "cached_semantics": "included_in_input",
+          "reasoning_semantics": "included_in_output"
+        },
+        "agent_wall_seconds": 146.77051195899912,
+        "verification_wall_seconds": 2.4727046250009153,
+        "retries": 0,
+        "execution_status": "completed",
+        "receipt_refs": [
+          "b8f0f23507264fd3fd4c7e3c97595b0e72a7f84a93e83f8786701aa498637b44"
+        ],
+        "verification_ref": "e67a5eb245743daf1ffa1a49b92d21a658b1a0fd5b6ce75ead0428a64bd505be",
+        "charge_ref": "2c506726ac8c2eab733b3ff5bffd65461e3dfa54a07eb968acb35b89fe8a9a43",
+        "protected_grading_measurement_refs": [
+          "a50d27ff0c466110d45d7adac842dcc9f844121377a2cf0f8e4d82901b95a3c9"
+        ],
+        "token_capture": {
+          "status": "verified",
+          "receipt_ref": "b8f0f23507264fd3fd4c7e3c97595b0e72a7f84a93e83f8786701aa498637b44",
+          "journal_ref": "16cf2e6dc2a312c9b9c32758e2f8f16a2f2548ff158e7d1ef3df01e8d96771e6",
+          "known_fields": [
+            "input_tokens",
+            "cached_input_tokens",
+            "cache_write_input_tokens",
+            "output_tokens",
+            "reasoning_output_tokens"
+          ],
+          "provider_usage_independently_verified": false,
+          "source": "provider_report",
+          "trust": "self_asserted"
+        },
+        "provider_tokens": {
+          "input_tokens": 273093,
+          "cached_input_tokens": 232704,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 5440,
+          "reasoning_output_tokens": 322
+        }
+      }
+    ],
+    "grader_operation_refs": [
+      "a50d27ff0c466110d45d7adac842dcc9f844121377a2cf0f8e4d82901b95a3c9"
+    ],
+    "workflow_accounting": {
+      "definition_ref": "5f4806e155c2cb2f24e41d15c1c31d54e44be3630b7d6d9be4e6337f10a040e5",
+      "operation_id": "workflow:skillsbench-sales-execution-handoff-20261105:execute",
+      "assessment_plan_ids": [
+        "plan_63ff6127a1514a379fcd1ba9e151c8aa"
+      ],
+      "ledger": "existing assessment operation_start / operation_measurement",
+      "measurement_scope": "exclusive wrapper wall time and process CPU; canonical execution intervals excluded",
+      "token_memory_cash_measurements": "UNKNOWN; no zero values inferred",
+      "completion": "resolve the terminal operation_measurement after this command returns"
+    },
+    "report_files": {
+      "report.md": "fe5dfb22352d8752a964dd71a222bc2fa3acbc4d9e8e21001ad01e7a88ae1b1a",
+      "report.html": "1474b220e359efef9c098be42b63d017e3c02e8742faebd831a238cc00590f7f"
+    },
+    "prepared_workflow_ref": "e74979c3ea7178e69f4ae9d90ae953df33160553a922baacba6137b943a9bccb",
+    "lifecycle": {
+      "document-data:setup": {
+        "configuration": "document-data",
+        "stage": "setup",
+        "original_source": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+        "operation": {
+          "operation_id": "workflow:skillsbench-workflow-runtime-20261105:document-data-setup",
+          "receipt_ref": "6f711c41e770074839063c0ae60676ceb44b90f4d35f27069b5c790355db480f"
+        },
+        "measurement_ref": "b760032e006e1a9ca3be0eeea16203b71ec6de1132d9535e0c3c4a62de5a2938",
+        "installation_ref": "973dc57c965bae9dd87c7c5b7a7e64a5214f7576804425e5b5ce2e4f54fe479f",
+        "review_ref": "87ac72b92a34e162f75adafd79f429732fed5c9f286dceee6912782e2c350df8",
+        "installation_journal_sha256": "0f8723d77725eeed543db49259d62da3f176a796c4e6ceaf3e5315707457134c",
+        "lifecycle_ref": "ab97830d814142f65bb5c45b5bb048d405e302694a86827cf643dccb3fa116d1",
+        "installed_tree_ref": "2981e39efd1d6c00d9ba6a83784f5d5a42fdd3acae49d3b68505b4b0d97f0575"
+      },
+      "document-data:readiness": {
+        "configuration": "document-data",
+        "stage": "readiness",
+        "original_source": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+        "operation": {
+          "operation_id": "workflow:skillsbench-workflow-runtime-20261105:document-data-readiness",
+          "receipt_ref": "d570c560e5763ecf8d76e1c61132f55b4fa44b9351c25d11dfd19a668b9ef59c"
+        },
+        "measurement_ref": "adcf54ede4f729f9fea40d05a7a3c0388b6cbc224bc71f2f09eca71325ef9807",
+        "installation_ref": "973dc57c965bae9dd87c7c5b7a7e64a5214f7576804425e5b5ce2e4f54fe479f",
+        "review_ref": "cee939717157e2a0c441d598f721fed0ff74c3588d1d5db5b49d0914d7e9d495",
+        "installation_journal_sha256": "0f8723d77725eeed543db49259d62da3f176a796c4e6ceaf3e5315707457134c",
+        "installed_tree_ref": "2981e39efd1d6c00d9ba6a83784f5d5a42fdd3acae49d3b68505b4b0d97f0575"
+      },
+      "sales-removal-check:setup": {
+        "configuration": "sales-removal-check",
+        "stage": "setup",
+        "original_source": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+        "operation": {
+          "operation_id": "workflow:skillsbench-workflow-runtime-20261105:sales-removal-check-setup",
+          "receipt_ref": "25668d0ba12ab1a1a72c2387a335cbb07b953f70d4d071c9991c0bf59a881fb7"
+        },
+        "measurement_ref": "109a6a1561ae1f6f4f4bfd0fb7d58a28c86db0c1990030c08a1c66b7aa9e8801",
+        "installation_ref": "b0525fdaecdf1421334deeed54e16f98f9f79630e50db9cc1ba49aa56a741dbc",
+        "review_ref": "7d95112aa0a111b52d678da96ecb1731996762e33aa75d8905d08ee903dbb88a",
+        "installation_journal_sha256": "4a215e85f07b65470c514b32ed5f93a3751382c9ad48d3aeb30f73cc683defc0",
+        "lifecycle_ref": "bd8d4cfd7bcd08d1b42429aa9d09b541237ed0318dc7e71f888b8ef25e77d07b",
+        "installed_tree_ref": "2981e39efd1d6c00d9ba6a83784f5d5a42fdd3acae49d3b68505b4b0d97f0575"
+      },
+      "sales-removal-check:remove": {
+        "configuration": "sales-removal-check",
+        "stage": "remove",
+        "original_source": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+        "operation": {
+          "operation_id": "workflow:skillsbench-workflow-runtime-20261105:sales-removal-check-remove",
+          "receipt_ref": "74c3b1d98f0680a7ef9d76eae778e5b8036c0c8dc5541b3d50d31603622b7628"
+        },
+        "measurement_ref": "640d7913517517c0d994c4c6940dee5e29131b42984e85f5eb94a3c13a8fe46f",
+        "installation_ref": "b0525fdaecdf1421334deeed54e16f98f9f79630e50db9cc1ba49aa56a741dbc",
+        "review_ref": "065ba8fb884e080bc72cc90717342e669b160a3a7f7fd52d782818b00cbfecd2",
+        "installation_journal_sha256": "4a215e85f07b65470c514b32ed5f93a3751382c9ad48d3aeb30f73cc683defc0",
+        "lifecycle_ref": "2a252bf4e15298ad8e9ccef2f983b46496636075101708f57b5735d155dbade5",
+        "installed_tree_ref": "2981e39efd1d6c00d9ba6a83784f5d5a42fdd3acae49d3b68505b4b0d97f0575"
+      }
+    },
+    "telemetry": [
+      {
+        "source_receipt_sha256": "b8f0f23507264fd3fd4c7e3c97595b0e72a7f84a93e83f8786701aa498637b44",
+        "trace_id": "b8f0f23507264fd3fd4c7e3c97595b0e",
+        "span_id": "72a7f84a93e83f87",
+        "deployment_review_ref": "8803f170bc484ff2797fc223e6b5f11ee0a99a440a38dbc9e2f54aa711cba8e1",
+        "original_source": "60216438830ae0aa5f59c086de189a7bba0c2dc35920c155824be33d291acb50",
+        "transport_status": "failed",
+        "acknowledgement": null,
+        "http_status": null,
+        "transport_receipt_ref": "610163c597131e1cfa8bcae74de2647153533075562742b74621dedb4a720f8c",
+        "transport_measurement_ref": "d884ad303044cfeecdd7e6ed76308b94a0f89fbe074612955f0d4ddbf2052e9e",
+        "readback_receipt_ref": "cfaba845fd31ccfef7c1fd5735372e1062386c2a81afd161d05961b70a458de7",
+        "readback_measurement_ref": "b65c630d8a08f7c3f9f3d33e55d853701361c29ac4ab191dff36acc8872d6784",
+        "ingestion_verified": true,
+        "disabled_export_verified": true,
+        "disabled_receipt_ref": "20e4eba2e3b89b13b18a71ffad6f97953fe89c9535733d163551e4b429d3855d",
+        "disabled_measurement_ref": "dae97761b92150099376ef14e751ec9b7ebb900d32b96dc9058e8c1e3af7f608"
+      }
+    ],
+    "checks": {
+      "ordinary_cli": true,
+      "canonical_report": true
+    }
+  }
+}

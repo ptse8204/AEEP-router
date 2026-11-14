@@ -3505,3 +3505,14 @@ only in an explicitly reviewed v3 export definition. Preserve the strict OTLP
 path and store the acknowledgement type, never the returned job body. Trace
 readback remains separate. Sales and Spring have independently verified
 readbacks; their failed transport receipts are terminal and must not be replayed.
+
+## D197. Resolve completed workflow evidence from the existing ledger
+
+Use the ordinary CLI to bind both SkillsBench configurations to their exact
+historical plans, protected grades and retained artifacts. Lifecycle receipts
+keep their actual configuration and installation identities. Telemetry records
+keep the transport, independently verified readback and disablement separate.
+The canonical readiness record binds the current implementation and carries
+forward the earlier source hashes under an exact compatibility review. Changes
+to bound evidence or the implementation require a new review. Stack assembly
+and comparison dispatch retain their own approval steps.

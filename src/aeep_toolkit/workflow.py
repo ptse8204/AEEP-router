@@ -409,8 +409,30 @@ def main(argv: list[str] | None = None) -> None:
         command.add_argument('--accounting', type=Path, help='Exact accounting v2 scope; required when applying setup/removal')
         command.add_argument('--operation-id')
         command.add_argument('--reviewed-digest', help='Exact operation-specific lifecycle preview; omit for inspection only')
+    evidence = commands.add_parser("evidence", help="Resolve settled workflow records for stack readiness")
+    evidence.add_argument("--store", required=True, type=Path)
+    evidence.add_argument("--file", required=True, type=Path, help="Exact workflow evidence request")
     args = parser.parse_args(argv)
     try:
+        if args.operation == "evidence":
+            from aeep.assessment.models import content_digest
+            from aeep.assessment.repository import AssessmentRepository
+            from aeep.assessment.verification import verification_source_digest
+
+            from .workflow_evidence import EvidenceRequest, inspect_workflow, open_store
+
+            request = EvidenceRequest.model_validate_json(read_bytes(args.file))
+            try:
+                with open_store(str(args.store.absolute())) as store:
+                    resolved_evidence = inspect_workflow(
+                        AssessmentRepository(store), request,
+                        verification_source_digest(Path(__file__).resolve().parents[2]),
+                    )
+            except ConfigurationError as error:
+                parser.exit(2, f"Workflow evidence blocked. {error}\n")
+            print(json.dumps({"record": resolved_evidence.model_dump(mode="json"),
+                              "review_sha256": content_digest(resolved_evidence)}, indent=2, allow_nan=False))
+            return
         if args.operation == 'scan':
             from .workflow_security import scan
             print(json.dumps(scan(args.workflow, args.configuration, accounting=args.accounting,

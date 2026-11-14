@@ -1,5 +1,14 @@
 # 0.8 plan coverage and remaining work
 
+<!-- completed-workflow-evidence-20261114:start -->
+The [workflow evidence packet](../toolkit-v2/c13/canonical-stack-verification-20261114/README.md)
+records both existing SkillsBench runs through the ordinary CLI and registers
+four current-source checks in the managed ledger. Copied-ledger controls
+cover mismatched inputs, interrupted runs, source drift and revoked reviews.
+The existing transport failures and verified Langfuse readbacks retain their
+original bindings. C13 and both comparison gates remain open.
+<!-- completed-workflow-evidence-20261114:end -->
+
 <!-- langfuse-acknowledgement-20261113:start -->
 Source `6e8d9925` recognizes the pinned Langfuse acknowledgement through an
 explicit v3 export review. Both full runs passed 2,156 tests with 21 skips,

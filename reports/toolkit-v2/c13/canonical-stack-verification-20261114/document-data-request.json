@@ -1,0 +1,73 @@
+{
+  "schema_version": "aeep.toolkit.workflow-evidence-request.v1",
+  "configuration": "document-data",
+  "report_id": "fit_ad8153443ae7471aad161e1e4e5cbd11",
+  "original_workflow": {
+    "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-sales-handoff-20261105/sales-prepared/workflow.json",
+    "sha256": "526953337a6bf676136fe516b1131123a20ae3f5a7287d37b0683e5834f44036"
+  },
+  "selected_workflow": {
+    "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-workflow-runtime-20261105/operator-workflow.json",
+    "sha256": "e118a019842b78aab500da6fc2036e1991b0518c5ca64a5f1f216ed51dd3ae48"
+  },
+  "report_directory": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-sales-handoff-20261105/sales-result",
+  "lifecycle": {
+    "store": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-workflow-runtime-20261105/receipts.sqlite3",
+    "workflow": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-workflow-runtime-20261105/workflow.json",
+      "sha256": "59dc7068d53913d21e558a095e89959b1b5cce1f50849d13a80641877d7294b1"
+    },
+    "operation_review": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-workflow-runtime-20261105/operation-review.json",
+      "sha256": "10a8628edef940f4fda7294d63d5d0001dc54204b02e371476d4ce5e001e1f19"
+    },
+    "runtime": "task-assets",
+    "setup": {
+      "operation_id": "workflow:skillsbench-workflow-runtime-20261105:document-data-setup",
+      "receipt_ref": "6f711c41e770074839063c0ae60676ceb44b90f4d35f27069b5c790355db480f"
+    },
+    "readiness": {
+      "operation_id": "workflow:skillsbench-workflow-runtime-20261105:document-data-readiness",
+      "receipt_ref": "d570c560e5763ecf8d76e1c61132f55b4fa44b9351c25d11dfd19a668b9ef59c"
+    },
+    "removal_configuration": "sales-removal-check",
+    "removal_setup": {
+      "operation_id": "workflow:skillsbench-workflow-runtime-20261105:sales-removal-check-setup",
+      "receipt_ref": "25668d0ba12ab1a1a72c2387a335cbb07b953f70d4d071c9991c0bf59a881fb7"
+    },
+    "removal": {
+      "operation_id": "workflow:skillsbench-workflow-runtime-20261105:sales-removal-check-remove",
+      "receipt_ref": "74c3b1d98f0680a7ef9d76eae778e5b8036c0c8dc5541b3d50d31603622b7628"
+    }
+  },
+  "telemetry": [
+    {
+      "store": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillrank-build-preparation-20261103/runtime-execution/canonical.sqlite3",
+      "readback": {
+        "operation_id": "skillsbench-domain-telemetry-20261113:observe:0f5fc90221c2:0",
+        "receipt_ref": "cfaba845fd31ccfef7c1fd5735372e1062386c2a81afd161d05961b70a458de7"
+      },
+      "transport": {
+        "operation_id": "receipt-export:3971ee71c3bd33fa3b32182c312d6a2b767504080f1e634c04c05442beaae294:b8f0f23507264fd3fd4c7e3c97595b0e72a7f84a93e83f8786701aa498637b44",
+        "receipt_ref": "610163c597131e1cfa8bcae74de2647153533075562742b74621dedb4a720f8c"
+      },
+      "disabled": {
+        "operation_id": "workflow:skillsbench-domain-telemetry-document-data-60216438830a:disabled",
+        "receipt_ref": "20e4eba2e3b89b13b18a71ffad6f97953fe89c9535733d163551e4b429d3855d"
+      },
+      "disabled_workflow": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-telemetry-source.7UC1C6/domain-telemetry-final/document-data-disabled-workflow.json",
+        "sha256": "34d8818c99d8a4ca18d211922bafd5271bdbbe37748053d66cf89b4dddf1eb03"
+      },
+      "observation_review": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-telemetry-source.7UC1C6/domain-live-review.json",
+        "sha256": "4483025c6f0401cfa0e24f64893ae4a2846b56a2032fca2a5cfaabba87368907"
+      },
+      "observed_result": {
+        "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/canonical-stack-verification-20261113/domain-live-result.json",
+        "sha256": "6dbf53641ab685bc99d3c033215cf1ab9c136ba48e106d8ef2796638e142b836"
+      }
+    }
+  ],
+  "compatibility_basis": "Current-source inspection verifies the same frozen plan, candidate, protected binary grades, receipt journals, settled accounting and byte-identical HTML/Markdown. The selected private task tree reproduces the original plan inputs and its lifecycle receipts resolve on their own reviewed workflow. The historical Langfuse transport status remains failed. Settled readback and disablement verify the exact original trace. Reuse covers the two required workflow checks only. The new telemetry acknowledgement has separate verification."
+}
