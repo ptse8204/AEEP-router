@@ -41,7 +41,7 @@ contribute to the source fingerprint and remain outside this commit.
 The [paired local review](boundary-review.json) covers Cisco and
 agent-skill-eval. The [preflight](boundary-preflight.json) and
 [copied-ledger accounting check](boundary-accounting-preflight.json) passed.
-The review expires November 15 at 7:22 p.m. Vancouver time. Execution
+The review expires November 15 at 8:22 p.m. Vancouver time. Execution
 requires the operator's repeat approval. Stack completion remains open.
 
 ## Verification
