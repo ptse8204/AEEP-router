@@ -2,8 +2,8 @@
 
 The [readiness snapshot](readiness.json) resolved all 39 required checks against
 the managed assessment ledger on the first stack-verification source. Two checks
-passed on that source. The [evidence index](evidence-index.json) links the
-preserved component runs and records the remaining checks for that snapshot.
+passed on that source. The [current evidence index](evidence-index-current.json)
+links the preserved component runs and records the gap for each current check.
 
 The [Sponsors run](sponsors-result.json) exercised the actual `export-preview`
 entry point in two retained offline containers. It checked the pinned public
@@ -41,7 +41,9 @@ passed with both original trial receipts and the scheduler receipt. Its
 missing-show, both protected grades, the scheduler journal and their settled
 operations. The runtime and source hashes stay attached to the original runs.
 Current integration registration remains open.
-Waza needs [protected operator sign-in](../waza-native-backend-20261104/operator-setup-20261113/README.md)
+The retained Waza binary and its offline text grader passed the
+[synthetic reference and rejection check](../waza-native-backend-20261104/backend-fixture/offline-grader-result.json).
+Waza still needs [protected operator sign-in](../waza-native-backend-20261104/operator-setup-20261113/README.md)
 and a separately reviewed real backend run.
 
 The [runtime audit](skillsbench-runtime-audit.json) verifies six retained
