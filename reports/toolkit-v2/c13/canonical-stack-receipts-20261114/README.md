@@ -39,7 +39,9 @@ contribute to the source fingerprint and remain outside this commit.
 | Waza | Native client bootstrap and the offline text grader passed. The supported backend still needs operator sign-in and a live grade. | Use the [protected operator sign-in guide](../waza-native-backend-20261104/operator-setup-20261113/README.md), then review the real backend check separately. |
 
 The [paired local review](boundary-review.json) covers Cisco and
-agent-skill-eval. Its [preflight](boundary-preflight.json) passed. Execution
+agent-skill-eval. The [preflight](boundary-preflight.json) and
+[copied-ledger accounting check](boundary-accounting-preflight.json) passed.
+The review expires November 15 at 7:22 p.m. Vancouver time. Execution
 requires the operator's repeat approval. Stack completion remains open.
 
 ## Verification
@@ -47,6 +49,8 @@ requires the operator's repeat approval. Stack completion remains open.
 The [source checks](source-verification.json) passed. Both full runs passed
 2,156 tests with 21 skips. Combined line and branch coverage was 81.43 percent,
 and both branch coverage gates passed. The wheel and source distribution built.
+The [committed source smoke check](committed-source-check.json) verified the
+CLI entry point and generated schemas.
 The prior [offline docs retry](../canonical-stack-verification-20261114/docs-pipe-result.json)
 passed on its 72 pinned documents. This update carries those results at their
 original input scope.
