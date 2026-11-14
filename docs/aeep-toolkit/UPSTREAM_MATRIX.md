@@ -2654,3 +2654,12 @@ managed run are pending. The
 verified the existing bridge, sandbox profile and stored Sol pair.
 The grant expired and the host is below the storage reserve. Comparisons
 stay paused.
+
+### November 13 Prefix Cache image and local storage preflight
+
+The [first-attempt review](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/operation-review.json)
+binds the unchanged SkillsBench revision and the retained grader parent.
+Docker and Buildx signatures and the current build context passed review.
+The host is below the reserve. No build, grader or model turn ran. The
+[preflight record](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/preflight.json)
+also confirms the retained SkillRank scheduler and the exact docs cache.

@@ -1,5 +1,42 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- prefix-cache-sealed-preflight-20261113:start -->
+**November 13. The offline Prefix Cache image check is ready for storage.**
+
+The [operation review](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/operation-review.json)
+binds one local COPY-only build and eight contained calls on the resulting
+image. The canonical ledger permits nine operations, 640 reserved seconds,
+zero model turns and zero cash. The old protected calibration stays recorded.
+The [read-only preflight](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/preflight.json)
+verified the digest, parent image, current source, signed Docker 29.9.3 and
+Buildx 0.38.1. First-party output, rejection and receipt checks and the schema
+check passed. No build or live grader call started.
+
+The repository volume had 18.64 GiB immediately free. The build starts
+at 52 GiB and preserves the 50 GiB reserve. The
+[storage inventory](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/storage-candidates.json)
+found 30,042 copies of worker databases in named pytest fixtures with
+35.87 GiB allocated. APFS may retain those blocks. Keep the primary fixture
+databases, verification logs, backups and Docker resources. This inventory
+does not authorize deletion.
+
+Once space is restored, rerun the exact preflight and use
+`--execute-delegated` with review digest
+`2afe8dc74f2eb49bfd7355306704745ef14e67cd1a0d285b7524dbd8d6350397`
+on [verify-carrier.py](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/verify-carrier.py)
+with `PYTHONPATH=src python3 -B`. The first offline attempt is delegated.
+Provider disclosure and the live turn remain separate.
+
+The SkillRank scheduler, sandbox executable and two stored Sol worker
+files still match. The private scheduler workspace remains unused.
+A reviewed expiry amendment, fresh worker checks and managed dispatch
+authority remain pending. All 1,449 pinned documentation modules and
+the pinned checking executables are available in local caches. The
+previous private runtime is missing, so restore it under a fresh bounded
+review before claiming a full docs check. C13 and Waza remain open.
+Comparisons stay paused.
+<!-- prefix-cache-sealed-preflight-20261113:end -->
+
 <!-- managed-prefix-cache-preparation-20261112:start -->
 **November 12. Prefix Cache grader and worker definitions are staged.**
 

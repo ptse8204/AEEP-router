@@ -1,5 +1,16 @@
 # 0.8 plan coverage and remaining work
 
+<!-- prefix-cache-sealed-preflight-20261113:start -->
+The [Prefix Cache image review](../toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/operation-review.json)
+pins the local build, reference and seven grader observations. Local
+contract, ledger and schema checks passed. Launch waits for 52 GiB of
+immediately usable space. The [read-only inventory](../toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/storage-candidates.json)
+reports 35.87 GiB allocated to pytest worker database copies. It records
+zero deletions. First-party evidence does not close the runtime gate.
+The docs cache and SkillRank scheduler bindings passed read-only checks.
+Live dispatch and comparisons remain paused.
+<!-- prefix-cache-sealed-preflight-20261113:end -->
+
 <!-- managed-prefix-cache-preparation-20261112:start -->
 The [Prefix Cache draft](../toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/result.json)
 binds the managed artifact and protected recipe. The

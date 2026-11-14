@@ -3459,3 +3459,11 @@ the protected task files and pinned Pytest closure to the retained
 nonroot React grader image. Use the existing binary grading contract.
 Run the reference and canonical grader checks on the resulting image
 before requesting a model turn. The build waits for the host reserve.
+
+## D191. Bind the first Prefix Cache build to the updated local Docker tools
+
+The [offline review](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/operation-review.json)
+pins the observed Docker and Buildx binaries after verifying their signatures.
+Keep the existing pinned parent image, protected task bytes and verifier.
+Use the standard containment executor and receipt ledger for the first local
+build and grader checks. Wait for measured usable disk space before launch.
