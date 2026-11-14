@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.4",
+  "name": "aeep-waza-native-backend-check",
+  "skill": "aeep-receipt-check",
+  "version": "1.0",
+  "config": {
+    "executor": "copilot-sdk",
+    "model": "auto",
+    "trials_per_task": 1,
+    "max_attempts": 1,
+    "timeout_seconds": 120,
+    "parallel": false,
+    "skill_directories": ["agent"]
+  },
+  "graders": [
+    {
+      "name": "exact-total",
+      "type": "text",
+      "config": {"regex_match": ["^\\s*AEEP_TOTAL=17\\s*$"]}
+    }
+  ],
+  "tasks": ["tasks/receipt-total.yaml"]
+}
