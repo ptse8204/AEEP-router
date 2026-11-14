@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import sqlite3
 
 import pytest
 from test_toolkit_workflow_accounting import accounting
@@ -251,6 +252,53 @@ def test_unknown_receipt_and_changed_definition_are_rejected(configured, monkeyp
     with pytest.raises(ValueError):
         invoke(configured, key="changed")
     assert not calls
+
+
+@pytest.mark.asyncio
+async def test_campaign_receipt_binds_completed_job_selected_scope_and_original(tmp_path, monkeypatch):
+    from test_toolkit_managed import prepared, record
+
+    from aeep.assessment.models import RecipeMaterializationRequest
+
+    router, service, adapter, path, _ = prepared(tmp_path, monkeypatch)
+    repository = service.repository
+    try:
+        report = record(service, adapter, path)
+        with router.store._immediate_transaction() as connection:
+            connection.execute(
+                "INSERT INTO assessment_jobs(id, plan_id, state, report_id) VALUES (?, ?, 'complete', ?)",
+                ("fixture-complete", adapter.plan.plan_id, report.report_id),
+            )
+        with sqlite3.connect(path) as connection:
+            for receipt_id, trial_id, value in connection.execute(
+                "SELECT receipt_id,trial_id,payload_json FROM trial_receipts"
+            ).fetchall():
+                receipt = ExecutionReceipt.model_validate_json(value)
+                receipt.metadata["worker_cleanup_confirmed"] = True
+                connection.execute("UPDATE trial_receipts SET payload_json=? WHERE receipt_id=?",
+                                   (receipt.model_dump_json(), receipt_id))
+                original_path, = connection.execute("SELECT database_path FROM trial_stores WHERE trial_id=?",
+                                                    (trial_id,)).fetchone()
+                with sqlite3.connect(original_path) as original:
+                    original.execute("UPDATE receipts SET payload_json=? WHERE receipt_id=?",
+                                     (receipt.model_dump_json(), receipt_id))
+        request = RecipeMaterializationRequest(
+            **{name: getattr(adapter.plan, name) for name in (
+                "subject_digest", "recipe_digest", "mapping_digest", "environment_digest",
+                "authorization_id", "definition_digests",
+            )}, seed=0,
+        )
+        args = (repository, content_digest(report), receipt_id, adapter.plan)
+        assert workflow_telemetry.campaign_receipt(*args, request) == receipt
+        assert router.store.get_receipt(receipt_id) is None
+        with pytest.raises(ConfigurationError, match="scope"):
+            workflow_telemetry.campaign_receipt(*args, request.model_copy(update={"recipe_digest": "e" * 64}))
+        with sqlite3.connect(original_path) as original:
+            original.execute("DELETE FROM receipts WHERE receipt_id=?", (receipt_id,))
+        with pytest.raises(ConfigurationError, match="original attempt"):
+            workflow_telemetry.campaign_receipt(*args, request)
+    finally:
+        await router.close()
 
 
 @pytest.mark.asyncio

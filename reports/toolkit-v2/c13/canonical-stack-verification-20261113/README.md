@@ -1,9 +1,9 @@
 # Verify the assembled stack through the ordinary CLI
 
-The [readiness snapshot](readiness.json) resolves all 39 required checks against
-the managed assessment ledger. Two checks have current canonical proof. The
-[evidence index](evidence-index.json) links the preserved component runs and
-identifies what still needs a current observation or binding.
+The [readiness snapshot](readiness.json) resolved all 39 required checks against
+the managed assessment ledger on the first stack-verification source. Two checks
+passed on that source. The [evidence index](evidence-index.json) links the
+preserved component runs and records the remaining checks for that snapshot.
 
 The [Sponsors run](sponsors-result.json) exercised the actual `export-preview`
 entry point in two retained offline containers. It checked the pinned public
@@ -35,9 +35,16 @@ failure. The CLI produced both reports and worker cleanup was confirmed.
 
 ## Remaining work
 
-Bind the existing component and task evidence to current composed workflows.
-Keep the reports at their original source and runtime identities. Do not
-rerun a settled model task to produce a wrapper report. The managed SkillRank
-diagnostic still needs its own bounded provider approval. Waza needs a supported
-account established through protected operator sign-in, then a separately
-reviewed real backend run. Comparisons remain paused. C13 stays open.
+The [managed SkillRank diagnostic](../skillrank-managed-diagnostic-20261107/README.md)
+passed with both original trial receipts and the scheduler receipt. Its
+catalog and scheduling evidence still need canonical integration bindings.
+Waza needs [protected operator sign-in](../waza-native-backend-20261104/operator-setup-20261113/README.md)
+and a separately reviewed real backend run.
+
+The [runtime audit](skillsbench-runtime-audit.json) verifies six retained
+lifecycle receipts and both installed task trees. The
+[telemetry preflight](domain-telemetry-preflight.json) binds an original trial
+receipt from each named domain. All six [document and software receipts](domain-receipt-bindings.json)
+resolved through their campaign and original attempt stores. Live export,
+readback and disablement for those
+receipts remain pending. Comparisons remain paused. C13 stays open.

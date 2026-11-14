@@ -186,6 +186,20 @@ path before selecting it for a comparison. Component installation, provider
 access and comparison authority have separate controls. Historical reports keep
 their original source and runtime bindings.
 
+### Export telemetry from a completed workflow
+
+For a managed campaign, select its prepared assessment and a v2 receipt-export
+definition with the exact `assessment_report_ref`. Use the existing
+`workflow export-telemetry` command with its receipt ID and the selected
+configuration. The exporter checks the settled job and the same grant scope,
+then matches the campaign's receipt to its original attempt store. This leaves
+campaign observations outside production routing history.
+
+The minimized preview shows the receipt hash and the prospective trace and span
+IDs. Enabling export requires the exact reviewed local deployment and accounting
+scope. Verify ingestion through that deployment's readback before claiming a
+trace is linked. A v1 export still resolves receipts in the router store.
+
 After a reviewed paired inspection settles, prepare its canonical readiness
 definitions through the ordinary CLI:
 
