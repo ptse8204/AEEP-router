@@ -1,0 +1,18 @@
+{
+  "review_sha256": "79670efb0a43a7d5b1dc98cb00716204c864b756788e06a39a9bc72bd2095638",
+  "exit_code": 2,
+  "passed": false,
+  "inputs_unchanged": true,
+  "model_turns": 0,
+  "failure": "Pinned Node aborted on fstat of its inherited log descriptor inside the existing sandbox. Neither markdownlint nor Lychee executed.",
+  "process_signal": "SIGABRT",
+  "log_sha256": "8f801fd0e7b2f5927326eac2b2226e33522a491c4a7d7d5dc11f13b04791f998",
+  "diagnosis": {
+    "sandbox_log_denied": "file-read-metadata on inherited docs.log",
+    "binary_abort_branch": "fstat$INODE64 failed with errno other than EBADF",
+    "first_party_probe": {
+      "regular_file_fstat_errno": 1,
+      "pipe_fstat_exit": 0
+    }
+  }
+}

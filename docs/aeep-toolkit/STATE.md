@@ -1,5 +1,21 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- excel-acknowledgement-20261114:start -->
+**November 14. Langfuse acknowledges the Excel receipt and verifies ingestion.**
+
+The [approved check](../../reports/toolkit-v2/c13/canonical-stack-verification-20261114/langfuse-live-result.json)
+verified the private Langfuse queue acknowledgement, read back the exact trace,
+and confirmed disabled export sent nothing. All retained containers are stopped.
+No model turns or cash were used. The managed readiness gate remains at four
+of 39 checks. The other component records, Waza operator sign-in and live grade,
+and stack assembly remain open. Comparisons stay paused.
+
+The [approved docs repeat](../../reports/toolkit-v2/c13/canonical-stack-verification-20261114/docs-repeat-result.json)
+stopped before either checker loaded. The sandbox denied Node's metadata check
+on the inherited log file. A first-party probe passes when the checker output
+is piped to its parent. Use the corrected exact review for the next attempt.
+<!-- excel-acknowledgement-20261114:end -->
+
 <!-- completed-workflow-evidence-20261114:start -->
 **November 14. Completed workflows now register canonical readiness evidence.**
 

@@ -1,5 +1,14 @@
 # 0.8 plan coverage and remaining work
 
+<!-- excel-acknowledgement-20261114:start -->
+The [live Langfuse check](../toolkit-v2/c13/canonical-stack-verification-20261114/langfuse-live-result.json)
+verified the queue acknowledgement, Excel trace readback and export disablement
+with zero model turns or cash. All retained containers are stopped. The
+[offline docs run](../toolkit-v2/c13/canonical-stack-verification-20261114/docs-repeat-result.json)
+stopped before loading the checkers because Node could not inspect its inherited
+log descriptor. Readiness remains at four of 39 checks and comparisons stay paused.
+<!-- excel-acknowledgement-20261114:end -->
+
 <!-- completed-workflow-evidence-20261114:start -->
 The [workflow evidence packet](../toolkit-v2/c13/canonical-stack-verification-20261114/README.md)
 records both existing SkillsBench runs through the ordinary CLI and registers

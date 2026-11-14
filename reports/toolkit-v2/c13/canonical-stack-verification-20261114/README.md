@@ -14,7 +14,7 @@ registers the resulting definition. The regular assessment review and
 
 The [managed registration](registration-result.json) accepted both records.
 The [readiness snapshot](stack-status.json) accepts 4 of 39 required checks.
-Neither operation counts nor assessment grants changed. The selected
+Registration left operation counts and assessment grants unchanged. The selected
 configuration receipts verify setup and readiness. The removal result comes
 from the separately installed disposable Sales configuration. Both records
 keep the original transport failure, verified Langfuse readback and verified
@@ -58,9 +58,14 @@ built, and the offline wheel smoke verified the CLI entry point. The
 
 ## Remaining checks
 
-The [reviewed Excel receipt check](langfuse-review-summary.json) is the
-remaining live test of acknowledgement parsing. The Sales and Spring readbacks already substantiate
-their recorded ingestion. Waza still requires
-[protected operator sign-in](../waza-native-backend-20261104/operator-setup-20261113/README.md)
+The [approved Excel receipt check](langfuse-live-result.json) verified the
+Langfuse queue acknowledgement, exact trace readback and disabled export.
+All retained containers are stopped. The [offline docs repeat](docs-repeat-result.json)
+stopped before either checker loaded when the sandbox denied Node access to
+the inherited log descriptor. The earlier docs result still applies to its
+original inputs. The [corrected review](docs-pipe-review-summary.json)
+binds the pipe-based capture and waits for repeat approval.
+
+Waza requires [protected operator sign-in](../waza-native-backend-20261104/operator-setup-20261113/README.md)
 and a supported backend grade. The remaining component evidence, stack
-assembly and comparison authorization are still open. Comparisons stay paused.
+assembly and comparison authorization are still open.
