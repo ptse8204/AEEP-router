@@ -37,7 +37,10 @@ failure. The CLI produced both reports and worker cleanup was confirmed.
 
 The [managed SkillRank diagnostic](../skillrank-managed-diagnostic-20261107/README.md)
 passed with both original trial receipts and the scheduler receipt. Its
-catalog and scheduling evidence still need canonical integration bindings.
+[read-only ledger audit](skillrank-ledger-audit.json) resolves search, show,
+missing-show, both protected grades, the scheduler journal and their settled
+operations. The runtime and source hashes stay attached to the original runs.
+Current integration registration remains open.
 Waza needs [protected operator sign-in](../waza-native-backend-20261104/operator-setup-20261113/README.md)
 and a separately reviewed real backend run.
 
@@ -47,4 +50,15 @@ lifecycle receipts and both installed task trees. The
 receipt from each named domain. All six [document and software receipts](domain-receipt-bindings.json)
 resolved through their campaign and original attempt stores. Live export,
 readback and disablement for those
-receipts remain pending. Comparisons remain paused. C13 stays open.
+receipts remain pending under the [paired-domain review](domain-live-review-summary.json).
+The [latest readiness snapshot](readiness-after-telemetry.json) records zero of
+39 checks on this source. The Sponsors receipts above remain valid for the
+earlier source in the first snapshot. Comparisons remain paused. C13 stays open.
+
+The [source checks](telemetry-source-verification.json) passed on the telemetry
+source. Both full runs passed 2,149 tests with 21 skips. Branch coverage was
+82.71 percent and both required branch gates passed. The wheel and sdist built.
+The [offline wheel smoke check](telemetry-wheel-contents-result.json) imported
+the built package with retained dependencies. The current
+[documentation review](docs/continuation-summary.json) is awaiting approval for
+the two changed documentation inputs.
