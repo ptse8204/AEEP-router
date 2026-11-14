@@ -54,7 +54,7 @@ All 13 [source checks](source-verification.json) passed. Both full runs
 passed 2,156 tests with 21 skips. Branch coverage was 82.19
 percent and both branch gates passed. The wheel and source distribution
 built, and the offline wheel smoke verified the CLI entry point. The
-[docs repeat](docs-review-summary.json) is bound to the revised guide and state.
+[offline docs check](docs-pipe-result.json) passed for its 72 bound inputs.
 
 ## Remaining checks
 
@@ -63,8 +63,8 @@ Langfuse queue acknowledgement, exact trace readback and disabled export.
 All retained containers are stopped. The [offline docs repeat](docs-repeat-result.json)
 stopped before either checker loaded when the sandbox denied Node access to
 the inherited log descriptor. The earlier docs result still applies to its
-original inputs. The [corrected review](docs-pipe-review-summary.json)
-binds the pipe-based capture and waits for repeat approval.
+original inputs. The [approved pipe-based retry](docs-pipe-result.json)
+passed with zero lint issues and zero link errors across 72 documents.
 
 Waza requires [protected operator sign-in](../waza-native-backend-20261104/operator-setup-20261113/README.md)
 and a supported backend grade. The remaining component evidence, stack

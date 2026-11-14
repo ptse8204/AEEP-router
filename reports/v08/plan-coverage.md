@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+<!-- offline-docs-pipe-20261114:start -->
+The [approved offline docs retry](../toolkit-v2/c13/canonical-stack-verification-20261114/docs-pipe-result.json)
+passed on all 72 bound inputs. Markdownlint reported zero issues and Lychee
+reported zero errors. Parent-side log capture resolved the Node startup failure
+with the same checker sandbox and versions.
+<!-- offline-docs-pipe-20261114:end -->
+
 <!-- excel-acknowledgement-20261114:start -->
 The [live Langfuse check](../toolkit-v2/c13/canonical-stack-verification-20261114/langfuse-live-result.json)
 verified the queue acknowledgement, Excel trace readback and export disablement
