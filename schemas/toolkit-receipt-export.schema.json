@@ -88,7 +88,8 @@
       "default": "aeep.toolkit.receipt-export.v1",
       "enum": [
         "aeep.toolkit.receipt-export.v1",
-        "aeep.toolkit.receipt-export.v2"
+        "aeep.toolkit.receipt-export.v2",
+        "aeep.toolkit.receipt-export.v3"
       ],
       "title": "Schema Version",
       "type": "string"
@@ -131,6 +132,19 @@
       ],
       "default": null,
       "title": "Assessment Report Ref"
+    },
+    "acknowledgement": {
+      "anyOf": [
+        {
+          "const": "langfuse-4.55.0-queue",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Acknowledgement"
     }
   },
   "required": [

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import os
+import re
 import sqlite3
 import time
 from contextlib import closing
@@ -51,9 +52,11 @@ from .workflow_accounting import account_workflow
 
 
 class ReceiptExportDefinition(StrictModel):
-    schema_version: Literal["aeep.toolkit.receipt-export.v1", "aeep.toolkit.receipt-export.v2"] = (
-        "aeep.toolkit.receipt-export.v1"
-    )
+    schema_version: Literal[
+        "aeep.toolkit.receipt-export.v1",
+        "aeep.toolkit.receipt-export.v2",
+        "aeep.toolkit.receipt-export.v3",
+    ] = "aeep.toolkit.receipt-export.v1"
     request: RecipeMaterializationRequest
     port: int = Field(strict=True, ge=1024, le=65535)
     enabled: bool = False
@@ -61,10 +64,16 @@ class ReceiptExportDefinition(StrictModel):
     deployment_review_ref: Digest
     timeout_seconds: int = Field(default=10, strict=True, ge=1, le=30)
     assessment_report_ref: Digest | None = None
+    acknowledgement: Literal["langfuse-4.55.0-queue"] | None = None
 
     @model_validator(mode="after")
     def exact_campaign(self) -> ReceiptExportDefinition:
-        if self.schema_version.endswith(".v2") != (self.assessment_report_ref is not None):
+        if self.schema_version.endswith(".v3"):
+            if self.acknowledgement is None:
+                raise ValueError("v3 receipt export requires an explicit acknowledgement protocol")
+        elif self.acknowledgement is not None:
+            raise ValueError("Langfuse queue acknowledgement requires a v3 definition")
+        elif self.schema_version.endswith(".v2") != (self.assessment_report_ref is not None):
             raise ValueError(
                 "campaign receipt export requires a v2 definition and exact assessment report"
             )
@@ -75,6 +84,8 @@ class ReceiptExportDefinition(StrictModel):
         result: dict[str, Any] = handler(self)
         if self.assessment_report_ref is None:
             result.pop("assessment_report_ref", None)
+        if self.acknowledgement is None:
+            result.pop("acknowledgement", None)
         return result
 
 
@@ -129,12 +140,41 @@ def accepted(raw: Any) -> bool:
     if raw.status != ExecutionStatus.SUCCESS or not isinstance(raw.output, dict):
         return False
     # OTLP can report rejected spans in an HTTP200 response. Preserve the failure.
-    partial = raw.output.get("partialSuccess", raw.output.get("partial_success", {}))
-    return raw.output == {} or (
-        isinstance(partial, dict)
-        and partial == {}
-        and set(raw.output) <= {"partialSuccess", "partial_success"}
+    return set(raw.output) <= {"partialSuccess", "partial_success"} and all(
+        isinstance(value, dict) and not value for value in raw.output.values()
     )
+
+
+def _acknowledgement(
+    raw: RawExecution, definition: ReceiptExportDefinition
+) -> Literal["otlp", "langfuse-4.55.0-queue"] | None:
+    if accepted(raw):
+        return "otlp"
+    body = raw.output
+    if (
+        definition.acknowledgement != "langfuse-4.55.0-queue"
+        or raw.status != ExecutionStatus.SUCCESS
+        or raw.metadata.get("status_code") != 200
+        or not isinstance(body, dict)
+        or {"partialSuccess", "partial_success", "error", "errors", "failedReason"} & body.keys()
+        or body.get("name") != "otel-ingestion-job"
+        or not isinstance(job_id := body.get("id"), str)
+        or not re.fullmatch(r"[1-9][0-9]{0,18}", job_id)
+        or type(timestamp := body.get("timestamp")) is not int
+        or timestamp <= 0
+        or not isinstance(job := body.get("data"), dict)
+        or job.get("name") != body["name"]
+        or not isinstance(payload := job.get("payload"), dict)
+        or payload.get("ingestionVersion") != "4"
+        or not isinstance(auth := payload.get("authCheck"), dict)
+        or auth.get("validKey") is not True
+        or not isinstance(scope := auth.get("scope"), dict)
+        or scope.get("accessLevel") != "project"
+        or not isinstance(data := payload.get("data"), dict)
+        or not all(isinstance(data.get(key), str) and data[key] for key in ("fileKey", "publicKey"))
+    ):
+        return None
+    return "langfuse-4.55.0-queue"
 
 
 def campaign_receipt(
@@ -314,6 +354,8 @@ def export_receipt(
             "export_performed": False,
             "ingestion_verified": False,
         }
+        if definition.acknowledgement is not None:
+            facts["acknowledgement"] = definition.acknowledgement
         digest = content_digest(facts)
         if reviewed_digest is None:
             return {**facts, "review_sha256": digest}
@@ -368,6 +410,7 @@ def export_receipt(
         raw = None
         failure = None
         evidence_ref = None
+        acknowledgement = None
 
         def authorize() -> str:
             meter.authorize()
@@ -410,7 +453,8 @@ def export_receipt(
                     )
                 ):
                     raw = asyncio.run(invoke())
-                if not accepted(raw):
+                acknowledgement = _acknowledgement(raw, definition)
+                if acknowledgement is None:
                     raise ConfigurationError(
                         "receipt transport failed or returned partial/invalid acceptance; no retry"
                     )
@@ -450,6 +494,11 @@ def export_receipt(
                         "legacy_vector_defaults_are_not_observations": True,
                         "ingestion_verified": False,
                         "response_contents_not_retained": True,
+                        **(
+                            {"acknowledgement": acknowledgement}
+                            if definition.acknowledgement is not None
+                            else {}
+                        ),
                     },
                 )
                 repository.store.save_receipt(transport)

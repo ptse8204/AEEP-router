@@ -188,7 +188,7 @@ their original source and runtime bindings.
 
 ### Export telemetry from a completed workflow
 
-For a managed campaign, select its prepared assessment and a v2 receipt-export
+For a managed campaign, select its prepared assessment and a v2 or v3 receipt-export
 definition with the exact `assessment_report_ref`. Use the existing
 `workflow export-telemetry` command with its receipt ID and the selected
 configuration. The exporter checks the settled job and the same grant scope,
@@ -199,6 +199,16 @@ The minimized preview shows the receipt hash and the prospective trace and span
 IDs. Enabling export requires the exact reviewed local deployment and accounting
 scope. Verify ingestion through that deployment's readback before claiming a
 trace is linked. A v1 export still resolves receipts in the router store.
+
+The reviewed Langfuse 4.55.0 deployment can opt in to its queued-job
+acknowledgement using `aeep.toolkit.receipt-export.v3` and
+`"acknowledgement": "langfuse-4.55.0-queue"`. This requires a new exact preview
+and review. The exporter records the acknowledgement type, never the job
+body. Readback is still required to confirm ingestion. Unrecognized responses
+and partial rejection retain a settled failure and do not trigger a retry.
+Existing v1 and v2 export definitions continue to use OTLP acknowledgements.
+Use readback to reconcile a previous send. Changing the definition does not
+authorize sending the same receipt again.
 
 After a reviewed paired inspection settles, prepare its canonical readiness
 definitions through the ordinary CLI:

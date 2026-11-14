@@ -166,7 +166,13 @@ def test_export_minimizes_source_and_accounts_without_claiming_ingestion(configu
 
 
 @pytest.mark.parametrize(
-    "output", [{"partialSuccess": {"rejectedSpans": "1"}}, {"unexpected": "private payload"}, []]
+    "output",
+    [
+        {"partialSuccess": {"rejectedSpans": "1"}},
+        {"partialSuccess": {}, "partial_success": {"rejected_spans": "1"}},
+        {"unexpected": "private payload"},
+        [],
+    ],
 )
 def test_invalid_or_partial_acceptance_stays_failed_and_charged(configured, monkeypatch, output):
     calls = substitute(monkeypatch, output=output)
@@ -381,24 +387,86 @@ async def _valid_fixture_url(*args, **kwargs):
     return None
 
 
-def test_full_ledger_path_uses_real_http_serialization_without_a_network(configured, monkeypatch):
+def _queued_job():
+    return {
+        "name": "otel-ingestion-job",
+        "id": "7",
+        "timestamp": 1763000000000,
+        "data": {
+            "name": "otel-ingestion-job",
+            "payload": {
+                "ingestionVersion": "4",
+                "authCheck": {"validKey": True, "scope": {"accessLevel": "project"}},
+                "data": {"fileKey": "private-object-path", "publicKey": "private-project-binding"},
+            },
+        },
+    }
+
+
+@pytest.mark.parametrize(
+    ("opt_in", "response_kind", "http_status", "expected"),
+    [
+        (False, "empty", 200, "otlp"),
+        (False, "queue", 200, None),
+        (True, "queue", 200, "langfuse-4.55.0-queue"),
+        (True, "queue", 202, None),
+        (True, "partial", 200, None),
+        (True, "wrong-version", 200, None),
+    ],
+)
+def test_full_ledger_path_uses_real_http_serialization_without_a_network(
+    configured, monkeypatch, opt_in, response_kind, http_status, expected
+):
     import httpx
 
     seen = []
     actual_client = httpx.AsyncClient
+    workflow, repo, scope_file, definition, _, binding_file = configured
+    legacy_digest = content_digest(definition)
+    assert "acknowledgement" not in definition.model_dump(mode="json")
+    if opt_in:
+        definition = ReceiptExportDefinition.model_validate(
+            definition.model_dump(mode="json")
+            | {
+                "schema_version": "aeep.toolkit.receipt-export.v3",
+                "acknowledgement": "langfuse-4.55.0-queue",
+            }
+        )
+        assert content_digest(definition) != legacy_digest
+        binding_file.write_text(definition.model_dump_json())
+        data = json.loads(workflow.read_bytes())
+        data["configurations"]["document-data"]["telemetry"]["sha256"] = sha(binding_file)
+        workflow.write_text(json.dumps(data))
+        from aeep_toolkit.workflow_accounting import WorkflowAccountingDefinition
+
+        scope = WorkflowAccountingDefinition.model_validate_json(scope_file.read_bytes())
+        scope = scope.model_copy(update={"workflow_sha256": sha(workflow)})
+        scope_file.write_text(scope.model_dump_json())
+        repo.review(repo.put("toolkit_workflow_accounting", content_digest(scope), scope))
+        repo.review(repo.put("toolkit_receipt_export", content_digest(definition), definition))
+    body = {} if response_kind == "empty" else _queued_job()
+    if response_kind == "partial":
+        body["partialSuccess"] = {"rejectedSpans": "1"}
+    elif response_kind == "wrong-version":
+        body["data"]["payload"]["ingestionVersion"] = "3"
 
     def response(request):
         seen.append(request)
         assert request.url == "http://127.0.0.1:39067/api/public/otel/v1/traces"
         assert request.headers["authorization"] == "Basic first-party-fixture-only"
         assert request.headers["x-langfuse-ingestion-version"] == "4"
-        return httpx.Response(200, json={})
+        return httpx.Response(http_status, json=body)
 
     monkeypatch.setattr("aeep.executors.http.validate_http_url", _valid_fixture_url)
     monkeypatch.setattr(
         "aeep.executors.http.httpx.AsyncClient",
         lambda **kwargs: actual_client(transport=httpx.MockTransport(response), **kwargs),
     )
+    if expected is None:
+        with pytest.raises(ConfigurationError, match="without verified acceptance"):
+            invoke(configured)
+        assert len(seen) == 1
+        return
     result = invoke(configured)
     assert len(seen) == 1 and result["transport_accepted"] and not result["ingestion_verified"]
     payload = json.loads(seen[0].content)
@@ -408,6 +476,21 @@ def test_full_ledger_path_uses_real_http_serialization_without_a_network(configu
     )
     assert transport["actual_resources"]["network_bytes"] > len(seen[0].content)
     assert transport["metadata"]["observed_resource_dimensions"] == ["latency_ms", "network_bytes"]
+    assert transport["metadata"].get("acknowledgement") == (expected if opt_in else None)
+    assert all(
+        value not in json.dumps(transport) and value not in json.dumps(result)
+        for value in ("private-object-path", "private-project-binding")
+    )
+
+
+def test_acknowledgement_requires_versioned_definition(configured):
+    original = configured[3].model_dump(mode="json")
+    for invalid in (
+        original | {"acknowledgement": "langfuse-4.55.0-queue"},
+        original | {"schema_version": "aeep.toolkit.receipt-export.v3"},
+    ):
+        with pytest.raises(ValueError, match="acknowledgement"):
+            ReceiptExportDefinition.model_validate(invalid)
 
 
 @pytest.mark.parametrize("port", [True, 0, 80, 65536, "3030"])

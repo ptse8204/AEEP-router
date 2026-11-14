@@ -1,5 +1,16 @@
 # 0.8 plan coverage and remaining work
 
+<!-- langfuse-acknowledgement-20261113:start -->
+Source `6e8d9925` recognizes the pinned Langfuse acknowledgement through an
+explicit v3 export review. Both full runs passed 2,156 tests with 21 skips,
+and both coverage gates passed. The offline wheel smoke passed.
+The [C13 packet](../toolkit-v2/c13/canonical-stack-verification-20261113/README.md)
+binds six historical task grades to their reports and accounted execution.
+The current CLI prepares both named configurations. The live acknowledgement
+review awaits repeat authority; Waza awaits protected sign-in and a real grade.
+Current canonical readiness and both comparison gates remain open.
+<!-- langfuse-acknowledgement-20261113:end -->
+
 <!-- domain-telemetry-settlement-20261113:start -->
 The [C13 results](../toolkit-v2/c13/canonical-stack-verification-20261113/README.md)
 now link both SkillsBench domains to private Langfuse observations. Sales Pivot

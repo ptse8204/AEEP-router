@@ -3496,3 +3496,12 @@ rights reference, the existing worker images and the verified offline
 grader. The public archive and protected assertions remain identical.
 Use one controlled Sol engineering turn after fresh conformance and
 explicit operator approval.
+
+## D196. Separate the Langfuse queue acknowledgement from trace readback
+
+The pinned [Langfuse 4.55.0 handler](https://github.com/langfuse/langfuse/blob/5e4db922e9021083500cd066249b220a414b7dfe/web/src/server/otel/processOtelIngestion.ts)
+returns a queue job for the v4 trace path. Accept its bounded response shape
+only in an explicitly reviewed v3 export definition. Preserve the strict OTLP
+path and store the acknowledgement type, never the returned job body. Trace
+readback remains separate. Sales and Spring have independently verified
+readbacks; their failed transport receipts are terminal and must not be replayed.

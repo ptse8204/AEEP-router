@@ -27,8 +27,9 @@ It made no network request, model turn, payment or publication.
 The [ledger audit](skillsbench-ledger-audit.json) verifies the exact receipt,
 grade, report and original source for each of the six jobs. The
 [six task records](skillsbench-engineering-outcomes.json) include receipt
-references, provider-reported token categories, elapsed time and retries. Each
-selected result comes from a single required-use engineering arm. Matched token
+references, provider-reported token categories, elapsed time and retries. The
+[domain journey audit](domain-journey-audit.json) verifies both renderings and
+the settled wrapper cost for every task. Each selected result comes from a single required-use engineering arm. Matched token
 differences remain unavailable. The latest [Prefix Cache result](../skillsbench-software-substitute-20261109/managed-preparation/managed-engineering/result.json)
 settled after one GPT-6.1 Sol medium turn. The protected grade was a task
 failure. The CLI produced both reports and worker cleanup was confirmed.
@@ -58,14 +59,19 @@ reused the retained services after the earlier driver stopped before dispatch.
 Both POST receipts remain failed because their acknowledgement was unrecognized.
 Independent readback verified ingestion for each trace. All six services stopped
 cleanly. Sales was not replayed, and no model turns ran.
-The [latest readiness snapshot](readiness-after-telemetry.json) records zero of
-39 checks on this source. The Sponsors receipts above remain valid for the
-earlier source in the first snapshot. Comparisons remain paused. C13 stays open.
+The pinned Langfuse queue acknowledgement has an explicit v3 opt-in. The
+[prepared live review](acknowledgement-live-review-summary.json) uses an
+unexported Excel receipt and does not repeat either prior POST. The service
+restart still requires approval. The [current CLI preparation](domain-current-preflight.json)
+resolved both selected configurations and installed task trees without dispatch.
+The [current readiness snapshot](readiness-after-acknowledgement.json) records
+zero of 39 canonical checks. The Sponsors receipts remain valid for their
+original source. C13 stays open and comparisons remain paused.
 
-The [source checks](telemetry-source-verification.json) passed on the telemetry
-source. Both full runs passed 2,149 tests with 21 skips. Branch coverage was
-82.71 percent and both required branch gates passed. The wheel and sdist built.
-The [offline wheel smoke check](telemetry-wheel-contents-result.json) imported
-the built package with retained dependencies. The [offline docs correction](docs/metadata-correction-result.json) passed on
-the 72 reviewed inputs: zero lint issues and zero link errors. It preserves
-the [earlier startup failure](docs/metadata-correction-summary.json).
+All 13 [source checks](acknowledgement-source-verification.json) passed. Both
+full runs passed 2,156 tests with 21 skips, and both branch gates passed at
+82.73 percent coverage. The wheel and sdist built. The separate
+[wheel smoke check](acknowledgement-wheel-result.json) passed offline.
+The [approved docs check](docs/metadata-correction-result.json) passed with
+zero lint issues and zero link errors on its 72 bound inputs. Later guide
+and checkpoint edits are outside that reviewed document snapshot.

@@ -18,7 +18,8 @@ OBSERVATIONS = {
                    "skillrank-managed-diagnostic-20261107/managed-result.json",
                    "canonical-stack-verification-20261113/skillrank-ledger-audit.json"],
         "Real search/show and the paired managed diagnostic passed. Their original ledgers verified read-only. The gate still needs current canonical bindings."),
-    "skillsbench": (["canonical-stack-verification-20261113/skillsbench-engineering-outcomes.json"],
+    "skillsbench": (["canonical-stack-verification-20261113/skillsbench-engineering-outcomes.json",
+                                 "canonical-stack-verification-20261113/domain-journey-audit.json"],
         "Six per-task CLI engineering results exist. The current gate still needs a protected-verifier and domain receipt binding."),
     "mcpmark": (["mcpmark-postgres-tool-schema-20261105/execution/summary.json",
                  "mcp-postgres-reference-results-20261105/results.json"],
@@ -36,7 +37,7 @@ OBSERVATIONS = {
     "langfuse": (["langfuse-ingestion-readback-20261105/service-execution/summary.json",
                   "canonical-stack-verification-20261113/domain-live-result.json",
                   "canonical-stack-verification-20261113/spring-telemetry-result.json"],
-        "Both exact receipt-linked traces ingested and disabled export sent no POST. The unrecognized POST acknowledgements remain failed transport receipts. Current canonical proof is pending."),
+        "Both exact receipt-linked traces ingested and disabled export sent no POST. The unrecognized POST acknowledgements remain failed transport receipts. The 4.55.0 response adapter still needs live verification on current source."),
     "langgraph": (["workflow-accounting-20261101/composed-sdk-runtime/execution/langgraph-sdk.json",
                    "workflow-accounting-20261101/composed-sdk-runtime/execution/summary.json"],
         "Four real SDK checks and six step receipts are retained. The bundle separately failed Agent Framework before its later correction. Current canonical integration binding remains open."),
@@ -51,15 +52,17 @@ OBSERVATIONS = {
         "Installed CLI optional execution and independence passed on an earlier source. Current runtime linkage remains open."),
     "github-sponsors": (["canonical-stack-verification-20261113/sponsors-result.json"],
         "Both checks have canonical settled receipts at the earlier source in readiness.json. Their source binding stays intact."),
-    "workflow-document-data": (["canonical-stack-verification-20261113/skillsbench-engineering-outcomes.json"],
+    "workflow-document-data": (["canonical-stack-verification-20261113/skillsbench-engineering-outcomes.json",
+                                 "canonical-stack-verification-20261113/domain-journey-audit.json"],
         "All three CLI task journeys reached grading. Sales Pivot telemetry linked with a failed CLI transport receipt. Composed canonical workflow registration remains open."),
-    "workflow-software-engineering": (["canonical-stack-verification-20261113/skillsbench-engineering-outcomes.json"],
+    "workflow-software-engineering": (["canonical-stack-verification-20261113/skillsbench-engineering-outcomes.json",
+                                 "canonical-stack-verification-20261113/domain-journey-audit.json"],
         "All three CLI task journeys reached grading. Spring telemetry readback and disablement passed. Composed canonical workflow registration remains open."),
 }
 
 
 def index():
-    snapshot = json.loads((HERE / "readiness-after-telemetry.json").read_bytes())
+    snapshot = json.loads((HERE / "readiness-after-acknowledgement.json").read_bytes())
     assert set(OBSERVATIONS) == {row["component"] for row in snapshot["components"]}
     return {
         "current_source": snapshot["implementation_source"],

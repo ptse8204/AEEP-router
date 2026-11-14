@@ -15,6 +15,13 @@ integrations. Langfuse is now selected for private observability. Components
 remain individually selectable; installation, execution permission and usefulness
 are separate from implementation. Waza still lacks supported backend access.
 
+The pinned private Langfuse 4.55.0 deployment returned matching traces for both
+named domains and passed disabled-export controls. See the
+[settled domain records](../../reports/toolkit-v2/c13/canonical-stack-verification-20261113/README.md).
+The strict CLI recorded failed transport acknowledgements. The new v3 export
+definition recognizes the pinned queue response after explicit review. Its
+live check remains open. No upstream version, data scope or acceptance gate changes.
+
 October 19 telemetry correction: D65 reuses the existing Codex 0.154.0 native
 OTLP collector and AEEP execution journal. No new telemetry dependency or hosted
 backend is selected. All 564 old token captures passed a retrospective consistency

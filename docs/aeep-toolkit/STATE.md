@@ -1,5 +1,28 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- langfuse-acknowledgement-20261113:start -->
+**November 13. Langfuse queue acknowledgement handled in the ordinary CLI.**
+
+Source `6e8d9925` adds the explicit v3 definition for private Langfuse 4.55.0.
+Transport acknowledgement stays separate from verified ingestion. The
+[source checks](../../reports/toolkit-v2/c13/canonical-stack-verification-20261113/acknowledgement-source-verification.json)
+passed all 13 gates: 2,156 tests and 21 skips in both full runs, 82.73 percent
+coverage, and both branch floors. Build and offline wheel smoke passed.
+The approved docs check covers the 72 earlier bound inputs.
+
+The [domain audit](../../reports/toolkit-v2/c13/canonical-stack-verification-20261113/domain-journey-audit.json)
+joins six protected scores, two receipt-linked traces, their CLI reports and
+settled overhead. Current prepare and readiness checks passed for both named
+configurations. The [current stack snapshot](../../reports/toolkit-v2/c13/canonical-stack-verification-20261113/readiness-after-acknowledgement.json)
+accepts zero of 39 canonical checks. Old evidence retains its original source.
+
+The [unstarted live review](../../reports/toolkit-v2/c13/canonical-stack-verification-20261113/acknowledgement-live-review-summary.json)
+binds the new acknowledgement path to one previously unexported Excel receipt.
+A restart needs repeat authority. Waza needs the operator's protected sign-in
+and an actual supported backend grade. Continue with current canonical bindings
+without model replays. C13 stays open. Comparisons remain paused.
+<!-- langfuse-acknowledgement-20261113:end -->
+
 <!-- domain-telemetry-settlement-20261113:start -->
 **November 13. Both SkillsBench domains verified receipt-linked telemetry.**
 
