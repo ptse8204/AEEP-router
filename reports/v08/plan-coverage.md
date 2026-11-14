@@ -1,5 +1,19 @@
 # 0.8 plan coverage and remaining work
 
+<!-- readiness-reconciliation-20261113:start -->
+The [C13 results](../toolkit-v2/c13/canonical-stack-verification-20261113/README.md)
+record all six SkillsBench task scores, the settled SkillRank receipts and
+39 current-source readiness requirements. The prior Sponsors checks retain
+their original source. Sales Pivot's actual receipt trace was read back from
+private Langfuse. The export CLI retained a failed transport receipt. A reused
+health-check operation ID stopped Spring before dispatch. All services stopped.
+
+Current telemetry code passed all 13 source checks and the offline wheel smoke.
+The approved docs run stopped at the Node entry point before either checker
+loaded. The Spring-only continuation and docs metadata correction wait for
+repeat authority. Waza requires operator sign-in. C13 and comparisons stay paused.
+<!-- readiness-reconciliation-20261113:end -->
+
 <!-- skillrank-and-domain-telemetry-20261113:start -->
 The [SkillRank diagnostic](../toolkit-v2/c13/skillrank-managed-diagnostic-20261107/README.md)
 settled two GPT-6.1 Sol medium turns and both protected grades. Scope is one

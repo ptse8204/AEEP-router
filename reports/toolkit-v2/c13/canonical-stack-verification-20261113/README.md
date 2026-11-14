@@ -49,8 +49,12 @@ lifecycle receipts and both installed task trees. The
 [telemetry preflight](domain-telemetry-preflight.json) binds an original trial
 receipt from each named domain. All six [document and software receipts](domain-receipt-bindings.json)
 resolved through their campaign and original attempt stores. Live export,
-readback and disablement for those
-receipts remain pending under the [paired-domain review](domain-live-review-summary.json).
+readback linked the Sales Pivot trace to its original receipt, and disabled
+export sent no request. The export CLI preserved a failed transport receipt
+because acceptance was unverified. The [paired-domain result](domain-live-result.json)
+records that Spring did not dispatch because the driver reused a settled health
+check ID. All six services stopped cleanly. The Spring-only continuation keeps
+the Sales result and its charges.
 The [latest readiness snapshot](readiness-after-telemetry.json) records zero of
 39 checks on this source. The Sponsors receipts above remain valid for the
 earlier source in the first snapshot. Comparisons remain paused. C13 stays open.
@@ -59,6 +63,7 @@ The [source checks](telemetry-source-verification.json) passed on the telemetry
 source. Both full runs passed 2,149 tests with 21 skips. Branch coverage was
 82.71 percent and both required branch gates passed. The wheel and sdist built.
 The [offline wheel smoke check](telemetry-wheel-contents-result.json) imported
-the built package with retained dependencies. The current
-[documentation review](docs/continuation-summary.json) is awaiting approval for
-the two changed documentation inputs.
+the built package with retained dependencies. The approved docs run reached
+Node, which stopped before either checker loaded because ancestor metadata
+was denied. The [metadata correction](docs/metadata-correction-summary.json)
+preserves that result and binds a new offline attempt.

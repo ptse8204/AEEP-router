@@ -1,0 +1,52 @@
+{
+  "synthetic_only": true,
+  "cases": {
+    "accepted": {
+      "disabled_export_verified": true,
+      "post_response": {
+        "http_status": 200,
+        "bytes": 2,
+        "json_object": true,
+        "otlp_acceptance_valid": true
+      },
+      "transport_record": {
+        "transport_accepted": true
+      },
+      "post_invocations": 1,
+      "ingestion_verified": true
+    },
+    "ambiguous_ack_ingested": {
+      "disabled_export_verified": true,
+      "post_response": {
+        "http_status": 200,
+        "bytes": 40,
+        "json_object": true,
+        "otlp_acceptance_valid": false
+      },
+      "transport_exit": "simulated invalid acknowledgment",
+      "post_invocations": 1,
+      "ingestion_verified": true
+    },
+    "before_post": {
+      "disabled_export_verified": true,
+      "transport_exit": "simulated refusal",
+      "post_invocations": 0,
+      "ingestion_verified": false
+    },
+    "not_ingested": {
+      "disabled_export_verified": true,
+      "post_response": {
+        "http_status": 502,
+        "bytes": 2,
+        "json_object": true,
+        "otlp_acceptance_valid": false
+      },
+      "transport_exit": "simulated invalid acknowledgment",
+      "post_invocations": 1,
+      "ingestion_verified": false
+    }
+  },
+  "network": "localhost first-party fixture",
+  "docker_started": false,
+  "models": 0
+}
