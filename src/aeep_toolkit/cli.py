@@ -114,7 +114,10 @@ def main(argv: list[str] | None = None) -> int:
     diagnostic = sub.add_parser('doctor', help='Read project connection metadata without starting services')
     diagnostic.add_argument('--host', choices=('codex', 'claude', 'dsh', 'deepseek-api'), required=True)
     diagnostic.add_argument('--project', type=Path, required=True)
-    sub.add_parser('stack-status', help='Print all required integration checks; no readiness or execution is inferred')
+    stack_status = sub.add_parser('stack-status', help='Inspect required checks or current canonical stack evidence')
+    stack_status.add_argument('--store', type=Path, help='Read an existing AEEP database without initializing it')
+    stack_verify = sub.add_parser('stack-verify', help='Define, probe and assemble canonical integration evidence')
+    stack_verify.add_argument('arguments', nargs=argparse.REMAINDER)
     report = sub.add_parser('report', help='Summarize normalized records without executing an evaluator')
     report.add_argument('--evidence', type=Path, required=True)
     report.add_argument('--format', choices=('json', 'markdown', 'html'), default='markdown')
@@ -255,8 +258,16 @@ def main(argv: list[str] | None = None) -> int:
             benchmark_main(args.arguments)
             return 0
         if args.command == 'stack-status':
-            from .stack_readiness import checklist
-            print(json.dumps(checklist(), indent=2))
+            if args.store is None:
+                from .stack_readiness import checklist
+                print(json.dumps(checklist(), indent=2))
+            else:
+                from .stack_verification import main as verify_main
+                verify_main(['status', '--store', str(args.store)])
+            return 0
+        if args.command == 'stack-verify':
+            from .stack_verification import main as verify_main
+            verify_main(args.arguments)
             return 0
         if args.command == 'candidate':
             from .candidate import inspect, stage_subject

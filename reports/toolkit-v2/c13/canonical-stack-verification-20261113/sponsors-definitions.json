@@ -1,0 +1,243 @@
+{
+  "integration": {
+    "schema_version": "aeep.toolkit.integration-definition.v1",
+    "component": "github-sponsors",
+    "source_revision": "84881f17ae11fc1045f3e368805f98e1451c7cf7ecf4ffa757308241a44bd48d",
+    "implementation_source": "84881f17ae11fc1045f3e368805f98e1451c7cf7ecf4ffa757308241a44bd48d",
+    "runtime_digest": "3a9edd0108dd4eefc13f26c633d9e85da328e7dc8d4fd491835d7090b1e2f888",
+    "executable_dependencies": {
+      "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/canonical-stack-verification-20261113/sponsors-check.py": "b28f718a81b9cf353359fc8bd969d53a5f7257572c895a3c12a960cb85893930",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c12/developer-source/no-observations.json": "9d84b3ee6d33822814e11c6db89962b75f7ca699b2793240cf504a3c6c2cc954",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-sponsors-20261104/sponsors-review.json": "d072b1586a4bf601739a88552ab6c449bfe05a0e03541b389b72e77adb113c13",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-sponsors-20261104/FUNDING.yml": "6dd38a9f9b42964dc90d18fbfc7d043fc91ecdb2a2a3d688c24f7cfb81289c84",
+      "/Applications/Docker.app/Contents/Resources/bin/docker": "8be48df662c5ced38738e7e5dd7f82611a55565f165787cfecebbe416b321b50"
+    },
+    "probe_definitions": {
+      "source_attribution": "9bf9551d514fd0c67893976587873456b2f1f47234753d9fd0834a171a64cff9",
+      "authorized_link": "82511998ced930e523598b1ed7b4ae40947914154e20952544ba0724525a6625"
+    }
+  },
+  "checks": {
+    "source_attribution": {
+      "name": "github-sponsors.source_attribution",
+      "executor": {
+        "id": "toolkit.sponsors-check",
+        "capability": "toolkit.sponsors-check@1",
+        "kind": "command",
+        "description": "Check the actual source-attribution CLI on an exact public funding declaration",
+        "input_schema": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "output_schema": null,
+        "estimate": {
+          "resources": {
+            "monetary_usd": 0.0,
+            "latency_ms": 0.0,
+            "cpu_ms": 0.0,
+            "memory_mb_seconds": 0.0,
+            "peak_memory_mb": 0.0,
+            "gpu_ms": 0.0,
+            "network_bytes": 0,
+            "context_tokens": 0,
+            "input_tokens": 0,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 0,
+            "reasoning_output_tokens": 0,
+            "subscription_units": 0.0
+          },
+          "cash": {
+            "amount_usd": null,
+            "upper_bound_usd": null,
+            "evidence": {
+              "status": "unavailable",
+              "source": "unavailable",
+              "trust": "untrusted",
+              "evidence_id": null,
+              "source_reference": null,
+              "digest": null,
+              "observed_at": null
+            }
+          },
+          "subscription_usage": [],
+          "success_probability": 0.95,
+          "quality_score": 0.95,
+          "risk_score": 0.05,
+          "confidence": 0.5,
+          "source": "static",
+          "sample_size": 0,
+          "uncertainty": null
+        },
+        "side_effect": "read",
+        "locality": "local",
+        "requires_network": false,
+        "data_residency": [],
+        "idempotent": true,
+        "safe_to_auto_execute": true,
+        "enabled": true,
+        "tags": [],
+        "resource_pool": null,
+        "provider_id": null,
+        "validators": [],
+        "config": {
+          "argv": [
+            "/usr/local/bin/python",
+            "-B",
+            "-c",
+            "\"\"\"Actual offline Sponsors checks with the preserved public funding declaration.\"\"\"\n\nimport contextlib\nimport hashlib\nimport io\nimport json\nimport sys\nimport tempfile\nfrom pathlib import Path\n\nPUBLISHER = \"DietrichGebert\"\nURL = f\"https://github.com/sponsors/{PUBLISHER}\"\nREVISION = \"1d95ff7d39de12d87014ea40d4e22201bddc501b\"\n\n\ndef evaluate(arguments):\n    from aeep_toolkit.cli import main\n\n    rendered = io.StringIO()\n    with contextlib.redirect_stdout(rendered), contextlib.redirect_stderr(io.StringIO()):\n        try:\n            code = main(arguments)\n        except SystemExit as stopped:\n            return stopped.code, None\n    return code, json.loads(rendered.getvalue())[\"document\"]\n\n\ndef run(check, source, source_revision, public_files):\n    with tempfile.TemporaryDirectory() as staging:\n        root = Path(staging).resolve()\n        for name, value in public_files.items():\n            assert name in {\"no-observations.json\", \"sponsors-review.json\", \"FUNDING.yml\"}\n            (root / name).write_bytes(bytes.fromhex(value))\n        digest = hashlib.sha256((root / \"sponsors-review.json\").read_bytes()).hexdigest()\n        args = [\"export-preview\", \"--evidence\", str(root / \"no-observations.json\"),\n                \"--sponsors-review\", str(root / \"sponsors-review.json\"), \"--reviewed-digest\", digest]\n        code, document = evaluate([*args, \"--disclose-source\"])\n        assert code == 0 and document\n        assertion = document[\"developer\"][\"assertion\"]\n        assert document[\"developer\"][\"status\"] == \"reviewed_source_declaration\"\n        assert document[\"outcome\"] == \"NOT_ASSESSED\" and not document[\"publication_performed\"]\n        assert assertion[\"assertion_ref\"] == digest and assertion[\"identity\"] == PUBLISHER\n        assert assertion[\"source\"][\"revision\"] == REVISION and assertion[\"support_url\"] == URL\n        observed = {\"component\": \"github-sponsors\", \"check\": check, \"implementation_source\": source,\n                    \"source_revision\": source_revision, \"mode\": \"upstream_functional\"}\n        if check == \"source_attribution\":\n            (root / \"FUNDING.yml\").write_text(\"github: OtherPublicAccount\\n\")\n            assert evaluate([*args, \"--disclose-source\"])[0] == 2\n            return observed | {\"funding_drift_rejected\": True, \"funding_source_revision\": REVISION}\n        if check != \"authorized_link\":\n            raise ValueError(\"unknown check\")\n        assert evaluate(args)[0] == 2\n        assert evaluate([*args[:-1], \"0\" * 64, \"--disclose-source\"])[0] == 2\n        return observed | {\"explicit_source_disclosure_required\": True, \"support_url\": URL}\n\n\nif __name__ == \"__main__\":\n    sys.path.insert(0, sys.argv[2])\n    print(json.dumps(run(*json.loads(sys.argv[1]))))\n",
+            "[\"source_attribution\",\"84881f17ae11fc1045f3e368805f98e1451c7cf7ecf4ffa757308241a44bd48d\",\"84881f17ae11fc1045f3e368805f98e1451c7cf7ecf4ffa757308241a44bd48d\",{\"no-observations.json\":\"7b0a202022736368656d615f76657273696f6e223a2022616565702e746f6f6c6b69742e65766964656e63652e7631222c0a20202263616e646964617465223a207b0a20202020227265706f7369746f7279223a202268747470733a2f2f6769746875622e636f6d2f44696574726963684765626572742f706f6e797461696c222c0a20202020227265766973696f6e223a202231643935666637643339646531326438373031346561343064346532323230316264646335303162222c0a202020202261727469666163745f736861323536223a202232386462373336613330373531633736616534663836343965356638313061653038363231336637653135616436303165363932623666383731383831313765222c0a20202020226c6963656e73655f65787072657373696f6e223a20224d4954222c0a2020202022646174615f726967687473223a2022536f757263652d6465636c61726564204d495420666f722070696e6e6564207265706f7369746f727920636f64653b206e6f207461736b2064617461736574207265646973747269627574696f6e20636c61696d2e220a20207d2c0a20202261646170746572223a207b0a2020202022736368656d615f76657273696f6e223a2022616565702e746f6f6c6b69742e616461707465722e7631222c0a2020202022616461707465725f6964223a2022616565702e62656e63686d61726b2d72756e6e65722e636f646578222c0a2020202022696d706c656d656e746174696f6e5f736861323536223a202235396231666239636531366161333333663934656233343435653634353336313735613634393232363366306363383636623966623432353631666339633063222c0a2020202022686f737473223a205b0a20202020202022636f646578220a202020205d2c0a202020202263616e6469646174655f7479706573223a205b0a20202020202022736b696c6c220a202020205d2c0a20202020226f7074696f6e616c5f696e766f636174696f6e223a20747275652c0a202020202274656c656d65747279223a205b0a20202020202022746f6b656e73222c0a202020202020226167656e745f77616c6c5f7365636f6e6473222c0a20202020202022766572696669636174696f6e5f77616c6c5f7365636f6e6473220a202020205d2c0a2020202022636f6e7461696e6d656e74223a2022756e7665726966696564222c0a2020202022636f6e666f726d616e63655f726566223a206e756c6c0a20207d2c0a20202272756e73223a205b5d0a7d0a\",\"sponsors-review.json\":\"7b0a202022736368656d615f76657273696f6e223a2022616565702e746f6f6c6b69742e73706f6e736f722d7265766965772e7631222c0a202022736f75726365223a207b0a20202020227265706f7369746f7279223a202268747470733a2f2f6769746875622e636f6d2f44696574726963684765626572742f706f6e797461696c222c0a20202020227265766973696f6e223a202231643935666637643339646531326438373031346561343064346532323230316264646335303162222c0a202020202261727469666163745f736861323536223a202232386462373336613330373531633736616534663836343965356638313061653038363231336637653135616436303165363932623666383731383831313765222c0a20202020226c6963656e73655f65787072657373696f6e223a20224d4954222c0a2020202022646174615f726967687473223a2022536f757263652d6465636c61726564204d495420666f722070696e6e6564207265706f7369746f727920636f64653b206e6f207461736b2064617461736574207265646973747269627574696f6e20636c61696d2e220a20207d2c0a20202266756e64696e67223a207b0a202020202270617468223a202246554e44494e472e796d6c222c0a2020202022736861323536223a202236646433386139663962343239363464633930643138666266633764303433666339316563646232613261336436383863323466376366623831323839633834220a20207d0a7d0a\",\"FUNDING.yml\":\"6769746875623a205b44696574726963684765626572745d0a\"}]",
+            "/Users/edwintse/Documents/aeep-toolkit-v2/src"
+          ],
+          "argv_literal": true,
+          "timeout_seconds": 20,
+          "output": {
+            "type": "json"
+          }
+        }
+      },
+      "expected": {
+        "component": "github-sponsors",
+        "check": "source_attribution",
+        "source_revision": "84881f17ae11fc1045f3e368805f98e1451c7cf7ecf4ffa757308241a44bd48d",
+        "implementation_source": "84881f17ae11fc1045f3e368805f98e1451c7cf7ecf4ffa757308241a44bd48d",
+        "mode": "upstream_functional",
+        "funding_drift_rejected": true,
+        "funding_source_revision": "1d95ff7d39de12d87014ea40d4e22201bddc501b"
+      }
+    },
+    "authorized_link": {
+      "name": "github-sponsors.authorized_link",
+      "executor": {
+        "id": "toolkit.sponsors-check",
+        "capability": "toolkit.sponsors-check@1",
+        "kind": "command",
+        "description": "Check the actual source-attribution CLI on an exact public funding declaration",
+        "input_schema": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "output_schema": null,
+        "estimate": {
+          "resources": {
+            "monetary_usd": 0.0,
+            "latency_ms": 0.0,
+            "cpu_ms": 0.0,
+            "memory_mb_seconds": 0.0,
+            "peak_memory_mb": 0.0,
+            "gpu_ms": 0.0,
+            "network_bytes": 0,
+            "context_tokens": 0,
+            "input_tokens": 0,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 0,
+            "reasoning_output_tokens": 0,
+            "subscription_units": 0.0
+          },
+          "cash": {
+            "amount_usd": null,
+            "upper_bound_usd": null,
+            "evidence": {
+              "status": "unavailable",
+              "source": "unavailable",
+              "trust": "untrusted",
+              "evidence_id": null,
+              "source_reference": null,
+              "digest": null,
+              "observed_at": null
+            }
+          },
+          "subscription_usage": [],
+          "success_probability": 0.95,
+          "quality_score": 0.95,
+          "risk_score": 0.05,
+          "confidence": 0.5,
+          "source": "static",
+          "sample_size": 0,
+          "uncertainty": null
+        },
+        "side_effect": "read",
+        "locality": "local",
+        "requires_network": false,
+        "data_residency": [],
+        "idempotent": true,
+        "safe_to_auto_execute": true,
+        "enabled": true,
+        "tags": [],
+        "resource_pool": null,
+        "provider_id": null,
+        "validators": [],
+        "config": {
+          "argv": [
+            "/usr/local/bin/python",
+            "-B",
+            "-c",
+            "\"\"\"Actual offline Sponsors checks with the preserved public funding declaration.\"\"\"\n\nimport contextlib\nimport hashlib\nimport io\nimport json\nimport sys\nimport tempfile\nfrom pathlib import Path\n\nPUBLISHER = \"DietrichGebert\"\nURL = f\"https://github.com/sponsors/{PUBLISHER}\"\nREVISION = \"1d95ff7d39de12d87014ea40d4e22201bddc501b\"\n\n\ndef evaluate(arguments):\n    from aeep_toolkit.cli import main\n\n    rendered = io.StringIO()\n    with contextlib.redirect_stdout(rendered), contextlib.redirect_stderr(io.StringIO()):\n        try:\n            code = main(arguments)\n        except SystemExit as stopped:\n            return stopped.code, None\n    return code, json.loads(rendered.getvalue())[\"document\"]\n\n\ndef run(check, source, source_revision, public_files):\n    with tempfile.TemporaryDirectory() as staging:\n        root = Path(staging).resolve()\n        for name, value in public_files.items():\n            assert name in {\"no-observations.json\", \"sponsors-review.json\", \"FUNDING.yml\"}\n            (root / name).write_bytes(bytes.fromhex(value))\n        digest = hashlib.sha256((root / \"sponsors-review.json\").read_bytes()).hexdigest()\n        args = [\"export-preview\", \"--evidence\", str(root / \"no-observations.json\"),\n                \"--sponsors-review\", str(root / \"sponsors-review.json\"), \"--reviewed-digest\", digest]\n        code, document = evaluate([*args, \"--disclose-source\"])\n        assert code == 0 and document\n        assertion = document[\"developer\"][\"assertion\"]\n        assert document[\"developer\"][\"status\"] == \"reviewed_source_declaration\"\n        assert document[\"outcome\"] == \"NOT_ASSESSED\" and not document[\"publication_performed\"]\n        assert assertion[\"assertion_ref\"] == digest and assertion[\"identity\"] == PUBLISHER\n        assert assertion[\"source\"][\"revision\"] == REVISION and assertion[\"support_url\"] == URL\n        observed = {\"component\": \"github-sponsors\", \"check\": check, \"implementation_source\": source,\n                    \"source_revision\": source_revision, \"mode\": \"upstream_functional\"}\n        if check == \"source_attribution\":\n            (root / \"FUNDING.yml\").write_text(\"github: OtherPublicAccount\\n\")\n            assert evaluate([*args, \"--disclose-source\"])[0] == 2\n            return observed | {\"funding_drift_rejected\": True, \"funding_source_revision\": REVISION}\n        if check != \"authorized_link\":\n            raise ValueError(\"unknown check\")\n        assert evaluate(args)[0] == 2\n        assert evaluate([*args[:-1], \"0\" * 64, \"--disclose-source\"])[0] == 2\n        return observed | {\"explicit_source_disclosure_required\": True, \"support_url\": URL}\n\n\nif __name__ == \"__main__\":\n    sys.path.insert(0, sys.argv[2])\n    print(json.dumps(run(*json.loads(sys.argv[1]))))\n",
+            "[\"authorized_link\",\"84881f17ae11fc1045f3e368805f98e1451c7cf7ecf4ffa757308241a44bd48d\",\"84881f17ae11fc1045f3e368805f98e1451c7cf7ecf4ffa757308241a44bd48d\",{\"no-observations.json\":\"7b0a202022736368656d615f76657273696f6e223a2022616565702e746f6f6c6b69742e65766964656e63652e7631222c0a20202263616e646964617465223a207b0a20202020227265706f7369746f7279223a202268747470733a2f2f6769746875622e636f6d2f44696574726963684765626572742f706f6e797461696c222c0a20202020227265766973696f6e223a202231643935666637643339646531326438373031346561343064346532323230316264646335303162222c0a202020202261727469666163745f736861323536223a202232386462373336613330373531633736616534663836343965356638313061653038363231336637653135616436303165363932623666383731383831313765222c0a20202020226c6963656e73655f65787072657373696f6e223a20224d4954222c0a2020202022646174615f726967687473223a2022536f757263652d6465636c61726564204d495420666f722070696e6e6564207265706f7369746f727920636f64653b206e6f207461736b2064617461736574207265646973747269627574696f6e20636c61696d2e220a20207d2c0a20202261646170746572223a207b0a2020202022736368656d615f76657273696f6e223a2022616565702e746f6f6c6b69742e616461707465722e7631222c0a2020202022616461707465725f6964223a2022616565702e62656e63686d61726b2d72756e6e65722e636f646578222c0a2020202022696d706c656d656e746174696f6e5f736861323536223a202235396231666239636531366161333333663934656233343435653634353336313735613634393232363366306363383636623966623432353631666339633063222c0a2020202022686f737473223a205b0a20202020202022636f646578220a202020205d2c0a202020202263616e6469646174655f7479706573223a205b0a20202020202022736b696c6c220a202020205d2c0a20202020226f7074696f6e616c5f696e766f636174696f6e223a20747275652c0a202020202274656c656d65747279223a205b0a20202020202022746f6b656e73222c0a202020202020226167656e745f77616c6c5f7365636f6e6473222c0a20202020202022766572696669636174696f6e5f77616c6c5f7365636f6e6473220a202020205d2c0a2020202022636f6e7461696e6d656e74223a2022756e7665726966696564222c0a2020202022636f6e666f726d616e63655f726566223a206e756c6c0a20207d2c0a20202272756e73223a205b5d0a7d0a\",\"sponsors-review.json\":\"7b0a202022736368656d615f76657273696f6e223a2022616565702e746f6f6c6b69742e73706f6e736f722d7265766965772e7631222c0a202022736f75726365223a207b0a20202020227265706f7369746f7279223a202268747470733a2f2f6769746875622e636f6d2f44696574726963684765626572742f706f6e797461696c222c0a20202020227265766973696f6e223a202231643935666637643339646531326438373031346561343064346532323230316264646335303162222c0a202020202261727469666163745f736861323536223a202232386462373336613330373531633736616534663836343965356638313061653038363231336637653135616436303165363932623666383731383831313765222c0a20202020226c6963656e73655f65787072657373696f6e223a20224d4954222c0a2020202022646174615f726967687473223a2022536f757263652d6465636c61726564204d495420666f722070696e6e6564207265706f7369746f727920636f64653b206e6f207461736b2064617461736574207265646973747269627574696f6e20636c61696d2e220a20207d2c0a20202266756e64696e67223a207b0a202020202270617468223a202246554e44494e472e796d6c222c0a2020202022736861323536223a202236646433386139663962343239363464633930643138666266633764303433666339316563646232613261336436383863323466376366623831323839633834220a20207d0a7d0a\",\"FUNDING.yml\":\"6769746875623a205b44696574726963684765626572745d0a\"}]",
+            "/Users/edwintse/Documents/aeep-toolkit-v2/src"
+          ],
+          "argv_literal": true,
+          "timeout_seconds": 20,
+          "output": {
+            "type": "json"
+          }
+        }
+      },
+      "expected": {
+        "component": "github-sponsors",
+        "check": "authorized_link",
+        "source_revision": "84881f17ae11fc1045f3e368805f98e1451c7cf7ecf4ffa757308241a44bd48d",
+        "implementation_source": "84881f17ae11fc1045f3e368805f98e1451c7cf7ecf4ffa757308241a44bd48d",
+        "mode": "upstream_functional",
+        "explicit_source_disclosure_required": true,
+        "support_url": "https://github.com/sponsors/DietrichGebert"
+      }
+    }
+  },
+  "requests": {
+    "source_attribution": {
+      "schema_version": "assessment.recipe-materialization.v1",
+      "plan_id": "canonical-sponsors-9c3527394065e318-source_attribution",
+      "subject_digest": "4a96fa5eebf092841e5e5a85d790ab8db7425c483bf535e5f3263f07a51709f4",
+      "recipe_digest": "0fd1909db5ed2fca3efbf432d05d88cb83dd0e3b02506bb80259ba6cd63f62a8",
+      "mapping_digest": "9bf9551d514fd0c67893976587873456b2f1f47234753d9fd0834a171a64cff9",
+      "environment_digest": "3a9edd0108dd4eefc13f26c633d9e85da328e7dc8d4fd491835d7090b1e2f888",
+      "authorization_id": "onboarding",
+      "definition_digests": [
+        "9c3527394065e3189a7423ccf0d9392ae3816fcdf97278e392cecfc27d51e58f",
+        "9bf9551d514fd0c67893976587873456b2f1f47234753d9fd0834a171a64cff9"
+      ],
+      "seed": 0
+    },
+    "authorized_link": {
+      "schema_version": "assessment.recipe-materialization.v1",
+      "plan_id": "canonical-sponsors-9c3527394065e318-authorized_link",
+      "subject_digest": "4a96fa5eebf092841e5e5a85d790ab8db7425c483bf535e5f3263f07a51709f4",
+      "recipe_digest": "0fd1909db5ed2fca3efbf432d05d88cb83dd0e3b02506bb80259ba6cd63f62a8",
+      "mapping_digest": "82511998ced930e523598b1ed7b4ae40947914154e20952544ba0724525a6625",
+      "environment_digest": "3a9edd0108dd4eefc13f26c633d9e85da328e7dc8d4fd491835d7090b1e2f888",
+      "authorization_id": "onboarding",
+      "definition_digests": [
+        "9c3527394065e3189a7423ccf0d9392ae3816fcdf97278e392cecfc27d51e58f",
+        "82511998ced930e523598b1ed7b4ae40947914154e20952544ba0724525a6625"
+      ],
+      "seed": 0
+    }
+  },
+  "environment": {
+    "environment_id": "local-offline-sponsors-verification",
+    "kind": "container",
+    "identity": {
+      "purpose": "canonical-functional-probe"
+    },
+    "network": false,
+    "container_image": "sha256:35dc1bcb7e8162c2a0cef6cbd30bc4bf276c082b11b6e5fc259b6800e8c5ca04",
+    "cpu_count": 1.0,
+    "memory_mb": 256,
+    "process_limit": 64,
+    "container_runtime": "/Applications/Docker.app/Contents/Resources/bin/docker",
+    "container_socket": "/Users/edwintse/.docker/run/docker.sock",
+    "read_only_roots": []
+  }
+}

@@ -1,5 +1,21 @@
 # 0.8 plan coverage and remaining work
 
+<!-- canonical-stack-verification-20261113:start -->
+The [stack verification increment](../toolkit-v2/c13/canonical-stack-verification-20261113/README.md)
+adds operator CLI production and read-only inspection for existing canonical
+readiness records. Both Sponsors checks passed on the current source. The
+six SkillsBench engineering runs now have a read-only receipt audit, including
+Prefix Cache's 0/1 protected grade. The report records provider token categories
+and timing. Matched differences need matched arms.
+
+C13 and comparison dispatch remain blocked. The other 37 checks require
+current canonical proof. SkillRank awaits a bounded managed diagnostic, Waza
+awaits protected operator setup, and both domains need composed lifecycle and
+receipt-linked telemetry. The first offline documentation attempt stopped at
+native sandbox startup. Its exit and tool/input bindings are retained for
+diagnosis.
+<!-- canonical-stack-verification-20261113:end -->
+
 <!-- prefix-cache-sol-review-20261113:start -->
 The [Prefix Cache engineering review](../toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/managed-engineering/operation-review.json)
 binds the verified grader and exact three public input files to the

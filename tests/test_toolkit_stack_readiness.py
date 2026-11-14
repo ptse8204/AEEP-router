@@ -8,10 +8,17 @@ import pytest
 from test_toolkit_managed import prepared
 
 from aeep.assessment.boundary import BoundaryProbe, BoundaryProbeDefinition
-from aeep.assessment.models import content_digest
+from aeep.assessment.models import (
+    AssessmentEnvironment,
+    RecipeMaterializationRequest,
+    content_digest,
+)
+from aeep.assessment.repository import AssessmentRepository
 from aeep.errors import ConfigurationError
 from aeep.execution import EventJournal, ExecutionEvidence
-from aeep.models import ExecutorSpec
+from aeep.models import ExecutorSpec, RawExecution, ResourceVector
+from aeep.store import ReceiptStore
+from aeep_toolkit import stack_verification, workflow_security
 from aeep_toolkit.cli import main
 from aeep_toolkit.stack_readiness import (
     REQUIRED_CHECKS,
@@ -186,6 +193,130 @@ def test_stack_requires_all_roles_both_domains_and_current_review(tmp_path, monk
                 components={k: v for k, v in components.items() if k != "workflow-document-data"},
             )
     finally:
+        asyncio.run(router.close())
+
+
+@pytest.mark.parametrize("outcome", ["verified", "mismatch", "uncertain"])
+def test_cli_records_charged_probe_and_blocks_replay(tmp_path, monkeypatch, capsys, outcome):
+    router, _, adapter, *_ = prepared(tmp_path, monkeypatch)
+    store = ReceiptStore(tmp_path / "stack.sqlite3")
+    router.store._connection.backup(store._connection)
+    repository = AssessmentRepository(store)
+    binary = tmp_path / "synthetic-runtime"
+    binary.write_text("only a runtime fingerprint, never executed")
+    env = AssessmentEnvironment(
+        environment_id="offline-test", kind="container", identity={"scope": "synthetic"},
+        container_image="sha256:" + D, container_runtime=str(binary),
+        container_socket=str(tmp_path / "docker.sock"),
+    )
+    env_ref = repository.put("environment", content_digest(env), env)
+    component = "github-sponsors"
+    checks = {}
+    for name in REQUIRED_CHECKS[component]:
+        checks[name] = BoundaryProbeDefinition(
+            name=f"{component}.{name}",
+            executor=ExecutorSpec(id="fixture", capability="fixture@1", kind="command",
+                description="Synthetic execution used only in this test",
+                config={"argv": ["/unused"], "argv_literal": True, "output": {"type": "json"}}),
+            expected={"component": component, "check": name, "source_revision": D,
+                      "implementation_source": D, "mode": "upstream_functional", "fixture": True},
+        )
+    definition = IntegrationDefinition(
+        component=component, source_revision=D, implementation_source=D, runtime_digest=env_ref,
+        executable_dependencies={str(binary): hashlib.sha256(binary.read_bytes()).hexdigest()},
+        probe_definitions={name: content_digest(check) for name, check in checks.items()},
+    )
+    definition_ref = content_digest(definition)
+    requests = {
+        name: RecipeMaterializationRequest(
+            plan_id="unit-" + name, subject_digest=adapter.plan.subject_digest,
+            recipe_digest=adapter.plan.recipe_digest, mapping_digest=ref, environment_digest=env_ref,
+            authorization_id=adapter.plan.authorization_id, definition_digests=[definition_ref, ref], seed=0,
+        ) for name, ref in definition.probe_definitions.items()
+    }
+    bundle = stack_verification.VerificationDefinitions(integration=definition, checks=checks, requests=requests)
+    config = tmp_path / "bundle.json"
+    config.write_text(bundle.model_dump_json())
+    monkeypatch.setattr(stack_verification, "verification_source_digest", lambda root: D)
+    # Retain real reservation/settlement. Stub only the enclosing policy fixture
+    # and the container transport. These outcomes remain unit-test evidence.
+    original_authorize = AssessmentRepository.authorize
+    def authorize(self, request):
+        if isinstance(request, RecipeMaterializationRequest):
+            if request.mapping_digest not in definition.probe_definitions.values():
+                pytest.fail("unexpected request")
+            with self.store._lock:
+                for ref in request.definition_digests:
+                    state = self.store._connection.execute(
+                        "SELECT revoked FROM assessment_reviews WHERE digest=?", (ref,)
+                    ).fetchone()
+                    if state is None or state[0]:
+                        raise ConfigurationError("test review missing")
+            return self.current_grant(request.authorization_id)
+        return original_authorize(self, request)
+
+    monkeypatch.setattr(AssessmentRepository, "authorize", authorize)
+    attempts = []
+
+    async def execute(self, context):
+        context.invocation_check()
+        attempts.append(context.attempt_id)
+        self.cleanup_verified = outcome != "uncertain"
+        name = context.attempt_id.removeprefix("stack-probe:unit-")
+        output = checks[name].expected if outcome != "mismatch" else {"private_output": "must not persist"}
+        return RawExecution(status="success", output=output, resources=ResourceVector())
+
+    monkeypatch.setattr(workflow_security.ScanContainerExecutor, "execute", execute)
+    cli = ["stack-verify"]
+    database = ["--store", store.path]
+    try:
+        assert main([*cli, "define", *database, "--file", str(config)]) == 0
+        assert json.loads(capsys.readouterr().out)["definition_ref"] == definition_ref
+        assert main(["stack-status", *database]) == 0
+        result = json.loads(capsys.readouterr().out)
+        assert sum(len(item["checks"]) for item in result["components"]) == 39
+        probe_refs = {}
+        for name, request in requests.items():
+            command = [*cli, "probe", *database, "--component", component, "--check", name,
+                       "--definition-ref", definition_ref, "--request-id", request.plan_id]
+            if not attempts:
+                with pytest.raises(SystemExit, match="2"):
+                    main(command)
+                repository.review(definition_ref)
+                for check_ref in definition.probe_definitions.values():
+                    repository.review(check_ref)
+            if outcome == "verified":
+                assert main(command) == 0
+                probe_refs[name] = json.loads(capsys.readouterr().out)["probe_ref"]
+            else:
+                with pytest.raises(SystemExit, match="2"):
+                    main(command)
+            with pytest.raises(SystemExit, match="2"):
+                main(command)
+            state = store._connection.execute(
+                "SELECT state FROM assessment_operations WHERE id=?", ("stack-probe:" + request.plan_id,)
+            ).fetchone()[0]
+            assert state == ("reserved" if outcome == "uncertain" else "complete")
+        assert len(attempts) == 2
+        assert not store._connection.execute(
+            "SELECT 1 FROM assessment_records WHERE payload_json LIKE '%must not persist%'"
+        ).fetchall()
+        if outcome == "verified":
+            record = IntegrationEvidence(definition_ref=definition_ref, probe_refs=probe_refs)
+            config.write_text(record.model_dump_json())
+            assert main([*cli, "record", *database, "--component", component, "--file", str(config)]) == 0
+            capsys.readouterr()
+            assert main(["stack-status", *database]) == 0
+            result = json.loads(capsys.readouterr().out)
+            report = next(row for row in result["components"] if row["component"] == component)
+            assert report["functional_status"] == "VERIFIED"
+            assert all(check["receipt_ref"] for check in report["checks"].values())
+            assert result["comparison_dispatch"].startswith("BLOCKED")
+            binary.write_text("different runtime")
+            with pytest.raises(SystemExit, match="2"):
+                main([*cli, "record", *database, "--component", component, "--file", str(config)])
+    finally:
+        store.close()
         asyncio.run(router.close())
 
 

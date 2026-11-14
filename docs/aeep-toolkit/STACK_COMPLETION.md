@@ -131,7 +131,9 @@ PYTHONPATH=src python3 -m aeep_toolkit workflow prepare \
 ```
 
 These commands inspect metadata and bytes. `stack-status` lists the required
-checks without probing components. Workflow v2 binds
+checks without probing components. Add `--store /absolute/path/aeep.sqlite3`
+to see current functional evidence and the reason each unchecked item is blocked.
+It opens the existing ledger read-only. Workflow v2 binds
 candidate bytes, the selected pack, task IDs and component dependency preview.
 A supplied canonical assessment must bind the same task IDs and candidate, and
 its grader recipe must bind the pack digest. A configuration can instead bind
@@ -153,6 +155,36 @@ An explicit ASE scheduling definition connects external scheduling to the same
 canonical trial runner. The retained runtime has passed its actual scheduler and
 grader contract check on synthetic certificates. Controlled model dispatch still
 needs applicable evidence; previews cannot establish functional readiness.
+
+### Record readiness in the existing ledger
+
+`stack-verify define --store DB --file BUNDLE` registers an integration definition,
+its exact probe definitions and any selected requests and environment. The bundle
+contains `integration`, `checks`, and optional `requests` and `environment`.
+The command prints the definition and request references. Use the existing
+operator assessment review and grant controls before running a probe.
+
+```bash
+aeep-toolkit stack-verify probe --store DB --component COMPONENT --check CHECK \
+  --definition-ref DEFINITION --request-id REQUEST
+aeep-toolkit stack-verify record --store DB --component COMPONENT --file EVIDENCE
+aeep-toolkit stack-verify assemble --store DB --file COMPLETION
+aeep-toolkit stack-status --store DB
+```
+
+The probe command currently accepts offline argv commands in existing pinned
+containers without extra host mounts. It reserves one operation and zero model
+turns against the existing grant. A verified result binds the probe, execution
+journal and receipt. A settled failure keeps its costs. Uncertain cleanup retains
+the reservation, and the same request cannot dispatch again.
+
+The evidence file supplies `definition_ref` and a `probe_refs` map that covers
+the component's required check names. The completion file supplies
+`implementation_source` and a `components` map containing all 19 component
+evidence references. Review the completion digest through the existing operator
+path before selecting it for a comparison. Component installation, provider
+access and comparison authority have separate controls. Historical reports keep
+their original source and runtime bindings.
 
 After a reviewed paired inspection settles, prepare its canonical readiness
 definitions through the ordinary CLI:

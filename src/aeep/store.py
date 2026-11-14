@@ -1260,26 +1260,32 @@ class PreparedActionFinalizationRecord(TypedDict):
 
 
 class ReceiptStore:
-    def __init__(self, path: str | Path) -> None:
+    def __init__(self, path: str | Path, *, read_only: bool = False) -> None:
         # Runtime identities must be resolved afresh after process restart.
         self.host_runtime_digests: dict[str, tuple[str, str]] = {}
         self.expected_host_runtime_digests: dict[str, str] = {}
         self.path = str(path)
-        if self.path != ":memory:":
+        database = self.path
+        if read_only:
+            database = Path(path).resolve(strict=True).as_uri() + "?mode=ro"
+        elif self.path != ":memory:":
             target = Path(self.path).expanduser()
             target.parent.mkdir(parents=True, exist_ok=True)
             self.path = str(target)
+            database = self.path
         try:
             self._connection = sqlite3.connect(
-                self.path,
+                database,
                 check_same_thread=False,
                 timeout=30.0,
+                uri=read_only,
             )
         except sqlite3.Error as exc:
             raise ConfigurationError(f"cannot open AEEP database {self.path!r}: {exc}") from exc
         self._connection.row_factory = sqlite3.Row
         self._lock = threading.RLock()
-        self._initialize()
+        if not read_only:
+            self._initialize()
 
     def _initialize(self) -> None:
         with self._lock:

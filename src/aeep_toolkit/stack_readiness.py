@@ -15,11 +15,16 @@ from pydantic import Field, model_validator
 
 from aeep.assessment.boundary import BoundaryProbe, BoundaryProbeDefinition
 from aeep.assessment.identity import verify_dependencies
-from aeep.assessment.models import AssessmentPlan, RecipeMaterializationRequest, content_digest
+from aeep.assessment.models import (
+    AssessmentOperation,
+    AssessmentPlan,
+    RecipeMaterializationRequest,
+    content_digest,
+)
 from aeep.assessment.repository import AssessmentRepository
 from aeep.errors import ConfigurationError
 from aeep.execution import ExecutionEvidence
-from aeep.models import StrictModel
+from aeep.models import ExecutionReceipt, ExecutionStatus, StrictModel
 
 from .models import Digest, Identifier
 
@@ -188,14 +193,13 @@ def source_revisions(source_digest: str) -> dict[str, str]:
     return result
 
 
-def require_integration(
+def require_definition(
     repository: AssessmentRepository, digest: str, *, component: str, source_digest: str
-) -> IntegrationEvidence:
-    evidence = _resolve(repository, "toolkit_integration_evidence", digest, IntegrationEvidence)
+) -> IntegrationDefinition:
     definition = _resolve(
         repository,
         "toolkit_integration_definition",
-        evidence.definition_ref,
+        digest,
         IntegrationDefinition,
         reviewed=True,
     )
@@ -203,65 +207,110 @@ def require_integration(
         definition.component != component
         or definition.implementation_source != source_digest
         or definition.source_revision != source_revisions(source_digest)[component]
-        or set(evidence.probe_refs) != set(definition.probe_definitions)
     ):
-        raise ConfigurationError("integration source, role or required check set differs")
+        raise ConfigurationError("integration source revision or component differs")
     verify_dependencies(definition.executable_dependencies)
+    return definition
+
+
+def check_contract(
+    definition: IntegrationDefinition, name: str, check: BoundaryProbeDefinition
+) -> None:
+    required = {
+        "component": definition.component,
+        "check": name,
+        "source_revision": definition.source_revision,
+        "implementation_source": definition.implementation_source,
+        "mode": "upstream_functional",
+    }
+    if (
+        check.name != definition.component + "." + name
+        or definition.probe_definitions.get(name) != content_digest(check)
+        or any(check.expected.get(key) != value for key, value in required.items())
+        or len(check.expected) <= len(required)
+    ):
+        raise ConfigurationError("functional check definition differs from its integration binding")
+
+
+def require_check(
+    repository: AssessmentRepository, definition: IntegrationDefinition, name: str, probe_ref: str
+) -> tuple[BoundaryProbe, ExecutionEvidence]:
+    probe = _resolve(repository, "boundary_probe", probe_ref, BoundaryProbe)
+    check = _resolve(
+        repository, "boundary_probe_definition", definition.probe_definitions[name],
+        BoundaryProbeDefinition, reviewed=True,
+    )
+    check_contract(definition, name, check)
+    if (
+        probe.name != check.name
+        or probe.implementation_digest != content_digest(check)
+        or probe.worker_digest != definition.runtime_digest
+        or any(
+            type(probe.observed.get(key)) is not type(value) or probe.observed.get(key) != value
+            for key, value in check.expected.items()
+        )
+    ):
+        raise ConfigurationError("functional check does not match its reviewed upstream observation")
+    journal = _resolve(
+        repository, "execution_evidence", probe.execution_evidence_digest, ExecutionEvidence
+    )
+    if (
+        not journal.complete
+        or not journal.events
+        or journal.events[-1].kind != "execution.completed"
+        or journal.boundary_digest != definition.runtime_digest
+        or not any(
+            event.kind == "artifact.created"
+            and event.source_id == "probe-result"
+            and event.evidence_ref == content_digest(probe.observed)
+            for event in journal.events
+        )
+    ):
+        raise ConfigurationError("functional observation has no complete bound execution journal")
+    with repository.store._lock:
+        operation = repository.store._connection.execute(
+            "SELECT state FROM assessment_operations WHERE id=?", (journal.attempt_id,)
+        ).fetchone()
+    if operation is None or operation[0] != "complete":
+        raise ConfigurationError("functional check accounting is absent or unresolved")
+    if probe.charged_operation_digest is not None:
+        start = _resolve(repository, "operation_start", probe.charged_operation_digest, AssessmentOperation)
+        measurement = AssessmentOperation.model_validate(repository.get("operation_measurement", journal.attempt_id))
+        if (start.operation_id != journal.attempt_id or measurement.operation_id != start.operation_id
+                or measurement.plan_id != start.plan_id or measurement.stage != start.stage
+                or measurement.reserved != start.reserved or measurement.elapsed_seconds is None):
+            raise ConfigurationError("functional check measurement differs from its reserved operation")
+    if journal.attempt_id.startswith("stack-probe:"):
+        if probe.host_receipt_digest is None or probe.charged_operation_digest is None:
+            raise ConfigurationError("stack check requires a canonical receipt and charge")
+        receipt = _resolve(repository, "toolkit_stack_probe_receipt", probe.host_receipt_digest, ExecutionReceipt)
+        if (receipt.decision_id != journal.attempt_id or receipt.status != ExecutionStatus.SUCCESS
+                or receipt.metadata.get("execution_evidence_ref") != probe.execution_evidence_digest
+                or receipt.metadata.get("probe_definition_ref") != probe.implementation_digest
+                or repository.store.get_receipt(receipt.receipt_id) != receipt):
+            raise ConfigurationError("functional check receipt differs from canonical execution")
+    return probe, journal
+
+
+def verify_integration(
+    repository: AssessmentRepository, evidence: IntegrationEvidence, *, component: str,
+    source_digest: str,
+) -> IntegrationDefinition:
+    definition = require_definition(
+        repository, evidence.definition_ref, component=component, source_digest=source_digest
+    )
+    if set(evidence.probe_refs) != set(definition.probe_definitions):
+        raise ConfigurationError("functional evidence requires the complete check set")
     for name, probe_ref in evidence.probe_refs.items():
-        probe = _resolve(repository, "boundary_probe", probe_ref, BoundaryProbe)
-        check = _resolve(
-            repository,
-            "boundary_probe_definition",
-            definition.probe_definitions[name],
-            BoundaryProbeDefinition,
-            reviewed=True,
-        )
-        expected = {
-            "component": component,
-            "check": name,
-            "source_revision": definition.source_revision,
-            "implementation_source": source_digest,
-            "mode": "upstream_functional",
-        }
-        if (
-            check.name != component + "." + name
-            or probe.name != check.name
-            or probe.implementation_digest != content_digest(check)
-            or probe.worker_digest != definition.runtime_digest
-            or any(check.expected.get(key) != value for key, value in expected.items())
-            or len(check.expected) <= len(expected)
-            or any(
-                type(probe.observed.get(key)) is not type(value) or probe.observed.get(key) != value
-                for key, value in check.expected.items()
-            )
-        ):
-            raise ConfigurationError(
-                "functional check does not match its reviewed upstream observation"
-            )
-        journal = _resolve(
-            repository, "execution_evidence", probe.execution_evidence_digest, ExecutionEvidence
-        )
-        if (
-            not journal.complete
-            or not journal.events
-            or journal.events[-1].kind != "execution.completed"
-            or journal.boundary_digest != definition.runtime_digest
-            or not any(
-                event.kind == "artifact.created"
-                and event.source_id == "probe-result"
-                and event.evidence_ref == content_digest(probe.observed)
-                for event in journal.events
-            )
-        ):
-            raise ConfigurationError(
-                "functional observation has no complete bound execution journal"
-            )
-        with repository.store._lock:
-            operation = repository.store._connection.execute(
-                "SELECT state FROM assessment_operations WHERE id=?", (journal.attempt_id,)
-            ).fetchone()
-        if operation is None or operation[0] != "complete":
-            raise ConfigurationError("functional check accounting is absent or unresolved")
+        require_check(repository, definition, name, probe_ref)
+    return definition
+
+
+def require_integration(
+    repository: AssessmentRepository, digest: str, *, component: str, source_digest: str
+) -> IntegrationEvidence:
+    evidence = _resolve(repository, "toolkit_integration_evidence", digest, IntegrationEvidence)
+    verify_integration(repository, evidence, component=component, source_digest=source_digest)
     return evidence
 
 

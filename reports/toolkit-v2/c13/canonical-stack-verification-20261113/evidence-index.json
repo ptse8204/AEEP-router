@@ -1,0 +1,455 @@
+{
+  "current_source": "84881f17ae11fc1045f3e368805f98e1451c7cf7ecf4ffa757308241a44bd48d",
+  "comparison_dispatch": "BLOCKED_WITHOUT_CANONICAL_CURRENT_STACK_COMPLETION",
+  "components": [
+    {
+      "component": "agent-skill-eval",
+      "expected_source_revision": "59de161f657b82bfaf8f6abe83dfff38552deb21",
+      "current_checks": {
+        "controlled_dispatch": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        },
+        "grading_accounting_cleanup": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        }
+      },
+      "preserved_reports": [
+        {
+          "path": "../integration-snapshot-correction-20261103/completion-audit.json",
+          "sha256": "c69fd2858b7ba1febea388c3d55339a17fcf56e1749f99ebe52a0d20718e659f"
+        }
+      ],
+      "remaining": "Actual controlled dispatch and grading were reconciled. The current stack has no linked readiness probe."
+    },
+    {
+      "component": "aeep-evaluator",
+      "expected_source_revision": "538606417ea93be6e82c431011c4f209a68ceb81",
+      "current_checks": {
+        "managed_workflow": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        },
+        "recovery_accounting": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        }
+      },
+      "preserved_reports": [
+        {
+          "path": "../integration-snapshot-correction-20261103/completion-audit.json",
+          "sha256": "c69fd2858b7ba1febea388c3d55339a17fcf56e1749f99ebe52a0d20718e659f"
+        }
+      ],
+      "remaining": "Actual managed engine and canonical recovery evidence exist. Register provenance through the current verification path."
+    },
+    {
+      "component": "waza",
+      "expected_source_revision": "e534d149d89ae77ea158469fb4d2003804b2ee76",
+      "current_checks": {
+        "real_agent": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        },
+        "grading_accounting_cleanup": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        }
+      },
+      "preserved_reports": [
+        {
+          "path": "../waza-native-backend-20261104/summary.json",
+          "sha256": "d558c37d51a2b6467ba4fd164e9fb460afc5cda423104709d3c0d7b5c4e8bcb5"
+        }
+      ],
+      "remaining": "Native client passed version and containment. Operator sign-in and real backend grades are outstanding."
+    },
+    {
+      "component": "skillrank",
+      "expected_source_revision": "5216bae9149b4ff8a7f9e014b6889fb094cee8e1",
+      "current_checks": {
+        "search_show": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        },
+        "bounded_diagnostic_evaluation": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        }
+      },
+      "preserved_reports": [
+        {
+          "path": "../skillrank-cli-continuation-20261104/runtime-execution/summary.json",
+          "sha256": "4a36e8c3c4466f4bb6fc35f0875387de63a5334bc8ace2faab8007ccf21c9d78"
+        },
+        {
+          "path": "../skillrank-certificate-deadline-20261107/native-check/native-check-result.json",
+          "sha256": "441aa18f04f971107094726a392bed1e7c98dc9c3503e1211f3dfcefbae7def9"
+        }
+      ],
+      "remaining": "Real search/show and synthetic-grade native scheduling ran. The paired managed diagnostic is still unstarted."
+    },
+    {
+      "component": "skillsbench",
+      "expected_source_revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+      "current_checks": {
+        "document_data": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        },
+        "software_engineering": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        },
+        "protected_verifiers": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        }
+      },
+      "preserved_reports": [
+        {
+          "path": "../canonical-stack-verification-20261113/skillsbench-engineering-outcomes.json",
+          "sha256": "803cceb10eceab1751ea918dbb7cb78fab9de00cd4131b98936f93fa4d2b710a"
+        }
+      ],
+      "remaining": "Six per-task CLI engineering results exist. The current gate still needs a protected-verifier and domain receipt binding."
+    },
+    {
+      "component": "mcpmark",
+      "expected_source_revision": "cd45b7f57923b9b3985467f5139927575f83141c",
+      "current_checks": {
+        "reference_task": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        },
+        "state_cleanup": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        }
+      },
+      "preserved_reports": [
+        {
+          "path": "../mcpmark-postgres-tool-schema-20261105/execution/summary.json",
+          "sha256": "e06c665245aca735ab4d403e0d48b4b723078e6f1fb05e9b154c1bdbddcf9ca0"
+        },
+        {
+          "path": "../mcp-postgres-reference-results-20261105/results.json",
+          "sha256": "49ec355fa4469486de681109e537c48737700f29a9e816d088b7497d83a908d4"
+        }
+      ],
+      "remaining": "Pinned PostgreSQL reference execution, rejection and cleanup passed. Current CLI component composition is pending."
+    },
+    {
+      "component": "mcp-universe",
+      "expected_source_revision": "0df6c42717f2a618d34f5b271efd05be462b9e4d",
+      "current_checks": {
+        "reference_task": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        },
+        "state_cleanup": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        }
+      },
+      "preserved_reports": [
+        {
+          "path": "../mcp-universe-postgres-tool-schema-20261105/execution/summary.json",
+          "sha256": "d8331e08f46ec8a551465eaa90ceb462405a34b75d972594e1bc16e396a2a5ca"
+        },
+        {
+          "path": "../mcp-postgres-reference-results-20261105/results.json",
+          "sha256": "49ec355fa4469486de681109e537c48737700f29a9e816d088b7497d83a908d4"
+        }
+      ],
+      "remaining": "Pinned PostgreSQL reference execution, rejection and cleanup passed. Current CLI component composition is pending."
+    },
+    {
+      "component": "skill-scanner",
+      "expected_source_revision": "c3d7fd9fee50cf2ea45f0b381eb61f857360f825",
+      "current_checks": {
+        "static_scan": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        },
+        "findings_and_failures": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        }
+      },
+      "preserved_reports": [
+        {
+          "path": "../scanner-fixture-continuation-20261103/cli-execution/summary.json",
+          "sha256": "e1df4b846493da0f7b6e1e14c18512948d15de56a79b87f680374cad10f41e30"
+        }
+      ],
+      "remaining": "Ordinary CLI Cisco scan and proof linkage exist on the earlier source. Current checks need a receipt-bound observation."
+    },
+    {
+      "component": "toolhive",
+      "expected_source_revision": "33ba170aad633e20520f380500a45cd158f24aed",
+      "current_checks": {
+        "launch_invoke": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        },
+        "permissions_stop": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        }
+      },
+      "preserved_reports": [
+        {
+          "path": "../toolhive-loopback-bind-20261104/summary.json",
+          "sha256": "3fd5d39378cef13102a3fefb9a73bc3f1e00d809ec68c98795be648319c4c8f6"
+        }
+      ],
+      "remaining": "Real local server launch, inspection, invocation and stop passed. Current checks need a bounded service observation."
+    },
+    {
+      "component": "semantic-conventions",
+      "expected_source_revision": "68e89181d4cb9bbce975c8128e694363214ab5fb",
+      "current_checks": {
+        "receipt_export": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        },
+        "privacy_disable": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        }
+      },
+      "preserved_reports": [
+        {
+          "path": "../langfuse-ingestion-readback-20261105/service-execution/summary.json",
+          "sha256": "fd7757c9ca20dc4b000d3197e9edd935c0ee8a63bc5cb90d88a2549fd1e903d4"
+        },
+        {
+          "path": "../workflow-telemetry-20261104/runtime-execution/summary.json",
+          "sha256": "d1a1193ce0af93d97e93b73119f876f337130ebff603ccdf08fbe9af26fb186f"
+        }
+      ],
+      "remaining": "Minimized OTLP and disabled-export checks exist. Current proof must link to each selected workload receipt."
+    },
+    {
+      "component": "langfuse",
+      "expected_source_revision": "5e4db922e9021083500cd066249b220a414b7dfe",
+      "current_checks": {
+        "ingestion_linkage": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        },
+        "export_disable": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        }
+      },
+      "preserved_reports": [
+        {
+          "path": "../langfuse-ingestion-readback-20261105/service-execution/summary.json",
+          "sha256": "fd7757c9ca20dc4b000d3197e9edd935c0ee8a63bc5cb90d88a2549fd1e903d4"
+        }
+      ],
+      "remaining": "Private readback verified ingestion of the original trace without replay. Current workload trace links remain open."
+    },
+    {
+      "component": "langgraph",
+      "expected_source_revision": "40a2e6d845054cc0cc17a6a169ca6e7394e5231c",
+      "current_checks": {
+        "conditional_loop": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        },
+        "interruption_recovery": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        }
+      },
+      "preserved_reports": [
+        {
+          "path": "../full-stack-20261030/langgraph-bootstrap-repair/execution/summary.json",
+          "sha256": "8e65548f78c6270dbfc5158772ff1b668b292ac7b87dd861197e0d15fb0e4be0"
+        }
+      ],
+      "remaining": "LangGraph's component check passed within a bundle whose overall result failed on another component. Verify the individual receipt chain."
+    },
+    {
+      "component": "evoagentx",
+      "expected_source_revision": "d77fd6b9a3e76c8dd83bebe3374c53a3f5d16f54",
+      "current_checks": {
+        "real_proposal": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        },
+        "proposal_validation": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        }
+      },
+      "preserved_reports": [
+        {
+          "path": "../evoagentx-distribution-20261106/managed-turn/reconciled-result.json",
+          "sha256": "faa7c5b05da2671b7938331a88015368c51ea52099822cf4ca3db2dfcdfbf3c6"
+        },
+        {
+          "path": "../evoagentx-distribution-20261106/planner-handoff/result.json",
+          "sha256": "17738f10ab0420148d5a2b70b9ff67b8fa998e1782914f22f231b1f0602f3516"
+        }
+      ],
+      "remaining": "Actual managed proposal and upstream planner handoff exist. Register validation with the current coordinator."
+    },
+    {
+      "component": "aflow",
+      "expected_source_revision": "3f457218fc716093fe53f6df8a5d5e6379d66346",
+      "current_checks": {
+        "bounded_optimization": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        },
+        "protected_grading_accounting": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        }
+      },
+      "preserved_reports": [
+        {
+          "path": "../proposal-optimizer-preparation-20261105/calibration/finite-cycle/result.json",
+          "sha256": "e2ff96e60b51f9d4cca4bbd6f21b292befeba03c127ce4f32f5c3c5e266bdd61"
+        }
+      ],
+      "remaining": "Finite upstream cycle, managed proposal and protected calibration grade exist. Current canonical link remains open."
+    },
+    {
+      "component": "agent-framework",
+      "expected_source_revision": "2d9cc3f8ae465baf1aed3022f89b6848db4ffa7b",
+      "current_checks": {
+        "approved_workflow": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        },
+        "interruption_accounting": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        }
+      },
+      "preserved_reports": [
+        {
+          "path": "../workflow-lifecycle-20261102/corrected-sdk-runtime/execution/framework-component-result.json",
+          "sha256": "ba82de6091a71f3c4c25f2c31ca81d7f9d831fbd19d58f31cfb2e4a242f8bfa7"
+        }
+      ],
+      "remaining": "Actual SDK component calls exist. Link current workflow and interruption receipts."
+    },
+    {
+      "component": "aeep-router",
+      "expected_source_revision": "8b015bf0247d4d9f49038982c49f3711a2802d97",
+      "current_checks": {
+        "optional_execution": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        },
+        "essentials_independence": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        }
+      },
+      "preserved_reports": [
+        {
+          "path": "../optional-router-20261104/summary.json",
+          "sha256": "f3e9aa16003ca886272cfc32a0bb3498660ea665f7a5997cfc256e71ec4b8cb1"
+        }
+      ],
+      "remaining": "Installed CLI optional execution and independence passed on an earlier source. Current runtime linkage remains open."
+    },
+    {
+      "component": "github-sponsors",
+      "expected_source_revision": "84881f17ae11fc1045f3e368805f98e1451c7cf7ecf4ffa757308241a44bd48d",
+      "current_checks": {
+        "source_attribution": {
+          "definition_ref": "9bf9551d514fd0c67893976587873456b2f1f47234753d9fd0834a171a64cff9",
+          "status": "VERIFIED",
+          "probe_ref": "ec3cda8e971bd86446e28bb257beee33aacf3ff2c590b55eba15e8039d296428",
+          "journal_ref": "a0f2072e607d5dde124af855a4b2351ffdf7eec016aba55d6908e08029566d51",
+          "operation_id": "stack-probe:canonical-sponsors-9c3527394065e318-source_attribution",
+          "receipt_ref": "982858930d686ae6993cb94612d5bf3232954b5d7d33f65720ede3539f1fd6d4",
+          "observed": {
+            "component": "github-sponsors",
+            "check": "source_attribution",
+            "implementation_source": "84881f17ae11fc1045f3e368805f98e1451c7cf7ecf4ffa757308241a44bd48d",
+            "source_revision": "84881f17ae11fc1045f3e368805f98e1451c7cf7ecf4ffa757308241a44bd48d",
+            "mode": "upstream_functional",
+            "funding_drift_rejected": true,
+            "funding_source_revision": "1d95ff7d39de12d87014ea40d4e22201bddc501b"
+          }
+        },
+        "authorized_link": {
+          "definition_ref": "82511998ced930e523598b1ed7b4ae40947914154e20952544ba0724525a6625",
+          "status": "VERIFIED",
+          "probe_ref": "239a06b23227ca7459f3397e1f11b9f558ded7dae207d7e51d75af1c85b6250a",
+          "journal_ref": "7a53344a5a8e6647021db04b564583cc358ca09df59c38eff7cd71ea36ab2b7b",
+          "operation_id": "stack-probe:canonical-sponsors-9c3527394065e318-authorized_link",
+          "receipt_ref": "4b0b3f88c31122f0dc996995a6c3d22046d09b4a171dcfa748af0ed648034394",
+          "observed": {
+            "component": "github-sponsors",
+            "check": "authorized_link",
+            "implementation_source": "84881f17ae11fc1045f3e368805f98e1451c7cf7ecf4ffa757308241a44bd48d",
+            "source_revision": "84881f17ae11fc1045f3e368805f98e1451c7cf7ecf4ffa757308241a44bd48d",
+            "mode": "upstream_functional",
+            "explicit_source_disclosure_required": true,
+            "support_url": "https://github.com/sponsors/DietrichGebert"
+          }
+        }
+      },
+      "preserved_reports": [
+        {
+          "path": "../canonical-stack-verification-20261113/sponsors-result.json",
+          "sha256": "67dbdaf970bac06052149874feb585ff246e339e84dec2ba4e3e4ecd30f65154"
+        }
+      ],
+      "remaining": "Both current checks have canonical settled receipts at the source in readiness.json."
+    },
+    {
+      "component": "workflow-document-data",
+      "expected_source_revision": "84881f17ae11fc1045f3e368805f98e1451c7cf7ecf4ffa757308241a44bd48d",
+      "current_checks": {
+        "ordinary_cli": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        },
+        "canonical_report": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        }
+      },
+      "preserved_reports": [
+        {
+          "path": "../canonical-stack-verification-20261113/skillsbench-engineering-outcomes.json",
+          "sha256": "803cceb10eceab1751ea918dbb7cb78fab9de00cd4131b98936f93fa4d2b710a"
+        }
+      ],
+      "remaining": "All three CLI task journeys reached grading. A composed configuration still needs per-receipt telemetry, setup and removal evidence."
+    },
+    {
+      "component": "workflow-software-engineering",
+      "expected_source_revision": "84881f17ae11fc1045f3e368805f98e1451c7cf7ecf4ffa757308241a44bd48d",
+      "current_checks": {
+        "ordinary_cli": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        },
+        "canonical_report": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        }
+      },
+      "preserved_reports": [
+        {
+          "path": "../canonical-stack-verification-20261113/skillsbench-engineering-outcomes.json",
+          "sha256": "803cceb10eceab1751ea918dbb7cb78fab9de00cd4131b98936f93fa4d2b710a"
+        }
+      ],
+      "remaining": "All three CLI task journeys reached grading. A composed configuration still needs per-receipt telemetry, setup and removal evidence."
+    }
+  ]
+}

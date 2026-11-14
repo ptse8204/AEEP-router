@@ -1,5 +1,31 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- canonical-stack-verification-20261113:start -->
+**November 13. Prefix Cache settled and the canonical stack gate is runnable.**
+
+The operator approved review `6b668486`. The [settled Prefix Cache result](../../reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/managed-engineering/result.json)
+records one GPT-6.1 Sol medium turn, a protected 0/1 grade, a verified
+token-capture chain, a transferred artifact, both reports and worker cleanup.
+Provider counts were 40,394 input, 29,440 cached input, zero cache-write input,
+1,212 output and 138 reasoning-output tokens. There is no matched token delta
+for this engineering run. The proxy was restored stopped and there were no new
+unresolved reservations. Preserve the historical reservations and charges.
+
+The [ledger audit](../../reports/toolkit-v2/c13/canonical-stack-verification-20261113/skillsbench-ledger-audit.json)
+reconciles all six SkillsBench CLI outcomes at their original sources.
+The [CLI readiness snapshot](../../reports/toolkit-v2/c13/canonical-stack-verification-20261113/readiness.json) covers 39 checks in
+19 entries. Both current Sponsors checks passed with linked receipts and settled
+accounting. The [evidence index](../../reports/toolkit-v2/c13/canonical-stack-verification-20261113/evidence-index.json) records the
+earlier upstream runs and the remaining proof for each entry. The named
+domain configurations still need composed lifecycle and receipt-linked telemetry
+proof. SkillRank still needs its managed two-turn diagnostic. Waza still needs
+protected operator sign-in and an actual supported backend grade.
+
+C13 remains open. Keep comparisons paused. Continue with receipt reconciliation
+and the missing component checks. Do not replay completed model tasks to
+recreate reports.
+<!-- canonical-stack-verification-20261113:end -->
+
 <!-- prefix-cache-sol-review-20261113:start -->
 **November 13. The ordinary Prefix Cache workflow is bound and awaits a single approval.**
 

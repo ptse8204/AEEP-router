@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from typing import Literal
 
 from pydantic import Field, SerializerFunctionWrapHandler, model_serializer, model_validator
@@ -12,10 +13,12 @@ from ..models import ExecutorSpec, RawExecution, StrictModel
 from .models import (
     AssessmentEnvironment,
     AssessmentLimits,
+    AssessmentOperation,
     AssessmentPlan,
     ConformanceProbeRequest,
     DifferentialEnvironment,
     Digest,
+    RecipeMaterializationRequest,
     ThreeWayAccessDefinition,
     content_digest,
 )
@@ -408,13 +411,23 @@ def require_conformance(repository: AssessmentRepository, digest: str, *, source
 
 
 async def run_boundary_probe(repository: AssessmentRepository, definition_digest: str, *,
-                             worker_digest: str, executor: object, plan: AssessmentPlan | ConformanceProbeRequest) -> BoundaryProbe:
+                             worker_digest: str, executor: object,
+                             plan: AssessmentPlan | ConformanceProbeRequest | RecipeMaterializationRequest,
+                             invocation_check: Callable[[], None] | None = None,
+                             cleanup_check: Callable[[], bool] | None = None) -> BoundaryProbe:
     """Run a reviewed harmless probe and bind its actual result, never a success flag."""
     import time
 
     from ..execution import start_execution
     from ..executors.base import BaseExecutor, ExecutionContext
-    from ..models import ActionRequest, ExecutionStatus, ExecutorKind, new_id
+    from ..models import (
+        ActionRequest,
+        ExecutionReceipt,
+        ExecutionStatus,
+        ExecutorKind,
+        new_id,
+        utc_now,
+    )
 
     if not isinstance(executor, BaseExecutor):
         raise ConfigurationError("boundary probe requires a controlled executor")
@@ -424,6 +437,9 @@ async def run_boundary_probe(repository: AssessmentRepository, definition_digest
     if content_digest(definition) != definition_digest or review is None or review[0]:
         raise ConfigurationError("boundary probe implementation requires operator review")
     managed = definition.executor.kind == ExecutorKind.MANAGED_HOST
+    stack_probe = isinstance(plan, RecipeMaterializationRequest)
+    if stack_probe and (invocation_check is None or cleanup_check is None):
+        raise ConfigurationError("stack checks require runtime revalidation and verified cleanup")
     if managed != isinstance(plan, ConformanceProbeRequest):
         raise ConfigurationError("model bootstrap requires a separate reviewed conformance request")
     if managed:
@@ -454,19 +470,40 @@ async def run_boundary_probe(repository: AssessmentRepository, definition_digest
     if (definition.executor.kind.value not in {"command", "python", "mcp", "host_managed"}
             or not definition.executor.idempotent or definition.executor.side_effect.rank > 1):
         raise ConfigurationError("boundary probes must be harmless local tools")
-    if definition_digest not in plan.definition_digests or content_digest(repository.get("conformance_request" if managed else "plan", plan.plan_id)) != content_digest(plan):
+    kind = ("conformance_request" if managed else
+            "recipe_materialization_request" if stack_probe else "plan")
+    if definition_digest not in plan.definition_digests or content_digest(repository.get(kind, plan.plan_id)) != content_digest(plan):
         raise ConfigurationError("boundary probe is not in the frozen assessment plan")
-    attempt = "probe:" + plan.plan_id if managed else new_id("probe-attempt")
+    attempt = ("stack-probe:" + plan.plan_id if stack_probe else
+               "probe:" + plan.plan_id if managed else new_id("probe-attempt"))
     timeout = float(definition.executor.config.get("timeout_seconds", 60))
-    repository.reserve(plan, attempt, AssessmentLimits(max_operations=1, max_model_turns=1 if managed else 0, max_elapsed_seconds=timeout + 5), stage="conformance_bootstrap" if managed else "boundary_probe")
+    repository.reserve(plan, attempt, AssessmentLimits(max_operations=1, max_model_turns=1 if managed else 0, max_elapsed_seconds=timeout + (45 if stack_probe else 5)), stage="toolkit_stack_probe" if stack_probe else "conformance_bootstrap" if managed else "boundary_probe", require_settled_plan=stack_probe)
     started = time.perf_counter()
+    started_at = utc_now()
+
+    def recheck() -> str:
+        repository.authorize(plan)
+        if invocation_check is not None:
+            invocation_check()
+        return worker_digest
+
     context = ExecutionContext(request=ActionRequest(capability=definition.executor.capability),
                                spec=definition.executor, estimate=definition.executor.estimate,
                                attempt=1, attempt_id=attempt,
-                               invocation_check=lambda: (repository.authorize(plan), worker_digest)[1])
+                               invocation_check=recheck)
 
     async def invoke(journal: EventJournal) -> RawExecution:
         raw = await executor.execute(context)
+        if cleanup_check is not None and not cleanup_check():
+            raise ConfigurationError("stack check cleanup is unresolved; reservation retained")
+        if stack_probe and raw.status == ExecutionStatus.SUCCESS and (
+            not isinstance(raw.output, dict) or raw.output.keys() != definition.expected.keys()
+            or any(type(raw.output[key]) is not type(value) or raw.output[key] != value
+                   for key, value in definition.expected.items())
+        ):
+            # The exact response contract limits retention to reviewed scalar facts.
+            raw.status = ExecutionStatus.FAILED
+            raw.output = None
         nested = raw.metadata.get("execution_evidence")
         if nested is not None:
             adapter_evidence = ExecutionEvidence.model_validate(nested)
@@ -484,16 +521,34 @@ async def run_boundary_probe(repository: AssessmentRepository, definition_digest
         try:
             raw = await handle.task
         finally:
-            repository.finish_operation(attempt, elapsed_seconds=time.perf_counter() - started,
-                                        accounting=raw.accounting if raw else None,
-                                        resources=raw.resources if raw else None)
+            if not stack_probe or raw is not None:
+                repository.finish_operation(attempt, elapsed_seconds=time.perf_counter() - started,
+                                            accounting=raw.accounting if raw else None,
+                                            resources=raw.resources if raw else None)
     evidence = ExecutionEvidence.model_validate(raw.metadata["execution_evidence"])
     evidence_digest = repository.put("execution_evidence", evidence.digest(), evidence)
+    receipt_ref = None
+    charged_ref = None
+    if stack_probe:
+        receipt = ExecutionReceipt(
+            decision_id=attempt, action_id=context.request.action_id,
+            capability=context.spec.capability, executor_id=context.spec.id,
+            executor_kind=context.spec.kind, status=raw.status, started_at=started_at,
+            ended_at=utc_now(), estimated=context.estimate, actual_resources=raw.resources,
+            accounting=raw.accounting, execution_success=raw.status == ExecutionStatus.SUCCESS,
+            metadata={"boundary_digest": worker_digest, "execution_evidence_ref": evidence_digest,
+                      "probe_definition_ref": definition_digest},
+        )
+        repository.store.save_receipt(receipt)
+        receipt_ref = repository.put("toolkit_stack_probe_receipt", attempt, receipt)
+        charged_ref = content_digest(AssessmentOperation.model_validate(repository.get("operation_start", attempt)))
     if not evidence.complete or raw.status != ExecutionStatus.SUCCESS or not isinstance(raw.output, dict):
         raise ConfigurationError("boundary probe returned no complete observation")
-    probe = BoundaryProbe(probe_id=new_id("probe"), name=definition.name,
+    probe = BoundaryProbe(schema_version="assessment.boundary-probe.v2" if stack_probe else "assessment.boundary-probe.v1",
+                          probe_id=new_id("probe"), name=definition.name,
                           implementation_digest=definition_digest, worker_digest=worker_digest,
-                          execution_evidence_digest=evidence_digest, observed=raw.output)
+                          execution_evidence_digest=evidence_digest, observed=raw.output,
+                          host_receipt_digest=receipt_ref, charged_operation_digest=charged_ref)
     repository.put("boundary_probe", probe.probe_id, probe)
     return probe
 
