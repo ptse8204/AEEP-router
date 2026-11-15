@@ -1,5 +1,15 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- waza-ollama-review-20261115:start -->
+**November 15. One local Waza execution review is ready.**
+
+At the operator's direction, the [exact Waza and Ollama review](../../reports/toolkit-v2/c13/waza-ollama-20261115/README.md)
+pins the private runtime setup, one local model request and the unchanged
+protected text grader. First-party preflight passed. The review awaits
+explicit approval. No third-party runtime or weights were acquired.
+Readiness stays at 37 of 39 and comparisons remain paused.
+<!-- waza-ollama-review-20261115:end -->
+
 <!-- ase-boundary-readiness-20261114:start -->
 **November 14. agent-skill-eval is verified. The managed gate is at 37 of 39.**
 

@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+<!-- waza-ollama-review-20261115:start -->
+The [local Waza launch review](../toolkit-v2/c13/waza-ollama-20261115/README.md)
+covers a private Ollama runtime and one protected Waza engineering task.
+The first-party preflight passed and live execution is unstarted. No change
+to the upstream gate or comparative qualification follows from preparation.
+<!-- waza-ollama-review-20261115:end -->
+
 <!-- ase-boundary-readiness-20261114:start -->
 The [registered scheduler boundary](../toolkit-v2/c13/canonical-stack-ase-20261114/README.md)
 raises C13 to 37 of 39 verified checks. The exact native repeat passed all six
