@@ -54,4 +54,12 @@ used by the offline grader. That grader scored a synthetic reference
    the returned grade, usage, settled charge and cleanup before recording
    either remaining check. Assemble stack completion only after both pass.
 
+## Verification
+
+Both full runs passed 2,162 tests with 21 skips. Both branch coverage gates
+passed. The wheel and source distribution built. The clean commit snapshot
+also loaded the ordinary CLI and passed its schema check. See the
+[source verification](source-verification.json) and
+[commit snapshot check](committed-source-check.json).
+
 The offline documentation check remains bound to its previous 72 inputs.
