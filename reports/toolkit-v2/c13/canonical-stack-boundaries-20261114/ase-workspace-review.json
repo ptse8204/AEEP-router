@@ -1,0 +1,154 @@
+{
+  "schema_version": "aeep.operator.toolkit-ase-native-repeat.v1",
+  "purpose": "Validate the current sandbox launcher against the retained ASE scheduler policy.",
+  "implementation_source": "1a51bddce06f4c299acca3f5fab99bb8111f023ed3af1830c153731f7b30918e",
+  "expires_at": "2026-11-16T03:22:00+00:00",
+  "original_review": {
+    "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/canonical-stack-receipts-20261114/boundary-review.json",
+    "sha256": "abbb339fe44305f3f0a568620469415046535e4a5463615bbc22f6f734dd43ca"
+  },
+  "original_result": {
+    "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/canonical-stack-boundaries-20261114/boundary-result.json",
+    "sha256": "8f0fa494aa40ae501d1783ffc5762a87921fc7efabb68606407037ee3553f3e1"
+  },
+  "driver": {
+    "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/canonical-stack-receipts-20261114/run-boundary-repeat.py",
+    "sha256": "ae32dc601ef39858520e9a13e6354f06558aba00f64eee1789a8c61147b3753d"
+  },
+  "native_driver": {
+    "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/canonical-stack-boundaries-20261114/review-ase-native.py",
+    "sha256": "dcd53703032825b691a872688bff8bc690fc71443acb2c820cd155a640a788f9"
+  },
+  "agent_skill_eval": {
+    "database": "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/aeep.sqlite3",
+    "baseline": {
+      "root": "7cf37077213dd84d02ffb6c8c1106930ecec04d4337780454f6ac308b0bef659",
+      "predecessor": "936c036876376d7f456fa0ab3fcc55e2397e497a72f5254755d6380de0f55913",
+      "limits": {
+        "max_operations": 50000,
+        "max_model_turns": 6000,
+        "max_elapsed_seconds": 604800.0,
+        "max_cash_usd": "0"
+      },
+      "counters": [
+        0,
+        13928,
+        3809,
+        126868.30596213754,
+        "0.0"
+      ],
+      "other_plan_reservations_preserved": [
+        "assessment_12735a46eb364c9c9cd2aa4868f290e1:report",
+        "conformance_probe_85882b1252ac409aa073fcb3c33b87bb-native-client"
+      ],
+      "expires_at": "2026-11-16T03:23:44.656789+00:00"
+    },
+    "request": {
+      "schema_version": "assessment.conformance-request.v1",
+      "plan_id": "conformance_probe_ase_sdk_contract_20261103",
+      "subject_digest": "7d55aaaca899f2e4e4a37f12782681a65d8596cd471e0b44308ffc53e5693f7c",
+      "recipe_digest": "dc2ef7a27918200d748fa2891aae9af264512cafa3481ae6e769f28d50c25f09",
+      "mapping_digest": "dc2ef7a27918200d748fa2891aae9af264512cafa3481ae6e769f28d50c25f09",
+      "environment_digest": "13bfce67fbcf1eebf274dd9e118bd4ed0635c4f9e310a976d33986857649944a",
+      "authorization_id": "onboarding",
+      "definition_digests": [
+        "7d55aaaca899f2e4e4a37f12782681a65d8596cd471e0b44308ffc53e5693f7c",
+        "dc2ef7a27918200d748fa2891aae9af264512cafa3481ae6e769f28d50c25f09",
+        "13bfce67fbcf1eebf274dd9e118bd4ed0635c4f9e310a976d33986857649944a"
+      ],
+      "worker_digest": "13bfce67fbcf1eebf274dd9e118bd4ed0635c4f9e310a976d33986857649944a",
+      "executable_dependencies": {
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-engineering-tools-20261103/bin/git": "c5f19006e8d461f2151a8fc354ba2c0df135f11ee88d012792343099fb7fb051"
+      }
+    },
+    "operation_id": "conformance_probe_ase_sdk_contract_20261103:native-readiness-1a51bddce0:git-binding",
+    "historical_scheduler": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/integration-snapshot-correction-20261103/scheduler.json",
+      "sha256": "b25373bf4fc849f20789b97c599108b52295fab9f02f489106b59233bc060c91"
+    },
+    "historical_profile": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/ase-controlled-workflow-20261103/scheduler.sb",
+      "sha256": "ba12252ffbe4abbfde8ecb4e8a4ed3ec6c152ffa6522041f396e0a081bfd8bd6"
+    },
+    "historical_native_control": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/ase-controlled-workflow-20261103/native-controls.json",
+      "sha256": "84540369eb1eba15b5ed23db684dfb67aeb80600687f94b4e5f50e1734273482"
+    },
+    "historical_definition_ref": "87c7fb76c223579a8f76f0c66c89113b56969f6225d7738eecae34690792a67b",
+    "executable_change": {
+      "/usr/bin/sandbox-exec": {
+        "original": "e3d7a792c58a5d3783d2f7274c82d70062393830d8cb1ded713ca554a470bd2f",
+        "current": "10cf4a46a575e4747d2419cf343800db0d11ae6e6e9b8415998d3d8f336b2a92"
+      }
+    },
+    "runtime_tree_sha256": "060c9a90b8b95a6757376420936321f7d752dfeb7d2a0e30e5516715cc38ccb4",
+    "current_profile": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-receipts-20261114/ase-workspace-correction/scheduler-native-study.sb",
+      "sha256": "250857241e42011496778bef01bf1f47617ded3865a7ecce2e75c556634dd58b"
+    },
+    "probe": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/ase-controlled-workflow-20261103/native-check.py",
+      "sha256": "0b29c243040f3a5afc1b180d9b8908f2ce32ac5dff89cbee64383f82f4940086"
+    },
+    "git": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-receipts-20261114/ase-workspace-correction/git",
+      "sha256": "4234b0b10f0a7cc60b34e30044070df81fc9a58f7035def2b9035b187fa0fb25"
+    },
+    "command": [
+      "/usr/bin/sandbox-exec",
+      "-f",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-receipts-20261114/ase-workspace-correction/scheduler-native-study.sb",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/upstream-stack-runtimes-20261102/corrected-composed-runtime/bin/python",
+      "-I",
+      "-B",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/ase-controlled-workflow-20261103/native-check.py"
+    ],
+    "workspace": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-receipts-20261114/ase-workspace-correction/ase-native-probe",
+    "workspace_tree_sha256": "11aa65046544675744c7a0bfc9130c0f75667938e9f8a105944acf608337a7ab",
+    "environment": {
+      "PATH": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-controlled-workflow-20261103/tools:/usr/bin:/bin",
+      "HOME": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-receipts-20261114/ase-workspace-correction/ase-native-probe/home",
+      "TMPDIR": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-receipts-20261114/ase-workspace-correction/ase-native-probe/tmp",
+      "LC_ALL": "C",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "stdin": {
+      "outside": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-receipts-20261114/ase-workspace-correction/outside-read-canary.txt",
+      "outside_write": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-receipts-20261114/ase-workspace-correction/denied-write",
+      "git": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-receipts-20261114/ase-workspace-correction/git"
+    },
+    "outside_canary": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-receipts-20261114/ase-workspace-correction/outside-read-canary.txt",
+      "sha256": "e20f108aa129085689a3a9c4444afed33d369966433645e58fdaf882ff3665e1"
+    },
+    "maximum_additional_operations": 1,
+    "maximum_reserved_seconds": 35,
+    "acceptance": "Six first-party native isolation/Git observations with verified process exit, journal and settled charge. Exact dependency bridge is used for current readiness after validation. Historical plan and model receipt remain bound to the original scheduler.",
+    "historical_git": {
+      "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/ase-controlled-workflow-20261103/tools/git",
+      "sha256": "00070481d75ec2b022c932121c0738c5d41a2811130f5cbb6cf51656a6143b3f"
+    }
+  },
+  "prior_attempt": "c0d772daf8e65b15289d4596f22c50e7c9ca1030ce80e9165b2429f57eb1a8d7",
+  "maximum_additional_operations": 1,
+  "maximum_reserved_seconds": 35,
+  "model_turns": 0,
+  "maximum_cash_usd": 0,
+  "exclusions": [
+    "Cisco replay",
+    "model execution",
+    "upstream SDK execution",
+    "installations",
+    "downloads",
+    "credentials",
+    "provider access",
+    "existing resource removal",
+    "retry",
+    "comparison",
+    "release",
+    "admission"
+  ],
+  "preparation_controls": {
+    "restricted_git_argument_and_workspace_checks": 4
+  }
+}

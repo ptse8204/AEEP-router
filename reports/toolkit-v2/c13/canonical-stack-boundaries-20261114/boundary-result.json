@@ -1,0 +1,135 @@
+{
+  "scanner": {
+    "passed": true,
+    "result": {
+      "scan_ref": "79e997799c2c97d06852bc8f3ec928e140bfc8bbfe68609182cd9b3235c5c49a",
+      "schema_version": "aeep.toolkit.workflow-scan.v1",
+      "definition_ref": "f17f46cb0b1c5e1ef061e9a0120fe98a90e9bf321fd4ad1e401120a5d53deb26",
+      "implementation_source": "1a51bddce06f4c299acca3f5fab99bb8111f023ed3af1830c153731f7b30918e",
+      "candidate_sha256": "c91039731c19735e818c150508e6f857a218482a2371b239e4bf7b033aabbca6",
+      "environment_digest": "b470662f09bb2a18322e26603d9c58df62f495c21d3015e7a6414e1a19d40078",
+      "wrapper_operation_id": "workflow:recipe_generation_5efe8d5cb42a468091122b514aa143e2:cisco-readiness-1a51bddce0",
+      "operation_id": "workflow:recipe_generation_5efe8d5cb42a468091122b514aa143e2:cisco-readiness-1a51bddce0:skill-scanner",
+      "request_plan_id": "recipe_generation_e34ed21d981f4288ab0d1d0dddb1fa62",
+      "authorization_id": "workflow-scanner-scanner-0116d754bc7a",
+      "receipt_ref": "788fb880778e83e8924d503e1784e8585c67a88b1d1585ce01a5adeb8309f57a",
+      "execution_evidence_ref": "41b2d5570248ec6392c793856930a1695667b04c87e07c2e44893ba2aa8ff440",
+      "observations": {
+        "findings": [
+          {
+            "id": "MANIFEST_MISSING_LICENSE_c5ae9be793",
+            "rule_id": "MANIFEST_MISSING_LICENSE",
+            "category": "policy_violation",
+            "severity": "INFO",
+            "analyzer": "static",
+            "line_number": null
+          }
+        ],
+        "findings_count": 1,
+        "analyzer_failures": [],
+        "failed_analyzers": 0,
+        "analyzers_executed": 4,
+        "analyzers_used": [
+          "static_analyzer",
+          "bytecode",
+          "pipeline",
+          "correlation"
+        ],
+        "upstream_report_sha256": "9124e9a4dc73b4dab4c9bdac53c727919014d87d5a3acaa25013bcb1beb195f4",
+        "safety_verdict": "NOT_ESTABLISHED",
+        "scanner_version": "2.2.1",
+        "scanner_artifact_sha256": "e5e6a3d7f956afccae73c7326e3a1a2d43203a431b7cbd598333f6098b3190e6",
+        "scanner_source_files_verified": 217
+      },
+      "cleanup_verified": true,
+      "workflow_accounting": {
+        "definition_ref": "a4235f828f76de120c88ad2abae99c836e4492de9ee5b4c1719dcfc4ad6ff8bb",
+        "operation_id": "workflow:recipe_generation_5efe8d5cb42a468091122b514aa143e2:cisco-readiness-1a51bddce0",
+        "assessment_plan_ids": [],
+        "ledger": "existing assessment operation_start / operation_measurement",
+        "measurement_scope": "exclusive wrapper wall time and process CPU; canonical execution intervals excluded",
+        "token_memory_cash_measurements": "UNKNOWN; no zero values inferred",
+        "completion": "resolve the terminal operation_measurement after this command returns"
+      },
+      "candidate_usefulness": "NOT_ASSESSED",
+      "selection_usefulness": "NOT_ASSESSED"
+    },
+    "receipt_ref": "788fb880778e83e8924d503e1784e8585c67a88b1d1585ce01a5adeb8309f57a",
+    "journal_ref": "41b2d5570248ec6392c793856930a1695667b04c87e07c2e44893ba2aa8ff440",
+    "budget_amendments": {
+      "scan": {
+        "schema_version": "assessment.budget-amendment.v1",
+        "amendment_id": "budget_amendment_b7f93f505dbd4c4a88c92be3dd78cda8",
+        "authorization_id": "workflow-scanner-scanner-0116d754bc7a",
+        "authorization_digest": "e0cce7904426e641357f1bc76ab56ab2c7405c3d3b43f635bc45027430f1dc87",
+        "previous_amendment_digest": "8a9df09da3cb3da9e1973687b0e476090515c72f1d44c81301546dbe6d293ed5",
+        "limits": {
+          "max_operations": 4,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 240.0,
+          "max_cash_usd": "0"
+        },
+        "expires_at": "2026-11-16T03:22:00Z",
+        "issued_at": "2026-11-15T04:21:45.620414Z"
+      },
+      "wrapper": {
+        "schema_version": "assessment.budget-amendment.v1",
+        "amendment_id": "budget_amendment_c67a37fa23d548959f4809ee326ac13f",
+        "authorization_id": "workflow-scanner-wrapper-0116d754bc7a",
+        "authorization_digest": "b73e0fc3849e129deac664f6d49494dda78de1e30fbbe73dcfe2a6178f9911dc",
+        "previous_amendment_digest": null,
+        "limits": {
+          "max_operations": 2,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 30.19424441596493,
+          "max_cash_usd": "0"
+        },
+        "expires_at": "2026-11-16T03:22:00Z",
+        "issued_at": "2026-11-15T04:21:45.620962Z"
+      }
+    },
+    "settlement": {
+      "workflow_static_scan": {
+        "elapsed_seconds": 8.50911266694311,
+        "measurement_ref": "db15580fee33626cb29feee9ce7fc367902ec225c66b4a704a4b11b839149f30"
+      },
+      "workflow_scan_overhead": {
+        "elapsed_seconds": 0.23490300099365413,
+        "measurement_ref": "68cf0b7d4ccd04a0c17f4c39f640a2ba890d5b5a9a51b58ca206cc1d7a2c436d"
+      }
+    }
+  },
+  "agent_skill_eval": {
+    "passed": false,
+    "operation_id": "conformance_probe_ase_sdk_contract_20261103:native-readiness-1a51bddce0",
+    "receipt_ref": "acdc4cf6b174b430e5373bc980b424dc786728f3445ec69124d3565ad356972a",
+    "journal_ref": "6f50d9cfe0bf3e9807623da6bb0d8680ae4edda53cc5fc3a84c514b80beb8371",
+    "checks": {},
+    "exit_code": 1,
+    "seconds": 0.15237283299211413,
+    "budget_amendment": {
+      "schema_version": "assessment.budget-amendment.v1",
+      "amendment_id": "budget_amendment_85571952c6064f81ada5f8db8fa8972e",
+      "authorization_id": "onboarding",
+      "authorization_digest": "7cf37077213dd84d02ffb6c8c1106930ecec04d4337780454f6ac308b0bef659",
+      "previous_amendment_digest": "936c036876376d7f456fa0ab3fcc55e2397e497a72f5254755d6380de0f55913",
+      "limits": {
+        "max_operations": 50000,
+        "max_model_turns": 6000,
+        "max_elapsed_seconds": 604800.0,
+        "max_cash_usd": "0"
+      },
+      "expires_at": "2026-11-16T03:23:44.656789Z",
+      "issued_at": "2026-11-15T04:21:54.895498Z"
+    },
+    "failure_type": "CommandExitError",
+    "stderr_bytes": 300,
+    "measurement_ref": "c0d772daf8e65b15289d4596f22c50e7c9ca1030ce80e9165b2429f57eb1a8d7"
+  },
+  "review_sha256": "abbb339fe44305f3f0a568620469415046535e4a5463615bbc22f6f734dd43ca",
+  "usage": {
+    "operations": 3,
+    "model_turns": 0,
+    "cash_authority_usd": 0
+  }
+}

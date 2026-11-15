@@ -1,5 +1,16 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- scanner-boundary-20261114:start -->
+**November 14. Cisco readiness is verified. The managed gate is at 35 of 39.**
+
+The [paired review result](../../reports/toolkit-v2/c13/canonical-stack-boundaries-20261114/README.md)
+records one successful ordinary CLI scanner journey. The native check ended
+before Git initialization because its restricted wrapper bound the prior
+workspace. All three operations settled, with zero models and $0 authority.
+The exact native correction awaits separate repeat approval. Waza needs
+protected sign-in and a live backend grade. Comparisons remain paused.
+<!-- scanner-boundary-20261114:end -->
+
 <!-- retained-stack-receipts-20261114:start -->
 **November 14. The managed CLI accepts 33 of 39 required readiness checks.**
 

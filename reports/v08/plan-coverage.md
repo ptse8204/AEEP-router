@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+<!-- scanner-boundary-20261114:start -->
+The [paired runtime review](../toolkit-v2/c13/canonical-stack-boundaries-20261114/README.md)
+raises C13 to 35 of 39 checks after verifying Cisco on the current Docker
+client. The native scheduler probe failed its Git workspace binding.
+Its exact local repeat and Waza protected backend setup remain open.
+<!-- scanner-boundary-20261114:end -->
+
 <!-- retained-stack-receipts-20261114:start -->
 The [C13 retained receipt audit](../toolkit-v2/c13/canonical-stack-receipts-20261114/README.md)
 records 33 of 39 current-source functional readiness checks in the managed

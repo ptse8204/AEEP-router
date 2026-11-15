@@ -1,0 +1,352 @@
+{
+  "policy": "all_upstream_integrations_before_comparisons",
+  "components": [
+    {
+      "component": "agent-skill-eval",
+      "functional_status": "BLOCKED",
+      "checks": {
+        "controlled_dispatch": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        },
+        "grading_accounting_cleanup": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        }
+      },
+      "source_revision": "59de161f657b82bfaf8f6abe83dfff38552deb21"
+    },
+    {
+      "component": "aeep-evaluator",
+      "functional_status": "VERIFIED",
+      "source_revision": "538606417ea93be6e82c431011c4f209a68ceb81",
+      "implementation_source": "1a51bddce06f4c299acca3f5fab99bb8111f023ed3af1830c153731f7b30918e",
+      "original_source": "cfc36a2aeda4e220046722dbdbc81fbf2376deb12b9f7266abdab81bddcec9e1",
+      "integration_evidence_ref": "9afd47d18aca6b58907081f6bae31855b785fe51b224d4cbbcb2c37a73fa3641",
+      "checks": {
+        "managed_workflow": {
+          "status": "VERIFIED",
+          "evidence_ref": "b6a65eb96c095048ef8d53358ea301e50760f529d0b15f6310c431a1c619de50"
+        },
+        "recovery_accounting": {
+          "status": "VERIFIED",
+          "evidence_ref": "20b28bcd78e6defeafbed6dcd5c1a799f58797e108c4122b4be8f1dcfeefbd67"
+        }
+      }
+    },
+    {
+      "component": "waza",
+      "functional_status": "BLOCKED",
+      "checks": {
+        "real_agent": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        },
+        "grading_accounting_cleanup": {
+          "status": "BLOCKED",
+          "gap": "no canonical integration definition"
+        }
+      },
+      "source_revision": "e534d149d89ae77ea158469fb4d2003804b2ee76"
+    },
+    {
+      "component": "skillrank",
+      "functional_status": "VERIFIED",
+      "source_revision": "5216bae9149b4ff8a7f9e014b6889fb094cee8e1",
+      "implementation_source": "1a51bddce06f4c299acca3f5fab99bb8111f023ed3af1830c153731f7b30918e",
+      "original_source": "84881f17ae11fc1045f3e368805f98e1451c7cf7ecf4ffa757308241a44bd48d",
+      "integration_evidence_ref": "cfeaf71255e8026b0e95dda29f8e6f9d527536d757409fcb3eccfac7bf8cc6fb",
+      "checks": {
+        "search_show": {
+          "status": "VERIFIED",
+          "evidence_ref": "173cd704d7e57013c54c4098c49fa2f6f6a48ffb65e96357260f0b1199c48451"
+        },
+        "bounded_diagnostic_evaluation": {
+          "status": "VERIFIED",
+          "evidence_ref": "39c5c100c34acbc84147c47498a9cf3197b44976df3c9c0fcc6aa5b1a9b49011"
+        }
+      }
+    },
+    {
+      "component": "skillsbench",
+      "functional_status": "VERIFIED",
+      "source_revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+      "implementation_source": "1a51bddce06f4c299acca3f5fab99bb8111f023ed3af1830c153731f7b30918e",
+      "original_source": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+      "integration_evidence_ref": "aecdc601750130b5f5a9e56ff8ea9e0a796e8ee5c8da2508e0d93a2a8aaa9bd3",
+      "checks": {
+        "document_data": {
+          "status": "VERIFIED",
+          "evidence_ref": "b8f0f23507264fd3fd4c7e3c97595b0e72a7f84a93e83f8786701aa498637b44"
+        },
+        "software_engineering": {
+          "status": "VERIFIED",
+          "evidence_ref": "4f0dcbfe6a09594ca0075b0092396121373dfadfd40b07931983e9047704b559"
+        },
+        "protected_verifiers": {
+          "status": "VERIFIED",
+          "evidence_ref": "1e2be528300c0172e6cb6cba9c62f72eb34ae901694864a6bb27414262f13f53"
+        }
+      }
+    },
+    {
+      "component": "mcpmark",
+      "functional_status": "VERIFIED",
+      "source_revision": "cd45b7f57923b9b3985467f5139927575f83141c",
+      "implementation_source": "1a51bddce06f4c299acca3f5fab99bb8111f023ed3af1830c153731f7b30918e",
+      "original_source": "5a13a630a89aa0c6b4940be4eed0a30dd80ab5a822ee15f7f25f78f521c11c4b",
+      "integration_evidence_ref": "faadac430f35bcac80962096235a5a50d8fba07dcd62ce1b49e94a843fed0d30",
+      "checks": {
+        "reference_task": {
+          "status": "VERIFIED",
+          "evidence_ref": "e9406d3dc1858656bf0db55c44a290deb8bb440c73c14ba5718ede4a670cc79b"
+        },
+        "state_cleanup": {
+          "status": "VERIFIED",
+          "evidence_ref": "b67256b912228bdc5f2812da247035022bb8118771d319ef8ae540f9be923048"
+        }
+      }
+    },
+    {
+      "component": "mcp-universe",
+      "functional_status": "VERIFIED",
+      "source_revision": "0df6c42717f2a618d34f5b271efd05be462b9e4d",
+      "implementation_source": "1a51bddce06f4c299acca3f5fab99bb8111f023ed3af1830c153731f7b30918e",
+      "original_source": "5a13a630a89aa0c6b4940be4eed0a30dd80ab5a822ee15f7f25f78f521c11c4b",
+      "integration_evidence_ref": "7876280f6ab8f407e51a953a46694c45c840354c8bebad8b51500d1c30ba71ba",
+      "checks": {
+        "reference_task": {
+          "status": "VERIFIED",
+          "evidence_ref": "c9296655055168312e1f3b5edcb88bbc3020f02cc9f626aec3d77d533dc8e1ae"
+        },
+        "state_cleanup": {
+          "status": "VERIFIED",
+          "evidence_ref": "bcb5bbf87107db6b8c7fb2efd0b9bbfda3b93426793c31e4fe8b20c51262da4a"
+        }
+      }
+    },
+    {
+      "component": "skill-scanner",
+      "functional_status": "VERIFIED",
+      "source_revision": "c3d7fd9fee50cf2ea45f0b381eb61f857360f825",
+      "implementation_source": "1a51bddce06f4c299acca3f5fab99bb8111f023ed3af1830c153731f7b30918e",
+      "original_source": "1a51bddce06f4c299acca3f5fab99bb8111f023ed3af1830c153731f7b30918e",
+      "integration_evidence_ref": "389c1d2392e8e647b748a2bb14a2f9021a3adbb0a2e7df700b3469477569cc74",
+      "checks": {
+        "static_scan": {
+          "status": "VERIFIED",
+          "evidence_ref": "788fb880778e83e8924d503e1784e8585c67a88b1d1585ce01a5adeb8309f57a"
+        },
+        "findings_and_failures": {
+          "status": "VERIFIED",
+          "evidence_ref": "788fb880778e83e8924d503e1784e8585c67a88b1d1585ce01a5adeb8309f57a"
+        }
+      }
+    },
+    {
+      "component": "toolhive",
+      "functional_status": "VERIFIED",
+      "source_revision": "33ba170aad633e20520f380500a45cd158f24aed",
+      "implementation_source": "1a51bddce06f4c299acca3f5fab99bb8111f023ed3af1830c153731f7b30918e",
+      "original_source": "5a13a630a89aa0c6b4940be4eed0a30dd80ab5a822ee15f7f25f78f521c11c4b",
+      "integration_evidence_ref": "f3d49d69bf16f729d9b35d33cb74adf42f64841dfe39beeeeb53b41197e45920",
+      "checks": {
+        "launch_invoke": {
+          "status": "VERIFIED",
+          "evidence_ref": "92c5c099bea24bbb7980696978a4fabf47f1366345b2596541e1dad66dbc0764"
+        },
+        "permissions_stop": {
+          "status": "VERIFIED",
+          "evidence_ref": "7de2a905ca58b1995b785a79d4c8665509b046b39504ebfe5d5808da7354d5ef"
+        }
+      }
+    },
+    {
+      "component": "semantic-conventions",
+      "functional_status": "VERIFIED",
+      "source_revision": "68e89181d4cb9bbce975c8128e694363214ab5fb",
+      "implementation_source": "1a51bddce06f4c299acca3f5fab99bb8111f023ed3af1830c153731f7b30918e",
+      "original_source": "ecbbed79e6f793cbbca2b9ec5bd54fd9f9d8786337d6eb1b6895779915a76bf6",
+      "integration_evidence_ref": "51029e501aaa5274dc212568abbfb8dbe25b2b7d80122a6b3a922e1d7efac5c3",
+      "checks": {
+        "receipt_export": {
+          "status": "VERIFIED",
+          "evidence_ref": "58b19cff73063578a474b307b2abf12d917a839a368a75bf6bc95b2c86308651"
+        },
+        "privacy_disable": {
+          "status": "VERIFIED",
+          "evidence_ref": "826e072c11cb1b3adbafc2acedd6d5096dd63709b3438496c817ff9d1809213f"
+        }
+      }
+    },
+    {
+      "component": "langfuse",
+      "functional_status": "VERIFIED",
+      "source_revision": "5e4db922e9021083500cd066249b220a414b7dfe",
+      "implementation_source": "1a51bddce06f4c299acca3f5fab99bb8111f023ed3af1830c153731f7b30918e",
+      "original_source": "ecbbed79e6f793cbbca2b9ec5bd54fd9f9d8786337d6eb1b6895779915a76bf6",
+      "integration_evidence_ref": "d041a39bdcb72e2f46389c79350d1d2036f9b455fd0f0cfec454b86e3f4dcff4",
+      "checks": {
+        "ingestion_linkage": {
+          "status": "VERIFIED",
+          "evidence_ref": "73f89e62bcd24c3df233b6ac66110a038707745ee648de345cf62ccde8bf13db"
+        },
+        "export_disable": {
+          "status": "VERIFIED",
+          "evidence_ref": "826e072c11cb1b3adbafc2acedd6d5096dd63709b3438496c817ff9d1809213f"
+        }
+      }
+    },
+    {
+      "component": "langgraph",
+      "functional_status": "VERIFIED",
+      "source_revision": "40a2e6d845054cc0cc17a6a169ca6e7394e5231c",
+      "implementation_source": "1a51bddce06f4c299acca3f5fab99bb8111f023ed3af1830c153731f7b30918e",
+      "original_source": "443b90a7157f60321646f32493f0191cd194a485494c53715ea5894712c295cc",
+      "integration_evidence_ref": "e75e424cc0f6edbfecec71c9bc2452ba567dd7bead55335c2ff4eb7a5aec280f",
+      "checks": {
+        "conditional_loop": {
+          "status": "VERIFIED",
+          "evidence_ref": "f5353d60dd71305797733f6299d912c77d1e833eaab6d850694d41696d222f7b"
+        },
+        "interruption_recovery": {
+          "status": "VERIFIED",
+          "evidence_ref": "ae6dae8ac99956ab8450d85bdb30c9b452f268f182dde5b59bea8637d6548db5"
+        }
+      }
+    },
+    {
+      "component": "evoagentx",
+      "functional_status": "VERIFIED",
+      "source_revision": "d77fd6b9a3e76c8dd83bebe3374c53a3f5d16f54",
+      "implementation_source": "1a51bddce06f4c299acca3f5fab99bb8111f023ed3af1830c153731f7b30918e",
+      "original_source": "8b626082c2bd9218809bddfe95fe27996c7ee595b7a9e3bf430d64beafa10114",
+      "integration_evidence_ref": "e4acbf2de2ed02c6651c8f2d5f2ea7cc99c82d909f0dd812e3ab9dd7f751d86f",
+      "checks": {
+        "real_proposal": {
+          "status": "VERIFIED",
+          "evidence_ref": "224412fced461da0de727d3bb09bd709f35b84e8708cac72fa86a03af80cd7e4"
+        },
+        "proposal_validation": {
+          "status": "VERIFIED",
+          "evidence_ref": "69afdb9441d5dff8b42fab30eb64d31a30b2dda3f7d9af4c64844cd9dee52484"
+        }
+      }
+    },
+    {
+      "component": "aflow",
+      "functional_status": "VERIFIED",
+      "source_revision": "3f457218fc716093fe53f6df8a5d5e6379d66346",
+      "implementation_source": "1a51bddce06f4c299acca3f5fab99bb8111f023ed3af1830c153731f7b30918e",
+      "original_source": "8b626082c2bd9218809bddfe95fe27996c7ee595b7a9e3bf430d64beafa10114",
+      "integration_evidence_ref": "708b0d245ba3a460e9f8d6b7b622f40c1c5ec7081863f817e6cca0909181a2ea",
+      "checks": {
+        "bounded_optimization": {
+          "status": "VERIFIED",
+          "evidence_ref": "653914bc60a6161be1cc8c97d9f7cd5ffeec8ded57560678e551b961e5d2ccaa"
+        },
+        "protected_grading_accounting": {
+          "status": "VERIFIED",
+          "evidence_ref": "653914bc60a6161be1cc8c97d9f7cd5ffeec8ded57560678e551b961e5d2ccaa"
+        }
+      }
+    },
+    {
+      "component": "agent-framework",
+      "functional_status": "VERIFIED",
+      "source_revision": "2d9cc3f8ae465baf1aed3022f89b6848db4ffa7b",
+      "implementation_source": "1a51bddce06f4c299acca3f5fab99bb8111f023ed3af1830c153731f7b30918e",
+      "original_source": "e363cfa5ada2201e355b1e4528ff36cb2d05a08fff7423912c6d5e163ea43dfb",
+      "integration_evidence_ref": "46acd5cd5de5630ce5f955f623cb006fba3a0b6e0b75be5407b1f43d72e13fd8",
+      "checks": {
+        "approved_workflow": {
+          "status": "VERIFIED",
+          "evidence_ref": "c59923b990e682d1ce0c52aed82d82aed5059874825f5e7adf0ebb34277aca2f"
+        },
+        "interruption_accounting": {
+          "status": "VERIFIED",
+          "evidence_ref": "e51423cf58688fd33105ebac0f11cd4686fcc395c9f0ac9bb6934f4d55bba60c"
+        }
+      }
+    },
+    {
+      "component": "aeep-router",
+      "functional_status": "VERIFIED",
+      "source_revision": "8b015bf0247d4d9f49038982c49f3711a2802d97",
+      "implementation_source": "1a51bddce06f4c299acca3f5fab99bb8111f023ed3af1830c153731f7b30918e",
+      "original_source": "54c8e6382bd23aec3a89cb4a0abe608f8c43f01dd81bc1d2ab364a8e2cd613a3",
+      "integration_evidence_ref": "55645eb2207e9ca58b61210e8707d98397e088460bb239e59c054a2d47f95726",
+      "checks": {
+        "optional_execution": {
+          "status": "VERIFIED",
+          "evidence_ref": "b731677a4866a082bf6f8d0fa0dc53e6c24fe89214a0b40c916d2ef31d333ba7"
+        },
+        "essentials_independence": {
+          "status": "VERIFIED",
+          "evidence_ref": "f3e9aa16003ca886272cfc32a0bb3498660ea665f7a5997cfc256e71ec4b8cb1"
+        }
+      }
+    },
+    {
+      "component": "github-sponsors",
+      "functional_status": "VERIFIED",
+      "source_revision": "1a51bddce06f4c299acca3f5fab99bb8111f023ed3af1830c153731f7b30918e",
+      "implementation_source": "1a51bddce06f4c299acca3f5fab99bb8111f023ed3af1830c153731f7b30918e",
+      "original_source": "84881f17ae11fc1045f3e368805f98e1451c7cf7ecf4ffa757308241a44bd48d",
+      "integration_evidence_ref": "b062392f0d3ca9ed48b4550a8129386c166ef4ae077bd0e86313d28f4726dea0",
+      "checks": {
+        "source_attribution": {
+          "status": "VERIFIED",
+          "evidence_ref": "982858930d686ae6993cb94612d5bf3232954b5d7d33f65720ede3539f1fd6d4"
+        },
+        "authorized_link": {
+          "status": "VERIFIED",
+          "evidence_ref": "4b0b3f88c31122f0dc996995a6c3d22046d09b4a171dcfa748af0ed648034394"
+        }
+      }
+    },
+    {
+      "component": "workflow-document-data",
+      "functional_status": "VERIFIED",
+      "implementation_source": "1a51bddce06f4c299acca3f5fab99bb8111f023ed3af1830c153731f7b30918e",
+      "original_source": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+      "integration_evidence_ref": "42dbc1006162a30146413de19cc08eff4c1a88818ab082aa8f2095dbce7ed1b4",
+      "checks": {
+        "ordinary_cli": {
+          "status": "VERIFIED",
+          "workflow_evidence_ref": "42dbc1006162a30146413de19cc08eff4c1a88818ab082aa8f2095dbce7ed1b4",
+          "receipt_ref": "f49982aa3494d0c32c15fbdccc9d496a17f2236cc0b51c0affc6711d65432c02"
+        },
+        "canonical_report": {
+          "status": "VERIFIED",
+          "workflow_evidence_ref": "42dbc1006162a30146413de19cc08eff4c1a88818ab082aa8f2095dbce7ed1b4",
+          "receipt_ref": "f49982aa3494d0c32c15fbdccc9d496a17f2236cc0b51c0affc6711d65432c02"
+        }
+      }
+    },
+    {
+      "component": "workflow-software-engineering",
+      "functional_status": "VERIFIED",
+      "implementation_source": "1a51bddce06f4c299acca3f5fab99bb8111f023ed3af1830c153731f7b30918e",
+      "original_source": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+      "integration_evidence_ref": "53b1ffcf29b21bd811cdafb685e1488e260ed147a480d7eea6f353dc46eeabe3",
+      "checks": {
+        "ordinary_cli": {
+          "status": "VERIFIED",
+          "workflow_evidence_ref": "53b1ffcf29b21bd811cdafb685e1488e260ed147a480d7eea6f353dc46eeabe3",
+          "receipt_ref": "b417de6e393d909e8c50beeff34c786358e92aa28d7a1713189476c4c5f83160"
+        },
+        "canonical_report": {
+          "status": "VERIFIED",
+          "workflow_evidence_ref": "53b1ffcf29b21bd811cdafb685e1488e260ed147a480d7eea6f353dc46eeabe3",
+          "receipt_ref": "b417de6e393d909e8c50beeff34c786358e92aa28d7a1713189476c4c5f83160"
+        }
+      }
+    }
+  ],
+  "comparison_dispatch": "BLOCKED_WITHOUT_CANONICAL_CURRENT_STACK_COMPLETION",
+  "candidate_usefulness": "NOT_ASSESSED",
+  "selection_usefulness": "NOT_ASSESSED",
+  "notice": "Canonical functional evidence only. No runtime, service or model was started.",
+  "implementation_source": "1a51bddce06f4c299acca3f5fab99bb8111f023ed3af1830c153731f7b30918e"
+}
