@@ -246,6 +246,17 @@
           "pattern": "^[a-f0-9]{64}$",
           "title": "Report Ref",
           "type": "string"
+        },
+        "native_boundary": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SchedulerBoundaryEvidence"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         }
       },
       "required": [
@@ -253,6 +264,29 @@
         "report_ref"
       ],
       "title": "ScheduledProof",
+      "type": "object"
+    },
+    "SchedulerBoundaryEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "review": {
+          "$ref": "#/$defs/WorkflowFile"
+        },
+        "definition_ref": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Definition Ref",
+          "type": "string"
+        },
+        "receipt": {
+          "$ref": "#/$defs/OperationLink"
+        }
+      },
+      "required": [
+        "review",
+        "definition_ref",
+        "receipt"
+      ],
+      "title": "SchedulerBoundaryEvidence",
       "type": "object"
     },
     "SkillRankProof": {

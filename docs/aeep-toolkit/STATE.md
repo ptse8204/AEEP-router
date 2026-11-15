@@ -1,5 +1,19 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- ase-boundary-readiness-20261114:start -->
+**November 14. agent-skill-eval is verified. The managed gate is at 37 of 39.**
+
+The [registered scheduler evidence](../../reports/toolkit-v2/c13/canonical-stack-ase-20261114/README.md)
+joins the successful native launcher probe to the earlier controlled run and
+protected grade. All six native checks passed. The probe settled one operation
+with zero model calls and $0 authority. Its predecessor and all prior ledger
+records remain available. Full-source verification is tracked with this change.
+
+Waza alone remains open. Complete protected operator sign-in if free access is
+available. A real supported backend check requires its own reviewed execution
+and grading scope. Comparisons remain paused.
+<!-- ase-boundary-readiness-20261114:end -->
+
 <!-- scanner-boundary-20261114:start -->
 **November 14. Cisco readiness is verified. The managed gate is at 35 of 39.**
 

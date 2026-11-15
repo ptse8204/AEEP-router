@@ -1,5 +1,13 @@
 # 0.8 plan coverage and remaining work
 
+<!-- ase-boundary-readiness-20261114:start -->
+The [registered scheduler boundary](../toolkit-v2/c13/canonical-stack-ase-20261114/README.md)
+raises C13 to 37 of 39 verified checks. The exact native repeat passed all six
+observations. Waza is the remaining component. Its protected operator setup and
+bounded live grade are pending. Comparative usefulness remains unassessed by
+these integration results.
+<!-- ase-boundary-readiness-20261114:end -->
+
 <!-- scanner-boundary-20261114:start -->
 The [paired runtime review](../toolkit-v2/c13/canonical-stack-boundaries-20261114/README.md)
 raises C13 to 35 of 39 checks after verifying Cisco on the current Docker

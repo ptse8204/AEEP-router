@@ -8,7 +8,7 @@ from contextlib import closing
 from pathlib import Path
 from typing import Literal
 
-from pydantic import Field
+from pydantic import Field, SerializerFunctionWrapHandler, model_serializer
 
 from aeep.assessment.identity import verify_dependencies
 from aeep.assessment.models import (
@@ -27,6 +27,7 @@ from aeep.errors import ConfigurationError
 from aeep.execution import ExecutionEvidence
 from aeep.models import ExecutionReceipt, StrictModel
 
+from .ase_boundary_evidence import SchedulerBoundaryEvidence, require_ase_boundary
 from .benchmarks import BenchmarkPack
 from .models import Digest, Identifier
 from .stack_readiness import (
@@ -99,6 +100,14 @@ class ToolHiveProof(StrictModel):
 class ScheduledProof(StrictModel):
     kind: Literal["scheduled"]
     report_ref: Digest
+    native_boundary: SchedulerBoundaryEvidence | None = None
+
+    @model_serializer(mode="wrap")
+    def preserve_legacy(self, handler: SerializerFunctionWrapHandler) -> dict[str, object]:
+        value: dict[str, object] = handler(self)
+        if self.native_boundary is None:
+            value.pop("native_boundary", None)
+        return value
 
 
 class SkillRankProof(StrictModel):
@@ -244,6 +253,7 @@ def verify_receipt_evidence(
             evidence.source_revision,
             "agent-skill-eval.controlled.v1",
             1,
+            native_boundary=proof.native_boundary,
         )
         return {
             "controlled_dispatch": scheduler,
@@ -673,6 +683,8 @@ def _scheduled_report(
     revision: str,
     adapter: str,
     turns: int,
+    *,
+    native_boundary: SchedulerBoundaryEvidence | None = None,
 ) -> tuple[str, dict[str, str]]:
     from aeep.assessment.scheduling import require_scheduler
 
@@ -681,7 +693,11 @@ def _scheduled_report(
     plan, trials, refs = _completed_trials(repo, report_ref, original_source)
     if plan.scheduler_digest is None or len(trials) != turns or not all(t.valid for t in trials):
         raise ConfigurationError("retained scheduler journey differs from the reviewed diagnostic")
-    definition = require_scheduler(repo, plan.scheduler_digest)
+    definition = (
+        require_scheduler(repo, plan.scheduler_digest)
+        if native_boundary is None
+        else require_ase_boundary(repo, plan.scheduler_digest, native_boundary)
+    )
     observation = SchedulerObservation.model_validate(
         repo.get("scheduler_observation", plan.plan_id)
     )
