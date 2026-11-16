@@ -1,0 +1,67 @@
+{
+  "review_sha256": "d5b47cc809101b10e593d52b9dfdc0bd4bb1b0ceb7dddc139400e4254b543d24",
+  "implementation_source": "99cda79d1d29acc5d1978842820d4fbd8c051aa16e4611bd0522c9e267034bdd",
+  "settled_receipts": [
+    {
+      "operation_id": "waza-local-d5b47cc809101b10:download_and_install",
+      "receipt_ref": "857b737d6dd4797343ebd0d057afc0f739dab712d2248d1d148ed13c15f202a8",
+      "measurement_ref": "345119d98a1b5d1c8b1093de9b34a6b43bbb5a05122667b6dd2f0247b388370b",
+      "status": "success",
+      "execution_evidence_ref": "db6b7122bb015a2f0b238884894417131ac486b666117381c47a898b609545aa",
+      "facts": {
+        "executable": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-ollama-20261115-retained-continuation/retained/runtime/ollama",
+        "executable_sha256": "5c3cf935be8d896433a5caefefc8857bc2bb9e32c77c35e7c3d38b7c5919822f",
+        "retained_artifacts_reused": 6,
+        "download_bytes": 0,
+        "model_manifest_sha256": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0"
+      },
+      "error_type": null
+    },
+    {
+      "operation_id": "waza-local-d5b47cc809101b10:service_and_boundaries",
+      "receipt_ref": "989059bcba984f2427a730042d752d031ad779e570641a1ba574cd25e838e1e6",
+      "measurement_ref": "5ac40933e848511d770bf011d832d47b3c5f6eeab38c84e0dfeed74a50ecfff3",
+      "status": "failed",
+      "execution_evidence_ref": "10bdb0e6f15e543e010c2e8e66b5cd98aef1ed8cab640de93d72c216dd8dd925",
+      "facts": {},
+      "error_type": "RuntimeError"
+    }
+  ],
+  "retained_runtime_members": {
+    "file": 47,
+    "library_alias": 10,
+    "directory": 2
+  },
+  "retained_model_blobs": 5,
+  "grant_baseline_after_attempt": {
+    "id": "waza-native-backend-info-20261104",
+    "root": "298e319c7eec25783d1f0eb8b63c880ed3f0aad48fb63f75bbb9ca6ced4ae5cc",
+    "state": [
+      0,
+      9,
+      0,
+      76.06425412464887,
+      "0"
+    ],
+    "predecessor": "edfe117e393d7c5744c36ecd4512468d77d94d0a760919312eb8b0ad5ba44027",
+    "effective_limits": {
+      "max_operations": 11,
+      "max_model_turns": 1,
+      "max_elapsed_seconds": 1819.328500165604,
+      "max_cash_usd": "0"
+    },
+    "effective_expiry": "2026-11-19T04:15:44.410728+00:00"
+  },
+  "service_start_observation": "Ollama and its runner started; macOS reported denied Metal cache access.",
+  "terminal_reason": "The driver retained RuntimeError without its readiness phase or service stderr.",
+  "metal_denial_caused_terminal_failure": null,
+  "listeners_remaining_on_reviewed_ports": 0,
+  "model_dispatch_started": false,
+  "protected_grade_started": false,
+  "waza_readiness_checks_registered": 0,
+  "all_stack_verification": {
+    "verified_checks": 37,
+    "required_checks": 39
+  },
+  "comparisons": "PAUSED"
+}

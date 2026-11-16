@@ -1,5 +1,10 @@
 # Upstream source review and reuse decisions
 
+The current [Waza engineering path](../../reports/toolkit-v2/c13/waza-ollama-20261115/SERVICE_CONTINUATION.md)
+uses the pinned Waza evaluator, Copilot SDK custom provider and local
+Ollama. Retained installation passed. Local service readiness and actual
+protected grading remain open. The hosted sign-in route remains deferred.
+
 November 3 engineering preparation adds a proposed scoped storage exception,
 not another upstream integration. The [current scanner review](../../reports/toolkit-v2/c13/scanner-storage-review-20261103/README.md)
 reuses retained Cisco 2.2.1 image `1cf3c440` and 32 unchanged native package dependency

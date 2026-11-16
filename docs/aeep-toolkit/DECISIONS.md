@@ -1,5 +1,13 @@
 # AEEP Toolkit architecture decisions (living log)
 
+### November 15 Waza local backend
+
+Retain the verified Ollama 0.40.16 installation and the five pinned Qwen3
+model blobs. Use [the narrowly scoped service continuation](../../reports/toolkit-v2/c13/waza-ollama-20261115/SERVICE_CONTINUATION.md)
+to capture the failing readiness phase before permitting one local Waza
+completion and protected grade. Leave the readiness gate closed until
+canonical checks accept the actual results. Comparisons remain paused.
+
 These are **proposed steering decisions**, not claims of implemented features. Append dated ADR-style entries to document new evidence and decisions. Do not retroactively edit benchmark parameters or rewrite historical AEEP records.
 
 | ID | Initial decision | Reason | Reconsider if |

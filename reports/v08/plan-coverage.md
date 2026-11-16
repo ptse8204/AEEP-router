@@ -1,5 +1,13 @@
 # 0.8 plan coverage and remaining work
 
+<!-- waza-ollama-service-20261115:start -->
+The [Waza service result](../toolkit-v2/c13/waza-ollama-20261115/SERVICE_CONTINUATION.md)
+preserves two settled operations from `d5b47cc8`. Installation passed.
+Service readiness stopped before inference or grading. First-party
+preflight for the exact diagnostic continuation passed. C13 has 37 of
+39 checks verified and comparisons remain paused.
+<!-- waza-ollama-service-20261115:end -->
+
 <!-- waza-ollama-archive-20261115:start -->
 The [local Waza setup result](../toolkit-v2/c13/waza-ollama-20261115/CONTINUATION.md)
 records a settled archive-extraction failure before any service or model

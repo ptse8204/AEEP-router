@@ -1,5 +1,17 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- waza-ollama-service-20261115:start -->
+**C13 remains open at 37 of 39 checks.** Approved `d5b47cc8` verified and
+installed the retained Ollama runtime. Startup reached the real service
+and stopped during readiness. Both operations settled, there are no
+remaining listeners, and the model and grader were unstarted. The
+[settled audit and next exact review](../../reports/toolkit-v2/c13/waza-ollama-20261115/SERVICE_CONTINUATION.md)
+record the local service failure and bind one unstarted diagnostic
+continuation `0f95d1a2` to the retained installation. It requires
+explicit restart approval. Waza is the sole component blocked and
+comparisons remain paused.
+<!-- waza-ollama-service-20261115:end -->
+
 <!-- waza-ollama-archive-20261115:start -->
 **November 15. Waza downloads verified. Private extraction needs correction.**
 

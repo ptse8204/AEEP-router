@@ -1,0 +1,62 @@
+{
+  "review_sha256": "0f95d1a2dccc8919e34c6d38d9805ac492f5057750961543b2530ac6014509de",
+  "verified_pins": 27,
+  "sandbox_first_party_controls": {
+    "live": {
+      "outside_read_denied": true,
+      "grader_read_denied": true,
+      "external_denied": true,
+      "gateway_allowed": true,
+      "engine_denied": true
+    },
+    "serve": {
+      "outside_read_denied": true,
+      "grader_read_denied": true,
+      "external_denied": true,
+      "child_loopback": true
+    },
+    "grade": {
+      "outside_read_denied": true,
+      "grader_read_denied": false,
+      "external_denied": true,
+      "gateway_allowed": false,
+      "engine_denied": true
+    }
+  },
+  "retained_runtime_and_model_verified": true,
+  "first_party_driver_controls": {
+    "complete": {
+      "stages": [
+        "service_and_boundaries",
+        "waza_local_inference",
+        "protected_grade"
+      ],
+      "readiness_phase": "complete"
+    },
+    "failed_task": {
+      "stages": [
+        "service_and_boundaries",
+        "waza_local_inference",
+        "protected_grade"
+      ],
+      "readiness_phase": "complete"
+    },
+    "version_mismatch": {
+      "stages": [
+        "service_and_boundaries"
+      ],
+      "readiness_phase": "version_identity"
+    },
+    "model_mismatch": {
+      "stages": [
+        "service_and_boundaries"
+      ],
+      "readiness_phase": "model_inventory"
+    }
+  },
+  "copied_ledger": "Three reservations; uncertain service cleanup blocks model dispatch.",
+  "downloaded_software_bytes": 0,
+  "upstream_processes_started": 0,
+  "model_turns": 0,
+  "comparisons": "PAUSED"
+}
