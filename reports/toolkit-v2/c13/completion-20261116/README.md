@@ -103,6 +103,13 @@ from the established grader on the same image. All four operations settled,
 including the bootstrap failure. The task has never been sent to an agent.
 [Protected workbook result](workbook-reference-result.json)
 
+The existing task-pack transport verified a two-file workbook archive with
+only the original task instruction and incomplete input. The Linux ARM64
+preflight matched the 33 macOS package versions, including six
+platform-specific wheel variants. The Linux closure is verified as local
+artifact metadata. A Linux installation and runtime check is still outstanding.
+[Transport and compatibility preflight](transport-and-compatibility-preflight.json)
+
 Advance source-bound candidates through the existing protected grader
 preparation and reference/counterexample checks. Keep development and formal
 exposure disjoint, and keep repository families in one stage. Inspect rights
