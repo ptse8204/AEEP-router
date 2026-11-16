@@ -1,0 +1,77 @@
+{
+  "schema_version": "aeep.c13.formula-offline-preparation.v1",
+  "prepared_only": true,
+  "carrier": {
+    "id": "sha256:6f04cf1668b8ede62e46a48f4454d69f08e17b44d40cc34f743ee63ea355801e",
+    "platform": "linux/amd64",
+    "prior_readonly_evidence": "../skillsbench-react-readonly-grader-20261108/result.json",
+    "prior_browser_revision": "1148",
+    "formula_required_browser_revision": "1200"
+  },
+  "wheel_closure": {
+    "pins": 10,
+    "verified_local_archives": 9,
+    "pending_pypi_sha256": "284ed5a706b7c389a06caa431b2f0ba9ac4130113c3a779767dda758c2497bb1",
+    "lock_sha256": "fa838084724c7510726d958f00072461489d45f8badb6e26bf4db13640c40517"
+  },
+  "mathjax": {
+    "version": "3.2.2",
+    "bundle_url": "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js",
+    "bundle_sha256": "d4295dc33744836935c1399feece5159577b34c5c8ffb9f1c6324cd82e03a882",
+    "license_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "npm_integrity": "sha512-Bt+SSVU8eBG27zChVewOicYs7Xsdt40qm4+UpHyX7k0/O9NliPc+x77k1/FEsPsjKPZGJvtRZM1vO+geW0OhGw=="
+  },
+  "fixtures": {
+    "published_test_bodies_unchanged": true,
+    "identities": 7,
+    "roles": [
+      "reference",
+      "wrong-value",
+      "incomplete",
+      "renderer-unavailable"
+    ],
+    "protected_lock_sha256": "2240b0a9b8cd9a4e899e542c935fc55ef9df28fc3e0527bca961043ea6d16547",
+    "guest_sha256": "55c4332f7771ff2f2e8660af2ad91dbe41433b6fcf79c35eb3509aa4d2c3fc5a"
+  },
+  "only_external_asset_acquisition_pending": {
+    "review_path": ".aeep/completion-20261116/formula-offline-assets/acquisition-review.json",
+    "review_sha256": "bedcde5cf81ec72bf9a5b86155719e60f42154b620af8783b477e47643e89dbb",
+    "maximum_gets": 2,
+    "maximum_bytes": 160981322,
+    "browser_publisher_generation": "1761684150058297",
+    "browser_publication_md5": "mUGHAsQMaDFHHnWaXU1xdw==",
+    "browser_members_from_bounded_zip_range": 287,
+    "browser_metadata_range_bytes": 65557,
+    "models": 0,
+    "cash_usd": 0
+  },
+  "preparation_checks": {
+    "fixtures_only": true,
+    "protected_roles_checked": [
+      "reference",
+      "wrong-value",
+      "incomplete",
+      "renderer-unavailable"
+    ],
+    "allocation_guards": [
+      "approval required",
+      "exact payload sizes",
+      "exact browser object generation",
+      "wheel browser revision",
+      "ZIP member checks",
+      "publisher hash"
+    ],
+    "renderer_guards": [
+      "missing identity",
+      "unexpected phase",
+      "skip rejected",
+      "infra failure ungraded"
+    ],
+    "external_code_executed": false,
+    "browser_launched": false
+  },
+  "preparation_failure": "The first metadata read flattened Google's separate x-goog-hash headers. The corrected inspection parsed both headers and reused the verified small wheel bytes.",
+  "asset_use_approved": false,
+  "browsers_launched": false,
+  "comparative_trials": 0
+}

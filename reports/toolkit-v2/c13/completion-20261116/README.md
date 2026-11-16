@@ -200,6 +200,20 @@ license notice support provenance. Asset-use approval remains separate.
 [Input contribution](https://github.com/benchflow-ai/skillsbench/commit/b0ebf1b3ed9556c21ffcd754a88f1d65e3ef56f6)
 [Pillow 10.4.0 comparison](https://raw.githubusercontent.com/python-pillow/Pillow/10.4.0/src/PIL/Image.py)
 
+The [offline renderer preparation](formula-offline-preparation.json) keeps
+all seven upstream test bodies intact. The staged inputs cover the exact
+oracle, a wrong formula with the same line count, a missing formula and an
+unavailable renderer. The infrastructure control must return no task grade.
+MathJax 3.2.2 and nine supporting wheels are retained. The old browser is
+revision 1148. The pinned Playwright 1.57.0 verifier requires revision 1200.
+Its matching Chromium archive was inspected with a 65,557-byte metadata
+range. The wheel and browser together require 160,981,322 bytes. Acquisition
+review `bedcde5c` covers those two downloads and archive verification. A
+later execution review will bind the resulting browser SHA-256. No browser
+or upstream test ran during preparation.
+[Playwright browser pin](https://raw.githubusercontent.com/microsoft/playwright/v1.57.0/packages/playwright-core/browsers.json)
+[Chrome publisher metadata](https://googlechromelabs.github.io/chrome-for-testing/143.0.7499.4.json)
+
 The selection recorder now rejects a route decision with no feasible executor.
 Only an actual baseline choice records abstention. A blocked route leaves the
 selection matrix incomplete. No live selection result was added. The 37-check acceptance

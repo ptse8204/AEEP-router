@@ -7,6 +7,12 @@ against the operational ledger and frozen source `4e673a6d`. It retains
 the private macOS arm64 / Python 3.13 LIMITED_BETA recommendation. Production
 release and public benefit claims remain NO_GO.
 
+The [Formula Extraction offline preparation](../../reports/toolkit-v2/c13/completion-20261116/formula-offline-preparation.json)
+staged the protected reference and three controls with all seven original
+test bodies intact. MathJax and nine wheels are verified locally. Exact
+review `bedcde5c` awaits approval for the two remaining public downloads.
+The full verifier remains unstarted.
+
 The [A2A protected reference review](../../reports/toolkit-v2/c13/completion-20261116/a2a-runtime-intake.json)
 pins the existing Linux carrier, 24 scoped runtime packages and all seven
 published tests. The prepared driver passed exact boundary checks and

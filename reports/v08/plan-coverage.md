@@ -1,5 +1,10 @@
 # 0.8 plan coverage and remaining work
 
+The [Formula Extraction offline preparation](../toolkit-v2/c13/completion-20261116/formula-offline-preparation.json)
+stages the reference and three protected controls and pins the missing
+Playwright wheel and Chromium archive. The acquisition review awaits
+approval. The staged fixtures add no runtime or candidate-value evidence.
+
 The [A2A protected runtime review](../toolkit-v2/c13/completion-20261116/a2a-runtime-intake.json)
 binds the first new repository batch candidate to a retained Linux carrier.
 Its exact two-operation approval is pending. Synthetic driver checks do not
