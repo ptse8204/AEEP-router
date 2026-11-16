@@ -1,0 +1,342 @@
+{
+  "review_sha256": "6a178abf05792a2326b75c7c2d8910fd738662ac0218578be3cc1c5a421aecfa",
+  "completed": true,
+  "tasks": [
+    {
+      "task": "canopen-python__canopen-613-declared-tests",
+      "arms": [
+        {
+          "arm": "control",
+          "score": 0,
+          "tokens": {
+            "input_tokens": 98643,
+            "cached_input_tokens": 72832,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 2166,
+            "reasoning_output_tokens": 218
+          },
+          "token_capture": {
+            "status": "verified",
+            "receipt_ref": "7aae909028b7f186f361df4fe952028b2026789b2831765c0a73ab248cb5ec01",
+            "journal_ref": "91eef895e129c887cb909f9350acdce52cb51fd2edb7182212af000b39f8a5d5",
+            "known_fields": [
+              "input_tokens",
+              "cached_input_tokens",
+              "cache_write_input_tokens",
+              "output_tokens",
+              "reasoning_output_tokens"
+            ],
+            "provider_usage_independently_verified": false,
+            "source": "provider_report",
+            "trust": "self_asserted"
+          },
+          "candidate_loading": {
+            "instructions_loaded": null,
+            "invoked": null,
+            "delivery_complete": false,
+            "snapshot_ref": "2eb29ed9a4d524a74fe89bb7c305c683787800b081d1758deb3d913fd1021b02",
+            "skill_sha256": null
+          },
+          "task_prompt_sha256": "788e58b8db15842a6077e008a3577dd691eef65a40a934c6fb230ecd9809be79",
+          "receipt_ref": "7aae909028b7f186f361df4fe952028b2026789b2831765c0a73ab248cb5ec01",
+          "agent_wall_seconds": 60.27554012497421,
+          "verification_wall_seconds": 2.3721320419572294
+        },
+        {
+          "arm": "treatment",
+          "score": 0,
+          "tokens": {
+            "input_tokens": 150539,
+            "cached_input_tokens": 130432,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 2692,
+            "reasoning_output_tokens": 150
+          },
+          "token_capture": {
+            "status": "verified",
+            "receipt_ref": "5300b3433749bd0ea310147119873bf91fbd1667e6d1b0192cd693c79667898c",
+            "journal_ref": "16746928508f35674347481aba06abfc775dab3506ec0c1a6ee6701e9b4b01d5",
+            "known_fields": [
+              "input_tokens",
+              "cached_input_tokens",
+              "cache_write_input_tokens",
+              "output_tokens",
+              "reasoning_output_tokens"
+            ],
+            "provider_usage_independently_verified": false,
+            "source": "provider_report",
+            "trust": "self_asserted"
+          },
+          "candidate_loading": {
+            "instructions_loaded": null,
+            "invoked": null,
+            "delivery_complete": false,
+            "snapshot_ref": "a4ad33e0f32147d273a6a9764b1c536a16ad26dcd2cd3372c98d236bfc8742c9",
+            "skill_sha256": "ce8543afa4e8b2514fbbec5b59d85064faa1758004605a9c1321e601f55388b6"
+          },
+          "task_prompt_sha256": "788e58b8db15842a6077e008a3577dd691eef65a40a934c6fb230ecd9809be79",
+          "receipt_ref": "5300b3433749bd0ea310147119873bf91fbd1667e6d1b0192cd693c79667898c",
+          "agent_wall_seconds": 74.43080725008622,
+          "verification_wall_seconds": 2.23463099997025
+        }
+      ],
+      "treatment_minus_control_score": 0,
+      "treatment_minus_control_tokens": {
+        "reasoning_output_tokens": -68,
+        "input_tokens": 51896,
+        "output_tokens": 526,
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 57600
+      },
+      "campaign_sha256": "531f50caf99d3ca20438216b9f98eb650170d8f54a89729bd1c7a960f9b9712f",
+      "diagnostics": {
+        "control": {
+          "receipt_ref": "7aae909028b7f186f361df4fe952028b2026789b2831765c0a73ab248cb5ec01",
+          "grade_detail": "test_failure",
+          "per_test": {
+            "pytest_exit": 1,
+            "required_statuses": {
+              "test/test_pdo.py::TestPDO::test_pdo_getitem": "FAILED",
+              "test/test_pdo.py::TestPDO::test_pdo_iterate": "FAILED",
+              "test/test_pdo.py::TestPDO::test_pdo_export": "PASSED",
+              "test/test_pdo.py::TestPDO::test_pdo_map_bit_mapping": "PASSED",
+              "test/test_pdo.py::TestPDO::test_pdo_map_getitem": "PASSED",
+              "test/test_pdo.py::TestPDO::test_pdo_maps_iterate": "PASSED",
+              "test/test_pdo.py::TestPDO::test_pdo_save": "PASSED",
+              "test/test_pdo.py::TestPDO::test_pdo_save_skip_readonly": "PASSED"
+            },
+            "protected_test_identity_digest": "c96aa126a8dc4fe8a03af99231b146e1bda0dc5c1e56cf145c02d1192668cfe6",
+            "trial_id": "trial_managed-sol-comparison-20261116-instrumented-3_development-canopen-python__canopen-613-declared-tests_sol-observed-3.control_fresh-worker_0",
+            "task": "canopen-python__canopen-613-declared-tests",
+            "grader_receipt_sha256": "7628c4f17bf8c4a83211d27c3337cac28be5e01328c11963c3bfd3264c90660d",
+            "grader_request_digest": "8a5c2f0d1ef23d97b9c75d69a1968ee63dca66aaeef18ac1301967d01064448d"
+          },
+          "positive_helper_calls": [],
+          "observed_helper_import_count": 0,
+          "observed_helper_rename_preview_count": 0,
+          "observed_changed_preview_count": 0,
+          "other_libcst_use": "unknown",
+          "observation_overflow": false
+        },
+        "treatment": {
+          "receipt_ref": "5300b3433749bd0ea310147119873bf91fbd1667e6d1b0192cd693c79667898c",
+          "grade_detail": "test_failure",
+          "per_test": {
+            "pytest_exit": 1,
+            "required_statuses": {
+              "test/test_pdo.py::TestPDO::test_pdo_getitem": "FAILED",
+              "test/test_pdo.py::TestPDO::test_pdo_iterate": "FAILED",
+              "test/test_pdo.py::TestPDO::test_pdo_export": "PASSED",
+              "test/test_pdo.py::TestPDO::test_pdo_map_bit_mapping": "PASSED",
+              "test/test_pdo.py::TestPDO::test_pdo_map_getitem": "PASSED",
+              "test/test_pdo.py::TestPDO::test_pdo_maps_iterate": "PASSED",
+              "test/test_pdo.py::TestPDO::test_pdo_save": "PASSED",
+              "test/test_pdo.py::TestPDO::test_pdo_save_skip_readonly": "PASSED"
+            },
+            "protected_test_identity_digest": "c96aa126a8dc4fe8a03af99231b146e1bda0dc5c1e56cf145c02d1192668cfe6",
+            "trial_id": "trial_managed-sol-comparison-20261116-instrumented-3_development-canopen-python__canopen-613-declared-tests_sol-observed-3.treatment_fresh-worker_0",
+            "task": "canopen-python__canopen-613-declared-tests",
+            "grader_receipt_sha256": "0f4ed77cfa94c07ea2153eacce974cda37804c696fd66247af1b65f5d316d0b3",
+            "grader_request_digest": "858c994a6d3cf0eb3a91c8ad9bdd1158ebd6dd29eb3e6b525183ee7c62877201"
+          },
+          "positive_helper_calls": [],
+          "observed_helper_import_count": 0,
+          "observed_helper_rename_preview_count": 0,
+          "observed_changed_preview_count": 0,
+          "other_libcst_use": "unknown",
+          "observation_overflow": false
+        }
+      }
+    },
+    {
+      "task": "tefra__xsdata-1126-issue-behavior-audit",
+      "arms": [
+        {
+          "arm": "treatment",
+          "score": 0,
+          "tokens": {
+            "input_tokens": 209056,
+            "cached_input_tokens": 183040,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 2478,
+            "reasoning_output_tokens": 225
+          },
+          "token_capture": {
+            "status": "verified",
+            "receipt_ref": "19c89a21e456457ff867a0514618b461bf77a1dfcb4e4ed1def3e1ea18aadf37",
+            "journal_ref": "53d0e0f7856dcf13c0c0026b6dafd73e0fc4d4245c5da1cb28d633f17f021c1f",
+            "known_fields": [
+              "input_tokens",
+              "cached_input_tokens",
+              "cache_write_input_tokens",
+              "output_tokens",
+              "reasoning_output_tokens"
+            ],
+            "provider_usage_independently_verified": false,
+            "source": "provider_report",
+            "trust": "self_asserted"
+          },
+          "candidate_loading": {
+            "instructions_loaded": null,
+            "invoked": null,
+            "delivery_complete": false,
+            "snapshot_ref": "d1791819ce77f6b4f7bde74766dd230d8780d8b77e5fa810b261b192ace7b8d3",
+            "skill_sha256": "ce8543afa4e8b2514fbbec5b59d85064faa1758004605a9c1321e601f55388b6"
+          },
+          "task_prompt_sha256": "29cd3b0cc46c4589ae41fba52b87e686346fba4fe64b903c2c3cc3c26515c1bb",
+          "receipt_ref": "19c89a21e456457ff867a0514618b461bf77a1dfcb4e4ed1def3e1ea18aadf37",
+          "agent_wall_seconds": 76.9886394579662,
+          "verification_wall_seconds": 2.3858188750455156
+        },
+        {
+          "arm": "control",
+          "score": 0,
+          "tokens": {
+            "input_tokens": 233016,
+            "cached_input_tokens": 212224,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 2687,
+            "reasoning_output_tokens": 285
+          },
+          "token_capture": {
+            "status": "verified",
+            "receipt_ref": "cdfd63a50dd563b57b6744c79538c7131c4acdee567ecd6472fca01626632121",
+            "journal_ref": "36b0e1f25d3916ef01a3cd5961422efd4680548ba14b135f17334e091e170f11",
+            "known_fields": [
+              "input_tokens",
+              "cached_input_tokens",
+              "cache_write_input_tokens",
+              "output_tokens",
+              "reasoning_output_tokens"
+            ],
+            "provider_usage_independently_verified": false,
+            "source": "provider_report",
+            "trust": "self_asserted"
+          },
+          "candidate_loading": {
+            "instructions_loaded": null,
+            "invoked": null,
+            "delivery_complete": false,
+            "snapshot_ref": "331f4becbfb506112afa9200f62cd252793e1deedd2fbb70c9ff8ed5701292e2",
+            "skill_sha256": null
+          },
+          "task_prompt_sha256": "29cd3b0cc46c4589ae41fba52b87e686346fba4fe64b903c2c3cc3c26515c1bb",
+          "receipt_ref": "cdfd63a50dd563b57b6744c79538c7131c4acdee567ecd6472fca01626632121",
+          "agent_wall_seconds": 78.32727529108524,
+          "verification_wall_seconds": 2.35854191693943
+        }
+      ],
+      "treatment_minus_control_score": 0,
+      "treatment_minus_control_tokens": {
+        "reasoning_output_tokens": -60,
+        "input_tokens": -23960,
+        "output_tokens": -209,
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": -29184
+      },
+      "campaign_sha256": "380fa0f78ae070daa1df62b5efd36c343f817380b3a0422755a8205756711bf0",
+      "diagnostics": {
+        "treatment": {
+          "receipt_ref": "19c89a21e456457ff867a0514618b461bf77a1dfcb4e4ed1def3e1ea18aadf37",
+          "grade_detail": "test_failure",
+          "per_test": {
+            "pytest_exit": 1,
+            "required_statuses": {
+              "tests/codegen/handlers/test_unnest_inner_classes.py::UnnestInnerClassesTests::test_update_types": "FAILED",
+              "tests/test_aeep_issue_contract.py::test_distinct_nested_enums_after_promotion_and_lookup": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_cascade_properties": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_copy_attribute_properties": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_copy_attribute_properties_from_empty_source": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_copy_attribute_properties_from_nillable_source": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_copy_attribute_properties_set_default_value_if_none": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_detect_lazy_namespace": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_find_dependency": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_dependency_type_with_absent_type": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_dependency_type_with_abstract_type_type": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_dependency_type_with_complex_type": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_dependency_type_with_enumeration_type": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_dependency_type_with_simple_type": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_inner_type_with_circular_reference": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_inner_type_with_complex_type": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_inner_type_with_simple_type": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_native_type": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_type_with_dependency_type": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_type_with_forward_reference": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_type_with_native_type": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_types": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_types_with_ignore_patterns": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_update_restrictions": "PASSED",
+              "tests/codegen/handlers/test_unnest_inner_classes.py::UnnestInnerClassesTests::test_process_with_config_disabled_promotes_only_enumerations": "PASSED",
+              "tests/codegen/handlers/test_unnest_inner_classes.py::UnnestInnerClassesTests::test_process_with_config_enabled": "PASSED",
+              "tests/codegen/handlers/test_unnest_inner_classes.py::UnnestInnerClassesTests::test_process_with_orphan_nested_class": "PASSED",
+              "tests/codegen/handlers/test_unnest_inner_classes.py::UnnestInnerClassesTests::test_update_inner_class": "PASSED"
+            },
+            "protected_test_identity_digest": "bcbd0dac978906b349fbbf9978430638c0e3cf8ea74b42f8b07571b20f15bb9d",
+            "trial_id": "trial_managed-sol-comparison-20261116-instrumented-4_development-tefra__xsdata-1126-issue-behavior-audit_sol-observed-4.treatment_fresh-worker_0",
+            "task": "tefra__xsdata-1126-issue-behavior-audit",
+            "grader_receipt_sha256": "4bc2a588236c3f95d5c06295e9ee51278883291fb1d88e8b8c20c39fed0b822e",
+            "grader_request_digest": "9ccf07bbb6ac7f306ffed7fb1408b4cd69c7173ee9ec587b10c1fbeb43fdbab9"
+          },
+          "positive_helper_calls": [],
+          "observed_helper_import_count": 0,
+          "observed_helper_rename_preview_count": 0,
+          "observed_changed_preview_count": 0,
+          "other_libcst_use": "unknown",
+          "observation_overflow": false
+        },
+        "control": {
+          "receipt_ref": "cdfd63a50dd563b57b6744c79538c7131c4acdee567ecd6472fca01626632121",
+          "grade_detail": "test_failure",
+          "per_test": {
+            "pytest_exit": 1,
+            "required_statuses": {
+              "tests/codegen/handlers/test_unnest_inner_classes.py::UnnestInnerClassesTests::test_update_types": "FAILED",
+              "tests/test_aeep_issue_contract.py::test_distinct_nested_enums_after_promotion_and_lookup": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_cascade_properties": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_copy_attribute_properties": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_copy_attribute_properties_from_empty_source": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_copy_attribute_properties_from_nillable_source": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_copy_attribute_properties_set_default_value_if_none": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_detect_lazy_namespace": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_find_dependency": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_dependency_type_with_absent_type": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_dependency_type_with_abstract_type_type": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_dependency_type_with_complex_type": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_dependency_type_with_enumeration_type": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_dependency_type_with_simple_type": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_inner_type_with_circular_reference": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_inner_type_with_complex_type": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_inner_type_with_simple_type": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_native_type": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_type_with_dependency_type": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_type_with_forward_reference": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_type_with_native_type": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_types": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_process_types_with_ignore_patterns": "PASSED",
+              "tests/codegen/handlers/test_process_attributes_types.py::ProcessAttributeTypesTests::test_update_restrictions": "PASSED",
+              "tests/codegen/handlers/test_unnest_inner_classes.py::UnnestInnerClassesTests::test_process_with_config_disabled_promotes_only_enumerations": "PASSED",
+              "tests/codegen/handlers/test_unnest_inner_classes.py::UnnestInnerClassesTests::test_process_with_config_enabled": "PASSED",
+              "tests/codegen/handlers/test_unnest_inner_classes.py::UnnestInnerClassesTests::test_process_with_orphan_nested_class": "PASSED",
+              "tests/codegen/handlers/test_unnest_inner_classes.py::UnnestInnerClassesTests::test_update_inner_class": "PASSED"
+            },
+            "protected_test_identity_digest": "bcbd0dac978906b349fbbf9978430638c0e3cf8ea74b42f8b07571b20f15bb9d",
+            "trial_id": "trial_managed-sol-comparison-20261116-instrumented-4_development-tefra__xsdata-1126-issue-behavior-audit_sol-observed-4.control_fresh-worker_0",
+            "task": "tefra__xsdata-1126-issue-behavior-audit",
+            "grader_receipt_sha256": "1ad4241a799f2c78b887eebf939b2d9177f0948a9b6c073288754d1818823854",
+            "grader_request_digest": "e66487430da33dbb93bef7f6e3878172c68dfda7a284a99a2fc1cef6481bc62e"
+          },
+          "positive_helper_calls": [],
+          "observed_helper_import_count": 0,
+          "observed_helper_rename_preview_count": 0,
+          "observed_changed_preview_count": 0,
+          "other_libcst_use": "unknown",
+          "observation_overflow": false
+        }
+      }
+    }
+  ],
+  "proxy_restored_stopped": true,
+  "new_unsettled_operations": []
+}

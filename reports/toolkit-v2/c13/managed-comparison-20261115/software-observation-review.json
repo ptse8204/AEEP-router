@@ -1,0 +1,84 @@
+{
+  "operator_authority": "Operator explicitly requested per-test reporting, real LibCST tracking and fresh paired runs on the same two software tasks.",
+  "opening_counters": [
+    13986,
+    3820,
+    128543.20761676774,
+    "0.0"
+  ],
+  "grant_expiry": "2026-11-23T07:27:48.408693+00:00",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "destination": "existing managed Codex proxy",
+  "tasks": [
+    {
+      "task_id": "canopen-python__canopen-613-declared-tests",
+      "recipe_digest": "31af06f5957bf875a38914a93aa4a3758a1dfb1004f2b9f20bbc839a8a629a0e",
+      "protected_environment_digest": "4209187811529cea1967411c558b4d5f11b93bcd8b7979d083ac8055eb5b1482",
+      "pair_digest": "6be9d2a032bd3d76c6248a4fcea990b14ad61bda02b3c200fc431dcc01e4a57a",
+      "shared_definition_digest": "dd3800c96ae9235daa58f5aa4c1d541b80d7fe7304f303414ff446602f35493d",
+      "suite_digest": "28c9b170d2aecc816b91d00e18eede1f6ac1904bfc9e602f87307c30967cd0e3",
+      "instruction_sha256": "788e58b8db15842a6077e008a3577dd691eef65a40a934c6fb230ecd9809be79",
+      "arm_order": [
+        "sol-observed-3.control",
+        "sol-observed-3.treatment"
+      ]
+    },
+    {
+      "task_id": "tefra__xsdata-1126-issue-behavior-audit",
+      "recipe_digest": "31af06f5957bf875a38914a93aa4a3758a1dfb1004f2b9f20bbc839a8a629a0e",
+      "protected_environment_digest": "4209187811529cea1967411c558b4d5f11b93bcd8b7979d083ac8055eb5b1482",
+      "pair_digest": "547fa22f12b3431967e5cdb67572b01286d16bf61e79797e7931a1f303e64b7b",
+      "shared_definition_digest": "9b8ee4b7b92cefa101cdc4754ef1765f7bc7b2f9cad4011874a5a98ea31a34cb",
+      "suite_digest": "6467cd4d33c8d6e865ceb41f26d3196d3d7e288947098b06db6ccf250d30cf92",
+      "instruction_sha256": "29cd3b0cc46c4589ae41fba52b87e686346fba4fe64b903c2c3cc3c26515c1bb",
+      "arm_order": [
+        "sol-observed-4.treatment",
+        "sol-observed-4.control"
+      ]
+    }
+  ],
+  "observer_bindings": {
+    "codex-app-server:sol-observed-3.control": {
+      "worker_digest": "52811681c9270cb42e536ee79c00303cbbc696225262ecb0e244753fbcb14d5c",
+      "helper_sha256": null
+    },
+    "codex-app-server:sol-observed-3.treatment": {
+      "worker_digest": "86ed0cb5e138aa095aa270f338f212efb154f5ee8e9a1a416b440e3fec86a298",
+      "helper_sha256": "ce3b0690dbe53d21e596dcbaf74e7bfcc4bcde6715b5341b5bb9190a1130d319"
+    },
+    "codex-app-server:sol-observed-4.control": {
+      "worker_digest": "8fc38b2bc10e6bca82cae8e660358f04b608dd9481540ce42edc1cf03a86cb24",
+      "helper_sha256": null
+    },
+    "codex-app-server:sol-observed-4.treatment": {
+      "worker_digest": "6b2b48142a90b1b16c5770221ee15da0e1b9a973b9f19d1a98ce2826d0db34fb",
+      "helper_sha256": "ce3b0690dbe53d21e596dcbaf74e7bfcc4bcde6715b5341b5bb9190a1130d319"
+    }
+  },
+  "cumulative_ceiling": {
+    "maximum_operations": 78,
+    "maximum_model_turns": 15,
+    "maximum_reserved_seconds": 6800,
+    "maximum_cash_usd": "0"
+  },
+  "maximum_new_operations": 21,
+  "maximum_new_model_turns": 4,
+  "maximum_reserved_seconds": 2680,
+  "automatic_retries": 0,
+  "pins": {
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/sol-dispatch-review.json": "bd939ed730bebfe8c12005bc05b57cf085328809ee7f326dc5f34deb9eb907f0",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/sales-handoff-continuation-review.json": "0650ab390a0e8fe6e8dbcc3fcbdd434e9fa0a272a6cc74024259b0a97cb4ab33",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/sales-window-audit.json": "5df6023d049dc068373e8e8443bedad055cdbf4586158d158a1373e5d2c4f877",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/software_rerun.py": "b63f0c1ad47d5bf5bdf82ed84a2369210873306d5aa13d22338d0e6daac84600",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/libcst_reviewed_helper.py": "ce3b0690dbe53d21e596dcbaf74e7bfcc4bcde6715b5341b5bb9190a1130d319",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/software_observer.py": "ddfa066967f9856b30c182f6a593181ef922b6d2fc38c92ca06cdf5678eeb9ff",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/software_observer_preflight.py": "4ab1094f9935cf0b509d4827427b86971ee2778176506bf41a37dad6a7cdbba2",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/check_software_observer.py": "7f9ace976e477052ccb678ac4340709177d04370db600306814a7b139e41a457",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/software-observer-offline/review.json": "95a1b22dae4b2cc08bb4db356b0ac32198a1060355a29c0fc4adf026bcb91ccc",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/software-observer-offline/result.json": "4a6a0fa085611b3f2502bbcf6db1f49c32d15d2712b9bc488899c1f121194373",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/software-observer-offline/images.json": "fcc47a47e91fbc926edb7e54e4bac52b6e6430a1a2e1d188ce0bcdac1667d950",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/software-observer-offline/app-server-event-schema-verified.json": "215e1fe51382cb4258b5c8626def2ccb2535374491a0dcc7db9872b9650f4168",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/software-observer-offline/non-login-shell-boundary.json": "940fad7b93159d63317ffd4d826f99e26597f6383eddb79bb997c1725af08dd2"
+  }
+}

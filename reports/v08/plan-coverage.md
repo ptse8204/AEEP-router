@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+The [instrumented software rerun](../toolkit-v2/c13/managed-comparison-20261115/SOFTWARE_RERUN.md)
+retains the exact protected test statuses for Canopen and Xsdata.
+It also binds optional LibCST helper use evidence to the host journal.
+Four live turns settled with the same failures in both arms and no
+observed helper calls. Direct invocation outside the observer is
+unresolved. Historical evidence remains intact.
+
 The [delegated follow-up](../toolkit-v2/c13/managed-comparison-20261115/FOLLOWUP_RESULTS.md)
 completed a fresh matched Sales pair with the same inputs and protected
 grader. The software audit links all four 0/1 grades to protected

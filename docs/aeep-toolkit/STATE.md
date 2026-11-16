@@ -1,5 +1,14 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 16. Instrumented Canopen and Xsdata pairs completed.**
+The [rerun report](../../reports/toolkit-v2/c13/managed-comparison-20261115/SOFTWARE_RERUN.md)
+binds all four per-test outcome maps to their protected grader and
+trial receipts. Both Canopen arms passed 6/8, and both Xsdata arms
+passed 28/29. All scored 0/1. Optional LibCST helper execution was
+verified offline. There were zero observed helper calls in the live
+pairs. Direct use outside its observer remains unknown. The four
+new turns and 21 operations settled at $0, and the proxy was stopped.
+
 **November 16. Delegated Sales follow-up and software receipt audit completed.**
 The [follow-up results](../../reports/toolkit-v2/c13/managed-comparison-20261115/FOLLOWUP_RESULTS.md)
 record a new matched 480-second Sales pair with two protected 0/1
