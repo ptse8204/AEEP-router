@@ -173,14 +173,21 @@ input and the offline MathJax and browser closure still need verification.
 [arXiv source](https://arxiv.org/abs/2405.10501v2)
 
 The selection recorder now rejects a route decision with no feasible executor.
-Only an actual baseline choice records abstention. The incomplete matrix
-remains visible, and no live selection result was added. The 37-check acceptance
+Only an actual baseline choice records abstention. A blocked route leaves the
+selection matrix incomplete. No live selection result was added. The 37-check acceptance
 still refers to its recorded source. Updated source requires its own binding
 before a new live study. An offline Router check confirmed that the blocked
 decision is stored with the input redacted and creates no execution receipt.
 For the live study, capture the case and decision digests when the route is
 made. The redacted decision alone cannot prove what input the policy saw.
 The selection report's existing data contract is unchanged.
+
+The committed snapshot passed 42 targeted tests, schema checks and the
+wheel build with a stable source fingerprint. Both full workspace runs passed
+2,165 tests with 21 skips and 81.45% combined coverage. Both branch gates
+passed. Finder changed the workspace fingerprint during verification, so the
+full runs retain their workspace scope.
+[Selection verification](selection-guard-verification.json)
 [Selection guide](../../../../docs/aeep-toolkit/REPOSITORY_EVALUATION.md#evaluate-selection-independently)
 
 Advance source-bound candidates through the existing protected grader

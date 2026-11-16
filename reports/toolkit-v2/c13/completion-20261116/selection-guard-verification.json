@@ -1,0 +1,58 @@
+{
+  "schema_version": "aeep.c13.selection-guard-verification.v1",
+  "tested_commit": "1d91d76f94b3091682a79461cec3e731f70c6ca9",
+  "no_route_smoke": {
+    "route_persisted": true,
+    "stored_input_redacted": true,
+    "selection_blocked": true,
+    "execution_receipts": 0
+  },
+  "exact_committed_archive": {
+    "source_digest": "9710ea4f129d21affc0dcbe85e2d0bc432a41e5ec9ee8899b68df8a834959786",
+    "stable_before_after": true,
+    "tests_passed": 42,
+    "same_package_source_except": [
+      "src/aeep_toolkit/selection.py"
+    ],
+    "selection_file_sha256": "12c1765efe455172c14bf9396444413e7ab0b97aa38fe3db42260b1c7652afb0",
+    "schemas_current": true,
+    "wheel_sha256": "b502bb84b8a7999d128bfe6ca9dd4b175a231c50ba285a0177af79f1136d67c1",
+    "wheel_bytes": 2272507,
+    "wheel_verified_guard_bytes": true,
+    "wheel_installed": false
+  },
+  "workspace_regression": {
+    "passes": 2165,
+    "skips": 21,
+    "warnings": 1,
+    "report_sha256": "32eb986dbd6099e6ddc8f70a956326c8d51f7a0f988f31843320b2ea59f2a161",
+    "source_digest_at_launch": "60f39a96e28f95b19c41a37cee615ef36aedcfe10ce15bf90283412d2038760f",
+    "scope": "Shared workspace includes existing unrelated CI verification edits. Finder updated src/.DS_Store after the initial source hash. The stable exact-source check applies to the isolated archive only."
+  },
+  "workspace_coverage": {
+    "status": "passed_with_worktree_fingerprint_drift",
+    "passes": 2165,
+    "skips": 21,
+    "warnings": 1,
+    "combined_coverage_percent": 81.45022516750265,
+    "critical_branch_gate_passed": true,
+    "assessment_branch_gate_passed": true,
+    "overall_source_drift_check_passed": false,
+    "source_digest_after_run": "cf2e4e2126c1ca70db15ca7329b2063d336ef1ad2371a066aa0fc89fa30b2aac",
+    "log_sha256": {
+      "coverage-tests.log": "255e519a29098ae3fe05bfe99ba65682d1aca78d5ab7e1bd4e367063d40f2317",
+      "coverage.log": "287b0f926572a6fed43965c5578cb2c4f664154a3289c9755e422335279dcacf",
+      "coverage-critical.log": "c54ccbd27dd9ac88dc8aadb5824c437cdd168e412d7fb8e566d4b6d6b488aca6",
+      "coverage-assessment.log": "b55d9ac72182746ae687656c5eed800e3b1ba0f07e90b0393673e122c60024c1",
+      "coverage.json": "f1796c70b3306a4bd2531d5d8ff41cde709775db8ce87eb1e4449ffd6e65c73f"
+    }
+  },
+  "model_turns": 0,
+  "cash_usd": 0,
+  "integration_completion_changed": false,
+  "initial_regression_attempt": {
+    "status": "stopped",
+    "issue": "Child processes lacked the checkout PYTHONPATH. Both failing tests passed with the explicit source path, and the corrected full workspace run passed.",
+    "prior_log_sha256": "49f51a9a513601812ea37e32afa1c783dedfb8e221aa3a73fd2f6b7a94d21152"
+  }
+}
