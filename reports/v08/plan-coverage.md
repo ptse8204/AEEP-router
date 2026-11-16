@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [Toolkit V2 Linux installation check](../toolkit-v2/c13/completion-20261116/linux-private-install-result.json)
+passed for the pinned Linux ARM64 glibc container. It verified the owned
+runtime lifecycle and matched the macOS synthetic reports. The separate
+clean macOS rollback review remains pending. This check adds compatibility
+evidence to C13.
+
 The [current C13 beta handoff](../toolkit-v2/c13/completion-20261116/README.md)
 revalidates 37 in-scope stack checks with Waza excluded. The macOS private wheel
 installed and produced fixture reports. Finder metadata blocked clean rollback

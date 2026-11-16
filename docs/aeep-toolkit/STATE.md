@@ -16,6 +16,18 @@ settled within the original cap. No agent saw the inputs. The paired
 preserves a prior software collection failure and another source-bound
 software candidate ready for runtime review. Zero formal cases are adopted.
 
+The [Linux compatibility check](../../reports/toolkit-v2/c13/completion-20261116/linux-private-install-result.json)
+passed under approved review `c3a6be5b`. The Linux ARM64 glibc container
+installed 33 pinned packages, reapplied idempotently, matched both macOS
+fixture reports and removed the owned runtime. Preserve the two earlier
+bootstrap failures and the first unresolved reservation. The separate
+macOS rollback repeat `e04a7998` is still pending.
+The FuseSoC runtime intake verifies 17 wheels and their notices. Its first
+protected run collected all 15 tests and failed all 15 on the reference.
+The original-source control stayed unstarted. A draft retains the exact
+tests and repair and puts config and cache in per-trial scratch. FuseSoC
+remains unadopted.
+
 The new wheel installed, reapplied idempotently, staged a synthetic candidate
 and rendered both reports. Removal rejected three added Finder files and
 preserved the runtime. A verified restoration preserved the three files

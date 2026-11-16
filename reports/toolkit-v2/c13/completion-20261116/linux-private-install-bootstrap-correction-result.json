@@ -1,0 +1,13 @@
+{
+  "review_sha256": "c0a6ea1d32968bdaa6cf587e0abb42c7558c5828265ede6b78e85d3eb5117fa1",
+  "passed": false,
+  "model_turns": 0,
+  "cash_usd": 0,
+  "failure": "CalledProcessError",
+  "error": "Traceback (most recent call last):\n  File \"/input/guest.py\", line 137, in <module>\n    main()\n    ~~~~^^\n  File \"/input/guest.py\", line 91, in main\n    installation = json.loads(execute([*command, \"install-plan\", \"--preview\", str(plan), \"--policy\",\n                              ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n                                       str(policy_path), \"--wheels\", str(INPUT / \"linux-wheels.json\"),\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n                                       \"--wheelhouse\", str(INPUT / \"wheels\"), \"--destination\", str(runtime)]))\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/input/guest.py\", line 39, in execute\n    raise RuntimeError(f\"{argv[4]} failed ({result.returncode}): {result.stderr[:500]!r}\")\nRuntimeError: install-plan failed (1): b'Traceback (most recent call last):\\n  File \"<frozen runpy>\", line 203, in _run_module_as_main\\n  File \"<frozen runpy>\", line 88, in _run_code\\n  File \"/bootstrap/aeep_toolkit/__main__.py\", line 4, in <module>\\n    raise SystemExit(main())\\n                     ~~~~^^\\n  File \"/bootstrap/aeep_toolkit/cli.py\", line 283, in main\\n    from .file_r",
+  "receipt_id": "rcpt_5cffd89848db4a8286342f1c69362014",
+  "wall_seconds": 1.1901667920174077,
+  "image": "sha256:4474cf22f867c681aa6120ce2f98d809413f89755cf11a445444b1b993754ea1",
+  "operations": 1,
+  "container_absent": true
+}

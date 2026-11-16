@@ -104,11 +104,48 @@ including the bootstrap failure. The task has never been sent to an agent.
 [Protected workbook result](workbook-reference-result.json)
 
 The existing task-pack transport verified a two-file workbook archive with
-only the original task instruction and incomplete input. The Linux ARM64
-preflight matched the 33 macOS package versions, including six
-platform-specific wheel variants. The Linux closure is verified as local
-artifact metadata. A Linux installation and runtime check is still outstanding.
+only the original task instruction and incomplete input. Linux ARM64
+installed the same 33 package versions as macOS using six platform-specific
+wheel variants. On glibc 2.41 and Python 3.13.15, repeat installation
+preserved the journal, and candidate inspection retained the same identity.
+Both reports matched the macOS fixture byte for byte. Removal preserved
+the neighboring file and the staged candidate, and the owned container
+was removed. This result covers the pinned Linux ARM64 container and package
+closure. The clean macOS rollback check is still pending.
 [Transport and compatibility preflight](transport-and-compatibility-preflight.json)
+[Linux install and removal result](linux-private-install-result.json)
+
+The first Linux launch rejected 40 stale dependency-manifest references before
+installation. The corrected graph passed preview for all 33 packages. That
+launch then stopped while importing the installer. The read-only inventory
+found no `packaging` module in any of the carrier's seven layers. The proposed
+approved repeat adds the same pinned `packaging` wheel from the audited
+closure to the bootstrap import path. Review `c3a6be5b` passed in 10.11 seconds.
+All three owned containers were removed. The first launch retains its 270-second
+reservation because the launcher could not construct the measurement receipt.
+The corrected bootstrap settled at 1.19 seconds. Both bootstrap failures
+stopped before package installation. All three operations used zero models
+and zero cash.
+[First bootstrap result](linux-private-install-bootstrap-result.json) ·
+[Corrected bootstrap result](linux-private-install-bootstrap-correction-result.json) ·
+[Carrier inventory](linux-carrier-inventory.json)
+
+The FuseSoC reference has 17 verified runtime wheels and a notice from the
+wheel or pinned source archive for each dependency. The fixture binds 246
+original source files, a separate protected test overlay and the original
+three-file repair. The 15 published test identities stay fixed. MarkupSafe
+and PyYAML use platform wheels, so a protected runtime must supply those
+exact artifacts separately from the portable-wheel probe payload. The case
+remains provisional. The first protected run collected all 15 published tests
+and all 15 failed on the reference, so the original-source control stayed
+unstarted. Each test constructs a default configuration that creates a cache.
+The first runner leaves that cache on the container's default home path.
+The fixture retains only aggregate verdicts, so the immediate exception is
+unknown. Review `992e408d` prepares a retry with cache and config inside a
+fresh per-trial scratch directory and records bounded exception categories.
+The earlier result and charge are preserved.
+[FuseSoC runtime preflight](fusesoc-runtime-intake.json) ·
+[First protected result](fusesoc-protected-reference-result.json)
 
 Advance source-bound candidates through the existing protected grader
 preparation and reference/counterexample checks. Keep development and formal
