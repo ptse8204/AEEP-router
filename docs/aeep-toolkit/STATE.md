@@ -7,6 +7,13 @@ against the operational ledger and frozen source `4e673a6d`. It retains
 the private macOS arm64 / Python 3.13 LIMITED_BETA recommendation. Production
 release and public benefit claims remain NO_GO.
 
+The [A2A protected reference review](../../reports/toolkit-v2/c13/completion-20261116/a2a-runtime-intake.json)
+pins the existing Linux carrier, 24 scoped runtime packages and all seven
+published tests. The prepared driver passed exact boundary checks and
+synthetic settlement, failure and unresolved-cleanup checks. Real execution
+awaits `9a31c7ac` approval under the exact untrusted-suite and container
+authority. No operation has been reserved for it.
+
 The [repository patch batch](../../reports/toolkit-v2/c13/completion-20261116/repository-patch-batch-intake.json)
 staged protected reproduction inputs for 42 cases across 29 repositories.
 Two inert preparations matched on all 168 assets. Runtime review is next.

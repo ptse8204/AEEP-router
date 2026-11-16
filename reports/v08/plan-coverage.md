@@ -1,5 +1,10 @@
 # 0.8 plan coverage and remaining work
 
+The [A2A protected runtime review](../toolkit-v2/c13/completion-20261116/a2a-runtime-intake.json)
+binds the first new repository batch candidate to a retained Linux carrier.
+Its exact two-operation approval is pending. Synthetic driver checks do not
+qualify the upstream tests or register a formal case.
+
 The [C13 repository patch batch](../toolkit-v2/c13/completion-20261116/repository-patch-batch-intake.json)
 staged 42 pinned source and grader inputs, preserving all declared tests.
 A separate [SkillsBench review](../toolkit-v2/c13/completion-20261116/formula-verifier-assessment.json)

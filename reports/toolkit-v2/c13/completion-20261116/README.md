@@ -106,6 +106,16 @@ grading after binding their runtime and dependencies. For example, the
 SQLACodegen dialect cases still require PostgreSQL or MySQL. The earlier
 SQLite check cannot validate those assertions.
 
+The [first offline A2A review](a2a-runtime-intake.json) binds seven published
+mocked transport tests to the retained Linux ARM64 carrier. It stages 24
+wheels and preserves one Python process with the explicit asyncio plugin.
+The original-source control must preserve five passing tests and fail the
+two missing context manager checks. Wrong identities, skips and unrelated
+errors fail validation. Synthetic driver checks exercised success, failure
+and uncertain cleanup. Exact review `9a31c7ac` is ready for approval.
+It permits two offline containers and a total reservation of 100 seconds.
+The protected suite is still unstarted.
+
 The next [workload intake](workload-intake-audit.json) checks both domains.
 On the software side, two original patches and protected test overlays apply
 cleanly. One of the two has a retained collection failure. The other needs
