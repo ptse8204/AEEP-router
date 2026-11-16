@@ -7,6 +7,15 @@ against the operational ledger and frozen source `4e673a6d`. It retains
 the private macOS arm64 / Python 3.13 LIMITED_BETA recommendation. Production
 release and public benefit claims remain NO_GO.
 
+The [new workbook reference](../../reports/toolkit-v2/c13/completion-20261116/workbook-reference-result.json)
+passed 19 original SkillsBench checks. The protected verifier rejected both
+missing and incomplete output. The first interpreter check failed before
+loading that verifier. All four operations, including the launch failure,
+settled within the original cap. No agent saw the inputs. The paired
+[intake audit](../../reports/toolkit-v2/c13/completion-20261116/workload-intake-audit.json)
+preserves a prior software collection failure and another source-bound
+software candidate ready for runtime review. Zero formal cases are adopted.
+
 The new wheel installed, reapplied idempotently, staged a synthetic candidate
 and rendered both reports. Removal rejected three added Finder files and
 preserved the runtime. A verified restoration preserved the three files

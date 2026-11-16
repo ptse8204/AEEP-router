@@ -1,0 +1,78 @@
+{
+  "skillsbench_revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+  "image": "sha256:4474cf22f867c681aa6120ce2f98d809413f89755cf11a445444b1b993754ea1",
+  "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+  "kind": "offline protected verifier check",
+  "test_runs": {
+    "reference": {
+      "passed": true,
+      "observation": {
+        "phase": "reference",
+        "exit_code": 0,
+        "collected": 19,
+        "distinct": 19,
+        "identity_sha256": "03b969aabefbe09340b63b1516cd4ce3f7935dc9a866c77e36daa73fa771ec4c",
+        "passed": 19,
+        "failed": 0,
+        "skipped": 0,
+        "xfail": 0,
+        "errors": 0
+      },
+      "receipt_id": "rcpt_3ebb42e1275647c38be068614ed2ac25"
+    },
+    "missing": {
+      "passed": true,
+      "observation": {
+        "phase": "missing",
+        "exit_code": 1,
+        "collected": 19,
+        "distinct": 19,
+        "identity_sha256": "03b969aabefbe09340b63b1516cd4ce3f7935dc9a866c77e36daa73fa771ec4c",
+        "passed": 0,
+        "failed": 1,
+        "skipped": 18,
+        "xfail": 0,
+        "errors": 0
+      },
+      "receipt_id": "rcpt_1672d42d076c4a5aa95d41b0b3a3c7eb"
+    },
+    "incomplete": {
+      "passed": true,
+      "observation": {
+        "phase": "incomplete",
+        "exit_code": 1,
+        "collected": 19,
+        "distinct": 19,
+        "identity_sha256": "03b969aabefbe09340b63b1516cd4ce3f7935dc9a866c77e36daa73fa771ec4c",
+        "passed": 1,
+        "failed": 18,
+        "skipped": 0,
+        "xfail": 0,
+        "errors": 0
+      },
+      "receipt_id": "rcpt_f5230fc3c5ff40d39e3e5ccbae343654"
+    }
+  },
+  "prior_infrastructure_receipt": {
+    "id": "rcpt_e3a0673417c54efa92e50fc8eb62029a",
+    "error_type": "FileNotFoundError",
+    "receipt_sha256": "11fb2059543ed83886c8e7854392368d5d18e178ced1571f9405a7ee136a2b79",
+    "upstream_code_loaded": false
+  },
+  "operation_review_sha256": "523a11c406ad74cb47517c058b7de5b0502bab4bb46377abce8dbbccdefffd21",
+  "prior_review_sha256": "2200e9989a077a2917d8f46a27a2e6dd28b92327d3aa09d33139397ffee84c91",
+  "cumulative_operations": 4,
+  "cumulative_observed_wall_seconds": 6.121008250047453,
+  "unsettled_operations": 0,
+  "all_owned_containers_absent": true,
+  "verifier_versions": {
+    "openpyxl": "3.1.2",
+    "pytest": "8.4.1"
+  },
+  "runtime_adaptation": "Python heredoc extracted without modifying its statements. Same relative workbook names in /tmp. Pinned pytest 8.4.1 and openpyxl3.1.2; first-party count adapter in place of the CTRF reporter/installer. Original verifier unchanged. Agent and protected asset records remain separate.",
+  "not_run": "Malformed-workbook control was omitted so the corrected launch stays inside the original four-operation limit.",
+  "case_adopted": false,
+  "case_exposed_to_agent": false,
+  "model_turns": 0,
+  "cash_usd": 0
+}

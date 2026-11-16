@@ -58,8 +58,11 @@ fingerprint matched again. Finder recreated the files between the enforced
 pre-removal checks. The second guard stopped before deletion. The journal now
 records `removing`, and the runtime, fixture reports, ownership record and both
 sets of metadata remain. The interrupted operation must not be replayed or the
-journal reset. Any independent clean replay should use a fresh private root
-outside the Finder-observed tree.
+journal reset. The clean rollback rehearsal binds the same wheel and dependency
+closure to a fresh private root outside the Finder-observed tree. Exact review
+`e04a7998` awaits operator approval for one repeat of install and remove. The
+driver checks confirmed approval enforcement, success and refusal to replay a
+terminal attempt. The old journal is a preserved input to that check.
 [Wheel and lifecycle evidence](beta-package-audit.json) ·
 [Installer controls](../../../../docs/aeep-toolkit/INSTALLATION_DESIGN.md#implemented-private-wheel-runtime)
 
@@ -83,6 +86,22 @@ Do not treat repository counts or archive integrity as case independence or
 qualifying evidence. This audit covers the Python repository cohort. The
 document/data workflows have accepted integration evidence and still need
 their own independent usefulness workload.
+
+The next [workload intake](workload-intake-audit.json) checks both domains.
+On the software side, two original patches and protected test overlays apply
+cleanly. One of the two has a retained collection failure. The other needs
+its exact runtime closure and protected execution before adoption. On the
+document/data side, eight additional SkillsBench entries have metadata pinned
+to the same revision as the six integration tasks.
+
+The first new document/data reference, `xlsx-recover-data`, passed all 19
+upstream checks. Missing output produced one failure and 18 skips. The
+unchanged workbook produced one pass and 18 failures. A bootstrap attempt
+failed before loading the upstream code because the selected image used
+`python3` at a different path. The corrected launch used the Python command
+from the established grader on the same image. All four operations settled,
+including the bootstrap failure. The task has never been sent to an agent.
+[Protected workbook result](workbook-reference-result.json)
 
 Advance source-bound candidates through the existing protected grader
 preparation and reference/counterexample checks. Keep development and formal

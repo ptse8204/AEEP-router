@@ -1,0 +1,50 @@
+{
+  "schema_version": "aeep.c13.workload-intake-audit.v1",
+  "adopted_cases": 0,
+  "software": {
+    "static_source_checks": {
+      "python_version_adaptation_requires_review": 58,
+      "requires_nonpython_or_explicit_path_review": 30,
+      "declares_additional_environment_inputs": 22,
+      "eligible_for_inert_patch_check": 2
+    },
+    "leads_with_matching_license_text": 63,
+    "inert_patch_results": {
+      "integrity_checks_passed": 2,
+      "prior_known_collection_failure_count": 1,
+      "prior_collection_observation_sha256": "ba0596ef7d1440423dd83c5d6e8c9d721857e6d55bccac04ed8e0f6bc617c120",
+      "new_reproduction_candidates": 1
+    },
+    "private_scopes_sha256": "409efb3e4f026c083a65779052ae35e0cb114fd29772850015e740b0e98ef7e4",
+    "private_patch_readiness_sha256": "d4d449f41d57ded2a5623ba32c29020fb5913148bd090820b3b7560de71fe8ba"
+  },
+  "document_data": {
+    "skillsbench_revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+    "source_tree_sha256": "dc38d1f82d15d5df8f243bb8c0c2b48157277a27d0c2abeb8eed917487e553f3",
+    "shortlisted_tasks": 8,
+    "source_text_blobs_checked": 16,
+    "source_text_bytes": 20845,
+    "first_preparation": {
+      "task_id": "xlsx-recover-data",
+      "input_asset_sha256": "d15aeb8720d52525d99e7196f8c00dd5daddf90e4262255a98177da0ffb573bf",
+      "workbook_sheets": 4,
+      "missing_cells": 15,
+      "local_data_provenance_sha256": "e78deacfaf963f3ffe35d7ef046584e6c8e420f0895daca6e80d1542d4f6015c",
+      "data_origin": "upstream synthetic educational fixture",
+      "protected_bindings": 6,
+      "verifier_sha256": "8bb25e42832dc540674dd8f1fe5603288f1f72a801e58c424a8aee07c5a64ee9",
+      "expected_declared_pytest_identities": 19,
+      "verifier_dependency_review_sha256": "41139ffd44fc21e5adb20220447572fe88086630fd45b1f15724fea1155dc8e3",
+      "protected_reference_run": false,
+      "provider_disclosure": false,
+      "pending": [
+        "statically bind retained Linux support runtime and verify isolation",
+        "confirm protected reference and failure paths offline before prospective agent exposure"
+      ]
+    }
+  },
+  "new_model_turns": 0,
+  "new_docker_mutations": 0,
+  "cash_usd": 0,
+  "external_code_executed": false
+}
