@@ -82,6 +82,12 @@ verified four public archives and staged three distinct multi-file cases.
 The local handoff reused pinned issue metadata without repeating acquisition.
 The optimistic software pool still needs at least 52 more rows.
 
+The [A2A receipt bridge audit](../toolkit-v2/c13/completion-20261116/a2a-receipt-bridge-audit.json)
+matched four canonical receipts, rebuilt both pairs of protected fixtures
+and verified their scoring through the ordinary callback. Three wheel
+bindings and pytest scope still need ordinary runtime verification. No
+protected tests were rerun and no formal stage was assigned.
+
 The [Toolkit V2 Linux installation check](../toolkit-v2/c13/completion-20261116/linux-private-install-result.json)
 passed for the pinned Linux ARM64 glibc container. It verified the owned
 runtime lifecycle and matched the macOS synthetic reports. The separate

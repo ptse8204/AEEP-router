@@ -218,6 +218,18 @@ match across the two pinned fixtures. Keep issue 472 out of the formal
 pool at this pin. The two successful pairs were preserved without replay.
 [Settled protected results](protected-reference-group-result.json)
 
+The [A2A receipt bridge audit](a2a-receipt-bridge-audit.json) matched four
+retained receipts to settled ledger entries. The ordinary grading callback
+rebuilt the same protected archives. It scored both published repairs 1/1 and
+both original snapshots 0/1 from the recorded test outcomes. Missing
+assertions, a mismatched archive and an incorrect patch base were rejected.
+This read-only check ran no upstream tests. A common contained runtime still
+needs the existing compiled dependencies, the larger Pygments wheel and a
+verified selector scope. Issue 682 also needs the reviewed pytest override.
+No case entered a formal stage.
+The audit reproduced byte for byte. All 156 targeted repository tests,
+schema drift verification and the 72-file offline documentation check passed.
+
 The next [workload intake](workload-intake-audit.json) checks both domains.
 On the software side, two original patches and protected test overlays apply
 cleanly. One of the two has a retained collection failure. The other needs

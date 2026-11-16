@@ -1,0 +1,114 @@
+{
+  "schema_version": "aeep.c13.a2a-receipt-bridge-audit.v1",
+  "historical_review_sha256": "e7f6f7352040634da81faf74ed064f14ff7dea0792bbced0da5350cfb19db631",
+  "historical_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+  "historical_operation_ledger_sha256": "b5d96fe935323348402c63e7baf918fa3a908c1e3049cdb03667a07fb9e50fe5",
+  "cases": {
+    "a2aproject__a2a-python-576": {
+      "source_revision": "3bfbea9ec8d7982fa73eb12d8352a581307355dc",
+      "protected_test_archive_sha256": "9abab868972815ddaac7e56f4f5f9ab51db6b5a4b58c9892d704c7a8d7c5652e",
+      "required_assertions": 39,
+      "published_addopts": "-ra --strict-markers",
+      "required_selector_scope": "exact nodes used in protected run; ordinary observer selects modules",
+      "read_only_grade_projection": {
+        "reference": {
+          "source_receipt_id": "rcpt_8348b78a0cc64f20b322262795aab603",
+          "score": 1.0,
+          "detail": ""
+        },
+        "original": {
+          "source_receipt_id": "rcpt_9afb1e12e5af4b4190a7689bcab5d118",
+          "score": 0.0,
+          "detail": "test_failure"
+        },
+        "missing_assertion_control": {
+          "source_receipt_id": "rcpt_8348b78a0cc64f20b322262795aab603",
+          "score": 0.0,
+          "detail": "missing_test"
+        },
+        "mismatched_archive_control": {
+          "source_receipt_id": "rcpt_8348b78a0cc64f20b322262795aab603",
+          "score": null,
+          "detail": "protocol_error"
+        },
+        "wrong_patch_base_control": {
+          "source_receipt_id": null,
+          "score": 0.0,
+          "detail": "input_binding"
+        }
+      }
+    },
+    "a2aproject__a2a-python-682_interface": {
+      "source_revision": "c91d4fba517190d8f7c76b42ea26914a4275f1d5",
+      "protected_test_archive_sha256": "0f493d3edc449092492f7170095fd3bdc3e9daf40edf79782bf2a1cb29849f69",
+      "required_assertions": 7,
+      "published_addopts": "-ra --strict-markers --dist loadgroup",
+      "required_selector_scope": "exact nodes used in protected run; ordinary observer selects modules",
+      "read_only_grade_projection": {
+        "reference": {
+          "source_receipt_id": "rcpt_e0fe61e662634de3a9d16ff070c9c27e",
+          "score": 1.0,
+          "detail": ""
+        },
+        "original": {
+          "source_receipt_id": "rcpt_94d1327f7f564264b49224f975a90cb2",
+          "score": 0.0,
+          "detail": "test_failure"
+        },
+        "missing_assertion_control": {
+          "source_receipt_id": "rcpt_e0fe61e662634de3a9d16ff070c9c27e",
+          "score": 0.0,
+          "detail": "missing_test"
+        },
+        "mismatched_archive_control": {
+          "source_receipt_id": "rcpt_e0fe61e662634de3a9d16ff070c9c27e",
+          "score": null,
+          "detail": "protocol_error"
+        },
+        "wrong_patch_base_control": {
+          "source_receipt_id": null,
+          "score": 0.0,
+          "detail": "input_binding"
+        }
+      }
+    }
+  },
+  "ordinary_tests_executed": 0,
+  "prior_receipts_verified": 4,
+  "transport_wheels_in_read_only_payload": 22,
+  "model_turns": 0,
+  "formal_cases_adopted": 0,
+  "ordinary_runtime_blockers": {
+    "wheels_outside_v6_transport": [
+      {
+        "filename": "protobuf-5.29.6-cp38-abi3-manylinux2014_aarch64.whl",
+        "sha256": "a8866b2cff111f0f863c1b3b9e7572dc7eaea23a7fae27f6fc613304046483e6",
+        "bytes": 320284,
+        "reasons": [
+          "native_wheel"
+        ]
+      },
+      {
+        "filename": "pydantic_core-2.41.1-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+        "sha256": "170406a37a5bc82c22c3274616bf6f17cc7df9c4a0a0a50449e559cb755db669",
+        "bytes": 1961472,
+        "reasons": [
+          "native_wheel",
+          "wheel_exceeds_asset_limit"
+        ]
+      },
+      {
+        "filename": "pygments-2.19.1-py3-none-any.whl",
+        "sha256": "9ea1544ad55cecf4b8242fab6dd35a93bbce657034b0611ee383099054ab6d8c",
+        "bytes": 1225293,
+        "reasons": [
+          "wheel_exceeds_asset_limit"
+        ]
+      }
+    ],
+    "unadapted_addopts": {
+      "a2aproject__a2a-python-682_interface": "--dist loadgroup"
+    },
+    "selector_equivalence": "Protected runs use required node IDs. Module-wide collection and exit status remain unverified."
+  }
+}

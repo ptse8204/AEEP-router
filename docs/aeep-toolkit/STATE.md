@@ -26,6 +26,14 @@ The original passed 78 and failed three. Its cancellation-queue assertion
 passed on both fixtures, whose selected test and handler functions match.
 Issue 472 remains excluded at this pin. The two prior pairs were reused.
 
+The [A2A receipt bridge audit](../../reports/toolkit-v2/c13/completion-20261116/a2a-receipt-bridge-audit.json)
+verified the four settled A2A receipts and exact protected archive hashes.
+The ordinary grading callback accepted both published repairs and rejected
+both originals using retained outcomes. Six altered inputs or observations
+were rejected. The ordinary v6 runtime still needs reviewed support for
+three blocked wheels, selector equivalence and the issue 682 pytest option.
+No upstream run, model turn or formal assignment was made.
+
 The [repository patch batch](../../reports/toolkit-v2/c13/completion-20261116/repository-patch-batch-intake.json)
 staged protected reproduction inputs for 42 cases across 29 repositories.
 Two inert preparations matched on all 168 assets. Runtime review is next.
