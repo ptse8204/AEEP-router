@@ -1,5 +1,14 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 16. Delegated Sol development comparison reached all eight slots.**
+The [continuation result](../../reports/toolkit-v2/c13/managed-comparison-20261115/CONTINUATION_RESULT.md)
+records three verified pairs and seven protected grades. The repaired
+Sales control delivered its workbook and scored 0/1. Sales treatment
+timed out without a grade. One replacement for the original failed
+control was included under the operator's repair delegation. All
+46 operations and nine charged turns settled at $0 cash. The proxy
+was stopped and both historical reservations were preserved.
+
 **November 16. Managed Sol development dispatch stopped after one turn.**
 The [reconciled outcome](../../reports/toolkit-v2/c13/managed-comparison-20261115/RESULT.md)
 for approved review `bd939ed7` verifies all eight fresh worker and

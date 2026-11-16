@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+The [delegated Sol continuation](../toolkit-v2/c13/managed-comparison-20261115/CONTINUATION_RESULT.md)
+completed the six untouched slots after the repaired Sales control
+graded and the Sales treatment timed out. Three matched development
+pairs have verified grades and tokens. The original failed turn
+remains charged. All 46 operations and nine model turns settled at
+$0 cash. No selection conclusion follows from these pairs.
+
 The [Sol dispatch outcome](../toolkit-v2/c13/managed-comparison-20261115/RESULT.md)
 records all eight successful boundary checks and one settled model
 turn. Artifact retrieval stopped the Sales Pivot control before
