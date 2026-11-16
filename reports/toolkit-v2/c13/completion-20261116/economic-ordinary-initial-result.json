@@ -1,0 +1,37 @@
+{
+  "review_sha256": "724f0a456ce6b44ff916bfa53ba51b0827f425f8c71131c71cca5490044c21bb",
+  "verified": false,
+  "observations": [
+    {
+      "operation": "aeep-c13-economic-ordinary-20261116:reference",
+      "receipt_id": "rcpt_90b63b1a23004048b8db33c33a9471bc",
+      "review_sha256": "724f0a456ce6b44ff916bfa53ba51b0827f425f8c71131c71cca5490044c21bb",
+      "contract_matched": true,
+      "container_absent": true,
+      "expected_sha256": "a9da0ca70d033b49eca9cb742f530946f628c83ee2701f521ba23ae579b9fc9a",
+      "matched_grader_code": null
+    },
+    {
+      "operation": "aeep-c13-economic-ordinary-20261116:grade-00",
+      "receipt_id": "rcpt_2c883210967c40a38e253aae3c3784ee",
+      "review_sha256": "724f0a456ce6b44ff916bfa53ba51b0827f425f8c71131c71cca5490044c21bb",
+      "contract_matched": false,
+      "container_absent": true,
+      "expected_sha256": "7dc0592a6b51911f6d7b7039bd8258fc1a095d362db4e78dee6428d673a657e4",
+      "matched_grader_code": null
+    }
+  ],
+  "models": 0,
+  "cash_usd": 0,
+  "prior_reference_reused": true,
+  "settled_operations": 2,
+  "settled_elapsed_seconds": 2.185139541979879,
+  "ledger_sha256": "38504a28aa5f65cf49c4400d91fe39f9efc152e2ab4faa262eeba452d1d9e179",
+  "root_grant_digest": "e8854710f9449d1ec45b7370179bd77bda1064bc12371f8587307dc464d8638d",
+  "terminal_observation_sha256": "2794418525cf2c7417255134a8908609e759a90fc2a20048d83972edcb3c4072",
+  "diagnosis": "The first-party observer prefix assigns ROOT from __file__. Isolated Python -c reproduces NameError before the grader can load its upstream tests.",
+  "diagnosis_scope": "Reproduced only first-party startup, with verifier dispatch removed. The runtime receipt records the failed command contract without grading.",
+  "unstarted_controls": 8,
+  "reference_replay_required": false,
+  "formal_cases_adopted": 0
+}
