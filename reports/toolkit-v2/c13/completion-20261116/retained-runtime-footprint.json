@@ -1,0 +1,241 @@
+{
+  "schema_version": "aeep.c13.retained-runtime-footprint.v1",
+  "observed_stack_completion_ref": "a5b11409ad5e307b7e7e88cff98221a70fa41b1aeb693f8fda410816f6031ad0",
+  "source_revision_records": 18,
+  "accepted_checks": 37,
+  "host_free_bytes": 104839786496,
+  "native_runtime_files": {
+    "essentials-interrupted-residue": {
+      "state": "measured",
+      "regular_file_logical_bytes": 15873663,
+      "regular_file_inodes": 53,
+      "symlinks_not_followed": 0
+    },
+    "toolhive-binary": {
+      "state": "measured",
+      "regular_file_logical_bytes": 128306930,
+      "regular_file_inodes": 1,
+      "symlinks_not_followed": 0
+    },
+    "agent-framework": {
+      "state": "measured",
+      "regular_file_logical_bytes": 117615831,
+      "regular_file_inodes": 6168,
+      "symlinks_not_followed": 0
+    },
+    "langgraph-and-agent-skill-eval": {
+      "state": "measured",
+      "regular_file_logical_bytes": 117561697,
+      "regular_file_inodes": 6165,
+      "symlinks_not_followed": 0
+    },
+    "langfuse-coordinator": {
+      "state": "measured",
+      "regular_file_logical_bytes": 77638454,
+      "regular_file_inodes": 2872,
+      "symlinks_not_followed": 0
+    }
+  },
+  "reviewed_essentials_archive_bytes": 15479784,
+  "historical_essentials_installed_allocated_bytes": 84602880,
+  "langfuse_retained_container_states": {
+    "clickhouse": "exited",
+    "minio": "exited",
+    "minio-bucket": "exited",
+    "minio-owner": "exited",
+    "postgres": "exited",
+    "redis": "exited",
+    "web": "exited",
+    "worker": "exited"
+  },
+  "identified_image_count": 17,
+  "measured_image_count": 17,
+  "images": {
+    "sha256:0d643ec0036ceb52ae65e5d8465e155ad6069d771f33a79a9e71dc4334e029e6": {
+      "components": [
+        "langfuse"
+      ],
+      "state": "measured",
+      "engine_image_size_bytes": 1047850995,
+      "machine": "arm64",
+      "layer_count": 11
+    },
+    "sha256:18f884c4b8231988aeedc1edb230167013e3286fddfc8d81471a002fa51dbc60": {
+      "components": [
+        "langfuse"
+      ],
+      "state": "measured",
+      "engine_image_size_bytes": 1862157628,
+      "machine": "arm64",
+      "layer_count": 6
+    },
+    "sha256:1cf3c4405db2f9b4721a35e10534f72a6b428fda49b3ee1114ef27d4f8a17eb4": {
+      "components": [
+        "skill-scanner"
+      ],
+      "state": "measured",
+      "engine_image_size_bytes": 1664186325,
+      "machine": "arm64",
+      "layer_count": 33
+    },
+    "sha256:2c34f2ff6a5ead1204892972474aac2b09356913f3a88a1fd1723910082e9c06": {
+      "components": [
+        "evoagentx"
+      ],
+      "state": "measured",
+      "engine_image_size_bytes": 1121599692,
+      "machine": "arm64",
+      "layer_count": 18
+    },
+    "sha256:30da3fc4e5ebda606bca1598a477fb6da68ed004248e9218f6655f2d9ff7d988": {
+      "components": [
+        "langfuse"
+      ],
+      "state": "measured",
+      "engine_image_size_bytes": 1496136492,
+      "machine": "arm64",
+      "layer_count": 17
+    },
+    "sha256:35dc1bcb7e8162c2a0cef6cbd30bc4bf276c082b11b6e5fc259b6800e8c5ca04": {
+      "components": [
+        "skillrank-catalog"
+      ],
+      "state": "measured",
+      "engine_image_size_bytes": 872356696,
+      "machine": "arm64",
+      "layer_count": 26
+    },
+    "sha256:3c0b4f876d9148e5a037033a3dbf60c5075a4cce8a251447d729546bacfda1ff": {
+      "components": [
+        "toolhive"
+      ],
+      "state": "measured",
+      "engine_image_size_bytes": 872372288,
+      "machine": "arm64",
+      "layer_count": 27
+    },
+    "sha256:4e3cb7fa008c768c5d5c56d823a291a37add169eecb81c2f89ede3fd86723d8d": {
+      "components": [
+        "aflow"
+      ],
+      "state": "measured",
+      "engine_image_size_bytes": 683103044,
+      "machine": "arm64",
+      "layer_count": 12
+    },
+    "sha256:5b65a93d4629c2c71aa8fd5ae5ad7bcfb2807105b5b4cc7fc96a24c4d603d278": {
+      "components": [
+        "skillsbench-reviewed-grader"
+      ],
+      "state": "measured",
+      "engine_image_size_bytes": 1000453473,
+      "machine": "amd64",
+      "layer_count": 7
+    },
+    "sha256:5bf590eb0bf8a06187ff092f0f75cf83b540cc27bd6a75fd8bd91305ca7b13de": {
+      "components": [
+        "aflow",
+        "evoagentx"
+      ],
+      "state": "measured",
+      "engine_image_size_bytes": 339140721,
+      "machine": "arm64",
+      "layer_count": 6
+    },
+    "sha256:70906c24c6bcde0712573cce29bb3d30331fec36aaefd503bc570c18ba431c26": {
+      "components": [
+        "langfuse"
+      ],
+      "state": "measured",
+      "engine_image_size_bytes": 189932000,
+      "machine": "arm64",
+      "layer_count": 7
+    },
+    "sha256:a0307352c8eb83a650d9644ae24066330d12073344e8854174d695ee5aa30fac": {
+      "components": [
+        "aflow",
+        "evoagentx"
+      ],
+      "state": "measured",
+      "engine_image_size_bytes": 1890654105,
+      "machine": "arm64",
+      "layer_count": 30
+    },
+    "sha256:ac359420747e1f5f8ac4d23f40d7ce022c0a39090ed6cdd8dde5f596affbe41d": {
+      "components": [
+        "langfuse",
+        "mcp-universe",
+        "mcpmark"
+      ],
+      "state": "measured",
+      "engine_image_size_bytes": 661399271,
+      "machine": "arm64",
+      "layer_count": 14
+    },
+    "sha256:bc41b14e7651fcb4c0a19708babd0978e0b77197d0bc11324c0b97b4732acd18": {
+      "components": [
+        "aflow",
+        "evoagentx"
+      ],
+      "state": "measured",
+      "engine_image_size_bytes": 1890535917,
+      "machine": "arm64",
+      "layer_count": 25
+    },
+    "sha256:c04abcb08d7901e28f6f3ee11b6d799f42ae94b64b160175e9905274121294d2": {
+      "components": [
+        "mcp-universe",
+        "mcpmark"
+      ],
+      "state": "measured",
+      "engine_image_size_bytes": 414207332,
+      "machine": "amd64",
+      "layer_count": 8
+    },
+    "sha256:e5629dccdad649d150791dd7bd291ba8b0d244761e970c4bd2abcc8646114d9b": {
+      "components": [
+        "skillsbench-reviewed-grader"
+      ],
+      "state": "measured",
+      "engine_image_size_bytes": 2130695971,
+      "machine": "amd64",
+      "layer_count": 11
+    },
+    "sha256:f4c90d3148e56e4b720a5663a9e45428bac3e38c39681bbc0d8692ed1086ff09": {
+      "components": [
+        "langfuse"
+      ],
+      "state": "measured",
+      "engine_image_size_bytes": 220733863,
+      "machine": "arm64",
+      "layer_count": 11
+    }
+  },
+  "image_total_gross_engine_size_bytes": 18357515813,
+  "image_largest_engine_size_bytes": 2130695971,
+  "langfuse_project_volume_count": 5,
+  "langfuse_project_volume_measurements_as_printed": {
+    "aeep-langfuse-loopback-20261105-clickhouse-data": "8.647MB",
+    "aeep-langfuse-loopback-20261105-clickhouse-logs": "2.449MB",
+    "aeep-langfuse-loopback-20261105-minio-data": "18.75kB",
+    "aeep-langfuse-loopback-20261105-postgres-data": "72.15MB",
+    "aeep-langfuse-loopback-20261105-redis-data": "28.89kB"
+  },
+  "langfuse_volume_sizes_unavailable_count": 0,
+  "model_calls": 0,
+  "resources_started_or_removed": 0,
+  "limits": [
+    "Reported image sizes include their parent layers. Distinct IDs can share data. This is a gross image measure.",
+    "Native file lengths exclude system Python and symbolic-link targets. File lengths do not measure APFS allocation.",
+    "The optional scope covers image identities recoverable from selected accepted records, plus explicitly bound native runtimes.",
+    "Managed worker, cache, evidence-retention, and temporary-file allocation across the complete stack remain unmeasured.",
+    "No estimate of reclaimable host bytes, recurring maintenance labor, or production capacity."
+  ],
+  "recorded_at": "2026-11-16T22:13:42.513135+00:00",
+  "authoritative_size_scope_source": "https://docs.docker.com/reference/cli/docker/system/df/",
+  "handoff_verification": {
+    "repository_suite_regressions_passed": 100,
+    "schema_drift": "passed",
+    "offline_docs_and_report_links": "passed"
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "review_sha256": "e7f6f7352040634da81faf74ed064f14ff7dea0792bbced0da5350cfb19db631",
+  "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+  "reproduced": [
+    "a2aproject__a2a-python-576",
+    "a2aproject__a2a-python-682_interface"
+  ],
+  "roles": {
+    "a2aproject__a2a-python-472": {
+      "reference": {
+        "receipt_id": "rcpt_cec69e12e1ed47929b3a72a419ebb733",
+        "receipt_sha256": "e0f6419ca8443a6430e9110bf6f2f5fd9dcdb1ac748749e938d3db55f86ba292",
+        "verified": false,
+        "upstream_exit_code": 4,
+        "collected": 0,
+        "observed_result_counts": {},
+        "container_absent": true
+      }
+    },
+    "a2aproject__a2a-python-576": {
+      "reference": {
+        "receipt_id": "rcpt_8348b78a0cc64f20b322262795aab603",
+        "receipt_sha256": "c2b132ccb8e17c36c993369f7e2097870f67ed18d82d662d87d5b57ee5d97e23",
+        "verified": true,
+        "upstream_exit_code": 0,
+        "collected": 39,
+        "observed_result_counts": {
+          "PASSED": 39
+        },
+        "container_absent": true
+      },
+      "original": {
+        "receipt_id": "rcpt_9afb1e12e5af4b4190a7689bcab5d118",
+        "receipt_sha256": "6d00986ee5751c43a7adf4c3446037e287bd8ff6ac15c4129ed2bebc4ca7d2e6",
+        "verified": true,
+        "upstream_exit_code": 1,
+        "collected": 39,
+        "observed_result_counts": {
+          "FAILED": 2,
+          "PASSED": 37
+        },
+        "container_absent": true
+      }
+    },
+    "a2aproject__a2a-python-682_interface": {
+      "reference": {
+        "receipt_id": "rcpt_e0fe61e662634de3a9d16ff070c9c27e",
+        "receipt_sha256": "fc2f7d7dbd0c7fc5bb90ee02dc7357e075499604f34c5316bb1e4d4ee3e0d873",
+        "verified": true,
+        "upstream_exit_code": 0,
+        "collected": 7,
+        "observed_result_counts": {
+          "PASSED": 7
+        },
+        "container_absent": true
+      },
+      "original": {
+        "receipt_id": "rcpt_94d1327f7f564264b49224f975a90cb2",
+        "receipt_sha256": "0414707dd269d94bab66c2ee0ff5be08c05e21e4e15d55462523a36af6d20027",
+        "verified": true,
+        "upstream_exit_code": 1,
+        "collected": 7,
+        "observed_result_counts": {
+          "FAILED": 2,
+          "PASSED": 5
+        },
+        "container_absent": true
+      }
+    }
+  },
+  "upstream_checks_ran": true,
+  "settled_operations": 5,
+  "settled_seconds": 12.94257316691801,
+  "reviewed_maximum_operations": 6,
+  "operation_ledger_sha256": "b5d96fe935323348402c63e7baf918fa3a908c1e3049cdb03667a07fb9e50fe5",
+  "a2a_472_prior_scope": "Reference collected zero and returned pytest exit 4. Original-source run was never launched.",
+  "a2a_472_static_diagnosis": {
+    "roles": {
+      "reference": {
+        "fixture_sha256": "b90c08869e10d4efe18610dd83c27dc107d8743ddb0e98f622417a92f4432d40",
+        "test_function_sha256": "1a46ced34f30e72c04ca81e762d8b370eb17003c3f40fa4470e61beeaf2056aa",
+        "test_module_sha256": "344e4bcdad59e6a6f279486e6feab183ec719dbbe8b02d250fa76de13fbeca3b",
+        "line": 172,
+        "published_identity": "tests/server/request_handlers/test_default_request_handler.py::test_on_cancel_task_queue_tap_returns_noneTask",
+        "actual_source_identity": "tests/server/request_handlers/test_default_request_handler.py::test_on_cancel_task_queue_tap_returns_none",
+        "expected_status": "PASSED",
+        "unchanged_test_identity_count": 81
+      },
+      "original": {
+        "fixture_sha256": "fa43bf56bba928b2cd6ddbc7a996f2fe7ecfff4e7b22caa8d33b1f11cb67dac7",
+        "test_function_sha256": "1a46ced34f30e72c04ca81e762d8b370eb17003c3f40fa4470e61beeaf2056aa",
+        "test_module_sha256": "344e4bcdad59e6a6f279486e6feab183ec719dbbe8b02d250fa76de13fbeca3b",
+        "line": 172,
+        "published_identity": "tests/server/request_handlers/test_default_request_handler.py::test_on_cancel_task_queue_tap_returns_noneTask",
+        "actual_source_identity": "tests/server/request_handlers/test_default_request_handler.py::test_on_cancel_task_queue_tap_returns_none",
+        "expected_status": "FAILED",
+        "unchanged_test_identity_count": 81
+      }
+    },
+    "assertion_changed": false,
+    "old_stderr_retained": false,
+    "repeat_authorized": false,
+    "note": "A published selector does not exist. The matching source function is unique and unchanged across both roles. This is sufficient to explain exit 4; other runtime issues remain unverified."
+  },
+  "new_models": 0,
+  "cash_usd": 0,
+  "formal_cases_adopted": 0,
+  "handoff_verification": {
+    "repository_suite_regressions_passed": 100,
+    "schema_drift": "passed",
+    "offline_docs_and_report_links": "passed"
+  }
+}

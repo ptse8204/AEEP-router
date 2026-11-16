@@ -21,7 +21,7 @@ C13 remains open. No release or automatic admission was performed.
 | OpenTelemetry and Langfuse | Receipt-bound minimized export, private readback and disabled-export controls | No automatic remote export, prompt retention or cost measurement |
 | LangGraph, Agent Framework, EvoAgentX and AFlow | Bounded composition/interruption, a validated upstream proposal, and a finite protected calibration cycle | No arbitrary execution of generated work or claim of optimizer benefit |
 | Optional Router and GitHub Sponsors | Approved routing configuration, Essentials independence, source-bound attribution and support link | No admission, payment or public release authority |
-| Current Essentials wheel | Installed and reapplied idempotently, source verified, sample candidate staged and both reports generated with network denied | Removal detected Finder metadata and preserved the runtime. A clean current-wheel rollback remains open |
+| Current Essentials wheel | Installed and reapplied idempotently, source verified, sample candidate staged and both reports generated with network denied | Clean rollback passed in a fresh private root. The older Finder-interrupted residue and journal remain preserved |
 | Supported hosts and operator use | macOS arm64 / Python 3.13 checks; earlier actual helped report comprehension | Wider host matrix and unassisted operation remain unverified |
 | Waza | Historical evidence retained | Excluded from this delivery |
 
@@ -53,18 +53,38 @@ are synthetic fixtures. No agent, grader, service, download or model ran.
 After idempotent apply and reporting, `remove` detected three added Finder
 files and preserved the runtime. The full tree matched the applied fingerprint
 when those files were excluded from the **read-only diagnosis**. The three files
-were moved byte-for-byte into a private evidence directory and the real
-fingerprint matched again. Finder recreated the files between the enforced
-pre-removal checks. The second guard stopped before deletion. The journal now
-records `removing`, and the runtime, fixture reports, ownership record and both
-sets of metadata remain. The interrupted operation must not be replayed or the
-journal reset. The clean rollback rehearsal binds the same wheel and dependency
-closure to a fresh private root outside the Finder-observed tree. Exact review
-`e04a7998` awaits operator approval for one repeat of install and remove. The
-driver checks confirmed approval enforcement, success and refusal to replay a
-terminal attempt. The old journal is a preserved input to that check.
+were moved byte-for-byte into a private evidence directory and the tree
+fingerprint matched again. The second removal attempt left a `removing`
+journal. The current residue has no installed package directory. The generic
+CLI error does not identify where removal stopped. The fixture reports, journal
+and preserved metadata remain available for recovery review. The clean rollback rehearsal binds the same wheel and dependency
+closure to a fresh private root outside the Finder-observed tree. Approved
+review `e04a7998` installed and removed the wheel with network denied. It
+verified the new removal journal and preserved both the neighboring file and
+the earlier interrupted residue and journal.
+[Clean rollback result](macos-private-rollback-result.json) ·
 [Wheel and lifecycle evidence](beta-package-audit.json) ·
 [Installer controls](../../../../docs/aeep-toolkit/INSTALLATION_DESIGN.md#implemented-private-wheel-runtime)
+
+## Retained runtime footprint
+
+The [read-only inventory](retained-runtime-footprint.json) measured 17 image
+IDs across selected accepted component proofs. Docker reports 18.36 GB
+gross for those images. This sum includes shared layers. The retained
+Langfuse namespace has five measured volumes and eight stopped containers.
+The inventory also records four optional native runtime paths. Essentials
+used 15.48 MB of wheel archives and 84.60 MB of allocated storage before
+the first removal attempt. The current interrupted directory is residue
+and is measured separately. Its installed package directory is absent.
+[Docker disk usage definitions](https://docs.docker.com/reference/cli/docker/system/df/)
+
+Setup and upkeep span the owned Python environments, pinned Docker images,
+protected task assets, and optional Langfuse data. The inventory binds 18
+component records and 37 accepted checks to their original evidence.
+A changed source, runtime or permission must retain applicable verification.
+Managed worker allocations, shared-layer usage, retained evidence and caches
+are outside the measured totals. Maintainer time and production resource
+capacity remain unmeasured.
 
 ## Formal candidate and selection gates
 
@@ -149,10 +169,14 @@ read-only source and protected test fixture. Six driver checks exercised
 approval and drift refusal, successful settlement, a settled failure and
 uncertain cleanup with synthetic executor replies.
 
-Use review `e7f6f735` in place of the standalone `9a31c7ac` review. The
-grouped review allows up to six offline calls and 360 reserved seconds,
-with zero models or cash. The tests remain unstarted. The three snapshots
-share one repository family and have no formal stage assignment.
+Approved review `e7f6f735` ran in place of the standalone `9a31c7ac`.
+Issues 576 and 682 reproduced both reference and original-source results.
+Issue 472 stopped at collection before its original-source control. The
+published selector adds `Task` to the only matching function name. The
+same test body is present in both fixtures. The batch settled five calls
+in 12.94 seconds with zero models and $0. The three snapshots share one
+repository family, and none has a formal stage assignment.
+[Protected receipts and diagnosis](approved-a2a-batch-results.json)
 
 The next [workload intake](workload-intake-audit.json) checks both domains.
 On the software side, two original patches and protected test overlays apply
@@ -206,7 +230,8 @@ preserved the journal, and candidate inspection retained the same identity.
 Both reports matched the macOS fixture byte for byte. Removal preserved
 the neighboring file and the staged candidate, and the owned container
 was removed. This result covers the pinned Linux ARM64 container and package
-closure. The clean macOS rollback check is still pending.
+closure. The separate [clean macOS rollback](macos-private-rollback-result.json)
+passed on the reviewed native runtime.
 [Transport and compatibility preflight](transport-and-compatibility-preflight.json)
 [Linux install and removal result](linux-private-install-result.json)
 
@@ -273,10 +298,11 @@ unavailable renderer. The infrastructure control must return no task grade.
 MathJax 3.2.2 and nine supporting wheels are retained. The old browser is
 revision 1148. The pinned Playwright 1.57.0 verifier requires revision 1200.
 Its matching Chromium archive was inspected with a 65,557-byte metadata
-range. The wheel and browser together require 160,981,322 bytes. Acquisition
-review `bedcde5c` covers those two downloads and archive verification. A
-later execution review will bind the resulting browser SHA-256. No browser
-or upstream test ran during preparation.
+range. Approved review `bedcde5c` received and verified the two artifacts
+at 160,981,322 bytes total. The browser archive has a recorded SHA-256.
+A separate protected execution review will bind the retained runtime,
+browser and four original verifier roles.
+[Acquisition result](formula-runtime-acquisition-result.json)
 [Playwright browser pin](https://raw.githubusercontent.com/microsoft/playwright/v1.57.0/packages/playwright-core/browsers.json)
 [Chrome publisher metadata](https://googlechromelabs.github.io/chrome-for-testing/143.0.7499.4.json)
 

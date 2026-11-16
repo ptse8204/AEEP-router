@@ -7,18 +7,17 @@ against the operational ledger and frozen source `4e673a6d`. It retains
 the private macOS arm64 / Python 3.13 LIMITED_BETA recommendation. Production
 release and public benefit claims remain NO_GO.
 
-The [Formula Extraction offline preparation](../../reports/toolkit-v2/c13/completion-20261116/formula-offline-preparation.json)
-staged the protected reference and three controls with all seven original
-test bodies intact. MathJax and nine wheels are verified locally. Exact
-review `bedcde5c` awaits approval for the two remaining public downloads.
-The full verifier remains unstarted.
+The [Formula Extraction acquisition](../../reports/toolkit-v2/c13/completion-20261116/formula-runtime-acquisition-result.json)
+passed approved review `bedcde5c`. Both exact artifacts verified at
+160,981,322 bytes total. The seven original assertions and four protected
+roles remain staged. The browser and verifier have never run.
 
-The [grouped A2A review](../../reports/toolkit-v2/c13/completion-20261116/a2a-batch-intake.json)
-binds 127 published test identities across three source revisions. It uses
-25 pinned wheels and separate read-only mounts for six protected calls.
-Synthetic driver and accounting checks passed. Exact review `e7f6f735`
-awaits approval in place of the earlier single-case review `9a31c7ac`.
-No upstream tests ran and no case was assigned to a formal stage.
+The [approved A2A batch](../../reports/toolkit-v2/c13/completion-20261116/approved-a2a-batch-results.json)
+reproduced the reference and original-source results for issues 576 and
+682. Issue 472 returned pytest exit 4 and collected zero tests. Its
+published selector appends `Task` to the only matching function, which
+is identical in both fixtures. The original-source call stayed unstarted.
+All five dispatched operations settled and no formal stage was assigned.
 
 The [repository patch batch](../../reports/toolkit-v2/c13/completion-20261116/repository-patch-batch-intake.json)
 staged protected reproduction inputs for 42 cases across 29 repositories.
@@ -95,7 +94,9 @@ passed under approved review `c3a6be5b`. The Linux ARM64 glibc container
 installed 33 pinned packages, reapplied idempotently, matched both macOS
 fixture reports and removed the owned runtime. Preserve the two earlier
 bootstrap failures and the first unresolved reservation. The separate
-macOS rollback repeat `e04a7998` is still pending.
+[macOS rollback](../../reports/toolkit-v2/c13/completion-20261116/macos-private-rollback-result.json)
+passed approved review `e04a7998`, verified the removed journal and
+preserved the neighboring file and the interrupted runtime residue.
 The FuseSoC runtime intake verifies 17 wheels and their notices. Its first
 protected run collected all 15 tests and failed all 15 on the reference.
 The original-source control stayed unstarted. A draft retains the exact
@@ -105,10 +106,18 @@ remains unadopted.
 The new wheel installed, reapplied idempotently, staged a synthetic candidate
 and rendered both reports. Removal rejected three added Finder files and
 preserved the runtime. A verified restoration preserved the three files
-outside the runtime. New Finder files appeared between the two deletion
-guards, leaving a durable `removing` journal and no verified deletion.
-Preserve that runtime and journal. Clean current-wheel removal still needs
-an independent check in a fresh private root outside the observed tree.
+outside the runtime. The second removal stopped with a durable `removing`
+journal. The current residue lacks the installed package directory. The
+generic error does not establish where removal stopped.
+Preserve the residue and journal. The clean independent replay above
+closed the scoped removal check for the reviewed current wheel.
+
+The [retained footprint](../../reports/toolkit-v2/c13/completion-20261116/retained-runtime-footprint.json)
+records 17 exact Docker image sizes, five Langfuse volumes and selected
+native runtime file lengths. The sum includes shared image layers. The
+historical Essentials installation allocation and current interrupted residue
+are recorded separately. Complete shared storage and maintainership effort
+remain unmeasured.
 
 The formal-input audit verifies 41 provisional cases and 135 asset bindings.
 It identifies 63 additional cached candidates with matched acquisition and
@@ -2627,8 +2636,8 @@ checkpoint_status:
   C13: IN_PROGRESS
 last_verified_commit: 'a95dc065'
 last_check_command: 'See C13 completion-20261116 readiness, package and formal-input audits. Read-only operational ledger validation on frozen source 4e673a6d.'
-last_check_result: '37/37 in-scope stack checks accepted. Waza excluded. Wheel install, idempotence, synthetic candidate inspection and reports verified; Finder interference stopped clean rollback. 41 provisional cases passed static asset checks; no formal stages or efficacy claims.'
-next_action: 'C13 completion-20261116: advance the 63 source-bound leads through scope, rights and protected reference review; prepare independent document/data workload. Preserve the interrupted wheel runtime and verify clean rollback in a fresh private root. Prepare exact new disclosure and scope review before formal model dispatch. Production release remains separately gated.'
+last_check_result: '37/37 in-scope stack checks accepted with Waza excluded. The clean macOS rollback passed. Two protected A2A case pairs reproduced and one stopped at collection. Formula browser artifacts were acquired and verified. No formal stages or efficacy claims.'
+next_action: 'C13 completion-20261116: correct the isolated A2A selector binding, verify independent document/data controls, and advance staged repository sources through rights and runtime review. Preserve all original journals and charges. Require applicable authority before protected repeats, formal disclosure or model dispatch. Production release remains separately gated.'
 blocked_actions:
   - 'Helped report comprehension is recorded. The operator removed the concrete control exercise from the critical path on October29;control-use qualification remains unmeasured and is not an engineering/comparison blocker.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'

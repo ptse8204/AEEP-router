@@ -1,14 +1,13 @@
 # 0.8 plan coverage and remaining work
 
-The [Formula Extraction offline preparation](../toolkit-v2/c13/completion-20261116/formula-offline-preparation.json)
-stages the reference and three protected controls and pins the missing
-Playwright wheel and Chromium archive. The acquisition review awaits
-approval. The staged fixtures add no runtime or candidate-value evidence.
+The [Formula Extraction acquisition](../toolkit-v2/c13/completion-20261116/formula-runtime-acquisition-result.json)
+passed approved review `bedcde5c`. Both archives are digest-bound.
+The protected verifier and browser remain unstarted.
 
-The [grouped A2A review](../toolkit-v2/c13/completion-20261116/a2a-batch-intake.json)
-covers six offline calls against 127 published test identities in three
-snapshots. The driver passed six synthetic checks. Review `e7f6f735`
-awaits approval and includes the prior unstarted pair. No case qualified.
+The [approved A2A batch](../toolkit-v2/c13/completion-20261116/approved-a2a-batch-results.json)
+reproduced two reference/original-source pairs. The third reference stopped at
+collection. Static review found a published selector mismatch. All five
+operations settled. No case was assigned to a formal stage.
 
 The [C13 repository patch batch](../toolkit-v2/c13/completion-20261116/repository-patch-batch-intake.json)
 staged 42 pinned source and grader inputs, preserving all declared tests.
@@ -52,13 +51,18 @@ deployment ran. Formal case assignment remains open.
 The [Toolkit V2 Linux installation check](../toolkit-v2/c13/completion-20261116/linux-private-install-result.json)
 passed for the pinned Linux ARM64 glibc container. It verified the owned
 runtime lifecycle and matched the macOS synthetic reports. The separate
-clean macOS rollback review remains pending. This check adds compatibility
-evidence to C13.
+[macOS rollback](../toolkit-v2/c13/completion-20261116/macos-private-rollback-result.json)
+passed in a fresh root. The old interrupted journal remains preserved.
+
+The [retained footprint](../toolkit-v2/c13/completion-20261116/retained-runtime-footprint.json)
+adds measured sizes for 17 image IDs, five Langfuse volumes and selected
+native runtimes. The original Essentials install and interrupted residue
+have separate observations. Whole-stack resource qualification remains open.
 
 The [current C13 beta handoff](../toolkit-v2/c13/completion-20261116/README.md)
 revalidates 37 in-scope stack checks with Waza excluded. The macOS private wheel
-installed and produced fixture reports. Finder metadata blocked clean rollback
-and the owned runtime remains preserved. Formal candidate and AEEP selection
+installed and produced fixture reports. The fresh rollback passed and
+preserved the older interrupted residue. Formal candidate and AEEP selection
 evidence, broader compatibility and release remain open.
 
 The [direct LibCST rerun](../toolkit-v2/c13/managed-comparison-20261115/DIRECT_LIBCST_RERUN.md)
