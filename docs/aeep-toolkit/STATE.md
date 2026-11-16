@@ -7,6 +7,13 @@ against the operational ledger and frozen source `4e673a6d`. It retains
 the private macOS arm64 / Python 3.13 LIMITED_BETA recommendation. Production
 release and public benefit claims remain NO_GO.
 
+A [screen of three further SkillsBench workbook cases](../../reports/toolkit-v2/c13/completion-20261116/workbook-grader-screening.json)
+verified 14 pinned assets. Keep Protein Expression and Powerlifting out of
+formal runs at these verifier pins. Their checks can accept wrong answers.
+Weighted GDP remains provisional. Its source rights, external workbook
+link and offline recalculation still need review. All three stayed local
+and unexecuted.
+
 The [new workbook reference](../../reports/toolkit-v2/c13/completion-20261116/workbook-reference-result.json)
 passed 19 original SkillsBench checks. The protected verifier rejected both
 missing and incomplete output. The first interpreter check failed before

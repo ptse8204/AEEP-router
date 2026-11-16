@@ -1,0 +1,225 @@
+{
+  "adopted_cases": 0,
+  "asset_count": 14,
+  "asset_total_bytes": 348950,
+  "benchmark_source": "https://github.com/benchflow-ai/skillsbench",
+  "cash_usd": 0,
+  "method": "Pinned source and OOXML inventory, and static analysis of verifier predicates. Workbook contents and protected assets remain private.",
+  "new_model_turns": 0,
+  "parent_commit": "f089f1ca",
+  "provider_transfer": false,
+  "revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+  "schema_version": "aeep.c13.skillsbench-workbook-screening.v1",
+  "tasks": {
+    "powerlifting-coef-calc": {
+      "assessment": "The output formula checks cover G2's prefix and H2's prefix plus ROUND/IF substrings. The accuracy assertions recalculate from Data independently of the submitted Dots formulas. A Dots sheet with the correct headers and row count, =0 in G2 and =ROUND(IF(1,0,0),3) in H2 satisfies the formula predicates. Keeping Data unchanged leaves the accuracy assertions unaffected.",
+      "assets": [
+        {
+          "bytes": 9076,
+          "git_blob_sha1": "b281cce2e572af1413b7b11934cf07d61d822f49",
+          "path": "tasks/powerlifting-coef-calc/environment/data-readme.md",
+          "sha256": "9250ae7e917c85dc775f2af8ec3d67af8513dd4163e80d034e405c5365181ee8",
+          "visibility": "agent"
+        },
+        {
+          "bytes": 10370,
+          "git_blob_sha1": "931c75a2616c5767d57410280b4f17dda68e7ffa",
+          "path": "tasks/powerlifting-coef-calc/environment/openipf_cleaned.xlsx",
+          "sha256": "68b725cb3dca83e3d7e579283ca8b51f187cf4b447f14b7f0428678a5a8d1489",
+          "visibility": "agent"
+        },
+        {
+          "bytes": 5788,
+          "git_blob_sha1": "9055adb544bf6e0dcb7037a48bc5d7317e3af93d",
+          "path": "tasks/powerlifting-coef-calc/oracle/solve.sh",
+          "sha256": "9b7e30d858b84ab42ec47c2828aecbc67383b0e82ca7aa85d0f1f96c7b3cb270",
+          "visibility": "protected"
+        },
+        {
+          "bytes": 11214,
+          "git_blob_sha1": "1d0da196e8451e7e04f19e3718eeebac829ebded",
+          "path": "tasks/powerlifting-coef-calc/verifier/cleaned_with_coefficients.xlsx",
+          "sha256": "9ccf421897455a192c0df419df593a60b56626907238b116995a829849eb1425",
+          "visibility": "protected"
+        },
+        {
+          "bytes": 556,
+          "git_blob_sha1": "936d6089de1afc6944cda84e8192d3f4285cd88a",
+          "path": "tasks/powerlifting-coef-calc/verifier/test.sh",
+          "sha256": "fe441fd4c3d6bfa1bd93ec45ea366e393f3b2bf4c64772950384a5c2a0223340",
+          "visibility": "protected"
+        },
+        {
+          "bytes": 7772,
+          "git_blob_sha1": "a5ecea60f3bd6d64e68c4ca65eecbf280c1c8b88",
+          "path": "tasks/powerlifting-coef-calc/verifier/test_outputs.py",
+          "sha256": "df3b3bfc52b24c18bfb6f4359d71758fc10e7e24a908cfc2a0874a6efb8d5673",
+          "visibility": "protected"
+        }
+      ],
+      "counterexample_review": "static_only",
+      "rights": "The workbook documents OpenPowerlifting, whose published CSVs are dedicated to the public domain. The exact derived data revision and permissions for the separately copied documentation require review before transfer. The workbook includes individual athlete names.",
+      "source_terms_url": "https://old.openpowerlifting.org/data.html#data-licensing",
+      "status": "excluded_at_this_verifier_pin",
+      "verifier_test_functions": [
+        "test_data_sheet_exists",
+        "test_dots_sheet_exists",
+        "test_dots_sheet_has_correct_columns",
+        "test_row_count_matches",
+        "test_dots_sheet_not_empty",
+        "test_total_column_is_formula",
+        "test_dots_column_is_formula",
+        "test_dots_values_match_ground_truth",
+        "test_all_lifters_have_ground_truth",
+        "test_dots_formula_handles_male_lifters",
+        "test_dots_formula_handles_female_lifters"
+      ],
+      "workbooks": [
+        {
+          "external_link_parts": 0,
+          "external_link_relationship_parts": 0,
+          "path": "environment/openipf_cleaned.xlsx",
+          "vba_project_parts": 0,
+          "zip_members": 13
+        },
+        {
+          "external_link_parts": 0,
+          "external_link_relationship_parts": 0,
+          "path": "verifier/cleaned_with_coefficients.xlsx",
+          "vba_project_parts": 0,
+          "zip_members": 13
+        }
+      ]
+    },
+    "protein-expression-analysis": {
+      "assessment": "The six checks never look up source values, compare calculated output or require a formula. Filling the three checked regions with hard-coded zeros and retaining the Task and Data sheets satisfies their predicates without doing the requested work.",
+      "assets": [
+        {
+          "bytes": 117651,
+          "git_blob_sha1": "7ef9f5957eaf0447d93ee31c361d86d0df74d9c0",
+          "path": "tasks/protein-expression-analysis/environment/data/protein_expression.xlsx",
+          "sha256": "95d5d1d9ed1920b2e22143866ca932c88aa14eafe7dd0ad998594868961faf21",
+          "visibility": "agent"
+        },
+        {
+          "bytes": 6319,
+          "git_blob_sha1": "47c9c827b58762e555775ab03fd1adb744f6644a",
+          "path": "tasks/protein-expression-analysis/oracle/solve.sh",
+          "sha256": "866658f398b68b70955d197944a83ce628bcf4285937548d3c92efdc6ab23bac",
+          "visibility": "protected"
+        },
+        {
+          "bytes": 536,
+          "git_blob_sha1": "893fa7a27addc4e0aa912071607e3176990453f4",
+          "path": "tasks/protein-expression-analysis/verifier/test.sh",
+          "sha256": "60f676cbdbb817230e5f47be4c756d2089d88b77904d19385bb674a8ff37912a",
+          "visibility": "protected"
+        },
+        {
+          "bytes": 2694,
+          "git_blob_sha1": "67281e8894037db1f9db54a9872ef35f02180570",
+          "path": "tasks/protein-expression-analysis/verifier/test_outputs.py",
+          "sha256": "810fec4eec42c34e9b8faaa14786182a63c32dd753fe11e6af0d1db8c2e23712",
+          "visibility": "protected"
+        }
+      ],
+      "counterexample_review": "static_only",
+      "provenance_url": "https://github.com/benchflow-ai/skillsbench/pull/27",
+      "rights": "The task author identifies Broad DepMap CCLE proteomics but gives no exact original release for the transformed workbook.",
+      "source_terms_url": "https://depmap.org/portal/data_page/",
+      "status": "excluded_at_this_verifier_pin",
+      "verifier_test_functions": [
+        "test_file_exists",
+        "test_sheets_exist",
+        "test_step1_expression_values_filled",
+        "test_step2_statistics_calculated",
+        "test_step3_fold_changes_calculated",
+        "test_values_are_numeric"
+      ],
+      "workbooks": [
+        {
+          "external_link_parts": 0,
+          "external_link_relationship_parts": 0,
+          "path": "environment/data/protein_expression.xlsx",
+          "vba_project_parts": 0,
+          "zip_members": 10
+        }
+      ]
+    },
+    "weighted-gdp-calc": {
+      "assessment": "The pinned verifier checks both formulas and numerical results. Its shell runner installs tooling and uses Gnumeric for recalculation. The protected grader needs a pinned offline calculator and verified recalculation.",
+      "assets": [
+        {
+          "bytes": 143146,
+          "git_blob_sha1": "5b08a2494ad0d4b4ec8123f501cf2cad862397b2",
+          "path": "tasks/weighted-gdp-calc/environment/gdp.xlsx",
+          "sha256": "fb8873433c7206cf431a01d2dec7e943b91d3faacfe2ce4c30b9de65c8842caa",
+          "visibility": "agent"
+        },
+        {
+          "bytes": 5039,
+          "git_blob_sha1": "070de8be89a1d816c6d84cf6773a1362760133f4",
+          "path": "tasks/weighted-gdp-calc/oracle/solve.sh",
+          "sha256": "5e50a0083bd4c06a236382bd7af472d2a6384f7f3415bbe4eaa3207e232a9f31",
+          "visibility": "protected"
+        },
+        {
+          "bytes": 1423,
+          "git_blob_sha1": "1c840fe51086e75ef4e2e6fc899a5c2645d930b8",
+          "path": "tasks/weighted-gdp-calc/verifier/test.sh",
+          "sha256": "f6d94159004f2dcf9488d3f80920a60675f7b45fb22353592fa9b3a61c24843a",
+          "visibility": "protected"
+        },
+        {
+          "bytes": 27366,
+          "git_blob_sha1": "968eff5c66397ac92190545bdd68e345066736de",
+          "path": "tasks/weighted-gdp-calc/verifier/test_outputs.py",
+          "sha256": "94b1b6089c1c143cb1f54c5110cfe932e2d85194c19286c7201f5c29c2c87055",
+          "visibility": "protected"
+        }
+      ],
+      "rights": "The exact original source and terms for the workbook remain unresolved. IMF series identifiers identify a possible source, but the workbook has no matching source-release record.",
+      "source_terms_url": "https://www.imf.org/en/About/copyright-and-terms",
+      "status": "pending_provenance_and_offline_reference",
+      "verifier_test_functions": [
+        "test_excel_file_exists",
+        "test_excel_file_readable",
+        "test_sheet_structure",
+        "test_exports_have_data",
+        "test_imports_have_data",
+        "test_gdp_have_data",
+        "test_exports_values",
+        "test_imports_values",
+        "test_gdp_values",
+        "test_net_exports_pct_have_data",
+        "test_net_exports_pct_values",
+        "test_statistics_have_data",
+        "test_min_values",
+        "test_max_values",
+        "test_median_values",
+        "test_mean_values",
+        "test_percentile_values",
+        "test_weighted_mean_has_data",
+        "test_weighted_mean_values_reasonable",
+        "test_weighted_mean_values",
+        "test_no_formula_errors",
+        "test_no_extra_sheets_added",
+        "test_required_sheets_exist",
+        "test_task_sheet_column_widths",
+        "test_data_sheet_column_widths",
+        "test_no_vba_macros",
+        "test_file_extension_xlsx"
+      ],
+      "workbooks": [
+        {
+          "external_link_parts": 1,
+          "external_link_relationship_parts": 1,
+          "path": "environment/gdp.xlsx",
+          "vba_project_parts": 0,
+          "zip_members": 18
+        }
+      ]
+    }
+  },
+  "upstream_execution_calls": 0
+}

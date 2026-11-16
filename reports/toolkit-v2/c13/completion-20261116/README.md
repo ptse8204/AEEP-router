@@ -147,6 +147,16 @@ The earlier result and charge are preserved.
 [FuseSoC runtime preflight](fusesoc-runtime-intake.json) ·
 [First protected result](fusesoc-protected-reference-result.json)
 
+The [static workbook screening](workbook-grader-screening.json) verified 14
+assets across three further SkillsBench cases. Protein Expression checks cell
+presence and types. Powerlifting's accuracy tests recalculate from the input
+sheet without evaluating the submitted formulas. Both can accept incorrect
+output. Exclude them at these verifier pins. Weighted GDP checks numeric
+results as well as formulas. Its workbook contains an external link, and its
+verifier depends on Gnumeric to recalculate formulas. It stays provisional
+until source rights, offline recalculation and reference and failure paths
+are verified. All three cases stayed local and unexecuted.
+
 Advance source-bound candidates through the existing protected grader
 preparation and reference/counterexample checks. Keep development and formal
 exposure disjoint, and keep repository families in one stage. Inspect rights
