@@ -5,6 +5,7 @@ import hashlib
 import json
 
 import pytest
+from pydantic import ValidationError
 from test_toolkit_managed import prepared
 
 from aeep.assessment.boundary import BoundaryProbe, BoundaryProbeDefinition
@@ -117,6 +118,7 @@ def test_checklist_is_inert_and_separates_readiness_from_value(monkeypatch, caps
     assert main(["stack-status"]) == 0
     result = json.loads(capsys.readouterr().out)
     assert len(result["components"]) == 19
+    assert result["optional_components"] == ["waza"]
     assert result["comparison_dispatch"].startswith("BLOCKED")
     assert result["candidate_usefulness"] == result["selection_usefulness"] == "NOT_ASSESSED"
 
@@ -194,6 +196,56 @@ def test_stack_requires_all_roles_both_domains_and_current_review(tmp_path, monk
             )
     finally:
         asyncio.run(router.close())
+
+
+@pytest.mark.asyncio
+async def test_v2_waza_is_required_only_when_selected(tmp_path, monkeypatch):
+    router, service, adapter, *_ = prepared(tmp_path, monkeypatch)
+    repo = service.repository
+    binary = tmp_path.resolve() / "owned-runtime-marker"
+    binary.write_text("synthetic runtime bytes; never executable")
+    version = "aeep.toolkit.stack-completion.v2"
+    try:
+        components = {
+            name: synthetic_component(repo, name, binary)
+            for name in REQUIRED_CHECKS
+            if name != "waza"
+        }
+        with pytest.raises(ValidationError):
+            StackCompletion(implementation_source=D, components=components)
+        with pytest.raises(ValidationError):
+            StackCompletion(schema_version=version, implementation_source=D,
+                            components={k: v for k, v in components.items() if k != "aeep-evaluator"})
+        record = StackCompletion(schema_version=version, implementation_source=D,
+                                 components=components)
+        ref = repo.put("toolkit_stack_completion", content_digest(record), record)
+        with pytest.raises(ConfigurationError, match="unreviewed"):
+            require_stack_complete(repo, ref, source_digest=D)
+        repo.review(ref)
+        assert require_stack_complete(repo, ref, source_digest=D) == record
+        before = router.store._connection.total_changes
+        with pytest.raises(ConfigurationError, match="both Waza readiness checks"):
+            await adapter.evaluate(adapter.review_digest, stack_readiness_ref=ref,
+                                   waza_selected=True)
+        # Readiness never grants the plan authorization needed for live dispatch.
+        with pytest.raises(ConfigurationError, match="authorization scope"):
+            await adapter.evaluate(adapter.review_digest, stack_readiness_ref=ref)
+        assert router.store._connection.total_changes == before
+        status = stack_verification.status(repo, D)
+        assert status["stack_completion_ref"] == ref
+        assert status["waza_in_stack_completion"] is False
+        assert {row["component"]: row["functional_status"] for row in status["components"]}[
+            "waza"
+        ] == "BLOCKED"
+        waza = synthetic_component(repo, "waza", binary)
+        full = StackCompletion(schema_version=version, implementation_source=D,
+                               components={**components, "waza": waza})
+        full_ref = repo.put("toolkit_stack_completion", content_digest(full), full)
+        repo.review(full_ref)
+        assert require_stack_complete(repo, full_ref, source_digest=D, waza_selected=True) == full
+        assert stack_verification.status(repo, D)["waza_in_stack_completion"] is True
+    finally:
+        await router.close()
 
 
 @pytest.mark.parametrize("outcome", ["verified", "mismatch", "uncertain"])

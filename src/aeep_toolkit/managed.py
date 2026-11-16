@@ -187,7 +187,8 @@ class AEEPAssessmentAdapter:
         }
 
     async def evaluate(self, reviewed_plan_id: str, *, stack_readiness_ref: str | None = None,
-                       engineering_review_ref: str | None = None) -> EvidenceBundle:
+                       engineering_review_ref: str | None = None,
+                       waza_selected: bool = False) -> EvidenceBundle:
         from .workflow_accounting import bind_workflow_plan
 
         bind_workflow_plan(self.plan)
@@ -209,7 +210,8 @@ class AEEPAssessmentAdapter:
             if self.plan.schema_version == "assessment.plan.v9":
                 raise ConfigurationError("SkillRank diagnostic requires exact engineering authority")
             require_stack_complete(self.service.repository, stack_readiness_ref,
-                                   source_digest=self.capabilities.implementation_sha256)
+                                   source_digest=self.capabilities.implementation_sha256,
+                                   waza_selected=waza_selected)
         # The service owns all authorization, reservation, execution and recovery.
         if self.plan.scheduler_digest != (self.coordinator.definition_digest if self.coordinator else None):
             raise ConfigurationError("selected evaluator is missing or changed; no fallback is inferred")
@@ -623,7 +625,7 @@ def comparison_summary(adapter: AEEPAssessmentAdapter, bundle: EvidenceBundle) -
     return summary
 
 
-def main(argv: list[str] | None = None) -> None:
+def main(argv: list[str] | None = None, *, waza_selected: bool = False) -> None:
     import argparse
     import asyncio
 
@@ -644,7 +646,7 @@ def main(argv: list[str] | None = None) -> None:
             command.add_argument("--output", type=Path, required=True)
         if name == "run":
             command.add_argument("--reviewed-digest", required=True)
-            command.add_argument("--stack-readiness", help="Reviewed current-source canonical complete-stack record")
+            command.add_argument("--stack-readiness", help="Reviewed current-source readiness record for the selected stack")
             command.add_argument("--engineering-review", help="Exact finite required-use integration check; never value evidence")
         if name == "report":
             command.add_argument("--report-id", required=True)
@@ -700,7 +702,8 @@ def main(argv: list[str] | None = None) -> None:
                 try:
                     bundle = (
                         await adapter.evaluate(args.reviewed_digest, stack_readiness_ref=args.stack_readiness,
-                                               engineering_review_ref=args.engineering_review)
+                                               engineering_review_ref=args.engineering_review,
+                                               waza_selected=waza_selected)
                         if args.operation == "run"
                         else adapter.normalize(args.report_id)
                     )

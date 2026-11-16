@@ -321,7 +321,7 @@ def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
     return {**facts, 'review_sha256':content_digest(facts), 'blockers':blockers,
             'gates':{'stack_integration':'NOT_VERIFIED_BY_PREVIEW', 'candidate_usefulness':'NOT_ASSESSED',
                      'selection_usefulness':'NOT_ASSESSED'},
-            'notice':'Complete selected metadata only. No installation, definition review, canonical plan creation or execution. Dispatch additionally requires current all-integration evidence.'}
+            'notice':'Complete selected metadata only. No installation, definition review, canonical plan creation or execution. Comparison dispatch requires current readiness evidence for the selected stack.'}
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -363,7 +363,7 @@ def main(argv: list[str] | None = None) -> None:
             command.add_argument('--report-id', required=True)
         command.add_argument('--scan-report', help='Canonical selected scanner observation; required only when configured')
         if name == 'run':
-            command.add_argument('--stack-readiness', help='Canonical current-source all-integration completion record')
+            command.add_argument('--stack-readiness', help='Canonical current-source readiness record for the selected stack')
             command.add_argument('--engineering-review', help='Canonical finite required-use integration review')
     scan_command = commands.add_parser('scan', help='Explicit static scanning through the existing contained executor')
     scan_command.add_argument('--workflow', type=Path, required=True)
@@ -595,7 +595,14 @@ def main(argv: list[str] | None = None) -> None:
                 delegated += ['--reviewed-digest', backend_review['review_sha256']]
             else:
                 delegated += ['--report-id', args.report_id]
-            managed_main(delegated)
+            if (
+                args.operation == 'run'
+                and version == 'aeep.toolkit.workflow.v2'
+                and 'waza' in preview['workflow']['configurations'][args.configuration]['components']
+            ):
+                managed_main(delegated, waza_selected=True)
+            else:
+                managed_main(delegated)
     except (ValueError, OSError, ConfigurationError, sqlite3.Error):
         parser.exit(2, 'Workflow inputs or exact review are invalid. No automatic retry.\n')
 

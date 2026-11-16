@@ -84,15 +84,22 @@ class IntegrationEvidence(StrictModel):
 
 
 class StackCompletion(StrictModel):
-    schema_version: Literal["aeep.toolkit.stack-completion.v1"] = "aeep.toolkit.stack-completion.v1"
+    schema_version: Literal[
+        "aeep.toolkit.stack-completion.v1", "aeep.toolkit.stack-completion.v2"
+    ] = "aeep.toolkit.stack-completion.v1"
     implementation_source: Digest
     components: dict[Identifier, Digest]
 
     @model_validator(mode="after")
     def complete_inventory(self) -> StackCompletion:
-        if set(self.components) != set(REQUIRED_CHECKS):
+        components = set(self.components)
+        required = set(REQUIRED_CHECKS)
+        waza_is_optional = self.schema_version == "aeep.toolkit.stack-completion.v2"
+        if components != required and not (
+            waza_is_optional and components == required - {"waza"}
+        ):
             raise ValueError(
-                "stack completion requires every integration and both composed workflows"
+                "stack completion requires the version's required integrations and both composed workflows"
             )
         if len(set(self.components.values())) != len(self.components):
             raise ValueError("one component evidence record cannot stand in for another")
@@ -343,17 +350,23 @@ def require_integration(
 
 
 def require_stack_complete(
-    repository: AssessmentRepository, digest: str | None, *, source_digest: str
+    repository: AssessmentRepository,
+    digest: str | None,
+    *,
+    source_digest: str,
+    waza_selected: bool = False,
 ) -> StackCompletion:
     if digest is None:
         raise ConfigurationError(
-            "new comparisons are paused until the complete upstream stack is verified"
+            "new comparisons are paused until the required stack is verified"
         )
     record = _resolve(
         repository, "toolkit_stack_completion", digest, StackCompletion, reviewed=True
     )
     if record.implementation_source != source_digest:
         raise ConfigurationError("stack completion belongs to another implementation source")
+    if waza_selected and "waza" not in record.components:
+        raise ConfigurationError("selected Waza requires both Waza readiness checks")
     for component, reference in record.components.items():
         require_integration(repository, reference, component=component, source_digest=source_digest)
     return record
@@ -361,7 +374,8 @@ def require_stack_complete(
 
 def checklist() -> dict[str, Any]:
     return {
-        "policy": "all_upstream_integrations_before_comparisons",
+        "policy": "required_integrations_and_selected_waza_before_comparisons",
+        "optional_components": ["waza"],
         "components": [
             {
                 "component": name,

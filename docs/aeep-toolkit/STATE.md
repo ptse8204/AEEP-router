@@ -1,5 +1,20 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 15. All 37 required checks are verified in the operational ledger.**
+The [operational audit](../../reports/toolkit-v2/c13/managed-comparison-20261115/operational-completion.json)
+accepts the reviewed v2 completion `81e3ebd6`. Selecting Waza still
+requires its own two checks. All historical evidence and counters
+are preserved. The [Sol comparison design](../../reports/toolkit-v2/c13/managed-comparison-20261115/README.md)
+binds four development tasks with one optional capability per domain.
+Actual worker and grader bindings and separate dispatch approval remain
+required. No comparisons ran.
+
+Waza remains optional. The
+[copied-ledger verification](../../reports/toolkit-v2/c13/waza-ollama-20261115/optional-readiness-verification.json)
+preceded registration. Local review `0f95d1a2` is superseded. The
+[cleanup record](../../reports/toolkit-v2/c13/waza-ollama-20261115/optional-readiness-cleanup.json)
+lists the private files removed.
+
 <!-- waza-ollama-service-20261115:start -->
 **C13 remains open at 37 of 39 checks.** Approved `d5b47cc8` verified and
 installed the retained Ollama runtime. Startup reached the real service

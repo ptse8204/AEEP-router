@@ -1,5 +1,15 @@
 # 0.8 plan coverage and remaining work
 
+The [operational audit](../toolkit-v2/c13/managed-comparison-20261115/operational-completion.json)
+verifies 37 required managed Codex checks and preserves the separate Waza
+gate. The [Sol design](../toolkit-v2/c13/managed-comparison-20261115/README.md)
+freezes a balanced development comparison. Its final driver, runtime
+bindings and live authority remain separate. The full source verification
+had 2,165 passes, 21 skips and 81% total branch coverage.
+
+The [Waza cleanup record](../toolkit-v2/c13/waza-ollama-20261115/optional-readiness-cleanup.json)
+lists the removed private runtimes, model copies and download.
+
 <!-- waza-ollama-service-20261115:start -->
 The [Waza service result](../toolkit-v2/c13/waza-ollama-20261115/SERVICE_CONTINUATION.md)
 preserves two settled operations from `d5b47cc8`. Installation passed.

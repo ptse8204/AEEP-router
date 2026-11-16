@@ -1,6 +1,6 @@
 # AEEP Toolkit architecture decisions (living log)
 
-### November 15 Waza local backend
+## November 15 Waza local backend
 
 Retain the verified Ollama 0.40.16 installation and the five pinned Qwen3
 model blobs. Use [the narrowly scoped service continuation](../../reports/toolkit-v2/c13/waza-ollama-20261115/SERVICE_CONTINUATION.md)

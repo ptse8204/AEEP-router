@@ -371,12 +371,13 @@ def status(repository: AssessmentRepository, source: str) -> dict[str, Any]:
     )
     for ref in _find_records(repository, COMPLETION, "implementation_source", source):
         try:
-            require_stack_complete(repository, ref, source_digest=source)
+            completion = require_stack_complete(repository, ref, source_digest=source)
         except (ConfigurationError, ValidationError, OSError, ValueError, KeyError, sqlite3.Error):
             continue
         result.update(
             comparison_dispatch="STACK_GATE_VERIFIED_SEPARATE_EXECUTION_AUTHORITY_REQUIRED",
             stack_completion_ref=ref,
+            waza_in_stack_completion="waza" in completion.components,
         )
         break
     return result

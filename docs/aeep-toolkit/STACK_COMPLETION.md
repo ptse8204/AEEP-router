@@ -1,10 +1,10 @@
-# Finish the upstream stack before comparisons
+# Verify the required stack before comparisons
 
-Complete every recommended upstream integration before resuming candidate-value
-or AEEP selection trials. Document/data and software engineering have equal
-priority. Components remain individually selectable, with separate installation,
-enablement and execution controls. The October 30 delivery order parks the
-proposed Ruff/LibCST campaign.
+Verify the 37 required checks before resuming candidate-value or AEEP selection
+trials with the managed Codex evaluator. Waza is optional. A workflow that selects
+Waza must also verify both Waza checks. Document/data and software engineering
+have equal priority. Installation, enablement and execution have separate
+controls. The October 30 delivery order parked the proposed Ruff/LibCST campaign.
 
 Use the existing evaluator, controlled workers, installation controls, exact
 reviews, attempt accounting and canonical reports. Add thin upstream adapters;
@@ -18,7 +18,7 @@ under applicable authority. Preserve historical evidence and unrelated work.
 | --- | --- |
 | agent-skill-eval | Actual scheduler/graders dispatch reviewed workers; canonical usage and cleanup; no fake harness |
 | AEEP AssessmentService / BenchmarkRunner | Managed Codex fallback through the ordinary workflow |
-| Waza | Real supported agent backend, grading, complete usage and normalized report; mock mode is insufficient |
+| Waza (when selected) | Real supported agent backend, grading, complete usage and normalized report |
 | SkillRank core | Search/show and bounded evaluation; forced-use diagnostics stay distinct |
 | SkillsBench | Document/data and software task journeys with protected upstream verifiers |
 | MCPMark / MCP-Universe | Each executes a pinned, rights-reviewed reference task with state cleanup |
@@ -77,8 +77,8 @@ tasks do not satisfy formal qualification or justify manufactured variations.
 1. Adapter/lifecycle checks: actual upstream execution, bounded permissions,
    source drift, accounting, interruption/recovery and non-destructive removal.
 2. Composed operation: both task domains through one selectable CLI workflow,
-   protected grading, canonical telemetry and HTML/Markdown reports. All required
-   integrations must have current functional evidence before comparative dispatch.
+   protected grading, canonical telemetry and HTML/Markdown reports. Verify the
+   required integrations and any selected Waza checks before comparative dispatch.
 3. Candidate usefulness: capable ordinary baseline versus optional relevant skills
    and combinations; frozen graders, utility and guardrails.
 4. AEEP selection usefulness: equal inventory versus discovery and a strong fixed
@@ -179,12 +179,18 @@ journal and receipt. A settled failure keeps its costs. Uncertain cleanup retain
 the reservation, and the same request cannot dispatch again.
 
 The evidence file supplies `definition_ref` and a `probe_refs` map that covers
-the component's required check names. The completion file supplies
-`implementation_source` and a `components` map containing all 19 component
-evidence references. Review the completion digest through the existing operator
-path before selecting it for a comparison. Component installation, provider
-access and comparison authority have separate controls. Historical reports keep
-their original source and runtime bindings.
+the component's required check names. Set `schema_version` to
+`aeep.toolkit.stack-completion.v2` in a new completion file. Supply
+`implementation_source` and a `components` map with evidence references for
+the 18 required entries. Include the Waza entry when the workflow selects Waza.
+Version 1 completion records still require all 19 entries.
+
+Review the completion digest through the operator review command before
+selecting it for a comparison. Live dispatch still requires an approved plan
+and an applicable execution grant. `stack-status` shows the Waza checks
+alongside the required checks, and the selected completion record indicates
+whether it includes Waza. Historical reports keep their original source and
+runtime bindings.
 
 ### Register retained component receipts
 
@@ -330,12 +336,12 @@ remain open. The four remaining SkillsBench tasks retain separate gates.
 
 The operator has no Copilot subscription. Waza's default real backend needs
 authorized Copilot access. Its [documented custom-provider route](https://github.com/microsoft/waza/blob/e534d149d89ae77ea158469fb4d2003804b2ee76/README.md#custom-copilot-sdk-providers) would require
-separate provider, credential and spending authority; none is inferred. Mock runs
-remain development evidence. This blocker does not change the all-integration
-gate or prevent engineering work on the other components.
+separate provider, credential and spending authority. Mock runs remain
+development evidence. The Waza backend is unverified and applies only to
+workflows that select Waza.
 
 A separately reviewed `--engineering-review` can bootstrap the composed workflow
-before the all-integration gate. It is limited to one condition, one repetition,
+before the comparison gate. It is limited to one condition, one repetition,
 one to six qualification tasks, one candidate route (or a separately reviewed
 two-route diagnostic) and at most twelve model turns, with
 required candidate exposure. Its canonical scope must match the exact plan and

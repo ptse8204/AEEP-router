@@ -3,12 +3,15 @@
 import hashlib
 import json
 import sqlite3
+from pathlib import Path
 
 import pytest
 from test_toolkit_benchmarks import pack
 from test_toolkit_contracts import extension_data
+from test_toolkit_managed import prepared
 
 from aeep.router import Router
+from aeep_toolkit import managed, workflow
 from aeep_toolkit.candidate import inspect
 from aeep_toolkit.cli import main
 from aeep_toolkit.installation import PreviewPolicy, manifest_digest
@@ -104,6 +107,47 @@ def test_unimplemented_backend_is_visible_and_never_silently_falls_back(tmp_path
         for reason in value["blockers"]
     )
     assert value["workflow"]["configurations"]["document-data"]["evaluator"] == "waza"
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("waza_selected", [False, True])
+async def test_run_passes_reviewed_waza_selection(tmp_path, monkeypatch, waza_selected):
+    router, _, adapter, *_ = prepared(tmp_path, monkeypatch)
+    path, data, _ = definition(tmp_path)
+    selected = data["configurations"]["document-data"]
+    if waza_selected:
+        selected["components"].append("waza")
+    path.write_text(json.dumps(data))
+    plan = tmp_path / "plan.json"
+    plan.write_text(adapter.plan.model_dump_json())
+    preview = {
+        "workflow": data,
+        "review_sha256": "a" * 64,
+        "blockers": [],
+        "assessment": {
+            "plan_path": str(plan),
+            "source_path": str(tmp_path / "source.json"),
+            "backend_review": {"review_sha256": adapter.review_digest},
+        },
+    }
+    calls = []
+
+    def delegate(argv, *, waza_selected=False):
+        calls.append((argv, waza_selected))
+
+    monkeypatch.setattr(workflow, "prepare_stack", lambda *_: preview)
+    monkeypatch.setattr(managed, "main", delegate)
+    try:
+        assert main([
+            "workflow", "run", "--workflow", str(path), "--configuration", "document-data",
+            "--reviewed-digest", preview["review_sha256"],
+            "--manifest", str(tmp_path / "manifest.json"), "--output", str(tmp_path / "out"),
+        ]) == 0
+        [(args, selected)] = calls
+        assert selected is waza_selected
+        assert Path(args[args.index("--plan") + 1]) == plan
+    finally:
+        await router.close()
 
 
 def test_changed_candidate_is_rejected_and_unready_run_never_opens_service(

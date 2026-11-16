@@ -1,0 +1,277 @@
+{
+  "schema_version": "aeep.operator.managed-comparison-design.v1",
+  "status": "DESIGN_REVIEW_ONLY",
+  "dispatch_authorized": false,
+  "implementation_source": "c63299aff6631834cb13c89331b1fc17d5e3deda7bafde9fcc8533c1af78f5f5",
+  "stack_completion_ref": "81e3ebd64ad53518026bf7e8b1374cc564fbc4f768c0e255646fb38bbc117031",
+  "question": "Does optional access to a relevant capability change protected task success, token usage, or time on either development workload?",
+  "evaluator": "Existing AEEP AssessmentService and BenchmarkRunner with managed Codex",
+  "development_path": "Reuse the bounded development schedule and canonical receipt/report flow. The formal managed workflow requires matched qualification and its existing frozen cohorts. Do not reclassify the engineering recipes or exposed tasks as formal holdout.",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "fallback": false,
+  "candidate_arms": {
+    "baseline": "Capable ordinary task tools, same model and instruction, no added candidate.",
+    "document-data": {
+      "optional_candidate": "Spreadsheets 26.915.20218 as retained in the exact image",
+      "source_image": "sha256:ad63be58192f47eea5c85c6368caee579b4d656151d1081af498e1481dd1948f",
+      "skill_sha256": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5",
+      "historical_pair_definition": {
+        "path": "reports/v08/sol-workbook-qualification-profile-review-bundle.json",
+        "sha256": "fa4d1eb77b77c152e4a5c4ddbd481f05708d88c49afd259a60edfc922ba95cd7"
+      },
+      "candidate_runtime_copy_requires_license_and_boundaries_review": true
+    },
+    "software-engineering": {
+      "optional_candidate": "LibCST 1.8.6 through the retained libcst-migrate skill",
+      "candidate_skill": {
+        "path": "examples/toolkit_repository_specialists/libcst-migrate/SKILL.md",
+        "sha256": "ce8543afa4e8b2514fbbec5b59d85064faa1758004605a9c1321e601f55388b6"
+      },
+      "local_wheels": [
+        {
+          "filename": "libcst-1.8.6-cp313-cp313-manylinux_2_28_aarch64.whl",
+          "sha256": "1a3a5e4ee870907aa85a4076c914ae69066715a2741b821d9bf16f9579de1105",
+          "bytes": 2235818,
+          "url": "https://files.pythonhosted.org/packages/36/a1/bd1b2b2b7f153d82301cdaddba787f4a9fc781816df6bdb295ca5f88b7cf/libcst-1.8.6-cp313-cp313-manylinux_2_28_aarch64.whl"
+        },
+        {
+          "filename": "pyyaml_ft-8.0.0-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+          "sha256": "3fa992481155ddda2e303fcc74c79c05eddcdbc907b888d3d9ce3ff3e2adcfb0",
+          "bytes": 746792,
+          "url": "https://files.pythonhosted.org/packages/e3/bb/23a9739291086ca0d3189eac7cd92b4d00e9fdc77d722ab610c35f9a82ba/pyyaml_ft-8.0.0-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
+        }
+      ],
+      "parked_runtime_review": {
+        "path": "reports/toolkit-v2/c13/stack-delivery-20261030/launcher-correction/specialist-runtime-review.json",
+        "sha256": "b03c2ddb38a5c9484a5b8a933ce94958ce93948dd423f508b906bf74a2202ad9"
+      },
+      "fresh_build_and_functional_checks_required": true
+    }
+  },
+  "worker_inputs": {
+    "document_baseline_parent": "sha256:5116daa2007110be23d7d5407d22a3cfacc3967e103471181addede1126a2704",
+    "document_parent_bindings": [
+      {
+        "path": ".aeep/skillsbench-managed-worker-preparation-20261105/engineering/sales-pair.json",
+        "sha256": "0826deef2c31a8cddfdec6d9b6d349686cb3eb1269e4fad942a1bb91269f2060"
+      },
+      {
+        "path": ".aeep/skillsbench-document-managed-20261106/worker-definitions/excel-pair.json",
+        "sha256": "1229e180b401a60d111bce0e73d812bbe1844d1b93d252092a5a860f5d78a521"
+      }
+    ],
+    "software_baseline_parent": "sha256:3afb108f52517f0c2e786eb94185c15a813e7bfa488a225ec8d1e60fd884ddac",
+    "sol_binary": {
+      "path": ".aeep/skillsbench-react-managed-preparation-20261107/sol-client-context/runtime/bin/codex",
+      "sha256": "22c787768933ff4d97e62e2d4613e1671e18b6a2cc999f0666be544acecffa45"
+    },
+    "sol_path": "/opt/codex/0.159.1/bin/codex",
+    "sol_runtime_inventory": {
+      "path": ".aeep/skillsbench-react-managed-preparation-20261107/sol-client-context-inventory.json",
+      "sha256": "8bce2e96a38d4ff9646c0d95d5c61c256dbc739dd349345f9de252158b4da4bb"
+    },
+    "prior_sol_dispatch_review": {
+      "path": "reports/toolkit-v2/c13/skillsbench-react-managed-preparation-20261107/sol-permitted-path-live-20261109/operation-review.json",
+      "sha256": "b463ae38658908aa5cc2975b38cff41dd4f75a512fef707d42dea025a10cee0d"
+    },
+    "proxy_id": "5f9a44f86633409a250d11a78cf59357495da2078724ee0261bc73acff57f0f3",
+    "proxy_image_id": "sha256:5bf590eb0bf8a06187ff092f0f75cf83b540cc27bd6a75fd8bd91305ca7b13de",
+    "retained_images_verified": [
+      "sha256:3afb108f52517f0c2e786eb94185c15a813e7bfa488a225ec8d1e60fd884ddac",
+      "sha256:4474cf22f867c681aa6120ce2f98d809413f89755cf11a445444b1b993754ea1",
+      "sha256:5116daa2007110be23d7d5407d22a3cfacc3967e103471181addede1126a2704",
+      "sha256:8eef4a0ccd7102086b16898331e89cc3e7893931d270fdae6a2601a7cbac1efa",
+      "sha256:9f473c493b7af1854922807d2acbdcbe3b955313dc57f203e6f73c9c50f9ea85",
+      "sha256:ad63be58192f47eea5c85c6368caee579b4d656151d1081af498e1481dd1948f"
+    ],
+    "final_pair_and_collector_refs": null
+  },
+  "tasks_in_execution_order": [
+    {
+      "id": "sales-pivot-analysis",
+      "domain": "document-data",
+      "revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+      "public_archive": {
+        "sha256": "347fad995448f6b7a48420cadae4d5206ecdfa9481b2e6076f49aeeec18e384f",
+        "bytes": 217907
+      },
+      "public_files": [
+        {
+          "path": "tasks/sales-pivot-analysis/environment/income.xlsx",
+          "sha256": "4ea46473be5e9e380a2ba3d5c80e87f1d0d6375c607092d5758a8107fbc4c730",
+          "bytes": 107556,
+          "role": "input"
+        },
+        {
+          "path": "tasks/sales-pivot-analysis/environment/population.pdf",
+          "sha256": "cfa3c33ba4468bcad811b8782de412d927a4a2357ac01fc1a9e93a44f5cc5ec3",
+          "bytes": 157563,
+          "role": "input"
+        },
+        {
+          "path": "tasks/sales-pivot-analysis/task.md",
+          "sha256": "aed27c7a62b1307a6d3dbdc89abacd373150fffd5f02e5e6df30c7ad84ee3232",
+          "bytes": 1989,
+          "role": "instruction"
+        }
+      ],
+      "task_input_digest": "7de088f3d8d6fa8e711b2f373bcff8ec7c1d6fba83e4c3ac51d6e9a6c92d86a1",
+      "rights_review": {
+        "path": "reports/toolkit-v2/c13/skillsbench-task-disclosure-20261105/operation-review.json",
+        "sha256": "7d27c9ef4d8858ddf40af4c74fa603810bb8bddd190ca8d8d189c14362b80af1"
+      },
+      "protected_grader": {
+        "image": "sha256:4474cf22f867c681aa6120ce2f98d809413f89755cf11a445444b1b993754ea1",
+        "historical_review": {
+          "path": "reports/toolkit-v2/c13/skillsbench-sales-handoff-20261105/operation-review.json",
+          "sha256": "b6203877730fc038d47a49c30160d51106d8d9baa36bc6c74898569b5c78b607"
+        },
+        "historical_recipe_digest": "483628f76cebe586005a145d33e4c223cae83480ab52206c0c65167b1022f792",
+        "original_validator_binding": "456a38b998df700e4269a3fcf8d25305d15fbf0a5b367111af674e37d2df80d0"
+      }
+    },
+    {
+      "id": "exceltable-in-ppt",
+      "domain": "document-data",
+      "revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+      "public_archive": {
+        "sha256": "93952a36b542bbcb13021a600a3a3fcea8d52ce656cfee8eef867a398fd9b145",
+        "bytes": 60059
+      },
+      "public_files": {
+        "tasks/exceltable-in-ppt/task.md": "4056e2263dc15e48730a523ce6400312a075a62b2e5fba2b953ed2ea426e8ae2",
+        "tasks/exceltable-in-ppt/environment/input.pptx": "23983c078eed6dcff8ed70dd260454be0acdfc7a890db68549e74c12d24a82b7"
+      },
+      "task_input_digest": "563f741f86c765490c698114e3f40fdc3ce926849c466a2be2dbf1e165ca6471",
+      "rights_review": {
+        "path": "reports/toolkit-v2/c13/skillsbench-document-rights-20261106/operation-review.json",
+        "sha256": "e257a1d6ed64ef654792ba553395d689c9124a9eb4ddc24b77cce33654186cc3"
+      },
+      "protected_grader": {
+        "image": "sha256:8eef4a0ccd7102086b16898331e89cc3e7893931d270fdae6a2601a7cbac1efa",
+        "historical_review": {
+          "path": "reports/toolkit-v2/c13/skillsbench-document-managed-20261106/packaged-grading/grader-review.json",
+          "sha256": "634a94c7e93183f3b546a2e63da681c4164b92c191f3dec38a34ee9a8203981f"
+        },
+        "historical_recipe_digest": "0968b07cedea1c52d7af1ffc4d6363600b4ae8fd3d540dd96078e601e2a319cf",
+        "original_validator_binding": "1470806c4e6733ed0b5901dbfd4beade0459943c43bf9839235f52cd2d8d04c2"
+      }
+    },
+    {
+      "id": "canopen-python__canopen-613-declared-tests",
+      "domain": "software-engineering",
+      "origin": "upstream_issue",
+      "repository": "https://github.com/canopen-python/canopen",
+      "revision": "593f0621f41ce3f94c09322ca8414c7e649b128e",
+      "public_archive": {
+        "path": ".aeep/repository-usefulness-pilot-20261029/public/acb9bf4e8eab94b3b5a7554ab6f913086eb2c5d714a57350b60ce708f37b2a90.tar.gz",
+        "sha256": "acb9bf4e8eab94b3b5a7554ab6f913086eb2c5d714a57350b60ce708f37b2a90",
+        "bytes": 104376
+      },
+      "task_input_digest": "abadc2b1f40b3fa8729e042ff313d1aecb52dc96ba4eef672f68155447d566b7",
+      "rights_record": {
+        "path": "reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/cohort.json",
+        "sha256": "d13109f2a80d73105698d0254226ef35053c48e1aa4ae7fd36c95c1f530ba3ea"
+      },
+      "protected_grader": {
+        "image": "sha256:9f473c493b7af1854922807d2acbdcbe3b955313dc57f203e6f73c9c50f9ea85",
+        "historical_recipe": {
+          "path": "reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/recipe.json",
+          "sha256": "1a458664217bd60a8bf6a60d6d2a16ad37bc15d601407e95f0367048d0665b28"
+        },
+        "binding": "0c68f5852a63c5624bbcfb45322fff24460627e506825318ac49e581a584a57a",
+        "reference_digest": "abee6999dfca5f9f1f2c3c557380d710dc36680a9fed7471985c6ea8d2d2f942",
+        "required_test_identities": 8
+      }
+    },
+    {
+      "id": "tefra__xsdata-1126-issue-behavior-audit",
+      "domain": "software-engineering",
+      "origin": "authored_control",
+      "repository": "https://github.com/tefra/xsdata",
+      "revision": "b6bd7e912ee346a0f5471543db31e2d6aa8a9809",
+      "public_archive": {
+        "path": ".aeep/repository-usefulness-pilot-20261029/public/cc7d9d8712746971b216188420716736881390e626bf40cce9c173060559d428.tar.gz",
+        "sha256": "cc7d9d8712746971b216188420716736881390e626bf40cce9c173060559d428",
+        "bytes": 328513
+      },
+      "task_input_digest": "4c523dba61f43556970959b251423edc3b33fcc85619141ee80b8c846a50b4eb",
+      "rights_record": {
+        "path": "reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/cohort.json",
+        "sha256": "d13109f2a80d73105698d0254226ef35053c48e1aa4ae7fd36c95c1f530ba3ea"
+      },
+      "protected_grader": {
+        "image": "sha256:9f473c493b7af1854922807d2acbdcbe3b955313dc57f203e6f73c9c50f9ea85",
+        "historical_recipe": {
+          "path": "reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/recipe.json",
+          "sha256": "1a458664217bd60a8bf6a60d6d2a16ad37bc15d601407e95f0367048d0665b28"
+        },
+        "binding": "1dbdba710843211348834e15335ea5252ee5300add41f3888dc706c1d38607ad",
+        "reference_digest": "dda9fbec3e4632029b043296bbd69e07ccf70e1716e3605ed0ccbea26ced8fbb",
+        "required_test_identities": 29
+      }
+    }
+  ],
+  "pair_order_by_task": [
+    "baseline/treatment",
+    "treatment/baseline",
+    "baseline/treatment",
+    "treatment/baseline"
+  ],
+  "analysis": {
+    "tier": "Exposed development tasks. Report paired observations by task and by domain.",
+    "primary": "Original protected 0/1 task score and matched difference.",
+    "secondary": "Matched provider input, cached input, cache-write, output, and reasoning token fields when present; wall time; operation costs; failure and measurement coverage.",
+    "candidate_use": "Record listed, retrieved and invoked separately where evidenced. Unknown utilization stays unknown.",
+    "repetitions": 1,
+    "formal_hypothesis_or_selection_claim": false
+  },
+  "maximum_live_scope": {
+    "model_turn_reservations": 8,
+    "operations_including_readiness_grading_and_reporting": 640,
+    "seconds_reserved_including_readiness_grading_and_reporting": 32000,
+    "single_model_turn_timeout_seconds": 300,
+    "reservation_basis": "At most 80 operations and 4,000 seconds per trial-equivalent, including setup and verification. Derive the actual upper allowance from the exact schedule before requesting live approval.",
+    "cash_usd": "0",
+    "automatic_retries": 0,
+    "minimum_host_free_bytes": 53687091200
+  },
+  "grant_readback": {
+    "authorization_id": "onboarding",
+    "current_counters": [
+      13929,
+      3809,
+      126868.71574172053,
+      "0.0"
+    ],
+    "current_limits": {
+      "max_operations": 50000,
+      "max_model_turns": 6000,
+      "max_elapsed_seconds": 604800.0,
+      "max_cash_usd": "0"
+    },
+    "expires_at": "2026-11-16T03:23:44.656789+00:00",
+    "expired_at_plan_preparation": true,
+    "previous_budget_amendment": "936c036876376d7f456fa0ab3fcc55e2397e497a72f5254755d6380de0f55913",
+    "prior_reservations_preserved": 2
+  },
+  "disclosure_limit": "The four bound public tasks and their exact permitted inputs, editable paths, output contracts, and reviewed candidate instructions as used, through the existing managed Codex proxy only. Protected tests and reference outputs stay in the offline grader. No new service, credential access, cash spending, fallback, publication or release.",
+  "prerequisites_for_dispatch_proposal": [
+    "Freeze actual additive worker image IDs, shared tool parity, candidate bytes/rights, source-bound isolation and collector receipts, and repository public archive wiring.",
+    "Retain genuine protected grades for reference, failure controls and error handling under the exact current carrier. Keep historical engineering plans at their original scope.",
+    "Exercise the bounded development schedule with local substitutes. Freeze canonical assessment and operation reviews and confirm they fit the existing grant with an expiry-only amendment.",
+    "Obtain separate explicit operator approval of the complete live review before any provider contact."
+  ],
+  "stop_conditions": [
+    "Any source, image, task, grader, model, destination, permission, inventory, budget or authority drift.",
+    "Any denied isolation probe, unavailable exact model, unsettled relevant attempt, or inadequate disk reserve.",
+    "Any indeterminate trial, missing required grade or token-capture evidence, accounting mismatch or uncertain cleanup. Retain successful settlement and genuine zero-score task outcomes. Reconcile an incomplete run read-only."
+  ],
+  "live_review_sha256": null,
+  "plan_preparation": {
+    "worker_starts": 0,
+    "model_calls": 0,
+    "host_free_bytes": 114501173248
+  }
+}
