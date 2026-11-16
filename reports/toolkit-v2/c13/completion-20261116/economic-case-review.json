@@ -1,0 +1,193 @@
+{
+  "schema_version": "aeep.c13.skillsbench-economic-case-review.v1",
+  "case": "econ-detrending-correlation",
+  "revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+  "source_pins": [
+    {
+      "path": "tasks/econ-detrending-correlation/environment/Dockerfile",
+      "git_blob": "4e2d1a4fad78c962e0a9e8f8e444e5fdf6fd6da5",
+      "size_bytes": 517,
+      "sha256": "8d68f3346fb1d061a25cb6b86da188a79a30a2b0a894cb96424fec07fcd5ddba"
+    },
+    {
+      "path": "tasks/econ-detrending-correlation/oracle/solution.py",
+      "git_blob": "bcd529205074476e3cc4cac523e895544fcb99f4",
+      "size_bytes": 5911,
+      "sha256": "af3e454f221c02c79eb5c949944d8b33549887b0ea04cb1dfc2dbebf58991870"
+    },
+    {
+      "path": "tasks/econ-detrending-correlation/oracle/solve.sh",
+      "git_blob": "4c000a2117cb6f994393475085dc2bcd629cde56",
+      "size_bytes": 6118,
+      "sha256": "4f2ea26cf33e374761369ff5948c70a1f5e48345ecce75c9420e09272c3599eb"
+    },
+    {
+      "path": "tasks/econ-detrending-correlation/task.md",
+      "git_blob": "c1a9c76635a3ccb813250af9ac1c384a10922653",
+      "size_bytes": 2813,
+      "sha256": "7956e369eb1bce4db2000e3fad9f7d564269505061ccb5c28d21f90ef51a47a4"
+    },
+    {
+      "path": "tasks/econ-detrending-correlation/verifier/test.sh",
+      "git_blob": "b90bba3f5d22b147f156a058275bca8d319d6cc7",
+      "size_bytes": 831,
+      "sha256": "c51f1d7aec614fda9fedf6db675921bad464e31cc66151bb40684b874f463223"
+    },
+    {
+      "path": "tasks/econ-detrending-correlation/verifier/test_outputs.py",
+      "git_blob": "05e36d28f2fc20165353a6b9e50546c62cb328b7",
+      "size_bytes": 3283,
+      "sha256": "7a1dcf2db177d6297e36c7b4ea563518af5c8102031e1d3c9afa04fe8b25b366"
+    }
+  ],
+  "input_assets": [
+    {
+      "name": "CPI.xlsx",
+      "git_blob": "a351b30997b8964ace17ddedcd5c0034fdeff874",
+      "bytes": 10243,
+      "sha256": "b85b623165f078588d5412f99b624c2b7eca9d0fb93ea55039e28b4e2a0f1911",
+      "workbook": {
+        "rows": 53,
+        "formulas": 0,
+        "external_links": 0,
+        "has_macros": false
+      }
+    },
+    {
+      "name": "ERP-2025-table10.xls",
+      "git_blob": "6ca6e260e7db7168dd8f9779ada5116107dc627b",
+      "bytes": 44544,
+      "sha256": "7ca56ea3978f1ee38b51f35bfa5694f589f728a20d39a97d4e14b78525cb34f6",
+      "publisher_url": "https://www.govinfo.gov/content/pkg/ERP-2025/xls/ERP-2025-table10.xls",
+      "publisher_sha256": "7ca56ea3978f1ee38b51f35bfa5694f589f728a20d39a97d4e14b78525cb34f6",
+      "publisher_exact_match": true
+    },
+    {
+      "name": "ERP-2025-table12.xls",
+      "git_blob": "7193214212776eba524f78bf3248092faf1fba62",
+      "bytes": 46592,
+      "sha256": "606b5bb00467eed87359dcb1233e28e97979978d2b70c6a228e004640604f814",
+      "publisher_url": "https://www.govinfo.gov/content/pkg/ERP-2025/xls/ERP-2025-table12.xls",
+      "publisher_sha256": "606b5bb00467eed87359dcb1233e28e97979978d2b70c6a228e004640604f814",
+      "publisher_exact_match": true
+    }
+  ],
+  "published_pdf_custody": [
+    {
+      "url": "https://www.govinfo.gov/content/pkg/ERP-2025/pdf/ERP-2025-table10.pdf",
+      "pdf_sha256": "acb8376af080c355b2944cf0a3b9d4d879383e0a4c12683b88b60522b685d91a",
+      "text_sha256": "d47ae0952a7c84d46f9d2ef2851c2626eb00e3786100687bddad03e4b0ec7e62",
+      "bytes": 470705
+    },
+    {
+      "url": "https://www.govinfo.gov/content/pkg/ERP-2025/pdf/ERP-2025-table12.pdf",
+      "pdf_sha256": "bc2dc7395a5ae40baecf823b1400789fcf6bb4a2300c374f8cc17f82670588b0",
+      "text_sha256": "d4040421a1293ea01ed80880841cbe6d0e619dca42e0276ad47ca7bd46dc4b22",
+      "bytes": 546061
+    }
+  ],
+  "published_cpi_rebasing_evidence": {
+    "years": 52,
+    "rebasing_formula": "annual mean divided by corresponding 2024 mean",
+    "series_checks": [
+      {
+        "key": "latest-SA",
+        "requested_vintage": null,
+        "actual_csv_columns": [
+          "observation_date",
+          "CPIAUCSL"
+        ],
+        "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCSL&cosd=1973-01-01&coed=2024-12-31",
+        "sha256": "38f915a5825677a1eaf5b4fc21961a4f17d4f923c5f933d8e4f2ec9d8ebcc51f",
+        "matched_to_1e-9": 1,
+        "matched_to_1e-4": 45,
+        "max_ratio_gap": 0.0002552520635145661
+      },
+      {
+        "key": "latest-NSA",
+        "requested_vintage": null,
+        "actual_csv_columns": [
+          "observation_date",
+          "CPIAUCNS"
+        ],
+        "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCNS&cosd=1973-01-01&coed=2024-12-31",
+        "sha256": "d7c68e0dd12b47ac4722a427cb8668e834bfb4a0e0ceeee62629be97c2e9d6a1",
+        "matched_to_1e-9": 52,
+        "matched_to_1e-4": 52,
+        "max_ratio_gap": 2.220446049250313e-16
+      },
+      {
+        "key": "vintage-SA",
+        "requested_vintage": "2025-04-06",
+        "actual_csv_columns": [
+          "observation_date",
+          "CPIAUCSL_20250406"
+        ],
+        "url": "https://alfred.stlouisfed.org/graph/alfredgraph.csv?id=CPIAUCSL&cosd=1973-01-01&coed=2024-12-31&vintage_date=2025-04-06",
+        "sha256": "6709db7b62768135e18a18ad056d41fc2ad8411f5a3649e721c06b11f73c28f6",
+        "matched_to_1e-9": 1,
+        "matched_to_1e-4": 45,
+        "max_ratio_gap": 0.0002556236234518283
+      },
+      {
+        "key": "vintage-NSA",
+        "requested_vintage": "2025-04-06",
+        "actual_csv_columns": [
+          "observation_date",
+          "CPIAUCNS_20250406"
+        ],
+        "url": "https://alfred.stlouisfed.org/graph/alfredgraph.csv?id=CPIAUCNS&cosd=1973-01-01&coed=2024-12-31&vintage_date=2025-04-06",
+        "sha256": "8cbb7a8f1d6320020c79e24a6c740420c219c108c2beb9b9aee34a62a357d23f",
+        "matched_to_1e-9": 52,
+        "matched_to_1e-4": 52,
+        "max_ratio_gap": 2.220446049250313e-16
+      }
+    ]
+  },
+  "publisher_terms": [
+    "https://www.govinfo.gov/about/policies",
+    "https://fred.stlouisfed.org/series/CPIAUCNS"
+  ],
+  "source_note": "The exact ERP tables match the GovInfo downloads. The workbook column states CPI_2024 and matches all 52 annual means of BLS CPIAUCNS divided by the 2024 mean. The task links CPIAUCSL, whose rebased values do not match the workbook to this precision.",
+  "text_extraction": {
+    "tool": "pdftotext 25.01.0",
+    "arguments": [
+      "-layout",
+      "-",
+      "-"
+    ]
+  },
+  "oracle_check": {
+    "included_years": 52,
+    "first_year": 1973,
+    "last_year": 2024,
+    "third_quarter_last_in_published_2024_tables": true,
+    "matches_upstream_reference_at_five_decimals": true,
+    "rejected_by_numeric_tolerance": {
+      "quarterly_smoothing": true,
+      "nominal_series": true,
+      "unlogged_series": true,
+      "excluded_2024": false
+    },
+    "all_four_controls_change_the_five_decimal_result": true,
+    "upstream_verifier_execution": false
+  },
+  "scope_note": "The independent calculation used the official table representations. It did not execute the published solver or protected verifier. Public verifier constants are available to models through training exposure; private worker isolation does not resolve that risk.",
+  "pending": [
+    "Freeze and verify a supplemental five-decimal and missing-year control before formal enrollment.",
+    "Run the original verifier with the authorized contained first-party carrier and retain real protected result records.",
+    "Keep benchmark and publisher attribution, and record the case-specific rights, exposure and authorized destination before disclosure.",
+    "Review independence before placing this case in any split."
+  ],
+  "formal_case_adopted": false,
+  "provider_transfer": false,
+  "new_model_turns": 0,
+  "verification": {
+    "ruff": "passed",
+    "repository_suite_regressions": 100,
+    "schema_drift": "passed",
+    "offline_docs": "passed",
+    "new_report_lint_and_links": "passed",
+    "product_source_changed": false
+  }
+}

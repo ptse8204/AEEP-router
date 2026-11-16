@@ -48,6 +48,19 @@ presentation, and both Georgia investment shock tasks out of formal runs at
 these verifier pins. The identified faults remain unexecuted. No case was
 adopted.
 
+The [common transport preparation](../../reports/toolkit-v2/c13/completion-20261116/formal-transport-preparation.json)
+converts two legacy patch artifacts to the existing gzip profile. All 41
+provisional software cases now share one profile. Source, tests and
+stage metadata stay intact. Synthetic callback checks passed. Both
+new bindings need protected execution. At least 100 rows remain before
+independence and adoption.
+
+The [economic detrending case](../../reports/toolkit-v2/c13/completion-20261116/economic-case-review.json)
+has verified publisher lineage for all three inputs and an independent
+five-decimal calculation. Missing 2024 passes the upstream tolerance.
+The case remains provisional pending a supplemental control, protected
+runtime evidence and stage review.
+
 The [new workbook reference](../../reports/toolkit-v2/c13/completion-20261116/workbook-reference-result.json)
 passed 19 original SkillsBench checks. The protected verifier rejected both
 missing and incomplete output. The first interpreter check failed before

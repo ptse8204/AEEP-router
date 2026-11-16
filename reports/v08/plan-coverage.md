@@ -30,6 +30,13 @@ The [document verifier screening](../toolkit-v2/c13/completion-20261116/document
 found gaps in four additional SkillsBench tasks. Keep them out of formal
 trials at their current pins. No protected verifier ran.
 
+The [repository transport preparation](../toolkit-v2/c13/completion-20261116/formal-transport-preparation.json)
+fits the 41 provisional cases to a common worker profile. Two changed
+bindings still need contained grading. The
+[economic detrending review](../toolkit-v2/c13/completion-20261116/economic-case-review.json)
+verified exact publisher inputs and found a missing-year grading gap.
+Neither preparation adopted a formal case.
+
 The [Toolkit V2 Linux installation check](../toolkit-v2/c13/completion-20261116/linux-private-install-result.json)
 passed for the pinned Linux ARM64 glibc container. It verified the owned
 runtime lifecycle and matched the macOS synthetic reports. The separate

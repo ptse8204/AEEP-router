@@ -77,13 +77,16 @@ excluded by the October study. Stage assignment remains unfrozen and zero cases
 are adopted. Even if all 41 survive final review, the 8/28/105 plan needs at
 least 100 additional distinct cases.
 
-A single campaign using the existing gzip artifact bridge has 39 compatible
-provisional rows. The other two use plain JSON. If all 39 qualify for holdout,
-the current three-family design still needs at least 27 contract audits,
-20 multi-file repairs and 19 single-file repairs in holdout, plus 36 separate
-qualification and training cases. Source independence and protected reproduction
-may increase those counts.
-[Transport and family counts](formal-transport-intake.json)
+The [original transport intake](formal-transport-intake.json) found 39 of
+the 41 provisional cases used gzip patches. The
+[transport preparation](formal-transport-preparation.json) converted the two
+legacy references and fault artifacts to the existing gzip profile. Both
+cases sent identical protected archives and wheel inputs through the
+coordinator callback. The new profile also checks source module identity.
+Synthetic callback responses verified both fault branches and bad-base
+rejection. Both cases need protected runtime validation on the new
+bindings. The common profile now covers 41 provisional rows, with a
+minimum shortfall of 100 before independence and adoption.
 
 The cached queue contains 63 potential inputs with matching source archive
 hashes and prior license records, 57 without complete matched records and 12
@@ -143,6 +146,18 @@ shock tasks out of formal trials at these pins. The checked assertions can
 miss misplaced form text, an unreachable reference slide, missing demand
 scenarios or an unfitted supply trend. These are static findings. No verifier
 ran and no case qualified.
+
+For the [economic detrending case](economic-case-review.json), the two
+bundled ERP tables match the official downloads byte for byte. All 52 CPI
+entries reproduce from annual means of the unadjusted BLS series divided
+by its 2024 mean. The supplied task links the seasonally adjusted series.
+An independent calculation matched the reference to five decimals. The
+original tolerance would also accept a calculation missing 2024, even
+though the answer changes at the requested precision. Keep the case
+provisional until a supplemental control and a protected runtime check
+are frozen and verified. No verifier, agent or candidate ran.
+[GovInfo tables](https://www.govinfo.gov/app/collection/erp/2025) ·
+[BLS series via FRED](https://fred.stlouisfed.org/series/CPIAUCNS)
 
 The first new document/data reference, `xlsx-recover-data`, passed all 19
 upstream checks. Missing output produced one failure and 18 skips. The
