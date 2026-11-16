@@ -70,7 +70,7 @@ def git_tree(entries):
     return tree(root).hex()
 
 
-def inventory(path, revision):
+def inventory(path, revision, *, omitted_gitlinks=None):
     if (
         path.resolve() != path
         or not path.is_relative_to(ROOT / ".aeep")
@@ -145,7 +145,17 @@ def inventory(path, revision):
             file_entries[relative] = (mode, git_object("blob", data))
     if not file_entries:
         raise ValueError("archive has no source files")
-    return git_tree(file_entries), notices, len(file_entries), sha(raw)
+    archive_entries = len(file_entries)
+    for name, revision in (omitted_gitlinks or {}).items():
+        relative = PurePosixPath(name)
+        if (
+            relative.is_absolute() or not relative.parts or relative.as_posix() != name
+            or ".." in relative.parts or relative.parts in file_entries
+            or REVISION.fullmatch(revision) is None
+        ):
+            raise ValueError("invalid omitted submodule pointer")
+        file_entries[relative.parts] = (b"160000", bytes.fromhex(revision))
+    return git_tree(file_entries), notices, archive_entries, sha(raw)
 
 
 class CommitRedirect(urllib.request.HTTPRedirectHandler):

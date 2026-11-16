@@ -149,6 +149,17 @@ optimistic software pool now has 94 rows. At least 47 remain, including
 22 contract audits and eight multi-file repairs for the holdout. The five
 new cases need exact runtime closures and protected verification.
 
+Three [cached multi-file projections](../../reports/toolkit-v2/c13/completion-20261116/cached-multifile-projections.json)
+advance Sentry, PDFly and Hugging Face Hub. The first two reconstruct
+their published trees using the exact omitted submodule pointers. The
+Hugging Face Hub projection omits one upstream instruction file and its
+symlink under the existing archive safety rules. The original archives
+stay intact. All 66 published test identities were retained. PDFly's
+required 78,657-byte fixture and notices are pinned privately. The pool
+has 97 provisional software rows, with at least 44 missing. The holdout
+still needs at least 22 audits and five multi-file repairs. All three
+cases need protected runtime verification.
+
 The [new workbook reference](../../reports/toolkit-v2/c13/completion-20261116/workbook-reference-result.json)
 passed 19 original SkillsBench checks. The protected verifier rejected both
 missing and incomplete output. The first interpreter check failed before

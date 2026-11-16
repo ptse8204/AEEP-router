@@ -87,6 +87,12 @@ stage 183 published test identities and five source-preservation guards.
 Both inert preparations matched. The optimistic software shortfall fell
 to 47. Protected reference and fault outcomes remain unverified.
 
+Three [cached multi-file projections](../toolkit-v2/c13/completion-20261116/cached-multifile-projections.json)
+reconcile two omitted Git submodules and one upstream instruction symlink.
+The three cases retain 66 published identities. PDFly's required fixture
+is separately pinned for the protected grader. The optimistic software
+shortfall fell to 44. Protected execution and formal adoption remain open.
+
 The [A2A receipt bridge audit](../toolkit-v2/c13/completion-20261116/a2a-receipt-bridge-audit.json)
 matched four canonical receipts, rebuilt both pairs of protected fixtures
 and verified their scoring through the ordinary callback. Three wheel

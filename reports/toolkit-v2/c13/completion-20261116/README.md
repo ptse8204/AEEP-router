@@ -189,6 +189,24 @@ across 60 repository families, leaving at least 47 missing before formal
 stage assignment. The 105-case holdout still lacks at least 22 audits
 and eight multi-file repairs.
 
+Three [cached multi-file projections](cached-multifile-projections.json)
+recover the retained Sentry, PDFly and Hugging Face Hub candidates. The
+Sentry and PDFly archives match their published trees when the exact
+submodule pointers are included in the identity check. Their contents
+stay outside the worker archive. Hugging Face Hub's complete archived
+tree matched, and the worker projection excludes its upstream instruction
+file and symlink. All three preserve the 66 published test identities.
+A fresh inert preparation reproduced every byte. The controls rejected
+incorrect submodule pointers and an unexpected symlink.
+The PDFly verifier needs the pinned submodule's three-page PDF. The private
+copy matched the published Git blob. The publisher's notices identify it
+as CC BY-SA 4.0. The verifier still needs the file at its original relative
+path inside the protected grader. Sentry's optional schema and the other
+runtime dependencies need protected verification. The optimistic software
+pool now has 97 rows. The shortfall is at least 44, including 22 contract
+audits and five multi-file repairs for the holdout.
+[Publisher fixture notice](https://raw.githubusercontent.com/py-pdf/sample-files/91b6d24a3b86bad1f20b707ec54555d89acc0c12/README.md)
+
 The [Wemake selector preflight](wemake-native-selector-preflight.json)
 reconstructed all 117 projected test identities from the literal upstream
 parameters. The 27 published selectors include 19 prefixes. Their synthetic

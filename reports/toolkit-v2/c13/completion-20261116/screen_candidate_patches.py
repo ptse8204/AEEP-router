@@ -85,7 +85,7 @@ def python_source(name, roots):
             and not any(path.is_relative_to(root) for root in roots))
 
 
-def assess(lead, helpers, *, reviewed_documentation_additions=()):
+def assess(lead, helpers, *, reviewed_documentation_additions=(), normalize_source=None):
     binding = lead['source_bindings'][0]
     archived = ROOT / binding['archive']
     raw = archived.read_bytes()
@@ -100,7 +100,8 @@ def assess(lead, helpers, *, reviewed_documentation_additions=()):
     if row['install_config'].get('env_vars'):
         raise ValueError('published runtime declares external environment inputs')
 
-    files = helpers['archive'].normalize_large(raw)
+    normalize_source = normalize_source or helpers['archive'].normalize_large
+    files = normalize_source(raw)
     for notice in binding['license_notices']:
         data = files[notice['file']]
         if sha(data) != notice['sha256'] or len(data) != notice['bytes']:
