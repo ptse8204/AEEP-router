@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [current C13 beta handoff](../toolkit-v2/c13/completion-20261116/README.md)
+revalidates 37 in-scope stack checks with Waza excluded. The macOS private wheel
+installed and produced fixture reports. Finder metadata blocked clean rollback
+and the owned runtime remains preserved. Formal candidate and AEEP selection
+evidence, broader compatibility and release remain open.
+
 The [direct LibCST rerun](../toolkit-v2/c13/managed-comparison-20261115/DIRECT_LIBCST_RERUN.md)
 extends receipt-bound observation to direct isolated Python import,
 parse and transformation calls. Four fresh live turns retained the

@@ -1,5 +1,15 @@
 # AEEP Toolkit architecture decisions (living log)
 
+## November 16 delivery scope
+
+Waza is excluded at the operator's direction. Use the existing v2 readiness
+record with 37 required checks across 18 entries on the verified execution
+source. Retain historical Waza records and the existing prohibition on selecting
+it without functional evidence. Keep stack integration, candidate usefulness
+and selection usefulness separate. The 8/28/105 counts, formal thresholds
+and release authority retain their original scope.
+[C13 beta handoff](../../reports/toolkit-v2/c13/completion-20261116/README.md)
+
 ## November 15 Waza local backend
 
 Retain the verified Ollama 0.40.16 installation and the five pinned Qwen3

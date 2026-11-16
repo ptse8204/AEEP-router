@@ -1,5 +1,11 @@
 # Upstream source review and reuse decisions
 
+The [November 16 readiness audit](../../reports/toolkit-v2/c13/completion-20261116/readiness-audit.json)
+accepts all 37 checks for the selected stack and retains the original evidence
+references and source pins. The operator excluded Waza from this delivery.
+The Waza setup below is historical. Candidate and selection usefulness remain
+separate from functional readiness.
+
 The current [Waza engineering path](../../reports/toolkit-v2/c13/waza-ollama-20261115/SERVICE_CONTINUATION.md)
 uses the pinned Waza evaluator, Copilot SDK custom provider and local
 Ollama. Retained installation passed. Local service readiness and actual

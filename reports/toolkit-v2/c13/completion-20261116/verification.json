@@ -1,0 +1,23 @@
+{
+  "targeted_source_tests": {
+    "passed": 180,
+    "paths": [
+      "tests/test_toolkit_runtime_install.py",
+      "tests/test_toolkit_stack_readiness.py",
+      "tests/test_repository_suites.py"
+    ],
+    "source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+    "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python3 -B -m pytest -q -p no:cacheprovider tests/test_toolkit_runtime_install.py tests/test_toolkit_stack_readiness.py tests/test_repository_suites.py"
+  },
+  "toolkit_source_changed": false,
+  "audit_replay_byte_identical": true,
+  "ruff_audit_scripts": "PASS",
+  "offline_docs": {
+    "passed": true,
+    "markdown_files": 72,
+    "local_links_ok": 1249,
+    "local_link_errors": 0,
+    "log_sha256": "a0fa18982c62a720310a6e8a2e5c2831ed6540c4673e103c5dac4d9158828c96",
+    "new_handoff_markdown_and_links": "PASS"
+  }
+}

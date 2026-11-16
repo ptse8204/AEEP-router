@@ -1,5 +1,28 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 16. C13 remains open. Waza is excluded from this delivery.**
+The [current beta handoff](../../reports/toolkit-v2/c13/completion-20261116/README.md)
+revalidates all 37 in-scope stack checks and both ordinary CLI workflows
+against the operational ledger and frozen source `4e673a6d`. It retains
+the private macOS arm64 / Python 3.13 LIMITED_BETA recommendation. Production
+release and public benefit claims remain NO_GO.
+
+The new wheel installed, reapplied idempotently, staged a synthetic candidate
+and rendered both reports. Removal rejected three added Finder files and
+preserved the runtime. A verified restoration preserved the three files
+outside the runtime. New Finder files appeared between the two deletion
+guards, leaving a durable `removing` journal and no verified deletion.
+Preserve that runtime and journal. Clean current-wheel removal still needs
+an independent check in a fresh private root outside the observed tree.
+
+The formal-input audit verifies 41 provisional cases and 135 asset bindings.
+It identifies 63 additional cached candidates with matched acquisition and
+license records. No stages are frozen and at least 100 case rows are missing
+before independence review. The development studies remain at their original
+scope. The next work is protected case curation and an independent document/data
+workload, followed by separately reviewed candidate and selection studies.
+Existing grant counters, measurements and prior observations stay intact.
+
 **November 16. Direct LibCST observer verified and both software pairs rerun.**
 The [direct-use report](../../reports/toolkit-v2/c13/managed-comparison-20261115/DIRECT_LIBCST_RERUN.md)
 binds four per-test outcomes and both usage observers to the canonical
@@ -2507,10 +2530,10 @@ checkpoint_status:
   C11: PASS
   C12: PASS
   C13: IN_PROGRESS
-last_verified_commit: 'df9eee7f2535a47e957418da0747c2d428641f26'
-last_check_command: 'stack-delivery-20261030/validation/checks.json:13/13 on working source24dccd3e;1798passed/21skipped per full run. Actual732f attempt reconciled; no retry.'
-last_check_result: 'Source24dccd3e13gates passed,82%coverage,both branch gates. Source includes preserved CI inputs. Named workflow software checks passed; no new live stack/value/selection pass.732f buildCLI failed125,no image/tool check;2operations and2.255710876sec retained. Corrected review pending. OriginalPonytail14/19both preserved.'
-next_action: 'Comparisons paused. Telemetry source5a13a630 passes all13 gates:2134tests/21skips twice,82.697%coverage,both branch gates. Frozen source408files and wheel5fe1fa9b prepared. Obtain exact workflow-telemetry-20261104/operation-review.json approval before six-image acquisition,current-wheel/offline-doc execution; no services or credentials authorized. Preserve50GiB/all old resources and42 settled SkillRank charges. After acquisition,static license/startup audit then separate Langfuse service review. Unrelated CI work remains.'
+last_verified_commit: 'a95dc065'
+last_check_command: 'See C13 completion-20261116 readiness, package and formal-input audits. Read-only operational ledger validation on frozen source 4e673a6d.'
+last_check_result: '37/37 in-scope stack checks accepted. Waza excluded. Wheel install, idempotence, synthetic candidate inspection and reports verified; Finder interference stopped clean rollback. 41 provisional cases passed static asset checks; no formal stages or efficacy claims.'
+next_action: 'C13 completion-20261116: advance the 63 source-bound leads through scope, rights and protected reference review; prepare independent document/data workload. Preserve the interrupted wheel runtime and verify clean rollback in a fresh private root. Prepare exact new disclosure and scope review before formal model dispatch. Production release remains separately gated.'
 blocked_actions:
   - 'Helped report comprehension is recorded. The operator removed the concrete control exercise from the critical path on October29;control-use qualification remains unmeasured and is not an engineering/comparison blocker.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'
