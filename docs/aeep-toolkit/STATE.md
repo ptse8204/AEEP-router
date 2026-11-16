@@ -9,8 +9,10 @@ release and public benefit claims remain NO_GO.
 
 The [Formula Extraction acquisition](../../reports/toolkit-v2/c13/completion-20261116/formula-runtime-acquisition-result.json)
 passed approved review `bedcde5c`. Both exact artifacts verified at
-160,981,322 bytes total. The seven original assertions and four protected
-roles remain staged. The browser and verifier have never run.
+160,981,322 bytes total. The [protected result](../../reports/toolkit-v2/c13/completion-20261116/protected-reference-group-result.json)
+then recorded seven passing reference checks under the corrected pixel
+comparison. Wrong and incomplete output scored 0/1. With MathJax withheld,
+the renderer timed out and no task grade was recorded.
 
 The [approved A2A batch](../../reports/toolkit-v2/c13/completion-20261116/approved-a2a-batch-results.json)
 reproduced the reference and original-source results for issues 576 and
@@ -18,6 +20,11 @@ reproduced the reference and original-source results for issues 576 and
 published selector appends `Task` to the only matching function, which
 is identical in both fixtures. The original-source call stayed unstarted.
 All five dispatched operations settled and no formal stage was assigned.
+The [selector correction](../../reports/toolkit-v2/c13/completion-20261116/protected-reference-group-result.json)
+collected all 81 identities on each fixture. The reference passed all 81.
+The original passed 78 and failed three. Its cancellation-queue assertion
+passed on both fixtures, whose selected test and handler functions match.
+Issue 472 remains excluded at this pin. The two prior pairs were reused.
 
 The [repository patch batch](../../reports/toolkit-v2/c13/completion-20261116/repository-patch-batch-intake.json)
 staged protected reproduction inputs for 42 cases across 29 repositories.
@@ -25,8 +32,8 @@ Two inert preparations matched on all 168 assets. Runtime review is next.
 The [Formula Extraction review](../../reports/toolkit-v2/c13/completion-20261116/formula-verifier-assessment.json)
 matched the exact PDF to its first author's contribution and demonstrated a
 pixel-comparison false positive. The proposed all-channel fix passed synthetic
-pixel controls. The full offline verifier and asset-use determination remain
-open. No case was adopted and no formal study ran.
+pixel controls. The full offline verifier passed the four reviewed roles above.
+Formal adoption, asset use and provider disclosure remain open.
 
 The selection recorder rejects a canonical decision with no feasible executor,
 so a blocked task cannot be credited as choosing the baseline. The
@@ -57,13 +64,16 @@ independence and adoption.
 The [economic detrending case](../../reports/toolkit-v2/c13/completion-20261116/economic-case-review.json)
 has verified publisher lineage for all three inputs and an independent
 five-decimal calculation. Missing 2024 passes the upstream tolerance.
-The case remains provisional pending a supplemental control, protected
-runtime evidence and stage review.
+The case remains provisional pending ordinary recipe binding and stage review.
 
 The [economic grader preparation](../../reports/toolkit-v2/c13/completion-20261116/economic-protected-reference-preparation.json)
 binds the four unchanged tests and a second five-decimal check. Review
 `e0b675f2` covers the reference and four fault cases in one offline call.
-The driver passed synthetic checks. No upstream tests ran.
+The [settled protected result](../../reports/toolkit-v2/c13/completion-20261116/protected-reference-group-result.json)
+retains a 1/1 reference and four 0/1 controls from the real suite. The
+upstream checks accepted omitted 2024 data and excess precision. The
+supplemental check rejected both. Across the approved group, all seven
+operations settled in 53.644 summed seconds with zero model turns and $0.
 
 The [ordinary worker transport](../../reports/toolkit-v2/c13/completion-20261116/repository-worker-transport.json)
 maps 42 staged sources and excludes their 126 protected assets from the
@@ -76,9 +86,16 @@ verified six complete archives against public Git trees and staged four
 more repair cases. Fifty-one cached files ended at earlier download caps.
 The [expanded mapping](../../reports/toolkit-v2/c13/completion-20261116/rebound-worker-transport.json)
 preserves all 42 previous bindings and covers 46 staged sources. Runtime
-evidence and stage assignment remain open. Even if all qualify, at least
-54 software rows are missing, including 27 contract audits and 10
-multi-file repairs for the holdout.
+checks have begun. The [updated corpus audit](../../reports/toolkit-v2/c13/completion-20261116/post-protected-corpus-status.json)
+excludes A2A issue 472 and counts 86 provisional software rows across 52
+repository families. At least 55 rows are missing even if all qualify,
+including 27 contract audits and 11 multi-file repairs for the holdout.
+Three document/data candidates have protected reference evidence and need
+ordinary recipe bindings and asset-use review before stage assignment.
+The [new SkillsBench pack](../../reports/toolkit-v2/c13/completion-20261116/independent-document-pack-intake.json)
+passed ordinary CLI inspection. All 26 original files match the pinned Git
+tree. Each of the three worker archives contains only its reviewed input
+paths and instruction. No rights record or stage assignment was registered.
 
 The [new workbook reference](../../reports/toolkit-v2/c13/completion-20261116/workbook-reference-result.json)
 passed 19 original SkillsBench checks. The protected verifier rejected both
@@ -99,9 +116,12 @@ passed approved review `e04a7998`, verified the removed journal and
 preserved the neighboring file and the interrupted runtime residue.
 The FuseSoC runtime intake verifies 17 wheels and their notices. Its first
 protected run collected all 15 tests and failed all 15 on the reference.
-The original-source control stayed unstarted. A draft retains the exact
-tests and repair and puts config and cache in per-trial scratch. FuseSoC
-remains unadopted.
+The approved [scratch repeat](../../reports/toolkit-v2/c13/completion-20261116/fusesoc-scratch-correction-result.json)
+again collected all 15 tests and observed 15 module-import failures.
+Neither archive includes the version module that the upstream build
+generates and the lockfile imports. The repeat settled one operation in
+3.263 seconds. The original-source control stayed unstarted. FuseSoC
+remains provisional pending exact build metadata.
 
 The new wheel installed, reapplied idempotently, staged a synthetic candidate
 and rendered both reports. Removal rejected three added Finder files and
@@ -2636,8 +2656,8 @@ checkpoint_status:
   C13: IN_PROGRESS
 last_verified_commit: 'a95dc065'
 last_check_command: 'See C13 completion-20261116 readiness, package and formal-input audits. Read-only operational ledger validation on frozen source 4e673a6d.'
-last_check_result: '37/37 in-scope stack checks accepted with Waza excluded. The clean macOS rollback passed. Two protected A2A case pairs reproduced and one stopped at collection. Formula browser artifacts were acquired and verified. No formal stages or efficacy claims.'
-next_action: 'C13 completion-20261116: correct the isolated A2A selector binding, verify independent document/data controls, and advance staged repository sources through rights and runtime review. Preserve all original journals and charges. Require applicable authority before protected repeats, formal disclosure or model dispatch. Production release remains separately gated.'
+last_check_result: '37/37 in-scope stack checks accepted with Waza excluded. macOS rollback passed. Formula Extraction and economic grading passed protected controls. A2A 472 collected all 81 tests but missed the expected original-source outcome contract. Seven grouped operations settled at zero models and $0. No formal stages or efficacy claims.'
+next_action: 'C13 completion-20261116: retain A2A 472 as unreproduced at this pin, advance the three protected document/data candidates through rights and stage review, and bind retained repository sources to exact protected runtimes. Preserve all original journals and charges. Require applicable authority before protected repeats, formal disclosure or model dispatch. Production release remains separately gated.'
 blocked_actions:
   - 'Helped report comprehension is recorded. The operator removed the concrete control exercise from the critical path on October29;control-use qualification remains unmeasured and is not an engineering/comparison blocker.'
   - 'Comparative value and AEEP live selection quality remain unproven beyond the bounded inconclusive study. Bounded patch grading and the six-turn real development journey passed fresh conformance. Independent real-task holdouts and new frozen qualification/usefulness/selection comparisons remain incomplete.'

@@ -1,0 +1,50 @@
+{
+  "canonical_database_checked_read_only": true,
+  "case_adopted": false,
+  "cash_usd": 0,
+  "diagnosis": {
+    "exception_module_name_not_captured": true,
+    "expected_generation": "pyproject.toml tool.setuptools_scm.write_to",
+    "failure_category_observed": "ModuleNotFoundError",
+    "fixture_sha256_by_archive": {
+      "original.tar.gz": "540f6a81bb8bf6a3d13db9f8c16e44137cab2323fc0342e1720b94a75654f5c3",
+      "protected-reference.tar.gz": "7286e749015c126520d5514ccb0733b89c52ff65a58de7a58f857f674a4832e1"
+    },
+    "missing_build_input": "fusesoc/version.py",
+    "module_absent_from_both_archives_and_retained_support": true,
+    "proposed_resolution": "Bind the genuine generated build metadata to the pinned source before any further protected run. Preserve both original archives and 15 assertions.",
+    "required_import": "fusesoc/lockfile.py imports version from fusesoc.version"
+  },
+  "execution_record_root": ".aeep/completion-20261116/fusesoc-scratch-correction-execution",
+  "formal_stage_assigned": false,
+  "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+  "ledger_sha256": "50555d0b391d040baee36540203fba4650d7a7b79dbe938204d9a3fbc2e6f7d3",
+  "model_turns": 0,
+  "operation_elapsed_seconds": 3.262999208061956,
+  "original_source_dispatched": false,
+  "passed": false,
+  "prior_reference_failure_sha256": "136f00665568c6db7b00d79d72646fbb059f96cd7485309191bfc01e2a9938bc",
+  "receipt_sha256": "2e634c09fd47d7ad88698376b672e51bc72b28069b4cbca3e6e8b8352bf6f48f",
+  "review_sha256": "992e408da0421b15ada4a32174837e4359ca39991d4320b315e73cfcac79043a",
+  "roles": {
+    "reference": {
+      "observation": {
+        "collected": 15,
+        "exact_test_identities": true,
+        "exit_code": 1,
+        "expected_outcome": false,
+        "failed": 15,
+        "failure_categories": {
+          "ModuleNotFoundError": 15
+        },
+        "passed": 0,
+        "role": "reference",
+        "setup_and_teardown_errors": 0
+      },
+      "passed": false,
+      "receipt_id": "rcpt_68e2d5c23c54443db425e9395de040e1"
+    }
+  },
+  "runtime_image_id": "sha256:4474cf22f867c681aa6120ce2f98d809413f89755cf11a445444b1b993754ea1",
+  "settled_operations": 1
+}

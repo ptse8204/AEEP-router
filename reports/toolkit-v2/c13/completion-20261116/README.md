@@ -156,9 +156,22 @@ those have metadata for multi-file changes within the current patch contract,
 pending full source verification. The [expanded worker mapping](rebound-worker-transport.json)
 now covers 46 staged prospects. All 46 attempts to address private test
 overlays through the public mapping failed. The earlier 42 bindings are
-unchanged. If all staged cases qualify, the software pool would still need
-at least 54 cases, including at least 27 contract audits and 10 multi-file
-repairs for the holdout. No runtime execution or stage assignment occurred.
+unchanged. Excluding A2A issue 472
+leaves 86 provisional rows across 52 repository families. Even if all qualify,
+the software pool needs at least 55 more rows, including 27 contract audits
+and 11 multi-file repairs for the holdout. Repository-disjoint assignment can
+increase the shortfall. Three document/data candidates now have protected
+reference evidence. They still need asset-use review and ordinary recipe
+bindings before stage assignment.
+[Updated corpus audit](post-protected-corpus-status.json)
+
+The [independent document pack](independent-document-pack-intake.json)
+binds 26 original files to the pinned SkillsBench Git tree. Ordinary CLI
+inspection passed for workbook recovery, Formula Extraction and economic
+detrending. The staged archives contain exactly two, two and four files,
+respectively. Each contains its instruction and original inputs. Protected
+tests, reference data, build inputs and bundled skills stay outside the
+archives. The pack is local and prospective.
 
 The [grouped A2A review](a2a-batch-intake.json) covers three published
 source revisions and 127 required test identities. Each reference must
@@ -177,6 +190,15 @@ same test body is present in both fixtures. The batch settled five calls
 in 12.94 seconds with zero models and $0. The three snapshots share one
 repository family, and none has a formal stage assignment.
 [Protected receipts and diagnosis](approved-a2a-batch-results.json)
+
+The approved selector correction ran all 81 identities on both fixtures
+for issue 472. The reference passed all 81. The original passed 78 and
+failed three, one fewer failure than the published contract requires.
+The fourth test, `test_on_cancel_task_queue_tap_returns_none`, passed on
+both fixtures. The selected test and cancellation-handler function bytes
+match across the two pinned fixtures. Keep issue 472 out of the formal
+pool at this pin. The two successful pairs were preserved without replay.
+[Settled protected results](protected-reference-group-result.json)
 
 The next [workload intake](workload-intake-audit.json) checks both domains.
 On the software side, two original patches and protected test overlays apply
@@ -207,11 +229,12 @@ are frozen and verified. No verifier, agent or candidate ran.
 
 The [economic protected reference](economic-protected-reference-preparation.json)
 now binds the unchanged four tests and a separate exact five-decimal check.
-Five prepared artifacts cover the reference, omitted 2024 data, excess
-precision, wrong smoothing and missing output. The planned check retains
-both grading results. Seven driver and six assertion cases passed against
-first-party fixtures. Review `e0b675f2` permits one local offline operation
-and 75 reserved seconds once authorized. The upstream suite remains unstarted.
+Approved review `e0b675f2` ran the five artifacts offline. The reference
+scored 1/1 using both checks. The upstream tests accepted the omitted 2024
+data and excess precision; the supplemental check rejected both. The
+combined grader also rejected wrong smoothing and missing output.
+This verifies the proposed supplemental grader. Formal adoption and
+provider disclosure remain open.
 
 The first new document/data reference, `xlsx-recover-data`, passed all 19
 upstream checks. Missing output produced one failure and 18 skips. The
@@ -267,6 +290,19 @@ The earlier result and charge are preserved.
 [FuseSoC runtime preflight](fusesoc-runtime-intake.json) ·
 [First protected result](fusesoc-protected-reference-result.json)
 
+The scratch correction `992e408d` matched all 1,161 retained file bindings,
+the image layers, the driver and the frozen source. Six first-party driver
+checks covered approval and drift guards, settlement, reference failure and
+uncertain cleanup. The approved repeat collected all 15 tests. Every test
+failed with `ModuleNotFoundError`. The observer retained the exception
+category. Static inspection found that `fusesoc.lockfile` imports
+`fusesoc.version`, which the upstream build generates through setuptools-scm.
+Both staged archives and the support tree lack that module. The original-source
+control stayed unstarted. The one operation settled in 3.263 seconds. Keep
+the case provisional pending a build-metadata binding at the exact revision.
+[Repeat and diagnosis](fusesoc-scratch-correction-result.json) ·
+[Pinned upstream build configuration](https://raw.githubusercontent.com/olofk/fusesoc/d2e6e720222f57cb66d6c303a326d336c582aade/pyproject.toml)
+
 The [static workbook screening](workbook-grader-screening.json) verified 14
 assets across three further SkillsBench cases. Protein Expression checks cell
 presence and types. Powerlifting's accuracy tests recalculate from the input
@@ -284,10 +320,9 @@ three-page input to its first author's contribution to SkillsBench. It also
 shows that the pinned Pillow comparison checks only the difference in alpha
 by default. A synthetic control with equal alpha and different color passed
 the original rule. The proposed all-channel comparison rejected it and
-still accepted identical pixels. Retain the immutable upstream verifier.
-The corrected variant still needs the pinned offline browser and MathJax,
-a full reference run and a wrong-formula control. The contribution and
-license notice support provenance. Asset-use approval remains separate.
+still accepted identical pixels. The immutable upstream verifier remains
+available. The contribution and license notice support provenance.
+Asset-use approval remains separate.
 [Input contribution](https://github.com/benchflow-ai/skillsbench/commit/b0ebf1b3ed9556c21ffcd754a88f1d65e3ef56f6)
 [Pillow 10.4.0 comparison](https://raw.githubusercontent.com/python-pillow/Pillow/10.4.0/src/PIL/Image.py)
 
@@ -300,11 +335,21 @@ revision 1148. The pinned Playwright 1.57.0 verifier requires revision 1200.
 Its matching Chromium archive was inspected with a 65,557-byte metadata
 range. Approved review `bedcde5c` received and verified the two artifacts
 at 160,981,322 bytes total. The browser archive has a recorded SHA-256.
-A separate protected execution review will bind the retained runtime,
-browser and four original verifier roles.
+Approved review `fa6d72b8` ran the four protected roles against the
+corrected pixel comparison. The reference passed all seven checks
+and scored 1/1. The same-length wrong formula and incomplete output
+scored 0/1. With the local MathJax script withheld, the renderer timed out
+and the grader returned an infrastructure error with no task grade. All
+four roles ran with networking disabled.
 [Acquisition result](formula-runtime-acquisition-result.json)
 [Playwright browser pin](https://raw.githubusercontent.com/microsoft/playwright/v1.57.0/packages/playwright-core/browsers.json)
 [Chrome publisher metadata](https://googlechromelabs.github.io/chrome-for-testing/143.0.7499.4.json)
+
+The [grouped review](protected-reference-group.json) covered seven local
+operations. The [result](protected-reference-group-result.json) reconciles
+all seven receipts and operation entries against the canonical databases
+in read-only mode. The settled intervals total 53.644 seconds across the
+operations. The group used zero model turns and \$0. No case was adopted.
 
 The selection recorder now rejects a route decision with no feasible executor.
 Only an actual baseline choice records abstention. A blocked route leaves the

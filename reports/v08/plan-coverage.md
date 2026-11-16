@@ -2,12 +2,19 @@
 
 The [Formula Extraction acquisition](../toolkit-v2/c13/completion-20261116/formula-runtime-acquisition-result.json)
 passed approved review `bedcde5c`. Both archives are digest-bound.
-The protected verifier and browser remain unstarted.
+The [protected result](../toolkit-v2/c13/completion-20261116/protected-reference-group-result.json)
+verifies the corrected renderer against the reference and two wrong outputs.
+With local MathJax withheld, the run recorded an infrastructure error
+and no grade.
 
 The [approved A2A batch](../toolkit-v2/c13/completion-20261116/approved-a2a-batch-results.json)
 reproduced two reference/original-source pairs. The third reference stopped at
 collection. Static review found a published selector mismatch. All five
-operations settled. No case was assigned to a formal stage.
+operations settled. The selector correction ran all 81 identities for
+issue 472. One required original-source failure instead passed on both
+fixtures, whose selected test and handler functions match. Keep that case
+out of the formal pool at this pin. The two reproduced pairs remain intact.
+[Grouped protected results](../toolkit-v2/c13/completion-20261116/protected-reference-group-result.json)
 
 The [C13 repository patch batch](../toolkit-v2/c13/completion-20261116/repository-patch-batch-intake.json)
 staged 42 pinned source and grader inputs, preserving all declared tests.
@@ -40,7 +47,18 @@ The [economic grader preparation](../toolkit-v2/c13/completion-20261116/economic
 preserves the original assertions and stages an independent precision check.
 The [worker transport](../toolkit-v2/c13/completion-20261116/repository-worker-transport.json)
 passed ordinary input mapping and protected-overlay refusal for 42 cases.
-Both still await protected execution. No formal case was adopted.
+The economic reference and four controls passed protected verification.
+The supplemental check rejected two defects accepted upstream. The worker
+transport remains staged for case-specific runtime review. No formal case
+was adopted. The protected group settled seven operations with zero model
+turns and $0.
+
+The [independent document pack](../toolkit-v2/c13/completion-20261116/independent-document-pack-intake.json)
+passed ordinary CLI inspection. The three archives carry only original input
+files and task instructions. Graded recipes and asset-use records remain open.
+The approved [FuseSoC scratch repeat](../toolkit-v2/c13/completion-20261116/fusesoc-scratch-correction-result.json)
+settled one failed reference. Runtime review found missing build-generated
+version metadata. The original-source control stayed unstarted.
 
 The [cache recovery](../toolkit-v2/c13/completion-20261116/cached-repository-rebinding.json)
 verified six complete archives against public Git trees. Four passed inert

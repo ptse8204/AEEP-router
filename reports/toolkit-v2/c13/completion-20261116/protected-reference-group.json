@@ -1,0 +1,48 @@
+{
+  "schema_version": "aeep.c13.protected-reference-group.v1",
+  "reviews": [
+    {
+      "component": "formula",
+      "review_path": ".aeep/completion-20261116/formula-protected-operation-review.json",
+      "review_sha256": "fa6d72b846ec55eeb1cc7ad286d460ccd26838a08033aa18f5822fdc5548ca8d",
+      "purpose": "Four first offline Formula Extraction roles with all seven protected identities.",
+      "maximum_operations": 4,
+      "maximum_reserved_seconds": 480,
+      "tested_driver_scenarios": 6,
+      "expires_at": "2026-11-23T22:23:36.368571+00:00"
+    },
+    {
+      "component": "a2a-selector",
+      "review_path": ".aeep/completion-20261116/a2a-selector-protected-operation-review.json",
+      "review_sha256": "ca82297bafea18eda2f470ea6b6ab6decc8bd367f103e4f4e3e7f9bfc55582d5",
+      "purpose": "Only issue 472 after the single selector correction. Failed reference may repeat. The original-source role stays dependent on a passing reference.",
+      "maximum_operations": 2,
+      "maximum_reserved_seconds": 120,
+      "tested_driver_scenarios": 6,
+      "expires_at": "2026-11-23T22:23:34.676406+00:00"
+    },
+    {
+      "component": "economic",
+      "review_path": ".aeep/completion-20261116/economic-reference-operation-review.json",
+      "review_sha256": "e0b675f22f96ebea7376ad634e1bfa8ac39bbf47e4fe9e1e0670d6881a7d94ec",
+      "purpose": "One offline economic verifier call across the staged reference and four controls.",
+      "maximum_operations": 1,
+      "maximum_reserved_seconds": 75,
+      "tested_driver_scenarios": 7,
+      "expires_at": "2026-11-23T21:44:24.285088+00:00"
+    }
+  ],
+  "maximum_operations": 7,
+  "maximum_reserved_seconds": 675,
+  "maximum_model_turns": 0,
+  "cash_authority_usd": 0,
+  "network": false,
+  "downloads": 0,
+  "builds": 0,
+  "installation": false,
+  "formal_comparisons": false,
+  "disclosure": false,
+  "worker_and_cleanup_measurements": "Original Docker and receipt layers. Each component stops independently.",
+  "existing_resources_and_operations_preserved": true,
+  "reviewed_runtime_started": false
+}

@@ -1,0 +1,448 @@
+{
+  "cash_usd": 0,
+  "comparison_dispatches": 0,
+  "elapsed_seconds_sum_over_operations": 53.64415383315645,
+  "formal_stage_assignments": 0,
+  "group_sha256": "3ddb312d2e0ef263d46019b8adef3d56decc6d61135d0f825ee874c909c77065",
+  "models": 0,
+  "results": {
+    "a2a-selector": {
+      "approval_sha256": "b2de10fd906e8aebc5bf0ff46a45502d805e0e13917edd55a7010b8100db6765",
+      "canonical_database_checked_read_only": true,
+      "diagnosis": {
+        "conclusion": "Both pinned fixtures have identical cancellation-handler and selected-test function bytes, and both pass this assertion. The published outcome contract for issue 472 remains unreproduced.",
+        "earlier_successes": [
+          "A2A issue 576",
+          "A2A issue 682"
+        ],
+        "earlier_successes_replayed": false,
+        "only_original_status_mismatch": {
+          "tests/server/request_handlers/test_default_request_handler.py::test_on_cancel_task_queue_tap_returns_none": {
+            "expected": "FAILED",
+            "observed": "PASSED"
+          }
+        },
+        "pinned_fixtures": {
+          "original": {
+            "archive_sha256": "fa43bf56bba928b2cd6ddbc7a996f2fe7ecfff4e7b22caa8d33b1f11cb67dac7",
+            "cancellation_handler_sha256": "57cebf345afc61c1bce1c293856669abf2348248601447041556db38b060fd0e",
+            "selected_test_body_sha256": "17456b770df61fb5a40916c4010553def4b7f4ce0fb18651789597ac472ec844",
+            "source_revision": "5ec078830eccf2a72c4a467e520de70c3cbca68e"
+          },
+          "reference": {
+            "archive_sha256": "b90c08869e10d4efe18610dd83c27dc107d8743ddb0e98f622417a92f4432d40",
+            "cancellation_handler_sha256": "57cebf345afc61c1bce1c293856669abf2348248601447041556db38b060fd0e",
+            "selected_test_body_sha256": "17456b770df61fb5a40916c4010553def4b7f4ce0fb18651789597ac472ec844",
+            "source_revision": "5ec078830eccf2a72c4a467e520de70c3cbca68e"
+          }
+        }
+      },
+      "elapsed_seconds": 6.7921882080845535,
+      "execution_record_root": ".aeep/completion-20261116/a2a-selector-protected-execution",
+      "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+      "ledger_sha256": "332099cd012dbe06ee0c463da701bc2ee1882e7d30c1b2c893cdbd444f8ce63e",
+      "passed_exact_contract": false,
+      "result_sha256": "949c295cd4b88b210b8782620a617b13bbd342a8341a1b9506f261a9343e7b44",
+      "review_sha256": "ca82297bafea18eda2f470ea6b6ab6decc8bd367f103e4f4e3e7f9bfc55582d5",
+      "roles": {
+        "original": {
+          "container_absent": true,
+          "observation": {
+            "collected": 81,
+            "exit_code": 1,
+            "input_verified": true,
+            "source_verified": true,
+            "statuses": {
+              "tests/server/events/test_event_queue.py::test_clear_events_closed_queue": "PASSED",
+              "tests/server/events/test_event_queue.py::test_clear_events_current_queue_only": "PASSED",
+              "tests/server/events/test_event_queue.py::test_clear_events_empty_queue": "PASSED",
+              "tests/server/events/test_event_queue.py::test_clear_events_with_children": "PASSED",
+              "tests/server/events/test_event_queue.py::test_close_graceful_py313_waits_for_join_and_children": "FAILED",
+              "tests/server/events/test_event_queue.py::test_close_idempotent": "PASSED",
+              "tests/server/events/test_event_queue.py::test_close_immediate_propagates_to_children": "PASSED",
+              "tests/server/events/test_event_queue.py::test_close_propagates_to_children": "PASSED",
+              "tests/server/events/test_event_queue.py::test_close_sets_flag_and_handles_internal_queue_new_python": "PASSED",
+              "tests/server/events/test_event_queue.py::test_close_sets_flag_and_handles_internal_queue_old_python": "PASSED",
+              "tests/server/events/test_event_queue.py::test_close_with_immediate_true": "PASSED",
+              "tests/server/events/test_event_queue.py::test_constructor_default_max_queue_size": "PASSED",
+              "tests/server/events/test_event_queue.py::test_constructor_invalid_max_queue_size": "PASSED",
+              "tests/server/events/test_event_queue.py::test_constructor_max_queue_size": "PASSED",
+              "tests/server/events/test_event_queue.py::test_dequeue_event_closed_and_empty_no_wait": "PASSED",
+              "tests/server/events/test_event_queue.py::test_dequeue_event_closed_and_empty_waits_then_raises": "PASSED",
+              "tests/server/events/test_event_queue.py::test_dequeue_event_empty_queue_no_wait": "PASSED",
+              "tests/server/events/test_event_queue.py::test_dequeue_event_no_wait": "PASSED",
+              "tests/server/events/test_event_queue.py::test_dequeue_event_wait": "PASSED",
+              "tests/server/events/test_event_queue.py::test_enqueue_and_dequeue_event": "PASSED",
+              "tests/server/events/test_event_queue.py::test_enqueue_different_event_types": "PASSED",
+              "tests/server/events/test_event_queue.py::test_enqueue_event_propagates_to_children": "PASSED",
+              "tests/server/events/test_event_queue.py::test_enqueue_event_when_closed": "PASSED",
+              "tests/server/events/test_event_queue.py::test_is_closed_reflects_state": "PASSED",
+              "tests/server/events/test_event_queue.py::test_tap_creates_child_queue": "PASSED",
+              "tests/server/events/test_event_queue.py::test_task_done": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_background_cleanup_task_is_tracked_and_cleared": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_cleanup_producer_task_id_not_in_running_agents": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_delete_no_task_push_notification_config_info": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_delete_task_push_notification_config_info_with_config": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_delete_task_push_notification_config_info_with_config_and_no_id": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_delete_task_push_notification_config_no_store": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_delete_task_push_notification_config_task_not_found": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_disconnect_persists_final_task_to_store": "FAILED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_get_task_push_notification_config_info_not_found": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_get_task_push_notification_config_info_with_config": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_get_task_push_notification_config_info_with_config_no_id": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_get_task_push_notification_config_no_store": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_get_task_push_notification_config_task_not_found": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_init_default_dependencies": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_list_no_task_push_notification_config_info": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_list_task_push_notification_config_info_with_config": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_list_task_push_notification_config_info_with_config_and_no_id": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_list_task_push_notification_config_no_store": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_list_task_push_notification_config_task_not_found": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_cancel_task_cancels_running_agent": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_cancel_task_completes_during_cancellation": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_cancel_task_invalid_result_type": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_cancel_task_queue_tap_returns_none": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_cancel_task_task_not_found": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_get_task_not_found": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_interrupted_flow": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_no_result_from_aggregator": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_non_blocking": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_stream": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_stream_client_disconnect_triggers_background_cleanup_and_producer_continues": "FAILED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_stream_task_id_mismatch": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_stream_task_id_provided_but_task_not_found": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_stream_task_in_terminal_state[canceled]": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_stream_task_in_terminal_state[completed]": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_stream_task_in_terminal_state[failed]": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_stream_task_in_terminal_state[rejected]": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_stream_with_push_notification": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_task_id_mismatch": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_task_id_provided_but_task_not_found": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_task_in_terminal_state[canceled]": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_task_in_terminal_state[completed]": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_task_in_terminal_state[failed]": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_task_in_terminal_state[rejected]": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_with_push_notification": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_with_push_notification_in_non_blocking_request": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_with_push_notification_no_existing_Task": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_resubscribe_to_task_in_terminal_state[canceled]": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_resubscribe_to_task_in_terminal_state[completed]": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_resubscribe_to_task_in_terminal_state[failed]": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_resubscribe_to_task_in_terminal_state[rejected]": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_resubscribe_to_task_queue_not_found": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_resubscribe_to_task_task_not_found": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_set_task_push_notification_config_no_notifier": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_set_task_push_notification_config_task_not_found": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_stream_disconnect_then_resubscribe_receives_future_events": "PASSED"
+            },
+            "worker_status": "success"
+          },
+          "operation_elapsed_seconds": 3.375186875113286,
+          "operation_id": "aeep-c13-a2a-selector-check-20261116:original",
+          "passed_exact_contract": false,
+          "receipt_id": "rcpt_733351228ef44b4cba34eae195992a42"
+        },
+        "reference": {
+          "container_absent": true,
+          "observation": {
+            "collected": 81,
+            "exit_code": 0,
+            "input_verified": true,
+            "source_verified": true,
+            "statuses": {
+              "tests/server/events/test_event_queue.py::test_clear_events_closed_queue": "PASSED",
+              "tests/server/events/test_event_queue.py::test_clear_events_current_queue_only": "PASSED",
+              "tests/server/events/test_event_queue.py::test_clear_events_empty_queue": "PASSED",
+              "tests/server/events/test_event_queue.py::test_clear_events_with_children": "PASSED",
+              "tests/server/events/test_event_queue.py::test_close_graceful_py313_waits_for_join_and_children": "PASSED",
+              "tests/server/events/test_event_queue.py::test_close_idempotent": "PASSED",
+              "tests/server/events/test_event_queue.py::test_close_immediate_propagates_to_children": "PASSED",
+              "tests/server/events/test_event_queue.py::test_close_propagates_to_children": "PASSED",
+              "tests/server/events/test_event_queue.py::test_close_sets_flag_and_handles_internal_queue_new_python": "PASSED",
+              "tests/server/events/test_event_queue.py::test_close_sets_flag_and_handles_internal_queue_old_python": "PASSED",
+              "tests/server/events/test_event_queue.py::test_close_with_immediate_true": "PASSED",
+              "tests/server/events/test_event_queue.py::test_constructor_default_max_queue_size": "PASSED",
+              "tests/server/events/test_event_queue.py::test_constructor_invalid_max_queue_size": "PASSED",
+              "tests/server/events/test_event_queue.py::test_constructor_max_queue_size": "PASSED",
+              "tests/server/events/test_event_queue.py::test_dequeue_event_closed_and_empty_no_wait": "PASSED",
+              "tests/server/events/test_event_queue.py::test_dequeue_event_closed_and_empty_waits_then_raises": "PASSED",
+              "tests/server/events/test_event_queue.py::test_dequeue_event_empty_queue_no_wait": "PASSED",
+              "tests/server/events/test_event_queue.py::test_dequeue_event_no_wait": "PASSED",
+              "tests/server/events/test_event_queue.py::test_dequeue_event_wait": "PASSED",
+              "tests/server/events/test_event_queue.py::test_enqueue_and_dequeue_event": "PASSED",
+              "tests/server/events/test_event_queue.py::test_enqueue_different_event_types": "PASSED",
+              "tests/server/events/test_event_queue.py::test_enqueue_event_propagates_to_children": "PASSED",
+              "tests/server/events/test_event_queue.py::test_enqueue_event_when_closed": "PASSED",
+              "tests/server/events/test_event_queue.py::test_is_closed_reflects_state": "PASSED",
+              "tests/server/events/test_event_queue.py::test_tap_creates_child_queue": "PASSED",
+              "tests/server/events/test_event_queue.py::test_task_done": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_background_cleanup_task_is_tracked_and_cleared": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_cleanup_producer_task_id_not_in_running_agents": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_delete_no_task_push_notification_config_info": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_delete_task_push_notification_config_info_with_config": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_delete_task_push_notification_config_info_with_config_and_no_id": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_delete_task_push_notification_config_no_store": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_delete_task_push_notification_config_task_not_found": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_disconnect_persists_final_task_to_store": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_get_task_push_notification_config_info_not_found": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_get_task_push_notification_config_info_with_config": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_get_task_push_notification_config_info_with_config_no_id": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_get_task_push_notification_config_no_store": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_get_task_push_notification_config_task_not_found": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_init_default_dependencies": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_list_no_task_push_notification_config_info": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_list_task_push_notification_config_info_with_config": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_list_task_push_notification_config_info_with_config_and_no_id": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_list_task_push_notification_config_no_store": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_list_task_push_notification_config_task_not_found": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_cancel_task_cancels_running_agent": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_cancel_task_completes_during_cancellation": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_cancel_task_invalid_result_type": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_cancel_task_queue_tap_returns_none": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_cancel_task_task_not_found": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_get_task_not_found": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_interrupted_flow": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_no_result_from_aggregator": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_non_blocking": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_stream": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_stream_client_disconnect_triggers_background_cleanup_and_producer_continues": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_stream_task_id_mismatch": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_stream_task_id_provided_but_task_not_found": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_stream_task_in_terminal_state[canceled]": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_stream_task_in_terminal_state[completed]": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_stream_task_in_terminal_state[failed]": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_stream_task_in_terminal_state[rejected]": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_stream_with_push_notification": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_task_id_mismatch": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_task_id_provided_but_task_not_found": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_task_in_terminal_state[canceled]": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_task_in_terminal_state[completed]": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_task_in_terminal_state[failed]": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_task_in_terminal_state[rejected]": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_with_push_notification": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_with_push_notification_in_non_blocking_request": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_message_send_with_push_notification_no_existing_Task": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_resubscribe_to_task_in_terminal_state[canceled]": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_resubscribe_to_task_in_terminal_state[completed]": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_resubscribe_to_task_in_terminal_state[failed]": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_resubscribe_to_task_in_terminal_state[rejected]": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_resubscribe_to_task_queue_not_found": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_on_resubscribe_to_task_task_not_found": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_set_task_push_notification_config_no_notifier": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_set_task_push_notification_config_task_not_found": "PASSED",
+              "tests/server/request_handlers/test_default_request_handler.py::test_stream_disconnect_then_resubscribe_receives_future_events": "PASSED"
+            },
+            "worker_status": "success"
+          },
+          "operation_elapsed_seconds": 3.4170013329712674,
+          "operation_id": "aeep-c13-a2a-selector-check-20261116:reference",
+          "passed_exact_contract": true,
+          "receipt_id": "rcpt_d0d93ecdeca54ad78a35c2129ed8c3b4"
+        }
+      },
+      "runtime_image_id": "sha256:4474cf22f867c681aa6120ce2f98d809413f89755cf11a445444b1b993754ea1",
+      "settled_operations": 2
+    },
+    "economic": {
+      "approval_sha256": "eef6baa429cb24186b8daaf3afffbe6a019c068a7d2b7eff741b2e5ddfea6a56",
+      "canonical_database_checked_read_only": true,
+      "elapsed_seconds": 1.6599458750570193,
+      "execution_record_root": ".aeep/completion-20261116/economic-reference-execution",
+      "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+      "ledger_sha256": "71e8b7a2c2f7e4f05c1b3a119d668cc9e949064043e1954d4d4f69b3f69f3481",
+      "passed_exact_contract": true,
+      "result_sha256": "974e31299e5d11e1df66ae5e3ab640d2461b00994a731b5118fc2a3aaae70b77",
+      "review_sha256": "e0b675f22f96ebea7376ad634e1bfa8ac39bbf47e4fe9e1e0670d6881a7d94ec",
+      "roles": {
+        "economic": {
+          "container_absent": true,
+          "observation": {
+            "excess_precision": {
+              "observations": {
+                "test_answer_file_exists": "passed",
+                "test_answer_format": "passed",
+                "test_answer_is_valid_number": "passed",
+                "test_correlation_value_correct": "passed"
+              },
+              "precision_valid": false,
+              "protected_grade": 0,
+              "protocol_verified": true,
+              "upstream_valid": true
+            },
+            "excluded_2024": {
+              "observations": {
+                "test_answer_file_exists": "passed",
+                "test_answer_format": "passed",
+                "test_answer_is_valid_number": "passed",
+                "test_correlation_value_correct": "passed"
+              },
+              "precision_valid": false,
+              "protected_grade": 0,
+              "protocol_verified": true,
+              "upstream_valid": true
+            },
+            "missing": {
+              "observations": {
+                "test_answer_file_exists": "failed",
+                "test_answer_format": "skipped",
+                "test_answer_is_valid_number": "skipped",
+                "test_correlation_value_correct": "skipped"
+              },
+              "precision_valid": false,
+              "protected_grade": 0,
+              "protocol_verified": true,
+              "upstream_valid": false
+            },
+            "quarterly_smoothing": {
+              "observations": {
+                "test_answer_file_exists": "passed",
+                "test_answer_format": "passed",
+                "test_answer_is_valid_number": "passed",
+                "test_correlation_value_correct": "failed"
+              },
+              "precision_valid": false,
+              "protected_grade": 0,
+              "protocol_verified": true,
+              "upstream_valid": false
+            },
+            "reference": {
+              "observations": {
+                "test_answer_file_exists": "passed",
+                "test_answer_format": "passed",
+                "test_answer_is_valid_number": "passed",
+                "test_correlation_value_correct": "passed"
+              },
+              "precision_valid": true,
+              "protected_grade": 1,
+              "protocol_verified": true,
+              "upstream_valid": true
+            }
+          },
+          "operation_elapsed_seconds": 1.6599458750570193,
+          "operation_id": "aeep-c13-economic-reference-20261116",
+          "passed_exact_contract": true,
+          "receipt_id": "rcpt_f17529e3934d4fb585b537c75a93782f"
+        }
+      },
+      "runtime_image_id": "sha256:4474cf22f867c681aa6120ce2f98d809413f89755cf11a445444b1b993754ea1",
+      "settled_operations": 1
+    },
+    "formula": {
+      "approval_sha256": "a61fa28d16f7c0274a7b063af197f44359bb4e99eb4235e41bbdac7788f64147",
+      "canonical_database_checked_read_only": true,
+      "elapsed_seconds": 45.19201975001488,
+      "execution_record_root": ".aeep/completion-20261116/formula-protected-execution",
+      "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+      "ledger_sha256": "3a23b5e66ee8357548663633fa5e8bd885273dc6d414306d3bf4d114cb8b3e1c",
+      "passed_exact_contract": true,
+      "result_sha256": "f5211e1cd0f280338204566c91b2737b4427cf491c52ac85758e31038d2d1341",
+      "review_sha256": "fa6d72b846ec55eeb1cc7ad286d460ccd26838a08033aa18f5822fdc5548ca8d",
+      "roles": {
+        "incomplete": {
+          "container_absent": true,
+          "observation": {
+            "collected": 7,
+            "exit_code": 1,
+            "grade": 0,
+            "outcomes": {
+              "test_outputs.py::TestFilesPresent::test_answer_file_exists": "passed",
+              "test_outputs.py::TestFilesPresent::test_answer_not_empty": "passed",
+              "test_outputs.py::TestFilesPresent::test_pdf_exists": "passed",
+              "test_outputs.py::TestFormulaContent::test_formula_count_matches": "failed",
+              "test_outputs.py::TestFormulaContent::test_formulas_render_match_expected": "failed",
+              "test_outputs.py::TestLatexFormatting::test_each_line_wrapped_with_dollars": "passed",
+              "test_outputs.py::TestLatexFormatting::test_no_duplicate_formulas": "passed"
+            },
+            "renderer_timeout_count": 0,
+            "role": "incomplete",
+            "unexpected_count": 0,
+            "verified_role": true
+          },
+          "operation_elapsed_seconds": 6.110278374981135,
+          "operation_id": "aeep-c13-formula-check-20261116:incomplete",
+          "passed_exact_contract": true,
+          "receipt_id": "rcpt_42d38850709f416c98637742fb46fde6"
+        },
+        "reference": {
+          "container_absent": true,
+          "observation": {
+            "collected": 7,
+            "exit_code": 0,
+            "grade": 1,
+            "outcomes": {
+              "test_outputs.py::TestFilesPresent::test_answer_file_exists": "passed",
+              "test_outputs.py::TestFilesPresent::test_answer_not_empty": "passed",
+              "test_outputs.py::TestFilesPresent::test_pdf_exists": "passed",
+              "test_outputs.py::TestFormulaContent::test_formula_count_matches": "passed",
+              "test_outputs.py::TestFormulaContent::test_formulas_render_match_expected": "passed",
+              "test_outputs.py::TestLatexFormatting::test_each_line_wrapped_with_dollars": "passed",
+              "test_outputs.py::TestLatexFormatting::test_no_duplicate_formulas": "passed"
+            },
+            "renderer_timeout_count": 0,
+            "role": "reference",
+            "unexpected_count": 0,
+            "verified_role": true
+          },
+          "operation_elapsed_seconds": 8.210903582978062,
+          "operation_id": "aeep-c13-formula-check-20261116:reference",
+          "passed_exact_contract": true,
+          "receipt_id": "rcpt_7189452ec3ed4c1b988d6cdbe7ae09cf"
+        },
+        "renderer-unavailable": {
+          "container_absent": true,
+          "observation": {
+            "collected": 7,
+            "exit_code": 1,
+            "grade": null,
+            "outcomes": {
+              "test_outputs.py::TestFilesPresent::test_answer_file_exists": "passed",
+              "test_outputs.py::TestFilesPresent::test_answer_not_empty": "passed",
+              "test_outputs.py::TestFilesPresent::test_pdf_exists": "passed",
+              "test_outputs.py::TestFormulaContent::test_formula_count_matches": "passed",
+              "test_outputs.py::TestFormulaContent::test_formulas_render_match_expected": "error",
+              "test_outputs.py::TestLatexFormatting::test_each_line_wrapped_with_dollars": "passed",
+              "test_outputs.py::TestLatexFormatting::test_no_duplicate_formulas": "passed"
+            },
+            "renderer_timeout_count": 1,
+            "role": "renderer-unavailable",
+            "unexpected_count": 0,
+            "verified_role": true
+          },
+          "operation_elapsed_seconds": 24.488023875048384,
+          "operation_id": "aeep-c13-formula-check-20261116:renderer-unavailable",
+          "passed_exact_contract": true,
+          "receipt_id": "rcpt_5dd91b87ce804517816c0d08822a90cd"
+        },
+        "wrong-value": {
+          "container_absent": true,
+          "observation": {
+            "collected": 7,
+            "exit_code": 1,
+            "grade": 0,
+            "outcomes": {
+              "test_outputs.py::TestFilesPresent::test_answer_file_exists": "passed",
+              "test_outputs.py::TestFilesPresent::test_answer_not_empty": "passed",
+              "test_outputs.py::TestFilesPresent::test_pdf_exists": "passed",
+              "test_outputs.py::TestFormulaContent::test_formula_count_matches": "passed",
+              "test_outputs.py::TestFormulaContent::test_formulas_render_match_expected": "failed",
+              "test_outputs.py::TestLatexFormatting::test_each_line_wrapped_with_dollars": "passed",
+              "test_outputs.py::TestLatexFormatting::test_no_duplicate_formulas": "passed"
+            },
+            "renderer_timeout_count": 0,
+            "role": "wrong-value",
+            "unexpected_count": 0,
+            "verified_role": true
+          },
+          "operation_elapsed_seconds": 6.382813917007297,
+          "operation_id": "aeep-c13-formula-check-20261116:wrong-value",
+          "passed_exact_contract": true,
+          "receipt_id": "rcpt_9030ac0beeef407ca0409d3e9fbed290"
+        }
+      },
+      "runtime_image_id": "sha256:6f04cf1668b8ede62e46a48f4454d69f08e17b44d40cc34f743ee63ea355801e",
+      "settled_operations": 4
+    }
+  },
+  "schema_version": "aeep.c13.protected-reference-group-result.v1",
+  "settled_operations": 7
+}
