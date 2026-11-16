@@ -1,5 +1,14 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 16. Managed Sol development dispatch stopped after one turn.**
+The [reconciled outcome](../../reports/toolkit-v2/c13/managed-comparison-20261115/RESULT.md)
+for approved review `bd939ed7` verifies all eight fresh worker and
+collector checks. The first Sales Pivot control ended at workbook
+retrieval before grading. Its token capture is partial. The proxy
+was stopped, all 12 operations settled, and seven turns remained
+unstarted. The expiry-only renewal is in force. There are zero
+completed pairs. Further live work requires an exact new review.
+
 **November 16. Managed Sol development dispatch awaits approval.**
 The [exact dispatch review](../../reports/toolkit-v2/c13/managed-comparison-20261115/DISPATCH.md)
 binds approved design `08613f4e` to two verified worker pairs and

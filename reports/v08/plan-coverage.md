@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+The [Sol dispatch outcome](../toolkit-v2/c13/managed-comparison-20261115/RESULT.md)
+records all eight successful boundary checks and one settled model
+turn. Artifact retrieval stopped the Sales Pivot control before
+grading. The remaining seven turns were unstarted, and the renewed
+grant preserved both older reservations. Paired results are
+unavailable.
+
 The [Sol dispatch review](../toolkit-v2/c13/managed-comparison-20261115/DISPATCH.md)
 binds the offline-verified worker pairs and protected graders to the
 four-task development design. Its expiry-only renewal passed on a
