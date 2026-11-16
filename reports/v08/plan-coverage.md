@@ -61,7 +61,13 @@ passed and the embedded grader stopped at startup. Both charges stay on the
 original ledger. The corrected launch awaits repeat authority. The [workbook
 supplement](../toolkit-v2/c13/completion-20261116/workbook-preservation-preflight.json)
 rejected eight synthetic changes. Asset-use records and workbook runtime
-verification remain open.
+verification remain open. The [ordinary workbook recipe](../toolkit-v2/c13/completion-20261116/workbook-ordinary-preparation.json)
+stages the pinned verifier and solver, a zero-value artifact and an
+untouched-title fault. Its exact image build and protected checks await
+repeat approval. The [Wemake selector audit](../toolkit-v2/c13/completion-20261116/wemake-native-selector-preflight.json)
+projected 36 issue and 81 preservation identities from literal parameters.
+The protected collection remains open.
+
 The approved [FuseSoC scratch repeat](../toolkit-v2/c13/completion-20261116/fusesoc-scratch-correction-result.json)
 settled one failed reference. Runtime review found missing build-generated
 version metadata. The original-source control stayed unstarted.

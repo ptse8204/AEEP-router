@@ -83,7 +83,11 @@ removes that single CLI-only line. Five copied-ledger scenarios verified
 recovery, preservation of both charges and the cumulative bound. The
 corrected runtime requires repeat approval. The [workbook supplement](../../reports/toolkit-v2/c13/completion-20261116/workbook-preservation-preflight.json)
 validates preservation of populated cells outside the 15 marked gaps.
-Eight synthetic controls were rejected. The protected trial is pending.
+Eight synthetic controls were rejected. The [ordinary workbook recipe](../../reports/toolkit-v2/c13/completion-20261116/workbook-ordinary-preparation.json)
+stages 16 pinned runtime files and an exact integration case. All 15 gaps
+change in the zero-value control and the untouched-title control changes
+only its target. The [build and protected repeat review](../../reports/toolkit-v2/c13/completion-20261116/workbook-ordinary-operation-review.json)
+awaits approval. The original two ledgers retain all four earlier charges.
 
 The [ordinary worker transport](../../reports/toolkit-v2/c13/completion-20261116/repository-worker-transport.json)
 maps 42 staged sources and excludes their 126 protected assets from the
@@ -113,7 +117,11 @@ sources passed ordinary worker mapping after local metadata reconciliation.
 The fourth contains an upstream symlink and remains outside that mapping.
 The optimistic software pool now has 89 rows. The minimum shortfall is 52,
 including 27 contract audits and eight multi-file repairs for the holdout.
-The three staged cases still need protected runtime verification.
+The three staged cases still need protected runtime verification. The
+[Wemake selector preflight](../../reports/toolkit-v2/c13/completion-20261116/wemake-native-selector-preflight.json)
+derived 117 projected native identities from the 27 published selectors.
+Its literal-only collection ran no repository code. A real protected
+collection with the pinned Python and dependencies remains required.
 
 The [new workbook reference](../../reports/toolkit-v2/c13/completion-20261116/workbook-reference-result.json)
 passed 19 original SkillsBench checks. The protected verifier rejected both

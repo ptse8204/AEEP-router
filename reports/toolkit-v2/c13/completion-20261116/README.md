@@ -176,6 +176,13 @@ are required, including 27 contract audits and eight multi-file repairs for
 the holdout. The three recovered candidates still need protected runtime
 verification and source-disjoint assignment.
 
+The [Wemake selector preflight](wemake-native-selector-preflight.json)
+reconstructed all 117 projected test identities from the literal upstream
+parameters. The 27 published selectors include 19 prefixes. Their synthetic
+expansion preserves 36 issue checks and 81 preservation checks. The protected
+runtime still needs the pinned Python and Flake8 dependencies and must collect
+the same identities before any result enters the corpus.
+
 The [independent document pack](independent-document-pack-intake.json)
 binds 26 original files to the pinned SkillsBench Git tree. Ordinary CLI
 inspection passed for workbook recovery, Formula Extraction and economic
@@ -262,6 +269,15 @@ check preserves populated cells outside those gaps and requires finite
 numeric replacements. One synthetic replacement control passed. Eight
 controls, including a changed title and an added cell, were rejected.
 The protected upstream verifier has its own retained evidence below.
+
+The [ordinary workbook recipe](workbook-ordinary-preparation.json) stages a
+COPY-only context with 16 pinned files and the original verifier and solver.
+The zero-value control changes precisely the 15 marked gaps. The other
+control alters one populated title. The [operation review](workbook-ordinary-operation-review.json)
+binds the build, reference and grade commands and preserves both earlier
+accounting histories. The copied-ledger preflight exercised success,
+scope drift, failed build, failed grade and uncertain cleanup. The exact
+protected repeat awaits operator approval.
 
 The first new document/data reference, `xlsx-recover-data`, passed all 19
 upstream checks. Missing output produced one failure and 18 skips. The

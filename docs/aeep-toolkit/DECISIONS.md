@@ -20,6 +20,16 @@ command, so the retained image needs no added mounts or packages. Keep the
 prepared single-task integration case separate from the formal corpus.
 [Recipe preparation](../../reports/toolkit-v2/c13/completion-20261116/economic-ordinary-recipe-preparation.json)
 
+### November 16 workbook recovery recipe
+
+Reuse the existing contained recipe and the pinned workbook solver and
+verifier. Package the reviewed wheels and grader in a private COPY-only
+image so the ordinary command requires no extra host mount. Add a
+preservation guard backed by complementary controls. One fills the marked
+gaps with zeros and must reach the original verifier. Another edits an
+untouched title and must fail preservation. This is an integration check
+for the document pack. [Workbook preparation](../../reports/toolkit-v2/c13/completion-20261116/workbook-ordinary-preparation.json)
+
 ## November 15 Waza local backend
 
 Retain the verified Ollama 0.40.16 installation and the five pinned Qwen3

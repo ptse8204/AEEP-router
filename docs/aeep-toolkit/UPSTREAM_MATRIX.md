@@ -12,6 +12,11 @@ startup, before loading the protected test module. The corrected adapter
 keeps the original tests and five-decimal supplement.
 [Initial runtime evidence](../../reports/toolkit-v2/c13/completion-20261116/economic-ordinary-initial-result.json)
 
+The independent SkillsBench workbook recipe has a staged local image context
+and exact case inputs. Its preservation control and ordinary command bindings
+passed preflight. Image build and protected execution require the reviewed
+repeat. [Workbook review](../../reports/toolkit-v2/c13/completion-20261116/workbook-ordinary-operation-review.json)
+
 The current [Waza engineering path](../../reports/toolkit-v2/c13/waza-ollama-20261115/SERVICE_CONTINUATION.md)
 uses the pinned Waza evaluator, Copilot SDK custom provider and local
 Ollama. Retained installation passed. Local service readiness and actual
