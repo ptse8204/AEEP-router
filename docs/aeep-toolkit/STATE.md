@@ -34,6 +34,14 @@ were rejected. The ordinary v6 runtime still needs reviewed support for
 three blocked wheels, selector equivalence and the issue 682 pytest option.
 No upstream run, model turn or formal assignment was made.
 
+The [prepared ordinary A2A runtime](../../reports/toolkit-v2/c13/completion-20261116/a2a-ordinary-preparation.json)
+binds the prior runtime closure and the four exact protected payloads to
+one COPY-only overlay. Three first-party launcher cases and five
+copied-ledger dispatch controls passed. Review `56ed2748` is unstarted.
+Run the two reference and original-source pairs through the contained
+ordinary callback after the exact repeat approval. Preserve the five
+previous charges and finish module-wide verification before formal use.
+
 The [repository patch batch](../../reports/toolkit-v2/c13/completion-20261116/repository-patch-batch-intake.json)
 staged protected reproduction inputs for 42 cases across 29 repositories.
 Two inert preparations matched on all 168 assets. Runtime review is next.

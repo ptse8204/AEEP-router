@@ -88,6 +88,12 @@ and verified their scoring through the ordinary callback. Three wheel
 bindings and pytest scope still need ordinary runtime verification. No
 protected tests were rerun and no formal stage was assigned.
 
+The [ordinary A2A preparation](../toolkit-v2/c13/completion-20261116/a2a-ordinary-preparation.json)
+stages a private dependency overlay, four checked callback payloads and a
+five-operation offline review. First-party launcher and copied-ledger
+checks passed. The pinned build and module-wide upstream checks await the
+exact repeat approval.
+
 The [Toolkit V2 Linux installation check](../toolkit-v2/c13/completion-20261116/linux-private-install-result.json)
 passed for the pinned Linux ARM64 glibc container. It verified the owned
 runtime lifecycle and matched the macOS synthetic reports. The separate

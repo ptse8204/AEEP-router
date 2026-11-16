@@ -110,7 +110,7 @@ def reviewed_wheels(review):
     return portable, unsupported
 
 
-async def grade_retained(row, wheels, observations):
+def case_assets(row, wheels):
     task = SuiteInput.model_validate(row["input"])
     private = PRIVATE / "protected" / task.task_id
     required = json.loads(read(private / "required.json", row["required_identities"]["sha256"]))
@@ -138,8 +138,6 @@ async def grade_retained(row, wheels, observations):
         identity_format="pytest-native-v1",
         **required,
     )
-    if observations["reference"][1] != row["reference_archive_sha256"]:
-        raise ValueError("reviewed fixture and staged reference differ")
     reference = json.loads(read(private / "reference.json", row["reference"]["sha256"]))
     source = archive_files(oracle.source.read(), large=True)
     # Writing the existing source bytes is a nonempty, in-scope patch that preserves the original tree.
@@ -147,6 +145,13 @@ async def grade_retained(row, wheels, observations):
         base_sha256=oracle.input_sha256,
         files={path: source[path].decode("utf-8") for path in task.editable_paths},
     )
+    return task, oracle, reference, original_patch, source
+
+
+async def grade_retained(row, wheels, observations):
+    task, oracle, reference, original_patch, source = case_assets(row, wheels)
+    if observations["reference"][1] != row["reference_archive_sha256"]:
+        raise ValueError("reviewed fixture and staged reference differ")
 
     async def grade(role, artifact, *, drop=None, corrupt=False, expected_calls=1):
         receipt_id, archive_sha256, observation = observations[role]

@@ -230,6 +230,17 @@ No case entered a formal stage.
 The audit reproduced byte for byte. All 156 targeted repository tests,
 schema drift verification and the 72-file offline documentation check passed.
 
+The [ordinary runtime preparation](a2a-ordinary-preparation.json)
+stages the same 1,179 dependency files in a private COPY-only overlay. The
+ordinary observer uses its existing native pytest capture with the reviewed
+options from the direct check. The case definitions rebuilt all four
+protected archives without extra host mounts. Three authored launcher checks
+and five copied-ledger driver scenarios passed. Uncertain cleanup kept the
+current reservation open and stopped further dispatch. Review `56ed2748`
+covers one local build and four protected calls, capped at 265 additional
+reserved seconds, zero models and $0. The build and module-wide verification
+are unstarted. Both snapshots remain provisional.
+
 The next [workload intake](workload-intake-audit.json) checks both domains.
 On the software side, two original patches and protected test overlays apply
 cleanly. One of the two has a retained collection failure. The other needs
