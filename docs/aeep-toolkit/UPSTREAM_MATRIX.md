@@ -6,6 +6,12 @@ references and source pins. The operator excluded Waza from this delivery.
 The Waza setup below is historical. Candidate and selection usefulness remain
 separate from functional readiness.
 
+The independent SkillsBench economic task has a contained recipe and case
+binding. Its first ordinary reference command passed. The grader failed during
+startup, before loading the protected test module. The corrected adapter
+keeps the original tests and five-decimal supplement.
+[Initial runtime evidence](../../reports/toolkit-v2/c13/completion-20261116/economic-ordinary-initial-result.json)
+
 The current [Waza engineering path](../../reports/toolkit-v2/c13/waza-ollama-20261115/SERVICE_CONTINUATION.md)
 uses the pinned Waza evaluator, Copilot SDK custom provider and local
 Ollama. Retained installation passed. Local service readiness and actual

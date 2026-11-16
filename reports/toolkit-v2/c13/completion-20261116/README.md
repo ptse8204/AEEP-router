@@ -247,6 +247,22 @@ combined grader also rejected wrong smoothing and missing output.
 This verifies the proposed supplemental grader. Formal adoption and
 provider disclosure remain open.
 
+The [ordinary recipe](economic-ordinary-recipe-preparation.json) binds the
+same verified tests and independent answer to the existing contained
+command and case format. The approved run passed the reference command.
+The grader stopped at startup because the embedded observer expected
+`__file__` in a `python -c` command. Both operations settled and the
+owned containers were removed. The [corrected continuation](economic-ordinary-continuation-review.json)
+reuses the reference and keeps both charges on the original ledger. It
+awaits exact repeat approval. [Initial result](economic-ordinary-initial-result.json)
+
+The [workbook preservation preflight](workbook-preservation-preflight.json)
+extracted 15 marked gaps from the four original sheets. Its supplemental
+check preserves populated cells outside those gaps and requires finite
+numeric replacements. One synthetic replacement control passed. Eight
+controls, including a changed title and an added cell, were rejected.
+The protected upstream verifier has its own retained evidence below.
+
 The first new document/data reference, `xlsx-recover-data`, passed all 19
 upstream checks. Missing output produced one failure and 18 skips. The
 unchanged workbook produced one pass and 18 failures. A bootstrap attempt

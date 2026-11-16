@@ -23,11 +23,12 @@ from aeep_toolkit.install_runtime import file_digest
 
 TASK_ID = "econ-detrending-correlation"
 OUT = WORK / "economic-ordinary-recipe"
+CORRECTED = WORK / "economic-ordinary-recipe-inline"
 BUILDER = HERE.parent / "skillsbench-contained-graders-20261105/prepare-recipes.py"
 PROTECTED_RESULT = HERE / "protected-reference-group-result.json"
 
 
-def definitions():
+def definitions(*, inline=False):
     intake = get(HERE / "independent-document-pack-intake.json")
     root = WORK / "independent-document-pack"
     pack_file = root / "pack.json"
@@ -58,6 +59,13 @@ def definitions():
     pause, separator, _ = preserved_observer.rpartition('if __name__ == "__main__":')
     if not separator:
         raise ValueError("reviewed observer entry point changed")
+    if inline:
+        # The original CLI loader needs a file path; the embedded observer
+        # receives its verifier path and has no use for the CLI's root.
+        cli_root = "ROOT = Path(__file__).resolve().parent\n"
+        if pause.count(cli_root) != 1:
+            raise ValueError("reviewed observer CLI root changed")
+        pause = pause.replace(cli_root, "", 1)
 
     ref = fixtures["artifacts"]["reference"].encode("ascii")
     binding = {

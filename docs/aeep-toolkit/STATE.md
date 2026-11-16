@@ -75,6 +75,16 @@ upstream checks accepted omitted 2024 data and excess precision. The
 supplemental check rejected both. Across the approved group, all seven
 operations settled in 53.644 summed seconds with zero model turns and $0.
 
+The independent economic task now has an [ordinary contained recipe](../../reports/toolkit-v2/c13/completion-20261116/economic-ordinary-recipe-preparation.json).
+Its reference command passed. The embedded grader stopped at startup when
+`python -c` could not resolve `__file__`. Both operations settled and both
+owned containers were removed. The [continuation](../../reports/toolkit-v2/c13/completion-20261116/economic-ordinary-continuation-review.json)
+removes that single CLI-only line. Five copied-ledger scenarios verified
+recovery, preservation of both charges and the cumulative bound. The
+corrected runtime requires repeat approval. The [workbook supplement](../../reports/toolkit-v2/c13/completion-20261116/workbook-preservation-preflight.json)
+validates preservation of populated cells outside the 15 marked gaps.
+Eight synthetic controls were rejected. The protected trial is pending.
+
 The [ordinary worker transport](../../reports/toolkit-v2/c13/completion-20261116/repository-worker-transport.json)
 maps 42 staged sources and excludes their 126 protected assets from the
 public root. All 42 attempts to retrieve the protected overlay through the

@@ -10,6 +10,16 @@ and selection usefulness separate. The 8/28/105 counts, formal thresholds
 and release authority retain their original scope.
 [C13 beta handoff](../../reports/toolkit-v2/c13/completion-20261116/README.md)
 
+### November 16 economic grader binding
+
+Reuse the ordinary contained recipe, protected observer and pinned upstream
+tests for the independent economic detrending task. Keep the five-decimal
+supplement in the grader. It rejects two outputs the original tolerance
+accepts. The ordinary recipe embeds the small verifier in its protected
+command, so the retained image needs no added mounts or packages. Keep the
+prepared single-task integration case separate from the formal corpus.
+[Recipe preparation](../../reports/toolkit-v2/c13/completion-20261116/economic-ordinary-recipe-preparation.json)
+
 ## November 15 Waza local backend
 
 Retain the verified Ollama 0.40.16 installation and the five pinned Qwen3

@@ -55,7 +55,13 @@ turns and $0.
 
 The [independent document pack](../toolkit-v2/c13/completion-20261116/independent-document-pack-intake.json)
 passed ordinary CLI inspection. The three archives carry only original input
-files and task instructions. Graded recipes and asset-use records remain open.
+files and task instructions. The [economic recipe](../toolkit-v2/c13/completion-20261116/economic-ordinary-recipe-preparation.json)
+now binds the retained verifier to ordinary contained commands. Its reference
+passed and the embedded grader stopped at startup. Both charges stay on the
+original ledger. The corrected launch awaits repeat authority. The [workbook
+supplement](../toolkit-v2/c13/completion-20261116/workbook-preservation-preflight.json)
+rejected eight synthetic changes. Asset-use records and workbook runtime
+verification remain open.
 The approved [FuseSoC scratch repeat](../toolkit-v2/c13/completion-20261116/fusesoc-scratch-correction-result.json)
 settled one failed reference. Runtime review found missing build-generated
 version metadata. The original-source control stayed unstarted.
