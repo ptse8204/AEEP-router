@@ -1,0 +1,53 @@
+{
+  "schema_version": "aeep.c13.skillsbench-formula-verifier-assessment.v1",
+  "intake_ref": "d8bb9e7d717faf9c5208e643a64ebf2eace95460648d83803e7820e1cf27bb3b",
+  "asset_provenance": {
+    "pdf_sha256": "24ae66f04cb3e1002bb392e24364df78cdabc66e0100a289eeefd0a8c514ce90",
+    "pdf_git_blob": "eed4a841a45edee8ef245a9465b14c0a271b49ab",
+    "contribution": "https://github.com/benchflow-ai/skillsbench/pull/87",
+    "commit": "https://github.com/benchflow-ai/skillsbench/commit/b0ebf1b3ed9556c21ffcd754a88f1d65e3ef56f6",
+    "contributor": "bingran-you",
+    "source_author_matches_first_author": true,
+    "license_notice": "https://raw.githubusercontent.com/benchflow-ai/skillsbench/b0ebf1b3ed9556c21ffcd754a88f1d65e3ef56f6/LICENSE",
+    "license_notice_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "license_scope": "The exact PDF was contributed by the paper's first author to the Apache-2.0 repository. Retain the repository notice and paper attribution. The contribution is source provenance; no separate PDF-specific notice or co-author permission record was found.",
+    "contributor_commit_name": "Bingran You"
+  },
+  "upstream_rule": {
+    "immutable_verifier_sha256": "857e670f1813bed43129e73fef31a4f472cdd50e5c73087a6e63821eaedb38c7",
+    "pillow_version": "10.4.0",
+    "pillow_source": "https://raw.githubusercontent.com/python-pillow/Pillow/10.4.0/src/PIL/Image.py",
+    "pillow_source_sha256": "80f279d870110b8471ffe6de795602f47d2c25f45b885e474de1368b468d1bb6",
+    "declares_alpha_only_by_default": true
+  },
+  "local_counterexample": {
+    "runtime_pillow": "11.1.0",
+    "fixture": "first_party_synthetic_rgba",
+    "observations": {
+      "same_pixels": {
+        "expected_equal": true,
+        "old_rule_equal": true,
+        "corrected_rule_equal": true
+      },
+      "same_alpha_changed_rgb": {
+        "expected_equal": false,
+        "old_rule_equal": true,
+        "corrected_rule_equal": false
+      },
+      "changed_alpha": {
+        "expected_equal": false,
+        "old_rule_equal": false,
+        "corrected_rule_equal": false
+      }
+    }
+  },
+  "proposed_protected_correction": {
+    "patched_verifier_sha256": "2e7f11fa277589100842b2810c01a58152bda653fa1233e0c2670f6050ee6915",
+    "patch_sha256": "bb2ebe1c340891f789bde5b0e3bb391892b2fc5a62111e6583b95cfcc842659e",
+    "status": "syntax_and_pixel_control_checked",
+    "full_verifier_executed": false
+  },
+  "next": "Pin the offline browser and MathJax runtime; verify the original reference and wrong-formula rejection with the proposed protected correction before any trial.",
+  "provider_transfer": false,
+  "model_turns": 0
+}

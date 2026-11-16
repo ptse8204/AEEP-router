@@ -1,0 +1,34 @@
+{
+  "schema_version": "aeep.c13.repository-patch-batch-intake.v1",
+  "parent_commit": "6782f617e529293ed520db98400310613f5f3e20",
+  "case_inventory_sha256": "637b43c855fc20ff403a992e63a5088b6d711eb5be9a3294356ca8f8782da61c",
+  "private_index_sha256": "69c3b0385585d16c7f66f982abacae9f368758c8fcd6cf827043ebf842d7dfe7",
+  "tool_sha256": "20876a0eced3f012a7e0e2e6d648b167335dbb2528387780a6cdda9adc3503e3",
+  "private_asset_root": ".aeep/completion-20261116/patch-batch-verified",
+  "inert_cached_candidates_checked": 63,
+  "ready_for_runtime_review": 42,
+  "ready_repository_count": 29,
+  "ready_families": {
+    "multi-file-repair": 9,
+    "single-file-repair": 33
+  },
+  "ready_required_test_counts": {
+    "issue": 131,
+    "preservation": 6062
+  },
+  "asset_bindings_verified_on_two_preparations": 168,
+  "all_issues_keep_original_failing_and_preservation_identity_lists": true,
+  "needs_scope_or_asset_review": 21,
+  "scope_failure_counts": {
+    "published repair adds or removes files": 11,
+    "published repair includes non-editable behavior or configuration": 9,
+    "published test overlay exceeds the declared protected roots": 1
+  },
+  "limitations": "A patch that applies does not prove runtime compatibility or grade validity. The declared SQLACodegen PostgreSQL/MySQL identities still require databases; the earlier SQLite reproduction gives no such evidence. No stage or candidate assignment was frozen.",
+  "next": "Pin each runnable subset to an actual protected runtime. Keep original-source failure, published-reference pass, and authored controls distinct. Group exact offline reproduction for cases whose dependency and isolation scope is known.",
+  "adopted_cases": 0,
+  "third_party_project_code_executed": false,
+  "provider_transfer": false,
+  "model_turns": 0,
+  "cash_usd": 0
+}

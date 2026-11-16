@@ -95,6 +95,17 @@ qualifying evidence. This audit covers the Python repository cohort. The
 document/data workflows have accepted integration evidence and still need
 their own independent usefulness workload.
 
+The [repository patch batch](repository-patch-batch-intake.json) applied
+published test overlays and repairs to all 63 source-bound leads as inert
+data. It staged 42 pairs of source and protected test archives, a published
+repair and exact required identities for each. The 42 cases span 29
+repositories, with nine multi-file and 33 single-file repairs. All 168
+staged files matched in two preparations. The other 21 cases exceeded this
+existing-file or protected-test scope. Run compatible subsets under protected
+grading after binding their runtime and dependencies. For example, the
+SQLACodegen dialect cases still require PostgreSQL or MySQL. The earlier
+SQLite check cannot validate those assertions.
+
 The next [workload intake](workload-intake-audit.json) checks both domains.
 On the software side, two original patches and protected test overlays apply
 cleanly. One of the two has a retained collection failure. The other needs
@@ -167,10 +178,17 @@ are verified. All three cases stayed local and unexecuted.
 
 The [Formula Extraction intake](formula-extraction-intake.json) verified six
 pinned assets and found seven declared checks, including a rendered comparison.
-The three-page task PDF matches the title and authors of the published paper.
-The later arXiv version has a CC BY 4.0 license. Rights for the exact shortened
-input and the offline MathJax and browser closure still need verification.
-[arXiv source](https://arxiv.org/abs/2405.10501v2)
+The [verifier review](formula-verifier-assessment.json) matches the exact
+three-page input to its first author's contribution to SkillsBench. It also
+shows that the pinned Pillow comparison checks only the difference in alpha
+by default. A synthetic control with equal alpha and different color passed
+the original rule. The proposed all-channel comparison rejected it and
+still accepted identical pixels. Retain the immutable upstream verifier.
+The corrected variant still needs the pinned offline browser and MathJax,
+a full reference run and a wrong-formula control. The contribution and
+license notice support provenance. Asset-use approval remains separate.
+[Input contribution](https://github.com/benchflow-ai/skillsbench/commit/b0ebf1b3ed9556c21ffcd754a88f1d65e3ef56f6)
+[Pillow 10.4.0 comparison](https://raw.githubusercontent.com/python-pillow/Pillow/10.4.0/src/PIL/Image.py)
 
 The selection recorder now rejects a route decision with no feasible executor.
 Only an actual baseline choice records abstention. A blocked route leaves the

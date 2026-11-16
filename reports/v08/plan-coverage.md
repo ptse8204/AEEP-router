@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 repository patch batch](../toolkit-v2/c13/completion-20261116/repository-patch-batch-intake.json)
+staged 42 pinned source and grader inputs, preserving all declared tests.
+A separate [SkillsBench review](../toolkit-v2/c13/completion-20261116/formula-verifier-assessment.json)
+found a false positive in Formula Extraction's pixel comparison and verified
+the proposed all-channel rule on synthetic controls. Formal evidence remains
+open.
+
 The [C13 selection recorder change](../toolkit-v2/c13/completion-20261116/README.md#formal-candidate-and-selection-gates)
 rejects a no-executor routing decision. A real baseline choice still counts as
 abstention. No live selection study or admission was performed.

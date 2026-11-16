@@ -7,6 +7,15 @@ against the operational ledger and frozen source `4e673a6d`. It retains
 the private macOS arm64 / Python 3.13 LIMITED_BETA recommendation. Production
 release and public benefit claims remain NO_GO.
 
+The [repository patch batch](../../reports/toolkit-v2/c13/completion-20261116/repository-patch-batch-intake.json)
+staged protected reproduction inputs for 42 cases across 29 repositories.
+Two inert preparations matched on all 168 assets. Runtime review is next.
+The [Formula Extraction review](../../reports/toolkit-v2/c13/completion-20261116/formula-verifier-assessment.json)
+matched the exact PDF to its first author's contribution and demonstrated a
+pixel-comparison false positive. The proposed all-channel fix passed synthetic
+pixel controls. The full offline verifier and asset-use determination remain
+open. No case was adopted and no formal study ran.
+
 The selection recorder rejects a canonical decision with no feasible executor,
 so a blocked task cannot be credited as choosing the baseline. The
 [updated guide](REPOSITORY_EVALUATION.md#evaluate-selection-independently)
