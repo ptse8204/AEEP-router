@@ -1,0 +1,128 @@
+{
+  "review_sha256": "e0b675f22f96ebea7376ad634e1bfa8ac39bbf47e4fe9e1e0670d6881a7d94ec",
+  "synthetic_driver_cases": {
+    "unapproved": {
+      "passed": true,
+      "synthetic_dispatches": 0
+    },
+    "approval_mismatch": {
+      "passed": true,
+      "synthetic_dispatches": 0
+    },
+    "drift": {
+      "passed": true,
+      "synthetic_dispatches": 0
+    },
+    "success": {
+      "passed": true,
+      "synthetic_dispatches": 1
+    },
+    "settled_failure": {
+      "passed": true,
+      "synthetic_dispatches": 1
+    },
+    "uncertain_cleanup": {
+      "passed": true,
+      "synthetic_dispatches": 1
+    },
+    "boolean_grade_rejected": {
+      "passed": true,
+      "synthetic_dispatches": 1
+    }
+  },
+  "synthetic_original_assertion_cases": 6,
+  "malformed_scalar_controls": 10,
+  "independent_real_arithmetic_controls": 4,
+  "actual_upstream_suite_run": false,
+  "actual_container_dispatches": 0,
+  "new_model_turns": 0,
+  "unstarted_driver_guard_draft": "27cd7d46e681e99ff66dddf82fbb751e003f62603846f89218d0dca3fe642264",
+  "original_verifier_changed": false,
+  "source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+  "mount_asset_digests": {
+    "economic_protected_grader.py": "43c82ba032d99a014af476a3658175908dbfb433a18b3e30a0830584c30201d6",
+    "fixtures.json": "02a45d63ea3a53b32cb51b592bb320e57958be9e70f352e64de95c01485718ae",
+    "upstream_test.py": "7a1dcf2db177d6297e36c7b4ea563518af5c8102031e1d3c9afa04fe8b25b366"
+  },
+  "review_path": ".aeep/completion-20261116/economic-reference-operation-review.json",
+  "limits": {
+    "max_operations": 1,
+    "max_reserved_seconds": 75,
+    "model_turns": 0,
+    "cash_usd": 0,
+    "downloads": 0,
+    "builds": 0
+  },
+  "safe_first_attempt_unstarted": true,
+  "operator_approval_pending": true,
+  "expected_observations": {
+    "reference": {
+      "protocol_verified": true,
+      "upstream_valid": true,
+      "protected_grade": 1,
+      "precision_valid": true,
+      "observations": {
+        "test_answer_file_exists": "passed",
+        "test_answer_format": "passed",
+        "test_answer_is_valid_number": "passed",
+        "test_correlation_value_correct": "passed"
+      }
+    },
+    "excluded_2024": {
+      "protocol_verified": true,
+      "upstream_valid": true,
+      "protected_grade": 0,
+      "precision_valid": false,
+      "observations": {
+        "test_answer_file_exists": "passed",
+        "test_answer_format": "passed",
+        "test_answer_is_valid_number": "passed",
+        "test_correlation_value_correct": "passed"
+      }
+    },
+    "excess_precision": {
+      "protocol_verified": true,
+      "upstream_valid": true,
+      "protected_grade": 0,
+      "precision_valid": false,
+      "observations": {
+        "test_answer_file_exists": "passed",
+        "test_answer_format": "passed",
+        "test_answer_is_valid_number": "passed",
+        "test_correlation_value_correct": "passed"
+      }
+    },
+    "quarterly_smoothing": {
+      "protocol_verified": true,
+      "upstream_valid": false,
+      "protected_grade": 0,
+      "precision_valid": false,
+      "observations": {
+        "test_answer_file_exists": "passed",
+        "test_answer_format": "passed",
+        "test_answer_is_valid_number": "passed",
+        "test_correlation_value_correct": "failed"
+      }
+    },
+    "missing": {
+      "protocol_verified": true,
+      "upstream_valid": false,
+      "protected_grade": 0,
+      "precision_valid": false,
+      "observations": {
+        "test_answer_file_exists": "failed",
+        "test_answer_format": "skipped",
+        "test_answer_is_valid_number": "skipped",
+        "test_correlation_value_correct": "skipped"
+      }
+    }
+  },
+  "grading_scope": "Original per-test observations and supplemental five-decimal artifact correctness. No proof that the task agent performed individual calculation steps.",
+  "verification": {
+    "lint": "passed",
+    "schemas": "passed",
+    "repository_suite_regressions": 100,
+    "offline_docs_and_report_links": "passed",
+    "core_source_changed": false
+  }
+}

@@ -61,6 +61,17 @@ five-decimal calculation. Missing 2024 passes the upstream tolerance.
 The case remains provisional pending a supplemental control, protected
 runtime evidence and stage review.
 
+The [economic grader preparation](../../reports/toolkit-v2/c13/completion-20261116/economic-protected-reference-preparation.json)
+binds the four unchanged tests and a second five-decimal check. Review
+`e0b675f2` covers the reference and four fault cases in one offline call.
+The driver passed synthetic checks. No upstream tests ran.
+
+The [ordinary worker transport](../../reports/toolkit-v2/c13/completion-20261116/repository-worker-transport.json)
+maps 42 staged sources and excludes their 126 protected assets from the
+public root. All 42 attempts to retrieve the protected overlay through the
+public mapping failed. Even if all 42 cases qualify, at least 58 new
+software rows are needed before independence and adoption.
+
 The [new workbook reference](../../reports/toolkit-v2/c13/completion-20261116/workbook-reference-result.json)
 passed 19 original SkillsBench checks. The protected verifier rejected both
 missing and incomplete output. The first interpreter check failed before

@@ -118,6 +118,16 @@ errors fail validation. Synthetic driver checks exercised success, failure
 and uncertain cleanup. Standalone review `9a31c7ac` remains unstarted.
 The grouped review below includes that pair once.
 
+The [worker transport preparation](repository-worker-transport.json) maps
+all 42 staged leads through the existing `repository_archive:2` adapter.
+The ordinary input root contains only hash-named source archives. The 126
+protected files stay in a separate root, and all 42 attempted overlay lookups
+through the public mapping failed. No runtime or formal stage was assigned.
+If every staged case qualifies, the software pool would contain 83 rows and
+would still need at least 58 more. The balanced holdout needs at least 27
+additional contract audits and 11 multi-file repairs under that optimistic
+count. Stage independence can increase the shortfall.
+
 The [grouped A2A review](a2a-batch-intake.json) covers three published
 source revisions and 127 required test identities. Each reference must
 pass every required test. Each original must fail its issue assertions and
@@ -158,6 +168,14 @@ provisional until a supplemental control and a protected runtime check
 are frozen and verified. No verifier, agent or candidate ran.
 [GovInfo tables](https://www.govinfo.gov/app/collection/erp/2025) ·
 [BLS series via FRED](https://fred.stlouisfed.org/series/CPIAUCNS)
+
+The [economic protected reference](economic-protected-reference-preparation.json)
+now binds the unchanged four tests and a separate exact five-decimal check.
+Five prepared artifacts cover the reference, omitted 2024 data, excess
+precision, wrong smoothing and missing output. The planned check retains
+both grading results. Seven driver and six assertion cases passed against
+first-party fixtures. Review `e0b675f2` permits one local offline operation
+and 75 reserved seconds once authorized. The upstream suite remains unstarted.
 
 The first new document/data reference, `xlsx-recover-data`, passed all 19
 upstream checks. Missing output produced one failure and 18 skips. The

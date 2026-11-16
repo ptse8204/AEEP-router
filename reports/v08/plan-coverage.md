@@ -37,6 +37,12 @@ bindings still need contained grading. The
 verified exact publisher inputs and found a missing-year grading gap.
 Neither preparation adopted a formal case.
 
+The [economic grader preparation](../toolkit-v2/c13/completion-20261116/economic-protected-reference-preparation.json)
+preserves the original assertions and stages an independent precision check.
+The [worker transport](../toolkit-v2/c13/completion-20261116/repository-worker-transport.json)
+passed ordinary input mapping and protected-overlay refusal for 42 cases.
+Both still await protected execution. No formal case was adopted.
+
 The [Toolkit V2 Linux installation check](../toolkit-v2/c13/completion-20261116/linux-private-install-result.json)
 passed for the pinned Linux ARM64 glibc container. It verified the owned
 runtime lifecycle and matched the macOS synthetic reports. The separate

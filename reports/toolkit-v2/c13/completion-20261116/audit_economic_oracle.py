@@ -82,7 +82,7 @@ def cycle(series, smoothing):
     return [base - fitted for base, fitted in zip(series, trend, strict=True)]
 
 
-def audit():
+def audit(*, protected_values=None):
     names = ("EXPECTED_CORRELATION", "TOLERANCE")
     records = json.loads((CUSTODY / "custody.json").read_bytes())["files"]
     verifier = next(
@@ -135,6 +135,9 @@ def audit():
     assert rejected == dict(
         quarterly_smoothing=True, nominal_series=True, unlogged_series=True, excluded_2024=False
     )
+    if protected_values is not None:
+        protected_values.update({name: f"{value:.5f}" for name, value in controls.items()})
+        protected_values["reference"] = f"{independent:.5f}"
     return {
         "included_years": len(YEARS),
         "first_year": min(YEARS),
