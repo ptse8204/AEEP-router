@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [direct LibCST rerun](../toolkit-v2/c13/managed-comparison-20261115/DIRECT_LIBCST_RERUN.md)
+extends receipt-bound observation to direct isolated Python import,
+parse and transformation calls. Four fresh live turns retained the
+same protected per-test failures in both arms. No covered calls were
+seen and unsupported paths remain unknown. Accounting is settled.
+
 The [instrumented software rerun](../toolkit-v2/c13/managed-comparison-20261115/SOFTWARE_RERUN.md)
 retains the exact protected test statuses for Canopen and Xsdata.
 It also binds optional LibCST helper use evidence to the host journal.

@@ -1,0 +1,71 @@
+{
+  "previous_preflight": {
+    "review_sha256": "52dc86069d77d3c574e3b52f4014674faf1cd5eb81aea9434def79e0f06c0aba",
+    "outcome": "stopped_before_container_start",
+    "cause": "The preflight treated the existing --cap-drop=ALL flag as two argv entries.",
+    "worker_starts": 0,
+    "model_turns": 0,
+    "cash_usd": "0"
+  },
+  "runtime_check": {
+    "review_sha256": "16cf155e6b575ad78cef9d814a23f0b61778da1394f7c5835ece83fdf5d1ea6f",
+    "workers": {
+      "control": {
+        "worker_image": "sha256:913f10a87db37de42e01c719fd7f7617c30cbbfa2258876ce0a7b7beef0af04b",
+        "facts": {
+          "package_present": false,
+          "read_only_package_root": false
+        },
+        "exit_codes": {
+          "import": 1,
+          "mention": 0
+        },
+        "worker_cleanup_confirmed": true,
+        "elapsed_seconds": 2.8067654579645023
+      },
+      "treatment": {
+        "worker_image": "sha256:82734040d28a07b9c0b46ad0ff536c68e176951cfec806936346ae3d0cb29831",
+        "facts": {
+          "package_present": true,
+          "read_only_package_root": true,
+          "files_sha256": "1c133fb4fb0a622adbf4236ffc762d4976bc566d4ddabaa073784433a681a1a2",
+          "package_file_count": 302
+        },
+        "exit_codes": {
+          "import": 0,
+          "mention": 0,
+          "parse": 0,
+          "heredoc_transform_changed": 0,
+          "noop_transform": 0,
+          "read_workspace_source": 0,
+          "parse_error": 1
+        },
+        "worker_cleanup_confirmed": true,
+        "elapsed_seconds": 3.742872625007294
+      }
+    },
+    "checks": {
+      "accepted_fixtures": 5,
+      "rejected_classifier_fixtures": 19,
+      "observed_and_masked_native_event_fixtures": 10,
+      "rejected_receipt_tampering_fixtures": 7
+    },
+    "model_turns": 0,
+    "cash_usd": "0"
+  },
+  "runtime_check_result_sha256": "0093df7f2b85520b25e7102d0214657f4547b11ce5c489fdf7c5908f051b96ad",
+  "runtime_review": {
+    "authority": "Operator requested first bounded direct LibCST runtime verification.",
+    "driver_sha256": "7eba52119248032cb6bb30b4a8cad41e52ab146974dad4ce2d5f65fe219a7d93",
+    "classifier_sha256": "fe1fd3c0dc809505760c0b64c2d171abedb1244d680b64d675a58c9f37d55877",
+    "previous_images_sha256": "fcc47a47e91fbc926edb7e54e4bac52b6e6430a1a2e1d188ce0bcdac1667d950",
+    "maximum_workers": 2,
+    "maximum_commands_per_worker": 8,
+    "maximum_reserved_seconds": 300,
+    "model_turns": 0,
+    "cash_usd": "0",
+    "builds": 0,
+    "network": "none",
+    "credential_mounts": 0
+  }
+}

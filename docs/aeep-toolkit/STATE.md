@@ -1,5 +1,14 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 16. Direct LibCST observer verified and both software pairs rerun.**
+The [direct-use report](../../reports/toolkit-v2/c13/managed-comparison-20261115/DIRECT_LIBCST_RERUN.md)
+binds four per-test outcomes and both usage observers to the canonical
+receipts. Offline positive controls verified direct import, parse and
+transformation detection. No covered live calls were observed and
+unsupported execution forms remain unknown. Both Canopen arms passed
+6/8 and both Xsdata arms passed 28/29. Four turns and 21 operations
+settled at $0 cash, preserving prior charges and reservations.
+
 **November 16. Instrumented Canopen and Xsdata pairs completed.**
 The [rerun report](../../reports/toolkit-v2/c13/managed-comparison-20261115/SOFTWARE_RERUN.md)
 binds all four per-test outcome maps to their protected grader and

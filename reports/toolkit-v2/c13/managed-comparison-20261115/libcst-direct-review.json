@@ -1,0 +1,92 @@
+{
+  "operator_authority": "Operator explicitly requested tracking actual direct LibCST imports and transforms as well as reviewed helper calls, then rerunning both software pairs with LibCST optional.",
+  "opening_counters": [
+    14007,
+    3824,
+    128869.45428701352,
+    "0.0"
+  ],
+  "grant_expiry": "2026-11-23T07:27:48.408693+00:00",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "destination": "existing managed Codex proxy",
+  "tasks": [
+    {
+      "task_id": "canopen-python__canopen-613-declared-tests",
+      "recipe_digest": "31af06f5957bf875a38914a93aa4a3758a1dfb1004f2b9f20bbc839a8a629a0e",
+      "protected_environment_digest": "4209187811529cea1967411c558b4d5f11b93bcd8b7979d083ac8055eb5b1482",
+      "pair_digest": "2934704684069fa067915b709c2c55bff25d3bc112caccc76389289bdab444fa",
+      "shared_definition_digest": "2dba3ffdbbfc5a43c144f8f13c1951365867aa8f9e5e6445bf5f70f36ed4085c",
+      "suite_digest": "6085b6060d383a5023f7ffefe5fed763b8dbb5e7379cc67b56d52649fe0eeee0",
+      "instruction_sha256": "0ac9a2168e0655561af59e2f5a8b91529acf02386754d3be9f7bb8d4d6e8ae77",
+      "arm_order": [
+        "sol-direct-3.control",
+        "sol-direct-3.treatment"
+      ]
+    },
+    {
+      "task_id": "tefra__xsdata-1126-issue-behavior-audit",
+      "recipe_digest": "31af06f5957bf875a38914a93aa4a3758a1dfb1004f2b9f20bbc839a8a629a0e",
+      "protected_environment_digest": "4209187811529cea1967411c558b4d5f11b93bcd8b7979d083ac8055eb5b1482",
+      "pair_digest": "65e1bf0a2d4f5991ff4236bbab57a402bf228ab2db7f301ab49bb6984beb2e53",
+      "shared_definition_digest": "bbad87327e1a11730eeebda14e908ae11097efe857e48647933b03dcfd92df1e",
+      "suite_digest": "5b1af1aee23834d5c2f6b3b67268919bb17a4e58a343b59f2fb8d7b81de02d43",
+      "instruction_sha256": "94a2b0be532bf60ed710ee54907df9999ed7ccf965d8ccb9977676099c7ef3e0",
+      "arm_order": [
+        "sol-direct-4.treatment",
+        "sol-direct-4.control"
+      ]
+    }
+  ],
+  "observer_bindings": {
+    "codex-app-server:sol-direct-3.control": {
+      "worker_digest": "6e191f04ed99edbd972c4e67e68bd3f3cb4a7e15f219e11ef20944f66f682524",
+      "helper_sha256": null,
+      "package_available": false,
+      "package_tree_sha256": null
+    },
+    "codex-app-server:sol-direct-3.treatment": {
+      "worker_digest": "04e4e514c43ff781f49355c5156e53a8298bf0972f077fe98afd322b23b9f995",
+      "helper_sha256": "ce3b0690dbe53d21e596dcbaf74e7bfcc4bcde6715b5341b5bb9190a1130d319",
+      "package_available": true,
+      "package_tree_sha256": "1c133fb4fb0a622adbf4236ffc762d4976bc566d4ddabaa073784433a681a1a2"
+    },
+    "codex-app-server:sol-direct-4.control": {
+      "worker_digest": "d5c2c673fc82b6e01ce70b2947f52bab997375d53d370d9c17cbe3f738d31fd8",
+      "helper_sha256": null,
+      "package_available": false,
+      "package_tree_sha256": null
+    },
+    "codex-app-server:sol-direct-4.treatment": {
+      "worker_digest": "c996832c547a1fe17efced7660db7ce9d7dec075812f7bfee3dff0ab41ef6711",
+      "helper_sha256": "ce3b0690dbe53d21e596dcbaf74e7bfcc4bcde6715b5341b5bb9190a1130d319",
+      "package_available": true,
+      "package_tree_sha256": "1c133fb4fb0a622adbf4236ffc762d4976bc566d4ddabaa073784433a681a1a2"
+    }
+  },
+  "cumulative_ceiling": {
+    "maximum_operations": 99,
+    "maximum_model_turns": 19,
+    "maximum_reserved_seconds": 6800,
+    "maximum_cash_usd": "0"
+  },
+  "maximum_new_operations": 21,
+  "maximum_new_model_turns": 4,
+  "maximum_reserved_seconds": 2680,
+  "automatic_retries": 0,
+  "direct_scope": "Pinned isolated Python inline import, parse and transform calls; other paths unknown",
+  "inputs": "Same reviewed public repository snapshots and protected grade contracts",
+  "worker_changes": false,
+  "pins": {
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/libcst_direct_rerun.py": "703bb10e45a0208c637498f4f7211414535ccd296c7c4e2e4973703c322b3baa",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/sol-dispatch-review.json": "bd939ed730bebfe8c12005bc05b57cf085328809ee7f326dc5f34deb9eb907f0",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/software-observation-review.json": "6a178abf05792a2326b75c7c2d8910fd738662ac0218578be3cc1c5a421aecfa",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/software-observation-audit.json": "23c14a9891850c19ef319a8ef0103a86b3c05b032cd58882137109b3aeed36e7",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/software-observation-result.json": "aeb5835040146040add00592269e78ece32c245c98027aa7e7fd3788dbf898ca",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/libcst_direct_observer.py": "fe1fd3c0dc809505760c0b64c2d171abedb1244d680b64d675a58c9f37d55877",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/check_libcst_direct.py": "7eba52119248032cb6bb30b4a8cad41e52ab146974dad4ce2d5f65fe219a7d93",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/software_rerun.py": "b63f0c1ad47d5bf5bdf82ed84a2369210873306d5aa13d22338d0e6daac84600",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/libcst-direct-offline-boundary/operation-review.json": "16cf155e6b575ad78cef9d814a23f0b61778da1394f7c5835ece83fdf5d1ea6f",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/libcst-direct-offline-boundary/result.json": "0093df7f2b85520b25e7102d0214657f4547b11ce5c489fdf7c5908f051b96ad"
+  }
+}
