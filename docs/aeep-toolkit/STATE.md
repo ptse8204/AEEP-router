@@ -1,5 +1,16 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+<!-- waza-ollama-archive-20261115:start -->
+**November 15. Waza downloads verified. Private extraction needs correction.**
+
+The [terminal setup result and continuation](../../reports/toolkit-v2/c13/waza-ollama-20261115/CONTINUATION.md)
+record the approved first attempt. It downloaded the pinned archive and five
+model blobs, then stopped on an audited relative library alias. The one setup
+charge is settled. Service startup, model inference and grading remain
+unstarted. The preflighted offline continuation awaits explicit approval.
+C13 remains at 37 of 39 and comparisons stay paused.
+<!-- waza-ollama-archive-20261115:end -->
+
 <!-- waza-ollama-review-20261115:start -->
 **November 15. One local Waza execution review is ready.**
 

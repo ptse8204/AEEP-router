@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+<!-- waza-ollama-archive-20261115:start -->
+The [local Waza setup result](../toolkit-v2/c13/waza-ollama-20261115/CONTINUATION.md)
+records a settled archive-extraction failure before any service or model
+started. The offline continuation reuses the verified bytes and awaits
+approval. Waza is still the sole open readiness component.
+<!-- waza-ollama-archive-20261115:end -->
+
 <!-- waza-ollama-review-20261115:start -->
 The [local Waza launch review](../toolkit-v2/c13/waza-ollama-20261115/README.md)
 covers a private Ollama runtime and one protected Waza engineering task.

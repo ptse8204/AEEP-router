@@ -1,0 +1,206 @@
+{
+  "schema_version": "aeep.operator.waza-ollama.v1",
+  "implementation_source": "99cda79d1d29acc5d1978842820d4fbd8c051aa16e4611bd0522c9e267034bdd",
+  "expires_at": "2026-11-19T04:15:44.410728+00:00",
+  "purpose": "Correct private extraction of the same pinned Ollama archive, then run the previously unstarted Waza task and protected grade once.",
+  "work": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-ollama-20261115-retained-continuation",
+  "database": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillrank-build-preparation-20261103/runtime-execution/canonical.sqlite3",
+  "grant_baseline": {
+    "id": "waza-native-backend-info-20261104",
+    "root": "298e319c7eec25783d1f0eb8b63c880ed3f0aad48fb63f75bbb9ca6ced4ae5cc",
+    "state": [
+      0,
+      7,
+      0,
+      62.108324457658455,
+      "0"
+    ],
+    "predecessor": "7449a2db639b26f8bc1689ba38f51b2be4ab0150b20c89c102f8db91ac1719b1",
+    "effective_limits": {
+      "max_operations": 10,
+      "max_model_turns": 1,
+      "max_elapsed_seconds": 1819.328500165604,
+      "max_cash_usd": "0"
+    },
+    "effective_expiry": "2026-11-18T21:06:06.030162+00:00"
+  },
+  "waza_revision": "e534d149d89ae77ea158469fb4d2003804b2ee76",
+  "waza": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-runtime-20261113/bin/waza",
+  "copilot": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-artifacts-20261104/copilot/copilot",
+  "copilot_version": "1.0.85",
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "model_license": "Apache-2.0",
+  "archive": {
+    "url": "https://github.com/ollama/ollama/releases/download/v0.40.16/ollama-darwin.tgz",
+    "sha256": "a743717494315da7cd352982b805f6b992d4b4452ca117fd5fbf86c4ee46fca0",
+    "size": 186116182,
+    "version": "0.40.16",
+    "revision": "d63b702609c4300a2ca07be2bdb0adb9834725e5"
+  },
+  "model_assets": [
+    {
+      "url": "https://registry.ollama.ai/v2/library/qwen3/blobs/sha256:b72accf9724e93698c57cbd3b1af2d3341b3d05ec2089d86d273d97964853cd2",
+      "sha256": "b72accf9724e93698c57cbd3b1af2d3341b3d05ec2089d86d273d97964853cd2",
+      "size": 487,
+      "media_type": "application/vnd.docker.container.image.v1+json"
+    },
+    {
+      "url": "https://registry.ollama.ai/v2/library/qwen3/blobs/sha256:85e4a5b7b8ef0e48af0e8658f5aaab9c2324c76c1641493f4d1e25fce54b18b9",
+      "sha256": "85e4a5b7b8ef0e48af0e8658f5aaab9c2324c76c1641493f4d1e25fce54b18b9",
+      "size": 2497280480,
+      "media_type": "application/vnd.ollama.image.model"
+    },
+    {
+      "url": "https://registry.ollama.ai/v2/library/qwen3/blobs/sha256:eade0a07cac7712787bbce23d12f9306adb4781d873d1df6e16f7840fa37afec",
+      "sha256": "eade0a07cac7712787bbce23d12f9306adb4781d873d1df6e16f7840fa37afec",
+      "size": 1379,
+      "media_type": "application/vnd.ollama.image.template"
+    },
+    {
+      "url": "https://registry.ollama.ai/v2/library/qwen3/blobs/sha256:d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12",
+      "sha256": "d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12",
+      "size": 11338,
+      "media_type": "application/vnd.ollama.image.license"
+    },
+    {
+      "url": "https://registry.ollama.ai/v2/library/qwen3/blobs/sha256:0914c7781e001948488d937994217538375b4fd8c1466c5e7a625221abd3ea7a",
+      "sha256": "0914c7781e001948488d937994217538375b4fd8c1466c5e7a625221abd3ea7a",
+      "size": 119,
+      "media_type": "application/vnd.ollama.image.params"
+    }
+  ],
+  "model_manifest": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-ollama-20261115/model-manifest.json",
+  "allowed_download_hosts": [],
+  "maximum_download_response_bytes": 0,
+  "maximum_archive_expanded_bytes": 1073741824,
+  "minimum_host_free_bytes": 53687091200,
+  "start_free_bytes": 59055800320,
+  "pins": {
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-ollama-20261115/prepare.py": "d11cad9a27556817e83e4d872c41940bb5b9adecf57c158b421362927f02e7ec",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-ollama-20261115/run.py": "5eb94f3a2eebe9f3d757e1c1f69740d85fa59b057f5c0cf57fe44274dd03f55a",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-ollama-20261115/local_gate.py": "c69654c8b84f0654ebeb6561a889be30b4013f781dbe34420e844fc140a290d5",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-ollama-20261115/check.py": "c97f8c48875c026e17b2a54be5201232cfe36ff5dd620f44ae1f843a8a766524",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-ollama-20261115/model-manifest.json": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-runtime-20261113/bin/waza": "10879de7375699e02dfd9b90a6540ed1c3dc551b1118b2486cd7961c0fc56b03",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-artifacts-20261104/copilot/copilot": "29034a478e514e2d6c8cb33e16a7e94067ef4f80cc737aec93ecac9dd12b8557",
+    "/usr/bin/sandbox-exec": "10cf4a46a575e4747d2419cf343800db0d11ae6e6e9b8415998d3d8f336b2a92",
+    "/usr/sbin/lsof": "15d29f9a5fb686e09d8fee2f39fdb81e783c61e1e717d123a958e2ca8a7f8b28",
+    "/usr/bin/codesign": "f9e0b219e5f934869f9647a2203bfd6bd00a819ad1bf9e617e9e6c14a4bef983",
+    "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3.13": "20c9c2144a9f5202177620417e67643fb551aa31586e5d3c1361627b920cadb0",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-ollama-20261115-retained-continuation/serve.sb": "6374ed647773533576d837efea4871a167db051daa8fbb048252d81bf5a60a61",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-ollama-20261115-retained-continuation/live.sb": "4a4c2189f2689523d27d0dc410276742e257bf452fd34ab706227a1ab1da5796",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-ollama-20261115-retained-continuation/grade.sb": "410c888e9a2e499ebbed0a7b86a87934b90a2c8dcc38ed0444196fc9abc4a154",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-ollama-20261115-retained-continuation/public/eval.yaml": "01ba4b90276039674e9c8e3c1011f11c459c6f67a6772d78203281256f4ef516",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-ollama-20261115-retained-continuation/public/tasks/receipt-total.yaml": "8c1385ba1866e2e2f5392f85a228d786d398bcd6f012b6ba3a0b80cc14775afc",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-ollama-20261115-retained-continuation/public/agent/aeep-receipt-check.agent.md": "f8d6d6beba9bd8d71009449254636907ce944c8b1f89d9e9f47073f5919daa13",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-native-backend-20261104/backend-fixture/eval.yaml": "a5fad973ce46aa0aa76f90a6838914f7c6fa2f85ae33777bfb7d80132f7834c0",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-native-backend-20261104/backend-fixture/offline-grader-result.json": "3199b046d849465f498434ab94597c86c4c7f45809797152a46cd7577435c2f7",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-ollama-20261115-exact/operation-review.json": "25d22dca75bb830f39bf35d367d6c31032315bde19fd8cc3e26b71f88f05dce8",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-ollama-20261115-exact/result.json": "0139a27f55927a1337be619cd06973ab7eaeeacaec98b84e8004736ca7091154",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-ollama-20261115-exact/started.json": "653b372a1f6bbf26935b41f7b442d3e1dd08506ed019e3f2515ab3e58e5d3953",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-ollama-20261115/resume.py": "0b25379260421b63d8307012291a8a2bf3ae2cf664415981abb1a703e286c2a2",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-ollama-20261115-retained-continuation/archive-index.json": "9ebfd82a871abcddf2a1a2ba206597065f64827875d7051167b4411a6ef52aad"
+  },
+  "profiles": {
+    "serve": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-ollama-20261115-retained-continuation/serve.sb",
+    "live": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-ollama-20261115-retained-continuation/live.sb",
+    "grade": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-ollama-20261115-retained-continuation/grade.sb"
+  },
+  "ports": {
+    "gateway": 39181,
+    "ollama": 39182
+  },
+  "max_cash_usd": "0",
+  "maximum_additional_operations": 4,
+  "maximum_reserved_seconds": 465,
+  "maximum_local_model_turns": 1,
+  "maximum_remote_model_turns": 0,
+  "stages": {
+    "download_and_install": {
+      "operations": 1,
+      "model_turns": 0,
+      "reserved_seconds": 150
+    },
+    "service_and_boundaries": {
+      "operations": 1,
+      "model_turns": 0,
+      "reserved_seconds": 90
+    },
+    "waza_local_inference": {
+      "operations": 1,
+      "model_turns": 1,
+      "reserved_seconds": 180
+    },
+    "protected_grade": {
+      "operations": 1,
+      "model_turns": 0,
+      "reserved_seconds": 45
+    }
+  },
+  "grant_absolute_limits": {
+    "max_model_turns": 1,
+    "max_operations": 11,
+    "max_elapsed_seconds": 1819.328500165604,
+    "max_cash_usd": "0"
+  },
+  "commands": {
+    "waza_live": [
+      "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-runtime-20261113/bin/waza",
+      "--no-update-check",
+      "run",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-ollama-20261115-retained-continuation/public/eval.yaml",
+      "--task",
+      "receipt-total",
+      "--trials",
+      "1",
+      "--no-cache",
+      "--skip-graders",
+      "--output",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-ollama-20261115-retained-continuation/scratch/model-task/run.json"
+    ],
+    "waza_grade": [
+      "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-native-runtime-20261113/bin/waza",
+      "--no-update-check",
+      "grade",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/waza-native-backend-20261104/backend-fixture/eval.yaml",
+      "--task",
+      "receipt-total",
+      "--results",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-ollama-20261115-retained-continuation/scratch/grader/minimal-result.json",
+      "--workspace",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-ollama-20261115-retained-continuation/scratch/grader",
+      "--output",
+      "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-ollama-20261115-retained-continuation/scratch/grader/graded.json"
+    ],
+    "serve": "one signed archive Ollama executable, argv [executable, serve]"
+  },
+  "retention": "Preserve original downloaded artifacts and partial tree. Keep the new verified runtime and model copy. Remove only new owned scratch after verified process stop.",
+  "boundaries": [
+    "Offline reuse only. Verify the retained archive and five model blobs. Create exactly audited intra-directory dynamic-library aliases after writing owned runtime files.",
+    "Separate private homes and explicit environments. No credential paths, GitHub sign-in or provider tokens.",
+    "Waza can connect only to the reviewed local gateway. Ollama can use loopback TCP for its child runners. Non-loopback traffic is denied. The grader has no network.",
+    "One local completion request through a nonce-bound loopback gateway with explicit model, output limit, provider usage and reply-hash capture.",
+    "Apple sandbox bind rules permit wildcard socket creation. The pinned Ollama command sets its API and child runner to literal loopback, and the driver inspects their actual listeners before accepting the inference.",
+    "Protected grader and answer unavailable to Waza inference. The original offline text grader receives the one verified Waza reply.",
+    "At most one setup attempt and one inference followed by at most one offline grade. No retry, fallback or alternative model.",
+    "No Docker changes, global install, provider disclosure, paid usage, activation, comparison or release."
+  ],
+  "archive_index": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/waza-ollama-20261115-retained-continuation/archive-index.json",
+  "prior_operation": {
+    "operation_id": "waza-local-25d22dca75bb830f:download_and_install",
+    "measurement_ref": "f379508bf671e9ed381217ab7a3356a786802b72f381420dfa5b801f3a704bee"
+  },
+  "archive_symlinks": [
+    "libggml-base.0.dylib",
+    "libggml-base.dylib",
+    "libggml.0.dylib",
+    "libggml.dylib",
+    "libllama-common.0.dylib",
+    "libllama-common.dylib",
+    "libllama.0.dylib",
+    "libllama.dylib",
+    "libmtmd.0.dylib",
+    "libmtmd.dylib"
+  ],
+  "additional_setup_operations_vs_original": 1
+}
