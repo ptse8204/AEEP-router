@@ -1,5 +1,14 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 16. Delegated Sales follow-up and software receipt audit completed.**
+The [follow-up results](../../reports/toolkit-v2/c13/managed-comparison-20261115/FOLLOWUP_RESULTS.md)
+record a new matched 480-second Sales pair with two protected 0/1
+grades and verified token differences. The original 300-second
+timeout remains separate. Protected test failures explain all four
+software grades. The individual assertions and actual LibCST use
+are unknown from the retained records. All 57 operations and 11
+charged turns settled at $0. No new reservations remain open.
+
 **November 16. Delegated Sol development comparison reached all eight slots.**
 The [continuation result](../../reports/toolkit-v2/c13/managed-comparison-20261115/CONTINUATION_RESULT.md)
 records three verified pairs and seven protected grades. The repaired

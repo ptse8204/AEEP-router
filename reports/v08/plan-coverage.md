@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [delegated follow-up](../toolkit-v2/c13/managed-comparison-20261115/FOLLOWUP_RESULTS.md)
+completed a fresh matched Sales pair with the same inputs and protected
+grader. The software audit links all four 0/1 grades to protected
+test failures. Exact assertions and LibCST use cannot be established
+from the retained evidence. The prior timeout and all charges remain.
+
 The [delegated Sol continuation](../toolkit-v2/c13/managed-comparison-20261115/CONTINUATION_RESULT.md)
 completed the six untouched slots after the repaired Sales control
 graded and the Sales treatment timed out. Three matched development

@@ -1,0 +1,52 @@
+{
+  "operator_authority": "Operator explicitly asked the delegated experiment agent to explain the Sales timeout and finish the pair. Review one fresh matched pair, preserve prior charges, no automatic replay.",
+  "purpose": "Report a fresh matched pair separately from the prior fixed 300 s observation.",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "destination": "existing managed Codex proxy",
+  "deadline_seconds_both_arms": 480,
+  "prior_timeout_preserved": true,
+  "task": {
+    "task_id": "sales-pivot-analysis",
+    "recipe_digest": "483628f76cebe586005a145d33e4c223cae83480ab52206c0c65167b1022f792",
+    "protected_environment_digest": "3e673c43b21daef31e42c077961388f24de846a694927ac7966e6377f823b29d",
+    "pair_digest": "c312fea0b4dc53027c10d2f8dc8f4143ee55b49a5d779543fee0a92abc4822df",
+    "shared_definition_digest": "6ef0cbee545e7a29099179b1e2c6c52942f7770fbbf3855088a2952c0bbb22d0",
+    "suite_digest": "1abafe80217a5075ca6cafe04017df75aac6607eced76bf1c654d617a74ac92e",
+    "instruction_sha256": "4d7a52c9c5face23b1a878f0efcb942d95af4fa69274824a05272950099cc0ff",
+    "arm_order": [
+      "sol-pilot-sales-window.control",
+      "sol-pilot-sales-window.treatment"
+    ]
+  },
+  "opening_counters": [
+    13975,
+    3818,
+    128065.96561864288,
+    "0.0"
+  ],
+  "grant_expiry": "2026-11-23T07:27:48.408693+00:00",
+  "maximum_new_operations": 11,
+  "maximum_new_model_turns": 2,
+  "maximum_new_reserved_seconds": 1740,
+  "cumulative_ceiling": {
+    "maximum_operations": 57,
+    "maximum_model_turns": 11,
+    "maximum_reserved_seconds": 6800,
+    "maximum_cash_usd": "0"
+  },
+  "pins": {
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/sales_window_dispatch.py": "9b1e5405b8d344c8c76d79d57594ee31ac65a442aa410eba4274f26a59d263a5",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/check_sales_runtime.py": "3ec6448584b22df813b401e2192a746733640cc4fb263f830311ff0e6fc3f694",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/run_sales_pair.py": "a5f300994bd37fa21da04e3d92e77f1028191712764cc62d1515038a26eef765",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/sol-dispatch-review.json": "bd939ed730bebfe8c12005bc05b57cf085328809ee7f326dc5f34deb9eb907f0",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/sales-handoff-continuation-review.json": "0650ab390a0e8fe6e8dbcc3fcbdd434e9fa0a272a6cc74024259b0a97cb4ab33",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/remaining-three-review.json": "4b2dbd7e169dfc7cc7311e27a863112e3375910ca4d48465bd720df56ef87574",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/comparison-continuation-result.json": "6cad30f8552dfb8470db90658251df446cd5a99ab441104f53e828bbdd133c32",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/sales-treatment-timeout.json": "7d6a12082cce8001129b8719494a0d9e75e418fd99f09b73ed65df0c1c289cb0",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/sales-runtime-offline-review.json": "bafcc3ebd89f8774a8869b38e106b699b3be787ff969c3d693ec05ad01f96ff3",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/sales-runtime-offline-result.json": "4739a85df854e7699a62315c109859f4f84601a449a5e5015788dd8ea974c249",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/remaining-three-dispatch/result.json": "a43ce2ba0d52d16c86cc17f4a13a276d2eec7b561909cde815870e1db7bb539c"
+  },
+  "automatic_retries": 0
+}

@@ -1,0 +1,112 @@
+{
+  "schema": "aeep.operator.software-outcome-audit.v1",
+  "result_sha256": "a43ce2ba0d52d16c86cc17f4a13a276d2eec7b561909cde815870e1db7bb539c",
+  "review_sha256": "4b2dbd7e169dfc7cc7311e27a863112e3375910ca4d48465bd720df56ef87574",
+  "tasks": [
+    {
+      "task": "canopen-python__canopen-613-declared-tests",
+      "required_protected_tests": 8,
+      "successful_artifact_transport": true,
+      "accepted_patch_contract": true,
+      "required_test_identities_present": true,
+      "failure_rule": "The protected pytest run returned nonzero or at least one required test status was not PASSED.",
+      "trials": [
+        {
+          "arm": "control",
+          "score": 0,
+          "callback_result": "test_failure",
+          "trial_ref": "9cca54a53fed6095cef4669de9c23cb5ad14f7d4b52f6d0d6bb53c57800ef991",
+          "receipt_ref": "bf1ae901139f70b45acbf28ea11b95612ec6b40b64da3214434a9ef127dccfd0",
+          "received_patch_sha256": "85529f9ddae505fdb2de8f21e0a4198c4e079edf0f49c4000f5bb59495263d3e",
+          "received_patch_bytes": 7196,
+          "grader_receipt_ref": "8b5ef8bf38c28127b2e2e9568e2f4c9071ade9dd20db2c971a3e2a5e1e9f4ba3",
+          "grader_measurement_ref": "5c342751de287eb4db30c4267bd7871d71f28e25299236a42106920a71cc109e",
+          "exact_failed_assertions_retained": false,
+          "retained_patch_available": false,
+          "libcst_selected_available": false,
+          "libcst_instruction_loading": null,
+          "libcst_invocation_or_import": null,
+          "catalog_delivery_complete": false,
+          "catalog_kept_skill_count": 4.0,
+          "catalog_skill_specific_positive_events": 0,
+          "catalog_snapshot_ref": "f3766129cd39d8c86b8485f658f5cd6fc18dfe59315cba025ed80b8650ba3185"
+        },
+        {
+          "arm": "treatment",
+          "score": 0,
+          "callback_result": "test_failure",
+          "trial_ref": "288dc435538bedda7b56bd63d77a7105cdc6b692276c0917eadc439de31c14ba",
+          "receipt_ref": "c96e621753ed7aa31abd3f1c3e791c21bf3cb71bf246d7f7552f356b0aaebf83",
+          "received_patch_sha256": "5424fa455930e1e9ffe1e7a40667f7a0da1907814fe7f506b21164a5db8c5232",
+          "received_patch_bytes": 7171,
+          "grader_receipt_ref": "ec7344ec5b58a3dc5bf462598213db819c159c8421dca43b6d1eba2bf9fd328b",
+          "grader_measurement_ref": "107aa210732946d85a8d6409a4285e49bb4b0c813585a0809cceea192228184a",
+          "exact_failed_assertions_retained": false,
+          "retained_patch_available": false,
+          "libcst_selected_available": true,
+          "libcst_instruction_loading": null,
+          "libcst_invocation_or_import": null,
+          "catalog_delivery_complete": false,
+          "catalog_kept_skill_count": 5.0,
+          "catalog_skill_specific_positive_events": 0,
+          "catalog_snapshot_ref": "915c6ae067da0710ffe5edb87220611330e4038aefd7d2096258729c0489b4f2"
+        }
+      ]
+    },
+    {
+      "task": "tefra__xsdata-1126-issue-behavior-audit",
+      "required_protected_tests": 29,
+      "successful_artifact_transport": true,
+      "accepted_patch_contract": true,
+      "required_test_identities_present": true,
+      "failure_rule": "The protected pytest run returned nonzero or at least one required test status was not PASSED.",
+      "trials": [
+        {
+          "arm": "treatment",
+          "score": 0,
+          "callback_result": "test_failure",
+          "trial_ref": "c21e3f387d3a0ae2bf18d01b6a087e5dd30b63f0cb3085223b44657870a2f840",
+          "receipt_ref": "b989bbe8a46dc3d4a8428071a2132cd49021153f63697e2a2930848d4526b954",
+          "received_patch_sha256": "e007c2e732193c306bfaf7d8c4e398d5af55284eb8248dbc6306eb07b07e04cd",
+          "received_patch_bytes": 3704,
+          "grader_receipt_ref": "f0cd01bee1351702859659ad6553037441832555b4fc2f48f85a8fbf34891c0c",
+          "grader_measurement_ref": "39e905f7eadec8463ecd1963c584aa4d300c87432efb89e3167e581614dbd9b1",
+          "exact_failed_assertions_retained": false,
+          "retained_patch_available": false,
+          "libcst_selected_available": true,
+          "libcst_instruction_loading": null,
+          "libcst_invocation_or_import": null,
+          "catalog_delivery_complete": false,
+          "catalog_kept_skill_count": 5.0,
+          "catalog_skill_specific_positive_events": 0,
+          "catalog_snapshot_ref": "28d85488b79fbf785bb6c95a65ccb58f48ae2f9a6e8381d62281fb502a6bb71d"
+        },
+        {
+          "arm": "control",
+          "score": 0,
+          "callback_result": "test_failure",
+          "trial_ref": "3834f54789ebf4cc8e2c9250e1f1c4edf6e85418057d798ddf6309337d16c1fd",
+          "receipt_ref": "0e532584503b3a7f3af819058557f16ac05794ff880eed46051ae2526915539e",
+          "received_patch_sha256": "0a271039db1fe5e22103bc775a03030879bf3a6d434331f43d57c03dc23de50e",
+          "received_patch_bytes": 3712,
+          "grader_receipt_ref": "7ba355cc7d88ec08d8f4a52f5a4318f4fc690c89c343e7d0ebf6bd1325f8d126",
+          "grader_measurement_ref": "e98fa9fc9795f5051dceff48969412eedd7afb34b6d0f7c63d12c7ba26559e20",
+          "exact_failed_assertions_retained": false,
+          "retained_patch_available": false,
+          "libcst_selected_available": false,
+          "libcst_instruction_loading": null,
+          "libcst_invocation_or_import": null,
+          "catalog_delivery_complete": false,
+          "catalog_kept_skill_count": 4.0,
+          "catalog_skill_specific_positive_events": 0,
+          "catalog_snapshot_ref": "8305dee9fa6e00cfd1a1ce32a28e3dcbf5b2476b556f65200ffdd893046c30e8"
+        }
+      ]
+    }
+  ],
+  "interpretation": {
+    "exact_failure_reconstruction": "The protected grader response and model patch were transient. The ledger kept status and digests.",
+    "libcst_use": "LibCST was available in both treatments. Retained metadata does not establish it was loaded or executed.",
+    "software_replays": 0
+  }
+}
