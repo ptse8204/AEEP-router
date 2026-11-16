@@ -42,6 +42,12 @@ Weighted GDP remains provisional. Its source rights, external workbook
 link and offline recalculation still need review. All three stayed local
 and unexecuted.
 
+The [document verifier screening](../../reports/toolkit-v2/c13/completion-20261116/document-verifier-screening.json)
+examined 35 test functions from four more SkillsBench tasks. Keep the PDF,
+presentation, and both Georgia investment shock tasks out of formal runs at
+these verifier pins. The identified faults remain unexecuted. No case was
+adopted.
+
 The [new workbook reference](../../reports/toolkit-v2/c13/completion-20261116/workbook-reference-result.json)
 passed 19 original SkillsBench checks. The protected verifier rejected both
 missing and incomplete output. The first interpreter check failed before

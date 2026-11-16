@@ -1,0 +1,212 @@
+{
+  "schema_version": "aeep.c13.document_verifier_screening.v1",
+  "revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+  "files_verified": 12,
+  "source_bytes_verified": 88331,
+  "test_functions_reviewed": 35,
+  "method": "Read-only review of published instructions, verifier source, and oracle shell text. No candidate outputs or test functions were executed.",
+  "cases": {
+    "edit-pdf": {
+      "gate": "exclude_at_this_verifier_pin",
+      "scope": "The task requires updating the existing PDF, placing values in the original form and preserving other text.",
+      "finding": "All nine tests consume the same flattened text fixture. Once pypdf extracts nonempty text, even the OCR fallback is bypassed. No assertion inspects the original PDF, compares its layout or binds accepted text to specific field positions.",
+      "fault_to_reject": "A replacement page with the required strings in a text block outside the form fields.",
+      "remaining": "Review the actual input's rights and sensitivity, and verify positions and preservation in a separately frozen grader.",
+      "pins": [
+        {
+          "path": "tasks/edit-pdf/oracle/solve.sh",
+          "git_blob": "6e378191836769c4cd818d8ddd162a87d6c022bc",
+          "bytes": 9751,
+          "sha256": "94b9561149b14e184060bfa52783fb88460a570aa8caaa70c051d7b784786749"
+        },
+        {
+          "path": "tasks/edit-pdf/verifier/test.sh",
+          "git_blob": "a5214b87d4463a6605972acbe0074e7aed1abe8d",
+          "bytes": 439,
+          "sha256": "25362979c79858cda21cbc25400fcca9ff7db5792d6e4920caf46da134c3a5f5"
+        },
+        {
+          "path": "tasks/edit-pdf/verifier/test_outputs.py",
+          "git_blob": "c20103a792ebada979c93b10e5ed24a99530ca72",
+          "bytes": 10636,
+          "sha256": "85352c21b1105ef34b015ce7e87f52f5628c862b55ac57d230e3c02fce8ba23f",
+          "declared_tests": [
+            "test_form_student_name",
+            "test_redact_student_id",
+            "test_form_school_email",
+            "test_form_date_of_birth",
+            "test_form_phone_number",
+            "test_form_appeal_reason",
+            "test_signature_added",
+            "test_todays_date_added",
+            "test_labels_not_covered"
+          ]
+        }
+      ],
+      "test_function_count": 9,
+      "declaration_lines": {
+        "test_form_student_name": 162,
+        "test_redact_student_id": 175,
+        "test_form_school_email": 189,
+        "test_form_date_of_birth": 199,
+        "test_form_phone_number": 208,
+        "test_form_appeal_reason": 219,
+        "test_signature_added": 231,
+        "test_todays_date_added": 242,
+        "test_labels_not_covered": 270
+      }
+    },
+    "pptx-reference-formatting": {
+      "gate": "exclude_at_this_verifier_pin",
+      "scope": "The task requires a reference slide at the end of the presentation and updates to existing title boxes.",
+      "finding": "The verifier counts numbered slide XML files and reads the seventh by filename order. It never resolves the presentation's slide ID list or its relationships. Its non-title preservation check compares normalized paragraph text.",
+      "fault_to_reject": "An otherwise oracle-equivalent archive with slide7.xml retained but its slide ID removed from the visible presentation order.",
+      "remaining": "Review input rights. Bind the visible slide sequence and reject removed graphics or other unrelated content.",
+      "pins": [
+        {
+          "path": "tasks/pptx-reference-formatting/oracle/solve.sh",
+          "git_blob": "297e54c06041f127b5c472682607fdb17d1a5a4c",
+          "bytes": 24147,
+          "sha256": "f24cbe53b8dee63f4457b0611b1b5c4fe9c91fb3bdf7c7fcb2372e5142313805"
+        },
+        {
+          "path": "tasks/pptx-reference-formatting/verifier/test.sh",
+          "git_blob": "b52caf714e29e0aa162c72ce8ab7e0fe887e3948",
+          "bytes": 820,
+          "sha256": "1b9d59e84e8ea942ecf4a01766ad53589e6483d26fb6547571f6a2379cd75267"
+        },
+        {
+          "path": "tasks/pptx-reference-formatting/verifier/test_outputs.py",
+          "git_blob": "caecdeda11849ff891c769b5e7c8e6542014e4de",
+          "bytes": 16151,
+          "sha256": "66059a6f7e075f5e409df36d645cfb19ffccd184cd3ce19f0bebca8764cdd93e",
+          "declared_tests": [
+            "test_output_pptx_exists",
+            "test_slides_2_to_6_have_one_title_matching_gt",
+            "test_titles_use_required_font_style",
+            "test_titles_fit_single_line",
+            "test_titles_placed_near_bottom",
+            "test_titles_center_aligned",
+            "test_slides_1_to_6_non_title_content_unchanged",
+            "test_slide_7_exists_and_is_last",
+            "test_slide_7_title_is_reference",
+            "test_reference_body_uses_ordered_bullets",
+            "test_reference_has_no_duplicate_titles",
+            "test_reference_matched_gt"
+          ]
+        }
+      ],
+      "test_function_count": 12,
+      "declaration_lines": {
+        "test_output_pptx_exists": 159,
+        "test_slides_2_to_6_have_one_title_matching_gt": 165,
+        "test_titles_use_required_font_style": 180,
+        "test_titles_fit_single_line": 194,
+        "test_titles_placed_near_bottom": 228,
+        "test_titles_center_aligned": 247,
+        "test_slides_1_to_6_non_title_content_unchanged": 280,
+        "test_slide_7_exists_and_is_last": 296,
+        "test_slide_7_title_is_reference": 303,
+        "test_reference_body_uses_ordered_bullets": 318,
+        "test_reference_has_no_duplicate_titles": 334,
+        "test_reference_matched_gt": 350
+      }
+    },
+    "shock-analysis-demand": {
+      "gate": "exclude_at_this_verifier_pin",
+      "scope": "The task requires calculations backed by IMF and Geostat data, plus three scenarios with populated formulas.",
+      "finding": "The GDP and price deflator checks skip empty cells. Scenarios two and three impose no assertion if their labels are absent. The allocation check runs only after finding at least eight numeric entries. The SUT checks also permit a numeric C4 and a C46 formula without a cached result.",
+      "fault_to_reject": "A workbook that deletes both scenario sections, the allocation series and the checked GDP projection values while keeping the expected sheets and SUT formula stub.",
+      "remaining": "Review exact data releases and snapshot terms. Require complete scenarios, cross-sheet linkage, and values verified against a pinned offline recalculation.",
+      "pins": [
+        {
+          "path": "tasks/shock-analysis-demand/oracle/solve.sh",
+          "git_blob": "c4b8f6e6eb60a9b721a7c9cd01a65583b98de637",
+          "bytes": 560,
+          "sha256": "90e3bd6182d7f8dea7d1e03e6cd8db692f6d8b38aee1cdd09af4791d837b8aac"
+        },
+        {
+          "path": "tasks/shock-analysis-demand/verifier/test.sh",
+          "git_blob": "1cc3b5538b1ba1c65287293af1bb0a1a1113a817",
+          "bytes": 1467,
+          "sha256": "fe5c199319d76a7861cd2c9d79deb812625fcc055244861c5823e44005bdfcda"
+        },
+        {
+          "path": "tasks/shock-analysis-demand/verifier/test_outputs.py",
+          "git_blob": "0cf040f81b7244f6a5e25d7de81206b49cb03eae",
+          "bytes": 11797,
+          "sha256": "8dff9959b3b6a06e75e08ee2808a9f5012ccb98cc824283286eae753a13dc5d1",
+          "declared_tests": [
+            "test_required_sheets_exist",
+            "test_weo_data_has_formulas",
+            "test_sut_calc_formulas_and_import_share",
+            "test_na_scenarios_assumptions",
+            "test_na_project_allocation_bell_shape"
+          ]
+        }
+      ],
+      "test_function_count": 5,
+      "declaration_lines": {
+        "test_required_sheets_exist": 106,
+        "test_weo_data_has_formulas": 127,
+        "test_sut_calc_formulas_and_import_share": 151,
+        "test_na_scenarios_assumptions": 190,
+        "test_na_project_allocation_bell_shape": 256
+      }
+    },
+    "shock-analysis-supply": {
+      "gate": "exclude_at_this_verifier_pin",
+      "scope": "The task requires fitting an HP filter and using its trend in an Excel model tied to three data sources.",
+      "finding": "The HP filter check requires a formula string in P5 and at least 15 numeric values in the smoothed column. Nothing checks that P5 calculates the stated objective, that the values minimize it, or that the output uses the fitted trend. The magnitude checks only enforce ranges on selected outputs.",
+      "fault_to_reject": "An otherwise equivalent workbook that replaces the HP objective with a constant formula and preserves arbitrary numeric smoothed values.",
+      "remaining": "Review exact input releases. Freeze link and numerical checks against an independent solver result, including a negative control for an unfitted trend.",
+      "pins": [
+        {
+          "path": "tasks/shock-analysis-supply/oracle/solve.sh",
+          "git_blob": "1685ac720c0d446ad6e372301b9549156b425a6a",
+          "bytes": 630,
+          "sha256": "7c82895ac3c5fbda0299faf649e8f6309b256560de6cf65c2dca437a9e4efd7a"
+        },
+        {
+          "path": "tasks/shock-analysis-supply/verifier/test.sh",
+          "git_blob": "1c11f32960f763bf75fbd71bdb66a798290aff1a",
+          "bytes": 942,
+          "sha256": "d2bb19f65ca3ac75b418017f5abcbc2d91aa5dbc9ba86d1d061521ab7639caa2"
+        },
+        {
+          "path": "tasks/shock-analysis-supply/verifier/test_outputs.py",
+          "git_blob": "ed9e4fad19d6d70f940bb66a286eeced3e6cc21f",
+          "bytes": 10991,
+          "sha256": "56053cd797e54511f9341cf7d9504d776723e61c081ee2f36b4f318325ecaf52",
+          "declared_tests": [
+            "test_required_sheets_exist",
+            "test_data_collection",
+            "test_weo_data_extended_with_formulas",
+            "test_production_depreciation_rate",
+            "test_hp_filter_setup",
+            "test_production_function_calculations",
+            "test_investment_and_capital_accumulation",
+            "test_ky_ratio_and_k_extension",
+            "test_value_magnitudes"
+          ]
+        }
+      ],
+      "test_function_count": 9,
+      "declaration_lines": {
+        "test_required_sheets_exist": 50,
+        "test_data_collection": 61,
+        "test_weo_data_extended_with_formulas": 87,
+        "test_production_depreciation_rate": 102,
+        "test_hp_filter_setup": 120,
+        "test_production_function_calculations": 155,
+        "test_investment_and_capital_accumulation": 185,
+        "test_ky_ratio_and_k_extension": 216,
+        "test_value_magnitudes": 237
+      }
+    }
+  },
+  "note": "The two Georgia tasks share a topical family and online source requirements. Do not assign them to independent stages.",
+  "provider_transfer": false,
+  "runtime_executions": 0,
+  "formal_cases_adopted": 0
+}

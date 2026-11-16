@@ -26,6 +26,10 @@ verified 14 pinned assets and found two verifiers with gaps that allow wrong
 answers. A third case still needs source rights and offline recalculation
 review. No case was adopted or sent to a model.
 
+The [document verifier screening](../toolkit-v2/c13/completion-20261116/document-verifier-screening.json)
+found gaps in four additional SkillsBench tasks. Keep them out of formal
+trials at their current pins. No protected verifier ran.
+
 The [Toolkit V2 Linux installation check](../toolkit-v2/c13/completion-20261116/linux-private-install-result.json)
 passed for the pinned Linux ARM64 glibc container. It verified the owned
 runtime lifecycle and matched the macOS synthetic reports. The separate

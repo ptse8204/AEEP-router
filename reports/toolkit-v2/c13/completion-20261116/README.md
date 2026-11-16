@@ -136,6 +136,14 @@ its exact runtime closure and protected execution before adoption. On the
 document/data side, eight additional SkillsBench entries have metadata pinned
 to the same revision as the six integration tasks.
 
+The [document verifier screening](document-verifier-screening.json) read
+12 pinned source files and reviewed 35 test functions across four more
+SkillsBench tasks. Keep the PDF, presentation, and both Georgia investment
+shock tasks out of formal trials at these pins. The checked assertions can
+miss misplaced form text, an unreachable reference slide, missing demand
+scenarios or an unfitted supply trend. These are static findings. No verifier
+ran and no case qualified.
+
 The first new document/data reference, `xlsx-recover-data`, passed all 19
 upstream checks. Missing output produced one failure and 18 skips. The
 unchanged workbook produced one pass and 18 failures. A bootstrap attempt
