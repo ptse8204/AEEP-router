@@ -77,6 +77,14 @@ excluded by the October study. Stage assignment remains unfrozen and zero cases
 are adopted. Even if all 41 survive final review, the 8/28/105 plan needs at
 least 100 additional distinct cases.
 
+A single campaign using the existing gzip artifact bridge has 39 compatible
+provisional rows. The other two use plain JSON. If all 39 qualify for holdout,
+the current three-family design still needs at least 27 contract audits,
+20 multi-file repairs and 19 single-file repairs in holdout, plus 36 separate
+qualification and training cases. Source independence and protected reproduction
+may increase those counts.
+[Transport and family counts](formal-transport-intake.json)
+
 The cached queue contains 63 potential inputs with matching source archive
 hashes and prior license records, 57 without complete matched records and 12
 carrying prior exact-source exclusions. The 63 still require task-specific asset
@@ -156,6 +164,24 @@ results as well as formulas. Its workbook contains an external link, and its
 verifier depends on Gnumeric to recalculate formulas. It stays provisional
 until source rights, offline recalculation and reference and failure paths
 are verified. All three cases stayed local and unexecuted.
+
+The [Formula Extraction intake](formula-extraction-intake.json) verified six
+pinned assets and found seven declared checks, including a rendered comparison.
+The three-page task PDF matches the title and authors of the published paper.
+The later arXiv version has a CC BY 4.0 license. Rights for the exact shortened
+input and the offline MathJax and browser closure still need verification.
+[arXiv source](https://arxiv.org/abs/2405.10501v2)
+
+The selection recorder now rejects a route decision with no feasible executor.
+Only an actual baseline choice records abstention. The incomplete matrix
+remains visible, and no live selection result was added. The 37-check acceptance
+still refers to its recorded source. Updated source requires its own binding
+before a new live study. An offline Router check confirmed that the blocked
+decision is stored with the input redacted and creates no execution receipt.
+For the live study, capture the case and decision digests when the route is
+made. The redacted decision alone cannot prove what input the policy saw.
+The selection report's existing data contract is unchanged.
+[Selection guide](../../../../docs/aeep-toolkit/REPOSITORY_EVALUATION.md#evaluate-selection-independently)
 
 Advance source-bound candidates through the existing protected grader
 preparation and reference/counterexample checks. Keep development and formal

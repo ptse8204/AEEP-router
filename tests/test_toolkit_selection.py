@@ -105,6 +105,10 @@ def test_actual_route_decision_lineage_and_cli(tmp_path, capsys):
     with pytest.raises(ValueError, match='frozen task'):
         from_route_decision(decision, policy='aeep', case=case.model_copy(update={'task_sha256': '0' * 64}),
             baseline_executor_id='native', capability_by_executor={})
+    decision.selected_executor_id = None
+    with pytest.raises(ValueError, match='route selected no executor'):
+        from_route_decision(decision, policy='aeep', case=case, baseline_executor_id='native',
+            capability_by_executor={})
     path = tmp_path / 'evaluation.json'
     path.write_text(evaluation().model_dump_json())
     assert main(['selection-report', '--evaluation', str(path)]) == 0

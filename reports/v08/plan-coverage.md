@@ -1,5 +1,9 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 selection recorder change](../toolkit-v2/c13/completion-20261116/README.md#formal-candidate-and-selection-gates)
+rejects a no-executor routing decision. A real baseline choice still counts as
+abstention. No live selection study or admission was performed.
+
 The [SkillsBench workbook screening](../toolkit-v2/c13/completion-20261116/workbook-grader-screening.json)
 verified 14 pinned assets and found two verifiers with gaps that allow wrong
 answers. A third case still needs source rights and offline recalculation

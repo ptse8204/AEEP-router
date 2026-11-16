@@ -1,0 +1,72 @@
+{
+  "assets": [
+    {
+      "audience": "agent",
+      "bytes": 251750,
+      "git_blob_sha1": "eed4a841a45edee8ef245a9465b14c0a271b49ab",
+      "path": "tasks/latex-formula-extraction/environment/latex_paper.pdf",
+      "sha256": "24ae66f04cb3e1002bb392e24364df78cdabc66e0100a289eeefd0a8c514ce90"
+    },
+    {
+      "audience": "agent",
+      "bytes": 2433,
+      "git_blob_sha1": "9e856b20cf916bd140c6cf324661578401e1ab91",
+      "path": "tasks/latex-formula-extraction/task.md",
+      "sha256": "ca601e918a6404b8f7286bdbce7cc0067e00c57a7fe02e5798e9c632a884897d"
+    },
+    {
+      "audience": "runtime",
+      "bytes": 1844,
+      "git_blob_sha1": "3e6002f7eab130b6a141975179a878d7c16ed15f",
+      "path": "tasks/latex-formula-extraction/environment/Dockerfile",
+      "sha256": "4c6b27e54765e3d23f92ab1172dbbc8ff86c057b3a7f04f3813b323f11c6f763"
+    },
+    {
+      "audience": "protected",
+      "bytes": 13659,
+      "git_blob_sha1": "eb05bfc77f835ff129b8d15e94ff9c8631ea196b",
+      "path": "tasks/latex-formula-extraction/verifier/test_outputs.py",
+      "sha256": "857e670f1813bed43129e73fef31a4f472cdd50e5c73087a6e63821eaedb38c7"
+    },
+    {
+      "audience": "protected",
+      "bytes": 4274,
+      "git_blob_sha1": "058ce30dcc429dc2f8350c38c195a87172718685",
+      "path": "tasks/latex-formula-extraction/verifier/test.sh",
+      "sha256": "3099d125be6772aab900335982a6c649a58a08591ea3f3a4130ad31fb3ac85f8"
+    },
+    {
+      "audience": "protected",
+      "bytes": 747,
+      "git_blob_sha1": "57647074470ecc2b3a79e33b411a4c2ed48e6534",
+      "path": "tasks/latex-formula-extraction/oracle/solve.sh",
+      "sha256": "7c64eea9ae525cd3b5392c0e5a577c8021e6871bebd58c2426d0c222ce703e56"
+    }
+  ],
+  "data_provenance": {
+    "later_version": "https://arxiv.org/abs/2405.10501v2",
+    "later_version_license": "https://creativecommons.org/licenses/by/4.0/",
+    "observation": "The task PDF is a three-page copy dated January 12, 2026. Its title and author list match the public paper. Exact provenance of this shortened copy remains unresolved.",
+    "publication": "https://arxiv.org/abs/2405.10501"
+  },
+  "model_turns": 0,
+  "needed": [
+    "Establish rights for the exact shortened task PDF",
+    "Pin the MathJax distribution, Playwright and Chromium for offline rendered formula verification",
+    "Check reference success, missing formula rejection, wrong expression rejection and renderer failure"
+  ],
+  "protected_reference_observed": false,
+  "protected_test_definitions": [
+    "test_pdf_exists",
+    "test_answer_file_exists",
+    "test_answer_not_empty",
+    "test_each_line_wrapped_with_dollars",
+    "test_no_duplicate_formulas",
+    "test_formula_count_matches",
+    "test_formulas_render_match_expected"
+  ],
+  "provider_transfer": false,
+  "revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+  "schema_version": "aeep.c13.skillsbench-formula-intake.v1",
+  "status": "provisional"
+}

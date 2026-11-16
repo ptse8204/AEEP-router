@@ -306,9 +306,10 @@ ideal policy may test the scorer, but cannot stand in for AEEP decisions.
 `from_route_decision` converts an actual canonical `RouteDecision` to a bounded
 selection record, verifies its task input digest and retains the decision
 reference and measured routing time. Choosing the ordinary baseline records
-abstention from adding a capability. Task invocation and protected grading follow
-through the existing execution path. Attach those separate verification
-references; a decision record alone is not a completed task.
+abstention from adding a capability. A decision with no feasible executor blocks
+the selection record and leaves the matrix incomplete. Task invocation and
+protected grading follow through the existing execution path. Attach the
+separate verification references to establish that the task completed.
 
 ```bash
 PYTHONPATH=src python3 -m aeep_toolkit.cli selection-report \

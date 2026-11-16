@@ -105,10 +105,9 @@ def from_route_decision(decision: RouteDecision, *, policy: str, case: Selection
     if content_digest(decision.action.input) != case.task_sha256:
         raise ValueError('selection decision does not match the frozen task input')
     selected = decision.selected_executor_id
-    if selected is None or selected == baseline_executor_id:
-        capability = None
-    else:
-        capability = capability_by_executor[selected]
+    if selected is None:
+        raise ValueError('route selected no executor; selection was blocked')
+    capability = None if selected == baseline_executor_id else capability_by_executor[selected]
     return SelectionDecision(policy=policy, case_id=case.case_id, selected=capability,
         decision_ref=content_digest(decision), decision_wall_seconds=decision.routing_overhead_ms / 1000)
 

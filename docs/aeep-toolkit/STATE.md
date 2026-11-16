@@ -7,6 +7,12 @@ against the operational ledger and frozen source `4e673a6d`. It retains
 the private macOS arm64 / Python 3.13 LIMITED_BETA recommendation. Production
 release and public benefit claims remain NO_GO.
 
+The selection recorder rejects a canonical decision with no feasible executor,
+so a blocked task cannot be credited as choosing the baseline. The
+[updated guide](REPOSITORY_EVALUATION.md#evaluate-selection-independently)
+describes the behavior. The current beta evidence stays on its frozen source.
+A live selection study and its evidence binding remain open.
+
 A [screen of three further SkillsBench workbook cases](../../reports/toolkit-v2/c13/completion-20261116/workbook-grader-screening.json)
 verified 14 pinned assets. Keep Protein Expression and Powerlifting out of
 formal runs at these verifier pins. Their checks can accept wrong answers.
