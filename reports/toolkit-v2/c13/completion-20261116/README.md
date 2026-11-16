@@ -165,6 +165,17 @@ reference evidence. They still need asset-use review and ordinary recipe
 bindings before stage assignment.
 [Updated corpus audit](post-protected-corpus-status.json)
 
+The [archive recovery](multifile-acquisition-result.json) verified four of
+13 exact public sources. Three passed existing multi-file scope checks and
+ordinary worker transport. One archive has a symlink and the worker contract
+rejected it. The acquisition driver initially omitted the pinned issue
+metadata beside each archive. Local staging paired the original metadata
+with the verified bytes and recovered the three bindings without further
+downloads. The optimistic software pool now has 89 rows. At least 52 more
+are required, including 27 contract audits and eight multi-file repairs for
+the holdout. The three recovered candidates still need protected runtime
+verification and source-disjoint assignment.
+
 The [independent document pack](independent-document-pack-intake.json)
 binds 26 original files to the pinned SkillsBench Git tree. Ordinary CLI
 inspection passed for workbook recovery, Formula Extraction and economic

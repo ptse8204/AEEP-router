@@ -64,7 +64,11 @@ The [cache recovery](../toolkit-v2/c13/completion-20261116/cached-repository-reb
 verified six complete archives against public Git trees. Four passed inert
 scope checks and joined the ordinary worker mapping. Fifty-one caches
 were truncated at earlier download caps. No model, protected test or
-deployment ran. Formal case assignment remains open.
+deployment ran. Formal case assignment remains open. The subsequent
+[multi-file recovery](../toolkit-v2/c13/completion-20261116/multifile-acquisition-result.json)
+verified four public archives and staged three distinct multi-file cases.
+The local handoff reused pinned issue metadata without repeating acquisition.
+The optimistic software pool still needs at least 52 more rows.
 
 The [Toolkit V2 Linux installation check](../toolkit-v2/c13/completion-20261116/linux-private-install-result.json)
 passed for the pinned Linux ARM64 glibc container. It verified the owned

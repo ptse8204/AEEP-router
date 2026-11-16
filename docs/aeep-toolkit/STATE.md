@@ -97,6 +97,14 @@ passed ordinary CLI inspection. All 26 original files match the pinned Git
 tree. Each of the three worker archives contains only its reviewed input
 paths and instruction. No rights record or stage assignment was registered.
 
+The approved [multi-file archive recovery](../../reports/toolkit-v2/c13/completion-20261116/multifile-acquisition-result.json)
+verified four published Git trees across 13 acquisition attempts. Three
+sources passed ordinary worker mapping after local metadata reconciliation.
+The fourth contains an upstream symlink and remains outside that mapping.
+The optimistic software pool now has 89 rows. The minimum shortfall is 52,
+including 27 contract audits and eight multi-file repairs for the holdout.
+The three staged cases still need protected runtime verification.
+
 The [new workbook reference](../../reports/toolkit-v2/c13/completion-20261116/workbook-reference-result.json)
 passed 19 original SkillsBench checks. The protected verifier rejected both
 missing and incomplete output. The first interpreter check failed before
