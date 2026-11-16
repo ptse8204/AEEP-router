@@ -52,7 +52,7 @@ def encode(value):
     return (json.dumps(value, indent=2, ensure_ascii=False) + "\n").encode()
 
 
-def bind_row(row, lead, target):
+def bind_row(row, lead, target, staged, original_archive):
     case = row["case_id"]
     if (
         repository(row["repository"]) != repository(lead["repository"])
@@ -61,7 +61,7 @@ def bind_row(row, lead, target):
     ):
         raise ValueError("pinned issue identity changed")
     assets = {
-        item["file"]: read(STAGED / case / item["file"], item["sha256"]) for item in row["assets"]
+        item["file"]: read(staged / case / item["file"], item["sha256"]) for item in row["assets"]
     }
     if {name: len(raw) for name, raw in assets.items()} != {
         entry["file"]: entry["bytes"] for entry in row["assets"]
@@ -79,8 +79,9 @@ def bind_row(row, lead, target):
         or not set(row["test_modules"]) <= source.keys() | overlay.keys()
     ):
         raise ValueError("protected overlay boundary differs")
-    raw_archive = ROOT / lead["source_bindings"][0]["archive"]
-    issue = json.loads(read(raw_archive.with_name("row.json"), row["dataset_row_sha256"]))
+    issue = json.loads(
+        read((ROOT / original_archive).with_name("row.json"), row["dataset_row_sha256"])
+    )
     identities = json.loads(assets["required.json"])
     if (
         identities != {"fail_to_pass": issue["FAIL_TO_PASS"], "pass_to_pass": issue["PASS_TO_PASS"]}
@@ -155,7 +156,7 @@ def bind_row(row, lead, target):
     return result
 
 
-def main(target):
+def main(target, *, include_rebound=False):
     intake = json.loads((HERE / "repository-patch-batch-intake.json").read_bytes())
     source = json.loads(read(STAGED / "private-index.json", intake["private_index_sha256"]))
     leads = {
@@ -168,18 +169,31 @@ def main(target):
     pool = json.loads(read(ROOT / old["prepared_pool_relative_path"], old["prepared_pool_sha256"]))
     prior = {(repository(row["source_repository"]), row["source_revision"]) for row in pool}
     rows = [row for row in source["records"] if row["status"] == "ready_for_runtime_review"]
-    candidates = {(repository(row["repository"]), row["revision"]) for row in rows}
-    if (
-        len(rows) != intake["ready_for_runtime_review"]
-        or len(candidates) != len(rows)
-        or candidates & prior
-    ):
-        raise ValueError("case counts or source-origin overlap changed")
+    if len(rows) != intake["ready_for_runtime_review"]:
+        raise ValueError("existing case count changed")
+    scoped = [(row, STAGED, leads[row["case_id"]]["source_bindings"][0]["archive"]) for row in rows]
+    if include_rebound:
+        rebound = json.loads((HERE / "cached-repository-rebinding.json").read_bytes())
+        path = ROOT / rebound["retained_private_stage_path"]
+        raw = json.loads(read(path, rebound["private_stage_results_sha256"]))
+        additional = [row for row in raw if row["status"] == "ready_for_runtime_review"]
+        if len(additional) != rebound["provisional_staged_cases"]:
+            raise ValueError("rebound case count differs")
+        scoped += [
+            (row, path.parent / "staged", leads[row["case_id"]]["archives"][0])
+            for row in additional
+        ]
+    candidates = {(repository(row["repository"]), row["revision"]) for row, _, _ in scoped}
+    if len(candidates) != len(scoped) or candidates & prior:
+        raise ValueError("source-origin overlap")
     target = target.resolve()
     if target.parent != WORK or shutil.disk_usage(WORK).free < 52 * 1024**3:
         raise ValueError("use a fresh output under the bounded private workspace")
     target.mkdir(mode=0o700)
-    records = [bind_row(row, leads[row["case_id"]], target) for row in rows]
+    records = [
+        bind_row(row, leads[row["case_id"]], target, staged, archive)
+        for row, staged, archive in scoped
+    ]
     public = list((target / "public").iterdir())
     assert len(public) == len(records) and all(path.name.endswith(".tar.gz") for path in public)
     private_index = write(target / "private-index.json", encode(records))
@@ -211,4 +225,6 @@ def main(target):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
-    main(parser.parse_args().output)
+    parser.add_argument("--include-rebound", action="store_true")
+    args = parser.parse_args()
+    main(args.output, include_rebound=args.include_rebound)

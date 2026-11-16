@@ -72,6 +72,15 @@ public root. All 42 attempts to retrieve the protected overlay through the
 public mapping failed. Even if all 42 cases qualify, at least 58 new
 software rows are needed before independence and adoption.
 
+The [cache recovery](../../reports/toolkit-v2/c13/completion-20261116/cached-repository-rebinding.json)
+verified six complete archives against public Git trees and staged four
+more repair cases. Fifty-one cached files ended at earlier download caps.
+The [expanded mapping](../../reports/toolkit-v2/c13/completion-20261116/rebound-worker-transport.json)
+preserves all 42 previous bindings and covers 46 staged sources. Runtime
+evidence and stage assignment remain open. Even if all qualify, at least
+54 software rows are missing, including 27 contract audits and 10
+multi-file repairs for the holdout.
+
 The [new workbook reference](../../reports/toolkit-v2/c13/completion-20261116/workbook-reference-result.json)
 passed 19 original SkillsBench checks. The protected verifier rejected both
 missing and incomplete output. The first interpreter check failed before

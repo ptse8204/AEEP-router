@@ -43,6 +43,12 @@ The [worker transport](../toolkit-v2/c13/completion-20261116/repository-worker-t
 passed ordinary input mapping and protected-overlay refusal for 42 cases.
 Both still await protected execution. No formal case was adopted.
 
+The [cache recovery](../toolkit-v2/c13/completion-20261116/cached-repository-rebinding.json)
+verified six complete archives against public Git trees. Four passed inert
+scope checks and joined the ordinary worker mapping. Fifty-one caches
+were truncated at earlier download caps. No model, protected test or
+deployment ran. Formal case assignment remains open.
+
 The [Toolkit V2 Linux installation check](../toolkit-v2/c13/completion-20261116/linux-private-install-result.json)
 passed for the pinned Linux ARM64 glibc container. It verified the owned
 runtime lifecycle and matched the macOS synthetic reports. The separate

@@ -128,6 +128,18 @@ would still need at least 58 more. The balanced holdout needs at least 27
 additional contract audits and 11 multi-file repairs under that optimistic
 count. Stage independence can increase the shortfall.
 
+The [cached-source recovery](cached-repository-rebinding.json) reconstructed
+the published Git tree for six cached archives and verified their root
+license notice bytes. Four passed the existing inert repair and test-scope
+checks. The other 51 caches ended at an earlier download cap. Fourteen of
+those have metadata for multi-file changes within the current patch contract,
+pending full source verification. The [expanded worker mapping](rebound-worker-transport.json)
+now covers 46 staged prospects. All 46 attempts to address private test
+overlays through the public mapping failed. The earlier 42 bindings are
+unchanged. If all staged cases qualify, the software pool would still need
+at least 54 cases, including at least 27 contract audits and 10 multi-file
+repairs for the holdout. No runtime execution or stage assignment occurred.
+
 The [grouped A2A review](a2a-batch-intake.json) covers three published
 source revisions and 127 required test identities. Each reference must
 pass every required test. Each original must fail its issue assertions and
