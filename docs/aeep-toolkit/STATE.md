@@ -139,6 +139,16 @@ derived 117 projected native identities from the 27 published selectors.
 Its literal-only collection ran no repository code. A real protected
 collection with the pinned Python and dependencies remains required.
 
+Five [additional contract audits](../../reports/toolkit-v2/c13/completion-20261116/additional-contract-audits.json)
+use distinct retained source revisions. They preserve 183 upstream test
+identities and each adds a private source-preservation guard. The public
+audit snapshot includes the published Python repair. Exact changelog
+additions stay outside the worker archive. A second preparation matched
+every byte, and the guards rejected seven one-file restorations. The
+optimistic software pool now has 94 rows. At least 47 remain, including
+22 contract audits and eight multi-file repairs for the holdout. The five
+new cases need exact runtime closures and protected verification.
+
 The [new workbook reference](../../reports/toolkit-v2/c13/completion-20261116/workbook-reference-result.json)
 passed 19 original SkillsBench checks. The protected verifier rejected both
 missing and incomplete output. The first interpreter check failed before

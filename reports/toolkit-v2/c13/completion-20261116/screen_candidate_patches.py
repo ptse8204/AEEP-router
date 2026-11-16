@@ -85,7 +85,7 @@ def python_source(name, roots):
             and not any(path.is_relative_to(root) for root in roots))
 
 
-def assess(lead, helpers):
+def assess(lead, helpers, *, reviewed_documentation_additions=()):
     binding = lead['source_bindings'][0]
     archived = ROOT / binding['archive']
     raw = archived.read_bytes()
@@ -125,11 +125,13 @@ def assess(lead, helpers):
             raise ValueError('published test overlay exceeds the declared protected roots')
         helpers['patch'].apply(root, row['patch'], root.parent)
         repaired = snapshot(root)
-    if repaired.keys() != overlaid.keys():
+    added = repaired.keys() - overlaid.keys()
+    if (added != set(reviewed_documentation_additions) or overlaid.keys() - repaired.keys()
+            or any(PurePosixPath(name).suffix not in {'.md', '.rst'} for name in added)):
         raise ValueError('published repair adds or removes files')
-    changed = sorted(name for name in repaired if repaired[name] != overlaid[name])
+    changed = sorted(name for name in overlaid if repaired[name] != overlaid[name])
     edits = [name for name in changed if python_source(name, roots)]
-    omissions = sorted(set(changed) - set(edits))
+    omissions = sorted((set(changed) - set(edits)) | added)
     if any(PurePosixPath(name).suffix not in {'.md', '.rst'} for name in omissions):
         raise ValueError('published repair includes non-editable behavior or configuration')
     bodies = [name for name in edits if helpers['archive'].executable(repaired[name]) !=

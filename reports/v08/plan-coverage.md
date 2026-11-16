@@ -82,6 +82,11 @@ verified four public archives and staged three distinct multi-file cases.
 The local handoff reused pinned issue metadata without repeating acquisition.
 The optimistic software pool still needs at least 52 more rows.
 
+Five [additional contract audits](../toolkit-v2/c13/completion-20261116/additional-contract-audits.json)
+stage 183 published test identities and five source-preservation guards.
+Both inert preparations matched. The optimistic software shortfall fell
+to 47. Protected reference and fault outcomes remain unverified.
+
 The [A2A receipt bridge audit](../toolkit-v2/c13/completion-20261116/a2a-receipt-bridge-audit.json)
 matched four canonical receipts, rebuilt both pairs of protected fixtures
 and verified their scoring through the ordinary callback. Three wheel

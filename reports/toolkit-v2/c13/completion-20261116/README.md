@@ -176,6 +176,19 @@ are required, including 27 contract audits and eight multi-file repairs for
 the holdout. The three recovered candidates still need protected runtime
 verification and source-disjoint assignment.
 
+The [additional contract audits](additional-contract-audits.json) use
+five distinct retained revisions from Venvstacks, Build, Twine, tox and
+Towncrier. The public inputs carry the published Python repair. The empty
+reference and original-source fault stay beside the protected tests.
+All 183 published test identities remain. The only omitted edits are
+the recorded changelog and documentation changes. The five preservation
+guards accepted the repaired bytes and rejected seven one-file restorations.
+Separate preparations produced identical bytes. All cases still need
+protected runtime verification. The optimistic pool now has 94 rows
+across 60 repository families, leaving at least 47 missing before formal
+stage assignment. The 105-case holdout still lacks at least 22 audits
+and eight multi-file repairs.
+
 The [Wemake selector preflight](wemake-native-selector-preflight.json)
 reconstructed all 117 projected test identities from the literal upstream
 parameters. The 27 published selectors include 19 prefixes. Their synthetic

@@ -1,0 +1,88 @@
+{
+  "schema_version": "aeep.c13.additional-contract-audits.v1",
+  "private_index": ".aeep/completion-20261116/new-contract-audits/index.json",
+  "private_index_sha256": "96857b706c83613ea2eded9987ea5bb07260494f80945f868cbf3fa7720a8d48",
+  "cases": [
+    {
+      "source_repository": "lmstudio-ai/venvstacks",
+      "source_revision": "8e8d8267567f87ebcb1c2252fe3728e3c45ed052",
+      "upstream_assertion_count": 53,
+      "omitted_documentation": [
+        "docs/changelog.d/20250603_050408_ncoghlan_only_lock_if_necessary_in_build_subcommand.rst"
+      ],
+      "case_id": "lmstudio-ai__venvstacks-197-aeep-contract-audit",
+      "verified_guard_rejection_count": 2
+    },
+    {
+      "source_repository": "pypa/build",
+      "source_revision": "27b67b2db1807f2547af670e4d14401a6605bf3b",
+      "upstream_assertion_count": 64,
+      "omitted_documentation": [
+        "docs/changelog/860.bugfix.rst"
+      ],
+      "case_id": "pypa__build-1027-aeep-contract-audit",
+      "verified_guard_rejection_count": 1
+    },
+    {
+      "source_repository": "pypa/twine",
+      "source_revision": "aa3a910cdef8e0a3cb4e893f4c371b58015f52e0",
+      "upstream_assertion_count": 17,
+      "omitted_documentation": [
+        "changelog/1224.bugfix.rst"
+      ],
+      "case_id": "pypa__twine-1225-aeep-contract-audit",
+      "verified_guard_rejection_count": 1
+    },
+    {
+      "source_repository": "tox-dev/tox",
+      "source_revision": "a4d8dabb3ed3736c00e2de14f8ed0dd419b2cc99",
+      "upstream_assertion_count": 33,
+      "omitted_documentation": [
+        "docs/changelog/3758.bugfix.rst"
+      ],
+      "case_id": "tox-dev__tox-3759-aeep-contract-audit",
+      "verified_guard_rejection_count": 2
+    },
+    {
+      "source_repository": "twisted/towncrier",
+      "source_revision": "cd0d2df75d3fe8d6d8795a52e7fd115c43cf6f0c",
+      "upstream_assertion_count": 16,
+      "omitted_documentation": [
+        "docs/configuration.rst",
+        "src/towncrier/newsfragments/687.feature.rst"
+      ],
+      "case_id": "twisted__towncrier-687-aeep-contract-audit",
+      "verified_guard_rejection_count": 1
+    }
+  ],
+  "optimistic_case_count": 94,
+  "distinct_repository_families": 60,
+  "only_current_public_archives_in_worker_root": true,
+  "optimistic_case_counts_by_family": {
+    "multi-file-repair": 27,
+    "single-file-repair": 54,
+    "contract-audit": 13
+  },
+  "minimum_additional_rows_before_independence": 47,
+  "minimum_additional_holdout_rows_by_family": {
+    "multi-file-repair": 8,
+    "single-file-repair": 0,
+    "contract-audit": 22
+  },
+  "upstream_test_executions": 0,
+  "model_turns": 0,
+  "formal_cases_adopted": 0,
+  "verification": {
+    "private_staging_replay_byte_identical": true,
+    "default_scope_still_rejects_added_files": true,
+    "incorrect_documentation_allowlist_rejected": true,
+    "retained_upstream_test_identities": 183
+  },
+  "runtime_review_findings": {
+    "lmstudio-ai/venvstacks": "Review pinned pip, PDM and uv dependencies and the CLI subprocess fixtures. Normalization retained the Python bytes but stripped one published executable permission.",
+    "pypa/build": "Review pyproject-hooks, pytest-mock and the local package fixture backends before an offline reference.",
+    "pypa/twine": "Pin the request, renderer, keyring and package metadata closure. Keep real credentials and publishing endpoints outside the grader.",
+    "tox-dev/tox": "Pin the virtualenv and pyproject-api closure and the plugin that supplies the declared pytest flag. Verify wheel caching and fixture installation stay offline.",
+    "twisted/towncrier": "Pin Twisted Trial and the Click and Jinja2 runtime. Verify native identities for the package-internal test root."
+  }
+}
