@@ -1,0 +1,93 @@
+{
+  "review_sha256": "e7f6f7352040634da81faf74ed064f14ff7dea0792bbced0da5350cfb19db631",
+  "synthetic_driver_checks": {
+    "unapproved": {
+      "passed": true,
+      "synthetic_calls": 0
+    },
+    "numeric_approval": {
+      "passed": true,
+      "synthetic_calls": 0
+    },
+    "drift": {
+      "passed": true,
+      "synthetic_calls": 0
+    },
+    "success": {
+      "passed": true,
+      "synthetic_calls": 6
+    },
+    "settled_failure": {
+      "passed": true,
+      "synthetic_calls": 5
+    },
+    "uncertain_cleanup": {
+      "passed": true,
+      "synthetic_calls": 1
+    }
+  },
+  "bound_files": 1193,
+  "boundary": "six reviewed commands with exact private role-only read-only mounts",
+  "required_identity_checks": 127,
+  "upstream_suite_executed": false,
+  "real_operations_reserved": 0,
+  "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+  "docker_sha256": "8be48df662c5ced38738e7e5dd7f82611a55565f165787cfecebbe416b321b50",
+  "linux_arm64_carrier": "sha256:4474cf22f867c681aa6120ce2f98d809413f89755cf11a445444b1b993754ea1",
+  "python": "3.13.15",
+  "pytest": "8.4.1",
+  "closure_wheels": 25,
+  "additional_wheel": {
+    "distribution": "starlette",
+    "version": "0.48.0",
+    "sha256": "0764ca97b097582558ecb498132ed0c7d942f233f365b86ba37770e026510659"
+  },
+  "cases": [
+    {
+      "case_id": "a2aproject__a2a-python-472",
+      "base_revision": "5ec078830eccf2a72c4a467e520de70c3cbca68e",
+      "reference_fixture_sha256": "b90c08869e10d4efe18610dd83c27dc107d8743ddb0e98f622417a92f4432d40",
+      "original_fixture_sha256": "fa43bf56bba928b2cd6ddbc7a996f2fe7ecfff4e7b22caa8d33b1f11cb67dac7",
+      "issue_assertions": 4,
+      "preservation_assertions": 77
+    },
+    {
+      "case_id": "a2aproject__a2a-python-576",
+      "base_revision": "3bfbea9ec8d7982fa73eb12d8352a581307355dc",
+      "reference_fixture_sha256": "c684eab2999782a1686484996860517ff7a6496f2d49e79532582464d215976e",
+      "original_fixture_sha256": "db3ea36340f808d91484951f9bbcfbec27b7f865cc5f9f2fc1f7749f423939cd",
+      "issue_assertions": 2,
+      "preservation_assertions": 37
+    },
+    {
+      "case_id": "a2aproject__a2a-python-682_interface",
+      "base_revision": "c91d4fba517190d8f7c76b42ea26914a4275f1d5",
+      "reference_fixture_sha256": "5d2dba2e752d1351dfffb663821b5dbb977f27a2792f9f6d4809caafdc0d74bc",
+      "original_fixture_sha256": "5e7d9ac2b07cbdb86e837f93e5a5b0e1e3089d4976b6a646af9fd7c2ac127c95",
+      "issue_assertions": 2,
+      "preservation_assertions": 5
+    }
+  ],
+  "independent_repository_families": 1,
+  "max_operations": 6,
+  "max_reserved_seconds": 360,
+  "expires_at": "2026-11-23T21:20:52.270636+00:00",
+  "model_turns": 0,
+  "cash_usd": 0,
+  "formal_stage_assigned": false,
+  "operator_approval": "pending",
+  "private_review": ".aeep/completion-20261116/a2a-batch-reference-review.json",
+  "preferred_over_prior_unstarted_review": "9a31c7acb11ecc83fd9893a33f47e06af9c9205d632c8b3e53a2d2784107cbaa",
+  "adaptations": [
+    "Use the retained CPython 3.13.15 carrier and exact async plugin.",
+    "Run all required nodes in one process, without the optional xdist flag of the 682 snapshot.",
+    "Keep optional gRPC and SQL database services absent. The selected tests use mocked or in-memory transports."
+  ],
+  "first_party_verification": {
+    "ruff": "passed",
+    "schema_drift_check": "passed",
+    "offline_docs_check": "passed",
+    "new_report_lint_and_links": "passed",
+    "product_source_changed": false
+  }
+}

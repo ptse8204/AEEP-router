@@ -13,12 +13,12 @@ test bodies intact. MathJax and nine wheels are verified locally. Exact
 review `bedcde5c` awaits approval for the two remaining public downloads.
 The full verifier remains unstarted.
 
-The [A2A protected reference review](../../reports/toolkit-v2/c13/completion-20261116/a2a-runtime-intake.json)
-pins the existing Linux carrier, 24 scoped runtime packages and all seven
-published tests. The prepared driver passed exact boundary checks and
-synthetic settlement, failure and unresolved-cleanup checks. Real execution
-awaits `9a31c7ac` approval under the exact untrusted-suite and container
-authority. No operation has been reserved for it.
+The [grouped A2A review](../../reports/toolkit-v2/c13/completion-20261116/a2a-batch-intake.json)
+binds 127 published test identities across three source revisions. It uses
+25 pinned wheels and separate read-only mounts for six protected calls.
+Synthetic driver and accounting checks passed. Exact review `e7f6f735`
+awaits approval in place of the earlier single-case review `9a31c7ac`.
+No upstream tests ran and no case was assigned to a formal stage.
 
 The [repository patch batch](../../reports/toolkit-v2/c13/completion-20261116/repository-patch-batch-intake.json)
 staged protected reproduction inputs for 42 cases across 29 repositories.

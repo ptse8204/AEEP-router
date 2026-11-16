@@ -112,9 +112,22 @@ wheels and preserves one Python process with the explicit asyncio plugin.
 The original-source control must preserve five passing tests and fail the
 two missing context manager checks. Wrong identities, skips and unrelated
 errors fail validation. Synthetic driver checks exercised success, failure
-and uncertain cleanup. Exact review `9a31c7ac` is ready for approval.
-It permits two offline containers and a total reservation of 100 seconds.
-The protected suite is still unstarted.
+and uncertain cleanup. Standalone review `9a31c7ac` remains unstarted.
+The grouped review below includes that pair once.
+
+The [grouped A2A review](a2a-batch-intake.json) covers three published
+source revisions and 127 required test identities. Each reference must
+pass every required test. Each original must fail its issue assertions and
+pass its preservation assertions. The 25-wheel closure uses the retained
+Linux ARM64 carrier. Each call mounts only the shared runtime and its own
+read-only source and protected test fixture. Six driver checks exercised
+approval and drift refusal, successful settlement, a settled failure and
+uncertain cleanup with synthetic executor replies.
+
+Use review `e7f6f735` in place of the standalone `9a31c7ac` review. The
+grouped review allows up to six offline calls and 360 reserved seconds,
+with zero models or cash. The tests remain unstarted. The three snapshots
+share one repository family and have no formal stage assignment.
 
 The next [workload intake](workload-intake-audit.json) checks both domains.
 On the software side, two original patches and protected test overlays apply

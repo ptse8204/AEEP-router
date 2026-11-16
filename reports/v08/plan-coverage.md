@@ -5,10 +5,10 @@ stages the reference and three protected controls and pins the missing
 Playwright wheel and Chromium archive. The acquisition review awaits
 approval. The staged fixtures add no runtime or candidate-value evidence.
 
-The [A2A protected runtime review](../toolkit-v2/c13/completion-20261116/a2a-runtime-intake.json)
-binds the first new repository batch candidate to a retained Linux carrier.
-Its exact two-operation approval is pending. Synthetic driver checks do not
-qualify the upstream tests or register a formal case.
+The [grouped A2A review](../toolkit-v2/c13/completion-20261116/a2a-batch-intake.json)
+covers six offline calls against 127 published test identities in three
+snapshots. The driver passed six synthetic checks. Review `e7f6f735`
+awaits approval and includes the prior unstarted pair. No case qualified.
 
 The [C13 repository patch batch](../toolkit-v2/c13/completion-20261116/repository-patch-batch-intake.json)
 staged 42 pinned source and grader inputs, preserving all declared tests.
