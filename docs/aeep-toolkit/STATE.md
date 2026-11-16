@@ -1,5 +1,13 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 16. Managed Sol development dispatch awaits approval.**
+The [exact dispatch review](../../reports/toolkit-v2/c13/managed-comparison-20261115/DISPATCH.md)
+binds approved design `08613f4e` to two verified worker pairs and
+four protected graders. Offline references and rejection controls
+passed. The expiry-only renewal passed on a copied ledger. The
+operational grant and prior reservations are unchanged. Live dispatch
+is unstarted and requires approval of `bd939ed7`.
+
 **November 15. All 37 required checks are verified in the operational ledger.**
 The [operational audit](../../reports/toolkit-v2/c13/managed-comparison-20261115/operational-completion.json)
 accepts the reviewed v2 completion `81e3ebd6`. Selecting Waza still

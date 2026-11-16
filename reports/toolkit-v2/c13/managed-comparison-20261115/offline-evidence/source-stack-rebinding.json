@@ -1,0 +1,1125 @@
+{
+  "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+  "original_source": "c63299aff6631834cb13c89331b1fc17d5e3deda7bafde9fcc8533c1af78f5f5",
+  "original_completion_ref": "81e3ebd64ad53518026bf7e8b1374cc564fbc4f768c0e255646fb38bbc117031",
+  "stack_completion_ref": "a5b11409ad5e307b7e7e88cff98221a70fa41b1aeb693f8fda410816f6031ad0",
+  "completion": {
+    "schema_version": "aeep.toolkit.stack-completion.v2",
+    "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+    "components": {
+      "agent-skill-eval": "ccd2b2f3e3a5af03024adf474f59a03657bcf5a24376067db628031c75288543",
+      "aeep-evaluator": "937bf76a971e1d1c5c198fc9fb2e81a8010a89ddb581f40edc1a6c7752ac148d",
+      "skillrank": "7afcc6ce8a0e7b75b2b8a5408205fed1f0e0c63b98f3941b21ea395cae5f6a08",
+      "skillsbench": "bd7b3263795772dab23757890dc1f05a838bb3097506943d5b3a84ae38d2ad74",
+      "mcpmark": "362669699789e177f6821b6dd175dd5d5c0ad60c412b0a3968f3d50e246633cd",
+      "mcp-universe": "8c21f91628d0c511d3fb2323dd1d52fbe392a56d8a2d1fca847ad626f9f81288",
+      "skill-scanner": "e72d8aa92b6d2da860c531bf91d5b5bc8538dc46a8066e5dd5a810d4910941ea",
+      "toolhive": "02d556932671602502f5e06b52515be3a01efa4b66eaa9478cf1b8d0622a17b7",
+      "semantic-conventions": "b9863544bd0fe00cbd24ac74faea43783d88ea1c78062486ce5fd19204b12395",
+      "langfuse": "71812c686e64e036e0dd9a06b02f1c2d33c00e1d417c6f8ef3cda34fe77069f3",
+      "langgraph": "579cc10d727a31e49c10e1203ed2aa20ab3937420bd1c64253617c0964decc65",
+      "evoagentx": "d8722692a47308a84312f1fa6c292006b7c630a77b505c8acbb37f38cc555393",
+      "aflow": "643d1df7ee85826c030b114c98057ab2b753270f72f23c6deded508b7e0e66e8",
+      "agent-framework": "6b7c97a055e9da1198af4fb6633264b65f2124cef578a43c864d21831974d468",
+      "aeep-router": "1920bc323a7500d46cbbc2446eb494f75e527c0757c761e47805c18ea5efebad",
+      "github-sponsors": "879c5129380a284e2dd470243136f02508f0b8103acfe872bfddcb697ae5af86",
+      "workflow-document-data": "a15823a96ed7c46684e2e7176b9dfd67d81c6d41f922cbb04fa8798f03c7a9e6",
+      "workflow-software-engineering": "c9ed3e5935579683b063e4838ae3f327c8e24a758c2d97ebbbad8287abdf569c"
+    }
+  },
+  "records": {
+    "agent-skill-eval": {
+      "kind": "toolkit_stack_receipt_evidence",
+      "value": {
+        "schema_version": "aeep.toolkit.stack-receipt-evidence.v1",
+        "component": "agent-skill-eval",
+        "source_revision": "59de161f657b82bfaf8f6abe83dfff38552deb21",
+        "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+        "original_source": "cfc36a2aeda4e220046722dbdbc81fbf2376deb12b9f7266abdab81bddcec9e1",
+        "compatibility_basis": "The original controlled agent-skill-eval scheduler and protected grade are unchanged. Exact review 70397da2 reverified the changed host launcher using a first-party native boundary observation and settled accounting. Current source makes Waza conditional in comparison readiness and passes the workflow's Waza selection to the gate. This preserves the observed dispatch, grading, reporting, isolation, and accounting of the retained run. Dispatch reuses the verified product bytes at 70943060 and the same local dev configuration and CI fixture. The copied execution source excludes Finder metadata and ignored Python caches. Original runtime proofs, observations and historical sources remain bound.",
+        "proof": {
+          "kind": "scheduled",
+          "report_ref": "fb043b1225f5ffb87662e996e7c69b4ba77225fa33154207418250136e46d751",
+          "native_boundary": {
+            "review": {
+              "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-receipts-20261114/ase-workspace-correction/operation-review.json",
+              "sha256": "70397da2bb762ef45db9f24c06766a842ac4c63469b7cadc9c552804f1e97231"
+            },
+            "definition_ref": "b4b055027b52706c97a5a796a58e1f05774ee77fd0d31b344ffbd373bba8f626",
+            "receipt": {
+              "operation_id": "conformance_probe_ase_sdk_contract_20261103:native-readiness-1a51bddce0:git-binding",
+              "receipt_ref": "32ee2cfdd136583d1a88e25699134e9a9f824c154f50a59ab9b4bc4f6c398c9a"
+            }
+          }
+        }
+      }
+    },
+    "aeep-evaluator": {
+      "kind": "toolkit_stack_receipt_evidence",
+      "value": {
+        "schema_version": "aeep.toolkit.stack-receipt-evidence.v1",
+        "component": "aeep-evaluator",
+        "source_revision": "538606417ea93be6e82c431011c4f209a68ceb81",
+        "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+        "original_source": "cfc36a2aeda4e220046722dbdbc81fbf2376deb12b9f7266abdab81bddcec9e1",
+        "compatibility_basis": "Validated exact retained records, original scope, and reviewed runtime identity. This source changes readiness verification and evidence registration only. Each original source and upstream revision remains bound. Current source adds retained ASE launcher proof validation only. This component's original execution path and bindings are unchanged. Current source makes Waza conditional in comparison readiness and passes the workflow's Waza selection to the gate. This preserves the observed dispatch, grading, reporting, isolation, and accounting of the retained run. Dispatch reuses the verified product bytes at 70943060 and the same local dev configuration and CI fixture. The copied execution source excludes Finder metadata and ignored Python caches. Original runtime proofs, observations and historical sources remain bound.",
+        "proof": {
+          "kind": "managed",
+          "report_ref": "faa17bf2824059668ff11bc97786047fe81078de69ca05dc268573a33af2cc4c",
+          "recovery_ref": "20b28bcd78e6defeafbed6dcd5c1a799f58797e108c4122b4be8f1dcfeefbd67",
+          "recovery_source": "b09911a0b7b79f6f78a5371bbad53580ff0692fc3d371592a983437898a19fcf",
+          "recovery_audit": {
+            "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/stopped-accounting-audit.json",
+            "sha256": "60f990cfe8758f5c85fa48e076584e760af58bc5a8995ec21f62c1e835703997"
+          }
+        }
+      }
+    },
+    "skillrank": {
+      "kind": "toolkit_stack_receipt_evidence",
+      "value": {
+        "schema_version": "aeep.toolkit.stack-receipt-evidence.v1",
+        "component": "skillrank",
+        "source_revision": "5216bae9149b4ff8a7f9e014b6889fb094cee8e1",
+        "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+        "original_source": "84881f17ae11fc1045f3e368805f98e1451c7cf7ecf4ffa757308241a44bd48d",
+        "compatibility_basis": "Validated exact retained records, original scope, and reviewed runtime identity. This source changes readiness verification and evidence registration only. Each original source and upstream revision remains bound. Current source adds retained ASE launcher proof validation only. This component's original execution path and bindings are unchanged. Current source makes Waza conditional in comparison readiness and passes the workflow's Waza selection to the gate. This preserves the observed dispatch, grading, reporting, isolation, and accounting of the retained run. Dispatch reuses the verified product bytes at 70943060 and the same local dev configuration and CI fixture. The copied execution source excludes Finder metadata and ignored Python caches. Original runtime proofs, observations and historical sources remain bound.",
+        "proof": {
+          "kind": "skillrank",
+          "catalog_store": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillrank-build-preparation-20261103/runtime-execution/canonical.sqlite3",
+          "catalog_source": "f2c7a3e9b923fb95fb550287dd0f0e59c681c8633fd235a773cb7c3f92e1515e",
+          "search_ref": "e7930da79a1ea36b052d72080ace50638c8935499c44f948426d07d52b0d7c5d",
+          "show_ref": "69bddbd22fc7e96d8dd62f4c586a3b41de5f7b9f6f7bb670be4f291f352b9e7c",
+          "diagnostic_report_ref": "4989a3a7c1e6977a33e0fb2263a36741e30f88e50f79eec431081ee02ab188a7"
+        }
+      }
+    },
+    "skillsbench": {
+      "kind": "toolkit_stack_receipt_evidence",
+      "value": {
+        "schema_version": "aeep.toolkit.stack-receipt-evidence.v1",
+        "component": "skillsbench",
+        "source_revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+        "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+        "original_source": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+        "compatibility_basis": "Validated exact retained records, original scope, and reviewed runtime identity. This source changes readiness verification and evidence registration only. Each original source and upstream revision remains bound. Current source adds retained ASE launcher proof validation only. This component's original execution path and bindings are unchanged. Current source makes Waza conditional in comparison readiness and passes the workflow's Waza selection to the gate. This preserves the observed dispatch, grading, reporting, isolation, and accounting of the retained run. Dispatch reuses the verified product bytes at 70943060 and the same local dev configuration and CI fixture. The copied execution source excludes Finder metadata and ignored Python caches. Original runtime proofs, observations and historical sources remain bound.",
+        "proof": {
+          "kind": "skillsbench",
+          "verifier_store": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillrank-build-preparation-20261103/runtime-execution/canonical.sqlite3",
+          "runs": {
+            "sales-pivot-analysis": {
+              "report_ref": "243226d54c948cb73dcfec82cf7c773a54f14a1a3acf07ab8d29ece9a1e5ed2f",
+              "original_source": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+              "pack": {
+                "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-contained-graders-20261105/rights-bound/task-only-pack.json",
+                "sha256": "cb120d21729fb38e6c44560d6faa7fc4b6c27766e10900e4b8b7f3a02d4f9b7b"
+              }
+            },
+            "invoice-fraud-detection": {
+              "report_ref": "7bf0570b5e09f6d3ce0f21f6a1432a16a9c514d16c4c59de1465b7d6d2f73a6f",
+              "original_source": "8b626082c2bd9218809bddfe95fe27996c7ee595b7a9e3bf430d64beafa10114",
+              "pack": {
+                "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-document-rights-20261106/invoice-fraud-detection-bound-pack.json",
+                "sha256": "7f75cbafebbdf23bef0d2cf29de27c7eb2a671b3eb76617092a37690ed053be8"
+              }
+            },
+            "exceltable-in-ppt": {
+              "report_ref": "d5dd630cefaeeb0eeae2bd630dd166dae14a5010767e53b528f6d4646df11b2a",
+              "original_source": "8b626082c2bd9218809bddfe95fe27996c7ee595b7a9e3bf430d64beafa10114",
+              "pack": {
+                "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-document-rights-20261106/exceltable-in-ppt-bound-pack.json",
+                "sha256": "54856d1cb096cd2fd228e4ea6ec7ebb07804542ad147784163cd26db7304d53e"
+              }
+            },
+            "spring-boot-jakarta-migration": {
+              "report_ref": "462e4b4fa1fbd76b2909660458e6547e638171d25b75e233bf8b907cb1ab1e7e",
+              "original_source": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+              "pack": {
+                "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-contained-graders-20261105/rights-bound/task-only-pack.json",
+                "sha256": "cb120d21729fb38e6c44560d6faa7fc4b6c27766e10900e4b8b7f3a02d4f9b7b"
+              }
+            },
+            "react-performance-debugging": {
+              "report_ref": "238a994bff3f67174e1507e4d4fcf82021f4fe665a3363716f79ec102f00fdf6",
+              "original_source": "443a2ee20e6ec04bffb149d9381d73fc750a62f90e1ee56348e91ed80e425de4",
+              "pack": {
+                "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-react-managed-preparation-20261107/react-performance-debugging-bound-pack.json",
+                "sha256": "2c638ebe1ef6f699741552b13501d58837c1d50850fa868d9ae4b36a7fd8cde6"
+              }
+            },
+            "llm-prefix-cache-replay": {
+              "report_ref": "f5a978c0ad21c522f80fa16d8d739ad412d32df4f84dcf0ec091b7788c31f7fe",
+              "original_source": "d144f09f5db624bf6acad21a89179b39902845cb13f5e32d18212d1f9a2ad83f",
+              "pack": {
+                "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-software-substitute-20261109/managed-preparation/cli-definitions/pack.json",
+                "sha256": "f4535939829998466ac577488225823b7f1fbfbe822a789f827ba6df252be44d"
+              }
+            }
+          },
+          "verifiers": {
+            "sales-pivot-analysis": {
+              "review": {
+                "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-sales-protected-grading-20261105/operation-review.json",
+                "sha256": "e922172e129218fef388f69cc1883cd09caa75977956fde6d5518b12e5c56de1"
+              },
+              "reference": {
+                "operation_id": "skillsbench-sales-protected-grading-20261105:reference-start",
+                "receipt_ref": "1e2be528300c0172e6cb6cba9c62f72eb34ae901694864a6bb27414262f13f53"
+              },
+              "negative": {
+                "operation_id": "skillsbench-sales-protected-grading-20261105:missing-start",
+                "receipt_ref": "d85e23fac3da8d6a72fe530ca759475a3d43b88bcd15d621f9cddb19bfdcb20f"
+              },
+              "reference_result": {
+                "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-sales-protected-grading-20261105/execution/reference-verdict.json",
+                "sha256": "0c45d94389014813922b59be91f1e0cb40662330776702b4558e14a957294c42"
+              },
+              "negative_result": {
+                "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-sales-protected-grading-20261105/execution/missing-verdict.json",
+                "sha256": "a6fd3b951111dc46dc21091b01fc865c5eea1bab85a9204c9aa9786c982a42b3"
+              }
+            },
+            "spring-boot-jakarta-migration": {
+              "review": {
+                "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-spring-offline-reference-20261105/operation-review.json",
+                "sha256": "abc9c39097904a1dad9bf598b25594f31686bf703365ea7358fc3a2fa63a5934"
+              },
+              "reference": {
+                "operation_id": "skillsbench-spring-offline-reference-20261105:reference-start",
+                "receipt_ref": "6ef1f3a54f3b6e0236f250f258c3b37c91bb8c186f9538d059ee61c6e9fffd6d"
+              },
+              "negative": {
+                "operation_id": "skillsbench-spring-offline-reference-20261105:missing-start",
+                "receipt_ref": "9985129d741c8ea1243f7a614fd1d1be6e3ef0e5e21fe1f32ec6e64c80ca36d9"
+              },
+              "reference_result": {
+                "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-spring-offline-reference-20261105/execution/reference-verdict.json",
+                "sha256": "8673c92cfcc307fa26a74dd4a265d62444f5bdda92a3117e035aef8bbf7eccc5"
+              },
+              "negative_result": {
+                "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-spring-offline-reference-20261105/execution/missing-verdict.json",
+                "sha256": "d97d74ad69b63ece07e24f43eac623e645d27bbee7861fad0c6f397f40524f6d"
+              }
+            }
+          }
+        }
+      }
+    },
+    "mcpmark": {
+      "kind": "toolkit_stack_receipt_evidence",
+      "value": {
+        "schema_version": "aeep.toolkit.stack-receipt-evidence.v1",
+        "component": "mcpmark",
+        "source_revision": "cd45b7f57923b9b3985467f5139927575f83141c",
+        "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+        "original_source": "5a13a630a89aa0c6b4940be4eed0a30dd80ab5a822ee15f7f25f78f521c11c4b",
+        "compatibility_basis": "Validated exact retained records, original scope, and reviewed runtime identity. This source changes readiness verification and evidence registration only. Each original source and upstream revision remains bound. Current source adds retained ASE launcher proof validation only. This component's original execution path and bindings are unchanged. Current source makes Waza conditional in comparison readiness and passes the workflow's Waza selection to the gate. This preserves the observed dispatch, grading, reporting, isolation, and accounting of the retained run. Dispatch reuses the verified product bytes at 70943060 and the same local dev configuration and CI fixture. The copied execution source excludes Finder metadata and ignored Python caches. Original runtime proofs, observations and historical sources remain bound.",
+        "proof": {
+          "kind": "mcp_reference",
+          "review": {
+            "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/mcpmark-postgres-tool-schema-20261105/operation-review.json",
+            "sha256": "d1979c81ce9f85b0fa4a97b7bbba5270776ef472a0a9fe786c2f8bf06ca558cc"
+          },
+          "prepared": {
+            "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/mcpmark-postgres-tool-schema-20261105/prepared.json",
+            "sha256": "0095d8cba434553fbd22ea3ad5cff98e93b79f3970efed372526d0d5c74eba18"
+          },
+          "result": {
+            "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/mcpmark-postgres-tool-schema-20261105/execution/summary.json",
+            "sha256": "e06c665245aca735ab4d403e0d48b4b723078e6f1fb05e9b154c1bdbddcf9ca0"
+          },
+          "receipts": {
+            "seed-start": {
+              "operation_id": "mcpmark-postgres-tool-schema-20261105:seed-start",
+              "receipt_ref": "6a258ab78605247869ce022e44e30d10dc13fd5c168bd49ff21159aae8b12107"
+            },
+            "missing-start": {
+              "operation_id": "mcpmark-postgres-tool-schema-20261105:missing-start",
+              "receipt_ref": "872d01cdde4b6a9596a955b43346863f9732af8e9471b6d54e89b29e4eab7dc7"
+            },
+            "execute-sql": {
+              "operation_id": "mcpmark-postgres-tool-schema-20261105:execute-sql",
+              "receipt_ref": "127f58c00e47e0e7c2c0a560868fd96f5b5c6dd59b895ea61a5df3d8c5223f7f"
+            },
+            "reference-start": {
+              "operation_id": "mcpmark-postgres-tool-schema-20261105:reference-start",
+              "receipt_ref": "e9406d3dc1858656bf0db55c44a290deb8bb440c73c14ba5718ede4a670cc79b"
+            },
+            "db-stopped": {
+              "operation_id": "mcpmark-postgres-tool-schema-20261105:db-stopped",
+              "receipt_ref": "b67256b912228bdc5f2812da247035022bb8118771d319ef8ae540f9be923048"
+            },
+            "server-stopped": {
+              "operation_id": "mcpmark-postgres-tool-schema-20261105:server-stopped",
+              "receipt_ref": "d7a0d7753ef888b5a911a5b17f932cba1523b401cccc11a5db704c6a661d824c"
+            }
+          }
+        }
+      }
+    },
+    "mcp-universe": {
+      "kind": "toolkit_stack_receipt_evidence",
+      "value": {
+        "schema_version": "aeep.toolkit.stack-receipt-evidence.v1",
+        "component": "mcp-universe",
+        "source_revision": "0df6c42717f2a618d34f5b271efd05be462b9e4d",
+        "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+        "original_source": "5a13a630a89aa0c6b4940be4eed0a30dd80ab5a822ee15f7f25f78f521c11c4b",
+        "compatibility_basis": "Validated exact retained records, original scope, and reviewed runtime identity. This source changes readiness verification and evidence registration only. Each original source and upstream revision remains bound. Current source adds retained ASE launcher proof validation only. This component's original execution path and bindings are unchanged. Current source makes Waza conditional in comparison readiness and passes the workflow's Waza selection to the gate. This preserves the observed dispatch, grading, reporting, isolation, and accounting of the retained run. Dispatch reuses the verified product bytes at 70943060 and the same local dev configuration and CI fixture. The copied execution source excludes Finder metadata and ignored Python caches. Original runtime proofs, observations and historical sources remain bound.",
+        "proof": {
+          "kind": "mcp_reference",
+          "review": {
+            "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/mcp-universe-postgres-tool-schema-20261105/operation-review.json",
+            "sha256": "2cb9d5234ee795b9c45218dd8bc367b576e8dc1ad8d5ff0453d76ceb78848961"
+          },
+          "prepared": {
+            "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/mcp-universe-postgres-tool-schema-20261105/prepared.json",
+            "sha256": "9a1b7ca1ec41a90762c4dc4156cd12eab53faaa100803548e6ba664970a48c99"
+          },
+          "result": {
+            "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/mcp-universe-postgres-tool-schema-20261105/execution/summary.json",
+            "sha256": "d8331e08f46ec8a551465eaa90ceb462405a34b75d972594e1bc16e396a2a5ca"
+          },
+          "receipts": {
+            "seed-start": {
+              "operation_id": "mcp-universe-postgres-tool-schema-20261105:seed-start",
+              "receipt_ref": "e635010ed12b99a03bbc6242511b6c53d57f2dcce95e925e5feeacfcc4dabcfb"
+            },
+            "missing-start": {
+              "operation_id": "mcp-universe-postgres-tool-schema-20261105:missing-start",
+              "receipt_ref": "b899064f0ca8900f2fc4be02d7c93277c8707df1e6db54c1096f7c819ecc70b3"
+            },
+            "execute-sql": {
+              "operation_id": "mcp-universe-postgres-tool-schema-20261105:execute-sql",
+              "receipt_ref": "d3b2f10b0ca105a717ceba37e21d5639f29f327622a4220a08c21bda9f40bb6a"
+            },
+            "reference-start": {
+              "operation_id": "mcp-universe-postgres-tool-schema-20261105:reference-start",
+              "receipt_ref": "c9296655055168312e1f3b5edcb88bbc3020f02cc9f626aec3d77d533dc8e1ae"
+            },
+            "db-stopped": {
+              "operation_id": "mcp-universe-postgres-tool-schema-20261105:db-stopped",
+              "receipt_ref": "bcb5bbf87107db6b8c7fb2efd0b9bbfda3b93426793c31e4fe8b20c51262da4a"
+            },
+            "server-stopped": {
+              "operation_id": "mcp-universe-postgres-tool-schema-20261105:server-stopped",
+              "receipt_ref": "04ae69f3f55048aefd90d6adca0d4da6bc78d64460d185877094aa6dbbd324d7"
+            }
+          }
+        }
+      }
+    },
+    "skill-scanner": {
+      "kind": "toolkit_stack_receipt_evidence",
+      "value": {
+        "schema_version": "aeep.toolkit.stack-receipt-evidence.v1",
+        "component": "skill-scanner",
+        "source_revision": "c3d7fd9fee50cf2ea45f0b381eb61f857360f825",
+        "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+        "original_source": "1a51bddce06f4c299acca3f5fab99bb8111f023ed3af1830c153731f7b30918e",
+        "compatibility_basis": "Ordinary CLI completed a protected static scan on the current source, exact retained image and changed Docker client under the approved paired review. Current source adds retained ASE launcher proof validation only. This component's original execution path and bindings are unchanged. Current source makes Waza conditional in comparison readiness and passes the workflow's Waza selection to the gate. This preserves the observed dispatch, grading, reporting, isolation, and accounting of the retained run. Dispatch reuses the verified product bytes at 70943060 and the same local dev configuration and CI fixture. The copied execution source excludes Finder metadata and ignored Python caches. Original runtime proofs, observations and historical sources remain bound.",
+        "proof": {
+          "kind": "scanner",
+          "store": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-scanner-20261102/canonical.sqlite3",
+          "scan_ref": "79e997799c2c97d06852bc8f3ec928e140bfc8bbfe68609182cd9b3235c5c49a",
+          "configuration": "document-data",
+          "workflow": {
+            "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-receipts-20261114/native-and-scanner-review/cli-workflow.json",
+            "sha256": "20cfc86e1826d7692b5095e49b238dbcb919099428dc465832efd81dd31e7ed1"
+          },
+          "wrapper": {
+            "operation_id": "workflow:recipe_generation_5efe8d5cb42a468091122b514aa143e2:cisco-readiness-1a51bddce0",
+            "receipt_ref": "ed1b42083b28196d2dc8650e32718651fe454162d8e3b1c36e24aa5ab3cf98b9"
+          }
+        }
+      }
+    },
+    "toolhive": {
+      "kind": "toolkit_stack_receipt_evidence",
+      "value": {
+        "schema_version": "aeep.toolkit.stack-receipt-evidence.v1",
+        "component": "toolhive",
+        "source_revision": "33ba170aad633e20520f380500a45cd158f24aed",
+        "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+        "original_source": "5a13a630a89aa0c6b4940be4eed0a30dd80ab5a822ee15f7f25f78f521c11c4b",
+        "compatibility_basis": "Validated exact retained records, original scope, and reviewed runtime identity. This source changes readiness verification and evidence registration only. Each original source and upstream revision remains bound. Current source adds retained ASE launcher proof validation only. This component's original execution path and bindings are unchanged. Current source makes Waza conditional in comparison readiness and passes the workflow's Waza selection to the gate. This preserves the observed dispatch, grading, reporting, isolation, and accounting of the retained run. Dispatch reuses the verified product bytes at 70943060 and the same local dev configuration and CI fixture. The copied execution source excludes Finder metadata and ignored Python caches. Original runtime proofs, observations and historical sources remain bound.",
+        "proof": {
+          "kind": "toolhive",
+          "review": {
+            "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/toolhive-loopback-bind-20261104/operation-review.json",
+            "sha256": "f61f8542b9a37f836409ca228d5b90e86da27183b9aa83bc3b2a31857f5437cc"
+          },
+          "result": {
+            "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/toolhive-loopback-bind-20261104/summary.json",
+            "sha256": "3fd5d39378cef13102a3fefb9a73bc3f1e00d809ec68c98795be648319c4c8f6"
+          },
+          "boundary": {
+            "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/toolhive-loopback-bind-20261104/server-boundary.json",
+            "sha256": "380f3db4ae7294b7c2c4823fb88af5eb1b780b45e2b2e8774fd4463e4821e6a7"
+          },
+          "listener": {
+            "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/toolhive-loopback-bind-20261104/listener-verdict.json",
+            "sha256": "19f187e43d57d3016de9b319f05ce1441879ce40c77f9eb85464090d161a12c5"
+          },
+          "receipts": {
+            "foreground-service": {
+              "operation_id": "toolhive-mcp-lifecycle-engineering-20261104:retained-image-launch:loopback-bind:foreground-service",
+              "receipt_ref": "f9daced42f29f2638b642ce14e1c27cbc9b9ec92f275fd0be79aa26e4725aee4"
+            },
+            "verify-loopback-listener": {
+              "operation_id": "toolhive-mcp-lifecycle-engineering-20261104:retained-image-launch:loopback-bind:verify-loopback-listener",
+              "receipt_ref": "d68939695e5e35ceb822989943a144dacb4ff0e7c1b7a4a9b378ab4df0e524e5"
+            },
+            "container-inspect": {
+              "operation_id": "toolhive-mcp-lifecycle-engineering-20261104:retained-image-launch:loopback-bind:container-inspect",
+              "receipt_ref": "d87653d969202cbafab14fbf0c4a745d2516ff0c55cd8cc6924f8773af345756"
+            },
+            "boundary-call": {
+              "operation_id": "toolhive-mcp-lifecycle-engineering-20261104:retained-image-launch:loopback-bind:boundary-call",
+              "receipt_ref": "c89ab8066240e133d33be86bd5d2ac360d966a0964dd93ea2ebdf5070323ac33"
+            },
+            "aeep-client": {
+              "operation_id": "toolhive-mcp-lifecycle-engineering-20261104:retained-image-launch:loopback-bind:aeep-client",
+              "receipt_ref": "92c5c099bea24bbb7980696978a4fabf47f1366345b2596541e1dad66dbc0764"
+            },
+            "stopped-inspect-discover": {
+              "operation_id": "toolhive-mcp-lifecycle-engineering-20261104:retained-image-launch:loopback-bind:stopped-inspect-discover",
+              "receipt_ref": "7de2a905ca58b1995b785a79d4c8665509b046b39504ebfe5d5808da7354d5ef"
+            }
+          }
+        }
+      }
+    },
+    "semantic-conventions": {
+      "kind": "toolkit_stack_receipt_evidence",
+      "value": {
+        "schema_version": "aeep.toolkit.stack-receipt-evidence.v1",
+        "component": "semantic-conventions",
+        "source_revision": "68e89181d4cb9bbce975c8128e694363214ab5fb",
+        "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+        "original_source": "ecbbed79e6f793cbbca2b9ec5bd54fd9f9d8786337d6eb1b6895779915a76bf6",
+        "compatibility_basis": "Validated exact retained records, original scope, and reviewed runtime identity. This source changes readiness verification and evidence registration only. Each original source and upstream revision remains bound. Current source adds retained ASE launcher proof validation only. This component's original execution path and bindings are unchanged. Current source makes Waza conditional in comparison readiness and passes the workflow's Waza selection to the gate. This preserves the observed dispatch, grading, reporting, isolation, and accounting of the retained run. Dispatch reuses the verified product bytes at 70943060 and the same local dev configuration and CI fixture. The copied execution source excludes Finder metadata and ignored Python caches. Original runtime proofs, observations and historical sources remain bound.",
+        "proof": {
+          "kind": "telemetry",
+          "configuration": "document-excel",
+          "export_record_ref": "5c30eef6ff4d6e3317c47fd206b83b6a367c3f5effa42cf885c51d572a194ec4",
+          "receipts": {
+            "store": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillrank-build-preparation-20261103/runtime-execution/canonical.sqlite3",
+            "readback": {
+              "operation_id": "langfuse-queue-acknowledgement-20261113:observe:456ed744a259:0",
+              "receipt_ref": "73f89e62bcd24c3df233b6ac66110a038707745ee648de345cf62ccde8bf13db"
+            },
+            "transport": {
+              "operation_id": "receipt-export:9339344721b509349db391aa654fdc13cf4d2d0ea79cebedf642b6cb83b26156:6bb76f9b0cc25e77742e3550658d42832f3f2793a8cbbec5058b9e4c175ebdc7",
+              "receipt_ref": "58b19cff73063578a474b307b2abf12d917a839a368a75bf6bc95b2c86308651"
+            },
+            "disabled": {
+              "operation_id": "workflow:skillsbench-langfuse-ack-ecbbed79e6f7:disabled",
+              "receipt_ref": "826e072c11cb1b3adbafc2acedd6d5096dd63709b3438496c817ff9d1809213f"
+            },
+            "disabled_workflow": {
+              "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-evidence-20261114/langfuse-inputs/disabled-workflow.json",
+              "sha256": "63cb39f4a9dd12b1f6ecf557a729abd312902b3f03364688ba96560cb7a0efdd"
+            },
+            "observation_review": {
+              "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-evidence-20261114/langfuse-operation-review.json",
+              "sha256": "d809b36628afd123389c935a39ab1029f5c994cd9963fc5bdbaf450b1da31b37"
+            },
+            "observed_result": {
+              "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/canonical-stack-verification-20261114/langfuse-live-result.json",
+              "sha256": "2c8d9c3589451ad4cf46586873bfa8a31d7ae85f1845e3e768c3ce471a0f2d7a"
+            }
+          }
+        }
+      }
+    },
+    "langfuse": {
+      "kind": "toolkit_stack_receipt_evidence",
+      "value": {
+        "schema_version": "aeep.toolkit.stack-receipt-evidence.v1",
+        "component": "langfuse",
+        "source_revision": "5e4db922e9021083500cd066249b220a414b7dfe",
+        "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+        "original_source": "ecbbed79e6f793cbbca2b9ec5bd54fd9f9d8786337d6eb1b6895779915a76bf6",
+        "compatibility_basis": "Validated exact retained records, original scope, and reviewed runtime identity. This source changes readiness verification and evidence registration only. Each original source and upstream revision remains bound. Current source adds retained ASE launcher proof validation only. This component's original execution path and bindings are unchanged. Current source makes Waza conditional in comparison readiness and passes the workflow's Waza selection to the gate. This preserves the observed dispatch, grading, reporting, isolation, and accounting of the retained run. Dispatch reuses the verified product bytes at 70943060 and the same local dev configuration and CI fixture. The copied execution source excludes Finder metadata and ignored Python caches. Original runtime proofs, observations and historical sources remain bound.",
+        "proof": {
+          "kind": "telemetry",
+          "configuration": "document-excel",
+          "export_record_ref": "5c30eef6ff4d6e3317c47fd206b83b6a367c3f5effa42cf885c51d572a194ec4",
+          "receipts": {
+            "store": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillrank-build-preparation-20261103/runtime-execution/canonical.sqlite3",
+            "readback": {
+              "operation_id": "langfuse-queue-acknowledgement-20261113:observe:456ed744a259:0",
+              "receipt_ref": "73f89e62bcd24c3df233b6ac66110a038707745ee648de345cf62ccde8bf13db"
+            },
+            "transport": {
+              "operation_id": "receipt-export:9339344721b509349db391aa654fdc13cf4d2d0ea79cebedf642b6cb83b26156:6bb76f9b0cc25e77742e3550658d42832f3f2793a8cbbec5058b9e4c175ebdc7",
+              "receipt_ref": "58b19cff73063578a474b307b2abf12d917a839a368a75bf6bc95b2c86308651"
+            },
+            "disabled": {
+              "operation_id": "workflow:skillsbench-langfuse-ack-ecbbed79e6f7:disabled",
+              "receipt_ref": "826e072c11cb1b3adbafc2acedd6d5096dd63709b3438496c817ff9d1809213f"
+            },
+            "disabled_workflow": {
+              "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-evidence-20261114/langfuse-inputs/disabled-workflow.json",
+              "sha256": "63cb39f4a9dd12b1f6ecf557a729abd312902b3f03364688ba96560cb7a0efdd"
+            },
+            "observation_review": {
+              "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/workflow-evidence-20261114/langfuse-operation-review.json",
+              "sha256": "d809b36628afd123389c935a39ab1029f5c994cd9963fc5bdbaf450b1da31b37"
+            },
+            "observed_result": {
+              "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/canonical-stack-verification-20261114/langfuse-live-result.json",
+              "sha256": "2c8d9c3589451ad4cf46586873bfa8a31d7ae85f1845e3e768c3ce471a0f2d7a"
+            }
+          }
+        }
+      }
+    },
+    "langgraph": {
+      "kind": "toolkit_stack_receipt_evidence",
+      "value": {
+        "schema_version": "aeep.toolkit.stack-receipt-evidence.v1",
+        "component": "langgraph",
+        "source_revision": "40a2e6d845054cc0cc17a6a169ca6e7394e5231c",
+        "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+        "original_source": "443b90a7157f60321646f32493f0191cd194a485494c53715ea5894712c295cc",
+        "compatibility_basis": "Validated exact retained records, original scope, and reviewed runtime identity. This source changes readiness verification and evidence registration only. Each original source and upstream revision remains bound. Current source adds retained ASE launcher proof validation only. This component's original execution path and bindings are unchanged. Current source makes Waza conditional in comparison readiness and passes the workflow's Waza selection to the gate. This preserves the observed dispatch, grading, reporting, isolation, and accounting of the retained run. Dispatch reuses the verified product bytes at 70943060 and the same local dev configuration and CI fixture. The copied execution source excludes Finder metadata and ignored Python caches. Original runtime proofs, observations and historical sources remain bound.",
+        "proof": {
+          "kind": "sdk",
+          "review": {
+            "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-accounting-20261101/composed-sdk-runtime/operation-review.json",
+            "sha256": "5136b81a2ab2bb44768b5a2fb7293095b177dbd249fb824b1aae27e5bcc3f41b"
+          },
+          "result": {
+            "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-accounting-20261101/composed-sdk-runtime/execution/langgraph-sdk.json",
+            "sha256": "bfe20370d6c00a6ac4f176ebb46b4c1a1e41d9381efa633fd44794ba0377e4b4"
+          },
+          "process_store": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-accounting-20261101/composed-sdk-runtime/execution/outer-receipts.sqlite3",
+          "process_receipt_id": "rcpt_861f088b3acf4590bc8257bf0f168f12",
+          "process_receipt_ref": "c74ee83654a06d3edc05747a5a66be188ff542899b241fdff422230c20c26ae6",
+          "step_store": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-accounting-20261101/composed-sdk-runtime/execution/owned-work/canonical.sqlite3"
+        }
+      }
+    },
+    "evoagentx": {
+      "kind": "toolkit_stack_receipt_evidence",
+      "value": {
+        "schema_version": "aeep.toolkit.stack-receipt-evidence.v1",
+        "component": "evoagentx",
+        "source_revision": "d77fd6b9a3e76c8dd83bebe3374c53a3f5d16f54",
+        "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+        "original_source": "8b626082c2bd9218809bddfe95fe27996c7ee595b7a9e3bf430d64beafa10114",
+        "compatibility_basis": "Validated exact retained records, original scope, and reviewed runtime identity. This source changes readiness verification and evidence registration only. Each original source and upstream revision remains bound. Current source adds retained ASE launcher proof validation only. This component's original execution path and bindings are unchanged. Current source makes Waza conditional in comparison readiness and passes the workflow's Waza selection to the gate. This preserves the observed dispatch, grading, reporting, isolation, and accounting of the retained run. Dispatch reuses the verified product bytes at 70943060 and the same local dev configuration and CI fixture. The copied execution source excludes Finder metadata and ignored Python caches. Original runtime proofs, observations and historical sources remain bound.",
+        "proof": {
+          "kind": "proposal",
+          "review": {
+            "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/evoagentx-distribution-20261106/managed-turn/operation-review.json",
+            "sha256": "4dbf1960893f298711b3f082da33ea3571b1d22d425bfbeaccea19a4cb065bfa"
+          },
+          "result": {
+            "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/evoagentx-distribution-20261106/managed-turn/reconciled-result.json",
+            "sha256": "faa7c5b05da2671b7938331a88015368c51ea52099822cf4ca3db2dfcdfbf3c6"
+          },
+          "validator": {
+            "operation_id": "evoagentx-managed-turn-local-20261106:reply",
+            "receipt_ref": "69afdb9441d5dff8b42fab30eb64d31a30b2dda3f7d9af4c64844cd9dee52484"
+          }
+        }
+      }
+    },
+    "aflow": {
+      "kind": "toolkit_stack_receipt_evidence",
+      "value": {
+        "schema_version": "aeep.toolkit.stack-receipt-evidence.v1",
+        "component": "aflow",
+        "source_revision": "3f457218fc716093fe53f6df8a5d5e6379d66346",
+        "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+        "original_source": "8b626082c2bd9218809bddfe95fe27996c7ee595b7a9e3bf430d64beafa10114",
+        "compatibility_basis": "Validated exact retained records, original scope, and reviewed runtime identity. This source changes readiness verification and evidence registration only. Each original source and upstream revision remains bound. Current source adds retained ASE launcher proof validation only. This component's original execution path and bindings are unchanged. Current source makes Waza conditional in comparison readiness and passes the workflow's Waza selection to the gate. This preserves the observed dispatch, grading, reporting, isolation, and accounting of the retained run. Dispatch reuses the verified product bytes at 70943060 and the same local dev configuration and CI fixture. The copied execution source excludes Finder metadata and ignored Python caches. Original runtime proofs, observations and historical sources remain bound.",
+        "proof": {
+          "kind": "proposal",
+          "review": {
+            "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/calibration/finite-cycle/operation-review.json",
+            "sha256": "fe2e444c6495b7a3a03b282f9ca3a3d1e115f6903820a16177c22cef4c9458c1"
+          },
+          "result": {
+            "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/proposal-optimizer-preparation-20261105/calibration/finite-cycle/result.json",
+            "sha256": "e2ff96e60b51f9d4cca4bbd6f21b292befeba03c127ce4f32f5c3c5e266bdd61"
+          },
+          "validator": {
+            "operation_id": "aflow-managed-turn-local-20261106:reply",
+            "receipt_ref": "653914bc60a6161be1cc8c97d9f7cd5ffeec8ded57560678e551b961e5d2ccaa"
+          }
+        }
+      }
+    },
+    "agent-framework": {
+      "kind": "toolkit_stack_receipt_evidence",
+      "value": {
+        "schema_version": "aeep.toolkit.stack-receipt-evidence.v1",
+        "component": "agent-framework",
+        "source_revision": "2d9cc3f8ae465baf1aed3022f89b6848db4ffa7b",
+        "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+        "original_source": "e363cfa5ada2201e355b1e4528ff36cb2d05a08fff7423912c6d5e163ea43dfb",
+        "compatibility_basis": "Validated exact retained records, original scope, and reviewed runtime identity. This source changes readiness verification and evidence registration only. Each original source and upstream revision remains bound. Current source adds retained ASE launcher proof validation only. This component's original execution path and bindings are unchanged. Current source makes Waza conditional in comparison readiness and passes the workflow's Waza selection to the gate. This preserves the observed dispatch, grading, reporting, isolation, and accounting of the retained run. Dispatch reuses the verified product bytes at 70943060 and the same local dev configuration and CI fixture. The copied execution source excludes Finder metadata and ignored Python caches. Original runtime proofs, observations and historical sources remain bound.",
+        "proof": {
+          "kind": "sdk",
+          "review": {
+            "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-lifecycle-20261102/corrected-sdk-runtime/operation-review.json",
+            "sha256": "034f218da03805fefa831eac08c555300405315356ec26a95399aea662dca579"
+          },
+          "result": {
+            "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-lifecycle-20261102/corrected-sdk-runtime/execution/framework-component-result.json",
+            "sha256": "ba82de6091a71f3c4c25f2c31ca81d7f9d831fbd19d58f31cfb2e4a242f8bfa7"
+          },
+          "process_store": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-lifecycle-20261102/corrected-sdk-runtime/execution/outer-receipts.sqlite3",
+          "process_receipt_id": "rcpt_1ca86e5e194940d6b1cb6cee21445536",
+          "process_receipt_ref": "7567299068db6f8cb322eef85d771bd7d4f150e27b9c4ae2584180be8fc35eb9",
+          "step_store": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/workflow-lifecycle-20261102/corrected-sdk-runtime/execution/owned-work/framework/canonical.sqlite3"
+        }
+      }
+    },
+    "aeep-router": {
+      "kind": "toolkit_stack_receipt_evidence",
+      "value": {
+        "schema_version": "aeep.toolkit.stack-receipt-evidence.v1",
+        "component": "aeep-router",
+        "source_revision": "8b015bf0247d4d9f49038982c49f3711a2802d97",
+        "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+        "original_source": "54c8e6382bd23aec3a89cb4a0abe608f8c43f01dd81bc1d2ab364a8e2cd613a3",
+        "compatibility_basis": "Validated exact retained records, original scope, and reviewed runtime identity. This source changes readiness verification and evidence registration only. Each original source and upstream revision remains bound. Current source adds retained ASE launcher proof validation only. This component's original execution path and bindings are unchanged. Current source makes Waza conditional in comparison readiness and passes the workflow's Waza selection to the gate. This preserves the observed dispatch, grading, reporting, isolation, and accounting of the retained run. Dispatch reuses the verified product bytes at 70943060 and the same local dev configuration and CI fixture. The copied execution source excludes Finder metadata and ignored Python caches. Original runtime proofs, observations and historical sources remain bound.",
+        "proof": {
+          "kind": "router",
+          "review": {
+            "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/optional-router-20261104/operation-review.json",
+            "sha256": "54a0635e5067f0a119e9e7a47f4c97e8afcb1e7904211adc3220ca147ede9b32"
+          },
+          "result": {
+            "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/optional-router-20261104/summary.json",
+            "sha256": "f3e9aa16003ca886272cfc32a0bb3498660ea665f7a5997cfc256e71ec4b8cb1"
+          },
+          "store": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/optional-router-20261104/state.db"
+        }
+      }
+    },
+    "github-sponsors": {
+      "kind": "toolkit_stack_receipt_evidence",
+      "value": {
+        "schema_version": "aeep.toolkit.stack-receipt-evidence.v1",
+        "component": "github-sponsors",
+        "source_revision": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+        "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+        "original_source": "84881f17ae11fc1045f3e368805f98e1451c7cf7ecf4ffa757308241a44bd48d",
+        "compatibility_basis": "Validated exact retained records, original scope, and reviewed runtime identity. This source changes readiness verification and evidence registration only. Each original source and upstream revision remains bound. Current source adds retained ASE launcher proof validation only. This component's original execution path and bindings are unchanged. Current source makes Waza conditional in comparison readiness and passes the workflow's Waza selection to the gate. This preserves the observed dispatch, grading, reporting, isolation, and accounting of the retained run. Dispatch reuses the verified product bytes at 70943060 and the same local dev configuration and CI fixture. The copied execution source excludes Finder metadata and ignored Python caches. Original runtime proofs, observations and historical sources remain bound.",
+        "proof": {
+          "kind": "sponsors",
+          "integration_evidence_ref": "ea750927384364e00adf9fc72d36125254642b89b4ea0bd7fcbfc3bcf4c8eab6"
+        }
+      }
+    },
+    "workflow-document-data": {
+      "kind": "toolkit_workflow_completion_evidence",
+      "value": {
+        "schema_version": "aeep.toolkit.workflow-completion-evidence.v1",
+        "component": "workflow-document-data",
+        "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+        "original_source": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+        "request": {
+          "schema_version": "aeep.toolkit.workflow-evidence-request.v1",
+          "configuration": "document-data",
+          "report_id": "fit_ad8153443ae7471aad161e1e4e5cbd11",
+          "original_workflow": {
+            "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-sales-handoff-20261105/sales-prepared/workflow.json",
+            "sha256": "526953337a6bf676136fe516b1131123a20ae3f5a7287d37b0683e5834f44036"
+          },
+          "selected_workflow": {
+            "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-workflow-runtime-20261105/operator-workflow.json",
+            "sha256": "e118a019842b78aab500da6fc2036e1991b0518c5ca64a5f1f216ed51dd3ae48"
+          },
+          "report_directory": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-sales-handoff-20261105/sales-result",
+          "compatibility_basis": "Current-source inspection verifies the same frozen plan, candidate, protected binary grades, receipt journals, settled accounting and byte-identical HTML/Markdown. The selected private task tree reproduces the original plan inputs and its lifecycle receipts resolve on their own reviewed workflow. The historical Langfuse transport status remains failed. Settled readback and disablement verify the exact original trace. Reuse covers the two required workflow checks only. The new telemetry acknowledgement has separate verification. Current source makes Waza conditional in comparison readiness and passes the workflow's Waza selection to the gate. This preserves the observed dispatch, grading, reporting, isolation, and accounting of the retained run. Dispatch reuses the verified product bytes at 70943060 and the same local dev configuration and CI fixture. The copied execution source excludes Finder metadata and ignored Python caches. Original runtime proofs, observations and historical sources remain bound.",
+          "lifecycle": {
+            "store": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-workflow-runtime-20261105/receipts.sqlite3",
+            "workflow": {
+              "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-workflow-runtime-20261105/workflow.json",
+              "sha256": "59dc7068d53913d21e558a095e89959b1b5cce1f50849d13a80641877d7294b1"
+            },
+            "operation_review": {
+              "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-workflow-runtime-20261105/operation-review.json",
+              "sha256": "10a8628edef940f4fda7294d63d5d0001dc54204b02e371476d4ce5e001e1f19"
+            },
+            "runtime": "task-assets",
+            "setup": {
+              "operation_id": "workflow:skillsbench-workflow-runtime-20261105:document-data-setup",
+              "receipt_ref": "6f711c41e770074839063c0ae60676ceb44b90f4d35f27069b5c790355db480f"
+            },
+            "readiness": {
+              "operation_id": "workflow:skillsbench-workflow-runtime-20261105:document-data-readiness",
+              "receipt_ref": "d570c560e5763ecf8d76e1c61132f55b4fa44b9351c25d11dfd19a668b9ef59c"
+            },
+            "removal_configuration": "sales-removal-check",
+            "removal_setup": {
+              "operation_id": "workflow:skillsbench-workflow-runtime-20261105:sales-removal-check-setup",
+              "receipt_ref": "25668d0ba12ab1a1a72c2387a335cbb07b953f70d4d071c9991c0bf59a881fb7"
+            },
+            "removal": {
+              "operation_id": "workflow:skillsbench-workflow-runtime-20261105:sales-removal-check-remove",
+              "receipt_ref": "74c3b1d98f0680a7ef9d76eae778e5b8036c0c8dc5541b3d50d31603622b7628"
+            }
+          },
+          "telemetry": [
+            {
+              "store": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillrank-build-preparation-20261103/runtime-execution/canonical.sqlite3",
+              "readback": {
+                "operation_id": "skillsbench-domain-telemetry-20261113:observe:0f5fc90221c2:0",
+                "receipt_ref": "cfaba845fd31ccfef7c1fd5735372e1062386c2a81afd161d05961b70a458de7"
+              },
+              "transport": {
+                "operation_id": "receipt-export:3971ee71c3bd33fa3b32182c312d6a2b767504080f1e634c04c05442beaae294:b8f0f23507264fd3fd4c7e3c97595b0e72a7f84a93e83f8786701aa498637b44",
+                "receipt_ref": "610163c597131e1cfa8bcae74de2647153533075562742b74621dedb4a720f8c"
+              },
+              "disabled": {
+                "operation_id": "workflow:skillsbench-domain-telemetry-document-data-60216438830a:disabled",
+                "receipt_ref": "20e4eba2e3b89b13b18a71ffad6f97953fe89c9535733d163551e4b429d3855d"
+              },
+              "disabled_workflow": {
+                "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-telemetry-source.7UC1C6/domain-telemetry-final/document-data-disabled-workflow.json",
+                "sha256": "34d8818c99d8a4ca18d211922bafd5271bdbbe37748053d66cf89b4dddf1eb03"
+              },
+              "observation_review": {
+                "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-telemetry-source.7UC1C6/domain-live-review.json",
+                "sha256": "4483025c6f0401cfa0e24f64893ae4a2846b56a2032fca2a5cfaabba87368907"
+              },
+              "observed_result": {
+                "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/canonical-stack-verification-20261113/domain-live-result.json",
+                "sha256": "6dbf53641ab685bc99d3c033215cf1ab9c136ba48e106d8ef2796638e142b836"
+              }
+            }
+          ]
+        },
+        "observations": {
+          "original_source": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+          "job_id": "assessment_62f59cf5bb86407daea74b2c8e79eda4",
+          "report_ref": "243226d54c948cb73dcfec82cf7c773a54f14a1a3acf07ab8d29ece9a1e5ed2f",
+          "campaign_ref": "d8fbb252d80cda9e1cf8d55e524e0dc1cd75fdcd7b8e9385a66e20a14fa0e6e1",
+          "ledger_ref": "50a6ea5e9df1d4e446c4a911375d05452b757a9771ce4adca2f15c279250a8cf",
+          "plan_ref": "1e1b8b42be675fdd5c465c93365c1d4c8681c9ab0ebcff79866876b7a9fb88e3",
+          "run_receipt_ref": "f49982aa3494d0c32c15fbdccc9d496a17f2236cc0b51c0affc6711d65432c02",
+          "run_measurement_ref": "b759321922a9fc93917550cedf32839c2838b97d6d23b78dd79a2e275fda8e3b",
+          "trials": [
+            {
+              "case_id": "sales-pivot-analysis",
+              "task_sha256": "480511af29dae88e00759b482d18ad24ed1c131c67ebe134091db9b4785da257",
+              "arm": "treatment",
+              "run_id": "trial_plan_63ff6127a1514a379fcd1ba9e151c8aa_sales-pivot-analysis_skillsbench-sales.treatment_fresh-worker_0",
+              "verification": "fail",
+              "binary_task_score": 0,
+              "tokens": 278533,
+              "raw_tokens": {
+                "source_ref": "b8f0f23507264fd3fd4c7e3c97595b0e72a7f84a93e83f8786701aa498637b44",
+                "input_tokens": 273093,
+                "output_tokens": 5440,
+                "cached_input_tokens": 232704,
+                "reasoning_output_tokens": 322,
+                "cached_semantics": "included_in_input",
+                "reasoning_semantics": "included_in_output"
+              },
+              "agent_wall_seconds": 146.77051195899912,
+              "verification_wall_seconds": 2.4727046250009153,
+              "retries": 0,
+              "execution_status": "completed",
+              "receipt_refs": [
+                "b8f0f23507264fd3fd4c7e3c97595b0e72a7f84a93e83f8786701aa498637b44"
+              ],
+              "verification_ref": "e67a5eb245743daf1ffa1a49b92d21a658b1a0fd5b6ce75ead0428a64bd505be",
+              "charge_ref": "2c506726ac8c2eab733b3ff5bffd65461e3dfa54a07eb968acb35b89fe8a9a43",
+              "protected_grading_measurement_refs": [
+                "a50d27ff0c466110d45d7adac842dcc9f844121377a2cf0f8e4d82901b95a3c9"
+              ],
+              "token_capture": {
+                "status": "verified",
+                "receipt_ref": "b8f0f23507264fd3fd4c7e3c97595b0e72a7f84a93e83f8786701aa498637b44",
+                "journal_ref": "16cf2e6dc2a312c9b9c32758e2f8f16a2f2548ff158e7d1ef3df01e8d96771e6",
+                "known_fields": [
+                  "input_tokens",
+                  "cached_input_tokens",
+                  "cache_write_input_tokens",
+                  "output_tokens",
+                  "reasoning_output_tokens"
+                ],
+                "provider_usage_independently_verified": false,
+                "source": "provider_report",
+                "trust": "self_asserted"
+              },
+              "provider_tokens": {
+                "input_tokens": 273093,
+                "cached_input_tokens": 232704,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 5440,
+                "reasoning_output_tokens": 322
+              }
+            }
+          ],
+          "grader_operation_refs": [
+            "a50d27ff0c466110d45d7adac842dcc9f844121377a2cf0f8e4d82901b95a3c9"
+          ],
+          "workflow_accounting": {
+            "definition_ref": "5f4806e155c2cb2f24e41d15c1c31d54e44be3630b7d6d9be4e6337f10a040e5",
+            "operation_id": "workflow:skillsbench-sales-execution-handoff-20261105:execute",
+            "assessment_plan_ids": [
+              "plan_63ff6127a1514a379fcd1ba9e151c8aa"
+            ],
+            "ledger": "existing assessment operation_start / operation_measurement",
+            "measurement_scope": "exclusive wrapper wall time and process CPU; canonical execution intervals excluded",
+            "token_memory_cash_measurements": "UNKNOWN; no zero values inferred",
+            "completion": "resolve the terminal operation_measurement after this command returns"
+          },
+          "report_files": {
+            "report.md": "fe5dfb22352d8752a964dd71a222bc2fa3acbc4d9e8e21001ad01e7a88ae1b1a",
+            "report.html": "1474b220e359efef9c098be42b63d017e3c02e8742faebd831a238cc00590f7f"
+          },
+          "prepared_workflow_ref": "4c19c858ed52c0d76c776b5213f3f105c5b4439e5cfbef2e21394bd11d0e0ca4",
+          "lifecycle": {
+            "document-data:setup": {
+              "configuration": "document-data",
+              "stage": "setup",
+              "original_source": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+              "operation": {
+                "operation_id": "workflow:skillsbench-workflow-runtime-20261105:document-data-setup",
+                "receipt_ref": "6f711c41e770074839063c0ae60676ceb44b90f4d35f27069b5c790355db480f"
+              },
+              "measurement_ref": "b760032e006e1a9ca3be0eeea16203b71ec6de1132d9535e0c3c4a62de5a2938",
+              "installation_ref": "973dc57c965bae9dd87c7c5b7a7e64a5214f7576804425e5b5ce2e4f54fe479f",
+              "review_ref": "87ac72b92a34e162f75adafd79f429732fed5c9f286dceee6912782e2c350df8",
+              "installation_journal_sha256": "0f8723d77725eeed543db49259d62da3f176a796c4e6ceaf3e5315707457134c",
+              "lifecycle_ref": "ab97830d814142f65bb5c45b5bb048d405e302694a86827cf643dccb3fa116d1",
+              "installed_tree_ref": "2981e39efd1d6c00d9ba6a83784f5d5a42fdd3acae49d3b68505b4b0d97f0575"
+            },
+            "document-data:readiness": {
+              "configuration": "document-data",
+              "stage": "readiness",
+              "original_source": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+              "operation": {
+                "operation_id": "workflow:skillsbench-workflow-runtime-20261105:document-data-readiness",
+                "receipt_ref": "d570c560e5763ecf8d76e1c61132f55b4fa44b9351c25d11dfd19a668b9ef59c"
+              },
+              "measurement_ref": "adcf54ede4f729f9fea40d05a7a3c0388b6cbc224bc71f2f09eca71325ef9807",
+              "installation_ref": "973dc57c965bae9dd87c7c5b7a7e64a5214f7576804425e5b5ce2e4f54fe479f",
+              "review_ref": "cee939717157e2a0c441d598f721fed0ff74c3588d1d5db5b49d0914d7e9d495",
+              "installation_journal_sha256": "0f8723d77725eeed543db49259d62da3f176a796c4e6ceaf3e5315707457134c",
+              "installed_tree_ref": "2981e39efd1d6c00d9ba6a83784f5d5a42fdd3acae49d3b68505b4b0d97f0575"
+            },
+            "sales-removal-check:setup": {
+              "configuration": "sales-removal-check",
+              "stage": "setup",
+              "original_source": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+              "operation": {
+                "operation_id": "workflow:skillsbench-workflow-runtime-20261105:sales-removal-check-setup",
+                "receipt_ref": "25668d0ba12ab1a1a72c2387a335cbb07b953f70d4d071c9991c0bf59a881fb7"
+              },
+              "measurement_ref": "109a6a1561ae1f6f4f4bfd0fb7d58a28c86db0c1990030c08a1c66b7aa9e8801",
+              "installation_ref": "b0525fdaecdf1421334deeed54e16f98f9f79630e50db9cc1ba49aa56a741dbc",
+              "review_ref": "7d95112aa0a111b52d678da96ecb1731996762e33aa75d8905d08ee903dbb88a",
+              "installation_journal_sha256": "4a215e85f07b65470c514b32ed5f93a3751382c9ad48d3aeb30f73cc683defc0",
+              "lifecycle_ref": "bd8d4cfd7bcd08d1b42429aa9d09b541237ed0318dc7e71f888b8ef25e77d07b",
+              "installed_tree_ref": "2981e39efd1d6c00d9ba6a83784f5d5a42fdd3acae49d3b68505b4b0d97f0575"
+            },
+            "sales-removal-check:remove": {
+              "configuration": "sales-removal-check",
+              "stage": "remove",
+              "original_source": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+              "operation": {
+                "operation_id": "workflow:skillsbench-workflow-runtime-20261105:sales-removal-check-remove",
+                "receipt_ref": "74c3b1d98f0680a7ef9d76eae778e5b8036c0c8dc5541b3d50d31603622b7628"
+              },
+              "measurement_ref": "640d7913517517c0d994c4c6940dee5e29131b42984e85f5eb94a3c13a8fe46f",
+              "installation_ref": "b0525fdaecdf1421334deeed54e16f98f9f79630e50db9cc1ba49aa56a741dbc",
+              "review_ref": "065ba8fb884e080bc72cc90717342e669b160a3a7f7fd52d782818b00cbfecd2",
+              "installation_journal_sha256": "4a215e85f07b65470c514b32ed5f93a3751382c9ad48d3aeb30f73cc683defc0",
+              "lifecycle_ref": "2a252bf4e15298ad8e9ccef2f983b46496636075101708f57b5735d155dbade5",
+              "installed_tree_ref": "2981e39efd1d6c00d9ba6a83784f5d5a42fdd3acae49d3b68505b4b0d97f0575"
+            }
+          },
+          "telemetry": [
+            {
+              "source_receipt_sha256": "b8f0f23507264fd3fd4c7e3c97595b0e72a7f84a93e83f8786701aa498637b44",
+              "trace_id": "b8f0f23507264fd3fd4c7e3c97595b0e",
+              "span_id": "72a7f84a93e83f87",
+              "deployment_review_ref": "8803f170bc484ff2797fc223e6b5f11ee0a99a440a38dbc9e2f54aa711cba8e1",
+              "original_source": "60216438830ae0aa5f59c086de189a7bba0c2dc35920c155824be33d291acb50",
+              "transport_status": "failed",
+              "acknowledgement": null,
+              "http_status": null,
+              "transport_receipt_ref": "610163c597131e1cfa8bcae74de2647153533075562742b74621dedb4a720f8c",
+              "transport_measurement_ref": "d884ad303044cfeecdd7e6ed76308b94a0f89fbe074612955f0d4ddbf2052e9e",
+              "readback_receipt_ref": "cfaba845fd31ccfef7c1fd5735372e1062386c2a81afd161d05961b70a458de7",
+              "readback_measurement_ref": "b65c630d8a08f7c3f9f3d33e55d853701361c29ac4ab191dff36acc8872d6784",
+              "ingestion_verified": true,
+              "disabled_export_verified": true,
+              "disabled_receipt_ref": "20e4eba2e3b89b13b18a71ffad6f97953fe89c9535733d163551e4b429d3855d",
+              "disabled_measurement_ref": "dae97761b92150099376ef14e751ec9b7ebb900d32b96dc9058e8c1e3af7f608"
+            }
+          ],
+          "checks": {
+            "ordinary_cli": true,
+            "canonical_report": true
+          }
+        }
+      }
+    },
+    "workflow-software-engineering": {
+      "kind": "toolkit_workflow_completion_evidence",
+      "value": {
+        "schema_version": "aeep.toolkit.workflow-completion-evidence.v1",
+        "component": "workflow-software-engineering",
+        "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+        "original_source": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+        "request": {
+          "schema_version": "aeep.toolkit.workflow-evidence-request.v1",
+          "configuration": "software-engineering",
+          "report_id": "fit_4399e89f8d4249fbbd686f280bd14b1a",
+          "original_workflow": {
+            "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-managed-worker-preparation-20261105/engineering/spring-prepared/workflow.json",
+            "sha256": "fa0ad82121a47d7e4016337f9149a7bfd410c825958d888b9e24abc03908676a"
+          },
+          "selected_workflow": {
+            "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-workflow-runtime-20261105/operator-workflow.json",
+            "sha256": "e118a019842b78aab500da6fc2036e1991b0518c5ca64a5f1f216ed51dd3ae48"
+          },
+          "report_directory": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-managed-worker-preparation-20261105/engineering/spring-result",
+          "compatibility_basis": "Current-source inspection verifies the same frozen plan, candidate, protected binary grades, receipt journals, settled accounting and byte-identical HTML/Markdown. The selected private task tree reproduces the original plan inputs and its lifecycle receipts resolve on their own reviewed workflow. The historical Langfuse transport status remains failed. Settled readback and disablement verify the exact original trace. Reuse covers the two required workflow checks only. The new telemetry acknowledgement has separate verification. Current source makes Waza conditional in comparison readiness and passes the workflow's Waza selection to the gate. This preserves the observed dispatch, grading, reporting, isolation, and accounting of the retained run. Dispatch reuses the verified product bytes at 70943060 and the same local dev configuration and CI fixture. The copied execution source excludes Finder metadata and ignored Python caches. Original runtime proofs, observations and historical sources remain bound.",
+          "lifecycle": {
+            "store": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-workflow-runtime-20261105/receipts.sqlite3",
+            "workflow": {
+              "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-workflow-runtime-20261105/workflow.json",
+              "sha256": "59dc7068d53913d21e558a095e89959b1b5cce1f50849d13a80641877d7294b1"
+            },
+            "operation_review": {
+              "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-workflow-runtime-20261105/operation-review.json",
+              "sha256": "10a8628edef940f4fda7294d63d5d0001dc54204b02e371476d4ce5e001e1f19"
+            },
+            "runtime": "task-assets",
+            "setup": {
+              "operation_id": "workflow:skillsbench-workflow-runtime-20261105:software-engineering-setup",
+              "receipt_ref": "4dd8697f041b351a643903dcb106cb76ae32ff50f87dad67a45fb2eb42411f07"
+            },
+            "readiness": {
+              "operation_id": "workflow:skillsbench-workflow-runtime-20261105:software-engineering-readiness",
+              "receipt_ref": "f1a3e2e6b388482b06a2a9fabb03af131c5d00d376b23773e834a0c9626e5d29"
+            },
+            "removal_configuration": "sales-removal-check",
+            "removal_setup": {
+              "operation_id": "workflow:skillsbench-workflow-runtime-20261105:sales-removal-check-setup",
+              "receipt_ref": "25668d0ba12ab1a1a72c2387a335cbb07b953f70d4d071c9991c0bf59a881fb7"
+            },
+            "removal": {
+              "operation_id": "workflow:skillsbench-workflow-runtime-20261105:sales-removal-check-remove",
+              "receipt_ref": "74c3b1d98f0680a7ef9d76eae778e5b8036c0c8dc5541b3d50d31603622b7628"
+            }
+          },
+          "telemetry": [
+            {
+              "store": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillrank-build-preparation-20261103/runtime-execution/canonical.sqlite3",
+              "readback": {
+                "operation_id": "skillsbench-spring-telemetry-20261113:observe:a8617c3cfb62:0",
+                "receipt_ref": "bfad53143542b01caffcb6bd1ed23f77fe894dc26a5feab82af7c80ee4be62e8"
+              },
+              "transport": {
+                "operation_id": "receipt-export:a3664284511f2ac6999ede41481a5a355a987e2d1e65f1838420170e81608ef1:4f0dcbfe6a09594ca0075b0092396121373dfadfd40b07931983e9047704b559",
+                "receipt_ref": "5e43d054c954a19705bc9fdcba7d4322ed0bf239b6a3292fb401ded493d97d24"
+              },
+              "disabled": {
+                "operation_id": "workflow:skillsbench-domain-telemetry-software-engineering-60216438830a:disabled",
+                "receipt_ref": "265ad8bf8ef5310b9255f5ab8e8c50d1ba131087e76db93217e39cc2b097af10"
+              },
+              "disabled_workflow": {
+                "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-telemetry-source.7UC1C6/domain-telemetry-final/software-engineering-disabled-workflow.json",
+                "sha256": "a2800d5655439b501190e1e6f5fb58af6d3769977c15bddaeaf33a15879b0099"
+              },
+              "observation_review": {
+                "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/stack-telemetry-source.7UC1C6/spring-operation-review.json",
+                "sha256": "810a5513cc78c6b96161ce33c8d8c9888167ea0e044cb54646eafd506c0208fe"
+              },
+              "observed_result": {
+                "path": "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/canonical-stack-verification-20261113/spring-telemetry-result.json",
+                "sha256": "ebeba2508b856ccc0d5bb5754b026b5b40f75c02a0d828da7c61bc618b169f63"
+              }
+            }
+          ]
+        },
+        "observations": {
+          "original_source": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+          "job_id": "assessment_4c1d6d20adef4fd28a882bce841fa0c4",
+          "report_ref": "462e4b4fa1fbd76b2909660458e6547e638171d25b75e233bf8b907cb1ab1e7e",
+          "campaign_ref": "6650aa3b40986fef9adb97baf734f8987c45ab74066ab52afe59dc5f21fcc162",
+          "ledger_ref": "8d65d8d47399654845dcaec0de29dcf5715bf45c45d132b788ff43ea56f41b53",
+          "plan_ref": "ae92436b6f33e22b14f321fe306e9f7c23e730512c809bfb0603f19b97fecbfb",
+          "run_receipt_ref": "b417de6e393d909e8c50beeff34c786358e92aa28d7a1713189476c4c5f83160",
+          "run_measurement_ref": "41dd305c3b838e529fd1307c005ad8aab56263ddaf467c47e608b732285a384a",
+          "trials": [
+            {
+              "case_id": "spring-boot-jakarta-migration",
+              "task_sha256": "96ba4eb2fca8bbe65f4e0166ff3d61d54e3b303f9e770f97dbae40ba0632b771",
+              "arm": "treatment",
+              "run_id": "trial_plan_e7533b81038a48e99841a367365613d0_spring-boot-jakarta-migration_skillsbench-spring.treatment_fresh-worker_0",
+              "verification": "pass",
+              "binary_task_score": 1,
+              "tokens": 135763,
+              "raw_tokens": {
+                "source_ref": "4f0dcbfe6a09594ca0075b0092396121373dfadfd40b07931983e9047704b559",
+                "input_tokens": 133140,
+                "output_tokens": 2623,
+                "cached_input_tokens": 102400,
+                "reasoning_output_tokens": 44,
+                "cached_semantics": "included_in_input",
+                "reasoning_semantics": "included_in_output"
+              },
+              "agent_wall_seconds": 78.15918895800132,
+              "verification_wall_seconds": 14.002595124999061,
+              "retries": 0,
+              "execution_status": "completed",
+              "receipt_refs": [
+                "4f0dcbfe6a09594ca0075b0092396121373dfadfd40b07931983e9047704b559"
+              ],
+              "verification_ref": "f92a2f0b9354a3d4a752a9073c70f9641e79353ec3324bc5ee6ef7186a94e368",
+              "charge_ref": "eba97f0cdbefeb1b16a579118df0296f58daa5ef267c0369c1c0a93956324f0f",
+              "protected_grading_measurement_refs": [
+                "4927e19ddfa41ba370819d824916532ef6f70e30cb33ac7181ba8103498bfb8a"
+              ],
+              "token_capture": {
+                "status": "verified",
+                "receipt_ref": "4f0dcbfe6a09594ca0075b0092396121373dfadfd40b07931983e9047704b559",
+                "journal_ref": "265ad6390e99ae297fb0c5c9ac7c45a3c014308aa7593d28e29eeb4080ecf20f",
+                "known_fields": [
+                  "input_tokens",
+                  "cached_input_tokens",
+                  "cache_write_input_tokens",
+                  "output_tokens",
+                  "reasoning_output_tokens"
+                ],
+                "provider_usage_independently_verified": false,
+                "source": "provider_report",
+                "trust": "self_asserted"
+              },
+              "provider_tokens": {
+                "input_tokens": 133140,
+                "cached_input_tokens": 102400,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 2623,
+                "reasoning_output_tokens": 44
+              }
+            }
+          ],
+          "grader_operation_refs": [
+            "4927e19ddfa41ba370819d824916532ef6f70e30cb33ac7181ba8103498bfb8a"
+          ],
+          "workflow_accounting": {
+            "definition_ref": "724de4b26d4838c611b968b1919b56572d96f4c70e7bf0319e285deb229ae93a",
+            "operation_id": "workflow:skillsbench-spring-execution-20261105:execute",
+            "assessment_plan_ids": [
+              "plan_e7533b81038a48e99841a367365613d0"
+            ],
+            "ledger": "existing assessment operation_start / operation_measurement",
+            "measurement_scope": "exclusive wrapper wall time and process CPU; canonical execution intervals excluded",
+            "token_memory_cash_measurements": "UNKNOWN; no zero values inferred",
+            "completion": "resolve the terminal operation_measurement after this command returns"
+          },
+          "report_files": {
+            "report.md": "b26ab9a443724c91634a191bd40ca4fd7f14eb0e1a9b5b04fc49ef4681d36f4e",
+            "report.html": "c361e7970bccc837cc4d5355f223accb590c1ef5c00d0e9a7cd38d303c70e342"
+          },
+          "prepared_workflow_ref": "8a2f6e941bdd553a359facbf754064e48c574fd91d6b2cafe01a69866331c336",
+          "lifecycle": {
+            "software-engineering:setup": {
+              "configuration": "software-engineering",
+              "stage": "setup",
+              "original_source": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+              "operation": {
+                "operation_id": "workflow:skillsbench-workflow-runtime-20261105:software-engineering-setup",
+                "receipt_ref": "4dd8697f041b351a643903dcb106cb76ae32ff50f87dad67a45fb2eb42411f07"
+              },
+              "measurement_ref": "7fb8b731528bfa8cc4de8a1d682a9a55c35625b9f7cb4b698626dc68eae62917",
+              "installation_ref": "cdac59e121a86ec6e9431df27bb0204f6431c9126ee4409851a3d59429bdb253",
+              "review_ref": "7af33faa20cd77413654a5b11b25bd6be7be5e654aad34b1097fd495bbb96003",
+              "installation_journal_sha256": "f3bdfba6b56cae31169fb4d6f5c99259f6c989f0ad546fb027190f1419cd996f",
+              "lifecycle_ref": "c192c312873e23be411b077d8acee93fad3ea505f96f9bfd626c16da0e7e80a7",
+              "installed_tree_ref": "f24ed03071ada69192c9e34aa11e9a51be01495f9ecf36dceb3c532a30f3b7bc"
+            },
+            "software-engineering:readiness": {
+              "configuration": "software-engineering",
+              "stage": "readiness",
+              "original_source": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+              "operation": {
+                "operation_id": "workflow:skillsbench-workflow-runtime-20261105:software-engineering-readiness",
+                "receipt_ref": "f1a3e2e6b388482b06a2a9fabb03af131c5d00d376b23773e834a0c9626e5d29"
+              },
+              "measurement_ref": "8c5bafc7914d2e1ec7b1c1d32b6678089e9d8b9dc0077428e7f741a83d8e4718",
+              "installation_ref": "cdac59e121a86ec6e9431df27bb0204f6431c9126ee4409851a3d59429bdb253",
+              "review_ref": "4df9d2f9ed10b82b99731a358a5d848e6baa4535465bc31574461629f0990bf5",
+              "installation_journal_sha256": "f3bdfba6b56cae31169fb4d6f5c99259f6c989f0ad546fb027190f1419cd996f",
+              "installed_tree_ref": "f24ed03071ada69192c9e34aa11e9a51be01495f9ecf36dceb3c532a30f3b7bc"
+            },
+            "sales-removal-check:setup": {
+              "configuration": "sales-removal-check",
+              "stage": "setup",
+              "original_source": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+              "operation": {
+                "operation_id": "workflow:skillsbench-workflow-runtime-20261105:sales-removal-check-setup",
+                "receipt_ref": "25668d0ba12ab1a1a72c2387a335cbb07b953f70d4d071c9991c0bf59a881fb7"
+              },
+              "measurement_ref": "109a6a1561ae1f6f4f4bfd0fb7d58a28c86db0c1990030c08a1c66b7aa9e8801",
+              "installation_ref": "b0525fdaecdf1421334deeed54e16f98f9f79630e50db9cc1ba49aa56a741dbc",
+              "review_ref": "7d95112aa0a111b52d678da96ecb1731996762e33aa75d8905d08ee903dbb88a",
+              "installation_journal_sha256": "4a215e85f07b65470c514b32ed5f93a3751382c9ad48d3aeb30f73cc683defc0",
+              "lifecycle_ref": "bd8d4cfd7bcd08d1b42429aa9d09b541237ed0318dc7e71f888b8ef25e77d07b",
+              "installed_tree_ref": "2981e39efd1d6c00d9ba6a83784f5d5a42fdd3acae49d3b68505b4b0d97f0575"
+            },
+            "sales-removal-check:remove": {
+              "configuration": "sales-removal-check",
+              "stage": "remove",
+              "original_source": "1e8aef5e3782fa2dec7ce1600b8a20e827b09a4d1b0720741aca7316e2b36ab0",
+              "operation": {
+                "operation_id": "workflow:skillsbench-workflow-runtime-20261105:sales-removal-check-remove",
+                "receipt_ref": "74c3b1d98f0680a7ef9d76eae778e5b8036c0c8dc5541b3d50d31603622b7628"
+              },
+              "measurement_ref": "640d7913517517c0d994c4c6940dee5e29131b42984e85f5eb94a3c13a8fe46f",
+              "installation_ref": "b0525fdaecdf1421334deeed54e16f98f9f79630e50db9cc1ba49aa56a741dbc",
+              "review_ref": "065ba8fb884e080bc72cc90717342e669b160a3a7f7fd52d782818b00cbfecd2",
+              "installation_journal_sha256": "4a215e85f07b65470c514b32ed5f93a3751382c9ad48d3aeb30f73cc683defc0",
+              "lifecycle_ref": "2a252bf4e15298ad8e9ccef2f983b46496636075101708f57b5735d155dbade5",
+              "installed_tree_ref": "2981e39efd1d6c00d9ba6a83784f5d5a42fdd3acae49d3b68505b4b0d97f0575"
+            }
+          },
+          "telemetry": [
+            {
+              "source_receipt_sha256": "4f0dcbfe6a09594ca0075b0092396121373dfadfd40b07931983e9047704b559",
+              "trace_id": "4f0dcbfe6a09594ca0075b0092396121",
+              "span_id": "373dfadfd40b0793",
+              "deployment_review_ref": "8803f170bc484ff2797fc223e6b5f11ee0a99a440a38dbc9e2f54aa711cba8e1",
+              "original_source": "60216438830ae0aa5f59c086de189a7bba0c2dc35920c155824be33d291acb50",
+              "transport_status": "failed",
+              "acknowledgement": null,
+              "http_status": 200,
+              "transport_receipt_ref": "5e43d054c954a19705bc9fdcba7d4322ed0bf239b6a3292fb401ded493d97d24",
+              "transport_measurement_ref": "e22e178f814f4ed0863fe64967a81efb756c0ea30ea48856998b95f75bfdadec",
+              "readback_receipt_ref": "bfad53143542b01caffcb6bd1ed23f77fe894dc26a5feab82af7c80ee4be62e8",
+              "readback_measurement_ref": "8d2af88957ef93c8f8c5a415700227b3b33d79edb0a8557834006ae82deacbfb",
+              "ingestion_verified": true,
+              "disabled_export_verified": true,
+              "disabled_receipt_ref": "265ad8bf8ef5310b9255f5ab8e8c50d1ba131087e76db93217e39cc2b097af10",
+              "disabled_measurement_ref": "f9f3e29f0e35044a1e93965d00056478af5a14cb761c9679d6c0e24061148f94"
+            }
+          ],
+          "checks": {
+            "ordinary_cli": true,
+            "canonical_report": true
+          }
+        }
+      }
+    }
+  },
+  "verified_required_checks": 37,
+  "reused_observations": true,
+  "waza_selected": false
+}

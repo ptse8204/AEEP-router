@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [Sol dispatch review](../toolkit-v2/c13/managed-comparison-20261115/DISPATCH.md)
+binds the offline-verified worker pairs and protected graders to the
+four-task development design. Its expiry-only renewal passed on a
+copied ledger. The operational grant and previous reservations are
+unchanged. The live run awaits explicit approval of `bd939ed7`.
+
 The [operational audit](../toolkit-v2/c13/managed-comparison-20261115/operational-completion.json)
 verifies 37 required managed Codex checks and preserves the separate Waza
 gate. The [Sol design](../toolkit-v2/c13/managed-comparison-20261115/README.md)

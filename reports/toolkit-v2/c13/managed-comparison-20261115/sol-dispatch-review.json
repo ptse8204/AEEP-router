@@ -1,0 +1,532 @@
+{
+  "schema_version": "aeep.operator.managed-sol-development-dispatch.v1",
+  "design_sha256": "08613f4efd26fbf6ee10e6713acaf74adb7bafb8b8c721e00de8d526825ac0a6",
+  "implementation_source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+  "stack_completion_ref": "a5b11409ad5e307b7e7e88cff98221a70fa41b1aeb693f8fda410816f6031ad0",
+  "original_stack_completion_ref": "81e3ebd64ad53518026bf7e8b1374cc564fbc4f768c0e255646fb38bbc117031",
+  "frozen_source": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/frozen-source",
+  "approval_pending": true,
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "tasks": [
+    {
+      "task_id": "sales-pivot-analysis",
+      "recipe_digest": "483628f76cebe586005a145d33e4c223cae83480ab52206c0c65167b1022f792",
+      "protected_environment_digest": "3e673c43b21daef31e42c077961388f24de846a694927ac7966e6377f823b29d",
+      "pair_digest": "476fe88b116734e1ff393a04e2b8de52c10ea10ec01d713140f0ec451d81ecdb",
+      "shared_definition_digest": "09191abcde90c0ee3525be35bd572677d0d23ffcdb4b5d58dfb82844cc9dddbb",
+      "suite_digest": "77f2e6a3da489faa209382ec1febd43db4bb19d60696fff54f2d9b98d7e93096",
+      "instruction_sha256": "d3abb4824c36578adbbf208d635bf7a10942bafbf02c3682bd4217de9625c9f8",
+      "arm_order": [
+        "sol-pilot-1.control",
+        "sol-pilot-1.treatment"
+      ]
+    },
+    {
+      "task_id": "exceltable-in-ppt",
+      "recipe_digest": "0968b07cedea1c52d7af1ffc4d6363600b4ae8fd3d540dd96078e601e2a319cf",
+      "protected_environment_digest": "9a173ebae8f026bdf4a9582b77b282d0da81ecf7120a6bb005e55984e73729cf",
+      "pair_digest": "f9ecf82083bd2d665cb6f59692b3c303492e6b6b9e8525c3b049403bb8656cd0",
+      "shared_definition_digest": "97d4412de2508d55efa0f86b9672074cc5f2377c1684dee7534183a2ca08a5b3",
+      "suite_digest": "23336a1b18937943a4b0644877d22fd4c489f57affe0c0b27413b7b7116a97ce",
+      "instruction_sha256": "7740036c39451973e6ad029a0d33c7f140ba6ed851fa1714fe28e891f70f3e68",
+      "arm_order": [
+        "sol-pilot-2.treatment",
+        "sol-pilot-2.control"
+      ]
+    },
+    {
+      "task_id": "canopen-python__canopen-613-declared-tests",
+      "recipe_digest": "31af06f5957bf875a38914a93aa4a3758a1dfb1004f2b9f20bbc839a8a629a0e",
+      "protected_environment_digest": "4209187811529cea1967411c558b4d5f11b93bcd8b7979d083ac8055eb5b1482",
+      "pair_digest": "5f4a12d8f786a4b7d57be830b40b8cad352ffe5a4c1b8f82e17a54989d2297e9",
+      "shared_definition_digest": "c6095884428fe871bc1ee86ad27a915d0835b3834c61ae7d18643de7e8e9cb67",
+      "suite_digest": "dd5adcfa641d0b6da106361d5862550ad2c6f7c1c0945b62c7f1c99690457b61",
+      "instruction_sha256": "6b0744b0d21aa2c96213fe8163a5e735475689376ce6f5db0189d20df365af91",
+      "arm_order": [
+        "sol-pilot-3.control",
+        "sol-pilot-3.treatment"
+      ]
+    },
+    {
+      "task_id": "tefra__xsdata-1126-issue-behavior-audit",
+      "recipe_digest": "31af06f5957bf875a38914a93aa4a3758a1dfb1004f2b9f20bbc839a8a629a0e",
+      "protected_environment_digest": "4209187811529cea1967411c558b4d5f11b93bcd8b7979d083ac8055eb5b1482",
+      "pair_digest": "26ba0ba114dcc80ff9c5b711728ca902df3d84f2c71ed77a59a1cd8e60616f27",
+      "shared_definition_digest": "b05eef32c187a8a5fec73ab05d1b74f19ae5800fe3159bf395f99a3fa8a9fe73",
+      "suite_digest": "f26626835391bd388fd6c01dc1a7c439529b1f764dfc5c818a22661014de11b9",
+      "instruction_sha256": "a17cee58b52545eafe30adeee6db561efdfd24f6e4024a09b5f9bf60d7b91b16",
+      "arm_order": [
+        "sol-pilot-4.treatment",
+        "sol-pilot-4.control"
+      ]
+    }
+  ],
+  "paired_order": [
+    "baseline/treatment",
+    "treatment/baseline",
+    "baseline/treatment",
+    "treatment/baseline"
+  ],
+  "worker_images": [
+    "sha256:4474cf22f867c681aa6120ce2f98d809413f89755cf11a445444b1b993754ea1",
+    "sha256:5de7682c23981cb69dcce0bebd9c3014ec16d137484f6517857760b7eca27c42",
+    "sha256:8eef4a0ccd7102086b16898331e89cc3e7893931d270fdae6a2601a7cbac1efa",
+    "sha256:913f10a87db37de42e01c719fd7f7617c30cbbfa2258876ce0a7b7beef0af04b",
+    "sha256:9f473c493b7af1854922807d2acbdcbe3b955313dc57f203e6f73c9c50f9ea85",
+    "sha256:cf6baad1625307c9a31d0bdf7f442c975e10d8f3e63eee6ab19f5f0fe22319e9",
+    "sha256:d39db07ca6c15d2b2173df9f7c556fa59de06cd1e1d054d5c66d489ef5683be9"
+  ],
+  "worker_offline_receipts": {
+    "document_data": {
+      "control": {
+        "image": "sha256:cf6baad1625307c9a31d0bdf7f442c975e10d8f3e63eee6ab19f5f0fe22319e9",
+        "model_turns": 0,
+        "candidate_exposure": false,
+        "sol_medium_catalogue": true,
+        "protocol": "aeep-agent-router/0.159.1 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+        "runtime": {
+          "workspace": true,
+          "shared_tools": {
+            "python": "Python 3.13.15",
+            "node": "v22.23.2",
+            "ripgrep": "ripgrep 15.2.0 (rev e89fff89ac)",
+            "pandas": "2.3.2",
+            "openpyxl": "3.1.5",
+            "pypdf": {
+              "version": "6.21.4",
+              "wheel_sha256": "33e4fb41ca352810eb4e9838aa0d82d6888a5f8bf682f43e99cce5faa666255c"
+            }
+          },
+          "external_network_denied": true,
+          "configuration_write_denied": true,
+          "skill": null,
+          "candidate_runtime": false
+        },
+        "auth_canary": {
+          "result": "blocked"
+        },
+        "collector": {
+          "collector_connection_denied": true
+        },
+        "effective_skill": null,
+        "passed": true,
+        "stage": "effective inventory",
+        "elapsed_seconds": 3.2983899998944253,
+        "cleanup_confirmed": true,
+        "observed_record_sha256": "e6771c63249164f556aa59d220d4d84a626dca724d6db4e3689d5cf8adadf532",
+        "observed_path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/verified-worker-observations/document_data-control.json"
+      },
+      "treatment": {
+        "image": "sha256:d39db07ca6c15d2b2173df9f7c556fa59de06cd1e1d054d5c66d489ef5683be9",
+        "model_turns": 0,
+        "candidate_exposure": true,
+        "sol_medium_catalogue": true,
+        "protocol": "aeep-agent-router/0.159.1 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+        "runtime": {
+          "workspace": true,
+          "shared_tools": {
+            "python": "Python 3.13.15",
+            "node": "v22.23.2",
+            "ripgrep": "ripgrep 15.2.0 (rev e89fff89ac)",
+            "pandas": "2.3.2",
+            "openpyxl": "3.1.5",
+            "pypdf": {
+              "version": "6.21.4",
+              "wheel_sha256": "33e4fb41ca352810eb4e9838aa0d82d6888a5f8bf682f43e99cce5faa666255c"
+            }
+          },
+          "external_network_denied": true,
+          "configuration_write_denied": true,
+          "skill": "fa24f7bd3834bda8a470e6b0983d29b6f7893b2af5fd74ba1f801bdb82acc3f5",
+          "candidate_runtime": true,
+          "runtime_check": "artifact-tool CSV and authoring helper"
+        },
+        "auth_canary": {
+          "result": "blocked"
+        },
+        "collector": {
+          "collector_connection_denied": true
+        },
+        "effective_skill": "Spreadsheets",
+        "passed": true,
+        "stage": "effective inventory",
+        "elapsed_seconds": 3.535155500052497,
+        "cleanup_confirmed": true,
+        "observed_record_sha256": "4e41b4ea8e394667414facf0f5e9a81fb545fcd129681740171933931a0a1625",
+        "observed_path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/candidate-granular-verification/document_data-treatment.json"
+      }
+    },
+    "software_engineering": {
+      "control": {
+        "image": "sha256:913f10a87db37de42e01c719fd7f7617c30cbbfa2258876ce0a7b7beef0af04b",
+        "model_turns": 0,
+        "candidate_exposure": false,
+        "sol_medium_catalogue": true,
+        "protocol": "aeep-agent-router/0.159.1 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+        "runtime": {
+          "workspace": true,
+          "shared_tools": {
+            "python": "Python 3.13.15",
+            "node": "v22.23.2",
+            "ripgrep": "ripgrep 15.2.0 (rev e89fff89ac)",
+            "pandas": "2.3.2",
+            "openpyxl": "3.1.5"
+          },
+          "external_network_denied": true,
+          "configuration_write_denied": true,
+          "skill": null,
+          "candidate_runtime": false
+        },
+        "auth_canary": {
+          "result": "blocked"
+        },
+        "collector": {
+          "collector_connection_denied": true
+        },
+        "effective_skill": null,
+        "passed": true,
+        "stage": "effective inventory",
+        "elapsed_seconds": 2.6795612080022693,
+        "cleanup_confirmed": true,
+        "observed_record_sha256": "13ab876831bca0639e0279ed35e158caaf772da6f0b20aa7b9708ef93d4f4244",
+        "observed_path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/verified-worker-observations/software_engineering-control.json"
+      },
+      "treatment": {
+        "image": "sha256:5de7682c23981cb69dcce0bebd9c3014ec16d137484f6517857760b7eca27c42",
+        "model_turns": 0,
+        "candidate_exposure": true,
+        "sol_medium_catalogue": true,
+        "protocol": "aeep-agent-router/0.159.1 (Debian 13.0.0; aarch64) unknown (aeep-agent-router; 0.8)",
+        "runtime": {
+          "workspace": true,
+          "shared_tools": {
+            "python": "Python 3.13.15",
+            "node": "v22.23.2",
+            "ripgrep": "ripgrep 15.2.0 (rev e89fff89ac)",
+            "pandas": "2.3.2",
+            "openpyxl": "3.1.5"
+          },
+          "external_network_denied": true,
+          "configuration_write_denied": true,
+          "skill": "ce8543afa4e8b2514fbbec5b59d85064faa1758004605a9c1321e601f55388b6",
+          "candidate_runtime": true,
+          "runtime_check": "LibCST rename preserves comment and string"
+        },
+        "auth_canary": {
+          "result": "blocked"
+        },
+        "collector": {
+          "collector_connection_denied": true
+        },
+        "effective_skill": "libcst-migrate",
+        "passed": true,
+        "stage": "effective inventory",
+        "elapsed_seconds": 3.0384249170310795,
+        "cleanup_confirmed": true,
+        "observed_record_sha256": "3f0386242bbb2668872ef1f86bb124c72c33e1d6863917c36c08f4e87737be54",
+        "observed_path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/verified-worker-observations/software_engineering-treatment.json"
+      }
+    }
+  },
+  "protected_grader_verification": {
+    "path": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/protected-grader-verification.json",
+    "sha256": "e46318cf56e92eec1a10fb7ef082c1fb5ce1929caba7e3f0cf6e7b64fe3203c7"
+  },
+  "proxy": {
+    "Id": "5f9a44f86633409a250d11a78cf59357495da2078724ee0261bc73acff57f0f3",
+    "Image": "sha256:5bf590eb0bf8a06187ff092f0f75cf83b540cc27bd6a75fd8bd91305ca7b13de",
+    "Running": false,
+    "Memory": 536870912,
+    "MemorySwap": 536870912,
+    "Networks": {
+      "aeep-reviewed-model-egress": {
+        "Aliases": [],
+        "DNSNames": [
+          "aeep-reviewed-model-proxy",
+          "5f9a44f86633"
+        ],
+        "DriverOpts": {},
+        "EndpointID": "",
+        "Gateway": "",
+        "GlobalIPv6Address": "",
+        "GlobalIPv6PrefixLen": 0,
+        "GwPriority": 0,
+        "IPAMConfig": {},
+        "IPAddress": "",
+        "IPPrefixLen": 0,
+        "IPv6Gateway": "",
+        "Links": null,
+        "MacAddress": "",
+        "NetworkID": "dc46efd9e7306a1671da13301e0cea413270af6a7bd9c4634b2f0e3f8aeab4dc"
+      },
+      "aeep-reviewed-model-private": {
+        "Aliases": null,
+        "DNSNames": [
+          "aeep-reviewed-model-proxy",
+          "5f9a44f86633"
+        ],
+        "DriverOpts": null,
+        "EndpointID": "",
+        "Gateway": "",
+        "GlobalIPv6Address": "",
+        "GlobalIPv6PrefixLen": 0,
+        "GwPriority": 0,
+        "IPAMConfig": null,
+        "IPAddress": "",
+        "IPPrefixLen": 0,
+        "IPv6Gateway": "",
+        "Links": null,
+        "MacAddress": "",
+        "NetworkID": "8f657f861de8897d53df66efdf595c6d2e202b174af81f2827db409fe53f19d6"
+      }
+    }
+  },
+  "grant": {
+    "canonical_amendment_digest": "824034fef322a24c00cda1be6b364866a14c1252b22a9bb1a60a05267c5d3b85",
+    "file_sha256": "9b6b63d4b98cf650adac0fb222fad4ed66f6bbe6f94921bf69a6fa36c38f1c10",
+    "prior_expiry": "2026-11-16T03:23:44.656789+00:00",
+    "proposed_expiry": "2026-11-23T07:27:48.408693+00:00",
+    "unchanged_counters": [
+      13929,
+      3809,
+      126868.71574172053,
+      "0.0"
+    ],
+    "unchanged_limits": {
+      "max_operations": 50000,
+      "max_model_turns": 6000,
+      "max_elapsed_seconds": 604800.0,
+      "max_cash_usd": "0"
+    },
+    "previous_amendment": "936c036876376d7f456fa0ab3fcc55e2397e497a72f5254755d6380de0f55913",
+    "prior_reservation_count": 2,
+    "prior_reservations_sha256": "493d681b72dc5871a86e553e40863615b6dcef24805095866538846186f4bcf6",
+    "copied_ledger_validated": true,
+    "operational_ledger_amended": false
+  },
+  "maximum_model_turns": 8,
+  "maximum_operations": 48,
+  "maximum_reserved_seconds": 6800,
+  "proxy_session_wall_timeout_seconds": 5700,
+  "single_turn_seconds": 300,
+  "maximum_cash_usd": "0",
+  "calculated_operation_reservations": 41,
+  "calculated_reserved_seconds": 5280,
+  "automatic_retries": 0,
+  "model_fallback": false,
+  "public_input_scope": [
+    {
+      "id": "sales-pivot-analysis",
+      "domain": "document-data",
+      "revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+      "public_archive": {
+        "sha256": "347fad995448f6b7a48420cadae4d5206ecdfa9481b2e6076f49aeeec18e384f",
+        "bytes": 217907
+      },
+      "public_files": [
+        {
+          "path": "tasks/sales-pivot-analysis/environment/income.xlsx",
+          "sha256": "4ea46473be5e9e380a2ba3d5c80e87f1d0d6375c607092d5758a8107fbc4c730",
+          "bytes": 107556,
+          "role": "input"
+        },
+        {
+          "path": "tasks/sales-pivot-analysis/environment/population.pdf",
+          "sha256": "cfa3c33ba4468bcad811b8782de412d927a4a2357ac01fc1a9e93a44f5cc5ec3",
+          "bytes": 157563,
+          "role": "input"
+        },
+        {
+          "path": "tasks/sales-pivot-analysis/task.md",
+          "sha256": "aed27c7a62b1307a6d3dbdc89abacd373150fffd5f02e5e6df30c7ad84ee3232",
+          "bytes": 1989,
+          "role": "instruction"
+        }
+      ],
+      "task_input_digest": "7de088f3d8d6fa8e711b2f373bcff8ec7c1d6fba83e4c3ac51d6e9a6c92d86a1",
+      "rights_review": {
+        "path": "reports/toolkit-v2/c13/skillsbench-task-disclosure-20261105/operation-review.json",
+        "sha256": "7d27c9ef4d8858ddf40af4c74fa603810bb8bddd190ca8d8d189c14362b80af1"
+      },
+      "protected_grader": {
+        "image": "sha256:4474cf22f867c681aa6120ce2f98d809413f89755cf11a445444b1b993754ea1",
+        "historical_review": {
+          "path": "reports/toolkit-v2/c13/skillsbench-sales-handoff-20261105/operation-review.json",
+          "sha256": "b6203877730fc038d47a49c30160d51106d8d9baa36bc6c74898569b5c78b607"
+        },
+        "historical_recipe_digest": "483628f76cebe586005a145d33e4c223cae83480ab52206c0c65167b1022f792",
+        "original_validator_binding": "456a38b998df700e4269a3fcf8d25305d15fbf0a5b367111af674e37d2df80d0"
+      }
+    },
+    {
+      "id": "exceltable-in-ppt",
+      "domain": "document-data",
+      "revision": "9a1f4dd5f7659f75707435da3ce854b6e48321d1",
+      "public_archive": {
+        "sha256": "93952a36b542bbcb13021a600a3a3fcea8d52ce656cfee8eef867a398fd9b145",
+        "bytes": 60059
+      },
+      "public_files": {
+        "tasks/exceltable-in-ppt/task.md": "4056e2263dc15e48730a523ce6400312a075a62b2e5fba2b953ed2ea426e8ae2",
+        "tasks/exceltable-in-ppt/environment/input.pptx": "23983c078eed6dcff8ed70dd260454be0acdfc7a890db68549e74c12d24a82b7"
+      },
+      "task_input_digest": "563f741f86c765490c698114e3f40fdc3ce926849c466a2be2dbf1e165ca6471",
+      "rights_review": {
+        "path": "reports/toolkit-v2/c13/skillsbench-document-rights-20261106/operation-review.json",
+        "sha256": "e257a1d6ed64ef654792ba553395d689c9124a9eb4ddc24b77cce33654186cc3"
+      },
+      "protected_grader": {
+        "image": "sha256:8eef4a0ccd7102086b16898331e89cc3e7893931d270fdae6a2601a7cbac1efa",
+        "historical_review": {
+          "path": "reports/toolkit-v2/c13/skillsbench-document-managed-20261106/packaged-grading/grader-review.json",
+          "sha256": "634a94c7e93183f3b546a2e63da681c4164b92c191f3dec38a34ee9a8203981f"
+        },
+        "historical_recipe_digest": "0968b07cedea1c52d7af1ffc4d6363600b4ae8fd3d540dd96078e601e2a319cf",
+        "original_validator_binding": "1470806c4e6733ed0b5901dbfd4beade0459943c43bf9839235f52cd2d8d04c2"
+      }
+    },
+    {
+      "id": "canopen-python__canopen-613-declared-tests",
+      "domain": "software-engineering",
+      "origin": "upstream_issue",
+      "repository": "https://github.com/canopen-python/canopen",
+      "revision": "593f0621f41ce3f94c09322ca8414c7e649b128e",
+      "public_archive": {
+        "path": ".aeep/repository-usefulness-pilot-20261029/public/acb9bf4e8eab94b3b5a7554ab6f913086eb2c5d714a57350b60ce708f37b2a90.tar.gz",
+        "sha256": "acb9bf4e8eab94b3b5a7554ab6f913086eb2c5d714a57350b60ce708f37b2a90",
+        "bytes": 104376
+      },
+      "task_input_digest": "abadc2b1f40b3fa8729e042ff313d1aecb52dc96ba4eef672f68155447d566b7",
+      "rights_record": {
+        "path": "reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/cohort.json",
+        "sha256": "d13109f2a80d73105698d0254226ef35053c48e1aa4ae7fd36c95c1f530ba3ea"
+      },
+      "protected_grader": {
+        "image": "sha256:9f473c493b7af1854922807d2acbdcbe3b955313dc57f203e6f73c9c50f9ea85",
+        "historical_recipe": {
+          "path": "reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/recipe.json",
+          "sha256": "1a458664217bd60a8bf6a60d6d2a16ad37bc15d601407e95f0367048d0665b28"
+        },
+        "binding": "0c68f5852a63c5624bbcfb45322fff24460627e506825318ac49e581a584a57a",
+        "reference_digest": "abee6999dfca5f9f1f2c3c557380d710dc36680a9fed7471985c6ea8d2d2f942",
+        "required_test_identities": 8
+      }
+    },
+    {
+      "id": "tefra__xsdata-1126-issue-behavior-audit",
+      "domain": "software-engineering",
+      "origin": "authored_control",
+      "repository": "https://github.com/tefra/xsdata",
+      "revision": "b6bd7e912ee346a0f5471543db31e2d6aa8a9809",
+      "public_archive": {
+        "path": ".aeep/repository-usefulness-pilot-20261029/public/cc7d9d8712746971b216188420716736881390e626bf40cce9c173060559d428.tar.gz",
+        "sha256": "cc7d9d8712746971b216188420716736881390e626bf40cce9c173060559d428",
+        "bytes": 328513
+      },
+      "task_input_digest": "4c523dba61f43556970959b251423edc3b33fcc85619141ee80b8c846a50b4eb",
+      "rights_record": {
+        "path": "reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/cohort.json",
+        "sha256": "d13109f2a80d73105698d0254226ef35053c48e1aa4ae7fd36c95c1f530ba3ea"
+      },
+      "protected_grader": {
+        "image": "sha256:9f473c493b7af1854922807d2acbdcbe3b955313dc57f203e6f73c9c50f9ea85",
+        "historical_recipe": {
+          "path": "reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/recipe.json",
+          "sha256": "1a458664217bd60a8bf6a60d6d2a16ad37bc15d601407e95f0367048d0665b28"
+        },
+        "binding": "1dbdba710843211348834e15335ea5252ee5300add41f3888dc706c1d38607ad",
+        "reference_digest": "dda9fbec3e4632029b043296bbd69e07ccf70e1716e3605ed0ccbea26ced8fbb",
+        "required_test_identities": 29
+      }
+    }
+  ],
+  "disclosure": "Only bound public instructions, archives and the cleared optional candidate instructions used by managed GPT-6.1 Sol through the existing Codex proxy. The private installed Spreadsheets runtime remains local. License terms are unasserted in its runtime package metadata. Approval covers private operator evaluation in the existing environment.",
+  "remaining_pre_dispatch_checks": [
+    "Revalidate the files and frozen source. Register the 37 independently revalidated checks under the clean source fingerprint using the exact copied-ledger binding. Preserve the prior completion.",
+    "Apply the exact expiry-only amendment; preserve both outstanding older reservations and all counters.",
+    "Start only the retained proxy. Before any model turn, complete fresh authenticated probes for all four task bindings, match GPT-6.1 Sol medium, and verify collector denial and cleanup."
+  ],
+  "report_scope": "Protected task scores, all verified raw token fields, paired differences and timings, operation ledgers, and evidence gaps. Four exposed development tasks. No formal qualification or selection claim.",
+  "stop_conditions": [
+    "Any source, image, task, grader, model, destination, permission, inventory, budget or authority drift.",
+    "Any denied isolation probe, unavailable exact model, unsettled relevant attempt, or inadequate disk reserve.",
+    "Any indeterminate trial, missing required grade or token-capture evidence, accounting mismatch or uncertain cleanup. Retain successful settlement and genuine zero-score task outcomes. Reconcile an incomplete run read-only."
+  ],
+  "pins": {
+    "/Applications/Docker.app/Contents/Resources/bin/docker": "8be48df662c5ced38738e7e5dd7f82611a55565f165787cfecebbe416b321b50",
+    "/Users/edwintse/Documents/aeep-agent-router/.aeep/live-review-v3/aeep.json": "091209e86a89894f5237b00021aa833117a0493d5067d1aa3091843a3ff0becb",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/acb9bf4e8eab94b3b5a7554ab6f913086eb2c5d714a57350b60ce708f37b2a90.tar.gz": "acb9bf4e8eab94b3b5a7554ab6f913086eb2c5d714a57350b60ce708f37b2a90",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/repository-usefulness-pilot-20261029/public/cc7d9d8712746971b216188420716736881390e626bf40cce9c173060559d428.tar.gz": "cc7d9d8712746971b216188420716736881390e626bf40cce9c173060559d428",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-contained-graders-20261105/buildx-docker-config/config.json": "042bab2aad8ab69bf7226ceb4a443f004311772de877d384db420c4da223f9bd",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/candidate-granular-verification/document_data-treatment.json": "4e41b4ea8e394667414facf0f5e9a81fb545fcd129681740171933931a0a1625",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/dispatch-gate-verification.json": "2a70275ff2731c20dc87525933653d57539e9e7da3472c2b351b2693910df943",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/expiry-only-renewal-audit.json": "4fbd59633ed27269fb3724bb0aa9b1cfff2149d720e4b6a7de41310a32c1653c",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/expiry-only-renewal.json": "9b6b63d4b98cf650adac0fb222fad4ed66f6bbe6f94921bf69a6fa36c38f1c10",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/grader-receipts/sol-comparison-20261116-grader-canopen-python__canopen-613-declared-tests-pass-reference.json": "21721ae28385f571672ac1897d4902bb0bfa05c2dc2539964d90ef04d17437bc",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/grader-receipts/sol-comparison-20261116-grader-canopen-python__canopen-613-declared-tests-reject-fault-0.json": "44faca8ac9795ddb7fceb8842928a6f2a4d4ae2239d99acae2ae48646b9b6690",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/grader-receipts/sol-comparison-20261116-grader-exceltable-in-ppt-pass-reference.json": "4eb9084deda4cf2f2bda98e50d7b8d2825fdb27fe89fa4db38275316343778cb",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/grader-receipts/sol-comparison-20261116-grader-exceltable-in-ppt-reference.json": "e67ebd28a0011cb20f48c6d9c7b0fca77563494f671a01e955ce847804c95068",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/grader-receipts/sol-comparison-20261116-grader-exceltable-in-ppt-reject-fault-0.json": "c2540efddd45603738cd97c269d9b2f116803d270a8a8b476d85eaa306753a33",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/grader-receipts/sol-comparison-20261116-grader-exceltable-in-ppt-reject-missing.json": "ed8c199c5a4b747dadd0bd9c0cf772391e9811b8ec65da9963dd1c3cfe082271",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/grader-receipts/sol-comparison-20261116-grader-sales-pivot-analysis-pass-reference.json": "676e86db41d2a789ca5ce24c030c9866230a80b7250547919cd61e306b5b2bac",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/grader-receipts/sol-comparison-20261116-grader-sales-pivot-analysis-reference.json": "7c1ce6594841c4b474272bd7d315590b013323190c5b51213d653210864100c6",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/grader-receipts/sol-comparison-20261116-grader-sales-pivot-analysis-reject-fault-0.json": "99fecfed3fa8d8b6166a70df5d654b025dde65504b668d64e15afca3ef5d47e3",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/grader-receipts/sol-comparison-20261116-grader-sales-pivot-analysis-reject-missing.json": "de5b94d94e55f629a663d71d9d1dfdeab772ae212e676e46649c8a553de924bc",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/grader-receipts/sol-comparison-20261116-grader-tefra__xsdata-1126-issue-behavior-audit-pass-reference.json": "facca545d5eccd042ff2a7d5e5fb814b8932248c2c1c4069c629973b75d86e74",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/grader-receipts/sol-comparison-20261116-grader-tefra__xsdata-1126-issue-behavior-audit-reject-fault-0.json": "a86aafd7bdcad2ba3d3497cb00795ca300958f668a5899844f5dc0808eff144d",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/protected-grader-verification.json": "e46318cf56e92eec1a10fb7ef082c1fb5ce1929caba7e3f0cf6e7b64fe3203c7",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/source-stack-rebinding.json": "e0ded993e87dabf9f6dc5f1c820321a9d07ca17f12429fa0281e2cafa2a087f1",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/verified-image-bindings.json": "6e0d68300f9c2d285368ab575ba6ebc00ea5344ea753ca551ab3e1b5e4d266f9",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/verified-worker-observations/document_data-control.json": "e6771c63249164f556aa59d220d4d84a626dca724d6db4e3689d5cf8adadf532",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/verified-worker-observations/software_engineering-control.json": "13ab876831bca0639e0279ed35e158caaf772da6f0b20aa7b9708ef93d4f4244",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/verified-worker-observations/software_engineering-treatment.json": "3f0386242bbb2668872ef1f86bb124c72c33e1d6863917c36c08f4e87737be54",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/check_dispatch.py": "311bad40aecce8fe2e718b71ae44fea1bab54b39b4cc18ca29b7de581916bdb9",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/dispatch_tasks.py": "c2863d1ba3c88b87d4e486080780ef0a1877ccd9ee1c4beb4d9fb2a0ddf14939",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/finish_worker_preflight.py": "8beae17ea61f1bafc545e8b117efc92b185c08fbdfa92aaa4cc1a5f949d44a4e",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/freeze_dispatch.py": "f990d40c4adecee5d156d903225174219231f1afb4ab306e0ca3682d14575ba4",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/freeze_study.py": "0eb379e29a022729c8141dd7b548ec2a1a993de2e693fefdb07780a6899d6dc3",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/pin_worker_policy.py": "0d61ab8894874b753d4e1b42610b20f1685cecfcb14340f218b320aff61a01bf",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/prepare_renewal.py": "c5df57d878b20f1773352200532ab6f720c0f474abaa91718cd0be136ce46174",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/prepare_runtime.py": "dd50f77628a657cbb59d5d24cbe25d5256a27b516c07877acb9e74c6262f9df7",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/rebind_source.py": "0141c5430c7ab3ac2959e2df1c682a11b28310e6712ca97ca0b8a9ffe4ca34ca",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/register_completion.py": "c620663f44dfaa6eb4b9dd37a953ad61c2487845a14dc8473fab2003c2ef1f4e",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/run_dispatch.py": "010d361f294264e5e938287acb02c4c96b143d854458e7774ca521c91a8b93f2",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/sol-comparison-design.json": "08613f4efd26fbf6ee10e6713acaf74adb7bafb8b8c721e00de8d526825ac0a6",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/verify_graders.py": "8f8b9c85379629950405c47948a1d851c5958e7d02a59b5d93bad5fdc29116ed",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/verify_workers.py": "728e80e96a90aaf6888223a34f4be3b95e1e361405fb58b2a9a4ffe57d13f07a",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/cohort.json": "d13109f2a80d73105698d0254226ef35053c48e1aa4ae7fd36c95c1f530ba3ea",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/review-budget.py": "dfaf4c305f5323db352044c183a6a42380d76ea20ea5b814bae579f1e688a4a7",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/run-collector.py": "80c877816ef304d4e53bd0d32e3e60738545978500968ccf488807b1e30ad988",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/repository-usefulness-pilot-20261029/trial-evidence.py": "4f9c342670774a4ffd62c87d5307114deec8c804c38ebfaad42e4f1a475dc0e0",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-document-rights-20261106/operation-review.json": "e257a1d6ed64ef654792ba553395d689c9124a9eb4ddc24b77cce33654186cc3",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/skillsbench-task-disclosure-20261105/operation-review.json": "7d27c9ef4d8858ddf40af4c74fa603810bb8bddd190ca8d8d189c14362b80af1"
+  },
+  "preflight": {
+    "budget_guards_passed": 7,
+    "local_dispatch_gate_verification": {
+      "missing_and_wrong_approval_rejected": true,
+      "real_pair_authorizations_followed_by_synthetic_probe_failure": 4,
+      "missing_evidence_rejections": 6,
+      "settled_zero_score_accepted": true,
+      "interrupted_reservation_visible_on_copy": true,
+      "score_token_timing_report_fixture": true,
+      "production_grant_and_reservations_unchanged": true,
+      "proxy_starts": 0,
+      "provider_requests": 0
+    },
+    "distinct_task_prompt_pairs": 4,
+    "deterministic_rebuild": true,
+    "new_external_requests": 0,
+    "dispatches": 0
+  },
+  "execution": [
+    "/usr/bin/env",
+    "PYTHONPATH=/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/sol-comparison-preflight-20261116/frozen-source/src",
+    "python3",
+    "-B",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/managed-comparison-20261115/run_dispatch.py",
+    "--execute-approved",
+    "<review-sha256>"
+  ]
+}
