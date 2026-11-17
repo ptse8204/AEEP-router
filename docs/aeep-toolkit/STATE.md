@@ -1,12 +1,20 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
-**November 17. C13 awaits operator authorization. Waza is excluded.**
-The [beta handoff](../../reports/toolkit-v2/c13/completion-20261116/README.md#november-17-handoff)
-now distinguishes verified source `f47d3042`, the older installed wheels
-and the draft ExtractBench runtime. Both required next actions passed
-read-only review checks and remain unstarted. Approve `ba9f3388` for
-the first native document calibration and `bb4a134f` for the software
-source intake. The formal cohorts, comparisons and release remain open.
+**November 17. Both approved actions ran. Waza is excluded from C13.**
+[Repository source intake](../../reports/toolkit-v2/c13/completion-20261116/repository-expansion-acquisition-result.json)
+`bb4a134f` staged 11 contract audits and two multi-file repairs from 48
+attempts. All 26 substituted payload checks passed. The prospective
+software pool reaches at most 116 of 141 cases before real grading.
+The recorded balanced profile still needs 15 audits and 15 multi-file
+repairs even if the current prospects qualify.
+
+[ExtractBench review `ba9f3388`](../../reports/toolkit-v2/c13/completion-20261116/extractbench-native-grade-continuation-preflight.json)
+retained seven newly acquired locked wheels and settled one operation.
+The metadata reader stopped at a vendored record in the Bleach wheel.
+The corrected preflight verified all 41 retained wheels. Exact continuation
+`8e1713c5` needs approval for the 29 unstarted downloads and one offline
+calibration. No real grade has run. The 37 verified stack checks retain
+their original scope. Formal comparisons and release remain open.
 
 **November 16. C13 remains open. Waza is excluded from this delivery.**
 The [current beta handoff](../../reports/toolkit-v2/c13/completion-20261116/README.md)

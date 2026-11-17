@@ -16,16 +16,18 @@ use on the reviewed macOS runtime remains LIMITED_BETA. Candidate
 usefulness and AEEP selection usefulness still need separate formal
 evidence. Production release and public benefit claims remain NO_GO.
 
-### Operator decisions needed to resume
+### Approved work and next decision
 
-| Existing review | Authorized work if approved | What it unblocks |
-| --- | --- | --- |
-| [`ba9f3388`](extractbench-native-grade-preflight.json) | Acquire 36 pinned wheels, up to 76,701,027 bytes, and run seven protected calibration roles on the retained image. Zero models and $0. | Establish the native document scorer and qualify the dependency closure before the CFPB grader build and protected reference/fault checks. |
-| [`bb4a134f`](repository-expansion-preflight.json) | Acquire 48 pinned public repository revisions and their Git metadata within the recorded byte caps. Zero models and $0. | Stage source-disjoint software cases for protected grading, rights review and formal cohort freeze. |
+[Software source intake `bb4a134f`](repository-expansion-acquisition-result.json)
+completed all 48 attempts and produced 13 staged prospects. The next
+software work addresses dependency closure, protected grading and source
+coverage. No software cohort is ready to freeze.
 
-Both exact reviews passed read-only revalidation on November 17 and remain
-unstarted. They can proceed independently. Provider disclosure, live formal
-comparisons and release retain their own approval requirements.
+[Document calibration `ba9f3388`](extractbench-native-grade-continuation-preflight.json)
+stopped during artifact verification. The corrected review `8e1713c5` needs
+specific approval for 29 unstarted pinned wheel downloads and one offline
+calibration. It retains the original charge and all 41 verified wheels.
+Zero model turns and $0 cash.
 
 ## Retained stack and lifecycle evidence
 
@@ -681,7 +683,32 @@ The [driver](check_extractbench_native_grade.py) caps the two operations
 at 755 reserved seconds with zero model turns and $0. The rehearsal
 verified the installer arguments, score guards, and accounting for
 success, missing approval, acquisition failure and uncertain cleanup.
-Exact approval `ba9f3388` is pending. No download or native grade ran.
+Exact review `ba9f3388` retained seven new wheels and stopped before
+the grader launched. The metadata reader counted a vendored HTML5lib
+record inside the Bleach wheel as a second distribution. The original
+operation settled in 0.330 seconds. The [continuation preflight](extractbench-native-grade-continuation-preflight.json)
+verifies all 41 retained wheels and records the 29 unstarted URLs,
+74,481,611 exact bytes and one protected offline grader call. The
+[corrected driver](continue_extractbench_native_grade.py) passed six
+wheel rejection checks, four substituted accounting scenarios and an
+exact-review drift check. Review `8e1713c5` needs authorization.
+
+[Repository source intake `bb4a134f`](repository-expansion-acquisition-result.json)
+finished all 48 attempts. It verified Git tree and license bindings for
+11 authored audits and two multi-file repairs. All 26 substituted callback
+checks passed. The other 35 attempts remain outside the pool. Twenty-nine
+lack a retained archive, and the old driver preserves only their failure
+class. Four retained archives are readable without a verified publisher
+match. Two passed the Git inventory and then failed transport staging.
+AiiDA's archive contains 15 non-regular entries under its tests. Removing
+the root `AGENTS.md` from an inert OpenAI Agents projection preserved both
+edit paths and all 24 identities. No upstream tests ran in the intake or
+the follow-up audit.
+
+If every current software prospect qualifies, the 116 possible cases
+still fall at least 25 short of the 141 required. The stated balanced
+8/28/105 profile still needs 15 audits and 15 multi-file repairs. Retain
+the prior source groups and protected grader requirements.
 
 SpreadsheetBench 2's revised paper reports 297 cell-graded tasks and
 24 visualization tasks. The publisher's archive history lists a June

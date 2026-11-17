@@ -1,5 +1,16 @@
 # 0.8 plan coverage and remaining work
 
+[C13 software acquisition](../toolkit-v2/c13/completion-20261116/repository-expansion-acquisition-result.json)
+settled all 48 attempts and staged 13 native grader inputs. The 26
+substituted callback checks verified transport shape. The provisional
+software pool is still short by at least 25 of 141 cases before grading.
+
+[ExtractBench calibration](../toolkit-v2/c13/completion-20261116/extractbench-native-grade-continuation-preflight.json)
+stopped during acquisition on nested Bleach metadata. All 41 retained wheels
+passed the corrected preflight. Exact review `8e1713c5` covers the remaining
+29 downloads and one offline grade. The 37 Waza-excluded stack checks stay
+verified at their recorded source. Formal comparisons and release remain open.
+
 The [Formula Extraction acquisition](../toolkit-v2/c13/completion-20261116/formula-runtime-acquisition-result.json)
 passed approved review `bedcde5c`. Both archives are digest-bound.
 The [protected result](../toolkit-v2/c13/completion-20261116/protected-reference-group-result.json)
