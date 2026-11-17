@@ -1,0 +1,195 @@
+{
+  "authorization_changed": false,
+  "case_counts": {
+    "holdout": 105,
+    "qualification": 8,
+    "training": 28
+  },
+  "comparative_dispatch_approved": false,
+  "current_python_3_13_case_capacity": {
+    "balanced_profiles_using_only_pending_batch": [],
+    "balanced_profiles_with_one_more_multifile_case": [
+      {
+        "contract-audit": 26,
+        "multi-file-repair": 18
+      }
+    ],
+    "case_pool_sha256": "36b88e1a218b9ceee69bfac8fcf0a402c07ba27eb94f6e9590afe8ceacd76b1e",
+    "pending_source_counts": {
+      "contract-audit": 31,
+      "multi-file-repair": 17
+    },
+    "python_3_13_exclusions": {
+      "microsoft__fabric-cicd-394": {
+        "family": "single-file-repair",
+        "requirement": ">=3.9,<3.13"
+      },
+      "microsoft__fabric-cicd-465": {
+        "family": "multi-file-repair",
+        "requirement": ">=3.9,<3.13"
+      },
+      "microsoft__fabric-cicd-670": {
+        "family": "multi-file-repair",
+        "requirement": ">=3.9,<3.13"
+      }
+    },
+    "retained_counts_outside_known_runtime_exclusions": {
+      "contract-audit": 21,
+      "multi-file-repair": 28,
+      "single-file-repair": 53
+    },
+    "scope": "Population lower bound on the current runtime projection. Each compatible prospect still needs applicable protected evidence and source-disjoint assignment.",
+    "source_review_sha256": "bb4a134feb5af19dac075f5ed362e80f20d9b83eec132d97886ef517dd721998",
+    "staged_runtime_audit_sha256": "fa5dc5ff1f9de2810b15aa20435408bacba2b229001777b569631a251a069e48"
+  },
+  "deadline_scope": "300 and 480 seconds come from retained development definitions. Actual formal settings require independent timing and a frozen plan.",
+  "implementation_sha256": {
+    "budget.py": "6c09f330416faf41ee77ed750780a6a650b654ff4f172030302925719011b9db",
+    "comparison.py": "11e4e7ef45109868e340fc14dd0b1b2298f77cb081d25913ce09320c74b1fbc5",
+    "service.py": "644c2969e056143f2d20d7829a6ffb313f977cccac4e1e27837ac3d6cdb433e3"
+  },
+  "operational_grant_snapshot": {
+    "absolute_limits": {
+      "max_cash_usd": "0",
+      "max_elapsed_seconds": 604800.0,
+      "max_model_turns": 6000,
+      "max_operations": 50000
+    },
+    "authorization_id": "onboarding",
+    "charged_including_pending": {
+      "cash_usd": "0.0",
+      "elapsed_seconds": 129271.35325447367,
+      "model_turns": 3828,
+      "operations": 14028
+    },
+    "effective_grant_sha256": "b4e9d3dba39d77a9bd1b891894fc90ec640bdfd12609f36b0d2d53f7424cfba5",
+    "expires_at": "2026-11-23T07:27:48.408693+00:00",
+    "remaining_including_pending": {
+      "cash_usd": "0.0",
+      "elapsed_seconds": 475528.64674552635,
+      "model_turns": 2172,
+      "operations": 35972
+    },
+    "revoked": false,
+    "unresolved_reservations": [
+      {
+        "record_sha256": "f415bab7adbbf5f9681682d00404438bbc6267ce7239506cb3bc908e35bc948b",
+        "reserved": {
+          "max_cash_usd": "0",
+          "max_elapsed_seconds": 30.0,
+          "max_model_turns": 0,
+          "max_operations": 1
+        },
+        "stage": "report_generation"
+      },
+      {
+        "record_sha256": "0fe0ddeb9c835fb820cc59331f68dc2261756e8c965279369520c23dad40837d",
+        "reserved": {
+          "max_cash_usd": "0",
+          "max_elapsed_seconds": 200.0,
+          "max_model_turns": 1,
+          "max_operations": 1
+        },
+        "stage": "ui_client"
+      }
+    ]
+  },
+  "projections": {
+    "one_cohort_at_each_retained_deadline": {
+      "model_turns": 1410,
+      "model_turns_above_remaining": 0,
+      "operations": 1410,
+      "operations_above_remaining": 0,
+      "trial_reservation_seconds": 666930,
+      "trial_reservation_seconds_above_remaining": 191401.35325447365
+    },
+    "one_qualification_and_marginal_cohort": {
+      "model_turns": 705,
+      "model_turns_above_remaining": 0,
+      "operations": 705,
+      "operations_above_remaining": 0,
+      "trial_reservation_seconds": 257325,
+      "trial_reservation_seconds_above_remaining": 0
+    },
+    "two_qualification_and_marginal_cohorts_then_one_selection_example": {
+      "model_turns": 1725,
+      "model_turns_above_remaining": 0,
+      "operations": 1725,
+      "operations_above_remaining": 0,
+      "trial_reservation_seconds": 610725,
+      "trial_reservation_seconds_above_remaining": 135196.35325447365
+    },
+    "two_separate_qualification_and_marginal_cohorts": {
+      "model_turns": 1410,
+      "model_turns_above_remaining": 0,
+      "operations": 1410,
+      "operations_above_remaining": 0,
+      "trial_reservation_seconds": 514650,
+      "trial_reservation_seconds_above_remaining": 39121.35325447365
+    },
+    "two_separate_qualification_marginal_and_catalog_cohorts": {
+      "model_turns": 2538,
+      "model_turns_above_remaining": 366,
+      "operations": 2538,
+      "operations_above_remaining": 0,
+      "trial_reservation_seconds": 943290,
+      "trial_reservation_seconds_above_remaining": 467761.35325447365
+    }
+  },
+  "retained_deadlines_seconds": {
+    "development": 300,
+    "sales_followup": 480
+  },
+  "retained_design_sha256": "08613f4efd26fbf6ee10e6713acaf74adb7bafb8b8c721e00de8d526825ac0a6",
+  "sales_followup_review_sha256": "c5296bb712f504c41a268830b466d60b97c6e7f8f1d6aef150098d2ceb518f64",
+  "schema_version": "aeep.c13.formal-trial-reservation-scenarios.v1",
+  "scope": "Planning projections for one fresh worker condition, one repetition and one managed turn per route on the full schedule. Each conditional cohort has independent stage inputs.",
+  "selection_example_scope": "The three-policy count shows 105 hypothetical independent tasks and supplies no selection threshold or scope decision.",
+  "stage_examples_at_normal_development_deadline": {
+    "marginal_value": {
+      "case_count": 141,
+      "model_turns": 564,
+      "route_deadline_seconds": {
+        "candidate": 300,
+        "higher_compute": 600,
+        "ordinary": 300,
+        "reusable_tool": 300
+      },
+      "trial_operations": 564,
+      "trial_reservation_seconds": 214320
+    },
+    "native_catalog": {
+      "case_count": 141,
+      "model_turns": 564,
+      "route_deadline_seconds": {
+        "candidate": 300,
+        "higher_compute": 600,
+        "ordinary": 300,
+        "reusable_tool": 300
+      },
+      "trial_operations": 564,
+      "trial_reservation_seconds": 214320
+    },
+    "qualification": {
+      "case_count": 141,
+      "model_turns": 141,
+      "route_deadline_seconds": {
+        "candidate": 300
+      },
+      "trial_operations": 141,
+      "trial_reservation_seconds": 43005
+    },
+    "three_policy_selection_105_task_sizing_example": {
+      "case_count": 105,
+      "model_turns": 315,
+      "route_deadline_seconds": {
+        "aeep": 300,
+        "discovery_only": 300,
+        "fixed": 300
+      },
+      "trial_operations": 315,
+      "trial_reservation_seconds": 96075
+    }
+  },
+  "trial_reservation_scope": "Only model trial operations and their per-call reservation ceilings. The final canonical budget preview must add setup, router creation, grader validation, grading, reporting and any other reviewed costs."
+}

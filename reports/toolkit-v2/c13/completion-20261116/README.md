@@ -188,6 +188,22 @@ still require independent controlled evidence.
 
 ## Formal candidate and selection gates
 
+The [trial reservation projection](formal-reservation-capacity.json) reads
+the current grant with both historical pending reservations still charged.
+The snapshot had 2,172 turns and 475,529 seconds available. With the
+retained 300-second deadline and one fresh-worker condition, one 8/28/105
+qualification plus four-arm value cohort projects 705 trial turns and
+257,325 reserved trial seconds. Two separate cohorts would reserve 514,650
+trial seconds, 39,121 above the snapshot balance. Adding the catalog
+stage for each would also exceed the turn balance by 366.
+
+These projections use one candidate per cohort and the required higher-
+compute deadline at twice the ordinary deadline. The frozen dispatch plan
+still needs independent cases, measured deadlines and the canonical budget
+preview for setup, graders and reporting. Preserve all former charges and
+select a finite amendment only when that exact plan needs one.
+[Audit command](audit_formal_reservation_capacity.py)
+
 The [formal-input audit](formal-input-audit.json) verified 135 exact retained
 asset bindings across 41 provisional Python repository cases from 20
 repositories. The audited rows contain 18 single-file repairs, 15 multi-file
@@ -397,6 +413,15 @@ holdout. With two multi-file failures, the 48-source review alone
 cannot fill the plan. Twenty-five distinct multi-file leads remain
 outside the review. The audit replay matched byte for byte. No case
 was assigned, downloaded or run.
+
+The [current carrier projection](formal-reservation-capacity.json)
+excludes all three Fabric CI/CD cases that declare Python below 3.13.
+Two are multi-file repairs. That leaves 28 staged multi-file prospects.
+The pending batch adds at most 17, and the balanced schedule needs
+at least 46 across the three stages. With the current carrier, add
+at least one multi-file case or verify an applicable runtime for one
+of the excluded multi-file sources. Actual protected acceptance and
+stage assignment remain open.
 
 The [staged grader audit](staged-repository-grader-bindings.json) exercised
 the ordinary callback on 64 additional source-bound cases with substituted

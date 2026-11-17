@@ -264,6 +264,15 @@ SkillsBench integration journeys. The ledger supports trial planning for
 these serial paths. Whole-host memory, energy and concurrency remain
 unmeasured. Resource acceptance stays open.
 
+The [trial reservation projection](../toolkit-v2/c13/completion-20261116/formal-reservation-capacity.json)
+checks full stage counts against the current grant. The projected trial
+reservations for two separate qualification and value cohorts at the
+retained development deadline exceed the time balance. Exact formal
+plans and their canonical budget previews remain open.
+Excluding three cases whose Python metadata conflicts with the retained
+3.13 carrier leaves the acquisition batch at least one multi-file case
+short of the balanced projection.
+
 The [current C13 beta handoff](../toolkit-v2/c13/completion-20261116/README.md)
 revalidates 37 in-scope stack checks with Waza excluded. The macOS private wheel
 installed and produced fixture reports. The fresh rollback passed and

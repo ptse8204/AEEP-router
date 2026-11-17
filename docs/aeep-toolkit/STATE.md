@@ -406,6 +406,16 @@ The longest document and software commands were 161.398 and 270.842 seconds.
 Suggested review windows for the reviewed serial paths are five and seven
 minutes. The audit changed no limits and left resource acceptance open.
 
+The [trial reservation projection](../../reports/toolkit-v2/c13/completion-20261116/formal-reservation-capacity.json)
+verified 2,172 turns and 475,529 seconds remaining with both pending
+reservations still charged. Two separate 8/28/105 qualification and
+four-arm value cohorts at the retained 300-second deadline project
+514,650 trial seconds before setup, grading and reporting. Freeze the
+actual cohort and timing before reviewing any allowance amendment.
+The current Python 3.13 profile also excludes three Fabric CI/CD cases,
+including two multi-file repairs. The 48-source batch then leaves a
+minimum one-case gap in multi-file coverage.
+
 The formal-input audit verifies 41 provisional cases and 135 asset bindings.
 It identifies 63 additional cached candidates with matched acquisition and
 license records. No stages are frozen and at least 100 case rows are missing
