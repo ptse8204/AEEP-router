@@ -164,6 +164,18 @@ rejection. Both cases need protected runtime validation on the new
 bindings. The common profile now covers 41 provisional rows, with a
 minimum shortfall of 100 before independence and adoption.
 
+The [retained grader audit](retained-grader-evidence.json) reconstructed
+the current callback payloads and verified 120 settled historical
+observations for 39 of these 41 prospective cases. Each reference passed
+and all 39 current fault artifacts map to observed protected rejections.
+The audit matched the exact action digests, terminal journals, cleanup
+evidence and original image references in the read-only ledgers.
+Dissect.cstruct 120 and Mockito 93 still need contained verification on
+their current payloads. The audit records the original runtime for
+each observation. A shared current runtime and formal cohort assignment
+still need verification.
+[Reconciliation script](reconcile_repository_grader_evidence.py)
+
 The cached queue contains 63 potential inputs with matching source archive
 hashes and prior license records, 57 without complete matched records and 12
 carrying prior exact-source exclusions. The 63 still require task-specific asset

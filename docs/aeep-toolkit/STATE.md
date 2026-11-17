@@ -32,6 +32,14 @@ worker were different, so it remains a separate observation. The outer
 proxy operation missing from that control's report snapshot is now settled
 in the canonical ledger. No model turn or stage assignment was needed.
 
+The [retained repository-grade audit](../../reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json)
+reconciled 120 protected observations for 39 of the first 41 prospective
+cases, including each of those 39 cases' current fault artifacts. It
+matched the current callback inputs, original container receipts,
+terminal attempts, and settled ledger operations. Dissect.cstruct 120
+and Mockito 93 still need contained grading for their current payloads.
+No new task ran and no case entered a formal stage.
+
 The [Formula Extraction acquisition](../../reports/toolkit-v2/c13/completion-20261116/formula-runtime-acquisition-result.json)
 passed approved review `bedcde5c`. Both exact artifacts verified at
 160,981,322 bytes total. The [protected result](../../reports/toolkit-v2/c13/completion-20261116/protected-reference-group-result.json)

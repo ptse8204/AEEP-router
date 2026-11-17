@@ -63,6 +63,12 @@ The two engine checks share the prompt and worker. The ordinary control
 differs on both. The accounting audit recovered the settled outer proxy
 operation for the ordinary campaign. Formal value evidence remains open.
 
+The [retained repository-grade audit](../toolkit-v2/c13/completion-20261116/retained-grader-evidence.json)
+linked 120 protected observations across 39 prospective cases to their
+current payloads and settled historical receipts. Both changed
+transport bindings still need contained verification. Formal stage
+assignment and current shared runtime conformance remain open.
+
 The [SkillsBench workbook screening](../toolkit-v2/c13/completion-20261116/workbook-grader-screening.json)
 verified 14 pinned assets and found two verifiers with gaps that allow wrong
 answers. A third case still needs source rights and offline recalculation
