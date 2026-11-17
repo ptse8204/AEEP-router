@@ -1,5 +1,15 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. Execution is blocked on approval and usable host space.**
+The [continuation audit](../../reports/toolkit-v2/c13/completion-20261116/continuation-blocker-audit-20261117.json)
+confirms that both exact correction scopes are unstarted and unapproved.
+They remain within their review windows. Host free space is about
+49.4 GiB, below the 50 GiB reserve and their 52 GiB launch floor.
+Read-only source binding, receipt recovery and driver preparation are
+complete for this increment. Resume with approval of `3376c129` and
+at least 52 GiB usable space, then recheck pins and run both scopes.
+The goal retains its full scope, Waza is excluded and comparisons stay paused.
+
 **November 17. Publisher proofs now bind the staged ordinary grader inputs.**
 The [projection bindings](../../reports/toolkit-v2/c13/completion-20261116/verified-publisher-projection-bindings.json)
 connect all five source proofs to their staged public inputs, protected

@@ -1,5 +1,10 @@
 # 0.8 plan coverage and remaining work
 
+The [continuation audit](../toolkit-v2/c13/completion-20261116/continuation-blocker-audit-20261117.json)
+records the pending exact correction authority and measured storage shortage.
+Both scopes remain unstarted. Their launch needs approval of `3376c129`
+and 52 GiB usable free space. Formal usefulness and release gates stay open.
+
 The [publisher projection bindings](../toolkit-v2/c13/completion-20261116/verified-publisher-projection-bindings.json)
 join five actual source proofs to unchanged task and grader payload hashes,
 including 129 protected identities. Two replays matched. Twenty altered
