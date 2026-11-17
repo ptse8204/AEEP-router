@@ -24,6 +24,14 @@ focused tests passed. The [native lifecycle review `788373dc`](../../reports/too
 is unstarted and requires exact repeat approval. Linux preparation remains
 an inert preview.
 
+The [evaluator head-to-head audit](../../reports/toolkit-v2/c13/completion-20261116/evaluator-head-to-head.json)
+reopened three real Markdownify receipts. Agent-skill-eval and the managed
+engine both scored 1/1 on the same prompt, worker and protected grader.
+The earlier ordinary Codex control also passed the same task. Its prompt and
+worker were different, so it remains a separate observation. The outer
+proxy operation missing from that control's report snapshot is now settled
+in the canonical ledger. No model turn or stage assignment was needed.
+
 The [Formula Extraction acquisition](../../reports/toolkit-v2/c13/completion-20261116/formula-runtime-acquisition-result.json)
 passed approved review `bedcde5c`. Both exact artifacts verified at
 160,981,322 bytes total. The [protected result](../../reports/toolkit-v2/c13/completion-20261116/protected-reference-group-result.json)

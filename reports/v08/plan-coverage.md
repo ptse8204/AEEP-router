@@ -56,6 +56,13 @@ now verifies both platform package closures and the real sandboxed native
 install-plan. The source CLI reproduced both retained report hashes. The
 current wheel's native install and rollback await review `788373dc`.
 
+The [evaluator head-to-head audit](../toolkit-v2/c13/completion-20261116/evaluator-head-to-head.json)
+reopened canonical receipts for two matched Markdownify engine checks
+and the earlier ordinary Codex control. All three grades were 1/1.
+The two engine checks share the prompt and worker. The ordinary control
+differs on both. The accounting audit recovered the settled outer proxy
+operation for the ordinary campaign. Formal value evidence remains open.
+
 The [SkillsBench workbook screening](../toolkit-v2/c13/completion-20261116/workbook-grader-screening.json)
 verified 14 pinned assets and found two verifiers with gaps that allow wrong
 answers. A third case still needs source rights and offline recalculation

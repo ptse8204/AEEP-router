@@ -113,6 +113,35 @@ Managed worker allocations, shared-layer usage, retained evidence and caches
 are outside the measured totals. Maintainer time and production resource
 capacity remain unmeasured.
 
+## Evaluator head-to-head
+
+The [ledger audit](evaluator-head-to-head.json) reopens three settled runs
+of Markdownify issue 200. Agent-skill-eval 0.7.0 and the managed engine
+share the task, actual model, worker, prompt, candidate, advertised
+inventory and protected grader. Their saved environment definitions
+differ only by ID. The recipe and case IDs preserve the original
+label adaptations. The older ordinary Codex control uses the same task
+inputs and protected validator with a different prompt, worker and inventory.
+
+| Retained run | Protected score | Reported input + output tokens | Agent seconds | Grading seconds |
+| --- | --- | --- | --- | --- |
+| agent-skill-eval with controlled Codex | 1/1 | 130,353 | 49.341 | 2.091 |
+| Managed engine with controlled Codex | 1/1 | 192,179 | 63.996 | 2.037 |
+| Earlier ordinary Codex control | 1/1 | 140,796 | 38.207 | 2.088 |
+
+The agent-skill-eval scheduler has 2.126 seconds of separate exclusive
+overhead in the ledger. Each row retains its provider token categories.
+Cached input and reasoning sit within their respective reported totals.
+Provider cash is unavailable. The ordinary control's report snapshot
+predates the end of its outer proxy operation. The audit found that
+operation settled under the same reservation and retained the original
+report. The parent interval covers the entire original campaign.
+
+The two matched engine runs provide a one-task engineering comparison.
+The older ordinary control remains descriptive. The whole repository
+family remains excluded from formal stages. Candidate and policy benefits
+still require independent controlled evidence.
+
 ## Formal candidate and selection gates
 
 The [formal-input audit](formal-input-audit.json) verified 135 exact retained
