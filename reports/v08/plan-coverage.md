@@ -1,5 +1,14 @@
 # 0.8 plan coverage and remaining work
 
+The [approved offline group](../toolkit-v2/c13/completion-20261116/offline-group-result-20261117.json)
+settled 11 operations in 35.333 seconds. Three software pairs passed their
+reference/original contracts. Two software cases and ExtractBench still
+need corrections. The [MontePy inverse export](../toolkit-v2/c13/completion-20261116/montepy-export-binding.json)
+completes source binding for the fifth retained archive with no new requests.
+All five source projections still need protected runtime grading. Rehearsed
+correction reviews are prepared, with actual execution gated on 52 GiB free.
+Formal comparisons, formal assignment and release remain open.
+
 The [pretrial attribution](../toolkit-v2/c13/completion-20261116/skillsbench-pretrial-attribution.json)
 verifies 48 settled grader operations across the six SkillsBench runs.
 Pretrial validation accounts for 109.607 seconds in React's canonical span,

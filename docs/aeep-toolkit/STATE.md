@@ -1,5 +1,28 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. Approved group `6b758e65` has completed.**
+The [group result](../../reports/toolkit-v2/c13/completion-20261116/offline-group-result-20261117.json)
+reconciles 11 settled operations, 35.333 seconds, and zero outstanding
+reservations. Sentry, Hugging Face Hub and py3status have complete protected
+reference/original pairs. Py-fsrs's original failure remains unverified.
+Files-to-prompt needs compatible Click because its tests use an argument
+removed in 8.2. Its original control was skipped after reference failure.
+
+ExtractBench acquired all 29 wheels and installed all 70 pinned dependencies.
+All seven native verifier roles returned infrastructure errors. Its observer
+discarded stderr, leaving the actual exception unknown. A one-reference
+diagnostic is prepared. The [MontePy export proof](../../reports/toolkit-v2/c13/completion-20261116/montepy-export-binding.json)
+reproduces the publisher tree after reversing the declared version
+substitution for hashing. With the four direct reconciliations, all five
+retained archives have source bindings. Protected grading is still open.
+
+The [next grouped review `3376c129`](../../reports/toolkit-v2/c13/completion-20261116/offline-correction-reviews-20261117.json)
+covers the reference diagnostic and software corrections. Their first-party driver rehearsals preserve uncertain
+reservations and reject terminal replay. Actual execution needs 52 GiB
+usable free space. The host fell below the 50 GiB reserve after the approved
+runs settled. Waza stays excluded, formal comparisons stay paused, and
+candidate usefulness, selection usefulness and release remain open.
+
 **November 17. Settled grader charges explain the React pretrial delay.**
 The [pretrial attribution](../../reports/toolkit-v2/c13/completion-20261116/skillsbench-pretrial-attribution.json)
 reopens 48 completed executions across six historical SkillsBench runs.

@@ -18,31 +18,49 @@ evidence. Production release and public benefit claims remain NO_GO.
 
 ### Approved work and next decision
 
-[Software source intake `bb4a134f`](repository-expansion-acquisition-result.json)
-completed all 48 attempts and produced 13 staged prospects. The next
-software work addresses dependency closure, protected grading and source
-coverage. No software cohort is ready to freeze.
+The [approved group result](offline-group-result-20261117.json) records all
+four scopes in `6b758e65`. Eleven operations settled in 35.333 seconds
+against 1,069 reserved seconds. No unresolved reservations or missing grade
+exports remain. One software control was skipped after its reference failed.
 
-[Document calibration `ba9f3388`](extractbench-native-grade-continuation-preflight.json)
-stopped during artifact verification. The corrected review `8e1713c5` needs
-specific approval for 29 unstarted pinned wheel downloads and one offline
-calibration. It retains the original charge and all 41 verified wheels.
-Zero model turns and $0 cash.
+The [software results](group-software-results-20261117.json) contain three
+complete protected reference/original pairs. These checks validate the grader
+on published repairs and originals. Candidate usefulness, selection usefulness
+and formal case adoption remain open.
 
-The [offline evidence group `6b758e65`](offline-evidence-reviews.json) binds
-the four pending scopes so the operator can approve them together. The two
-software grader reviews replayed unchanged. They cover five cases already
-staged in the provisional pool. Their real reference and original-source
-grades are still pending. All reviews retain independent stop rules.
+| Software case | Reference | Original | Remaining issue |
+| --- | --- | --- | --- |
+| py3status | 1/1, two tests passed | 0/1, one test failed | Formal assignment remains open |
+| Sentry | 1/1, 41 tests passed | 0/1, one test failed | Formal assignment remains open |
+| Hugging Face Hub | 1/1, 21 tests passed | 0/1, two tests failed | Formal assignment remains open |
+| py-fsrs | 1/1, 34 tests passed | Unverified contract | Original failure dispositions were discarded |
+| Files-to-prompt | Unverified contract | Skipped | Click 8.3 removed the constructor argument used by the tests |
 
-The [group readback](offline-group-readback-verification.json) checks
-each review's ledger and exports without dispatch. It distinguishes an
-unsettled reservation from a settled charge with no matching grade export.
-The earlier interrupted ExtractBench acquisition still shows 0.330
-settled seconds and no grade. Local fixture checks reject altered receipt
-files, omitted calibration roles and truncated staged exports. The
-publisher conclusions still use their dedicated source-projection audit.
-All four grouped scopes remain unstarted.
+ExtractBench acquired all 29 remaining wheels and installed the complete
+70-wheel closure in its private offline container. The seven verifier roles
+exited with infrastructure errors and unavailable scores. The old observer
+discarded child stderr, so the actual exception remains unknown. The prepared
+reference diagnostic retains its exception class, import name and bounded
+source frames while withholding messages and document contents.
+
+The [publisher reconciliation](offline-group-result-20261117.json) verifies
+four retained archive trees directly. The [MontePy export check](montepy-export-binding.json)
+accounts for Git's declared version substitution and reproduces the fifth
+publisher tree exactly. Its original mismatch stays recorded. Both local
+replays matched byte for byte. Protected runtime grading remains open for
+all five source projections.
+
+The [next grouped review `3376c129`](offline-correction-reviews-20261117.json) covers one ExtractBench reference diagnostic,
+py-fsrs's original failure capture, and Files-to-prompt with an exact
+compatible Click artifact. Their drivers exercise settlement, interrupted
+attempts and terminal replay rejection with first-party replies. Actual
+execution requires 52 GiB usable free space. Waza is excluded, and formal
+comparisons remain paused.
+
+The [group readback](offline-group-readback-verification.json) retains the
+earlier recovery fixtures and interrupted acquisition. Its latest actual
+readback is bound in the approved result above. Every historical charge
+and original outcome remains available.
 
 The [source recovery driver](check_expansion_tree_recovery.py) binds five
 retained archives. Three contain Git submodule declarations. The exact
