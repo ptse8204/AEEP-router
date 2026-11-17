@@ -100,6 +100,11 @@ oracle and five submitted artifacts privately. Seven substituted verifier
 responses preserved native scores and distinguished grader errors from
 task outcomes. The actual dependency closure and native grade remain open.
 
+The [ExtractBench execution review](../toolkit-v2/c13/completion-20261116/extractbench-native-grade-preflight.json)
+binds the published lock, protected grader mount and all seven roles.
+It reuses 34 cached wheels and scopes the remaining 36 downloads to
+76.70 MB. Both acquisition and offline grading remain unstarted.
+
 The [selected-trial preflight](../toolkit-v2/c13/completion-20261116/selection-trial-preflight.json)
 used the real Router, ordinary BenchmarkRunner and a first-party protected
 callback. It links the pre-task selection through the pinned execution

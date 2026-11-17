@@ -123,6 +123,19 @@ def prepared():
     return record, manifest, entries
 
 
+def verify_staged(manifest, files):
+    expected_dirs = {parent.as_posix() for name in files for parent in PurePosixPath(name).parents} - {"."}
+    tree = list(STAGED.rglob("*"))
+    actual_dirs = {path.relative_to(STAGED).as_posix() for path in tree if path.is_dir()}
+    actual_files = {path.relative_to(STAGED).as_posix() for path in tree if path.is_file()}
+    if (
+        STAGED.is_symlink() or any(path.is_symlink() for path in tree)
+        or actual_dirs != expected_dirs or actual_files != set(files) or len(tree) != len(actual_dirs) + len(actual_files)
+        or any(read(STAGED / name, manifest[name]["sha256"]) != value for name, value in files.items())
+    ):
+        raise ValueError("protected mount changed or contains unexpected files")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     action = parser.add_mutually_exclusive_group(required=True)
@@ -141,16 +154,7 @@ def main():
         with (ROOT / "protected-runtime-input-manifest.json").open("x") as stream:
             json.dump(manifest, stream, sort_keys=True, indent=2)
             stream.write("\n")
-    expected_dirs = {parent.as_posix() for name in files for parent in PurePosixPath(name).parents} - {"."}
-    tree = list(STAGED.rglob("*"))
-    actual_dirs = {path.relative_to(STAGED).as_posix() for path in tree if path.is_dir()}
-    actual_files = {path.relative_to(STAGED).as_posix() for path in tree if path.is_file()}
-    if (
-        STAGED.is_symlink() or any(path.is_symlink() for path in tree)
-        or actual_dirs != expected_dirs or actual_files != set(files) or len(tree) != len(actual_dirs) + len(actual_files)
-        or any(read(STAGED / name, manifest[name]["sha256"]) != value for name, value in files.items())
-    ):
-        raise ValueError("protected mount changed or contains unexpected files")
+    verify_staged(manifest, files)
     print(json.dumps(record, sort_keys=True, indent=2))
 
 

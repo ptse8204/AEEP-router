@@ -547,6 +547,18 @@ observer checks passed. Acquisition of the 36 remaining pinned wheels
 and offline verification with the actual scorer remain open.
 [Staging command](stage_extractbench_protected_inputs.py)
 
+The [execution review](extractbench-native-grade-preflight.json) binds
+the entire locked wheel set, the protected mount and the retained Linux
+ARM64 carrier. It allows 36 exact downloads totaling 76,701,027 bytes
+and one offline container. The guest checks all 70 installed wheel
+versions, then loads the verified fuzzysearch source fallback and runs
+the seven protected cases. Installation stays in temporary guest storage.
+The [driver](check_extractbench_native_grade.py) caps the two operations
+at 755 reserved seconds with zero model turns and $0. The rehearsal
+verified the installer arguments, score guards, and accounting for
+success, missing approval, acquisition failure and uncertain cleanup.
+Exact approval `ba9f3388` is pending. No download or native grade ran.
+
 SpreadsheetBench 2 publishes two pinned corpus archives. Its dataset
 card declares MIT and its paper names CC BY-SA 4.0 for the data. The
 cell verifier checks declared answer ranges and the documented evaluation
