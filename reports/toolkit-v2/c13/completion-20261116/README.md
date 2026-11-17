@@ -122,15 +122,34 @@ of image history sizes. The five selected Langfuse volumes added
 83.29 MB of exact daemon-reported volume data. Host allocation and
 maintenance labor remain unknown.
 
-The settled CLI wrapper charges cover exclusive wall time and process CPU
-after accounting for nested execution. These are two integration journeys.
+The [resource observations](skillsbench-resource-observations.json) reconcile
+all six completed SkillsBench commands to their original receipts and settled
+charges. The full command span ends before the final receipt write and Router
+close. The wrapper charges its exclusive wall time and process CPU after
+excluding canonical execution.
 
-| Verified workflow | Wrapper wall time | Agent wall time | Protected grading |
-| --- | --- | --- | --- |
-| Sales Pivot | 0.468 s | 146.771 s | 2.473 s |
-| Spring Boot | 0.555 s | 78.159 s | 14.003 s |
+| Integration task | CLI span | Exclusive wrapper | Agent | Protected grading |
+| --- | ---: | ---: | ---: | ---: |
+| Sales Pivot | 161.398 s | 0.468 s | 146.771 s | 2.473 s |
+| Invoice Fraud | 68.034 s | 0.564 s | 54.054 s | 1.512 s |
+| Excel-in-PowerPoint | 74.309 s | 0.574 s | 54.076 s | 3.071 s |
+| Spring Boot migration | 123.804 s | 0.555 s | 78.159 s | 14.003 s |
+| React performance debugging | 270.842 s | 0.445 s | 122.865 s | 36.718 s |
+| Prefix Cache replay | 61.574 s | 0.408 s | 40.221 s | 2.354 s |
+
+React's canonical execution span includes 110.814 seconds beyond the listed
+agent and grading intervals. The receipts leave that remainder unattributed.
+
+For serial private beta work on these pinned configurations, start with a
+five-minute review window for document/data and seven minutes for software.
+These planning estimates add 50% to the longest measured command in each
+domain and round up to a minute. Existing authorized ceilings still apply.
+Keep the earlier Sales timeout in its original study. Memory, energy,
+concurrency and provider cash remain unmeasured. Resource acceptance stays
+open independently of comparison and release.
 
 [Audit driver](audit_assembled_runtime_footprint.py) ·
+[Six-task audit driver](audit_skillsbench_resources.py) ·
 [Docker measurement definitions](https://docs.docker.com/reference/cli/docker/system/df/)
 
 The full source run with the checkout on `PYTHONPATH` passed 2,165

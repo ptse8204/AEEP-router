@@ -258,6 +258,12 @@ The settled exclusive Sales and Spring wrapper charges remain separate from
 agent and grader time. The full checkout-source coverage run passed 2,165
 tests, with 21 skips and both branch gates passing.
 
+The [six-task resource audit](../toolkit-v2/c13/completion-20261116/skillsbench-resource-observations.json)
+reconciles full command spans and exclusive wrapper charges for all six
+SkillsBench integration journeys. The ledger supports trial planning for
+these serial paths. Whole-host memory, energy and concurrency remain
+unmeasured. Resource acceptance stays open.
+
 The [current C13 beta handoff](../toolkit-v2/c13/completion-20261116/README.md)
 revalidates 37 in-scope stack checks with Waza excluded. The macOS private wheel
 installed and produced fixture reports. The fresh rollback passed and

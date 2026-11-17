@@ -399,6 +399,13 @@ reported separately. No resource changed or task ran during the audit.
 The full checkout-source regression and coverage run passed 2,165 tests
 with 21 skips and 81% combined coverage. Both branch gates passed.
 
+The [six-task resource audit](../../reports/toolkit-v2/c13/completion-20261116/skillsbench-resource-observations.json)
+reconciled the full CLI spans, exclusive wrapper charges, agent time and
+protected grading time against all six original SkillsBench receipts.
+The longest document and software commands were 161.398 and 270.842 seconds.
+Suggested review windows for the reviewed serial paths are five and seven
+minutes. The audit changed no limits and left resource acceptance open.
+
 The formal-input audit verifies 41 provisional cases and 135 asset bindings.
 It identifies 63 additional cached candidates with matched acquisition and
 license records. No stages are frozen and at least 100 case rows are missing
