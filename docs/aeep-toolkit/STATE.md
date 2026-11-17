@@ -1,5 +1,15 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. ExtractBench has two reproducible metadata intake layouts.**
+The [document cohort intake](../../reports/toolkit-v2/c13/completion-20261116/extractbench-cohort-intake-witness.json)
+keeps the Audent development family and six CFPB fixture relatives out.
+The fully separate 8/28/105 layouts leave nine metadata slots unused.
+Each holdout has six long, 40 medium and 59 short entries. A shared-early
+layout has 45 slots unused. If length defines the formal variation, the
+two holdouts need at least 53 more long entries even before early stages.
+Rights, exact assets, protected grades and formal assignment remain open.
+Exact group `6b758e65` is pending. Waza is excluded and comparisons stay paused.
+
 **November 17. OpenTelemetry has a protected monorepo import binding.**
 The [OpenTelemetry preparation](../../reports/toolkit-v2/c13/completion-20261116/opentelemetry-monorepo-preparation.json)
 preserves the public snapshot, edit path and all 18 grading identities.

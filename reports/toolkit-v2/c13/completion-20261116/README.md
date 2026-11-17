@@ -729,6 +729,23 @@ the whole pool. Each illustrative holdout has two long documents. This is
 a capacity check pending source and rights review, protected grading and
 formal assignment.
 
+The [document cohort intake](extractbench-cohort-intake-witness.json)
+also reserves the CFPB family for scorer checks. From 291 metadata slots,
+two fully separate 8/28/105 layouts each hold out six long, 40 medium and
+59 short entries. They leave nine slots unused. Losing any one of nine
+larger families would make the fully separate count unattainable from these
+records. A shared-early layout holds out seven long, 41 medium and 57 short
+entries per cohort and leaves 45 slots unused. Both layouts reproduced
+byte for byte. Their metadata keeps related cases in one stage and excludes
+the known development family.
+
+Matching length mixes across cohorts leave the formal variation rule
+open. If length defines the three formal variations, two balanced
+holdouts need 70 long entries. Only 17 long metadata slots remain before
+the early-stage counts. Permitted use, exact inputs and actual protected
+grading still need evidence. Keep the illustrative layouts outside the
+operational ledger.
+
 The [CFPB case review](extractbench-cfpb-source-review.json) verifies nine
 input files across three tasks against the upstream manifest and matches their
 PDFs to CFPB originals. Both refinance examples match all pages. The

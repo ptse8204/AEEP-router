@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+The [document cohort intake](../toolkit-v2/c13/completion-20261116/extractbench-cohort-intake-witness.json)
+builds two metadata-only 8/28/105 layouts with matching holdout lengths
+and source families kept within one stage. The fully separate layout
+leaves nine slots unused and the shared-early layout leaves 45. Source
+rights, real protected grades and a formally balanced variation design
+remain open.
+
 The [OpenTelemetry monorepo preparation](../toolkit-v2/c13/completion-20261116/opentelemetry-monorepo-preparation.json)
 binds four source roots in the protected grader inputs. The public snapshot
 and 18 grading identities stay fixed. The ordinary callback exercised both
