@@ -1,0 +1,60 @@
+{
+  "actions": [
+    {
+      "path": ".aeep/completion-20261116/verified-pytest-cleanup-20261117/result.json",
+      "sha256": "d9d985a628aec259b7dc980148107e358b2e71ab09f4fcebfa0ae7c2cb5f1157"
+    },
+    {
+      "path": ".aeep/completion-20261116/verified-pytest-cleanup-20261117/readonly-preparation-space-result.json",
+      "sha256": "43622c4bbb16e3cfdf9fe57feafc6f5da2bdb602ca232923cd6c83d1f69a872d"
+    },
+    {
+      "path": ".aeep/completion-20261116/verified-pytest-cleanup-20261117/build-headroom-result.json",
+      "sha256": "967a1dd4c696bcb8f2a9729112a92d34b0d0e51eba51d74523ccc9cc44a20fdf"
+    },
+    {
+      "path": ".aeep/completion-20261116/verified-pytest-cleanup-20261117/finish-headroom-result.json",
+      "sha256": "9014781ef8d895ce8d49bab789cf6b77288ed7b636ce42708399e2e661133d82"
+    }
+  ],
+  "actual_free_space_deltas_remain_per_action": true,
+  "allocated_GiB_removed": 4.580974578857422,
+  "allocated_bytes_removed": 4918784000,
+  "authority": "Prior user instruction: Go ahead and clean up only the verified old pytest worker database copies. Preserve my work, backups and Docker resources.",
+  "backups_removed": 0,
+  "comparisons_paused": true,
+  "completed_test_log": {
+    "path": ".aeep/completion-20261116/selection-measurements-20261117/pytest.log",
+    "sha256": "f4fda4fb812f07e4d8db432f5843ccfcd8fe64f4a197220d764b11a28310e5e2"
+  },
+  "docker_resources_removed": 0,
+  "files_removed": 3904,
+  "final_preservation_hashes_matched": 74,
+  "free_bytes_at_audit": 54020866048,
+  "interruption": "The build-headroom pass stopped at an open-file check after789removals. Read-only SQLite validation connections had not been explicitly closed. The continuation explicitly closes validation connections and rechecks unchanged remaining427files, within the original1.4GiB additional cap. Old result and partial accounting remain.",
+  "models": 0,
+  "preserved_primary_databases_inputs_logs": true,
+  "reviews": [
+    {
+      "path": ".aeep/completion-20261116/verified-pytest-cleanup-20261117/cleanup-review.json",
+      "sha256": "0114f2c3dae793aa71fbb8c9d7196f94623a0a625656bd57dc77281657f93bdb"
+    },
+    {
+      "path": ".aeep/completion-20261116/verified-pytest-cleanup-20261117/readonly-preparation-space-review.json",
+      "sha256": "8aebef834e396e1e2e559f0c33f252d83413550075ac38c7892ce98173ea008e"
+    },
+    {
+      "path": ".aeep/completion-20261116/verified-pytest-cleanup-20261117/build-headroom-review.json",
+      "sha256": "05f98e0447cfee36873679de283dc8eb03f2cbed4a66ae0ec16cf9ebd7e0a285"
+    },
+    {
+      "path": ".aeep/completion-20261116/verified-pytest-cleanup-20261117/finish-headroom-review.json",
+      "sha256": "9e0dcff85a7844126241382d6ff289ed5e21231b5b1b44995a28a3bf962bcdf9"
+    }
+  ],
+  "root": ".aeep/completion-20261116/selection-measurements-20261117/pytest-tmp",
+  "schema_version": "aeep.c13.verified-pytest-cleanup-result.v1",
+  "snapshot_removals": 0,
+  "source_changes": 0,
+  "waza_excluded": true
+}

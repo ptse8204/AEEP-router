@@ -1,5 +1,18 @@
 # 0.8 plan coverage and remaining work
 
+The [CFPB component result](../toolkit-v2/c13/completion-20261116/cfpb-local-component-result-20261117.json)
+verifies three perfect references and three rejected empty outputs on the
+retained self-contained grader. Actual partial F1 values and the original
+driver's incorrect zero-score assertions remain. Seven operations settled
+at 26.449 seconds, with no build/reference replay or counter reset.
+This covers one source family, zero formal cases and no managed CLI run.
+The [current-wheel repeat](../toolkit-v2/c13/completion-20261116/current-wheel-repeat-preflight-20261117.json)
+is prepared with nine driver controls and four sandbox checks. It needs
+exact approval and 52 GiB usable space. Comparisons remain paused and Waza
+is excluded. The [cleanup record](../toolkit-v2/c13/completion-20261116/verified-pytest-cleanup-result-20261117.json)
+accounts for 3,904 verified obsolete copies while preserving backups,
+Docker resources and all 74 final evidence hashes.
+
 The [actual ExtractBench calibration](../toolkit-v2/c13/completion-20261116/extractbench-native-calibration-result-20261117.json)
 passes seven conditions on one Audent task with verified read-only dependencies
 and scratch `noexec`. Its 16.026-second operation settled and cleanup passed.

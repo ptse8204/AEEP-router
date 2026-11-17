@@ -16,6 +16,47 @@ use on the reviewed macOS runtime remains LIMITED_BETA. Candidate
 usefulness and AEEP selection usefulness still need separate formal
 evidence. Production release and public benefit claims remain NO_GO.
 
+### CFPB native task-pack checks
+
+The [local component result](cfpb-local-component-result-20261117.json)
+verifies the three CFPB references and their empty-output controls using
+the retained image `aeep-extractbench:cfpb-canonical-local-20261117`
+(`sha256:c047c726a98ebeae08626ae2123280a62b026bba4469a968a47c2be2e6e17f14`).
+
+| CFPB task | Reference F1 | Empty-output F1 | Empty-output verdict |
+| --- | ---: | ---: | --- |
+| H25F | 1.000000 | 0.730769 | Rejected |
+| Filled sample | 1.000000 | 0.005556 | Rejected |
+| H25E | 1.000000 | 0.020833 | Rejected |
+
+The upstream scorer credits matching blank fields. Its perfect-match
+rule still rejects all three empty submissions. The driver incorrectly
+expected every empty output to score zero; its mismatch flags and failed
+receipt statuses remain. The [read-only audit](audit_cfpb_component_result.py)
+checks the actual certificates against the unchanged upstream rule.
+It preserves native scores and requires no verifier replay.
+
+A storage stop followed the settled build and first reference. Only the
+five unstarted roles continued, inheriting both earlier operations and
+their charges. All seven settled at 26.449 seconds against 425 reserved;
+all owned containers are absent. These are three related tasks in one
+source family, with zero formal cases adopted. Provider disclosure and
+the full managed CLI journey remain unapproved and unexecuted.
+
+The [current-wheel check](current-wheel-repeat-preflight-20261117.json)
+is prepared for wheel `d5f092a8` and 32 unchanged cached dependencies.
+Nine full-driver scenarios and four sandbox checks pass. Exact repeat
+`f47bbb55` needs approval and 52 GiB usable space before installation.
+The seven phases cover install, idempotence, source identity, candidate
+inspection, HTML/Markdown reporting and removal of only the unchanged
+new test runtime. Existing runtimes and journals remain.
+
+The [cleanup record](verified-pytest-cleanup-result-20261117.json) accounts
+for 3,904 obsolete pytest worker copies, about 4.58 GiB allocated. All
+74 final preservation hashes match. No backups or Docker resources were
+removed. Current usable space is recorded separately from allocated bytes
+removed. Waza remains excluded and comparisons stay paused.
+
 ### Approved work and next decision
 
 [Correction group `3376c129`](correction-group-3376c129-result.json) completed
@@ -63,7 +104,7 @@ operator approval and the refinement are bound in the calibration result.
 
 The [CFPB route audit](../../../../.aeep/completion-20261116/cfpb-runtime-route-audit-20261117/route-audit.json)
 confirmed that canonical recipe invocation rejects extra host roots before
-reservation. The next first local journey therefore uses a self-contained
+reservation. The completed local checks above use the self-contained
 COPY-only image of the existing dependencies and protected context. Full
 managed workflow preparation also checks provider-disclosure rights, which
 remain unapproved for these CFPB inputs.
@@ -71,7 +112,7 @@ remain unapproved for these CFPB inputs.
 Earlier cleanup authorization covered verified obsolete pytest worker
 database copies. Removing 2,688 such copies reclaimed about 3.2 GiB of
 allocated storage. All 70 preservation hashes matched, including primary
-fixture databases, inputs and logs. The reviewed launch floor is restored.
+fixture databases, inputs and logs. The reviewed launch floor was restored for that completed group.
 The [cleanup receipts](correction-group-3376c129-result.json) retain exact
 paths and measured free-space changes.
 

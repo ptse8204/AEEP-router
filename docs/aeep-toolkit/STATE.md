@@ -1,5 +1,44 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. Three CFPB reference/control pairs completed on a reusable grader image.**
+The [component result](../../reports/toolkit-v2/c13/completion-20261116/cfpb-local-component-result-20261117.json)
+records three reference scores of 1.0 and three rejected empty submissions.
+Their native value F1 scores are 0.730769, 0.005556 and 0.020833.
+The protected upstream scorer gives credit for matching blank fields;
+its existing perfect-match rule rejects every empty control. The driver's
+incorrect zero-score expectations and failed receipt flags remain recorded.
+Read-only reconciliation preserves all scores and the original thresholds.
+
+The retained image is `aeep-extractbench:cfpb-canonical-local-20261117`, ID
+`sha256:c047c726a98ebeae08626ae2123280a62b026bba4469a968a47c2be2e6e17f14`.
+It contains the same 70 dependency versions and protected context. Current
+v7 response handling preserves the real native scores. A storage stop
+followed the settled build and first reference. The five unstarted roles
+continued with the original two operations and counters inherited into
+an exclusively claimed ledger copy. All seven operations settled at
+26.449 seconds against 425 reserved, with no outstanding reservation.
+No completed build or reference was replayed. All owned containers are absent.
+
+[Cleanup evidence](../../reports/toolkit-v2/c13/completion-20261116/verified-pytest-cleanup-result-20261117.json)
+records 3,904 obsolete first-party pytest database copies removed under the
+existing user authorization, about 4.58 GiB allocated. All 74 final
+preservation hashes match. Primary databases, inputs, logs, backups and
+existing Docker resources remain. One cleanup pass stopped on its own
+unclosed validation handle; the continuation explicitly closed connections
+and rechecked the remaining files within the same cap.
+
+The [current-wheel review](../../reports/toolkit-v2/c13/completion-20261116/current-wheel-repeat-preflight-20261117.json)
+binds wheel `d5f092a8`, 32 unchanged dependencies and seven private lifecycle
+phases. Nine substituted driver scenarios and four sandbox checks pass.
+Exact repeat `f47bbb55` is pending approval and at least 52 GiB usable
+space before launch. No current-wheel installation has started.
+
+CFPB observations cover three related tasks in one source family and adopt
+zero formal cases. Managed CLI preparation still requires exact disclosure
+rights and controlled-worker evidence. The next safe action is binding the
+retained image into inert workflow definitions and preparing the grouped
+engineering review. C13 remains open. Waza is excluded and comparisons stay paused.
+
 **November 17. Real ExtractBench calibration passed with retained read-only dependencies.**
 The [native result](../../reports/toolkit-v2/c13/completion-20261116/extractbench-native-calibration-result-20261117.json)
 verifies one settled operation at 16.026 seconds and all seven Audent
