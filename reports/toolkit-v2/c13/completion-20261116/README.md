@@ -54,11 +54,13 @@ driver flags.
 
 The [current-wheel check](current-wheel-repeat-preflight-20261117.json)
 is prepared for wheel `d5f092a8` and 32 unchanged cached dependencies.
-Nine full-driver scenarios and four sandbox checks pass. Exact repeat
-`f47bbb55` needs approval and 52 GiB usable space before installation.
-The seven phases cover install, idempotence, source identity, candidate
-inspection, HTML/Markdown reporting and removal of only the unchanged
-new test runtime. Existing runtimes and journals remain.
+Nine full-driver scenarios and four sandbox checks pass. The operator
+approved exact repeat `f47bbb55`. The seven phases cover installation,
+idempotence, source identity, candidate inspection, HTML and Markdown
+reporting, and removal of the unchanged test runtime. Dispatch awaits
+52 GiB usable space. The approval record preserves the observed capacity
+after the additional verified pytest cleanup.
+[Approval and cleanup record](current-wheel-approval-20261117.json)
 
 The [cleanup record](verified-pytest-cleanup-result-20261117.json) accounts
 for 3,904 obsolete pytest worker copies, about 4.58 GiB allocated. All

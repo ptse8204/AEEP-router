@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [current wheel approval](../toolkit-v2/c13/completion-20261116/current-wheel-approval-20261117.json)
+records exact approval for `f47bbb55` and passing pin checks. Removing
+2,494 verified obsolete pytest worker copies left usable space near
+50.1 GiB, below the reviewed 52 GiB floor. All 34 preservation hashes
+matched. The lifecycle is unstarted and comparisons stay paused.
+
 The [inert CFPB CLI proposal](../toolkit-v2/c13/completion-20261116/cfpb-ordinary-proposal-20261117.json)
 retains the exact public inputs while preparing three rights-bound input
 aliases. Three reference-byte checks and four mutation checks pass. Rights

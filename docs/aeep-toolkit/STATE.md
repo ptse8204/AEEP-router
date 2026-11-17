@@ -1,5 +1,16 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. The current wheel repeat is approved and awaiting usable space.**
+The [approval and cleanup record](../../reports/toolkit-v2/c13/completion-20261116/current-wheel-approval-20261117.json)
+binds the operator response to review `f47bbb55` and the unchanged wheel
+`d5f092a8`. Exact preflight passes. Using the existing pytest cleanup
+authorization, 2,494 obsolete worker copies were verified and removed.
+All 34 preservation hashes matched. The copies accounted for 3.00 GiB of
+allocated storage, but usable free space stayed near 50.1 GiB. The actual
+launch floor is 52 GiB. The lifecycle has not started. Resume with fresh
+capacity and pin checks before dispatch. Waza remains excluded and
+comparisons stay paused.
+
 **November 17. Three CFPB reference/control pairs completed on a reusable grader image.**
 The [component result](../../reports/toolkit-v2/c13/completion-20261116/cfpb-local-component-result-20261117.json)
 records three reference scores of 1.0 and three rejected empty submissions.
