@@ -1,5 +1,16 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. Four retained archives with links have ordinary grader inputs.**
+[Retained link projections](../../reports/toolkit-v2/c13/completion-20261116/retained-link-projection-result.json)
+stages MontePy, GitPython, RETURNN and AiiDA Quantum ESPRESSO. It verifies
+27 linked-file copies, records four omitted directory aliases, and
+preserves all 129 published test identities. Two staging runs match and
+eight substituted callback checks pass. RETURNN's realpath calculation
+reaches the same repository root with the pinned regular-file copies.
+The existing group `6b758e65` covers publisher verification for the first
+three. AiiDA needs a separate publisher binding. All four still need
+protected runtime evidence. Waza is excluded and comparisons stay paused.
+
 **November 17. Two retained archives now have ordinary grader inputs.**
 [Retained projections](../../reports/toolkit-v2/c13/completion-20261116/retained-projection-staging-result.json)
 records the OpenAI Agents multi-file repair and the Ophyd Async contract

@@ -50,9 +50,17 @@ indexes reproduced byte for byte. The original OpenAI archive stays
 intact. Its worker projection omits two hash-bound instruction files and
 preserves both editable source paths and all 24 published test identities.
 Ophyd Async keeps its 28 published identities and adds the protected
-preservation check. MontePy, GitPython and RETURNN remain unstaged with
-nonregular archive members. Publisher binding and protected reproduction
-are pending for both staged projections.
+preservation check. Publisher binding and protected reproduction are
+pending for both projections.
+
+The [retained link projections](retained-link-projection-result.json) stage
+MontePy, GitPython, RETURNN and AiiDA Quantum ESPRESSO. They copy 27
+hash-bound link targets into regular files and omit four MontePy directory
+aliases under documentation or demos. RETURNN's existing bootstrap selects
+the same repository root with the copies. All 129 published test identities
+are preserved. Both preparations matched byte for byte. The pending group
+covers the first three publisher checks. AiiDA needs a separate binding,
+and protected grading remains open for all four.
 
 The [staged runtime triage](repository-expansion-runtime-triage.json) checked
 all 13 staged cases against the ordinary grader and retained wheel cache.
@@ -68,10 +76,10 @@ No protected tests ran in this audit.
 
 The retained source queue has 111 unattempted repositories. If each
 contributes one eligible case, all 116 current prospects qualify, and
-both newly staged projections clear review, the pool reaches 229.
+all six retained projections clear review, the pool reaches 233.
 Qualification and marginal value together require at least 246 distinct
 inputs under the shared-early-case assumption. This scenario still needs
-17 cases from further recovery or additional intake.
+13 cases from further recovery or additional intake.
 
 ## Retained stack and lifecycle evidence
 

@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [retained link projections](../toolkit-v2/c13/completion-20261116/retained-link-projection-result.json)
+stage four additional prospects using pinned regular-file copies and
+explicit directory-alias omissions. All 129 published test identities
+are preserved. The artifact and substituted tests add no formal
+cohort credit before publisher and protected runtime verification.
+
 [Retained source projections](../toolkit-v2/c13/completion-20261116/retained-projection-staging-result.json)
 stage two additional software prospects through the ordinary public
 archive adapter and substituted protected grader. OpenAI Agents and
