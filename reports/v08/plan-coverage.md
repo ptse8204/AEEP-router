@@ -1,5 +1,13 @@
 # 0.8 plan coverage and remaining work
 
+The [inert CFPB CLI proposal](../toolkit-v2/c13/completion-20261116/cfpb-ordinary-proposal-20261117.json)
+retains the exact public inputs while preparing three rights-bound input
+aliases. Three reference-byte checks and four mutation checks pass. Rights
+remain unapproved and the overlay unbuilt. Six further checks reject
+poisoned score/receipt joins. [Handoff verification](../toolkit-v2/c13/completion-20261116/cfpb-handoff-verification-20261117.json)
+records the pending wheel repeat and storage condition; no model dispatch
+or formal case adoption follows from this proposal.
+
 The [CFPB component result](../toolkit-v2/c13/completion-20261116/cfpb-local-component-result-20261117.json)
 verifies three perfect references and three rejected empty outputs on the
 retained self-contained grader. Actual partial F1 values and the original

@@ -43,6 +43,15 @@ all owned containers are absent. These are three related tasks in one
 source family, with zero formal cases adopted. Provider disclosure and
 the full managed CLI journey remain unapproved and unexecuted.
 
+The [ordinary CLI proposal](cfpb-ordinary-proposal-20261117.json) prepares
+three additional input bindings because proposed rights records change the
+pack digest. Each alias resolves the same protected reference bytes.
+Four altered pack, archive and oracle bindings are rejected. The proposal
+has no registered rights, image build or model authority. The
+[handoff checks](cfpb-handoff-verification-20261117.json) also reject six
+poisoned evidence joins while preserving the real scores and failed
+driver flags.
+
 The [current-wheel check](current-wheel-repeat-preflight-20261117.json)
 is prepared for wheel `d5f092a8` and 32 unchanged cached dependencies.
 Nine full-driver scenarios and four sandbox checks pass. Exact repeat

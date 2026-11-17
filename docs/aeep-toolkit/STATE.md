@@ -35,9 +35,16 @@ space before launch. No current-wheel installation has started.
 
 CFPB observations cover three related tasks in one source family and adopt
 zero formal cases. Managed CLI preparation still requires exact disclosure
-rights and controlled-worker evidence. The next safe action is binding the
-retained image into inert workflow definitions and preparing the grouped
-engineering review. C13 remains open. Waza is excluded and comparisons stay paused.
+rights and controlled-worker evidence. The [inert CLI proposal](../../reports/toolkit-v2/c13/completion-20261116/cfpb-ordinary-proposal-20261117.json)
+now binds three new input aliases for a proposed rights-bound pack to the
+same protected files. Three reference-byte checks and four mutation checks
+pass. Its rights are unapproved and unregistered; the overlay is unbuilt.
+Six additional evidence mutation checks reject mismatched tasks, receipts,
+scores and missing results. The [handoff verification](../../reports/toolkit-v2/c13/completion-20261116/cfpb-handoff-verification-20261117.json)
+records these checks and the exact pending wheel repeat. Resume that
+repeat only with approval and 52 GiB usable space. Future CFPB dispatch
+needs its grouped rights, worker and execution review. C13 remains open.
+Waza is excluded and comparisons stay paused.
 
 **November 17. Real ExtractBench calibration passed with retained read-only dependencies.**
 The [native result](../../reports/toolkit-v2/c13/completion-20261116/extractbench-native-calibration-result-20261117.json)
