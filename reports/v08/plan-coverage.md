@@ -103,6 +103,13 @@ bind Sentry and Hugging Face Hub to four ordinary protected calls. The
 first-party driver verified rejection of mismatched approval, evidence
 drift and uncertain cleanup. The offline protected run remains unstarted.
 
+The [repository expansion preflight](../toolkit-v2/c13/completion-20261116/repository-expansion-preflight.json)
+builds a queue for the 36-row minimum software shortfall from the
+retained pinned dataset. Exact review `bb4a134f` caps 48 distinct source
+archives and their commit metadata. Both stage roles, approval refusal,
+independent failure and rate-stop cases passed local checks. The new
+acquisition awaits approval.
+
 The [A2A receipt bridge audit](../toolkit-v2/c13/completion-20261116/a2a-receipt-bridge-audit.json)
 matched four canonical receipts, rebuilt both pairs of protected fixtures
 and verified their scoring through the ordinary callback. Three wheel

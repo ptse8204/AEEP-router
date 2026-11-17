@@ -178,6 +178,16 @@ Six first-party driver scenarios passed. Review `72354f5a` covers four
 offline calls and 140 reserved seconds at zero models and $0. It is
 unstarted and needs exact new-source execution approval.
 
+The [repository expansion preflight](../../reports/toolkit-v2/c13/completion-20261116/repository-expansion-preflight.json)
+rescreens all 860 pinned SWE-rebench rows, excluding previously used or
+considered repositories. It identifies 283 leads across 159 fresh
+repository families. Exact review `bb4a134f` selects 48 distinct source
+revisions after public metadata inspection. The review caps archive
+responses at 168,000,000 bytes and commit metadata at 9,216,048 bytes.
+It stages 31 candidate audit inputs and 17 candidate multi-file repairs
+only if source, patch and test checks pass. The first-party driver checks
+passed. No archive acquisition, upstream execution or adoption occurred.
+
 The [new workbook reference](../../reports/toolkit-v2/c13/completion-20261116/workbook-reference-result.json)
 passed 19 original SkillsBench checks. The protected verifier rejected both
 missing and incomplete output. The first interpreter check failed before

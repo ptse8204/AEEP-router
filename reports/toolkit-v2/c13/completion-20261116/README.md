@@ -234,6 +234,27 @@ unresolved reservation after uncertain cleanup. Exact review `72354f5a`
 permits four offline calls and 140 reserved seconds at zero models and
 $0. The review is unstarted and pending authorization.
 
+The [repository expansion preflight](repository-expansion-preflight.json)
+reads all nine retained pages of the pinned SWE-rebench union. The
+local screen excludes previously used or considered repositories,
+unreviewed patch shapes and missing test identities. It retained 283
+leads across 159 repository families. The pinned replay matched both
+private queue files byte for byte. The public repository metadata
+check issued 60 requests and verified 53 entries. Current repository
+size and license fields inform source prioritization. The acquisition
+driver verifies the exact archived Git tree and root license notice
+before any case advances.
+
+The [private acquisition review](repository-expansion-preflight.json)
+binds 48 exact source revisions. It tests whether 31 separate audit
+origins and 17 multi-file repairs can move through the existing
+protected staging path. The cap is 168 MB of archive responses and
+9.22 MB of commit metadata. Six first-party driver checks exercised
+both roles with retained bytes, approval and drift refusal, a transport
+failure and a publisher rate limit. The batch is unstarted. A
+successful archive binding still needs runtime reproduction, rights
+review and source-disjoint stage assignment before formal use.
+
 The [Wemake selector preflight](wemake-native-selector-preflight.json)
 reconstructed all 117 projected test identities from the literal upstream
 parameters. The 27 published selectors include 19 prefixes. Their synthetic
