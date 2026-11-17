@@ -43,6 +43,17 @@ archives again or fetch submodule contents. Five bindings, six malformed
 tree controls and a simulated matched recovery passed. The actual
 publisher comparisons remain pending.
 
+The [retained source projections](retained-projection-staging-result.json)
+stage the OpenAI Agents multi-file repair and the Ophyd Async contract
+audit through the ordinary archive and grading interfaces. Both private
+indexes reproduced byte for byte. The original OpenAI archive stays
+intact. Its worker projection omits two hash-bound instruction files and
+preserves both editable source paths and all 24 published test identities.
+Ophyd Async keeps its 28 published identities and adds the protected
+preservation check. MontePy, GitPython and RETURNN remain unstaged with
+nonregular archive members. Publisher binding and protected reproduction
+are pending for both staged projections.
+
 The [staged runtime triage](repository-expansion-runtime-triage.json) checked
 all 13 staged cases against the ordinary grader and retained wheel cache.
 For Django Guardian, four wheel hashes, license notices and active
@@ -55,11 +66,12 @@ monorepo import projection so tests exercise the patched snapshot.
 The other ten cases have unresolved declared dependency candidates.
 No protected tests ran in this audit.
 
-The retained source queue has 111 unattempted repositories. Even if each
-contributes one eligible case and all 116 current prospects qualify,
-that gives 227 cases. Qualification and marginal value together require
-at least 246 distinct inputs under the shared-early-case assumption.
-This scenario still needs 19 cases from recovery or additional intake.
+The retained source queue has 111 unattempted repositories. If each
+contributes one eligible case, all 116 current prospects qualify, and
+both newly staged projections clear review, the pool reaches 229.
+Qualification and marginal value together require at least 246 distinct
+inputs under the shared-early-case assumption. This scenario still needs
+17 cases from further recovery or additional intake.
 
 ## Retained stack and lifecycle evidence
 

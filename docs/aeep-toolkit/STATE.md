@@ -1,5 +1,16 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. Two retained archives now have ordinary grader inputs.**
+[Retained projections](../../reports/toolkit-v2/c13/completion-20261116/retained-projection-staging-result.json)
+records the OpenAI Agents multi-file repair and the Ophyd Async contract
+audit. They preserve 24 and 29 protected test identities respectively.
+Both private indexes match across two preparations. The OpenAI worker
+projection omits two pinned repository instruction files. MontePy,
+GitPython and RETURNN still have nonregular archive members to review.
+Publisher binding and actual protected grading remain open. The two
+projections add no formal case credit. Exact group `6b758e65` is still
+pending, Waza is excluded, and comparisons stay paused.
+
 **November 17. The 13 new software cases have per-case runtime findings.**
 [Staged runtime triage](../../reports/toolkit-v2/c13/completion-20261116/repository-expansion-runtime-triage.json)
 verified four retained Django wheels and localized its missing

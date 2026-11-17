@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+[Retained source projections](../toolkit-v2/c13/completion-20261116/retained-projection-staging-result.json)
+stage two additional software prospects through the ordinary public
+archive adapter and substituted protected grader. OpenAI Agents and
+Ophyd Async preserve 53 test identities across both cases. Publisher
+binding and actual protected grading are pending. Three other retained
+archives need review of nonregular members.
+
 The [staged runtime triage](../toolkit-v2/c13/completion-20261116/repository-expansion-runtime-triage.json)
 records dependency and import-layout gaps for the 13 staged software
 cases. Four retained Django dependencies passed byte, license and
