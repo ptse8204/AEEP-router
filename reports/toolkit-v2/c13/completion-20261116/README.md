@@ -255,6 +255,19 @@ failure and a publisher rate limit. The batch is unstarted. A
 successful archive binding still needs runtime reproduction, rights
 review and source-disjoint stage assignment before formal use.
 
+The [source-disjoint capacity audit](repository-capacity-audit.json)
+checks the proposed corpus against the 8/28/105 plan. The current 105
+prospects include 54 single-file repairs, 30 multi-file repairs and 21
+contract audits. The headcount gap is 36. Balancing the three workload
+families in each stage needs at least 42 new sources. Either 25 audits
+and 17 multi-file repairs or 26 audits and 16 multi-file repairs can
+fill the plan if every retained prospect qualifies. Both projections
+keep each repository in one stage and put 35 cases of each family in
+holdout. With two multi-file failures, the 48-source review alone
+cannot fill the plan. Twenty-five distinct multi-file leads remain
+outside the review. The audit replay matched byte for byte. No case
+was assigned, downloaded or run.
+
 The [Wemake selector preflight](wemake-native-selector-preflight.json)
 reconstructed all 117 projected test identities from the literal upstream
 parameters. The 27 published selectors include 19 prefixes. Their synthetic

@@ -1,0 +1,92 @@
+{
+  "formal_stages_assigned": false,
+  "holdout_family_lower_bounds": {
+    "contract-audit": 14,
+    "multi-file-repair": 5
+  },
+  "minimal_new_source_profiles_with_disjoint_witnesses": [
+    {
+      "new_sources_required": {
+        "contract-audit": 25,
+        "multi-file-repair": 17,
+        "single-file-repair": 0
+      },
+      "pending_sources_that_may_fail_if_all_retained_rows_survive": {
+        "contract-audit": 6,
+        "multi-file-repair": 0,
+        "single-file-repair": 0
+      },
+      "stage_capacity_example": {
+        "holdout": {
+          "contract-audit": 35,
+          "multi-file-repair": 35,
+          "single-file-repair": 35
+        },
+        "qualification": {
+          "contract-audit": 2,
+          "multi-file-repair": 3,
+          "single-file-repair": 3
+        },
+        "training": {
+          "contract-audit": 9,
+          "multi-file-repair": 9,
+          "single-file-repair": 10
+        }
+      }
+    },
+    {
+      "new_sources_required": {
+        "contract-audit": 26,
+        "multi-file-repair": 16,
+        "single-file-repair": 0
+      },
+      "pending_sources_that_may_fail_if_all_retained_rows_survive": {
+        "contract-audit": 5,
+        "multi-file-repair": 1,
+        "single-file-repair": 0
+      },
+      "stage_capacity_example": {
+        "holdout": {
+          "contract-audit": 35,
+          "multi-file-repair": 35,
+          "single-file-repair": 35
+        },
+        "qualification": {
+          "contract-audit": 3,
+          "multi-file-repair": 2,
+          "single-file-repair": 3
+        },
+        "training": {
+          "contract-audit": 9,
+          "multi-file-repair": 9,
+          "single-file-repair": 10
+        }
+      }
+    }
+  ],
+  "minimum_additions_for_balance_in_each_stage": 42,
+  "other_multifile_repository_leads": 25,
+  "proposed_counts": {
+    "contract-audit": 31,
+    "multi-file-repair": 17
+  },
+  "proposed_unique_repositories": 48,
+  "provisional_counts": {
+    "contract-audit": 21,
+    "multi-file-repair": 30,
+    "single-file-repair": 54
+  },
+  "provisional_rows": 105,
+  "reproduction_runs_performed_by_audit": 0,
+  "required_stage_counts": {
+    "holdout": 105,
+    "qualification": 8,
+    "training": 28
+  },
+  "retained_repositories": 70,
+  "row_count_lower_bound": 36,
+  "schema_version": "aeep.c13.repository-capacity.v1",
+  "source_preflight_sha256": "2f99632135d53ed7b32110612a62ba813557fc22049f154d403a016f59cb5134",
+  "source_review_sha256": "bb4a134feb5af19dac075f5ed362e80f20d9b83eec132d97886ef517dd721998",
+  "verification": "Read-only counts. Witnesses use repository families in one stage."
+}

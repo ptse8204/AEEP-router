@@ -201,6 +201,16 @@ It stages 31 candidate audit inputs and 17 candidate multi-file repairs
 only if source, patch and test checks pass. The first-party driver checks
 passed. No archive acquisition, upstream execution or adoption occurred.
 
+The [source-disjoint capacity audit](../../reports/toolkit-v2/c13/completion-20261116/repository-capacity-audit.json)
+checks the balanced-by-stage software design against the 105 retained
+prospects and 48 proposed sources. The headcount gap is 36. Filling the
+three workload families in each stage takes at least 42 additional sources
+even if all retained prospects survive. Two feasible projections keep each
+repository in one stage. The pending batch can lose at most one multi-file
+repair, and that projection needs 26 of 31 contract audits. Twenty-five
+other multi-file repository leads remain outside the review. No cases were
+assigned and no acquisition or protected execution started.
+
 The [new workbook reference](../../reports/toolkit-v2/c13/completion-20261116/workbook-reference-result.json)
 passed 19 original SkillsBench checks. The protected verifier rejected both
 missing and incomplete output. The first interpreter check failed before

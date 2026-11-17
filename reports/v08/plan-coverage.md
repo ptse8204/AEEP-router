@@ -121,6 +121,12 @@ archives and their commit metadata. Both stage roles, approval refusal,
 independent failure and rate-stop cases passed local checks. The new
 acquisition awaits approval.
 
+The [source-disjoint capacity audit](../toolkit-v2/c13/completion-20261116/repository-capacity-audit.json)
+shows why 36 additional rows cannot fill the balanced-by-stage plan.
+The two smallest projections need 42 new rows. Both keep repositories
+in one stage. At most one of the 17 proposed multi-file repairs may fail
+even if all 105 retained prospects qualify. No stage was assigned.
+
 The [A2A receipt bridge audit](../toolkit-v2/c13/completion-20261116/a2a-receipt-bridge-audit.json)
 matched four canonical receipts, rebuilt both pairs of protected fixtures
 and verified their scoring through the ordinary callback. Three wheel
