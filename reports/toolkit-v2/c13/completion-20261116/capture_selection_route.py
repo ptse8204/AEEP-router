@@ -5,7 +5,7 @@ import time
 from pathlib import Path
 from typing import Self
 
-from pydantic import Field, model_validator
+from pydantic import Field, SerializerFunctionWrapHandler, model_serializer, model_validator
 
 from aeep import router as router_module
 from aeep.assessment.models import (
@@ -31,6 +31,7 @@ from aeep_toolkit.selection import SelectionCase, SelectionDecision
 SCOPE = "toolkit_selection_route_scope"
 CAPTURE = "toolkit_selection_route_capture"
 STAGE = "selection_routing"
+CONTROLS = {"discovery-only", "fixed"}
 
 
 class SelectionRouteScope(StrictModel):
@@ -68,6 +69,14 @@ class SelectionRouteCapture(StrictModel):
     persisted_decision_ref: Digest
     captured_at: UtcDateTime
     router_seconds: Measure
+    control_ref: Digest | None = None
+
+    @model_serializer(mode="wrap")
+    def preserve_original_capture(self, handler: SerializerFunctionWrapHandler):
+        value = handler(self)
+        if self.control_ref is None:
+            value.pop("control_ref", None)
+        return value
 
 
 def implementation_source() -> str:
@@ -81,9 +90,7 @@ def load_scope(repo: AssessmentRepository, ref: str) -> SelectionRouteScope:
     return scope
 
 
-def capture_route(router: Router, scope_ref: str, action: ActionRequest) -> RouteDecision:
-    """Reserve and record one local decision. Workload dispatch remains separate."""
-    started = time.perf_counter()
+def selection_inputs(router, scope_ref, action):
     repo = AssessmentRepository(router.store)
     scope = load_scope(repo, scope_ref)
     request = RecipeMaterializationRequest.model_validate(
@@ -109,6 +116,10 @@ def capture_route(router: Router, scope_ref: str, action: ActionRequest) -> Rout
     if errors or {item.id for item in compatible} != permitted:
         raise ConfigurationError("selection pool does not match the frozen input and inventory")
 
+    return repo, scope, request
+
+
+def reserve_selection(repo, scope, request):
     operation_id = scope.operation_id()
     repo.reserve(
         request,
@@ -117,8 +128,20 @@ def capture_route(router: Router, scope_ref: str, action: ActionRequest) -> Rout
         stage=STAGE,
         require_settled_plan=True,
     )
-    # No remote discovery, protected grading or task execution is called here.
-    decision = router.route(action)
+    return operation_id
+
+
+def capture_route(router: Router, scope_ref: str, action: ActionRequest) -> RouteDecision:
+    """Reserve and record one local AEEP decision without dispatching a task."""
+    started = time.perf_counter()
+    repo, scope, request = selection_inputs(router, scope_ref, action)
+    if scope.policy in CONTROLS:
+        raise ConfigurationError("control policy requires its own reviewed selector")
+    operation = reserve_selection(repo, scope, request)
+    return finalize_selection(repo, scope_ref, scope, request, operation, action, router.route(action), started)
+
+
+def finalize_selection(repo, scope_ref, scope, request, operation_id, action, decision, started, *, control_ref=None):
     stored = repo.store.get_decision(decision.decision_id)
     if (
         stored is None
@@ -141,6 +164,7 @@ def capture_route(router: Router, scope_ref: str, action: ActionRequest) -> Rout
         persisted_decision_ref=content_digest(stored),
         captured_at=utc_now(),
         router_seconds=decision.routing_overhead_ms / 1000,
+        control_ref=control_ref,
     )
     repo.put(CAPTURE, operation_id, capture)
     elapsed = time.perf_counter() - started
@@ -149,7 +173,7 @@ def capture_route(router: Router, scope_ref: str, action: ActionRequest) -> Rout
         raise ConfigurationError("routing exceeded the reviewed time reservation")
     repo.authorize(request)
     # A blocked route is durable evidence of a stop. It cannot become an abstention.
-    require_selected(decision, permitted)
+    require_selected(decision, {scope.baseline_executor_id, *scope.candidates_by_executor})
     return decision
 
 
@@ -215,6 +239,12 @@ def resolve_route(
     selected = require_selected(
         decision, {scope.baseline_executor_id, *scope.candidates_by_executor}
     )
+    if scope.policy in CONTROLS:
+        from selection_controls import verify_control
+
+        verify_control(repo, scope, capture, decision)
+    elif capture.control_ref is not None:
+        raise ConfigurationError("AEEP selection cannot claim control policy evidence")
     linked = None
     if receipt_id is not None:
         receipt = repo.store.get_receipt(receipt_id)

@@ -690,6 +690,29 @@ reviewed discovery-only and fixed policies and obtaining independent
 candidate evidence before a live selection study.
 [Verification script](verify_selection_trial.py)
 
+The [discovery and fixed controls](selection_controls.py) now use the same
+pre-task capture and protected execution path as the AEEP arm. Discovery
+calls the existing DiscoveryService on a reviewed local metadata snapshot.
+Its query is pinned, and it follows catalog order for exact matches in the
+shared inventory. The fixed arm follows a separately reviewed preference
+from earlier development evidence. A fixed preference cannot draw on the
+current task. The read-only source check reopened one complete historical
+assessment and refused changed prior task references.
+
+Both controls share the Router's feasibility checks and disregard its
+ranking. Each records the common Router time, the preference time and the
+full measured decision interval separately. A control uses the baseline
+only if it passes the same constraints. The choice record preserves the
+source and never grants dispatch authority.
+
+The [three-policy fixture](selection-controls-preflight.json) produced three
+different choices from the same task and inventory. All three settled
+protected grades were 1/1, and the existing selection scorer found a matched
+grade and decision time for every policy pair. The result remains
+NOT_ASSESSED. The historical [single-choice preflight](selection-trial-preflight.json)
+keeps its original driver hashes. The live fixed-choice review still needs
+independent candidate evidence and frozen comparative workloads.
+
 The committed snapshot passed 42 targeted tests, schema checks and the
 wheel build with a stable source fingerprint. Both full workspace runs passed
 2,165 tests with 21 skips and 81.45% combined coverage. Both branch gates

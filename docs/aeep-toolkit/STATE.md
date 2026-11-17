@@ -68,6 +68,15 @@ operations. Both valid first-party outputs passed, and the wrong
 output scored 0/1. Twenty-seven refusal checks passed. Live policy
 comparators, independent workloads and selection value remain open.
 
+The [three-policy preflight](../../reports/toolkit-v2/c13/completion-20261116/selection-controls-preflight.json)
+ran AEEP, discovery-only and fixed selection on the same first-party
+task, inventory and authority. All three selected different routes and
+each protected result scored 1/1. The decision, execution and grading
+charges settled. The fixed policy accepted a real completed historical
+report in a separate read-only source check and refused altered prior
+case references. Choosing the live fixed preference and qualifying the
+independent workloads remain open. No live comparison ran.
+
 The [Formula Extraction acquisition](../../reports/toolkit-v2/c13/completion-20261116/formula-runtime-acquisition-result.json)
 passed approved review `bedcde5c`. Both exact artifacts verified at
 160,981,322 bytes total. The [protected result](../../reports/toolkit-v2/c13/completion-20261116/protected-reference-group-result.json)

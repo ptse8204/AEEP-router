@@ -89,6 +89,14 @@ decision to the completed grade and settled accounting. Two valid outputs
 passed and a wrong output failed. Twenty-seven altered or unapproved
 bindings were refused. Live selection usefulness remains open.
 
+The [three-policy preflight](../toolkit-v2/c13/completion-20261116/selection-controls-preflight.json)
+exercised real local discovery, the frozen fixed preference and AEEP
+over equal first-party environments. It records the common feasibility
+cost separately from the control preference step. All three verified
+rows reached the existing selection report with a fixture-level
+NOT_ASSESSED outcome. A completed historical fixed-policy source was
+verified read-only. Live usefulness and adoption remain open.
+
 The [SkillsBench workbook screening](../toolkit-v2/c13/completion-20261116/workbook-grader-screening.json)
 verified 14 pinned assets and found two verifiers with gaps that allow wrong
 answers. A third case still needs source rights and offline recalculation
