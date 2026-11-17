@@ -51,6 +51,15 @@ has no registered rights, image build or model authority. The
 poisoned evidence joins while preserving the real scores and failed
 driver flags.
 
+The [prepared ordinary CLI run](cfpb-cli-prepared-20261117.json) narrows
+disclosure to the filled public sample. It binds the three-file archive,
+the existing Codex destination, and one GPT-6.1 Sol medium engineering
+turn behind fresh worker, collector and PDF reader checks. The two other
+CFPB cases retain their local evidence. The three additive images are
+sealed and retained. The isolated CLI preparation and approval guards
+passed. Review `7735ab2d` awaits approval before the operational ledger
+receives asset-use authority or any worker starts.
+
 The [current-wheel lifecycle](current-wheel-lifecycle-result-20261117.json)
 passed under exact review `f47bbb55` on macOS arm64 with Python 3.13.
 Wheel `d5f092a8` used 32 unchanged cached dependencies. All seven phases

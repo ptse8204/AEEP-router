@@ -1,5 +1,13 @@
 # 0.8 plan coverage and remaining work
 
+The [CFPB CLI review](../toolkit-v2/c13/completion-20261116/cfpb-cli-prepared-20261117.json)
+binds one exact public sample, the sealed worker and grader images, and
+a single ordinary CLI engineering task. Three local builds settled in
+6.63 seconds. The disposable CLI ledger and the review guards passed.
+Live readiness, public-file disclosure and one GPT-6.1 Sol medium turn
+await the same exact review `7735ab2d`. Comparisons remain paused and
+Waza is excluded.
+
 The [current wheel lifecycle result](../toolkit-v2/c13/completion-20261116/current-wheel-lifecycle-result-20261117.json)
 records seven passing phases for wheel `d5f092a8` under exact review
 `f47bbb55`. Installed source, idempotence, candidate inspection, matching

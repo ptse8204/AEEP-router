@@ -1,5 +1,24 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. One CFPB ordinary CLI run is prepared for exact review.**
+The [prepared run](../../reports/toolkit-v2/c13/completion-20261116/cfpb-cli-prepared-20261117.json)
+binds review `7735ab2d` to the filled public CFPB sample, the sealed
+worker pair, and the protected grader. It covers only the three hash-bound
+public files, the fixed workspace instructions, and the previously reviewed
+stack-check skill. The proposed run uses GPT-6.1 Sol medium through the
+existing Codex proxy after two fresh, turn-free worker readiness checks.
+The cap is one model turn, 64 operations, 3,900 reserved seconds and $0.
+The existing grant expiry and counters carry forward.
+
+The ordinary CLI prepared the exact v7 case in a disposable ledger. It
+rejected an unreviewed asset-use record, a changed review digest, and an
+attempt to run before approval. The three local image builds settled in
+6.63 seconds. After a hash-check path-type error, read-only receipt recovery
+verified the completed grader build and the continuation ran only the
+two unstarted worker builds. Live worker checks, disclosure and execution
+await approval of `7735ab2d`. C13 stays open, comparisons stay paused,
+and Waza is excluded.
+
 **November 17. The approved macOS lifecycle passed for the current wheel.**
 The [lifecycle result](../../reports/toolkit-v2/c13/completion-20261116/current-wheel-lifecycle-result-20261117.json)
 binds exact review `f47bbb55` to wheel `d5f092a8` and 32 cached dependencies.
