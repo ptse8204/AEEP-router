@@ -7,6 +7,17 @@ a request that explicitly selects Waza without its two checks. It also rejects
 the same completion record on a different source digest.
 [Readiness audit](readiness-audit.json) · [Retained evidence](../managed-comparison-20261115/offline-evidence/source-stack-rebinding.json)
 
+A [source compatibility audit](current-stack-source-binding.json) confirms
+all 37 checks on committed source `9710ea4f`. The ordinary CLI accepted
+completion `23c4b48e` in a private ledger copy. Selection conversion is the
+only changed runtime file. Both workflow preparations produced new references
+with their original observations intact. The old source reference, the
+unreviewed completion and an explicit Waza selection were refused on the new
+source. All 53 focused tests and the schema check passed. The audit read
+the operational ledger without changing it. The newer wheel was checked
+as an archive. The install and rollback evidence below covers the older
+tested wheel. [Audit driver](rebind_current_stack.py)
+
 **LIMITED_BETA** for private macOS arm64 / Python 3.13 evaluation work with the
 reviewed runtime and documented controls. **NO_GO** for production release and
 for public claims of better task results, reduced token use or cost savings.

@@ -7,6 +7,14 @@ against the operational ledger and frozen source `4e673a6d`. It retains
 the private macOS arm64 / Python 3.13 LIMITED_BETA recommendation. Production
 release and public benefit claims remain NO_GO.
 
+The [committed-source stack audit](../../reports/toolkit-v2/c13/completion-20261116/current-stack-source-binding.json)
+revalidated all 37 checks and both ordinary workflows on `9710ea4f`.
+The ordinary CLI accepted completion `23c4b48e` in a private ledger copy.
+The only runtime source change is rejection of a blocked route by the
+selection scorer. Both workflow preparations produced current references
+with unchanged historical facts. The operational ledger was opened
+read-only, and no execution authority or installed coverage changed.
+
 The [Formula Extraction acquisition](../../reports/toolkit-v2/c13/completion-20261116/formula-runtime-acquisition-result.json)
 passed approved review `bedcde5c`. Both exact artifacts verified at
 160,981,322 bytes total. The [protected result](../../reports/toolkit-v2/c13/completion-20261116/protected-reference-group-result.json)

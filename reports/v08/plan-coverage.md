@@ -45,6 +45,12 @@ retain the original decision and the redacted ledger copy by digest.
 The hook runs before task execution. It produces no protected grade or
 live selection-value claim.
 
+The [committed-source stack audit](../toolkit-v2/c13/completion-20261116/current-stack-source-binding.json)
+rechecked the 37 retained integration checks through the ordinary CLI
+using a private ledger copy. The accepted source is `9710ea4f`.
+Both workflows retained their original observations. The current wheel
+was read as an archive. Its installation remains unverified.
+
 The [SkillsBench workbook screening](../toolkit-v2/c13/completion-20261116/workbook-grader-screening.json)
 verified 14 pinned assets and found two verifiers with gaps that allow wrong
 answers. A third case still needs source rights and offline recalculation
