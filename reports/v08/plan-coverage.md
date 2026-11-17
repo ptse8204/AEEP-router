@@ -1,5 +1,13 @@
 # 0.8 plan coverage and remaining work
 
+The [CFPB CLI result](../toolkit-v2/c13/completion-20261116/cfpb-cli-execution-result-20261117.json)
+records two passing worker readiness checks and one completed GPT-6.1 Sol
+medium turn. Its protected native value F1 was 0.996855 with an exact-match
+failure. Verified receipt binding preserves provider token counts and both
+reports. Twenty-one operations settled without new outstanding charges,
+and the proxy returned to stopped. Comparisons stay paused and Waza
+remains excluded.
+
 The [CFPB CLI review](../toolkit-v2/c13/completion-20261116/cfpb-cli-prepared-20261117.json)
 binds one exact public sample, the sealed worker and grader images, and
 a single ordinary CLI engineering task. Three local builds settled in

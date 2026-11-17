@@ -1,5 +1,23 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. The reviewed CFPB task completed through the ordinary CLI.**
+The [execution result](../../reports/toolkit-v2/c13/completion-20261116/cfpb-cli-execution-result-20261117.json)
+binds approval `7735ab2d`, the two fresh worker checks, and the single
+GPT-6.1 Sol medium task. Each worker passed all 11 boundaries, read the
+synthetic PDF using the pinned library, denied collector access, and
+cleaned up. The protected grader returned native value F1
+`0.9968553459119497` and rejected the output under its exact-match rule.
+The CLI run and report generation both completed.
+
+The receipt binds 177,089 provider-reported input tokens, including
+146,816 cached tokens, and 2,749 output tokens, including 209 reasoning
+tokens. The provider reported zero cache-write input tokens. The model
+worker took 79.59 seconds and protected grading took 3.19 seconds. The
+grant charged 21 operations, one model turn, and 135.69 settled seconds
+at $0 cash. The proxy returned to stopped and no new reservation was left
+open. HTML and Markdown reports are bound in the execution result.
+Comparisons remain paused and Waza is excluded. C13 stays open.
+
 **November 17. One CFPB ordinary CLI run is prepared for exact review.**
 The [prepared run](../../reports/toolkit-v2/c13/completion-20261116/cfpb-cli-prepared-20261117.json)
 binds review `7735ab2d` to the filled public CFPB sample, the sealed

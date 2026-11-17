@@ -57,8 +57,16 @@ the existing Codex destination, and one GPT-6.1 Sol medium engineering
 turn behind fresh worker, collector and PDF reader checks. The two other
 CFPB cases retain their local evidence. The three additive images are
 sealed and retained. The isolated CLI preparation and approval guards
-passed. Review `7735ab2d` awaits approval before the operational ledger
-receives asset-use authority or any worker starts.
+passed before the operator approved review `7735ab2d`.
+
+The [execution result](cfpb-cli-execution-result-20261117.json) verifies
+11 boundaries, PDF reading, and collector denial for each worker. The CLI
+ran one GPT-6.1 Sol medium turn and generated HTML and Markdown reports.
+Native value F1 was 0.996855 and the exact-match verdict was a task failure.
+The receipt binds 177,089 reported input tokens and 2,749 output tokens,
+including 146,816 cached input tokens and 209 reasoning tokens. The
+grant settled 21 operations and one turn with $0 cash. Both worker checks
+cleaned up and the proxy returned to stopped.
 
 The [current-wheel lifecycle](current-wheel-lifecycle-result-20261117.json)
 passed under exact review `f47bbb55` on macOS arm64 with Python 3.13.
