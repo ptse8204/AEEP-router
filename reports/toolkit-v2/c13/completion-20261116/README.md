@@ -176,6 +176,24 @@ each observation. A shared current runtime and formal cohort assignment
 still need verification.
 [Reconciliation script](reconcile_repository_grader_evidence.py)
 
+The [exact migration review `864880c7`](migrated-grader-operation-review.json)
+binds those four checks to the retained Linux ARM64 image and the ordinary
+native pytest observer. The two references and two faults retain their
+original archive and wheel hashes. Each has all required outcomes in the
+historical reply. The current payload adds the source-module import guard
+and an empty explicit plugin list. A third case is an inert recipe fixture
+for selecting the native observer. Only the two migrated cases can dispatch.
+
+The [driver](check_migrated_graders.py) passed local checks for success,
+missing approval, scope drift, an altered grade, uncertain cleanup and
+terminal replay refusal. The router wrote and reconciled real journal and
+accounting records on a disposable fixture ledger, with the container
+replies substituted. The four actual calls remain unstarted. The review
+caps them at four operations and 140 reserved seconds on the existing
+grant, with no models, cash, downloads, builds or disclosure. A failed or
+uncertain call stops dispatch and leaves settled records available for
+recovery.
+
 The cached queue contains 63 potential inputs with matching source archive
 hashes and prior license records, 57 without complete matched records and 12
 carrying prior exact-source exclusions. The 63 still require task-specific asset

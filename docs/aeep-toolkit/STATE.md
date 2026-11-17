@@ -40,6 +40,16 @@ terminal attempts, and settled ledger operations. Dissect.cstruct 120
 and Mockito 93 still need contained grading for their current payloads.
 No new task ran and no case entered a formal stage.
 
+The [migrated grader review `864880c7`](../../reports/toolkit-v2/c13/completion-20261116/migrated-grader-operation-review.json)
+binds the missing Dissect.cstruct and Mockito checks to the ordinary
+native observer, current source and retained ARM64 image. All four
+protected archives and wheel sets match the original receipt-bound
+runs. The current payloads add an empty explicit plugin list and a
+source import guard. The local driver settled four substituted replies
+and blocked drift, unapproved dispatch, failed grading and uncertain
+cleanup. The four contained checks are unstarted and require exact
+repeat authorization. No formal assignment or provider use occurred.
+
 The [Formula Extraction acquisition](../../reports/toolkit-v2/c13/completion-20261116/formula-runtime-acquisition-result.json)
 passed approved review `bedcde5c`. Both exact artifacts verified at
 160,981,322 bytes total. The [protected result](../../reports/toolkit-v2/c13/completion-20261116/protected-reference-group-result.json)

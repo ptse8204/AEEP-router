@@ -69,6 +69,12 @@ current payloads and settled historical receipts. Both changed
 transport bindings still need contained verification. Formal stage
 assignment and current shared runtime conformance remain open.
 
+The [migrated repository grader review](../toolkit-v2/c13/completion-20261116/migrated-grader-operation-review.json)
+pins four offline checks to the ordinary native observer and the retained
+Linux ARM64 image. The archive and wheel inputs match the original
+receipts. Local substituted replies verified journals, settlement and
+failure handling. Actual contained verification awaits repeat approval.
+
 The [SkillsBench workbook screening](../toolkit-v2/c13/completion-20261116/workbook-grader-screening.json)
 verified 14 pinned assets and found two verifiers with gaps that allow wrong
 answers. A third case still needs source rights and offline recalculation
