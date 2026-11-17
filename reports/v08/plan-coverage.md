@@ -142,6 +142,12 @@ The approved [FuseSoC scratch repeat](../toolkit-v2/c13/completion-20261116/fuse
 settled one failed reference. Runtime review found missing build-generated
 version metadata. The original-source control stayed unstarted.
 
+The [FuseSoC build-metadata preflight](../toolkit-v2/c13/completion-20261116/fusesoc-build-metadata-preflight.json)
+pins the source ancestry and the actual upstream version generator.
+Six first-party rehearsals verified receipt and accounting behavior.
+Review `18e8cfc1` awaits exact approval for the reference repeat and
+the unstarted original-source check. No new protected result was recorded.
+
 The [cache recovery](../toolkit-v2/c13/completion-20261116/cached-repository-rebinding.json)
 verified six complete archives against public Git trees. Four passed inert
 scope checks and joined the ordinary worker mapping. Fifty-one caches

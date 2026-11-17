@@ -324,6 +324,15 @@ generates and the lockfile imports. The repeat settled one operation in
 3.263 seconds. The original-source control stayed unstarted. FuseSoC
 remains provisional pending exact build metadata.
 
+The [FuseSoC build-metadata preflight](../../reports/toolkit-v2/c13/completion-20261116/fusesoc-build-metadata-preflight.json)
+binds the snapshot to tag 2.4.5 and its 49-commit distance. It stages
+the verified setuptools-scm wheel and preserves all 15 protected tests.
+Review `18e8cfc1` covers the failed reference repeat and the unstarted
+original-source control, with at most two offline operations and 100
+reserved seconds. Six copied-ledger rehearsals passed. The protected
+repeat remains unstarted pending exact approval. Both earlier results
+and their charges stay recorded.
+
 The new wheel installed, reapplied idempotently, staged a synthetic candidate
 and rendered both reports. Removal rejected three added Finder files and
 preserved the runtime. A verified restoration preserved the three files

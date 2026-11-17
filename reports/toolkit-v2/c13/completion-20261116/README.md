@@ -592,6 +592,19 @@ the case provisional pending a build-metadata binding at the exact revision.
 [Repeat and diagnosis](fusesoc-scratch-correction-result.json) ·
 [Pinned upstream build configuration](https://raw.githubusercontent.com/olofk/fusesoc/d2e6e720222f57cb66d6c303a326d336c582aade/pyproject.toml)
 
+The [build-metadata preflight](fusesoc-build-metadata-preflight.json)
+pins FuseSoC's snapshot 49 commits after tag 2.4.5. During grading,
+setuptools-scm 8.3.1 will generate the missing module in each fresh
+protected source tree using the full commit SHA. The existing source,
+patch, test archives and all 15 assertions stay unchanged. Six
+first-party rehearsals exercised approval refusal, settlement and
+error handling. Exact review `18e8cfc1` allows one offline reference
+repeat and the previously unstarted original-source control after a
+pass. At most two operations and 100 reserved seconds. The review has
+no model calls, cash, build or install. Both protected calls are unstarted.
+[Upstream version rules](https://setuptools-scm.readthedocs.io/v8.3.1/usage/) ·
+[Pinned publication](https://pypi.org/project/setuptools-scm/8.3.1/)
+
 The [static workbook screening](workbook-grader-screening.json) verified 14
 assets across three further SkillsBench cases. Protein Expression checks cell
 presence and types. Powerlifting's accuracy tests recalculate from the input
