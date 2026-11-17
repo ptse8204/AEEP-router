@@ -634,14 +634,23 @@ verified the installer arguments, score guards, and accounting for
 success, missing approval, acquisition failure and uncertain cleanup.
 Exact approval `ba9f3388` is pending. No download or native grade ran.
 
-SpreadsheetBench 2 publishes two pinned corpus archives. Its dataset
-card declares MIT and its paper names CC BY-SA 4.0 for the data. The
-cell verifier checks declared answer ranges and the documented evaluation
-expects LibreOffice recalculation. The original visualization lane uses
-an external model. Both archive downloads and adoption are open until
-the asset terms and exact scorer binding are resolved.
+SpreadsheetBench 2's revised paper reports 297 cell-graded tasks and
+24 visualization tasks. The publisher's archive history lists a June
+upload and a separately named September upload. Both hashes are pinned
+in the metadata audit. The link between those hashes and the paper's counts
+remains unverified. The dataset card declares MIT. The revised paper
+declares CC BY-SA 4.0 for the released dataset and MIT for the evaluator.
+Archive selection and permitted use remain open.
 [Dataset card](https://huggingface.co/datasets/KAKA22/SpreadsheetBench-v2) ·
-[Paper license statement](https://arxiv.org/html/2606.29955v1#A4) ·
+[Archive history](https://huggingface.co/datasets/KAKA22/SpreadsheetBench-v2/commits/main) ·
+[Revised paper license statement](https://arxiv.org/html/2606.29955v2#A4)
+
+The paper describes full-workbook accuracy. The pinned cell evaluator
+iterates the task's declared answer ranges. Check which cells those ranges
+cover on each selected workbook before making a preservation claim. The
+documented evaluation requires recalculation, and visualization uses a
+separate model. Both archives await acquisition.
+[Paper evaluation metrics](https://arxiv.org/html/2606.29955v2#S2.SS4) ·
 [Pinned evaluator](https://github.com/RUCKBReasoning/SpreadsheetBench-2/blob/a7bdc2d358e052d35a94768e1f487c0d9e9c0011/evaluation/evaluation.py)
 
 The [audit script](audit_document_corpus_capacity.py) reproduced the
