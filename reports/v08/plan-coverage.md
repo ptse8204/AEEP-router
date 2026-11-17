@@ -304,6 +304,12 @@ verified the published origin of three clean loan disclosure PDFs and
 all nine agent inputs. The six linked tasks stay in one stage if adopted.
 The protected contents and native grades remain pending.
 
+The [CFPB protected preparation](../toolkit-v2/c13/completion-20261116/extractbench-cfpb-protected-preparation.json)
+verified those protected contents and staged seven roles for each of the
+three clean cases. Per-case support roots preserve the pinned scorer,
+the publisher references and the separate agent inputs. Offline command
+construction passed. Native scoring and formal use remain open.
+
 The [Venvstacks lock projection](../toolkit-v2/c13/completion-20261116/venvstacks-runtime-lock-projection.json)
 found 15 matching cached wheels and 32 missing. The [Tox audit](../toolkit-v2/c13/completion-20261116/tox-native-runtime-audit.json)
 found a pytest version mismatch and unbound plugin options. Both preserve the

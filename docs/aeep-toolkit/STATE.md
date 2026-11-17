@@ -85,6 +85,19 @@ benchmark and artifact-preflight tests passed. The offline docs check
 passed. The source copies, exact manifest records and local comparison
 commands are in `.aeep/completion-20261116/extractbench-cfpb-source-review`.
 
+The [CFPB protected preparation](../../reports/toolkit-v2/c13/completion-20261116/extractbench-cfpb-protected-preparation.json)
+verified all 24 publisher files. Nine exact downloads totaled 343,617
+bytes. Each published solution agrees with its grader reference, and
+each reference schema matches the agent input schema. The separate
+grader roots reuse the pinned scorer and hold seven reference and fault
+roles per case. Three offline launch definitions passed the existing
+containment adapter checks. Report replay and four drift and isolation
+controls passed, along with 28 focused tests and the offline docs check.
+The manifest replay and command preview are under
+`.aeep/completion-20261116/extractbench-cfpb-protected-preparation`.
+Native grading remains pending the first calibration and a reviewed case
+execution. Live comparisons remain paused.
+
 The document grouping checks reproduced the report byte for byte and
 rejected a changed manifest. Compilation and the schema check passed.
 Both full regression runs passed 2,165 tests with 21 skips. Combined

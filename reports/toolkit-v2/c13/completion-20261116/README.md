@@ -578,6 +578,15 @@ and approval for provider disclosure.
 [CFPB model forms](https://www.consumerfinance.gov/rules-policy/regulations/1026/2026-04-08/h/) ·
 [CFPB source-use notice](https://www.consumerfinance.gov/privacy/website-privacy-policy/)
 
+The [CFPB protected preparation](extractbench-cfpb-protected-preparation.json)
+checks the publisher solutions against the grader references and the
+reference schemas against the inputs. It reuses the pinned scorer in three
+case-bound protected roots. Each has seven roles covering the reference,
+missing and duplicated rows, a changed value, malformed and missing output,
+and an unavailable reference. The observer commands passed the ordinary
+container boundary checks offline. Run the existing native calibration
+before reviewing these three protected calls.
+
 The original ExtractBench Harbor verifier uses value F1 and reports
 perfect-document status separately. Its Dockerfile fetches a scorer and
 dependencies at build time. Exact offline dependency review, grader
