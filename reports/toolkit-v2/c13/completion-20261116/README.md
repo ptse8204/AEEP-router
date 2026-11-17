@@ -482,6 +482,24 @@ controls and asset-use records must precede any execution. The ordinary
 SkillsBench workflow remains the integration path.
 [ExtractBench dataset](https://huggingface.co/datasets/llamaindex/ExtractBench/tree/f9b910906cd7e73cc9eb5379a8d5d935c67b92c4)
 
+The [13F development intake](extractbench-audent-intake.json) verifies all
+11 files for one ExtractBench task. The two-page PDF and the protected
+reference agree with the SEC table on all 52 security identifiers,
+values and share counts. Exactly three files are staged as agent inputs.
+The reference, solver and verifier stay private. The calibration keeps
+native value F1 and the perfect-document indicator. It stages the original
+reference, a missing row, a changed value, a repeated row and malformed
+JSON. Treat the six tasks that share this schema as a development family.
+[Official SEC filing](https://www.sec.gov/Archives/edgar/data/1834874/000208585326000296/0002085853-26-000296-index.htm) ·
+[SEC reuse guidance](https://www.sec.gov/about/webmaster-frequently-asked-questions)
+
+The publisher's pinned base lock has 70 compatible CPython 3.13 Linux
+ARM64 wheels and no matching wheel for `fuzzysearch==0.8.1`. Thirty-two
+of the 70 wheels match existing caches byte for byte. The other 38 total
+77.73 MB. Resolve the offline scorer's import closure before choosing
+which artifacts to acquire. Native scoring and disclosure authority
+remain open. [Read-only calibration audit](audit_extractbench_audent.py)
+
 SpreadsheetBench 2 publishes two pinned corpus archives. Its dataset
 card declares MIT and its paper names CC BY-SA 4.0 for the data. The
 cell verifier checks declared answer ranges and the documented evaluation

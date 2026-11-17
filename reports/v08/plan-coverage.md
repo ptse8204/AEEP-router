@@ -82,6 +82,12 @@ need 35 long cases and the pack lists 20. Three sample asset declarations
 are ready for provenance review. SpreadsheetBench 2's data license and
 archive selection remain open. No assets ran or reached a model.
 
+The [ExtractBench 13F intake](../toolkit-v2/c13/completion-20261116/extractbench-audent-intake.json)
+binds 11 staged assets and 52 rows to the original SEC filing. The task
+and its five control artifacts are for protected development calibration.
+The native grader, runtime closure and authority remain open. This
+work adds no formal case or candidate-usefulness result.
+
 The [selected-trial preflight](../toolkit-v2/c13/completion-20261116/selection-trial-preflight.json)
 used the real Router, ordinary BenchmarkRunner and a first-party protected
 callback. It links the pre-task selection through the pinned execution

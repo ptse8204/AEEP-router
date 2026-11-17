@@ -59,6 +59,15 @@ contract. Source groups, permitted use and the offline grader remain open.
 SpreadsheetBench 2 has conflicting data-license declarations. Neither
 workbook archive was fetched. No case was assigned or disclosed.
 
+The [ExtractBench 13F development intake](../../reports/toolkit-v2/c13/completion-20261116/extractbench-audent-intake.json)
+verified all 11 original assets and reconciled 52 holding rows with the
+official SEC table. Three input files and eight protected files have
+separate roots. Five distinct output controls are pinned. Keep the six
+cases that share its schema outside formal stages. The publisher's base
+lock has a missing Linux ARM64 wheel for fuzzysearch 0.8.1, and 38 of its
+70 selected wheels remain uncached. Resolve the minimal offline closure
+before acquiring further packages. No native grade or model call ran.
+
 The [selected-trial preflight](../../reports/toolkit-v2/c13/completion-20261116/selection-trial-preflight.json)
 binds the pre-task Router choice to the ordinary runner's separate
 execution decision. The pre-trial hook rechecks the approved case,
