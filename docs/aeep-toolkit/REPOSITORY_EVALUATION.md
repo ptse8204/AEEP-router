@@ -129,6 +129,15 @@ installer. It requires three development cases. `--assessment` additionally
 requires source-disjoint 8/28/105 cases; materialization enforces balanced
 holdout families. Development exports cannot generate campaign holdouts.
 
+For incremental repository campaigns, export a reviewed definition and
+materialize an 8/28/105 case set for each stage. Keep the grading contract,
+development fixtures, variation rules and assessment environment identical.
+The source families and case records can differ. A later holdout must be
+disjoint from cases in the earlier stage, and an earlier holdout cannot
+reappear in the later stage. The service checks repository, revision,
+snapshot and independent case IDs. Each definition still needs exact review,
+and the later campaign must link to the completed prerequisite evidence.
+
 The declarative host adapter uses `input_transform: repository_archive:1` and
 one `read_only_roots` entry naming the public asset directory. It loads only the
 current hash-named archive and adds `source_b64` and the canonical `base_sha256`.

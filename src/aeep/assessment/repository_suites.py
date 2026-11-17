@@ -36,6 +36,7 @@ from .repository_tasks import Probe, RepositoryPatch, checked_files
 
 if TYPE_CHECKING:
     from ..benchmarking import BenchmarkCase
+    from .models import AssessmentPlan
 
 MAX_ARCHIVE = 650_000
 MAX_EXPANDED = 4_000_000
@@ -434,6 +435,54 @@ def curated_payload(recipe: RecipeDefinition) -> dict[str, Any]:
     return {'cases': [{'input': case.input.model_dump(mode='json'), 'output': case.truth.model_dump(mode='json'),
         'variation': case.input.family, 'template_family': case.source_repository.casefold()}
         for split in ('qualification', 'training', 'holdout') for case in cases if case.split == split]}
+
+
+def require_distinct_curated_cohorts(
+    earlier: RecipeDefinition, earlier_plan: AssessmentPlan,
+    later: RecipeDefinition, later_plan: AssessmentPlan,
+) -> None:
+    """Allow different curated inputs under the same reviewed grading contract."""
+    def contract(recipe: RecipeDefinition) -> dict[str, Any]:
+        return recipe.model_dump(exclude={
+            'recipe_id': True,
+            'generator_config': {'cases', 'declared_origin_counts'},
+            'extension': {'template_families'},
+        })
+
+    if (earlier.generator != 'curated_repository:1' or later.generator != 'curated_repository:1'
+            or earlier.extension is None or later.extension is None
+            or earlier.generator_config.get('assessment') is not True
+            or later.generator_config.get('assessment') is not True
+            or contract(earlier) != contract(later)):
+        raise ConfigurationError('curated stages require the same reviewed grading contract')
+
+    cohorts = []
+    for recipe, plan in ((earlier, earlier_plan), (later, later_plan)):
+        cases = curated_cases(recipe, assessment=True)
+        expected = {(case.split, case.source_repository.casefold(), content_digest(case.input))
+                    for case in cases if case.split != 'development'}
+        observed = {(case.split.value, case.template_family, content_digest(case.action.input))
+                    for case in plan.suite.cases}
+        if (plan.pilot is not None or plan.recipe_case_set_digest is None
+                or plan.integration_case_set_digest is not None or observed != expected
+                or len(plan.suite.cases) != len(expected)):
+            raise ConfigurationError('curated plan must bind the full reviewed cohort')
+        cohorts.append(cases)
+
+    def identities(cases: list[RepositorySuiteCase]) -> set[tuple[str, str]]:
+        return {
+            key for case in cases for key in (
+                ('repository', case.source_repository.casefold()),
+                ('revision', case.source_revision),
+                ('snapshot', case.input.source_sha256),
+                ('case', case.independent_case_id),
+            )
+        }
+
+    prior_cases, next_cases = cohorts
+    if (identities(prior_cases) & identities([case for case in next_cases if case.split == 'holdout'])
+            or identities(next_cases) & identities([case for case in prior_cases if case.split == 'holdout'])):
+        raise ConfigurationError('curated stages must use source-disjoint holdouts')
 
 
 def reference_outputs(recipe: RecipeDefinition, inputs: list[dict[str, Any]]) -> list[dict[str, Any]]:

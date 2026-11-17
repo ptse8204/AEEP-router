@@ -242,6 +242,17 @@ still require independent controlled evidence.
 
 ## Formal candidate and selection gates
 
+The [curated lineage verification](curated-cohort-lineage-verification.json)
+covers the service change that lets two curated definitions carry separate
+case sets under the same reviewed grader and environment. Each stage still
+needs 8/28/105 cases. The qualification and marginal plans need at least
+210 distinct holdouts and 36 early-stage cases between them if every early
+case can be shared. That puts the optimistic pool of 116 software cases at
+least 130 short of the two-stage minimum before source grouping and protected
+grading. A native-catalog stage, if run, needs another distinct holdout.
+The existing ExtractBench integration definition allows at most six
+engineering tasks. Formal native-score case materialization remains open.
+
 The [trial reservation projection](formal-reservation-capacity.json) reads
 the current grant with both historical pending reservations still charged.
 The snapshot had 2,172 turns and 475,529 seconds available. With the

@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [curated campaign lineage check](../toolkit-v2/c13/completion-20261116/curated-cohort-lineage-verification.json)
+allows separate reviewed repository cohorts with the same grader and
+environment. Preceding canonical validation stays tied to its original
+recipe. Reused holdout origins and changed grading contracts are rejected.
+Both formal stages still need 105 separate holdout cases each.
+
 The [C13 offline review group](../toolkit-v2/c13/completion-20261116/offline-evidence-reviews.json)
 binds an unstarted document calibration, two unstarted protected software
 grader batches and a metadata-only recovery on five retained archives.

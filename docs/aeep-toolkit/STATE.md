@@ -1,5 +1,17 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. Separate curated software cohorts can share a grading contract.**
+[Curated campaign verification](../../reports/toolkit-v2/c13/completion-20261116/curated-cohort-lineage-verification.json)
+records the lineage correction. The service checks each exact 8/28/105
+definition, a matching grading contract and environment, and source-disjoint
+holdouts. Qualification plus marginal value need 210 distinct holdout cases.
+Even if both reuse all 36 earlier-stage cases, they require at least 246
+eligible cases. The optimistic software pool has 116. The existing
+ExtractBench recipe is for integration checks, with formal document campaign
+materialization still open. A private ledger replay verified all 37 retained
+stack checks on the new tracked source. Waza is excluded. Review group
+`6b758e65` remains pending and comparative dispatch stays paused.
+
 **November 17. C13 offline evidence scopes are ready for grouped review.**
 [Offline evidence reviews `6b758e65`](../../reports/toolkit-v2/c13/completion-20261116/offline-evidence-reviews.json)
 bind the ExtractBench continuation, two unstarted software grader batches,

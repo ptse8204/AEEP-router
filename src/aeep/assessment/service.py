@@ -816,7 +816,8 @@ class AssessmentService:
         return mapping
 
     def _verify_three_way_qualification(self, plan: AssessmentPlan,
-                                        qualified_plan: AssessmentPlan, report: AssessmentReport) -> None:
+                                        qualified_plan: AssessmentPlan, report: AssessmentReport, *,
+                                        distinct_curated_cohort: bool = False) -> None:
         """Supplement existing canonical qualification checks, never replace refitting."""
         self.repository.authorize(qualified_plan)
         self._verify_dependencies(qualified_plan)
@@ -825,7 +826,9 @@ class AssessmentService:
         assert report.grader_validation_digest is not None
         validation = GraderValidationEvidence.model_validate(self.repository.get('grader_validation', report.grader_validation_digest))
         if (content_digest(validation) != report.grader_validation_digest
-                or validation.recipe_digest != plan.recipe_digest or validation.rejected_fault_count < 1):
+                or validation.recipe_digest != qualified_plan.recipe_digest
+                or (not distinct_curated_cohort and qualified_plan.recipe_digest != plan.recipe_digest)
+                or validation.rejected_fault_count < 1):
             raise ConfigurationError('three-way qualification grader binding differs')
         rows = self.router.store._connection.execute(
             "SELECT digest FROM assessment_records WHERE kind='grader_validation' AND id IN (SELECT id || ':grader-validation' FROM assessment_jobs WHERE plan_id=? AND report_id=? AND state='complete' AND error_code IS NULL)",
@@ -842,6 +845,23 @@ class AssessmentService:
             config['invocation'].pop('exposure')
         if left != right:
             raise ConfigurationError('three-way qualification candidate backend differs')
+
+    def _incremental_prior_recipe(self, plan: AssessmentPlan, recipe: RecipeDefinition,
+                                  prior_plan: AssessmentPlan) -> RecipeDefinition:
+        if prior_plan.recipe_digest == plan.recipe_digest:
+            return recipe
+        if recipe.generator != 'curated_repository:1':
+            raise ConfigurationError("incremental value requires current independent qualification evidence")
+        from .repository_suites import require_distinct_curated_cohorts
+
+        prior_recipe = RecipeDefinition.model_validate(self.repository.get('recipe', prior_plan.recipe_digest))
+        if (content_digest(prior_recipe) != prior_plan.recipe_digest
+                or content_digest(recipe) != plan.recipe_digest
+                or prior_plan.environment_digest != plan.environment_digest):
+            raise ConfigurationError('curated stages require exact recipe and environment bindings')
+        require_distinct_curated_cohorts(prior_recipe, prior_plan, recipe, plan)
+        self.repository.authorize(prior_plan)
+        return prior_recipe
 
     def _verify_incremental_evidence(self, plan: AssessmentPlan, experiment: IncrementalExperiment) -> None:
         from .boundary import require_differential
@@ -861,11 +881,16 @@ class AssessmentService:
                 or content_digest(report) != experiment.qualification_report_digest
                 or prior_experiment is None or prior_experiment.stage != "qualification"
                 or qualified_plan.authorization_id != plan.authorization_id
-                or qualified_plan.subject_digest != plan.subject_digest or qualified_plan.recipe_digest != plan.recipe_digest
+                or qualified_plan.subject_digest != plan.subject_digest
                 or prior_experiment.environment != experiment.environment
                 or binding.source_digest != verification_source_digest(Path(__file__).parents[3])
-                or report.grader_validation_digest is None
-                or not fit_report(qualified_plan, recipe, campaign).qualification_passed):
+                or report.grader_validation_digest is None):
+            raise ConfigurationError("incremental value requires current independent qualification evidence")
+        qualified_recipe = self._incremental_prior_recipe(plan, recipe, qualified_plan)
+        distinct_curated_cohort = qualified_plan.recipe_digest != plan.recipe_digest
+        if (not fit_report(qualified_plan, qualified_recipe, campaign).qualification_passed
+                or (distinct_curated_cohort and (content_digest(qualified_plan) != report.plan_digest
+                    or content_digest(campaign) != report.campaign_digest))):
             raise ConfigurationError("incremental value requires current independent qualification evidence")
         allowed_training = {content_digest(case.action.input) for case in qualified_plan.suite.cases if case.split == BenchmarkSplit.TRAINING}
         prior_inputs = {content_digest(case.action.input) for case in qualified_plan.suite.cases if case.split == BenchmarkSplit.HOLDOUT}
@@ -883,10 +908,14 @@ class AssessmentService:
             marginal_experiment = marginal_plan.comparison.experiment if marginal_plan.comparison else None
             if (marginal_plan.pilot is not None or content_digest(marginal) != experiment.marginal_report_digest or marginal_experiment is None
                     or marginal_plan.authorization_id != plan.authorization_id
-                    or marginal_experiment.stage != 'marginal_value' or marginal_plan.recipe_digest != plan.recipe_digest
+                    or marginal_experiment.stage != 'marginal_value'
                     or marginal_plan.subject_digest != plan.subject_digest
                     or marginal_experiment.environment.candidate_inventory != experiment.environment.candidate_inventory):
                 raise ConfigurationError('native catalog requires matching preceding marginal evidence')
+            if (marginal_plan.recipe_digest != plan.recipe_digest
+                    and content_digest(marginal_plan) != marginal.plan_digest):
+                raise ConfigurationError('curated marginal plan differs from its completed report')
+            self._incremental_prior_recipe(plan, recipe, marginal_plan)
             marginal_binding = AssessmentRunBinding.model_validate(self.repository.get('run_binding', marginal_plan.plan_id))
             with self.router.store._lock:
                 done = self.router.store._connection.execute(
@@ -906,7 +935,8 @@ class AssessmentService:
             if completed is None:
                 raise ConfigurationError("qualification requires a completed campaign, not a report alone")
             if experiment.stage == 'aeep_value':
-                self._verify_three_way_qualification(plan, qualified_plan, report)
+                self._verify_three_way_qualification(
+                    plan, qualified_plan, report, distinct_curated_cohort=distinct_curated_cohort)
                 return
             for identity in experiment.reusable_build_operation_ids:
                 row = self.router.store._connection.execute(

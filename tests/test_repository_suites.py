@@ -28,6 +28,7 @@ from aeep.assessment.repository_suites import (
     public_archive,
     reference_outputs,
     repository_suite_recipe,
+    require_distinct_curated_cohorts,
 )
 from aeep.assessment.repository_tasks import RepositoryPatch
 from aeep.errors import ConfigurationError
@@ -265,12 +266,12 @@ def test_truth_and_fault_contracts(suite_cases):
         decode_patch({'patch_b64': base64.b64encode(b'{"files":{},"files":{}}').decode()})
 
 
-def campaign_cases(development, root):
+def campaign_cases(development, root, *, prefix=""):
     """Fabricated origins and simple text assets for lifecycle serialization only."""
     result = list(development)
     for split, count in [('qualification', 8), ('training', 28), ('holdout', 105)]:
         for index in range(count):
-            tag = split + str(index)
+            tag = prefix + split + str(index)
             data = development[0].model_dump(mode='json')
             archive = pack_files({'library/core.py': ('# first-party serialization fixture ' + tag).encode()})
             digest = hashlib.sha256(archive).hexdigest()
@@ -315,6 +316,67 @@ async def test_curated_materialization_uses_one_existing_ledger_operation(suite_
             curated_payload(broken)
     finally:
         await router.close()
+
+
+def test_curated_campaigns_allow_fresh_cohorts_without_changing_the_grader(suite_cases, tmp_path):
+    from aeep.assessment.service import AssessmentService
+    from aeep.benchmarking import BenchmarkSplit
+
+    def cases(prefix):
+        staged = campaign_cases(suite_cases, tmp_path.resolve(), prefix=prefix)
+        for case in staged[len(suite_cases):]:
+            case.source_repository = f'https://example.test/{prefix}-{case.split}'
+        return staged
+
+    def plan(recipe):
+        cohort = curated_cases(recipe, assessment=True)
+        return SimpleNamespace(
+            recipe_digest=content_digest(recipe),
+            environment_digest='reviewed-environment',
+            pilot=None,
+            integration_case_set_digest=None,
+            recipe_case_set_digest='materialized',
+            suite=SimpleNamespace(cases=[
+                SimpleNamespace(split=BenchmarkSplit(case.split),
+                                template_family=case.source_repository.casefold(),
+                                action=SimpleNamespace(input=case.input.model_dump(mode='json')))
+                for case in cohort if case.split != 'development'
+            ]),
+        )
+
+    prior = repository_suite_recipe(cases('qualification-'), assessment=True)
+    later = repository_suite_recipe(cases('value-'), assessment=True)
+    old_plan, new_plan = plan(prior), plan(later)
+    assert old_plan.recipe_digest != new_plan.recipe_digest
+    assert len(old_plan.suite.cases) == len(new_plan.suite.cases) == 141
+    authorized = []
+    service = object.__new__(AssessmentService)
+    service.repository = SimpleNamespace(
+        get=lambda kind, key: {old_plan.recipe_digest: prior, new_plan.recipe_digest: later}[key],
+        authorize=authorized.append,
+    )
+    assert service._incremental_prior_recipe(new_plan, later, old_plan) == prior
+    assert authorized == [old_plan]
+
+    new_plan.environment_digest = 'different-container'
+    with pytest.raises(ConfigurationError, match='exact recipe and environment'):
+        service._incremental_prior_recipe(new_plan, later, old_plan)
+    new_plan.environment_digest = old_plan.environment_digest
+    assert later.extension is not None
+    modified = later.model_copy(deep=True)
+    modified.extension.grader.config['timeout_seconds'] += 1
+    with pytest.raises(ConfigurationError, match='same reviewed grading contract'):
+        require_distinct_curated_cohorts(prior, old_plan, modified, new_plan)
+
+    new_plan.suite.cases.pop()
+    with pytest.raises(ConfigurationError, match='full reviewed cohort'):
+        require_distinct_curated_cohorts(prior, old_plan, later, new_plan)
+
+    reused = cases('catalog-')
+    reused[-1].source_repository = old_plan.suite.cases[-1].template_family.upper()
+    overlapping = repository_suite_recipe(reused, assessment=True)
+    with pytest.raises(ConfigurationError, match='source-disjoint holdouts'):
+        require_distinct_curated_cohorts(prior, old_plan, overlapping, plan(overlapping))
 
 
 @pytest.mark.asyncio

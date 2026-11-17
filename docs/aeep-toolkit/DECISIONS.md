@@ -3591,3 +3591,14 @@ check. The new review covers compatibility of the evidence with the current
 gate. Execution authority stays with the original grants and reviewed inputs.
 Runtime drift leaves the affected check open. See the
 [C13 retained receipt audit](../../reports/toolkit-v2/c13/canonical-stack-receipts-20261114/README.md).
+
+## November 17 — independent repository cohorts under one grading contract
+
+A curated repository definition embeds all 141 campaign cases. The exact
+recipe digest therefore changes when the later stage uses a fresh holdout.
+The assessment service accepts different curated definitions only when the
+grading contract and environment match. It checks the materialized inputs
+against each exact definition and rejects overlap involving either holdout.
+The preceding grade evidence stays tied to its original exact recipe.
+Other recipe families keep their existing identical-digest requirement.
+Review, accounting and completion checks still apply to each stage.

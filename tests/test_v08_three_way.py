@@ -425,7 +425,8 @@ def test_false_or_unbound_three_way_access_fails_closed(access_fixture, fault):
 
 
 @pytest.mark.parametrize(
-    "fault", [None, "candidate", "revoked", "grader_recipe", "grader_job", "backend", "exposure"]
+    "fault", [None, "candidate", "revoked", "grader_recipe", "grader_job", "backend", "exposure",
+              "fresh_curated_recipe", "wrong_curated_validation"]
 )
 def test_qualification_transfer_uses_canonical_records_and_exact_backend(
     tmp_path, monkeypatch, fault
@@ -438,11 +439,15 @@ def test_qualification_transfer_uses_canonical_records_and_exact_backend(
         candidate_id: str = "candidate"
         plan_id: str = "qualified"
         mapping_digest: str = "qmap"
+        recipe_digest: str = "a" * 64
 
     qualified = Qualified()
     plan = SimpleNamespace(candidate_id="candidate", recipe_digest="a" * 64, mapping_digest="vmap")
+    distinct_curated = fault in {"fresh_curated_recipe", "wrong_curated_validation"}
+    if distinct_curated:
+        plan.recipe_digest = "d" * 64
     validation = GraderValidationEvidence(
-        recipe_digest=plan.recipe_digest,
+        recipe_digest=plan.recipe_digest if fault == "wrong_curated_validation" else qualified.recipe_digest,
         independent_fixture_digests=["b" * 64],
         generator_fixture_digests=[],
         rejected_fault_count=1,
@@ -510,11 +515,11 @@ def test_qualification_transfer_uses_canonical_records_and_exact_backend(
         configs["vmap"]["model"] = "other"
     if fault == "exposure":
         configs["qmap"]["invocation"]["exposure"] = "optional"
-    if fault:
+    if fault not in {None, "fresh_curated_recipe"}:
         with pytest.raises(ConfigurationError):
-            service._verify_three_way_qualification(plan, qualified, report)
+            service._verify_three_way_qualification(plan, qualified, report, distinct_curated_cohort=distinct_curated)
     else:
-        service._verify_three_way_qualification(plan, qualified, report)
+        service._verify_three_way_qualification(plan, qualified, report, distinct_curated_cohort=distinct_curated)
         assert calls == ["authorize", "dependencies"]
     store.close()
 
@@ -563,7 +568,7 @@ def test_three_way_keeps_shared_qualification_lineage_and_holdout_gate(monkeypat
         "plan": qualified,
         "campaign": campaign,
         "run_binding": binding,
-        "recipe": SimpleNamespace(),
+        "recipe": SimpleNamespace(generator="contained_json:1"),
     }
     for name in (
         "AssessmentEnvironment",

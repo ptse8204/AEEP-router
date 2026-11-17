@@ -1,0 +1,146 @@
+{
+  "schema_version": "aeep.c13.curated-cohort-lineage-verification.v1",
+  "tracked_source": "c5d34f51c45bb33f4e610214fd2239a8438ef71a162b7a11949860cb0844f876",
+  "prior_tracked_source": "f47d30422f793429ce9079ded16ed0230bb844c942a3336025eac09925bb1939",
+  "tracked_source_files_checked": 414,
+  "source_changes": {
+    "src/aeep/assessment/repository_suites.py": [
+      "9923c3e1f8c9d751cb1fc7088853838f9ee28d3cc78f463fdbdc25313a305843",
+      "c0a5025b23491acba1079c46cf6aa78f469cb9db0f4e924113f3e260e8169335"
+    ],
+    "src/aeep/assessment/service.py": [
+      "644c2969e056143f2d20d7829a6ffb313f977cccac4e1e27837ac3d6cdb433e3",
+      "18b9ac6544f1821dc7a29254b7eae9e247112af6ee7c475bf1cfea86fa438e99"
+    ],
+    "tests/test_repository_suites.py": [
+      "8bd6d3ba22a2ee1e469e506bc1c5ceccd24164c2e261a4a1213dd36f5b144b26",
+      "d255a0a36efea870a21d4beb1cbf097948911c0eb476730819ddd50b8d5762a6"
+    ],
+    "tests/test_v08_three_way.py": [
+      "dea127e30a410b938be04ab5d858ffd0aeedc12c318bdd59a8cf9f22d3ada135",
+      "beb41482b5dc0fff1ca63e7730b6a5eb96f231421224340bf5d1ed56556f7dda"
+    ]
+  },
+  "semantics": {
+    "prior_and_current_recipe_review_required": true,
+    "assessment_environment_exact_match_required": true,
+    "shared_contract_fields": "All recipe and extension fields except identifiers, case records, origin counts and template family names derived from cases.",
+    "prior_canonical_grader_validation": "Binds to the qualified plan recipe.",
+    "cross_stage_holdout_keys": [
+      "repository",
+      "revision",
+      "snapshot",
+      "independent case ID"
+    ]
+  },
+  "verification": {
+    "compileall": true,
+    "schema_drift": false,
+    "targeted_type_check": true,
+    "targeted_lint": true,
+    "tracked_focused_tests": {
+      "passed": 134,
+      "log": {
+        "path": ".aeep/completion-20261116/curated-cohort-lineage-20261117/tracked-focused.log",
+        "sha256": "ed94c4167db47dbd98e2449707082d4b822bd81947fa91cc852aa47d8cdad29e"
+      }
+    },
+    "workspace_regression": {
+      "passed": 2173,
+      "skipped": 21,
+      "log": {
+        "path": ".aeep/completion-20261116/curated-cohort-lineage-20261117/pytest.log",
+        "sha256": "2c8928e0f9c8e004e7defe7666e0a558d08f3a2ea143de2a370b2c8f3e86b85c"
+      },
+      "warning": "The retained installed Starlette test client deprecates httpx."
+    },
+    "workspace_branch_suite": {
+      "passed": 2173,
+      "skipped": 21,
+      "combined_coverage_percent": 81.46775253816375,
+      "log": {
+        "path": ".aeep/completion-20261116/curated-cohort-lineage-20261117/coverage-pytest.log",
+        "sha256": "86cb9986c461ca383a5f3de6799fef9841d00334edf628e2a58893dacc73b57e"
+      },
+      "coverage_report": {
+        "path": ".aeep/completion-20261116/curated-cohort-lineage-20261117/coverage-report.log",
+        "sha256": "f3eaf8be259b1690f8801eda5b695ea21e68e30c561710f043b970c5fa54f8ab"
+      },
+      "raw_coverage_digest": {
+        "path": ".aeep/completion-20261116/curated-cohort-lineage-20261117/.coverage",
+        "sha256": "60c131a7aff4ed2748219f86fc9d74d7d4eeaf53ea2890115b38ee578a4c2a97"
+      },
+      "critical_branch_gate": {
+        "path": ".aeep/completion-20261116/curated-cohort-lineage-20261117/critical-coverage.log",
+        "sha256": "c54ccbd27dd9ac88dc8aadb5824c437cdd168e412d7fb8e566d4b6d6b488aca6"
+      },
+      "assessment_branch_gate": {
+        "path": ".aeep/completion-20261116/curated-cohort-lineage-20261117/assessment-coverage.log",
+        "sha256": "4a5e7160fe409aaf5c8393c734cf5200968132d88ce6394e9678be9551432d55"
+      },
+      "post_test_recovery": "The scratch directory contained only .DS_Store after cleanup raised ENOTEMPTY. Both coverage gates and reports completed from saved data."
+    },
+    "offline_docs": {
+      "files": 72,
+      "link_errors": 0,
+      "log": {
+        "path": ".aeep/completion-20261116/curated-cohort-lineage-20261117/docs-final.log",
+        "sha256": "a200538a2ef5b128be09d0254982e04e8b9dcc36e16ccbba36a96643025f6d3a"
+      }
+    }
+  },
+  "stack_reinspection": {
+    "report": {
+      "path": ".aeep/completion-20261116/curated-cohort-lineage-20261117/stack-reinspection.json",
+      "sha256": "dd81c63c9af2fead7196177caf872b3595138df66ca3d80648d64a09d9727338"
+    },
+    "status": {
+      "path": ".aeep/completion-20261116/curated-cohort-lineage-20261117/stack-status.json",
+      "sha256": "f7cb8f99f9af60be54092ef22ea2fc38e7a2b24cb03dfc3e6d9d757461d7f8ef"
+    },
+    "driver": {
+      "path": ".aeep/completion-20261116/curated-cohort-lineage-20261117/recheck-stack.py",
+      "sha256": "4b64824e9d71f3e2f83b12768cd8902647e56fefde4c0855ae32460970b49863"
+    },
+    "checks": 37,
+    "components": 18,
+    "private_completion_reference": "fdac21346571eb5d5abef7f141c5006d1a277ebadba76014995853d4fb0d7b34",
+    "scope": "Read-only source evidence copied into a private ledger. No operational grant change."
+  },
+  "tracked_wheel_archive": {
+    "path": ".aeep/completion-20261116/curated-cohort-lineage-20261117/committed-dist/aeep_agent_router-0.8.2-py3-none-any.whl",
+    "sha256": "0e9104b1b2f97e820b6d8389358346ec55ac182d5df9e4260377ea1b06699abe",
+    "runtime_changes": [
+      "aeep/assessment/repository_suites.py",
+      "aeep/assessment/service.py"
+    ],
+    "runtime_requirements_unchanged": true,
+    "installed": false
+  },
+  "prospective_software_floor": {
+    "official_counts_per_curated_stage": {
+      "holdout": 105,
+      "qualification": 8,
+      "training": 28
+    },
+    "minimum_distinct_holdout_cases_for_qualification_and_marginal": 210,
+    "minimum_distinct_cases_if_all_early_cases_shared": 246,
+    "optimistic_provisional_cases_available": 116,
+    "additional_eligible_cases_needed_at_least": 130,
+    "scope": "Read-only capacity lower bound before rights, runtime, and source-disjoint assignment."
+  },
+  "storage_cleanup": {
+    "path": ".aeep/completion-20261116/curated-cohort-lineage-20261117/storage-fixture-cleanup.json",
+    "sha256": "bba1044c7465f550eb82ce2e7d458e0bb507589f1e10a863bede18e34e601149"
+  },
+  "extractbench_formal_materialization_available": false,
+  "grouped_offline_review_pending": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/offline-evidence-reviews.json",
+    "sha256": "6b758e65254042640df8aa36b8341bfbcad7975e931ed063a2060ed986aa0c1a"
+  },
+  "comparisons_dispatched": 0,
+  "new_model_turns": 0,
+  "new_cash_usd": 0,
+  "formal_cases_adopted": 0,
+  "waza_excluded": true
+}
