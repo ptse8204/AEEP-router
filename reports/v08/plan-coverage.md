@@ -294,6 +294,14 @@ published test identities are intact. These are alternatives to authored
 audits at the same revisions. Both require protected runtime verification
 before they can change the balanced cohort projection.
 
+The [ancillary repair alternatives](../toolkit-v2/c13/completion-20261116/ancillary-repair-alternatives.json)
+bind Arta 50 and Confluence Markdown Exporter 92 to eight ordinary
+grader payloads. Both retain the original test identities and could
+replace audits at the same revisions. Source-disjoint capacity improves
+only if the protected reference and both partial failures are verified.
+The existing 103 prospects, formal stages and execution authority are
+recorded separately. No upstream code ran.
+
 The [ExtractBench source-group audit](../toolkit-v2/c13/completion-20261116/extractbench-source-group-capacity.json)
 finds 294 potential document/data slots after known alias and development
 exclusions. Two group-disjoint 8/28/105 examples fit in the metadata. Per-source

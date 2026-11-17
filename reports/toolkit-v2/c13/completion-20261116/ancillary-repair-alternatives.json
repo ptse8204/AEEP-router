@@ -1,0 +1,440 @@
+{
+  "bootstrap_probe_review_sha256": "46aacf0449047d1ffd20e4fbf783be2d71450ff71d5587d29ce53771a0f8bf0c",
+  "capacity": {
+    "examples": {
+      "all_four_repairs": {
+        "pending": [
+          {
+            "balanced_stage_sizes_by_family": {
+              "holdout": {
+                "contract-audit": 35,
+                "multi-file-repair": 35,
+                "single-file-repair": 35
+              },
+              "qualification": {
+                "contract-audit": 3,
+                "multi-file-repair": 2,
+                "single-file-repair": 3
+              },
+              "training": {
+                "contract-audit": 9,
+                "multi-file-repair": 9,
+                "single-file-repair": 10
+              }
+            },
+            "needed": {
+              "contract-audit": 30,
+              "multi-file-repair": 13
+            }
+          },
+          {
+            "balanced_stage_sizes_by_family": {
+              "holdout": {
+                "contract-audit": 35,
+                "multi-file-repair": 35,
+                "single-file-repair": 35
+              },
+              "qualification": {
+                "contract-audit": 2,
+                "multi-file-repair": 3,
+                "single-file-repair": 3
+              },
+              "training": {
+                "contract-audit": 9,
+                "multi-file-repair": 9,
+                "single-file-repair": 10
+              }
+            },
+            "needed": {
+              "contract-audit": 29,
+              "multi-file-repair": 14
+            }
+          }
+        ],
+        "retained": {
+          "contract-audit": 17,
+          "multi-file-repair": 33,
+          "single-file-repair": 53
+        }
+      },
+      "both_new_repairs": {
+        "pending": [
+          {
+            "balanced_stage_sizes_by_family": {
+              "holdout": {
+                "contract-audit": 35,
+                "multi-file-repair": 35,
+                "single-file-repair": 35
+              },
+              "qualification": {
+                "contract-audit": 3,
+                "multi-file-repair": 2,
+                "single-file-repair": 3
+              },
+              "training": {
+                "contract-audit": 9,
+                "multi-file-repair": 9,
+                "single-file-repair": 10
+              }
+            },
+            "needed": {
+              "contract-audit": 28,
+              "multi-file-repair": 15
+            }
+          },
+          {
+            "balanced_stage_sizes_by_family": {
+              "holdout": {
+                "contract-audit": 35,
+                "multi-file-repair": 35,
+                "single-file-repair": 35
+              },
+              "qualification": {
+                "contract-audit": 2,
+                "multi-file-repair": 3,
+                "single-file-repair": 3
+              },
+              "training": {
+                "contract-audit": 9,
+                "multi-file-repair": 9,
+                "single-file-repair": 10
+              }
+            },
+            "needed": {
+              "contract-audit": 27,
+              "multi-file-repair": 16
+            }
+          }
+        ],
+        "retained": {
+          "contract-audit": 19,
+          "multi-file-repair": 31,
+          "single-file-repair": 53
+        }
+      },
+      "current": {
+        "pending": [
+          {
+            "balanced_stage_sizes_by_family": {
+              "holdout": {
+                "contract-audit": 35,
+                "multi-file-repair": 35,
+                "single-file-repair": 35
+              },
+              "qualification": {
+                "contract-audit": 3,
+                "multi-file-repair": 2,
+                "single-file-repair": 3
+              },
+              "training": {
+                "contract-audit": 9,
+                "multi-file-repair": 9,
+                "single-file-repair": 10
+              }
+            },
+            "needed": {
+              "contract-audit": 26,
+              "multi-file-repair": 17
+            }
+          }
+        ],
+        "retained": {
+          "contract-audit": 21,
+          "multi-file-repair": 29,
+          "single-file-repair": 53
+        }
+      }
+    },
+    "formal_assignment": null,
+    "prior_audit_sha256": "b01aee4eff6e466306a98dc474affd1fc4a937116ad6b5fc25751d937bdc37c2",
+    "review_sha256": "bb4a134feb5af19dac075f5ed362e80f20d9b83eec132d97886ef517dd721998"
+  },
+  "cases": [
+    {
+      "case": "MAIF__arta-50",
+      "ordinary_callback_substitutions": {
+        "only:src/arta/condition.py": {
+          "archive_sha256": "bb19bc21bf8250eb819ed693d715d51884d25d05e6836d86a541dd1515c4c82f",
+          "bytes": 757504
+        },
+        "only:src/arta/rule.py": {
+          "archive_sha256": "23a339f1a667fc01c03634a6e2696067fa194238acc693b1f88a1e9de8a77d4f",
+          "bytes": 757524
+        },
+        "original": {
+          "archive_sha256": "525370b638ee92e37717fc478c05a611079fb54f4118145bec82772fda63e5f6",
+          "bytes": 757500
+        },
+        "reference": {
+          "archive_sha256": "26ead298095b9ec4aecce2ebb26c9973a4ff11d7fdec85ed2bb552ad9e4abf0f",
+          "bytes": 757528
+        }
+      },
+      "protected_controls": {
+        "bytes": 13175,
+        "sha256": "e7719150481ecb4e50d00981750f55bf1eda58919443fbcb637051230a87d707"
+      },
+      "published_dependencies": [
+        "omegaconf>=2.0.0",
+        "pydantic<3.0.0"
+      ],
+      "replaces_only": "MAIF__arta-50-aeep-contract-audit",
+      "required_test_identities": 16,
+      "reviewed_snapshot": {
+        "dataset_row_sha256": "acca0a3ceddb6c7a20b681568c0f8a621f0027ff338a14e6172124cb26ec346d",
+        "editable_changes": [
+          "src/arta/condition.py",
+          "src/arta/rule.py"
+        ],
+        "executable_changes": [
+          "src/arta/condition.py",
+          "src/arta/rule.py"
+        ],
+        "family": "multi-file-repair",
+        "frozen_metadata": {
+          ".pre-commit-config.yaml": {
+            "after": "d9b972e5f7e2857a462c40793d3b8435e9609bd18d2909df91629e892cd4fdc0",
+            "before": "6244353bfc22215edad8c85a342ca19ec494c93a7e5707325136bef18de3f338"
+          },
+          "pyproject.toml": {
+            "after": "8c2592c7dfcc79f93e69103e42211f5b28470e8b97b794edbfb1ccefe2068c4d",
+            "before": "9f7b8a0976c093c2259b0b44a13658c79887e309306fcea30024cf1784c8988a"
+          }
+        },
+        "license_notices": [
+          {
+            "bytes": 10174,
+            "file": "LICENSE",
+            "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+          },
+          {
+            "bytes": 633,
+            "file": "NOTICE",
+            "sha256": "3cee948f4f330e7c2e7aa22b846a8b302b4beaf168b107a9b37398f242d2b38a"
+          },
+          {
+            "bytes": 203,
+            "file": "licenses.md",
+            "sha256": "05756df4b424e4a5a24b51b2590e9f1b9bc99db515ecdf841cb4db80c139a8ce"
+          }
+        ],
+        "metadata_semantic_sha256": "30bee1e3f57bd6ee961021c3d2a2c6cba8873d40482ad35e46c8a8880860ac60",
+        "omitted_documentation_changes": [
+          "CHANGELOG.md",
+          "docs/pages/a_simple_example.md",
+          "docs/pages/home.md",
+          "docs/pages/how_to.md",
+          "docs/pages/value_sharing.md"
+        ],
+        "published_python": "3.11",
+        "repository": "MAIF/arta",
+        "required_issue_tests": 2,
+        "required_preservation_tests": 14,
+        "revision": "4554f44729b2c23fc1ac91c1701451666b5d5c4b",
+        "source_archive_sha256": "96d230590ac051b6ed18db4939609503ff6ae77c8e1f49c52445abcef0a9a1c9",
+        "test_modules": [
+          "tests/unit/test_engine_with_conf.py"
+        ],
+        "test_roots": [
+          "tests"
+        ]
+      },
+      "runtime": {
+        "admits_python_3_13_0": true,
+        "declared_requires_python": ">3.8.0",
+        "names_not_declared_in_selected_module": {}
+      },
+      "upstream_lock_sha256": null
+    },
+    {
+      "case": "Spenhouet__confluence-markdown-exporter-92",
+      "ordinary_callback_substitutions": {
+        "only:confluence_markdown_exporter/main.py": {
+          "archive_sha256": "effac080fcc77f52ef2c1dddfc511172b760aa3c190096f0acacb81b3a3f210e",
+          "bytes": 763152
+        },
+        "only:confluence_markdown_exporter/utils/app_data_store.py": {
+          "archive_sha256": "c466cd1c3a85debf0b0ca8f92cdfe65e3611bb8567f2b72c1b6a9f529732a40d",
+          "bytes": 763168
+        },
+        "original": {
+          "archive_sha256": "d30d4cef46840b04a25aaac7bf139517e508f8dac87d36da404262db7e9cf837",
+          "bytes": 763224
+        },
+        "reference": {
+          "archive_sha256": "3a28b7f1b662ca8a804d3e2980596202ba6e64518b4f3d0c9e2d2217861dac21",
+          "bytes": 763072
+        }
+      },
+      "protected_controls": {
+        "bytes": 12758,
+        "sha256": "ce3fb11270d0979dfe1d4cfa250da09f6bd55bf6f30a86b8d097c9c6168c5c98"
+      },
+      "published_dependencies": [
+        "atlassian-python-api",
+        "jmespath",
+        "markdownify",
+        "pydantic-settings",
+        "pyyaml",
+        "questionary",
+        "tabulate",
+        "tqdm",
+        "typer",
+        "python-dateutil"
+      ],
+      "replaces_only": "Spenhouet__confluence-markdown-exporter-92-aeep-contract-audit",
+      "required_test_identities": 8,
+      "reviewed_snapshot": {
+        "dataset_row_sha256": "8af020ce54b23dd0dd1c9106e7657fde44a59403a33293d7ed3c1835336d8b96",
+        "editable_changes": [
+          "confluence_markdown_exporter/main.py",
+          "confluence_markdown_exporter/utils/app_data_store.py"
+        ],
+        "executable_changes": [
+          "confluence_markdown_exporter/main.py",
+          "confluence_markdown_exporter/utils/app_data_store.py"
+        ],
+        "family": "multi-file-repair",
+        "frozen_metadata": {
+          "pyproject.toml": {
+            "after": "34fd260923353ef3d2005d45dc035a13099f1a460b301dba42516db5e2ad0909",
+            "before": "3da5913a5cde7ade99c866ee2eb44925d570a30c8a02ad25a7bef1babfcb309d"
+          }
+        },
+        "license_notices": [
+          {
+            "bytes": 1075,
+            "file": "LICENSE",
+            "sha256": "01e9238b76f1eb6f2d8146f6e94a003447410e1235cd5a44ecbcfcaa34617c0f"
+          }
+        ],
+        "metadata_semantic_sha256": "f89c5ee8a7e5f507c363f3cc5bfb4b5668d61eb34583c1afe3958e0cd3128ef6",
+        "omitted_documentation_changes": [],
+        "published_python": "3.12",
+        "repository": "Spenhouet/confluence-markdown-exporter",
+        "required_issue_tests": 1,
+        "required_preservation_tests": 7,
+        "revision": "7e08acc485dce32fc637336b877c223e4c6a4a4e",
+        "source_archive_sha256": "7ccd039c67d8ff852d182b3fbc6eda74710402b3ef799bc00e31eecf132e4936",
+        "test_modules": [
+          "tests/unit/test_main.py"
+        ],
+        "test_roots": [
+          "tests"
+        ]
+      },
+      "runtime": {
+        "admits_python_3_13_0": true,
+        "declared_requires_python": ">= 3.10",
+        "names_not_declared_in_selected_module": {}
+      },
+      "upstream_lock_sha256": "0163a397bb73013af96d36e2a18dd61285652a0ea51f0d125ce2c8004218fe6a"
+    }
+  ],
+  "confluence_lock_projection": {
+    "cache_verified": [
+      "PyYAML-6.0.2-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+      "annotated_types-0.7.0-py3-none-any.whl",
+      "idna-3.10-py3-none-any.whl",
+      "iniconfig-2.1.0-py3-none-any.whl",
+      "markdown_it_py-4.0.0-py3-none-any.whl",
+      "mdurl-0.1.2-py3-none-any.whl",
+      "packaging-25.0-py3-none-any.whl",
+      "pluggy-1.6.0-py3-none-any.whl",
+      "pygments-2.19.2-py3-none-any.whl",
+      "pytest-8.4.1-py3-none-any.whl",
+      "python_dateutil-2.9.0.post0-py2.py3-none-any.whl",
+      "python_dotenv-1.1.1-py3-none-any.whl",
+      "requests-2.32.5-py3-none-any.whl",
+      "shellingham-1.5.4-py2.py3-none-any.whl",
+      "six-1.17.0-py2.py3-none-any.whl",
+      "tqdm-4.67.1-py3-none-any.whl",
+      "typing_extensions-4.15.0-py3-none-any.whl",
+      "typing_inspection-0.4.1-py3-none-any.whl",
+      "urllib3-2.5.0-py3-none-any.whl"
+    ],
+    "lock_sha256": "0163a397bb73013af96d36e2a18dd61285652a0ea51f0d125ce2c8004218fe6a",
+    "missing_platform_wheels": [],
+    "pytest": "8.4.1",
+    "runtime_target": {
+      "implementation_name": "cpython",
+      "implementation_version": "3.13.15",
+      "os_name": "posix",
+      "platform_machine": "aarch64",
+      "platform_python_implementation": "CPython",
+      "platform_release": "",
+      "platform_system": "Linux",
+      "platform_version": "",
+      "python_full_version": "3.13.15",
+      "python_version": "3.13",
+      "sys_platform": "linux"
+    },
+    "scope": "Published runtime and pytest lock; Ruff development-only tooling excluded.",
+    "uncached_bytes": 4230311,
+    "verified_cached_wheel_count": 19,
+    "wheel_count": 40
+  },
+  "downloads": 0,
+  "formal_cases_adopted": 0,
+  "index": {
+    "bytes": 5482,
+    "path": ".aeep/completion-20261116/ancillary-repair-alternatives/staged-v3/worker-transport/private-index.json",
+    "sha256": "2148320b8b0ca17d64b89fde463d2d4cb985791b21ea255b1391565778eb35c2"
+  },
+  "model_turns": 0,
+  "native_runs": 0,
+  "runtime_gaps": {
+    "MAIF__arta-50": "No publisher lock. The retained wheel cache has no OmegaConf or ANTLR Python runtime wheel. An exact compatible closure and native grading remain open.",
+    "Spenhouet__confluence-markdown-exporter-92": "The recorded lock binds pytest 8.4.1. The callback rehearsal used an existing pytest 8.3.5 fixture. Twenty-one locked wheels remain uncached, and the actual grader has not run."
+  },
+  "schema_version": "aeep.c13.ancillary-repair-alternatives.v1",
+  "scope": "Inert archive preparation and substituted protected replies; native scores and dependency closure remain unknown.",
+  "verification": {
+    "docs": {
+      "log": ".aeep/completion-20261116/ancillary-repair-alternatives/docs.log",
+      "result": "72 inputs passed",
+      "sha256": "bf5367614f66fe807d2cac9ec3bad3a443ef9de5288f1b0a100870df6aa04bbd"
+    },
+    "focused_tests": {
+      "log": ".aeep/completion-20261116/ancillary-repair-alternatives/focused.log",
+      "result": "128 passed",
+      "sha256": "9265856cce7fa62366c9d36beacc0da31829bfef74db6d7836f09793df96ed8f"
+    },
+    "full_private_record": {
+      "path": ".aeep/completion-20261116/ancillary-repair-alternatives/stage-result-v3.json",
+      "sha256": "817b2a7f5b169af482f51d6ee3b45f46985e8f4a15add54d1202303f9c546e2b"
+    },
+    "initial_preparation_failure": "Missing staging directory before writing the first asset. Created the expected directory and prepared fresh, isolated output. No upstream code ran.",
+    "private_driver": {
+      "path": ".aeep/completion-20261116/ancillary-repair-alternatives/stage.py",
+      "sha256": "e29b58486deca5d13d231aebead273f2d0744ae7ca650c29249da3a254ee0c75"
+    },
+    "replay_and_drift": {
+      "checks": [
+        "deterministic_inputs_payloads_and_partition_projection",
+        "MAIF__arta-50:protected_control_outside_public",
+        "MAIF__arta-50:refused_public_archive_drift",
+        "MAIF__arta-50:refused_protected_test_drift",
+        "MAIF__arta-50:refused_reference_patch_drift",
+        "Spenhouet__confluence-markdown-exporter-92:protected_control_outside_public",
+        "Spenhouet__confluence-markdown-exporter-92:refused_public_archive_drift",
+        "Spenhouet__confluence-markdown-exporter-92:refused_protected_test_drift",
+        "Spenhouet__confluence-markdown-exporter-92:refused_reference_patch_drift"
+      ],
+      "result": "passed"
+    },
+    "replay_command": {
+      "argv": [
+        "python3",
+        "-B",
+        ".aeep/completion-20261116/ancillary-repair-alternatives/stage.py",
+        "ABSOLUTE_FRESH_DIRECTORY_UNDER_.aeep/completion-20261116"
+      ],
+      "environment": {
+        "PYTHONPATH": "src"
+      },
+      "normalization": "Only the index path differs by output root.",
+      "run_from": "repository root"
+    }
+  }
+}

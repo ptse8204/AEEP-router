@@ -6,6 +6,12 @@ references and source pins. The operator excluded Waza from this delivery.
 The Waza setup below is historical. Candidate and selection usefulness remain
 separate from functional readiness.
 
+Arta 50 and Confluence Markdown Exporter 92 reuse original SWE-rebench
+inputs and 24 protected test identities. Their scoped production repairs
+reuse ordinary patch transport. Native runtime and exact dependency
+verification remain open.
+[Repair alternatives](../../reports/toolkit-v2/c13/completion-20261116/ancillary-repair-alternatives.json)
+
 The independent SkillsBench economic task has a contained recipe and case
 binding. Its first ordinary reference command passed. The grader failed during
 startup, before loading the protected test module. The corrected adapter

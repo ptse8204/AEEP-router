@@ -497,6 +497,19 @@ with the checksum-verified cached 26.3 wheel in place of 25.0. Runtime
 closure remains open. Venvstacks also needs an executable-mode review for
 its retained `stacks.py`. No stages changed.
 
+The [ancillary repair alternatives](../../reports/toolkit-v2/c13/completion-20261116/ancillary-repair-alternatives.json)
+bind two-file repairs for Arta 50 and Confluence Markdown Exporter 92.
+The ordinary callback accepted eight distinct payloads with substituted
+replies. All 24 published test identities are intact. Each repair would
+replace the authored audit at its exact source revision. If both pass
+native grading, one balanced 8/28/105 projection needs 28 audits and 15
+multi-file repairs from the pending batch. The prospective pool still
+contains 103 origins. Arta needs an exact dependency closure. Confluence
+has 19 verified cached wheels out of 40; 21 are missing (4,230,311 bytes).
+Replay, nine preparation checks and 128 focused tests passed. The scoped
+replay command, dependencies and unresolved runtime gaps are in the
+evidence record. No cases were assigned or disclosed.
+
 The [Venvstacks lock projection](../../reports/toolkit-v2/c13/completion-20261116/venvstacks-runtime-lock-projection.json)
 binds 47 wheels for the publisher's default and test groups on Linux ARM64.
 Fifteen cached wheels matched the lock. Thirty-two are missing, and the

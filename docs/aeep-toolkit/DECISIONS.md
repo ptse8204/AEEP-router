@@ -10,6 +10,15 @@ and selection usefulness separate. The 8/28/105 counts, formal thresholds
 and release authority retain their original scope.
 [C13 beta handoff](../../reports/toolkit-v2/c13/completion-20261116/README.md)
 
+### November 16 retained multi-file alternatives
+
+Keep each source revision eligible for one task definition. Arta 50 and
+Confluence Markdown Exporter 92 can replace their same-revision audits
+only after the original protected tests distinguish the published repair
+from the unchanged source and both one-file partials. Preserve the
+previously reviewed metadata bindings in every role.
+[Preparation evidence](../../reports/toolkit-v2/c13/completion-20261116/ancillary-repair-alternatives.json)
+
 ### November 16 economic grader binding
 
 Reuse the ordinary contained recipe, protected observer and pinned upstream
