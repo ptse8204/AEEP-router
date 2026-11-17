@@ -416,6 +416,14 @@ The current Python 3.13 profile also excludes three Fabric CI/CD cases,
 including two multi-file repairs. The 48-source batch then leaves a
 minimum one-case gap in multi-file coverage.
 
+The [pyserde repair intake](../../reports/toolkit-v2/c13/completion-20261116/pyserde-production-repair-preflight.json)
+stages a distinct two-file repair from a retained archive. Both production
+diffs and all five required test identities match the publisher. The
+production projection omits only two demonstration changes. It can supply
+the missing multi-file case if protected verification passes, with both
+pyserde cases kept in one stage. Five exact locked wheels totaling
+1.39 MB remain uncached. No upstream test or formal assignment ran.
+
 The formal-input audit verifies 41 provisional cases and 135 asset bindings.
 It identifies 63 additional cached candidates with matched acquisition and
 license records. No stages are frozen and at least 100 case rows are missing

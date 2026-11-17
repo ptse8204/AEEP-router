@@ -273,6 +273,12 @@ Excluding three cases whose Python metadata conflicts with the retained
 3.13 carrier leaves the acquisition batch at least one multi-file case
 short of the balanced projection.
 
+The [pyserde repair intake](../toolkit-v2/c13/completion-20261116/pyserde-production-repair-preflight.json)
+stages the production changes and five unchanged published tests for a
+separate pyserde revision. Existing protected transport reproduced the
+reference, original and two partial-repair payloads. Native grading and
+offline support for five missing locked wheels remain open.
+
 The [current C13 beta handoff](../toolkit-v2/c13/completion-20261116/README.md)
 revalidates 37 in-scope stack checks with Waza excluded. The macOS private wheel
 installed and produced fixture reports. The fresh rollback passed and

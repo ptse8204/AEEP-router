@@ -423,6 +423,23 @@ at least one multi-file case or verify an applicable runtime for one
 of the excluded multi-file sources. Actual protected acceptance and
 stage assignment remain open.
 
+The [pyserde repair intake](pyserde-production-repair-preflight.json)
+matches a distinct retained archive to its published Git tree and keeps
+both production diffs and all five tests from PR 682. The repair scope
+omits the example program and its example runner change. The ordinary
+callback staged the reference, original and both one-file repairs using
+substituted responses. Protected grading still needs to establish which
+outputs pass and whether both edits are independently necessary.
+
+With this candidate, a balanced source-disjoint schedule becomes
+possible if it qualifies and the acquisition batch supplies 26 audits
+and all 17 multi-file repairs. Both pyserde revisions stay in one stage.
+The publisher's Python 3.13 ARM64 lock projection needs five uncached
+wheels totaling 1,387,387 bytes. Beartype exceeds the per-wheel transport
+bound. The reviewed runner still needs an offline runtime for it.
+[Publisher PR](https://github.com/yukinarit/pyserde/pull/682) ·
+[Staging driver](stage_pyserde_production_repair.py)
+
 The [staged grader audit](staged-repository-grader-bindings.json) exercised
 the ordinary callback on 64 additional source-bound cases with substituted
 pytest replies. Both archive roles for every case stayed within the transport
