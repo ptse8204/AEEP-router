@@ -88,6 +88,12 @@ and its five control artifacts are for protected development calibration.
 The native grader, runtime closure and authority remain open. This
 work adds no formal case or candidate-usefulness result.
 
+The [ExtractBench runtime audit](../toolkit-v2/c13/completion-20261116/extractbench-runtime-audit.json)
+verified the locked ParseBench wheel and fuzzysearch source archive as
+data. The native scorer imports NumPy and SciPy. Provider registration
+also loads modules dynamically, so the static audit cannot certify a
+reduced runtime. The protected native grade remains open.
+
 The [selected-trial preflight](../toolkit-v2/c13/completion-20261116/selection-trial-preflight.json)
 used the real Router, ordinary BenchmarkRunner and a first-party protected
 callback. It links the pre-task selection through the pinned execution

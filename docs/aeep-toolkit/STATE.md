@@ -68,6 +68,13 @@ lock has a missing Linux ARM64 wheel for fuzzysearch 0.8.1, and 38 of its
 70 selected wheels remain uncached. Resolve the minimal offline closure
 before acquiring further packages. No native grade or model call ran.
 
+The [ExtractBench runtime audit](../../reports/toolkit-v2/c13/completion-20261116/extractbench-runtime-audit.json)
+traced 90 modules from the original Harbor grader. NumPy and SciPy are
+used in the native score. Startup also attempts 79 dynamic provider
+imports. The publisher ships a Python fallback for fuzzysearch, and
+36 wheels in the base lock projection remain uncached (76.70 MB).
+Protected runtime verification and native grades remain open.
+
 The [selected-trial preflight](../../reports/toolkit-v2/c13/completion-20261116/selection-trial-preflight.json)
 binds the pre-task Router choice to the ordinary runner's separate
 execution decision. The pre-trial hook rechecks the approved case,

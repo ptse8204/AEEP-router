@@ -500,6 +500,21 @@ of the 70 wheels match existing caches byte for byte. The other 38 total
 which artifacts to acquire. Native scoring and disclosure authority
 remain open. [Read-only calibration audit](audit_extractbench_audent.py)
 
+The [runtime audit](extractbench-runtime-audit.json) follows the original
+verifier and 89 imported modules, including the ExtractBench and ParseBench
+package initializers. NumPy and SciPy provide the native array matching
+and scoring, with 48.56 MB of combined wheels. Three registries attempt
+another 79 imports at startup. Keep the publisher's base lock projection
+for the offline check until a smaller closure is verified. Of its 70
+wheels, 34 are now cached and 36 still need acquisition (76.70 MB).
+
+The verified fuzzysearch 0.8.1 source archive includes the publisher's
+Python fallback for its compiled extensions. Its compatibility and the
+native value-F1 controls still need a contained run. No grader ran and
+no case was admitted. [Runtime audit command](audit_extractbench_runtime.py) ·
+[Publisher scorer](https://github.com/run-llama/ExtractBench/tree/2f27f100730afc7c395602e26a2a87e07ea66b31) ·
+[fuzzysearch release](https://pypi.org/project/fuzzysearch/0.8.1/)
+
 SpreadsheetBench 2 publishes two pinned corpus archives. Its dataset
 card declares MIT and its paper names CC BY-SA 4.0 for the data. The
 cell verifier checks declared answer ranges and the documented evaluation

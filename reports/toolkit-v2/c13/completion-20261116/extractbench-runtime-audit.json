@@ -1,0 +1,302 @@
+{
+  "dynamic_provider_initializers": {
+    "extract_bench.inference.providers.extract": {
+      "module_count": 25,
+      "source_line": 13
+    },
+    "extract_bench.inference.providers.layoutdet": {
+      "module_count": 9,
+      "source_line": 8
+    },
+    "extract_bench.inference.providers.parse": {
+      "module_count": 45,
+      "source_line": 8
+    }
+  },
+  "formal_cases_adopted": 0,
+  "fuzzysearch_source_fallback": {
+    "artifact": {
+      "hash": "sha256:e5f50962c6b1c3dfc6c8cdfd5e2604838c95cb10118e4cab518e5292e9e0b1c6",
+      "size": 39510,
+      "upload-time": "2025-11-11T08:47:10.321Z",
+      "url": "https://files.pythonhosted.org/packages/e9/b4/d92b429ba4bfe5461faa358f84092eceb5ea8985cd2e448daf38bba17737/fuzzysearch-0.8.1.tar.gz"
+    },
+    "inspected_files": {
+      "fuzzysearch-0.8.1/LICENSE": "ebe3ba5366e87bafafb60a46578ea519a7cde2759879631961e78aafa2b9adaf",
+      "fuzzysearch-0.8.1/setup.py": "defaf0781ae962ea41ee1846719704d960c56377a55af59c76a03846927bbd7b",
+      "fuzzysearch-0.8.1/src/fuzzysearch/__init__.py": "542a7ff43f32b10f3f2166f58c3e69acaa096ee25bff1ebcc57473a493ee6265",
+      "fuzzysearch-0.8.1/src/fuzzysearch/common.py": "66e209cdf1613b507d8a71d9794c1502ff61b80b7e611c370824a9629cfc7305",
+      "fuzzysearch-0.8.1/src/fuzzysearch/generic_search.py": "269c116f58730609e50a22a53b9f1444a2977245106e9a06f8f4e8e5c44f84b9",
+      "fuzzysearch-0.8.1/src/fuzzysearch/levenshtein.py": "5b52a7a76eab5da5a88249c6b8b003f4596aae7c89d21c1d9462b9ba853d350d",
+      "fuzzysearch-0.8.1/src/fuzzysearch/levenshtein_ngram.py": "952429f7ad7e2944831eef7162f4b2a84718fc84fd3ffe21f70833b06f4a0b9e",
+      "fuzzysearch-0.8.1/src/fuzzysearch/no_deletions.py": "3ed66a5fafd863c07fd32e1888d3b9674a183e36124427114a3eff4f033c78a3",
+      "fuzzysearch-0.8.1/src/fuzzysearch/search_exact.py": "dfdae234e6092cfae76d5201444b09f04704c5a9ffeb2f3af5a82db648f913d9",
+      "fuzzysearch-0.8.1/src/fuzzysearch/substitutions_only.py": "448eeccfe4b8a2cb9bcbea9bb40f5641a0a7811051c0b1b1521979ffdc1be59f"
+    },
+    "integration_status": "Upstream Python fallback is present. Contained startup and behavior are unverified.",
+    "publisher_fallback_documentation": "https://pypi.org/project/fuzzysearch/0.8.1/"
+  },
+  "immediate_imports": {
+    "autoevals": [
+      {
+        "import": "autoevals.number",
+        "line": 11,
+        "module": "extract_bench.evaluation.metrics.extract.json_subset_match"
+      },
+      {
+        "import": "autoevals.string",
+        "line": 12,
+        "module": "extract_bench.evaluation.metrics.extract.json_subset_match"
+      }
+    ],
+    "beautifulsoup4": [
+      {
+        "import": "bs4",
+        "line": 33,
+        "module": "extract_bench.inference.providers.extract.table_codegen.document"
+      },
+      {
+        "import": "bs4",
+        "line": 50,
+        "module": "extract_bench.inference.providers.extract.table_codegen.table_parser"
+      }
+    ],
+    "numpy": [
+      {
+        "import": "numpy",
+        "line": 99,
+        "module": "extract_bench.evaluation.metrics.extract.unified_evidence_metric"
+      },
+      {
+        "import": "numpy",
+        "line": 11,
+        "module": "extract_bench.evaluation.metrics.extract.array_record_match_metric"
+      },
+      {
+        "import": "numpy",
+        "line": 10,
+        "module": "extract_bench.evaluation.metrics.extract.json_subset_match"
+      }
+    ],
+    "pydantic": [
+      {
+        "import": "pydantic",
+        "line": 4,
+        "module": "extract_bench.schemas.pipeline_io"
+      },
+      {
+        "import": "pydantic",
+        "line": 15,
+        "module": "extract_bench.schemas.evaluation"
+      },
+      {
+        "import": "pydantic",
+        "line": 8,
+        "module": "extract_bench.test_cases.schema"
+      },
+      {
+        "import": "pydantic",
+        "line": 7,
+        "module": "extract_bench.schemas.parse_output"
+      },
+      {
+        "import": "pydantic",
+        "line": 7,
+        "module": "parse_bench.schemas.extract_output"
+      },
+      {
+        "import": "pydantic",
+        "line": 6,
+        "module": "extract_bench.schemas.layout_detection_output"
+      },
+      {
+        "import": "pydantic",
+        "line": 13,
+        "module": "parse_bench.schemas.product"
+      },
+      {
+        "import": "pydantic",
+        "line": 6,
+        "module": "parse_bench.schemas.evaluation"
+      },
+      {
+        "import": "pydantic",
+        "line": 12,
+        "module": "extract_bench.test_cases.parse_rule_schemas"
+      },
+      {
+        "import": "pydantic",
+        "line": 3,
+        "module": "parse_bench.schemas.pipeline"
+      },
+      {
+        "import": "pydantic",
+        "line": 13,
+        "module": "parse_bench.schemas.parse_output"
+      },
+      {
+        "import": "pydantic",
+        "line": 4,
+        "module": "parse_bench.schemas.pipeline_io"
+      },
+      {
+        "import": "pydantic",
+        "line": 5,
+        "module": "parse_bench.schemas.metrics"
+      },
+      {
+        "import": "pydantic",
+        "line": 8,
+        "module": "parse_bench.test_cases.schema"
+      },
+      {
+        "import": "pydantic",
+        "line": 6,
+        "module": "parse_bench.schemas.layout_detection_output"
+      },
+      {
+        "import": "pydantic",
+        "line": 12,
+        "module": "parse_bench.test_cases.parse_rule_schemas"
+      }
+    ],
+    "pydantic-core": [
+      {
+        "import": "pydantic_core",
+        "line": 14,
+        "module": "parse_bench.schemas.product"
+      }
+    ],
+    "python-dateutil": [
+      {
+        "import": "dateutil",
+        "line": 17,
+        "module": "extract_bench.evaluation.metrics.field_grounding.evidence_comparator"
+      },
+      {
+        "import": "dateutil",
+        "line": 13,
+        "module": "extract_bench.evaluation.metrics.extract.json_subset_match"
+      },
+      {
+        "import": "dateutil",
+        "line": 12,
+        "module": "extract_bench.evaluation.metrics.field_grounding.core"
+      },
+      {
+        "import": "dateutil",
+        "line": 94,
+        "module": "extract_bench.test_cases.bbox_value_strict_comparator"
+      },
+      {
+        "import": "dateutil.parser",
+        "line": 95,
+        "module": "extract_bench.test_cases.bbox_value_strict_comparator"
+      }
+    ],
+    "rapidfuzz": [
+      {
+        "import": "rapidfuzz",
+        "line": 12,
+        "module": "extract_bench.evaluation.metrics.extract.array_record_match_metric"
+      },
+      {
+        "import": "rapidfuzz.distance",
+        "line": 18,
+        "module": "extract_bench.evaluation.metrics.field_grounding.evidence_comparator"
+      },
+      {
+        "import": "rapidfuzz.distance",
+        "line": 13,
+        "module": "extract_bench.evaluation.metrics.field_grounding.core"
+      },
+      {
+        "import": "rapidfuzz.distance",
+        "line": 96,
+        "module": "extract_bench.test_cases.bbox_value_strict_comparator"
+      }
+    ],
+    "rich": [
+      {
+        "import": "rich.console",
+        "line": 19,
+        "module": "extract_bench.inference.runner"
+      },
+      {
+        "import": "rich.live",
+        "line": 20,
+        "module": "extract_bench.inference.runner"
+      },
+      {
+        "import": "rich.panel",
+        "line": 21,
+        "module": "extract_bench.inference.runner"
+      },
+      {
+        "import": "rich.progress",
+        "line": 22,
+        "module": "extract_bench.inference.runner"
+      },
+      {
+        "import": "rich.table",
+        "line": 31,
+        "module": "extract_bench.inference.runner"
+      }
+    ],
+    "scipy": [
+      {
+        "import": "scipy.optimize",
+        "line": 100,
+        "module": "extract_bench.evaluation.metrics.extract.unified_evidence_metric"
+      },
+      {
+        "import": "scipy.optimize",
+        "line": 13,
+        "module": "extract_bench.evaluation.metrics.extract.array_record_match_metric"
+      },
+      {
+        "import": "scipy",
+        "line": 14,
+        "module": "extract_bench.evaluation.metrics.extract.json_subset_match"
+      },
+      {
+        "import": "scipy.optimize",
+        "line": 15,
+        "module": "extract_bench.evaluation.metrics.extract.json_subset_match"
+      }
+    ]
+  },
+  "inspected_module_bytes": 999976,
+  "inspected_module_count": 90,
+  "inspected_module_manifest_sha256": "084f59206eafc82161ee8262836d5391131399479767b938a3f54a61edf109c7",
+  "lock_sha256": "af5277a55f234ba8b251e341685e2a5a61391f5064ffc85639dcee23b244d574",
+  "models": 0,
+  "native_grades": 0,
+  "parse_bench_wheel": {
+    "filename": "parse_bench-1.0.4-py3-none-any.whl",
+    "hash": "sha256:050535c95dcfd715ed0f135dceaaad1a9ef07fbd6980a2cf914a27ecf2531a68",
+    "license_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "size": 1029023,
+    "upload-time": "2026-09-04T22:29:26.251Z",
+    "url": "https://files.pythonhosted.org/packages/e0/6c/603b70e37d4bc0f906b6fb7386b4db4f06bf29ee91200d8553e9f709588d/parse_bench-1.0.4-py3-none-any.whl",
+    "version": "1.0.4"
+  },
+  "runtime_projection": {
+    "available_exact_wheels": 34,
+    "missing_compatible_wheels": [
+      {
+        "package": "fuzzysearch",
+        "version": "0.8.1"
+      }
+    ],
+    "missing_wheel_pins_sha256": "7e14bebe79706ae952d22f0a44ec339bca046b944eaa686a3bc4c271c3549dde",
+    "numpy_and_scipy_wheel_bytes": 48561055,
+    "remaining_wheel_bytes": 76701027,
+    "remaining_wheel_count": 36
+  },
+  "schema_version": "aeep.c13.extractbench-runtime-audit.v1",
+  "scope": "Static module imports and bounded wheel metadata. Provider registration loads dynamically. Exact runtime, native grading and task controls remain unverified.",
+  "scorer_revision": "2f27f100730afc7c395602e26a2a87e07ea66b31",
+  "source_license_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+  "source_tree_sha256": "d84d3876be88bcaf21485c9a3678dad1732ea54c7f68f4d4694044a82ea93149"
+}
