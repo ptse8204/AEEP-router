@@ -431,12 +431,16 @@ callback staged the reference, original and both one-file repairs using
 substituted responses. Protected grading still needs to establish which
 outputs pass and whether both edits are independently necessary.
 
-With this candidate, a balanced source-disjoint schedule becomes
-possible if it qualifies and the acquisition batch supplies 26 audits
-and all 17 multi-file repairs. Both pyserde revisions stay in one stage.
-The publisher's Python 3.13 ARM64 lock projection needs five uncached
-wheels totaling 1,387,387 bytes. Beartype exceeds the per-wheel transport
-bound. The reviewed runner still needs an offline runtime for it.
+The [ordinary grader result](pyserde-ordinary-result.json) verifies the
+published repair on the retained Linux ARM64 image with all 12 locked
+dependencies. The 173-file agent archive excludes the new issue assertion.
+The two production files are its only editable paths. The reference passed
+5/5. The original and both one-file partials passed four preservation tests
+and failed the same issue test.
+All five operations settled in 7.539 summed seconds, with zero model turns
+and $0 cash. Both Pyserde revisions must stay in one stage. The source-disjoint
+projection still requires 26 audits and all 17 multi-file repairs from the
+pending acquisition batch and their protected acceptance.
 [Publisher PR](https://github.com/yukinarit/pyserde/pull/682) ·
 [Staging driver](stage_pyserde_production_repair.py)
 
