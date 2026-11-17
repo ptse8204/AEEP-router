@@ -221,6 +221,19 @@ results remain open. The optimistic software pool has 105 of 141 rows,
 with at least 14 contract audits and five multi-file repairs still
 needed for the holdout.
 
+The [native pair runtime preflight](cached-native-pair-preflight.json)
+binds Sentry and Hugging Face Hub to the retained Linux ARM64 grader,
+exact cached wheels and the ordinary native pytest callback. It rebuilt
+all four protected payloads. The Sentry profile supplies pytest-cov and
+uses the carrier's jsonschema. The Hugging Face Hub profile supplies
+pytest-mock. The selected tqdm module still needs real collection to
+verify the retained profile suffices with HF-Xet absent.
+Six substituted driver checks verified approval and drift refusal,
+settlement, independent progress after a missing identity and an
+unresolved reservation after uncertain cleanup. Exact review `72354f5a`
+permits four offline calls and 140 reserved seconds at zero models and
+$0. The review is unstarted and pending authorization.
+
 The [Wemake selector preflight](wemake-native-selector-preflight.json)
 reconstructed all 117 projected test identities from the literal upstream
 parameters. The 27 published selectors include 19 prefixes. Their synthetic

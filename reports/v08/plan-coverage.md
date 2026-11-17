@@ -98,6 +98,11 @@ increase the provisional software pool to 105. Both prepared roles share
 the exact patched metadata. The 596 protected identities were retained.
 Reference and fault behavior still require protected execution.
 
+The [prepared native repository pairs](../toolkit-v2/c13/completion-20261116/cached-native-pair-preflight.json)
+bind Sentry and Hugging Face Hub to four ordinary protected calls. The
+first-party driver verified rejection of mismatched approval, evidence
+drift and uncertain cleanup. The offline protected run remains unstarted.
+
 The [A2A receipt bridge audit](../toolkit-v2/c13/completion-20261116/a2a-receipt-bridge-audit.json)
 matched four canonical receipts, rebuilt both pairs of protected fixtures
 and verified their scoring through the ordinary callback. Three wheel

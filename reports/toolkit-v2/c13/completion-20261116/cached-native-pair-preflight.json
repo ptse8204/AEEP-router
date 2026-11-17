@@ -1,0 +1,97 @@
+{
+  "schema_version": "aeep.c13.cached-native-pair-preflight.v1",
+  "review_sha256": "72354f5af2a4c5c0ceded3e528552adfec40c9b01fdb0e63e0cb1b1c4033a838",
+  "review": ".aeep/completion-20261116/c13-cached-native-repository-pairs-20261116/operation-review.json",
+  "cases": {
+    "getsentry__sentry-python-4231": {
+      "source_revision": "2c3776c582a23b6936c76ef53008bf63f861b6fd",
+      "wheel_count": 12,
+      "required_issues": 1,
+      "required_preservation": 40
+    },
+    "huggingface__huggingface_hub-4056": {
+      "source_revision": "6983a4d3d2bdcbd09c6ea08acae64cdf83ccb2e4",
+      "wheel_count": 16,
+      "required_issues": 2,
+      "required_preservation": 19
+    }
+  },
+  "exec_expiry": "2026-11-24T00:07:45.740081+00:00",
+  "retained_carrier": "sha256:35dc1bcb7e8162c2a0cef6cbd30bc4bf276c082b11b6e5fc259b6800e8c5ca04",
+  "pinned_payloads": [
+    {
+      "operation": "c13-cached-native-repository-pairs-20261116:getsentry__sentry-python-4231:reference",
+      "container": "aeep-48603dcb0454d2e3c4a7cafb0c916e9f",
+      "argv_sha256": "7bb2d0d76f9b8155e25917096aebbaa6622377b9a84b920d81898fa8b845f980",
+      "payload_sha256": "3b15a1a9d4a57b3d9cde15319bf0df003b071e9151e37ee605d82af08ae0361e",
+      "archive_sha256": "314bb8c21ef8641a8975461a3ce8c99145bd455764feb90d9954d9bb2edc24de",
+      "payload_bytes": 2493252,
+      "required_tests": 41
+    },
+    {
+      "operation": "c13-cached-native-repository-pairs-20261116:getsentry__sentry-python-4231:original",
+      "container": "aeep-160b29a5c7265d1fd3b7f2f6b945fc14",
+      "argv_sha256": "da474ee70d83453caf26abfd91c3cbc3253bbbdba168e1d4b589e247ffbe4cde",
+      "payload_sha256": "79c1b36523d597b8685423b695138a6daefd2f6ff8ab31f6670f3380236229fc",
+      "archive_sha256": "a97bea9885e44c781c2008497d7a1e2a58c880fdce296490666d14d9a319541b",
+      "payload_bytes": 2493280,
+      "required_tests": 41
+    },
+    {
+      "operation": "c13-cached-native-repository-pairs-20261116:huggingface__huggingface_hub-4056:reference",
+      "container": "aeep-0ed7672ea6fce3f145be5993dc94ae08",
+      "argv_sha256": "452619b5625aef136bff4ace59b18101de08cd381b073a03d59f7f23455ae1fb",
+      "payload_sha256": "61c886db5de5aae05511d81febc4d2d2eb3dda945e8a04dd82b2695a970f48f2",
+      "archive_sha256": "9a19e27d0270066bd02aedcd9ba9bcdac0132d1c18f70eefbcac2faca1eda43d",
+      "payload_bytes": 3403202,
+      "required_tests": 21
+    },
+    {
+      "operation": "c13-cached-native-repository-pairs-20261116:huggingface__huggingface_hub-4056:original",
+      "container": "aeep-e22f03a2ae3114c35b0de3525a323464",
+      "argv_sha256": "bcf578078a36582ad0fcb1df59b39043198c2189909f270d79810186a4c0f697",
+      "payload_sha256": "0b3082b7fe7bacd0eabe144c4f0d74a9ae16109b1a726300d1ef809cd5442cb8",
+      "archive_sha256": "f7c01cdb690a20c71fdfe078493f1fe8fc8a7a2b3e66710fbf1c5460931116e9",
+      "payload_bytes": 3402546,
+      "required_tests": 21
+    }
+  ],
+  "driver_checks": {
+    "missing_approval": {
+      "passed": true,
+      "substituted_calls": 0
+    },
+    "numeric_approval": {
+      "passed": true,
+      "substituted_calls": 0
+    },
+    "drift": {
+      "passed": true,
+      "substituted_calls": 0
+    },
+    "success": {
+      "passed": true,
+      "substituted_calls": 4
+    },
+    "reference_omitted": {
+      "passed": true,
+      "substituted_calls": 3
+    },
+    "cleanup_unknown": {
+      "passed": true,
+      "substituted_calls": 1
+    }
+  },
+  "protected_calls_authorized": false,
+  "untrusted_test_executions": 0,
+  "models": 0,
+  "cash_usd": 0,
+  "maximum_operations": 4,
+  "maximum_reserved_seconds": 140,
+  "dependencies_to_observe_at_runtime": [
+    "Sentry coverage and inherited jsonschema",
+    "Hub HF-Xet is not in this pure wheel profile and the offline tqdm test collection must show if that dependency is needed"
+  ],
+  "comparative_evidence": false,
+  "formal_cases_adopted": 0
+}

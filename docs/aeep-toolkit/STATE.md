@@ -170,6 +170,14 @@ failed their byte-preservation guards. The provisional pool has 105 of
 five multi-file repairs still needed for the holdout. Runtime and
 upstream reference/fault checks remain open.
 
+The [Sentry and Hugging Face Hub runtime preflight](../../reports/toolkit-v2/c13/completion-20261116/cached-native-pair-preflight.json)
+binds both source pairs to the ordinary protected callback and the
+retained Linux ARM64 image. The four payloads retain 62 required native
+test identities and use 12 and 16 exact cached wheels, respectively.
+Six first-party driver scenarios passed. Review `72354f5a` covers four
+offline calls and 140 reserved seconds at zero models and $0. It is
+unstarted and needs exact new-source execution approval.
+
 The [new workbook reference](../../reports/toolkit-v2/c13/completion-20261116/workbook-reference-result.json)
 passed 19 original SkillsBench checks. The protected verifier rejected both
 missing and incomplete output. The first interpreter check failed before
