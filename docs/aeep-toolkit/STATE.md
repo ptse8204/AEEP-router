@@ -15,6 +15,15 @@ selection scorer. Both workflow preparations produced current references
 with unchanged historical facts. The operational ledger was opened
 read-only, and no execution authority or installed coverage changed.
 
+The [current Essentials preflight](../../reports/toolkit-v2/c13/completion-20261116/current-essentials-preflight.json)
+prepared the unchanged 33-package closure for macOS and Linux ARM64
+with the current wheel `b502bb84`. The native CLI reproduced the exact
+plan in a network-denied sandbox. The source CLI reproduced the retained
+synthetic candidate and both reports. Seven driver controls and 124
+focused tests passed. The [native lifecycle review `788373dc`](../../reports/toolkit-v2/c13/completion-20261116/current-essentials-macos-operation-review.json)
+is unstarted and requires exact repeat approval. Linux preparation remains
+an inert preview.
+
 The [Formula Extraction acquisition](../../reports/toolkit-v2/c13/completion-20261116/formula-runtime-acquisition-result.json)
 passed approved review `bedcde5c`. Both exact artifacts verified at
 160,981,322 bytes total. The [protected result](../../reports/toolkit-v2/c13/completion-20261116/protected-reference-group-result.json)

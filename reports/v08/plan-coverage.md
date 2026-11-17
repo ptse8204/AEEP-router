@@ -51,6 +51,11 @@ using a private ledger copy. The accepted source is `9710ea4f`.
 Both workflows retained their original observations. The current wheel
 was read as an archive. Its installation remains unverified.
 
+The [current Essentials preflight](../toolkit-v2/c13/completion-20261116/current-essentials-preflight.json)
+now verifies both platform package closures and the real sandboxed native
+install-plan. The source CLI reproduced both retained report hashes. The
+current wheel's native install and rollback await review `788373dc`.
+
 The [SkillsBench workbook screening](../toolkit-v2/c13/completion-20261116/workbook-grader-screening.json)
 verified 14 pinned assets and found two verifiers with gaps that allow wrong
 answers. A third case still needs source rights and offline recalculation

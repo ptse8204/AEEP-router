@@ -77,6 +77,22 @@ the earlier interrupted residue and journal.
 [Wheel and lifecycle evidence](beta-package-audit.json) ·
 [Installer controls](../../../../docs/aeep-toolkit/INSTALLATION_DESIGN.md#implemented-private-wheel-runtime)
 
+The [current Essentials preflight](current-essentials-preflight.json)
+binds wheel `b502bb84` and both 33-package closures. The macOS CLI
+reproduced the exact install plan in a sandbox that denied outside reads
+and writes and network binds. A wrong plan digest left the destination
+absent. The source CLI reproduced the candidate identity and both
+fixture report hashes. All 124 installer, candidate and reporting
+tests passed. Linux preview used the earlier platform wheels and the
+current core wheel. The guest has yet to check that closure at runtime.
+
+The [native operation review `788373dc`](current-essentials-macos-operation-review.json)
+covers one private install, a successful-plan reapply, installed source
+and report checks, and one rollback. Seven substituted driver checks cover
+terminal errors and refusal to replay. The ordinary install-plan and
+sandbox probe ran before review. The actual lifecycle remains unstarted,
+pending exact repeat approval.
+
 ## Retained runtime footprint
 
 The [read-only inventory](retained-runtime-footprint.json) measured 17 image
