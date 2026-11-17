@@ -451,6 +451,15 @@ with the checksum-verified cached 26.3 wheel in place of 25.0. Runtime
 closure remains open. Venvstacks also needs an executable-mode review for
 its retained `stacks.py`. No stages changed.
 
+Post-verification passed compilation, the schema check, 2,165 tests in
+each full run, and both branch coverage gates. Both runs skipped 21 tests.
+Combined coverage was 81%. Offline checks passed for 72 documentation
+inputs. Coverage and gate logs are under the Pyserde private runtime
+directory. The 37 accepted stack checks still bind frozen source
+`9710ea4f`. The working tree's local package configuration, CI test and
+Finder metadata have a different fingerprint and retain their existing
+user-owned state.
+
 The formal-input audit verifies 41 provisional cases and 135 asset bindings.
 It identifies 63 additional cached candidates with matched acquisition and
 license records. No stages are frozen and at least 100 case rows are missing
