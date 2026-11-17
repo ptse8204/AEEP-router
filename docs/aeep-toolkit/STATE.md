@@ -50,6 +50,15 @@ and blocked drift, unapproved dispatch, failed grading and uncertain
 cleanup. The four contained checks are unstarted and require exact
 repeat authorization. No formal assignment or provider use occurred.
 
+The [document corpus metadata audit](../../reports/toolkit-v2/c13/completion-20261116/document-corpus-metadata.json)
+pins two possible expansion sources without changing the integrated pack.
+ExtractBench lists 370 distinct PDF digests and 71 schema digests. It has
+20 long cases, fewer than the 35 needed for a 105-case holdout balanced
+by length. Three sample asset declarations pass the existing task asset
+contract. Source groups, permitted use and the offline grader remain open.
+SpreadsheetBench 2 has conflicting data-license declarations. Neither
+workbook archive was fetched. No case was assigned or disclosed.
+
 The [Formula Extraction acquisition](../../reports/toolkit-v2/c13/completion-20261116/formula-runtime-acquisition-result.json)
 passed approved review `bedcde5c`. Both exact artifacts verified at
 160,981,322 bytes total. The [protected result](../../reports/toolkit-v2/c13/completion-20261116/protected-reference-group-result.json)

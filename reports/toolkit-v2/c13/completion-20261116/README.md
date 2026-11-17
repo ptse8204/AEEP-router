@@ -426,6 +426,38 @@ its exact runtime closure and protected execution before adoption. On the
 document/data side, eight additional SkillsBench entries have metadata pinned
 to the same revision as the six integration tasks.
 
+The [document corpus metadata audit](document-corpus-metadata.json) pins
+two upstream workload sources for the independent document/data study.
+It reads 926,087 bytes of official metadata and verifier text. The
+ExtractBench manifest and file listing agree on 370 tasks and 370 unique
+PDF digests. The tasks use 71 distinct schema digests. The largest schema
+group has 18 tasks. Whole-source provenance still needs review across
+files with different hashes. The 20 long cases fall short of the 35
+needed for a holdout balanced by length. The three sample declarations
+validate against the existing task asset contract and separate the
+document and schema from the reference answers and grader.
+
+The original ExtractBench Harbor verifier uses value F1 and reports
+perfect-document status separately. Its Dockerfile fetches a scorer and
+dependencies at build time. Exact offline dependency review, grader
+controls and asset-use records must precede any execution. The ordinary
+SkillsBench workflow remains the integration path.
+[ExtractBench dataset](https://huggingface.co/datasets/llamaindex/ExtractBench/tree/f9b910906cd7e73cc9eb5379a8d5d935c67b92c4)
+
+SpreadsheetBench 2 publishes two pinned corpus archives. Its dataset
+card declares MIT and its paper names CC BY-SA 4.0 for the data. The
+cell verifier checks declared answer ranges and the documented evaluation
+expects LibreOffice recalculation. The original visualization lane uses
+an external model. Both archive downloads and adoption are open until
+the asset terms and exact scorer binding are resolved.
+[Dataset card](https://huggingface.co/datasets/KAKA22/SpreadsheetBench-v2) ·
+[Paper license statement](https://arxiv.org/html/2606.29955v1#A4) ·
+[Pinned evaluator](https://github.com/RUCKBReasoning/SpreadsheetBench-2/blob/a7bdc2d358e052d35a94768e1f487c0d9e9c0011/evaluation/evaluation.py)
+
+The [audit script](audit_document_corpus_capacity.py) reproduced the
+report from 14 retained documents and rejected five altered source
+bindings. No task assets were acquired and no formal split was assigned.
+
 The [document verifier screening](document-verifier-screening.json) read
 12 pinned source files and reviewed 35 test functions across four more
 SkillsBench tasks. Keep the PDF, presentation, and both Georgia investment

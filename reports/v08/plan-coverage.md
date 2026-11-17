@@ -75,6 +75,13 @@ Linux ARM64 image. The archive and wheel inputs match the original
 receipts. Local substituted replies verified journals, settlement and
 failure handling. Actual contained verification awaits repeat approval.
 
+The [independent document corpus audit](../toolkit-v2/c13/completion-20261116/document-corpus-metadata.json)
+matched all 370 ExtractBench task manifests to the pinned file listing.
+Only 71 exact schema groups appear. A length-balanced holdout would
+need 35 long cases and the pack lists 20. Three sample asset declarations
+are ready for provenance review. SpreadsheetBench 2's data license and
+archive selection remain open. No assets ran or reached a model.
+
 The [SkillsBench workbook screening](../toolkit-v2/c13/completion-20261116/workbook-grader-screening.json)
 verified 14 pinned assets and found two verifiers with gaps that allow wrong
 answers. A third case still needs source rights and offline recalculation
