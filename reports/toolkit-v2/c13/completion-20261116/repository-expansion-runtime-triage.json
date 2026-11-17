@@ -1,0 +1,553 @@
+{
+  "acquisition_result_sha256": "88bc973f326033a94c623d28537cc963acef28b8b9f0abce0c3c188017f1ceaa",
+  "audit_driver_sha256": "871bae5bd2af6155fcfadf5f0ff66499eb365168e16d8f4c30a16d0c1d2595f0",
+  "cache_wheel_aliases_without_platform_tags": [
+    "scanner.whl"
+  ],
+  "candidate_index_sha256": "36667d01dde573c5754894f99b13d061500eead71d0816cfc00970a5faf3fe86",
+  "cases": [
+    {
+      "case": "django-guardian__django-guardian-904-aeep-contract-audit",
+      "declared_database_default": "SQLite",
+      "declared_python": "3.12",
+      "direct_requirements": {
+        "django-environ>=0.12.0": {
+          "cached_filenames": [],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": []
+        },
+        "pytest-django>=4.9.0": {
+          "cached_filenames": [
+            "pytest_django-4.11.1-py3-none-any.whl"
+          ],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": [
+            "pytest_django-4.11.1-py3-none-any.whl"
+          ]
+        }
+      },
+      "input_sha256": "de7c33abdc1f4c941c4762b8d199f2f10b7c0fb29ce0da9435cc3b4db114d2bc",
+      "project_python": ">=3.9",
+      "protected_overlay_sha256": "5e0c66f8014036ffb5a9694257e226836a507be3a09827694a8641a23b5cb18d",
+      "remaining_boundary": "Acquire and review django-environ and verify collection with explicit pytest_django.plugin.",
+      "repository": "django-guardian/django-guardian",
+      "required_test_identities": 19,
+      "revision": "d9f15f2249ec75316723f34b3659ad0ff2822d91",
+      "settings": "guardian.testapp.testsettings",
+      "source_files": {
+        "guardian/testapp/testsettings.py": "0797aacc7e2276e353bf03adbf2b8b809da4467d6fe4fedc85af3efd608dafa5",
+        "pyproject.toml": "f3a85d4fe11d045b72b67bae6518305e53724d7937a737a554bae4415841b3f8"
+      },
+      "state": "dependency_artifact_gap",
+      "verified_portable_wheel_pins": {
+        "asgiref": {
+          "active_requires_dist": [],
+          "metadata_sha256": "4e570a3829f7170482183eb68d991b7243d187e4630219022cb0e77e60d94f20",
+          "private_cache": ".aeep/repository-workload-batch-20261022-wheels/asgiref-3.10.0-py3-none-any.whl",
+          "sha256": "aef8a81283a34d0ab31630c9b7dfe70c812c95eba78171367ca8745e88124734",
+          "size_bytes": 24050,
+          "version": "3.10.0"
+        },
+        "django": {
+          "active_requires_dist": [
+            "asgiref>=3.8.1",
+            "sqlparse>=0.3.1"
+          ],
+          "metadata_sha256": "7d5b69524872505438c9e316b74be9bf143df8caffa9e17427a9ed50c6d2a182",
+          "private_cache": ".aeep/repository-workload-batch-20261022-wheels/django-5.2.7-py3-none-any.whl",
+          "sha256": "59a13a6515f787dec9d97a0438cd2efac78c8aca1c80025244b0fe507fe0754b",
+          "size_bytes": 8307145,
+          "version": "5.2.7"
+        },
+        "pytest-django": {
+          "active_requires_dist": [
+            "pytest>=7.0.0"
+          ],
+          "metadata_sha256": "cbb8a3fab22e31a57c8efb5b6a725785170a14ddb22b000c988a78f4a73bf753",
+          "private_cache": ".aeep/repository-workload-batch-20261022-wheels/pytest_django-4.11.1-py3-none-any.whl",
+          "sha256": "1b63773f648aa3d8541000c26929c1ea63934be1cfa674c76436966d73fe6a10",
+          "size_bytes": 25281,
+          "version": "4.11.1"
+        },
+        "sqlparse": {
+          "active_requires_dist": [],
+          "metadata_sha256": "ea1e5df5a969ef19d62e05c00896a64d6aee79d65997c8d86ed4ee3b06e9ac8e",
+          "private_cache": ".aeep/repository-workload-batch-20261022-wheels/sqlparse-0.5.3-py3-none-any.whl",
+          "sha256": "cf2196ed3418f3ba5de6af7e82c694a9fbdbfecccdfc72e281548517081f16ca",
+          "size_bytes": 44415,
+          "version": "0.5.3"
+        }
+      }
+    },
+    {
+      "case": "davep__braindrop-96-aeep-contract-audit",
+      "declared_python": "3.13.1",
+      "direct_requirements": {
+        "humanize==4.11.0": {
+          "cached_filenames": [],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": []
+        },
+        "pyperclip==1.9.0": {
+          "cached_filenames": [],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": []
+        },
+        "textual==1.0.0": {
+          "cached_filenames": [
+            "textual-8.2.8-py3-none-any.whl"
+          ],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": []
+        },
+        "xdg-base-dirs==6.0.2": {
+          "cached_filenames": [],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": []
+        }
+      },
+      "input_sha256": "2ce6a7bd1649cf3c6c73634df744cfff94dd7018275c24757f83fc6d5731753f",
+      "project_python": ">= 3.10",
+      "protected_overlay_sha256": "a5a71edf5c8dcbaf1ade3cf491c4867efcd21fc8fce6620aef0f1120a65d92fb",
+      "remaining_boundary": "Bind required artifacts and verify the applicable closure and collection before relying on the reference and fault grades.",
+      "repository": "davep/braindrop",
+      "required_test_identities": 63,
+      "revision": "c5b88c44922df7f721c6605a718a3ebc914e2dc3",
+      "source_files": {
+        "requirements.lock": "00d7306729e5555975022c52042d26bf57b2c4c12ca9bcf361e9e421cc478273"
+      },
+      "state": "declared_runtime_gaps"
+    },
+    {
+      "case": "BQSKit__bqskit-337",
+      "declared_python": "3.11",
+      "direct_requirements": {
+        "bqskitrs>=0.4.1": {
+          "cached_filenames": [],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": []
+        },
+        "dill>=0.3.8": {
+          "cached_filenames": [],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": []
+        },
+        "lark": {
+          "cached_filenames": [],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": []
+        }
+      },
+      "input_sha256": "9e8d0a3f93572f098418b4aa0454b2362cd320ec81e9dcb085c51ac8c438eab1",
+      "project_python": null,
+      "protected_overlay_sha256": "85b58e77369add7271ee0e5646c7a7568b287cfd48989da0193598efd7821cfc",
+      "remaining_boundary": "Bind required artifacts and verify the applicable closure and collection before relying on the reference and fault grades.",
+      "repository": "bqskit/bqskit",
+      "required_test_identities": 34,
+      "revision": "cea4a08e50b2404e199bf2c4512ede0f3ea70415",
+      "source_files": {
+        "setup.py": "ffe78c2956802f47fd24ba86909c86ce5acbdc7f6bd6a1a6890a3e82e38103d6"
+      },
+      "state": "declared_runtime_gaps"
+    },
+    {
+      "case": "feder-observatory__stellarphot-526-aeep-contract-audit",
+      "declared_python": "3.11",
+      "direct_requirements": {
+        "astropy >=5": {
+          "cached_filenames": [],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": []
+        },
+        "bottleneck": {
+          "cached_filenames": [],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": []
+        },
+        "photutils >=2,<3": {
+          "cached_filenames": [],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": []
+        }
+      },
+      "input_sha256": "432d93808c2ba7b8c1a02c01bcfd85807c5f30f472bb9d905f656155893c9371",
+      "project_python": ">=3.11",
+      "protected_overlay_sha256": "bc51b9a87bc70261b22cb2177941f3e02e8ccbfc55a757fda6ef52d88e9a90f1",
+      "remaining_boundary": "Bind required artifacts and verify the applicable closure and collection before relying on the reference and fault grades.",
+      "repository": "feder-observatory/stellarphot",
+      "required_test_identities": 50,
+      "revision": "da552391c4c5b4ae9128491dbbc3d103d3d2f313",
+      "source_files": {
+        "pyproject.toml": "70a463663d44484f01de4c484515ce4ab18da736c8d424d1fa48be14c7055af1"
+      },
+      "state": "declared_runtime_gaps"
+    },
+    {
+      "case": "vndee__llm-sandbox-101-aeep-contract-audit",
+      "declared_python": "3.12",
+      "direct_requirements": {
+        "pydantic-core==2.33.2": {
+          "cached_filenames": [
+            "pydantic_core-2.33.2-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+            "pydantic_core-2.41.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+            "pydantic_core-2.41.1-cp313-cp313-macosx_11_0_arm64.whl",
+            "pydantic_core-2.41.1-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+            "pydantic_core-2.41.4-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+            "pydantic_core-2.41.5-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+            "pydantic_core-2.50.0-cp313-cp313-macosx_11_0_arm64.whl",
+            "pydantic_core-2.50.4-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl"
+          ],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": []
+        }
+      },
+      "external_backend_modules_referenced_by_test_patches": [
+        "docker",
+        "podman"
+      ],
+      "input_sha256": "1d63747d54ef034fde45b508c2b44d9c1116d534605262950ca1ce4a50eae997",
+      "project_python": ">=3.10,<4.0",
+      "protected_overlay_sha256": "8b132059e9f10234dfd3ce8999a63ef6a0ab09e1ee9a6843c2a2934f485f99fe",
+      "pydantic_locked_version": "2.11.5",
+      "remaining_boundary": "Use a reviewed matching native runtime and verify any backend SDK imports reached by the selected tests.",
+      "repository": "vndee/llm-sandbox",
+      "required_test_identities": 22,
+      "revision": "e797eb3905650a624944183278a144d29ef0d802",
+      "source_files": {
+        "pyproject.toml": "928f6884266299acce84db552a843aeda497730116bf46bf4cbd6918a0559381",
+        "tests/test_session.py": "2d6068f8c7f647fec9e98b83ee499dd2147b6c9fe3eeabd3efb2d59556613fa1",
+        "uv.lock": "40d5b37a804ff78c6d1eab0eb878347d7c7cb2e2fd9360f5207f9b038b30a3e1"
+      },
+      "state": "exact_compiled_runtime_gap"
+    },
+    {
+      "case": "PyPSA__linopy-494-aeep-contract-audit",
+      "declared_python": "3.12",
+      "direct_requirements": {
+        "bottleneck": {
+          "cached_filenames": [],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": []
+        },
+        "dask>=0.18.0": {
+          "cached_filenames": [],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": []
+        },
+        "polars": {
+          "cached_filenames": [],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": []
+        }
+      },
+      "input_sha256": "41bbcb7b555ea6ad279be4f3ead30f923f750dcdcd96dfeb5562060db02b6237",
+      "project_python": ">=3.10",
+      "protected_overlay_sha256": "7b0b3aaeed9318895da93700e161730545a4fab1a76a93427d948b2b0e8a0fe4",
+      "remaining_boundary": "Bind required artifacts and verify the applicable closure and collection before relying on the reference and fault grades.",
+      "repository": "pypsa/linopy",
+      "required_test_identities": 49,
+      "revision": "397152d709bcd7e54834bad6c8547b846afdf337",
+      "source_files": {
+        "pyproject.toml": "a3c2daca598d2d1a7b6bdd6ced7d46633d6c4875f5e5e514b7501276834c805f"
+      },
+      "state": "declared_runtime_gaps"
+    },
+    {
+      "case": "travisghansen__hass-opnsense-433-aeep-contract-audit",
+      "declared_python": "3.12",
+      "direct_requirements": {
+        "pytest-homeassistant-custom-component": {
+          "cached_filenames": [],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": []
+        }
+      },
+      "input_sha256": "0d52277b1f38a2c50e2261851680ad9b2a81d8775373a9cce63881c2bb405266",
+      "project_python": null,
+      "protected_overlay_sha256": "7a5ad9559be97d4c743d8404a55c59fc3240bee45ae56e1cb99cf3733ee092cb",
+      "remaining_boundary": "Bind required artifacts and verify the applicable closure and collection before relying on the reference and fault grades.",
+      "repository": "travisghansen/hass-opnsense",
+      "required_test_identities": 46,
+      "revision": "e1d01fc41d6d7e3e8bc50af8984d9b85c49eb213",
+      "source_files": {
+        "requirements-dev.txt": "9e2a1cd3b4acc2321fdfa0513198eec55fa8b2ba62165bdb1759440ad22f3f0a"
+      },
+      "state": "declared_runtime_gaps"
+    },
+    {
+      "case": "zwicker-group__py-pde-712",
+      "declared_python": "3.12",
+      "direct_requirements": {
+        "numba>=0.59": {
+          "cached_filenames": [],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": []
+        },
+        "sympy>=1.9": {
+          "cached_filenames": [
+            "sympy-1.14.0-py3-none-any.whl"
+          ],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": [
+            "sympy-1.14.0-py3-none-any.whl"
+          ]
+        }
+      },
+      "input_sha256": "eb42af6f175432fe9da84f602cc7eb6dc29aa8d820175e158a3408ef02e99d84",
+      "project_python": ">=3.9,<3.14",
+      "protected_overlay_sha256": "1afa9cbcd00f41b2b2d4eebe9945f3c04756a5d5572c5aad1d4cea8e71c5347f",
+      "remaining_boundary": "Bind required artifacts and verify the applicable closure and collection before relying on the reference and fault grades.",
+      "repository": "zwicker-group/py-pde",
+      "required_test_identities": 14,
+      "revision": "619aa23acf4b07d5fbe2cf8757ca74c574a621fd",
+      "source_files": {
+        "pyproject.toml": "ec94e3ccf30e091792642cb403a7d9925490b92e8b00b41331fbd69566a2ae33"
+      },
+      "state": "declared_runtime_gaps"
+    },
+    {
+      "case": "optuna__optuna-6428-aeep-contract-audit",
+      "declared_python": "3.12",
+      "direct_requirements": {
+        "alembic>=1.5.0": {
+          "cached_filenames": [],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": []
+        },
+        "colorlog": {
+          "cached_filenames": [],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": []
+        }
+      },
+      "input_sha256": "1a9bdff20203fd5ebdde033ff0c9a312d8b8fd6259ec9d35549abdbb7c897052",
+      "project_python": ">=3.9",
+      "protected_overlay_sha256": "66ca20fa283568243a8fab689212a1805c393ed6784388ba7908f87538be423b",
+      "remaining_boundary": "Bind required artifacts and verify the applicable closure and collection before relying on the reference and fault grades.",
+      "repository": "optuna/optuna",
+      "required_test_identities": 19,
+      "revision": "52f6ef6ffe5a2a4c6386f8d83cd39335d7f3a2ae",
+      "source_files": {
+        "pyproject.toml": "f731a91d1cc8269a424edeac0c3f1dce3025aa78d7d3e78de8ca37af919122a3"
+      },
+      "state": "declared_runtime_gaps"
+    },
+    {
+      "case": "conan-io__conan-19735_interface-aeep-contract-audit",
+      "declared_python": "3.13",
+      "direct_requirements": {
+        "fasteners>=0.15": {
+          "cached_filenames": [],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": []
+        },
+        "patch-ng>=1.18.0, <1.19": {
+          "cached_filenames": [],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": []
+        }
+      },
+      "input_sha256": "059a51745f767cd51fd8c62113a9282342827c8faff6c8dff1e0fe698e05bf27",
+      "project_python": null,
+      "protected_overlay_sha256": "66ed0f941133d2b8ac4af7afa49f977ab08665aa08bd7d0a85d9a911ef0a3af6",
+      "remaining_boundary": "Bind required artifacts and verify the applicable closure and collection before relying on the reference and fault grades.",
+      "repository": "conan-io/conan",
+      "required_test_identities": 23,
+      "revision": "4a65d65f53d2ab37f4ce0e52dc3f25cd832b2934",
+      "source_files": {
+        "conans/requirements.txt": "663b80360affe2561f68486beb5b05a596047e4134649614c956fc0b1b264f0c"
+      },
+      "state": "declared_runtime_gaps"
+    },
+    {
+      "case": "calliope-project__calliope-854-aeep-contract-audit",
+      "declared_python": "3.11",
+      "direct_requirements": {
+        "bottleneck >= 1": {
+          "cached_filenames": [],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": []
+        },
+        "netcdf4 >= 1.2": {
+          "cached_filenames": [],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": []
+        },
+        "pyomo >= 6.8.2": {
+          "cached_filenames": [],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": []
+        }
+      },
+      "input_sha256": "ece0b700e4f76b0174f8afd3b8aef451b9eced1800d563a5f63b46ee69c672c4",
+      "project_python": ">=3.10",
+      "protected_overlay_sha256": "48cedf17ea8516dfbb75563c626d5fb85132124c68555a8e660dd7d67f5d4235",
+      "remaining_boundary": "Bind required artifacts and verify the applicable closure and collection before relying on the reference and fault grades.",
+      "repository": "calliope-project/calliope",
+      "required_test_identities": 47,
+      "revision": "07d9af46160ef01029d6fa47aeb8031b577aad1a",
+      "source_files": {
+        "requirements/base.txt": "6417887a11be931d5d32777ceaabc8bcde8dfa00781650ade43150fc19d726ea"
+      },
+      "state": "declared_runtime_gaps"
+    },
+    {
+      "case": "cal-itp__benefits-3330-aeep-contract-audit",
+      "declared_python": "3.11",
+      "direct_requirements": {
+        "calitp-littlepay==2025.4.1": {
+          "cached_filenames": [],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": []
+        },
+        "django-cdt-identity @ git+https://github.com/Office-of-Digital-Services/django-cdt-identity.git@c635773a75e7f184a9382748afcef6d5a705b2d6": {
+          "cached_filenames": [],
+          "direct_reference": true,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": []
+        },
+        "eligibility-api==2025.4.1": {
+          "cached_filenames": [],
+          "direct_reference": false,
+          "native_cp313_linux_arm64_matching_filenames": [],
+          "portable_matching_filenames": []
+        }
+      },
+      "input_sha256": "6c6cd4c0f0b55c700430211e4f1ce5fb153067acc39b2e90075abc56d04465fb",
+      "project_python": ">=3.9",
+      "protected_overlay_sha256": "4601cb399b6261e743fc16c94191459bd948a1faf46fc95e7dc9741d9c7c5090",
+      "remaining_boundary": "Bind required artifacts and verify the applicable closure and collection before relying on the reference and fault grades.",
+      "repository": "cal-itp/benefits",
+      "required_test_identities": 23,
+      "revision": "2949c7d90b91830543d0a69c1bcbff8ddfcddc86",
+      "source_files": {
+        "pyproject.toml": "445956b9f273cc41be4c9dbfe9e9a5e4f1c243694464bdfc48d3ef6e4d4db5f3"
+      },
+      "state": "declared_runtime_gaps"
+    },
+    {
+      "case": "open-telemetry__opentelemetry-python-4891-aeep-contract-audit",
+      "declared_python": "3.12",
+      "input_sha256": "b0cf2f10eb71f85df793dcc4d26cbf996e32ed28e35045541634c0cef0a9bf66",
+      "observer_adds_source_paths": [
+        "src",
+        "."
+      ],
+      "paths_needed_from_snapshot": [
+        "opentelemetry-sdk/src",
+        "opentelemetry-api/src",
+        "tests/opentelemetry-test-utils/src"
+      ],
+      "project_python": ">=3.9",
+      "protected_overlay_sha256": "3c1b4576eb04758d507b5958f754176e24c0dc25e9675cb4b2c5a268650ad770",
+      "remaining_boundary": "Bind the monorepo namespace to the protected snapshot before grading. A cached upstream wheel cannot attest which patched module was imported.",
+      "repository": "open-telemetry/opentelemetry-python",
+      "required_test_identities": 18,
+      "revision": "76ea42f46e66ef71f809c4b79d9b662dd9fb0133",
+      "source_files": {
+        "opentelemetry-api/src/opentelemetry/trace/__init__.py": "097d464bed8b74628eec2ee6917d3c5cbcfebc60f6471587cdb669612c122645",
+        "opentelemetry-sdk/src/opentelemetry/sdk/metrics/_internal/metric_reader_storage.py": "7b728993e953a61d6dbc704bd2816882b875f4af14f1f1020a7a0e2468e3c268",
+        "tests/opentelemetry-test-utils/src/opentelemetry/test/concurrency_test.py": "cf40b8a57f55e177aed88f1ecaabcc6001005b0c99f55b28265fd05444baf0f5"
+      },
+      "state": "source_import_layout_gap"
+    }
+  ],
+  "formal_cases_adopted": 0,
+  "new_archive_downloads": 0,
+  "new_container_launches": 0,
+  "ordinary_observer_sha256": "a20e4b9c2e81d45fb510f8f4173ab756007d06b4ed7ef82697f0d7a93605f2b4",
+  "queue_capacity": {
+    "assumptions": "One case per unattempted repository. Every existing prospect and every new row qualifies. No credit for recovery of previously unsuccessful acquisitions. This is a scenario for the retained queue, with no general restriction on how many cases a source family may contribute within one split.",
+    "attempted_repositories": 48,
+    "optimistic_current_prospects": 116,
+    "optimistic_prospects_if_every_unattempted_repository_adds_one_case": 227,
+    "original_cohort_floor_ref": {
+      "path": "reports/toolkit-v2/c13/completion-20261116/curated-cohort-lineage-verification.json",
+      "sha256": "a1e85e2493185d758eb6589a0e8f8ef407e2fbbfd423e23e9670804478d619cf"
+    },
+    "qualification_plus_marginal_minimum_if_all_early_cases_shared": 246,
+    "screened_leads_sha256": "4ac3c0741b22147c398dc0407391886a70afe6a92b58a2ac8d65e3db8116fc22",
+    "screened_unique_repositories": 159,
+    "shortfall_in_this_scenario": 19,
+    "source_review_sha256": "bb4a134feb5af19dac075f5ed362e80f20d9b83eec132d97886ef517dd721998",
+    "unattempted_repositories": 111
+  },
+  "retained_wheel_review_sha256": "fa7712ce40011cd663768b777a8eafe01abf6d8a8ae5a465d535ae5f9c16330c",
+  "review_caps": {
+    "candidate_rows": 13,
+    "distinct_wheel_filenames": 404,
+    "physical_wheel_paths": 9179
+  },
+  "schema_version": "aeep.c13.repository-expansion-runtime-triage.v1",
+  "scope": [
+    "Static triage of the 13 staged acquisitions. No source or test code was imported or executed.",
+    "Wheel candidates are filename observations except for the four hash-verified Django pins.",
+    "The compatibility screen uses the ordinary grader's Python 3.13 Linux ARM64 target. A wheel absent from this project cache may exist in another reviewed runtime.",
+    "Declared project dependencies can be broader than the selected tests. Explicit settings or import layout are recorded where checked."
+  ],
+  "states": {
+    "declared_runtime_gaps": 10,
+    "dependency_artifact_gap": 1,
+    "exact_compiled_runtime_gap": 1,
+    "source_import_layout_gap": 1
+  },
+  "verification": {
+    "cash_usd": 0,
+    "documentation": {
+      "current_plan_lint_log": {
+        "path": ".aeep/completion-20261116/repository-expansion-runtime-triage-20261117/plan-staged.log",
+        "sha256": "00ef3ca38c4d5f07506d59fcb2544a347578a50e4d414b24287efa646f31f83e"
+      },
+      "docs_log": {
+        "path": ".aeep/completion-20261116/repository-expansion-runtime-triage-20261117/docs.log",
+        "sha256": "bd305b22e4578baba8eb357fdfcdaf4d59e9e01b4ce2fc0940766baae123c269"
+      },
+      "edited_section_lint_log": {
+        "path": ".aeep/completion-20261116/repository-expansion-runtime-triage-20261117/handoff-lint-passing.log",
+        "sha256": "9c500126115819fea8a475c5661616e64ad3950ce3e8a99c3753151ea55898d8"
+      },
+      "handoff_and_new_plan_section_lint": "passed",
+      "historical_plan_file_findings_unchanged": 48,
+      "link_errors": 0,
+      "offline_docs_check": "passed",
+      "offline_docs_files": 72,
+      "prior_plan_lint_log": {
+        "path": ".aeep/completion-20261116/repository-expansion-runtime-triage-20261117/plan-baseline.log",
+        "sha256": "241b360cd2aba5b1c812661a62fc26889d10adb2ec649a6a0e5f786b275b807f"
+      }
+    },
+    "driver_path": ".aeep/completion-20261116/repository-expansion-runtime-triage-20261117/audit-runtime-inputs.py",
+    "model_turns": 0,
+    "protected_cases_executed": 0,
+    "raw_replay_path": ".aeep/completion-20261116/repository-expansion-runtime-triage-20261117/runtime-inputs.json",
+    "raw_replay_sha256": "d1490f63622e36bf048c458266c295979099588e9f967e6b058ccf78227a3280",
+    "two_runs_byte_identical": true
+  }
+}

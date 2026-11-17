@@ -1,5 +1,17 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. The 13 new software cases have per-case runtime findings.**
+[Staged runtime triage](../../reports/toolkit-v2/c13/completion-20261116/repository-expansion-runtime-triage.json)
+verified four retained Django wheels and localized its missing
+`django-environ` dependency. It also found a compiled-version gap
+for LLM Sandbox and a source import layout gap for OpenTelemetry.
+The 111 unattempted repositories plus the 116 current prospects
+reach 227 under the one-case-per-new-repository assumption. Two formal
+cohorts need at least 246 even if they share all early cases. The later
+intake still needs additional sources or recovery. No protected grades
+were run. Exact group `6b758e65` is still the next approval, Waza is
+excluded, and formal comparisons stay paused.
+
 **November 17. Formal native-score document case preparation is implemented.**
 [Document preparation verification](../../reports/toolkit-v2/c13/completion-20261116/formal-document-native-verification.json)
 covers the v8 8/28/105 materializer, public archive projection, singleton

@@ -2,15 +2,15 @@
 
 ## November 17 handoff
 
-Commit `ed1e9df1` is the latest evaluated implementation. A private
-ledger copy accepted all 37 required checks against source `f47d3042`.
-The operational ledger retains its original execution bindings. The
-[ExtractBench preflight](extractbench-ordinary-pack-preflight.json) verifies
-the three CFPB archives through the ordinary CLI. Its grader outcomes
-are fixtures. Both workspace suites passed 2,170 tests with 21 skips.
-Both branch coverage gates and all 72 offline documentation checks passed.
+The current [formal document verification](formal-document-native-verification.json)
+binds commit `d985f2f4`. A private ledger copy accepted all 37 required
+checks on tracked source `03c615b3`. The operational ledger retains its
+original execution bindings. The ordinary CLI accepted a 141-case fixture,
+and the public artifact adapter matched three retained CFPB inputs. Actual
+ExtractBench grading is pending. Both workspace suites passed 2,181 tests
+with 21 skips. Both branch coverage gates and all 72 offline docs checks passed.
 
-Wheel `d34c66ca` passed archive inspection. The installed lifecycle evidence
+Wheel `d5f092a8` passed archive inspection. The installed lifecycle evidence
 below covers the earlier wheels identified in that section. Private beta
 use on the reviewed macOS runtime remains LIMITED_BETA. Candidate
 usefulness and AEEP selection usefulness still need separate formal
@@ -43,14 +43,23 @@ archives again or fetch submodule contents. Five bindings, six malformed
 tree controls and a simulated matched recovery passed. The actual
 publisher comparisons remain pending.
 
-The new intake cases still need per-case runtime review. Django Guardian
-imports `environ` from its test settings. The selected LLM Sandbox tests
-mock backend objects after importing the corresponding Python packages,
-so the grader still needs their reviewed client libraries. BQSKit declares
-the compiled `bqskitrs` dependency. OpenTelemetry's relevant package roots
-live under its monorepo projects, outside the ordinary observer's root
-and `src` import paths. Keep these cases provisional while resolving their
-runtime requirements.
+The [staged runtime triage](repository-expansion-runtime-triage.json) checked
+all 13 staged cases against the ordinary grader and retained wheel cache.
+For Django Guardian, four wheel hashes, license notices and active
+dependency declarations match the prior review. Its SQLite test
+settings still require `django-environ`. LLM Sandbox's locked
+`pydantic-core` wheel is available for Python 3.12 and lacks a matching
+3.13 wheel in this cache. Its selected tests also reference backend
+clients through mock targets. The OpenTelemetry case needs a verified
+monorepo import projection so tests exercise the patched snapshot.
+The other ten cases have unresolved declared dependency candidates.
+No protected tests ran in this audit.
+
+The retained source queue has 111 unattempted repositories. Even if each
+contributes one eligible case and all 116 current prospects qualify,
+that gives 227 cases. Qualification and marginal value together require
+at least 246 distinct inputs under the shared-early-case assumption.
+This scenario still needs 19 cases from recovery or additional intake.
 
 ## Retained stack and lifecycle evidence
 

@@ -1,5 +1,13 @@
 # 0.8 plan coverage and remaining work
 
+The [staged runtime triage](../toolkit-v2/c13/completion-20261116/repository-expansion-runtime-triage.json)
+records dependency and import-layout gaps for the 13 staged software
+cases. Four retained Django dependencies passed byte, license and
+active requirement checks. The unattempted source queue and provisional
+pool yield at most 227 in the documented one-case-per-repository
+scenario, 19 short before protected grading or further exclusions.
+The pending offline review group and its approval boundary are unchanged.
+
 The [formal document recipe verification](../toolkit-v2/c13/completion-20261116/formal-document-native-verification.json)
 adds case-set preparation for native scores with compact, hashed task inputs.
 Local transport checks used three retained CFPB documents. The formal
