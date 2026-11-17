@@ -23,12 +23,15 @@ from ..models import (
 from ..registry import validate_json
 from ..workflow import pointer_get
 from .models import (
+    FORMAL_NATIVE_SCORE_EXTENSION,
     INTEGRATION_RECIPE_EXTENSIONS,
-    NATIVE_SCORE_EXTENSION,
+    NATIVE_SCORE_EXTENSIONS,
     AssessmentEnvironment,
     AssessmentLimits,
     AssessmentPlan,
     AssessmentSubject,
+    DocumentRecipeCase,
+    DocumentTaskInput,
     ExecutableRecipeExtension,
     RecipeCaseSet,
     RecipeDefinition,
@@ -106,6 +109,11 @@ async def invoke(service: AssessmentService, scope: AssessmentPlan | RecipeMater
     if recipe.extension.schema_version in INTEGRATION_RECIPE_EXTENSIONS and (
             not isinstance(scope, AssessmentPlan) or scope.integration_case_set_digest is None):
         raise ConfigurationError('integration recipe requires a bound integration case set')
+    if recipe.extension.schema_version == FORMAL_NATIVE_SCORE_EXTENSION and (
+            not isinstance(scope, AssessmentPlan) or scope.recipe_case_set_digest is None
+            or scope.integration_case_set_digest is not None
+            or spec not in (recipe.extension.reference, recipe.extension.grader)):
+        raise ConfigurationError('formal document grading requires a bound formal case set')
     service.repository.authorize(scope)
     if isinstance(scope, RecipeMaterializationRequest):
         if not scope.runtime_dependencies or content_digest(RecipeRuntimeBinding(dependencies=scope.runtime_dependencies)) not in scope.definition_digests:
@@ -165,20 +173,21 @@ async def materialize(service: AssessmentService, request_id: str) -> RecipeCase
         return RecipeCaseSet.model_validate(service.repository.get("recipe_case_set", request_id))
     recipe = RecipeDefinition.model_validate(service.repository.get("recipe", request.recipe_digest))
     assert recipe.extension is not None
-    if recipe.extension.schema_version.endswith('.v5'):
+    if recipe.generator in {'curated_repository:1', 'curated_document:1'}:
         from .identity import verify_dependencies
         from .repository_suites import curated_payload
 
         require_environment(recipe, AssessmentEnvironment.model_validate(service.repository.get('environment', request.environment_digest)))
         if (not request.runtime_dependencies or content_digest(RecipeRuntimeBinding(dependencies=request.runtime_dependencies))
                 not in request.definition_digests):
-            raise ConfigurationError('curated repository runtime must be frozen and reviewed')
+            raise ConfigurationError('curated runtime must be frozen and reviewed')
         verify_dependencies(request.runtime_dependencies)
         operation = f'{request_id}-generator'
         service.repository.reserve(request, operation, AssessmentLimits(max_operations=1, max_elapsed_seconds=30), stage='curated_case_materialization')
         started = time.perf_counter()
         try:
-            payload = curated_payload(recipe)
+            payload = (curated_document_payload(recipe) if recipe.generator == 'curated_document:1'
+                       else curated_payload(recipe))
         finally:
             service.repository.finish_operation(operation, elapsed_seconds=time.perf_counter() - started)
     else:
@@ -233,6 +242,89 @@ async def materialize(service: AssessmentService, request_id: str) -> RecipeCase
 STAGES = ((BenchmarkSplit.QUALIFICATION, 8), (BenchmarkSplit.TRAINING, 28), (BenchmarkSplit.HOLDOUT, 105))
 
 
+def curated_document_payload(recipe: RecipeDefinition) -> dict[str, Any]:
+    """Freeze file-pack descriptors without materializing protected answers."""
+    rows = recipe.generator_config.get('cases')
+    if not isinstance(rows, list) or len(rows) != sum(count for _, count in STAGES):
+        raise ConfigurationError('curated document recipes require exactly 141 reviewed cases')
+    cases = [DocumentRecipeCase.model_validate(row) for row in rows]
+    sets = {split: [case for case in cases if case.split == split.value] for split, _ in STAGES}
+    if any(len(sets[split]) != count for split, count in STAGES):
+        raise ConfigurationError('curated document recipes require reviewed 8/28/105 splits')
+    for field in ('task_id', 'document_sha256', 'task_archive_sha256'):
+        if len({getattr(case.input, field) for case in cases}) != len(cases):
+            raise ConfigurationError('curated document recipes cannot repeat source assets or task identities')
+    assert recipe.extension is not None
+    fixtures = [DocumentTaskInput.model_validate(fixture.input)
+                for fixture in (*recipe.extension.independent_fixtures, *recipe.extension.transformed_fixtures)]
+    for field in ('task_id', 'document_sha256', 'task_archive_sha256'):
+        if ({getattr(case.input, field) for case in sets[BenchmarkSplit.HOLDOUT]}
+                & {getattr(fixture, field) for fixture in fixtures}):
+            raise ConfigurationError('curated document holdout overlaps reviewed grader fixtures')
+    families = [{case.template_family.casefold() for case in sets[split]} for split, _ in STAGES]
+    if len(set().union(*families)) != sum(map(len, families)):
+        raise ConfigurationError('curated document stages must have disjoint source families')
+    if any(case.input.benchmark_pack_sha256 != recipe.dependencies.get('benchmark_pack') for case in cases):
+        raise ConfigurationError('curated document task differs from its exact benchmark pack')
+    output = []
+    for split, _ in STAGES:
+        for case in sets[split]:
+            value = case.input.model_dump(mode='json')
+            output.append({'input': value, 'output': {'input_sha256': content_digest(value)},
+                           'variation': case.input.family, 'template_family': case.template_family})
+    return {'cases': output}
+
+
+def require_distinct_document_cohorts(
+    earlier: RecipeDefinition, earlier_plan: AssessmentPlan,
+    later: RecipeDefinition, later_plan: AssessmentPlan,
+) -> None:
+    """Permit new reviewed case lists with identical grader and worker contracts."""
+    def contract(recipe: RecipeDefinition) -> dict[str, Any]:
+        return recipe.model_dump(exclude={
+            'recipe_id': True, 'generator_config': {'cases'},
+            'dependencies': {'benchmark_pack'}, 'extension': {'template_families'},
+        })
+
+    if (earlier.extension is None or later.extension is None
+            or earlier.extension.schema_version != FORMAL_NATIVE_SCORE_EXTENSION
+            or later.extension.schema_version != FORMAL_NATIVE_SCORE_EXTENSION
+            or contract(earlier) != contract(later)):
+        raise ConfigurationError('document stages require the same reviewed grading contract')
+
+    for recipe, plan in ((earlier, earlier_plan), (later, later_plan)):
+        payload = curated_document_payload(recipe)['cases']
+        splits = [split for split, count in STAGES for _ in range(count)]
+        if (plan.recipe_case_set_digest is None or plan.pilot is not None
+                or plan.integration_case_set_digest is not None or len(plan.suite.cases) != len(payload)
+                or any(case.action.input != row['input'] or case.split != split
+                       or case.template_family != row['template_family'] or case.variation != row['variation']
+                       or not case.validators or case.validators[-1].config.get('expected') != row['output']
+                       for case, row, split in zip(plan.suite.cases, payload, splits, strict=True))):
+            raise ConfigurationError('document plan differs from the full reviewed cohort')
+
+    def keys(plan: AssessmentPlan, *, holdout: bool = False) -> set[tuple[str, str]]:
+        return {
+            (key, value) for case in plan.suite.cases
+            if not holdout or case.split == BenchmarkSplit.HOLDOUT
+            for key, value in (
+                ('family', (case.template_family or '').casefold()),
+                ('document', case.action.input['document_sha256']),
+                ('archive', case.action.input['task_archive_sha256']),
+                ('task', case.action.input['task_id']),
+            )
+        }
+
+    if keys(earlier_plan) & keys(later_plan, holdout=True) or keys(later_plan) & keys(earlier_plan, holdout=True):
+        raise ConfigurationError('document stages must use source-disjoint holdouts')
+
+
+def reference_batches(extension: ExecutableRecipeExtension, inputs: list[dict[str, Any]]) -> list[list[dict[str, Any]]]:
+    if extension.truth_schema is None:
+        return [inputs]
+    return bounded_batches(inputs, separate=extension.schema_version in NATIVE_SCORE_EXTENSIONS)
+
+
 def grader_name(value: dict[str, Any], expected: dict[str, Any]) -> str:
     return "contained_recipe_" + content_digest({"input": value, "expected": expected})
 
@@ -240,7 +332,7 @@ def grader_name(value: dict[str, Any], expected: dict[str, Any]) -> str:
 def grader_results(reply: Any, extension: ExecutableRecipeExtension, count: int) -> list[ValidationResult]:
     """Only exact reviewed codes may leave the contained grader; never its free text."""
     diagnostic = extension.failure_codes is not None
-    native = extension.schema_version == NATIVE_SCORE_EXTENSION
+    native = extension.schema_version in NATIVE_SCORE_EXTENSIONS
     keys = {"valid", "failure_codes"} if diagnostic else {"valid"}
     if native:
         keys.add("quality_scores")
@@ -325,7 +417,7 @@ async def validate_grader(service: AssessmentService, plan: AssessmentPlan, reci
         from .repository_suites import reference_outputs
         outputs_from_reference = reference_outputs(recipe, inputs)
     else:
-        for batch in bounded_batches(inputs) if extension.truth_schema is not None else [inputs]:
+        for batch in reference_batches(extension, inputs):
             reference, _elapsed = await invoke(service, plan, extension.reference,
                 {"inputs": batch}, stage="grader_reference", elapsed_times=program_seconds)
             if (not isinstance(reference, dict) or set(reference) != {"outputs"}
@@ -360,7 +452,7 @@ async def validate_grader(service: AssessmentService, plan: AssessmentPlan, reci
         if observed != decisions:
             raise ConfigurationError('repository grader failed independent correctness/fault validation')
         return literals, sum(not item for item in decisions)
-    batches = (bounded_batches(examples, separate=extension.schema_version in INTEGRATION_RECIPE_EXTENSIONS)
+    batches = (bounded_batches(examples, separate=extension.schema_version in (*INTEGRATION_RECIPE_EXTENSIONS, FORMAL_NATIVE_SCORE_EXTENSION))
                if extension.truth_schema is not None else [examples])
     for batch in batches:
         reply, _elapsed = await invoke(service, plan, extension.grader, {"examples": batch}, stage="grader_probe", elapsed_times=program_seconds)

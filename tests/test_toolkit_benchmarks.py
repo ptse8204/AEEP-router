@@ -242,6 +242,27 @@ def test_extractbench_pack_archive_preserves_original_paths_and_rejects_role_dri
     stage_agent_assets(selected, root, "fixture", tmp_path.resolve() / "extractbench-worker")
     assert (tmp_path / "extractbench-worker/environment/document.pdf").read_bytes() == public["environment/document.pdf"]
 
+    from aeep.assessment.adapters import project_document_archive
+    from aeep.errors import ConfigurationError
+    from aeep_toolkit.benchmarks import stage_document_archive
+
+    transport = tmp_path.resolve() / "public-zips"
+    transport.mkdir()
+    descriptor = stage_document_archive(selected, root, "fixture", "small", transport)
+    assert "task_archive_b64" not in descriptor
+    assert project_document_archive(descriptor, [str(transport)])["task_archive_b64"] == archived["task_archive_b64"]
+    with pytest.raises(ConfigurationError, match="reviewed public document assets"):
+        project_document_archive({**descriptor, "document_sha256": "0" * 64}, [str(transport)])
+    poison = io.BytesIO()
+    with ZipFile(poison, "w") as files:
+        for name, body in {**public, "solution/expected.json": b"protected"}.items():
+            files.writestr(name, body)
+    raw = poison.getvalue()
+    poisoned_digest = hashlib.sha256(raw).hexdigest()
+    (transport / f"{poisoned_digest}.zip").write_bytes(raw)
+    with pytest.raises(ConfigurationError, match="reviewed public document assets"):
+        project_document_archive({**descriptor, "task_archive_sha256": poisoned_digest}, [str(transport)])
+
     for field, replacement in [
         ("repository", "https://example.test/unrelated"),
         ("revision", "0" * 40),

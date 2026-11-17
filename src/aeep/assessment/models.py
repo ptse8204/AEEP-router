@@ -85,7 +85,27 @@ class RecipeFeatureRule(StrictModel):
 
 
 NATIVE_SCORE_EXTENSION = "assessment.recipe-extension.v7"
+FORMAL_NATIVE_SCORE_EXTENSION = "assessment.recipe-extension.v8"
+NATIVE_SCORE_EXTENSIONS = (NATIVE_SCORE_EXTENSION, FORMAL_NATIVE_SCORE_EXTENSION)
 INTEGRATION_RECIPE_EXTENSIONS = ("assessment.recipe-extension.v6", NATIVE_SCORE_EXTENSION)
+
+
+class DocumentTaskInput(StrictModel):
+    """Metadata for one reviewed public document archive."""
+
+    task_id: str = Field(pattern=r"^[a-z0-9][a-z0-9_.-]{0,199}$")
+    instruction_sha256: Digest
+    family: str = Field(pattern=r"^[a-z0-9][a-z0-9_.-]{0,99}$")
+    benchmark_pack_sha256: Digest
+    task_archive_sha256: Digest
+    document_sha256: Digest
+    output_paths: list[Literal["output.json"]] = Field(min_length=1, max_length=1)
+
+
+class DocumentRecipeCase(StrictModel):
+    input: DocumentTaskInput
+    split: Literal["qualification", "training", "holdout"]
+    template_family: str = Field(min_length=1, max_length=200)
 
 
 class ExecutableRecipeExtension(StrictModel):
@@ -99,7 +119,7 @@ class ExecutableRecipeExtension(StrictModel):
         "assessment.recipe-extension.v1", "assessment.recipe-extension.v2",
         "assessment.recipe-extension.v3", "assessment.recipe-extension.v4",
         "assessment.recipe-extension.v5", "assessment.recipe-extension.v6",
-        "assessment.recipe-extension.v7",
+        "assessment.recipe-extension.v7", "assessment.recipe-extension.v8",
     ] = "assessment.recipe-extension.v1"
     generator: ExecutorSpec
     grader: ExecutorSpec
@@ -131,7 +151,7 @@ class ExecutableRecipeExtension(StrictModel):
             raise ValueError('executable recipes require independent and transformed fixtures')
         if (self.schema_version != 'assessment.recipe-extension.v1') != (self.truth_schema is not None):
             raise ValueError("semantic artifact grading requires extension v2/v3 and an explicit truth schema")
-        diagnostics = self.schema_version.endswith(('.v3', '.v4', '.v5')) or integration
+        diagnostics = self.schema_version.endswith(('.v3', '.v4', '.v5')) or integration or self.schema_version == FORMAL_NATIVE_SCORE_EXTENSION
         if diagnostics != (self.failure_codes is not None):
             raise ValueError('reviewed failure codes require extension v3 or later')
         if not diagnostics and any(
@@ -139,7 +159,7 @@ class ExecutableRecipeExtension(StrictModel):
             raise ValueError('independent grader outputs require extension v3 or later')
         if self.failure_codes is not None and len(set(self.failure_codes)) != len(self.failure_codes):
             raise ValueError('duplicate reviewed failure code')
-        grader_limit = 60 if integration else 30
+        grader_limit = 60 if integration or self.schema_version == FORMAL_NATIVE_SCORE_EXTENSION else 30
         for spec, timeout_limit in ((self.generator, 30), (self.grader, grader_limit), (self.reference, 30)):
             config = spec.config
             if self.truth_schema is not None and config.get('argv_literal') is not True:
@@ -190,14 +210,18 @@ class RecipeDefinition(StrictModel):
     @model_validator(mode="after")
     def extension_contract(self) -> RecipeDefinition:
         if self.extension is not None:
-            if self.extension.schema_version in INTEGRATION_RECIPE_EXTENSIONS and 'benchmark_pack' not in self.dependencies:
-                raise ValueError('integration grader requires an exact benchmark pack binding')
-            generator = 'curated_repository:1' if self.extension.schema_version.endswith('.v5') else 'contained_json:1'
+            version = self.extension.schema_version
+            if (version in INTEGRATION_RECIPE_EXTENSIONS or version == FORMAL_NATIVE_SCORE_EXTENSION) and 'benchmark_pack' not in self.dependencies:
+                raise ValueError('benchmark grader requires an exact benchmark pack binding')
+            generator = {
+                'assessment.recipe-extension.v5': 'curated_repository:1',
+                FORMAL_NATIVE_SCORE_EXTENSION: 'curated_document:1',
+            }.get(version, 'contained_json:1')
             if (self.schema_version != "assessment.recipe.v2" or self.generator != generator or self.grader != "contained_json:1"
                     or self.extractor not in {"structural_json:1", "workbook_structure:1"}
                     or set(self.extension.variation_features) != set(self.variations)):
                 raise ValueError("executable recipe identifiers and reviewed variations must agree")
-        elif "contained_json:1" in {self.generator, self.grader}:
+        elif {self.generator, self.grader} & {"contained_json:1", "curated_document:1"}:
             raise ValueError("contained recipes require an exact executable extension")
         return self
 

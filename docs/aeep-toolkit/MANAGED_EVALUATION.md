@@ -57,6 +57,43 @@ The [CFPB preflight](../../reports/toolkit-v2/c13/completion-20261116/extractben
 shows the three currently staged inputs. Their native grading remains
 pending.
 
+## Prepare a formal native-score document cohort
+
+Use the pinned ExtractBench pack to stage one public archive and print its
+formal task descriptor. Create the destination as a dedicated directory
+for public ZIP files.
+
+```bash
+aeep-toolkit benchmark stage-document --pack PACK.json --root PACK_ASSETS \
+  --task TASK_ID --family CASE_FAMILY --destination PUBLIC_ZIPS
+```
+
+The descriptor binds the exact pack, document, instructions and ZIP by
+hash. The worker's reviewed `assessment_adapter` uses
+`input_transform: document_archive:1` and the public ZIP directory as its
+sole `read_only_roots` entry. Its existing artifact transport uses
+`task_archive_b64` as the input field and `output.json` as the output
+filename. The adapter loads the current task's public bytes when its
+worker starts. Keep the references and verifiers in the protected grader
+image.
+
+A formal recipe uses `assessment.recipe-extension.v8` and
+`curated_document:1`. Put each descriptor in the `input` field of its
+`generator_config.cases` entry. Set `split` to `qualification`, `training`
+or `holdout`, and set `template_family` to the reviewed source family.
+Use 8, 28 and 105 cases respectively. The case `family` is the reviewed
+variation label. The source family groups related documents and stays
+within one split. Keep the independent and transformed grader fixtures
+outside the holdout.
+
+Define and review the recipe with `aeep assess define` and
+`aeep assess review`. Use the existing `prepare-recipe`, `generate-cases`
+and `propose --case-set` commands. Select the resulting canonical plan
+in the workflow. Review the grader, exact asset-use scope and grant
+before execution. The preview reserves one reference call per native-score
+case, including the protected fixtures. Formal case materialization
+creates no native grade on its own.
+
 ## Run the existing plan
 
 After reviewing that exact binding and the existing assessment authority:

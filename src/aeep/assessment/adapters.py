@@ -2,26 +2,47 @@
 
 from __future__ import annotations
 
+import base64
+import hashlib
+import io
 import json
+import stat
+import zipfile
 from dataclasses import replace
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Literal
 
 from pydantic import Field, model_validator
 
+from ..errors import ConfigurationError
 from ..executors.base import ExecutionContext
-from ..models import ExecutionStatus, RawExecution, ResourceVector, StrictModel, new_id
+from ..models import (
+    ExecutionStatus,
+    ExecutorKind,
+    ExecutorSpec,
+    RawExecution,
+    ResourceVector,
+    StrictModel,
+    new_id,
+)
 from ..qualification import behavior_fingerprint
 from ..registry import validate_json
 from ..templates import render
 from ..workflow import WorkflowRequest, WorkflowStatus, pointer_get
+from .models import DocumentTaskInput
 
 if TYPE_CHECKING:
     from ..router import Router
 
 
+DOCUMENT_ARCHIVE_PATHS = {"instruction.md", "environment/document.pdf", "environment/schema.json"}
+_ARCHIVE_TRANSFORMS = {"repository_archive:1", "repository_archive:2", "document_archive:1"}
+
+
 class DeclarativeAdapter(StrictModel):
-    input_transform: Literal["local_search_tree:1", "local_search_tree:2", "repository_archive:1", "repository_archive:2"] | None = None
+    input_transform: Literal[
+        "local_search_tree:1", "local_search_tree:2", "repository_archive:1", "repository_archive:2", "document_archive:1"
+    ] | None = None
     read_only_roots: list[str] = Field(default_factory=list)
     input_template: dict[str, Any] | None = None
     target_input_schema: dict[str, Any] | None = None
@@ -92,14 +113,15 @@ def prepare_context(context: ExecutionContext) -> tuple[ExecutionContext, Declar
         return context, None
     adapter = DeclarativeAdapter.model_validate(value)
     arguments = render(adapter.input_template, {"input": context.request.input}) if adapter.input_template is not None else context.request.input
-    if adapter.read_only_roots and adapter.input_transform not in {'repository_archive:1', 'repository_archive:2'}:
-        from ..errors import ConfigurationError
+    if adapter.read_only_roots and adapter.input_transform not in _ARCHIVE_TRANSFORMS:
         root = Path(arguments["root"]).resolve(strict=True)
         if not any(root.is_relative_to(Path(allowed).resolve(strict=True)) for allowed in adapter.read_only_roots):
             raise ConfigurationError("search input lies outside reviewed read roots")
     if adapter.input_transform in {'repository_archive:1', 'repository_archive:2'}:
         from .repository_suites import public_archive
         arguments = public_archive(arguments, adapter.read_only_roots, large=adapter.input_transform == 'repository_archive:2')
+    elif adapter.input_transform == "document_archive:1":
+        arguments = project_document_archive(arguments, adapter.read_only_roots)
     elif adapter.input_transform == "local_search_tree:1":
         from .recipes import search_files
         try:
@@ -115,6 +137,53 @@ def prepare_context(context: ExecutionContext) -> tuple[ExecutionContext, Declar
     if adapter.target_input_schema is not None:
         validate_json(arguments, adapter.target_input_schema, label="mapped plugin input")
     return replace(context, request=context.request.model_copy(update={"input": arguments})), adapter
+
+
+def require_document_worker_archives(subjects: list[ExecutorSpec]) -> None:
+    """Validate the public archive delivery before a formal worker is dispatched."""
+    for subject in subjects:
+        if subject.kind != ExecutorKind.MANAGED_HOST:
+            continue
+        artifact = subject.managed_host_config().artifact
+        adapter = DeclarativeAdapter.model_validate(subject.config.get('assessment_adapter') or {})
+        if (artifact is None or artifact.input_field != 'task_archive_b64'
+                or artifact.output_name != 'output.json'
+                or adapter.input_transform != 'document_archive:1' or len(adapter.read_only_roots) != 1):
+            raise ConfigurationError(f'formal document worker {subject.id} requires reviewed archive delivery')
+
+
+def project_document_archive(arguments: dict[str, Any], roots: list[str]) -> dict[str, Any]:
+    """Load the single public ZIP identified in a reviewed document case."""
+    from ..artifact_store import _read_stable_file
+    from .identity import protected_directory
+
+    task = DocumentTaskInput.model_validate(arguments)
+    if len(roots) != 1:
+        raise ConfigurationError('document archive mapping requires one reviewed public asset root')
+    root = Path(roots[0])
+    if root.is_symlink() or root.resolve() != root or protected_directory(root):
+        raise ConfigurationError('document archive root is invalid')
+    data = _read_stable_file(root / (task.task_archive_sha256 + '.zip'), 4_000_000)
+    if hashlib.sha256(data).hexdigest() != task.task_archive_sha256:
+        raise ConfigurationError('public document archive changed')
+    try:
+        with zipfile.ZipFile(io.BytesIO(data)) as archive:
+            entries = archive.infolist()
+            if (len(entries) != len(DOCUMENT_ARCHIVE_PATHS)
+                    or {entry.filename for entry in entries} != DOCUMENT_ARCHIVE_PATHS
+                    or any(entry.is_dir() or stat.S_IFMT(entry.external_attr >> 16) not in {0, stat.S_IFREG}
+                           or entry.flag_bits & 1 for entry in entries)
+                    or sum(entry.file_size for entry in entries) > 16_000_000
+                    or not 0 < archive.getinfo('instruction.md').file_size <= 100_000):
+                raise ConfigurationError('archive does not contain the reviewed public document assets')
+            instruction = archive.read('instruction.md')
+            if (hashlib.sha256(instruction).hexdigest() != task.instruction_sha256
+                    or hashlib.sha256(archive.read('environment/document.pdf')).hexdigest() != task.document_sha256):
+                raise ConfigurationError('archive does not contain the reviewed public document assets')
+            prompt = instruction.decode('utf-8')
+    except (OSError, RuntimeError, UnicodeError, zipfile.BadZipFile) as exc:
+        raise ConfigurationError('cannot validate the reviewed public document archive') from exc
+    return {**arguments, 'task': prompt, 'task_archive_b64': base64.b64encode(data).decode('ascii')}
 
 
 def project_output(raw: RawExecution, adapter: DeclarativeAdapter | None) -> RawExecution:

@@ -172,9 +172,15 @@ def prepare(definition: Path, configuration: str) -> tuple[dict[str, Any], Path,
 
 def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
     """Inspect the selected stack; canonical preparation is a separate explicit step."""
-    from aeep.assessment.models import NATIVE_SCORE_EXTENSION, RecipeDefinition, content_digest
+    from aeep.assessment.models import (
+        FORMAL_NATIVE_SCORE_EXTENSION,
+        NATIVE_SCORE_EXTENSIONS,
+        DocumentTaskInput,
+        RecipeDefinition,
+        content_digest,
+    )
 
-    from .benchmarks import BenchmarkPack, inspect_pack, parse_pack
+    from .benchmarks import BenchmarkPack, document_archive, inspect_pack, parse_pack
     from .candidate import inspect
     from .cli import read_json
     from .installation import PreviewPolicy, preview
@@ -211,7 +217,7 @@ def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
         if recipe.dependencies.get('benchmark_pack') != content_digest(pack.model_dump(mode='json')):
             raise ValueError('canonical grader recipe differs from the exact task-pack assets')
         if pack.pack_id == 'extractbench' and (
-            recipe.extension is None or recipe.extension.schema_version != NATIVE_SCORE_EXTENSION
+            recipe.extension is None or recipe.extension.schema_version not in NATIVE_SCORE_EXTENSIONS
         ):
             raise ValueError('ExtractBench requires the native-score grader contract')
     if not isinstance(pack, BenchmarkPack):
@@ -232,6 +238,8 @@ def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
             raise ValueError('preparation source differs from the selected candidate package')
         if recipe is None:
             raise ValueError('canonical preparation requires the exact benchmark recipe')
+        if recipe.extension is not None and recipe.extension.schema_version == FORMAL_NATIVE_SCORE_EXTENSION:
+            raise ValueError('prepare a formal document case set with aeep assess and bind its canonical plan')
         preparation = {'request_path':str(request_path), 'source_path':str(source_path),
                        'manifest_path':str(manifest_path), 'request':request.model_dump(mode='json'),
                        'recipe_digest':content_digest(recipe)}
@@ -254,6 +262,15 @@ def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
             blockers.append('canonical grader recipe has no selected task-pack binding')
         elif content_digest(recipe) != plan.recipe_digest:
             raise ValueError('canonical grader recipe differs from the exact task-pack assets')
+        elif recipe.extension is not None and recipe.extension.schema_version == FORMAL_NATIVE_SCORE_EXTENSION:
+            if (not isinstance(pack, BenchmarkPack) or len(plan.suite.cases) != 141
+                    or plan.recipe_case_set_digest is None or plan.integration_case_set_digest is not None):
+                raise ValueError('formal document workflows require a full canonical document cohort')
+            for case in plan.suite.cases:
+                observed = DocumentTaskInput.model_validate(case.action.input)
+                expected, _ = document_archive(pack, asset_root.absolute(), observed.task_id, observed.family)
+                if observed != expected:
+                    raise ValueError('formal document case differs from exact selected public assets')
         assessment = {'plan_path':str(plan_path), 'source_path':str(source_path),
                       'backend_review':plan_preview(plan, source)}
     scheduler_binding: dict[str, str] | None = None

@@ -17,6 +17,7 @@ from aeep.assessment.models import (
     RecipeDefinition,
     RecipeFeatureRule,
     RecipeLiteralFixture,
+    content_digest,
 )
 from aeep.assessment.onboarding import reference_spec
 from aeep.assessment.service import AssessmentService
@@ -232,3 +233,156 @@ async def test_reviewed_diagnostics_survive_the_contained_campaign(tmp_path, mon
         assert not router.store.list_receipts()
     finally:
         await router.close()
+
+
+def document_definition(prefix="earlier", *, pack="a"):
+    from aeep.assessment.models import DocumentTaskInput
+
+    def document(tag, family, pack):
+        return {
+            "task_id": tag, "instruction_sha256": content_digest({"fixture_instructions": tag}), "family": family,
+            "benchmark_pack_sha256": pack * 64, "output_paths": ["output.json"],
+            "document_sha256": content_digest({"fixture_document": tag}),
+            "task_archive_sha256": content_digest({"fixture_archive": tag}),
+        }
+
+    value = definition().model_dump(mode="json")
+    value["recipe_id"] = f"formal-document-{prefix}"
+    value["generator"] = "curated_document:1"
+    value["dependencies"]["benchmark_pack"] = pack * 64
+    value["input_schema"] = DocumentTaskInput.model_json_schema()
+    rows = []
+    for split, count in (("qualification", 8), ("training", 28), ("holdout", 105)):
+        for index in range(count):
+            rows.append({
+                "split": split, "template_family": f"{prefix}-{split}",
+                "input": document(f"{prefix}-{split}-{index}", str(index % 3 + 1), pack),
+            })
+    value["generator_config"]["cases"] = rows
+    extension = value["extension"]
+    extension["schema_version"] = "assessment.recipe-extension.v8"
+    extension["truth_schema"] = {"type": "object", "properties": {"input_sha256": {"type": "string"}},
+                                  "required": ["input_sha256"], "additionalProperties": False}
+    extension["failure_codes"] = ["inexact_extraction"]
+    extension["template_families"] = sorted({row["template_family"] for row in rows})
+    extension["feature_rules"] = {"family": {"path": "/family", "operation": "enum", "values": ["1", "2", "3"]}}
+    extension["variation_features"] = {family: {"family": family} for family in ("1", "2", "3")}
+    for index, fixture in enumerate(extension["independent_fixtures"] + extension["transformed_fixtures"]):
+        fixture["input"] = document(f"calibration-{index}", "1", "c")
+        fixture["output"] = {"input_sha256": content_digest(fixture["input"])}
+    for role in ("generator", "reference", "grader"):
+        extension[role]["config"]["argv_literal"] = True
+    return RecipeDefinition.model_validate(value)
+
+
+async def test_formal_native_document_materializes_without_running_generator(tmp_path, monkeypatch):
+    from aeep.assessment.extensions import (
+        curated_document_payload,
+        grader_results,
+        require_distinct_document_cohorts,
+        validate_grader,
+    )
+
+    router, service, recipe, request, environment = setup(tmp_path, monkeypatch, recipe=document_definition())
+    observed = Counter()
+
+    async def substitute(service, scope, spec, value, *, stage, elapsed_times):
+        assert recipe.extension is not None and spec != recipe.extension.generator
+        observed[stage] += 1
+        if stage == "grader_reference":
+            assert len(value["inputs"]) == 1
+            return {"outputs": [{"count": 1}]}, 0.1
+        case, = value["examples"]
+        assert case["expected"] == {"input_sha256": content_digest(case["input"])}
+        correct = case["output"] == {"count": 1}
+        return {"valid": [correct], "failure_codes": [None if correct else "inexact_extraction"],
+                "quality_scores": [1 if correct else 0.25]}, 0.1
+
+    monkeypatch.setattr("aeep.assessment.extensions.invoke", substitute)
+    try:
+        with pytest.raises(ConfigurationError, match="review"):
+            await materialize(service, request.plan_id)
+        for digest in request.definition_digests:
+            service.repository.review(digest)
+        cases = await materialize(service, request.plan_id)
+        assert await materialize(service, request.plan_id) == cases
+        operations = service.repository.operation_ledger(request.plan_id).operations
+        assert len(operations) == 1 and operations[0].stage == "curated_case_materialization"
+        assert not observed and not router.store.list_receipts()
+        options = dict(subject_id=request.subject_digest, family=recipe.recipe_id, candidate_id="candidate",
+                       baseline_id="baseline", authorization_id=request.authorization_id,
+                       environment=environment, seed=request.seed)
+        with pytest.raises(ConfigurationError, match="full materialized"):
+            service.propose(**options)
+        plan = service.propose(**options, case_set_id=request.plan_id)
+        assert len(plan.suite.cases) == 141
+        preview = service.budget_preview(plan.plan_id)["campaign_allowance"]
+        ref = next(row for row in preview["stages"] if row["stage"] == "grader_reference")
+        assert ref["calls_upper"] == 144  # 141 formal cases and three grader fixtures.
+        fixtures, rejected = await validate_grader(service, plan, recipe, [])
+        assert len(fixtures) == 3 and rejected > 0
+        assert observed == {"grader_reference": 144, "grader_probe": 144 + rejected}
+        assert recipe.extension is not None
+        partial, = grader_results({"valid": [False], "failure_codes": ["inexact_extraction"],
+                                   "quality_scores": [0.625]}, recipe.extension, 1)
+        assert partial.quality_score == 0.625 and not partial.valid
+
+        def plan_for(other_recipe):
+            other = plan.model_copy(deep=True)
+            for case, row in zip(other.suite.cases, curated_document_payload(other_recipe)["cases"], strict=True):
+                case.action.input = row["input"]
+                case.template_family = row["template_family"]
+                case.variation = row["variation"]
+                case.validators[-1].config["expected"] = row["output"]
+            return other
+
+        later = document_definition("later", pack="b")
+        fresh = plan_for(later)
+        require_distinct_document_cohorts(recipe, plan, later, fresh)
+        fresh.suite.cases[-1].validators[-1].config["expected"] = {}
+        with pytest.raises(ConfigurationError, match="full reviewed cohort"):
+            require_distinct_document_cohorts(recipe, plan, later, fresh)
+        overlap = document_definition("overlap", pack="b")
+        overlap.generator_config["cases"][-1]["input"]["document_sha256"] = cases.cases[-1].action.input["document_sha256"]
+        with pytest.raises(ConfigurationError, match="source-disjoint holdouts"):
+            require_distinct_document_cohorts(recipe, plan, overlap, plan_for(overlap))
+    finally:
+        await router.close()
+
+
+@pytest.mark.parametrize(
+    ("fault", "reason"),
+    [("short", "141"), ("split", "8/28/105"), ("source", "repeat source assets"),
+     ("pack", "exact benchmark pack"), ("family", "disjoint source families"), ("fixture", "overlaps")],
+)
+def test_formal_documents_reject_ambiguous_cohort(fault, reason):
+    from aeep.assessment.extensions import curated_document_payload
+
+    recipe = document_definition()
+    rows = recipe.generator_config["cases"]
+    if fault == "short":
+        rows.pop()
+    elif fault == "split":
+        rows[0]["split"] = "holdout"
+    elif fault == "source":
+        rows[-1]["input"]["document_sha256"] = rows[0]["input"]["document_sha256"]
+    elif fault == "pack":
+        rows[-1]["input"]["benchmark_pack_sha256"] = "b" * 64
+    elif fault == "family":
+        rows[-1]["template_family"] = rows[0]["template_family"].upper()
+    else:
+        rows[-1]["input"]["task_id"] = "calibration-0"
+    with pytest.raises(ConfigurationError, match=reason):
+        curated_document_payload(recipe)
+
+
+def test_native_integration_reference_budget_uses_one_input_per_call():
+    from aeep.assessment.extensions import reference_batches
+
+    definition = document_definition().model_dump(mode="json")
+    definition["extension"]["schema_version"] = "assessment.recipe-extension.v7"
+    definition["generator"] = "contained_json:1"
+    extension = RecipeDefinition.model_validate(definition).extension
+    assert extension is not None
+    inputs = [{"task_id": "a"}, {"task_id": "b"}]
+    assert reference_batches(extension, inputs) == [[inputs[0]], [inputs[1]]]

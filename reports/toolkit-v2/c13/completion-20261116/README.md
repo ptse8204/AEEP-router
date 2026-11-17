@@ -251,7 +251,13 @@ case can be shared. That puts the optimistic pool of 116 software cases at
 least 130 short of the two-stage minimum before source grouping and protected
 grading. A native-catalog stage, if run, needs another distinct holdout.
 The existing ExtractBench integration definition allows at most six
-engineering tasks. Formal native-score case materialization remains open.
+engineering tasks. The [formal native recipe verification](formal-document-native-verification.json)
+adds a separate versioned definition with 8/28/105 reviewed cases. The
+document descriptor keeps archive and instruction bytes outside the
+assessment definition. The ordinary benchmark CLI staged all three
+retained CFPB cases and reproduced their archive and instruction hashes.
+The full cohort and protected score handling were exercised with local
+fixtures. Native calibration and final cohort adoption remain pending.
 
 The [trial reservation projection](formal-reservation-capacity.json) reads
 the current grant with both historical pending reservations still charged.

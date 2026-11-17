@@ -1,0 +1,244 @@
+{
+  "schema_version": "aeep.c13.formal-document-native-verification.v1",
+  "tracked_source": "03c615b31e1c84f7225f20f8b9b8538e3dc618c223052b6232a02ce68864f6ab",
+  "prior_tracked_source": "c5d34f51c45bb33f4e610214fd2239a8438ef71a162b7a11949860cb0844f876",
+  "tracked_files_checked": 414,
+  "changes": {
+    "src/aeep/assessment/adapters.py": [
+      "03372687cbefff1c54a0d1da0da32000c4a0bbf37c472ecc0c606d2d2f3da257",
+      "f6e86cb4bdb27037a47fe9b2607981d888e4ba12f5863216880dd51bc88ad7cc"
+    ],
+    "src/aeep/assessment/budget.py": [
+      "6c09f330416faf41ee77ed750780a6a650b654ff4f172030302925719011b9db",
+      "678956b9309a6adb329072db0c1f1149dd673b9a8572dc780fba6412c6e15d67"
+    ],
+    "src/aeep/assessment/extensions.py": [
+      "5b92a051cece130fcdf3becf1061ea85715b8a83ee9752b999682849ef6fb872",
+      "2d715baeec02978aab210a2d84d4d3fadb4c58ad8ff4602b03f03226170350d6"
+    ],
+    "src/aeep/assessment/models.py": [
+      "2fee6a0aeaadc1b396596783868b758c04e9fcaa12a26c8bc70527875bcd50af",
+      "0dbdf99dcff88f0a85757dc7d5bae794a59e68189d44b28d02691ea72aef01c2"
+    ],
+    "src/aeep/assessment/service.py": [
+      "18b9ac6544f1821dc7a29254b7eae9e247112af6ee7c475bf1cfea86fa438e99",
+      "dde80dbd1ca275b4210fc68c7ff5c99a54cb612ba3125378789e80470d750c46"
+    ],
+    "src/aeep_toolkit/benchmarks.py": [
+      "a62d0d3d95841dc27bffb4ad479cf3664c844f8a4cf8b96d3c14d3c13de25b81",
+      "429248ae982df85cc0a2d3f01c4ee78da87f4711082fbc63fcd6f314bba3f89c"
+    ],
+    "src/aeep_toolkit/managed.py": [
+      "27b64d67532a71f744c2bc7ed19cbed62491ed2e4414d68babf5a5da9e670542",
+      "d8ba95c94bd800bcf1ba1555f584f0809f55f74a071862065ce107238d7917ec"
+    ],
+    "src/aeep_toolkit/workflow.py": [
+      "d5c00f4976fa60c88f6011181aa2ffde5af3902b59b6acfd61098c6ab6903c48",
+      "2a26b15507eda9f881eb6bda70cd41225b47405ff8610dee6b9bafb0cd4e3163"
+    ],
+    "src/aeep_toolkit/workflow_evidence.py": [
+      "d6a52dcdb678a86a75f84fb27685a0633f48e64b0aa9ee0ec2d7616bfaa5e7be",
+      "33916337230f315c15c8f94aebcc954080abd95feb2d990bc9280ea8d7fc27da"
+    ],
+    "tests/test_toolkit_benchmarks.py": [
+      "7b9b213d0aeb6b15665b7e5538c63ff90e2469cd5b679282e33c51d47381729a",
+      "1787c20fe475cb335c9bc59b90615fa00a6213d88baf8e135f26ffadd885ac60"
+    ],
+    "tests/test_v08_executable_recipes.py": [
+      "7a5d66db6b3f506298e070252f67495bacc9094da520361617f958af34352c24",
+      "7d46f14903dbf4760deb963740f8d167a69c03e05ff09eaea6c761ca2dedf10e"
+    ]
+  },
+  "formal_contract": {
+    "recipe_extension": "assessment.recipe-extension.v8",
+    "generator": "curated_document:1",
+    "counts": {
+      "qualification": 8,
+      "training": 28,
+      "holdout": 105
+    },
+    "ledger_materialization_operations": 1,
+    "protected_case_identity": "The native verifier receives the exact compact input digest.",
+    "validation_references_for_141_case_fixture": 144,
+    "measured_transport": "Descriptors contain hash bindings only. The reviewed worker receives its current public ZIP and instructions."
+  },
+  "archive_preflight": {
+    "evidence": {
+      "path": ".aeep/completion-20261116/formal-document-native-20261117/archive-preflight.json",
+      "sha256": "0f56b7157d62a9bb4bbeeb6f9bba228ae8695232216deb8c14f547ddeb1337e8"
+    },
+    "pack_bytes_sha256": "6c27fa825e856814ec0fcc591041aa86157094d38d436a7b4f27513800de7763",
+    "cases": [
+      {
+        "task_id": "short--cfpb-closing-disclosure-h25f-094db1040b",
+        "archive_sha256": "a9c8123d69687b51032623ebffefbe07df4e4a178af512ca0ce3e12f92791a8e",
+        "document_sha256": "1a1de1fbddb2f6f26f3227195406f369e1c4aba0b15729bda35917d20a81bfa0",
+        "archive_bytes": 53853,
+        "instruction_bytes": 29075,
+        "descriptor_bytes": 508
+      },
+      {
+        "task_id": "short--cfpb-closing-disclosure-filled-sample-ec900645b7",
+        "archive_sha256": "8ac9347f05a9279af714cd443dd30a152406950427865ef52c0489d7b206b3e6",
+        "document_sha256": "9f5dc39bf904a75c6a43266fed3c0617e93cdaef4ed770861a33ce5cd1ac9c1b",
+        "archive_bytes": 69542,
+        "instruction_bytes": 29075,
+        "descriptor_bytes": 517
+      },
+      {
+        "task_id": "short--cfpb-closing-disclosure-h25e-0787c1b60e",
+        "archive_sha256": "e60ced0c3e4b9a8698bbf268df26ba6b145bb7acc04cac1a2c4217b931d52a3b",
+        "document_sha256": "75611b4dded3424d71aa46b4716324bd75d35e248e6d1cf1ecdb5b703b6e4fc6",
+        "archive_bytes": 84589,
+        "instruction_bytes": 29075,
+        "descriptor_bytes": 508
+      }
+    ],
+    "upstream_grades": 0,
+    "formal_cases_adopted": 0,
+    "provider_transfers": 0
+  },
+  "verification": {
+    "compileall_passed": true,
+    "schemas_passed": true,
+    "targeted_lint_passed": true,
+    "targeted_typecheck_passed": true,
+    "focused": {
+      "passed": 11,
+      "log": {
+        "path": ".aeep/completion-20261116/formal-document-native-20261117/tracked-focused.log",
+        "sha256": "25eb2dda1221043c3a59aa61b680e242bcc4aa71b98cc3a4b7e14562d5f0a6e1"
+      }
+    },
+    "workspace_regression": {
+      "passed": 2181,
+      "skipped": 21,
+      "log": {
+        "path": ".aeep/completion-20261116/formal-document-native-20261117/pytest.log",
+        "sha256": "4e4cbd0e3894d1e81bc1e913defdfda780be19aaebb2189bb0e5ffeed13d6b52"
+      }
+    },
+    "docs": {
+      "files": 72,
+      "link_errors": 0,
+      "log": {
+        "path": ".aeep/completion-20261116/formal-document-native-20261117/docs.log",
+        "sha256": "f280dfac581d090f191480e06f6ff4679af3c758a2b9ccc621b9fec9b21e70bb"
+      }
+    },
+    "formal_cli_preview_fixture": {
+      "scope": "first-party synthetic assets and CLI preview",
+      "tasks": 141,
+      "plan_bytes": 293613,
+      "plan_sha256": "2af279e876c8298495c5024deba07f6e320dcb6d472b3cc8ccde2995c8c1281b",
+      "changed_archive_rejected": true,
+      "subprocesses": 0,
+      "network_requests": 0,
+      "model_turns": 0,
+      "result": {
+        "path": ".aeep/completion-20261116/formal-document-native-20261117/formal-cli-fixture.json",
+        "sha256": "93cf4ffcf19138e052a1c7c88768f936aa536ee28555ea56c4ac69c3f245a82a"
+      },
+      "driver": {
+        "path": ".aeep/completion-20261116/formal-document-native-20261117/check-formal-cli.py",
+        "sha256": "66c7ac108aee3403a12d9498de4251bdba0673df223dc945012301dab842352e"
+      }
+    },
+    "handoff_markdown_lint": {
+      "files": 1,
+      "issues": 0,
+      "tool": "markdownlint-cli2 0.23.3"
+    },
+    "workspace_branch_suite": {
+      "passed": 2181,
+      "skipped": 21,
+      "warning_count": 1,
+      "warning": "Existing Starlette TestClient deprecation for httpx.",
+      "statement_and_branch_percent": 81.45730288041896,
+      "branch_only_percent": 71.7840573597638,
+      "critical_coverage_gate": "passed",
+      "assessment_coverage_gate": "passed",
+      "log": {
+        "path": ".aeep/completion-20261116/formal-document-native-20261117/coverage-pytest.log",
+        "sha256": "646c2ace6e8c42745e30ff7c26ca31d093e2d04e1df048d00bf6ede841e34d92"
+      },
+      "report": {
+        "path": ".aeep/completion-20261116/formal-document-native-20261117/coverage-report.log",
+        "sha256": "b1f1aa14091f90ae1a32a2f39f6e0336dcf5b1161d1ada1b503c65e5eadb7ec7"
+      },
+      "measurements": {
+        "path": ".aeep/completion-20261116/formal-document-native-20261117/coverage.json",
+        "sha256": "44b3dc1ffe1a0ee078be7afaac374fe8d683e1ad0c90ecdfd2d4d7c879cce9e4"
+      },
+      "critical_log": {
+        "path": ".aeep/completion-20261116/formal-document-native-20261117/critical-coverage.log",
+        "sha256": "c54ccbd27dd9ac88dc8aadb5824c437cdd168e412d7fb8e566d4b6d6b488aca6"
+      },
+      "assessment_log": {
+        "path": ".aeep/completion-20261116/formal-document-native-20261117/assessment-coverage.log",
+        "sha256": "4a5e7160fe409aaf5c8393c734cf5200968132d88ce6394e9678be9551432d55"
+      }
+    }
+  },
+  "stack_reinspection": {
+    "record": {
+      "path": ".aeep/completion-20261116/formal-document-native-20261117/stack-reinspection.json",
+      "sha256": "399f9a1dd34a6a080bdc82dff615408bfac74a4a0a0661648fc521c1921964e4"
+    },
+    "status": {
+      "path": ".aeep/completion-20261116/formal-document-native-20261117/stack-status.json",
+      "sha256": "8d6d572809d6fc2a9e177fcbf9f9886935915fc5d06acb56a0970beb7638b956"
+    },
+    "driver": {
+      "path": ".aeep/completion-20261116/formal-document-native-20261117/recheck-stack.py",
+      "sha256": "dce7e44496cb9e308de8fc20d7c8febaff34f84c762b087bccc52ea9a0abbe49"
+    },
+    "verified_checks": 37,
+    "verified_components": 18,
+    "private_completion_ref": "8a9dce30e18c27d2bc91f689bf7a91e8faebb087d069f5786a04a72e04d45cc9",
+    "waza_excluded": true,
+    "scope": "The ordinary CLI resolves retained original evidence in a private ledger copy."
+  },
+  "wheel_archive": {
+    "path": {
+      "path": ".aeep/completion-20261116/formal-document-native-20261117/dist/aeep_agent_router-0.8.2-py3-none-any.whl",
+      "sha256": "d5f092a8a514fc3c52fa7f8a2c61a19500f2286dc9068f9f4bb6b6dd9b49f44e"
+    },
+    "analysis": {
+      "path": ".aeep/completion-20261116/formal-document-native-20261117/tracked-wheel-audit.json",
+      "sha256": "a9431692b58ad7f30a9c8eb656291d5433b8b0926f57491c69b8af98075dcea9"
+    },
+    "installed": false
+  },
+  "review_group_pending": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/offline-evidence-reviews.json",
+    "sha256": "6b758e65254042640df8aa36b8341bfbcad7975e931ed063a2060ed986aa0c1a"
+  },
+  "upstream_extraction_graders_executed": 0,
+  "native_scores_observed_from_upstream": 0,
+  "formal_cases_adopted": 0,
+  "model_turns": 0,
+  "cash_usd": 0,
+  "operator_comparisons_dispatched": false,
+  "private_protected_reference_preflight": {
+    "driver": {
+      "path": ".aeep/completion-20261116/formal-document-native-20261117/bind-protected-preflight.py",
+      "sha256": "5a0f16ef8f46aebf5c6c0539ba4d46316e11534ab4e7ed5671bfe66f6081e4e9"
+    },
+    "result": {
+      "path": ".aeep/completion-20261116/formal-document-native-20261117/protected-binding-preflight.json",
+      "sha256": "ba67b483b7e6525c410ed870129a1e406ee41d6df36031020cce77709d845d1d"
+    },
+    "compact_bindings": {
+      "path": ".aeep/completion-20261116/formal-document-native-20261117/compact-protected-bindings.json",
+      "sha256": "a8a1539fb8520fbd5c28c0a1740c17a11f06c3fa106f7254e6b2f928e6fd07f2"
+    },
+    "matched_original_reference_replies": 3,
+    "rejected_changed_truth_bindings": 3,
+    "upstream_scores": 0
+  },
+  "review_reinspection": {
+    "path": ".aeep/completion-20261116/formal-document-native-20261117/review-reinspection.json",
+    "sha256": "526cdbb7aa1d03e74b30327d4de76810e299f990fe7eb4b483e598d04a273107"
+  }
+}

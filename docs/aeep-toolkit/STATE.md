@@ -1,5 +1,15 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. Formal native-score document case preparation is implemented.**
+[Document preparation verification](../../reports/toolkit-v2/c13/completion-20261116/formal-document-native-verification.json)
+covers the v8 8/28/105 materializer, public archive projection, singleton
+native reference budgeting and source-disjoint lineage. The ordinary
+benchmark CLI staged three retained CFPB cases with their original public
+bytes. The 141-case test used first-party fixtures. Actual native grading
+and formal case adoption remain open. The private current-source ledger
+reinspection accepted all 37 retained checks. Waza stays excluded and
+comparisons stay paused. Exact review group `6b758e65` remains pending.
+
 **November 17. Separate curated software cohorts can share a grading contract.**
 [Curated campaign verification](../../reports/toolkit-v2/c13/completion-20261116/curated-cohort-lineage-verification.json)
 records the lineage correction. The service checks each exact 8/28/105

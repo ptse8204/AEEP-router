@@ -17,6 +17,8 @@ from pydantic import Field, model_validator
 from .models import ContractModel, Count, Digest, Identifier, SourcePin
 
 if TYPE_CHECKING:
+    from aeep.assessment.models import DocumentTaskInput
+
     from .state_benchmarks import MCPStatePack
 
 SKILLSBENCH_REVISION = "9a1f4dd5f7659f75707435da3ce854b6e48321d1"
@@ -311,6 +313,44 @@ def task_input(pack: BenchmarkPack | MCPStatePack, root: Path, task_id: str) -> 
             'output_paths':list(task.output_paths)}
 
 
+def document_archive(
+    pack: BenchmarkPack, root: Path, task_id: str, family: str,
+) -> tuple[DocumentTaskInput, bytes]:
+    """Reproduce the formal case binding using the reviewed public inputs."""
+    from aeep.assessment.models import DocumentTaskInput
+
+    if pack.pack_id != 'extractbench':
+        raise ValueError('document archive staging requires the pinned ExtractBench pack')
+    task = pack.task(task_id)
+    input_value = task_input(pack, root, task_id)
+    archive = base64.b64decode(input_value.pop('task_archive_b64'), validate=True)
+    document = next(asset for asset in task.assets if asset.path == f'tasks/{task_id}/environment/document.pdf')
+    instruction = input_value.pop('task').encode('utf-8')
+    if not 0 < len(instruction) <= 100_000:
+        raise ValueError('document instruction exceeds the reviewed task archive envelope')
+    value = DocumentTaskInput.model_validate({
+        **input_value, 'family': family, 'document_sha256': document.sha256,
+        'instruction_sha256': hashlib.sha256(instruction).hexdigest(),
+    })
+    return value, archive
+
+
+def stage_document_archive(
+    pack: BenchmarkPack, root: Path, task_id: str, family: str, destination: Path,
+) -> dict[str, Any]:
+    """Stage a compact formal case input and its separate public ZIP."""
+    from .install_runtime import canonical
+
+    value, archive = document_archive(pack, root, task_id, family)
+    canonical(str(destination))
+    if destination.resolve(strict=True) != destination or not destination.is_dir():
+        raise ValueError('staging requires an existing canonical public archive directory')
+    path = destination / (value.task_archive_sha256 + '.zip')
+    with path.open('xb') as stream:
+        stream.write(archive)
+    return value.model_dump(mode='json')
+
+
 def initial_catalog() -> dict[str, Any]:
     return {
         "pack": "skillsbench",
@@ -432,6 +472,12 @@ def main(argv: list[str] | None = None) -> None:
     inspect.add_argument("--pack", type=Path, required=True)
     inspect.add_argument("--root", type=Path, required=True)
     inspect.add_argument("--task", action="append", required=True)
+    stage = sub.add_parser("stage-document", help="Stage one public ZIP and print its compact formal task descriptor")
+    stage.add_argument("--pack", type=Path, required=True)
+    stage.add_argument("--root", type=Path, required=True)
+    stage.add_argument("--task", required=True)
+    stage.add_argument("--family", required=True)
+    stage.add_argument("--destination", type=Path, required=True)
     imported = sub.add_parser("skillsbench-import")
     imported.add_argument("--root", type=Path, required=True)
     imported.add_argument("--inventory-sha256", required=True)
@@ -441,6 +487,9 @@ def main(argv: list[str] | None = None) -> None:
             value = initial_catalog()
         elif args.operation == "skillsbench-import":
             value = skillsbench_manifest(args.root, args.inventory_sha256).model_dump(mode="json")
+        elif args.operation == "stage-document":
+            pack = BenchmarkPack.model_validate(read_json(args.pack))
+            value = stage_document_archive(pack, args.root.absolute(), args.task, args.family, args.destination.absolute())
         else:
             value = inspect_pack(
                 parse_pack(read_json(args.pack)), args.root, tuple(args.task)

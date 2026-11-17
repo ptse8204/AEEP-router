@@ -14,7 +14,7 @@ from pydantic import Field
 
 from aeep.assessment.identity import protected_directory
 from aeep.assessment.models import (
-    NATIVE_SCORE_EXTENSION,
+    NATIVE_SCORE_EXTENSIONS,
     AssessmentOperation,
     AssessmentOperationLedger,
     AssessmentPlan,
@@ -295,7 +295,7 @@ def _original_run(
     recipe = RecipeDefinition.model_validate(repo.get("recipe", plan.recipe_digest))
     if content_digest(recipe) != plan.recipe_digest:
         raise ConfigurationError("workflow grading recipe differs from the reviewed definition")
-    native = recipe.extension is not None and recipe.extension.schema_version == NATIVE_SCORE_EXTENSION
+    native = recipe.extension is not None and recipe.extension.schema_version in NATIVE_SCORE_EXTENSIONS
     cases = {case.case_id: case for case in plan.suite.cases}
     expected = {
         (case, route.route_id, condition, rep)

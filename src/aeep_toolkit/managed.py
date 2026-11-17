@@ -18,7 +18,7 @@ from pydantic import TypeAdapter, ValidationError
 from aeep.assessment import verification
 from aeep.assessment.boundary import require_conformance
 from aeep.assessment.models import (
-    NATIVE_SCORE_EXTENSION,
+    NATIVE_SCORE_EXTENSIONS,
     AssessmentOperationLedger,
     AssessmentPlan,
     AssessmentReport,
@@ -537,7 +537,7 @@ class AEEPAssessmentAdapter:
             )
         native_task_score = None
         if (self.recipe.extension is not None
-                and self.recipe.extension.schema_version == NATIVE_SCORE_EXTENSION
+                and self.recipe.extension.schema_version in NATIVE_SCORE_EXTENSIONS
                 and status == "completed" and graded):
             if (len(trial.case_validation) != 1
                     or trial.case_validation[0].kind != "callback"

@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [formal document recipe verification](../toolkit-v2/c13/completion-20261116/formal-document-native-verification.json)
+adds case-set preparation for native scores with compact, hashed task inputs.
+Local transport checks used three retained CFPB documents. The formal
+materialization and score checks used fixtures. Native ExtractBench
+calibration, independent cohorts and live comparisons remain open.
+
 The [curated campaign lineage check](../toolkit-v2/c13/completion-20261116/curated-cohort-lineage-verification.json)
 allows separate reviewed repository cohorts with the same grader and
 environment. Preceding canonical validation stays tied to its original

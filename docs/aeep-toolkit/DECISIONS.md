@@ -3602,3 +3602,19 @@ against each exact definition and rejects overlap involving either holdout.
 The preceding grade evidence stays tied to its original exact recipe.
 Other recipe families keep their existing identical-digest requirement.
 Review, accounting and completion checks still apply to each stage.
+
+## November 17 — use the existing campaign engine for native-score documents
+
+The six-task integration contract stays available for engineering checks.
+Formal document cohorts use the existing reviewed case-set materializer,
+attempt ledger and offline grader through an explicit v8 recipe. Reuse
+the public archive delivery and keep instructions and PDF bytes outside
+the 141-case plan. The operator reviews each pack and its source-family
+assignments. Separate cohorts can share the same grading contract when
+the preceding evidence, exact environment and holdout separation match.
+
+The protected native reference and grader each receive one case per call.
+The budget preview uses the same reference batching as execution. A native
+reward remains separate from the exact-match correctness gate. Actual
+ExtractBench calibration, formal case adoption and comparative dispatch
+still require their own evidence and authority.
