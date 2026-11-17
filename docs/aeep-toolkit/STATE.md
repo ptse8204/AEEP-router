@@ -1,5 +1,20 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. The approved macOS lifecycle passed for the current wheel.**
+The [lifecycle result](../../reports/toolkit-v2/c13/completion-20261116/current-wheel-lifecycle-result-20261117.json)
+binds exact review `f47bbb55` to wheel `d5f092a8` and 32 cached dependencies.
+All seven phases passed in 8.30 seconds. The private install reapplied
+idempotently, matched the expected source, inspected the fixture candidate
+without execution, and reproduced both report hashes. Removal deleted the
+owned runtime and preserved its journal and neighboring file.
+
+The operator authorized removal of only the oldest local Time Machine
+snapshot. APFS readback confirms that the November 15 snapshot was removed
+and the November 16 snapshot remains. Usable space rose by 29.64 GiB after
+the deletion and measured 79.90 GiB at dispatch. Neither operation
+touched external backups or Docker resources. C13 remains open, comparisons
+stay paused, and Waza is excluded.
+
 **November 17. The current wheel repeat is approved and awaiting usable space.**
 The [approval and cleanup record](../../reports/toolkit-v2/c13/completion-20261116/current-wheel-approval-20261117.json)
 binds the operator response to review `f47bbb55` and the unchanged wheel

@@ -10,9 +10,8 @@ and the public artifact adapter matched three retained CFPB inputs. The Audent
 ExtractBench reference calibration now passes. Both workspace suites passed 2,181 tests
 with 21 skips. Both branch coverage gates and all 72 offline docs checks passed.
 
-Wheel `d5f092a8` passed archive inspection. The installed lifecycle evidence
-below covers the earlier wheels identified in that section. Private beta
-use on the reviewed macOS runtime remains LIMITED_BETA. Candidate
+Wheel `d5f092a8` passed archive inspection and the private macOS lifecycle
+check. Private beta use on the reviewed macOS runtime remains LIMITED_BETA. Candidate
 usefulness and AEEP selection usefulness still need separate formal
 evidence. Production release and public benefit claims remain NO_GO.
 
@@ -52,15 +51,18 @@ has no registered rights, image build or model authority. The
 poisoned evidence joins while preserving the real scores and failed
 driver flags.
 
-The [current-wheel check](current-wheel-repeat-preflight-20261117.json)
-is prepared for wheel `d5f092a8` and 32 unchanged cached dependencies.
-Nine full-driver scenarios and four sandbox checks pass. The operator
-approved exact repeat `f47bbb55`. The seven phases cover installation,
-idempotence, source identity, candidate inspection, HTML and Markdown
-reporting, and removal of the unchanged test runtime. Dispatch awaits
-52 GiB usable space. The approval record preserves the observed capacity
-after the additional verified pytest cleanup.
-[Approval and cleanup record](current-wheel-approval-20261117.json)
+The [current-wheel lifecycle](current-wheel-lifecycle-result-20261117.json)
+passed under exact review `f47bbb55` on macOS arm64 with Python 3.13.
+Wheel `d5f092a8` used 32 unchanged cached dependencies. All seven phases
+passed in 8.30 seconds, including the idempotent reapply, installed source
+check, inert candidate inspection, matching HTML and Markdown report
+hashes, and removal. The removal journal and neighboring file remain.
+
+The operator authorized removal of the oldest local Time Machine snapshot.
+APFS confirmed that the November 15 snapshot was removed and the November 16
+snapshot remains. Usable space measured 79.90 GiB at dispatch, above the
+reviewed 52 GiB floor. External backups and Docker resources stayed intact.
+[Approval and earlier pytest cleanup](current-wheel-approval-20261117.json)
 
 The [cleanup record](verified-pytest-cleanup-result-20261117.json) accounts
 for 3,904 obsolete pytest worker copies, about 4.58 GiB allocated. All

@@ -1,5 +1,13 @@
 # 0.8 plan coverage and remaining work
 
+The [current wheel lifecycle result](../toolkit-v2/c13/completion-20261116/current-wheel-lifecycle-result-20261117.json)
+records seven passing phases for wheel `d5f092a8` under exact review
+`f47bbb55`. Installed source, idempotence, candidate inspection, matching
+report hashes and removal with the journal retained are verified. Only the
+oldest local Time Machine snapshot was removed with operator approval.
+The check started with 79.90 GiB usable. Comparisons stay paused and Waza
+remains excluded.
+
 The [current wheel approval](../toolkit-v2/c13/completion-20261116/current-wheel-approval-20261117.json)
 records exact approval for `f47bbb55` and passing pin checks. Removing
 2,494 verified obsolete pytest worker copies left usable space near
