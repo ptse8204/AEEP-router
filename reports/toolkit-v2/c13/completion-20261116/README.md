@@ -374,6 +374,20 @@ each observation. A shared current runtime and formal cohort assignment
 still need verification.
 [Reconciliation script](reconcile_repository_grader_evidence.py)
 
+The [grader runtime map](grader-evidence-runtime-map.json) reproduced all
+120 settled observations from the read-only ledger against the current
+callback. Only the callback source hash changed in the audit output. The
+protected grader operations took a median of 2.01 seconds and a
+95th-percentile time of 2.93 seconds. These times cover historical
+grader operations only.
+
+The retained ARM64 image `35dc1bcb` contains all nine historical image
+layer sequences. One of the 39 cases ran on that exact image. Use it as
+the candidate for shared-runtime import and protected grading checks.
+All historical receipts retain their original image, environment and
+observer bindings. The four independently verified Pyserde grades use
+an image outside this lineage and a case outside the 41-case pool.
+
 The [exact migration review `864880c7`](migrated-grader-operation-review.json)
 binds those four checks to the retained Linux ARM64 image and the ordinary
 native pytest observer. The two references and two faults retain their

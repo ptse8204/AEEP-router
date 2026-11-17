@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+The [retained grader runtime map](../toolkit-v2/c13/completion-20261116/grader-evidence-runtime-map.json)
+reconciles 120 settled observations for 39 cases on the current callback.
+A retained ARM64 image contains the layer sequences of all nine observed
+images. One case used that exact runtime. Common-runtime imports and
+protected grading still need verification. Pyserde's four receipts
+retain their own runtime binding. No formal cases have been adopted.
+
 The [supplemental archive recovery](../toolkit-v2/c13/completion-20261116/supplemental-archive-recovery-result.json)
 stages Copier and Pyinfra with both edits, 18 test identities and four
 one-file controls. Ordinary callback fixtures passed for all eight

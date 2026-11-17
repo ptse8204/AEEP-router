@@ -1,5 +1,15 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. Retained grades reconcile on the current callback.**
+The [retained grader runtime map](../../reports/toolkit-v2/c13/completion-20261116/grader-evidence-runtime-map.json)
+reproduces 120 settled observations across 39 of 41 prospective cases
+from the original receipts. The locally retained ARM64 image
+`35dc1bcb` contains all nine historical image layer sequences. One
+case ran on that exact image. Imports and protected grading on the
+shared candidate remain unverified. Pyserde's four settled grades
+retain a separate runtime binding. Exact group `6b758e65` remains
+pending. Waza is excluded and formal comparisons stay paused.
+
 **November 17. Two more cached multi-file pairs have protected inputs.**
 [Supplemental archive recovery](../../reports/toolkit-v2/c13/completion-20261116/supplemental-archive-recovery-result.json)
 stages Copier and Pyinfra from retained copies and keeps all 18 published
