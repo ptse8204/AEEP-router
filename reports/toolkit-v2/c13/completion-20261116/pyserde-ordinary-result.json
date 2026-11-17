@@ -1,0 +1,118 @@
+{
+  "schema_version": "aeep.c13.pyserde-ordinary-result.v1",
+  "case": "yukinarit__pyserde-682",
+  "source_revision": "59af51ef2292821900629ec8a3f5b898e20f8078",
+  "review_sha256": "7e644e0d73f729d867dda397120356b21308d2209ec77f9bed58aff0c9ddcfd8",
+  "approval_sha256": "cb9035edb7b8a4141cd61fa08772fefb4a1af4c5d3f09b09222e2d0501d52856",
+  "frozen_source_sha256": "9710ea4f129d21affc0dcbe85e2d0bc432a41e5ec9ee8899b68df8a834959786",
+  "base_image_id": "sha256:9e3b3712bae59607d06a162f275f0afbd916a70bcb91b544e9f350b6a6712fd7",
+  "built_image": {
+    "receipt_id": "rcpt_f5cfae78e3d64a7da6b8544ab1e6baaf",
+    "image_id": "sha256:517cefb5aa4c4571dfb35dfebfd75e299ac6c173332e58d25054c5856459d8f7"
+  },
+  "receipt_ledger_path": ".aeep/completion-20261116/pyserde-production-repair-20261116/ordinary/execution/receipts.sqlite3",
+  "ledger_export_sha256": "aecfbcd0f7372009ae65ce8229f1efb8b49957c7d0fe8703cb81d6d31da239ac",
+  "retained_result_sha256": "dc8add26ed5d57be83b8b0dce36f745107a4ca4de68184d9baa2b450593511c6",
+  "roles": [
+    {
+      "role": "reference",
+      "receipt_id": "rcpt_6b2a038e76db4db5b62a8b8990c716c0",
+      "score": 1.0,
+      "exit_code": 0,
+      "test_results": {
+        "PASSED": 5
+      },
+      "failed_required_tests": [],
+      "elapsed_seconds": 1.6240243329666555,
+      "observation_sha256": "52ceb8770d8d64d32bfc764579a5b76e2d93f897a2791bec8ae1ae739596d2dd",
+      "owned_container_absent": true
+    },
+    {
+      "role": "original",
+      "receipt_id": "rcpt_6168a7c5dfda48fc82f44d96831ec168",
+      "score": 0.0,
+      "exit_code": 1,
+      "test_results": {
+        "PASSED": 4,
+        "FAILED": 1
+      },
+      "failed_required_tests": [
+        "tests/test_type_alias.py::test_pep695_type_alias_variable_tuple"
+      ],
+      "elapsed_seconds": 1.3999223749851808,
+      "observation_sha256": "4b165aae47ab37db1a1b62e0531a1bd747bb3225acbe5d05b603227c26dc9d68",
+      "owned_container_absent": true
+    },
+    {
+      "role": "deserialization_only",
+      "receipt_id": "rcpt_af0f09eda49c4d4990a9e0a70d6b0f25",
+      "score": 0.0,
+      "exit_code": 1,
+      "test_results": {
+        "PASSED": 4,
+        "FAILED": 1
+      },
+      "failed_required_tests": [
+        "tests/test_type_alias.py::test_pep695_type_alias_variable_tuple"
+      ],
+      "elapsed_seconds": 1.3913022089982405,
+      "observation_sha256": "7c6f56af525f5b1e2775af5e110c6cf687f871131222ee98ac364163532fb46d",
+      "owned_container_absent": true
+    },
+    {
+      "role": "serialization_only",
+      "receipt_id": "rcpt_bac18caa9c4d48d596194ed93d312bf3",
+      "score": 0.0,
+      "exit_code": 1,
+      "test_results": {
+        "PASSED": 4,
+        "FAILED": 1
+      },
+      "failed_required_tests": [
+        "tests/test_type_alias.py::test_pep695_type_alias_variable_tuple"
+      ],
+      "elapsed_seconds": 1.404549041064456,
+      "observation_sha256": "adb4908a84d7278a78c3ba956a73ae9ad43a7d11d57dbf8827acf8e889d91ffa",
+      "owned_container_absent": true
+    }
+  ],
+  "settled_operations": 5,
+  "settled_elapsed_seconds": 7.538604499073699,
+  "models": 0,
+  "cash_usd": 0,
+  "source_transfers": 0,
+  "protected_ordinary_verification_passed": true,
+  "formal_cases_adopted": 0,
+  "comparison_dispatch": false,
+  "scope": "Published production repair on the adapted pinned Linux CPython 3.13 runtime. Same upstream issue check rejects both incomplete repairs.",
+  "conditional_software_capacity": {
+    "provisional_candidates": 103,
+    "same_stage_as": [
+      "yukinarit__pyserde-657"
+    ],
+    "requires_at_least": {
+      "contract-audit": 26,
+      "multi-file-repair": 17
+    },
+    "example_family_counts": {
+      "qualification": {
+        "contract-audit": 3,
+        "multi-file-repair": 2,
+        "single-file-repair": 3
+      },
+      "training": {
+        "contract-audit": 9,
+        "multi-file-repair": 9,
+        "single-file-repair": 10
+      },
+      "holdout": {
+        "contract-audit": 35,
+        "multi-file-repair": 35,
+        "single-file-repair": 35
+      }
+    },
+    "formal_assignment": null,
+    "pending_acquisition_review": "bb4a134feb5af19dac075f5ed362e80f20d9b83eec132d97886ef517dd721998",
+    "scope": "Population projection. Prospects still require grading and source-disjoint acceptance."
+  }
+}

@@ -279,6 +279,15 @@ separate pyserde revision. Existing protected transport reproduced the
 reference, original and two partial-repair payloads. Native grading and
 offline support for five missing locked wheels remain open.
 
+The [Pyserde ordinary result](../toolkit-v2/c13/completion-20261116/pyserde-ordinary-result.json)
+records five settled operations after the approved offline build and protected
+checks. The reference passed 5/5. The original and both partial repairs
+passed 4/5 and failed the same published issue test. No models or cash were
+used. Nine substituted driver scenarios and 128 focused tests passed.
+The verified two-file repair fills the identified capacity gap on the
+pinned Python 3.13 runtime. The remaining source batch still needs
+acquisition and grading before stage freeze. Comparisons remain paused.
+
 The [current C13 beta handoff](../toolkit-v2/c13/completion-20261116/README.md)
 revalidates 37 in-scope stack checks with Waza excluded. The macOS private wheel
 installed and produced fixture reports. The fresh rollback passed and

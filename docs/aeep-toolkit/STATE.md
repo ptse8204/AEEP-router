@@ -424,6 +424,21 @@ the missing multi-file case if protected verification passes, with both
 pyserde cases kept in one stage. Five exact locked wheels totaling
 1.39 MB remain uncached. No upstream test or formal assignment ran.
 
+The [Pyserde verification](../../reports/toolkit-v2/c13/completion-20261116/pyserde-ordinary-result.json)
+passed on the ordinary Linux ARM64 grader. Exact review `7e644e0d` bound all
+12 published lock wheels, the retained base image and four payloads. Seven
+wheels came from the cache. Five checksum-verified downloads totaled
+1,387,387 bytes. Nine substituted driver scenarios and 128 focused tests
+passed before the approved offline build. The full published production
+repair passed all five tests. The original and both one-file partials each
+failed the same upstream issue test and passed all four preservation tests.
+All five operations settled in 7.539 summed seconds with zero model turns
+and $0 cash. The image and receipts remain. This adds one verified two-file
+repair to the prospective pool. Both Pyserde cases must stay within one stage.
+Balanced software coverage still depends on protected acceptance of at least
+26 audits and all 17 multi-file prospects from the pending acquisition batch.
+No stage was frozen and comparisons remain paused.
+
 The formal-input audit verifies 41 provisional cases and 135 asset bindings.
 It identifies 63 additional cached candidates with matched acquisition and
 license records. No stages are frozen and at least 100 case rows are missing

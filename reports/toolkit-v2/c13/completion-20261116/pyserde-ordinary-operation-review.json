@@ -1,0 +1,210 @@
+{
+  "schema_version": "aeep.c13.pyserde-ordinary-review.v1",
+  "purpose": "Verify one published two-file repair, original source and two single-file partial repairs.",
+  "source": "9710ea4f129d21affc0dcbe85e2d0bc432a41e5ec9ee8899b68df8a834959786",
+  "revision": "59af51ef2292821900629ec8a3f5b898e20f8078",
+  "runtime_template": {
+    "environment_id": "aeep-c13-pyserde-682-ordinary",
+    "kind": "container",
+    "identity": {
+      "source": "9710ea4f129d21affc0dcbe85e2d0bc432a41e5ec9ee8899b68df8a834959786"
+    },
+    "network": false,
+    "container_image": "sha256:9e3b3712bae59607d06a162f275f0afbd916a70bcb91b544e9f350b6a6712fd7",
+    "cpu_count": 1.0,
+    "memory_mb": 512,
+    "process_limit": 96,
+    "container_runtime": "/Applications/Docker.app/Contents/Resources/bin/docker",
+    "container_socket": "/Users/edwintse/.docker/run/docker.sock",
+    "container_tmpfs_mb": 64,
+    "read_only_roots": []
+  },
+  "parent_layers": [
+    "sha256:8227a1264c7ff2f8bd125b585e62c1cec77dd2099c985c33e08d34292d06144f",
+    "sha256:8a6da6eb1b282a3bab8da6e094b7259bf3f21335dd8e803b4dcede1afecc1716",
+    "sha256:d81ccc5a95666f072f57d6526d725c3e6c25eda2ee84b88e43fb8f7db5f47411",
+    "sha256:8fd7bcc5bf0ec20486b3ee0761eef560a3298d92e46ce7aed301a38b532ce945",
+    "sha256:2dbbecc823b874a53ae196efbddbf171afddd94650d9c21f3dadd3d43466a596"
+  ],
+  "parent_config_sha256": "417a090c132dcecff9b2615bd6830027b4a45063400ec2746c9746366e37119c",
+  "pins": {
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/completion-20261116/pyserde-production-repair-preflight.json": "a2982f2871255cb214c5d5528a91594f40020c1723276d6158a185366eef96e5",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/completion-20261116/pyserde-production-repair-20261116/wheelhouse-evidence.json": "08e63538167135db1674705d217e77c170b516996a16a71eee90c89b01431762",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/completion-20261116/pyserde-production-repair-20261116/ordinary/docker-config/config.json": "f5be2de77c49fd4fa1d29235031bb04ad8bd22276a6e814c2b772ec36306e88f",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/completion-20261116/check_pyserde_ordinary.py": "9f22fc0b2b8f8888333f6e9033effaea21cf99a80b1d97f1eab8d2b0da45d55a",
+    "/Applications/Docker.app/Contents/Resources/bin/docker": "8be48df662c5ced38738e7e5dd7f82611a55565f165787cfecebbe416b321b50",
+    "/Applications/Docker.app/Contents/Resources/cli-plugins/docker-buildx": "aad5fd9a4dcb81a0ec0f8d3af45a16ff874341ebebd9bb10a88319849ee405a7",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/completion-20261116/check_linux_install.py": "6f70beec4482da0165849ce43108d5d385b862dd712d6e880101a89c2129d48a",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/completion-20261116/check_migrated_graders.py": "cfd9f42fe4ea43a3a75c784755fb940528cc685b34033e7388a86ec384715a74",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/completion-20261116/audit_staged_repository_graders.py": "0d3a010ed33f2a00eaf4d98f9a24553d9b97d8b08e8d1d6d61f393f389b464ef",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/completion-20261116/check_staged_offline_cases.py": "16b09043d88b565265596d35cd65535dbe5946941a6e395e0a3e13ca3eee7e19",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/completion-20261116/stage_pyserde_production_repair.py": "550044e675e439c689ef2eb7df50c0aa23f87b5db84b3e0b49aeb0c2134b0160",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/completion-20261116/repository_offline_pair_batch.py": "bfc66cc1f767ad4eacff60c69f3946e7361a774d110b6b86a37499b79a512833",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/completion-20261116/stage_repository_transport.py": "c78417321ada34c9352918abafb28b9703001487b72c2c882562fb3bb981c4ec",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/reports/toolkit-v2/c13/completion-20261116/stage_protected_inputs.py": "019346c18c408de9ad95fe55f0781c43b004e57c7def7bb1f64d4eb6de566616"
+  },
+  "protected_pytest_wheel_review_sha256": "46aacf0449047d1ffd20e4fbf783be2d71450ff71d5587d29ce53771a0f8bf0c",
+  "build_context_sha256": "a7d695bd2a5c1460b167b90b4b7936a0b94101bad33d365bc2e924f3c7c5306f",
+  "private_client_state_sha256": "1b5af9a35edf15f10a0c4e978f77ae431a2c82dc605324c1dc0ac568ee7ae987",
+  "build_inputs": {
+    "Dockerfile": "79ddfa966af645cf0e4171a2a83a3ef16a8126cb71a5c099f3bf1cb389af8419",
+    "wheels/beartype-0.22.6-py3-none-any.whl": "0584bc46a2ea2a871509679278cda992eadde676c01356ab0ac77421f3c9a093",
+    "wheels/casefy-1.1.0-py3-none-any.whl": "a3dfcb14d85902d90702db1e9835760237f6a73ec0ae3b7e991ad767513a3cbc",
+    "wheels/jinja2-3.1.6-py3-none-any.whl": "85ece4451f492d0c13c5dd7c13a64681a86afae63a5f347908daf103ce6d2f67",
+    "wheels/markdown_it_py-4.0.0-py3-none-any.whl": "87327c59b172c5011896038353a81343b6754500a08cd7a4973bb48c6d578147",
+    "wheels/markupsafe-3.0.3-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl": "133a43e73a802c5562be9bbcd03d090aa5a1fe899db609c29e8c8d815c5f6de6",
+    "wheels/mdurl-0.1.2-py3-none-any.whl": "84008a41e51615a49fc9966191ff91509e3c40b939176e643fd50a5c2196b8f8",
+    "wheels/mypy_extensions-1.1.0-py3-none-any.whl": "1be4cccdb0f2482337c4743e60421de3a356cd97508abadd57d47403e94f5505",
+    "wheels/plum_dispatch-2.6.0-py3-none-any.whl": "8e9b8f20c5119f944720fa5b93f84338a9f604329f016a5132e419e4894cddf1",
+    "wheels/pygments-2.19.2-py3-none-any.whl": "86540386c03d588bb81d44bc3928634ff26449851e99741617ecb9037ee5ec0b",
+    "wheels/requirements.txt": "d3eb2379c504a6bcb43ffd7182145f4086b8f18d65f53dabad416afb8deb04d4",
+    "wheels/rich-14.2.0-py3-none-any.whl": "76bc51fe2e57d2b1be1f96c524b890b816e334ab4c1e45888799bfaab0021edd",
+    "wheels/typing_extensions-4.15.0-py3-none-any.whl": "f0fa19c6845758ab08074a0cfa8b7aecb71c999ca73d62883bc25cc018c4e548",
+    "wheels/typing_inspect-0.9.0-py3-none-any.whl": "9ee6fc59062311ef8547596ab6b955e1b8aa46242d854bfc78f4f6b0eff35f9f"
+  },
+  "tag": "aeep-repository-grader:pyserde-682-20261116",
+  "build_spec": {
+    "id": "toolkit.pyserde.grader.build",
+    "capability": "toolkit.upstream-engineering@1",
+    "kind": "command",
+    "description": "Install exactly the locked wheel closure in one private offline image.",
+    "input_schema": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "output_schema": null,
+    "estimate": {
+      "resources": {
+        "monetary_usd": 0.0,
+        "latency_ms": 0.0,
+        "cpu_ms": 0.0,
+        "memory_mb_seconds": 0.0,
+        "peak_memory_mb": 0.0,
+        "gpu_ms": 0.0,
+        "network_bytes": 0,
+        "context_tokens": 0,
+        "input_tokens": 0,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 0,
+        "reasoning_output_tokens": 0,
+        "subscription_units": 0.0
+      },
+      "cash": {
+        "amount_usd": null,
+        "upper_bound_usd": null,
+        "evidence": {
+          "status": "unavailable",
+          "source": "unavailable",
+          "trust": "untrusted",
+          "evidence_id": null,
+          "source_reference": null,
+          "digest": null,
+          "observed_at": null
+        }
+      },
+      "subscription_usage": [],
+      "success_probability": 0.95,
+      "quality_score": 0.95,
+      "risk_score": 0.05,
+      "confidence": 0.5,
+      "source": "static",
+      "sample_size": 0,
+      "uncertainty": null
+    },
+    "side_effect": "write",
+    "locality": "local",
+    "requires_network": false,
+    "data_residency": [],
+    "idempotent": true,
+    "safe_to_auto_execute": true,
+    "enabled": true,
+    "tags": [],
+    "resource_pool": null,
+    "provider_id": null,
+    "validators": [],
+    "config": {
+      "argv": [
+        "/Applications/Docker.app/Contents/Resources/bin/docker",
+        "--config",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/completion-20261116/pyserde-production-repair-20261116/ordinary/docker-config",
+        "--host",
+        "unix:///Users/edwintse/.docker/run/docker.sock",
+        "buildx",
+        "build",
+        "--builder",
+        "default",
+        "--pull=false",
+        "--network=none",
+        "--platform=linux/arm64",
+        "--provenance=false",
+        "--sbom=false",
+        "--load",
+        "--iidfile",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/completion-20261116/pyserde-production-repair-20261116/ordinary/execution/image-id",
+        "--tag",
+        "aeep-repository-grader:pyserde-682-20261116",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/completion-20261116/pyserde-production-repair-20261116/ordinary/build"
+      ],
+      "argv_literal": true,
+      "inherit_env": false,
+      "env": {
+        "HOME": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/completion-20261116/pyserde-production-repair-20261116/ordinary",
+        "PATH": "/usr/bin:/bin",
+        "LC_ALL": "C",
+        "DOCKER_BUILDKIT": "1"
+      },
+      "timeout_seconds": 180,
+      "max_output_bytes": 65536,
+      "output": {
+        "type": "text"
+      }
+    }
+  },
+  "grader_sha256": "4c89dd78cb4899dd27d8102d1fabf8dbc049cf68dfbf5aafc6f8838c13807889",
+  "required_identities": 5,
+  "calls": {
+    "reference": {
+      "archive_sha256": "2e9fe784a68be5398bccd8baea7eb09eb092a17a62307c699d3da8bbfac8eb16",
+      "payload_sha256": "774894c867e4a847e38bd58d846ec116cb2aab49a1ede0adac078206d18b5243",
+      "operation": "aeep-c13-pyserde-682-ordinary:reference",
+      "container": "aeep-5cd91f0903390409411f9bfe8fc8cd33",
+      "parent_argv_sha256": "b183acf2ee8c61c5929725ce01c38b534378dff9085eb706d21fffa60e4a8fe8"
+    },
+    "original": {
+      "archive_sha256": "39eefa0e0b3daa330adb4a35610393f576e579dc92e1d3c73fbcdb2ec9d47bac",
+      "payload_sha256": "39864d690b7b37b2b40ba9b98e9429ad0b5dfb2414feedf116947a99322e28e9",
+      "operation": "aeep-c13-pyserde-682-ordinary:original",
+      "container": "aeep-cf689ef4f1ad2c6658d99be7d3ebf3b6",
+      "parent_argv_sha256": "25de664a412db13beeb0c822a19d3fb374dc0164d23dc7d5c7b9ca6f656cf84a"
+    },
+    "deserialization_only": {
+      "archive_sha256": "dbe2dfe4a9efea6a43435a7c00dfe42612f09d514d8f643b04b71ec20b83ee1c",
+      "payload_sha256": "90f5d2d47835f199054ec15c549f67929008315e8f81eb96a8bac9c9c527b515",
+      "operation": "aeep-c13-pyserde-682-ordinary:deserialization_only",
+      "container": "aeep-1dcb8fe3e6d63f11974e47f65957dc3f",
+      "parent_argv_sha256": "e4ae2ce5027a0041efda5e2a3527a51ec10bbe146d7c78f54bd88a388e65fa72"
+    },
+    "serialization_only": {
+      "archive_sha256": "a1679687e08124f4884a63e37c055a0a434e666c10abb104f6a1bbcf6d77508b",
+      "payload_sha256": "b550abfb785005649de5fefb7285ef02c0ef294d8e1759ad152b6cf177efdc84",
+      "operation": "aeep-c13-pyserde-682-ordinary:serialization_only",
+      "container": "aeep-d1712d84d3d9d07bbb0ba8c271c828fe",
+      "parent_argv_sha256": "4186e3818679c2e48c8089eb5669d8acb5d4c6229e93870abd00bfa7e6034fb9"
+    }
+  },
+  "maximum_operations": 5,
+  "maximum_reserved_seconds": 325,
+  "required_free_bytes": 55834574848,
+  "minimum_build_headroom_bytes": 268435456,
+  "downloads": 0,
+  "models": 0,
+  "cash_usd": 0,
+  "existing_resources_removed": 0,
+  "provider_disclosure": false,
+  "extra_host_mounts": false,
+  "network": false,
+  "maximum_attempts": 1,
+  "stop_policy": "Stop after a build failure, uncertain cleanup or grader error. Run controls only after a passing reference. Retain actual scores and charges. No automatic repeat.",
+  "expires_at": "2026-11-20T04:20:51.579802+00:00"
+}
