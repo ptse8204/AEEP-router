@@ -59,6 +59,15 @@ contract. Source groups, permitted use and the offline grader remain open.
 SpreadsheetBench 2 has conflicting data-license declarations. Neither
 workbook archive was fetched. No case was assigned or disclosed.
 
+The [selected-trial preflight](../../reports/toolkit-v2/c13/completion-20261116/selection-trial-preflight.json)
+binds the pre-task Router choice to the ordinary runner's separate
+execution decision. The pre-trial hook rechecks the approved case,
+grader, shared inventory and selected executor. Read-only verification
+matches the protected grade to the attempt journal and three settled
+operations. Both valid first-party outputs passed, and the wrong
+output scored 0/1. Twenty-seven refusal checks passed. Live policy
+comparators, independent workloads and selection value remain open.
+
 The [Formula Extraction acquisition](../../reports/toolkit-v2/c13/completion-20261116/formula-runtime-acquisition-result.json)
 passed approved review `bedcde5c`. Both exact artifacts verified at
 160,981,322 bytes total. The [protected result](../../reports/toolkit-v2/c13/completion-20261116/protected-reference-group-result.json)

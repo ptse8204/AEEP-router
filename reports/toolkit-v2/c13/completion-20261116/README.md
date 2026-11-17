@@ -672,6 +672,24 @@ Apply it to a reviewed equal-inventory policy study after independent
 candidate evidence exists. Guardrails, case counts and policy comparisons
 still require their own evidence.
 
+The [selected-trial binding](bind_selection_trial.py) uses the ordinary
+BenchmarkRunner hook for a single reviewed case and policy choice. It
+freezes the case and grader before selection, then rechecks the selected
+executor and shared runner inventory before dispatch. The read-only check
+reopens the separate execution decision, exact pinned action, receipt,
+terminal journal and protected callback grade. Selection, execution and
+grading have distinct settled ledger references. Task contents stay out
+of the selection records.
+
+The [first-party preflight](selection-trial-preflight.json) used the real
+Router, runner, and grader on the current committed source. The valid
+baseline and candidate calls both scored 1/1. A wrong-output control scored
+0/1. All nine operations and 27 refusal checks used disposable local
+ledgers and zero model turns. The remaining work is connecting the
+reviewed discovery-only and fixed policies and obtaining independent
+candidate evidence before a live selection study.
+[Verification script](verify_selection_trial.py)
+
 The committed snapshot passed 42 targeted tests, schema checks and the
 wheel build with a stable source fingerprint. Both full workspace runs passed
 2,165 tests with 21 skips and 81.45% combined coverage. Both branch gates

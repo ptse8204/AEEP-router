@@ -82,6 +82,13 @@ need 35 long cases and the pack lists 20. Three sample asset declarations
 are ready for provenance review. SpreadsheetBench 2's data license and
 archive selection remain open. No assets ran or reached a model.
 
+The [selected-trial preflight](../toolkit-v2/c13/completion-20261116/selection-trial-preflight.json)
+used the real Router, ordinary BenchmarkRunner and a first-party protected
+callback. It links the pre-task selection through the pinned execution
+decision to the completed grade and settled accounting. Two valid outputs
+passed and a wrong output failed. Twenty-seven altered or unapproved
+bindings were refused. Live selection usefulness remains open.
+
 The [SkillsBench workbook screening](../toolkit-v2/c13/completion-20261116/workbook-grader-screening.json)
 verified 14 pinned assets and found two verifiers with gaps that allow wrong
 answers. A third case still needs source rights and offline recalculation
