@@ -62,21 +62,26 @@ earlier recovery fixtures and interrupted acquisition. Its latest actual
 readback is bound in the approved result above. Every historical charge
 and original outcome remains available.
 
+The [verified projection bindings](verified-publisher-projection-bindings.json)
+connect all five publisher proofs to the original staged task inputs,
+protected overlays, editable paths and 129 required test identities. Both
+reference and original payload hashes reproduce through the ordinary callback
+with first-party replies. Twenty altered source and payload bindings were
+rejected. Actual protected runtime grading remains open.
+
 The [source recovery driver](check_expansion_tree_recovery.py) binds five
 retained archives. Three contain Git submodule declarations. The exact
 review `7e9158ba` uses at most eight GitHub metadata requests and reconstructs
 the publisher tree with Git submodule pointers. It does not download the
 archives again or fetch submodule contents. Five bindings, six malformed
-tree controls and a simulated matched recovery passed. The actual
-publisher comparisons remain pending.
+tree controls and a simulated matched recovery passed. The approved publisher
+run and inverse-export proof now supply all five source bindings.
 
 The [publisher reconciliation preflight](publisher-reconciliation-preflight.json)
-binds the five staged projections to the exact metadata review. After
-publisher recovery settles, use its read-only inspector to replay the
-retained Git tree, license hashes and ordinary grader payloads. Fixture
-checks covered all five cases, a rate-limited partial run and a publisher
-tree mismatch. The inspector needs the exact approval and terminal
-receipts. A verified source remains pending protected runtime grading.
+bound the five staged projections to the exact metadata review. Its actual
+read-only inspector reopened the retained Git trees, license hashes and
+ordinary grader payloads. The newer projection bindings also accept MontePy's
+inverse-export proof. The original fixture controls remain recorded.
 
 The [retained source projections](retained-projection-staging-result.json)
 stage the OpenAI Agents multi-file repair and the Ophyd Async contract
@@ -85,17 +90,17 @@ indexes reproduced byte for byte. The original OpenAI archive stays
 intact. Its worker projection omits two hash-bound instruction files and
 preserves both editable source paths and all 24 published test identities.
 Ophyd Async keeps its 28 published identities and adds the protected
-preservation check. Publisher binding and protected reproduction are
-pending for both projections.
+preservation check. Publisher binding is verified for both projections.
+Their protected runtime reproduction remains pending.
 
 The [retained link projections](retained-link-projection-result.json) stage
 MontePy, GitPython, RETURNN and AiiDA Quantum ESPRESSO. They copy 27
 hash-bound link targets into regular files and omit four MontePy directory
 aliases under documentation or demos. RETURNN's existing bootstrap selects
 the same repository root with the copies. All 129 published test identities
-are preserved. Both preparations matched byte for byte. The pending group
-covers the first three publisher checks. AiiDA needs a separate binding,
-and protected grading remains open for all four.
+are preserved. Both preparations matched byte for byte. Publisher binding now
+covers MontePy, GitPython and RETURNN. AiiDA needs a separate binding, and
+protected grading remains open for all four.
 
 The [retained runtime prerequisites](retained-runtime-prerequisites.json)
 identify missing named wheel candidates for four projections. GitPython
@@ -103,8 +108,8 @@ also needs a compatible history fixture for its protected clone and tag
 checks. The ordinary archive carries regular source files, and the
 contained grader denies injected host environment variables. For RETURNN,
 the existing ARM64 image ID and both ordinary grader payloads passed
-preflight with all 13 identities. Publisher binding and actual isolated
-runtime checks still need to settle.
+preflight with all 13 identities. Its publisher binding is now verified.
+Actual isolated runtime checks still need to settle.
 
 The [staged runtime triage](repository-expansion-runtime-triage.json) checked
 all 13 staged cases against the ordinary grader and retained wheel cache.

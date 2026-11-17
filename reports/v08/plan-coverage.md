@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [publisher projection bindings](../toolkit-v2/c13/completion-20261116/verified-publisher-projection-bindings.json)
+join five actual source proofs to unchanged task and grader payload hashes,
+including 129 protected identities. Two replays matched. Twenty altered
+bindings were rejected. Actual runtime grading and formal assignment remain
+open, and correction group `3376c129` is still pending.
+
 The [approved offline group](../toolkit-v2/c13/completion-20261116/offline-group-result-20261117.json)
 settled 11 operations in 35.333 seconds. Three software pairs passed their
 reference/original contracts. Two software cases and ExtractBench still

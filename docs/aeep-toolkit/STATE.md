@@ -1,5 +1,15 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. Publisher proofs now bind the staged ordinary grader inputs.**
+The [projection bindings](../../reports/toolkit-v2/c13/completion-20261116/verified-publisher-projection-bindings.json)
+connect all five source proofs to their staged public inputs, protected
+overlays, editable paths and 129 required test identities. Two read-only
+replays matched byte for byte. Twenty changed revisions, publisher trees
+and archive bindings were rejected. The workspace source is recorded
+separately from the historical execution sources. No upstream tests ran.
+Protected runtime grading and formal assignment remain open. Correction
+group `3376c129` still needs approval and 52 GiB usable free space.
+
 **November 17. Approved group `6b758e65` has completed.**
 The [group result](../../reports/toolkit-v2/c13/completion-20261116/offline-group-result-20261117.json)
 reconciles 11 settled operations, 35.333 seconds, and zero outstanding
