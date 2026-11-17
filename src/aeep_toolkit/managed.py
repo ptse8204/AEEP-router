@@ -18,6 +18,7 @@ from pydantic import TypeAdapter, ValidationError
 from aeep.assessment import verification
 from aeep.assessment.boundary import require_conformance
 from aeep.assessment.models import (
+    NATIVE_SCORE_EXTENSION,
     AssessmentOperationLedger,
     AssessmentPlan,
     AssessmentReport,
@@ -534,6 +535,16 @@ class AEEPAssessmentAdapter:
             verification = (
                 "pass" if passed and status == "completed" else "fail" if not passed else "unknown"
             )
+        native_task_score = None
+        if (self.recipe.extension is not None
+                and self.recipe.extension.schema_version == NATIVE_SCORE_EXTENSION
+                and status == "completed" and graded):
+            if (len(trial.case_validation) != 1
+                    or trial.case_validation[0].kind != "callback"
+                    or trial.case_validation[0].trust != "verified"
+                    or trial.case_validation[0].quality_score is None):
+                raise ConfigurationError("native score requires a verified protected grader result")
+            native_task_score = trial.case_validation[0].quality_score
         return EvaluationRun.model_validate(
             dict(
                 run_id=trial.trial_id,
@@ -557,6 +568,7 @@ class AEEPAssessmentAdapter:
                 candidate_exposed=discovery.get("exposed"),
                 candidate_invoked=discovery.get("invoked"),
                 verification=verification,
+                native_task_score=native_task_score,
                 verification_ref=content_digest(trial) if verification != "unknown" else None,
                 status=status,
                 retries=trial.retry_fallback_count,

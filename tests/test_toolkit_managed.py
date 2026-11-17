@@ -595,3 +595,48 @@ async def test_source_pin_binds_all_subject_files_not_only_skill_entry_point(tmp
         assert router.store._connection.total_changes == before
     finally:
         await router.close()
+
+
+async def test_managed_native_score_requires_completed_verified_callback(tmp_path, monkeypatch):
+    from aeep.assessment.extensions import grader_results
+    from aeep.assessment.models import RecipeDefinition
+    from aeep.assessment.skillsbench_recipe import skillsbench_offer_letter_recipe
+    from aeep.models import ExecutionStatus, ValidationKind
+
+    router, service, adapter, path, _ = prepared(tmp_path, monkeypatch)
+    try:
+        report = record(service, adapter, path)
+        monkeypatch.setattr(adapter_module, "require_conformance", lambda *args, **kwargs: None)
+        campaign = BenchmarkCampaignReport.model_validate(
+            service.repository.get("campaign", report.campaign_digest)
+        )
+        trial = campaign.trials[0]
+        with sqlite3.connect(path) as connection:
+            receipt = ExecutionReceipt.model_validate_json(
+                connection.execute(
+                    "SELECT payload_json FROM trial_receipts WHERE receipt_id=?",
+                    (trial.receipt_ids[0],),
+                ).fetchone()[0]
+            )
+        raw = skillsbench_offer_letter_recipe().model_dump(mode="json")
+        raw["extension"]["schema_version"] = "assessment.recipe-extension.v7"
+        raw["dependencies"]["benchmark_pack"] = "a" * 64
+        adapter.recipe = RecipeDefinition.model_validate(raw)
+        extension = adapter.recipe.extension
+        assert extension is not None and extension.failure_codes
+        adapter.plan.suite.cases[0].validators[0].kind = ValidationKind.CALLBACK
+        trial.case_validation = grader_results({
+            "valid": [False], "quality_scores": [0.625],
+            "failure_codes": [extension.failure_codes[0]],
+        }, extension, 1)
+        trial.valid = False
+        run = adapter._run(trial, receipt)
+        assert run.native_task_score == 0.625 and run.verification == "fail"
+        assert run.verification_ref == content_digest(trial)
+        trial.case_validation[0].trust = "observed"
+        with pytest.raises(ConfigurationError, match="verified protected grader"):
+            adapter._run(trial, receipt)
+        receipt.status = trial.status = ExecutionStatus.TIMEOUT
+        assert adapter._run(trial, receipt).native_task_score is None
+    finally:
+        await router.close()

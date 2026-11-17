@@ -2,10 +2,17 @@
 
 from __future__ import annotations
 
-from typing import Annotated, Literal, Protocol
+from typing import Annotated, Any, Literal, Protocol
 from urllib.parse import urlsplit
 
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    SerializerFunctionWrapHandler,
+    model_serializer,
+    model_validator,
+)
 
 
 class ContractModel(BaseModel):
@@ -196,6 +203,15 @@ class EvaluationRun(ContractModel):
     timing_source_ref: Digest | None = None
     cash_accounting_ref: Digest | None = None
 
+    native_task_score: Annotated[float, Field(strict=True, ge=0, le=1)] | None = None
+
+    @model_serializer(mode="wrap")
+    def omit_unmeasured_native_score(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
+        record: dict[str, Any] = handler(self)
+        if self.native_task_score is None:
+            record.pop("native_task_score", None)
+        return record
+
     @model_validator(mode="after")
     def observations(self) -> EvaluationRun:
         if self.arm == "control" and (self.candidate_exposed is True or self.candidate_invoked is True):
@@ -206,6 +222,11 @@ class EvaluationRun(ContractModel):
             raise ValueError("verification result requires independent evidence reference")
         if self.verification == "pass" and self.status != "completed":
             raise ValueError("unfinished execution cannot be a verified success")
+        if self.native_task_score is not None and (
+            self.status != "completed"
+            or self.verification != ("pass" if self.native_task_score == 1 else "fail")
+        ):
+            raise ValueError("native score requires a completed and consistent verification result")
         if any(v is not None for v in (self.agent_wall_seconds, self.verification_wall_seconds, self.setup_wall_seconds)) and self.timing_source_ref is None:
             raise ValueError("timing observations require provenance")
         return self

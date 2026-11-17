@@ -6,6 +6,12 @@ references and source pins. The operator excluded Waza from this delivery.
 The Waza setup below is historical. Candidate and selection usefulness remain
 separate from functional readiness.
 
+The ExtractBench CFPB adapter uses the existing managed artifact
+transport and version 7 protected recipe for value F1. Recipe preparation
+checks all three original input archives and the protected reference
+bindings. Actual native calibration and runtime verification remain open.
+[Contained recipe preflight](../../reports/toolkit-v2/c13/completion-20261116/extractbench-recipe-preflight.json)
+
 Arta 50 and Confluence Markdown Exporter 92 reuse original SWE-rebench
 inputs and 24 protected test identities. Their scoped production repairs
 reuse ordinary patch transport. Native runtime and exact dependency

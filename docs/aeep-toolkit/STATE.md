@@ -98,6 +98,28 @@ The manifest replay and command preview are under
 Native grading remains pending the first calibration and a reviewed case
 execution. Live comparisons remain paused.
 
+The [native score contract and reinspection](../../reports/toolkit-v2/c13/completion-20261116/extractbench-native-score-verification.json)
+preserve a fractional upstream grade in a versioned protected recipe
+and ordinary JSON, HTML and Markdown reports. Binary recipes retain
+their original format. A read-only replay preserved both ordinary
+workflows' report hashes. The isolated ledger copy accepted all 37
+retained stack checks on source `1e6fcef7`. The operational ledger retains
+its original source bindings. No installed-runtime state or authority
+changed. The wheel passed archive inspection. Both full workspace runs
+passed 2,169 tests with 21 skips. Both branch coverage gates passed,
+with 81.46% combined coverage. All 72 offline documentation
+inputs passed.
+
+The [CFPB recipe preflight](../../reports/toolkit-v2/c13/completion-20261116/extractbench-recipe-preflight.json)
+binds all three original input archives to the managed file carrier.
+The protected callback passed 21 first-party score and failure checks.
+Their replies are fixtures. The retained ExtractBench calibration review
+`ba9f3388` still passes exact read-only preflight and awaits authorization.
+It is separate from the new recipe and uses its frozen source.
+Pack registration, sealed runtime checks and protected grading remain
+open. Software source acquisition `bb4a134f` is still unstarted.
+Comparative campaigns remain paused.
+
 The document grouping checks reproduced the report byte for byte and
 rejected a changed manifest. Compilation and the schema check passed.
 Both full regression runs passed 2,165 tests with 21 skips. Combined

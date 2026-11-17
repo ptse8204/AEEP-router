@@ -59,14 +59,15 @@ def _generation_request(recipe, seed: int = 29) -> dict:
     }
 
 
-def test_integration_grader_deadline_is_opt_in_and_keeps_other_program_bounds():
+@pytest.mark.parametrize("version", ["v6", "v7"])
+def test_integration_grader_deadline_is_opt_in_and_keeps_other_program_bounds(version):
     data = skillsbench_offer_letter_recipe().model_dump(mode="json")
     extension = data["extension"]
     extension["grader"]["config"]["timeout_seconds"] = 60
     with pytest.raises(ValueError, match="bounded read-only JSON"):
         RecipeDefinition.model_validate(data)
 
-    extension["schema_version"] = "assessment.recipe-extension.v6"
+    extension["schema_version"] = "assessment.recipe-extension." + version
     with pytest.raises(ValueError, match="exact benchmark pack"):
         RecipeDefinition.model_validate(data)
     data["dependencies"]["benchmark_pack"] = "a" * 64
@@ -202,3 +203,32 @@ def test_skillsbench_recipe_artifact_and_source_drift_change_reviewed_definition
     assert content_digest(drifted) != original_digest
     assert drifted.extension is not None and recipe.extension is not None
     assert drifted.extension.generator.config['argv'] != recipe.extension.generator.config['argv']
+
+
+def test_native_score_extension_preserves_fractional_protected_results():
+    from aeep.assessment.extensions import grader_results
+
+    definition = skillsbench_offer_letter_recipe().model_dump(mode="json")
+    definition["extension"]["schema_version"] = "assessment.recipe-extension.v7"
+    with pytest.raises(ValueError, match="exact benchmark pack"):
+        RecipeDefinition.model_validate(definition)
+    definition["dependencies"]["benchmark_pack"] = "a" * 64
+    extension = RecipeDefinition.model_validate(definition).extension
+    assert extension is not None and extension.failure_codes
+    code = extension.failure_codes[0]
+    reply = {"valid": [True, False, False], "failure_codes": [None, code, code],
+             "quality_scores": [1, 0.625, 0]}
+    grades = grader_results(reply, extension, 3)
+    assert [(grade.valid, grade.quality_score, grade.trust) for grade in grades] == [
+        (True, 1.0, "verified"), (False, 0.625, "verified"), (False, 0.0, "verified"),
+    ]
+    for values in ([1, 0.625], [1, True, 0], [1, float("nan"), 0], [1, float("inf"), 0],
+                   [1, -0.01, 0], [1, 1.01, 0], [0.99, 0.625, 0], [1, 1, 0], [1, "0.625", 0]):
+        with pytest.raises(ConfigurationError, match="invalid native score"):
+            grader_results({**reply, "quality_scores": values}, extension, 3)
+    with pytest.raises(ConfigurationError, match="invalid result"):
+        grader_results({"valid": [False], "failure_codes": [code]}, extension, 1)
+    definition["extension"]["schema_version"] = "assessment.recipe-extension.v6"
+    binary = RecipeDefinition.model_validate(definition).extension
+    with pytest.raises(ConfigurationError, match="invalid result"):
+        grader_results(reply, binary, 3)

@@ -1029,6 +1029,14 @@ runtime before exposing candidate source paths, and reject an already loaded
 editable source module. Plugin declarations grant no installation, network or
 execution authority; dependency bytes and the effective image still need review.
 
+`assessment.recipe-extension.v7` retains the v6 integration-case-set, containment,
+and review requirements and adds a native score list to the protected grader
+reply. Each score MUST be a finite number from 0 through 1, and the paired
+correctness indicator MUST be true exactly when the score is 1. This
+contract applies to upstream graders with that same success rule. Invalid,
+missing or inconsistent replies MUST block assessment. Versions 1–6 retain
+their binary reply contracts and existing serialized records.
+
 Assessment definitions, plans, authorizations, reports and scoped admissions use
 `assessment.*.v1` schema identifiers. Ordinary routing MUST NOT start assessments
 or contact a planning model. Model arguments MUST NOT create, expand or revoke

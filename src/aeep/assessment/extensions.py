@@ -23,6 +23,8 @@ from ..models import (
 from ..registry import validate_json
 from ..workflow import pointer_get
 from .models import (
+    INTEGRATION_RECIPE_EXTENSIONS,
+    NATIVE_SCORE_EXTENSION,
     AssessmentEnvironment,
     AssessmentLimits,
     AssessmentPlan,
@@ -101,7 +103,7 @@ async def invoke(service: AssessmentService, scope: AssessmentPlan | RecipeMater
     require_environment(recipe, environment)
     if recipe.extension is None or spec not in (recipe.extension.generator, recipe.extension.grader, recipe.extension.reference):
         raise ConfigurationError("recipe executor is not in its reviewed definition")
-    if recipe.extension.schema_version.endswith('.v6') and (
+    if recipe.extension.schema_version in INTEGRATION_RECIPE_EXTENSIONS and (
             not isinstance(scope, AssessmentPlan) or scope.integration_case_set_digest is None):
         raise ConfigurationError('integration recipe requires a bound integration case set')
     service.repository.authorize(scope)
@@ -238,7 +240,10 @@ def grader_name(value: dict[str, Any], expected: dict[str, Any]) -> str:
 def grader_results(reply: Any, extension: ExecutableRecipeExtension, count: int) -> list[ValidationResult]:
     """Only exact reviewed codes may leave the contained grader; never its free text."""
     diagnostic = extension.failure_codes is not None
+    native = extension.schema_version == NATIVE_SCORE_EXTENSION
     keys = {"valid", "failure_codes"} if diagnostic else {"valid"}
+    if native:
+        keys.add("quality_scores")
     if (not isinstance(reply, dict) or set(reply) != keys
             or not isinstance(reply.get("valid"), list) or len(reply["valid"]) != count
             or any(type(value) is not bool for value in reply["valid"])):
@@ -248,9 +253,15 @@ def grader_results(reply: Any, extension: ExecutableRecipeExtension, count: int)
             or any((code is not None if valid else code not in (extension.failure_codes or []))
                    for valid, code in zip(reply["valid"], codes, strict=True))):
         raise ConfigurationError("recipe grader returned an unreviewed failure code; assessment blocked")
+    scores = reply["quality_scores"] if native else [float(valid) for valid in reply["valid"]]
+    if (not isinstance(scores, list) or len(scores) != count
+            or any(type(score) not in {int, float} or not 0 <= score <= 1
+                   or valid != (score == 1)
+                   for valid, score in zip(reply["valid"], scores, strict=True))):
+        raise ConfigurationError("recipe grader returned an invalid native score; assessment blocked")
     return [ValidationResult(kind=ValidationKind.CALLBACK, valid=valid,
-                quality_score=1.0 if valid else 0.0, detail=code or "", trust=TrustLevel.VERIFIED)
-            for valid, code in zip(reply["valid"], codes, strict=True)]
+                quality_score=score, detail=code or "", trust=TrustLevel.VERIFIED)
+            for valid, code, score in zip(reply["valid"], codes, scores, strict=True)]
 
 
 def callbacks(service: AssessmentService, plan: AssessmentPlan, recipe: RecipeDefinition) -> dict[str, Any]:
@@ -349,7 +360,7 @@ async def validate_grader(service: AssessmentService, plan: AssessmentPlan, reci
         if observed != decisions:
             raise ConfigurationError('repository grader failed independent correctness/fault validation')
         return literals, sum(not item for item in decisions)
-    batches = (bounded_batches(examples, separate=extension.schema_version.endswith('.v6'))
+    batches = (bounded_batches(examples, separate=extension.schema_version in INTEGRATION_RECIPE_EXTENSIONS)
                if extension.truth_schema is not None else [examples])
     for batch in batches:
         reply, _elapsed = await invoke(service, plan, extension.grader, {"examples": batch}, stage="grader_probe", elapsed_times=program_seconds)

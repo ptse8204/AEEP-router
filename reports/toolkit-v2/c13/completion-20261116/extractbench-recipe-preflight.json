@@ -1,0 +1,58 @@
+{
+  "cases": [
+    {
+      "case": "short--cfpb-closing-disclosure-h25f-094db1040b",
+      "public_archive": "a9c8123d69687b51032623ebffefbe07df4e4a178af512ca0ce3e12f92791a8e",
+      "task_sha256": "ba7f32297578cdb7f51d2d13fb598a6ce439bcc83445640f5b27963afebaf5ff"
+    },
+    {
+      "case": "short--cfpb-closing-disclosure-filled-sample-ec900645b7",
+      "public_archive": "8ac9347f05a9279af714cd443dd30a152406950427865ef52c0489d7b206b3e6",
+      "task_sha256": "16f44358c09c33f09c748aac804257dd5881e602e8797a417db5e8633936be13"
+    },
+    {
+      "case": "short--cfpb-closing-disclosure-h25e-0787c1b60e",
+      "public_archive": "e60ced0c3e4b9a8698bbf268df26ba6b145bb7acc04cac1a2c4217b931d52a3b",
+      "task_sha256": "ba47c83d99a3d1f94d595d2273124cc130c3604f8b0c9c2524c56098681f7ad4"
+    }
+  ],
+  "fixture_counts_by_disposition": {
+    "fractional": 3,
+    "invalid_submission": 3,
+    "perfect": 3,
+    "refused_inconsistent_perfect_flag": 3,
+    "refused_infrastructure_error": 3,
+    "refused_timeout": 3,
+    "zero": 3
+  },
+  "formal_cases_adopted": 0,
+  "formal_exposure_group": "CFPB Closing Disclosure, all six related clean/degraded inputs",
+  "guest_sha256": "45d2ea628a6cd6bc4b9356e392948c04fc7811c7851afe1f68e65ae2b074a67f",
+  "managed_artifact": {
+    "input_field": "task_archive_b64",
+    "input_name": "extractbench-task.zip",
+    "max_bytes": 200000,
+    "output_field": "prediction_b64",
+    "output_name": "output.json"
+  },
+  "model_turns": 0,
+  "native_first_calibration_preflight_rechecked": true,
+  "native_first_calibration_review": "ba9f338866750df709e9beee92552b80a43c29560ebc2ad3e073187caa473414",
+  "preparation_driver": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/prepare_extractbench_recipe.py",
+    "sha256": "00019f2828d52097859705c42a7380fff97ae3b7f5d75306f0d3eda709e5d976"
+  },
+  "prepared_recipe_path": ".aeep/completion-20261116/native-score-contract/carrier/recipe.json",
+  "private_bindings_sha256": "8317d1d59d4757cbc1a6c618ab6ff1ab45dcdc21422743592a0baaf660cc1aa2",
+  "private_cases_sha256": "77d4ddaa5fe2c95c84dfc3af650e35006843932497413e156a113a5a6f30c516",
+  "protected_preparation_sha256": "10c71bc17c7961e2268c30140957bd22967d2869b63415258762d6b062a61141",
+  "provider_disclosures": 0,
+  "recipe_file_sha256": "c8def8c3b42d5c2930256386409fc357bfc67df58c4ed6a7dd06aa45d2a121ed",
+  "recipe_sha256": "c3bcf434a40b72a62fcf93bc4b304325ea771add3bf08ddd51b259bc45e13ae8",
+  "replay_matched": true,
+  "schema_version": "aeep.c13.extractbench-recipe-preflight.v1",
+  "scope": "Three locally staged definitions. Native scorer replies were substituted. The sealed runtime, pack registration, rights and native verification are pending.",
+  "source_review_sha256": "1d1deab7eec27adc85f8bce3907b345b825493fc562aac874af68b29b71132ca",
+  "substituted_score_and_failure_checks": 21,
+  "upstream_scores_observed": 0
+}

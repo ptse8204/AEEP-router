@@ -14,11 +14,13 @@ from pydantic import Field
 
 from aeep.assessment.identity import protected_directory
 from aeep.assessment.models import (
+    NATIVE_SCORE_EXTENSION,
     AssessmentOperation,
     AssessmentOperationLedger,
     AssessmentPlan,
     AssessmentReport,
     AssessmentRunBinding,
+    RecipeDefinition,
     content_digest,
 )
 from aeep.assessment.repository import AssessmentRepository
@@ -290,6 +292,10 @@ def _original_run(
     ):
         raise ConfigurationError("report files do not match the canonical workflow run")
 
+    recipe = RecipeDefinition.model_validate(repo.get("recipe", plan.recipe_digest))
+    if content_digest(recipe) != plan.recipe_digest:
+        raise ConfigurationError("workflow grading recipe differs from the reviewed definition")
+    native = recipe.extension is not None and recipe.extension.schema_version == NATIVE_SCORE_EXTENSION
     cases = {case.case_id: case for case in plan.suite.cases}
     expected = {
         (case, route.route_id, condition, rep)
@@ -359,12 +365,17 @@ def _original_run(
             for item in graders
             if trial.ended_at is not None and trial.started_at <= item.started_at <= trial.ended_at
         ]
+        score_matches = (
+            grade.quality_score is not None and grade.quality_score == run.native_task_score
+            if native
+            else grade.quality_score == int(grade.valid is True) and run.native_task_score is None
+        )
         if (
             grade.kind != "callback"
             or grade.trust != "verified"
             or type(grade.valid) is not bool
             or grade.valid != trial.valid
-            or grade.quality_score != int(grade.valid)
+            or not score_matches
             or receipt.status != "success"
             or receipt.execution_success is not True
             or charge != recorded_charges.get(trial.trial_id)

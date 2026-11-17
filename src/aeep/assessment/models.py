@@ -84,9 +84,13 @@ class RecipeFeatureRule(StrictModel):
     values: list[str | int | bool] = Field(default_factory=list, max_length=100)
 
 
+NATIVE_SCORE_EXTENSION = "assessment.recipe-extension.v7"
+INTEGRATION_RECIPE_EXTENSIONS = ("assessment.recipe-extension.v6", NATIVE_SCORE_EXTENSION)
+
+
 class ExecutableRecipeExtension(StrictModel):
     model_config = ConfigDict(json_schema_extra={"allOf": [{
-        "if": {"properties": {"schema_version": {"const": "assessment.recipe-extension.v6"}},
+        "if": {"properties": {"schema_version": {"enum": [*INTEGRATION_RECIPE_EXTENSIONS]}},
                "required": ["schema_version"]},
         "else": {"properties": {"independent_fixtures": {"minItems": 2},
                                 "transformed_fixtures": {"minItems": 1}}},
@@ -95,6 +99,7 @@ class ExecutableRecipeExtension(StrictModel):
         "assessment.recipe-extension.v1", "assessment.recipe-extension.v2",
         "assessment.recipe-extension.v3", "assessment.recipe-extension.v4",
         "assessment.recipe-extension.v5", "assessment.recipe-extension.v6",
+        "assessment.recipe-extension.v7",
     ] = "assessment.recipe-extension.v1"
     generator: ExecutorSpec
     grader: ExecutorSpec
@@ -120,12 +125,13 @@ class ExecutableRecipeExtension(StrictModel):
     @model_validator(mode="after")
     def contained_json_programs(self) -> ExecutableRecipeExtension:
         # Integration plans already supply reviewed upstream cases and a separate protected reference.
-        if not self.schema_version.endswith('.v6') and (
+        integration = self.schema_version in INTEGRATION_RECIPE_EXTENSIONS
+        if not integration and (
                 len(self.independent_fixtures) < 2 or not self.transformed_fixtures):
             raise ValueError('executable recipes require independent and transformed fixtures')
         if (self.schema_version != 'assessment.recipe-extension.v1') != (self.truth_schema is not None):
             raise ValueError("semantic artifact grading requires extension v2/v3 and an explicit truth schema")
-        diagnostics = self.schema_version.endswith(('.v3', '.v4', '.v5', '.v6'))
+        diagnostics = self.schema_version.endswith(('.v3', '.v4', '.v5')) or integration
         if diagnostics != (self.failure_codes is not None):
             raise ValueError('reviewed failure codes require extension v3 or later')
         if not diagnostics and any(
@@ -133,7 +139,7 @@ class ExecutableRecipeExtension(StrictModel):
             raise ValueError('independent grader outputs require extension v3 or later')
         if self.failure_codes is not None and len(set(self.failure_codes)) != len(self.failure_codes):
             raise ValueError('duplicate reviewed failure code')
-        grader_limit = 60 if self.schema_version.endswith('.v6') else 30
+        grader_limit = 60 if integration else 30
         for spec, timeout_limit in ((self.generator, 30), (self.grader, grader_limit), (self.reference, 30)):
             config = spec.config
             if self.truth_schema is not None and config.get('argv_literal') is not True:
@@ -184,7 +190,7 @@ class RecipeDefinition(StrictModel):
     @model_validator(mode="after")
     def extension_contract(self) -> RecipeDefinition:
         if self.extension is not None:
-            if self.extension.schema_version.endswith('.v6') and 'benchmark_pack' not in self.dependencies:
+            if self.extension.schema_version in INTEGRATION_RECIPE_EXTENSIONS and 'benchmark_pack' not in self.dependencies:
                 raise ValueError('integration grader requires an exact benchmark pack binding')
             generator = 'curated_repository:1' if self.extension.schema_version.endswith('.v5') else 'contained_json:1'
             if (self.schema_version != "assessment.recipe.v2" or self.generator != generator or self.grader != "contained_json:1"

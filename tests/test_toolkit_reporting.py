@@ -211,3 +211,22 @@ def test_report_exposes_inspection_references_without_inventing_authority():
         assert "pending approvals" in text
         assert "grades alone do not describe edits" in text
         assert D in text
+
+
+def test_native_task_score_survives_rendering_with_independent_binary_outcome():
+    value = bundle(native_task_score=0.625, verification="fail")
+    assert "native_task_score" not in value.runs[0].model_dump()
+    assert EvidenceBundle.model_validate_json(value.model_dump_json()) == value
+    summary = summarize(value)
+    task = summary["cohorts"][0]["families"][0]["task_comparisons"][0]
+    treatment = task["arms"]["treatment"]
+    assert treatment["native_task_score"] == 0.625
+    assert treatment["binary_task_score"] == 0
+    for format in ("json", "markdown", "html"):
+        assert "0.625" in render(summary, format)
+    assert "Treatment native score" in render(summary, "markdown")
+    assert "Control native score" not in render(summarize(bundle()), "markdown")
+    for changes in ({"status": "timeout"}, {"verification": "unknown"},
+                    {"verification": "pass"}, {"native_task_score": True}):
+        with pytest.raises(ValueError):
+            bundle(**({"native_task_score": 0.625, "verification": "fail"} | changes))

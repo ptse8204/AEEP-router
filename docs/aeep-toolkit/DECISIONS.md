@@ -10,6 +10,14 @@ and selection usefulness separate. The 8/28/105 counts, formal thresholds
 and release authority retain their original scope.
 [C13 beta handoff](../../reports/toolkit-v2/c13/completion-20261116/README.md)
 
+### November 16 native score contract
+
+Reuse the bounded contained recipe reply, canonical trial grade and
+managed reporting path for upstream unit-interval scores. Use v7 for
+verifiers whose independent success rule is exactly 1. Keep earlier
+binary result envelopes stable. ExtractBench still needs its real
+protected calibration.
+
 ### November 16 retained multi-file alternatives
 
 Keep each source revision eligible for one task definition. Arta 50 and

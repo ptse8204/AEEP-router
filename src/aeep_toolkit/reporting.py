@@ -66,6 +66,7 @@ def task_observation(run: EvaluationRun) -> dict[str, Any]:
         'task_sha256': run.task_sha256, 'arm': run.arm, 'run_id': run.run_id,
         'verification': run.verification,
         'binary_task_score': int(run.verification == 'pass') if run.verification in {'pass', 'fail'} else None,
+        **({'native_task_score': run.native_task_score} if run.native_task_score is not None else {}),
         'tokens': measurement(run, 'tokens'),
         'raw_tokens': run.tokens.model_dump(mode='json') if run.tokens else None,
         'agent_wall_seconds': run.agent_wall_seconds,
@@ -274,14 +275,22 @@ def render(summary: dict[str, Any], format: str) -> str:
             if family.get('task_comparisons'):
                 def shown(value: Any) -> str:
                     return 'unknown' if value is None else str(value)
+                native = any(
+                    'native_task_score' in arm
+                    for task in family['task_comparisons'] for arm in task['arms'].values()
+                )
+                header = "Task SHA-256 | Control score | Treatment score"
+                if native:
+                    header += " | Control native score | Treatment native score"
                 lines += ["Per-task comparison (resource difference = control minus treatment; positive means fewer treatment tokens)",
-                          "Task SHA-256 | Control score | Treatment score | Control tokens | Treatment tokens | Token difference | Relative difference"]
+                          header + " | Control tokens | Treatment tokens | Token difference | Relative difference"]
                 for task in family['task_comparisons']:
                     arms = task['arms']
                     relative = task['relative_tokens_control_minus_treatment']
                     percent = f'{relative * 100:+.4g}%' if relative is not None else 'unknown'
                     lines.append(' | '.join([task['task_sha256'],
                         shown(arms['control']['binary_task_score']), shown(arms['treatment']['binary_task_score']),
+                        *([shown(arms[arm].get('native_task_score')) for arm in ('control', 'treatment')] if native else []),
                         shown(arms['control']['tokens']), shown(arms['treatment']['tokens']),
                         shown(task['tokens_control_minus_treatment']), percent]))
                 lines.append("Task timing, retries, raw token categories and canonical references: " + json.dumps(family['task_comparisons'], sort_keys=True, allow_nan=False))
@@ -298,6 +307,12 @@ def render(summary: dict[str, Any], format: str) -> str:
                 lines += [cash['notice'], ""]
             else:
                 lines += ["Actual cash, cost per verified success, recurring fees and break-even: unknown.", ""]
+    if any(
+        "native_task_score" in task
+        for cohort in summary["cohorts"] for family in cohort["families"]
+        for task in family.get("task_observations", ())
+    ):
+        lines += ["Native scores come from the reviewed upstream verifier. The score of each graded run is shown with its independent pass/fail outcome."]
     if summary.get("inspection_references"):
         lines += ["Inspection references", json.dumps(summary["inspection_references"], sort_keys=True), ""]
     lines += ["Limits", *summary["limitations"]]

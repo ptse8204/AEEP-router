@@ -98,6 +98,20 @@ observed trial is `NOT_ASSESSED`. The readable report shows the engineering
 comparison status separately from the unassessed real-model value. Earlier
 artifacts retain their original format and evidence meaning.
 
+## Native grading scores
+
+The version 7 contained integration grader carries the upstream 0–1 task
+score through the protected callback, canonical trial and normalized report.
+Use it when the upstream verifier defines success as an exact score of 1.
+A fractional score can accompany a failed correctness check. JSON,
+Markdown and HTML preserve both observations and link them to the trial.
+Failed or interrupted execution cannot supply a native score. Existing
+binary recipes and reports retain their original result format.
+
+The score must come from the reviewed protected verifier. It carries no
+additional runtime authority and supplies no candidate usefulness
+conclusion. The offline tests use first-party score fixtures.
+
 ## Missing native token measurements
 
 New Codex App Server receipts retain the exact supplied token-field names in

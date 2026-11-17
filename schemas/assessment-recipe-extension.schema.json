@@ -811,7 +811,10 @@
       "if": {
         "properties": {
           "schema_version": {
-            "const": "assessment.recipe-extension.v6"
+            "enum": [
+              "assessment.recipe-extension.v6",
+              "assessment.recipe-extension.v7"
+            ]
           }
         },
         "required": [
@@ -829,7 +832,8 @@
         "assessment.recipe-extension.v3",
         "assessment.recipe-extension.v4",
         "assessment.recipe-extension.v5",
-        "assessment.recipe-extension.v6"
+        "assessment.recipe-extension.v6",
+        "assessment.recipe-extension.v7"
       ],
       "title": "Schema Version",
       "type": "string"

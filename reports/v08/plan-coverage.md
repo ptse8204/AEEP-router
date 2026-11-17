@@ -312,6 +312,13 @@ verified the published origin of three clean loan disclosure PDFs and
 all nine agent inputs. The six linked tasks stay in one stage if adopted.
 The protected contents and native grades remain pending.
 
+The [native score verification](../toolkit-v2/c13/completion-20261116/extractbench-native-score-verification.json)
+preserves upstream scores separately from correctness. Both retained
+binary workflows replayed unchanged, and 37 readiness checks passed in
+a private ledger copy on the proposed source. Offline fixture and package
+checks do not supply an upstream grade. The actual calibration and formal
+cohorts remain open.
+
 The [CFPB protected preparation](../toolkit-v2/c13/completion-20261116/extractbench-cfpb-protected-preparation.json)
 verified those protected contents and staged seven roles for each of the
 three clean cases. Per-case support roots preserve the pinned scorer,
