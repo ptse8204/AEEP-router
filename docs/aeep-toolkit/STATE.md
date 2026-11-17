@@ -1,5 +1,15 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. The software queue has a bounded overlap screen.**
+[Retained issue screening](../../reports/toolkit-v2/c13/completion-20261116/retained-issue-overlap-screen.json)
+identifies 154 leads from 111 unattempted repositories by distinct
+revisions, edits and issue test modules. It also finds 20 supplemental
+multi-file leads. Seven have retained archive files to verify. The
+recorded balanced two-cohort profile still needs two multi-file repairs
+even if every counted prospect qualifies. Source families stay within
+one split and no case has been assigned. Exact review `6b758e65` is
+pending, with Waza excluded and comparisons paused.
+
 **November 17. The six retained projections have scoped runtime findings.**
 [Runtime prerequisites](../../reports/toolkit-v2/c13/completion-20261116/retained-runtime-prerequisites.json)
 records an ordinary two-role RETURNN payload with all 13 identities and a

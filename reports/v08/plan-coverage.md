@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [retained issue screen](../toolkit-v2/c13/completion-20261116/retained-issue-overlap-screen.json)
+records 154 unattempted leads and 20 supplemental multi-file leads. The
+balanced two-cohort projection remains at least two multi-file repairs
+short even if every counted lead qualifies. Repository families stay
+within one split, and the screen assigns no formal cases.
+
 [Runtime prerequisites](../toolkit-v2/c13/completion-20261116/retained-runtime-prerequisites.json)
 separate the RETURNN carrier preflight from five unresolved runtime inputs.
 The existing GitPython verifier requires repository history. RETURNN's

@@ -98,6 +98,17 @@ Qualification and marginal value together require at least 246 distinct
 inputs under the shared-early-case assumption. This scenario still needs
 13 cases from further recovery or additional intake.
 
+The [retained issue screen](retained-issue-overlap-screen.json) allows
+additional issues within one repository split only where revision,
+patch, production paths and issue test modules differ. It finds 154
+leads in the 111 unattempted repositories. The recorded balanced profile
+still needs 48 multi-file repairs beyond the 122 conditional prospects.
+The unattempted queue has at most 26 matching path-shape leads. Screening
+the older inventory and alternate revisions adds 20 supplemental leads,
+including seven with retained archive files. At least two more multi-file
+cases are needed in that optimistic scenario. Archive, scope, rights and
+runtime still need independent verification.
+
 ## Retained stack and lifecycle evidence
 
 The operational ledger accepts all **37 required integration checks** for the
