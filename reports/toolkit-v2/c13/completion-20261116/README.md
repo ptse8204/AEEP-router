@@ -490,6 +490,16 @@ four roles ran with networking disabled.
 [Playwright browser pin](https://raw.githubusercontent.com/microsoft/playwright/v1.57.0/packages/playwright-core/browsers.json)
 [Chrome publisher metadata](https://googlechromelabs.github.io/chrome-for-testing/143.0.7499.4.json)
 
+The [ordinary Formula Extraction recipe](formula-ordinary-preparation.json)
+uses the original task input and checks, with the recorded all-channel pixel
+correction. The protected grader accepts only the declared Markdown artifact,
+up to 32,768 UTF-8 bytes. A first-party check reproduced the four historical
+dispositions, rejected six malformed artifacts and two input or reference
+binding changes, and verified the four contained command shapes. The local
+COPY-only context has 2,755 pinned files totaling 458,297,419 bytes. No new
+protected invocation or image build ran. Exact runtime verification, task
+asset rights and provider disclosure remain separate.
+
 The [grouped review](protected-reference-group.json) covered seven local
 operations. The [result](protected-reference-group-result.json) reconciles
 all seven receipts and operation entries against the canonical databases

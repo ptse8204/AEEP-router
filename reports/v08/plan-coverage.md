@@ -7,6 +7,12 @@ verifies the corrected renderer against the reference and two wrong outputs.
 With local MathJax withheld, the run recorded an infrastructure error
 and no grade.
 
+The [ordinary Formula Extraction preparation](../toolkit-v2/c13/completion-20261116/formula-ordinary-preparation.json)
+binds the seven checks to the standard recipe interface. A local check mapped
+the four retained outcomes to ordinary grades or an infrastructure error,
+rejected eight malformed or drifted inputs, and checked the four command
+shapes. The image build and contained ordinary verification remain open.
+
 The [approved A2A batch](../toolkit-v2/c13/completion-20261116/approved-a2a-batch-results.json)
 reproduced two reference/original-source pairs. The third reference stopped at
 collection. Static review found a published selector mismatch. All five

@@ -1,0 +1,103 @@
+{
+  "task_id": "latex-formula-extraction",
+  "recipe_digest": "48ec8460db779551be9c52222928932223466588d1dbd6896ac40273f17d3aa3",
+  "case_digest": "1dde7afb1091329437102a79865179c62305eb4422d8854bdbe83f24a13c55e1",
+  "reference_receipt_id": "rcpt_7189452ec3ed4c1b988d6cdbe7ae09cf",
+  "historical_review_sha256": "fa6d72b846ec55eeb1cc7ad286d460ccd26838a08033aa18f5822fdc5548ca8d",
+  "historical_ledger_sha256": "3a23b5e66ee8357548663633fa5e8bd885273dc6d414306d3bf4d114cb8b3e1c",
+  "source_parent": "sha256:6f04cf1668b8ede62e46a48f4454d69f08e17b44d40cc34f743ee63ea355801e",
+  "parent_tag": "aeep-skillsbench-react:retained-amd64-6f04cf16",
+  "parent_layers": [
+    "sha256:98effb2dfe85d4c431f97d90482075f19e5fc3a57c2dd423d8bdfd4813620043",
+    "sha256:defb1ed3f048cead06e972ba2839be3f52c88b7276e7c1ffdbb87774d61cc790",
+    "sha256:8dcaa608a04c91741782f616c876bae81c7b5ee98a0ff011fcd314071ff1fc1c",
+    "sha256:e15e9832f78247a1a27728caf2752793423a35eef6d5ebbe02c768bbb4f83517",
+    "sha256:d20cda54bf984ab2d1c478eff5be85d143885f1d08fc3ddd58e0a147b488b22c",
+    "sha256:7ea6b9933bb8127c8268ab3f2f161fdffb32804ee85cf8bf058f28be1bd7a9fc",
+    "sha256:f1f5e0f774c8619f0885af029622fed607d1c464b9cadfe906e75a4bd54f5bdb",
+    "sha256:7ea98e48b6f8baa33bd4c70e5617c751a8822ff9458a3253fbb0bf085ed9552d",
+    "sha256:91d09d8d6ac6fb20fccdf8c6c5d5c3ab655179c3c5dd17df2ffbbae031d1f5f4",
+    "sha256:0444a5bedb0a988a78c26d738d039046e1dbc647e22ecccacc844f8f9ad46a11",
+    "sha256:62e32b47bfa54f5544d2d2b5f344686c244ccab3069372ed0dcbee86ae5dee64",
+    "sha256:bae4a65a4a93398d073295db12010fa34e626d1ff55ddce41541b3327c52e3fb"
+  ],
+  "copied_runtime_source_digests": {
+    "/private/tmp/aeep-c13-formula-check-20261116/renderer": "74814c31025aef2283f5a955a57ae27b06a033d1457f139e2c38059a74d0350d",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/skillsbench-react-ordinary-carrier-20261108/context/python": "dfd343ae02e667317a68a356675a11dc6f2d77c74cf7afce7593096a6e1083d3"
+  },
+  "context_digest": "6dc9d024d9ac8b7ec568cdf5db278683ae465e6e7e5e5c370ba43690583ca85b",
+  "file_count": 2755,
+  "context_bytes": 458297419,
+  "compiled_renderer_supported_architecture": "linux/amd64",
+  "all_upstream_identities_retained": 7,
+  "historical_durations": {
+    "incomplete": 6.110278374981135,
+    "reference": 8.210903582978062,
+    "renderer-unavailable": 24.488023875048384,
+    "wrong-value": 6.382813917007297
+  },
+  "environment_bound": false,
+  "build_executed": false,
+  "ordinary_tests_executed": 0,
+  "provider_disclosure": false,
+  "formal_assignment": false,
+  "context_path": "/private/tmp/aeep-c13-formula-ordinary-20261116",
+  "preserved_finder_metadata_sha256": "b325df39caa06af13fed41bd72c6e5d62d8d4ab12edaf851a3e357ce9ba6a5fd",
+  "ordinary_archives_verified": true,
+  "reference_fault_and_error_projection": {
+    "incomplete": {
+      "score": 0.0,
+      "historical_receipt": "rcpt_42d38850709f416c98637742fb46fde6"
+    },
+    "reference": {
+      "score": 1.0,
+      "historical_receipt": "rcpt_7189452ec3ed4c1b988d6cdbe7ae09cf"
+    },
+    "renderer-unavailable": {
+      "disposition": "infrastructure_error",
+      "historical_receipt": "rcpt_5dd91b87ce804517816c0d08822a90cd"
+    },
+    "wrong-value": {
+      "score": 0.0,
+      "historical_receipt": "rcpt_9030ac0beeef407ca0409d3e9fbed290"
+    }
+  },
+  "rejected_artifact_controls": 6,
+  "rejected_input_or_truth_drift_controls": 2,
+  "verified_contained_command_shapes": [
+    {
+      "role": "reference",
+      "container_pattern": "aeep-d540457411c70db990f0c37c01f2cc1e",
+      "payload_sha256": "b54f8ac89e06ae183ffd67603d872dd1d00d28cb608151724251ea22f026f01b",
+      "normalized_argv_sha256": "e1f84689878c33fc1beac052af5a4cc9a5026609b5cd26749c0ea4fe27ea0ecb",
+      "timeout_seconds": 30
+    },
+    {
+      "role": "grade-reference",
+      "container_pattern": "aeep-2e880b23e2eefcc2233fd7979ca77cb7",
+      "payload_sha256": "0b79e1cb115df0414c0ea5d3159c70a2621ffd68dc57cee813b6ddb2b229288d",
+      "normalized_argv_sha256": "2d9cad8984ba8c72147a0c3ca3622ae24b1ba905e74fa304b9cfc34af74872cf",
+      "timeout_seconds": 45
+    },
+    {
+      "role": "grade-fault-0",
+      "container_pattern": "aeep-112292d4265073304ce362c25a004160",
+      "payload_sha256": "78231a25013967c286f724d97e90493138cc3225569dc2c1340601ed95c1f791",
+      "normalized_argv_sha256": "df8dda7c15231f635280516d7bdafed403ec4f1ec1d8af73462451558510bf10",
+      "timeout_seconds": 45
+    },
+    {
+      "role": "grade-fault-1",
+      "container_pattern": "aeep-b1209e49b3ad2a5bb2d822a1f865b029",
+      "payload_sha256": "a049e49cfa5b4b0e6b0a4dfedbf876c0003494efbba8c3c2e127a988f89e113c",
+      "normalized_argv_sha256": "71983f95e372fb71f58f0f4480fe248693e40874bad17cc687c45213151421d8",
+      "timeout_seconds": 45
+    }
+  ],
+  "exact_runtime_review_prepared": false,
+  "pending": [
+    "Approve a bounded offline COPY-only build and ordinary verifier run.",
+    "Bind the derived image, then verify its actual recipe and grader results.",
+    "Review exact input rights and data disclosure separately before any managed turn."
+  ]
+}

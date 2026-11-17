@@ -14,6 +14,13 @@ then recorded seven passing reference checks under the corrected pixel
 comparison. Wrong and incomplete output scored 0/1. With MathJax withheld,
 the renderer timed out and no task grade was recorded.
 
+The [ordinary Formula Extraction preparation](../../reports/toolkit-v2/c13/completion-20261116/formula-ordinary-preparation.json)
+binds the same seven checks to a versioned recipe and the pinned SkillsBench
+input. The local adapter reproduced the four dispositions from retained
+observations and rejected eight malformed or drifted inputs. The 2,755-file
+COPY-only build context is hash-bound. The derived image and actual ordinary
+grader calls remain unstarted. Provider disclosure and formal use remain open.
+
 The [approved A2A batch](../../reports/toolkit-v2/c13/completion-20261116/approved-a2a-batch-results.json)
 reproduced the reference and original-source results for issues 576 and
 682. Issue 472 returned pytest exit 4 and collected zero tests. Its
