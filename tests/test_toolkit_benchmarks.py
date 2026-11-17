@@ -204,3 +204,55 @@ def test_six_task_original_import_retains_blob_identity_and_never_clears_rights(
     ]
     with pytest.raises(ValueError, match="inputs are external"):
         skillsbench_manifest(root, freeze())
+
+
+def test_extractbench_pack_archive_preserves_original_paths_and_rejects_role_drift(tmp_path):
+    import base64
+    import io
+    from zipfile import ZipFile
+
+    from aeep_toolkit.benchmarks import (
+        EXTRACTBENCH_ASSET_ROLES,
+        EXTRACTBENCH_REPOSITORY,
+        EXTRACTBENCH_REVISION,
+        task_input,
+    )
+
+    root, original = pack(tmp_path)
+    value = original.model_dump(mode="json")
+    value["pack_id"] = "extractbench"
+    value["source"].update(repository=EXTRACTBENCH_REPOSITORY, revision=EXTRACTBENCH_REVISION)
+    task = value["tasks"][0]
+    task.update(output_paths=["output.json"], upstream_score="native_reward", assets=[])
+    public = {}
+    for relative, role in EXTRACTBENCH_ASSET_ROLES.items():
+        name = "tasks/fixture/" + relative
+        payload = ("synthetic " + relative).encode()
+        path = root / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(payload)
+        task["assets"].append(dict(path=name, sha256=hashlib.sha256(payload).hexdigest(),
+                                   bytes=len(payload), role=role))
+        if role in {"instruction", "input"}:
+            public[relative] = payload
+    selected = BenchmarkPack.model_validate(value)
+    archived = task_input(selected, root, "fixture")
+    with ZipFile(io.BytesIO(base64.b64decode(archived["task_archive_b64"]))) as files:
+        assert {name: files.read(name) for name in files.namelist()} == public
+    stage_agent_assets(selected, root, "fixture", tmp_path.resolve() / "extractbench-worker")
+    assert (tmp_path / "extractbench-worker/environment/document.pdf").read_bytes() == public["environment/document.pdf"]
+
+    for field, replacement in [
+        ("repository", "https://example.test/unrelated"),
+        ("revision", "0" * 40),
+    ]:
+        with pytest.raises(ValueError, match=r"pinned dataset|reviewed pin"):
+            BenchmarkPack.model_validate({**value, "source": {**value["source"], field: replacement}})
+    for field, replacement in [
+        ("upstream_score", "binary"),
+        ("output_paths", ["other.json"]),
+        ("assets", [{**a, "role": "input"} if a["path"].endswith("/tests/verifier.py") else a
+                    for a in task["assets"]]),
+    ]:
+        with pytest.raises(ValueError, match="protected task layout"):
+            BenchmarkPack.model_validate({**value, "tasks": [{**task, field: replacement}]})

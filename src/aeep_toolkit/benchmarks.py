@@ -20,6 +20,21 @@ if TYPE_CHECKING:
     from .state_benchmarks import MCPStatePack
 
 SKILLSBENCH_REVISION = "9a1f4dd5f7659f75707435da3ce854b6e48321d1"
+EXTRACTBENCH_REPOSITORY = "https://huggingface.co/datasets/llamaindex/ExtractBench"
+EXTRACTBENCH_REVISION = "f9b910906cd7e73cc9eb5379a8d5d935c67b92c4"
+EXTRACTBENCH_ASSET_ROLES = {
+    "instruction.md": "instruction",
+    "environment/document.pdf": "input",
+    "environment/schema.json": "input",
+    "environment/Dockerfile": "environment",
+    "task.toml": "environment",
+    "solution/expected.json": "oracle",
+    "solution/solve.sh": "oracle",
+    "tests/reference.test.json": "oracle",
+    "tests/verifier.py": "verifier",
+    "tests/test.sh": "verifier",
+    "tests/Dockerfile": "environment",
+}
 INITIAL_TASKS: tuple[
     tuple[str, Literal["document-data", "software-engineering"], Literal["medium", "hard"]], ...
 ] = (
@@ -100,7 +115,7 @@ class BenchmarkTask(ContractModel):
 
 class BenchmarkPack(ContractModel):
     schema_version: Literal["aeep.toolkit.benchmark-pack.v1"] = "aeep.toolkit.benchmark-pack.v1"
-    pack_id: Literal["skillsbench", "mcpmark", "mcp-universe"]
+    pack_id: Literal["skillsbench", "mcpmark", "mcp-universe", "extractbench"]
     source: SourcePin
     tasks: tuple[BenchmarkTask, ...] = Field(min_length=1, max_length=256)
 
@@ -108,8 +123,26 @@ class BenchmarkPack(ContractModel):
     def pinned_pack(self) -> BenchmarkPack:
         from .stack_readiness import source_revisions
 
-        if self.source.revision != source_revisions("0" * 64)[self.pack_id]:
+        revision = (
+            EXTRACTBENCH_REVISION if self.pack_id == "extractbench"
+            else source_revisions("0" * 64)[self.pack_id]
+        )
+        if self.source.revision != revision:
             raise ValueError("benchmark source differs from the selected reviewed pin")
+        if self.pack_id == "extractbench":
+            if self.source.repository != EXTRACTBENCH_REPOSITORY:
+                raise ValueError("ExtractBench requires its pinned dataset repository")
+            for task in self.tasks:
+                expected = {
+                    f"tasks/{task.task_id}/{path}": role
+                    for path, role in EXTRACTBENCH_ASSET_ROLES.items()
+                }
+                if (
+                    task.domain != "document-data" or task.upstream_score != "native_reward"
+                    or task.output_paths != ("output.json",)
+                    or {asset.path: asset.role for asset in task.assets} != expected
+                ):
+                    raise ValueError("ExtractBench requires its original protected task layout and native score")
         if len({task.task_id for task in self.tasks}) != len(self.tasks):
             raise ValueError("duplicate task identities")
         return self
@@ -200,6 +233,12 @@ def inspect_pack(pack: BenchmarkPack | MCPStatePack, root: Path, task_ids: tuple
     }
 
 
+def _worker_path(pack_id: str, task_id: str, asset: TaskAsset) -> str:
+    if pack_id == "extractbench":
+        return PurePosixPath(asset.path).relative_to(PurePosixPath("tasks") / task_id).as_posix()
+    return asset.path
+
+
 def stage_agent_assets(
     pack: BenchmarkPack | MCPStatePack,
     root: Path,
@@ -228,7 +267,7 @@ def stage_agent_assets(
         raw = asset_path(root, asset).read_bytes()
         if len(raw) != asset.bytes or hashlib.sha256(raw).hexdigest() != asset.sha256:
             raise ValueError("task input changed during staging; retain the incomplete tree")
-        target = destination / asset.path
+        target = destination / _worker_path(pack.pack_id, task_id, asset)
         target.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
         with target.open("xb") as stream:
             stream.write(raw)
@@ -259,7 +298,7 @@ def task_input(pack: BenchmarkPack | MCPStatePack, root: Path, task_id: str) -> 
                 raise ValueError('task input changed while packaging')
             if asset.role == 'instruction':
                 instruction = raw.decode('utf-8')
-            entry = zipfile.ZipInfo(asset.path, date_time=(1980, 1, 1, 0, 0, 0))
+            entry = zipfile.ZipInfo(_worker_path(pack.pack_id, task_id, asset), date_time=(1980, 1, 1, 0, 0, 0))
             entry.compress_type = zipfile.ZIP_DEFLATED
             entry.external_attr = (stat.S_IFREG | 0o444) << 16
             archive.writestr(entry, raw)

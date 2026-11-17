@@ -6,6 +6,12 @@ references and source pins. The operator excluded Waza from this delivery.
 The Waza setup below is historical. Candidate and selection usefulness remain
 separate from functional readiness.
 
+The optional [ordinary ExtractBench pack](../../reports/toolkit-v2/c13/completion-20261116/extractbench-ordinary-pack-preflight.json)
+reuses the existing workflow preview, file carrier and protected v7
+recipe. The pinned dataset preview and transport checks passed for all
+three original CFPB inputs. Calibration, case rights and installed
+runtime evidence remain pending.
+
 The ExtractBench CFPB adapter uses the existing managed artifact
 transport and version 7 protected recipe for value F1. Recipe preparation
 checks all three original input archives and the protected reference

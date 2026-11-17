@@ -10,6 +10,15 @@ and selection usefulness separate. The 8/28/105 counts, formal thresholds
 and release authority retain their original scope.
 [C13 beta handoff](../../reports/toolkit-v2/c13/completion-20261116/README.md)
 
+### November 16 ordinary ExtractBench pack
+
+Use a single optional file-task pack pinned to the reviewed ExtractBench
+dataset. Reuse the ordinary asset carrier, rights gate and native score
+recipe. Preserve the three public task paths inside each archive and
+separate the protected reference and scorer. Keep the six related CFPB
+cases in one source group. This preparation leaves the required stack
+inventory and comparison thresholds intact.
+
 ### November 16 native score contract
 
 Reuse the bounded contained recipe reply, canonical trial grade and

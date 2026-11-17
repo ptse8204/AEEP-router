@@ -172,7 +172,7 @@ def prepare(definition: Path, configuration: str) -> tuple[dict[str, Any], Path,
 
 def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
     """Inspect the selected stack; canonical preparation is a separate explicit step."""
-    from aeep.assessment.models import content_digest
+    from aeep.assessment.models import NATIVE_SCORE_EXTENSION, RecipeDefinition, content_digest
 
     from .benchmarks import BenchmarkPack, inspect_pack, parse_pack
     from .candidate import inspect
@@ -204,6 +204,16 @@ def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
     if engine not in selected.components or pack.pack_id not in selected.components:
         raise ValueError('selected evaluator and benchmark pack must be explicit components')
     blockers = list(installation.blockers)
+    recipe = None
+    if selected.benchmark_recipe is not None:
+        _, recipe_raw = _read(selected.benchmark_recipe, root)
+        recipe = RecipeDefinition.model_validate_json(recipe_raw)
+        if recipe.dependencies.get('benchmark_pack') != content_digest(pack.model_dump(mode='json')):
+            raise ValueError('canonical grader recipe differs from the exact task-pack assets')
+        if pack.pack_id == 'extractbench' and (
+            recipe.extension is None or recipe.extension.schema_version != NATIVE_SCORE_EXTENSION
+        ):
+            raise ValueError('ExtractBench requires the native-score grader contract')
     if not isinstance(pack, BenchmarkPack):
         blockers.append('MCP state-output execution requires a reviewed ToolHive/server binding and protected database verifier; file recipes cannot execute this pack')
     if any(task.rights_review_ref is None for task in pack.tasks if task.task_id in selected.task_ids):
@@ -211,7 +221,7 @@ def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
     assessment = None
     preparation = None
     if selected.preparation is not None:
-        from aeep.assessment.models import AssessmentSetupRequest, RecipeDefinition
+        from aeep.assessment.models import AssessmentSetupRequest
 
         request_path, request_raw = _read(selected.preparation.request, root)
         source_path, source_raw = _read(selected.preparation.source, root)
@@ -220,12 +230,8 @@ def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
         source = SourcePin.model_validate_json(source_raw)
         if source.artifact_sha256 != candidate.sha256:
             raise ValueError('preparation source differs from the selected candidate package')
-        if selected.benchmark_recipe is None:
+        if recipe is None:
             raise ValueError('canonical preparation requires the exact benchmark recipe')
-        _, recipe_raw = _read(selected.benchmark_recipe, root)
-        recipe = RecipeDefinition.model_validate_json(recipe_raw)
-        if recipe.dependencies.get('benchmark_pack') != content_digest(pack.model_dump(mode='json')):
-            raise ValueError('preparation recipe differs from the selected pack')
         preparation = {'request_path':str(request_path), 'source_path':str(source_path),
                        'manifest_path':str(manifest_path), 'request':request.model_dump(mode='json'),
                        'recipe_digest':content_digest(recipe)}
@@ -235,7 +241,7 @@ def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
     else:
         plan_path, plan_raw = _read(selected.assessment.plan, root, integration_plan=True)
         source_path, source_raw = _read(selected.assessment.source, root)
-        from aeep.assessment.models import AssessmentPlan, RecipeDefinition
+        from aeep.assessment.models import AssessmentPlan
 
         from .managed import plan_preview
         plan = AssessmentPlan.model_validate_json(plan_raw)
@@ -244,14 +250,10 @@ def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
             raise ValueError('assessment source differs from the selected candidate package')
         if {case.action.input.get('task_id') for case in plan.suite.cases} != set(selected.task_ids):
             raise ValueError('canonical assessment task selection differs from the benchmark pack')
-        if selected.benchmark_recipe is None:
+        if recipe is None:
             blockers.append('canonical grader recipe has no selected task-pack binding')
-        else:
-            _, recipe_raw = _read(selected.benchmark_recipe, root)
-            recipe = RecipeDefinition.model_validate_json(recipe_raw)
-            if (content_digest(recipe) != plan.recipe_digest
-                    or recipe.dependencies.get('benchmark_pack') != content_digest(pack.model_dump(mode='json'))):
-                raise ValueError('canonical grader recipe differs from the exact task-pack assets')
+        elif content_digest(recipe) != plan.recipe_digest:
+            raise ValueError('canonical grader recipe differs from the exact task-pack assets')
         assessment = {'plan_path':str(plan_path), 'source_path':str(source_path),
                       'backend_review':plan_preview(plan, source)}
     scheduler_binding: dict[str, str] | None = None

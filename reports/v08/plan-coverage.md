@@ -312,6 +312,12 @@ verified the published origin of three clean loan disclosure PDFs and
 all nine agent inputs. The six linked tasks stay in one stage if adopted.
 The protected contents and native grades remain pending.
 
+The [ordinary ExtractBench pack](../toolkit-v2/c13/completion-20261116/extractbench-ordinary-pack-preflight.json)
+previews all three CFPB inputs on the existing workflow CLI. Their
+public archive bytes match prior staging. A protected runtime context
+and version 7 recipe are pinned. Native calibration, case-rights review
+and canonical preparation remain open. No case entered a formal study.
+
 The [native score verification](../toolkit-v2/c13/completion-20261116/extractbench-native-score-verification.json)
 preserves upstream scores separately from correctness. Both retained
 binary workflows replayed unchanged, and 37 readiness checks passed in

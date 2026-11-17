@@ -120,6 +120,21 @@ Pack registration, sealed runtime checks and protected grading remain
 open. Software source acquisition `bb4a134f` is still unstarted.
 Comparative campaigns remain paused.
 
+The [ordinary CLI ExtractBench preflight](../../reports/toolkit-v2/c13/completion-20261116/extractbench-ordinary-pack-preflight.json)
+opens one named workflow for all three pinned CFPB inputs. Their exact
+public archives match the earlier staging. The published document and
+schema paths survive the ordinary file carrier. The CLI refuses a binary
+grader substituted for the v7 native scorer, and refuses canonical
+preparation without its prerequisites. The private protected context
+contains 879 pinned files, and the scorer's document path is adapted
+to its future contained location. Its dependency site needs the native
+calibration. All 37 retained checks passed against source `f47d3042`
+in a private ledger copy. Rights, runtime authorization, actual native
+grades and formal assignments remain open. The existing exact reviews
+`ba9f3388` and `bb4a134f` remain unstarted. Both workspace suites passed
+2,170 tests with 21 skips. The critical and assessment branch gates and
+all 72 offline documentation checks passed.
+
 The document grouping checks reproduced the report byte for byte and
 rejected a changed manifest. Compilation and the schema check passed.
 Both full regression runs passed 2,165 tests with 21 skips. Combined

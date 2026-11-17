@@ -41,6 +41,22 @@ database, output directory or host process. Its review digest binds the exact
 plan, source association and adapter implementation. It cannot establish that a
 grant is current, that a budget remains, or that worker conformance passes.
 
+## Inspect a pinned ExtractBench workflow
+
+An ExtractBench pack can select the original document, JSON schema and
+instructions for each task through the ordinary workflow. The worker
+archive retains `instruction.md`, `environment/document.pdf` and
+`environment/schema.json`. Grading uses the protected native score
+recipe and reads the worker's `output.json`.
+
+Run `aeep-toolkit workflow plan --workflow WORKFLOW --configuration NAME`
+against the exact workflow file. Its preview lists the selected tasks
+and pending rights and setup. Canonical preparation requires reviewed
+asset-use records, the exact recipe and case set, and a bound runtime.
+The [CFPB preflight](../../reports/toolkit-v2/c13/completion-20261116/extractbench-ordinary-pack-preflight.json)
+shows the three currently staged inputs. Their native grading remains
+pending.
+
 ## Run the existing plan
 
 After reviewing that exact binding and the existing assessment authority:
