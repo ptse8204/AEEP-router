@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 offline review group](../toolkit-v2/c13/completion-20261116/offline-evidence-reviews.json)
+binds an unstarted document calibration, two unstarted protected software
+grader batches and a metadata-only recovery on five retained archives.
+Two exact grader replays and the first-party recovery controls passed.
+The group needs operator approval. C13 remains open.
+
 [C13 software acquisition](../toolkit-v2/c13/completion-20261116/repository-expansion-acquisition-result.json)
 settled all 48 attempts and staged 13 native grader inputs. The 26
 substituted callback checks verified transport shape. The provisional

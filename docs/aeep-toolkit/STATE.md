@@ -1,5 +1,13 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. C13 offline evidence scopes are ready for grouped review.**
+[Offline evidence reviews `6b758e65`](../../reports/toolkit-v2/c13/completion-20261116/offline-evidence-reviews.json)
+bind the ExtractBench continuation, two unstarted software grader batches,
+and GitHub metadata recovery for five retained archives. The software
+preflights replayed their exact payloads. The recovery driver verified all
+five archives and refused a request without approval. All four scopes
+remain unstarted. Waza is excluded and formal comparisons stay paused.
+
 **November 17. Both approved actions ran. Waza is excluded from C13.**
 [Repository source intake](../../reports/toolkit-v2/c13/completion-20261116/repository-expansion-acquisition-result.json)
 `bb4a134f` staged 11 contract audits and two multi-file repairs from 48

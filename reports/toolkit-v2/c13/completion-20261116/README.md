@@ -29,6 +29,29 @@ specific approval for 29 unstarted pinned wheel downloads and one offline
 calibration. It retains the original charge and all 41 verified wheels.
 Zero model turns and $0 cash.
 
+The [offline evidence group `6b758e65`](offline-evidence-reviews.json) binds
+the four pending scopes so the operator can approve them together. The two
+software grader reviews replayed unchanged. They cover five cases already
+staged in the provisional pool. Their real reference and original-source
+grades are still pending. All reviews retain independent stop rules.
+
+The [source recovery driver](check_expansion_tree_recovery.py) binds five
+retained archives. Three contain Git submodule declarations. The exact
+review `7e9158ba` uses at most eight GitHub metadata requests and reconstructs
+the publisher tree with Git submodule pointers. It does not download the
+archives again or fetch submodule contents. Five bindings, six malformed
+tree controls and a simulated matched recovery passed. The actual
+publisher comparisons remain pending.
+
+The new intake cases still need per-case runtime review. Django Guardian
+imports `environ` from its test settings. The selected LLM Sandbox tests
+mock backend objects after importing the corresponding Python packages,
+so the grader still needs their reviewed client libraries. BQSKit declares
+the compiled `bqskitrs` dependency. OpenTelemetry's relevant package roots
+live under its monorepo projects, outside the ordinary observer's root
+and `src` import paths. Keep these cases provisional while resolving their
+runtime requirements.
+
 ## Retained stack and lifecycle evidence
 
 The operational ledger accepts all **37 required integration checks** for the
