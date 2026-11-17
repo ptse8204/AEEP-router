@@ -532,6 +532,21 @@ no case was admitted. [Runtime audit command](audit_extractbench_runtime.py) ·
 [Publisher scorer](https://github.com/run-llama/ExtractBench/tree/2f27f100730afc7c395602e26a2a87e07ea66b31) ·
 [fuzzysearch release](https://pypi.org/project/fuzzysearch/0.8.1/)
 
+The [protected intake](extractbench-protected-runtime-intake.json) matched
+all 379 archived blobs to the pinned Git tree. It stages 282 package
+files, the original verifier and protected calibration assets in a
+separate grader mount. The verifier has one reversible document-path
+adaptation. The native loader, metric and oracle remain unchanged.
+
+The [observer](extractbench_harbor_observer.py) preserves fractional
+value F1, a separate perfect indicator and upstream feedback counts.
+It keeps infrastructure errors ungraded and excludes cell contents
+from its summary. Seven substituted roles passed, including malformed
+and absent output and an absent reference. All 12 source, path and
+observer checks passed. Acquisition of the 36 remaining pinned wheels
+and offline verification with the actual scorer remain open.
+[Staging command](stage_extractbench_protected_inputs.py)
+
 SpreadsheetBench 2 publishes two pinned corpus archives. Its dataset
 card declares MIT and its paper names CC BY-SA 4.0 for the data. The
 cell verifier checks declared answer ranges and the documented evaluation

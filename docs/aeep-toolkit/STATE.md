@@ -75,6 +75,14 @@ imports. The publisher ships a Python fallback for fuzzysearch, and
 36 wheels in the base lock projection remain uncached (76.70 MB).
 Protected runtime verification and native grades remain open.
 
+The [ExtractBench protected intake](../../reports/toolkit-v2/c13/completion-20261116/extractbench-protected-runtime-intake.json)
+verified all 379 archived blobs against the pinned publisher Git tree.
+The protected mount holds 282 scorer files and seven calibration roles.
+The Harbor verifier changes only its document path. A first-party
+rehearsal preserved fractional value F1, the binary perfect indicator
+and missing-reference errors. No upstream grader ran. Exact wheel
+acquisition and offline scorer execution remain open.
+
 The [selected-trial preflight](../../reports/toolkit-v2/c13/completion-20261116/selection-trial-preflight.json)
 binds the pre-task Router choice to the ordinary runner's separate
 execution decision. The pre-trial hook rechecks the approved case,

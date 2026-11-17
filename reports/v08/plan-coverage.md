@@ -94,6 +94,12 @@ data. The native scorer imports NumPy and SciPy. Provider registration
 also loads modules dynamically, so the static audit cannot certify a
 reduced runtime. The protected native grade remains open.
 
+The [ExtractBench protected intake](../toolkit-v2/c13/completion-20261116/extractbench-protected-runtime-intake.json)
+matched all 379 published scorer blobs and staged the exact verifier,
+oracle and five submitted artifacts privately. Seven substituted verifier
+responses preserved native scores and distinguished grader errors from
+task outcomes. The actual dependency closure and native grade remain open.
+
 The [selected-trial preflight](../toolkit-v2/c13/completion-20261116/selection-trial-preflight.json)
 used the real Router, ordinary BenchmarkRunner and a first-party protected
 callback. It links the pre-task selection through the pinned execution
