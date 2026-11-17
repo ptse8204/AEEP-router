@@ -70,6 +70,15 @@ are preserved. Both preparations matched byte for byte. The pending group
 covers the first three publisher checks. AiiDA needs a separate binding,
 and protected grading remains open for all four.
 
+The [retained runtime prerequisites](retained-runtime-prerequisites.json)
+identify missing named wheel candidates for four projections. GitPython
+also needs a compatible history fixture for its protected clone and tag
+checks. The ordinary archive carries regular source files, and the
+contained grader denies injected host environment variables. For RETURNN,
+the existing ARM64 image ID and both ordinary grader payloads passed
+preflight with all 13 identities. Publisher binding and actual isolated
+runtime checks still need to settle.
+
 The [staged runtime triage](repository-expansion-runtime-triage.json) checked
 all 13 staged cases against the ordinary grader and retained wheel cache.
 For Django Guardian, four wheel hashes, license notices and active

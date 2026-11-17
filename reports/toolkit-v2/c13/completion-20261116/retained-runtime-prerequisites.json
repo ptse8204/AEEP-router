@@ -1,0 +1,207 @@
+{
+  "cases": [
+    {
+      "case": "openai__openai-agents-python-1965",
+      "direct_requirement_candidates": {
+        "griffe>=1.5.6, <2": [],
+        "mcp>=1.11.0, <2; python_version >= '3.10'": [],
+        "openai>=2.2,<3": [
+          "openai-2.24.0-py3-none-any.whl"
+        ]
+      },
+      "fixture_sha256": "43c1009fd2f2038d5305d787515f304561bec688748781f8a149469cda971747",
+      "oracle_overlay_sha256": "158247b7b8f99e63b1cf462fb97f45be0775d4edff11f56e8471478df9330335",
+      "project_requires_python": ">=3.9",
+      "reason": "OpenAI SDK 2.24.0 is a filename-level compatible prospect. MCP and griffe have no matching named wheel. Keep the test fixture isolated from provider credentials.",
+      "runtime_verified": false,
+      "selected_modules": [
+        "tests/test_tool_output_conversion.py"
+      ],
+      "source_sha256": "1fc42b4bc123edcb63a60931c08f87fd0edbce6714787e1e62a07be594366397",
+      "state": "runtime_artifact_gap"
+    },
+    {
+      "case": "bluesky__ophyd-async-1165-aeep-contract-audit",
+      "direct_requirement_candidates": {
+        "bluesky>=1.13.1rc2": [],
+        "event-model>=1.23": [],
+        "pydantic-numpy": [],
+        "scanspec>=0.8": [],
+        "stamina>=23.1.0": [],
+        "velocity-profile": []
+      },
+      "fixture_sha256": "7f35f6f908340dbfaa727a8476f0311f9e5458b2d6815126cffd2e1799557cfd",
+      "oracle_overlay_sha256": "8101f06da9cf5001059d5a21bf5c7ec1c6836d2d190d478d82520d90abe7dc31",
+      "project_requires_python": ">=3.11",
+      "reason": "Several declared dependencies are absent from named cached wheels. The selected EPICS tests also require a review of their pytest fixture setup.",
+      "runtime_verified": false,
+      "selected_modules": [
+        "tests/test_aeep_preservation.py",
+        "tests/unit_tests/core/test_device.py",
+        "tests/unit_tests/epics/pvi/test_pvi.py"
+      ],
+      "source_sha256": "4c8be992dfa371c965578535ddd6620aa579a620ebc0a6459af928ba9f55c3ce",
+      "state": "runtime_artifact_gap"
+    },
+    {
+      "case": "idaholab__montepy-933_interface-aeep-contract-audit",
+      "direct_requirement_candidates": {
+        "numpy>=2.0": [
+          "numpy-2.0.2-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+          "numpy-2.2.6-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+          "numpy-2.4.4-cp313-cp313-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl",
+          "numpy-2.5.4-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl"
+        ],
+        "sly>= 0.4, <=0.5": []
+      },
+      "oracle_overlay_sha256": "b008fdaafa69dab601bf3d94a8fd4b4cbc9941f360bf5ab1919db95609fb2f82",
+      "project_requires_python": ">=3.12",
+      "pytest_plugins_for_review": [
+        "_hypothesis_pytestplugin"
+      ],
+      "reason": "SLY is missing from named retained wheels. Exact NumPy carrier and explicit Hypothesis plugin still require a protected collection check.",
+      "runtime_verified": false,
+      "selected_modules": [
+        "tests/test_aeep_preservation.py",
+        "tests/test_universe.py",
+        "tests/test_universe_integration.py"
+      ],
+      "source_sha256": "eb6a4193b27289aa99650cdfd508b16c4cd0c87fa6225e3a80f7a97bb42abfd1",
+      "state": "runtime_artifact_gap"
+    },
+    {
+      "bootstrap_sha256": "9730b47a4d33adffcd54cbb45c8b73fb202b912ddb036fe589add9bf62676cb4",
+      "case": "gitpython-developers__GitPython-2051-aeep-contract-audit",
+      "oracle_overlay_sha256": "deb6ece248f4a5097b37196de4f88a417d944f605af7f4077bbb173b74a9039d",
+      "project_requires_python": null,
+      "reason": "The protected tests open and clone a Git repository with historical refs. The ordinary archive has no .git state and permits no injected host environment.",
+      "runtime_verified": false,
+      "selected_modules": [
+        "test/test_aeep_preservation.py",
+        "test/test_submodule.py"
+      ],
+      "source_sha256": "80880a0028ac731f3ce34b80db9e36970efa5c3d06e6f10e66e3486b4ced7df2",
+      "state": "requires_reviewed_history_fixture"
+    },
+    {
+      "case": "rwth-i6__returnn-1764",
+      "fixture_sha256": "5e06220acaf650ddb4da7794c75fa23808df62c3bc3d910b8f1b1f3828cc15c3",
+      "imports": [
+        "_setup_test_env",
+        "multiprocessing",
+        "numpy",
+        "pickle",
+        "returnn",
+        "sys",
+        "unittest"
+      ],
+      "oracle_overlay_sha256": "6b290953224c00c5d4befecf36b04e20859b15a7d7aaac7aa30c7f4f845d35a6",
+      "project_requires_python": null,
+      "reason": "Selected NumPy and multiprocessing checks can use an existing carrier candidate. An actual isolated probe and the approved source receipt are still required.",
+      "runtime_verified": false,
+      "selected_modules": [
+        "tests/test_tensor.py"
+      ],
+      "source_sha256": "b77a387ca14f48513fdec058d77f6e2df7302cad13120c2d1e0dd2f1a0fa90b9",
+      "state": "retained_carrier_pair_preflight"
+    },
+    {
+      "case": "aiidateam__aiida-quantumespresso-1136-aeep-contract-audit",
+      "direct_requirement_candidates": {
+        "aiida-pseudo>=1.7.2,<2": [],
+        "aiida_core[atomic_tools]~=2.3": [],
+        "qe-tools~=2.0": []
+      },
+      "oracle_overlay_sha256": "382cde39bb4d93ee5a1de855ca39c829b9414109ba4b1f0d702189cb99e4e199",
+      "project_requires_python": ">=3.9",
+      "reason": "The declared AiiDA dependencies and its pytest profile still need a reviewed runtime. Its publisher check is outside the pending group.",
+      "runtime_verified": false,
+      "selected_modules": [
+        "tests/test_aeep_preservation.py",
+        "tests/workflows/protocols/pw/test_base.py",
+        "tests/workflows/protocols/pw/test_relax.py"
+      ],
+      "source_sha256": "d01ce1ebf1094f1fb1eb7ca6de049b625b00c5ce45b28d3e8f9fb74206f09cf3",
+      "state": "runtime_artifact_gap_and_publisher_boundary"
+    }
+  ],
+  "documentation": {
+    "checked_files": 72,
+    "docs_log": {
+      "path": ".aeep/completion-20261116/retained-runtime-prerequisites-20261117/docs.log",
+      "sha256": "8ef2f3194682a5981fe4243169d451096fc266a514000d9d2f4668c0e6e724eb"
+    },
+    "edited_section_lint": "passed",
+    "link_errors": 0,
+    "lint_log": {
+      "path": ".aeep/completion-20261116/retained-runtime-prerequisites-20261117/handoff-lint.log",
+      "sha256": "fa64e18dc342917f65bb103c3169aca51583636bda9b95629725b853c17a2e8b"
+    }
+  },
+  "formal_cases_adopted": 0,
+  "model_turns": 0,
+  "protected_tests_executed": 0,
+  "provider_disclosure": false,
+  "publisher_scope": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/offline-evidence-reviews.json",
+    "sha256": "6b758e65254042640df8aa36b8341bfbcad7975e931ed063a2060ed986aa0c1a"
+  },
+  "returnn_pair_preflight": {
+    "carrier": {
+      "build_result_sha256": "d3dceb540ad0465f927f3b1db97cc3a8430dfd877355c395e843db144d419ced",
+      "fresh_numpy_import_executed": false,
+      "image": "sha256:2386ef223e39b5dc12e6d8cdbaa6ac9779753f13ee74dc51e8d207279edae91f",
+      "inherited_numpy_version_from_review": "2.2.6",
+      "platform": "linux/arm64",
+      "runtime_review_sha256": "32bf5845ef8d1c9208fe6b251d4255538fb817941c11b58d407297e57794d0eb"
+    },
+    "fixture_role_count": 2,
+    "fixtures": [
+      {
+        "command_sha256": "855d4da57d06e6a8f2a71f8aa22de4799a4d7254e5b16e5bad29def15c855090",
+        "payload_sha256": "018b0713000cf3e055c436bb7cc25f92eb448c1d756b1402b242e74049a01056",
+        "protected_archive_sha256": "1480bf5bfd2edca330db2d9bdebe52733c20ec7b0fa125da62201dec42c5ceea",
+        "protective_mount_count": 1,
+        "role": "reference",
+        "test_identities": 13
+      },
+      {
+        "command_sha256": "ab7dbc357c67aa82b515a39fef9f8213f619c101cfc03b165bfa08737b2f9657",
+        "payload_sha256": "9f603e9478e69f41b38a883a4b4b401137d9b870b45eb443c93908b451ced23c",
+        "protected_archive_sha256": "27744b54940137fb278231ad52518b86eb74e8d1384a375e6f5ec190eff045cb",
+        "protective_mount_count": 1,
+        "role": "original",
+        "test_identities": 13
+      }
+    ],
+    "observer_sha256": "1f099dfb9eee49db52c631a2c59f56c45f933e15bb6b4f1be35b86f5b8a84ba2",
+    "protected_grade_executed": false
+  },
+  "schema_version": "aeep.c13.retained-runtime-prerequisites.v1",
+  "states": {
+    "requires_reviewed_history_fixture": 1,
+    "retained_carrier_pair_preflight": 1,
+    "runtime_artifact_gap": 3,
+    "runtime_artifact_gap_and_publisher_boundary": 1
+  },
+  "verification": {
+    "cash_usd": 0,
+    "docker_inspect_scope": "Exact existing candidate image metadata via the local Docker socket",
+    "driver": {
+      "path": ".aeep/completion-20261116/retained-runtime-prerequisites-20261117/check-projection-runtime.py",
+      "sha256": "27a8e4ea841a86908aaf9778d96944add0a4bc0c19819934b726685ccc6a397e"
+    },
+    "new_container_launches": 0,
+    "new_downloads": 0,
+    "new_runtime_builds": 0,
+    "raw_replay": {
+      "path": ".aeep/completion-20261116/retained-runtime-prerequisites-20261117/replay-result.json",
+      "sha256": "1efd7f9bdd0f698e5014d8994e5c9516fc1e822fd38433cc4ea514f0eb4f479b"
+    },
+    "raw_result": {
+      "path": ".aeep/completion-20261116/retained-runtime-prerequisites-20261117/verified-result.json",
+      "sha256": "1efd7f9bdd0f698e5014d8994e5c9516fc1e822fd38433cc4ea514f0eb4f479b"
+    },
+    "replay_matches": true
+  }
+}

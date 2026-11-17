@@ -1,5 +1,14 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. The six retained projections have scoped runtime findings.**
+[Runtime prerequisites](../../reports/toolkit-v2/c13/completion-20261116/retained-runtime-prerequisites.json)
+records an ordinary two-role RETURNN payload with all 13 identities and a
+locally verified ARM64 image ID. Grades were substituted. Runtime imports
+and the publisher receipt still need verification. GitPython requires a
+reviewed history fixture, which is absent from the regular-file archive.
+Four other rows have missing named wheel candidates. Exact group
+`6b758e65` remains pending, Waza is excluded, and comparisons stay paused.
+
 **November 17. Publisher recovery has a read-only reconciliation path.**
 [Reconciliation preflight](../../reports/toolkit-v2/c13/completion-20261116/publisher-reconciliation-preflight.json)
 joins the five retained projections to approved per-case publisher receipts.

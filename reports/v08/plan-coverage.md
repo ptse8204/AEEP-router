@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+[Runtime prerequisites](../toolkit-v2/c13/completion-20261116/retained-runtime-prerequisites.json)
+separate the RETURNN carrier preflight from five unresolved runtime inputs.
+The existing GitPython verifier requires repository history. RETURNN's
+two ordinary payloads preserve all 13 assertions. The ARM64 image metadata
+was inspected locally. The protected checks have not run.
+
 The [publisher reconciliation preflight](../toolkit-v2/c13/completion-20261116/publisher-reconciliation-preflight.json)
 checks the approved recovery receipts against five staged projections.
 Two fixture runs match. A publisher tree mismatch leaves that case
