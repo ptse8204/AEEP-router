@@ -43,6 +43,14 @@ archives again or fetch submodule contents. Five bindings, six malformed
 tree controls and a simulated matched recovery passed. The actual
 publisher comparisons remain pending.
 
+The [publisher reconciliation preflight](publisher-reconciliation-preflight.json)
+binds the five staged projections to the exact metadata review. After
+publisher recovery settles, use its read-only inspector to replay the
+retained Git tree, license hashes and ordinary grader payloads. Fixture
+checks covered all five cases, a rate-limited partial run and a publisher
+tree mismatch. The inspector needs the exact approval and terminal
+receipts. A verified source remains pending protected runtime grading.
+
 The [retained source projections](retained-projection-staging-result.json)
 stage the OpenAI Agents multi-file repair and the Ophyd Async contract
 audit through the ordinary archive and grading interfaces. Both private

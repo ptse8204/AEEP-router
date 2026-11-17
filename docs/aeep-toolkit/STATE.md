@@ -1,5 +1,14 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. Publisher recovery has a read-only reconciliation path.**
+[Reconciliation preflight](../../reports/toolkit-v2/c13/completion-20261116/publisher-reconciliation-preflight.json)
+joins the five retained projections to approved per-case publisher receipts.
+Fixture checks cover Git tree reconstruction, a rate-limited partial run,
+and rejection of mismatched receipts and trees. The live path refused an
+unapproved invocation. Exact group `6b758e65` is still pending. Once it runs,
+reconcile the source results before grading or formal case assignment.
+Waza is excluded and comparisons stay paused.
+
 **November 17. Four retained archives with links have ordinary grader inputs.**
 [Retained link projections](../../reports/toolkit-v2/c13/completion-20261116/retained-link-projection-result.json)
 stages MontePy, GitPython, RETURNN and AiiDA Quantum ESPRESSO. It verifies

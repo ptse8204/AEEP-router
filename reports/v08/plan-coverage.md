@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [publisher reconciliation preflight](../toolkit-v2/c13/completion-20261116/publisher-reconciliation-preflight.json)
+checks the approved recovery receipts against five staged projections.
+Two fixture runs match. A publisher tree mismatch leaves that case
+outside the verified source set. Real publisher receipts and runtime
+grading remain pending.
+
 The [retained link projections](../toolkit-v2/c13/completion-20261116/retained-link-projection-result.json)
 stage four additional prospects using pinned regular-file copies and
 explicit directory-alias omissions. All 129 published test identities

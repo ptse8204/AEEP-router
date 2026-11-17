@@ -1,0 +1,71 @@
+{
+  "acceptance_scope": "Verify exact approval, completed attempt files, reconstructed publisher tree and matching staged artifact fingerprints. A successful source binding remains pending protected grading and formal assignment.",
+  "additional_operator_approval_required_for_read_only_reconciliation": false,
+  "documentation": {
+    "checked_files": 72,
+    "docs_log": {
+      "path": ".aeep/completion-20261116/publisher-reconciliation-20261117/docs.log",
+      "sha256": "61b1760d00628e6fe66f08973e13baefe5465d6f81fa1ba13b8a27c2955767df"
+    },
+    "edited_section_lint": "passed",
+    "link_errors": 0,
+    "lint_log": {
+      "path": ".aeep/completion-20261116/publisher-reconciliation-20261117/handoff-lint.log",
+      "sha256": "3de6fadf991120e25645d6d5cda65d1cc35dd777487bfe763e1b2bb8d0373b91"
+    }
+  },
+  "driver": {
+    "path": ".aeep/completion-20261116/publisher-reconciliation-20261117/reconcile-publisher.py",
+    "sha256": "8809acd018313cc3299431ffb88cbab90a64352493f8496099cb928908acea71"
+  },
+  "fixture_evidence": {
+    "path": ".aeep/completion-20261116/publisher-reconciliation-20261117/verified-result.json",
+    "sha256": "04fb5ae7098f79a47aeddd5423c48d3e9f5667add22c93a5fe892bb8096c508e"
+  },
+  "fixture_replay_evidence": {
+    "path": ".aeep/completion-20261116/publisher-reconciliation-20261117/replayed-result.json",
+    "sha256": "04fb5ae7098f79a47aeddd5423c48d3e9f5667add22c93a5fe892bb8096c508e"
+  },
+  "publisher_requests_remain_unstarted": true,
+  "publisher_scope_sha256": "7e9158bafb79b0b7b7f30783dd072978ae5ebab480d304f959dfd136fa5ff78e",
+  "result": {
+    "fixture": true,
+    "fixture_cases": 5,
+    "formal_cases_adopted": 0,
+    "network_requests": 0,
+    "partial_fixture_cases": 1,
+    "protected_tests_executed": 0,
+    "real_publisher_bindings": 0,
+    "recursive_cases": 3,
+    "rejected_controls": [
+      "wrong_approval",
+      "non_boolean_approval",
+      "changed_commit",
+      "changed_recursive_tree",
+      "per_case_result_drift",
+      "unreviewed_partial_result",
+      "reordered_results"
+    ],
+    "tree_mismatch_excluded": true
+  },
+  "schema_version": "aeep.c13.publisher-reconciliation-preflight.v1",
+  "source_projection_records": [
+    {
+      "path": "reports/toolkit-v2/c13/completion-20261116/retained-projection-staging-result.json",
+      "sha256": "a776f13d01aaae9ef0e52947847be25920946b2521ba583c66893aca5b0d7db6"
+    },
+    {
+      "path": "reports/toolkit-v2/c13/completion-20261116/retained-link-projection-result.json",
+      "sha256": "d8a8849a2465e19a74a63b26026988f25f0a1f91c9e54cd083885d04bd5e47f3"
+    }
+  ],
+  "source_review_group": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/offline-evidence-reviews.json",
+    "sha256": "6b758e65254042640df8aa36b8341bfbcad7975e931ed063a2060ed986aa0c1a"
+  },
+  "unapproved_live_path_log": {
+    "path": ".aeep/completion-20261116/publisher-reconciliation-20261117/unapproved-error.log",
+    "sha256": "09c576cfceb623ece043b9749afcbc0f46dfbef8d6fb409d478df38316f00a3e"
+  },
+  "unapproved_live_path_refused": true
+}
