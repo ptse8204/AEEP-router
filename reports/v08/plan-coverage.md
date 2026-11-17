@@ -222,6 +222,13 @@ adds measured sizes for 17 image IDs, five Langfuse volumes and selected
 native runtimes. The original Essentials install and interrupted residue
 have separate observations. Whole-stack resource qualification remains open.
 
+The [assembled runtime audit](../toolkit-v2/c13/completion-20261116/assembled-runtime-footprint.json)
+includes the plan-bound workers and protected graders. It accounts for 25
+image IDs, 184 distinct unpacked chains and five selected Langfuse volumes.
+The settled exclusive Sales and Spring wrapper charges remain separate from
+agent and grader time. The full checkout-source coverage run passed 2,165
+tests, with 21 skips and both branch gates passing.
+
 The [current C13 beta handoff](../toolkit-v2/c13/completion-20261116/README.md)
 revalidates 37 in-scope stack checks with Waza excluded. The macOS private wheel
 installed and produced fixture reports. The fresh rollback passed and

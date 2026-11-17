@@ -349,6 +349,16 @@ historical Essentials installation allocation and current interrupted residue
 are recorded separately. Complete shared storage and maintainership effort
 remain unmeasured.
 
+The [assembled runtime audit](../../reports/toolkit-v2/c13/completion-20261116/assembled-runtime-footprint.json)
+adds plan-bound workers and graders from the workflow, evaluator and
+SkillRank proofs. The daemon reported 28.01 GB across 25 configured images
+and 83.29 MB for five Langfuse volumes. The 184 deduplicated filesystem
+chains total 12.43 GB by image history. Sales and Spring wrapper overhead
+settled at 0.468 and 0.555 seconds respectively, with agent and grader time
+reported separately. No resource changed or task ran during the audit.
+The full checkout-source regression and coverage run passed 2,165 tests
+with 21 skips and 81% combined coverage. Both branch gates passed.
+
 The formal-input audit verifies 41 provisional cases and 135 asset bindings.
 It identifies 63 additional cached candidates with matched acquisition and
 license records. No stages are frozen and at least 100 case rows are missing

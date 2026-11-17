@@ -113,6 +113,31 @@ Managed worker allocations, shared-layer usage, retained evidence and caches
 are outside the measured totals. Maintainer time and production resource
 capacity remain unmeasured.
 
+The [assembled runtime audit](assembled-runtime-footprint.json) adds the
+workers and graders from both accepted workflow plans and the accepted
+evaluator and SkillRank runs. It reopens six original worker receipts.
+All 25 configured image IDs were present. The gross Docker size was
+28.01 GB. Counting 184 unpacked filesystem chains once gave 12.43 GB
+of image history sizes. The five selected Langfuse volumes added
+83.29 MB of exact daemon-reported volume data. Host allocation and
+maintenance labor remain unknown.
+
+The settled CLI wrapper charges cover exclusive wall time and process CPU
+after accounting for nested execution. These are two integration journeys.
+
+| Verified workflow | Wrapper wall time | Agent wall time | Protected grading |
+| --- | --- | --- | --- |
+| Sales Pivot | 0.468 s | 146.771 s | 2.473 s |
+| Spring Boot | 0.555 s | 78.159 s | 14.003 s |
+
+[Audit driver](audit_assembled_runtime_footprint.py) ·
+[Docker measurement definitions](https://docs.docker.com/reference/cli/docker/system/df/)
+
+The full source run with the checkout on `PYTHONPATH` passed 2,165
+tests with 21 skips and 81% combined coverage. Both 90% branch gates
+passed. The earlier run retained one failure from a subprocess that
+imported the installed package. The corrected focused check also passed.
+
 ## Evaluator head-to-head
 
 The [ledger audit](evaluator-head-to-head.json) reopens three settled runs

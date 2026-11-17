@@ -1,0 +1,423 @@
+{
+  "accepted_plan_runtime_bindings": {
+    "aeep-evaluator": {
+      "grading_image": "sha256:35dc1bcb7e8162c2a0cef6cbd30bc4bf276c082b11b6e5fc259b6800e8c5ca04",
+      "plan_ref": "ac40582f1c0f40914dcb35c74f2a837f4f8e098ebcdf1965f415ffbbe7f803e0",
+      "report_ref": "faa17bf2824059668ff11bc97786047fe81078de69ca05dc268573a33af2cc4c",
+      "workers": {
+        "toolkit-ase-stack-20261103.control": {
+          "image": "sha256:0c05b495931e8558baf76b099c01c3b80a4b5136b5640d387db2d8ee644cf1db",
+          "observed_receipts": []
+        },
+        "toolkit-ase-stack-20261103.treatment": {
+          "image": "sha256:bf4581894c1d43808baaf580888c0b5f1dfdf4e1ea4caf0b8f2a7956d0fdd6d9",
+          "observed_receipts": [
+            "b6a65eb96c095048ef8d53358ea301e50760f529d0b15f6310c431a1c619de50"
+          ]
+        }
+      }
+    },
+    "agent-skill-eval": {
+      "grading_image": "sha256:35dc1bcb7e8162c2a0cef6cbd30bc4bf276c082b11b6e5fc259b6800e8c5ca04",
+      "plan_ref": "a7063c2933cbc35ac03a762cd24c6b323d0036c5a3c325ea46d6f02c90a42b77",
+      "report_ref": "fb043b1225f5ffb87662e996e7c69b4ba77225fa33154207418250136e46d751",
+      "workers": {
+        "toolkit-ase-stack-20261103.control": {
+          "image": "sha256:0c05b495931e8558baf76b099c01c3b80a4b5136b5640d387db2d8ee644cf1db",
+          "observed_receipts": []
+        },
+        "toolkit-ase-stack-20261103.treatment": {
+          "image": "sha256:bf4581894c1d43808baaf580888c0b5f1dfdf4e1ea4caf0b8f2a7956d0fdd6d9",
+          "observed_receipts": [
+            "c23c117c28d9ee2a197e318bdd1da3d5f51a3a96fcecefb1a778dba3c90bb231"
+          ]
+        }
+      }
+    },
+    "skillrank": {
+      "grading_image": "sha256:35dc1bcb7e8162c2a0cef6cbd30bc4bf276c082b11b6e5fc259b6800e8c5ca04",
+      "plan_ref": "4841a4cb3c523e529abc2e6e326db33dc3a7f60a551685947e4334c620d9905d",
+      "report_ref": "4989a3a7c1e6977a33e0fb2263a36741e30f88e50f79eec431081ee02ab188a7",
+      "workers": {
+        "skillrank-markdownify-sol.control": {
+          "image": "sha256:3afb108f52517f0c2e786eb94185c15a813e7bfa488a225ec8d1e60fd884ddac",
+          "observed_receipts": [
+            "daa52fc6bd99b8e750074bcdd2fd61c9c68dfd5f29f33e0602ebaf0677091956"
+          ]
+        },
+        "skillrank-markdownify-sol.treatment": {
+          "image": "sha256:bc91c4cc903a87414365d592a89694b7b37cc7222942401760bdd389022865ae",
+          "observed_receipts": [
+            "f036d7e19829c4bc488eec84a35efc0fc7677d020a0f9cd9fa72210578635012"
+          ]
+        }
+      }
+    },
+    "workflow-document-data": {
+      "grading_image": "sha256:4474cf22f867c681aa6120ce2f98d809413f89755cf11a445444b1b993754ea1",
+      "plan_ref": "1e1b8b42be675fdd5c465c93365c1d4c8681c9ab0ebcff79866876b7a9fb88e3",
+      "report_ref": "243226d54c948cb73dcfec82cf7c773a54f14a1a3acf07ab8d29ece9a1e5ed2f",
+      "workers": {
+        "skillsbench-sales.control": {
+          "image": "sha256:5116daa2007110be23d7d5407d22a3cfacc3967e103471181addede1126a2704",
+          "observed_receipts": []
+        },
+        "skillsbench-sales.treatment": {
+          "image": "sha256:4d7e4882f696f1aecda936ae28aa1940a50ac5b8b14f0e2278a3ba13ae44d865",
+          "observed_receipts": [
+            "b8f0f23507264fd3fd4c7e3c97595b0e72a7f84a93e83f8786701aa498637b44"
+          ]
+        }
+      }
+    },
+    "workflow-software-engineering": {
+      "grading_image": "sha256:8d64eb9ddf942bbd1e4bd83d0c588ad2dc4488248529bb4344dfdfe8b9666291",
+      "plan_ref": "ae92436b6f33e22b14f321fe306e9f7c23e730512c809bfb0603f19b97fecbfb",
+      "report_ref": "462e4b4fa1fbd76b2909660458e6547e638171d25b75e233bf8b907cb1ab1e7e",
+      "workers": {
+        "skillsbench-spring.control": {
+          "image": "sha256:bc41b14e7651fcb4c0a19708babd0978e0b77197d0bc11324c0b97b4732acd18",
+          "observed_receipts": []
+        },
+        "skillsbench-spring.treatment": {
+          "image": "sha256:a0307352c8eb83a650d9644ae24066330d12073344e8854174d695ee5aa30fac",
+          "observed_receipts": [
+            "4f0dcbfe6a09594ca0075b0092396121373dfadfd40b07931983e9047704b559"
+          ]
+        }
+      }
+    }
+  },
+  "accepted_wrapper_overhead": {
+    "workflow-document-data": {
+      "accepted_trial_count": 1,
+      "agent_wall_seconds_sum_if_all_known": 146.77051195899912,
+      "charged_operation_ref": "b759321922a9fc93917550cedf32839c2838b97d6d23b78dd79a2e275fda8e3b",
+      "protected_grading_wall_seconds_sum_if_all_known": 2.4727046250009153,
+      "wrapper_exclusive_wall_seconds": 0.46839141600139556,
+      "wrapper_process_cpu_ms": 441.5819999999986
+    },
+    "workflow-software-engineering": {
+      "accepted_trial_count": 1,
+      "agent_wall_seconds_sum_if_all_known": 78.15918895800132,
+      "charged_operation_ref": "41dd305c3b838e529fd1307c005ad8aab56263ddaf467c47e608b732285a384a",
+      "protected_grading_wall_seconds_sum_if_all_known": 14.002595124999061,
+      "wrapper_exclusive_wall_seconds": 0.5545151670012274,
+      "wrapper_process_cpu_ms": 527.3340000000032
+    }
+  },
+  "configured_image_count": 25,
+  "current_stack_completion_ref": "23c4b48e258ef03d1f419225d550b743c4880900c8a3935b6dc0d8f4b7d3fbfe",
+  "deduplicated_matched_history_bytes": 12426625024,
+  "engine_api": "1.56",
+  "engine_gross_selected_image_bytes": 28005753018,
+  "engine_langfuse_volume_bytes_if_all_known": 83294562,
+  "engine_per_image_unique_bytes_if_all_known": 12801767299,
+  "images": {
+    "sha256:0c05b495931e8558baf76b099c01c3b80a4b5136b5640d387db2d8ee644cf1db": {
+      "container_reference_count": 0,
+      "engine_shared_bytes": 1045960408,
+      "engine_size_bytes": 1045995452,
+      "engine_summary_present": true,
+      "selected_roles": [
+        "aeep-evaluator/toolkit-ase-stack-20261103.control",
+        "agent-skill-eval/toolkit-ase-stack-20261103.control"
+      ],
+      "unpacked_history_bytes": 763600896
+    },
+    "sha256:0d643ec0036ceb52ae65e5d8465e155ad6069d771f33a79a9e71dc4334e029e6": {
+      "container_reference_count": 6,
+      "engine_shared_bytes": 32,
+      "engine_size_bytes": 1047850995,
+      "engine_summary_present": true,
+      "selected_roles": [
+        "langfuse"
+      ],
+      "unpacked_history_bytes": 819257344
+    },
+    "sha256:18f884c4b8231988aeedc1edb230167013e3286fddfc8d81471a002fa51dbc60": {
+      "container_reference_count": 1,
+      "engine_shared_bytes": 39526814,
+      "engine_size_bytes": 1862157628,
+      "engine_summary_present": true,
+      "selected_roles": [
+        "langfuse"
+      ],
+      "unpacked_history_bytes": 1495138304
+    },
+    "sha256:1cf3c4405db2f9b4721a35e10534f72a6b428fda49b3ee1114ef27d4f8a17eb4": {
+      "container_reference_count": 0,
+      "engine_shared_bytes": 872312718,
+      "engine_size_bytes": 1664186325,
+      "engine_summary_present": true,
+      "selected_roles": [
+        "skill-scanner"
+      ],
+      "unpacked_history_bytes": 1202298880
+    },
+    "sha256:2c34f2ff6a5ead1204892972474aac2b09356913f3a88a1fd1723910082e9c06": {
+      "container_reference_count": 0,
+      "engine_shared_bytes": 1121378245,
+      "engine_size_bytes": 1121599692,
+      "engine_summary_present": true,
+      "selected_roles": [
+        "evoagentx"
+      ],
+      "unpacked_history_bytes": 794357760
+    },
+    "sha256:30da3fc4e5ebda606bca1598a477fb6da68ed004248e9218f6655f2d9ff7d988": {
+      "container_reference_count": 4,
+      "engine_shared_bytes": 39526814,
+      "engine_size_bytes": 1496136492,
+      "engine_summary_present": true,
+      "selected_roles": [
+        "langfuse"
+      ],
+      "unpacked_history_bytes": 1189351424
+    },
+    "sha256:35dc1bcb7e8162c2a0cef6cbd30bc4bf276c082b11b6e5fc259b6800e8c5ca04": {
+      "container_reference_count": 0,
+      "engine_shared_bytes": 872312718,
+      "engine_size_bytes": 872356696,
+      "engine_summary_present": true,
+      "selected_roles": [
+        "aeep-evaluator/protected-grader",
+        "agent-skill-eval/protected-grader",
+        "skillrank-catalog",
+        "skillrank/protected-grader"
+      ],
+      "unpacked_history_bytes": 640176128
+    },
+    "sha256:3afb108f52517f0c2e786eb94185c15a813e7bfa488a225ec8d1e60fd884ddac": {
+      "container_reference_count": 0,
+      "engine_shared_bytes": 2018074684,
+      "engine_size_bytes": 2018110838,
+      "engine_summary_present": true,
+      "selected_roles": [
+        "skillrank/skillrank-markdownify-sol.control"
+      ],
+      "unpacked_history_bytes": 1501356032
+    },
+    "sha256:3c0b4f876d9148e5a037033a3dbf60c5075a4cce8a251447d729546bacfda1ff": {
+      "container_reference_count": 0,
+      "engine_shared_bytes": 872312718,
+      "engine_size_bytes": 872372288,
+      "engine_summary_present": true,
+      "selected_roles": [
+        "toolhive"
+      ],
+      "unpacked_history_bytes": 640188416
+    },
+    "sha256:4474cf22f867c681aa6120ce2f98d809413f89755cf11a445444b1b993754ea1": {
+      "container_reference_count": 0,
+      "engine_shared_bytes": 286921527,
+      "engine_size_bytes": 288705998,
+      "engine_summary_present": true,
+      "selected_roles": [
+        "workflow-document-data/protected-grader"
+      ],
+      "unpacked_history_bytes": 225329152
+    },
+    "sha256:4d7e4882f696f1aecda936ae28aa1940a50ac5b8b14f0e2278a3ba13ae44d865": {
+      "container_reference_count": 0,
+      "engine_shared_bytes": 1046076280,
+      "engine_size_bytes": 1046945590,
+      "engine_summary_present": true,
+      "selected_roles": [
+        "workflow-document-data/skillsbench-sales.treatment"
+      ],
+      "unpacked_history_bytes": 764137472
+    },
+    "sha256:4e3cb7fa008c768c5d5c56d823a291a37add169eecb81c2f89ede3fd86723d8d": {
+      "container_reference_count": 0,
+      "engine_shared_bytes": 683092771,
+      "engine_size_bytes": 683103044,
+      "engine_summary_present": true,
+      "selected_roles": [
+        "aflow"
+      ],
+      "unpacked_history_bytes": 498003968
+    },
+    "sha256:5116daa2007110be23d7d5407d22a3cfacc3967e103471181addede1126a2704": {
+      "container_reference_count": 0,
+      "engine_shared_bytes": 1046791793,
+      "engine_size_bytes": 1046827294,
+      "engine_summary_present": true,
+      "selected_roles": [
+        "workflow-document-data/skillsbench-sales.control"
+      ],
+      "unpacked_history_bytes": 764026880
+    },
+    "sha256:5b65a93d4629c2c71aa8fd5ae5ad7bcfb2807105b5b4cc7fc96a24c4d603d278": {
+      "container_reference_count": 7,
+      "engine_shared_bytes": 87601184,
+      "engine_size_bytes": 1000453473,
+      "engine_summary_present": true,
+      "selected_roles": [
+        "skillsbench-reviewed-grader"
+      ],
+      "unpacked_history_bytes": 779112448
+    },
+    "sha256:5bf590eb0bf8a06187ff092f0f75cf83b540cc27bd6a75fd8bd91305ca7b13de": {
+      "container_reference_count": 1,
+      "engine_shared_bytes": 201506755,
+      "engine_size_bytes": 339143123,
+      "engine_summary_present": true,
+      "selected_roles": [
+        "aflow",
+        "evoagentx"
+      ],
+      "unpacked_history_bytes": 270348288
+    },
+    "sha256:70906c24c6bcde0712573cce29bb3d30331fec36aaefd503bc570c18ba431c26": {
+      "container_reference_count": 6,
+      "engine_shared_bytes": 32,
+      "engine_size_bytes": 189932000,
+      "engine_summary_present": true,
+      "selected_roles": [
+        "langfuse"
+      ],
+      "unpacked_history_bytes": 146423808
+    },
+    "sha256:8d64eb9ddf942bbd1e4bd83d0c588ad2dc4488248529bb4344dfdfe8b9666291": {
+      "container_reference_count": 0,
+      "engine_shared_bytes": 284054835,
+      "engine_size_bytes": 1137299888,
+      "engine_summary_present": true,
+      "selected_roles": [
+        "workflow-software-engineering/protected-grader"
+      ],
+      "unpacked_history_bytes": 745107456
+    },
+    "sha256:a0307352c8eb83a650d9644ae24066330d12073344e8854174d695ee5aa30fac": {
+      "container_reference_count": 0,
+      "engine_shared_bytes": 1046076280,
+      "engine_size_bytes": 1890654105,
+      "engine_summary_present": true,
+      "selected_roles": [
+        "aflow",
+        "evoagentx",
+        "workflow-software-engineering/skillsbench-spring.treatment"
+      ],
+      "unpacked_history_bytes": 1280106496
+    },
+    "sha256:ac359420747e1f5f8ac4d23f40d7ce022c0a39090ed6cdd8dde5f596affbe41d": {
+      "container_reference_count": 9,
+      "engine_shared_bytes": 0,
+      "engine_size_bytes": 661399271,
+      "engine_summary_present": true,
+      "selected_roles": [
+        "langfuse",
+        "mcp-universe",
+        "mcpmark"
+      ],
+      "unpacked_history_bytes": 501403648
+    },
+    "sha256:bc41b14e7651fcb4c0a19708babd0978e0b77197d0bc11324c0b97b4732acd18": {
+      "container_reference_count": 0,
+      "engine_shared_bytes": 1045960408,
+      "engine_size_bytes": 1890535917,
+      "engine_summary_present": true,
+      "selected_roles": [
+        "aflow",
+        "evoagentx",
+        "workflow-software-engineering/skillsbench-spring.control"
+      ],
+      "unpacked_history_bytes": 1279995904
+    },
+    "sha256:bc91c4cc903a87414365d592a89694b7b37cc7222942401760bdd389022865ae": {
+      "container_reference_count": 0,
+      "engine_shared_bytes": 1460821237,
+      "engine_size_bytes": 2018233305,
+      "engine_summary_present": true,
+      "selected_roles": [
+        "skillrank/skillrank-markdownify-sol.treatment"
+      ],
+      "unpacked_history_bytes": 1501470720
+    },
+    "sha256:bf4581894c1d43808baaf580888c0b5f1dfdf4e1ea4caf0b8f2a7956d0fdd6d9": {
+      "container_reference_count": 0,
+      "engine_shared_bytes": 1046076282,
+      "engine_size_bytes": 1046116438,
+      "engine_summary_present": true,
+      "selected_roles": [
+        "aeep-evaluator/toolkit-ase-stack-20261103.treatment",
+        "agent-skill-eval/toolkit-ase-stack-20261103.treatment"
+      ],
+      "unpacked_history_bytes": 763711488
+    },
+    "sha256:c04abcb08d7901e28f6f3ee11b6d799f42ae94b64b160175e9905274121294d2": {
+      "container_reference_count": 11,
+      "engine_shared_bytes": 32,
+      "engine_size_bytes": 414207332,
+      "engine_summary_present": true,
+      "selected_roles": [
+        "mcp-universe",
+        "mcpmark"
+      ],
+      "unpacked_history_bytes": 315432960
+    },
+    "sha256:e5629dccdad649d150791dd7bd291ba8b0d244761e970c4bd2abcc8646114d9b": {
+      "container_reference_count": 10,
+      "engine_shared_bytes": 87601152,
+      "engine_size_bytes": 2130695971,
+      "engine_summary_present": true,
+      "selected_roles": [
+        "skillsbench-reviewed-grader"
+      ],
+      "unpacked_history_bytes": 1324064768
+    },
+    "sha256:f4c90d3148e56e4b720a5663a9e45428bac3e38c39681bbc0d8692ed1086ff09": {
+      "container_reference_count": 16,
+      "engine_shared_bytes": 0,
+      "engine_size_bytes": 220733863,
+      "engine_summary_present": true,
+      "selected_roles": [
+        "langfuse"
+      ],
+      "unpacked_history_bytes": 162336768
+    }
+  },
+  "langfuse_volumes": {
+    "aeep-langfuse-loopback-20261105-clickhouse-data": {
+      "engine_size_bytes": 8647387,
+      "references": 1
+    },
+    "aeep-langfuse-loopback-20261105-clickhouse-logs": {
+      "engine_size_bytes": 2448872,
+      "references": 1
+    },
+    "aeep-langfuse-loopback-20261105-minio-data": {
+      "engine_size_bytes": 18749,
+      "references": 2
+    },
+    "aeep-langfuse-loopback-20261105-postgres-data": {
+      "engine_size_bytes": 72150664,
+      "references": 1
+    },
+    "aeep-langfuse-loopback-20261105-redis-data": {
+      "engine_size_bytes": 28890,
+      "references": 1
+    }
+  },
+  "matched_unpacked_chain_count": 184,
+  "measured_image_count": 25,
+  "new_task_runs": 0,
+  "observed_at": "2026-11-17T02:53:48.200988+00:00",
+  "previous_image_count": 17,
+  "proof_sha256": {
+    "current-stack-source-binding.json": "fa8a79bbcb228a48a32e19ca8487c9984a6adb3a88eda4175da5acb79b022ded",
+    "retained-runtime-footprint.json": "a2d25a2e5080c69ff562e66735527586ca01cde25d2ef4499810dfae1cae092a",
+    "source-stack-rebinding.json": "e0ded993e87dabf9f6dc5f1c820321a9d07ca17f12429fa0281e2cafa2a087f1"
+  },
+  "resources_started_or_removed": 0,
+  "schema_version": "aeep.c13.assembled-runtime-footprint.v1",
+  "scope": [
+    "Selected retained Docker images, reviewed plan worker pairs and named Langfuse volumes.",
+    "Daemon size and unpacked image history have different accounting definitions.",
+    "Deduplicated history counts verified filesystem chains once. Ambiguous joins remain unknown.",
+    "Host allocation, reclaimable host space, native runtimes, temporary files and maintenance labor are outside this measurement."
+  ],
+  "source_digest": "9710ea4f129d21affc0dcbe85e2d0bc432a41e5ec9ee8899b68df8a834959786",
+  "unpacked_history_matched_image_count": 25
+}
