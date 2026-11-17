@@ -294,6 +294,16 @@ published test identities are intact. These are alternatives to authored
 audits at the same revisions. Both require protected runtime verification
 before they can change the balanced cohort projection.
 
+The [ExtractBench source-group audit](../toolkit-v2/c13/completion-20261116/extractbench-source-group-capacity.json)
+finds 294 potential document/data slots after known alias and development
+exclusions. Two group-disjoint 8/28/105 examples fit in the metadata. Per-source
+rights, provenance and protected grading remain open.
+
+The [Venvstacks lock projection](../toolkit-v2/c13/completion-20261116/venvstacks-runtime-lock-projection.json)
+found 15 matching cached wheels and 32 missing. The [Tox audit](../toolkit-v2/c13/completion-20261116/tox-native-runtime-audit.json)
+found a pytest version mismatch and unbound plugin options. Both preserve the
+published tests and keep the alternatives outside formal stages.
+
 The [current C13 beta handoff](../toolkit-v2/c13/completion-20261116/README.md)
 revalidates 37 in-scope stack checks with Waza excluded. The macOS private wheel
 installed and produced fixture reports. The fresh rollback passed and

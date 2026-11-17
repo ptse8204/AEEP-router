@@ -557,6 +557,16 @@ needed for a holdout balanced by length. The three sample declarations
 validate against the existing task asset contract and separate the
 document and schema from the reference answers and grader.
 
+The [source-group audit](extractbench-source-group-capacity.json) ties 38
+named clean/degraded pairs together. Three also have different answer hashes.
+It collapses page excerpts and matching answer hashes and keeps schema-linked
+families within one stage. Excluding the six Audent development-family cases
+leaves 294 metadata slots across 69 families. An illustrative packing fits
+two 8/28/105 cohorts with 12 spare slots. Only 17 long slots remain across
+the whole pool. Each illustrative holdout has two long documents. This is
+a capacity check pending source and rights review, protected grading and
+formal assignment.
+
 The original ExtractBench Harbor verifier uses value F1 and reports
 perfect-document status separately. Its Dockerfile fetches a scorer and
 dependencies at build time. Exact offline dependency review, grader

@@ -59,6 +59,17 @@ contract. Source groups, permitted use and the offline grader remain open.
 SpreadsheetBench 2 has conflicting data-license declarations. Neither
 workbook archive was fetched. No case was assigned or disclosed.
 
+The [ExtractBench source-group audit](../../reports/toolkit-v2/c13/completion-20261116/extractbench-source-group-capacity.json)
+links 38 named clean/degraded pairs, including three with different answer
+hashes. It groups 36 known page excerpts by parent, then keeps matching
+schemas and linked document families in one stage. Collapsing the aliases
+and excluding the six-member Audent development family leaves 294 potential
+slots across 69 families. The metadata admits two separate 8/28/105 examples
+with 12 spare slots. Both illustrative holdouts include two long documents.
+Source provenance and permitted use, protected grading and formal assignment
+remain open. No task assets were downloaded or disclosed. The prior offline
+grader review remains the next required runtime step.
+
 The [ExtractBench 13F development intake](../../reports/toolkit-v2/c13/completion-20261116/extractbench-audent-intake.json)
 verified all 11 original assets and reconciled 52 holding rows with the
 official SEC table. Three input files and eight protected files have
@@ -450,6 +461,15 @@ Tox declares Packaging 26 or newer. Both payloads also passed preflight
 with the checksum-verified cached 26.3 wheel in place of 25.0. Runtime
 closure remains open. Venvstacks also needs an executable-mode review for
 its retained `stacks.py`. No stages changed.
+
+The [Venvstacks lock projection](../../reports/toolkit-v2/c13/completion-20261116/venvstacks-runtime-lock-projection.json)
+binds 47 wheels for the publisher's default and test groups on Linux ARM64.
+Fifteen cached wheels matched the lock. Thirty-two are missing, and the
+closure includes four platform wheels. The [Tox runtime audit](../../reports/toolkit-v2/c13/completion-20261116/tox-native-runtime-audit.json)
+found that the prepared pytest 8.3.5 falls below the declared 9.0.2 minimum.
+The upstream configuration also needs plugin options. Tox's Packaging 26.3
+preflight resolves one dependency. Compatible pytest and plugin wheels
+remain open. These alternatives retain their prospective status.
 
 Post-verification passed compilation, the schema check, 2,165 tests in
 each full run, and both branch coverage gates. Both runs skipped 21 tests.

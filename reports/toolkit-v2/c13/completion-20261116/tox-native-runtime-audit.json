@@ -1,0 +1,37 @@
+{
+  "schema_version": "aeep.c13.tox-native-runtime-audit.v1",
+  "case": "tox-dev__tox-3759",
+  "revision": "a4d8dabb3ed3736c00e2de14f8ed0dd419b2cc99",
+  "source_sha256": "23dd6cac7bacff301d30ce6f2429e6c05128f3a9c74c0b367ad0ef63fbc965ce",
+  "declared_requirements": {
+    "flaky": "flaky>=3.8.1",
+    "packaging": "packaging>=26",
+    "pytest": "pytest>=9.0.2",
+    "pytest-mock": "pytest-mock>=3.15.1",
+    "pytest-timeout": "pytest-timeout>=2.4"
+  },
+  "prepared_pytest": "8.3.5",
+  "prepared_explicit_plugins": [],
+  "upstream_root_conftest_plugins": [
+    "tox.pytest"
+  ],
+  "upstream_test_options": {
+    "addopts": "--no-success-flaky-report",
+    "timeout": 30
+  },
+  "portable_cache_candidates_by_filename": {
+    "packaging": [
+      "packaging-26.2-py3-none-any.whl",
+      "packaging-26.3-py3-none-any.whl"
+    ],
+    "pytest-timeout": [],
+    "pytest-mock": [],
+    "pytest": [],
+    "flaky": []
+  },
+  "case_ready_for_protected_execution": false,
+  "diagnosis": "The previous payload bound Packaging 26.3 but still uses pytest 8.3.5. The upstream test group requires pytest 9.0.2 or newer and its configuration expects plugin options. Select and pin a compatible offline pytest and plugin closure before protected execution.",
+  "downloads": 0,
+  "upstream_programs_executed": 0,
+  "formal_cases_adopted": 0
+}
