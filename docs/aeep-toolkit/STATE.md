@@ -439,6 +439,18 @@ Balanced software coverage still depends on protected acceptance of at least
 26 audits and all 17 multi-file prospects from the pending acquisition batch.
 No stage was frozen and comparisons remain paused.
 
+The [retained backup preflight](../../reports/toolkit-v2/c13/completion-20261116/retained-multifile-backup-preflight.json)
+stages two-file repairs for Venvstacks 197 and Tox 3759. Each projection
+omits one release note and preserves all published assertions, 86 test
+identities in total. Four ordinary callback payloads passed with substituted
+replies. Each repair would replace the authored audit at its exact repository
+and revision. If both pass protected grading, a balanced source-disjoint
+projection needs 28 audits and 15 multi-file repairs from the pending batch.
+Tox declares Packaging 26 or newer. Both payloads also passed preflight
+with the checksum-verified cached 26.3 wheel in place of 25.0. Runtime
+closure remains open. Venvstacks also needs an executable-mode review for
+its retained `stacks.py`. No stages changed.
+
 The formal-input audit verifies 41 provisional cases and 135 asset bindings.
 It identifies 63 additional cached candidates with matched acquisition and
 license records. No stages are frozen and at least 100 case rows are missing

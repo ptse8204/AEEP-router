@@ -288,6 +288,12 @@ The verified two-file repair fills the identified capacity gap on the
 pinned Python 3.13 runtime. The remaining source batch still needs
 acquisition and grading before stage freeze. Comparisons remain paused.
 
+The [retained backup preflight](../toolkit-v2/c13/completion-20261116/retained-multifile-backup-preflight.json)
+binds Venvstacks 197 and Tox 3759 to four ordinary grader payloads. Their 86
+published test identities are intact. These are alternatives to authored
+audits at the same revisions. Both require protected runtime verification
+before they can change the balanced cohort projection.
+
 The [current C13 beta handoff](../toolkit-v2/c13/completion-20261116/README.md)
 revalidates 37 in-scope stack checks with Waza excluded. The macOS private wheel
 installed and produced fixture reports. The fresh rollback passed and

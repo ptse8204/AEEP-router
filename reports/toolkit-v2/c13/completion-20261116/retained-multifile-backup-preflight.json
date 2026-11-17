@@ -1,0 +1,193 @@
+{
+  "schema_version": "aeep.c13.retained-multifile-backup-transport.v1",
+  "scope": "First-party static staging. Third-party archive and original issue patch bytes were treated as inert inputs. Callback replies were substituted.",
+  "private_index": ".aeep/completion-20261116/retained-multifile-backup-transport/worker-transport/private-index.json",
+  "private_index_sha256": "70b961f3e82f2931c49b83a5191534d09d86e1eb49adfe5ae58754f4f8c720b3",
+  "pytest_bootstrap_review_sha256": "46aacf0449047d1ffd20e4fbf783be2d71450ff71d5587d29ce53771a0f8bf0c",
+  "cases": [
+    {
+      "case": "lmstudio-ai__venvstacks-197",
+      "repository": "lmstudio-ai/venvstacks",
+      "revision": "8e8d8267567f87ebcb1c2252fe3728e3c45ed052",
+      "original_archive_sha256": "693a77e594729e47637f8ac1e9db43bfcd62907fdcc017ce06683382cb868dc3",
+      "dataset_row_sha256": "7c3dd2b5a430d08d23e10cb6843d94552c0656c9a0fde12b4f071eb93292591e",
+      "license_notices": [
+        {
+          "file": "LICENSE",
+          "sha256": "2db36b68ce504dbe8eecb0f434ccaa4afca4e4fd53b6f7161080fffb0b740e42",
+          "bytes": 1074
+        }
+      ],
+      "editable_production_files": [
+        "src/venvstacks/cli.py",
+        "src/venvstacks/stacks.py"
+      ],
+      "omitted_release_note": "docs/changelog.d/20250603_050408_ncoghlan_only_lock_if_necessary_in_build_subcommand.rst",
+      "issue_test_count": 5,
+      "preservation_test_count": 48,
+      "suite_transport": {
+        "reference": {
+          "archive_sha256": "7aab0f9d0f5975022e457e70f51eb938ee270deec06017cdc933fb0108baf39a",
+          "payload_sha256": "703b1fd481f0736a360af648cff7129cca5a6e8c492340a1407241310d65457d"
+        },
+        "original": {
+          "archive_sha256": "d53ed16b872b0afe006dc65cc65504e76fe88bbba64f4294bfb4160e0f47b3ef",
+          "payload_sha256": "744a4c8dc9c544ba1cec26d126eb70a1e5dd454bc00178822bdc5824b0367e99"
+        }
+      },
+      "public_source_sha256": "32fb364781958fb8c0b2d5a7690d04982455bc8ebc78b546ff07b9dae9d170f2",
+      "protected_overlay_sha256": "755b09f9c16f60ea1230ec02b1fef3508f790ca4420fd540ff184c4a409c1bac",
+      "python": {
+        "declared_requires_python": ">=3.11",
+        "admits_python_3_13_0": true
+      },
+      "declared_application_requirements": [
+        "pip>=24.1.1",
+        "pdm>=2.17.3",
+        "uv>=0.2.33",
+        "typer-slim>=0.12.4",
+        "tomlkit>=0.13.2"
+      ],
+      "project_lock_sha256": {
+        "pdm.lock": "b324acc4fd44f591bbe8dd99cfd17ffdfb2974f06be49a7b82dad37267590a6c"
+      },
+      "mutually_exclusive_with_same_snapshot": "lmstudio-ai__venvstacks-197-aeep-contract-audit",
+      "same_stage_as_other_revisions_in_its_repository": true
+    },
+    {
+      "case": "tox-dev__tox-3759",
+      "repository": "tox-dev/tox",
+      "revision": "a4d8dabb3ed3736c00e2de14f8ed0dd419b2cc99",
+      "original_archive_sha256": "b1e30778464d202629dfff194044b3728545d85222759b8cf17a81513d2323a8",
+      "dataset_row_sha256": "3506c0ffe854357e021bd93d077551e6696f870ab9dc2d32c8fff5f417e85fc4",
+      "license_notices": [
+        {
+          "file": "LICENSE",
+          "sha256": "90e25e1faf2a4aaea8d95ee8e7f5738b052a1acc0c9c58068101f931a86bd588",
+          "bytes": 1023
+        }
+      ],
+      "editable_production_files": [
+        "src/tox/config/loader/toml/__init__.py",
+        "src/tox/config/loader/toml/_replace.py"
+      ],
+      "omitted_release_note": "docs/changelog/3758.bugfix.rst",
+      "issue_test_count": 1,
+      "preservation_test_count": 32,
+      "suite_transport": {
+        "reference": {
+          "archive_sha256": "9c36de7b8634971c70fe32870c419b58b4f5ae8fc38f3c4d1b0b395495057859",
+          "payload_sha256": "de7f2cd6bb64d06a62b6c1b5c5531989d4739c7311817bebde4d0d7c1b234ee3"
+        },
+        "original": {
+          "archive_sha256": "c558d27e0fe9eef1eaf5250383dc4cdad03656343010ed3f34389335f2993b26",
+          "payload_sha256": "b41584954be9117f8b015afe6a3c3ba8b2ec92089bd7d85047d9079a4cfe1edc"
+        }
+      },
+      "public_source_sha256": "23dd6cac7bacff301d30ce6f2429e6c05128f3a9c74c0b367ad0ef63fbc965ce",
+      "protected_overlay_sha256": "ddc2a665895837cd66fc3bd9418d4708f0c5ac58a46aa78fe92b0465ab13f545",
+      "python": {
+        "declared_requires_python": ">=3.10",
+        "admits_python_3_13_0": true
+      },
+      "declared_application_requirements": [
+        "cachetools>=7.0.1",
+        "chardet>=5.2",
+        "colorama>=0.4.6",
+        "filelock>=3.24",
+        "packaging>=26",
+        "platformdirs>=4.9.1",
+        "pluggy>=1.6",
+        "pyproject-api>=1.10",
+        "tomli>=2.4; python_version<'3.11'",
+        "typing-extensions>=4.15; python_version<'3.11'",
+        "virtualenv>=20.36.1"
+      ],
+      "project_lock_sha256": {},
+      "mutually_exclusive_with_same_snapshot": "tox-dev__tox-3759-aeep-contract-audit",
+      "same_stage_as_other_revisions_in_its_repository": true,
+      "compatible_pytest_bootstrap_projection": {
+        "scope": "Replace packaging 25.0 with checksum-verified packaging 26.3 to satisfy the published Tox dependency. Remaining runtime closure is unverified.",
+        "cached_wheel_path": ".aeep/evoagentx-distribution-20261106/wheelhouse/packaging-26.3-py3-none-any.whl",
+        "wheel_sha256": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c",
+        "wheel_bytes": 129956,
+        "prior_artifact_review_sha256": "153afa0d39542c8bd3a94ce178843e1d6859326407424b5169dd396c0e919210",
+        "ordinary_callback_payloads": {
+          "reference": {
+            "archive_sha256": "9c36de7b8634971c70fe32870c419b58b4f5ae8fc38f3c4d1b0b395495057859",
+            "payload_sha256": "e5a9b127d572fe744a714d24b0e0fbf30d99c5ecde2b4123403c98ff7c308982"
+          },
+          "original": {
+            "archive_sha256": "c558d27e0fe9eef1eaf5250383dc4cdad03656343010ed3f34389335f2993b26",
+            "payload_sha256": "d5f9463585fabd08d901d0f955df86d94ac553f3011e7829b6c92217bb8d9cc9"
+          }
+        },
+        "actual_upstream_executions": 0
+      }
+    }
+  ],
+  "downloads": 0,
+  "model_turns": 0,
+  "upstream_tests_executed": 0,
+  "formal_cases_adopted": 0,
+  "remaining": [
+    "Review actual protected runtime closure for each snapshot.",
+    "Resolve any executable-mode adaptations before reference checks.",
+    "Verify required tests on the reference, original and independently reviewed partial repairs, then consider the cases for stage freeze."
+  ],
+  "conditional_source_disjoint_capacity": {
+    "potential_case_count": 103,
+    "options": [
+      {
+        "pending_case_counts": {
+          "contract-audit": 28,
+          "multi-file-repair": 15
+        },
+        "balanced_family_counts": {
+          "qualification": {
+            "contract-audit": 3,
+            "multi-file-repair": 2,
+            "single-file-repair": 3
+          },
+          "training": {
+            "contract-audit": 9,
+            "multi-file-repair": 9,
+            "single-file-repair": 10
+          },
+          "holdout": {
+            "contract-audit": 35,
+            "multi-file-repair": 35,
+            "single-file-repair": 35
+          }
+        }
+      },
+      {
+        "pending_case_counts": {
+          "contract-audit": 27,
+          "multi-file-repair": 16
+        },
+        "balanced_family_counts": {
+          "qualification": {
+            "contract-audit": 2,
+            "multi-file-repair": 3,
+            "single-file-repair": 3
+          },
+          "training": {
+            "contract-audit": 9,
+            "multi-file-repair": 9,
+            "single-file-repair": 10
+          },
+          "holdout": {
+            "contract-audit": 35,
+            "multi-file-repair": 35,
+            "single-file-repair": 35
+          }
+        }
+      }
+    ],
+    "needs_both_backup_runtime_verifications": true,
+    "counting_policy": "Each repair replaces the existing authored audit at the identical repository and revision.",
+    "assignment_frozen": false
+  },
+  "required_test_identities": 86
+}
