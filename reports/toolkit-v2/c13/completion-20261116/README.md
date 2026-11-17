@@ -537,6 +537,23 @@ For the live study, capture the case and decision digests when the route is
 made. The redacted decision alone cannot prove what input the policy saw.
 The selection report's existing data contract is unchanged.
 
+The [selection capture](capture_selection_route.py) reserves one local
+routing operation on the reviewed assessment request. It matches the frozen
+action and shared routing pool, records the decision digest before returning
+the route, and keeps task contents out of the capture. A read-only consumer
+can bind a later receipt to that choice. The capture and Router times stay
+available. A blocked route cannot become an abstention. An interrupted
+routing operation keeps its reservation and blocks another dispatch.
+
+The [preflight](selection-route-capture-preflight.json) passed seven scenarios
+and ten receipt-link checks, including a receipt read from a reopened
+read-only ledger. It used the real local Router on synthetic tasks with
+network connections denied. The receipt links were tested with synthetic
+receipts. The hook did not execute tasks, grade outputs, or invoke models.
+Apply it to a reviewed equal-inventory policy study after independent
+candidate evidence exists. Guardrails, case counts and policy comparisons
+still require their own evidence.
+
 The committed snapshot passed 42 targeted tests, schema checks and the
 wheel build with a stable source fingerprint. Both full workspace runs passed
 2,165 tests with 21 skips and 81.45% combined coverage. Both branch gates

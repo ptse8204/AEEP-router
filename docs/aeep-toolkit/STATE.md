@@ -70,6 +70,14 @@ so a blocked task cannot be credited as choosing the baseline. The
 describes the behavior. The current beta evidence stays on its frozen source.
 A live selection study and its evidence binding remain open.
 
+The [selection routing preflight](../../reports/toolkit-v2/c13/completion-20261116/selection-route-capture-preflight.json)
+now captures an actual local Router choice before dispatch in synthetic
+checks on source `4e673a6d`. It uses the existing ledger, binds the frozen
+task and study, and preserves redaction. Blocked routing stops. An
+interrupt retains one unresolved reservation. Read-only receipt matching
+rejects a different executor, task, decision or earlier start. Task
+execution, protected grades and independent policy value remain open.
+
 A [screen of three further SkillsBench workbook cases](../../reports/toolkit-v2/c13/completion-20261116/workbook-grader-screening.json)
 verified 14 pinned assets. Keep Protein Expression and Powerlifting out of
 formal runs at these verifier pins. Their checks can accept wrong answers.
