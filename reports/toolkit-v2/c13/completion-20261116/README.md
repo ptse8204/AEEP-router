@@ -1,5 +1,34 @@
 # C13 beta handoff and remaining evidence
 
+## November 17 handoff
+
+Commit `ed1e9df1` is the latest evaluated implementation. A private
+ledger copy accepted all 37 required checks against source `f47d3042`.
+The operational ledger retains its original execution bindings. The
+[ExtractBench preflight](extractbench-ordinary-pack-preflight.json) verifies
+the three CFPB archives through the ordinary CLI. Its grader outcomes
+are fixtures. Both workspace suites passed 2,170 tests with 21 skips.
+Both branch coverage gates and all 72 offline documentation checks passed.
+
+Wheel `d34c66ca` passed archive inspection. The installed lifecycle evidence
+below covers the earlier wheels identified in that section. Private beta
+use on the reviewed macOS runtime remains LIMITED_BETA. Candidate
+usefulness and AEEP selection usefulness still need separate formal
+evidence. Production release and public benefit claims remain NO_GO.
+
+### Operator decisions needed to resume
+
+| Existing review | Authorized work if approved | What it unblocks |
+| --- | --- | --- |
+| [`ba9f3388`](extractbench-native-grade-preflight.json) | Acquire 36 pinned wheels, up to 76,701,027 bytes, and run seven protected calibration roles on the retained image. Zero models and $0. | Establish the native document scorer and qualify the dependency closure before the CFPB grader build and protected reference/fault checks. |
+| [`bb4a134f`](repository-expansion-preflight.json) | Acquire 48 pinned public repository revisions and their Git metadata within the recorded byte caps. Zero models and $0. | Stage source-disjoint software cases for protected grading, rights review and formal cohort freeze. |
+
+Both exact reviews passed read-only revalidation on November 17 and remain
+unstarted. They can proceed independently. Provider disclosure, live formal
+comparisons and release retain their own approval requirements.
+
+## Retained stack and lifecycle evidence
+
 The operational ledger accepts all **37 required integration checks** for the
 frozen execution source, including the ordinary CLI and canonical reports for
 both workload domains. Waza is excluded by the operator. The CLI still rejects
@@ -32,7 +61,7 @@ C13 remains open. No release or automatic admission was performed.
 | OpenTelemetry and Langfuse | Receipt-bound minimized export, private readback and disabled-export controls | No automatic remote export, prompt retention or cost measurement |
 | LangGraph, Agent Framework, EvoAgentX and AFlow | Bounded composition/interruption, a validated upstream proposal, and a finite protected calibration cycle | No arbitrary execution of generated work or claim of optimizer benefit |
 | Optional Router and GitHub Sponsors | Approved routing configuration, Essentials independence, source-bound attribution and support link | No admission, payment or public release authority |
-| Current Essentials wheel | Installed and reapplied idempotently, source verified, sample candidate staged and both reports generated with network denied | Clean rollback passed in a fresh private root. The older Finder-interrupted residue and journal remain preserved |
+| Retained Essentials wheel `82d8ed9c` | Installed and reapplied idempotently, source verified, sample candidate staged and both reports generated with network denied | Clean rollback passed in a fresh private root. The older Finder-interrupted residue and journal remain preserved |
 | Supported hosts and operator use | macOS arm64 / Python 3.13 checks; earlier actual helped report comprehension | Wider host matrix and unassisted operation remain unverified |
 | Waza | Historical evidence retained | Excluded from this delivery |
 
@@ -77,7 +106,7 @@ the earlier interrupted residue and journal.
 [Wheel and lifecycle evidence](beta-package-audit.json) ·
 [Installer controls](../../../../docs/aeep-toolkit/INSTALLATION_DESIGN.md#implemented-private-wheel-runtime)
 
-The [current Essentials preflight](current-essentials-preflight.json)
+The [Essentials preflight for wheel `b502bb84`](current-essentials-preflight.json)
 binds wheel `b502bb84` and both 33-package closures. The macOS CLI
 reproduced the exact install plan in a sandbox that denied outside reads
 and writes and network binds. A wrong plan digest left the destination

@@ -1,5 +1,13 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. C13 awaits operator authorization. Waza is excluded.**
+The [beta handoff](../../reports/toolkit-v2/c13/completion-20261116/README.md#november-17-handoff)
+now distinguishes verified source `f47d3042`, the older installed wheels
+and the draft ExtractBench runtime. Both required next actions passed
+read-only review checks and remain unstarted. Approve `ba9f3388` for
+the first native document calibration and `bb4a134f` for the software
+source intake. The formal cohorts, comparisons and release remain open.
+
 **November 16. C13 remains open. Waza is excluded from this delivery.**
 The [current beta handoff](../../reports/toolkit-v2/c13/completion-20261116/README.md)
 revalidates all 37 in-scope stack checks and both ordinary CLI workflows
