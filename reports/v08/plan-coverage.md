@@ -211,6 +211,12 @@ replies. Three Fabric CI/CD cases need a Python version below 3.13.
 Protected collection, per-case runtime closure and adoption remain open.
 No upstream code ran.
 
+The [first staged protected batch](../toolkit-v2/c13/completion-20261116/staged-protected-pair-preflight.json)
+binds three cases and 54 original or supplemental test identities to a
+retained ARM64 runtime. The ordinary runner verified complete journals,
+settlement and refusal of unauthorized replay using substitute replies.
+Review `f818cc19` still needs exact authority for upstream execution.
+
 The [A2A receipt bridge audit](../toolkit-v2/c13/completion-20261116/a2a-receipt-bridge-audit.json)
 matched four canonical receipts, rebuilt both pairs of protected fixtures
 and verified their scoring through the ordinary callback. Three wheel

@@ -314,6 +314,14 @@ All three Fabric CI/CD prospects declare Python below 3.13. Universal
 Pathlib 529 needs native collection and its reviewed local S3 fixture.
 No upstream code ran and no case was assigned.
 
+The [first staged protected batch](../../reports/toolkit-v2/c13/completion-20261116/staged-protected-pair-preflight.json)
+binds py-fsrs, files-to-prompt and py3status to the ordinary grader on a
+retained Linux ARM64 image. Six substituted calls passed the receipt
+and accounting rehearsal. Missing identities stayed ungraded and
+uncertain cleanup stopped dispatch. Exact review `f818cc19` is unstarted.
+It covers up to six offline calls and 210 reserved seconds at zero
+model turns and $0. No case entered a formal stage.
+
 The [new workbook reference](../../reports/toolkit-v2/c13/completion-20261116/workbook-reference-result.json)
 passed 19 original SkillsBench checks. The protected verifier rejected both
 missing and incomplete output. The first interpreter check failed before

@@ -392,6 +392,23 @@ The 117 focused grader and benchmark tests, schema check, and offline
 documentation check passed. The audit reproduced its result byte for byte.
 [Audit driver](audit_staged_repository_graders.py)
 
+The [first staged protected batch](staged-protected-pair-preflight.json)
+covers a py-fsrs contract audit, a files-to-prompt repair and a py3status
+repair. The three cases retain 54 required test identities. The existing
+Linux ARM64 image supplies setuptools 75.8.2. Its wheel exceeds the
+ordinary per-file transport bound. Files-to-prompt uses an exact cached
+Click wheel. Both asset roles retain their original archive hashes.
+
+The [driver](check_staged_offline_cases.py) rehearsed all six calls through
+the actual ledger and attempt journal with substitute container replies.
+It also verified missing-test, unauthorized, changed-review and unknown
+cleanup paths. A settled reference mismatch skips only its counterexample.
+Exact review `f818cc19` allows up to six offline operations and 210
+reserved seconds at zero model turns and $0. Upstream runs remain
+unstarted. The review reproduced byte for byte. All 128 focused tests,
+schema checks and offline documentation checks passed. No formal cases
+are assigned.
+
 The [Wemake selector preflight](wemake-native-selector-preflight.json)
 reconstructed all 117 projected test identities from the literal upstream
 parameters. The 27 published selectors include 19 prefixes. Their synthetic
