@@ -70,6 +70,13 @@ Source provenance and permitted use, protected grading and formal assignment
 remain open. No task assets were downloaded or disclosed. The prior offline
 grader review remains the next required runtime step.
 
+The document grouping checks reproduced the report byte for byte and
+rejected a changed manifest. Compilation and the schema check passed.
+Both full regression runs passed 2,165 tests with 21 skips. Combined
+coverage was 81%, and both branch gates passed. All 72 offline documentation
+inputs passed. Logs and the two backup runtime audit commands are retained
+in `.aeep/completion-20261116/extractbench-source-group-audit`.
+
 The [ExtractBench 13F development intake](../../reports/toolkit-v2/c13/completion-20261116/extractbench-audent-intake.json)
 verified all 11 original assets and reconciled 52 holding rows with the
 official SEC table. Three input files and eight protected files have
