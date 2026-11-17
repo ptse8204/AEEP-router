@@ -277,8 +277,19 @@ excluding canonical execution.
 | React performance debugging | 270.842 s | 0.445 s | 122.865 s | 36.718 s |
 | Prefix Cache replay | 61.574 s | 0.408 s | 40.221 s | 2.354 s |
 
-React's canonical execution span includes 110.814 seconds beyond the listed
-agent and grading intervals. The receipts leave that remainder unattributed.
+The [pretrial attribution](skillsbench-pretrial-attribution.json) reopens 48
+settled operations and completed execution journals across the six runs.
+Each run has one protected grader reference and seven probes before the
+agent trial. These operations account for 109.607 of the 110.814 seconds
+outside React's agent and task grading intervals. The two longest probes
+each took about 46 seconds. Their contained executor receipts report 90.856
+seconds combined and contain only start and completion events. The remaining
+1.207 seconds in the canonical span lack finer attribution. All six runs
+have less than 1.4 seconds unassigned after this reconciliation.
+
+The [read-only audit](audit_skillsbench_pretrial.py) produced byte-identical
+reports on two passes. Five local controls rejected overlapping, unsettled
+and cross-plan charges, a changed receipt, and over-attribution.
 
 For serial private beta work on these pinned configurations, start with a
 five-minute review window for document/data and seven minutes for software.

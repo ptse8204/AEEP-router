@@ -1,5 +1,16 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. Settled grader charges explain the React pretrial delay.**
+The [pretrial attribution](../../reports/toolkit-v2/c13/completion-20261116/skillsbench-pretrial-attribution.json)
+reopens 48 completed executions across six historical SkillsBench runs.
+React spent 109.607 seconds validating the grader before its trial. Two
+probes account for about 92 seconds of that charge. Only 1.207 seconds of
+the canonical span remain unassigned. No task ran again. Resource acceptance
+is open separately. Exact group `6b758e65` is still pending, Waza is excluded,
+and formal comparisons stay paused.
+Both read-only runs matched and all five rejection checks passed. The
+offline docs check passed on 72 files with zero link errors.
+
 **November 17. The grouped reviews have a read-only recovery check.**
 The [group readback](../../reports/toolkit-v2/c13/completion-20261116/offline-group-readback-verification.json)
 separates unsettled reservations, settled operations without a grade

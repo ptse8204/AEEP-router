@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+The [pretrial attribution](../toolkit-v2/c13/completion-20261116/skillsbench-pretrial-attribution.json)
+verifies 48 settled grader operations across the six SkillsBench runs.
+Pretrial validation accounts for 109.607 seconds in React's canonical span,
+and 1.207 seconds remain unassigned. Two replays matched byte for byte.
+Five local controls rejected inconsistent charges and receipts. No new
+execution or resource acceptance follows from this historical audit.
+
 The [group readback](../toolkit-v2/c13/completion-20261116/offline-group-readback-verification.json)
 reconciles exact review digests with existing ledgers and exports. The
 earlier ExtractBench acquisition still shows a settled charge without a
