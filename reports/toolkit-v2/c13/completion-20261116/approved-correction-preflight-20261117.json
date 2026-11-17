@@ -1,0 +1,68 @@
+{
+  "checks": [
+    "ExtractBench exact review, frozen source, cached runtime,70 wheel hashes and protected verifier bindings passed",
+    "Software exact review, frozen source, original protected identities and reviewed Click artifact bindings passed",
+    "Both review windows remain valid",
+    "Both execution directories are absent"
+  ],
+  "comparisons_paused": true,
+  "documentation_verification": {
+    "files": 72,
+    "link_errors": 0,
+    "lint_issues": 0,
+    "log": {
+      "path": ".aeep/completion-20261116/approved-correction-3376c129-docs-final-20261117.log",
+      "sha256": "ec1d7263f28f7dcd77d5d9607280f604314a655f1e7aec82e0fd073738eda6cb"
+    }
+  },
+  "earlier_authorized_cleanup": {
+    "path": "reports/toolkit-v2/c13/skillsbench-software-substitute-20261109/managed-preparation/carrier-verification/cleanup-result.json",
+    "sha256": "f9263b2ff2be42f45ce5c990bd296f7ea9bfd44f536446b23eef32dfd8c3bc55"
+  },
+  "earlier_cleanup_files_removed": 30042,
+  "exact_minimum_host_free_bytes": 55834574848,
+  "group": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/offline-correction-reviews-20261117.json",
+    "sha256": "3376c12916efc4406abfe437599b025a86e1d91d1317563d9a21a7d8768f12c8"
+  },
+  "host_usable_free_bytes": 53011886080,
+  "new_downloads": 0,
+  "new_model_turns": 0,
+  "new_operations": 0,
+  "new_resource_deletions": 0,
+  "observed_at": "2026-11-17T19:28:01.103703+00:00",
+  "operator_approval": {
+    "path": ".aeep/completion-20261116/group-3376c129-approval-20261117.json",
+    "sha256": "ebd5b6150139a1b7ea388e77e04c77795ee4296843a8bdaa8e49353700345358"
+  },
+  "remaining_blocker": "usable_host_storage",
+  "remaining_pytest_temp_allocated_KiB": 45840,
+  "resume": "Recheck usable free space and exact pins. At52 GiB or more, execute both already-approved scopes independently. The current approvals remain sufficient while their exact bindings and review windows hold.",
+  "schema_version": "aeep.c13.approved-correction-preflight.v1",
+  "scopes": [
+    {
+      "approval": {
+        "path": ".aeep/completion-20261116/extractbench-diagnostic-20261117/approval.json",
+        "sha256": "69142c9b3275da943ea1ea146b620959f5a06c469b84ed95cdfd2f2b2c7a2f08"
+      },
+      "artifact_preflight": "passed",
+      "charged_operations": 0,
+      "execution_started": false,
+      "review_sha256": "1896e9b6e32a1ae2e0970beca723da7368df1e1c35a3cbf5c94a5aea82488be0",
+      "scope": "extractbench_reference_diagnostic"
+    },
+    {
+      "approval": {
+        "path": ".aeep/completion-20261116/staged-software-correction-20261117/approval.json",
+        "sha256": "78499cf33caf038d205ef823717acb8ab718b91df949e5de868f01f885432563"
+      },
+      "artifact_preflight": "passed",
+      "charged_operations": 0,
+      "execution_started": false,
+      "review_sha256": "0d6342ef5a2979a2e1b66b58b3ae2e065cb0f014bc57b5fd87701bc87467b9d3",
+      "scope": "software_correction"
+    }
+  ],
+  "shortfall_bytes": 2822688768,
+  "waza_excluded": true
+}

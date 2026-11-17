@@ -1,5 +1,16 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. Correction group `3376c129` is approved. Storage blocks launch.**
+The [approved preflight](../../reports/toolkit-v2/c13/completion-20261116/approved-correction-preflight-20261117.json)
+binds the operator response and both component approvals. Exact source,
+runtime, dependency and verifier checks pass. Neither execution has
+started or reserved an operation. Usable free space is about 49.38 GiB,
+roughly 2.62 GiB below the approved 52 GiB floor. Earlier authorized
+pytest cleanup is already complete. The remaining pytest temp directory
+holds about 45 MiB. Resume both scopes after space and pin checks pass.
+The recorded approvals remain sufficient within their exact scope and
+expiry. Waza stays excluded and comparisons remain paused.
+
 **November 17. Execution is blocked on approval and usable host space.**
 The [continuation audit](../../reports/toolkit-v2/c13/completion-20261116/continuation-blocker-audit-20261117.json)
 confirms that both exact correction scopes are unstarted and unapproved.

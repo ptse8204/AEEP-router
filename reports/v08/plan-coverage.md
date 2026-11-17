@@ -1,5 +1,10 @@
 # 0.8 plan coverage and remaining work
 
+The [approved correction preflight](../toolkit-v2/c13/completion-20261116/approved-correction-preflight-20261117.json)
+records group `3376c129` approval and matching artifact checks. Both
+executions remain unstarted because usable space is 49.38 GiB against
+the approved 52 GiB floor. Approval is resolved, and storage remains open.
+
 The [continuation audit](../toolkit-v2/c13/completion-20261116/continuation-blocker-audit-20261117.json)
 records the pending exact correction authority and measured storage shortage.
 Both scopes remain unstarted. Their launch needs approval of `3376c129`
