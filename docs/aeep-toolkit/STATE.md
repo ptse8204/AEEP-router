@@ -1,5 +1,15 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. Two more cached multi-file pairs have protected inputs.**
+[Supplemental archive recovery](../../reports/toolkit-v2/c13/completion-20261116/supplemental-archive-recovery-result.json)
+stages Copier and Pyinfra from retained copies and keeps all 18 published
+test identities. Each original, reference and one-file variant uses the
+ordinary callback with substituted replies. Copier preserves both Unicode
+spellings of its fixture in the packed inputs. Five other cached cases
+have truncated archives. The two staged cases were already among the
+20 screened leads. Publisher and runtime checks remain open. Exact group
+`6b758e65` is pending, with Waza excluded and comparisons paused.
+
 **November 17. The software queue has a bounded overlap screen.**
 [Retained issue screening](../../reports/toolkit-v2/c13/completion-20261116/retained-issue-overlap-screen.json)
 identifies 154 leads from 111 unattempted repositories by distinct

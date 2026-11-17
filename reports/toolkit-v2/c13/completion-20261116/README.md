@@ -109,6 +109,16 @@ including seven with retained archive files. At least two more multi-file
 cases are needed in that optimistic scenario. Archive, scope, rights and
 runtime still need independent verification.
 
+The [supplemental archive recovery](supplemental-archive-recovery-result.json)
+rechecked every retained copy for seven screened leads. Copier and
+Pyinfra have complete copies with the recorded archive and license
+hashes. Five other leads have truncated gzip files. Ordinary staging
+keeps both edits, all 18 published test identities and the one-file
+controls for Copier and Pyinfra. Both Unicode spellings of Copier's
+fixture remain in the packed input. Publisher matching and protected
+runtime reproduction still need to settle. The 20-lead count already
+includes these two cases.
+
 ## Retained stack and lifecycle evidence
 
 The operational ledger accepts all **37 required integration checks** for the

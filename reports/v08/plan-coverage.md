@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [supplemental archive recovery](../toolkit-v2/c13/completion-20261116/supplemental-archive-recovery-result.json)
+stages Copier and Pyinfra with both edits, 18 test identities and four
+one-file controls. Ordinary callback fixtures passed for all eight
+variants. Five older archives are truncated. Actual publisher and grader
+evidence remain open.
+
 The [retained issue screen](../toolkit-v2/c13/completion-20261116/retained-issue-overlap-screen.json)
 records 154 unattempted leads and 20 supplemental multi-file leads. The
 balanced two-cohort projection remains at least two multi-file repairs
