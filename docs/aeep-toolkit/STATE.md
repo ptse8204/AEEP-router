@@ -1,5 +1,14 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. The grouped reviews have a read-only recovery check.**
+The [group readback](../../reports/toolkit-v2/c13/completion-20261116/offline-group-readback-verification.json)
+separates unsettled reservations, settled operations without a grade
+export, and reports with matched receipts. It recovered the recorded
+0.330-second acquisition after the earlier ExtractBench failure. Local
+fixtures rejected truncated exports, changed receipts and omitted roles.
+All four scopes in exact group `6b758e65` still await approval. Waza is
+excluded and comparisons stay paused.
+
 **November 17. PDFly's odd-page fixture is staged for the protected grader.**
 The [PDFly placement check](../../reports/toolkit-v2/c13/completion-20261116/pdfly-protected-fixture-placement.json)
 preserves all four published test identities and the worker archive.

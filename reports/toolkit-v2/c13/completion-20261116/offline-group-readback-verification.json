@@ -1,0 +1,150 @@
+{
+  "byte_identical_replays": [
+    {
+      "path": ".aeep/completion-20261116/offline-group-readback-20261117/verification-final.json",
+      "sha256": "a2a8c0dc416b8a740a9be4bcb59bea513346b401257cca2e1dd75d12d2ee5029"
+    },
+    {
+      "path": ".aeep/completion-20261116/offline-group-readback-20261117/verification-replay.json",
+      "sha256": "a2a8c0dc416b8a740a9be4bcb59bea513346b401257cca2e1dd75d12d2ee5029"
+    }
+  ],
+  "current_group_readback": {
+    "group_sha256": "6b758e65254042640df8aa36b8341bfbcad7975e931ed063a2060ed986aa0c1a",
+    "reviews": [
+      {
+        "accounting_or_export_needs_reconciliation": false,
+        "dispatches_operations": false,
+        "exact_review": "8e1713c5abfeec26187fb5abd52a8a2f5fa336d407432f7192e3ea26bbc763ee",
+        "materializes_formal_cases": false,
+        "observed_operations": {},
+        "reserved_seconds": 0,
+        "retained_outcomes": {},
+        "scope": "document_calibration",
+        "settled_grades_missing_readback": [],
+        "settled_operation_seconds": 0,
+        "status": "approval_pending",
+        "verified_approval": false
+      },
+      {
+        "accounting_or_export_needs_reconciliation": false,
+        "dispatches_operations": false,
+        "exact_review": "f818cc19fa549677f9dfba0bbaa03d17f99f8dd03abdd577a2794f5266ca5a3b",
+        "materializes_formal_cases": false,
+        "observed_operations": {},
+        "reserved_seconds": 0,
+        "retained_outcomes": {},
+        "scope": "staged_software_grading",
+        "settled_grades_missing_readback": [],
+        "settled_operation_seconds": 0,
+        "status": "approval_pending",
+        "verified_approval": false
+      },
+      {
+        "accounting_or_export_needs_reconciliation": false,
+        "dispatches_operations": false,
+        "exact_review": "72354f5af2a4c5c0ceded3e528552adfec40c9b01fdb0e63e0cb1b1c4033a838",
+        "materializes_formal_cases": false,
+        "observed_operations": {},
+        "reserved_seconds": 0,
+        "retained_outcomes": {},
+        "scope": "cached_software_grading",
+        "settled_grades_missing_readback": [],
+        "settled_operation_seconds": 0,
+        "status": "approval_pending",
+        "verified_approval": false
+      },
+      {
+        "accounting_or_export_needs_reconciliation": false,
+        "dispatches_operations": false,
+        "exact_review": "7e9158bafb79b0b7b7f30783dd072978ae5ebab480d304f959dfd136fa5ff78e",
+        "materializes_formal_cases": false,
+        "observed_operations": {},
+        "reserved_seconds": 0,
+        "retained_outcomes": {},
+        "scope": "retained_software_tree_recovery",
+        "settled_grades_missing_readback": [],
+        "settled_operation_seconds": 0,
+        "status": "approval_pending",
+        "verified_approval": false
+      }
+    ],
+    "schema_version": "aeep.c13.offline-group-readback.v1",
+    "scope": "Read-only export and accounting check. Missing exports leave the associated evidence unresolved. Publisher source rights and raw cached-role replay require their separate checks."
+  },
+  "documentation_checks": {
+    "edited_report_and_plan_excerpt": {
+      "path": ".aeep/completion-20261116/offline-group-readback-20261117/lint.log",
+      "result": "passed",
+      "sha256": "6377cc37c1d8c2f12058bf60a11cd55dbe0479587a0deb1c74d22859253857c6"
+    },
+    "standard_offline_docs": {
+      "path": ".aeep/completion-20261116/offline-group-readback-20261117/docs.log",
+      "result": "passed",
+      "sha256": "92fd6a35e831a7baf046a81c41d99624dfb03d215300be814277bfa91cdf86a9"
+    }
+  },
+  "fixture_checks": {
+    "cached": {
+      "partial_export_keeps_unread_grade": true,
+      "rejected": [
+        "altered_receipt",
+        "duplicate_result"
+      ],
+      "reserved_preserved": true,
+      "settled_without_export_preserved": true
+    },
+    "document": {
+      "complete_seven_role_export": true,
+      "rejected": [
+        "missing_calibration_role"
+      ]
+    },
+    "publisher": {
+      "partial_failed_source_preserved": true,
+      "rejected": [
+        "altered_source_export",
+        "non_boolean_approval"
+      ]
+    },
+    "staged": {
+      "missing_role_reported": true,
+      "rejected": [
+        "truncated_final_staged_export"
+      ]
+    }
+  },
+  "fixture_tool": {
+    "path": ".aeep/completion-20261116/offline-group-readback-20261117/verify-readback.py",
+    "sha256": "0577dda5ff89b840cb0b356ab0e4fa3d8584d3cb144d9ff404ffe98f31dc78cc"
+  },
+  "new_live_operation_reservations": 0,
+  "new_model_turns": 0,
+  "new_runtime_launches": 0,
+  "operator_group": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/offline-evidence-reviews.json",
+    "sha256": "6b758e65254042640df8aa36b8341bfbcad7975e931ed063a2060ed986aa0c1a"
+  },
+  "previous_real_acquisition": {
+    "accounting_or_export_needs_reconciliation": false,
+    "dispatches_operations": false,
+    "exact_review": "ba9f338866750df709e9beee92552b80a43c29560ebc2ad3e073187caa473414",
+    "materializes_formal_cases": false,
+    "observed_operations": {
+      "c13-extractbench-first-native-grade-20261116:acquisition": "complete"
+    },
+    "reserved_seconds": 420.0,
+    "retained_outcomes": {},
+    "scope": "document_calibration",
+    "settled_grades_missing_readback": [],
+    "settled_operation_seconds": 0.3299977920250967,
+    "status": "started_export_missing",
+    "verified_approval": true
+  },
+  "readback_tool": {
+    "path": ".aeep/completion-20261116/offline-group-readback-20261117/inspect-evidence-group.py",
+    "sha256": "ce279f47b11f1c8507bb79d2b076422655689d00ee4f6730347e2d02302725d4"
+  },
+  "schema_version": "aeep.c13.offline-group-readback-verification.v1",
+  "scope": "Read-only receipt and settlement reconciliation using current review hashes. Only the prior ExtractBench acquisition comes from a settled operational ledger. The exported native and repository grading scenarios are fixtures. The pending reviews have no live outcomes or model dispatch."
+}

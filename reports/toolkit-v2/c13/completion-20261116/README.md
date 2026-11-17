@@ -35,6 +35,15 @@ software grader reviews replayed unchanged. They cover five cases already
 staged in the provisional pool. Their real reference and original-source
 grades are still pending. All reviews retain independent stop rules.
 
+The [group readback](offline-group-readback-verification.json) checks
+each review's ledger and exports without dispatch. It distinguishes an
+unsettled reservation from a settled charge with no matching grade export.
+The earlier interrupted ExtractBench acquisition still shows 0.330
+settled seconds and no grade. Local fixture checks reject altered receipt
+files, omitted calibration roles and truncated staged exports. The
+publisher conclusions still use their dedicated source-projection audit.
+All four grouped scopes remain unstarted.
+
 The [source recovery driver](check_expansion_tree_recovery.py) binds five
 retained archives. Three contain Git submodule declarations. The exact
 review `7e9158ba` uses at most eight GitHub metadata requests and reconstructs

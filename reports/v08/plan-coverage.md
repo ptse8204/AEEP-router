@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+The [group readback](../toolkit-v2/c13/completion-20261116/offline-group-readback-verification.json)
+reconciles exact review digests with existing ledgers and exports. The
+earlier ExtractBench acquisition still shows a settled charge without a
+grade. Fixtures exercise interrupted exports, outstanding reservations
+and invalid receipt bindings. The four pending scopes still need live
+evidence.
+
 The [PDFly placement check](../toolkit-v2/c13/completion-20261116/pdfly-protected-fixture-placement.json)
 stages the original odd-page PDF and notices under the protected test
 root. Five payload variants preserve the four upstream test identities
