@@ -4,6 +4,7 @@ import hashlib
 import json
 import sqlite3
 from contextlib import closing
+from itertools import combinations
 
 from capture_selection_route import (
     CAPTURE,
@@ -22,11 +23,13 @@ from aeep.benchmarking import BenchmarkSuite, BenchmarkTrial, _pin_action
 from aeep.economic.prepared import deterministic_digest, executor_fingerprint
 from aeep.errors import ConfigurationError
 from aeep.execution import ExecutionEvidence
+from aeep.hosts.codex_accounting import TOKEN_FIELDS
 from aeep.models import ExecutionReceipt, StrictModel, UtcDateTime, ValidationResult, utc_now
 from aeep.qualification import behavior_fingerprint
 from aeep_toolkit.install_runtime import canonical
 from aeep_toolkit.models import Digest, Identifier
 from aeep_toolkit.selection import SelectionCase, SelectionDecision
+from aeep_toolkit.telemetry import token_capture
 from aeep_toolkit.workflow_evidence import _settled, open_store
 
 APPROVAL = "toolkit_selection_trial_approval"
@@ -215,7 +218,7 @@ def verify_attempt(path, receipt, task, choice, selected, binding):
             and journal.attempt_id == attempt.attempt_id and journal.events[-1].kind == "execution.completed",
             "protected task execution has no matching terminal journal",
         )
-    return journal_ref
+    return journal
 
 
 def checked_binding(repo, scope_ref, case, suite):
@@ -253,6 +256,79 @@ def authorize_trial(repo, scope_ref, case, suite, router, route, trial):
     return request
 
 
+def observed_tokens(receipt, journal, trial):
+    capture = token_capture(receipt, journal if "codex_token_fields" in receipt.metadata else None)
+    fields = capture["known_fields"]
+    require(
+        all(getattr(trial.actual_resources, field) == getattr(receipt.actual_resources, field) for field in fields),
+        "captured tokens differ from the canonical trial",
+    )
+    counts = {field: getattr(receipt.actual_resources, field) if field in fields else None
+              for field in TOKEN_FIELDS.values()}
+    incoming, outgoing = counts["input_tokens"], counts["output_tokens"]
+    return {
+        "capture": capture,
+        "provider_model": receipt.metadata.get("actual_model") if fields else None,
+        "raw_counts": counts,
+        "cache_semantics": "included_in_input" if fields else None,
+        "reasoning_semantics": "included_in_output" if fields else None,
+        "input_plus_output_tokens": incoming + outgoing if incoming is not None and outgoing is not None else None,
+    }
+
+
+def resolved_case_measurements(resolved):
+    """Compare measurements from resolve_outcome for one case across policies."""
+    shared_fields = (
+        "study_ref", "task_ref", "action_ref", "condition", "grader_definition_ref", "shared_environment_ref",
+    )
+    require(len(resolved) >= 2 and len({choice.case_id for choice, _ in resolved}) == 1
+            and len({choice.policy for choice, _ in resolved}) == len(resolved)
+            and len({choice.decision_ref for choice, _ in resolved}) == len(resolved)
+            and len({proof["receipt_ref"] for _, proof in resolved}) == len(resolved)
+            and all(len({proof[field] for _, proof in resolved}) == 1 for field in shared_fields)
+            and all(choice.task_verified is not None and choice.verification_ref == content_digest(proof)
+                    and proof["tokens"]["capture"]["receipt_ref"] == proof["receipt_ref"]
+                    for choice, proof in resolved),
+            "matched selection observations require distinct verified policies for the same case")
+    comparisons = []
+    for (left, a), (right, b) in combinations(resolved, 2):
+        a_tokens, b_tokens = a["tokens"], b["tokens"]
+        comparable = a_tokens["provider_model"] is not None and all(
+            a_tokens[key] == b_tokens[key] for key in ("provider_model", "cache_semantics", "reasoning_semantics")
+        ) and all(a_tokens["capture"][key] == b_tokens["capture"][key] for key in ("source", "trust"))
+        a_counts, b_counts = a_tokens["raw_counts"], b_tokens["raw_counts"]
+        pair = {
+            "left": left.policy, "right": right.policy,
+            "left_grade_ref": a["grade_ref"], "right_grade_ref": b["grade_ref"],
+            "verified_success_left_minus_right": int(left.task_verified) - int(right.task_verified),
+            "quality_score_left_minus_right": a["quality_score"] - b["quality_score"],
+            "token_capture_status": {left.policy: a_tokens["capture"]["status"],
+                                     right.policy: b_tokens["capture"]["status"]},
+            "raw_token_differences_left_minus_right": {
+                field: left_count - b_counts[field]
+                if comparable and left_count is not None and b_counts[field] is not None else None
+                for field, left_count in a_counts.items()
+            },
+        }
+        a_total, b_total = a_tokens["input_plus_output_tokens"], b_tokens["input_plus_output_tokens"]
+        pair["input_plus_output_left_minus_right"] = (
+            a_total - b_total if comparable and a_total is not None and b_total is not None else None
+        )
+        for field in ("decision_seconds", "agent_seconds", "grading_seconds"):
+            pair[f"{field}_left_minus_right"] = a[field] - b[field] if a[field] is not None and b[field] is not None else None
+        comparisons.append(pair)
+    return {
+        "case_id": resolved[0][0].case_id,
+        "policies": {
+            choice.policy: {"decision_ref": choice.decision_ref, "selected": choice.selected,
+                            "task_verified": choice.task_verified, "verification_ref": choice.verification_ref,
+                            **proof}
+            for choice, proof in resolved
+        },
+        "comparisons": comparisons,
+    }
+
+
 def resolve_outcome(repo, scope_ref: str, case: SelectionCase, suite: BenchmarkSuite) -> tuple[SelectionDecision, dict]:
     """Reconstruct one graded selection row from read-only canonical records."""
     scope, choice, selected, value, task, trial_id, binding, request = checked_binding(repo, scope_ref, case, suite)
@@ -276,7 +352,7 @@ def resolve_outcome(repo, scope_ref: str, case: SelectionCase, suite: BenchmarkS
         and trial.started_at <= charge.started_at <= receipt.started_at,
         "execution reservation was not bound to the selected trial",
     )
-    journal_ref = verify_attempt(store, receipt, task, choice, selected, binding)
+    journal = verify_attempt(store, receipt, task, choice, selected, binding)
     grade = ProtectedGrade.model_validate(repo.get(GRADE, binding.grade_operation()))
     measurement = _settled(repo, binding.grade_operation())
     result = trial.case_validation[0]
@@ -294,11 +370,18 @@ def resolve_outcome(repo, scope_ref: str, case: SelectionCase, suite: BenchmarkS
         "protected grade or settled verification measure differs from the selected trial",
     )
     verification = {
+        "study_ref": scope.study_ref, "task_ref": case.task_sha256, "action_ref": scope.action_sha256,
+        "condition": trial.condition.value,
+        "grader_definition_ref": grade.grader_definition_ref, "shared_environment_ref": binding.execution_environment_ref,
         "binding_ref": content_digest(binding), "trial_ref": content_digest(trial), "receipt_ref": grade.receipt_ref,
-        "journal_ref": journal_ref, "trial_measurement_ref": content_digest(charge), "grade_ref": content_digest(grade), "grade_measurement_ref": grade.measurement_ref,
+        "journal_ref": content_digest(journal), "trial_measurement_ref": content_digest(charge),
+        "grade_ref": content_digest(grade), "grade_measurement_ref": grade.measurement_ref,
         "quality_score": result.quality_score, "decision_seconds": value.decision_wall_seconds,
         "agent_seconds": None if trial.wall_time_ms is None else trial.wall_time_ms / 1000,
         "grading_seconds": None if trial.grading_wall_time_ms is None else trial.grading_wall_time_ms / 1000,
+        "tokens": observed_tokens(receipt, journal, trial),
+        "execution_status": trial.status.value, "failure_category": trial.failure_category,
+        "retry_fallback_count": trial.retry_fallback_count,
     }
     return value.model_copy(update={
         "task_verified": trial.valid, "verification_ref": content_digest(verification),

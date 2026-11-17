@@ -6,6 +6,7 @@ import json
 import socket
 import time
 from contextlib import closing
+from copy import deepcopy
 from datetime import timedelta
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -22,9 +23,11 @@ from aeep.assessment.models import (
     content_digest,
 )
 from aeep.assessment.repository import AssessmentRepository
-from aeep.benchmarking import BenchmarkCase, BenchmarkRoute, BenchmarkRunner, BenchmarkSuite
+from aeep.benchmarking import BenchmarkCase, BenchmarkRoute, BenchmarkRunner, BenchmarkSuite, BenchmarkTrial
 from aeep.discovery import DiscoveryRequest, DiscoveryResult, _metadata_digest
 from aeep.errors import ConfigurationError
+from aeep.execution import EventJournal, ExecutionEvidence
+from aeep.hosts.codex_accounting import TOKEN_FIELDS, turn_accounting
 from aeep.models import (
     ActionConstraints,
     ActionRequest,
@@ -285,6 +288,10 @@ async def fixture(root, selected, *, corrupted=False, policy="aeep"):
             resolved, proof = link.resolve_outcome(read_repo, scope_ref, case, suite)
             assert resolved.task_verified == trial.valid and proof["quality_score"] == int(trial.valid)
             assert resolved.selected == scope.candidates_by_executor.get(selected)
+            assert proof["tokens"]["capture"]["status"] == "unknown"
+            assert all(value is None for value in proof["tokens"]["raw_counts"].values())
+            assert proof["failure_category"] == ("task_failure" if corrupted else None)
+            assert proof["retry_fallback_count"] == 0
             bad_task = case.model_copy(update={"task_sha256": "c" * 64})
             reject("another frozen", link.resolve_outcome, read_repo, scope_ref, bad_task, suite)
             fixture_rejections += 1
@@ -320,11 +327,98 @@ async def fixture(root, selected, *, corrupted=False, policy="aeep"):
             "authority_ref": content_digest(grant.model_dump(
                 mode="json", include={"limits", "allowed_destinations", "remote_disclosure", "automatic_admission"},
             )),
-        }, resolved, case, {scope.candidates_by_executor[spec.id]: content_digest(spec) for spec in specs if spec.id != "baseline"}, policy_ref or scope_ref
+        }, resolved, case, {scope.candidates_by_executor[spec.id]: content_digest(spec) for spec in specs if spec.id != "baseline"}, policy_ref or scope_ref, proof
     finally:
         if runner is not None:
             runner.connection.close()
         await router.close()
+
+
+def synthetic_counters(reference, input_tokens, output_tokens, *, missing_field=None):
+    wire = dict.fromkeys(TOKEN_FIELDS, 0)
+    wire.update(inputTokens=input_tokens, outputTokens=output_tokens, cachedInputTokens=4)
+    if missing_field is not None:
+        del wire[missing_field]
+    resources, accounting = turn_accounting(wire, model="fixture", resource_pool="fixture")
+    stream = EventJournal(reference)
+    stream.append("execution.started", "start")
+    stream.append("usage.reported", "turn-usage", accounting=accounting, accounting_mode="cumulative")
+    stream.append("execution.completed", "terminal")
+    journal = ExecutionEvidence(attempt_id=reference, adapter="fixture", events=list(stream.items),
+        journal_id=stream.journal_id, complete=True, identity_digest="a" * 64, boundary_digest="b" * 64)
+    receipt = ExecutionReceipt(decision_id=reference, action_id="fixture", capability="fixture",
+        executor_id="fixture", executor_kind="host_managed", status="success", estimated=RouteEstimate(),
+        actual_resources=resources, accounting=accounting, metadata={
+            "execution_evidence_digest": content_digest(journal), "attempt_id": reference,
+            "host_runtime_digest": "a" * 64, "boundary_digest": "b" * 64, "actual_model": "fixture",
+            "codex_token_fields": json.dumps(sorted(wire)),
+        })
+    trial = BenchmarkTrial(trial_id=reference, run_id="fixture", suite_id="fixture", case_id="demo",
+        route_id=reference, repetition=0, phase="measurement", condition="process-cold", state="complete",
+        actual_resources=resources)
+    return receipt, journal, trial
+
+
+def verify_measurements(resolved):
+    comparisons = link.resolved_case_measurements(resolved)["comparisons"]
+    assert len(comparisons) == 3
+    assert all(pair["input_plus_output_left_minus_right"] is None for pair in comparisons)
+    assert all(pair["quality_score_left_minus_right"] == 0 for pair in comparisons)
+    a, b = [(choice, dict(proof)) for choice, proof in resolved[:2]]
+    complete = synthetic_counters("first", 12, 3)
+    changed = complete[2].model_copy(update={"actual_resources": ResourceVector(input_tokens=100)})
+    reject("differ from the canonical trial", link.observed_tokens, *complete[:2], changed)
+
+    def checked_pair(tokens):
+        verified = []
+        for (choice, proof), observed in zip((a, b), tokens, strict=True):
+            proof = {**proof, "tokens": observed, "receipt_ref": observed["capture"]["receipt_ref"]}
+            verified.append((choice.model_copy(update={"verification_ref": content_digest(proof)}), proof))
+        return verified
+
+    both = checked_pair([link.observed_tokens(*values) for values in
+                         (complete, synthetic_counters("second", 10, 1))])
+    measured = link.resolved_case_measurements(both)["comparisons"][0]
+    assert measured["input_plus_output_left_minus_right"] == 4
+    assert measured["raw_token_differences_left_minus_right"]["cached_input_tokens"] == 0
+    assert measured["token_capture_status"] == {a[0].policy: "verified", b[0].policy: "verified"}
+
+    partial = checked_pair([link.observed_tokens(*values) for values in
+                            (complete, synthetic_counters("second", 10, 1, missing_field="cachedInputTokens"))])
+    paired_partial = link.resolved_case_measurements(partial)["comparisons"][0]
+    assert paired_partial["input_plus_output_left_minus_right"] == 4
+    assert paired_partial["raw_token_differences_left_minus_right"]["input_tokens"] == 2
+    assert paired_partial["raw_token_differences_left_minus_right"]["cached_input_tokens"] is None
+    assert paired_partial["token_capture_status"][b[0].policy] == "partial"
+    absent = link.observed_tokens(*synthetic_counters("second", 10, 1, missing_field="outputTokens"))
+    with_missing_total = link.resolved_case_measurements(
+        checked_pair([partial[0][1]["tokens"], absent]))["comparisons"][0]
+    assert with_missing_total["input_plus_output_left_minus_right"] is None
+    assert all(value is None for value in with_missing_total["raw_token_differences_left_minus_right"].values())
+    changed_token_source = deepcopy(partial[1][1]["tokens"])
+    changed_token_source["provider_model"] = "different-model"
+    unpaired = link.resolved_case_measurements(
+        checked_pair([partial[0][1]["tokens"], changed_token_source]))["comparisons"][0]
+    assert all(value is None for value in unpaired["raw_token_differences_left_minus_right"].values())
+    reject("distinct verified policies", link.resolved_case_measurements, [resolved[0], resolved[0]])
+    for field in ("task_ref", "study_ref", "condition", "grader_definition_ref", "shared_environment_ref", "receipt_ref"):
+        choice, proof = resolved[1]
+        wrong = {**proof, field: resolved[0][1][field] if field == "receipt_ref" else "e" * 64}
+        reject("distinct verified policies", link.resolved_case_measurements,
+               [resolved[0], (choice.model_copy(update={"verification_ref": content_digest(wrong)}), wrong)])
+    bad_proof = {**resolved[1][1], "quality_score": 0}
+    reject("distinct verified policies", link.resolved_case_measurements, [resolved[0], (resolved[1][0], bad_proof)])
+    return {
+        "same_case_protected_grade_pairs": len(comparisons),
+        "unknown_token_pairs": len(comparisons),
+        "synthetic_complete_token_delta": measured["input_plus_output_left_minus_right"],
+        "synthetic_partial_token_delta": paired_partial["input_plus_output_left_minus_right"],
+        "synthetic_missing_parent_total_delta": with_missing_total["input_plus_output_left_minus_right"],
+        "incompatible_model_token_pairs_omitted": 1,
+        "rejected_controls": ["trial_counter_drift", "same_decision", "different_task",
+                              "different_study", "different_condition", "different_grader", "different_environment", "duplicate_receipt",
+                              "changed_proof"],
+    }
 
 
 async def check(root):
@@ -335,7 +429,7 @@ async def check(root):
             "fixed": await fixture(root / "fixed", "baseline", policy="fixed"),
         }
         arms = {policy: value[0] for policy, value in linked.items()}
-        _, _, frozen_case, inventory, _ = linked["aeep"]
+        _, _, frozen_case, inventory, _, _ = linked["aeep"]
         assert all(value[2:4] == (frozen_case, inventory) for value in linked.values())
         for key in ("study_ref", "action_ref", "shared_environment_ref", "authority_ref"):
             assert all(arm[key] == arms["aeep"][key] for arm in arms.values())
@@ -353,6 +447,7 @@ async def check(root):
             decisions=tuple(value[1] for value in linked.values()),
         )
         scoring = summarize_selection(evaluation)
+        measurements = verify_measurements([(value[1], value[5]) for value in linked.values()])
         assert scoring["outcome"] == "NOT_ASSESSED" and not scoring["admission_changed"]
         assert all(pair["graded_pairs"] == pair["decision_time_pairs"] == 1 for pair in scoring["comparisons"])
         return {
@@ -369,6 +464,7 @@ async def check(root):
                 "outcome": scoring["outcome"], "admission_changed": scoring["admission_changed"],
                 "pairs_with_verified_grades_and_decision_times": len(scoring["comparisons"]),
             },
+            "paired_measurement_checks": measurements,
             "evidence_scope": "First-party deterministic fixture with real Router, runner, and grader. No candidate usefulness evidence.",
             "model_turns": 0,
         }

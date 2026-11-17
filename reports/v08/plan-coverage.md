@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [selection measurement check](../toolkit-v2/c13/completion-20261116/selection-measurement-verification.json)
+adds receipt-bound token categories, protected scores and separate timing
+to the selection trial readback. Three policy pairs passed the local
+check. Six existing GPT-6.1 Sol receipts reproduced their development
+measurements. No new candidate or selection result was added.
+
 The [retained grader runtime map](../toolkit-v2/c13/completion-20261116/grader-evidence-runtime-map.json)
 reconciles 120 settled observations for 39 cases on the current callback.
 A retained ARM64 image contains the layer sequences of all nine observed

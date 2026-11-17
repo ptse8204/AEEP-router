@@ -1122,6 +1122,25 @@ NOT_ASSESSED. The historical [single-choice preflight](selection-trial-preflight
 keeps its original driver hashes. The live fixed-choice review still needs
 independent candidate evidence and frozen comparative workloads.
 
+The [selection measurement check](selection-measurement-verification.json)
+uses the original attempt journal and canonical trial to report per-task
+scores, decision time, agent time, grading time and Codex token categories.
+It leaves a token delta unknown if the corresponding counter or a
+compatible capture source is missing. Cached input and reasoning output
+remain subsets of the parent counts. The report links each observation to
+its protected grade and receipt.
+
+Two local three-policy runs produced identical verification results.
+The reader also reproduced all six retained receipt measurements for
+Sales Pivot, CANopen and Xsdata. These are historical capability runs.
+The new checks used no model turns and added no formal selection evidence.
+
+The ordinary regression run passed 2,181 tests with 21 skips. The
+coverage run reported two teardown errors because pytest's fixture
+cleanup used the file-open function those tests patched. Both tests
+passed under coverage with default retention. The combined coverage
+passed both branch gates. The report retains the original failure log.
+
 The committed snapshot passed 42 targeted tests, schema checks and the
 wheel build with a stable source fingerprint. Both full workspace runs passed
 2,165 tests with 21 skips and 81.45% combined coverage. Both branch gates

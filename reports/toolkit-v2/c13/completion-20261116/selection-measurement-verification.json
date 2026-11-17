@@ -1,0 +1,466 @@
+{
+  "base_commit": "3d86ff0cb5f0da46e7660b05c3ac30fad5661cd9",
+  "drivers": [
+    {
+      "path": "reports/toolkit-v2/c13/completion-20261116/bind_selection_trial.py",
+      "sha256": "8bbef31ded41bc040c410f2a1f1704e5de7dbfa408a964c7183a5afd785fadb9"
+    },
+    {
+      "path": "reports/toolkit-v2/c13/completion-20261116/verify_selection_trial.py",
+      "sha256": "32fd55a24c413656626c4fabd7218b0b28a3655d4cf2cf9ab67c89b6fac68e01"
+    },
+    {
+      "path": ".aeep/completion-20261116/selection-measurements-20261117/read-retained-captures.py",
+      "sha256": "a0a31e2a6db9345fdab804f27334a3f85ecf4f87761563543838f668de4d55ea"
+    }
+  ],
+  "financial_scope": "No cash or token savings claim. Counter values remain provider-reported.",
+  "fixture": {
+    "incompatible_model_token_pairs_omitted": 1,
+    "rejected_controls": [
+      "trial_counter_drift",
+      "same_decision",
+      "different_task",
+      "different_study",
+      "different_condition",
+      "different_grader",
+      "different_environment",
+      "duplicate_receipt",
+      "changed_proof"
+    ],
+    "same_case_protected_grade_pairs": 3,
+    "synthetic_complete_token_delta": 4,
+    "synthetic_missing_parent_total_delta": null,
+    "synthetic_partial_token_delta": 4,
+    "unknown_token_pairs": 3
+  },
+  "fixture_implementation_source": "6a782bd04e6b3df36a915237824c333f9ad00c2a57fe3395c9d405141c4bc7e2",
+  "fixture_replays": [
+    {
+      "path": ".aeep/completion-20261116/selection-measurements-20261117/condition-final.json",
+      "sha256": "87b7e176ed1b710f97b699dac334b8b0e73420a4cbc294991bfa24311d2bbc01"
+    },
+    {
+      "path": ".aeep/completion-20261116/selection-measurements-20261117/condition-replay.json",
+      "sha256": "87b7e176ed1b710f97b699dac334b8b0e73420a4cbc294991bfa24311d2bbc01"
+    }
+  ],
+  "historical_readback": {
+    "new_selection_evidence": false,
+    "new_turns": 0,
+    "prior_capability_runs": [
+      {
+        "pairs": [
+          {
+            "campaign_ref": "d845bbd5c66b1e3585f689b6ab0d3df8370f263dfd39054ccebee09623699fbc",
+            "historical_arms": {
+              "control": {
+                "agent_seconds": 169.80029354104772,
+                "grading_seconds": 2.8871492919279262,
+                "receipt_ref": "27a9149c8465b62140100c165a3bb36bd4e7d583f34dd6be86167b8f158bd1b3",
+                "score": 0.0,
+                "tokens": {
+                  "cache_semantics": "included_in_input",
+                  "capture": {
+                    "journal_ref": "6997a96a284a8fc2a9f7ef324f61f5f8ac1f3f73a7fc6fbb5c34d5d10c1f6447",
+                    "known_fields": [
+                      "input_tokens",
+                      "cached_input_tokens",
+                      "cache_write_input_tokens",
+                      "output_tokens",
+                      "reasoning_output_tokens"
+                    ],
+                    "provider_usage_independently_verified": false,
+                    "receipt_ref": "27a9149c8465b62140100c165a3bb36bd4e7d583f34dd6be86167b8f158bd1b3",
+                    "source": "provider_report",
+                    "status": "verified",
+                    "trust": "self_asserted"
+                  },
+                  "input_plus_output_tokens": 220482,
+                  "provider_model": "gpt-6.1-sol",
+                  "raw_counts": {
+                    "cache_write_input_tokens": 0,
+                    "cached_input_tokens": 194816,
+                    "input_tokens": 214063,
+                    "output_tokens": 6419,
+                    "reasoning_output_tokens": 677
+                  },
+                  "reasoning_semantics": "included_in_output"
+                },
+                "trial_ref": "8e8d97974ac6751a13db4a8a13480d4deff80761dacfe23cf69a70ab21f3e7f2"
+              },
+              "treatment": {
+                "agent_seconds": 283.05995991698,
+                "grading_seconds": 3.1581560000777245,
+                "receipt_ref": "d293dc992361bff3a16cb12e82608c91f11c1f037516c11006004a05b024088c",
+                "score": 0.0,
+                "tokens": {
+                  "cache_semantics": "included_in_input",
+                  "capture": {
+                    "journal_ref": "4607c3d6229604f22f61d119239f757adf035c42562f5daa877542a43d36a2c0",
+                    "known_fields": [
+                      "input_tokens",
+                      "cached_input_tokens",
+                      "cache_write_input_tokens",
+                      "output_tokens",
+                      "reasoning_output_tokens"
+                    ],
+                    "provider_usage_independently_verified": false,
+                    "receipt_ref": "d293dc992361bff3a16cb12e82608c91f11c1f037516c11006004a05b024088c",
+                    "source": "provider_report",
+                    "status": "verified",
+                    "trust": "self_asserted"
+                  },
+                  "input_plus_output_tokens": 612891,
+                  "provider_model": "gpt-6.1-sol",
+                  "raw_counts": {
+                    "cache_write_input_tokens": 0,
+                    "cached_input_tokens": 531584,
+                    "input_tokens": 602911,
+                    "output_tokens": 9980,
+                    "reasoning_output_tokens": 891
+                  },
+                  "reasoning_semantics": "included_in_output"
+                },
+                "trial_ref": "c38e82b9f7d57629a6ca76b3163da1cf0bfbb64debcfd39138825c2789b40683"
+              }
+            },
+            "input_plus_output_treatment_minus_control": 392409,
+            "raw_token_treatment_minus_control": {
+              "cache_write_input_tokens": 0,
+              "cached_input_tokens": 336768,
+              "input_tokens": 388848,
+              "output_tokens": 3561,
+              "reasoning_output_tokens": 214
+            },
+            "task": "sales-pivot-analysis"
+          }
+        ],
+        "path": "reports/toolkit-v2/c13/managed-comparison-20261115/sales-window-result.json",
+        "sha256": "f5b7bf594c64f93ef5173482a6ec568ecd42a07f01170ee492dc303818226e5f"
+      },
+      {
+        "pairs": [
+          {
+            "campaign_ref": "d4e0c074339299fdc13bb2f3ae897ef288c9568893616b410ed5b4aa0a38ffde",
+            "historical_arms": {
+              "control": {
+                "agent_seconds": 84.93376920907758,
+                "grading_seconds": 2.3337879159953445,
+                "receipt_ref": "907282f7ff921bd98bd56bd27324f8d81b55043a174fef4cca20cd3f1ef5ca80",
+                "score": 0.0,
+                "tokens": {
+                  "cache_semantics": "included_in_input",
+                  "capture": {
+                    "journal_ref": "eacf42324a4ad6bfd57cd25a792ab444a786ce6d39fd14663fcb29b6ea5115f6",
+                    "known_fields": [
+                      "input_tokens",
+                      "cached_input_tokens",
+                      "cache_write_input_tokens",
+                      "output_tokens",
+                      "reasoning_output_tokens"
+                    ],
+                    "provider_usage_independently_verified": false,
+                    "receipt_ref": "907282f7ff921bd98bd56bd27324f8d81b55043a174fef4cca20cd3f1ef5ca80",
+                    "source": "provider_report",
+                    "status": "verified",
+                    "trust": "self_asserted"
+                  },
+                  "input_plus_output_tokens": 160860,
+                  "provider_model": "gpt-6.1-sol",
+                  "raw_counts": {
+                    "cache_write_input_tokens": 0,
+                    "cached_input_tokens": 127744,
+                    "input_tokens": 157921,
+                    "output_tokens": 2939,
+                    "reasoning_output_tokens": 120
+                  },
+                  "reasoning_semantics": "included_in_output"
+                },
+                "trial_ref": "6c12fd9a6536e7059a62891af1aea19bb4ccb5ccd77df4baae85f1fb6af4c46c"
+              },
+              "treatment": {
+                "agent_seconds": 91.0970927909948,
+                "grading_seconds": 2.0705114169977605,
+                "receipt_ref": "d30566b9fbeff2bba80387bb1d9223ca1d0169075de812b65abff5fe90863719",
+                "score": 0.0,
+                "tokens": {
+                  "cache_semantics": "included_in_input",
+                  "capture": {
+                    "journal_ref": "a1b144f792069b24aa3162d1fdca0b837e401b3835fe4f6e862af582a6b5ad53",
+                    "known_fields": [
+                      "input_tokens",
+                      "cached_input_tokens",
+                      "cache_write_input_tokens",
+                      "output_tokens",
+                      "reasoning_output_tokens"
+                    ],
+                    "provider_usage_independently_verified": false,
+                    "receipt_ref": "d30566b9fbeff2bba80387bb1d9223ca1d0169075de812b65abff5fe90863719",
+                    "source": "provider_report",
+                    "status": "verified",
+                    "trust": "self_asserted"
+                  },
+                  "input_plus_output_tokens": 185858,
+                  "provider_model": "gpt-6.1-sol",
+                  "raw_counts": {
+                    "cache_write_input_tokens": 0,
+                    "cached_input_tokens": 158208,
+                    "input_tokens": 182603,
+                    "output_tokens": 3255,
+                    "reasoning_output_tokens": 251
+                  },
+                  "reasoning_semantics": "included_in_output"
+                },
+                "trial_ref": "39c757b0904a89f78d65aa9619186fcdc20180da6d2b61a1e4737a4853dabec7"
+              }
+            },
+            "input_plus_output_treatment_minus_control": 24998,
+            "raw_token_treatment_minus_control": {
+              "cache_write_input_tokens": 0,
+              "cached_input_tokens": 30464,
+              "input_tokens": 24682,
+              "output_tokens": 316,
+              "reasoning_output_tokens": 131
+            },
+            "task": "canopen-python__canopen-613-declared-tests"
+          },
+          {
+            "campaign_ref": "571e103489ac45efff1184f23fb2c77ba1f9e247b1c02e18acd8248309508c26",
+            "historical_arms": {
+              "control": {
+                "agent_seconds": 98.26344362599775,
+                "grading_seconds": 2.2106276659760624,
+                "receipt_ref": "a36e8475f1f80220e265beeea797f26900f5529e95a36f6bbc7c2fec651d5689",
+                "score": 0.0,
+                "tokens": {
+                  "cache_semantics": "included_in_input",
+                  "capture": {
+                    "journal_ref": "6db7bcaa158084c76b1a16321a3e36288e2e9a4cb11a2bfc65dc9869d468b598",
+                    "known_fields": [
+                      "input_tokens",
+                      "cached_input_tokens",
+                      "cache_write_input_tokens",
+                      "output_tokens",
+                      "reasoning_output_tokens"
+                    ],
+                    "provider_usage_independently_verified": false,
+                    "receipt_ref": "a36e8475f1f80220e265beeea797f26900f5529e95a36f6bbc7c2fec651d5689",
+                    "source": "provider_report",
+                    "status": "verified",
+                    "trust": "self_asserted"
+                  },
+                  "input_plus_output_tokens": 271327,
+                  "provider_model": "gpt-6.1-sol",
+                  "raw_counts": {
+                    "cache_write_input_tokens": 0,
+                    "cached_input_tokens": 240256,
+                    "input_tokens": 267885,
+                    "output_tokens": 3442,
+                    "reasoning_output_tokens": 463
+                  },
+                  "reasoning_semantics": "included_in_output"
+                },
+                "trial_ref": "b2918d169cfdf2dda9329cb6ed2346655fe511d9770587c610c0747193215234"
+              },
+              "treatment": {
+                "agent_seconds": 92.59376870887354,
+                "grading_seconds": 2.159005625057034,
+                "receipt_ref": "525da94661faedfccabaf58437b3c295fe51c1307681357f6ad4f66e01aadc5d",
+                "score": 0.0,
+                "tokens": {
+                  "cache_semantics": "included_in_input",
+                  "capture": {
+                    "journal_ref": "50d46d583265a45efca439f07d0e2164a6c58e50fabc0f7e0cf73f42774461ed",
+                    "known_fields": [
+                      "input_tokens",
+                      "cached_input_tokens",
+                      "cache_write_input_tokens",
+                      "output_tokens",
+                      "reasoning_output_tokens"
+                    ],
+                    "provider_usage_independently_verified": false,
+                    "receipt_ref": "525da94661faedfccabaf58437b3c295fe51c1307681357f6ad4f66e01aadc5d",
+                    "source": "provider_report",
+                    "status": "verified",
+                    "trust": "self_asserted"
+                  },
+                  "input_plus_output_tokens": 268868,
+                  "provider_model": "gpt-6.1-sol",
+                  "raw_counts": {
+                    "cache_write_input_tokens": 0,
+                    "cached_input_tokens": 235648,
+                    "input_tokens": 265724,
+                    "output_tokens": 3144,
+                    "reasoning_output_tokens": 593
+                  },
+                  "reasoning_semantics": "included_in_output"
+                },
+                "trial_ref": "b85000df597d06c46bc053e56c93061f7b42b99e55ea8ba6e4e8c1272dcb0671"
+              }
+            },
+            "input_plus_output_treatment_minus_control": -2459,
+            "raw_token_treatment_minus_control": {
+              "cache_write_input_tokens": 0,
+              "cached_input_tokens": -4608,
+              "input_tokens": -2161,
+              "output_tokens": -298,
+              "reasoning_output_tokens": 130
+            },
+            "task": "tefra__xsdata-1126-issue-behavior-audit"
+          }
+        ],
+        "path": "reports/toolkit-v2/c13/managed-comparison-20261115/libcst-direct-result.json",
+        "sha256": "798e7e5d3ee36db9f4adac0f62de8c149c004b1c45558918584215875ced7927"
+      }
+    ]
+  },
+  "new_formal_trial_evidence": 0,
+  "new_model_turns": 0,
+  "pending_review": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/offline-evidence-reviews.json",
+    "sha256": "6b758e65254042640df8aa36b8341bfbcad7975e931ed063a2060ed986aa0c1a"
+  },
+  "pending_review_reinspection": {
+    "cached_software_grading": {
+      "approval_present": false,
+      "exact_read_only_preflight": "passed",
+      "execution_started": false,
+      "log": {
+        "path": ".aeep/completion-20261116/selection-measurements-20261117/cached-grading-exact-preflight.log",
+        "sha256": "dba694a1c6be27cd3d26c92a9a820f5d564e4cac5070cd8d9f3adf7db94d1f9c"
+      },
+      "review_sha256": "72354f5af2a4c5c0ceded3e528552adfec40c9b01fdb0e63e0cb1b1c4033a838",
+      "source_checkout": "sol-comparison-preflight-20261116/frozen-source"
+    },
+    "document_calibration": {
+      "approval_present": false,
+      "exact_read_only_preflight": "passed",
+      "execution_started": false,
+      "log": {
+        "path": ".aeep/completion-20261116/selection-measurements-20261117/document-calibration-exact-preflight.log",
+        "sha256": "989fce375575a2323ac465096ae38452281d032c38cafbc75de2ef8cb5fef531"
+      },
+      "review_sha256": "8e1713c5abfeec26187fb5abd52a8a2f5fa336d407432f7192e3ea26bbc763ee",
+      "source_checkout": "transport-grader-current-source"
+    },
+    "retained_software_tree_recovery": {
+      "approval_present": false,
+      "exact_read_only_preflight": "passed",
+      "execution_started": false,
+      "log": {
+        "path": ".aeep/completion-20261116/selection-measurements-20261117/retained-metadata-preflight.log",
+        "sha256": "5cec2fe148a4234231480276b431707104052fb0ff2e1a8ca4033db4c0edb94d"
+      },
+      "review_sha256": "7e9158bafb79b0b7b7f30783dd072978ae5ebab480d304f959dfd136fa5ff78e",
+      "source_checkout": null
+    },
+    "staged_software_grading": {
+      "approval_present": false,
+      "exact_read_only_preflight": "passed",
+      "execution_started": false,
+      "log": {
+        "path": ".aeep/completion-20261116/selection-measurements-20261117/staged-grading-exact-preflight.log",
+        "sha256": "6fbca04af10de693a83ad308586bd5b7d3153440092b2671dae7a7d2ce6ef546"
+      },
+      "review_sha256": "f818cc19fa549677f9dfba0bbaa03d17f99f8dd03abdd577a2794f5266ca5a3b",
+      "source_checkout": "transport-grader-current-source"
+    }
+  },
+  "retained_read_only_replays": [
+    {
+      "path": ".aeep/completion-20261116/selection-measurements-20261117/retained-captures.json",
+      "sha256": "e3d60d77f59fee6be875434b2cdedf62ed77bc106cf7961b2fa1f0580a9771bf"
+    },
+    {
+      "path": ".aeep/completion-20261116/selection-measurements-20261117/retained-captures-replay.json",
+      "sha256": "e3d60d77f59fee6be875434b2cdedf62ed77bc106cf7961b2fa1f0580a9771bf"
+    },
+    {
+      "path": ".aeep/completion-20261116/selection-measurements-20261117/retained-captures-final.json",
+      "sha256": "e3d60d77f59fee6be875434b2cdedf62ed77bc106cf7961b2fa1f0580a9771bf"
+    }
+  ],
+  "schema_version": "aeep.c13.selection-measurement-verification.v1",
+  "scope": "Selection study readback with first-party policy fixtures and older receipt-bound capability comparisons.",
+  "selection_report": {
+    "admission_changed": false,
+    "outcome": "NOT_ASSESSED",
+    "pairs_with_verified_grades_and_decision_times": 3
+  },
+  "verification": {
+    "compile_and_schema": "passed",
+    "coverage_recovery": {
+      "assessment_branch_gate": "passed",
+      "combined_percent_covered": 81.45730288041896,
+      "critical_branch_gate": "passed",
+      "retention": "pytest default",
+      "targeted_covered_tests_passed": 2
+    },
+    "full_coverage_run": {
+      "error_cause": "Pytest cleanup opened a temporary directory before each fixture's os.open monkeypatch was undone.",
+      "minimum_observed_available_bytes": 58476298240,
+      "skipped": 21,
+      "teardown_errors": 2,
+      "test_bodies_passed": 2181
+    },
+    "logs": {
+      "assessment-coverage": {
+        "path": ".aeep/completion-20261116/selection-measurements-20261117/assessment-coverage.log",
+        "sha256": "4a5e7160fe409aaf5c8393c734cf5200968132d88ce6394e9678be9551432d55"
+      },
+      "compile": {
+        "path": ".aeep/completion-20261116/selection-measurements-20261117/compile.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "coverage-pytest": {
+        "path": ".aeep/completion-20261116/selection-measurements-20261117/coverage-pytest.log",
+        "sha256": "4ba7632d7219786507e9a6f639fd900fbb111c5f529a47d5d7a74ae8db028172"
+      },
+      "coverage-recovery": {
+        "path": ".aeep/completion-20261116/selection-measurements-20261117/coverage-recovery.log",
+        "sha256": "e8b12eb9c14e20ba6d6f42d6a6564099a0106363b2d2c716df325fb3a6e8b6f6"
+      },
+      "coverage-report": {
+        "path": ".aeep/completion-20261116/selection-measurements-20261117/coverage-report.log",
+        "sha256": "b1f1aa14091f90ae1a32a2f39f6e0336dcf5b1161d1ada1b503c65e5eadb7ec7"
+      },
+      "coverage-space": {
+        "path": ".aeep/completion-20261116/selection-measurements-20261117/coverage-space.log",
+        "sha256": "82b177bd67987fc7277c573c2de5d355125068b4765a77562c0dafeb00814060"
+      },
+      "critical-coverage": {
+        "path": ".aeep/completion-20261116/selection-measurements-20261117/critical-coverage.log",
+        "sha256": "c54ccbd27dd9ac88dc8aadb5824c437cdd168e412d7fb8e566d4b6d6b488aca6"
+      },
+      "docs": {
+        "path": ".aeep/completion-20261116/selection-measurements-20261117/docs.log",
+        "sha256": "591f539b87188a4c1940f85ee2595a77b0bcde7abc65fdbd06a64d2575e4d742"
+      },
+      "lint-final": {
+        "path": ".aeep/completion-20261116/selection-measurements-20261117/lint-final.log",
+        "sha256": "d211abd788a5b71e0fd045c631ff82bebec17bb1fe2e7252f42b3ff24a80c3d5"
+      },
+      "pytest": {
+        "path": ".aeep/completion-20261116/selection-measurements-20261117/pytest.log",
+        "sha256": "f4fda4fb812f07e4d8db432f5843ccfcd8fe64f4a197220d764b11a28310e5e2"
+      },
+      "schema": {
+        "path": ".aeep/completion-20261116/selection-measurements-20261117/schema.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "offline_docs": {
+      "additional_scoped_lint_issues": 0,
+      "link_errors": 0,
+      "lint_issues": 0,
+      "paths_checked": 72
+    },
+    "regression": {
+      "passed": 2181,
+      "skipped": 21,
+      "warnings": 1
+    }
+  },
+  "verification_scope": "The paired readback is an operator evidence driver. The CLI selection report remains a descriptive summary."
+}

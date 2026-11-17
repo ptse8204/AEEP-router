@@ -1,5 +1,15 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. Selection readback includes matched task measurements.**
+The [selection measurement check](../../reports/toolkit-v2/c13/completion-20261116/selection-measurement-verification.json)
+verifies per-task grades and timings from the existing trial and receipt
+path. It uses journal-bound Codex counters and compares only compatible
+measurements. Six retained GPT-6.1 Sol receipts reproduce their original
+development scores and counters. The three-policy fixture exercised
+missing counters and mismatched evidence. Formal selection evidence and
+case assignment remain open. Exact group `6b758e65` remains pending.
+Waza is excluded and formal comparisons stay paused.
+
 **November 17. Retained grades reconcile on the current callback.**
 The [retained grader runtime map](../../reports/toolkit-v2/c13/completion-20261116/grader-evidence-runtime-map.json)
 reproduces 120 settled observations across 39 of 41 prospective cases
