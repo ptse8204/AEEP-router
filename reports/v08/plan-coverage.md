@@ -1,5 +1,20 @@
 # 0.8 plan coverage and remaining work
 
+The [actual ExtractBench calibration](../toolkit-v2/c13/completion-20261116/extractbench-native-calibration-result-20261117.json)
+passes seven conditions on one Audent task with verified read-only dependencies
+and scratch `noexec`. Its 16.026-second operation settled and cleanup passed.
+Current v7 response normalization preserves real fractional scores and
+refuses infrastructure failures. A scoped pre-dispatch probe correction
+used existing definition delegation. The canonical CFPB route needs a
+self-contained image, with managed disclosure rights still open.
+
+The [completed correction group](../toolkit-v2/c13/completion-20261116/correction-group-3376c129-result.json)
+settles five operations at 9.048 seconds. All five software reference/original
+pairs are verified after the Click correction and read-only py-fsrs score
+recovery. ExtractBench still needs the reviewed native-loading correction
+`51ae1f19`. Cleanup under prior worker-copy authority restored the launch
+floor and preserved all 70 evidence hashes. Formal comparisons remain paused.
+
 The [approved correction preflight](../toolkit-v2/c13/completion-20261116/approved-correction-preflight-20261117.json)
 records group `3376c129` approval and matching artifact checks. Both
 executions remain unstarted because usable space is 49.38 GiB against

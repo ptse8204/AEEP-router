@@ -1,0 +1,208 @@
+{
+  "accounted_operations": 5,
+  "cash_authority_usd": 0,
+  "cleanup": {
+    "additional_result": {
+      "path": ".aeep/completion-20261116/verified-pytest-cleanup-20261117/readonly-preparation-space-result.json",
+      "sha256": "43622c4bbb16e3cfdf9fe57feafc6f5da2bdb602ca232923cd6c83d1f69a872d"
+    },
+    "additional_review": {
+      "path": ".aeep/completion-20261116/verified-pytest-cleanup-20261117/readonly-preparation-space-review.json",
+      "sha256": "8aebef834e396e1e2e559f0c33f252d83413550075ac38c7892ce98173ea008e"
+    },
+    "allocated_bytes_removed": 3463335936,
+    "authority": "Prior explicit user authorization for verified obsolete pytest worker database copies",
+    "backups_removed": 0,
+    "copies_removed": 2688,
+    "docker_resources_removed": 0,
+    "initial_result": {
+      "path": ".aeep/completion-20261116/verified-pytest-cleanup-20261117/result.json",
+      "sha256": "d9d985a628aec259b7dc980148107e358b2e71ab09f4fcebfa0ae7c2cb5f1157"
+    },
+    "initial_review": {
+      "path": ".aeep/completion-20261116/verified-pytest-cleanup-20261117/cleanup-review.json",
+      "sha256": "0114f2c3dae793aa71fbb8c9d7196f94623a0a625656bd57dc77281657f93bdb"
+    },
+    "preserved_file_hashes_verified": 70
+  },
+  "comparisons_paused": true,
+  "completed_software_pairs": [
+    {
+      "case": "py3status",
+      "original_score": 0.0,
+      "reference_score": 1.0
+    },
+    {
+      "case": "Sentry",
+      "original_score": 0.0,
+      "reference_score": 1.0
+    },
+    {
+      "case": "Hugging Face Hub",
+      "original_score": 0.0,
+      "reference_score": 1.0
+    },
+    {
+      "case": "py-fsrs",
+      "original_score": 0.0,
+      "reference_score": 1.0,
+      "scope": "Retained34-test reference plus new diagnostic with32passed and2failed. Ordinary score recovered read-only."
+    },
+    {
+      "case": "Files-to-prompt",
+      "original_score": 0.0,
+      "reference_score": 1.0,
+      "scope": "Same18 assertions with Click8.1.8. Reference18passed, original13passed5failed."
+    }
+  ],
+  "documentation_verification": {
+    "files": 72,
+    "link_errors": 0,
+    "lint_issues": 0,
+    "log": {
+      "path": ".aeep/completion-20261116/correction-3376c129-result-docs-20261117.log",
+      "sha256": "d0445cffab7755c961ce2e42d68428781b64099ff3d16fd736165e79d3623199"
+    }
+  },
+  "extractbench": {
+    "configured_boundary_defect": "Native extension wheels were installed beneath the /tmp mount configured with noexec.",
+    "ledger": {
+      "path": ".aeep/completion-20261116/extractbench-diagnostic-20261117/execution/ledger.json",
+      "sha256": "2eaf0144ab2012d5af957ab4cdf3cbde3376ff73a25b07bfed82bc912ad1e8d1"
+    },
+    "observed_reference": {
+      "exit_code": 1,
+      "failure_diagnostic": {
+        "exception_type": "ImportError",
+        "frames": [
+          {
+            "line": 6,
+            "relative_path": "parse_bench/schemas/evaluation.py",
+            "source": "dependencies"
+          },
+          {
+            "line": 5,
+            "relative_path": "pydantic/__init__.py",
+            "source": "dependencies"
+          },
+          {
+            "line": 4,
+            "relative_path": "pydantic/_migration.py",
+            "source": "dependencies"
+          },
+          {
+            "line": 5,
+            "relative_path": "pydantic/warnings.py",
+            "source": "dependencies"
+          },
+          {
+            "line": 7,
+            "relative_path": "pydantic/version.py",
+            "source": "dependencies"
+          },
+          {
+            "line": 8,
+            "relative_path": "pydantic_core/__init__.py",
+            "source": "dependencies"
+          }
+        ],
+        "import_name": "_pydantic_core"
+      },
+      "perfect": null,
+      "status": "infrastructure_error",
+      "value_f1": null
+    },
+    "prepared_correction": "All same70 cached wheels are projected into a read-only mount. A contained origin/mount probe gates the unchanged protected calibration.",
+    "result": {
+      "path": ".aeep/completion-20261116/extractbench-diagnostic-20261117/execution/result.json",
+      "sha256": "3ed15694c2a7566b65ed268a27bad3caa4ff13aa3a1b3aeff4d8d4a62260b589"
+    },
+    "scoring_status": "infrastructure_error",
+    "verified_diagnostic_receipt": {
+      "container_absent": true,
+      "elapsed_seconds": 3.111437667044811,
+      "measurement_ref": "4388c3fa9e099028aaac8737fa74c5364552f4449fde56f77e2f71f8781fa1bf",
+      "operation_id": "c13-extractbench-reference-diagnostic-20261117:grade",
+      "receipt_id": "rcpt_8f7c1714bb944c7ea7c2645d5d0adb4f",
+      "receipt_ref": "e1f5c5e62b0b7d2111680f6d43071da99478a105c8af3dac3dabace4e4ee15ac",
+      "reserved_seconds": 335.0
+    }
+  },
+  "fixture_preflights": {
+    "coordinator": {
+      "path": ".aeep/completion-20261116/extractbench-readonly-runtime-20261117/driver-check-final.log",
+      "sha256": "53e2e59e162b76416fa7a28f77613015fb6c088558d28babb3f0ca7f55a4f748"
+    },
+    "error_classifier": {
+      "path": ".aeep/completion-20261116/extractbench-readonly-runtime-20261117/classifier-check.log",
+      "sha256": "0800dfd20ca937f3354d2446fb2a674359e2905a6f13ca4bcb7f6845479c62ad"
+    },
+    "probe": {
+      "path": ".aeep/completion-20261116/extractbench-readonly-runtime-20261117/probe-check-final.log",
+      "sha256": "1c4714bf9a2323cfd5c002d38e344952e705f0d5fa03e088605482c5179e53fa"
+    }
+  },
+  "followup_documentation_verification": {
+    "files": 72,
+    "link_errors": 0,
+    "lint_issues": 0,
+    "log": {
+      "path": ".aeep/completion-20261116/extractbench-readonly-runtime-20261117/calibration-docs-final.log",
+      "sha256": "c4cc90301645600582cb95d82417ac81ec0f78c6471c101ccd55b5b5e03f19e2"
+    },
+    "scoped_report_lint": {
+      "path": ".aeep/completion-20261116/extractbench-readonly-runtime-20261117/calibration-report-lint-final.log",
+      "sha256": "ac4eff59dfb3b4c6ad661c0f236cd77e9e47be59c2210d4267694d223c0aa9d7"
+    }
+  },
+  "followup_native_calibration": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/extractbench-native-calibration-result-20261117.json",
+    "sha256": "dbe4573da047e77bca3c326653bfffef1621ab7366ae2f84f267cb282135d63f"
+  },
+  "followup_pre_dispatch_refinement": {
+    "path": ".aeep/completion-20261116/extractbench-readonly-runtime-20261117/pre-dispatch-refinement.json",
+    "sha256": "cbb6ded2c9e56d476639e5a4612fb316f4d0181c8e9964181ed5dd120771fcf2"
+  },
+  "followup_result_auditor": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/audit_extractbench_calibration_result.py",
+    "sha256": "6ab942bf73fb8fecedb79e4c1539460432f95f8eb737390224b6007f9e5088ba"
+  },
+  "formal_cases_adopted": 0,
+  "group": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/offline-correction-reviews-20261117.json",
+    "sha256": "3376c12916efc4406abfe437599b025a86e1d91d1317563d9a21a7d8768f12c8"
+  },
+  "host_floor_bytes": 55834574848,
+  "host_usable_free_bytes": 56103874560,
+  "new_model_turns": 0,
+  "next_reference_review": {
+    "path": ".aeep/completion-20261116/extractbench-readonly-runtime-20261117/operation-review.json",
+    "sha256": "51ae1f19fc49eea70d7c429fa054f3701d31278597fcd778ee891b5242f90396"
+  },
+  "next_reference_review_digest": "51ae1f19fc49eea70d7c429fa054f3701d31278597fcd778ee891b5242f90396",
+  "next_review_maximum_operations": 1,
+  "next_review_model_turns": 0,
+  "next_review_reserved_seconds": 335,
+  "operator_approval": {
+    "path": ".aeep/completion-20261116/group-3376c129-approval-20261117.json",
+    "sha256": "ebd5b6150139a1b7ea388e77e04c77795ee4296843a8bdaa8e49353700345358"
+  },
+  "outstanding_reservations": 0,
+  "reserved_seconds": 490.0,
+  "retained_dependency_bytes": 329240739,
+  "retained_dependency_files": 7613,
+  "retained_dependency_preparation_elapsed_seconds": null,
+  "retained_runtime_scope": "Prepared from the exact cached Linux ARM64 wheels as container inputs. Native imports on the new mount remain unexecuted.",
+  "schema_version": "aeep.c13.approved-correction-group-result.v1",
+  "settled_seconds": 9.048390540992841,
+  "software_results": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/software-correction-result-20261117.json",
+    "sha256": "41f3f437c93633d50902566fe5e2579f599adbb4d214de0d9ae460f718cc4ec7"
+  },
+  "waza_excluded": true,
+  "withdrawn_unstarted_review": {
+    "execution_started": false,
+    "reason": "A static check found regex absent from the pinned closure. Replace only that probe with the existing lxml binary and require native-file membership before review.",
+    "sha256": "ae50eaa723df72cd29310b0cd5b9d36a5a62d78179c78126df107c161c39ecbb"
+  }
+}

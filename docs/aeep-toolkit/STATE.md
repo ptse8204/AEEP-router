@@ -1,5 +1,53 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. Real ExtractBench calibration passed with retained read-only dependencies.**
+The [native result](../../reports/toolkit-v2/c13/completion-20261116/extractbench-native-calibration-result-20261117.json)
+verifies one settled operation at 16.026 seconds and all seven Audent
+conditions. Reference value F1 is 1.0. Damaged outputs are inexact, malformed
+and missing outputs score zero, and a missing reference remains an
+infrastructure error. Actual mount and native-origin checks pass. The
+existing v7 response handler preserves all six real task scores and
+refuses the infrastructure error. Both read-only result replays match.
+
+Operator approval of `ae50eaa7` preceded the first attempt. A scoped
+pre-dispatch refinement under standing test-definition delegation
+replaced its absent `regex` probe with the already locked `lxml`.
+The original guest and driver were reconstructed cryptographically to
+prove the narrow change. Executed review `51ae1f19` retains the same
+packages, protected inputs, sandbox and one-operation ceiling.
+
+The [CFPB route audit](../../.aeep/completion-20261116/cfpb-runtime-route-audit-20261117/route-audit.json)
+confirms that canonical v7 recipe invocation requires a no-extra-mounts
+image and a bound integration plan. A first local COPY-only journey is
+being prepared from the existing site and protected context under
+recorded first-attempt delegation. Full managed preparation still needs
+explicit provider-disclosure rights. Waza is excluded and comparisons
+stay paused.
+
+**November 17. Correction group `3376c129` completed. Five software pairs are verified.**
+The [correction result](../../reports/toolkit-v2/c13/completion-20261116/correction-group-3376c129-result.json)
+settles all five operations at 9.048 seconds with cleanup confirmed.
+Files-to-prompt passes all 18 reference tests and rejects the original
+with five failures. Py-fsrs's original has 32 passes and two failures,
+including its published lazy-loading regression. Its 0/1 score was
+recovered through the unchanged ordinary callback. Both references score
+1/1. All five software reference/original pairs are now verified.
+
+ExtractBench captured an `ImportError` for native `_pydantic_core` from
+dependencies placed under scratch configured with `noexec`. The
+[read-only repeat `51ae1f19`](../../.aeep/completion-20261116/extractbench-readonly-runtime-20261117/operation-review.json)
+uses the same 70 versions and scorer. Its one worker must verify actual
+read-only/noexec flags and native origins before seven protected roles.
+Local driver and boundary checks pass. Actual execution needs repeat
+approval.
+
+Using prior authorization for obsolete pytest worker copies, 2,688
+verified copies were removed while all 70 preserved-file hashes matched.
+Usable space returned to about 52.25 GiB. Primary fixture databases,
+inputs, logs, backups and Docker resources were preserved. The dependency
+projection is retained for reuse. Waza is excluded and comparisons stay
+paused. Formal assignment, usefulness and release gates remain open.
+
 **November 17. Correction group `3376c129` is approved. Storage blocks launch.**
 The [approved preflight](../../reports/toolkit-v2/c13/completion-20261116/approved-correction-preflight-20261117.json)
 binds the operator response and both component approvals. Exact source,

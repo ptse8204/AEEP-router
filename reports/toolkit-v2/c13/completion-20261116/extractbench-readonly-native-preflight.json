@@ -1,0 +1,69 @@
+{
+  "actual_upstream_execution_started": false,
+  "coordinator_fixtures": {
+    "path": ".aeep/completion-20261116/extractbench-readonly-runtime-20261117/driver-check-final.log",
+    "sha256": "53e2e59e162b76416fa7a28f77613015fb6c088558d28babb3f0ca7f55a4f748"
+  },
+  "current_exact_preflight": "passed_with_storage",
+  "dependency_projection": {
+    "path": ".aeep/completion-20261116/extractbench-readonly-runtime-20261117/dependency-projection.json",
+    "sha256": "0901a6cd7ec47142134ca171787e6ab58b365f94d3564db44283789d33b96423"
+  },
+  "downloads": 0,
+  "fixture_scenarios": [
+    "complete_seven_role_result",
+    "missing_probe_or_mount_rejected",
+    "diagnostic_interruption",
+    "uncertain_cleanup",
+    "terminal_replay_denied"
+  ],
+  "formal_cases_adopted": 0,
+  "host_execution_floor_bytes": 55834574848,
+  "host_usable_free_bytes": 56098983936,
+  "loader_error_categories_checked": 5,
+  "loader_error_classifier_fixtures": {
+    "path": ".aeep/completion-20261116/extractbench-readonly-runtime-20261117/classifier-check.log",
+    "sha256": "0800dfd20ca937f3354d2446fb2a674359e2905a6f13ca4bcb7f6845479c62ad"
+  },
+  "models": 0,
+  "native_boundary_fixtures": {
+    "path": ".aeep/completion-20261116/extractbench-readonly-runtime-20261117/probe-check-final.log",
+    "sha256": "1c4714bf9a2323cfd5c002d38e344952e705f0d5fa03e088605482c5179e53fa"
+  },
+  "native_boundary_rejections": [
+    "executable_scratch",
+    "writable_dependencies",
+    "foreign_native_origin",
+    "changed_dependency"
+  ],
+  "native_module_files": {
+    "lxml.etree": "lxml/etree.cpython-313-aarch64-linux-gnu.so",
+    "numpy._core._multiarray_umath": "numpy/_core/_multiarray_umath.cpython-313-aarch64-linux-gnu.so",
+    "pydantic_core._pydantic_core": "pydantic_core/_pydantic_core.cpython-313-aarch64-linux-gnu.so",
+    "scipy._lib._ccallback_c": "scipy/_lib/_ccallback_c.cpython-313-aarch64-linux-gnu.so"
+  },
+  "review": {
+    "path": ".aeep/completion-20261116/extractbench-readonly-runtime-20261117/operation-review.json",
+    "sha256": "51ae1f19fc49eea70d7c429fa054f3701d31278597fcd778ee891b5242f90396"
+  },
+  "schema_version": "aeep.c13.readonly-native-calibration-preflight.v1",
+  "scope": "Read-only source/file binding plus first-party substituted driver and module tests. Actual native imports and protected scores on this layout remain pending approval.",
+  "source_files": [
+    {
+      "path": ".aeep/completion-20261116/extractbench-readonly-runtime-20261117/programs/guest.py",
+      "sha256": "77fe24139ab2f55196d2c8fedefccc2a8ab4331535438ae0202e7dab99054d72"
+    },
+    {
+      "path": ".aeep/completion-20261116/extractbench-readonly-runtime-20261117/programs/extractbench_harbor_observer.py",
+      "sha256": "84542e8dc69a849764083c30d62a5830daa5cbf19190d870117f937dd5e5d63c"
+    },
+    {
+      "path": ".aeep/completion-20261116/extractbench-readonly-runtime-20261117/run-calibration.py",
+      "sha256": "09d302a12f29b4571d29ef15d7004e80468e680a044b193f17c85cc6d8c6f887"
+    }
+  ],
+  "withdrawn_unstarted_review": {
+    "path": ".aeep/completion-20261116/extractbench-readonly-runtime-20261117/withdrawn-unstarted-ae50eaa7.json",
+    "sha256": "ae50eaa723df72cd29310b0cd5b9d36a5a62d78179c78126df107c161c39ecbb"
+  }
+}

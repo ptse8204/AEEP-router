@@ -6,8 +6,8 @@ The current [formal document verification](formal-document-native-verification.j
 binds commit `d985f2f4`. A private ledger copy accepted all 37 required
 checks on tracked source `03c615b3`. The operational ledger retains its
 original execution bindings. The ordinary CLI accepted a 141-case fixture,
-and the public artifact adapter matched three retained CFPB inputs. Actual
-ExtractBench grading is pending. Both workspace suites passed 2,181 tests
+and the public artifact adapter matched three retained CFPB inputs. The Audent
+ExtractBench reference calibration now passes. Both workspace suites passed 2,181 tests
 with 21 skips. Both branch coverage gates and all 72 offline docs checks passed.
 
 Wheel `d5f092a8` passed archive inspection. The installed lifecycle evidence
@@ -18,49 +18,67 @@ evidence. Production release and public benefit claims remain NO_GO.
 
 ### Approved work and next decision
 
-The [approved group result](offline-group-result-20261117.json) records all
-four scopes in `6b758e65`. Eleven operations settled in 35.333 seconds
-against 1,069 reserved seconds. No unresolved reservations or missing grade
-exports remain. One software control was skipped after its reference failed.
+[Correction group `3376c129`](correction-group-3376c129-result.json) completed
+all five operations in 9.048 seconds against 490 reserved seconds.
+All charges settled, and owned-container cleanup passed. The
+[software correction](software-correction-result-20261117.json) completes
+the five protected reference/original pairs from the earlier group.
 
-The [software results](group-software-results-20261117.json) contain three
-complete protected reference/original pairs. These checks validate the grader
-on published repairs and originals. Candidate usefulness, selection usefulness
-and formal case adoption remain open.
-
-| Software case | Reference | Original | Remaining issue |
+| Software case | Reference | Original | Scope |
 | --- | --- | --- | --- |
-| py3status | 1/1, two tests passed | 0/1, one test failed | Formal assignment remains open |
-| Sentry | 1/1, 41 tests passed | 0/1, one test failed | Formal assignment remains open |
-| Hugging Face Hub | 1/1, 21 tests passed | 0/1, two tests failed | Formal assignment remains open |
-| py-fsrs | 1/1, 34 tests passed | Unverified contract | Original failure dispositions were discarded |
-| Files-to-prompt | Unverified contract | Skipped | Click 8.3 removed the constructor argument used by the tests |
+| py3status | 1/1, two tests passed | 0/1, one test failed | Original protected pair |
+| Sentry | 1/1, 41 tests passed | 0/1, one test failed | Original protected pair |
+| Hugging Face Hub | 1/1, 21 tests passed | 0/1, two tests failed | Original protected pair |
+| py-fsrs | 1/1, 34 tests passed | 0/1, two tests failed | Original score recovered from the retained diagnostic |
+| Files-to-prompt | 1/1, 18 tests passed | 0/1, five tests failed | Exact compatible Click 8.1.8 |
 
-ExtractBench acquired all 29 remaining wheels and installed the complete
-70-wheel closure in its private offline container. The seven verifier roles
-exited with infrastructure errors and unavailable scores. The old observer
-discarded child stderr, so the actual exception remains unknown. The prepared
-reference diagnostic retains its exception class, import name and bounded
-source frames while withholding messages and document contents.
+Py-fsrs's two failures include the published lazy-loading regression and the
+authored preservation guard. The earlier review expected only the guard
+to fail. The unchanged ordinary grader accepts the actual complete test
+dispositions and returns `test_failure`. Read-only recovery retains the
+earlier strict-contract mismatch and avoids another upstream invocation.
 
-The [publisher reconciliation](offline-group-result-20261117.json) verifies
-four retained archive trees directly. The [MontePy export check](montepy-export-binding.json)
-accounts for Git's declared version substitution and reproduces the fifth
-publisher tree exactly. Its original mismatch stays recorded. Both local
-replays matched byte for byte. Protected runtime grading remains open for
-all five source projections.
+The [native ExtractBench calibration](extractbench-native-calibration-result-20261117.json)
+passed on the unchanged Audent task. The worker verified the exact 70
+distributions, 7,613 files, four native import origins, read-only dependencies
+and scratch `noexec`. One operation settled at 16.026 seconds. The
+existing recipe response normalizer preserved the real fractional scores
+and refused to turn a missing reference into a task score.
 
-The [next grouped review `3376c129`](offline-correction-reviews-20261117.json) covers one ExtractBench reference diagnostic,
-py-fsrs's original failure capture, and Files-to-prompt with an exact
-compatible Click artifact. Their drivers exercise settlement, interrupted
-attempts and terminal replay rejection with first-party replies. Actual
-execution requires 52 GiB usable free space. Waza is excluded, and formal
-comparisons remain paused.
+| Calibration condition | Native value F1 | Disposition |
+| --- | ---: | --- |
+| Reference | 1.000000 | Exact success |
+| Changed value | 0.998538 | Inexact |
+| Missing row | 0.990406 | Inexact |
+| Repeated row | 0.991228 | Inexact |
+| Malformed output | 0.000000 | Invalid submission |
+| Missing output | 0.000000 | Invalid submission |
+| Missing reference | Unknown | Infrastructure error |
 
-The [group readback](offline-group-readback-verification.json) retains the
-earlier recovery fixtures and interrupted acquisition. Its latest actual
-readback is bound in the approved result above. Every historical charge
-and original outcome remains available.
+These seven conditions belong to one calibration task. The same dependency
+versions now load from their retained read-only path. The recorded
+pre-dispatch refinement replaced an absent `regex` probe with already locked
+`lxml`, with a static membership check and no extra attempt. Both original
+operator approval and the refinement are bound in the calibration result.
+
+The [CFPB route audit](../../../../.aeep/completion-20261116/cfpb-runtime-route-audit-20261117/route-audit.json)
+confirmed that canonical recipe invocation rejects extra host roots before
+reservation. The next first local journey therefore uses a self-contained
+COPY-only image of the existing dependencies and protected context. Full
+managed workflow preparation also checks provider-disclosure rights, which
+remain unapproved for these CFPB inputs.
+
+Earlier cleanup authorization covered verified obsolete pytest worker
+database copies. Removing 2,688 such copies reclaimed about 3.2 GiB of
+allocated storage. All 70 preservation hashes matched, including primary
+fixture databases, inputs and logs. The reviewed launch floor is restored.
+The [cleanup receipts](correction-group-3376c129-result.json) retain exact
+paths and measured free-space changes.
+
+Waza remains excluded and comparisons stay paused. These protected
+reference checks leave formal assignment, candidate usefulness and
+selection usefulness open. [Earlier group results](offline-group-result-20261117.json)
+retain the original source recovery and failed grader outcomes.
 
 The [verified projection bindings](verified-publisher-projection-bindings.json)
 connect all five publisher proofs to the original staged task inputs,

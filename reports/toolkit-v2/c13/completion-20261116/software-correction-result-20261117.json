@@ -1,0 +1,308 @@
+{
+  "approval": {
+    "path": ".aeep/completion-20261116/staged-software-correction-20261117/approval.json",
+    "sha256": "78499cf33caf038d205ef823717acb8ab718b91df949e5de868f01f885432563"
+  },
+  "cash_usd": 0,
+  "charges": {
+    "operations": 4,
+    "outstanding_reservations": 0,
+    "reserved_seconds": 155.0,
+    "settled_seconds": 5.93695287394803
+  },
+  "comparisons_paused": true,
+  "compatibility_scope": "Current observations use the same protected assertions and identities, with the reviewed bounded log-retention switch. Files-to-prompt alone uses Click8.1.8 instead of8.3.0 through the existing protected wheel path.",
+  "formal_cases_adopted": 0,
+  "ledger_export": {
+    "path": ".aeep/completion-20261116/staged-software-correction-20261117/execution/ledger.json",
+    "sha256": "4d1ce463af087bd9d4d70ac048c4960def7304b4d65f3824186f969aab7e3de3"
+  },
+  "new_model_turns": 0,
+  "observations": [
+    {
+      "case": "open-spaced-repetition__py-fsrs-127-aeep-contract-audit",
+      "container_absent_at_settlement": true,
+      "container_absent_now": true,
+      "container_name": "aeep-41ddafd0883588fa412ee67badaab529",
+      "diagnostic_execution_status": "success",
+      "error_test_ids": [],
+      "exit_code": 1,
+      "extra_observed_ids": [],
+      "failed_test_ids": [
+        "tests/test_aeep_preservation.py::test_snapshot_preserved",
+        "tests/test_basic.py::TestPyFSRS::test_Optimizer_lazy_loading"
+      ],
+      "grade_recovered_read_only": true,
+      "observation_sha256": "6f692d46458f4ef4947c951978087346b05007c8c9f5299f14ed9f2312cc133b",
+      "ordinary_callback_grade": {
+        "detail": "test_failure",
+        "kind": "callback",
+        "quality_score": 0.0,
+        "trust": "verified",
+        "valid": false
+      },
+      "payload_sha256": "26f03723ccfd71a5fe2705a5a48341651c2c7018f4e27fc649d92e39e2767d11",
+      "protected_tests_archive_sha256": "f235dbf738de7a0cc877f3074e397339904d0effeaa594abba4bbf4a5a3cd006",
+      "public_test_log_bytes": 3315,
+      "public_test_log_sha256": "9522b49ac2a0fc894011c6e8c12f02e061512ed0778b026b3b9345b3a5953625",
+      "raw_file": {
+        "path": ".aeep/completion-20261116/staged-software-correction-20261117/execution/c13-staged-software-correction-20261117:open-spaced-repetition__py-fsrs-127-aeep-contract-audit:original.raw.json",
+        "sha256": "78374b9ec67bcb4a54fc492e063e6ee90af3a7da2e67f9fded45402b9612ea9e"
+      },
+      "receipt_id": "rcpt_1dc4bc1e8fbc4e139d6285b0173cbba7",
+      "receipt_ref": "9a6fa847016322af83b121f4c0e899ac756e6473d6568f36859d051d8239db78",
+      "required_identities_sha256": "5a8383f4832204e9af70ae5bf2964b0163f067c821bb82ee77a12dc2600ec299",
+      "required_test_ids": [
+        "tests/test_basic.py::TestPyFSRS::test_Optimizer_lazy_loading",
+        "tests/test_basic.py::TestPyFSRS::test_review_card",
+        "tests/test_basic.py::TestPyFSRS::test_repeated_correct_reviews",
+        "tests/test_basic.py::TestPyFSRS::test_memo_state",
+        "tests/test_basic.py::TestPyFSRS::test_repeat_default_arg",
+        "tests/test_basic.py::TestPyFSRS::test_datetime",
+        "tests/test_basic.py::TestPyFSRS::test_Card_serialize",
+        "tests/test_basic.py::TestPyFSRS::test_ReviewLog_serialize",
+        "tests/test_basic.py::TestPyFSRS::test_custom_scheduler_args",
+        "tests/test_basic.py::TestPyFSRS::test_retrievability",
+        "tests/test_basic.py::TestPyFSRS::test_Scheduler_serialize",
+        "tests/test_basic.py::TestPyFSRS::test_good_learning_steps",
+        "tests/test_basic.py::TestPyFSRS::test_again_learning_steps",
+        "tests/test_basic.py::TestPyFSRS::test_hard_learning_steps",
+        "tests/test_basic.py::TestPyFSRS::test_easy_learning_steps",
+        "tests/test_basic.py::TestPyFSRS::test_review_state",
+        "tests/test_basic.py::TestPyFSRS::test_relearning",
+        "tests/test_basic.py::TestPyFSRS::test_fuzz",
+        "tests/test_basic.py::TestPyFSRS::test_no_learning_steps",
+        "tests/test_basic.py::TestPyFSRS::test_no_relearning_steps",
+        "tests/test_basic.py::TestPyFSRS::test_one_card_multiple_schedulers",
+        "tests/test_basic.py::TestPyFSRS::test_maximum_interval",
+        "tests/test_basic.py::TestPyFSRS::test_class_repr",
+        "tests/test_basic.py::TestPyFSRS::test_unique_card_ids",
+        "tests/test_basic.py::TestPyFSRS::test_stability_lower_bound",
+        "tests/test_basic.py::TestPyFSRS::test_scheduler_parameter_validation",
+        "tests/test_basic.py::TestPyFSRS::test_class___eq___methods",
+        "tests/test_basic.py::TestPyFSRS::test_learning_card_rate_hard_one_learning_step",
+        "tests/test_basic.py::TestPyFSRS::test_learning_card_rate_hard_second_learning_step",
+        "tests/test_basic.py::TestPyFSRS::test_long_term_stability_learning_state",
+        "tests/test_basic.py::TestPyFSRS::test_relearning_card_rate_hard_one_relearning_step",
+        "tests/test_basic.py::TestPyFSRS::test_relearning_card_rate_hard_two_relearning_steps",
+        "tests/test_basic.py::TestPyFSRS::test_import_non_existent_module",
+        "tests/test_aeep_preservation.py::test_snapshot_preserved"
+      ],
+      "role": "original",
+      "settled_measurement_ref": "d9fef192c71773f5b96d8ec7c7857b545415dfff98fd3d69e9345623e55e0fd7",
+      "settled_seconds": 2.932319707935676,
+      "source_archive_sha256": "202f695ea571371a8af9407e86f411c52ad24ea1a1d0291989d5f82b5f941ee2",
+      "source_revision": "e50db2ea5243f0ffca8dd3a4d5baca64f29ce20c",
+      "status_counts": {
+        "FAILED": 2,
+        "PASSED": 32
+      },
+      "truth_sha256": "0970311557316550b275c8f4823ffa39e6e1e71226ddb4b4eb7a8e2e224a7369"
+    },
+    {
+      "case": "simonw__files-to-prompt-44",
+      "container_absent_at_settlement": true,
+      "container_absent_now": true,
+      "container_name": "aeep-d9b1095de169f88b41798ee7ba43b5b9",
+      "diagnostic_execution_status": "success",
+      "error_test_ids": [],
+      "exit_code": 0,
+      "extra_observed_ids": [],
+      "failed_test_ids": [],
+      "grade_recovered_read_only": false,
+      "observation_sha256": "326e41b886084ae077d87c4da12e21066c2935b0495e153ea8ad2ff14966bb12",
+      "ordinary_callback_grade": {
+        "detail": "",
+        "kind": "callback",
+        "quality_score": 1.0,
+        "trust": "verified",
+        "valid": true
+      },
+      "payload_sha256": "01dfda8b5830e8097964a6b972a8fb34cca0876d5617aaf7ea97d97985b6cc9c",
+      "protected_tests_archive_sha256": "df410c4a8a472df4442e38858fc9a1795dabe465bae89a4c011c5ed4cbd0ce08",
+      "public_test_log_bytes": 0,
+      "public_test_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_file": {
+        "path": ".aeep/completion-20261116/staged-software-correction-20261117/execution/c13-staged-software-correction-20261117:simonw__files-to-prompt-44:reference.raw.json",
+        "sha256": "25eda0a521da91681c787af1a644516576878402b1908f43704c464ccb09d595"
+      },
+      "receipt_id": "rcpt_4bcae40672734e6b98f0a8a346debfa6",
+      "receipt_ref": "deec641e499731f3e5521582fc88b899860416d6def9a5a843c69c589cbd0a60",
+      "required_identities_sha256": "e92b34f75c621649d4411a64b0c829e13c9b61a561b88b353684b259de42b05d",
+      "required_test_ids": [
+        "tests/test_files_to_prompt.py::test_reading_paths_from_stdin[test_dir1/file1.txt\\ntest_dir2/file2.txt-extra_args0]",
+        "tests/test_files_to_prompt.py::test_reading_paths_from_stdin[test_dir1/file1.txt\\ntest_dir2/file2.txt-extra_args1]",
+        "tests/test_files_to_prompt.py::test_reading_paths_from_stdin[test_dir1/file1.txt\\x00test_dir2/file2.txt-extra_args2]",
+        "tests/test_files_to_prompt.py::test_reading_paths_from_stdin[test_dir1/file1.txt\\x00test_dir2/file2.txt-extra_args3]",
+        "tests/test_files_to_prompt.py::test_paths_from_arguments_and_stdin",
+        "tests/test_files_to_prompt.py::test_basic_functionality",
+        "tests/test_files_to_prompt.py::test_include_hidden",
+        "tests/test_files_to_prompt.py::test_ignore_gitignore",
+        "tests/test_files_to_prompt.py::test_multiple_paths",
+        "tests/test_files_to_prompt.py::test_ignore_patterns",
+        "tests/test_files_to_prompt.py::test_specific_extensions",
+        "tests/test_files_to_prompt.py::test_mixed_paths_with_options",
+        "tests/test_files_to_prompt.py::test_binary_file_warning",
+        "tests/test_files_to_prompt.py::test_xml_format_dir[args0]",
+        "tests/test_files_to_prompt.py::test_xml_format_dir[args1]",
+        "tests/test_files_to_prompt.py::test_output_option[-o]",
+        "tests/test_files_to_prompt.py::test_output_option[--output]",
+        "tests/test_files_to_prompt.py::test_line_numbers"
+      ],
+      "role": "reference",
+      "settled_measurement_ref": "d95e4673b96c2e761966e0ff4cc0aac53a82fd713826cff62d3cacf165a0df3e",
+      "settled_seconds": 1.4864793750457466,
+      "source_archive_sha256": "e0510408ebedacf0589bb9360f5f360304b9ae900bc4b9c2315e78be2f5a8dd2",
+      "source_revision": "fdca384b1ca8dcabd87bf81cd7a113279a21ada7",
+      "status_counts": {
+        "PASSED": 18
+      },
+      "truth_sha256": "a6ac69b4ace1df3f9a9b6976ac4511fc4f93f8d491174cac26fbcb68dd76f482"
+    },
+    {
+      "case": "simonw__files-to-prompt-44",
+      "container_absent_at_settlement": true,
+      "container_absent_now": true,
+      "container_name": "aeep-59e794d562789067c647a501ba1e5c89",
+      "diagnostic_execution_status": "success",
+      "error_test_ids": [],
+      "exit_code": 1,
+      "extra_observed_ids": [],
+      "failed_test_ids": [
+        "tests/test_files_to_prompt.py::test_paths_from_arguments_and_stdin",
+        "tests/test_files_to_prompt.py::test_reading_paths_from_stdin[test_dir1/file1.txt\\ntest_dir2/file2.txt-extra_args0]",
+        "tests/test_files_to_prompt.py::test_reading_paths_from_stdin[test_dir1/file1.txt\\ntest_dir2/file2.txt-extra_args1]",
+        "tests/test_files_to_prompt.py::test_reading_paths_from_stdin[test_dir1/file1.txt\\x00test_dir2/file2.txt-extra_args2]",
+        "tests/test_files_to_prompt.py::test_reading_paths_from_stdin[test_dir1/file1.txt\\x00test_dir2/file2.txt-extra_args3]"
+      ],
+      "grade_recovered_read_only": false,
+      "observation_sha256": "8e67a4224653a73a9b6dd6bdf713baa6225cb71c5e5f46f9ccf99bb41924ff87",
+      "ordinary_callback_grade": {
+        "detail": "test_failure",
+        "kind": "callback",
+        "quality_score": 0.0,
+        "trust": "verified",
+        "valid": false
+      },
+      "payload_sha256": "8a23178d5d99e9a68aa820cd91cf477d58d77b14258d495db2320de9882ad9ee",
+      "protected_tests_archive_sha256": "df410c4a8a472df4442e38858fc9a1795dabe465bae89a4c011c5ed4cbd0ce08",
+      "public_test_log_bytes": 2448,
+      "public_test_log_sha256": "75434ded98a1519de73315b160ae64832894786ffe3505ae4ed47ad9e873232b",
+      "raw_file": {
+        "path": ".aeep/completion-20261116/staged-software-correction-20261117/execution/c13-staged-software-correction-20261117:simonw__files-to-prompt-44:original.raw.json",
+        "sha256": "088ded2488b3fad97d03f069398a04bf3a1e317ce880530817353c0f9f9c95ec"
+      },
+      "receipt_id": "rcpt_3045f5fd2f3d408d8fb64bc117c99447",
+      "receipt_ref": "22ada5d7e947db63afd037fcb0b916b3a955ff1f8e2c4ef96c08aa52d3424b40",
+      "required_identities_sha256": "e92b34f75c621649d4411a64b0c829e13c9b61a561b88b353684b259de42b05d",
+      "required_test_ids": [
+        "tests/test_files_to_prompt.py::test_reading_paths_from_stdin[test_dir1/file1.txt\\ntest_dir2/file2.txt-extra_args0]",
+        "tests/test_files_to_prompt.py::test_reading_paths_from_stdin[test_dir1/file1.txt\\ntest_dir2/file2.txt-extra_args1]",
+        "tests/test_files_to_prompt.py::test_reading_paths_from_stdin[test_dir1/file1.txt\\x00test_dir2/file2.txt-extra_args2]",
+        "tests/test_files_to_prompt.py::test_reading_paths_from_stdin[test_dir1/file1.txt\\x00test_dir2/file2.txt-extra_args3]",
+        "tests/test_files_to_prompt.py::test_paths_from_arguments_and_stdin",
+        "tests/test_files_to_prompt.py::test_basic_functionality",
+        "tests/test_files_to_prompt.py::test_include_hidden",
+        "tests/test_files_to_prompt.py::test_ignore_gitignore",
+        "tests/test_files_to_prompt.py::test_multiple_paths",
+        "tests/test_files_to_prompt.py::test_ignore_patterns",
+        "tests/test_files_to_prompt.py::test_specific_extensions",
+        "tests/test_files_to_prompt.py::test_mixed_paths_with_options",
+        "tests/test_files_to_prompt.py::test_binary_file_warning",
+        "tests/test_files_to_prompt.py::test_xml_format_dir[args0]",
+        "tests/test_files_to_prompt.py::test_xml_format_dir[args1]",
+        "tests/test_files_to_prompt.py::test_output_option[-o]",
+        "tests/test_files_to_prompt.py::test_output_option[--output]",
+        "tests/test_files_to_prompt.py::test_line_numbers"
+      ],
+      "role": "original",
+      "settled_measurement_ref": "ed1cdd8a40c02156919bb924afda5fc199f82e99094ee1154ab2c6ebe97a975e",
+      "settled_seconds": 1.461200625053607,
+      "source_archive_sha256": "e0510408ebedacf0589bb9360f5f360304b9ae900bc4b9c2315e78be2f5a8dd2",
+      "source_revision": "fdca384b1ca8dcabd87bf81cd7a113279a21ada7",
+      "status_counts": {
+        "FAILED": 5,
+        "PASSED": 13
+      },
+      "truth_sha256": "a6ac69b4ace1df3f9a9b6976ac4511fc4f93f8d491174cac26fbcb68dd76f482"
+    }
+  ],
+  "py_fsrs_compatible_pair": {
+    "diagnostic_original_review_sha256": "0d6342ef5a2979a2e1b66b58b3ae2e065cb0f014bc57b5fd87701bc87467b9d3",
+    "historical_original_contract_mismatch_preserved": true,
+    "original_receipt_ref": "9a6fa847016322af83b121f4c0e899ac756e6473d6568f36859d051d8239db78",
+    "original_score_recovered_read_only": 0.0,
+    "reason": "The strict historical driver expected the authored snapshot guard alone to fail. The original eager import also fails the published Optimizer lazy-loading regression. Both required failures are now observed in the diagnostic; ordinary grading returns test_failure.",
+    "reference": {
+      "action_digest": "sha256:21efd04955a6d2fad12d510bb7152d3be1f7ba79d06f9803fe65597b0d397ad6",
+      "attempt_id": "attempt_6d0824394228497b950b54b96a7a0756",
+      "elapsed_seconds": 3.379281917004846,
+      "executor_fingerprint": "sha256:f066e1120aa946c686fea138c22a5edec07fe7e27f702e91010cf0c71fb3c4ea",
+      "journal_sha256": "8eb8d0dd94205e67529238276e43a5cd0a6189049b40b196090868509dae9c12",
+      "measurement_sha256": "8c80eca10cdcdcc0bf59e1c63bdc9a930ebd9c353582e121ffad3065a066c344",
+      "operation_id": "c13-first-staged-protected-pairs-20261116:open-spaced-repetition__py-fsrs-127-aeep-contract-audit:reference",
+      "original_cleanup_confirmed": true,
+      "receipt_id": "rcpt_6d226183ff924a2a983a4fcb0421519e",
+      "receipt_sha256": "e029a84e5cb7e5388710a2ef3a10dea76b5e3bb90b4f7394de493081b79aa80d"
+    },
+    "reference_observation": {
+      "path": ".aeep/completion-20261116/c13-first-staged-protected-pairs-20261116/execution/c13-first-staged-protected-pairs-20261116:open-spaced-repetition__py-fsrs-127-aeep-contract-audit:reference.observation.json",
+      "sha256": "40e6f27b341ed5460232990d7eb44317834f4ff375e0a430950b3f7acab91993"
+    },
+    "reference_review_sha256": "f818cc19fa549677f9dfba0bbaa03d17f99f8dd03abdd577a2794f5266ca5a3b",
+    "reference_score": 1.0,
+    "same_source_and_protected_assertions": true,
+    "same_source_revision": "e50db2ea5243f0ffca8dd3a4d5baca64f29ce20c"
+  },
+  "raw_receipts_database": {
+    "path": ".aeep/completion-20261116/staged-software-correction-20261117/execution/receipts.sqlite3",
+    "sha256": "58971fc55d38a752aa89f28e854f4cefb721963e419322f9fca11599f91a2b92"
+  },
+  "recovery": {
+    "byte_identical": true,
+    "driver": {
+      "path": ".aeep/completion-20261116/staged-software-correction-20261117/reconcile-result.py",
+      "sha256": "d6ecba139133b679bdc057a112c8bab7d385d35f10e790ae9e8dcf7367e99d7b"
+    },
+    "first_result": {
+      "path": ".aeep/completion-20261116/staged-software-correction-20261117/recovered-result.json",
+      "sha256": "911d98ab67e9e663b0e872482dfdda4200c5ba71b2c562483c1e0355f8a3b87e"
+    },
+    "read_only": true,
+    "replay_result": {
+      "path": ".aeep/completion-20261116/staged-software-correction-20261117/recovered-replay.json",
+      "sha256": "911d98ab67e9e663b0e872482dfdda4200c5ba71b2c562483c1e0355f8a3b87e"
+    },
+    "upstream_replays": 0
+  },
+  "result_export": {
+    "path": ".aeep/completion-20261116/staged-software-correction-20261117/execution/result.json",
+    "sha256": "270330ff1f6e0bcbcf3cf1536963361defd9173e4a52c6fca8ddd31dd4a778b4"
+  },
+  "retained_runtime": "sha256:2a057881ffe70b7a83639d24612b3c579b5892615542452e52324f1389c4abb9",
+  "review": {
+    "path": ".aeep/completion-20261116/staged-software-correction-20261117/operation-review.json",
+    "sha256": "0d6342ef5a2979a2e1b66b58b3ae2e065cb0f014bc57b5fd87701bc87467b9d3"
+  },
+  "schema_version": "aeep.c13.staged-software-correction-result.v1",
+  "source": "9710ea4f129d21affc0dcbe85e2d0bc432a41e5ec9ee8899b68df8a834959786",
+  "waza_excluded": true,
+  "wheel": {
+    "active_linux_3_13_dependencies": [],
+    "actual_verification": {
+      "artifact_sha256": "63c132bbbed01578a06712a2d1f497bb62d9c1c0d329b7903a866228027263b2",
+      "license_sha256": "9a8ad106a394e853bfe21f42f4e72d592819a22805d991b5f3275029292b658d",
+      "testing_source_sha256": "dd103c6a709fed367cfb94401798add937be6965c100be552dab109cc882d994"
+    },
+    "bytes": 98188,
+    "filename": "click-8.1.8-py3-none-any.whl",
+    "license": "BSD-3-Clause",
+    "license_member": "click-8.1.8.dist-info/LICENSE.txt",
+    "license_sha256": "9a8ad106a394e853bfe21f42f4e72d592819a22805d991b5f3275029292b658d",
+    "maximum_download_attempts": 1,
+    "metadata_requires_python": ">=3.7",
+    "sha256": "63c132bbbed01578a06712a2d1f497bb62d9c1c0d329b7903a866228027263b2",
+    "testing_source_sha256": "dd103c6a709fed367cfb94401798add937be6965c100be552dab109cc882d994",
+    "url": "https://files.pythonhosted.org/packages/7e/d4/7ebdbd03970677812aac39c869717059dbb71a4cfc033ca6e5221787892c/click-8.1.8-py3-none-any.whl"
+  }
+}
