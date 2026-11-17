@@ -91,6 +91,16 @@ monorepo import projection so tests exercise the patched snapshot.
 The other ten cases have unresolved declared dependency candidates.
 No protected tests ran in this audit.
 
+The [OpenTelemetry preparation](opentelemetry-monorepo-preparation.json)
+preserves the public source and edit path. The protected overlay binds
+the API, SDK, semantic conventions and test utility imports to their
+original repository roots. It supplies metadata for 24 entry points from
+the pinned project files. The lookup rejects an already loaded package
+and a conflicting module path. Both ordinary callback payloads preserve
+the 18 grading identities and match across two staging runs with
+substituted replies. The three missing locked wheels total 62,028 bytes.
+Actual contained results and formal adoption are pending.
+
 The retained source queue has 111 unattempted repositories. If each
 contributes one eligible case, all 116 current prospects qualify, and
 all six retained projections clear review, the pool reaches 233.

@@ -1,5 +1,14 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. OpenTelemetry has a protected monorepo import binding.**
+The [OpenTelemetry preparation](../../reports/toolkit-v2/c13/completion-20261116/opentelemetry-monorepo-preparation.json)
+preserves the public snapshot, edit path and all 18 grading identities.
+The private test bootstrap binds four local source roots and their 24
+upstream entry points. Two staging runs matched. Ordinary callback checks
+used substituted replies. Real grading still needs three lock-matched
+wheels totaling 62,028 bytes and exact execution authority. Group
+`6b758e65` remains pending. Waza is excluded and comparisons stay paused.
+
 **November 17. Selection readback includes matched task measurements.**
 The [selection measurement check](../../reports/toolkit-v2/c13/completion-20261116/selection-measurement-verification.json)
 verifies per-task grades and timings from the existing trial and receipt

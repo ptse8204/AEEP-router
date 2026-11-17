@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [OpenTelemetry monorepo preparation](../toolkit-v2/c13/completion-20261116/opentelemetry-monorepo-preparation.json)
+binds four source roots in the protected grader inputs. The public snapshot
+and 18 grading identities stay fixed. The ordinary callback exercised both
+payloads with substituted replies. Three exact locked wheels and real
+protected grades are still needed.
+
 The [selection measurement check](../toolkit-v2/c13/completion-20261116/selection-measurement-verification.json)
 adds receipt-bound token categories, protected scores and separate timing
 to the selection trial readback. Three policy pairs passed the local
