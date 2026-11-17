@@ -13,6 +13,11 @@ the four retained outcomes to ordinary grades or an infrastructure error,
 rejected eight malformed or drifted inputs, and checked the four command
 shapes. The image build and contained ordinary verification remain open.
 
+The [exact offline review `73cee6d8`](../toolkit-v2/c13/completion-20261116/formula-ordinary-operation-review.json)
+covers one local build and four ordinary calls. Substituted driver checks
+verify success, refusal, interruption and settled receipt recovery after a
+report I/O error. Approval and actual execution remain open.
+
 The [approved A2A batch](../toolkit-v2/c13/completion-20261116/approved-a2a-batch-results.json)
 reproduced two reference/original-source pairs. The third reference stopped at
 collection. Static review found a published selector mismatch. All five

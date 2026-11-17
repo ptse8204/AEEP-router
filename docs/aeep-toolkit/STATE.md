@@ -21,6 +21,12 @@ observations and rejected eight malformed or drifted inputs. The 2,755-file
 COPY-only build context is hash-bound. The derived image and actual ordinary
 grader calls remain unstarted. Provider disclosure and formal use remain open.
 
+The [offline review `73cee6d8`](../../reports/toolkit-v2/c13/completion-20261116/formula-ordinary-operation-review.json)
+binds one local COPY-only build and four ordinary reference and grading
+calls. The cap is five operations and 370 reserved seconds at zero models
+and zero cash. Seven first-party driver controls passed. The verifier repeat
+awaits exact operator approval. The earlier protected evidence stays settled.
+
 The [approved A2A batch](../../reports/toolkit-v2/c13/completion-20261116/approved-a2a-batch-results.json)
 reproduced the reference and original-source results for issues 576 and
 682. Issue 472 returned pytest exit 4 and collected zero tests. Its

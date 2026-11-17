@@ -500,6 +500,14 @@ COPY-only context has 2,755 pinned files totaling 458,297,419 bytes. No new
 protected invocation or image build ran. Exact runtime verification, task
 asset rights and provider disclosure remain separate.
 
+The [exact offline review `73cee6d8`](formula-ordinary-operation-review.json)
+covers one COPY-only build and four ordinary calls on Linux AMD64. It binds
+the local Docker builder, parent layers, sealed context and protected command
+templates. The [first-party driver preflight](formula-ordinary-driver-preflight.json)
+covers seven cases, including a wrong grade, uncertain cleanup and a final
+report write failure after all receipts settled. The build and verifier calls
+remain unstarted while the exact repeat approval is pending.
+
 The [grouped review](protected-reference-group.json) covered seven local
 operations. The [result](protected-reference-group-result.json) reconciles
 all seven receipts and operation entries against the canonical databases
