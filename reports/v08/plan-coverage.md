@@ -93,6 +93,11 @@ The three cases retain 66 published identities. PDFly's required fixture
 is separately pinned for the protected grader. The optimistic software
 shortfall fell to 44. Protected execution and formal adoption remain open.
 
+Eight [audits with frozen metadata](../toolkit-v2/c13/completion-20261116/ancillary-contract-audits.json)
+increase the provisional software pool to 105. Both prepared roles share
+the exact patched metadata. The 596 protected identities were retained.
+Reference and fault behavior still require protected execution.
+
 The [A2A receipt bridge audit](../toolkit-v2/c13/completion-20261116/a2a-receipt-bridge-audit.json)
 matched four canonical receipts, rebuilt both pairs of protected fixtures
 and verified their scoring through the ordinary callback. Three wheel

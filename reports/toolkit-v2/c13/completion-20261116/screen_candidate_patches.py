@@ -85,7 +85,8 @@ def python_source(name, roots):
             and not any(path.is_relative_to(root) for root in roots))
 
 
-def assess(lead, helpers, *, reviewed_documentation_additions=(), normalize_source=None):
+def assess(lead, helpers, *, reviewed_documentation_additions=(), normalize_source=None,
+           reviewed_frozen_metadata=(), reviewed_ci_only=()):
     binding = lead['source_bindings'][0]
     archived = ROOT / binding['archive']
     raw = archived.read_bytes()
@@ -112,6 +113,14 @@ def assess(lead, helpers, *, reviewed_documentation_additions=(), normalize_sour
     if not fail or not preserve or len(nodes) != len(set(nodes)):
         raise ValueError('published issue and preservation identities must be distinct')
     modules, roots = test_roots(nodes)
+    frozen_metadata = set(reviewed_frozen_metadata)
+    ci_only = set(reviewed_ci_only)
+    if (not frozen_metadata <= {'.gitignore', '.pre-commit-config.yaml', 'pyproject.toml',
+                                'setup.py', 'VERSION'}
+            or not frozen_metadata.isdisjoint(ci_only)
+            or any(not name.startswith('.github/workflows/') or PurePosixPath(name).suffix not in {'.yml', '.yaml'}
+                   for name in ci_only)):
+        raise ValueError('unreviewable ancillary source scope')
     with tempfile.TemporaryDirectory(prefix='aeep-inert-corpus-', dir='/private/tmp') as temporary:
         root = Path(temporary)
         for name, data in files.items():
@@ -121,6 +130,10 @@ def assess(lead, helpers, *, reviewed_documentation_additions=(), normalize_sour
         helpers['patch'].apply(root, row['test_patch'], root.parent)
         overlaid = snapshot(root)
         overlay = {name: data for name, data in overlaid.items() if files.get(name) != data}
+        if not ci_only <= overlay.keys() & files.keys():
+            raise ValueError('reviewed CI change did not match the test patch')
+        ci_changes = {name: {'before': sha(files[name]), 'after': sha(overlay.pop(name))}
+                      for name in sorted(ci_only)}
         if (not overlay or not set(files) <= overlaid.keys() or not set(modules) <= overlaid.keys()
                 or any(not any(PurePosixPath(name).is_relative_to(r) for r in roots) for name in overlay)):
             raise ValueError('published test overlay exceeds the declared protected roots')
@@ -132,14 +145,17 @@ def assess(lead, helpers, *, reviewed_documentation_additions=(), normalize_sour
         raise ValueError('published repair adds or removes files')
     changed = sorted(name for name in overlaid if repaired[name] != overlaid[name])
     edits = [name for name in changed if python_source(name, roots)]
-    omissions = sorted((set(changed) - set(edits)) | added)
+    if not frozen_metadata <= (set(changed) - set(edits)) - overlay.keys():
+        raise ValueError('reviewed metadata must be changed outside candidate-protected scope')
+    metadata = {name: repaired[name] for name in sorted(frozen_metadata)}
+    omissions = sorted((set(changed) - set(edits) - frozen_metadata) | added)
     if any(PurePosixPath(name).suffix not in {'.md', '.rst'} for name in omissions):
         raise ValueError('published repair includes non-editable behavior or configuration')
     bodies = [name for name in edits if helpers['archive'].executable(repaired[name]) !=
               helpers['archive'].executable(overlaid[name])]
     if not bodies:
         raise ValueError('published repair has no observed Python body change')
-    public = pack_files(files, large=True)
+    public = pack_files({**files, **metadata}, large=True)
     protected = pack_files(overlay, large=True)
     repair = {name: repaired[name].decode() for name in edits}
     family = 'multi-file-repair' if len(bodies) > 1 else 'single-file-repair'
@@ -154,6 +170,9 @@ def assess(lead, helpers, *, reviewed_documentation_additions=(), normalize_sour
         'required_issue_tests': len(fail), 'required_preservation_tests': len(preserve),
         'test_roots': roots, 'test_modules': modules, 'executable_changes': bodies,
         'editable_changes': edits, 'omitted_documentation_changes': omissions,
+        **({'frozen_metadata': {name: {'before': sha(files[name]), 'after': sha(content)}
+                               for name, content in metadata.items()}} if metadata else {}),
+        **({'omitted_ci_test_patch': ci_changes} if ci_changes else {}),
     }, {
         'source.tar.gz': public,
         'tests.tar.gz': protected,

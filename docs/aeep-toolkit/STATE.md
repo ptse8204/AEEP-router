@@ -160,6 +160,16 @@ has 97 provisional software rows, with at least 44 missing. The holdout
 still needs at least 22 audits and five multi-file repairs. All three
 cases need protected runtime verification.
 
+Eight [audits with frozen project metadata](../../reports/toolkit-v2/c13/completion-20261116/ancillary-contract-audits.json)
+retain 596 published test identities. The exact patched package and
+pytest settings stay identical in the references and restored-source
+controls. The py-fsrs publisher's CI edit stays outside the protected
+overlay. Both preparations matched, and 18 single-file restorations
+failed their byte-preservation guards. The provisional pool has 105 of
+141 rows assuming all eligible, with at least 14 contract audits and
+five multi-file repairs still needed for the holdout. Runtime and
+upstream reference/fault checks remain open.
+
 The [new workbook reference](../../reports/toolkit-v2/c13/completion-20261116/workbook-reference-result.json)
 passed 19 original SkillsBench checks. The protected verifier rejected both
 missing and incomplete output. The first interpreter check failed before

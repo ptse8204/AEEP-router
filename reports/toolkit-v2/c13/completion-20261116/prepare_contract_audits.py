@@ -31,6 +31,22 @@ SELECTED = {
     "twisted__towncrier-687": "src/towncrier/newsfragments/687.feature.rst",
 }
 TARGET = WORK / "new-contract-audits"
+ANCILLARY_TARGET = WORK / "ancillary-contract-audits"
+ANCILLARY = {
+    "MAIF__arta-50": {"reviewed_frozen_metadata": (".pre-commit-config.yaml", "pyproject.toml")},
+    "MindscapeHQ__raygun4py-119": {"reviewed_frozen_metadata": ("setup.py",)},
+    "Spenhouet__confluence-markdown-exporter-92": {"reviewed_frozen_metadata": ("pyproject.toml",)},
+    "agronholm__anyio-975": {"reviewed_frozen_metadata": ("pyproject.toml",)},
+    "carsdotcom__skelebot-280": {"reviewed_frozen_metadata": ("VERSION",)},
+    "open-spaced-repetition__py-fsrs-127": {
+        "reviewed_frozen_metadata": ("pyproject.toml",),
+        "reviewed_ci_only": (".github/workflows/test.yml",),
+    },
+    "openlawlibrary__pygls-524": {"reviewed_frozen_metadata": ("pyproject.toml",)},
+    "python-wheel-build__fromager-653": {
+        "reviewed_frozen_metadata": (".gitignore", "pyproject.toml")
+    },
+}
 INTAKE_SHA = "637b43c855fc20ff403a992e63a5088b6d711eb5be9a3294356ca8f8782da61c"
 
 
@@ -98,10 +114,12 @@ def verify_guard(code, test_name, fixed, base, scratch):
         path.write_bytes(fixed[name])
 
 
-def bind_case(lead, helpers, target, scratch):
+def bind_case(lead, helpers, target, scratch, scope):
     original_id = lead["instance_id"]
-    facts, assets = assess(lead, helpers, reviewed_documentation_additions=[SELECTED[original_id]])
-    if SELECTED[original_id] not in facts["omitted_documentation_changes"]:
+    facts, assets = assess(lead, helpers, **scope)
+    if set(scope.get("reviewed_documentation_additions", ())) - set(
+        facts["omitted_documentation_changes"]
+    ):
         raise ValueError("reviewed documentation adaptation was lost")
     base = archive_files(assets["source.tar.gz"], large=True)
     overlay = archive_files(assets["tests.tar.gz"], large=True)
@@ -176,6 +194,7 @@ def bind_case(lead, helpers, target, scratch):
         "test_modules": sorted([*facts["test_modules"], guard_file]),
         "published_python": facts["published_python"],
         "omitted_documentation": facts["omitted_documentation_changes"],
+        **{key: facts[key] for key in ("frozen_metadata", "omitted_ci_test_patch") if key in facts},
         "reference_archive_sha256": digest(pack_files({**fixed, **overlay}, large=True)),
         "fault_archive_sha256": digest(pack_files({**base, **overlay}, large=True)),
         "upstream_assertion_count": len(required),
@@ -185,24 +204,36 @@ def bind_case(lead, helpers, target, scratch):
     }
 
 
-def prepare(target):
+def prepare(target, *, ancillary=False):
     target = target.resolve()
     if not target.is_relative_to(WORK) or target == WORK:
         raise ValueError("audit staging must use a new private workspace")
 
     prior, origins = prior_origins()
+    scopes = {k: {"reviewed_documentation_additions": (doc,)} for k, doc in SELECTED.items()}
+    if ancillary:
+        for name, key in (
+            ("additional-contract-audits.json", "private_index"),
+            ("cached-multifile-projections.json", "private_transport_index"),
+        ):
+            old = load(HERE / name)
+            prior.extend(json.loads(read(ROOT / old[key], old[key + "_sha256"])))
+        origins = {(repository(row["source_repository"]), row["source_revision"]) for row in prior}
+        if len(prior) != 97 or len(prior) != len(origins):
+            raise ValueError("retained independent intake changed")
+        scopes = ANCILLARY
     intake = {row["instance_id"]: row for row in json.loads(read(INTAKE, INTAKE_SHA))}
     if any(
-        (repository(intake[k]["repository"]), intake[k]["base_commit"]) in origins for k in SELECTED
+        (repository(intake[k]["repository"]), intake[k]["base_commit"]) in origins for k in scopes
     ):
         raise ValueError("selected audit repeats an existing provisional source")
     if shutil.disk_usage(WORK).free < 50 * 1024**3 + 128 * 1024**2:
         raise ValueError("host storage is below the retained reserve")
     target.mkdir(mode=0o700)
     helpers, output = load_reviewed_helpers(), []
-    for case_id in SELECTED:
+    for case_id, scope in scopes.items():
         with TemporaryDirectory(prefix="aeep-audit-preservation-") as root:
-            output.append(bind_case(intake[case_id], helpers, target, Path(root)))
+            output.append(bind_case(intake[case_id], helpers, target, Path(root), scope))
     pool = [*prior, *output]
     families = Counter(row["input"]["family"] for row in pool)
     snapshots = {row["input"]["source_sha256"] for row in pool}
@@ -229,6 +260,11 @@ def prepare(target):
             | {
                 "case_id": row["input"]["task_id"],
                 "verified_guard_rejection_count": len(row["input"]["editable_paths"]),
+                **{
+                    key: row[key]
+                    for key in ("frozen_metadata", "omitted_ci_test_patch")
+                    if key in row
+                },
             }
             for row in output
         ],
@@ -249,6 +285,8 @@ def prepare(target):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", type=Path, default=TARGET)
+    parser.add_argument("--output", type=Path)
+    parser.add_argument("--ancillary", action="store_true")
     arguments = parser.parse_args()
-    print(json.dumps(prepare(arguments.output), indent=2))
+    default = ANCILLARY_TARGET if arguments.ancillary else TARGET
+    print(json.dumps(prepare(arguments.output or default, ancillary=arguments.ancillary), indent=2))

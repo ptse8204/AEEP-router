@@ -207,6 +207,20 @@ pool now has 97 rows. The shortfall is at least 44, including 22 contract
 audits and five multi-file repairs for the holdout.
 [Publisher fixture notice](https://raw.githubusercontent.com/py-pdf/sample-files/91b6d24a3b86bad1f20b707ec54555d89acc0c12/README.md)
 
+Eight [audits with frozen project metadata](ancillary-contract-audits.json)
+recover Arta, Raygun4py, Confluence Markdown Exporter, AnyIO, Skelebot,
+py-fsrs, pygls and Fromager. The public source uses the exact upstream
+Python repair and the reviewed patched metadata. The restored-source
+control restores only the published Python changes. Ten metadata files
+match in both roles. The py-fsrs CI schedule change stays outside the
+test overlay, with all published test identities retained. Inert
+preparation preserved 596 identities and rejected 18 single-file
+restorations through local preservation guards. Separate preparations
+matched byte for byte. Grader runtime and upstream reference and fault
+results remain open. The optimistic software pool has 105 of 141 rows,
+with at least 14 contract audits and five multi-file repairs still
+needed for the holdout.
+
 The [Wemake selector preflight](wemake-native-selector-preflight.json)
 reconstructed all 117 projected test identities from the literal upstream
 parameters. The 27 published selectors include 19 prefixes. Their synthetic
