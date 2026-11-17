@@ -186,6 +186,13 @@ The two smallest projections need 42 new rows. Both keep repositories
 in one stage. At most one of the 17 proposed multi-file repairs may fail
 even if all 105 retained prospects qualify. No stage was assigned.
 
+The [staged grader audit](../toolkit-v2/c13/completion-20261116/staged-repository-grader-bindings.json)
+reconstructed both protected payloads for 64 prospective cases and kept
+all 8,338 test identities through the ordinary callback with substitute
+replies. Three Fabric CI/CD cases need a Python version below 3.13.
+Protected collection, per-case runtime closure and adoption remain open.
+No upstream code ran.
+
 The [A2A receipt bridge audit](../toolkit-v2/c13/completion-20261116/a2a-receipt-bridge-audit.json)
 matched four canonical receipts, rebuilt both pairs of protected fixtures
 and verified their scoring through the ordinary callback. Three wheel

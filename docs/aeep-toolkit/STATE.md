@@ -289,6 +289,15 @@ repair, and that projection needs 26 of 31 contract audits. Twenty-five
 other multi-file repository leads remain outside the review. No cases were
 assigned and no acquisition or protected execution started.
 
+The [staged grader audit](../../reports/toolkit-v2/c13/completion-20261116/staged-repository-grader-bindings.json)
+exercised both archive roles on all 64 remaining prospective transports
+with substituted pytest replies. The ordinary callback retained 8,338
+test identities. Four altered case or asset bindings were refused.
+Resolve per-case dependency closure before scheduling protected calls.
+All three Fabric CI/CD prospects declare Python below 3.13. Universal
+Pathlib 529 needs native collection and its reviewed local S3 fixture.
+No upstream code ran and no case was assigned.
+
 The [new workbook reference](../../reports/toolkit-v2/c13/completion-20261116/workbook-reference-result.json)
 passed 19 original SkillsBench checks. The protected verifier rejected both
 missing and incomplete output. The first interpreter check failed before

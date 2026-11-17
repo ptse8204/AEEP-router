@@ -354,6 +354,19 @@ cannot fill the plan. Twenty-five distinct multi-file leads remain
 outside the review. The audit replay matched byte for byte. No case
 was assigned, downloaded or run.
 
+The [staged grader audit](staged-repository-grader-bindings.json) exercised
+the ordinary callback on 64 additional source-bound cases with substituted
+pytest replies. Both archive roles for every case stayed within the transport
+limit with the pinned base pytest stack and retain 8,338 test identities.
+All three Fabric CI/CD cases declare Python below 3.13. Universal Pathlib
+529 needs a separate collection preflight. Its S3 tests inherit assertions
+from shared test classes and use a local S3 server fixture. The existing
+A2A receipts retain their original scope. Per-case runtime closure,
+actual grading and formal assignment remain open.
+The 117 focused grader and benchmark tests, schema check, and offline
+documentation check passed. The audit reproduced its result byte for byte.
+[Audit driver](audit_staged_repository_graders.py)
+
 The [Wemake selector preflight](wemake-native-selector-preflight.json)
 reconstructed all 117 projected test identities from the literal upstream
 parameters. The 27 published selectors include 19 prefixes. Their synthetic
