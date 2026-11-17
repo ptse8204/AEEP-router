@@ -1,0 +1,356 @@
+{
+  "bootstrap_controls": [
+    "normal",
+    "preexisting",
+    "altered_payload",
+    "symlink_payload"
+  ],
+  "byte_identical_transport_replay": true,
+  "case": "py-pdf__pdfly-219",
+  "documentation_checks": {
+    "edited_report_and_plan_excerpt": {
+      "path": ".aeep/completion-20261116/pdfly-protected-placement-20261117/lint.log",
+      "result": "passed",
+      "sha256": "a37516f45f556603ffd5a851d900426f18ab63606cdd125639dc88f256693680"
+    },
+    "standard_offline_docs": {
+      "path": ".aeep/completion-20261116/pdfly-protected-placement-20261117/docs.log",
+      "result": "passed",
+      "sha256": "c9ff882cde2816ff7911cc47159c4646f94c0cf5efb52eadf560ec6dbc32ae21"
+    }
+  },
+  "fixture_destination": "sample-files/026-latex-multicolumn/multicolumn.pdf",
+  "fixture_license_record": "CC-BY-SA-4.0",
+  "formal_cases_adopted": 0,
+  "model_turns": 0,
+  "new_container_launches": 0,
+  "new_downloads": 0,
+  "next_boundary": "Review a complete compatible runtime closure including compiled Pillow and cryptography, then verify the protected reference, original and partial repair cases in containment.",
+  "original_fixture_report": {
+    "bytes": 2219,
+    "path": ".aeep/completion-20261116/pdfly-protected-file/evidence.json",
+    "sha256": "7f58a680765e7dd19c74130df3789874928c7e29d1ba2c338a8bb02efb237275"
+  },
+  "original_source_report": {
+    "bytes": 9435,
+    "path": "reports/toolkit-v2/c13/completion-20261116/cached-multifile-projections.json",
+    "sha256": "3402782d51a2dbb03e8620bc506122948cda19f5e6561cf099449476c7804511"
+  },
+  "partial_role_artifacts": {
+    "bytes": 7880,
+    "path": ".aeep/completion-20261116/pdfly-protected-placement-20261117/bound/transport/protected/py-pdf__pdfly-219/partial-patches.json",
+    "sha256": "1c3df74fbae783638d477da24fad7fa0c3030e145538472c5e19054e71e9dffb"
+  },
+  "pending_offline_review": {
+    "bytes": 3112,
+    "path": "reports/toolkit-v2/c13/completion-20261116/offline-evidence-reviews.json",
+    "sha256": "6b758e65254042640df8aa36b8341bfbcad7975e931ed063a2060ed986aa0c1a"
+  },
+  "probe_wheel_lock_sha256": "46aacf0449047d1ffd20e4fbf783be2d71450ff71d5587d29ce53771a0f8bf0c",
+  "protected_augmented_conftest_sha256": "4b61d80245afef4ce1a6684d264b55e45e46ddc2c92b81d76f4764901f0f345e",
+  "protected_identities": {
+    "issue": 1,
+    "preservation": 3
+  },
+  "protected_input_index": {
+    "bytes": 1952,
+    "path": ".aeep/completion-20261116/pdfly-protected-placement-20261117/bound/transport/private-index.json",
+    "sha256": "586cd3123a658f7c73933574bf3e3c95c45c61b36f6edf665e3d30bc77d88bf6"
+  },
+  "protected_original_conftest_sha256": "ac72e6d2732705759383b0814a52a5187191e3698ecbb709d7509085f2cdeb4e",
+  "protected_overlay": {
+    "bytes": 87926,
+    "path": ".aeep/completion-20261116/pdfly-protected-placement-20261117/bound/transport/protected/py-pdf__pdfly-219/tests.tar.gz",
+    "sha256": "303e93b5c32bb77c9812dceae5bb18d5c722cb52e593080e2869208b6d358e7f"
+  },
+  "public_archive_sha256": "10f60723bbee0d1e3ab74f02726de13a4c165c4a5a568f9faad0d8a32a7b5d9e",
+  "public_archive_unchanged": true,
+  "public_input_sha256": "c7c69b20703f0d9c675b9696255d86c4d82a70e19f5996e2056697c873bddd2d",
+  "reference_and_partial_outcomes_observed": false,
+  "replays": [
+    {
+      "bytes": 13185,
+      "path": ".aeep/completion-20261116/pdfly-protected-placement-20261117/bound/result.json",
+      "sha256": "2b5cb98f31225ca246d4203c9d198cb81a945cc3428a9c3e58813bbf64bbedb6"
+    },
+    {
+      "bytes": 13188,
+      "path": ".aeep/completion-20261116/pdfly-protected-placement-20261117/replay/result.json",
+      "sha256": "7914f60212e10063d35811fde808bfbbba0840ccf99dc7b1e911540853a769b5"
+    }
+  ],
+  "repository_revision": "b3aad8e327d7a8f0cb79b7e02c2f1e2d26563007",
+  "runtime": {
+    "direct_dependency_observations": {
+      "asn1crypto": {
+        "declared": "asn1crypto",
+        "state": "retained_exact_candidate",
+        "version": "1.5.1",
+        "wheels": [
+          {
+            "arm64_python_313_tag_candidate": true,
+            "name": "asn1crypto-1.5.1-py2.py3-none-any.whl",
+            "retained_exact_wheel_paths": [
+              ".aeep/repository-multifile-image-20261027/asn1crypto-1.5.1-py2.py3-none-any.whl",
+              ".aeep/repository-multifile-runtime-wheels-20261027/asn1crypto-1.5.1-py2.py3-none-any.whl"
+            ],
+            "sha256": "db4e40728b728508912cbb3d44f19ce188f218e9eba635821bb4b68564f8fd67"
+          }
+        ]
+      },
+      "cryptography": {
+        "declared": "cryptography",
+        "state": "no_compatible_tag_in_retained_lock",
+        "version": "46.0.3",
+        "wheels": [
+          {
+            "arm64_python_313_tag_candidate": false,
+            "name": "cryptography-46.0.3-cp38-abi3-manylinux_2_34_x86_64.whl",
+            "retained_exact_wheel_paths": [],
+            "sha256": "402b58fc32614f00980b66d6e56a5b4118e6cb362ae8f3fda141ba4689bd4506"
+          }
+        ]
+      },
+      "endesive": {
+        "declared": "endesive",
+        "state": "compatible_locked_candidate_not_retained",
+        "version": "2.19.1",
+        "wheels": [
+          {
+            "arm64_python_313_tag_candidate": true,
+            "name": "endesive-2.19.1-py3-none-any.whl",
+            "retained_exact_wheel_paths": [],
+            "sha256": "d434012bf3bf1c26f3dd156e9ad425f5ccd2e426b82b26f6474e6c6a9b5ae36f"
+          }
+        ]
+      },
+      "fpdf2": {
+        "declared": "fpdf2>=2.8.1",
+        "state": "compatible_locked_candidate_not_retained",
+        "version": "2.8.5",
+        "wheels": [
+          {
+            "arm64_python_313_tag_candidate": true,
+            "name": "fpdf2-2.8.5-py3-none-any.whl",
+            "retained_exact_wheel_paths": [],
+            "sha256": "2356b94e2a5fcbd1fe53ac5cbb83494e9003308860ab180050255ba50961d913"
+          }
+        ]
+      },
+      "pillow": {
+        "declared": "pillow",
+        "state": "no_compatible_tag_in_retained_lock",
+        "version": "12.0.0",
+        "wheels": [
+          {
+            "arm64_python_313_tag_candidate": false,
+            "name": "pillow-12.0.0-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+            "retained_exact_wheel_paths": [],
+            "sha256": "d77153e14b709fd8b8af6f66a3afbb9ed6e9fc5ccf0b6b7e1ced7b036a228782"
+          }
+        ]
+      },
+      "pydantic": {
+        "declared": "pydantic",
+        "state": "compatible_locked_candidate_not_retained",
+        "version": "2.12.4",
+        "wheels": [
+          {
+            "arm64_python_313_tag_candidate": true,
+            "name": "pydantic-2.12.4-py3-none-any.whl",
+            "retained_exact_wheel_paths": [],
+            "sha256": "92d3d202a745d46f9be6df459ac5a064fdaa3c1c4cd8adcfa332ccf3c05f871e"
+          }
+        ]
+      },
+      "pypdf": {
+        "declared": "pypdf[full]>=5.1.0",
+        "state": "compatible_locked_candidate_not_retained",
+        "version": "6.2.0",
+        "wheels": [
+          {
+            "arm64_python_313_tag_candidate": true,
+            "name": "pypdf-6.2.0-py3-none-any.whl",
+            "retained_exact_wheel_paths": [],
+            "sha256": "4c0f3e62677217a777ab79abe22bf1285442d70efabf552f61c7a03b6f5c569f"
+          }
+        ]
+      },
+      "pytest": {
+        "declared": "pytest",
+        "state": "compatible_locked_candidate_not_retained",
+        "version": "9.0.0",
+        "wheels": [
+          {
+            "arm64_python_313_tag_candidate": true,
+            "name": "pytest-9.0.0-py3-none-any.whl",
+            "retained_exact_wheel_paths": [],
+            "sha256": "e5ccdf10b0bac554970ee88fc1a4ad0ee5d221f8ef22321f9b7e4584e19d7f96"
+          }
+        ]
+      },
+      "pytest-cov": {
+        "declared": "pytest-cov",
+        "state": "retained_exact_candidate",
+        "version": "7.0.0",
+        "wheels": [
+          {
+            "arm64_python_313_tag_candidate": true,
+            "name": "pytest_cov-7.0.0-py3-none-any.whl",
+            "retained_exact_wheel_paths": [
+              ".aeep/repository-supported-suite-image-20261027/pytest_cov-7.0.0-py3-none-any.whl",
+              ".aeep/repository-supported-suite-wheels-20261027/pytest_cov-7.0.0-py3-none-any.whl"
+            ],
+            "sha256": "3b8e9558b16cc1479da72058bdecf8073661c7f57f7d3c5f22a1c23507f2d861"
+          }
+        ]
+      },
+      "pytest-socket": {
+        "declared": "pytest-socket",
+        "state": "compatible_locked_candidate_not_retained",
+        "version": "0.7.0",
+        "wheels": [
+          {
+            "arm64_python_313_tag_candidate": true,
+            "name": "pytest_socket-0.7.0-py3-none-any.whl",
+            "retained_exact_wheel_paths": [],
+            "sha256": "7e0f4642177d55d317bbd58fc68c6bd9048d6eadb2d46a89307fa9221336ce45"
+          }
+        ]
+      },
+      "pytest-timeout": {
+        "declared": "pytest-timeout",
+        "state": "compatible_locked_candidate_not_retained",
+        "version": "2.4.0",
+        "wheels": [
+          {
+            "arm64_python_313_tag_candidate": true,
+            "name": "pytest_timeout-2.4.0-py3-none-any.whl",
+            "retained_exact_wheel_paths": [],
+            "sha256": "c42667e5cdadb151aeb5b26d114aff6bdf5a907f176a007a30b940d3d865b5c2"
+          }
+        ]
+      },
+      "requests": {
+        "declared": "requests>=2.32.5",
+        "state": "retained_exact_candidate",
+        "version": "2.32.5",
+        "wheels": [
+          {
+            "arm64_python_313_tag_candidate": true,
+            "name": "requests-2.32.5-py3-none-any.whl",
+            "retained_exact_wheel_paths": [
+              ".aeep/completion-20261116/extractbench-audent-source/c13-extractbench-first-native-grade-20261116/runtime/wheels/requests-2.32.5-py3-none-any.whl",
+              ".aeep/completion-20261116/extractbench-audent-source/c13-extractbench-native-grade-continuation-20261117/runtime/wheels/requests-2.32.5-py3-none-any.whl",
+              ".aeep/repository-replacement-runtime-20261022-image-context-v2/requests-2.32.5-py3-none-any.whl",
+              ".aeep/repository-replacement-runtime-20261022-image-context-v3/requests-2.32.5-py3-none-any.whl",
+              ".aeep/repository-replacement-runtime-20261022-image-context-v4/requests-2.32.5-py3-none-any.whl",
+              ".aeep/repository-replacement-runtime-20261022-image-context/requests-2.32.5-py3-none-any.whl",
+              ".aeep/repository-replacement-runtime-20261022-wheels/requests-2.32.5-py3-none-any.whl"
+            ],
+            "sha256": "2462f94637a34fd532264295e186976db0f5d453d1cdd31473c85a6a161affb6"
+          }
+        ]
+      },
+      "rich": {
+        "declared": "rich",
+        "state": "retained_exact_candidate",
+        "version": "14.2.0",
+        "wheels": [
+          {
+            "arm64_python_313_tag_candidate": true,
+            "name": "rich-14.2.0-py3-none-any.whl",
+            "retained_exact_wheel_paths": [
+              ".aeep/completion-20261116/pyserde-production-repair-20261116/ordinary/build/wheels/rich-14.2.0-py3-none-any.whl",
+              ".aeep/completion-20261116/pyserde-production-repair-20261116/wheelhouse/rich-14.2.0-py3-none-any.whl",
+              ".aeep/repository-supported-suite-image-20261027/rich-14.2.0-py3-none-any.whl",
+              ".aeep/repository-supported-suite-wheels-20261027/rich-14.2.0-py3-none-any.whl"
+            ],
+            "sha256": "76bc51fe2e57d2b1be1f96c524b890b816e334ab4c1e45888799bfaab0021edd"
+          }
+        ]
+      },
+      "typer": {
+        "declared": "typer>=0.12.4",
+        "state": "retained_exact_candidate",
+        "version": "0.20.0",
+        "wheels": [
+          {
+            "arm64_python_313_tag_candidate": true,
+            "name": "typer-0.20.0-py3-none-any.whl",
+            "retained_exact_wheel_paths": [
+              ".aeep/repository-supported-suite-image-20261027/typer-0.20.0-py3-none-any.whl",
+              ".aeep/repository-supported-suite-wheels-20261027/typer-0.20.0-py3-none-any.whl"
+            ],
+            "sha256": "5b463df6793ec1dca6213a3cf4c0f03bc6e322ac5e16e13ddd622a889489784a"
+          }
+        ]
+      }
+    },
+    "pylock_sha256": "c33504620612a041a763bf4c87f832817442cda2e6d425928903c4cb578d4cd2",
+    "pyproject_sha256": "5f07a02052057020034e8695a29394187d4c880e0362e5d64607d452317c0df5",
+    "pytest_options_by_project": [
+      "--disable-socket",
+      "--doctest-modules",
+      "--cov=.",
+      "--cov-report",
+      "html:tests/reports/coverage-html",
+      "--cov-report",
+      "term-missing",
+      "--ignore=docs/",
+      "--durations=3",
+      "--timeout=30"
+    ],
+    "required_plugin_options": {
+      "pytest-cov": "--cov=.",
+      "pytest-socket": "--disable-socket",
+      "pytest-timeout": "--timeout=30"
+    },
+    "scope": "Static tag and exact-hash screening of direct dependencies. Transitive closure, ABI, import and plugin conformance remain unverified.",
+    "state_counts": {
+      "compatible_locked_candidate_not_retained": 7,
+      "no_compatible_tag_in_retained_lock": 2,
+      "retained_exact_candidate": 5
+    }
+  },
+  "schema_version": "aeep.c13.pdfly-protected-placement.v1",
+  "stage_driver": {
+    "bytes": 16262,
+    "path": ".aeep/completion-20261116/pdfly-protected-placement-20261117/check-pdfly-placement.py",
+    "sha256": "18190c68f8fa95f616b3f65d0b0b85393b7e1880ab19abde07c3a348687d074e"
+  },
+  "submodule_revision": "91b6d24a3b86bad1f20b707ec54555d89acc0c12",
+  "transport_checks": {
+    "original": {
+      "archive_sha256": "63026f77e60a1d91bca87994ed4bc102e0d8a458d90dc431792aa6020e1352c0",
+      "edit_count": 0,
+      "reply_substituted_for_transport_only": true,
+      "request_sha256": "005e129e195aa3234caf97785c4add01f408d25210a8f0c6a21bf70773bc8454"
+    },
+    "reference": {
+      "archive_sha256": "e171a2569440550444da54282d495f7ec2b8b148859f77d413f5e7a63a715b96",
+      "edit_count": 3,
+      "reply_substituted_for_transport_only": true,
+      "request_sha256": "a6375217f297646d926e5fee90c017f2017d25381dea74405a1934eb44133f5b"
+    },
+    "without_booklet": {
+      "archive_sha256": "846cf3779688c1502c30cd67b53a5b6d9221c14ccc54355dbba986e040858e2d",
+      "edit_count": 2,
+      "reply_substituted_for_transport_only": true,
+      "request_sha256": "4ad3223451703d0bdb334f7302b42c559e8235a7420c05f9509a9bf09ce80fdb"
+    },
+    "without_up2": {
+      "archive_sha256": "91beaadc1de4dc0ad3ade0d93bd7db8f79631633b66087f589f9617e941b218b",
+      "edit_count": 2,
+      "reply_substituted_for_transport_only": true,
+      "request_sha256": "97766af2745029b89c0ae70c5b26fd8901c90ab6499d7e957c42173823feef18"
+    },
+    "without_x2pdf": {
+      "archive_sha256": "a5e578f178583a6f20417a1846659ab15f38f5a2ae5ff5ddd077dbddb846a15f",
+      "edit_count": 2,
+      "reply_substituted_for_transport_only": true,
+      "request_sha256": "2faf0eb7984e3fab8005a5f29fbb3fe03c2b7fbaff7d40c8466342af9c6947d6"
+    }
+  },
+  "upstream_tests": 0
+}

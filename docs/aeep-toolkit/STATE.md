@@ -1,5 +1,15 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. PDFly's odd-page fixture is staged for the protected grader.**
+The [PDFly placement check](../../reports/toolkit-v2/c13/completion-20261116/pdfly-protected-fixture-placement.json)
+preserves all four published test identities and the worker archive.
+The native grader gets the original PDF at its expected submodule path.
+Two preparations matched across the reference, original and three
+partial repairs with substituted replies. The retained lock lacks
+compatible ARM64 wheel entries for Pillow and cryptography. The full
+runtime and genuine grades remain open. Group `6b758e65` is pending.
+Waza is excluded and comparisons stay paused.
+
 **November 17. ExtractBench has two reproducible metadata intake layouts.**
 The [document cohort intake](../../reports/toolkit-v2/c13/completion-20261116/extractbench-cohort-intake-witness.json)
 keeps the Audent development family and six CFPB fixture relatives out.

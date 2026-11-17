@@ -515,6 +515,21 @@ pool now has 97 rows. The shortfall is at least 44, including 22 contract
 audits and five multi-file repairs for the holdout.
 [Publisher fixture notice](https://raw.githubusercontent.com/py-pdf/sample-files/91b6d24a3b86bad1f20b707ec54555d89acc0c12/README.md)
 
+The [PDFly placement check](pdfly-protected-fixture-placement.json) stages
+the exact PDF and publisher notices under the protected test root. The
+first-party bootstrap restores them at their upstream relative paths before
+PDFly imports. It rejected a pre-existing destination, corrupted bytes and
+a symlink. The reference, original and three one-file-drop payloads all
+preserve the single issue test and three preservation tests. Two preparations
+matched byte for byte with substituted replies. The public archive stays
+fixed.
+
+Five direct dependency artifacts in the retained lock match local wheels.
+Seven platform-compatible wheel candidates are missing. The only pinned
+Pillow and cryptography wheel entries target x86-64. Review a compatible
+dependency closure before genuine protected grading. The partial repairs
+have no measured outcomes yet.
+
 Eight [audits with frozen project metadata](ancillary-contract-audits.json)
 recover Arta, Raygun4py, Confluence Markdown Exporter, AnyIO, Skelebot,
 py-fsrs, pygls and Fromager. The public source uses the exact upstream

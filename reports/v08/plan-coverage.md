@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+The [PDFly placement check](../toolkit-v2/c13/completion-20261116/pdfly-protected-fixture-placement.json)
+stages the original odd-page PDF and notices under the protected test
+root. Five payload variants preserve the four upstream test identities
+and keep the public worker input fixed. The retained lock has no matching
+ARM64 wheel entries for two direct dependencies. Actual protected grades
+remain open.
+
 The [document cohort intake](../toolkit-v2/c13/completion-20261116/extractbench-cohort-intake-witness.json)
 builds two metadata-only 8/28/105 layouts with matching holdout lengths
 and source families kept within one stage. The fully separate layout
