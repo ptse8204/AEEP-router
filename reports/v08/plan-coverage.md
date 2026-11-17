@@ -299,6 +299,11 @@ finds 294 potential document/data slots after known alias and development
 exclusions. Two group-disjoint 8/28/105 examples fit in the metadata. Per-source
 rights, provenance and protected grading remain open.
 
+The [CFPB source review](../toolkit-v2/c13/completion-20261116/extractbench-cfpb-source-review.json)
+verified the published origin of three clean loan disclosure PDFs and
+all nine agent inputs. The six linked tasks stay in one stage if adopted.
+The protected contents and native grades remain pending.
+
 The [Venvstacks lock projection](../toolkit-v2/c13/completion-20261116/venvstacks-runtime-lock-projection.json)
 found 15 matching cached wheels and 32 missing. The [Tox audit](../toolkit-v2/c13/completion-20261116/tox-native-runtime-audit.json)
 found a pytest version mismatch and unbound plugin options. Both preserve the

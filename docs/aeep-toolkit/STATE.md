@@ -70,6 +70,21 @@ Source provenance and permitted use, protected grading and formal assignment
 remain open. No task assets were downloaded or disclosed. The prior offline
 grader review remains the next required runtime step.
 
+The [CFPB source review](../../reports/toolkit-v2/c13/completion-20261116/extractbench-cfpb-source-review.json)
+matches three clean ExtractBench PDFs to the Bureau's public loan disclosure
+samples. H-25(E) and H-25(F) match every page. The filled sample matches
+pages 2–6 of H-25(B) and omits its cover. The comparisons checked normalized
+text and rendered pixels at 96 and 144 DPI. Nine benchmark inputs matched
+the pinned manifest and Git blobs. Keep the three degraded variants in
+the same six-case family. The protected files have publisher metadata
+bindings. Their contents, native grading and formal assignment remain open.
+[CFPB source-use notice](https://www.consumerfinance.gov/privacy/website-privacy-policy/)
+
+The CFPB inputs passed hash and size drift controls. All 28 focused
+benchmark and artifact-preflight tests passed. The offline docs check
+passed. The source copies, exact manifest records and local comparison
+commands are in `.aeep/completion-20261116/extractbench-cfpb-source-review`.
+
 The document grouping checks reproduced the report byte for byte and
 rejected a changed manifest. Compilation and the schema check passed.
 Both full regression runs passed 2,165 tests with 21 skips. Combined

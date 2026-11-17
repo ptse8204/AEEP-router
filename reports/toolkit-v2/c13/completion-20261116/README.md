@@ -567,6 +567,17 @@ the whole pool. Each illustrative holdout has two long documents. This is
 a capacity check pending source and rights review, protected grading and
 formal assignment.
 
+The [CFPB case review](extractbench-cfpb-source-review.json) verifies nine
+input files across three tasks against the upstream manifest and matches their
+PDFs to CFPB originals. Both refinance examples match all pages. The
+benchmark's filled example matches the five form pages of the fixed-rate
+sample. The comparison covers text and rendered pixels. The three degraded
+copies share the same source family. All oracle files stay outside the
+verified input roots. The task declarations still need protected grading
+and approval for provider disclosure.
+[CFPB model forms](https://www.consumerfinance.gov/rules-policy/regulations/1026/2026-04-08/h/) ·
+[CFPB source-use notice](https://www.consumerfinance.gov/privacy/website-privacy-policy/)
+
 The original ExtractBench Harbor verifier uses value F1 and reports
 perfect-document status separately. Its Dockerfile fetches a scorer and
 dependencies at build time. Exact offline dependency review, grader
