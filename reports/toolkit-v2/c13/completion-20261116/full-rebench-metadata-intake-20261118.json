@@ -1,0 +1,415 @@
+{
+  "column_scope": "Full task-body, patches, dependency commands and expected-test columns were excluded. The Parquet footer may contain statistics referencing other columns. Retained raw ranges and candidate lists stay private.",
+  "columns": [
+    "instance_id",
+    "base_commit",
+    "repo",
+    "license_name",
+    "meta.has_test_patch",
+    "meta.num_modified_files",
+    "install_config.python",
+    "install_config.log_parser"
+  ],
+  "comparisons_paused": true,
+  "dataset": "nebius/SWE-rebench",
+  "declared_python_minor_profiles": {
+    "3.10": {
+      "provisional_rows": 595,
+      "repository_families": 166
+    },
+    "3.11": {
+      "provisional_rows": 164,
+      "repository_families": 49
+    },
+    "3.12": {
+      "provisional_rows": 34,
+      "repository_families": 20
+    },
+    "3.13": {
+      "provisional_rows": 3,
+      "repository_families": 2
+    },
+    "3.4": {
+      "provisional_rows": 48,
+      "repository_families": 30
+    },
+    "3.5": {
+      "provisional_rows": 339,
+      "repository_families": 120
+    },
+    "3.6": {
+      "provisional_rows": 2039,
+      "repository_families": 597
+    },
+    "3.7": {
+      "provisional_rows": 2050,
+      "repository_families": 642
+    },
+    "3.8": {
+      "provisional_rows": 824,
+      "repository_families": 308
+    },
+    "3.9": {
+      "provisional_rows": 9320,
+      "repository_families": 2195
+    }
+  },
+  "driver": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/screen_full_rebench_metadata.py",
+    "sha256": "fecfc8e460cd1dff88a5be2217adb8839ae68549c05ebc3761d4cc37762ff5b2"
+  },
+  "existing_leaderboard_cases_excluded": 860,
+  "existing_leaderboard_origins_excluded": 853,
+  "first_acquisition": {
+    "path": ".aeep/rebench-full-first-source-review-20261118.json",
+    "sha256": "a274480ecc15f63907c17b9210d94d735af59526e148b6368fb4e6c43e87af3f"
+  },
+  "formal_cases_adopted": 0,
+  "full_shard_hash_verified": false,
+  "latest_v2_discovery": {
+    "data_columns_requested": 0,
+    "dataset": "nebius/SWE-rebench-V2",
+    "one_trailer_footer_length_bytes": 4589318,
+    "published_parquet_bytes": 428839266,
+    "revision": "d7608f017a29ab256400ad4b73d5248d97204966",
+    "status": "Separate prospective source. Its footer is above the bounded V1 review; no feasibility count inferred."
+  },
+  "local_fixture": {
+    "path": ".aeep/rebench-range-fixture.7xxedt",
+    "sha256": "b962cd0b534d6c087d0b123ada20ab9b7540a834163a6b8b77bf4dd99a713413"
+  },
+  "metadata_body_bytes": 1815861,
+  "new_model_turns": 0,
+  "offline_replay_verified": true,
+  "pinned_repositories_excluded": 138,
+  "project_rights_verified": false,
+  "protected_identity_intake_plan": {
+    "executed": false,
+    "maximum_range_bytes": 5026939,
+    "maximum_range_requests": 6,
+    "next_control": "Use one public pinned shard HEAD and exact ranges after at least 52 GiB is usable. Discard unrelated rows after extraction and retain selected test identities outside worker inputs.",
+    "purpose": "Check published issue and preservation identity availability for four initial software leads.",
+    "row_groups": [
+      {
+        "allowed_ranges": {
+          "FAIL_TO_PASS.list.element": {
+            "bytes": 225039,
+            "start": 91227341
+          },
+          "PASS_TO_PASS.list.element": {
+            "bytes": 1380441,
+            "start": 91486364
+          }
+        },
+        "row_group": 7,
+        "row_positions": {
+          "jorenham__optype-29": 326
+        },
+        "shard": "data/test-00001-of-00002.parquet",
+        "shard_sha256": "81994a30bd2e89fb5e5aedf9196e6425c700b4898720c4d74a0cfd7314f56eeb"
+      },
+      {
+        "allowed_ranges": {
+          "FAIL_TO_PASS.list.element": {
+            "bytes": 263271,
+            "start": 115612526
+          },
+          "PASS_TO_PASS.list.element": {
+            "bytes": 1562961,
+            "start": 115906066
+          }
+        },
+        "row_group": 9,
+        "row_positions": {
+          "ryanhoangt__locify-8": 373
+        },
+        "shard": "data/test-00001-of-00002.parquet",
+        "shard_sha256": "81994a30bd2e89fb5e5aedf9196e6425c700b4898720c4d74a0cfd7314f56eeb"
+      },
+      {
+        "allowed_ranges": {
+          "FAIL_TO_PASS.list.element": {
+            "bytes": 328560,
+            "start": 133898833
+          },
+          "PASS_TO_PASS.list.element": {
+            "bytes": 1266667,
+            "start": 134261486
+          }
+        },
+        "row_group": 10,
+        "row_positions": {
+          "Akkudoktor-EOS__EOS-459": 362,
+          "ceb10n__fastapi-translations-management-11": 230
+        },
+        "shard": "data/test-00001-of-00002.parquet",
+        "shard_sha256": "81994a30bd2e89fb5e5aedf9196e6425c700b4898720c4d74a0cfd7314f56eeb"
+      }
+    ]
+  },
+  "provisional_lanes": {
+    "declared_3_12": {
+      "catalog": {
+        "path": ".aeep/completion-20261116/rebench-full-metadata-20261118/declared_3_12.json",
+        "sha256": "ea49596659d7cb495c6092331120bbc8a69743f3618017c13b2625f720fe78e9"
+      },
+      "provisional_rows": 34,
+      "repository_families": 20,
+      "rows_publisher_reports_at_least_two_changed_files": 21
+    },
+    "declared_3_13": {
+      "catalog": {
+        "path": ".aeep/completion-20261116/rebench-full-metadata-20261118/declared_3_13.json",
+        "sha256": "971fc752f083075eff902a1ba6d2363eb2f6720b97671b128949748b91c62806"
+      },
+      "provisional_rows": 3,
+      "repository_families": 2,
+      "rows_publisher_reports_at_least_two_changed_files": 3
+    },
+    "other_pinned_version": {
+      "catalog": {
+        "path": ".aeep/completion-20261116/rebench-full-metadata-20261118/other_pinned_version.json",
+        "sha256": "9212b52aca5f63865aa0fb07a2b6e210cda19fd44ae90c66fe5b685ad84621bd"
+      },
+      "provisional_rows": 15379,
+      "repository_families": 2992,
+      "rows_publisher_reports_at_least_two_changed_files": 10809
+    }
+  },
+  "publisher_manifest_batch": {
+    "checks": {
+      "Akkudoktor-EOS__EOS-459": {
+        "admits_retained_python_3_13_15_in_project_metadata": true,
+        "metadata_constraint": ">=3.10",
+        "metadata_constraint_source": "project.requires-python",
+        "publisher_metadata_and_license": [
+          {
+            "bytes": 3611,
+            "declared_core_dependencies": 0,
+            "has_static_pep621_requirement": true,
+            "http_status": 200,
+            "path": ".aeep/completion-20261116/rebench-full-metadata-20261118/publisher-metadata/Akkudoktor-EOS__EOS-459/pyproject.toml",
+            "python_3_13_15_admitted": true,
+            "requires_python": ">=3.10",
+            "sha256": "399b66de6e8e5cda124d4bccb0b1ba5b4cd5dce307efb1122a74ef82d4867b86",
+            "source": "https://raw.githubusercontent.com/akkudoktor-eos/eos/d912561bfbe5c1c97505f89225c3f9650b00c3c7/pyproject.toml"
+          },
+          {
+            "bytes": 622,
+            "http_status": 200,
+            "notice_detected": true,
+            "path": ".aeep/completion-20261116/rebench-full-metadata-20261118/publisher-metadata/Akkudoktor-EOS__EOS-459/LICENSE",
+            "sha256": "b8b7a350b82493701884f8ad4a300758d6d9694ddb4ba57c79be291e4cd257c5",
+            "source": "https://raw.githubusercontent.com/akkudoktor-eos/eos/d912561bfbe5c1c97505f89225c3f9650b00c3c7/LICENSE"
+          }
+        ],
+        "reference_grader_or_redistribution_verified": false,
+        "repository": "akkudoktor-eos/eos",
+        "revision": "d912561bfbe5c1c97505f89225c3f9650b00c3c7"
+      },
+      "BoboTiG__ebook-reader-dict-2054": {
+        "admits_retained_python_3_13_15_in_project_metadata": null,
+        "metadata_constraint": null,
+        "metadata_constraint_source": null,
+        "publisher_metadata_and_license": [
+          {
+            "bytes": 1100,
+            "declared_core_dependencies": 0,
+            "has_static_pep621_requirement": false,
+            "http_status": 200,
+            "path": ".aeep/completion-20261116/rebench-full-metadata-20261118/publisher-metadata/BoboTiG__ebook-reader-dict-2054/pyproject.toml",
+            "python_3_13_15_admitted": null,
+            "requires_python": null,
+            "sha256": "111a9aa475c4b101fe19dc0c87be2f792357371487fd1e7b9f39449874517583",
+            "source": "https://raw.githubusercontent.com/bobotig/ebook-reader-dict/d6cc6741d4712018610391f1bc229fb9e0d3210e/pyproject.toml"
+          },
+          {
+            "bytes": 1081,
+            "http_status": 200,
+            "notice_detected": true,
+            "path": ".aeep/completion-20261116/rebench-full-metadata-20261118/publisher-metadata/BoboTiG__ebook-reader-dict-2054/LICENSE",
+            "sha256": "cb7d7ba81318ff856bb1d944eff2b079fd6128d1d3440c6f9e5b28971f1ed4c8",
+            "source": "https://raw.githubusercontent.com/bobotig/ebook-reader-dict/d6cc6741d4712018610391f1bc229fb9e0d3210e/LICENSE"
+          }
+        ],
+        "reference_grader_or_redistribution_verified": false,
+        "repository": "bobotig/ebook-reader-dict",
+        "revision": "d6cc6741d4712018610391f1bc229fb9e0d3210e"
+      },
+      "ceb10n__fastapi-translations-management-11": {
+        "admits_retained_python_3_13_15_in_project_metadata": true,
+        "metadata_constraint": ">=3.12",
+        "metadata_constraint_source": "project.requires-python",
+        "publisher_metadata_and_license": [
+          {
+            "bytes": 2425,
+            "declared_core_dependencies": 3,
+            "has_static_pep621_requirement": true,
+            "http_status": 200,
+            "path": ".aeep/completion-20261116/rebench-full-metadata-20261118/publisher-metadata/ceb10n__fastapi-translations-management-11/pyproject.toml",
+            "python_3_13_15_admitted": true,
+            "requires_python": ">=3.12",
+            "sha256": "597ebb7d9d9fb7ba5f12e22c7e0a26923b213c3d7f219d001216d09d2adb5fb4",
+            "source": "https://raw.githubusercontent.com/ceb10n/fastapi-translations-management/89a7520595f4fe9cbc2f93b74b7c9db9c4da951d/pyproject.toml"
+          },
+          {
+            "bytes": 1116,
+            "http_status": 200,
+            "notice_detected": true,
+            "path": ".aeep/completion-20261116/rebench-full-metadata-20261118/publisher-metadata/ceb10n__fastapi-translations-management-11/LICENSE",
+            "sha256": "0ff89b703486a783a8351022ab360631f46ddd0484c7d6f69d0a290c6ddf2d0d",
+            "source": "https://raw.githubusercontent.com/ceb10n/fastapi-translations-management/89a7520595f4fe9cbc2f93b74b7c9db9c4da951d/LICENSE"
+          }
+        ],
+        "reference_grader_or_redistribution_verified": false,
+        "repository": "ceb10n/fastapi-translations-management",
+        "revision": "89a7520595f4fe9cbc2f93b74b7c9db9c4da951d"
+      },
+      "fsspec__filesystem_spec-1465": {
+        "admits_retained_python_3_13_15_in_project_metadata": null,
+        "metadata_constraint": null,
+        "metadata_constraint_source": null,
+        "publisher_metadata_and_license": [
+          {
+            "bytes": 499,
+            "declared_core_dependencies": 0,
+            "has_static_pep621_requirement": false,
+            "http_status": 200,
+            "path": ".aeep/completion-20261116/rebench-full-metadata-20261118/publisher-metadata/fsspec__filesystem_spec-1465/pyproject.toml",
+            "python_3_13_15_admitted": null,
+            "requires_python": null,
+            "sha256": "8d98d645bc4dfb2d28369b9e2dd29027e4e7f769d136fb24b11679e581529578",
+            "source": "https://raw.githubusercontent.com/fsspec/filesystem_spec/dd8cb9bf620be4d9153e854dd1431c23a2be6db0/pyproject.toml"
+          },
+          {
+            "bytes": 1513,
+            "http_status": 200,
+            "notice_detected": true,
+            "path": ".aeep/completion-20261116/rebench-full-metadata-20261118/publisher-metadata/fsspec__filesystem_spec-1465/LICENSE",
+            "sha256": "2dc35496ce53a7307915c008a844aad53e772b49b34cdd00445067691407ec94",
+            "source": "https://raw.githubusercontent.com/fsspec/filesystem_spec/dd8cb9bf620be4d9153e854dd1431c23a2be6db0/LICENSE"
+          }
+        ],
+        "reference_grader_or_redistribution_verified": false,
+        "repository": "fsspec/filesystem_spec",
+        "revision": "dd8cb9bf620be4d9153e854dd1431c23a2be6db0"
+      },
+      "jorenham__optype-29": {
+        "admits_retained_python_3_13_15_in_project_metadata": true,
+        "metadata_constraint": "^3.12",
+        "metadata_constraint_source": "tool.poetry.dependencies.python",
+        "publisher_metadata_and_license": [
+          {
+            "bytes": 5538,
+            "declared_core_dependencies": 0,
+            "has_static_pep621_requirement": false,
+            "http_status": 200,
+            "path": ".aeep/completion-20261116/rebench-full-metadata-20261118/publisher-metadata/jorenham__optype-29/pyproject.toml",
+            "python_3_13_15_admitted": null,
+            "requires_python": null,
+            "sha256": "dc500b3eac1139a55bf5a400e37bb2e8d33cf4b2ec2049600bb20d9645ecadb9",
+            "source": "https://raw.githubusercontent.com/jorenham/optype/4d3e3765a206e98df244e33b95a3c29175ed121c/pyproject.toml"
+          },
+          {
+            "bytes": 1505,
+            "http_status": 200,
+            "notice_detected": true,
+            "path": ".aeep/completion-20261116/rebench-full-metadata-20261118/publisher-metadata/jorenham__optype-29/LICENSE",
+            "sha256": "a659b2f5799b7f8beda6b87f18b4f497ccdb180bac32cb99426738719a7cc3fb",
+            "source": "https://raw.githubusercontent.com/jorenham/optype/4d3e3765a206e98df244e33b95a3c29175ed121c/LICENSE"
+          }
+        ],
+        "reference_grader_or_redistribution_verified": false,
+        "repository": "jorenham/optype",
+        "revision": "4d3e3765a206e98df244e33b95a3c29175ed121c"
+      },
+      "ryanhoangt__locify-8": {
+        "admits_retained_python_3_13_15_in_project_metadata": true,
+        "metadata_constraint": "^3.12",
+        "metadata_constraint_source": "tool.poetry.dependencies.python",
+        "publisher_metadata_and_license": [
+          {
+            "bytes": 1005,
+            "declared_core_dependencies": 0,
+            "has_static_pep621_requirement": false,
+            "http_status": 200,
+            "path": ".aeep/completion-20261116/rebench-full-metadata-20261118/publisher-metadata/ryanhoangt__locify-8/pyproject.toml",
+            "python_3_13_15_admitted": null,
+            "requires_python": null,
+            "sha256": "003b8715d0933e8803eeb35f6737b077cfa1a4f3500590ced28397a14d25b48b",
+            "source": "https://raw.githubusercontent.com/ryanhoangt/locify/cabfbb04d0d94bb50f67c84201f1fdb9022a0a2c/pyproject.toml"
+          },
+          {
+            "bytes": 1069,
+            "http_status": 200,
+            "notice_detected": true,
+            "path": ".aeep/completion-20261116/rebench-full-metadata-20261118/publisher-metadata/ryanhoangt__locify-8/LICENSE",
+            "sha256": "ba9fbe5fb86ae1db20cbadb5025509808b8b40f349f53a5da90c3af8ac94f9e7",
+            "source": "https://raw.githubusercontent.com/ryanhoangt/locify/cabfbb04d0d94bb50f67c84201f1fdb9022a0a2c/LICENSE"
+          }
+        ],
+        "reference_grader_or_redistribution_verified": false,
+        "repository": "ryanhoangt/locify",
+        "revision": "cabfbb04d0d94bb50f67c84201f1fdb9022a0a2c"
+      }
+    },
+    "coverage_scope": "The dataset uses Python 3.12 for these six leads. Four projects declare a version range that admits Python 3.13.15. Test compatibility, dependency closure, archive rights and workload validity remain open.",
+    "poetry_caret_reference": "https://python-poetry.org/docs/dependency-specification/#caret-requirements",
+    "public_requests": 12,
+    "raw_observations": {
+      "path": ".aeep/completion-20261116/rebench-full-metadata-20261118/project-metadata-result.json",
+      "sha256": "b2b06b9795d1bf3f65243e25a5d662772831089716556dad8f3c61e57f803b87"
+    },
+    "response_bytes": 21084
+  },
+  "pyarrow_version": "21.0.0",
+  "rejections": {
+    "already_in_leaderboard_revision": 191,
+    "duplicate_full_release_origin": 892,
+    "license_label_needs_separate_review": 2504,
+    "missing_test_patch_or_edit_count": 21,
+    "previously_considered_or_development_exposed_repository": 2195,
+    "unreviewed_test_runner_or_python": 117
+  },
+  "replay_driver": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/reconcile_full_rebench_metadata.py",
+    "sha256": "1246ce315ce2dcf67d29ccb1dd7cf3fcb9f70c558fe70baea8a36d31ef06c75a"
+  },
+  "requests": {
+    "head": 2,
+    "range_gets": 180
+  },
+  "retained_data_fragments_hash_verified": 176,
+  "revision": "6aecac9ae07f7efa62e93873b239fdfa1f8aa258",
+  "rows": 21336,
+  "schema_version": "aeep.c13.full-rebench-metadata-screen.v1",
+  "shards": [
+    {
+      "data_range_bytes": 709973,
+      "data_range_requests": 88,
+      "footer_bytes": 186841,
+      "footer_sha256": "c82f2311d0667d47897a017aebe150950e4bd839677df412237838e5b8468e2e",
+      "name": "data/test-00000-of-00002.parquet",
+      "publisher_lfs_sha256": "e0a33a5fc618aac8c24c0a17125dbd6442f79be1cc0f4c67e2edab03de70e1b7",
+      "publisher_shard_bytes": 104004857,
+      "retained_chunk_inventory_sha256": "7c9ba1c00b8d66b1ad92abdc86e7687be7b014c7ef5ca21e3603733facaef1ff",
+      "rows": 10668
+    },
+    {
+      "data_range_bytes": 721602,
+      "data_range_requests": 88,
+      "footer_bytes": 197445,
+      "footer_sha256": "d6987648242219f5f054ee195193733ef9d766c3d3da8875e006b7770e4a6036",
+      "name": "data/test-00001-of-00002.parquet",
+      "publisher_lfs_sha256": "81994a30bd2e89fb5e5aedf9196e6425c700b4898720c4d74a0cfd7314f56eeb",
+      "publisher_shard_bytes": 135730600,
+      "retained_chunk_inventory_sha256": "fd1168b77d2abfc42b71c467552e97bb51332a69ae2ac59281409604333efdb3",
+      "rows": 10668
+    }
+  ],
+  "task_sources_downloaded": 0,
+  "transport": "The pinned Hub resolver returned the expected LFS identity. Only listed byte ranges were read and individually hashed.",
+  "upstream_card_git_blob": "65258ae8c6f702e55ff87fcaa2ae28201e88ee32",
+  "upstream_dataset_license": "CC-BY-4.0",
+  "waza_excluded": true
+}

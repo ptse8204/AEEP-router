@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 SWE-rebench source intake](../toolkit-v2/c13/completion-20261116/full-rebench-metadata-intake-20261118.json)
+replays 21,336 publisher rows from retained metadata ranges. Three
+provisional rows declare Python 3.13. Four of six screened Python 3.12
+projects declare compatibility with the existing 3.13 carrier. The
+staged identity check is waiting for 52 GiB of usable storage. No new
+case has been reproduced or assigned.
+
 The [C13 PyGLS protected reference](../toolkit-v2/c13/completion-20261116/pygls-first-protected-result-20261118.json)
 settled in 23.44 seconds without a grade. The read-only audit verified
 the charge and container cleanup. All 87 required tests remain in the

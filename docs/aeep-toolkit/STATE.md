@@ -1,5 +1,31 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 18. The broader SWE-rebench edition has few exact-runtime leads.**
+The [source intake](../../reports/toolkit-v2/c13/completion-20261116/full-rebench-metadata-intake-20261118.json)
+replays all 21,336 rows at publisher revision `6aecac9a` from
+1.82 MB of footer and selected column ranges. It checks every retained
+fragment and excludes known repositories and the earlier leaderboard
+identities. The metadata screen returns 3 rows declaring Python 3.13,
+34 declaring 3.12 and 164 declaring 3.11. These are provisional leads.
+Changing the interpreter alone would leave the 3.11 lane below the
+current 196-case software shortfall, even before checking eligibility.
+
+Six Python 3.12 leads have pinned publisher manifests and notices.
+Four project constraints admit the existing Python 3.13.15 carrier.
+The next read-only intake binds six exact Parquet ranges for those
+four leads. It will check the original issue and preservation identities
+before any source archive or verifier run. Run
+`read_full_rebench_test_identities.py --intake-sha256 <intake-file-digest>`
+from the pinned coordinator with at least 52 GiB available plus the
+5,026,939-byte input allowance. Local identity and reserve controls pass.
+The intake is unstarted. Publisher constraints and license labels still
+need runtime reproduction and exact asset review.
+
+The volume now has about 41.4 GiB usable. Local dispatch waits for
+the recorded reserve. Recovery group `67a93f4c` also still requires
+operator approval. The reproduced pool stays at 50 cases. No cohort
+was adopted. Comparisons stay paused and Waza is excluded.
+
 **November 18. The first PyGLS reference settled without a grade.**
 The [PyGLS record](../../reports/toolkit-v2/c13/completion-20261116/pygls-first-protected-result-20261118.json)
 binds the publisher revision, 87 required tests and four lockfile wheels
