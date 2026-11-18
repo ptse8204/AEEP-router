@@ -68,12 +68,32 @@ including 146,816 cached input tokens and 209 reasoning tokens. The
 grant settled 21 operations and one turn with $0 cash. Both worker checks
 cleaned up and the proxy returned to stopped.
 
+The [field evidence audit](cfpb-field-evidence-audit-20261117.json)
+checked both managed reports and 11 attempt and grader stores. The
+protected grader kept the aggregate and discarded its field-level
+feedback. The submission receipt retained its hash and 13,030-byte size.
+The saved evidence cannot identify which fields differed or how many.
+Neither the model nor the grader was rerun. All six related publisher
+tasks remain outside both exploratory formal intake scenarios.
+
+[A diagnostic reader](summarize_cfpb_feedback.py) checks that protected
+feedback agrees with the published score and exports only reviewed field
+names and mismatch counts. The preflight exercised 62 allowlisted schema
+paths and rejected ten invalid inputs using synthetic feedback. The
+protected grading path has yet to use this reader.
+
 The [current-wheel lifecycle](current-wheel-lifecycle-result-20261117.json)
 passed under exact review `f47bbb55` on macOS arm64 with Python 3.13.
 Wheel `d5f092a8` used 32 unchanged cached dependencies. All seven phases
 passed in 8.30 seconds, including the idempotent reapply, installed source
 check, inert candidate inspection, matching HTML and Markdown report
 hashes, and removal. The removal journal and neighboring file remain.
+
+The [current Linux inputs](current-linux-wheel-inputs-20261117.json)
+passed archive and preview checks. The 32 cached dependency wheels match
+the earlier Linux check and the current wheel changes only a dev-only
+dependency declaration. The current wheel's Linux lifecycle remains
+unstarted and needs a separate execution review.
 
 The operator authorized removal of the oldest local Time Machine snapshot.
 APFS confirmed that the November 15 snapshot was removed and the November 16

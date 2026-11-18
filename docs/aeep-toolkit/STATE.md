@@ -1,5 +1,28 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. CFPB field attribution is unavailable in the saved evidence.**
+The [read-only audit](../../reports/toolkit-v2/c13/completion-20261116/cfpb-field-evidence-audit-20261117.json)
+reconciled the protected grade, both reports and all 11 campaign attempt
+and grader stores. The callback retained value F1 `0.9968553459119497`
+and exact-match failure. The 13,030-byte submission has a recorded hash.
+The submission and normalized field markers were transient, so the audit
+cannot identify the fields or their count. No model or grader was rerun.
+
+A separate diagnostic preflight reconciled the score with synthetic
+feedback and rejected ten invalid inputs. The diagnostic can export
+reviewed schema field names and mismatch types without values or row
+indices. It has yet to run inside the protected grader. Both exploratory
+intake scenarios still exclude all six related CFPB publisher tasks.
+Neither scenario assigns formal cases.
+
+The [current Linux wheel inputs](../../reports/toolkit-v2/c13/completion-20261116/current-linux-wheel-inputs-20261117.json)
+passed read-only archive and manifest checks for the existing aarch64
+carrier. Wheel `d5f092a8` uses the 32 previously verified Linux dependency
+artifacts. The only dependency declaration change removes a dev-only
+pin. The current wheel was not installed on Linux. Any repeat needs an
+exact execution review. C13 stays open. Comparisons stay paused and Waza
+remains excluded.
+
 **November 17. The reviewed CFPB task completed through the ordinary CLI.**
 The [execution result](../../reports/toolkit-v2/c13/completion-20261116/cfpb-cli-execution-result-20261117.json)
 binds approval `7735ab2d`, the two fresh worker checks, and the single

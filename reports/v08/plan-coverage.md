@@ -1,5 +1,19 @@
 # 0.8 plan coverage and remaining work
 
+The [CFPB field audit](../toolkit-v2/c13/completion-20261116/cfpb-field-evidence-audit-20261117.json)
+joins the saved aggregate grade and submission hash to the canonical
+trial. No field markers or submission bytes survived cleanup. Field
+attribution remains unknown. A first-party diagnostic passed synthetic
+checks to retain only reviewed field names in future protected grading.
+All six related CFPB tasks remain excluded from both exploratory intake
+scenarios. The audit ran no models or graders.
+
+The [Linux wheel preflight](../toolkit-v2/c13/completion-20261116/current-linux-wheel-inputs-20261117.json)
+verifies the current `d5f092a8` wheel, 32 cached Linux dependencies and
+the installer manifest for the retained aarch64 carrier. A current-wheel
+Linux install and removal remain unstarted. C13 remains open, comparisons
+stay paused, and Waza remains excluded.
+
 The [CFPB CLI result](../toolkit-v2/c13/completion-20261116/cfpb-cli-execution-result-20261117.json)
 records two passing worker readiness checks and one completed GPT-6.1 Sol
 medium turn. Its protected native value F1 was 0.996855 with an exact-match
