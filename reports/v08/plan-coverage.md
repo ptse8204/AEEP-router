@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 Conan receipt audit](../toolkit-v2/c13/completion-20261116/conan-contained-runtime-20261118.json)
+verifies the retained runtime dependency closure and the first reference's
+settled observation mismatch. It issued no grade. The original is
+unstarted. Collection-only review `b95a5c45` passed a copied-ledger
+rehearsal and awaits repeat approval. The software pool remains at 48
+reproduced cases.
+
 The [C13 Conan preflight](../toolkit-v2/c13/completion-20261116/conan-native-selector-preflight-20261118.json)
 maps all 23 required selectors to 30 protected test identities. The
 patched and original archives retain their pins. The pytest 7.4.4

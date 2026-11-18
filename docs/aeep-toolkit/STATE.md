@@ -1,5 +1,23 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 18. Conan's first protected reference settled without a grade.**
+The [Conan receipt audit](../../reports/toolkit-v2/c13/completion-20261116/conan-contained-runtime-20261118.json)
+verifies 19 active dependency requirements in the retained image and
+seven ZIP-imported wheels. This is a static dependency check. The first
+contained reference failed the 30-test observation contract after 2.265
+seconds. Docker recorded exit 0 and confirmed removal. The protected
+reply was discarded, so the cause remains unknown. The original-source
+role is unstarted. One operation and its 35-second reservation remain
+recorded.
+
+Review `b95a5c45` binds one collection-only repeat with sanitized
+diagnostics and no grade. Private ledger rehearsals preserved prior
+charges and rejected execution without approval. The repeat is unstarted
+and requires approval, with a ceiling of one operation and 35 reserved
+seconds. The software pool remains at 48 reproduced cases. The other
+pending reviews retain scope. Comparisons stay paused and Waza is
+excluded.
+
 **November 18. Conan's protected selector coverage has been reconstructed.**
 The [Conan preflight](../../reports/toolkit-v2/c13/completion-20261116/conan-native-selector-preflight-20261118.json)
 expands 23 required selectors to 30 test identities, including every

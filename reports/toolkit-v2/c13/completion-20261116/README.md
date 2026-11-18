@@ -113,6 +113,15 @@ checks and verify native collection before assigning a grade.
 [pytest 7.4.4](https://pypi.org/project/pytest/7.4.4/) ·
 [patch-ng 1.18.1](https://pypi.org/project/patch-ng/1.18.1/)
 
+The [Conan runtime and receipt audit](conan-contained-runtime-20261118.json)
+verifies 19 active dependency requirements using 11 inherited packages
+and seven portable wheels. The first reference call settled at 2.265
+seconds with an observation mismatch and no grade. The container exited
+with code 0 and was removed. The raw reply was discarded, so the
+mismatch cause is unknown and the original is unstarted. Collection-only
+review `b95a5c45` passed a copied-ledger rehearsal and requires repeat
+approval for one offline call and 35 reserved seconds.
+
 The [document boundary audit](document-dispatch-boundary-20261118.json)
 rebuilt the three public input ZIPs and verified each ordinary recipe,
 environment and case-set digest. It joined 11 Workbook Recovery receipts,
