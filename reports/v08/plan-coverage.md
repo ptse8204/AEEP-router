@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 Advanced Alchemy contained check](../toolkit-v2/c13/completion-20261116/advanced-alchemy-first-protected-result-20261118.json)
+verifies pinned native imports and all 174 required collection
+identities on the retained ARM64 carrier. The reference passed 170
+required tests and failed four. The score and failure identities are
+unavailable. Both charges settled and the original control is
+unstarted. The one-operation repeat remains unapproved.
+
 The [C13 Advanced Alchemy intake](../toolkit-v2/c13/completion-20261116/advanced-alchemy-protected-intake-20261118.json)
 matches the public archive to its Git tree and stages the three-file
 repair and all 174 required tests. The 22 lockfile wheels have verified

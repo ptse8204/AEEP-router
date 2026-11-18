@@ -1,5 +1,27 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 18. Advanced Alchemy collected all required tests.**
+The [first contained check](../../reports/toolkit-v2/c13/completion-20261116/advanced-alchemy-first-protected-result-20261118.json)
+verified pinned distribution versions and native import origins on the
+retained ARM64 carrier. The adapted grader collected 195 tests,
+including all 174 required identities. The published repair passed 170
+required tests and failed four. The reference issued no grade and the
+original-source role remains unstarted. The retained summary has
+counts and a log digest. It cannot identify the four failures.
+
+Both containers were removed and both operations settled. The read-only
+ledger check matched 130 reserved seconds and 5.55 observed seconds.
+The reproduced pool remains at 49 cases. Repeat review `9af9dc28`
+uses the same reference payload and remaining operation to identify
+mismatched required tests and distinguish issue checks from preservation
+checks. The copied-ledger rehearsal preserved the two charges and
+refused replay. The diagnostic and recovery group `403dfca5` are
+unapproved and unstarted. C13 stays open, comparisons stay paused,
+and Waza is excluded.
+
+The [combined recovery review `e0941e18`](../../reports/toolkit-v2/c13/completion-20261116/c13-recovery-group-with-alchemy-reference-20261118.json)
+pairs both unchanged scopes for one operator decision.
+
 **November 18. Advanced Alchemy has verified source and grader inputs.**
 The [protected intake](../../reports/toolkit-v2/c13/completion-20261116/advanced-alchemy-protected-intake-20261118.json)
 binds the 1,094,807-byte public archive to the publisher's Git tree
