@@ -23,6 +23,37 @@ Combined line and branch coverage was 81.45 percent. This count covers
 the tracked archive. Both interrupted fixture attempts and the
 successful run retain their logs.
 
+### Completed offline verification group
+
+The [C13 confirmation](c13-offline-approval-20261117.json) applies to
+all six member scopes. Exact digest checks remain part of each driver's
+execution record. Routine bounded C13 work uses this authority without
+a separate operator prompt for each change.
+
+| Scope | Result | New operations |
+| --- | --- | ---: |
+| Current Linux ARM64 wheel | Install, reapply, candidate inspection, report reproduction and removal passed | 1 |
+| Arta | Reference 1/1, original 0/1 | 2 |
+| Workbook Recovery | Ordinary reference and grader controls passed | 11 |
+| Economic detrending | Nine grader calls passed, including eight controls | 9 |
+| RETURNN | Reference observation rejected, original unstarted | 1 |
+| Formula Extraction | BuildKit copy failed after a missing parent layer lookup, grading unstarted | 1 |
+
+The [group result](offline-group-9ee3ca0f-result-20261117.json) joins all
+25 new operations to their receipts and ledgers. It preserves the
+three earlier Workbook Recovery and two earlier economic operations.
+All new operations settled in 35.241 seconds against 1,395 reserved.
+BuildKit's history shows registry denial and zero bytes transferred for
+the missing layer. The failed build and the original parent remain.
+Comparisons remain paused. Waza and release remain outside this scope.
+
+The [RETURNN diagnostic](returnn-reference-diagnostic-result-20261117.json)
+used the same archived input and carrier. Pytest exited 2 with
+`ModuleNotFoundError` and collected no required runtime outcomes.
+The module name was outside the allowlist, so the diagnostic retained
+only the category and counts. Both charges settled, and the diagnostic
+issued no task grade. The original-source role remains unstarted.
+
 ### CFPB native task-pack checks
 
 The [local component result](cfpb-local-component-result-20261117.json)

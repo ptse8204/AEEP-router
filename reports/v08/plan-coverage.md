@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [settled C13 offline group](../toolkit-v2/c13/completion-20261116/offline-group-9ee3ca0f-result-20261117.json)
+verified the current Linux ARM64 install and rollback, Arta's reference
+and original, Workbook Recovery and economic grading. The Formula
+build and RETURNN reference failed with settled receipts. No replay,
+model call, formal case assignment or release occurred within the group.
+
 The [SpreadsheetBench grader scope audit](../toolkit-v2/c13/completion-20261116/spreadsheet-grader-scope-20261117.json)
 checks all 297 cell-task declarations against the pinned scorer. Exact
 preservation remains unverified because the published score can give full

@@ -1,5 +1,26 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. The approved C13 offline group has settled.**
+The [operator's C13 confirmation](../../reports/toolkit-v2/c13/completion-20261116/c13-offline-approval-20261117.json)
+covers all six bound reviews in group `9ee3ca0f`. The
+[group result](../../reports/toolkit-v2/c13/completion-20261116/offline-group-9ee3ca0f-result-20261117.json)
+reconciles 25 operations, 35.241 settled seconds and zero new
+unresolved operations. The current wheel passed Linux ARM64 install,
+idempotent reapply, both report hashes and selective removal. Arta's
+reference scored 1/1 and its original scored 0/1. Workbook Recovery
+passed 11 operations and economic detrending passed nine ordinary
+grader calls on the existing ledger.
+
+RETURNN's reference failed the observation contract and its original
+remains unstarted. Formula Extraction stopped at the COPY-only build
+when BuildKit attempted to read a missing parent layer and the registry
+denied access. The layer transferred zero bytes in the retained log.
+No Formula grader call began. Failed attempts and existing resources
+remain. Routine bounded C13 corrections use the confirmed authority with
+exact evidence and preserved charges. No model turns, cash spending,
+candidate admission or formal assignment occurred. C13 stays open,
+comparisons stay paused, and Waza is excluded.
+
 **November 17. SpreadsheetBench grading has explicit range and rounding limits.**
 The [scope audit](../../reports/toolkit-v2/c13/completion-20261116/spreadsheet-grader-scope-20261117.json)
 read all 297 retained cell-task range declarations and the pinned scorer.
