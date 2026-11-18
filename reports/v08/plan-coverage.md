@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [SpreadsheetBench grader scope audit](../toolkit-v2/c13/completion-20261116/spreadsheet-grader-scope-20261117.json)
+checks all 297 cell-task declarations against the pinned scorer. Exact
+preservation remains unverified because the published score can give full
+credit after rounding. The audit measured declared coverage and left the
+upstream score, retained evidence and formal thresholds intact.
+
 The [tracked-source C13 verification](../toolkit-v2/c13/completion-20261116/tracked-source-verification-20261117.json)
 records 2,180 passes and 21 skips in each of the regression and coverage
 runs. Both coverage gates passed. This verifies the tracked implementation

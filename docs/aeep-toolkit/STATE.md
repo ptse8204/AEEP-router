@@ -1,5 +1,18 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. SpreadsheetBench grading has explicit range and rounding limits.**
+The [scope audit](../../reports/toolkit-v2/c13/completion-20261116/spreadsheet-grader-scope-20261117.json)
+read all 297 retained cell-task range declarations and the pinned scorer.
+The published grade can round one mismatch to full credit in a regression
+bucket of 488 cells or a modification bucket of 20,000 cells. The declared
+ranges are large enough to allow those bucket sizes in 216 and 80 tasks,
+respectively. Actual bucket sizes and coverage outside the declared ranges
+require the workbook bodies. Use exact counts and a separate
+out-of-range control when verifying workbook preservation. The
+upstream score and thresholds stay as published. Ten checks passed.
+The audit opened no workbook bodies and ran no grader or model. C13
+stays open, comparisons stay paused, and Waza remains excluded.
+
 **November 17. The tracked C13 source checks and both coverage gates passed.**
 The [verification record](../../reports/toolkit-v2/c13/completion-20261116/tracked-source-verification-20261117.json)
 binds the unchanged tracked implementation and tests to archive `38850526`.

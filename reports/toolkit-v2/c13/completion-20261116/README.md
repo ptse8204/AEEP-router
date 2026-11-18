@@ -1216,6 +1216,28 @@ Model has 100 tasks and 20 paths, and Template has 97 of each. The other
 24 tasks use the separate visualization evaluator. Use reference paths
 as the initial grouping. Shared provenance may merge groups.
 
+The [grader scope audit](spreadsheet-grader-scope-20261117.json) checks
+the 297 cell-task range declarations against the pinned evaluator. The
+published grader rounds both ratios to four decimal places and treats a
+rounded regression ratio of 0.998 or higher as full credit. A scoring
+bucket can therefore contain one mismatch and still receive full credit
+at 488 regression cells or 20,000 modification cells.
+
+| Category | Tasks | Median declared cell visits | Maximum visits | At least 488 visits | At least 20,000 visits |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Debugging | 100 | 9,311.5 | 294,669 | 100 | 10 |
+| Financial Model | 100 | 39,002 | 222,448 | 100 | 70 |
+| Template | 97 | 306 | 1,008 | 16 | 0 |
+
+Declared visits are upper bounds for each scoring bucket. Actual
+bucket sizes depend on the workbook contents. The audit found no
+overlapping declared ranges and read no workbook bodies. Retain the
+published score alongside exact cell counts and separate out-of-range
+checks during protected verification. The
+[audit](audit_spreadsheet_grader_scope.py) replayed offline and passed
+ten checks, including both cutoff boundaries and source drift.
+[Pinned evaluator](https://github.com/RUCKBReasoning/SpreadsheetBench-2/blob/a7bdc2d358e052d35a94768e1f487c0d9e9c0011/evaluation/evaluation.py#L418)
+
 The [offline replay script](audit_spreadsheet_archive_index.py) with
 `--manifests` reproduced the aggregate from retained metadata. Six
 negative checks rejected malformed inputs. The audit read no workbook
