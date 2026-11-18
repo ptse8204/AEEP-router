@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 SkillsBench task table](../toolkit-v2/c13/completion-20261116/README.md#skillsbench-cli-scores-and-usage)
+shows the protected grades, provider token categories, agent and grader
+timing, and retries for six settled engineering tasks. The existing
+trial and receipt joins reproduced read-only. Matched token differences
+are unavailable for those single-arm runs.
+
 The [six-member offline C13 review](../toolkit-v2/c13/completion-20261116/pending-c13-offline-verification-20261117.json)
 combines the formula, workbook and economic ordinary graders with the
 pending Linux lifecycle and RETURNN and Arta checks. Renewal binds the

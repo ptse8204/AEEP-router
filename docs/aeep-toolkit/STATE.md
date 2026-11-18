@@ -1,5 +1,14 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. C13 summarizes the six settled SkillsBench CLI tasks.**
+The [task table](../../reports/toolkit-v2/c13/completion-20261116/README.md#skillsbench-cli-scores-and-usage)
+loads grades, provider token categories, separate agent and grader
+timing, and retries from the existing receipt audit. The read-only
+audit reproduced all six trial and receipt joins and both report hashes
+per task. These were single-arm engineering runs. Matched differences
+remain unavailable. C13 remains open, comparisons stay paused, and
+Waza is excluded.
+
 **November 17. The ordinary document grader checks are ready for one offline review.**
 The [workbook renewal `43273d66`](../../reports/toolkit-v2/c13/completion-20261116/workbook-ordinary-renewal-review-20261117.json)
 replaces the expired, unstarted `8d35b573` review. It binds the same local

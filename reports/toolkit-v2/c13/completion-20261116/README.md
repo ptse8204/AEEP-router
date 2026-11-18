@@ -413,9 +413,29 @@ C13 remains open. No release or automatic admission was performed.
 | Supported hosts and operator use | macOS arm64 / Python 3.13 checks; earlier actual helped report comprehension | Wider host matrix and unassisted operation remain unverified |
 | Waza | Historical evidence retained | Excluded from this delivery |
 
-The [SkillsBench grade ledger](../canonical-stack-verification-20261113/skillsbench-ledger-audit.json)
-includes three verified passes and three verified task failures. The latest
-direct LibCST rerun has four 0/1 grades. The two Canopen arms passed 6/8
+### SkillsBench CLI scores and usage
+
+The six settled engineering runs each produced a protected grade and
+canonical HTML and Markdown reports. Each run used one required-use arm.
+Matched token differences are unavailable for these runs.
+[Trial receipts and report hashes](../canonical-stack-verification-20261113/domain-journey-audit.json)
+
+| Domain | Task | Grade | Input (cached) | Output (reasoning) | Agent s | Grader s | Retries |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Document/data | Sales Pivot | 0/1 | 273,093 (232,704) | 5,440 (322) | 146.77 | 2.47 | 0 |
+| Document/data | Invoice Fraud | 0/1 | 116,557 (89,984) | 1,868 (41) | 54.05 | 1.51 | 0 |
+| Document/data | Excel-in-PowerPoint | 1/1 | 84,913 (70,144) | 1,761 (66) | 54.08 | 3.07 | 0 |
+| Software | Spring Boot/Jakarta | 1/1 | 133,140 (102,400) | 2,623 (44) | 78.16 | 14.00 | 0 |
+| Software | React performance | 1/1 | 188,327 (146,560) | 4,721 (508) | 122.87 | 36.72 | 0 |
+| Software | Prefix Cache Replay | 0/1 | 40,394 (29,440) | 1,212 (138) | 40.22 | 2.35 | 0 |
+
+Token counts come from the provider and were matched to the trial receipts.
+Input totals include cached input. Output totals include reasoning. Cache
+writes were zero in all six receipts. Agent and grader timings cover their
+respective intervals. The audited wrapper timings are available separately.
+[Timing evidence](skillsbench-resource-observations.json)
+
+The latest direct LibCST rerun has four 0/1 grades. The two Canopen arms passed 6/8
 protected tests each and the two Xsdata arms passed 28/29 each. The observer
 recorded no covered LibCST calls. Unsupported execution paths remain unknown.
 The Sales follow-up and historical Ponytail comparisons retain their original
