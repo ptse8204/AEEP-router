@@ -1,0 +1,112 @@
+{
+  "schema_version": "aeep.c13.djpress-first-protected-result.v1",
+  "source_runtime_proof": {
+    "path": ".aeep/completion-20261116/djpress-protected-pair-20261118/source-and-runtime-proof.json",
+    "sha256": "e9d30b1e81457984642ca37f3f20b3f13ce07dd8d6372a987027dee863d3ab3f"
+  },
+  "review": {
+    "path": ".aeep/completion-20261116/djpress-protected-pair-20261118/operation-review.json",
+    "sha256": "600b6b5059668c8562c3fdae7dbb419c32a479c1f0880c992960a1714f59b04b"
+  },
+  "authority": {
+    "path": ".aeep/completion-20261116/djpress-protected-pair-20261118/delegated-authority.json",
+    "sha256": "8df8de876f1f7ac969adca6236d6d1c2fc46b704c33a200e3d40319441ef0b00"
+  },
+  "driver_preflight": {
+    "path": ".aeep/completion-20261116/djpress-protected-pair-20261118/driver-preflight.json",
+    "sha256": "0e950b2cb867089737103f0cdd3ebf743600b15ee70fa7c9a74b9a07410d0a77"
+  },
+  "result": {
+    "path": ".aeep/completion-20261116/djpress-protected-pair-20261118/execution/result.json",
+    "sha256": "4e0444e2a97896d18ab14e73d2e35aa5162f380b5e456eed526653ce2950326a"
+  },
+  "ledger": {
+    "path": ".aeep/completion-20261116/djpress-protected-pair-20261118/execution/ledger.json",
+    "sha256": "ec2e87e031ecdb48da7ba13636cba457034844211c74e6aec3905ece3d364b26"
+  },
+  "first_party_observations": {
+    "path": ".aeep/completion-20261116/djpress-protected-pair-20261118/execution/required-test-observations.json",
+    "sha256": "8d11e9e5bb30d7745cf619e86fed51924109c9bab18b81eb9f8ca85ec71da196"
+  },
+  "coordinator_source_sha256": "e060413cc2af11fd3c967384ad908026d8e8d467aaa430729ae28462b4f5afc7",
+  "carrier": "sha256:324a1fee6ee58475ecfdc659c98be5b5a8480fae4389b26b13b5b0b43bc32d2b",
+  "both_grades_verified_against_original_callback": true,
+  "ledger_checked_read_only": true,
+  "containers_absent": true,
+  "protected_grades": [
+    {
+      "role": "reference",
+      "grade": 1.0,
+      "receipt_id": "rcpt_24c68d158b564da1b8b8336bac7a55df",
+      "receipt": {
+        "path": ".aeep/completion-20261116/djpress-protected-pair-20261118/execution/receipt-rcpt_24c68d158b564da1b8b8336bac7a55df.json",
+        "sha256": "57391482d3251ceb9f0cb3425b9168ecec0f3b061e9d3fd44184db1c3bbf93b2"
+      },
+      "test_counts": {
+        "PASSED": 68
+      },
+      "elapsed_seconds": 2.250700500095263
+    },
+    {
+      "role": "original",
+      "grade": 0.0,
+      "receipt_id": "rcpt_e546b9a9d01345dea907da22303d254d",
+      "receipt": {
+        "path": ".aeep/completion-20261116/djpress-protected-pair-20261118/execution/receipt-rcpt_e546b9a9d01345dea907da22303d254d.json",
+        "sha256": "8c54d8df9d7aeaf363c88b47baf8378af27f6260e99dd52b040ae476650bdf01"
+      },
+      "test_counts": {
+        "FAILED": 3,
+        "PASSED": 65
+      },
+      "elapsed_seconds": 1.7846298329532146
+    }
+  ],
+  "sqlite_database": ":memory:",
+  "model_turns": 0,
+  "cash_usd": 0,
+  "installations": 0,
+  "builds": 0,
+  "formal_cases_adopted": 0,
+  "software_reproduction_pool": {
+    "previous": {
+      "path": "reports/toolkit-v2/c13/completion-20261116/raygun-protected-audit-results-20261118.json",
+      "sha256": "1affc9097a5b6622b7559ee615e41e3a4aa0d5209c20419f92a65858863b07bd"
+    },
+    "new_row": {
+      "case": "stuartmaxwell__djpress-117",
+      "repository": "stuartmaxwell/djpress",
+      "revision": "62898afc246da3e96a0b8f753cf5e9853d75b40e",
+      "family": "multi-file-repair",
+      "evidence": "settled_ordinary_reference_and_original",
+      "receipt_ids": [
+        "rcpt_24c68d158b564da1b8b8336bac7a55df",
+        "rcpt_e546b9a9d01345dea907da22303d254d"
+      ]
+    },
+    "capacity": {
+      "reproduced_rows": 50,
+      "repository_families": 29,
+      "counts_by_family": {
+        "contract-audit": 12,
+        "single-file-repair": 18,
+        "multi-file-repair": 20
+      },
+      "distinct_receipts": 102,
+      "largest_repository_group_rows": 14,
+      "two_cohorts_shared_early_minimum": 246,
+      "minimum_missing_rows_if_all_reproduced_rows_are_eligible": 196,
+      "two_balanced_holdouts_minimum_missing_by_family_before_early_stages": {
+        "contract-audit": 58,
+        "multi-file-repair": 50,
+        "single-file-repair": 52
+      }
+    }
+  },
+  "unstarted_combined_review": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/c13-recovery-group-with-alchemy-reference-20261118.json",
+    "sha256": "e0941e187e1c22f83a5d16d70c751ebdaa2f6e8190e637694002e6dd634326e5"
+  },
+  "comparisons_paused": true,
+  "waza_excluded": true
+}

@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 DJPress protected result](../toolkit-v2/c13/completion-20261116/djpress-protected-result-20261118.json)
+reproduces the two-file repair at 1/1 and the original at 0/1 on the
+retained Django ARM64 carrier. The read-only audit verified both
+canonical receipts. The reproduced pool now has 50 cases across
+29 repositories. Formal assignment and usefulness remain open.
+
 The [C13 Advanced Alchemy contained check](../toolkit-v2/c13/completion-20261116/advanced-alchemy-first-protected-result-20261118.json)
 verifies pinned native imports and all 174 required collection
 identities on the retained ARM64 carrier. The reference passed 170

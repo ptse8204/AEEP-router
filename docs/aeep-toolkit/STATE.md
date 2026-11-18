@@ -1,5 +1,27 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 18. DJPress passes the protected reference and original checks.**
+The [DJPress result](../../reports/toolkit-v2/c13/completion-20261116/djpress-protected-result-20261118.json)
+binds the two-file repair and 68 original assertions to the retained
+Django ARM64 carrier. The documented runtime uses compatible dependency
+versions and the upstream in-memory SQLite settings. The published
+repair passed all 68 required tests and scored 1/1. The original
+failed the three expected issue tests, passed all 65 preservation
+tests and scored 0/1.
+
+The read-only reconciliation reproduced both grades from their exact
+payload and receipt digests. Both containers were removed. Two local
+operations settled in 4.04 seconds. The private grader now records
+mismatched required identities when the verifier has them. No build,
+install or model turn was needed.
+
+The reproduced software pool now has 50 cases across 29 repositories.
+Even if each qualifies, 196 more eligible cases are needed for the
+two-cohort minimum with shared early stages. Common runtime, exact
+asset use and formal stage assignment remain open. Combined recovery
+review `e0941e18` is unchanged and unstarted. C13 stays open,
+comparisons stay paused, and Waza is excluded.
+
 **November 18. Advanced Alchemy collected all required tests.**
 The [first contained check](../../reports/toolkit-v2/c13/completion-20261116/advanced-alchemy-first-protected-result-20261118.json)
 verified pinned distribution versions and native import origins on the
