@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [RETURNN protected-pair preflight](../toolkit-v2/c13/completion-20261116/returnn-protected-pair-preflight-20261117.json)
+binds one publisher-verified multi-file repair to 13 unchanged upstream
+identities. Seven checks passed, including settlement, missing-test
+failure, and cleanup uncertainty under substituted replies. Exact scope
+`2e961f2b` remains unstarted and no formal case was adopted.
+
 The [exact Linux lifecycle review](../toolkit-v2/c13/completion-20261116/current-linux-wheel-operation-review-20261117.json)
 binds the current wheel `d5f092a8` and the unchanged cached dependencies
 and guest. Eight preflight checks passed. The single offline Linux

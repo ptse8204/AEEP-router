@@ -229,6 +229,24 @@ are preserved. Both preparations matched byte for byte. Publisher binding now
 covers MontePy, GitPython and RETURNN. AiiDA needs a separate binding, and
 protected grading remains open for all four.
 
+The [exact RETURNN review `2e961f2b`](returnn-protected-pair-review-20261117.json)
+binds the published tensor serialization repair and the original
+source to the ordinary protected grader. Both payload hashes match
+the earlier preflight. The 13 upstream identities cover three issue
+checks and ten preservation checks. Seven [driver checks](returnn-protected-pair-preflight-20261117.json)
+included substituted records for two settled calls, a missing test
+and uncertain cleanup. The real two-call scope needs approval and
+has yet to run. It permits zero model calls, downloads or cash.
+
+From the Toolkit repository root, reproduce the execution bindings
+without grading.
+
+```bash
+PYTHONPATH=.aeep/completion-20261116/formal-document-native-20261117/committable-source/src \
+  python3 -B reports/toolkit-v2/c13/completion-20261116/check_returnn_pair.py \
+  --verify 2e961f2bb52858773950da9bb9a2c5cfbecf1740145a839eb422483de443e76c
+```
+
 The [retained runtime prerequisites](retained-runtime-prerequisites.json)
 identify missing named wheel candidates for four projections. GitPython
 also needs a compatible history fixture for its protected clone and tag

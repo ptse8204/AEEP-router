@@ -1,5 +1,22 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. The first protected RETURNN check is ready for an exact review.**
+[Review `2e961f2b`](../../reports/toolkit-v2/c13/completion-20261116/returnn-protected-pair-review-20261117.json)
+binds the published repair, the original source and all 13 upstream
+identities. The two ordinary callback payloads match the earlier staged
+audits. The exact launcher uses the retained Linux aarch64 carrier, four
+cached pytest wheels and the carrier's pinned NumPy 2.2.6.
+
+The [driver preflight](../../reports/toolkit-v2/c13/completion-20261116/returnn-protected-pair-preflight-20261117.json)
+matched the archive and execution bindings and passed seven checks. In
+rehearsal the real ledger settled two substituted valid replies, stopped
+after a missing test identity, and retained the reservation when cleanup
+could not be confirmed. Replay and unapproved launch were denied. No
+upstream test, real operation charge or formal assignment occurred.
+The exact two-call scope allows 70 reserved seconds and zero models,
+cash or downloads. Approval is pending independently of `0050681f`.
+C13 stays open, comparisons stay paused, and Waza remains excluded.
+
 **November 17. The current Linux lifecycle is ready for an exact execution review.**
 [Review `0050681f`](../../reports/toolkit-v2/c13/completion-20261116/current-linux-wheel-operation-review-20261117.json)
 seals wheel `d5f092a8`, 32 cached dependencies and the unchanged guest
