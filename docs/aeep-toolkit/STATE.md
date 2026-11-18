@@ -1,5 +1,22 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. Three offline verification scopes are ready for one grouped approval.**
+[Group `03d8c261`](../../reports/toolkit-v2/c13/completion-20261116/pending-offline-verification-group-20261117.json)
+binds the existing Linux lifecycle `0050681f`, RETURNN pair `2e961f2b`
+and first [Arta pair `5679eda1`](../../reports/toolkit-v2/c13/completion-20261116/arta-protected-pair-review-20261117.json).
+The three read-only launch checks passed. All scopes remain unstarted.
+Their combined cap is five operations and 410 reserved seconds.
+There are zero models, cash, downloads or image builds in scope.
+
+The [Arta driver rehearsal](../../reports/toolkit-v2/c13/completion-20261116/arta-protected-pair-preflight-20261117.json)
+passed eight controls with substituted replies. Missing reference evidence
+stopped the original-source check. A failed preservation control was
+rejected, and uncertain cleanup left its reservation open. The driver
+refused replay. Approve the group or an exact individual member before
+execution. Recheck expiry, host space and exact bindings per member.
+Preserve prior evidence and charges. C13 stays open, comparisons remain
+paused, and Waza is excluded.
+
 **November 17. Arta's protected grader inputs are staged.**
 The [runtime input record](../../reports/toolkit-v2/c13/completion-20261116/arta-runtime-inputs-20261117.json)
 binds the published Arta rules-engine case, the exact 254,152-byte

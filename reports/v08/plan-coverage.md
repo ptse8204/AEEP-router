@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 offline verification group](../toolkit-v2/c13/completion-20261116/pending-offline-verification-group-20261117.json)
+binds the current Linux install and rollback, RETURNN grading and
+the first Arta pair. All three exact launch checks passed. The group
+awaits approval and caps execution at five offline operations and 410
+reserved seconds. No models, downloads or image builds are in scope.
+
 The [Arta case preparation](../toolkit-v2/c13/completion-20261116/arta-runtime-inputs-20261117.json)
 verifies the published OmegaConf wheel and retained Linux dependencies.
 A metadata-only fixture supplies the Arta version. The two ordinary

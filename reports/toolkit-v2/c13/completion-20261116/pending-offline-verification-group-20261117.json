@@ -1,0 +1,92 @@
+{
+  "approval": "Await exact approval of this group or of an individual member. Record authority against the bound member before its first action.",
+  "cash_usd": 0,
+  "comparisons_paused": true,
+  "deletes_existing_resources": false,
+  "downloads": 0,
+  "earliest_member_expiry": "2026-11-25T00:20:32.992247+00:00",
+  "host_installations": 0,
+  "image_builds": 0,
+  "maximum_model_turns": 0,
+  "maximum_operations": 5,
+  "maximum_reserved_seconds": 410,
+  "member_review_expiries_apply_independently": true,
+  "members": [
+    {
+      "approval_record_path": ".aeep/completion-20261116/current-linux-wheel-lifecycle-20261117/linux-install-package-bridge-approval.json",
+      "driver": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/current_linux_lifecycle.py",
+        "sha256": "acae83d3c12e1c37cd13a67d4177568fc8a7e7bdf1687d09059300e4ed23beab"
+      },
+      "envelope_verified": true,
+      "execute_flag": "--execute-reviewed",
+      "expires_at": "2026-11-25T00:20:32.992247+00:00",
+      "maximum_operations": 1,
+      "maximum_reserved_seconds": 270,
+      "preflight": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/current-linux-wheel-dispatch-preflight-20261117.json",
+        "sha256": "fd91ef0d4ef15151e560662291c38a477c9732a6db00737bf893fcc76d52a997"
+      },
+      "review": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/current-linux-wheel-operation-review-20261117.json",
+        "sha256": "0050681ff982879b983ac734cb9ae17fd35837a31d676362601a43f67fd1e4ec"
+      },
+      "scope": "linux-current-wheel",
+      "terminal_path": ".aeep/completion-20261116/current-linux-wheel-lifecycle-20261117/linux-install-package-bridge-execution",
+      "unstarted_at_preflight": true
+    },
+    {
+      "approval_record_path": ".aeep/completion-20261116/c13-returnn-protected-pair-20261117/approval.json",
+      "driver": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/check_returnn_pair.py",
+        "sha256": "0619adf81226687bd677a42c2e6456b0be064a7ebc024b1af01b59163c263a5b"
+      },
+      "envelope_verified": true,
+      "execute_flag": "--exact-review",
+      "expires_at": "2026-11-25T00:25:18.659092+00:00",
+      "maximum_operations": 2,
+      "maximum_reserved_seconds": 70,
+      "preflight": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/returnn-protected-pair-preflight-20261117.json",
+        "sha256": "d11fbf3b121acc95d6faf19455c1961fa393e46157fd47ac48eee58e2eb94bc1"
+      },
+      "review": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/returnn-protected-pair-review-20261117.json",
+        "sha256": "2e961f2bb52858773950da9bb9a2c5cfbecf1740145a839eb422483de443e76c"
+      },
+      "scope": "returnn-protected-grading",
+      "terminal_path": ".aeep/completion-20261116/c13-returnn-protected-pair-20261117/execution",
+      "unstarted_at_preflight": true
+    },
+    {
+      "approval_record_path": ".aeep/completion-20261116/c13-arta-protected-pair-20261117/approval.json",
+      "driver": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/check_arta_pair.py",
+        "sha256": "d2b7409122e646fe81b543bc46927dc0264eae23bacf8a05895323a8245bdd63"
+      },
+      "envelope_verified": true,
+      "execute_flag": "--exact-review",
+      "expires_at": "2026-11-25T00:45:03.983904+00:00",
+      "maximum_operations": 2,
+      "maximum_reserved_seconds": 70,
+      "preflight": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/arta-protected-pair-preflight-20261117.json",
+        "sha256": "a8d8f7a5eaacf5d4adb2079db37074dc582e9ad8dc0100b9715afeb753f9ceaf"
+      },
+      "review": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/arta-protected-pair-review-20261117.json",
+        "sha256": "5679eda1977a7a52e9a442f13b79a64145981412764e937583a23bd0badd568e"
+      },
+      "scope": "arta-protected-grading",
+      "terminal_path": ".aeep/completion-20261116/c13-arta-protected-pair-20261117/execution",
+      "unstarted_at_preflight": true
+    }
+  ],
+  "minimum_usable_host_bytes": 55834574848,
+  "new_external_destinations": 0,
+  "recovery": "Leave all reservations and outputs intact. A known terminal grade or install failure leaves independent members eligible. Review drift, loss of host reserve, uncertain shared containment, ownership or accounting prevents further launches. The group does not authorize repeating any member.",
+  "release_authority": false,
+  "schema_version": "aeep.c13.offline-verification-group.v1",
+  "scope": "One contained Linux Essentials lifecycle and two independent protected reference/original grader pairs.",
+  "waza_excluded": true
+}

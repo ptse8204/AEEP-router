@@ -127,6 +127,24 @@ removed. Waza remains excluded and comparisons stay paused.
 
 ### Approved work and next decision
 
+[Group `03d8c261`](pending-offline-verification-group-20261117.json)
+collects the three unstarted offline checks under their existing exact
+scopes. Approve the group or an individual member. The group permits
+five operations and 410 reserved seconds in total, with zero models,
+cash, downloads or image builds. All three launch bindings verified.
+
+| Member | Exact review | Operations | Reserved seconds |
+| --- | --- | ---: | ---: |
+| Linux current-wheel install and removal | [`0050681f`](current-linux-wheel-operation-review-20261117.json) | 1 | 270 |
+| RETURNN protected reference and original | [`2e961f2b`](returnn-protected-pair-review-20261117.json) | 2 | 70 |
+| Arta protected reference and original | [`5679eda1`](arta-protected-pair-review-20261117.json) | 2 | 70 |
+
+Review and record approval for each selected member before dispatch.
+The group's handoff binds the original expiry, runner and preflight
+for each member. A known terminal grading or install failure leaves
+independent members eligible. Uncertain accounting, ownership or shared
+containment stops dispatch. Repetition needs a new exact review.
+
 [Correction group `3376c129`](correction-group-3376c129-result.json) completed
 all five operations in 9.048 seconds against 490 reserved seconds.
 All charges settled, and owned-container cleanup passed. The
@@ -531,7 +549,10 @@ without introducing another importable copy of Arta. The two
 ordinary payloads preserve 16 upstream test identities and one
 coordinator-authored preservation check. Six preflight checks
 passed, including byte-identical replay and three drift controls.
-Actual protected grading remains unstarted.
+The [exact grading rehearsal](arta-protected-pair-preflight-20261117.json)
+exercises the ordinary runner with eight substituted cases and includes
+the original-source preservation failure. Actual grading remains
+unstarted and is part of group `03d8c261`.
 
 The [curated lineage verification](curated-cohort-lineage-verification.json)
 covers the service change that lets two curated definitions carry separate
