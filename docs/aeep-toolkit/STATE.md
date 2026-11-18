@@ -1,5 +1,21 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 18. ExtractBench has too few fixed-field cases for the tested design.**
+The [schema audit](../../reports/toolkit-v2/c13/completion-20261116/extractbench-schema-variation-capacity-20261118.json)
+verified 66 public schemas against the pinned manifest. After existing
+source grouping and development exclusions, 252 slots have array-valued
+schemas, eight have fixed fields and 31 are unresolved. Five bounded
+responses differed from their pinned digests. Even if all 31 unresolved
+slots have fixed fields, two balanced holdouts need at least 65 more
+fixed-field cases. With balanced shared early stages the gap is at least 83.
+
+VAREX is a source lead. Its pinned manifest lists 1,777 distinct IDs.
+Template independence, schema shape, exact use rights and grader
+comparability remain open. Keep the existing cohorts provisional.
+The audits used zero grader executions and model turns. The grouped
+software repeat `ce4e08cf` remains unstarted. C13 stays open, comparisons
+stay paused, and Waza is excluded.
+
 **November 18. The v2 workflow rechecks asset rights at dispatch.**
 The managed runner checks the selected pack's exact asset-use reviews in
 its own ledger before creating output or starting a job. This also covers

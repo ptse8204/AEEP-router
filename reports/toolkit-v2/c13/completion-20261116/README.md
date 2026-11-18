@@ -1241,6 +1241,23 @@ the early-stage counts. Permitted use, exact inputs and actual protected
 grading still need evidence. Keep the illustrative layouts outside the
 operational ledger.
 
+The [schema variation audit](extractbench-schema-variation-capacity-20261118.json)
+checked another design using declared arrays in the expected output.
+Sixty-six schema hashes verified. Five responses differed from the pins
+and account for 31 unresolved slots. Only eight verified slots have
+fixed fields, so the best-case supply is 39. Two 105-case holdouts need
+at least 104 fixed-field cases for this design. With balanced 8- and
+28-case shared early stages, at least 83 fixed-field cases are missing.
+The audit replayed offline and left the cohort provisional.
+
+The pinned VAREX manifest lists 1,777 distinct documents using government
+form templates with synthetic values. The retained dataset card declares
+CDLA-Permissive-2.0. Source grouping, exact use rights and protected
+grading remain to be checked. Keep its published scoring separate
+until a comparison design establishes comparability with ExtractBench.
+[Pinned VAREX dataset](https://huggingface.co/datasets/ibm-research/VAREX/tree/ff36b6cd232efd401b3f4a20272a07bf2b749914) ·
+[VAREX paper](https://arxiv.org/abs/2603.15118)
+
 The [CFPB case review](extractbench-cfpb-source-review.json) verifies nine
 input files across three tasks against the upstream manifest and matches their
 PDFs to CFPB originals. Both refinance examples match all pages. The

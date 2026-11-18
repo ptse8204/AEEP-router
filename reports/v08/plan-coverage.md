@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 document variation audit](../toolkit-v2/c13/completion-20261116/extractbench-schema-variation-capacity-20261118.json)
+bounds the fixed-field supply at 39 of the 291 ExtractBench metadata
+slots. Two balanced holdouts require at least 104 fixed-field cases.
+The shortfall is at least 65 for holdout alone and 83 with balanced
+shared early stages. All assignments remain open.
+
 The [C13 dispatch-rights verification](../toolkit-v2/c13/completion-20261116/workflow-asset-rights-verification-20261118.json)
 checks the exact selected task reviews through the ordinary v2 CLI.
 Revoked or missing reviews stop dispatch before any output or job.

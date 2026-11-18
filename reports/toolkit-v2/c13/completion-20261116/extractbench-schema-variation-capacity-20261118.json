@@ -1,0 +1,193 @@
+{
+  "acquisition": {
+    "digest_mismatches": {
+      "40ffcfb47eda4d323cabae49afe30b38a5a4821a75232acaef1159206b81be03": "https://huggingface.co/datasets/llamaindex/ExtractBench/raw/f9b910906cd7e73cc9eb5379a8d5d935c67b92c4/tasks/medium--bar-lev-2024-42d433aefa/environment/schema.json",
+      "99ad267aaab490fcbf643b6da913f41e48b59bd4c635e25307ccbbb736605d75": "https://huggingface.co/datasets/llamaindex/ExtractBench/raw/f9b910906cd7e73cc9eb5379a8d5d935c67b92c4/tasks/medium--bar-lev-2021-c5e613a7df/environment/schema.json",
+      "d8b47af1842564dcbc10d90dd67fcf24cb07967eb0003081277b89a36da1c9c9": "https://huggingface.co/datasets/llamaindex/ExtractBench/raw/f9b910906cd7e73cc9eb5379a8d5d935c67b92c4/tasks/medium--bar-lev-2022-079b82bf02/environment/schema.json",
+      "dc5f87aa67387dea56c06ddf026ad0af5b7b66cae406487ebfc419429b1cab68": "https://huggingface.co/datasets/llamaindex/ExtractBench/raw/f9b910906cd7e73cc9eb5379a8d5d935c67b92c4/tasks/short--w14-2nd-sub-53269-revised-w14-0b19e8e811/environment/schema.json",
+      "dfcfc113f0ae7c683a8662bf3eb42f654c66930c5d8cb1647c3dbdf868bef94a": "https://huggingface.co/datasets/llamaindex/ExtractBench/raw/f9b910906cd7e73cc9eb5379a8d5d935c67b92c4/tasks/medium--arif-2023-d064ee7cab/environment/schema.json"
+    },
+    "downloaded_bytes": 1724824,
+    "full_record": {
+      "path": ".aeep/c13-extractbench-schema-variations.MjxujS/schema-acquisition.json",
+      "sha256": "83b5c955f5849f3b49373c7411191b93e0155441d3086bdf0ace39f9252702ed"
+    },
+    "publisher_schemas": 64,
+    "reused_schemas": 2,
+    "verified_schemas": 66
+  },
+  "assumed_variations": "An explicit array in a declared property schema or reachable local reference; otherwise fixed named fields.",
+  "capacity_by_variation": {
+    "array-valued": 252,
+    "fixed-fields": 8,
+    "unknown": 31
+  },
+  "capacity_by_variation_and_length": {
+    "array-valued": {
+      "long": 17,
+      "medium": 70,
+      "short": 165
+    },
+    "fixed-fields": {
+      "short": 8
+    },
+    "unknown": {
+      "medium": 14,
+      "short": 17
+    }
+  },
+  "cfpb_exclusion_sha256": "10c71bc17c7961e2268c30140957bd22967d2869b63415258762d6b062a61141",
+  "classifier": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/audit_extractbench_schema_variations.py",
+    "sha256": "07671bf1ca9bd063c6fbe0e398ba5276396fdd3516471b5adbb5842ac349eb70"
+  },
+  "classifier_sha256": "07671bf1ca9bd063c6fbe0e398ba5276396fdd3516471b5adbb5842ac349eb70",
+  "comparisons_paused": true,
+  "development_exclusion_sha256": "a737313cdd760b2bed001820d67a52fa63e8a09c3767db43d9274c99c5ccb507",
+  "eligible_source_families": 68,
+  "families_with_multiple_known_variations": 0,
+  "fixed_fields_additional_cases_lower_bound": {
+    "one_cohort_with_balanced_early_stages": 31,
+    "one_holdout": 13,
+    "two_cohorts_with_balanced_shared_early_stages": 83,
+    "two_holdouts": 65
+  },
+  "fixed_fields_best_case_capacity": 39,
+  "formal_cases_adopted": 0,
+  "independent_source_metadata": {
+    "dataset_card": {
+      "bytes": 3713,
+      "path": ".aeep/c13-extractbench-schema-variations.MjxujS/varex-README.md",
+      "sha256": "985d5f302ba900efc62a23d16560a71a946d10044d9c46916bef0e1bad077ac1"
+    },
+    "declared_data_license": "CDLA-Permissive-2.0",
+    "distinct_dropped_ids": 105,
+    "distinct_published_ids": 1777,
+    "eligible_cases_verified": 0,
+    "limitations": [
+      "Source-disjoint groups and the fixed-field count still require independent evidence.",
+      "The original scorer has a different contract. Preserve scores separately until a reviewed comparison design establishes comparability.",
+      "Any future use supplements the real-document coverage requirement."
+    ],
+    "manifest": {
+      "bytes": 30625,
+      "path": ".aeep/c13-extractbench-schema-variations.MjxujS/varex-manifest.json",
+      "sha256": "6acc717aca6a8ba8baf09ec84e1e73872d29a99657d28e365b6fe78c26b74ada"
+    },
+    "metadata_scope": {
+      "bytes": 413,
+      "path": ".aeep/c13-extractbench-schema-variations.MjxujS/varex-metadata-scope.json",
+      "sha256": "57f3d30e1fb674be7a7a6b5b7196f2e092bbff61d9d93c4140a85d90b90d16bd"
+    },
+    "name": "VAREX",
+    "paper": "https://arxiv.org/abs/2603.15118",
+    "publisher": "https://huggingface.co/datasets/ibm-research/VAREX/tree/ff36b6cd232efd401b3f4a20272a07bf2b749914",
+    "revision": "ff36b6cd232efd401b3f4a20272a07bf2b749914",
+    "scope": "Independently published government form templates populated with synthetic values. The metadata establishes an inventory for intake, with template grouping, rights, exact schema labels and protected scoring still open.",
+    "scoring_source": "https://github.com/udibarzi/varex-bench"
+  },
+  "labels_by_schema_sha256": {
+    "01a7a6440912a321a28dd535917c9c438917d96283d0479040d9a4e77035eacd": "array-valued",
+    "03554fc582bb05797a5dbd63e90d13f01c1e2b428a35c159b0efae7bed5a6332": "array-valued",
+    "0768983ddbe6a9099ff13ffba00fda1e37a9964f8d0ac82ba3c252e6914bea55": "array-valued",
+    "09c56d8969c9d9574515bf13159cee28ea9aab8c4b37272fcc41f83259af2e66": "array-valued",
+    "0c189061a3cc5e318900856b09f5f78d487a8ec70c5919966bb0014bd4833733": "array-valued",
+    "0dee0e53617d8a9a084027931a4eeea2fe25104373912def4b145ba227514819": "array-valued",
+    "17e257dc8975853df2c055e268b2b594ebcfe0f30a4582ed62252311db531fba": "array-valued",
+    "1df696c7acd6ea75287a1dc3cc98b1e99d47fdf29a584c5af0050f2804ae444c": "array-valued",
+    "1edebb321c240f22bd9948936a9ef7384dc588a4932b9ca8628d31e8d8c02018": "array-valued",
+    "1fa0bfb9a3b5bbe058adbad10ecaf793e62f324b0e212118b8d84777f866f6fa": "array-valued",
+    "2367c90297131c0d49627935e0428f173fe2b1b20e759c45928dd894d79bb28b": "array-valued",
+    "2424acbecc45ca3d361c6f9cbcf557ab6ffdfc97b720c473cd22f2895ae551ad": "array-valued",
+    "282c7c023382757ee1ba61febcd61fd2d1a6460ca255eb5751dd0fdb785ece4d": "array-valued",
+    "2990796405e48c95760c9d4638d72adab1281bf0f544e7081993ce7956042cc4": "array-valued",
+    "43ef31998525472b5551f99e9c6bb85f0a594d87a7ecec9a6fab4169dc9a95f6": "array-valued",
+    "485c15e9a412223a6c3c9fae75a9498353ff49e4a53f5839a1330d32c6ea4dac": "array-valued",
+    "48910b30b46183631ac51cd9849acb439c97a666071b85e4267927d6281ca487": "array-valued",
+    "492fa622f1fe5ef910d7cd1bc4f26eda3bab03774b8805227cd56de8fdf0cf56": "array-valued",
+    "4e28d40c18e43927e968a2c4c9ca6de8a28c2c8e1ef4ebc5e4c1a2eeb6df4ff9": "array-valued",
+    "53d3b824cce69594b7023ca50663786acf3371b424302def0bfca5f260182c1d": "array-valued",
+    "5a89738d24f87817060945b701e46f2f68021f3af92d1181781a134031a67afa": "array-valued",
+    "5c3b8646611d87f933c147cd6face890f47da262e22488f8ab5f952fbff2bed3": "array-valued",
+    "5cd375545e8965c0e8ffec8b9e3b6e6f1c4d026b5163d149fd0a4b8702890451": "array-valued",
+    "5d701042c7aa4b5c8db9a3a7c3ab6bfc813cac44cf9a95f087cfb128bc31f626": "array-valued",
+    "5d87e9e657f76834f8a8847897f02a79bb80436d2c12d9555228a39e1f010007": "array-valued",
+    "74594b568d7a1ad153a9f4be003bdadfca8dafe5ec2be3b6be9276217bfcb00d": "array-valued",
+    "76bce872c4c7712867135cf34f772598ceeb298e3bd6d3107bd950379e09d169": "array-valued",
+    "77010848485c2b630c27ba99511d45aeffec9fbc79d83043a8e25dbf0e364fbb": "array-valued",
+    "7d4c688f8c0b28a736a621a015284624febc93dd593a6de4bd5298efe7988579": "array-valued",
+    "8141a68e19debcfda49463c269497d195b76f66d8a7922b6a23487ce51784c6e": "array-valued",
+    "85c71ae4e1eb20dff34b5e812762e97f8c20dee6c2815889226ca767853ca8e5": "array-valued",
+    "85e2b9ca7e97c7a9624d3d05c112b425be1586ce19443296fef06a5eb1f04f9b": "array-valued",
+    "860fb13d62e253f92b4539cc03470284d0800a2e1f6648b2875e08de31b612c6": "array-valued",
+    "867d30ab6d4d656810e93b69ea7524c8d5d0be528198455235dda6eed471925a": "array-valued",
+    "8c3f8d1f28bd21ca35fe1880644c24696901c0a728189d5ad2db2f0797956fad": "array-valued",
+    "91d217fc95d8e0a6a7a484408a48d1344ff062a16ac4dccf6e7555b0220c556d": "array-valued",
+    "9afebd12b0f089bda9e7b14a7aaa5df7e46b5f6703bb65e064f0ba6f59fc7379": "array-valued",
+    "a281c6994f47b7a90865bdfe4837ba56a96e7446f9393a93824b58108a35f1df": "array-valued",
+    "a84fc5a0c56ed68f4600ee2ad8935893e5e4189b307d3e9214942b5313ea00ee": "array-valued",
+    "a895ae4065be85d7ad03c8d533a9ae7e32e247e176965a1ac455fd9be97d1286": "array-valued",
+    "a9c6fa56e8701310dd78b311048592fbd0e7f4b33c0b81a8566e9f8ad72bb112": "array-valued",
+    "a9c7139a146a8252837a4110bb989adbf65f2f9924eb3aba96fd9d5f41fa2e79": "array-valued",
+    "aa0b00f840ad33a3dc632e87e3735688bfc19a4356b2befdde845f6f07126afe": "array-valued",
+    "b2a3100dfe32f806eabdb8508931e960426ac2cbc32724790c4eee87f932a53f": "array-valued",
+    "be0b8bd72128914a532a53534e8c18bb47fdba14b31d9ebb53fe67b06a8d9f96": "array-valued",
+    "c09da29780792d57d7b28c801fd858400b759b9cda59b8e2c9025ad5f55ae5d2": "array-valued",
+    "c4212957e77966b8400a39b4e7b344e4c93eabce8cbe87a5e810cded91e9fa0d": "array-valued",
+    "c8fa20d26e319e0454a0f95e1a9183ed6be4a521a1efb383aea3e29e99b8802d": "array-valued",
+    "cd105edbf18f3501af37e55efacd22a62c381572b472fafaa6507d1df51b63eb": "fixed-fields",
+    "cd9cf7d7ce7d0885ce1f7b0641fdcc0477d9ed2db8dccdbbb9f661033061c560": "array-valued",
+    "cf5f94a6db12444b75a63a2c6cc16bd978a29e20e8370a76fee599ef748cdbb4": "array-valued",
+    "d79f5683051c72ab8a41531e3fa587b4abe845c8f5a609f758ad6a065bb6dcea": "array-valued",
+    "db588de90b8862f0ffeb61058fa7d9e0cb8516a5df0fb20616fe60296853caa6": "array-valued",
+    "dbfc063dc443f75a1c165253f6c115d4230e2b2ff379da303d355c13c9f0ac84": "array-valued",
+    "df1f4a6336c5650aabc07cc685338e1035dadc8620231612a376efe2f92b3a3c": "array-valued",
+    "e3a57ac87f017b2e2cd8dddabc5faf0a591cabb5082d0556a45d114541bf38b8": "array-valued",
+    "e3b94520aea923c6ec84047a2a0e8472ed98863510147d59d3c94ef79442ad07": "array-valued",
+    "e68790a917112d0990d5e1629b21c72df62ed7276eb6ab24fe9b45f7213be002": "array-valued",
+    "e7134c20aa13018bab9a4e4abd96f5031de2ca1a9be1b6d90d63698af395bca9": "array-valued",
+    "efcafb2c83298ddd98438966581fb920266461bd1c068f0b76934526af28299c": "array-valued",
+    "f01b096d72512fec3041c22d7636038d03e56940e7bd332841627cff6ca5a759": "array-valued",
+    "f04fe0f77cfc7532f0594d579e6057fcee13335f036b2b3d76abcddeef3d774f": "array-valued",
+    "f15947c1ece7e29f54dfaa1cfcd14c8864c5285ccd4f2d51b425caae1470b1ce": "array-valued",
+    "f8891a5198c070d1e977f9dc8418c7160084466559e73dc2d72b4b866f64dd0a": "array-valued",
+    "f8b8f1e4889fcb37ac750aff6e10b282f6fa95749307a6164238ea1ecf9ab476": "array-valued",
+    "fc67da77b774c21251d46cf2c0bb3c6f5c37bb01f8653646fc1a829469d97760": "array-valued"
+  },
+  "manifest_sha256": "0452463e5b1be2c627c0b7d1a076531f0fd301b3297affdb7d9613735bc04840",
+  "minimum_per_variation_for_two_balanced_holdouts": 104,
+  "minimum_per_variation_with_balanced_shared_early_stages": 122,
+  "minimum_shortfall_with_shared_early_stages": {
+    "array-valued": 0,
+    "fixed-fields": 83
+  },
+  "model_turns": 0,
+  "next_action": "Keep this design provisional and investigate independent fixed-field sources with comparable protected grading. Recheck exact scope and rights before admitting any case.",
+  "original_source_revision": "51bf3a03eb7feeaef8952be1fc2fc7f924ee72dc",
+  "protected_graders_executed": 0,
+  "publisher_revision": "f9b910906cd7e73cc9eb5379a8d5d935c67b92c4",
+  "review": {
+    "path": ".aeep/c13-extractbench-schema-variations.MjxujS/metadata-review.json",
+    "sha256": "0e2b616e6ef85156389f72351fa411e4527415179859c2fa7b1db6bc99c8a7bd"
+  },
+  "schema_version": "aeep.c13.extractbench-variation-capacity.v1",
+  "scope": "Schema shape feasibility before rights review and source-disjoint assignment.",
+  "status": "INSUFFICIENT_SUPPLY_FOR_THIS_VARIATION_DESIGN",
+  "unsupported_schemas": {},
+  "verification": {
+    "offline_docs": {
+      "inputs": 72,
+      "path": ".aeep/c13-extractbench-schema-variations.MjxujS/docs.log",
+      "sha256": "d08c7517d50610fb58070b9ac3b635cd751f0b57f09ad8102217d063dcff5381"
+    },
+    "offline_replay_matches": true,
+    "schema_controls": 11,
+    "source_observation": {
+      "path": ".aeep/c13-extractbench-schema-variations.MjxujS/variation-audit.json",
+      "sha256": "b72f68652aebe03face53a21fade1ec25aadc67e653792c388a9f97ff85f03cc"
+    },
+    "source_schema_check": "passed",
+    "toolkit_source_verification_reused_from": "b53bf3a97f95328e3b636518266c54bf770843f4"
+  },
+  "waza_excluded": true
+}
