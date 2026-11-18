@@ -2,6 +2,28 @@
 
 ## November 18 handoff
 
+The [ExtractBench transport audit](extractbench-transport-capacity-20261118.json)
+matched 4,070 publisher file entries to 370 tasks. All 31 slots tied to
+the five unresolved schemas exceed the current inline instruction limit.
+The remaining 260 slots include 18 archives whose compressed sizes still
+need measurement. Even if all 18 fit, the pool has 113 of the 122
+multiple-collection cases needed for the balanced metadata example.
+Stage assignment still requires exact asset use and protected grading.
+[Publisher file metadata API](https://huggingface.co/docs/huggingface_hub/v1.2.4/en/package_reference/hf_api#huggingface_hub.HfApi.list_repo_tree)
+
+The first metadata request completed before the parser rejected the
+publisher's page-size parameter. The [continuation](extractbench-transport-metadata-continuation-20261118.json)
+reused the retained first page and fetched five previously unstarted
+pages. Full replay was byte-identical and made no network calls. The
+three member approvals and terminal markers in group `403dfca5` remain
+untouched. Keep the schema member staged until its cases have a viable
+transport. The software repeats and Conan diagnostic are independent.
+
+The [Raygun audit](raygun-protected-audit-results-20261118.json) passed
+seven checks on the reference and reproduced the three expected failures
+on the original, scoring 1/1 and 0/1 respectively. Both operations
+settled. The software pool now contains 49 cases across 28 repositories.
+
 The [Optuna audit](optuna-protected-audit-result-20261118.json) settled
 one protected reference. All 19 required checks returned observations:
 15 passed and four failed. The role issued no grade. The original-source

@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 ExtractBench transport audit](../toolkit-v2/c13/completion-20261116/extractbench-transport-capacity-20261118.json)
+joined the full pinned publisher tree to 370 task records. All 31 slots
+related to the five missing schemas exceed the 100,000-byte instruction
+limit. Even if all remaining ZIPs fit, the document pool has 113
+multiple-collection slots and needs at least 122. The software repeats
+and Conan diagnostic remain independent in group `403dfca5`.
+
 The [C13 Raygun audit](../toolkit-v2/c13/completion-20261116/raygun-protected-audit-results-20261118.json)
 reproduces the 1/1 reference and 0/1 original through the ordinary
 protected grader. Both scores match the settled receipts. This adds one

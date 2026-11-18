@@ -1,5 +1,28 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 18. ExtractBench's instruction limit reduces cohort capacity.**
+The [transport audit](../../reports/toolkit-v2/c13/completion-20261116/extractbench-transport-capacity-20261118.json)
+joined metadata for 4,070 files to the pinned 370-task manifest. Among
+the 291 independent metadata slots, 31 exceed the 100,000-byte instruction
+limit. The 31 are exactly the cases tied to the five unresolved schemas.
+Their instructions range from 183,253 to 567,600 bytes. No slot exceeds
+the uncompressed archive limit.
+
+The remaining 260 slots include 18 whose compressed ZIP sizes need
+measurement. Even if all 18 fit, only 113 multiple-collection slots
+remain, nine below the smallest balanced allocation for both holdouts
+and shared early stages. Fetching the five schemas leaves that shortfall
+under the current transport. Keep that member of group `403dfca5` staged
+while assessing exact file-backed instruction delivery or independent
+replacement tasks. The offline software members remain eligible under
+their original approval requirements.
+
+The first metadata page settled before a cursor parser rejected the
+publisher's page-size parameter. The [continuation](../../reports/toolkit-v2/c13/completion-20261116/extractbench-transport-metadata-continuation-20261118.json)
+reused that page and fetched five unstarted pages. The report reproduced
+byte for byte offline. No task files or protected answers were fetched.
+C13 stays open, comparisons stay paused, and Waza is excluded.
+
 **November 18. Raygun's protected contract audit passed.**
 The [Raygun audit](../../reports/toolkit-v2/c13/completion-20261116/raygun-protected-audit-results-20261118.json)
 binds six upstream wildcard assertions and one preservation check to the
