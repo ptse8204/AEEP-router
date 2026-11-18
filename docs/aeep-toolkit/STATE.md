@@ -1,5 +1,19 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 18. Raygun's protected contract audit passed.**
+The [Raygun audit](../../reports/toolkit-v2/c13/completion-20261116/raygun-protected-audit-results-20261118.json)
+binds six upstream wildcard assertions and one preservation check to the
+pinned source and retained offline grader. The reference passed all seven
+and scored 1/1. The original scored 0/1 with the three expected failures.
+Both operations settled, both containers were removed, and read-only
+receipt recovery reproduced both grades. Total recorded execution time
+was 3.156 seconds. No downloads, installs or model turns were needed.
+
+The reproduced software pool now has 49 cases across 28 repositories.
+Common-runtime evidence, exact asset use and independent stage
+assignment remain open. C13 stays open. Group `403dfca5` is unchanged
+and unstarted, comparisons stay paused, and Waza is excluded.
+
 **November 18. Optuna's first protected reference failed four checks.**
 The [Optuna audit](../../reports/toolkit-v2/c13/completion-20261116/optuna-protected-audit-result-20261118.json)
 binds all 19 required checks to the pinned source and retained offline

@@ -1,0 +1,109 @@
+{
+  "canonical_ledger": {
+    "path": ".aeep/completion-20261116/c13-raygun-protected-pair-20261118/execution/ledger.json",
+    "sha256": "0c7ed387ac630950905e473ee0f02012ad0c8bd51153cff8f0b31afe60fb7797"
+  },
+  "cash_usd": 0,
+  "comparisons_paused": true,
+  "coverage": "Six upstream wildcard assertions and one authored preservation check in each role.",
+  "delegated_authority": {
+    "path": ".aeep/completion-20261116/c13-raygun-protected-pair-20261118/delegated-authority.json",
+    "sha256": "da5feefe27fa93e2b2b32c70e10f291de53b8f5cfc59f7e5558b002ae975c764"
+  },
+  "exact_review": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/raygun-protected-pair-review-20261118.json",
+    "sha256": "19ed0fe81ffdd6b65d02a370a17a9ca28958cbce185b3940125dd3da0226dd53"
+  },
+  "formal_cases_adopted": 0,
+  "formal_usage_remaining": [
+    "current common runtime",
+    "exact task asset use",
+    "source-disjoint cohort assignment"
+  ],
+  "implementation_base": "45a6cce0797f08e69ddee32e5cdf72e2059e6034",
+  "models": 0,
+  "observations": [
+    {
+      "container_absent": true,
+      "elapsed_seconds": 1.8392301669809967,
+      "exit_code": 0,
+      "receipt": {
+        "path": ".aeep/completion-20261116/c13-raygun-protected-pair-20261118/execution/receipt-rcpt_4455fa92d26440eba985327a06f2b46a.json",
+        "sha256": "0400fb171dcab7761e3784d1e9951dee7c4db364e304138ec4f5d79fe5fac634"
+      },
+      "role": "reference",
+      "score": 1.0,
+      "status_counts": {
+        "PASSED": 7
+      }
+    },
+    {
+      "container_absent": true,
+      "elapsed_seconds": 1.3170708750840276,
+      "exit_code": 1,
+      "receipt": {
+        "path": ".aeep/completion-20261116/c13-raygun-protected-pair-20261118/execution/receipt-rcpt_f92adef9d8b74b65bf009d0e585a636a.json",
+        "sha256": "b329eceb5b267b2c1c8a4548a01f5bb6e4e4756c70c735ad9e3611f36679fa99"
+      },
+      "role": "original",
+      "score": 0.0,
+      "status_counts": {
+        "FAILED": 3,
+        "PASSED": 4
+      }
+    }
+  ],
+  "operations_settled": 2,
+  "prior_capacity": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/expansion-contract-audit-results-20261118.json",
+    "sha256": "c0162de26e8fc784a6dc494a312caab92983d1e09f14ec91533aff6532975bab"
+  },
+  "protected_result": {
+    "path": ".aeep/completion-20261116/c13-raygun-protected-pair-20261118/execution/result.json",
+    "sha256": "3f99810237177930e15500a68844e6843ccccac85034b439970abb9f1c97a39f"
+  },
+  "reserved_seconds": 70.0,
+  "retained_image": "sha256:35dc1bcb7e8162c2a0cef6cbd30bc4bf276c082b11b6e5fc259b6800e8c5ca04",
+  "schema_version": "aeep.c13.raygun-protected-audit-results.v1",
+  "software_reproduction_pool": {
+    "capacity": {
+      "counts_by_family": {
+        "contract-audit": 12,
+        "multi-file-repair": 19,
+        "single-file-repair": 18
+      },
+      "distinct_receipts": 100,
+      "largest_repository_group_rows": 14,
+      "minimum_missing_rows_if_all_reproduced_rows_are_eligible": 197,
+      "repository_families": 28,
+      "reproduced_rows": 49,
+      "two_balanced_holdouts_minimum_missing_by_family_before_early_stages": {
+        "contract-audit": 58,
+        "multi-file-repair": 51,
+        "single-file-repair": 52
+      },
+      "two_cohorts_shared_early_minimum": 246
+    },
+    "new_row": {
+      "case": "MindscapeHQ__raygun4py-119-aeep-contract-audit",
+      "evidence": "settled_ordinary_reference_and_original",
+      "family": "contract-audit",
+      "receipt_ids": [
+        "rcpt_4455fa92d26440eba985327a06f2b46a",
+        "rcpt_f92adef9d8b74b65bf009d0e585a636a"
+      ],
+      "repository": "mindscapehq/raygun4py",
+      "revision": "4c0ab4f645d9af29c91370667878fb29303ac972"
+    }
+  },
+  "source_archive_sha256": "2c819e7b7bd4dc2f4cf82305e944586166a21313b91c6afb859b305146b8dcd6",
+  "source_revision": "4c0ab4f645d9af29c91370667878fb29303ac972",
+  "source_verification_digest": "03c615b31e1c84f7225f20f8b9b8538e3dc618c223052b6232a02ce68864f6ab",
+  "status_summary": {
+    "path": ".aeep/completion-20261116/c13-raygun-protected-pair-20261118/execution/status-counts.json",
+    "sha256": "33c534d155c9ead741f3e6fb04caedca89618fdc2c1d846cb4ef48791ed4a55c"
+  },
+  "summed_elapsed_seconds": 3.1563010420650244,
+  "test_archive_sha256": "9287c9ea6b11b04feed2c085b3fc655350392c60941517c3290fe2164be4b5d0",
+  "waza_excluded": true
+}

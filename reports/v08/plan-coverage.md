@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 Raygun audit](../toolkit-v2/c13/completion-20261116/raygun-protected-audit-results-20261118.json)
+reproduces the 1/1 reference and 0/1 original through the ordinary
+protected grader. Both scores match the settled receipts. This adds one
+contract audit to the reproduced pool, bringing it to 49 cases across
+28 repositories. Formal stage assignment remains open.
+
 The [C13 Optuna audit](../toolkit-v2/c13/completion-20261116/optuna-protected-audit-result-20261118.json)
 settled a first reference with 15 passed and four failed required checks.
 No grade was issued and the original-source role is unstarted. The
