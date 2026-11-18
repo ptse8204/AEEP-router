@@ -285,6 +285,7 @@ def campaign_cases(development, root, *, prefix=""):
             reference.write_text(json.dumps(output))
             data.update(reference=dict(path=str(reference), sha256=hashlib.sha256(reference.read_bytes()).hexdigest(), size_bytes=reference.stat().st_size),
                 split=split, used_for_development=False, independent_case_id=tag,
+                source_repository=f'https://example.test/{prefix}{split}',
                 source_revision=hashlib.sha1(tag.encode()).hexdigest(),
                 fault_outputs=[patch_artifact(RepositoryPatch(base_sha256=binding, files={'library/core.py': 'return -1'}))])
             result.append(RepositorySuiteCase.model_validate(data))
@@ -314,6 +315,18 @@ async def test_curated_materialization_uses_one_existing_ledger_operation(suite_
         broken.generator_config['cases'][-1]['used_for_development'] = True
         with pytest.raises(ConfigurationError, match='8/28/105'):
             curated_payload(broken)
+        for early_split, reused_split in (
+            ('qualification', 'training'), ('qualification', 'holdout'),
+            ('training', 'holdout'), ('development', 'holdout'),
+        ):
+            broken = recipe.model_copy(deep=True)
+            records = broken.generator_config['cases']
+            early = next(case for case in records if case['split'] == early_split)
+            reused = next(case for case in records if case['split'] == reused_split)
+            assert early['source_revision'] != reused['source_revision']
+            reused['source_repository'] = early['source_repository'].upper()
+            with pytest.raises(ConfigurationError, match='disjoint source families'):
+                curated_payload(broken)
     finally:
         await router.close()
 
@@ -321,12 +334,6 @@ async def test_curated_materialization_uses_one_existing_ledger_operation(suite_
 def test_curated_campaigns_allow_fresh_cohorts_without_changing_the_grader(suite_cases, tmp_path):
     from aeep.assessment.service import AssessmentService
     from aeep.benchmarking import BenchmarkSplit
-
-    def cases(prefix):
-        staged = campaign_cases(suite_cases, tmp_path.resolve(), prefix=prefix)
-        for case in staged[len(suite_cases):]:
-            case.source_repository = f'https://example.test/{prefix}-{case.split}'
-        return staged
 
     def plan(recipe):
         cohort = curated_cases(recipe, assessment=True)
@@ -344,8 +351,8 @@ def test_curated_campaigns_allow_fresh_cohorts_without_changing_the_grader(suite
             ]),
         )
 
-    prior = repository_suite_recipe(cases('qualification-'), assessment=True)
-    later = repository_suite_recipe(cases('value-'), assessment=True)
+    prior = repository_suite_recipe(campaign_cases(suite_cases, tmp_path.resolve(), prefix='qualification-'), assessment=True)
+    later = repository_suite_recipe(campaign_cases(suite_cases, tmp_path.resolve(), prefix='value-'), assessment=True)
     old_plan, new_plan = plan(prior), plan(later)
     assert old_plan.recipe_digest != new_plan.recipe_digest
     assert len(old_plan.suite.cases) == len(new_plan.suite.cases) == 141
@@ -372,7 +379,7 @@ def test_curated_campaigns_allow_fresh_cohorts_without_changing_the_grader(suite
     with pytest.raises(ConfigurationError, match='full reviewed cohort'):
         require_distinct_curated_cohorts(prior, old_plan, later, new_plan)
 
-    reused = cases('catalog-')
+    reused = campaign_cases(suite_cases, tmp_path.resolve(), prefix='catalog-')
     reused[-1].source_repository = old_plan.suite.cases[-1].template_family.upper()
     overlapping = repository_suite_recipe(reused, assessment=True)
     with pytest.raises(ConfigurationError, match='source-disjoint holdouts'):

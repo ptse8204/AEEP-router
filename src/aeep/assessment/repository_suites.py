@@ -425,6 +425,14 @@ def curated_cases(recipe: RecipeDefinition, *, assessment: bool = False) -> list
     if assessment and (Counter(case.split for case in campaign) != Counter(qualification=8, training=28, holdout=105)
             or any(case.used_for_development for case in campaign)):
         raise ConfigurationError('repository suite needs unexposed source-disjoint 8/28/105 cases')
+    if assessment:
+        families = {
+            split: {case.source_repository.casefold() for case in cases if case.split == split}
+            for split in ('qualification', 'training', 'holdout', 'development')
+        }
+        qualification, training, holdout = (families[split] for split in ('qualification', 'training', 'holdout'))
+        if qualification & training or holdout & (qualification | training | families['development']):
+            raise ConfigurationError('curated repository stages require disjoint source families')
     if not assessment and campaign:
         raise ConfigurationError('development recipe cannot contain campaign cases')
     return cases

@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 source-family verification](../toolkit-v2/c13/completion-20261116/curated-source-family-verification-20261118.json)
+checks repository independence for curated 8/28/105 software stages.
+Same-repository cases with distinct revisions are rejected across stages.
+Regression reconciled 2,183 passes and 21 skips, both branch gates
+passed, and the updated CLI accepted all 37 retained checks in a
+private ledger copy. Recovery group `403dfca5` is still unstarted.
+
 [C13 recovery group `403dfca5`](../toolkit-v2/c13/completion-20261116/c13-recovery-group-20261118.json)
 combines three unchanged exact reviews. All member preflights reproduced.
 Sentry and Hugging Face Hub's completed pairs were reconciled against

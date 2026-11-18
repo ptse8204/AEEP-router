@@ -126,7 +126,9 @@ Each cases file contains an array matching
 Repeat `--cases` for separate metadata files; the existing 1 MiB read limit
 applies to each file. Export reads reviewed assets but starts no worker or
 installer. It requires three development cases. `--assessment` additionally
-requires source-disjoint 8/28/105 cases; materialization enforces balanced
+requires 8/28/105 cases from separate repositories across qualification,
+training and holdout. Keep development repositories out of holdout, including
+other revisions of those repositories. Materialization enforces balanced
 holdout families. Development exports cannot generate campaign holdouts.
 
 For incremental repository campaigns, export a reviewed definition and

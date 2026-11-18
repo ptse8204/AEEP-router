@@ -1,5 +1,25 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 18. Formal software stages enforce repository separation.**
+The [source-family verification](../../reports/toolkit-v2/c13/completion-20261116/curated-source-family-verification-20261118.json)
+records a guard in recipe export and materialization. It refuses repeated
+repository families across qualification, training and holdout, and keeps
+development repositories out of holdout. Alternate revisions and case
+changes in the declared repository text failed the regression controls.
+The valid 8/28/105 fixture materialized through the ordinary service.
+
+Regression finished with 2,183 passed and 21 skipped after resuming the
+200 tests without terminal results. The storage guard stopped the
+initial phase at the 50 GiB reserve. Removing 2,264 verified transient
+worker database copies created by this run restored 2.79 GiB usable
+space while preserving the logs and campaign databases. Both branch
+coverage gates passed using 18 nonoverlapping batches. The wheel and
+source archive built. The ordinary CLI accepted all 37 retained stack
+checks on the updated source in a private ledger copy.
+
+C13 stays open. Group `403dfca5` is unchanged and unstarted. No formal
+cases were assigned. Comparisons stay paused and Waza is excluded.
+
 **November 18. The pending C13 recoveries have one review.**
 [Group `403dfca5`](../../reports/toolkit-v2/c13/completion-20261116/c13-recovery-group-20261118.json)
 collects the unchanged reviews for four protected software pairs, the
