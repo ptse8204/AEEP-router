@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [exact Linux lifecycle review](../toolkit-v2/c13/completion-20261116/current-linux-wheel-operation-review-20261117.json)
+binds the current wheel `d5f092a8` and the unchanged cached dependencies
+and guest. Eight preflight checks passed. The single offline Linux
+install and removal need exact operator approval. No Docker objects
+were created and no operations charged. C13 remains open.
+
 The [CFPB field audit](../toolkit-v2/c13/completion-20261116/cfpb-field-evidence-audit-20261117.json)
 joins the saved aggregate grade and submission hash to the canonical
 trial. No field markers or submission bytes survived cleanup. Field

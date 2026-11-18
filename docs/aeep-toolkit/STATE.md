@@ -1,5 +1,22 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. The current Linux lifecycle is ready for an exact execution review.**
+[Review `0050681f`](../../reports/toolkit-v2/c13/completion-20261116/current-linux-wheel-operation-review-20261117.json)
+seals wheel `d5f092a8`, 32 cached dependencies and the unchanged guest
+on the previously verified aarch64 carrier. All 39 inputs matched.
+The [dispatch preflight](../../reports/toolkit-v2/c13/completion-20261116/current-linux-wheel-dispatch-preflight-20261117.json)
+verified the complete 33-wheel manifest, rejected changed inputs and
+blocked launch without exact approval. An earlier draft compared against
+the old expiry and stopped before any action. Its evidence is retained.
+
+The new review allows one private offline lifecycle in a fresh container,
+with a 240-second guest limit and 270 reserved seconds. Cleanup is limited
+to the new owned container and its unchanged test runtime. Prior Linux
+and macOS results retain their original wheel bindings. No container has
+been created or operation charged. Resume after exact approval and a fresh
+binding and storage check using the C13 handoff. C13 stays open.
+Comparisons stay paused and Waza remains excluded.
+
 **November 17. CFPB field attribution is unavailable in the saved evidence.**
 The [read-only audit](../../reports/toolkit-v2/c13/completion-20261116/cfpb-field-evidence-audit-20261117.json)
 reconciled the protected grade, both reports and all 11 campaign attempt

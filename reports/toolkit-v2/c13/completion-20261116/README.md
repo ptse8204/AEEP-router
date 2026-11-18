@@ -92,8 +92,26 @@ hashes, and removal. The removal journal and neighboring file remain.
 The [current Linux inputs](current-linux-wheel-inputs-20261117.json)
 passed archive and preview checks. The 32 cached dependency wheels match
 the earlier Linux check and the current wheel changes only a dev-only
-dependency declaration. The current wheel's Linux lifecycle remains
-unstarted and needs a separate execution review.
+dependency declaration. [Review `0050681f`](current-linux-wheel-operation-review-20261117.json)
+binds the unchanged guest, the Linux aarch64 carrier and all 39 staged
+files. The [dispatch preflight](current-linux-wheel-dispatch-preflight-20261117.json)
+passed eight checks. Installation, reapply, candidate inspection,
+report reproduction and removal are unstarted and need exact approval.
+
+From the Toolkit repository root, check the launch bindings without
+starting the container.
+
+```bash
+PYTHONPATH=.aeep/completion-20261116/formal-document-native-20261117/committable-source/src \
+  python3 -B reports/toolkit-v2/c13/completion-20261116/current_linux_lifecycle.py \
+  --verify 0050681ff982879b983ac734cb9ae17fd35837a31d676362601a43f67fd1e4ec
+```
+
+After exact operator approval is recorded, use the same command with
+`--execute-reviewed`. The existing runner writes the attempt receipt
+and ledger to the new scoped directory under
+`.aeep/completion-20261116/current-linux-wheel-lifecycle-20261117`.
+Inspect those files before considering a repeat.
 
 The operator authorized removal of the oldest local Time Machine snapshot.
 APFS confirmed that the November 15 snapshot was removed and the November 16
