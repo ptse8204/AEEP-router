@@ -7,8 +7,9 @@ import io
 import json
 import re
 import shutil
+import subprocess
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from xml.etree import ElementTree
 from zipfile import ZipFile
@@ -33,6 +34,7 @@ from prepare_workbook_recipe import (
     WORK,
 )
 
+from aeep.assessment import containment
 from aeep.assessment.containment import ContainerExecutor
 from aeep.assessment.extensions import grader_results
 from aeep.assessment.models import (
@@ -61,11 +63,14 @@ from aeep_toolkit.install_runtime import file_digest
 TAG = "aeep-skillsbench-workbook-recovery:protected-20261116"
 BUILD_PLUGIN = Path("/Applications/Docker.app/Contents/Resources/cli-plugins/docker-buildx")
 CONFIG = TARGET / "docker-config"
-REVIEW = HERE / "workbook-ordinary-operation-review.json"
+PRIOR_REVIEW = HERE / "workbook-ordinary-operation-review.json"
+PRIOR_REVIEW_DIGEST = "8d35b573e5de5c23d2e1c97b6728d201f3665ed621952376ccc5ffad2625f589"
+REVIEW = HERE / "workbook-ordinary-renewal-review-20261117.json"
 APPROVAL = TARGET / "approval.json"
 RESULT = TARGET / "execution"
 RESERVE = 52 * 1024**3
 BUILD_SECONDS = 120
+BUILD_ENV = {"HOME": str(TARGET), "PATH": "/usr/bin:/bin", "LC_ALL": "C", "DOCKER_BUILDKIT": "1"}
 
 
 def title_fault(output):
@@ -161,12 +166,50 @@ def prepared():
     return review, before, grant, recipe, case
 
 
-def prepare():
-    CONFIG.mkdir(mode=0o700)
-    put(CONFIG / "config.json", {"cliPluginsExtraDirs": [str(BUILD_PLUGIN.parent)]})
-    review, *_ = prepared()
-    put(REVIEW, review)
-    print(file_digest(REVIEW))
+def renewed_fields(review, expires):
+    prior = get(PRIOR_REVIEW)
+    if (
+        file_digest(PRIOR_REVIEW) != PRIOR_REVIEW_DIGEST
+        or {**review, "driver_sha256": prior["driver_sha256"]} != prior
+        or not datetime.fromisoformat(prior["expires_at"]) <= utc_now() < expires
+        or expires > utc_now() + timedelta(days=7)
+    ):
+        raise ValueError("expired workbook scope or renewal window differs")
+    return {
+        **review, "expires_at": expires.isoformat(), "previous_expires_at": prior["expires_at"],
+        "previous_review_sha256": PRIOR_REVIEW_DIGEST, "build_env": BUILD_ENV,
+    }
+
+
+def preflight(review):
+    if (
+        not Path(containment.__file__).resolve().is_relative_to(FROZEN / "src")
+        or RESULT.exists() or docker("image", "ls", "--filter", "reference=" + TAG, "-q")
+        or shutil.disk_usage(WORK).free < RESERVE
+    ):
+        raise ValueError("workbook requires its pinned source, fresh tag and host reserve")
+    builder = subprocess.run(
+        [*review["build_command"][:5], "buildx", "inspect", "default"],
+        env=BUILD_ENV, stdin=subprocess.DEVNULL, timeout=20, check=True, capture_output=True, text=True,
+    ).stdout
+    if (
+        not re.search(r"^Driver:\s+docker\s*$", builder, re.M)
+        or not re.search(r"^Status:\s+running\s*$", builder, re.M)
+        or not re.search(r"^Platforms:\s+.*\blinux/arm64(?:,|$)", builder, re.M)
+    ):
+        raise ValueError("local workbook Docker builder is unavailable")
+
+
+def load_review(*, prepare=False):
+    current, *scope = prepared()
+    published = None if prepare else get(REVIEW)
+    expires = (utc_now() + timedelta(days=7) if published is None
+               else datetime.fromisoformat(published["expires_at"]))
+    renewed = renewed_fields(current, expires)
+    if published is not None and published != renewed:
+        raise ValueError("workbook renewal bindings changed")
+    preflight(renewed)
+    return renewed, expires, *scope
 
 
 async def run(exact):
@@ -175,12 +218,9 @@ async def run(exact):
         or not APPROVAL.is_file() or get(APPROVAL) != {"approved": True, "review_sha256": exact}
     ):
         raise ValueError("this unstarted workbook operation needs its exact approval")
-    review, prior, grant, recipe, case = prepared()
-    expires = datetime.fromisoformat(review["expires_at"])
-    if review != get(REVIEW) or utc_now() >= expires or docker("image", "ls", "--filter", "reference=" + TAG, "-q"):
-        raise ValueError("workbook review, expiration or image tag changed")
-    if shutil.disk_usage(WORK).free < RESERVE:
-        raise ValueError("host storage reserve unavailable")
+    review, expires, prior, grant, recipe, case = load_review()
+    if file_digest(REVIEW) != exact:
+        raise ValueError("workbook renewal changed during preflight")
     RESULT.mkdir(mode=0o700)
     scope = Scope(review_sha256=exact)
     subject = grant.subject_digests[0]
@@ -284,7 +324,7 @@ async def run(exact):
             kind="command", side_effect="write", description="Offline COPY-only workbook grader image",
             config={
                 "argv": review["build_command"], "argv_literal": True, "inherit_env": False,
-                "env": {"HOME": str(TARGET), "PATH": "/usr/bin:/bin", "LC_ALL": "C", "DOCKER_BUILDKIT": "1"},
+                "env": review["build_env"],
                 "timeout_seconds": BUILD_SECONDS, "max_output_bytes": 65536, "output": {"type": "text"},
             },
         )
@@ -344,10 +384,13 @@ async def run(exact):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     args = parser.add_mutually_exclusive_group(required=True)
-    args.add_argument("--prepare", action="store_true")
+    args.add_argument("--prepare-renewal", action="store_true")
+    args.add_argument("--preflight", action="store_true")
     args.add_argument("--exact-review")
     options = parser.parse_args()
-    if options.prepare:
-        prepare()
-    else:
+    if options.exact_review:
         raise SystemExit(not asyncio.run(run(options.exact_review)))
+    review, *_ = load_review(prepare=options.prepare_renewal)
+    if options.prepare_renewal:
+        put(REVIEW, review)
+    print(file_digest(REVIEW))

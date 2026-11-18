@@ -1,0 +1,171 @@
+{
+  "schema_version": "aeep.c13.offline-verification-group.v1",
+  "scope": "Six independent unstarted offline checks, including the two retained protected software pairs, the current Linux lifecycle, and three ordinary document graders.",
+  "previous_group": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/pending-offline-verification-group-20261117.json",
+    "sha256": "03d8c261e8d21371b5034e03a2696cfb7ec01ed5daeff624d88cfe56416ac3b1"
+  },
+  "expired_unstarted_workbook_review": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/workbook-ordinary-operation-review.json",
+    "sha256": "8d35b573e5de5c23d2e1c97b6728d201f3665ed621952376ccc5ffad2625f589"
+  },
+  "members": [
+    {
+      "approval_record_path": ".aeep/completion-20261116/current-linux-wheel-lifecycle-20261117/linux-install-package-bridge-approval.json",
+      "driver": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/current_linux_lifecycle.py",
+        "sha256": "acae83d3c12e1c37cd13a67d4177568fc8a7e7bdf1687d09059300e4ed23beab"
+      },
+      "envelope_verified": true,
+      "execute_flag": "--execute-reviewed",
+      "expires_at": "2026-11-25T00:20:32.992247+00:00",
+      "maximum_operations": 1,
+      "maximum_reserved_seconds": 270,
+      "preflight": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/current-linux-wheel-dispatch-preflight-20261117.json",
+        "sha256": "fd91ef0d4ef15151e560662291c38a477c9732a6db00737bf893fcc76d52a997"
+      },
+      "review": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/current-linux-wheel-operation-review-20261117.json",
+        "sha256": "0050681ff982879b983ac734cb9ae17fd35837a31d676362601a43f67fd1e4ec"
+      },
+      "scope": "linux-current-wheel",
+      "terminal_path": ".aeep/completion-20261116/current-linux-wheel-lifecycle-20261117/linux-install-package-bridge-execution",
+      "unstarted_at_preflight": true
+    },
+    {
+      "approval_record_path": ".aeep/completion-20261116/c13-returnn-protected-pair-20261117/approval.json",
+      "driver": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/check_returnn_pair.py",
+        "sha256": "0619adf81226687bd677a42c2e6456b0be064a7ebc024b1af01b59163c263a5b"
+      },
+      "envelope_verified": true,
+      "execute_flag": "--exact-review",
+      "expires_at": "2026-11-25T00:25:18.659092+00:00",
+      "maximum_operations": 2,
+      "maximum_reserved_seconds": 70,
+      "preflight": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/returnn-protected-pair-preflight-20261117.json",
+        "sha256": "d11fbf3b121acc95d6faf19455c1961fa393e46157fd47ac48eee58e2eb94bc1"
+      },
+      "review": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/returnn-protected-pair-review-20261117.json",
+        "sha256": "2e961f2bb52858773950da9bb9a2c5cfbecf1740145a839eb422483de443e76c"
+      },
+      "scope": "returnn-protected-grading",
+      "terminal_path": ".aeep/completion-20261116/c13-returnn-protected-pair-20261117/execution",
+      "unstarted_at_preflight": true
+    },
+    {
+      "approval_record_path": ".aeep/completion-20261116/c13-arta-protected-pair-20261117/approval.json",
+      "driver": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/check_arta_pair.py",
+        "sha256": "d2b7409122e646fe81b543bc46927dc0264eae23bacf8a05895323a8245bdd63"
+      },
+      "envelope_verified": true,
+      "execute_flag": "--exact-review",
+      "expires_at": "2026-11-25T00:45:03.983904+00:00",
+      "maximum_operations": 2,
+      "maximum_reserved_seconds": 70,
+      "preflight": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/arta-protected-pair-preflight-20261117.json",
+        "sha256": "a8d8f7a5eaacf5d4adb2079db37074dc582e9ad8dc0100b9715afeb753f9ceaf"
+      },
+      "review": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/arta-protected-pair-review-20261117.json",
+        "sha256": "5679eda1977a7a52e9a442f13b79a64145981412764e937583a23bd0badd568e"
+      },
+      "scope": "arta-protected-grading",
+      "terminal_path": ".aeep/completion-20261116/c13-arta-protected-pair-20261117/execution",
+      "unstarted_at_preflight": true
+    },
+    {
+      "scope": "workbook-ordinary-grading",
+      "review": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/workbook-ordinary-renewal-review-20261117.json",
+        "sha256": "43273d666760fd5c1aed2547d22468cb032a1843d6c090091d133b515bfcdc12"
+      },
+      "preflight": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/document-runtime-review-preflight-20261117.json",
+        "sha256": "55f944aea597f8d45bbe2c0905afb5fb615c2d21d7fc27934ede2b8f16ff8228"
+      },
+      "driver": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/check_workbook_recipe.py",
+        "sha256": "b9067a982fc3a7a959d70c2d1d2d70f693a3d0a90eda39309c7c4fb977f15095"
+      },
+      "expires_at": "2026-11-25T01:12:14.343213+00:00",
+      "maximum_operations": 11,
+      "maximum_reserved_seconds": 610,
+      "maximum_local_copy_only_builds": 1,
+      "execute_flag": "--exact-review",
+      "approval_record_path": ".aeep/completion-20261116/workbook-ordinary-recipe/approval.json",
+      "terminal_path": ".aeep/completion-20261116/workbook-ordinary-recipe/execution",
+      "unstarted_at_preflight": true
+    },
+    {
+      "scope": "formula-ordinary-grading",
+      "review": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/formula-ordinary-operation-review.json",
+        "sha256": "73cee6d803107ef8cf158760ad2d99770a4f0f9d11a2fd045b0b1ab7416907c0"
+      },
+      "preflight": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/document-runtime-review-preflight-20261117.json",
+        "sha256": "55f944aea597f8d45bbe2c0905afb5fb615c2d21d7fc27934ede2b8f16ff8228"
+      },
+      "driver": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/check_formula_recipe.py",
+        "sha256": "f99572303cfe17bf3f71e0fd859810b2737a8c0690deb5bc6a7d8a9f5e245df9"
+      },
+      "expires_at": "2026-11-20T00:35:16.188585+00:00",
+      "maximum_operations": 5,
+      "maximum_reserved_seconds": 370,
+      "maximum_local_copy_only_builds": 1,
+      "execute_flag": "--exact-review",
+      "approval_record_path": ".aeep/completion-20261116/formula-ordinary-recipe/approval.json",
+      "terminal_path": ".aeep/completion-20261116/formula-ordinary-recipe/execution",
+      "unstarted_at_preflight": true
+    },
+    {
+      "scope": "economic-ordinary-grading",
+      "review": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/economic-ordinary-continuation-review.json",
+        "sha256": "9b859b0790cd25bedfef53d2281ab84caab0fb8b0675dacb8719c8d7072036f4"
+      },
+      "preflight": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/document-runtime-review-preflight-20261117.json",
+        "sha256": "55f944aea597f8d45bbe2c0905afb5fb615c2d21d7fc27934ede2b8f16ff8228"
+      },
+      "driver": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/check_economic_recipe.py",
+        "sha256": "a83f9caeec96ac1383c894e1eb18bd5db9cc114b689935815878b29ddf0888ec"
+      },
+      "expires_at": "2026-11-23T22:56:34.759885+00:00",
+      "maximum_operations": 9,
+      "maximum_reserved_seconds": 225,
+      "maximum_local_copy_only_builds": 0,
+      "execute_flag": "--continue-review",
+      "approval_record_path": ".aeep/completion-20261116/economic-ordinary-continuation-approval.json",
+      "terminal_path": ".aeep/completion-20261116/economic-ordinary-continuation-execution",
+      "unstarted_at_preflight": true
+    }
+  ],
+  "maximum_operations": 30,
+  "maximum_reserved_seconds": 1615,
+  "maximum_local_copy_only_builds": 2,
+  "minimum_usable_host_bytes": 55834574848,
+  "formula_minimum_usable_host_bytes_before_build": 56751169686,
+  "maximum_model_turns": 0,
+  "cash_usd": 0,
+  "downloads": 0,
+  "new_external_destinations": 0,
+  "host_installations": 0,
+  "deletes_existing_resources": false,
+  "candidate_or_selection_trial_authority": false,
+  "release_authority": false,
+  "comparisons_paused": true,
+  "waza_excluded": true,
+  "earliest_member_expiry": "2026-11-20T00:35:16.188585+00:00",
+  "member_review_expiries_apply_independently": true,
+  "approval": "One exact group approval can cover all six members. Earlier group 03d8c261 stays valid for its original three members. Individual approvals remain valid only for their bound attempts. Skip any already-started member and reconcile its ledger. No duplicate limits, charges or attempts.",
+  "recovery": "Known terminal failures leave independent members eligible. Stop on uncertain shared containment, ownership or accounting. Check each member's source, resource reserve and expiry before dispatch. No repeats, changed protected bytes or provider disclosure are authorized."
+}

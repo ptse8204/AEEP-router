@@ -137,6 +137,30 @@ The compact ExtractBench profile covers PDF extraction and these three
 SkillsBench cases still need their own ordinary runtime checks.
 No new grading, provider disclosure or formal assignment occurred.
 
+[Group `9ee3ca0f`](pending-c13-offline-verification-20261117.json) adds
+three independent ordinary document grader checks to the earlier group
+below. One approval can cover all six unstarted scopes. Approval of the
+earlier group still covers only its three members. The group permits up
+to 30 operations, 1,615 reserved seconds and two local COPY-only builds.
+Both builds use pinned retained inputs. The Formula build requires
+52 GiB plus twice its reviewed build context. Expiry and storage are
+checked per member before dispatch.
+
+| Document member | Review | Operations | Reserved seconds |
+| --- | --- | ---: | ---: |
+| Workbook recovery | [`43273d66`](workbook-ordinary-renewal-review-20261117.json) | 11 | 610 |
+| Formula Extraction | [`73cee6d8`](formula-ordinary-operation-review.json) | 5 | 370 |
+| Economic detrending, grade-only | [`9b859b07`](economic-ordinary-continuation-review.json) | 9 | 225 |
+
+The [document preflight](document-runtime-review-preflight-20261117.json)
+passed 13 checks. The workbook renewal retains the original recipe,
+carrier, build command, controls, ceilings and both prior ledgers.
+The same grant accepted a budget renewal and the next reservation in
+a private copy without changing its three settled operations. The other
+two reviews reproduced exactly on their frozen implementation. The
+economic reference stays settled. No reviewer permission, provider
+access, comparison dispatch or protected execution was inferred.
+
 [Group `03d8c261`](pending-offline-verification-group-20261117.json)
 collects the three unstarted offline checks under their existing exact
 scopes. Approve the group or an individual member. The group permits

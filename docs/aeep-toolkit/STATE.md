@@ -1,5 +1,28 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. The ordinary document grader checks are ready for one offline review.**
+The [workbook renewal `43273d66`](../../reports/toolkit-v2/c13/completion-20261116/workbook-ordinary-renewal-review-20261117.json)
+replaces the expired, unstarted `8d35b573` review. It binds the same local
+image layers, inputs, recipe, commands and absolute ceilings. The expired
+root is renewed only after exact execution approval. Its three settled
+operations and the separate bootstrap operation remain recorded.
+
+The [preflight](../../reports/toolkit-v2/c13/completion-20261116/document-runtime-review-preflight-20261117.json)
+passed 13 checks on the original runner source, including a copied-ledger
+renewal, unchanged reservations, and rejection of expanded limits and
+unapproved dispatch. Formula `73cee6d8` and economic `9b859b07` both matched
+their unchanged scopes. The economic check reuses its verified reference
+and runs nine grade calls. No container or model was launched.
+
+[Group `9ee3ca0f`](../../reports/toolkit-v2/c13/completion-20261116/pending-c13-offline-verification-20261117.json)
+combines the three document checks with the three existing offline checks.
+Its ceiling is 30 operations and 1,615 reserved seconds, including two
+local COPY-only builds. Zero models, downloads, cash, provider disclosure
+or formal case assignments are in scope. The original group `03d8c261`
+remains valid for its three members. All six are unstarted and exact
+execution approval is pending. Apply each member's expiry independently.
+C13 stays open, comparisons remain paused, and Waza stays excluded.
+
 **November 17. SpreadsheetBench 2 archive manifests establish initial workbook groups.**
 The [read-only intake audit](../../reports/toolkit-v2/c13/completion-20261116/spreadsheet-archive-index-20261117.json)
 matched both publisher ZIP indexes to their pinned revision and read the

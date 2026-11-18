@@ -1,0 +1,71 @@
+{
+  "parent_id": "sha256:4474cf22f867c681aa6120ce2f98d809413f89755cf11a445444b1b993754ea1",
+  "derived_tag": "aeep-skillsbench-workbook-recovery:protected-20261116",
+  "build_command": [
+    "/Applications/Docker.app/Contents/Resources/bin/docker",
+    "--config",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/completion-20261116/workbook-ordinary-recipe/docker-config",
+    "--host",
+    "unix:///Users/edwintse/.docker/run/docker.sock",
+    "build",
+    "--pull=false",
+    "--network=none",
+    "--platform=linux/arm64",
+    "--provenance=false",
+    "--sbom=false",
+    "--iidfile",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/completion-20261116/workbook-ordinary-recipe/execution/image-id",
+    "--tag",
+    "aeep-skillsbench-workbook-recovery:protected-20261116",
+    "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/completion-20261116/workbook-ordinary-recipe/image"
+  ],
+  "build_context_sha256": "0c62e6c19e2d1f62fda01da7ffe8cacb5e91a7714b0540a0eb9ce5f843a7e5bb",
+  "build_plugin_sha256": "aad5fd9a4dcb81a0ec0f8d3af45a16ff874341ebebd9bb10a88319849ee405a7",
+  "docker_sha256": "8be48df662c5ced38738e7e5dd7f82611a55565f165787cfecebbe416b321b50",
+  "source": "4e673a6d324c6a72c4444ae55e736c1516acd03cb34d2a3401ecb8073f17c9f5",
+  "driver_sha256": "b9067a982fc3a7a959d70c2d1d2d70f693a3d0a90eda39309c7c4fb977f15095",
+  "recipe_digest": "fc684be42b64ff4264896cf5af155e74fd765b70b215e418cd1dbde58736f426",
+  "case_digest": "5e3ea00bc7c77aaec9e2a669218d35d14787be63d9072a163cd85b330ad373ec",
+  "prior_ledger_sha256": "0358b893d073cac064a35dce5d42a32ef2a386f137c07615e2a8db8d471d0945",
+  "first_ledger_sha256": "32999e49ac4401360814e089d0685c5a67cda2277b900e59f751a87902f7b794",
+  "root_grant_digest": "6a550e8f1551c94dcf9a925a1ba4ebe68667cfa1d607821fe7637910215b7b5f",
+  "expires_at": "2026-11-25T01:12:14.343213+00:00",
+  "max_new_operations": 11,
+  "max_new_reserved_seconds": 610,
+  "max_operations_on_root": 14,
+  "max_seconds_on_root": 760.0,
+  "reference_and_grader": {
+    "reference": [
+      "python3",
+      "-I",
+      "-B",
+      "/opt/aeep-workbook-recovery/guest.py",
+      "reference"
+    ],
+    "grader": [
+      "python3",
+      "-I",
+      "-B",
+      "/opt/aeep-workbook-recovery/guest.py",
+      "grade"
+    ],
+    "negative_controls": [
+      "five protocol faults",
+      "unfilled workbook",
+      "zero replacements",
+      "changed title"
+    ]
+  },
+  "provider_disclosure": false,
+  "models": 0,
+  "cash_usd": 0,
+  "retries": 0,
+  "previous_expires_at": "2026-11-17T19:18:14.565582+00:00",
+  "previous_review_sha256": "8d35b573e5de5c23d2e1c97b6728d201f3665ed621952376ccc5ffad2625f589",
+  "build_env": {
+    "HOME": "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/completion-20261116/workbook-ordinary-recipe",
+    "PATH": "/usr/bin:/bin",
+    "LC_ALL": "C",
+    "DOCKER_BUILDKIT": "1"
+  }
+}

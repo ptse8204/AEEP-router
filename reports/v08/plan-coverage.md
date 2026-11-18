@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+The [six-member offline C13 review](../toolkit-v2/c13/completion-20261116/pending-c13-offline-verification-20261117.json)
+combines the formula, workbook and economic ordinary graders with the
+pending Linux lifecycle and RETURNN and Arta checks. Renewal binds the
+workbook's expired scope while preserving the approved ceilings and
+historical charges. Thirteen first-party checks passed. All six members
+remain unstarted. No models, images or protected cases were run.
+
 The [SpreadsheetBench 2 archive audit](../toolkit-v2/c13/completion-20261116/spreadsheet-archive-index-20261117.json)
 verified 297 cell-graded task rows and 127 distinct reference workbook
 paths in the September manifests. Debugging's 100 rows share ten of
