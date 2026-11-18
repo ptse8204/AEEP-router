@@ -81,6 +81,18 @@ filename. The adapter loads the current task's public bytes when its
 worker starts. Keep the references and verifiers in the protected grader
 image.
 
+To give the worker the original instructions as a file, add
+`--archive-instructions` to the staging command and set the reviewed
+workers' transform to `document_archive:2`. The descriptor marks this
+choice with `"instruction_delivery": "archive"`. The reviewed prompt
+template must include the task text, for example `{input.task}`. The
+adapter tells the worker to read the complete `instruction.md` from the
+current task ZIP. It verifies the original instructions and document by
+hash and accepts at most 600,000 bytes of file-backed instructions. The
+inline mode keeps its 100,000-byte limit. Both modes retain the existing
+ZIP and expanded-size guards. Use one mode in every case and both arms.
+Qualification and later cohorts must use the same mode.
+
 A formal recipe uses `assessment.recipe-extension.v8` and
 `curated_document:1`. Put each descriptor in the `input` field of its
 `generator_config.cases` entry. Set `split` to `qualification`, `training`

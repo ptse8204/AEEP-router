@@ -339,6 +339,14 @@ async def test_formal_native_document_materializes_without_running_generator(tmp
         later = document_definition("later", pack="b")
         fresh = plan_for(later)
         require_distinct_document_cohorts(recipe, plan, later, fresh)
+        archived = document_definition("archived", pack="b")
+        for row in archived.generator_config["cases"]:
+            row["input"]["instruction_delivery"] = "archive"
+        with pytest.raises(ConfigurationError, match="same instruction delivery mode"):
+            require_distinct_document_cohorts(recipe, plan, archived, plan_for(archived))
+        archived.generator_config["cases"][-1]["input"].pop("instruction_delivery")
+        with pytest.raises(ConfigurationError, match="one instruction delivery mode"):
+            curated_document_payload(archived)
         fresh.suite.cases[-1].validators[-1].config["expected"] = {}
         with pytest.raises(ConfigurationError, match="full reviewed cohort"):
             require_distinct_document_cohorts(recipe, plan, later, fresh)

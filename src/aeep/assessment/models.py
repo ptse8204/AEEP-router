@@ -88,6 +88,8 @@ NATIVE_SCORE_EXTENSION = "assessment.recipe-extension.v7"
 FORMAL_NATIVE_SCORE_EXTENSION = "assessment.recipe-extension.v8"
 NATIVE_SCORE_EXTENSIONS = (NATIVE_SCORE_EXTENSION, FORMAL_NATIVE_SCORE_EXTENSION)
 INTEGRATION_RECIPE_EXTENSIONS = ("assessment.recipe-extension.v6", NATIVE_SCORE_EXTENSION)
+DOCUMENT_INLINE_INSTRUCTION_BYTES = 100_000
+DOCUMENT_ARCHIVE_INSTRUCTION_BYTES = 600_000
 
 
 class DocumentTaskInput(StrictModel):
@@ -100,6 +102,14 @@ class DocumentTaskInput(StrictModel):
     task_archive_sha256: Digest
     document_sha256: Digest
     output_paths: list[Literal["output.json"]] = Field(min_length=1, max_length=1)
+    instruction_delivery: Literal["archive"] | None = None
+
+    @model_serializer(mode="wrap")
+    def preserve_inline_descriptor(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
+        value = handler(self)
+        if self.instruction_delivery is None:
+            value.pop("instruction_delivery", None)
+        return value
 
 
 class DocumentRecipeCase(StrictModel):

@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 file-backed instruction verification](../toolkit-v2/c13/completion-20261116/document-archive-instruction-verification-20261118.json)
+adds a reviewed document archive mode. The actual contained carrier
+preserved a 567,600-byte synthetic instruction and the ordinary CLI
+validated a full 8/28/105 fixture. Metadata gives all 31 previously
+oversize instructions a staging path, pending actual assets and protected
+grading. The old inline cap and the archive guardrails still apply.
+
 The [C13 ExtractBench transport audit](../toolkit-v2/c13/completion-20261116/extractbench-transport-capacity-20261118.json)
 joined the full pinned publisher tree to 370 task records. All 31 slots
 related to the five missing schemas exceed the 100,000-byte instruction

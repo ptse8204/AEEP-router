@@ -2,6 +2,19 @@
 
 ## November 18 handoff
 
+The [file-backed instruction mode](document-archive-instruction-verification-20261118.json)
+lets the ordinary CLI stage longer publisher instructions under the
+existing ZIP bounds. A network-disabled container read an exact
+567,600-byte synthetic instruction after the production artifact program
+wrote its ZIP. The ordinary CLI validated the 141-case fixture and
+rejected a mixed delivery mode and archive drift. Three retained
+publisher ZIPs matched byte for byte between the modes.
+
+All 31 previously oversized instructions fit the new file limit. Of
+those, 28 fall within the stored-size ZIP screen. The five missing
+schemas can affect capacity again. The exact recovery group remains
+pending. No model used the new mode and no formal case was assigned.
+
 The [ExtractBench transport audit](extractbench-transport-capacity-20261118.json)
 matched 4,070 publisher file entries to 370 tasks. All 31 slots tied to
 the five unresolved schemas exceed the current inline instruction limit.

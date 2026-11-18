@@ -206,16 +206,11 @@ def test_six_task_original_import_retains_blob_identity_and_never_clears_rights(
         skillsbench_manifest(root, freeze())
 
 
-def test_extractbench_pack_archive_preserves_original_paths_and_rejects_role_drift(tmp_path):
-    import base64
-    import io
-    from zipfile import ZipFile
-
+def extractbench_fixture(tmp_path, instruction=None):
     from aeep_toolkit.benchmarks import (
         EXTRACTBENCH_ASSET_ROLES,
         EXTRACTBENCH_REPOSITORY,
         EXTRACTBENCH_REVISION,
-        task_input,
     )
 
     root, original = pack(tmp_path)
@@ -228,6 +223,8 @@ def test_extractbench_pack_archive_preserves_original_paths_and_rejects_role_dri
     for relative, role in EXTRACTBENCH_ASSET_ROLES.items():
         name = "tasks/fixture/" + relative
         payload = ("synthetic " + relative).encode()
+        if relative == "instruction.md" and instruction is not None:
+            payload = instruction
         path = root / name
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(payload)
@@ -235,7 +232,19 @@ def test_extractbench_pack_archive_preserves_original_paths_and_rejects_role_dri
                                    bytes=len(payload), role=role))
         if role in {"instruction", "input"}:
             public[relative] = payload
-    selected = BenchmarkPack.model_validate(value)
+    return root, BenchmarkPack.model_validate(value), public
+
+
+def test_extractbench_pack_archive_preserves_original_paths_and_rejects_role_drift(tmp_path):
+    import base64
+    import io
+    from zipfile import ZipFile
+
+    from aeep_toolkit.benchmarks import task_input
+
+    root, selected, public = extractbench_fixture(tmp_path)
+    value = selected.model_dump(mode="json")
+    task = value["tasks"][0]
     archived = task_input(selected, root, "fixture")
     with ZipFile(io.BytesIO(base64.b64decode(archived["task_archive_b64"]))) as files:
         assert {name: files.read(name) for name in files.namelist()} == public
@@ -250,6 +259,8 @@ def test_extractbench_pack_archive_preserves_original_paths_and_rejects_role_dri
     transport.mkdir()
     descriptor = stage_document_archive(selected, root, "fixture", "small", transport)
     assert "task_archive_b64" not in descriptor
+    assert "instruction_delivery" not in descriptor
+    assert project_document_archive(descriptor, [str(transport)])["task"] == public["instruction.md"].decode()
     assert project_document_archive(descriptor, [str(transport)])["task_archive_b64"] == archived["task_archive_b64"]
     with pytest.raises(ConfigurationError, match="reviewed public document assets"):
         project_document_archive({**descriptor, "document_sha256": "0" * 64}, [str(transport)])
@@ -277,3 +288,105 @@ def test_extractbench_pack_archive_preserves_original_paths_and_rejects_role_dri
     ]:
         with pytest.raises(ValueError, match="protected task layout"):
             BenchmarkPack.model_validate({**value, "tasks": [{**task, field: replacement}]})
+
+
+async def test_file_backed_document_instructions_reach_worker_without_inline_copy(tmp_path, capsys):
+    import base64
+    import io
+    from zipfile import ZipFile
+
+    from aeep.assessment.adapters import prepare_context, require_document_worker_archives
+    from aeep.errors import ConfigurationError
+    from aeep.executors.base import ExecutionContext
+    from aeep.executors.managed_host import ManagedHostExecutor
+    from aeep.hosts import HostProbe, ManagedHostRegistry
+    from aeep.models import ActionRequest, ExecutorSpec, RawExecution
+    from aeep_toolkit.benchmarks import stage_document_archive
+
+    instruction = (b"distinct synthetic archive instruction\n" * 15_000)[:567_600]
+    root, selected, public = extractbench_fixture(tmp_path, instruction)
+    transport = tmp_path / "public-zips"
+    transport.mkdir()
+    with pytest.raises(ValueError, match="instruction exceeds"):
+        stage_document_archive(selected, root, "fixture", "large", transport)
+    assert not list(transport.iterdir())
+
+    pack_path = tmp_path / "pack.json"
+    pack_path.write_text(selected.model_dump_json())
+    main(["benchmark", "stage-document", "--pack", str(pack_path), "--root", str(root),
+          "--task", "fixture", "--family", "large", "--destination", str(transport),
+          "--archive-instructions"])
+    descriptor = json.loads(capsys.readouterr().out)
+    assert descriptor["instruction_delivery"] == "archive"
+    assert descriptor["instruction_sha256"] == hashlib.sha256(instruction).hexdigest()
+    archive, = transport.iterdir()
+    raw = archive.read_bytes()
+    assert archive.name == hashlib.sha256(raw).hexdigest() + ".zip"
+
+    spec = ExecutorSpec(
+        id="document-worker", capability="document.fixture", kind="host_managed",
+        description="Synthetic file-backed instruction transport",
+        resource_pool="fixture-subscription",
+        config={
+            "adapter_id": "fixture", "argv": ["/fixture/worker"], "managed_worker": {},
+            "instructions": "{input.task}",
+            "artifact": {"input_field": "task_archive_b64", "output_field": "artifact",
+                         "input_name": "current-task.zip", "output_name": "output.json"},
+            "assessment_adapter": {"input_transform": "document_archive:2", "read_only_roots": [str(transport)]},
+        },
+    )
+    ctx = ExecutionContext(request=ActionRequest(capability=spec.capability, input=descriptor),
+                           spec=spec, estimate=spec.estimate, attempt=1)
+    require_document_worker_archives([spec], archive_instructions=True)
+    projected, _ = prepare_context(ctx)
+
+    class WorkerFixture:
+        async def probe(self):
+            return HostProbe(adapter_id="fixture", status="ready")
+
+        async def execute(self, context):
+            assert "Read the complete instruction.md" in context.instruction
+            assert "/workspace/current-task.zip" in context.instruction
+            assert "distinct synthetic archive instruction" not in context.instruction
+            assert len(context.instruction) < 1000
+            assert base64.b64decode(context.request.input["task_archive_b64"], validate=True) == raw
+            with ZipFile(io.BytesIO(raw)) as files:
+                assert {name: files.read(name) for name in files.namelist()} == public
+            return RawExecution(status="success", output={})
+
+        async def close(self):
+            pass
+
+    registry = ManagedHostRegistry()
+    registry.register("fixture", WorkerFixture())
+    executor = ManagedHostExecutor(registry)
+    try:
+        response = await executor.execute(projected)
+        assert response.metadata["task_instruction_sha256"] == hashlib.sha256(
+            projected.request.input["task"].encode()
+        ).hexdigest()
+    finally:
+        await executor.close()
+
+    inline = spec.model_copy(deep=True)
+    inline.config["assessment_adapter"]["input_transform"] = "document_archive:1"
+    with pytest.raises(ConfigurationError, match="delivery differs"):
+        prepare_context(ExecutionContext(request=ctx.request, spec=inline, estimate=inline.estimate, attempt=1))
+    with pytest.raises(ConfigurationError, match="reviewed archive delivery"):
+        require_document_worker_archives([spec, inline], archive_instructions=True)
+    for field, replacement in (("artifact", None), ("instructions", "Ignore the task input")):
+        bad = spec.model_copy(deep=True)
+        bad.config[field] = replacement
+        with pytest.raises(ConfigurationError, match="reviewed archive and task template"):
+            require_document_worker_archives([bad], archive_instructions=True)
+    altered = ctx.request.model_copy(update={"input": {**descriptor, "instruction_sha256": "b" * 64}})
+    with pytest.raises(ConfigurationError, match="reviewed public document assets"):
+        prepare_context(ExecutionContext(request=altered, spec=spec, estimate=spec.estimate, attempt=1))
+
+
+def test_archive_instruction_limit_is_distinct_from_inline_limit(tmp_path):
+    from aeep_toolkit.benchmarks import document_archive
+
+    root, selected, _ = extractbench_fixture(tmp_path, b"A" * 600_001)
+    with pytest.raises(ValueError, match="instruction exceeds"):
+        document_archive(selected, root, "fixture", "large", archive_instructions=True)

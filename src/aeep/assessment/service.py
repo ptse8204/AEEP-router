@@ -251,9 +251,6 @@ class AssessmentService:
             case_set = RecipeCaseSet.model_validate(self.repository.get("recipe_case_set", case_set_id))
             if case_set.recipe_digest != recipe_digest or case_set.environment_digest != environment_digest or case_set.seed != seed:
                 raise ConfigurationError("generated cases differ from the reviewed recipe, environment or seed")
-        if recipe.extension is not None and recipe.extension.schema_version == FORMAL_NATIVE_SCORE_EXTENSION:
-            from .adapters import require_document_worker_archives
-            require_document_worker_archives(mapping.subjects)
         cases = integration_cases.cases if integration_cases is not None else case_set.cases if case_set is not None else [
             (
                 generate_reviewed_case(recipe, index, seed, split)
@@ -267,6 +264,11 @@ class AssessmentService:
             )
             for index in range(count)
         ]
+        if recipe.extension is not None and recipe.extension.schema_version == FORMAL_NATIVE_SCORE_EXTENSION:
+            from .adapters import require_document_worker_archives
+            require_document_worker_archives(
+                mapping.subjects, archive_instructions=cases[0].action.input.get("instruction_delivery") == "archive",
+            )
         if pilot is not None:
             cases = [case for case in cases if case.split == BenchmarkSplit.QUALIFICATION]
         blocked = list(selection["reasons"])

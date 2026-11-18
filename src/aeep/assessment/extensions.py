@@ -248,6 +248,8 @@ def curated_document_payload(recipe: RecipeDefinition) -> dict[str, Any]:
     if not isinstance(rows, list) or len(rows) != sum(count for _, count in STAGES):
         raise ConfigurationError('curated document recipes require exactly 141 reviewed cases')
     cases = [DocumentRecipeCase.model_validate(row) for row in rows]
+    if len({case.input.instruction_delivery for case in cases}) != 1:
+        raise ConfigurationError("formal document cases must share one instruction delivery mode")
     sets = {split: [case for case in cases if case.split == split.value] for split, _ in STAGES}
     if any(len(sets[split]) != count for split, count in STAGES):
         raise ConfigurationError('curated document recipes require reviewed 8/28/105 splits')
@@ -291,9 +293,10 @@ def require_distinct_document_cohorts(
             or later.extension.schema_version != FORMAL_NATIVE_SCORE_EXTENSION
             or contract(earlier) != contract(later)):
         raise ConfigurationError('document stages require the same reviewed grading contract')
-
+    delivery_modes = set()
     for recipe, plan in ((earlier, earlier_plan), (later, later_plan)):
         payload = curated_document_payload(recipe)['cases']
+        delivery_modes.add(payload[0]['input'].get('instruction_delivery'))
         splits = [split for split, count in STAGES for _ in range(count)]
         if (plan.recipe_case_set_digest is None or plan.pilot is not None
                 or plan.integration_case_set_digest is not None or len(plan.suite.cases) != len(payload)
@@ -302,6 +305,8 @@ def require_distinct_document_cohorts(
                        or not case.validators or case.validators[-1].config.get('expected') != row['output']
                        for case, row, split in zip(plan.suite.cases, payload, splits, strict=True))):
             raise ConfigurationError('document plan differs from the full reviewed cohort')
+    if len(delivery_modes) != 1:
+        raise ConfigurationError('document stages require the same instruction delivery mode')
 
     def keys(plan: AssessmentPlan, *, holdout: bool = False) -> set[tuple[str, str]]:
         return {

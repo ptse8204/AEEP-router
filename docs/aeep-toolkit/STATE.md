@@ -1,5 +1,29 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 18. ExtractBench can stage file-backed instructions.**
+The [archive delivery verification](../../reports/toolkit-v2/c13/completion-20261116/document-archive-instruction-verification-20261118.json)
+binds a new reviewed `document_archive:2` mode to the current source.
+The ordinary staging command keeps original instructions in the ZIP.
+The worker receives a short directive to read that file. Both arms and
+all formal cohorts for a study must use the same delivery mode. Inline
+instructions retain their 100,000-byte limit. File-backed instructions
+are limited to 600,000 bytes under the existing ZIP and unpacked limits.
+
+The contained artifact program wrote a synthetic ZIP and read back its
+exact 567,600-byte instruction file. Its one operation settled and its
+container was removed. The ordinary CLI preview accepted 141 synthetic
+cases and refused a mixed worker mode and a tampered archive. Three
+retained published ZIPs were byte-identical across the two modes. The
+current CLI accepted all 37 existing stack checks in a private ledger
+copy without changing operational authority or accounting.
+
+The prior publisher size audit now gives 31 slots within the file
+instruction envelope, with 28 below the stored-size ZIP screen. Actual
+compression, permitted use, protected grades and managed model reading
+remain open. The five-schema member of group `403dfca5` can inform the
+cohort again. The exact group remains pending. No formal cases were
+adopted, comparisons remain paused, and Waza is excluded.
+
 **November 18. ExtractBench's instruction limit reduces cohort capacity.**
 The [transport audit](../../reports/toolkit-v2/c13/completion-20261116/extractbench-transport-capacity-20261118.json)
 joined metadata for 4,070 files to the pinned 370-task manifest. Among

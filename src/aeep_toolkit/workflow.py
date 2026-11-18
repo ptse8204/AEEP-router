@@ -268,7 +268,10 @@ def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
                 raise ValueError('formal document workflows require a full canonical document cohort')
             for case in plan.suite.cases:
                 observed = DocumentTaskInput.model_validate(case.action.input)
-                expected, _ = document_archive(pack, asset_root.absolute(), observed.task_id, observed.family)
+                expected, _ = document_archive(
+                    pack, asset_root.absolute(), observed.task_id, observed.family,
+                    archive_instructions=observed.instruction_delivery == 'archive',
+                )
                 if observed != expected:
                     raise ValueError('formal document case differs from exact selected public assets')
         assessment = {'plan_path':str(plan_path), 'source_path':str(source_path),

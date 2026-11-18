@@ -20,6 +20,7 @@ from ..models import (
     ExecutionStatus,
     ExecutorKind,
     ExecutorSpec,
+    ManagedHostArtifact,
     RawExecution,
     ResourceVector,
     StrictModel,
@@ -29,19 +30,25 @@ from ..qualification import behavior_fingerprint
 from ..registry import validate_json
 from ..templates import render
 from ..workflow import WorkflowRequest, WorkflowStatus, pointer_get
-from .models import DocumentTaskInput
+from .models import (
+    DOCUMENT_ARCHIVE_INSTRUCTION_BYTES,
+    DOCUMENT_INLINE_INSTRUCTION_BYTES,
+    DocumentTaskInput,
+)
 
 if TYPE_CHECKING:
     from ..router import Router
 
 
 DOCUMENT_ARCHIVE_PATHS = {"instruction.md", "environment/document.pdf", "environment/schema.json"}
-_ARCHIVE_TRANSFORMS = {"repository_archive:1", "repository_archive:2", "document_archive:1"}
+_DOCUMENT_TRANSFORMS = {"document_archive:1", "document_archive:2"}
+_ARCHIVE_TRANSFORMS = {"repository_archive:1", "repository_archive:2", *_DOCUMENT_TRANSFORMS}
 
 
 class DeclarativeAdapter(StrictModel):
     input_transform: Literal[
-        "local_search_tree:1", "local_search_tree:2", "repository_archive:1", "repository_archive:2", "document_archive:1"
+        "local_search_tree:1", "local_search_tree:2", "repository_archive:1", "repository_archive:2",
+        "document_archive:1", "document_archive:2",
     ] | None = None
     read_only_roots: list[str] = Field(default_factory=list)
     input_template: dict[str, Any] | None = None
@@ -122,6 +129,9 @@ def prepare_context(context: ExecutionContext) -> tuple[ExecutionContext, Declar
         arguments = public_archive(arguments, adapter.read_only_roots, large=adapter.input_transform == 'repository_archive:2')
     elif adapter.input_transform == "document_archive:1":
         arguments = project_document_archive(arguments, adapter.read_only_roots)
+    elif adapter.input_transform == "document_archive:2":
+        artifact = require_document_archive_target(context.spec)
+        arguments = project_document_archive(arguments, adapter.read_only_roots, artifact=artifact)
     elif adapter.input_transform == "local_search_tree:1":
         from .recipes import search_files
         try:
@@ -139,31 +149,56 @@ def prepare_context(context: ExecutionContext) -> tuple[ExecutionContext, Declar
     return replace(context, request=context.request.model_copy(update={"input": arguments})), adapter
 
 
-def require_document_worker_archives(subjects: list[ExecutorSpec]) -> None:
+def require_document_archive_target(subject: ExecutorSpec) -> ManagedHostArtifact:
+    if subject.kind != ExecutorKind.MANAGED_HOST:
+        raise ConfigurationError("file-backed document instructions require a managed artifact worker")
+    config = subject.managed_host_config()
+    artifact = config.artifact
+    if (
+        artifact is None or artifact.input_field != "task_archive_b64" or artifact.output_name != "output.json"
+        or (config.invocation is not None and config.invocation.mode == "mcp_tool")
+        or not any(token in config.instructions for token in (
+            "{input}", "{input.task}", "{action}", "{action.input}", "{action.input.task}",
+        ))
+    ):
+        raise ConfigurationError("file-backed document instructions require a reviewed archive and task template")
+    return artifact
+
+
+def require_document_worker_archives(
+    subjects: list[ExecutorSpec], *, archive_instructions: bool = False,
+) -> None:
     """Validate the public archive delivery before a formal worker is dispatched."""
     for subject in subjects:
+        if archive_instructions:
+            require_document_archive_target(subject)
         if subject.kind != ExecutorKind.MANAGED_HOST:
             continue
         artifact = subject.managed_host_config().artifact
         adapter = DeclarativeAdapter.model_validate(subject.config.get('assessment_adapter') or {})
         if (artifact is None or artifact.input_field != 'task_archive_b64'
                 or artifact.output_name != 'output.json'
-                or adapter.input_transform != 'document_archive:1' or len(adapter.read_only_roots) != 1):
+                or adapter.input_transform != ('document_archive:2' if archive_instructions else 'document_archive:1')
+                or len(adapter.read_only_roots) != 1):
             raise ConfigurationError(f'formal document worker {subject.id} requires reviewed archive delivery')
 
 
-def project_document_archive(arguments: dict[str, Any], roots: list[str]) -> dict[str, Any]:
+def project_document_archive(
+    arguments: dict[str, Any], roots: list[str], *, artifact: ManagedHostArtifact | None = None,
+) -> dict[str, Any]:
     """Load the single public ZIP identified in a reviewed document case."""
     from ..artifact_store import _read_stable_file
     from .identity import protected_directory
 
     task = DocumentTaskInput.model_validate(arguments)
+    if (artifact is not None) != (task.instruction_delivery == "archive"):
+        raise ConfigurationError("document instruction delivery differs from the reviewed worker")
     if len(roots) != 1:
         raise ConfigurationError('document archive mapping requires one reviewed public asset root')
     root = Path(roots[0])
     if root.is_symlink() or root.resolve() != root or protected_directory(root):
         raise ConfigurationError('document archive root is invalid')
-    data = _read_stable_file(root / (task.task_archive_sha256 + '.zip'), 4_000_000)
+    data = _read_stable_file(root / (task.task_archive_sha256 + '.zip'), artifact.max_bytes if artifact else 4_000_000)
     if hashlib.sha256(data).hexdigest() != task.task_archive_sha256:
         raise ConfigurationError('public document archive changed')
     try:
@@ -174,7 +209,9 @@ def project_document_archive(arguments: dict[str, Any], roots: list[str]) -> dic
                     or any(entry.is_dir() or stat.S_IFMT(entry.external_attr >> 16) not in {0, stat.S_IFREG}
                            or entry.flag_bits & 1 for entry in entries)
                     or sum(entry.file_size for entry in entries) > 16_000_000
-                    or not 0 < archive.getinfo('instruction.md').file_size <= 100_000):
+                    or not 0 < archive.getinfo('instruction.md').file_size <= (
+                        DOCUMENT_ARCHIVE_INSTRUCTION_BYTES if artifact else DOCUMENT_INLINE_INSTRUCTION_BYTES
+                    )):
                 raise ConfigurationError('archive does not contain the reviewed public document assets')
             instruction = archive.read('instruction.md')
             if (hashlib.sha256(instruction).hexdigest() != task.instruction_sha256
@@ -183,6 +220,12 @@ def project_document_archive(arguments: dict[str, Any], roots: list[str]) -> dic
             prompt = instruction.decode('utf-8')
     except (OSError, RuntimeError, UnicodeError, zipfile.BadZipFile) as exc:
         raise ConfigurationError('cannot validate the reviewed public document archive') from exc
+    if artifact is not None:
+        prompt = (
+            f"Read the complete instruction.md from the task ZIP at /workspace/{artifact.input_name}. "
+            "Use its environment/document.pdf and environment/schema.json. "
+            "Follow the instructions and write the requested JSON to /workspace/output.json."
+        )
     return {**arguments, 'task': prompt, 'task_archive_b64': base64.b64encode(data).decode('ascii')}
 
 
