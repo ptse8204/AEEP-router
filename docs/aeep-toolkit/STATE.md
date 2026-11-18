@@ -1,5 +1,30 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 18. ExtractBench capacity depends on the annual filing family.**
+The [source-family sensitivity audit](../../reports/toolkit-v2/c13/completion-20261116/extractbench-year-source-sensitivity-20261118.json)
+keeps 18 metadata slots with recurring filename stems in one stage.
+This models possible source linkage across four years. It leaves
+filer identity and asset rights open. Under the stored-size ZIP screen,
+16 of 32 hypothetical schema classifications allow balanced,
+source-disjoint allocations of 8, 28, 105 and 105 cases. If the 18
+slots are held for review, at most 121 multiple-collection slots remain,
+one below the minimum. Counting ZIPs whose compressed size still needs
+measurement gives a witness in 16 of 32 scenarios with those slots held.
+The exact five-schema read can resolve the shape assumptions. Asset
+rights, archive measurements, protected grades and stage assignment
+remain open. No case was adopted.
+
+The [Pyfakefs audit](../../reports/toolkit-v2/c13/completion-20261116/pyfakefs-protected-audit-result-20261118.json)
+records the first offline reference for the pinned repository case.
+Of 432 required checks, 431 passed and one failed. The receipt
+settled with an observation mismatch, no grade and no retained
+failed-test identity. The container was removed and the original-source
+control remains unstarted. The reproduced software pool stays at
+49 cases across 28 repositories.
+
+Recovery group `403dfca5` remains unapproved and unstarted. C13 stays
+open, comparisons stay paused, and Waza is excluded.
+
 **November 18. ExtractBench can stage file-backed instructions.**
 The [archive delivery verification](../../reports/toolkit-v2/c13/completion-20261116/document-archive-instruction-verification-20261118.json)
 binds a new reviewed `document_archive:2` mode to the current source.

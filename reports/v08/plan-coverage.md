@@ -1,5 +1,19 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 source-family sensitivity audit](../toolkit-v2/c13/completion-20261116/extractbench-year-source-sensitivity-20261118.json)
+keeps 18 recurring annual metadata slots within one stage.
+The stored-size ZIP screen has a balanced 8/28/105/105 witness in
+16 of 32 conditional schema classifications. Holding those slots
+leaves at most 121 multiple-collection slots, below the minimum of 122.
+Measuring compressed ZIPs and resolving the five missing schema
+classifications remain open. There is no adopted document stage.
+
+The [C13 Pyfakefs audit](../toolkit-v2/c13/completion-20261116/pyfakefs-protected-audit-result-20261118.json)
+reconciles a settled reference that passed 431 of 432 required checks.
+The original-source control remains unstarted. The reproduced software
+pool stays at 49 cases across 28 repositories. Recovery group
+`403dfca5` is unapproved and unstarted.
+
 The [C13 file-backed instruction verification](../toolkit-v2/c13/completion-20261116/document-archive-instruction-verification-20261118.json)
 adds a reviewed document archive mode. The actual contained carrier
 preserved a 567,600-byte synthetic instruction and the ordinary CLI
