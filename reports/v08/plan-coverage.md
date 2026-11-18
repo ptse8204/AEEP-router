@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 Optuna audit](../toolkit-v2/c13/completion-20261116/optuna-protected-audit-result-20261118.json)
+settled a first reference with 15 passed and four failed required checks.
+No grade was issued and the original-source role is unstarted. The
+selected samplers exercise optional `cmaes` and `torch` code beyond the
+reviewed runtime. The reproduced pool remains at 48 cases.
+
 The [C13 source-family verification](../toolkit-v2/c13/completion-20261116/curated-source-family-verification-20261118.json)
 checks repository independence for curated 8/28/105 software stages.
 Same-repository cases with distinct revisions are rejected across stages.

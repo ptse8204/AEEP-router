@@ -2,6 +2,14 @@
 
 ## November 18 handoff
 
+The [Optuna audit](optuna-protected-audit-result-20261118.json) settled
+one protected reference. All 19 required checks returned observations:
+15 passed and four failed. The role issued no grade. The original-source
+role remains unstarted. The protected tests instantiate CMA-ES and
+Gaussian-process samplers, whose optional `cmaes` and `torch` runtime
+dependencies need review. The receipt preserves counts, with individual
+failure identities unavailable. The 48-case reproduced pool is unchanged.
+
 [Recovery group `403dfca5`](c13-recovery-group-20261118.json) puts the
 three pending repeats under one approval. The member reviews, limits,
 drivers and terminal checks are unchanged. All five exact driver

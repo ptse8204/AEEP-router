@@ -1,0 +1,104 @@
+{
+  "actual_elapsed_seconds": 2.9386120419949293,
+  "artifact_result": {
+    "path": ".aeep/c13-optuna-runtime.qorIpf/artifact-result.json",
+    "sha256": "621f14637a1157eb35091b00b8a3bdf7f5b86303658d220ffd1cc792cfffaed3"
+  },
+  "artifact_review": {
+    "path": ".aeep/c13-optuna-runtime.qorIpf/artifact-review.json",
+    "sha256": "3518c4972725bcd5d1b7485369948177cd9958de3d0172c8ebc6798e74347fed"
+  },
+  "canonical_readback": {
+    "ledger": {
+      "path": ".aeep/completion-20261116/c13-optuna-protected-pair-20261118/execution/ledger.json",
+      "sha256": "4eb25ac238a62aefbc77f5ba1d4c0246f61d94df901731b81bbe68d45dbed283"
+    },
+    "receipt": {
+      "path": ".aeep/completion-20261116/c13-optuna-protected-pair-20261118/execution/receipt-rcpt_7a4d3a45a97e45a782771431999ffdd3.json",
+      "sha256": "ae80ade3ad03c8f9914381f7add59820bb0f5b083d079594beaef0954ac4578c"
+    },
+    "result": {
+      "path": ".aeep/completion-20261116/c13-optuna-protected-pair-20261118/execution/result.json",
+      "sha256": "1110393d8fb368b87c5be22dd092cf4432c304cacf8326d3ba8e8dec0d668832"
+    },
+    "status_summary": {
+      "path": ".aeep/completion-20261116/c13-optuna-protected-pair-20261118/execution/status-counts.json",
+      "sha256": "dfe93bf59d5ac741a8c62ec8b46bb1334000d3b1dccde83460ad32cc4c87752f"
+    }
+  },
+  "cash_usd": 0,
+  "comparisons_paused": true,
+  "decision": "Keep Optuna outside the reproduced pool until the optional runtime is reviewed and the full protected pair passes. No repeat scheduled.",
+  "delegated_first_attempt": {
+    "path": ".aeep/completion-20261116/c13-optuna-protected-pair-20261118/delegated-authority.json",
+    "sha256": "e8ddf85a3b7a20a745459f68c613878c9ec72c74aa62def0c33484201bc3c11d"
+  },
+  "dependency_preflight": {
+    "default_and_test_runtime_requirement_edges": 19,
+    "label_note": "The reused closure helper labels the first group with Conan's name. Its inputs in this review are the pinned Optuna project requirements, pytest, and SciPy.",
+    "portable_wheel_artifact_response_bytes": 338487,
+    "retained_image": "sha256:2386ef223e39b5dc12e6d8cdbaa6ac9779753f13ee74dc51e8d207279edae91f"
+  },
+  "formal_cases_adopted": 0,
+  "implementation_parent": "2ec18d3f",
+  "model_turns": 0,
+  "operation_count": 1,
+  "original_source_started": false,
+  "owned_container_absent_at_settlement": true,
+  "provider_disclosure": false,
+  "reference_grade": null,
+  "reference_observations": {
+    "contract_matched": false,
+    "exit_code": 1,
+    "observed_counts": {
+      "FAILED": 4,
+      "PASSED": 15
+    },
+    "required_status_count": 19,
+    "required_status_matches": 15,
+    "role": "reference"
+  },
+  "rehearsal": {
+    "path": ".aeep/c13-optuna-runtime.qorIpf/rehearsal.json",
+    "sha256": "07d259077bd3fcaff55b1e03b587ef4bc00039e0d2e662e34697ad68f9dfee37"
+  },
+  "reserved_seconds": 35.0,
+  "review": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/optuna-protected-pair-review-20261118.json",
+    "sha256": "820bf4aa75bd9b828628d7e853d9fef4e42e35e48b5b9185516bee823bd0481c"
+  },
+  "schema_version": "aeep.c13.optuna-protected-audit-result.v1",
+  "selected_optional_runtime": {
+    "pinned_cmaes_requirement": "cmaes>=0.12.0",
+    "pinned_gp_requirement": "torch",
+    "reviewed_runtime_includes_optional_dependencies": false,
+    "scope": "Static reachability and optional requirements. Individual failed identities and reasons were not retained.",
+    "selected_parameter_variants": {
+      "CmaEsSampler": 2,
+      "GPSampler": 2
+    }
+  },
+  "software_reproduction_pool": 48,
+  "subject": {
+    "case": "optuna__optuna-6428-aeep-contract-audit",
+    "protected_overlay": {
+      "path": ".aeep/completion-20261116/repository-expansion-acquisition/transport/protected/optuna__optuna-6428-aeep-contract-audit/tests.tar.gz",
+      "sha256": "66ca20fa283568243a8fab689212a1805c393ed6784388ba7908f87538be423b"
+    },
+    "public_archive": {
+      "path": ".aeep/completion-20261116/repository-expansion-acquisition/transport/public/a54105a35eb0002b1304156a51c30c8c6f2132fad910372c445316d2ee176559.tar.gz",
+      "sha256": "a54105a35eb0002b1304156a51c30c8c6f2132fad910372c445316d2ee176559"
+    },
+    "source_revision": "52f6ef6ffe5a2a4c6386f8d83cd39335d7f3a2ae"
+  },
+  "verification": {
+    "docs": {
+      "files": 72,
+      "path": ".aeep/c13-optuna-runtime.qorIpf/docs.log",
+      "sha256": "7293af972218da793d6e6ae3e2a7c9e8345caef51163cafeb1ba2f5a3dbb6982"
+    },
+    "ruff": "passed",
+    "schemas": "passed"
+  },
+  "waza_excluded": true
+}

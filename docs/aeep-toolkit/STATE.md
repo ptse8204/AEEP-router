@@ -1,5 +1,20 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 18. Optuna's first protected reference failed four checks.**
+The [Optuna audit](../../reports/toolkit-v2/c13/completion-20261116/optuna-protected-audit-result-20261118.json)
+binds all 19 required checks to the pinned source and retained offline
+image. The first reference returned 15 passes and four failures in
+2.939 seconds. Its sole operation settled and its container was removed.
+The original-source role remains unstarted and no grade was issued.
+
+The selected tests instantiate both CMA-ES and Gaussian-process
+samplers. Their optional `cmaes` and `torch` dependencies were outside
+the reviewed runtime. The retained status counts cannot identify the
+four failures individually. Keep Optuna outside the reproduced pool
+while the optional runtime is unresolved. The pool remains at 48
+cases. Group `403dfca5` is unchanged and unstarted. Comparisons stay
+paused and Waza is excluded.
+
 **November 18. Formal software stages enforce repository separation.**
 The [source-family verification](../../reports/toolkit-v2/c13/completion-20261116/curated-source-family-verification-20261118.json)
 records a guard in recipe export and materialization. It refuses repeated
