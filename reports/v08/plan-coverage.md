@@ -1,5 +1,13 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 document boundary audit](../toolkit-v2/c13/completion-20261116/document-dispatch-boundary-20261118.json)
+verified exact archives and 25 retained receipts on three ordinary
+SkillsBench case sets. Asset-use review and formal cohort assignment
+remain open. The [Braindrop triage](../toolkit-v2/c13/completion-20261116/braindrop-selector-triage-20261118.json)
+reconstructed 11 truncated selectors and preserved both original charges.
+The [repeat addendum](../toolkit-v2/c13/completion-20261116/protected-repeat-group-addendum-20261118.json)
+groups the outstanding protected runs for one operator decision.
+
 The [C13 contract-audit results](../toolkit-v2/c13/completion-20261116/expansion-contract-audit-results-20261118.json)
 verify Django Guardian at 1/1 reference and 0/1 original. Its 19
 protected outcomes bring the prospective software pool to 48 cases.

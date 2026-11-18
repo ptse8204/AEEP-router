@@ -1,5 +1,28 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 18. Braindrop's protected selection and document boundaries are pinned.**
+The [Braindrop triage](../../reports/toolkit-v2/c13/completion-20261116/braindrop-selector-triage-20261118.json)
+settles two operations. Its first reference produced no grade. The
+collection-only diagnostic selected 63 native tests, with 52 exact matches.
+Eleven publisher selectors stop at whitespace inside parameter IDs.
+The reconstruction matches each to one literal parameter case. Both
+grading payloads are byte-identical to the original review. Conan has
+ten truncated selectors, including ambiguous prefixes. Keep it out
+pending full source-bound identities.
+
+The [document boundary audit](../../reports/toolkit-v2/c13/completion-20261116/document-dispatch-boundary-20261118.json)
+reopened 25 canonical receipts for Workbook Recovery, Formula Extraction
+and economic detrending. All three ordinary task archives, recipes and
+environments match. The verified case sets are integration-only.
+Task rights and formal cohort use remain pending.
+
+[Group `ce4e08cf`](../../reports/toolkit-v2/c13/completion-20261116/protected-repeat-group-addendum-20261118.json)
+adds Braindrop's two-call repeat to the still-valid `f8cac92e` group.
+It covers eight local operations and 280 seconds at most, with zero
+models, cash or disclosure. No member is approved or started. The
+software pool remains at 48 reproduced cases and zero formal assignments.
+C13 stays open, comparisons stay paused, and Waza is excluded.
+
 **November 18. Django Guardian qualifies for the reproduced software pool.**
 The [receipt audit](../../reports/toolkit-v2/c13/completion-20261116/expansion-contract-audit-results-20261118.json) verified all 19 reference tests.
 The original failed two checks and passed 17. The prospective software

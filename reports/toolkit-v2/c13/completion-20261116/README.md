@@ -79,6 +79,43 @@ cohort floors leaves at least 198 more eligible cases even if every
 reproduced case qualifies. No formal cohort is frozen. Comparisons stay
 paused, and Waza remains excluded.
 
+### Native selector repair and reviewed document inputs
+
+[Braindrop's first reference](braindrop-selector-triage-20261118.json)
+used the retained HTTPX wheels and metadata from the exact source.
+It returned an observation mismatch and issued no grade. A collection-only
+diagnostic selected 63 native tests. The publisher names matched 52.
+Eleven preservation names stop at spaces inside literal parameters.
+
+The [repair preflight](recover_braindrop_native_ids.py) reconstructs each
+full identity from its parameter declaration and the pinned pytest 8.3.5
+naming behavior. An ambiguous alias is rejected. The reference and
+original still use the same archive, protected assertions, thresholds
+and per-role grading payload hashes. A screen of all 13 retained
+expansion rows also found ten truncated Conan names. Some share a prefix
+with multiple native cases. Conan remains outside the verified pool.
+Braindrop's original-source grade is unstarted. Its two earlier operations
+settled and remain on the original ledger.
+
+The [document boundary audit](document-dispatch-boundary-20261118.json)
+rebuilt the three public input ZIPs and verified each ordinary recipe,
+environment and case-set digest. It joined 11 Workbook Recovery receipts,
+five Formula Extraction receipts and nine economic detrending receipts
+to their settled ledger entries. Changed archives, cross-environment case
+sets and duplicated receipts were refused. These are integration-only
+case sets. The exact public and protected asset pins are available for
+asset-use review. Formal study use still needs the reviewed recipe to
+support the retained output types and existing cohort floors.
+
+[Repeat group `ce4e08cf`](protected-repeat-group-addendum-20261118.json)
+covers Braindrop's corrected pair and both unchanged scopes in
+`f8cac92e`. The earlier group remains valid on its own. The expanded
+group is limited to eight offline operations and 280 reserved seconds,
+with zero model turns, cash, installation, downloads or disclosure.
+Preparation preserved prior charges and refused unapproved replay,
+missing identities and uncertain cleanup. All protected repeats remain
+unstarted.
+
 ## November 17 handoff
 
 The current [formal document verification](formal-document-native-verification.json)
