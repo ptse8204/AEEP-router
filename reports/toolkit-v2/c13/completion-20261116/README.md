@@ -1121,10 +1121,9 @@ the prior source groups and protected grader requirements.
 SpreadsheetBench 2's revised paper reports 297 cell-graded tasks and
 24 visualization tasks. The publisher's archive history lists a June
 upload and a separately named September upload. Both hashes are pinned
-in the metadata audit. The link between those hashes and the paper's counts
-remains unverified. The dataset card declares MIT. The revised paper
-declares CC BY-SA 4.0 for the released dataset and MIT for the evaluator.
-Archive selection and permitted use remain open.
+in the initial metadata audit. The dataset card declares MIT. The revised
+paper declares CC BY-SA 4.0 for the released dataset and MIT for the
+evaluator. The license of the exact archive remains unresolved.
 [Dataset card](https://huggingface.co/datasets/KAKA22/SpreadsheetBench-v2) ·
 [Archive history](https://huggingface.co/datasets/KAKA22/SpreadsheetBench-v2/commits/main) ·
 [Revised paper license statement](https://arxiv.org/html/2606.29955v2#A4)
@@ -1133,9 +1132,26 @@ The paper describes full-workbook accuracy. The pinned cell evaluator
 iterates the task's declared answer ranges. Check which cells those ranges
 cover on each selected workbook before making a preservation claim. The
 documented evaluation requires recalculation, and visualization uses a
-separate model. Both archives await acquisition.
+separate model. Neither full archive has been acquired.
 [Paper evaluation metrics](https://arxiv.org/html/2606.29955v2#S2.SS4) ·
 [Pinned evaluator](https://github.com/RUCKBReasoning/SpreadsheetBench-2/blob/a7bdc2d358e052d35a94768e1f487c0d9e9c0011/evaluation/evaluation.py)
+
+The [archive index and manifest audit](spreadsheet-archive-index-20261117.json)
+checked both pinned ZIP indexes and the four September manifests using
+223,004 bytes of public range payloads. The indexes share all 568 paths.
+Sixteen Template workbooks and one Visualization manifest differ in
+indexed size or CRC. The later upload is the proposed input for source
+and rights review. Its 297 cell-graded tasks reference 127 distinct
+golden workbook paths. Debugging has 100 tasks and ten paths, Financial
+Model has 100 tasks and 20 paths, and Template has 97 of each. The other
+24 tasks use the separate visualization evaluator. Use reference paths
+as the initial grouping. Shared provenance may merge groups.
+
+The [offline replay script](audit_spreadsheet_archive_index.py) with
+`--manifests` reproduced the aggregate from retained metadata. Six
+negative checks rejected malformed inputs. The audit read no workbook
+bodies, recomputed no full object hashes, ran no graders, authorized no
+provider disclosure and adopted no formal cases.
 
 The [audit script](audit_document_corpus_capacity.py) reproduced the
 report from 14 retained documents and rejected five altered source

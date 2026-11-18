@@ -1,5 +1,23 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. SpreadsheetBench 2 archive manifests establish initial workbook groups.**
+The [read-only intake audit](../../reports/toolkit-v2/c13/completion-20261116/spreadsheet-archive-index-20261117.json)
+matched both publisher ZIP indexes to their pinned revision and read the
+four later task manifests. Both indexes contain the same 568 paths.
+Sixteen Template workbooks and the Visualization manifest differ in
+size or checksum. The later release has 297 cell-graded tasks across
+127 distinct reference workbook paths and 24 separate visualization
+tasks. Debugging's 100 tasks share ten reference paths. Shared source
+provenance may combine those initial groups further.
+
+Only 223,004 range payload bytes were fetched, including two probes.
+No workbook body was read. The aggregate audit replayed offline and six
+drift controls were rejected. The later upload is the proposed input for
+source and rights review. The dataset card and revised paper still give
+different license terms. Whole-object verification, source grouping and
+protected grading remain open. No formal cases were assigned. C13 stays
+open, comparisons remain paused, and Waza remains excluded.
+
 **November 17. Three document/data cases have archive-bound grader evidence.**
 The [read-only evidence audit](../../reports/toolkit-v2/c13/completion-20261116/document-grader-evidence-20261117.json)
 matched eight settled protected operations to the exact public

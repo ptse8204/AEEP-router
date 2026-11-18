@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+The [SpreadsheetBench 2 archive audit](../toolkit-v2/c13/completion-20261116/spreadsheet-archive-index-20261117.json)
+verified 297 cell-graded task rows and 127 distinct reference workbook
+paths in the September manifests. Debugging's 100 rows share ten of
+those paths. Compare source provenance before treating groups as
+independent. The archive license remains unresolved, no workbook bodies
+were received, and zero formal cases were adopted.
+
 The [document grader evidence audit](../toolkit-v2/c13/completion-20261116/document-grader-evidence-20261117.json)
 binds eight settled operations to the exact workbook, formula and
 economic task archives. It preserves upstream grades, the precision
