@@ -1,0 +1,243 @@
+{
+  "actual_grade": null,
+  "additional_original_preservation_instances": 7,
+  "aliases_covering_multiple_tests": 4,
+  "candidate_index_sha256": "36667d01dde573c5754894f99b13d061500eead71d0816cfc00970a5faf3fe86",
+  "case_status": "PROVISIONAL_AUTHORED_CONTRACT_AUDIT",
+  "comparisons_paused": true,
+  "covered_native_count": 30,
+  "driver": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/audit_conan_native_selectors.py",
+    "sha256": "f45f64302432ed815208140e330fe5f5119641d3eeef91c91aa5f4d67ab68339"
+  },
+  "emcc_regression_unique": true,
+  "formal_assignments": 0,
+  "model_turns": 0,
+  "next_action": "Verify the remaining declared imports on an exact compatible carrier, then collect the protected test identities before reference and original grading.",
+  "notes": [
+    "Keep every intact parameter instance matching a published preservation alias.",
+    "The single banner regression is the case added by the pinned test patch.",
+    "The source and protected test archive hashes match the existing public task and private oracle assets."
+  ],
+  "ordinary_callback_rehearsals": [
+    {
+      "archive_sha256": "00d5da3c26643de5556bb433159db1374a494674d713f011a28daa351e5d762c",
+      "expected_fail": 0,
+      "expected_pass": 30,
+      "payload_sha256": "62cf96d453b9d89fd0fa6e8963f8d3f4f785ed2581ff241e415791b55b195545",
+      "role": "reference"
+    },
+    {
+      "archive_sha256": "d3f748d9e794f78ddfd16b9045874c15d9778f4f459f1e1780def5774330f717",
+      "expected_fail": 2,
+      "expected_pass": 28,
+      "payload_sha256": "05e8e93e2ce0f5e016823bc7bfeec7b6233c00267dbda62d7d9b790eda7bf0aa",
+      "role": "original"
+    }
+  ],
+  "original_required_selector_count": 23,
+  "private_selector_binding": {
+    "path": ".aeep/c13-conan-selector-coverage.PwEc0S/private-selection.json",
+    "sha256": "fcba600f069d82fb0e936c30a23bbf7bb40b39732b50da4e18514c9f97005061"
+  },
+  "protected_overlay_sha256": "66ed0f941133d2b8ac4af7afa49f977ab08665aa08bd7d0a85d9a911ef0a3af6",
+  "protected_test_sha256": "362c46464bf8374bd7f61f6d914890b8784cbe664dff4daa999b815c10e01f7e",
+  "protected_upstream_executions": 0,
+  "published_selector_count": 22,
+  "publisher_row_sha256": "d8c4691ef9853abc9198f375a0a6b546940d006a290111f2909d38eaaea08c8a",
+  "pytest_8_3_5": {
+    "pytest_compatibility_sha256": "b0f7154303dde3919aaac8086446c24d1d3818a86456621f7ede909ca8f7866a",
+    "pytest_python_sha256": "9a425e93886aa7b18c23293ab8f356725236758960efcb538f299d7195624c93",
+    "wheel_sha256": "c69214aa47deac29fad6c2a4f590b9c4a9fdb16a403176fe154b79c0b4d4d820"
+  },
+  "rehearsal_uses_substituted_test_results": true,
+  "retained_wheel_review_sha256": "46aacf0449047d1ffd20e4fbf783be2d71450ff71d5587d29ce53771a0f8bf0c",
+  "runtime_preparation": {
+    "candidates": {
+      "fasteners": {
+        "files": [
+          {
+            "filename": "fasteners-0.19-py3-none-any.whl",
+            "packagetype": "bdist_wheel",
+            "requires_python": ">=3.6",
+            "sha256": "758819cb5d94cdedf4e836988b74de396ceacb8e2794d21f82d131fd9ee77237",
+            "size": 18679,
+            "url": "https://files.pythonhosted.org/packages/61/bf/fd60001b3abc5222d8eaa4a204cd8c0ae78e75adc688f33ce4bf25b7fafa/fasteners-0.19-py3-none-any.whl"
+          },
+          {
+            "filename": "fasteners-0.19.tar.gz",
+            "packagetype": "sdist",
+            "requires_python": ">=3.6",
+            "sha256": "b4f37c3ac52d8a445af3a66bce57b33b5e90b97c696b7b984f530cf8f0ded09c",
+            "size": 24832,
+            "url": "https://files.pythonhosted.org/packages/5f/d4/e834d929be54bfadb1f3e3b931c38e956aaa3b235a46a3c764c26c774902/fasteners-0.19.tar.gz"
+          }
+        ],
+        "metadata_sha256": "19787302a193d4ed7010286b8750bec8a7ec486bbba85aaf1b283acaf7110996",
+        "metadata_url": "https://pypi.org/pypi/fasteners/0.19/json",
+        "project": "fasteners",
+        "requires_dist": null,
+        "version": "0.19"
+      },
+      "patch-ng": {
+        "files": [
+          {
+            "filename": "patch-ng-1.18.1.tar.gz",
+            "packagetype": "sdist",
+            "requires_python": ">=3.6",
+            "sha256": "52fd46ee46f6c8667692682c1fd7134edc65a2d2d084ebec1d295a6087fc0291",
+            "size": 17913,
+            "url": "https://files.pythonhosted.org/packages/ee/c0/53a2f017ac5b5397a7064c2654b73c3334ac8461315707cbede6c12199eb/patch-ng-1.18.1.tar.gz"
+          }
+        ],
+        "metadata_sha256": "04d99f60579721cf96e553d6d702e885535ada96b380d3d14d4e2192d2247cfc",
+        "metadata_url": "https://pypi.org/pypi/patch-ng/1.18.1/json",
+        "project": "patch-ng",
+        "requires_dist": null,
+        "version": "1.18.1"
+      },
+      "pytest": {
+        "files": [
+          {
+            "filename": "pytest-7.4.4-py3-none-any.whl",
+            "packagetype": "bdist_wheel",
+            "requires_python": ">=3.7",
+            "sha256": "b090cdf5ed60bf4c45261be03239c2c1c22df034fbffe691abe93cd80cea01d8",
+            "size": 325287,
+            "url": "https://files.pythonhosted.org/packages/51/ff/f6e8b8f39e08547faece4bd80f89d5a8de68a38b2d179cc1c4490ffa3286/pytest-7.4.4-py3-none-any.whl"
+          },
+          {
+            "filename": "pytest-7.4.4.tar.gz",
+            "packagetype": "sdist",
+            "requires_python": ">=3.7",
+            "sha256": "2cf0005922c6ace4a3e2ec8b4080eb0d9753fdc93107415332f50ce9e7994280",
+            "size": 1357116,
+            "url": "https://files.pythonhosted.org/packages/80/1f/9d8e98e4133ffb16c90f3b405c43e38d3abb715bb5d7a63a5a684f7e46a3/pytest-7.4.4.tar.gz"
+          }
+        ],
+        "metadata_sha256": "74761366acfe8be9f3c83a5c78c32adf55e8aeead58fce556f871dfdd34400ad",
+        "metadata_url": "https://pypi.org/pypi/pytest/7.4.4/json",
+        "project": "pytest",
+        "requires_dist": [
+          "iniconfig",
+          "packaging",
+          "pluggy <2.0,>=0.12",
+          "exceptiongroup >=1.0.0rc8 ; python_version < \"3.11\"",
+          "tomli >=1.0.0 ; python_version < \"3.11\"",
+          "importlib-metadata >=0.12 ; python_version < \"3.8\"",
+          "colorama ; sys_platform == \"win32\"",
+          "argcomplete ; extra == 'testing'",
+          "attrs >=19.2.0 ; extra == 'testing'",
+          "hypothesis >=3.56 ; extra == 'testing'",
+          "mock ; extra == 'testing'",
+          "nose ; extra == 'testing'",
+          "pygments >=2.7.2 ; extra == 'testing'",
+          "requests ; extra == 'testing'",
+          "setuptools ; extra == 'testing'",
+          "xmlschema ; extra == 'testing'"
+        ],
+        "version": "7.4.4"
+      }
+    },
+    "declared_carrier_payload_rehearsal": {
+      "path": ".aeep/c13-conan-selector-coverage.PwEc0S/declared-carrier-payload-preflight.json",
+      "sha256": "c4e5601e0a07569bce0918b6ca62973dfb688f77913b111b117de84632a2ece8"
+    },
+    "declared_carrier_payloads": [
+      {
+        "archive_sha256": "00d5da3c26643de5556bb433159db1374a494674d713f011a28daa351e5d762c",
+        "bound_payload_sha256": "d0ea978791908861738f8e4e8bf57f8d5dd099799ba5676ce6ceea26a5abe3bf",
+        "role": "reference"
+      },
+      {
+        "archive_sha256": "d3f748d9e794f78ddfd16b9045874c15d9778f4f459f1e1780def5774330f717",
+        "bound_payload_sha256": "800fa15534633d14120981cd7c4f8da0a4cddf9b275893623d501db68e5fc8a0",
+        "role": "original"
+      }
+    ],
+    "driver": {
+      "path": "reports/toolkit-v2/c13/completion-20261116/stage_conan_runtime_assets.py",
+      "sha256": "22ac512193c4ff2d7eb97a2ac86c66a27a3d0a785d769cf8edbb29e3640f3816"
+    },
+    "first_static_artifact_scope": {
+      "path": ".aeep/c13-conan-selector-coverage.PwEc0S/conan-static-artifact-scope.json",
+      "sha256": "198cebbbdc5c1322e049e4a53cc131259222fd8b5f472cfde6e68fed0f2d5056"
+    },
+    "installation_boundary": "The installer rejects pytest bootstrap entry points. Verify pytest for the existing protected ZIP-import route.",
+    "installations": 0,
+    "new_package_artifact_downloads": 3,
+    "patch_ng_range": ">=1.18.0,<1.19",
+    "patch_ng_release_index": {
+      "path": ".aeep/c13-conan-selector-coverage.PwEc0S/patch-ng-range-metadata.json",
+      "sha256": "07e7a80eea6c875732ef4e928710ae8b939d976fb118cbc20d9e707b24d7d17b"
+    },
+    "project_dev_pytest_range": ">=7,<8.0.0",
+    "proposed_pytest_7_4_4_identity_rules": {
+      "pytest_compatibility_sha256": "b5afb417146c1dee0dd8546c0d11bc4578befe525e4177af402568ffa6d46f31",
+      "pytest_python_sha256": "e415652a719bd368b118320e8b43c980028a9f1f1f03623382ced1d1f7e94f64",
+      "wheel_sha256": "b090cdf5ed60bf4c45261be03239c2c1c22df034fbffe691abe93cd80cea01d8"
+    },
+    "published_patch_ng_distributions_in_range": [
+      "patch-ng-1.18.0.tar.gz",
+      "patch-ng-1.18.1.tar.gz"
+    ],
+    "publisher_artifact_bytes": 361879,
+    "publisher_metadata": {
+      "path": ".aeep/c13-conan-selector-coverage.PwEc0S/conan-direct-runtime-candidates.json",
+      "sha256": "bcca3d3ce1a4036843fd2607fe443d871453708131902012b67c0dc4b16f6f08"
+    },
+    "publisher_urls": {
+      "fasteners": "https://pypi.org/project/fasteners/0.19/",
+      "patch_ng": "https://pypi.org/project/patch-ng/1.18.1/",
+      "pytest": "https://pypi.org/project/pytest/7.4.4/"
+    },
+    "scope": "Static artifacts and substituted callbacks. A whole runtime and contained native collection remain open.",
+    "source_carrier": {
+      "bytes": 51321,
+      "filename": "patch_ng-1.18.1-py3-none-any.whl",
+      "license_sha256": "d807f69dbc4f24153544ac011b741015ea47231c69fe16b1e74759f299349a78",
+      "publisher_metadata_sha256": "0731967e2f109d6c90436f61996481bb0fa0cee3843140705d80754465460e59",
+      "sha256": "a146788e7a89ea196c18f9b6b8d1dcd9b7ac79d693c81eba8b3b937bf23e76e3",
+      "source_module_sha256": "a6308eef215a2c9ae75489faa48eef2798da40172d234404a5fea22ba06f14f4"
+    },
+    "source_carrier_replay_matches": true,
+    "verification": {
+      "path": ".aeep/c13-conan-selector-coverage.PwEc0S/staged-runtime-final.json",
+      "sha256": "cd5e78889badf9650c4d4547472ae08b6f1c3e516531d33a64a26a0237d81350"
+    }
+  },
+  "runtime_verified": false,
+  "schema_version": "aeep.c13.conan-native-selector-preflight.v1",
+  "source_revision": "4a65d65f53d2ab37f4ce0e52dc3f25cd832b2934",
+  "source_sha256": "78d1f8fe885dfa262c90defedc6116c88882c68bb0fe6c94d5cca3a58ad33502",
+  "truncated_aliases": 10,
+  "verification": {
+    "docs_check": {
+      "inputs": 72,
+      "path": ".aeep/c13-conan-selector-coverage.PwEc0S/docs.log",
+      "sha256": "e07c3fe05da5635f22aeafb654a6d3cbd416d9fd21eb7874129e8dffe1bb8ac9"
+    },
+    "final_native_preflight": {
+      "path": ".aeep/c13-conan-selector-coverage.PwEc0S/final-native-preflight.json",
+      "sha256": "187e0db278bb9957f7bf3a1a88c7d36aec132698fd9158227abf11d448b03435"
+    },
+    "host_collection_evidence": {
+      "path": ".aeep/c13-conan-selector-coverage.PwEc0S/synthetic-collection-check.json",
+      "sha256": "dbc7f15b4f970d6a93807e44ca988748fdfce771d56a8c7270c28c5bd179df8e"
+    },
+    "host_collection_fixture": {
+      "actual_conan_collection": false,
+      "actual_grader_calls": 0,
+      "first_party_derived_fixture_collected_expected_exact_ids": 17,
+      "installed_pytest": "9.0.3",
+      "origin_roles_verified_only_in_substituted_grader": true,
+      "python": "3.13.1",
+      "selector_mutations_rejected": 3
+    },
+    "offline_replay_matches": true,
+    "report_script_lint": "passed",
+    "schema_check": "passed",
+    "unchanged_verified_toolkit_source": "b53bf3a9"
+  },
+  "waza_excluded": true
+}

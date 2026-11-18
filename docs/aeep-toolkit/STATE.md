@@ -1,5 +1,20 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 18. Conan's protected selector coverage has been reconstructed.**
+The [Conan preflight](../../reports/toolkit-v2/c13/completion-20261116/conan-native-selector-preflight-20261118.json)
+expands 23 required selectors to 30 test identities, including every
+compiler-version instance behind the ambiguous prefixes. Both protected
+archives match their earlier hashes. A first-party collection fixture
+matched all 17 reconstructed parameter identities.
+
+Three publisher artifacts passed checksum verification. The local
+patch-ng carrier retains the exact module, metadata and license from
+its source archive. The pytest 7.4.4 payload rehearsal preserves the
+original tests and uses substituted observations. Remaining native
+runtime imports, protected collection and grading are open. The
+reproduced software pool remains at 48 cases. Comparisons stay paused,
+Waza is excluded, and the two pending recovery reviews retain scope.
+
 **November 18. Five public schemas can resolve the collection-shape design.**
 The [collection audit](../../reports/toolkit-v2/c13/completion-20261116/extractbench-collection-shape-capacity-20261118.json)
 verified 147 slots with at most one output collection and 113 with

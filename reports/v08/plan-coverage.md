@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 Conan preflight](../toolkit-v2/c13/completion-20261116/conan-native-selector-preflight-20261118.json)
+maps all 23 required selectors to 30 protected test identities. The
+patched and original archives retain their pins. The pytest 7.4.4
+payloads passed substituted checks, and the standalone patch-ng module
+and license are bound. Native runtime verification and real grading
+remain open.
+
 The [C13 collection-shape audit](../toolkit-v2/c13/completion-20261116/extractbench-collection-shape-capacity-20261118.json)
 finds 113 verified multiple-collection slots, nine below the smallest
 allocation for two balanced holdouts and shared early stages. Publisher

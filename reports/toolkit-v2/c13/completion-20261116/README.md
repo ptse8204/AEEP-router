@@ -97,6 +97,22 @@ with multiple native cases. Conan remains outside the verified pool.
 Braindrop's original-source grade is unstarted. Its two earlier operations
 settled and remain on the original ledger.
 
+The [Conan preflight](conan-native-selector-preflight-20261118.json)
+uses every intact parameter instance represented by the published
+prefixes. All 23 required selectors map to 30 identities, including seven further
+preservation instances and the one uniquely identified banner regression.
+The test archives and grader threshold retain their original pins.
+A first-party fixture matched all 17 expanded parameter identities.
+
+Conan's declared pytest range is below version 8. The verified pytest
+7.4.4 wheel, fasteners wheel and patch-ng source archive total 361,879
+bytes. The local patch-ng carrier copies its original module, license
+and metadata without invoking the build script. Both ordinary callback
+payloads matched in rehearsal. Complete the remaining runtime import
+checks and verify native collection before assigning a grade.
+[pytest 7.4.4](https://pypi.org/project/pytest/7.4.4/) ·
+[patch-ng 1.18.1](https://pypi.org/project/patch-ng/1.18.1/)
+
 The [document boundary audit](document-dispatch-boundary-20261118.json)
 rebuilt the three public input ZIPs and verified each ordinary recipe,
 environment and case-set digest. It joined 11 Workbook Recovery receipts,
