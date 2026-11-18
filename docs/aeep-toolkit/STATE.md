@@ -1,5 +1,26 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 18. The first PyGLS reference settled without a grade.**
+The [PyGLS record](../../reports/toolkit-v2/c13/completion-20261116/pygls-first-protected-result-20261118.json)
+binds the publisher revision, 87 required tests and four lockfile wheels
+to the retained ARM64 grader. The staged code uses the upstream CPython
+standard-I/O transport with private dependency and source paths. Four
+driver rehearsals passed before the first reference. The reference
+settled in 23.44 seconds and its container was removed. The ledger and
+receipt matched in a read-only audit. The saved error is an observation
+mismatch. Elapsed time suggests the 22-second child timeout, and the
+guest cause remains unknown. The original-source role is unstarted.
+
+Diagnostic review `1fa44c81` keeps the same protected payload and
+bounds one reference call to 35 reserved seconds. It captures a timeout
+or missing-events category and the last required test when available.
+Three substituted driver cases passed. The
+[recovery group `67a93f4c`](../../reports/toolkit-v2/c13/completion-20261116/c13-recovery-group-with-pygls-20261118.json)
+includes the unchanged earlier group for one operator decision. Both
+remain unapproved and unstarted. The reproduced software pool stays at
+50 cases across 29 repositories. C13 remains open. Comparisons stay
+paused and Waza is excluded.
+
 **November 18. DJPress passes the protected reference and original checks.**
 The [DJPress result](../../reports/toolkit-v2/c13/completion-20261116/djpress-protected-result-20261118.json)
 binds the two-file repair and 68 original assertions to the retained

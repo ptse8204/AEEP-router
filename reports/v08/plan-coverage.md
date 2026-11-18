@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 PyGLS protected reference](../toolkit-v2/c13/completion-20261116/pygls-first-protected-result-20261118.json)
+settled in 23.44 seconds without a grade. The read-only audit verified
+the charge and container cleanup. All 87 required tests remain in the
+scope. The prepared reference-only diagnostic preserves the original
+inputs and still requires repeat authorization. The reproduced pool
+remains at 50 cases across 29 repositories.
+
 The [C13 DJPress protected result](../toolkit-v2/c13/completion-20261116/djpress-protected-result-20261118.json)
 reproduces the two-file repair at 1/1 and the original at 0/1 on the
 retained Django ARM64 carrier. The read-only audit verified both
