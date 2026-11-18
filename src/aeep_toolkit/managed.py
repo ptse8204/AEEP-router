@@ -37,6 +37,7 @@ from aeep.errors import ConfigurationError
 from aeep.estimator import evidence_cohort_digest
 from aeep.hosts.codex_accounting import TOKEN_FIELDS
 from aeep.models import ExecutionReceipt, ExecutionStatus, ExecutorKind
+from aeep_toolkit.benchmarks import BenchmarkPack
 from aeep_toolkit.models import (
     AdapterCapabilities,
     EvaluationRun,
@@ -637,7 +638,12 @@ def comparison_summary(adapter: AEEPAssessmentAdapter, bundle: EvidenceBundle) -
     return summary
 
 
-def main(argv: list[str] | None = None, *, waza_selected: bool = False) -> None:
+def main(
+    argv: list[str] | None = None,
+    *,
+    waza_selected: bool = False,
+    benchmark_pack: BenchmarkPack | None = None,
+) -> None:
     import argparse
     import asyncio
 
@@ -703,6 +709,20 @@ def main(argv: list[str] | None = None, *, waza_selected: bool = False) -> None:
                 adapter = AEEPAssessmentAdapter(service, plan.plan_id, source, coordinator=coordinator)
                 if content_digest(adapter.plan) != content_digest(plan):
                     raise ConfigurationError("supplied plan differs from canonical record")
+                if args.operation == "run" and benchmark_pack is not None:
+                    from .workflow_preparation import require_rights
+
+                    task_ids = tuple(dict.fromkeys(
+                        case.action.input["task_id"] for case in plan.suite.cases
+                    ))
+                    try:
+                        require_rights(service.repository, benchmark_pack, task_ids)
+                    except (ConfigurationError, ValueError):
+                        parser.exit(
+                            2,
+                            "Current asset-use reviews must authorize local execution and "
+                            "provider disclosure for every selected task.\n",
+                        )
                 args.output.mkdir(mode=0o700, parents=False, exist_ok=False)
                 state = args.output / "operation.json"
                 state.write_text(

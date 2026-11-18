@@ -1,5 +1,20 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 18. The v2 workflow rechecks asset rights at dispatch.**
+The managed runner checks the selected pack's exact asset-use reviews in
+its own ledger before creating output or starting a job. This also covers
+externally prepared plans. The ordinary CLI tests accept a current review
+and reject revoked or missing reviews. No job or model turn was started.
+
+The [verification record](../../reports/toolkit-v2/c13/completion-20261116/workflow-asset-rights-verification-20261118.json)
+links the retained Sales Pivot and Spring Boot reviews and the 37
+stack checks accepted in a private ledger copy. Historical receipts
+and the operational ledger remain unchanged.
+
+C13 stays open. The [grouped protected repeat](../../reports/toolkit-v2/c13/completion-20261116/protected-repeat-group-addendum-20261118.json)
+is still unstarted. Formal cohort assignment, candidate usefulness and
+selection usefulness remain open. Comparisons stay paused and Waza is excluded.
+
 **November 18. Braindrop's protected selection and document boundaries are pinned.**
 The [Braindrop triage](../../reports/toolkit-v2/c13/completion-20261116/braindrop-selector-triage-20261118.json)
 settles two operations. Its first reference produced no grade. The
@@ -3030,7 +3045,6 @@ Continue balanced SkillsBench input/rights/runtime preparation. Comparisons,
 usefulness, resources and release remain separate and open. Parent `0b88950`;
 unrelated CI work preserved. Verification controller session87970 is active.
 <!-- worker-readiness-implementation-20261103:end -->
-
 
 <!-- ase-controlled-failure-20261103:start -->
 **November 3: approved controlled engineering attempt stopped before models.**

@@ -12,6 +12,7 @@ from test_toolkit_managed import prepared
 
 from aeep.router import Router
 from aeep_toolkit import managed, workflow
+from aeep_toolkit.benchmarks import BenchmarkPack
 from aeep_toolkit.candidate import inspect
 from aeep_toolkit.cli import main
 from aeep_toolkit.installation import PreviewPolicy, manifest_digest
@@ -132,8 +133,8 @@ async def test_run_passes_reviewed_waza_selection(tmp_path, monkeypatch, waza_se
     }
     calls = []
 
-    def delegate(argv, *, waza_selected=False):
-        calls.append((argv, waza_selected))
+    def delegate(argv, *, waza_selected=False, benchmark_pack=None):
+        calls.append((argv, waza_selected, benchmark_pack))
 
     monkeypatch.setattr(workflow, "prepare_stack", lambda *_: preview)
     monkeypatch.setattr(managed, "main", delegate)
@@ -143,8 +144,9 @@ async def test_run_passes_reviewed_waza_selection(tmp_path, monkeypatch, waza_se
             "--reviewed-digest", preview["review_sha256"],
             "--manifest", str(tmp_path / "manifest.json"), "--output", str(tmp_path / "out"),
         ]) == 0
-        [(args, selected)] = calls
+        [(args, selected, benchmark_pack)] = calls
         assert selected is waza_selected
+        assert benchmark_pack == BenchmarkPack.model_validate_json((tmp_path / "benchmark.json").read_bytes())
         assert Path(args[args.index("--plan") + 1]) == plan
     finally:
         await router.close()

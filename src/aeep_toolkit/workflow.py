@@ -614,12 +614,18 @@ def main(argv: list[str] | None = None) -> None:
                 delegated += ['--reviewed-digest', backend_review['review_sha256']]
             else:
                 delegated += ['--report-id', args.report_id]
-            if (
-                args.operation == 'run'
-                and version == 'aeep.toolkit.workflow.v2'
-                and 'waza' in preview['workflow']['configurations'][args.configuration]['components']
-            ):
-                managed_main(delegated, waza_selected=True)
+            if args.operation == 'run' and version == 'aeep.toolkit.workflow.v2':
+                from .benchmarks import BenchmarkPack
+
+                selection = preview['workflow']['configurations'][args.configuration]
+                _, pack_raw = _read(
+                    WorkflowFile.model_validate(selection['benchmark']), args.workflow.absolute().parent
+                )
+                managed_main(
+                    delegated,
+                    waza_selected='waza' in selection['components'],
+                    benchmark_pack=BenchmarkPack.model_validate_json(pack_raw),
+                )
             else:
                 managed_main(delegated)
     except (ValueError, OSError, ConfigurationError, sqlite3.Error):

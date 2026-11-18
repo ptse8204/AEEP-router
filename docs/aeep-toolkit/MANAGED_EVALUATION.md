@@ -53,6 +53,10 @@ Run `aeep-toolkit workflow plan --workflow WORKFLOW --configuration NAME`
 against the exact workflow file. Its preview lists the selected tasks
 and pending rights and setup. Canonical preparation requires reviewed
 asset-use records, the exact recipe and case set, and a bound runtime.
+Before a v2 workflow runs, the managed evaluator rechecks the exact
+asset-use records in the assessment ledger. Every selected task needs
+current authorization for local execution and provider disclosure.
+This check also applies to plans prepared outside the workflow.
 The [CFPB preflight](../../reports/toolkit-v2/c13/completion-20261116/extractbench-ordinary-pack-preflight.json)
 shows the three currently staged inputs. Their native grading remains
 pending.

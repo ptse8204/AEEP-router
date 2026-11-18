@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 dispatch-rights verification](../toolkit-v2/c13/completion-20261116/workflow-asset-rights-verification-20261118.json)
+checks the exact selected task reviews through the ordinary v2 CLI.
+Revoked or missing reviews stop dispatch before any output or job.
+A private ledger copy accepted both retained workflow reviews and all
+37 in-scope stack checks. The grouped protected repeat remains unstarted.
+
 The [C13 document boundary audit](../toolkit-v2/c13/completion-20261116/document-dispatch-boundary-20261118.json)
 verified exact archives and 25 retained receipts on three ordinary
 SkillsBench case sets. Asset-use review and formal cohort assignment

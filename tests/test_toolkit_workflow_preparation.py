@@ -320,6 +320,59 @@ async def _no_close():
     pass
 
 
+@pytest.mark.parametrize("review_state", ["current", "revoked", "missing"])
+def test_workflow_run_checks_current_asset_rights(tmp_path, monkeypatch, capsys, review_state):
+    from aeep_toolkit.managed import AEEPAssessmentAdapter
+
+    path, service, _, rights = configured(tmp_path)
+    monkeypatch.setattr(Router, "from_manifest", lambda *_: service.router)
+    monkeypatch.setattr(service.router, "close", _no_close)
+    repo = service.repository
+
+    class ReachedEvaluation(RuntimeError):
+        pass
+
+    async def evaluate(*_args, **_kwargs):
+        raise ReachedEvaluation
+
+    monkeypatch.setattr(AEEPAssessmentAdapter, "evaluate", evaluate)
+    try:
+        prepare_canonical(
+            path,
+            "document-data",
+            reviewed_digest=prepare_stack(path, "document-data")["review_sha256"],
+            destination=tmp_path / "prepared",
+        )
+        workflow = tmp_path / "prepared/workflow.json"
+        preview = prepare_stack(workflow, "document-data")
+        if review_state == "revoked":
+            repo.review(content_digest(rights), revoke=True)
+        elif review_state == "missing":
+            repo.store._connection.execute(
+                "DELETE FROM assessment_reviews WHERE digest=?", (content_digest(rights),)
+            )
+
+        output = tmp_path / "out"
+        argv = [
+            "workflow", "run", "--workflow", str(workflow), "--configuration", "document-data",
+            "--manifest", str(tmp_path / "manifest.json"), "--output", str(output),
+            "--reviewed-digest", preview["review_sha256"], "--engineering-review", "a" * 64,
+        ]
+        if review_state == "current":
+            with pytest.raises(ReachedEvaluation):
+                main(argv)
+        else:
+            with pytest.raises(SystemExit) as refused:
+                main(argv)
+            assert refused.value.code == 2
+            assert "Current asset-use reviews must authorize" in capsys.readouterr().err
+            assert not output.exists()
+        assert repo.store._connection.execute("SELECT count(*) FROM assessment_jobs").fetchone()[0] == 0
+        assert repo.store._connection.execute("SELECT count(*) FROM assessment_operations").fetchone()[0] == 0
+    finally:
+        asyncio.run(Router.close(service.router))
+
+
 @pytest.mark.parametrize(
     "fault",
     ["pack", "environment", "seed", "template", "validators", "input_schema", "not_qualification"],
