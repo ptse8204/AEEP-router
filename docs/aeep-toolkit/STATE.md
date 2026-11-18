@@ -1,5 +1,26 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 18. The full software pool is bound to its grader carriers.**
+The [carrier audit](../../reports/toolkit-v2/c13/completion-20261116/protected-carrier-coverage-20261118.json)
+maps all 102 protected receipts for 50 reproduced cases to 12 retained
+ARM64 images. Image `35dc1bcb` has four cases with exact image evidence
+and 43 whose observed image layers are ordered prefixes. Arta, RETURNN
+and Pyserde are outside that lineage. Layer ancestry identifies where
+to start consolidation. A shared grader and actual imports, references
+and counterexamples still need verification.
+
+Two read-only replays matched byte for byte. Six local controls verify
+the distinction between identical image IDs, matching layers and
+unrelated or reordered layers. No grader, worker or model ran.
+The reproduced pool is still 50. Comparisons stay paused and Waza
+is excluded.
+
+The host has about 41.3 GiB usable against the 52 GiB launch floor.
+macOS lists one purgeable local Time Machine snapshot, dated November 17.
+APFS reports no reclaimable byte count for that snapshot. It was left
+intact. The staged SWE-rebench intake still needs space. The exact
+recovery group `67a93f4c` also needs its existing approval.
+
 **November 18. The broader SWE-rebench edition has few exact-runtime leads.**
 The [source intake](../../reports/toolkit-v2/c13/completion-20261116/full-rebench-metadata-intake-20261118.json)
 replays all 21,336 rows at publisher revision `6aecac9a` from

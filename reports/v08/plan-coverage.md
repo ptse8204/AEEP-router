@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 carrier audit](../toolkit-v2/c13/completion-20261116/protected-carrier-coverage-20261118.json)
+maps 102 protected receipts across all 50 reproduced cases. The leading
+shared image has four exact-image cases and 43 with matching ordered
+ancestor layers. Three cases have other carriers. Import and
+protected-grade compatibility on a common recipe remain open.
+
 The [C13 SWE-rebench source intake](../toolkit-v2/c13/completion-20261116/full-rebench-metadata-intake-20261118.json)
 replays 21,336 publisher rows from retained metadata ranges. Three
 provisional rows declare Python 3.13. Four of six screened Python 3.12
