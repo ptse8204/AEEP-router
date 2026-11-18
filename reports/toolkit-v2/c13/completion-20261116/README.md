@@ -522,6 +522,17 @@ and paths outside the checkout. The legacy A2A observations retain
 their own runtime scope. Current common runtime, rights review and
 formal stage assignment remain open.
 
+The [Arta runtime inputs](arta-runtime-inputs-20261117.json) pin one
+published rules-engine contract audit, OmegaConf 2.4.0 and the
+retained Linux image containing PyYAML and Pydantic. The OmegaConf
+wheel and both attribution files match their recorded hashes.
+A private metadata-only Arta wheel resolves the checkout version
+without introducing another importable copy of Arta. The two
+ordinary payloads preserve 16 upstream test identities and one
+coordinator-authored preservation check. Six preflight checks
+passed, including byte-identical replay and three drift controls.
+Actual protected grading remains unstarted.
+
 The [curated lineage verification](curated-cohort-lineage-verification.json)
 covers the service change that lets two curated definitions carry separate
 case sets under the same reviewed grader and environment. Each stage still

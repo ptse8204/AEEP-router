@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [Arta case preparation](../toolkit-v2/c13/completion-20261116/arta-runtime-inputs-20261117.json)
+verifies the published OmegaConf wheel and retained Linux dependencies.
+A metadata-only fixture supplies the Arta version. The two ordinary
+payloads preserve all 17 checks and replay byte for byte with substituted
+replies. Actual protected grading and formal assignment remain open.
+
 The [retained software reproduction audit](../toolkit-v2/c13/completion-20261116/software-reproduction-pool-20261117.json)
 links 45 scoped reproductions across 24 repositories to 92 distinct
 receipt references. Nine are contract audits. Two balanced holdouts

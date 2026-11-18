@@ -1,5 +1,22 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. Arta's protected grader inputs are staged.**
+The [runtime input record](../../reports/toolkit-v2/c13/completion-20261116/arta-runtime-inputs-20261117.json)
+binds the published Arta rules-engine case, the exact 254,152-byte
+OmegaConf 2.4.0 wheel and both of its license notices. The retained
+Linux image's seven layers contain Python 3.13 distribution metadata
+for PyYAML 6.0.3, Pydantic 2.13.5 and Pydantic Core 2.46.5.
+The locally generated metadata-only Arta wheel resolves the exact
+checkout version and contains no package code.
+
+Both ordinary callback payloads replayed byte for byte with 16
+upstream checks and one preservation check. Three drift controls
+were rejected. One public file was fetched. No upstream module
+was imported, no contained grader ran, and no formal case was
+assigned. Actual protected reference and original-source grading
+remain open. C13 stays open, comparisons remain paused, and Waza
+remains excluded.
+
 **November 17. The retained software reproduction pool has 45 cases.**
 The [reproduction audit](../../reports/toolkit-v2/c13/completion-20261116/software-reproduction-pool-20261117.json)
 reconciled 39 historical callback cases and six later reproductions
