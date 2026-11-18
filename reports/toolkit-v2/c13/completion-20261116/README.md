@@ -161,6 +161,23 @@ two reviews reproduced exactly on their frozen implementation. The
 economic reference stays settled. No reviewer permission, provider
 access, comparison dispatch or protected execution was inferred.
 
+Use the pinned runner source for each group member. The Linux, RETURNN
+and Arta verifiers load
+`.aeep/completion-20261116/formal-document-native-20261117/committable-source/src`.
+The three ordinary document drivers load
+`.aeep/sol-comparison-preflight-20261116/frozen-source/src`.
+Both archive trees remain local. Importing the changed product checkout
+instead alters the container argument bindings for Formula and economic
+detrending, and their preflight denies the launch.
+
+After approval, record only the selected, still-unstarted member
+digests at the group's `approval_record_path` locations. Drivers read
+the exact `approved` and `review_sha256` fields. Use each member's
+`execute_flag` with the full review digest. Check the corresponding
+`terminal_path` and ledger before recording any authority or resuming an
+interrupted member. The group is a review packet. The existing drivers
+still own reservation, dispatch, receipt and cleanup.
+
 [Group `03d8c261`](pending-offline-verification-group-20261117.json)
 collects the three unstarted offline checks under their existing exact
 scopes. Approve the group or an individual member. The group permits
