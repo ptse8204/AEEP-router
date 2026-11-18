@@ -1,5 +1,24 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. Three document/data cases have archive-bound grader evidence.**
+The [read-only evidence audit](../../reports/toolkit-v2/c13/completion-20261116/document-grader-evidence-20261117.json)
+matched eight settled protected operations to the exact public
+archives for workbook recovery, Formula Extraction and economic
+detrending. It reproduced the ordinary task-pack ZIPs and confirmed
+only the instruction and input files are present. The receipt stores
+were unchanged. Seven audit checks passed, including rejection of
+an oracle in a public archive and mismatched receipt evidence.
+
+The historical references passed 19, seven and four upstream checks,
+respectively. The Formula renderer failure retains no task score.
+The economic evidence preserves two upstream passes that the supplemental
+precision check rejected. The current compact native-score recipe is
+scoped to ExtractBench PDFs. These three SkillsBench cases retain their
+ordinary task inputs. Their pending runtime checks, provider rights
+and formal assignment remain open. No grader or model was rerun.
+The offline group remains pending. C13 stays open, comparisons stay
+paused, and Waza is excluded.
+
 **November 17. Three offline verification scopes are ready for one grouped approval.**
 [Group `03d8c261`](../../reports/toolkit-v2/c13/completion-20261116/pending-offline-verification-group-20261117.json)
 binds the existing Linux lifecycle `0050681f`, RETURNN pair `2e961f2b`

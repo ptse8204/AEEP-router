@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [document grader evidence audit](../toolkit-v2/c13/completion-20261116/document-grader-evidence-20261117.json)
+binds eight settled operations to the exact workbook, formula and
+economic task archives. It preserves upstream grades, the precision
+rejection controls and an ungraded renderer failure. Ordinary runtime,
+provider-rights and formal gates remain open. No upstream tests ran.
+
 The [C13 offline verification group](../toolkit-v2/c13/completion-20261116/pending-offline-verification-group-20261117.json)
 binds the current Linux install and rollback, RETURNN grading and
 the first Arta pair. All three exact launch checks passed. The group

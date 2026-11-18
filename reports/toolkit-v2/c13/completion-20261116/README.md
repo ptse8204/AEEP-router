@@ -127,6 +127,16 @@ removed. Waza remains excluded and comparisons stay paused.
 
 ### Approved work and next decision
 
+The [document grader evidence audit](document-grader-evidence-20261117.json)
+binds the exact public archives for workbook recovery, Formula Extraction
+and economic detrending to eight settled protected operations. The
+ordinary task-pack ZIPs exclude the oracles and test code. The audit
+retains Formula's ungraded renderer failure, the economic supplement's
+two disagreements with upstream and the workbook's local-only review.
+The compact ExtractBench profile covers PDF extraction and these three
+SkillsBench cases still need their own ordinary runtime checks.
+No new grading, provider disclosure or formal assignment occurred.
+
 [Group `03d8c261`](pending-offline-verification-group-20261117.json)
 collects the three unstarted offline checks under their existing exact
 scopes. Approve the group or an individual member. The group permits
