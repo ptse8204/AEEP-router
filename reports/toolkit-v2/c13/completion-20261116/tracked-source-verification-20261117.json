@@ -1,0 +1,94 @@
+{
+  "schema_version": "aeep.c13.tracked-source-verification.v1",
+  "archive_commit": "38850526b3d9a321ace52fd37888ce546c85dd22",
+  "unchanged_tracked_scope_since_archive": [
+    "src",
+    "scripts",
+    "tests",
+    "schemas",
+    "integrations",
+    "examples",
+    "pyproject.toml"
+  ],
+  "docs_check_scope": "72 current documentation inputs",
+  "compileall": {
+    "path": ".aeep/completion-20261116/document-runtime-renewal-20261117/verified-compileall.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "schemas": {
+    "path": ".aeep/completion-20261116/document-runtime-renewal-20261117/verified-schemas.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "test_runs": {
+    "regression": {
+      "passed": 2180,
+      "skipped": 21,
+      "warnings": 1,
+      "elapsed_seconds": 625.94,
+      "log": {
+        "path": ".aeep/completion-20261116/document-runtime-renewal-20261117/verified-pytest.log",
+        "sha256": "b27091f4aae47257bdbcfc877c51aa2330271dc11c5c21250a1c046247e3bf80"
+      }
+    },
+    "branch": {
+      "passed": 2180,
+      "skipped": 21,
+      "warnings": 1,
+      "elapsed_seconds": 946.94,
+      "log": {
+        "path": ".aeep/completion-20261116/document-runtime-renewal-20261117/verified-coverage-tests.log",
+        "sha256": "278bd154ae4bf66d35ca1c4d1a279a5c3fe7e376eba7f891b8ea11c6c3a65937"
+      }
+    }
+  },
+  "coverage": {
+    "statement_and_branch_percent": 81.4500290951411,
+    "branch_only_percent": 71.77702797694363,
+    "critical_gate": "passed",
+    "assessment_gate": "passed",
+    "measurements": {
+      "path": ".aeep/completion-20261116/document-runtime-renewal-20261117/verified-coverage.json",
+      "sha256": "508e09bcd90699c3977333cf38687138151ebec47ccbf059babc2e0a3c26bc99"
+    },
+    "report": {
+      "path": ".aeep/completion-20261116/document-runtime-renewal-20261117/verified-coverage-report.log",
+      "sha256": "b540adeed29a982a26d2d8d9f31420ca7ba319cad902916b9f9bb8b2742f5b02"
+    },
+    "critical_gate_log": {
+      "path": ".aeep/completion-20261116/document-runtime-renewal-20261117/verified-critical.log",
+      "sha256": "c54ccbd27dd9ac88dc8aadb5824c437cdd168e412d7fb8e566d4b6d6b488aca6"
+    },
+    "assessment_gate_log": {
+      "path": ".aeep/completion-20261116/document-runtime-renewal-20261117/verified-assessment.log",
+      "sha256": "4a5e7160fe409aaf5c8393c734cf5200968132d88ce6394e9678be9551432d55"
+    }
+  },
+  "documentation": {
+    "path": ".aeep/completion-20261116/document-runtime-renewal-20261117/skillbench-summary-docs.log",
+    "sha256": "518ac9e5ca5c542432b0095e0aa73b3520ff507813ab6dfd13656f8cce5fd81e"
+  },
+  "interrupted_fixture_runs": [
+    {
+      "reason": "Reduced source copy omitted tracked test evidence.",
+      "log": {
+        "path": ".aeep/completion-20261116/document-runtime-renewal-20261117/pytest.log",
+        "sha256": "8516675fb6af129d877f49977bc9be6a0111272516c5fe92abdfda762855b7e2"
+      }
+    },
+    {
+      "reason": "Source archive lacked Git history and used an incompatible system temporary root.",
+      "log": {
+        "path": ".aeep/completion-20261116/document-runtime-renewal-20261117/full-pytest.log",
+        "sha256": "2cbf2ad664a52313edade93fd0e18d45b19392c7cb0573c51561f5f40caf6de9"
+      }
+    }
+  ],
+  "pending_group": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/pending-c13-offline-verification-20261117.json",
+    "sha256": "9ee3ca0f7d0b0f26e149d0e220d002fc04fda345daa8ae137a2240fda8eb0475"
+  },
+  "group_unstarted": true,
+  "comparisons_paused": true,
+  "waza_excluded": true,
+  "counts_include_untracked_user_tests": false
+}

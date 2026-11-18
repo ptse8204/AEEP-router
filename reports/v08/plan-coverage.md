@@ -1,5 +1,10 @@
 # 0.8 plan coverage and remaining work
 
+The [tracked-source C13 verification](../toolkit-v2/c13/completion-20261116/tracked-source-verification-20261117.json)
+records 2,180 passes and 21 skips in each of the regression and coverage
+runs. Both coverage gates passed. This verifies the tracked implementation
+and tests. The six protected offline scopes still await approval.
+
 The [C13 SkillsBench task table](../toolkit-v2/c13/completion-20261116/README.md#skillsbench-cli-scores-and-usage)
 shows the protected grades, provider token categories, agent and grader
 timing, and retries for six settled engineering tasks. The existing

@@ -15,6 +15,14 @@ check. Private beta use on the reviewed macOS runtime remains LIMITED_BETA. Cand
 usefulness and AEEP selection usefulness still need separate formal
 evidence. Production release and public benefit claims remain NO_GO.
 
+The [tracked-source check](tracked-source-verification-20261117.json)
+reproduced compile, schema and regression verification on a complete
+archive of `38850526` with local Git history available. Each full run
+passed 2,180 tracked tests with 21 skips. Both coverage gates passed.
+Combined line and branch coverage was 81.45 percent. This count covers
+the tracked archive. Both interrupted fixture attempts and the
+successful run retain their logs.
+
 ### CFPB native task-pack checks
 
 The [local component result](cfpb-local-component-result-20261117.json)

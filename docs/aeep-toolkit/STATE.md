@@ -1,5 +1,14 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. The tracked C13 source checks and both coverage gates passed.**
+The [verification record](../../reports/toolkit-v2/c13/completion-20261116/tracked-source-verification-20261117.json)
+binds the unchanged tracked implementation and tests to archive `38850526`.
+Both regression runs passed 2,180 tests with 21 skips. Combined line
+and branch coverage was 81.45 percent. The critical and assessment
+coverage gates, compile, schema and offline documentation checks passed.
+Two incomplete fixture runs remain recorded. Group `9ee3ca0f` is still
+unstarted. Comparisons remain paused and Waza is excluded.
+
 **November 17. C13 summarizes the six settled SkillsBench CLI tasks.**
 The [task table](../../reports/toolkit-v2/c13/completion-20261116/README.md#skillsbench-cli-scores-and-usage)
 loads grades, provider token categories, separate agent and grader
