@@ -1,5 +1,13 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 Advanced Alchemy intake](../toolkit-v2/c13/completion-20261116/advanced-alchemy-protected-intake-20261118.json)
+matches the public archive to its Git tree and stages the three-file
+repair and all 174 required tests. The 22 lockfile wheels have verified
+bytes and active dependency metadata. The
+[private import tree](../toolkit-v2/c13/completion-20261116/advanced-alchemy-import-tree-20261118.json)
+binds 2,144 files without generating console scripts. Actual imports,
+collection and protected grading remain open.
+
 The [C13 larger multi-file intake](../toolkit-v2/c13/completion-20261116/larger-multifile-intake-20261118.json)
 identifies four additional distinct leads with all 174 to 2,003
 required tests preserved. The conditional multi-file pool reaches

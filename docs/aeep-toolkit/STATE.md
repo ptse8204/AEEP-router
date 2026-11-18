@@ -1,5 +1,32 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 18. Advanced Alchemy has verified source and grader inputs.**
+The [protected intake](../../reports/toolkit-v2/c13/completion-20261116/advanced-alchemy-protected-intake-20261118.json)
+binds the 1,094,807-byte public archive to the publisher's Git tree
+and stages the three-file repair. Its 174 required test identities
+include three issue checks and 171 preservation checks. The proposed
+unit grader keeps both protected test files and the upstream logging
+fixture byte-for-byte. It omits the parent Docker-backed service
+plugins. All 22 plugin source files were inspected as data. The
+fixture audit found no service dependency in the unit signatures.
+Four controls rejected changes to that boundary.
+
+The 22 wheel files match the upstream lock, and their active metadata
+dependencies reconcile. Ten came from the cache. The first wheel
+intake retained the other 12 exact files and stopped when the
+Essentials guard rejected greenlet's header. Read-only reconciliation
+also identified pytest's reserved console entry points. The
+[private import tree](../../reports/toolkit-v2/c13/completion-20261116/advanced-alchemy-import-tree-20261118.json)
+preserves 2,144 checked files. It omits the header and generates no
+console scripts. The Essentials guard remains in place. The next
+runtime check must verify native imports, collection of all 174
+identities, and both protected grades in containment.
+
+No packages were imported or installed, no containers were built,
+and no upstream tests ran. The reproduced pool remains at 49 cases.
+Recovery group `403dfca5` remains unapproved and unstarted. C13 stays
+open, comparisons remain paused, and Waza is excluded.
+
 **November 18. Four longer multi-file workloads clear metadata screening.**
 The [intake audit](../../reports/toolkit-v2/c13/completion-20261116/larger-multifile-intake-20261118.json)
 reopens the pinned publisher pages and preserves all required tests in
