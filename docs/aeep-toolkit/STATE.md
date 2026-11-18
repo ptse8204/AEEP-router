@@ -1,5 +1,27 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 18. Four longer multi-file workloads clear metadata screening.**
+The [intake audit](../../reports/toolkit-v2/c13/completion-20261116/larger-multifile-intake-20261118.json)
+reopens the pinned publisher pages and preserves all required tests in
+four additional leads. They contain 174 to 2,003 tests. Three other
+leads overlap previously selected repairs and stay outside the count.
+The narrower 170-test cutoff still controls the earlier acquisition.
+Across both screens, the conditional multi-file count moves from 79
+to 83 against a target of 81. That assumes all counted leads qualify
+and gives no source-disjoint stage assignment.
+
+Ten pinned publisher blobs confirm project metadata and notices for
+the four leads. The PyTensor notice is a link. Its link and target
+have separate verified hashes. Start the next archive review with
+Advanced Alchemy's 174-test case. Its declared Python range admits
+3.13 and its build lists Hatchling. Archive provenance, rights,
+test-runtime dependencies and actual protected grades remain open.
+
+Five negative controls passed. Native capture retained every required
+identity in four substituted reply checks. No formal case entered the
+cohort. The pending recovery group `403dfca5` is unchanged and
+unstarted. C13 stays open, comparisons stay paused, and Waza is excluded.
+
 **November 18. ExtractBench capacity depends on the annual filing family.**
 The [source-family sensitivity audit](../../reports/toolkit-v2/c13/completion-20261116/extractbench-year-source-sensitivity-20261118.json)
 keeps 18 metadata slots with recurring filename stems in one stage.

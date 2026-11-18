@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 larger multi-file intake](../toolkit-v2/c13/completion-20261116/larger-multifile-intake-20261118.json)
+identifies four additional distinct leads with all 174 to 2,003
+required tests preserved. The conditional multi-file pool reaches
+83 for a target of 81. Project metadata and notices are pinned.
+Archive provenance, exact rights, runtime and protected grading
+remain open. This intake adds no formal assignments.
+
 The [C13 source-family sensitivity audit](../toolkit-v2/c13/completion-20261116/extractbench-year-source-sensitivity-20261118.json)
 keeps 18 recurring annual metadata slots within one stage.
 The stored-size ZIP screen has a balanced 8/28/105/105 witness in
