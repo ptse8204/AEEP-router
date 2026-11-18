@@ -1,5 +1,22 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 18. All six scopes in the approved C13 offline group now pass.**
+The [reconciliation](../../reports/toolkit-v2/c13/completion-20261116/offline-completion-results-20261118.json) binds 36 settled operations across
+the group and its repairs. The RETURNN published repair passed all 13
+protected tests and scored 1/1. The original failed the three expected
+issue tests, passed ten preservation tests and scored 0/1. Both roles
+used an additive private ARM64 image with `dm-tree 0.1.9` and
+`absl-py 2.3.1`. All three earlier RETURNN charges remain. No unrelated
+Docker resources changed. No model turn, provider disclosure or cash
+was used.
+
+The read-only audit reproduced both RETURNN and Arta scores and increased
+the prospective software pool from 45 to 47 cases across 26 repositories.
+Current common-runtime evidence, use rights and formal cohort assignment
+remain open. The next offline work is to qualify retained cases in
+batches, prioritizing the contract-audit shortfall. C13 stays open,
+comparisons stay paused, and Waza is excluded.
+
 **November 17. Formula Extraction passed after local runtime recovery.**
 The [correction record](../../reports/toolkit-v2/c13/completion-20261116/offline-correction-results-20261117.json)
 binds the local import to the exact prior base and Formula overlays.

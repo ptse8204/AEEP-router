@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+The [reconciled C13 offline group](../toolkit-v2/c13/completion-20261116/offline-completion-results-20261118.json)
+now verifies all six original scopes with their repairs. The RETURNN
+published reference scored 1/1 and its original scored 0/1. The original
+charges remain. The prospective software pool has 47 reproduced cases
+and zero formal assignments. Comparisons remain paused and Waza is
+excluded. Private beta and production release retain their separate gates.
+
 The [C13 correction results](../toolkit-v2/c13/completion-20261116/offline-correction-results-20261117.json)
 verify Formula Extraction through the same ordinary grader commands on
 a local imported image. RETURNN remains ungraded because its pinned

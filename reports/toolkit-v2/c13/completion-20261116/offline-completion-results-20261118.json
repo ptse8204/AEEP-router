@@ -1,0 +1,149 @@
+{
+  "cash_usd": 0,
+  "comparisons_paused": true,
+  "earlier_corrections": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/offline-correction-results-20261117.json",
+    "sha256": "66b1fcae66426be3312be163234dfbf836f99a2448d302698d63d0144a17729c"
+  },
+  "formal_cases_adopted": 0,
+  "formal_stages_assigned": 0,
+  "initial_group": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/offline-group-9ee3ca0f-result-20261117.json",
+    "sha256": "348691114eb5b2c0b77a138d4a363f5c95ca9a41b72efcc78164cac0d0660e63"
+  },
+  "initial_passes": 4,
+  "model_turns": 0,
+  "new_upstream_tests_run_by_audit": 0,
+  "operations_in_group_and_repairs": 36,
+  "returnn": {
+    "case": "rwth-i6__returnn-1764",
+    "dependency_review": {
+      "path": ".aeep/completion-20261116/returnn-native-runtime-20261118/dependency-review.json",
+      "sha256": "00bbf0abbae5c4e6d54a1f37e8e6a0c308c5b634fcfce8e7ae8f7f914ac431fd"
+    },
+    "driver": {
+      "path": ".aeep/completion-20261116/returnn-native-runtime-20261118/verify.py",
+      "sha256": "5617c664f8e1fc78466a232cb993eafef554e38fe80354378b2d9c20ec1e0c56"
+    },
+    "ledger": {
+      "path": ".aeep/completion-20261116/returnn-native-runtime-20261118/ledger.json",
+      "sha256": "7e6445a6c2fe2780f565bae0e119433b2029f7882852a9165782d0802899d0ac"
+    },
+    "new_operations": 4,
+    "new_reserved_seconds": 230.0,
+    "new_settled_seconds": 10.842513458803296,
+    "prior_operations_preserved": 3,
+    "protected_pair": [
+      {
+        "container_absent": true,
+        "contract_matched": true,
+        "error_category": null,
+        "pytest_exit": 0,
+        "receipt_id": "rcpt_ddc737e8b5aa43c3a4cbe7404b5ada15",
+        "role": "reference",
+        "score": 1.0,
+        "status_counts": {
+          "PASSED": 13
+        }
+      },
+      {
+        "container_absent": true,
+        "contract_matched": true,
+        "error_category": null,
+        "pytest_exit": 1,
+        "receipt_id": "rcpt_2292c9ef200343cdab5cedd4ab6aa3dd",
+        "role": "original",
+        "score": 0.0,
+        "status_counts": {
+          "FAILED": 3,
+          "PASSED": 10
+        }
+      }
+    ],
+    "rehearsal": {
+      "path": ".aeep/completion-20261116/returnn-native-runtime-20261118/rehearsal.json",
+      "sha256": "ce633662104db218b1c6fb7f7f18fa910660139975934c6b8ac80e4e7ea92395"
+    },
+    "result": {
+      "path": ".aeep/completion-20261116/returnn-native-runtime-20261118/result.json",
+      "sha256": "ab100e00ef87296c1765301684d28e6d3d34898be88fba12a8332ee85a3710d6"
+    },
+    "review": {
+      "path": ".aeep/completion-20261116/returnn-native-runtime-20261118/operation-review.json",
+      "sha256": "618a107839b984dc425eb3a15f56db72d00b4b4ac85edfc178f7fb1fd53f5c10"
+    },
+    "runtime": {
+      "image": "sha256:7d8b35d79026e25cc75893a146aa2cbe84e4703cb334896e4fe0eda362b58791",
+      "layer": "sha256:deb3fa241f12597a4075ca6d6f460fc7182488e0d0fe4dd71ef7c4f62eb90d5e",
+      "versions": {
+        "absl-py": "2.3.1",
+        "attrs": "25.4.0",
+        "dm-tree": "0.1.9",
+        "numpy": "2.2.6",
+        "wrapt": "1.17.3"
+      }
+    },
+    "source_revision": "58aca86de83f85cf513878d3c48f03c23280181b",
+    "verified": true,
+    "verified_protected_statuses": 13
+  },
+  "schema_version": "aeep.c13.offline-completion-reconciliation.v1",
+  "scopes_verified_after_recovery": [
+    "arta-protected-grading",
+    "economic-ordinary-grading",
+    "formula-ordinary-grading",
+    "linux-current-wheel",
+    "returnn-protected-grading",
+    "workbook-ordinary-grading"
+  ],
+  "software_reproduction_pool": {
+    "additional_rows": [
+      {
+        "case": "MAIF__arta-50-aeep-contract-audit",
+        "evidence": "settled_ordinary_reference_and_original",
+        "family": "contract-audit",
+        "receipt_ids": [
+          "rcpt_1d6b5de95b2c488a8c0088e2cbd5aae7",
+          "rcpt_f266afe1166d4682ae6cb6a8dc8a08d1"
+        ],
+        "repository": "maif/arta",
+        "revision": "4554f44729b2c23fc1ac91c1701451666b5d5c4b"
+      },
+      {
+        "case": "rwth-i6__returnn-1764",
+        "evidence": "settled_ordinary_reference_and_original",
+        "family": "multi-file-repair",
+        "receipt_ids": [
+          "rcpt_ddc737e8b5aa43c3a4cbe7404b5ada15",
+          "rcpt_2292c9ef200343cdab5cedd4ab6aa3dd"
+        ],
+        "repository": "rwth-i6/returnn",
+        "revision": "58aca86de83f85cf513878d3c48f03c23280181b"
+      }
+    ],
+    "capacity": {
+      "counts_by_family": {
+        "contract-audit": 10,
+        "multi-file-repair": 19,
+        "single-file-repair": 18
+      },
+      "distinct_receipts": 96,
+      "largest_repository_group_rows": 14,
+      "minimum_missing_rows_if_all_reproduced_rows_are_eligible": 199,
+      "repository_families": 26,
+      "reproduced_rows": 47,
+      "two_balanced_holdouts_minimum_missing_by_family_before_early_stages": {
+        "contract-audit": 60,
+        "multi-file-repair": 51,
+        "single-file-repair": 52
+      },
+      "two_cohorts_shared_early_minimum": 246
+    },
+    "previous": {
+      "path": "reports/toolkit-v2/c13/completion-20261116/software-reproduction-pool-20261117.json",
+      "sha256": "7f43c2ce25a0879e05a8cf4f776cd6aca44949c5fc84cc8743302d3801a2cc9d"
+    }
+  },
+  "unsettled_operations_in_group_and_repairs": 0,
+  "waza_excluded": true
+}

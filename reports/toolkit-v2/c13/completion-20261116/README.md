@@ -1,5 +1,42 @@
 # C13 beta handoff and remaining evidence
 
+## November 18 handoff
+
+The [offline completion reconciliation](offline-completion-results-20261118.json)
+verifies all six scopes of group `9ee3ca0f` after repairs. All 36 operations
+settled, including the earlier failures and diagnostics. No model turns,
+provider disclosure or cash were used.
+
+| RETURNN variant | Protected score | Test results |
+| --- | ---: | --- |
+| Published repair | 1/1 | 13 passed |
+| Unchanged original | 0/1 | Three issue tests failed and ten preservation tests passed |
+
+The continued check imported one verified local ARM64 rootfs with
+`dm-tree 0.1.9` and `absl-py 2.3.1`. It reused the retained NumPy,
+attrs and wrapt versions. Both wheel hashes, license notices, RECORD
+inventories and the ARM64 native library were verified. The existing source
+snapshot, protected observer, thirteen identities, mounts and privileges
+were preserved. Import, runtime probe and two grader calls settled in
+10.843 seconds combined. All owned grader containers are absent.
+[dm-tree pin](https://pypi.org/project/dm-tree/0.1.9/) ·
+[absl-py pin](https://pypi.org/project/absl-py/2.3.1/)
+
+The [read-only reconciliation](reconcile_c13_offline_completion.py) reopened
+the two ledgers and reproduced Arta's and RETURNN's exact callback scores
+from receipt-bound observations. It rejected an altered score, a removed
+prior charge and swapped receipt identities. These two cases bring the
+retained software pool to 47 across 26 repositories. The two software
+cohort projection still needs at least 199 more eligible cases even if all
+47 qualify and both cohorts share every early-stage case. The 47
+reproductions include just ten contract audits. No formal assignment
+was made.
+
+C13 stays open. Continue protected grader and rights checks in grouped
+batches, starting with retained contract-audit candidates. Candidate
+usefulness and AEEP selection usefulness still need separate independent
+evidence. Comparisons stay paused, and Waza remains excluded.
+
 ## November 17 handoff
 
 The current [formal document verification](formal-document-native-verification.json)
