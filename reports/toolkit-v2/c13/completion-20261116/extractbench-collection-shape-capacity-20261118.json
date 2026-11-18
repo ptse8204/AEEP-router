@@ -1,0 +1,115 @@
+{
+  "classifier_and_allocation_sha256": "bfa1d7877b2c989f2e82a9aefe47e2dd730bb5ecbc3bf0d8b85b94898c3ebafc",
+  "comparisons_paused": true,
+  "feasibility_review": {
+    "path": ".aeep/c13-extractbench-collection-shape.suhrzT/feasibility-review.json",
+    "sha256": "bb7a5f56dc42e4f9a1194755abe02bd2ba3f96070194bfaec9031fe88dc87fd4"
+  },
+  "formal_cases_adopted": 0,
+  "independent_variation_basis": "Count declared array-valued schema paths before outcomes. This distinguishes workloads with several output collections from those with at most one.",
+  "min_additional_by_variant_in_best_case": {
+    "at-most-one-collection": 0,
+    "multiple-collections": 0
+  },
+  "minimum_cases_in_larger_variant_with_matching_holdout_mix": 124,
+  "minimum_cases_per_variant_with_shared_early_stages": 122,
+  "mixed_groups_excluded_from_witness": 0,
+  "model_turns": 0,
+  "next_action": "Verify the five unresolved schema bodies under the exact recovery review. Recompute feasibility using their actual bytes. Continue provenance and rights review before any formal assignment.",
+  "observed_shapes_offline_replay_matches": true,
+  "previous_fixed_field_audit": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/extractbench-schema-variation-capacity-20261118.json",
+    "sha256": "8995c962e3d8da731b7508c95265fc47a2ea0b352da7550fc77e9b281f12cd8f"
+  },
+  "protected_graders_executed": 0,
+  "publisher_file_metadata": {
+    "metadata_without_schema_bodies": true,
+    "observed_sizes": {
+      "path": ".aeep/c13-extractbench-collection-shape.suhrzT/unresolved-schema-sizes.json",
+      "sha256": "940655ad1e16a7add844d070a946732e3e11f9cb3141990adfc39f509ee34bf6"
+    },
+    "schema_files_above_previous_131072_byte_cap": 5,
+    "scope": {
+      "path": ".aeep/c13-extractbench-collection-shape.suhrzT/file-metadata-scope.json",
+      "sha256": "3b36049fba53a4ea398bc8e8b3603c851b0604bba3c94e4c226885f7f47146e3"
+    },
+    "unresolved_case_slots": 31
+  },
+  "publisher_manifest_sha256": "0452463e5b1be2c627c0b7d1a076531f0fd301b3297affdb7d9613735bc04840",
+  "recovery": {
+    "largest_unresolved_group": {
+      "case_slots": 13,
+      "publisher_bytes": 200640,
+      "schema_sha256": "dc5f87aa67387dea56c06ddf026ad0af5b7b66cae406487ebfc419429b1cab68",
+      "simulated_witness_if_all_13_are_multiple_collection_cases": true
+    },
+    "maximum_requests": 5,
+    "maximum_response_body_read_bytes": 3261401,
+    "preflight": {
+      "path": ".aeep/c13-extractbench-collection-shape.suhrzT/recovery-preflight.json",
+      "sha256": "e6b5d4fe5faa0217a093744219d6d4ff757095050264266275f964842c26aaa6"
+    },
+    "rehearsal": {
+      "path": ".aeep/c13-extractbench-collection-shape.suhrzT/recovery-rehearsal.json",
+      "sha256": "8d0f2a8ad5999a2a0787ee0063750dea40e206d666fa858b775a37f9a38a74a3"
+    },
+    "review": {
+      "path": ".aeep/c13-extractbench-collection-shape.suhrzT/schema-recovery-review.json",
+      "sha256": "5e323b110188cae6d32dbe9fbd241d41a1d398b99c564a5191998f8d8139bcdc"
+    },
+    "runner": {
+      "path": "reports/toolkit-v2/c13/completion-20261116/recover_extractbench_schemas.py",
+      "sha256": "9fd071ac2d42c5a8a56ea763ca9aaa0e511ddf5c40aca677408f8bc6ee9b5e0e"
+    },
+    "state": "unstarted_awaiting_exact_operator_approval"
+  },
+  "review_sha256": "bb7a5f56dc42e4f9a1194755abe02bd2ba3f96070194bfaec9031fe88dc87fd4",
+  "schema_acquisition_sha256": "83b5c955f5849f3b49373c7411191b93e0155441d3086bdf0ace39f9252702ed",
+  "schema_version": "aeep.c13.extractbench-collection-shape-capacity.v1",
+  "schemas_by_array_path_count": {
+    "0": 1,
+    "1": 34,
+    "2": 15,
+    "3": 6,
+    "4": 4,
+    "5": 1,
+    "7": 3,
+    "8": 1,
+    "9": 1
+  },
+  "unsupported_schema_pins": {},
+  "variation_lengths": {
+    "at-most-one-collection": {
+      "long": 14,
+      "medium": 44,
+      "short": 89
+    },
+    "multiple-collections": {
+      "long": 3,
+      "medium": 26,
+      "short": 84
+    },
+    "unresolved": {
+      "medium": 14,
+      "short": 17
+    }
+  },
+  "variation_slot_counts": {
+    "at-most-one-collection": 147,
+    "multiple-collections": 113,
+    "unresolved": 31
+  },
+  "verification": {
+    "docs_check": {
+      "inputs": 72,
+      "path": ".aeep/c13-extractbench-collection-shape.suhrzT/docs.log",
+      "sha256": "d4562721ae0bc8ba889079c043365fdaf2883da6b55d8145d1e648a5b139d665"
+    },
+    "report_script_lint": "passed",
+    "schema_check": "passed",
+    "unchanged_verified_toolkit_source": "b53bf3a9"
+  },
+  "verified_multiple_collection_slot_shortfall": 9,
+  "waza_excluded": true,
+  "witness": null
+}

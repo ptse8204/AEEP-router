@@ -1250,6 +1250,22 @@ at least 104 fixed-field cases for this design. With balanced 8- and
 28-case shared early stages, at least 83 fixed-field cases are missing.
 The audit replayed offline and left the cohort provisional.
 
+The [collection-shape audit](extractbench-collection-shape-capacity-20261118.json)
+tests two variants based on the number of declared array paths. The
+retained schemas supply 147 slots with at most one output collection
+and 113 slots with multiple collections. At least nine more slots
+in the latter variant are needed for two balanced holdouts and
+balanced shared early stages. A hypothetical label for the largest
+unresolved group produced a 246-case layout. Actual schema evidence,
+provenance, rights and grading are still required before assignment.
+
+All five unresolved files exceed the previous 131,072-byte read cap
+in the pinned publisher tree. Review `5e323b11` binds five one-time
+reads, each capped at the published length plus one byte. It permits
+zero PDF or protected asset downloads, grader calls or model turns.
+The driver exercised the approval gate and three substituted transport
+outcomes. The reviewed recovery is unstarted.
+
 The pinned VAREX manifest lists 1,777 distinct documents using government
 form templates with synthetic values. The retained dataset card declares
 CDLA-Permissive-2.0. Source grouping, exact use rights and protected

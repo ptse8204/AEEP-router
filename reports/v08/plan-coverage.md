@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 collection-shape audit](../toolkit-v2/c13/completion-20261116/extractbench-collection-shape-capacity-20261118.json)
+finds 113 verified multiple-collection slots, nine below the smallest
+allocation for two balanced holdouts and shared early stages. Publisher
+metadata explains the old byte limit for all five unresolved schemas.
+Review `5e323b11` binds one bounded recovery and remains unstarted.
+
 The [C13 document variation audit](../toolkit-v2/c13/completion-20261116/extractbench-schema-variation-capacity-20261118.json)
 bounds the fixed-field supply at 39 of the 291 ExtractBench metadata
 slots. Two balanced holdouts require at least 104 fixed-field cases.

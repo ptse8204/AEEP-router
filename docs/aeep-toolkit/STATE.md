@@ -1,5 +1,21 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 18. Five public schemas can resolve the collection-shape design.**
+The [collection audit](../../reports/toolkit-v2/c13/completion-20261116/extractbench-collection-shape-capacity-20261118.json)
+verified 147 slots with at most one output collection and 113 with
+multiple collections. Two balanced 105-case holdouts and balanced
+shared early stages need at least nine more multiple-collection slots.
+A substituted label for the unresolved 13-slot group yielded a
+source-disjoint layout. The actual layout remains unverified.
+
+Publisher file metadata shows that all five unresolved files exceed
+the earlier 131,072-byte cap. The exact recovery review `5e323b11`
+allows five public schema reads at the verified sizes, up to 3,261,401
+response body bytes. The preflight verified the 66 retained bodies and
+denied execution without approval. The recovery and software repeat
+`ce4e08cf` are unstarted. C13 stays open, comparisons stay paused, and
+Waza is excluded.
+
 **November 18. ExtractBench has too few fixed-field cases for the tested design.**
 The [schema audit](../../reports/toolkit-v2/c13/completion-20261116/extractbench-schema-variation-capacity-20261118.json)
 verified 66 public schemas against the pinned manifest. After existing
