@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 correction results](../toolkit-v2/c13/completion-20261116/offline-correction-results-20261117.json)
+verify Formula Extraction through the same ordinary grader commands on
+a local imported image. RETURNN remains ungraded because its pinned
+carrier cannot import `tree`. Both diagnostics and the failed Formula
+build remain charged on their original ledgers.
+
 The [settled C13 offline group](../toolkit-v2/c13/completion-20261116/offline-group-9ee3ca0f-result-20261117.json)
 verified the current Linux ARM64 install and rollback, Arta's reference
 and original, Workbook Recovery and economic grading. The Formula

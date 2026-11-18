@@ -54,6 +54,23 @@ The module name was outside the allowlist, so the diagnostic retained
 only the category and counts. Both charges settled, and the diagnostic
 issued no task grade. The original-source role remains unstarted.
 
+The [correction record](offline-correction-results-20261117.json) covers
+the Formula local import and the final RETURNN diagnostic. Formula
+reused the never-started parent container's exact filesystem. The tar
+audit matched 58,949 base entries against the prior sealed archive and
+all 3,016 overlay entries against the unchanged Formula build context.
+The local import, reference command, positive grade and two rejection
+controls passed. The original failed BuildKit operation stays settled
+in the same ledger. The recovered image and recipe case set are retained.
+
+The second RETURNN diagnostic captured the confirmed missing `tree`
+import. Neither the required reference tests nor the original-source
+role ran. The pinned source declares `dm-tree` and the matching Linux
+ARM64 CPython 3.13 wheel was absent from the reviewed cache. Its
+publisher hash is recorded. Acquisition, dependency closure and
+protected grading on a corrected carrier remain open.
+[PyPI release](https://pypi.org/project/dm-tree/0.1.9/)
+
 ### CFPB native task-pack checks
 
 The [local component result](cfpb-local-component-result-20261117.json)
@@ -178,8 +195,8 @@ No new grading, provider disclosure or formal assignment occurred.
 
 [Group `9ee3ca0f`](pending-c13-offline-verification-20261117.json) adds
 three independent ordinary document grader checks to the earlier group
-below. One approval can cover all six unstarted scopes. Approval of the
-earlier group still covers only its three members. The group permits up
+below. The C13 approval covered all six member scopes. The original
+three-member group remains part of the review history. The group permitted up
 to 30 operations, 1,615 reserved seconds and two local COPY-only builds.
 Both builds use pinned retained inputs. The Formula build requires
 52 GiB plus twice its reviewed build context. Expiry and storage are
@@ -218,8 +235,8 @@ interrupted member. The group is a review packet. The existing drivers
 still own reservation, dispatch, receipt and cleanup.
 
 [Group `03d8c261`](pending-offline-verification-group-20261117.json)
-collects the three unstarted offline checks under their existing exact
-scopes. Approve the group or an individual member. The group permits
+records the three checks under their original exact scopes. They later
+ran in group `9ee3ca0f`. This earlier group permitted
 five operations and 410 reserved seconds in total, with zero models,
 cash, downloads or image builds. All three launch bindings verified.
 
@@ -229,11 +246,13 @@ cash, downloads or image builds. All three launch bindings verified.
 | RETURNN protected reference and original | [`2e961f2b`](returnn-protected-pair-review-20261117.json) | 2 | 70 |
 | Arta protected reference and original | [`5679eda1`](arta-protected-pair-review-20261117.json) | 2 | 70 |
 
-Review and record approval for each selected member before dispatch.
+Record the approved group and exact member digests before dispatch.
 The group's handoff binds the original expiry, runner and preflight
 for each member. A known terminal grading or install failure leaves
 independent members eligible. Uncertain accounting, ownership or shared
-containment stops dispatch. Repetition needs a new exact review.
+containment stops dispatch. A terminal repeat needs a new internal
+review with preserved charges. Ask the operator when the scope exceeds
+the confirmed C13 authority.
 
 [Correction group `3376c129`](correction-group-3376c129-result.json) completed
 all five operations in 9.048 seconds against 490 reserved seconds.

@@ -1,5 +1,21 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. Formula Extraction passed after local runtime recovery.**
+The [correction record](../../reports/toolkit-v2/c13/completion-20261116/offline-correction-results-20261117.json)
+binds the local import to the exact prior base and Formula overlays.
+A read-only recovery matched all 58,949 base entries and 3,016 overlay
+entries after the staging report exceeded its file-hash reader limit.
+The original archive was reused. The import and four unchanged ordinary
+roles passed. The failed BuildKit charge stays in the same ledger.
+
+RETURNN's bounded diagnostic identified missing `tree` at pytest
+collection, before any of its 13 required tests ran. The pinned project
+declares `dm-tree`. The CPython 3.13 Linux ARM64 wheel has a recorded
+publisher hash and was absent from the searched caches. Its dependency
+closure and materialized grader overlay remain open. Both diagnostics
+settled and did not issue a grade. Five of the six offline scopes now
+pass. C13 stays open, comparisons stay paused, and Waza is excluded.
+
 **November 17. The approved C13 offline group has settled.**
 The [operator's C13 confirmation](../../reports/toolkit-v2/c13/completion-20261116/c13-offline-approval-20261117.json)
 covers all six bound reviews in group `9ee3ca0f`. The
