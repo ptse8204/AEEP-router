@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [retained software reproduction audit](../toolkit-v2/c13/completion-20261116/software-reproduction-pool-20261117.json)
+links 45 scoped reproductions across 24 repositories to 92 distinct
+receipt references. Nine are contract audits. Two balanced holdouts
+require 70 in that family, leaving 61 relative to this pool before
+early stages. Common runtime, rights and formal assignment remain open.
+
 The [RETURNN protected-pair preflight](../toolkit-v2/c13/completion-20261116/returnn-protected-pair-preflight-20261117.json)
 binds one publisher-verified multi-file repair to 13 unchanged upstream
 identities. Seven checks passed, including settlement, missing-test

@@ -1,0 +1,564 @@
+{
+  "capacity": {
+    "counts_by_family": {
+      "contract-audit": 9,
+      "multi-file-repair": 18,
+      "single-file-repair": 18
+    },
+    "distinct_receipts": 92,
+    "largest_repository_group_rows": 14,
+    "minimum_missing_rows_if_all_reproduced_rows_are_eligible": 201,
+    "repository_families": 24,
+    "reproduced_rows": 45,
+    "two_balanced_holdouts_minimum_missing_by_family_before_early_stages": {
+      "contract-audit": 61,
+      "multi-file-repair": 52,
+      "single-file-repair": 52
+    },
+    "two_cohorts_shared_early_minimum": 246
+  },
+  "development_repository_exclusions_checked": 25,
+  "formal_assignments": 0,
+  "formal_cases_adopted": 0,
+  "groups": {
+    "historical_callback": 39,
+    "recent_reproductions": 6
+  },
+  "historical_pending_exact_controls": [
+    "fox-it__dissect.cstruct-120-single-file-scope",
+    "kaste__mockito-python-93-single-file-scope"
+  ],
+  "inputs": {
+    "a2a-receipt-bridge-audit.json": "3ed848409dc996ea612cc0734cd35ef2c81a073aea18d4bc6311a2437481fa06",
+    "additional-contract-audits.json": "498957d8fc730ed1f935a55c9968fdb4abfacfba9b6dad8fef16bcac689770af",
+    "ancillary-contract-audits.json": "b01aee4eff6e466306a98dc474affd1fc4a937116ad6b5fc25751d937bdc37c2",
+    "approved-a2a-batch-results.json": "3a4f6d812b55dee71c5dde004c4eeb0f26362307dfd5bf5ab096e12635af06dc",
+    "cached-multifile-projections.json": "3402782d51a2dbb03e8620bc506122948cda19f5e6561cf099449476c7804511",
+    "formal-transport-preparation.json": "053ed3874b7b83ffcb4abe0cde266d4c9d3e8c7be8d0ec25ccec757e62941577",
+    "group-software-results-20261117.json": "5601fe9aabe9c7019dd867b5fd2d8c22a792847b22a80ce425a5765813c0d5ea",
+    "offline-group-result-20261117.json": "43180e9eda32e3fa0d6122c18cd34c5282ce95bea0fc5b9814f81e6e0e666ce5",
+    "pyserde-ordinary-result.json": "c3a3a2c0126bbff0ce0b7ead9617995ab59d26706f3780cbba6692f3e3a05ef2",
+    "pyserde-production-repair-preflight.json": "a2982f2871255cb214c5d5528a91594f40020c1723276d6158a185366eef96e5",
+    "rebound-worker-transport.json": "973dd5bbb8ab32c16b1df2b857965dcb99b587e9e4268485b5005da42939c59a",
+    "retained-grader-evidence.json": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0",
+    "software-correction-result-20261117.json": "41f3f437c93633d50902566fe5e2579f599adbb4d214de0d9ae460f718cc4ec7"
+  },
+  "legacy_observer_reproductions_pending_ordinary_runtime": [
+    "a2aproject__a2a-python-576",
+    "a2aproject__a2a-python-682_interface"
+  ],
+  "new_model_turns": 0,
+  "new_upstream_tests": 0,
+  "rows": [
+    {
+      "case": "AzureAD__microsoft-authentication-library-for-python-795-aeep-contract-audit",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "contract-audit",
+      "receipt_ids": [
+        "rcpt_9a027c8743cc4f26a58bedbf5287a9ad",
+        "rcpt_1d19a4c3f8514bc9a062807f77082ea9"
+      ],
+      "repository": "azuread/microsoft-authentication-library-for-python",
+      "revision": "fb3e21cf501587dccb71676a3d06f9ea24476102"
+    },
+    {
+      "case": "BrianPugh__cyclopts-609-aeep-contract-audit",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "contract-audit",
+      "receipt_ids": [
+        "rcpt_78a3cd7454b64942b8f0bbd33ec9d9b8",
+        "rcpt_a3e2c324c900473e8c063ab698a57222"
+      ],
+      "repository": "brianpugh/cyclopts",
+      "revision": "06d8f0ec532d147e974cd729c9bd8ed1db196478"
+    },
+    {
+      "case": "BrianPugh__cyclopts-633-declared-tests",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "single-file-repair",
+      "receipt_ids": [
+        "rcpt_1013bf1e2e1a4aae87af284587a69a5e",
+        "rcpt_e9065f72e2ca42b6a793f2cbbbf99bde"
+      ],
+      "repository": "brianpugh/cyclopts",
+      "revision": "23fed053c63ca13e7ab28ca54e94804012d23946"
+    },
+    {
+      "case": "BrianPugh__cyclopts-701-declared-tests",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "single-file-repair",
+      "receipt_ids": [
+        "rcpt_c18607e5e7c94a34a8cf2b2a8310e130",
+        "rcpt_1053d0ae9d54416ca33dd8be4ac4c7e9"
+      ],
+      "repository": "brianpugh/cyclopts",
+      "revision": "9d8e082b8e09316db8b5f294ca1d0224adc908be"
+    },
+    {
+      "case": "CrossGL__crosstl-257-aeep-contract-audit",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "contract-audit",
+      "receipt_ids": [
+        "rcpt_f9b9103b73f04e7fb3419a2c33b86277",
+        "rcpt_af39c5618bfd4840a1e7101b3f05835f"
+      ],
+      "repository": "crossgl/crosstl",
+      "revision": "bf894dbc90466d1ed9ae942f44396fbd04f18298"
+    },
+    {
+      "case": "agronholm__sqlacodegen-370-declared-tests",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "single-file-repair",
+      "receipt_ids": [
+        "rcpt_7770b5e90b904ddda0d3bc23f838eb55",
+        "rcpt_1be1da9c5318473bb403a443a4d667a1"
+      ],
+      "repository": "agronholm/sqlacodegen",
+      "revision": "0b404d2c690abe11b45fa9e073ef55a9e2ec4f4a"
+    },
+    {
+      "case": "asottile__dead-204-native-expanded-scope",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "single-file-repair",
+      "receipt_ids": [
+        "rcpt_0104a4853e094b55acd46d00144f4c36",
+        "rcpt_869e67c3bc01451b9d0662a8dd488fb7"
+      ],
+      "repository": "asottile/dead",
+      "revision": "d2d94828cfe205d294b5e551dfe187d77a1fe026"
+    },
+    {
+      "case": "cdent__gabbi-342-declared-tests",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "single-file-repair",
+      "receipt_ids": [
+        "rcpt_c96356498e6341ada2a582ce0951bd71",
+        "rcpt_e752dcc83d194b4baf15a1b4374e0a8e"
+      ],
+      "repository": "cdent/gabbi",
+      "revision": "6617540b160db1ee1b4ab6a5b4acc83ef8049606"
+    },
+    {
+      "case": "collective__icalendar-878-aeep-contract-audit",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "contract-audit",
+      "receipt_ids": [
+        "rcpt_a2455e1a2a5d455a9c876abb7e7fca4c",
+        "rcpt_91d3b5bee8f54513897779e42ac06f27"
+      ],
+      "repository": "collective/icalendar",
+      "revision": "2ab45380677b794eb3b7d07f3ff7e80ff83e3f2d"
+    },
+    {
+      "case": "collective__icalendar-880-native-identity-audit",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "multi-file-repair",
+      "receipt_ids": [
+        "rcpt_687508a03f4544c981bb309b6460d5a1",
+        "rcpt_e0c492c7add142a884a307a8db15eaae"
+      ],
+      "repository": "collective/icalendar",
+      "revision": "6547ea283b14965d74e4facaadac63e98d24ae4d"
+    },
+    {
+      "case": "collective__icalendar-921-aeep-contract-audit",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "contract-audit",
+      "receipt_ids": [
+        "rcpt_c80ea9784de84dd0aa4719e8488fa560",
+        "rcpt_a1aac4a23dd9406b9e47265f855bff94"
+      ],
+      "repository": "collective/icalendar",
+      "revision": "8e3d091c880a9465f5347204e3bc9a46774a277e"
+    },
+    {
+      "case": "duo-labs__py_webauthn-241-safetynet-scope",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "single-file-repair",
+      "receipt_ids": [
+        "rcpt_c6a81c746172490fb031d7f470c061b2",
+        "rcpt_f2b250551e9041d79b4ca4c42ad1f034"
+      ],
+      "repository": "duo-labs/py_webauthn",
+      "revision": "aa365d75e58bb5c506226449a9b859897f024811"
+    },
+    {
+      "case": "fabfuel__circuitbreaker-67-declared-tests",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "single-file-repair",
+      "receipt_ids": [
+        "rcpt_43caf2c4af604dbab0fb9306693e4eea",
+        "rcpt_77f66f365cef484e890331be36421eaa"
+      ],
+      "repository": "fabfuel/circuitbreaker",
+      "revision": "646651337a3034062b2cf4889e2090c1ba19b61c"
+    },
+    {
+      "case": "facelessuser__pymdown-extensions-2576-single-source-scope",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "single-file-repair",
+      "receipt_ids": [
+        "rcpt_56ed23249db145f8a9f43acc1870f57a",
+        "rcpt_76a2cfd4cbbb4d75ac442224c5e8d409"
+      ],
+      "repository": "facelessuser/pymdown-extensions",
+      "revision": "b5d38261aac121cb13cd459df0272c4c81abd67f"
+    },
+    {
+      "case": "facelessuser__pymdown-extensions-2807-single-source-scope",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "single-file-repair",
+      "receipt_ids": [
+        "rcpt_a15964585ef64d58b74668c71caeed0a",
+        "rcpt_15533997d1f54f16a932c4dca7c86caa"
+      ],
+      "repository": "facelessuser/pymdown-extensions",
+      "revision": "6ed9a366fbb5744900b3c860e3b051d1ec529df0"
+    },
+    {
+      "case": "getsentry__sentry-python-4231",
+      "evidence": "settled_ordinary_reference_and_original",
+      "family": "multi-file-repair",
+      "receipt_ids": [
+        "rcpt_c95becb4a1294adab13f22919351a7a4",
+        "rcpt_d3ddacb373914584a2d53c4f600be7d1"
+      ],
+      "repository": "getsentry/sentry-python",
+      "revision": "2c3776c582a23b6936c76ef53008bf63f861b6fd"
+    },
+    {
+      "case": "huggingface__huggingface_hub-4056",
+      "evidence": "settled_ordinary_reference_and_original",
+      "family": "multi-file-repair",
+      "receipt_ids": [
+        "rcpt_ef36df9219e846b080eac16379695f81",
+        "rcpt_b6989248993b46afa199f265c4acb5a1"
+      ],
+      "repository": "huggingface/huggingface_hub",
+      "revision": "6983a4d3d2bdcbd09c6ea08acae64cdf83ccb2e4"
+    },
+    {
+      "case": "lmstudio-ai__lmstudio-python-110-declared-tests",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "single-file-repair",
+      "receipt_ids": [
+        "rcpt_3da5c5f7132b47ee84e87f4533fa41e1",
+        "rcpt_84099d81d7394b9eab4ed08c631bb893"
+      ],
+      "repository": "lmstudio-ai/lmstudio-python",
+      "revision": "a8f9223547d251aa37d51dd39b971dedda6d4e49"
+    },
+    {
+      "case": "macbre__sql-metadata-552-aeep-contract-audit",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "contract-audit",
+      "receipt_ids": [
+        "rcpt_5f714f5d464e4566b19db6aed2df058a",
+        "rcpt_5e29c7d03c794d4c8cf66db269559550"
+      ],
+      "repository": "macbre/sql-metadata",
+      "revision": "cc9017d944e9a4da48dbe1685acbf99a7024b814"
+    },
+    {
+      "case": "macbre__sql-metadata-553-declared-tests",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "single-file-repair",
+      "receipt_ids": [
+        "rcpt_0a3c723789b24efbb07db79e293d1ddd",
+        "rcpt_09aa4fd8b6eb405eba3796b504c8cf72"
+      ],
+      "repository": "macbre/sql-metadata",
+      "revision": "8df3ffceb18cea4b29a7195263f132cda4ca34a7"
+    },
+    {
+      "case": "macbre__sql-metadata-583-declared-tests",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "single-file-repair",
+      "receipt_ids": [
+        "rcpt_e3db04a11211462fa3cd8511ea7af216",
+        "rcpt_d5b8a3ef0bae4628862880fe4e9006d2"
+      ],
+      "repository": "macbre/sql-metadata",
+      "revision": "3d0c043fb22efdd5b2837507f5bfce9c053bc10a"
+    },
+    {
+      "case": "marshmallow-code__marshmallow-sqlalchemy-640-aeep-contract-audit",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "contract-audit",
+      "receipt_ids": [
+        "rcpt_af5b72c3545f4d97a28248acfcc8babf",
+        "rcpt_c9f0be9562a840ea98598c046c012849"
+      ],
+      "repository": "marshmallow-code/marshmallow-sqlalchemy",
+      "revision": "11971438fe15f1110136c59df68a8be30fb1d526"
+    },
+    {
+      "case": "model-bakers__model_bakery-520-declared-tests",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "single-file-repair",
+      "receipt_ids": [
+        "rcpt_ec56acacf25847a6921d940e3398fe51",
+        "rcpt_926684e54b1249948eda2cbfde597b2d"
+      ],
+      "repository": "model-bakers/model_bakery",
+      "revision": "8051e3f5bcc1c9cae96e0cc54d98e695d6701051"
+    },
+    {
+      "case": "networkx__networkx-7804-declared-tests",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "single-file-repair",
+      "receipt_ids": [
+        "rcpt_8e168b49f88545538f8e54198cbda57d",
+        "rcpt_1f06eb36abd84ab587f0891d4a410dad"
+      ],
+      "repository": "networkx/networkx",
+      "revision": "b369de6e892c1f0932f6118d322aed55cb0618f6"
+    },
+    {
+      "case": "networkx__networkx-8055-aeep-contract-audit",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "contract-audit",
+      "receipt_ids": [
+        "rcpt_8aa3189dc40646c0a4ef1974d491592c",
+        "rcpt_210302d136dd4d2a86675d4bd44d3083"
+      ],
+      "repository": "networkx/networkx",
+      "revision": "679191810fc962e282b606622c90355f2e6f58ad"
+    },
+    {
+      "case": "nhairs__python-json-logger-39-native-expanded-scope",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "single-file-repair",
+      "receipt_ids": [
+        "rcpt_7a8880bba88d4c95a0110c6c9a19e9af",
+        "rcpt_2ba3f3796c034c378f9f70a2d952de75"
+      ],
+      "repository": "nhairs/python-json-logger",
+      "revision": "0092ea0be1cd28e3c1da51eaa084c503bb3710b7"
+    },
+    {
+      "case": "open-spaced-repetition__py-fsrs-127-aeep-contract-audit",
+      "evidence": "settled_ordinary_reference_and_original",
+      "family": "contract-audit",
+      "receipt_ids": [
+        "rcpt_6d226183ff924a2a983a4fcb0421519e",
+        "rcpt_1dc4bc1e8fbc4e139d6285b0173cbba7"
+      ],
+      "repository": "open-spaced-repetition/py-fsrs",
+      "revision": "e50db2ea5243f0ffca8dd3a4d5baca64f29ce20c"
+    },
+    {
+      "case": "reagento__dishka-512-declared-tests",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "single-file-repair",
+      "receipt_ids": [
+        "rcpt_1ddf56d286874a82a4cbd742a5c7da29",
+        "rcpt_394f2487370f48c5adfee332c73d52bf"
+      ],
+      "repository": "reagento/dishka",
+      "revision": "e11de4e1e2f18621943df2084e683459d9445c18"
+    },
+    {
+      "case": "simonw__files-to-prompt-44",
+      "evidence": "settled_ordinary_reference_and_original",
+      "family": "single-file-repair",
+      "receipt_ids": [
+        "rcpt_4bcae40672734e6b98f0a8a346debfa6",
+        "rcpt_3045f5fd2f3d408d8fb64bc117c99447"
+      ],
+      "repository": "simonw/files-to-prompt",
+      "revision": "fdca384b1ca8dcabd87bf81cd7a113279a21ada7"
+    },
+    {
+      "case": "tobymao__sqlglot-4643-declared-tests",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "multi-file-repair",
+      "receipt_ids": [
+        "rcpt_a2092cacf19d4912ac40cab358646f45",
+        "rcpt_0f6a5d1877594d0281a1f5ff174c0ded"
+      ],
+      "repository": "tobymao/sqlglot",
+      "revision": "761e835e39fa819ef478b8086bfd814dbecc7927"
+    },
+    {
+      "case": "tobymao__sqlglot-4683-declared-tests",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "multi-file-repair",
+      "receipt_ids": [
+        "rcpt_696aea2248c9449f8ff4f118fd82eb37",
+        "rcpt_33e4d97b13934e32a90855b02f1db2d3"
+      ],
+      "repository": "tobymao/sqlglot",
+      "revision": "a6e3f1903acc43fcd84ad13da36b8a1f92f9fc7a"
+    },
+    {
+      "case": "tobymao__sqlglot-4987-declared-tests",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "multi-file-repair",
+      "receipt_ids": [
+        "rcpt_ef89df2f28e94d198a998a5bf7563d47",
+        "rcpt_a0b28f6b8fd74b2082a5c67183b502f2"
+      ],
+      "repository": "tobymao/sqlglot",
+      "revision": "2369195635e25dabd5ce26c13e402076508bba04"
+    },
+    {
+      "case": "tobymao__sqlglot-5075-declared-tests",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "multi-file-repair",
+      "receipt_ids": [
+        "rcpt_cb96741786ef48b3be324016e00d2db0",
+        "rcpt_4f958922146e4415a2919d0336d80d64"
+      ],
+      "repository": "tobymao/sqlglot",
+      "revision": "1ddfcbe6c1d30d70533774da38d842bb3af6c205"
+    },
+    {
+      "case": "tobymao__sqlglot-5189-declared-tests",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "multi-file-repair",
+      "receipt_ids": [
+        "rcpt_579ef1851ae549a6b20cad37358d8a98",
+        "rcpt_6420d97feafa4cb99c104461c50add11"
+      ],
+      "repository": "tobymao/sqlglot",
+      "revision": "696150dcb3337e328290434debbb28055233b2f8"
+    },
+    {
+      "case": "tobymao__sqlglot-5256-declared-tests",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "multi-file-repair",
+      "receipt_ids": [
+        "rcpt_b5bc71c854da47f1b6b43fdd114e419d",
+        "rcpt_2d1b30237f6b4298ad03bf8060e59b48"
+      ],
+      "repository": "tobymao/sqlglot",
+      "revision": "f5b5b9338eb92b7aa2c9b4c92c6138c2c05e1c40"
+    },
+    {
+      "case": "tobymao__sqlglot-5359-declared-tests",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "multi-file-repair",
+      "receipt_ids": [
+        "rcpt_3218193ff8f54fd293e7df9ce48d6bb8",
+        "rcpt_76d1e001399e4e52832bfe9286215aac"
+      ],
+      "repository": "tobymao/sqlglot",
+      "revision": "7e1d2117d83df677e4019c81cf96f3a1729b5da2"
+    },
+    {
+      "case": "tobymao__sqlglot-5431-declared-tests",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "multi-file-repair",
+      "receipt_ids": [
+        "rcpt_ce0b6d5bacae487f8fbf03d1b2b594a1",
+        "rcpt_9b1a28cd59b344398c003e50588a55e2"
+      ],
+      "repository": "tobymao/sqlglot",
+      "revision": "e22a04ae09d566cc8cc2ef4259726b4dacea44b6"
+    },
+    {
+      "case": "tobymao__sqlglot-5566-declared-tests",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "multi-file-repair",
+      "receipt_ids": [
+        "rcpt_258ff8b892ad45e2bb4e37c4ce08de08",
+        "rcpt_f9896118f38e4a5eb6d5bc14c712edfa"
+      ],
+      "repository": "tobymao/sqlglot",
+      "revision": "4e42dfd8dc5dcc32f7d724b962e1e837add87714"
+    },
+    {
+      "case": "tobymao__sqlglot-6067-declared-tests",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "multi-file-repair",
+      "receipt_ids": [
+        "rcpt_8a00f0a83c8d44779d4f43464961dba7",
+        "rcpt_de5873b10b4d423fb69dc9f3efa804c6"
+      ],
+      "repository": "tobymao/sqlglot",
+      "revision": "ddc7bd334e8e303e78060839e3a1687dd2d9b2d3"
+    },
+    {
+      "case": "tobymao__sqlglot-6174-declared-tests",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "multi-file-repair",
+      "receipt_ids": [
+        "rcpt_17d8243427a2494cb6aa43e85f481f63",
+        "rcpt_af16e041dcf345009d4c57911e9dac54"
+      ],
+      "repository": "tobymao/sqlglot",
+      "revision": "74b4e7c311e9d4ff39ce2e4d91940eced96aa32f"
+    },
+    {
+      "case": "tobymao__sqlglot-6374-declared-tests",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "multi-file-repair",
+      "receipt_ids": [
+        "rcpt_c8bdbaa621464dde9fc7f420559bf3aa",
+        "rcpt_d8db27bcf5c54c509f23bb2982fe4978"
+      ],
+      "repository": "tobymao/sqlglot",
+      "revision": "c94d0ebb383c7d7ab7f38b96586c19f09b921a52"
+    },
+    {
+      "case": "tobymao__sqlglot-6413-declared-tests",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "multi-file-repair",
+      "receipt_ids": [
+        "rcpt_5ba09d42613f4e84b1b016195c1ad4f8",
+        "rcpt_a4d96342e5194940831b455e60cdc0c2"
+      ],
+      "repository": "tobymao/sqlglot",
+      "revision": "bb4eda1beb68b92de9ab014a63c67797a07df2fa"
+    },
+    {
+      "case": "tobymao__sqlglot-7187-declared-tests",
+      "evidence": "historical_callback_with_settled_receipts",
+      "family": "multi-file-repair",
+      "receipt_ids": [
+        "rcpt_fc135b215ca04d8ea2e077d937f958c2",
+        "rcpt_1ae7efa501644e70a10c5d73a64e62e9"
+      ],
+      "repository": "tobymao/sqlglot",
+      "revision": "0e8d0824c40ac46c5e7275180cf2eaae6810f805"
+    },
+    {
+      "case": "ultrabug__py3status-2286",
+      "evidence": "settled_ordinary_reference_and_original",
+      "family": "single-file-repair",
+      "receipt_ids": [
+        "rcpt_3cd7dd9736a64ec288673b444bed2ca9",
+        "rcpt_5daa3152f7a64c4a985b4b1d360568d8"
+      ],
+      "repository": "ultrabug/py3status",
+      "revision": "51eb2dfe4fba47ebe2f754beb051fbdb194c5d3a"
+    },
+    {
+      "case": "yukinarit__pyserde-682",
+      "evidence": "settled_ordinary_reference_original_and_partial_repairs",
+      "family": "multi-file-repair",
+      "receipt_ids": [
+        "rcpt_6b2a038e76db4db5b62a8b8990c716c0",
+        "rcpt_6168a7c5dfda48fc82f44d96831ec168",
+        "rcpt_af0f09eda49c4d4990a9e0a70d6b0f25",
+        "rcpt_bac18caa9c4d48d596194ed93d312bf3"
+      ],
+      "repository": "yukinarit/pyserde",
+      "revision": "59af51ef2292821900629ec8a3f5b898e20f8078"
+    }
+  ],
+  "schema_version": "aeep.c13.software-reproduction-pool.v1",
+  "scope": "Retained exact ordinary-callback reproductions. Current common runtime, rights, independent assignment and formal acceptance remain separate.",
+  "verification": {
+    "byte_identical_replay": true,
+    "negative_controls": [
+      "duplicate_case",
+      "duplicate_snapshot",
+      "duplicate_receipt",
+      "exposed_repository",
+      "asset_outside_worktree",
+      "asset_drift"
+    ]
+  }
+}

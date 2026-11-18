@@ -507,6 +507,21 @@ still require independent controlled evidence.
 
 ## Formal candidate and selection gates
 
+The [retained software reproduction audit](software-reproduction-pool-20261117.json)
+links 39 historical callback cases and six later reproductions to 92
+distinct receipt references. The 45 cases span 24 repositories and
+include nine contract audits, 18 multi-file repairs and 18 single-file
+repairs. One repository supplies 14 rows. The largest gap for two
+balanced holdouts is 61 contract audits relative to these reproduced
+cases, even before the early stages. The intake projections below
+include prospects whose protected evidence is still incomplete.
+
+The read-only audit reproduced byte for byte and rejected duplicate
+cases, snapshots and receipts, development exposure, evidence drift,
+and paths outside the checkout. The legacy A2A observations retain
+their own runtime scope. Current common runtime, rights review and
+formal stage assignment remain open.
+
 The [curated lineage verification](curated-cohort-lineage-verification.json)
 covers the service change that lets two curated definitions carry separate
 case sets under the same reviewed grader and environment. Each stage still

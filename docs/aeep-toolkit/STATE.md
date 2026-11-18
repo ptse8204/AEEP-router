@@ -1,5 +1,23 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 17. The retained software reproduction pool has 45 cases.**
+The [reproduction audit](../../reports/toolkit-v2/c13/completion-20261116/software-reproduction-pool-20261117.json)
+reconciled 39 historical callback cases and six later reproductions
+across 24 repositories. It checked 92 distinct receipt references.
+The pool contains nine contract audits, 18 multi-file repairs and 18
+single-file repairs. One repository supplies 14 rows and belongs in
+only one independent holdout. All documented development exclusions
+remain in effect. Two legacy A2A reproductions still need ordinary
+runtime validation.
+
+Two balanced 105-case holdouts require 70 cases in each family. Relative
+to these reproduced rows, contract audits have the largest gap at 61
+before qualification and training. Case-level rights checks, a common
+runtime and source-disjoint assignment remain open. The read-only audit
+replayed byte for byte and rejected six invalid inputs. It assigned
+zero cases and ran no upstream tests or models. C13 stays open.
+Comparisons stay paused and Waza remains excluded.
+
 **November 17. The first protected RETURNN check is ready for an exact review.**
 [Review `2e961f2b`](../../reports/toolkit-v2/c13/completion-20261116/returnn-protected-pair-review-20261117.json)
 binds the published repair, the original source and all 13 upstream
