@@ -1,5 +1,13 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 contract-audit results](../toolkit-v2/c13/completion-20261116/expansion-contract-audit-results-20261118.json)
+verify Django Guardian at 1/1 reference and 0/1 original. Its 19
+protected outcomes bring the prospective software pool to 48 cases.
+OpenTelemetry's namespace repair and the first-party 128-task probe
+passed. Its protected grade still needs the
+[grouped repeat review](../toolkit-v2/c13/completion-20261116/protected-repeat-group-20261118.json).
+All seven operations settled and no formal case was assigned.
+
 The [reconciled C13 offline group](../toolkit-v2/c13/completion-20261116/offline-completion-results-20261118.json)
 now verifies all six original scopes with their repairs. The RETURNN
 published reference scored 1/1 and its original scored 0/1. The original

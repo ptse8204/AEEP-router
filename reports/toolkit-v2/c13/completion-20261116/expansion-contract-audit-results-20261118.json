@@ -1,0 +1,149 @@
+{
+  "accounted_operations": 7,
+  "authority": {
+    "path": ".aeep/completion-20261116/c13-expansion-contracts-20261118/delegated-authority.json",
+    "sha256": "cbe5ebdc66726cbd4498050eb1f2acc2e35c650e245f85185f9730ff86528ca0"
+  },
+  "cash_usd": 0,
+  "comparisons_paused": true,
+  "django_guardian": {
+    "ledger": {
+      "path": ".aeep/completion-20261116/c13-django-guardian-protected-audit-20261118/execution/ledger.json",
+      "sha256": "6d266407eb2430b9fe545f8b0599d109a5165d7c6a673b92e9ee661e5191a776"
+    },
+    "observations": [
+      {
+        "receipt": {
+          "path": ".aeep/completion-20261116/c13-django-guardian-protected-audit-20261118/execution/receipt-rcpt_4f13cbc699034ad18601b6d2979feb66.json",
+          "sha256": "ed4e5a91f86084d0adc624034cab8cf7e3370e1abd349eb154a909d442feca22"
+        },
+        "role": "reference",
+        "score": 1.0,
+        "test_outcomes": {
+          "PASSED": 19
+        }
+      },
+      {
+        "receipt": {
+          "path": ".aeep/completion-20261116/c13-django-guardian-protected-audit-20261118/execution/receipt-rcpt_cf681b2ff8de4b0e9dbc356ccc99e187.json",
+          "sha256": "5385a58ab1a5eb30b70b92dd4fd7cd34205e50f8859742d5163a28de882775ea"
+        },
+        "role": "original",
+        "score": 0.0,
+        "test_outcomes": {
+          "FAILED": 2,
+          "PASSED": 17
+        }
+      }
+    ],
+    "operations": 2,
+    "result": {
+      "path": ".aeep/completion-20261116/c13-django-guardian-protected-audit-20261118/execution/result.json",
+      "sha256": "ee5d28c0c8b1aefdd3e2eb95ce865ae1a04242f10aad555c3854760112d809e4"
+    },
+    "scope_review": {
+      "path": ".aeep/completion-20261116/c13-django-guardian-protected-audit-20261118/operation-review.json",
+      "sha256": "09620fd9204f08a1a5e2207dd1aed99df53f5f1c6ff124263c7a74d8b96f4f99"
+    },
+    "settled_seconds": 3.9979670410975814,
+    "verified": true
+  },
+  "earlier_reproduction_pool": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/offline-completion-results-20261118.json",
+    "sha256": "6d065dabb88626e5b61292a9f5c0d86469be1e9269a0160c0bee437c69bd88ae"
+  },
+  "formal_cases_adopted": 0,
+  "new_model_turns": 0,
+  "new_wheel_download_bytes": 81985,
+  "opentelemetry": {
+    "bootstrap_repair": {
+      "path": ".aeep/completion-20261116/c13-expansion-contracts-20261118/otel-repair-preflight.json",
+      "sha256": "c27231700f7f649c94ae06b3c95ee689523008fd84d36f08b2f973e009fad8b7"
+    },
+    "collection_diagnostic": {
+      "path": ".aeep/completion-20261116/c13-expansion-contracts-20261118/otel-collection-result.json",
+      "sha256": "a6c92a40ce2f5aa8963689e588008571a7b3c64e5eccbbd53e664361402e3d35"
+    },
+    "first_corrected_reference": {
+      "path": ".aeep/completion-20261116/c13-expansion-contracts-20261118/otel-namespace-pair-result.json",
+      "sha256": "3dab113cff971b605e45db04b1a59fa040916a268b91315d2edc4425577be170"
+    },
+    "ledger": {
+      "path": ".aeep/completion-20261116/c13-expansion-contracts-20261118/thread-ceiling-ledger.json",
+      "sha256": "3516c89529d4820c6915954f03576ff0bb7c8c350652e76bfa3cadc09a64ea67"
+    },
+    "operations": 5,
+    "original_observation": {
+      "path": ".aeep/completion-20261116/c13-opentelemetry-protected-audit-20261118/execution/result.json",
+      "sha256": "84d3b8e794982fcec618732a4e714e9cc4dcb6c7f5e3297168032530d3a99621"
+    },
+    "original_source_role_dispatched": false,
+    "protected_grade_verified": false,
+    "settled_seconds": 28.566750166704878,
+    "thread_caps_verified": [
+      {
+        "cap": 96,
+        "error_category": null,
+        "facts": {
+          "configured_limit": 96,
+          "failure": "thread_creation_denied",
+          "limit_events": 1,
+          "threads_started": 94
+        },
+        "receipt_id": "rcpt_bf8a2d2d14f547bea40ef2b8ec401b54",
+        "verified": true
+      },
+      {
+        "cap": 128,
+        "error_category": null,
+        "facts": {
+          "configured_limit": 128,
+          "failure": null,
+          "limit_events": 0,
+          "threads_started": 100
+        },
+        "receipt_id": "rcpt_60d36b7d92ff4aca920e019c7d27a628",
+        "verified": true
+      }
+    ],
+    "thread_probe": {
+      "path": ".aeep/completion-20261116/c13-expansion-contracts-20261118/thread-ceiling-result.json",
+      "sha256": "f415ec748341d6d5fb575df5e4116d3c726cfacb8e6de72915b0e565d129ce08"
+    }
+  },
+  "provider_disclosure": false,
+  "schema_version": "aeep.c13.expansion-contract-audit-results.v1",
+  "software_reproduction_pool": {
+    "capacity": {
+      "counts_by_family": {
+        "contract-audit": 11,
+        "multi-file-repair": 19,
+        "single-file-repair": 18
+      },
+      "distinct_receipts": 98,
+      "largest_repository_group_rows": 14,
+      "minimum_missing_rows_if_all_reproduced_rows_are_eligible": 198,
+      "repository_families": 27,
+      "reproduced_rows": 48,
+      "two_balanced_holdouts_minimum_missing_by_family_before_early_stages": {
+        "contract-audit": 59,
+        "multi-file-repair": 51,
+        "single-file-repair": 52
+      },
+      "two_cohorts_shared_early_minimum": 246
+    },
+    "new_row": {
+      "case": "django-guardian__django-guardian-904-aeep-contract-audit",
+      "evidence": "settled_ordinary_reference_and_original",
+      "family": "contract-audit",
+      "receipt_ids": [
+        "rcpt_4f13cbc699034ad18601b6d2979feb66",
+        "rcpt_cf681b2ff8de4b0e9dbc356ccc99e187"
+      ],
+      "repository": "django-guardian/django-guardian",
+      "revision": "d9f15f2249ec75316723f34b3659ad0ff2822d91"
+    }
+  },
+  "summed_settled_wall_seconds": 32.56471720780246,
+  "waza_excluded": true
+}

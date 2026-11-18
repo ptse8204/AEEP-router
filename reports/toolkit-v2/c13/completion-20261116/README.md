@@ -37,6 +37,48 @@ batches, starting with retained contract-audit candidates. Candidate
 usefulness and AEEP selection usefulness still need separate independent
 evidence. Comparisons stay paused, and Waza remains excluded.
 
+### Contract audits and the next protected repeat
+
+The [contract-audit reconciliation](expansion-contract-audit-results-20261118.json)
+joins seven settled operations on retained ARM64 images. Django Guardian
+passed all 19 protected reference tests and scored 1/1. The original
+scored 0/1 with two expected failures and 17 passes. The worker reused
+Django 5.2.7 and its reviewed dependency closure. The added
+`django-environ` wheel and three OpenTelemetry wheels total 81,985 bytes.
+They were verified against their hashes, metadata and license notices.
+[django-environ 0.12.0](https://pypi.org/project/django-environ/0.12.0/)
+
+OpenTelemetry's initial protected reference stopped before collection.
+The collection diagnostic returned a `KeyError` with zero selected tests.
+The [repair preflight](stage_otel_namespace_repair.py) reproduced the
+exception with the archived namespace layout and isolated placeholders.
+Resolving one package component at a time repaired the first-party path
+check. The preflight still rejects foreign and preloaded packages.
+Both protected test files and all 18 test identities are unchanged.
+
+The corrected reference returned a command exit after 23.1 seconds.
+The unchanged upstream concurrency test waits for 100 worker threads.
+Linux counts those threads against the container task cap. The
+first-party probe started 94 threads and recorded one limit event at
+96 tasks. It started all 100 threads with no limit event at 128 tasks.
+Neither protected reference yielded a grade. The original-source role
+remains unstarted. [Linux PID controller](https://docs.kernel.org/admin-guide/cgroup-v2.html#pid)
+
+[Group `f8cac92e`](protected-repeat-group-20261118.json) binds two
+OpenTelemetry calls on the measured profile and the four pending
+Dissect.cstruct and Mockito migration calls. Both member reviews
+reproduced. The OpenTelemetry driver rejected missing approval and
+rehearsed success, incomplete observations and uncertain cleanup on
+private ledger copies. The group is unstarted. Its ceiling is six
+local operations and 210 reserved seconds with no new downloads,
+builds, installation, model turns, cash or provider disclosure.
+
+The prospective software pool now has 48 reproduced cases across 27
+repositories, including 11 contract audits. Preserving the two software
+cohort floors leaves at least 198 more eligible cases even if every
+reproduced case qualifies. No formal cohort is frozen. Comparisons stay
+paused, and Waza remains excluded.
+
 ## November 17 handoff
 
 The current [formal document verification](formal-document-native-verification.json)

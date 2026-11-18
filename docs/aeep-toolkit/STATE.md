@@ -1,5 +1,27 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 18. Django Guardian qualifies for the reproduced software pool.**
+The [receipt audit](../../reports/toolkit-v2/c13/completion-20261116/expansion-contract-audit-results-20261118.json) verified all 19 reference tests.
+The original failed two checks and passed 17. The prospective software
+pool has 48 cases across 27 repositories, including 11 contract audits.
+No case has a formal assignment yet.
+
+OpenTelemetry's first run stopped at collection. An archive-shaped
+check reproduced the namespace lookup error and verified the protected
+bootstrap repair. The corrected runtime still failed before recording
+a grade. Its concurrency test starts 100 threads. The contained
+standard-library probe could start 94 under the 96-task cap and all
+100 at a 128-task cap. Both failed grades and all diagnostic charges
+settled. The original-source grader role remains unstarted.
+
+[Protected repeat group `f8cac92e`](../../reports/toolkit-v2/c13/completion-20261116/protected-repeat-group-20261118.json) is ready for one
+operator decision. It covers two OpenTelemetry calls on the measured
+128-task profile and the four pending Dissect.cstruct and Mockito
+migration checks. Maximum six operations and 210 reserved seconds.
+No downloads, installation, new images, model turns, cash or provider
+disclosure. Existing trial and source bindings remain intact.
+C13 stays open. Comparisons stay paused, and Waza is excluded.
+
 **November 18. All six scopes in the approved C13 offline group now pass.**
 The [reconciliation](../../reports/toolkit-v2/c13/completion-20261116/offline-completion-results-20261118.json) binds 36 settled operations across
 the group and its repairs. The RETURNN published repair passed all 13
