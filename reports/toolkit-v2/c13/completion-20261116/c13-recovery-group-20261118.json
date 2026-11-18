@@ -1,0 +1,92 @@
+{
+  "already_settled_excluded": {
+    "canonical_receipts_checked": 4,
+    "counted_in_existing_software_pool": true,
+    "ledger": {
+      "path": ".aeep/completion-20261116/c13-cached-native-repository-pairs-20261116/execution/ledger.json",
+      "sha256": "d2982baa7ff5c776ad6aa68c74786b55dcb7b0243496fbc5e2fb510ce9306d8d"
+    },
+    "reference_and_original_scores": [
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        0
+      ]
+    ],
+    "result": {
+      "path": ".aeep/completion-20261116/c13-cached-native-repository-pairs-20261116/execution/result.json",
+      "sha256": "4d4cd7f1feadfda3d95005d5a3fca19584b94bd136d43fa9f8e5d385dd9736d3"
+    },
+    "settled_operations": 4,
+    "subjects": [
+      "getsentry/sentry-python",
+      "huggingface/huggingface_hub"
+    ]
+  },
+  "comparisons_paused": true,
+  "extractbench_sensitivity": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/extractbench-recovery-capacity-20261118.json",
+    "sha256": "c9483dabfee06a32519cb26872aa98cbfdff07ea52fa905d7ec794c92fa8bcd7"
+  },
+  "formal_cases_adopted": 0,
+  "members": [
+    {
+      "offline_operations": 8,
+      "preflight": "All three exact member reviews reproduced on their own pinned coordinator sources.",
+      "reserved_seconds": 280,
+      "review": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/protected-repeat-group-addendum-20261118.json",
+        "sha256": "ce4e08cf56e89601ab9cc8567a96295a5d8ad51c70413cb0ecf5779cb8d63412"
+      },
+      "reviewed_member_count": 3,
+      "scope": "braindrop-opentelemetry-dissect-cstruct-mockito-protected-repeats"
+    },
+    {
+      "approval_record_path": ".aeep/completion-20261116/c13-conan-protected-pair-20261118/collection-approval.json",
+      "offline_operations": 1,
+      "preflight": "Exact collection-only review reproduced. No raw log retention or grade.",
+      "reserved_seconds": 35,
+      "review": {
+        "path": ".aeep/completion-20261116/c13-conan-protected-pair-20261118/collection-review.json",
+        "sha256": "b95a5c450d80bb7c31d9204f3e88836d544b3d51b764eb8021a761efe5dac7fb"
+      },
+      "scope": "conan-collection-diagnostic",
+      "terminal_marker_path": ".aeep/completion-20261116/c13-conan-protected-pair-20261118/collection-started.json"
+    },
+    {
+      "approval_record_path": ".aeep/c13-extractbench-collection-shape.suhrzT/recovery-approval.json",
+      "maximum_http_requests": 5,
+      "maximum_response_body_bytes": 3261401,
+      "offline_operations": 0,
+      "preflight": "Existing verifier reproduced from the absolute review path and verified 66 retained bodies.",
+      "reserved_seconds": 0,
+      "review": {
+        "path": ".aeep/c13-extractbench-collection-shape.suhrzT/schema-recovery-review.json",
+        "sha256": "5e323b110188cae6d32dbe9fbd241d41a1d398b99c564a5191998f8d8139bcdc"
+      },
+      "scope": "extractbench-public-schema-only-recovery",
+      "terminal_marker_path": ".aeep/c13-extractbench-collection-shape.suhrzT/recovery"
+    }
+  ],
+  "schema_version": "aeep.c13.grouped-recovery-review.v1",
+  "source_and_approval_rule": "Each unchanged member retains its own exact review, driver, expiry, authority, limits and terminal markers. Recheck them before dispatch. An approved member may run independently when another is ineligible. Stop any affected scope on uncertain accounting or cleanup. Execution requires explicit operator approval of the exact requested review or this packet.",
+  "source_parent": "e5d56de8",
+  "state": "unapproved_unstarted",
+  "totals": {
+    "automatic_retries": 0,
+    "builds": 0,
+    "cash_usd": 0,
+    "downloads_other_than_public_schema_bodies": 0,
+    "installations": 0,
+    "maximum_offline_operations": 9,
+    "maximum_offline_reserved_seconds": 315,
+    "maximum_public_response_body_bytes": 3261401,
+    "maximum_public_schema_requests": 5,
+    "model_turns": 0,
+    "provider_disclosure": false
+  },
+  "waza_excluded": true
+}

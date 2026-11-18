@@ -1,5 +1,13 @@
 # 0.8 plan coverage and remaining work
 
+[C13 recovery group `403dfca5`](../toolkit-v2/c13/completion-20261116/c13-recovery-group-20261118.json)
+combines three unchanged exact reviews. All member preflights reproduced.
+Sentry and Hugging Face Hub's completed pairs were reconciled against
+four canonical receipts and stay outside the unstarted group. The
+[ExtractBench sensitivity audit](../toolkit-v2/c13/completion-20261116/extractbench-recovery-capacity-20261118.json)
+found 26 feasible classifications and six that lack enough
+multiple-collection cases. No formal cohort was frozen.
+
 The [C13 Conan receipt audit](../toolkit-v2/c13/completion-20261116/conan-contained-runtime-20261118.json)
 verifies the retained runtime dependency closure and the first reference's
 settled observation mismatch. It issued no grade. The original is

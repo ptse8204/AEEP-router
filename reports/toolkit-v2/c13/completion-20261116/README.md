@@ -2,6 +2,26 @@
 
 ## November 18 handoff
 
+[Recovery group `403dfca5`](c13-recovery-group-20261118.json) puts the
+three pending repeats under one approval. The member reviews, limits,
+drivers and terminal checks are unchanged. All five exact driver
+preflights passed. The group contains up to nine offline operations,
+315 reserved seconds and five public schema requests totaling at most
+3,261,401 response bytes. It is unapproved and unstarted. No comparison,
+model call or installation is covered.
+
+Four settled receipts confirm that Sentry and Hugging Face Hub each
+scored 1/1 on the reference and 0/1 on the original. The earlier
+preflight below records their initial state. The current queue excludes
+both and the reproduced software pool already includes them.
+
+The [ExtractBench sensitivity audit](extractbench-recovery-capacity-20261118.json)
+classifies the 66 retained schemas and tries both possible labels for
+each of the five unresolved schemas. Twenty-six classifications admit
+two balanced 105-case holdouts with shared 8-case and 28-case early
+stages. Six fall below the 122-case floor for multiple collections.
+Receipt, rights and asset verification still precede formal assignment.
+
 The [offline completion reconciliation](offline-completion-results-20261118.json)
 verifies all six scopes of group `9ee3ca0f` after repairs. All 36 operations
 settled, including the earlier failures and diagnostics. No model turns,

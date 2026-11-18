@@ -1,5 +1,24 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 18. The pending C13 recoveries have one review.**
+[Group `403dfca5`](../../reports/toolkit-v2/c13/completion-20261116/c13-recovery-group-20261118.json)
+collects the unchanged reviews for four protected software pairs, the
+Conan collection diagnostic and five public ExtractBench schemas. The
+member preflights reproduced. The group allows at most nine offline
+operations, 315 reserved seconds and five public schema responses
+totaling at most 3,261,401 bytes. It remains unapproved and unstarted.
+Sentry and Hugging Face Hub already have four settled receipts, so both
+stay outside the group.
+
+The [ExtractBench sensitivity audit](../../reports/toolkit-v2/c13/completion-20261116/extractbench-recovery-capacity-20261118.json)
+found a balanced source-disjoint metadata layout in 26 of 32 possible
+classifications of the five unresolved schemas. The 13-case schema alone
+is sufficient if it has multiple collections. Otherwise at least one
+five-case schema and one other schema must have multiple collections.
+The result is conditional. Actual schema bytes, rights and protected
+grading still matter. The software pool remains at 48 reproduced cases.
+C13 stays open, comparisons are paused, and Waza is excluded.
+
 **November 18. Conan's first protected reference settled without a grade.**
 The [Conan receipt audit](../../reports/toolkit-v2/c13/completion-20261116/conan-contained-runtime-20261118.json)
 verifies 19 active dependency requirements in the retained image and
