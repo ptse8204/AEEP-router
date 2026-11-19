@@ -1,5 +1,24 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 19. Locify's publisher source and tokenizer data are staged.**
+The [runtime source audit](../../reports/toolkit-v2/c13/completion-20261116/rebench-runtime-source-readiness-20261119.json)
+verifies 463 package entries against LiteLLM's Git tree at `fb523b79`
+and retains both checksum-pinned Tiktoken vocabularies. The archive is
+the publisher's source for 1.50.1. The locked wheel remains unavailable.
+Pin the build backend and dependency closure before contained execution.
+A read-only replay passed and rejected two altered inputs.
+
+EOS's exact direct pins are mutually compatible in the published metadata.
+Twenty-one of 37 first-level dependency names now have checksum-verified
+retained wheel candidates. Deeper requirements and the ARM64 system
+closure remain open. No protected grader or model ran.
+
+The host has about 50.27 GiB usable. Optype's exact check is still approved
+and unstarted. Optional review `ce0f1a3b` targets only the November 18 local
+Time Machine snapshot. Its recoverable bytes are unknown. The previous
+storage approval preserved the snapshot. Comparisons stay paused and
+Waza stays excluded.
+
 **November 19. The approved cleanup completed and the Optype repeat is queued.**
 [Group `b72ac722` results](../../reports/toolkit-v2/c13/completion-20261116/rebench-storage-and-carriers-20261119.json)
 show 2,581 obsolete worker copies removed and all preserved evidence

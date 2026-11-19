@@ -1,5 +1,10 @@
 # 0.8 plan coverage and remaining work
 
+[C13 runtime source audit](../toolkit-v2/c13/completion-20261116/rebench-runtime-source-readiness-20261119.json)
+binds the published LiteLLM source and two tokenizer vocabularies. EOS
+has 21 retained first-level dependency candidates verified against
+publisher checksums. Optype remains approved and storage-blocked.
+
 [C13 cleanup and carrier evidence](../toolkit-v2/c13/completion-20261116/rebench-storage-and-carriers-20261119.json)
 records completed fixture cleanup, Optype approval and the measured storage
 blocker. Locify's source-addition draft passes 119 focused tests and the real
