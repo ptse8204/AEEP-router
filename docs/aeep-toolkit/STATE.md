@@ -1,5 +1,27 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 19. Locify's retained runtime passes offline imports.**
+The [runtime readback](../../reports/toolkit-v2/c13/completion-20261116/locify-native-runtime-20261119.json)
+binds two source-built wheels, all 65 exact packages, both retained
+images and four settled operations. The ARM64 smoke imported eight
+modules and checked Git and local tokenizer behavior. The protected
+reference and original still need the source-bound repository recipe.
+All existing Docker resources remain. Comparisons stay paused and
+Waza stays excluded.
+
+**November 19. The approved snapshot removal and Optype repeat settled.**
+The [readback](../../reports/toolkit-v2/c13/completion-20261116/optype-and-storage-20261119.json)
+verifies that exactly the approved November 18 snapshot was removed.
+Usable space rose from 49.93 to 62.17 GiB. External backups and existing
+Docker resources were preserved. Optype's published repair scored 1/1.
+The original-only check scored 0/1 with 404 passing preservation tests
+and 12 missing issue tests. The canonical observation hash, receipt,
+and one settled operation are retained. No formal assignment was made.
+
+The 43 missing EOS artifacts passed byte and identity checks. Native
+installation and protected grading remain open. Comparisons stay
+paused and Waza stays excluded.
+
 **November 19. EOS's full instructions and both intake drafts are verified locally.**
 The [combined intake draft](../../reports/toolkit-v2/c13/completion-20261116/combined-intake-draft-20261119.json)
 keeps all 11,030 bytes of EOS's publisher statement in both prepared

@@ -1,5 +1,14 @@
 # 0.8 plan coverage and remaining work
 
+[C13 Locify runtime](../toolkit-v2/c13/completion-20261116/locify-native-runtime-20261119.json)
+verifies the retained source wheels, offline package closure, tokenizer
+and Git. Protected grades remain open.
+
+[C13 Optype and storage readback](../toolkit-v2/c13/completion-20261116/optype-and-storage-20261119.json)
+verifies the exact snapshot change, the receipt-bound 1/1 and 0/1
+protected pair, and 43 verified EOS artifacts. No formal case was
+assigned and no model ran.
+
 [C13 combined intake draft](../toolkit-v2/c13/completion-20261116/combined-intake-draft-20261119.json)
 tests both prompt profiles on the full EOS statement and combines
 the Locify and document work. Full coverage and protected run

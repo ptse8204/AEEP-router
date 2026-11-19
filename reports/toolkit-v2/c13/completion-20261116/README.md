@@ -2,6 +2,21 @@
 
 ## November 19 handoff
 
+The [protected Optype result](optype-and-storage-20261119.json) pairs
+the published repair's 1/1 with the original's 0/1. The original passed
+404 preservation tests and did not collect the 12 required issue tests.
+Both settled receipts and the earlier failed attempt remain available.
+Removing the single approved local snapshot restored 12.24 GiB.
+The same audit verified all 43 newly acquired EOS artifacts by checksum.
+EOS native installation and grading remain open.
+
+The [Locify runtime check](locify-native-runtime-20261119.json) built
+Fire and LiteLLM locally from their pinned sources and installed all 65
+reviewed packages in a retained offline ARM64 runtime. Eight imports,
+Git and the local tokenizer check passed. The two source-built wheels
+have their own digests. The protected Locify reference and original
+roles remain open.
+
 The [Locify offline intake](locify-offline-intake-20261119.json) verified
 53 new artifacts against publisher checksums and checked 69 active
 dependency requirements from 64 package metadata records. The LiteLLM
@@ -12,8 +27,8 @@ reserve.
 
 Optype's published repair scored 1/1. The saved original observation
 records 404 passing preservation tests and 12 missing issue tests. The
-rejected reply lacks a full response digest. The original-only repeat is
-approved and waits for 52 GiB usable space. The
+rejected reply lacks a full response digest. The approved repeat settled
+with the required digest after space recovered. The
 [EOS dependency plan](eos-runtime-closure-20261119.json) binds the
 18 upstream direct pins, 96 active dependency requirements and 28
 verified retained archives. The remaining 43 downloads total
