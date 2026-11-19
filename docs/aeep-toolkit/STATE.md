@@ -1,5 +1,21 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 19. Reviewed document pack support is ready for full verification.**
+The [implementation draft](../../reports/toolkit-v2/c13/completion-20261116/reviewed-document-pack-draft-20261119.json)
+adds an explicit mixed-source v2 manifest to the existing document CLI.
+Each task binds the exact publisher pin, and its asset-use record binds
+the same pin. Original ExtractBench members keep their pinned bytes and
+roles. The ordinary stage command verified the real USDA PDF and kept
+the expected output and verifier outside the public archive.
+
+All 53 focused tests, compileall, schema, lint and type checks passed.
+Focused coverage of three modules was 76 percent. Full regression,
+project coverage, packaging and current stack rebinding remain pending.
+The exact patch is retained and applies cleanly. The production source
+stays on the verified revision while storage recovery is pending.
+No formal cases or protected executions were added. Group `b72ac722`
+still awaits approval. Comparisons stay paused and Waza stays excluded.
+
 **November 19. One exact storage and Optype review is ready.**
 [Group `b72ac722`](../../reports/toolkit-v2/c13/completion-20261116/retired-worker-storage-and-optype-review-20261119.json)
 binds 2,581 verified old synthetic SQLite worker copies to their

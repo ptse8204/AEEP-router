@@ -1,5 +1,10 @@
 # 0.8 plan coverage and remaining work
 
+[C13 reviewed-document draft](../toolkit-v2/c13/completion-20261116/reviewed-document-pack-draft-20261119.json)
+passes ordinary CLI staging on the real USDA input and 53 focused tests.
+Full source and protected grading gates remain open. The draft is staged
+separately from the currently verified implementation.
+
 [C13 storage and Optype review](../toolkit-v2/c13/completion-20261116/retired-worker-storage-and-optype-review-20261119.json)
 groups one exact cleanup scope with the unchanged original-only
 grader review. The selected files are verified synthetic worker
