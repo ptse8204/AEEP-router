@@ -1,5 +1,20 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 19. EOS's full instructions and both intake drafts are verified locally.**
+The [combined intake draft](../../reports/toolkit-v2/c13/completion-20261116/combined-intake-draft-20261119.json)
+keeps all 11,030 bytes of EOS's publisher statement in both prepared
+worker prompts. The original public archive and the protected overlay
+retain separate hashes. Locify's addition support and the reviewed
+document packs are part of the same patch. The combined run passed
+165 focused tests. Selected module coverage was 75 percent, below
+the required 80 percent. Full source, package and stack checks remain
+pending.
+
+Optype's approved protected repeat cannot launch below 52 GiB usable.
+The Locify build and EOS intake also need more headroom. Snapshot
+review `ce0f1a3b` remains pending. Comparisons stay paused and Waza stays
+excluded.
+
 **November 19. EOS has an exact metadata and acquisition plan.**
 The [EOS closure](../../reports/toolkit-v2/c13/completion-20261116/eos-runtime-closure-20261119.json)
 preserves all 18 direct pins and validates 96 active requirements

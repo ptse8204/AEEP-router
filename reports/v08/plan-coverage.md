@@ -1,5 +1,10 @@
 # 0.8 plan coverage and remaining work
 
+[C13 combined intake draft](../toolkit-v2/c13/completion-20261116/combined-intake-draft-20261119.json)
+tests both prompt profiles on the full EOS statement and combines
+the Locify and document work. Full coverage and protected run
+acceptance remain pending.
+
 [C13 EOS runtime closure](../toolkit-v2/c13/completion-20261116/eos-runtime-closure-20261119.json)
 validates the upstream direct pins, selected package metadata and
 download sizes. Acquisition, native execution and protected grading

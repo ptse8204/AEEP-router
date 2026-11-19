@@ -18,7 +18,11 @@ approved and waits for 52 GiB usable space. The
 18 upstream direct pins, 96 active dependency requirements and 28
 verified retained archives. The remaining 43 downloads total
 184,826,759 bytes, including three Conda Forge system packages.
-Native imports, instruction transport and protected grading remain open.
+The [combined intake draft](combined-intake-draft-20261119.json) carried
+EOS's full 11,030-byte statement through ordinary prompt preparation
+for both arms. It kept the protected overlay separate and passed 165
+focused tests. The selected modules measured 75 percent coverage.
+Full verification, native imports and protected grading remain open.
 
 C13 remains open. Comparisons stay paused and Waza stays excluded.
 
