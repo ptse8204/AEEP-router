@@ -1,5 +1,38 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 19. Recovery group `67a93f4c` has settled.**
+The [reconciled recovery](../../reports/toolkit-v2/c13/completion-20261116/recovery-67a93f4c-result-20261119.json)
+records the exact approval, receipt checks and protection against replay.
+Removing only the November 17 local snapshot recovered 17.37 GiB.
+The fresh space check cleared 52 GiB. The November 18 local snapshot
+remains. External backups and existing Docker resources were preserved.
+
+All 11 approved offline operations settled across the exact member
+scopes. Their measured intervals total 41.94 seconds against 415
+reserved. The read-only audit found each owned container absent.
+OpenTelemetry, Braindrop, Dissect.cstruct and Mockito each reproduced
+the expected 1/1 reference and 0/1 control. The software pool now has
+54 reproduced cases across 33 repositories. The optimistic shortfall
+for two formal cohorts is 192. No formal cases were assigned.
+
+The PyGLS reference hit the child timeout during a threaded-handler
+test. Its diagnostic records the last required test privately.
+Advanced Alchemy missed one issue assertion and three preservation
+assertions. Conan collection reported a missing import, with the module
+name redacted by the approved diagnostic. These three runs supplied
+diagnostic evidence without a protected grade.
+
+The SWE-rebench intake verified six exact ranges. Three leads have both
+required test groups, with 343, 416 and 2 test identities respectively.
+The fourth lacks a required group. ExtractBench recovered all five
+pending schemas. Its 71 verified schemas now support a balanced
+metadata layout when the linked annual source family is eligible.
+Holding that family leaves at most 113 multiple-collection slots
+against a minimum of 122, even with unmeasured compression.
+Verify exact PDF rights and source identity before relying on those
+annual slots. Continue protected source and verifier preparation for the
+three software leads. Comparisons stay paused and Waza is excluded.
+
 **November 18. The full software pool is bound to its grader carriers.**
 The [carrier audit](../../reports/toolkit-v2/c13/completion-20261116/protected-carrier-coverage-20261118.json)
 maps all 102 protected receipts for 50 reproduced cases to 12 retained

@@ -1,5 +1,13 @@
 # 0.8 plan coverage and remaining work
 
+[C13 recovery `67a93f4c`](../toolkit-v2/c13/completion-20261116/recovery-67a93f4c-result-20261119.json)
+settled all 11 offline operations with canonical receipts and owned
+container cleanup verified. Four more protected pairs passed, bringing
+the software pool to 54 cases across 33 repositories. The intake
+verified both required test groups for three new leads and recovered
+the five unresolved ExtractBench schemas. Formal eligibility and live
+evaluation remain open.
+
 The [C13 carrier audit](../toolkit-v2/c13/completion-20261116/protected-carrier-coverage-20261118.json)
 maps 102 protected receipts across all 50 reproduced cases. The leading
 shared image has four exact-image cases and 43 with matching ordered
