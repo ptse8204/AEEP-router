@@ -1,5 +1,25 @@
 # C13 beta handoff and remaining evidence
 
+## November 19 handoff
+
+The [Locify offline intake](locify-offline-intake-20261119.json) verified
+53 new artifacts against publisher checksums and checked 69 active
+dependency requirements from 64 package metadata records. The LiteLLM
+publisher source and tokenizer data are staged. Fire and LiteLLM still
+need contained source builds. The existing wheel members alone expand
+to about 351 MiB, more than the current headroom above the 50 GiB host
+reserve.
+
+Optype's published repair scored 1/1. The saved original observation
+records 404 passing preservation tests and 12 missing issue tests. The
+rejected reply lacks a full response digest. The original-only repeat is
+approved and waits for 52 GiB usable space. The
+[EOS dependency audit](rebench-runtime-source-readiness-20261119.json)
+verifies 21 retained first-level dependency candidates. Both its deeper
+dependency closure and contained grader runs remain open.
+
+C13 remains open. Comparisons stay paused and Waza stays excluded.
+
 ## November 18 handoff
 
 The [file-backed instruction mode](document-archive-instruction-verification-20261118.json)

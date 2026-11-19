@@ -1,5 +1,9 @@
 # 0.8 plan coverage and remaining work
 
+[C13 Locify offline intake](../toolkit-v2/c13/completion-20261116/locify-offline-intake-20261119.json)
+pins 53 new files and verifies package metadata. The remaining isolated
+builds and the already approved Optype repeat need usable storage.
+
 [C13 runtime source audit](../toolkit-v2/c13/completion-20261116/rebench-runtime-source-readiness-20261119.json)
 binds the published LiteLLM source and two tokenizer vocabularies. EOS
 has 21 retained first-level dependency candidates verified against

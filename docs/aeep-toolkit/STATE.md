@@ -1,5 +1,18 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 19. Locify's exact public package intake is complete.**
+The [offline intake](../../reports/toolkit-v2/c13/completion-20261116/locify-offline-intake-20261119.json)
+verified 53 artifacts and 69 active dependency requirements from
+64 package records. The remaining builds use staged Fire and LiteLLM
+sources. Wheel member sizes alone exceed the available headroom above
+the 50 GiB host reserve. Usable space remains below Optype's 52 GiB floor.
+
+The saved Optype original receipt has no full response digest. Its
+protected observation counts stay available at their original scope.
+The approved original-only repeat stays unstarted. The optional
+snapshot review `ce0f1a3b` remains unapproved. Comparisons stay paused
+and Waza stays excluded.
+
 **November 19. Locify's publisher source and tokenizer data are staged.**
 The [runtime source audit](../../reports/toolkit-v2/c13/completion-20261116/rebench-runtime-source-readiness-20261119.json)
 verifies 463 package entries against LiteLLM's Git tree at `fb523b79`
