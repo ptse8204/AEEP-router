@@ -1,5 +1,22 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 19. A public USDA document has an exact reference.**
+The [WASDE calibration](../../reports/toolkit-v2/c13/completion-20261116/usda-wasde-reference-calibration-20261119.json)
+matches the November 2026 PDF and XML on 32 rows and all 160 numeric
+cells across the world and U.S. grain tables. The public three-file ZIP
+is 952,063 bytes and passes the existing document archive projection.
+The XML and expected answers remain outside the worker input. Four
+local controls reject changed data, missing rows, reordered rows
+and incorrect data types.
+
+The ordinary `stage-document` CLI still requires the pinned
+ExtractBench pack. A reviewed external corpus binding and equivalent
+protected grading must be verified before using a USDA task in the
+formal workflow. The calibration contributes zero formal cases and
+zero model or protected grader calls. The 52 GiB launch floor and
+Optype approval remain pending. Comparisons stay paused and Waza
+stays excluded.
+
 **November 19. ExtractBench's annual disclosures remain held.**
 The [source review](../../reports/toolkit-v2/c13/completion-20261116/extractbench-disclosure-source-review-20261119.json)
 links the 18 publisher inputs to California's gubernatorial tax

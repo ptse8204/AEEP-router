@@ -1,5 +1,10 @@
 # 0.8 plan coverage and remaining work
 
+[C13 USDA calibration](../toolkit-v2/c13/completion-20261116/usda-wasde-reference-calibration-20261119.json)
+matched 32 rows across two tables to the publisher XML and verified
+the existing public ZIP projection. A reviewed external corpus path
+and protected grade remain open. No formal case was assigned.
+
 [C13 document source review](../toolkit-v2/c13/completion-20261116/extractbench-disclosure-source-review-20261119.json)
 keeps 18 California gubernatorial tax-disclosure inputs on hold and
 records exact publisher metadata for nine aggregate statistical release

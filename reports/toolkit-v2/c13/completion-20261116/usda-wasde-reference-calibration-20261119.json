@@ -1,0 +1,92 @@
+{
+  "schema_version": "aeep.c13.usda-wasde-reference-calibration.v1",
+  "previous_commit": "8a658035",
+  "calibration_result": {
+    "path": ".aeep/completion-20261116/wasde-reference-calibration-20261119/result.json",
+    "sha256": "20988114ec94cbf76f887be2bd48ab714404a91f6987da093c63432c492a18b9"
+  },
+  "calibration_driver": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/prepare_usda_wasde_reference.py",
+    "sha256": "645aeeac05dd01edbd49e1fe90ed41f44731d0f0352eb71ce32075bb2ed33b91"
+  },
+  "external_corpus_scope": "USDA World Agricultural Outlook Board release 677, printed page 8 World and United States grain supply and use",
+  "publisher_listing": "https://esmis.nal.usda.gov/publication/world-agricultural-supply-and-demand-estimates",
+  "published_copyright_statement": "https://www.nal.usda.gov/web-policies-and-important-links",
+  "publisher_metadata_rights_observation": "NAL generally allows distribution of public-domain content and lists third-party exceptions. Case-specific rights review has not been registered.",
+  "document_tool": {
+    "path": "/usr/local/Cellar/poppler/25.01.0/bin/pdftotext",
+    "sha256": "7d507ea2df5ce2b8eac1f09ee085c88b2c3cce7a7c5687eef60acfeeb22184a2",
+    "version": "pdftotext version 25.01.0"
+  },
+  "visual_check": "Printed page 8 rendered locally. Two visible tables, each with four commodities and four periods. Filler text was present only in PDF text extraction and is excluded.",
+  "retained_protected_reference": {
+    "path": ".aeep/completion-20261116/wasde-reference-calibration-20261119/protected-reference.json",
+    "sha256": "6b9a724e01d5654a574ba2cfa7424f85850c3a1ccd67fa1d97405a3a0b25bdfc"
+  },
+  "retained_schema": {
+    "path": ".aeep/completion-20261116/wasde-reference-calibration-20261119/schema.json",
+    "sha256": "464a57fd6a3c63a3beea398562159e7364ec568a71cf7e4a727e3bdae968a1d8"
+  },
+  "retained_draft_instruction": {
+    "path": ".aeep/completion-20261116/wasde-reference-calibration-20261119/instruction.md",
+    "sha256": "8ead21c317fca0177a6ac0ea71b26ce1541dafdd89f1bdbaa7201d647fda1e28"
+  },
+  "checks": {
+    "reference_correct": true,
+    "different_numeric_cell_rejected": true,
+    "missing_row_rejected": true,
+    "row_reorder_rejected": true,
+    "wrong_value_type_rejected": true,
+    "generic_document_archive_projection_verified": true
+  },
+  "formal_workflow_gap": {
+    "stage_document_cli_requires_pinned_extractbench_pack": true,
+    "new_corpus_relabelled_as_extractbench": false,
+    "native_protected_grader_run": false,
+    "same_formal_grading_and_cohort_contract_verified": false,
+    "provider_disclosure_authorized": false
+  },
+  "host_free_bytes_at_local_verification": 53515702272,
+  "publisher_release": "USDA WASDE-677 November 2026",
+  "sources": {
+    "https://esmis.nal.usda.gov/sites/default/release-files/796142/wasde1126.pdf": {
+      "bytes": 1015158,
+      "sha256": "c9d63b4b07dd48626ebf4bb5ab57bd52046f11cd5d6c968043fefd5e3283bcc2"
+    },
+    "https://esmis.nal.usda.gov/sites/default/release-files/796142/wasde1126.xml": {
+      "bytes": 2052149,
+      "sha256": "c285bbba0e9228dfa91f255cdbdacc7612718162d264fe09fe53050ce016780a"
+    }
+  },
+  "row_counts": {
+    "world": 16,
+    "united_states": 16
+  },
+  "numeric_cells_matched": 160,
+  "protected_reference_sha256": "6b9a724e01d5654a574ba2cfa7424f85850c3a1ccd67fa1d97405a3a0b25bdfc",
+  "public_transport": {
+    "bytes": 952063,
+    "sha256": "ac38064b54733872f1273e05f03fcfb33bc32686991955ee2590ed750a5a2796",
+    "public_files": [
+      "environment/document.pdf",
+      "environment/schema.json",
+      "instruction.md"
+    ]
+  },
+  "scope": "local calibration of public source and reference; no protected executor dispatch",
+  "archive_used_pinned_ordinary_extractbench_pack": false,
+  "formal_cases_adopted": 0,
+  "comparisons_paused": true,
+  "waza_excluded": true,
+  "verification": {
+    "new_driver_ruff_passed": true,
+    "source_schema_check_passed": true,
+    "staged_document_lint_files": 72,
+    "staged_offline_links_ok": 1426,
+    "staged_offline_link_errors": 0,
+    "docs_log": {
+      "path": ".aeep/c13-wasde-docs.EXHTis/calibration-docs.log",
+      "sha256": "6f9165cb89560c660e8d405acf09e135046957f968074cbd3c71b8069c07d85f"
+    }
+  }
+}
