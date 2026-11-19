@@ -14,9 +14,11 @@ Optype's published repair scored 1/1. The saved original observation
 records 404 passing preservation tests and 12 missing issue tests. The
 rejected reply lacks a full response digest. The original-only repeat is
 approved and waits for 52 GiB usable space. The
-[EOS dependency audit](rebench-runtime-source-readiness-20261119.json)
-verifies 21 retained first-level dependency candidates. Both its deeper
-dependency closure and contained grader runs remain open.
+[EOS dependency plan](eos-runtime-closure-20261119.json) binds the
+18 upstream direct pins, 96 active dependency requirements and 28
+verified retained archives. The remaining 43 downloads total
+184,826,759 bytes, including three Conda Forge system packages.
+Native imports, instruction transport and protected grading remain open.
 
 C13 remains open. Comparisons stay paused and Waza stays excluded.
 

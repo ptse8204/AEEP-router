@@ -1,5 +1,10 @@
 # 0.8 plan coverage and remaining work
 
+[C13 EOS runtime closure](../toolkit-v2/c13/completion-20261116/eos-runtime-closure-20261119.json)
+validates the upstream direct pins, selected package metadata and
+download sizes. Acquisition, native execution and protected grading
+remain open.
+
 [C13 Locify offline intake](../toolkit-v2/c13/completion-20261116/locify-offline-intake-20261119.json)
 pins 53 new files and verifies package metadata. The remaining isolated
 builds and the already approved Optype repeat need usable storage.

@@ -1,5 +1,18 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 19. EOS has an exact metadata and acquisition plan.**
+The [EOS closure](../../reports/toolkit-v2/c13/completion-20261116/eos-runtime-closure-20261119.json)
+preserves all 18 direct pins and validates 96 active requirements
+in the selected Linux ARM64 Python 3.12 graph. The plan reuses 28
+verified archives. It quotes 184,826,759 bytes for the remaining
+43 archives, including three Conda Forge system packages.
+
+Only package metadata was fetched. Runtime installation, native imports,
+the full instruction transport and both protected grades remain open.
+Optype's approved repeat remains unstarted below 52 GiB usable.
+The existing snapshot review `ce0f1a3b` remains pending. Comparisons stay
+paused and Waza stays excluded.
+
 **November 19. Locify's exact public package intake is complete.**
 The [offline intake](../../reports/toolkit-v2/c13/completion-20261116/locify-offline-intake-20261119.json)
 verified 53 artifacts and 69 active dependency requirements from
