@@ -1,5 +1,20 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 19. The WASDE reference now passes the document recipe protocol.**
+The [binary grade rehearsal](../../reports/toolkit-v2/c13/completion-20261116/wasde-recipe-protocol-20261119.json)
+reuses the ordinary v7 grader envelope. The publisher-cross-checked
+reference scored 1/1. Eight incorrect submissions scored 0/1, including
+changed row order. Three source or input mismatches stopped without a
+grade. A contained run still needs the rebuilt draft manifest, the exact
+asset-use review and a pinned grader runtime. No formal case was assigned.
+
+For the three SWE-rebench leads, both required Locify tests import the
+real LiteLLM counter at collection. Dropping LiteLLM would change the
+protected check. EOS still needs a verified ARM64 runtime. Optype's
+original-only repeat remains unstarted. Group `b72ac722` and 52 GiB
+usable host space are still required. Comparisons stay paused and Waza
+stays excluded.
+
 **November 19. Reviewed document pack support is ready for full verification.**
 The [implementation draft](../../reports/toolkit-v2/c13/completion-20261116/reviewed-document-pack-draft-20261119.json)
 adds an explicit mixed-source v2 manifest to the existing document CLI.

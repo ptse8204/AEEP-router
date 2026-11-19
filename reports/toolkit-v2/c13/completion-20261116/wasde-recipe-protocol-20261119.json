@@ -1,0 +1,130 @@
+{
+  "schema_version": "aeep.c13.wasde-recipe-protocol-evidence.v1",
+  "parent": "ac136f12",
+  "wasde_rehearsal": {
+    "path": ".aeep/completion-20261116/wasde-recipe-protocol-20261119/result.json",
+    "sha256": "9bde58a562bbefdddf390e689ae001e3d55698c96bdbba26346f925f10c3832d"
+  },
+  "recipe_preparation": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/prepare_wasde_recipe.py",
+    "sha256": "33019274613f68e5bdc8cc57c5e9df6a99b0118da3b8364166c83fb8625d847b"
+  },
+  "metric": "ordered_json_exact_match",
+  "observations": {
+    "exact_reference": {
+      "score": 1.0,
+      "valid": true,
+      "reason": null
+    },
+    "different_group_key_order": {
+      "score": 1.0,
+      "valid": true,
+      "reason": null
+    },
+    "wrong_cell": {
+      "score": 0.0,
+      "valid": false,
+      "reason": "inexact_extraction"
+    },
+    "missing_row": {
+      "score": 0.0,
+      "valid": false,
+      "reason": "inexact_extraction"
+    },
+    "row_order_changed": {
+      "score": 0.0,
+      "valid": false,
+      "reason": "inexact_extraction"
+    },
+    "wrong_value_type": {
+      "score": 0.0,
+      "valid": false,
+      "reason": "inexact_extraction"
+    },
+    "duplicate_property": {
+      "score": 0.0,
+      "valid": false,
+      "reason": "invalid_submission"
+    },
+    "nonfinite_json": {
+      "score": 0.0,
+      "valid": false,
+      "reason": "invalid_submission"
+    },
+    "malformed_base64": {
+      "score": 0.0,
+      "valid": false,
+      "reason": "invalid_submission"
+    },
+    "malformed_utf8": {
+      "score": 0.0,
+      "valid": false,
+      "reason": "invalid_submission"
+    }
+  },
+  "infrastructure_errors_without_grade": [
+    "different_truth",
+    "different_archive",
+    "reference_drift"
+  ],
+  "reference_protocol_round_trip": true,
+  "checks": {
+    "scored_protocol_cases": 10,
+    "infrastructure_rejections": 3,
+    "reference_calls": 1,
+    "ruff_passed": true,
+    "schema_check_passed": true,
+    "draft_patch_applies": true,
+    "documentation": {
+      "linted_files": 72,
+      "links_ok": 1429,
+      "errors": 0,
+      "path": ".aeep/c13-wasde-protocol-docs.gpofd5wa/wasde-docs.log",
+      "sha256": "51ca35e1e441a05549a055e7f96e02cc1f1becb75a5d546c9c2d060a1938c365"
+    }
+  },
+  "source_scope": "The production toolkit, registry, and grader thresholds are unchanged.",
+  "next_document_gate": [
+    "restage document pack using the actual guest as its protected verifier",
+    "bind reviewed protected runtime and record case-specific asset rights"
+  ],
+  "three_software_leads": {
+    "optype": {
+      "group": {
+        "path": ".aeep/completion-20261116/retired-coverage-copies-20261119/approval-bundle.json",
+        "sha256": "b72ac7228d214678fc7f1616e424df0ae70e478cb161249e34ca911f626544ae"
+      },
+      "required_host_usable_bytes": 55834574848,
+      "usable_bytes_observed_at_record": 54194262016,
+      "original_repeat_started": false
+    },
+    "locify": {
+      "reference_archive": {
+        "path": ".aeep/completion-20261116/full-rebench-three-leads-20261119/retained-reference-assets/ryanhoangt__locify-8/reference-with-verifier.tar.gz",
+        "sha256": "1fca4e57929896644a5ae9cb323615174edd44ddb15fd86894890490d0230546",
+        "bytes": 98089,
+        "files": 49
+      },
+      "required_issue_and_preservation_selectors_confirmed": 2,
+      "static_import_chain": [
+        "tests/integration/test_repo_map_strategy.py",
+        "locify/utils/llm.py",
+        "litellm.token_counter"
+      ],
+      "conclusion": "Both required tests import the real token counter at collection. Omitting or stubbing the unavailable LiteLLM distribution would alter the check."
+    },
+    "eos": {
+      "reference_archive": {
+        "path": ".aeep/completion-20261116/full-rebench-three-leads-20261119/retained-reference-assets/Akkudoktor-EOS__EOS-459/reference-with-verifier.tar.gz",
+        "sha256": "d5d56b28efbb561d3c9d114c4ed5e42dab2619cfed96453ffaf52ea0e99e9f6b",
+        "bytes": 1617130,
+        "files": 159
+      },
+      "conclusion": "The ARM64 timezonefinder distribution and transitive closure remain unverified."
+    }
+  },
+  "new_protected_dispatches": 0,
+  "formal_assignments": 0,
+  "comparisons_paused": true,
+  "waza_excluded": true
+}
