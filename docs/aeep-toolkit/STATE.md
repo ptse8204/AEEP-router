@@ -1,5 +1,26 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 19. ExtractBench's annual disclosures remain held.**
+The [source review](../../reports/toolkit-v2/c13/completion-20261116/extractbench-disclosure-source-review-20261119.json)
+links the 18 publisher inputs to California's gubernatorial tax
+disclosure family. Four filenames match the current agency index.
+The exact PDF bytes remain unverified against agency copies. The
+state's consent form covers redacted publication on its own site.
+It supplies no C13 asset-use or provider-disclosure grant. The private
+hold list pins all 18 inputs without retrieving any returns.
+
+With that family held, the remaining catalog has 108 multiple-collection
+slots under the stored ZIP screen and at most 113 with favorable
+unmeasured compression. That leaves a gap of 14 or nine against the
+122 minimum, before further eligibility checks. Nine agency statistical
+release leads span distinct subjects. Four PDF sizes fall below the
+existing ZIP limit before adding the other required files. Their
+reference mapping, rights, compression and protected grades remain open.
+
+No formal case was assigned and no grader or model ran. Comparisons
+stay paused and Waza stays excluded. The unstarted Optype original
+still needs approval `4e679937` and the 52 GiB launch floor.
+
 **November 19. Runtime availability verified for the pending SWE-rebench leads.**
 The [runtime availability audit](../../reports/toolkit-v2/c13/completion-20261116/full-rebench-runtime-availability-20261119.json)
 checks publisher metadata for 70 exact release pins, plus the retained Git

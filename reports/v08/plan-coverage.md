@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+[C13 document source review](../toolkit-v2/c13/completion-20261116/extractbench-disclosure-source-review-20261119.json)
+keeps 18 California gubernatorial tax-disclosure inputs on hold and
+records exact publisher metadata for nine aggregate statistical release
+leads. The document cohort still needs at least nine eligible
+multiple-collection cases. No model, grader or formal assignment ran.
+
 [C13 runtime availability](../toolkit-v2/c13/completion-20261116/full-rebench-runtime-availability-20261119.json)
 identified the unavailable locked LiteLLM distribution for Locify and
 the missing ARM64 timezonefinder wheel for EOS. EOS's reviewed source
