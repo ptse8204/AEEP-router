@@ -1,5 +1,10 @@
 # 0.8 plan coverage and remaining work
 
+[C13 cleanup and carrier evidence](../toolkit-v2/c13/completion-20261116/rebench-storage-and-carriers-20261119.json)
+records completed fixture cleanup, Optype approval and the measured storage
+blocker. Locify's source-addition draft passes 119 focused tests and the real
+source projection. Runtime checks remain open for Locify and EOS.
+
 [C13 WASDE grader rehearsal](../toolkit-v2/c13/completion-20261116/wasde-recipe-protocol-20261119.json)
 checks exact ordered data using the existing v7 reply decoder. The local
 first-party process passed 10 scoring checks and three fail-closed checks.

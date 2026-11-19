@@ -1,5 +1,22 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 19. The approved cleanup completed and the Optype repeat is queued.**
+[Group `b72ac722` results](../../reports/toolkit-v2/c13/completion-20261116/rebench-storage-and-carriers-20261119.json)
+show 2,581 obsolete worker copies removed and all preserved evidence
+matched. Usable host space remained near 50.4 GiB. The November 18
+local snapshot is still present. Optype's exact repeat is approved and
+unstarted. It can run when a fresh check shows 52 GiB usable.
+
+The same report keeps the Locify v7 source-addition draft and its 119
+focused tests. The public archive remains the publisher's original
+source. The reference transport adds one Python module and retains
+both required verifier identities. It excludes a description-only
+`pyproject.toml` edit. Full source verification and the LiteLLM runtime
+remain open. Conda Forge publishes an exact-version ARM64 Python 3.12
+`timezonefinder` build for EOS. Its transitive runtime remains unverified.
+No protected grader calls or model turns started. Comparisons stay paused
+and Waza stays excluded.
+
 **November 19. The WASDE reference now passes the document recipe protocol.**
 The [binary grade rehearsal](../../reports/toolkit-v2/c13/completion-20261116/wasde-recipe-protocol-20261119.json)
 reuses the ordinary v7 grader envelope. The publisher-cross-checked

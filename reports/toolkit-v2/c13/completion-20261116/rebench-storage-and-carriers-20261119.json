@@ -1,0 +1,116 @@
+{
+  "approval": {
+    "cleanup_terminal": true,
+    "group": {
+      "path": ".aeep/completion-20261116/retired-coverage-copies-20261119/approval-bundle.json",
+      "sha256": "b72ac7228d214678fc7f1616e424df0ae70e478cb161249e34ca911f626544ae"
+    },
+    "operator_statement": "Approve, again for the whole c13",
+    "optype_exact_repeat_approved": true
+  },
+  "cleanup": {
+    "allocated_bytes_removed": 3409534976,
+    "finished_without_error": true,
+    "floor_reached": false,
+    "free_after_bytes": 54155530240,
+    "free_before_bytes": 54156816384,
+    "local_data_volume_snapshot": {
+      "name": "com.apple.TimeMachine.2026-11-18-164141.local",
+      "observation": "Snapshot predates this deletion. Referenced blocks may stay allocated.",
+      "purgeable": true,
+      "uuid": "D0DDFF83-B6CB-4372-9D15-D3E2491E677B"
+    },
+    "observed_free_change_bytes": -1286144,
+    "preserved_evidence_verified": true,
+    "removed_count": 2581,
+    "retained_result": {
+      "path": ".aeep/completion-20261116/retired-coverage-copies-20261119/result.json",
+      "sha256": "b6df3cdf46979672fcf25b56461df94d971c77caee105953c8648d3629e140b5"
+    },
+    "review_sha256": "ad599fcc4d450c00c44f98a3d11ccfcbc0113813b900937caeb0607c9454d82b"
+  },
+  "comparisons_paused": true,
+  "eos": {
+    "abi_and_dependencies": [
+      "cffi >=1.15.1,<2",
+      "h3-py >4",
+      "libgcc >=13",
+      "numpy >=1.23,<3",
+      "python >=3.12,<3.13.0a0",
+      "python >=3.12,<3.13.0a0 *_cpython",
+      "python_abi 3.12.* *_cp312"
+    ],
+    "archive": {
+      "bytes": 41931336,
+      "downloaded": false,
+      "sha256": "ef2880631bbaa20685c9667158491365f46ea013a6b5b7ade834e21b92ab06de",
+      "url": "https://conda.anaconda.org/conda-forge/linux-aarch64/timezonefinder-6.5.8-py312hb2c0f52_0.conda"
+    },
+    "execution_compatibility_verified": false,
+    "known_unavailable_archive_lower_bound_bytes_using_this_build": 117525018,
+    "lower_bound_excludes_additional_transitive_dependencies": true,
+    "metadata_sha256": "9547f1b45280291bcdee222a15c1a0049aa300eb01d576cdc179dee34a271e99",
+    "metadata_url": "https://api.anaconda.org/release/conda-forge/timezonefinder/6.5.8"
+  },
+  "formal_assignments": 0,
+  "locify": {
+    "focused_regression": {
+      "path": ".aeep/c13-locify-creations.Dspkqa/pytest-contract.log",
+      "sha256": "f66d37fc3f6225901bb3d920103a8753030c311ca4d7587094feb2e4a29b7779"
+    },
+    "focused_regression_passed": 119,
+    "prior_failure": "Initial test found a changed diagnostic for v1/v2 mismatches. Restored the existing diagnostic and added v7 wording.",
+    "projection_driver": {
+      "path": "reports/toolkit-v2/c13/completion-20261116/stage_locify_creation_contract.py",
+      "sha256": "61546825a77b1113af4fb65e02ce7d4c541947debbd8f50a74bd593392752554"
+    },
+    "remaining": [
+      "Full source and coverage gates before adopting the draft",
+      "Pinned LiteLLM 1.50.1 distribution or a verified publisher-source runtime",
+      "Protected original and reference execution"
+    ],
+    "retained_archive_projection": {
+      "path": ".aeep/completion-20261116/locify-creation-contract-20261119.json",
+      "sha256": "1f4b63559436e58b72a761bd975cc07a49890979253f67fa362aa96a659f7efd"
+    },
+    "source_addition_draft": {
+      "path": ".aeep/c13-locify-creations.Dspkqa/create-files-v7.patch",
+      "sha256": "3bfb0c11b6a1313ef05622eda103f737ca41b91d9807cb0fd771c7dd59540691"
+    },
+    "source_compile_schema_lint_passed": true,
+    "verification": {
+      "coverage_log": {
+        "path": ".aeep/c13-locify-creations.Dspkqa/coverage-report.log",
+        "sha256": "2c3ff9443641cefc10511c05e1dba6640ea02512cef2123e6ecf93876951e795"
+      },
+      "coverage_pytest_log": {
+        "path": ".aeep/c13-locify-creations.Dspkqa/pytest-coverage.log",
+        "sha256": "b90ba8cf084e50723cf1edded3088f838256fd34b9f93a14d165822621c48f29"
+      },
+      "docs": {
+        "path": ".aeep/c13-rebench-carrier-docs.7abngg8l/rebench-docs.log",
+        "sha256": "8c57b19c7dd34754eaa5cdaacb5d18c13bf789ac6d610fb777f9d663d8646cda"
+      },
+      "documents_linted": 72,
+      "focused_branch_coverage_combined_percent": 92,
+      "full_source_and_project_coverage": "pending host headroom and merged patch verification",
+      "offline_links_ok": 1430,
+      "suite_module_percent": 94
+    }
+  },
+  "model_turns": 0,
+  "optype": {
+    "execution_started": false,
+    "fresh_usable_bytes": 54057226240,
+    "host_floor_bytes": 55834574848,
+    "operation_review": {
+      "path": ".aeep/completion-20261116/full-rebench-three-leads-20261119/optype-original-only/operation-review.json",
+      "sha256": "4e6799371a9774e58d7e8eea34733cf24a525d0772e7bb6ad4deaee74031cb6a"
+    },
+    "reserved_operations": 0
+  },
+  "schema_version": "aeep.c13.rebench-storage-and-carrier-progress.v1",
+  "source_parent": "72fa172f",
+  "upstream_grader_invocations_this_turn": 0,
+  "waza_excluded": true
+}
