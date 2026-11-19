@@ -1,5 +1,13 @@
 # 0.8 plan coverage and remaining work
 
+[Three C13 SWE-rebench leads](../toolkit-v2/c13/completion-20261116/full-rebench-three-leads-result-20261119.json)
+now have verified publisher trees and pinned protected inputs. Optype's
+reference passed 416 checks. The original lacked the 12 generated issue
+identities, and the read-only canonical grader returned `missing_test`.
+An original-only repeat is staged. Locify and EOS have verified reference
+archives and unresolved runtime and ordinary-input requirements.
+Comparisons remain paused and the software pool remains at 54.
+
 [C13 recovery `67a93f4c`](../toolkit-v2/c13/completion-20261116/recovery-67a93f4c-result-20261119.json)
 settled all 11 offline operations with canonical receipts and owned
 container cleanup verified. Four more protected pairs passed, bringing

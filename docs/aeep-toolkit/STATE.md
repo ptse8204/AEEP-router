@@ -1,5 +1,31 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 19. Three SWE-rebench source leads advanced.**
+The [source and grader record](../../reports/toolkit-v2/c13/completion-20261116/full-rebench-three-leads-result-20261119.json)
+binds all three archives to their publisher Git trees, notices and exact
+SWE-rebench rows. Two offline Optype invocations settled with zero model
+turns and cash. The reference scored 1/1 with 416 required tests passed.
+The original passed 404 preservation tests. Its 12 issue identities are
+generated from protocols added by the repair and were absent. The batch
+expected failed identities and did not record the original grade. The
+canonical grader rejects the saved required-status projection as
+`missing_test`. That read-only result is separate from the live receipts.
+Review `4e679937` is ready for one original-only invocation, without
+replaying the reference, subject to approval for the terminal repeat.
+
+Locify and EOS now have hash-bound original and repaired verifier archives.
+Locify's repair adds a module outside the ordinary existing-file patch
+contract. Of 65 locked Linux ARM64 dependencies, 13 exact wheels are
+retained, and the Fire pin has no matching wheel in the publisher lock.
+Git and offline tokenizer data also need a reviewed runtime. EOS has
+two cached filenames for its 18 exact direct runtime and verifier pins
+and still needs a complete isolated dependency closure. The canonical
+input cannot carry its 11,028-character statement. Its grader projection
+omits only the publisher's forbidden `.env` file and retains all 343
+identities. The effect of that omission on runtime remains unverified.
+No new protected pairs were admitted. The software pool remains at 54.
+Comparisons remain paused and Waza remains excluded.
+
 **November 19. Recovery group `67a93f4c` has settled.**
 The [reconciled recovery](../../reports/toolkit-v2/c13/completion-20261116/recovery-67a93f4c-result-20261119.json)
 records the exact approval, receipt checks and protection against replay.
