@@ -1,0 +1,343 @@
+{
+  "schema_version": "aeep.c13.rebench-three-leads-progress.v1",
+  "optype_evidence": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/optype-and-storage-20261119.json",
+    "sha256": "9c09e740bfc7cc6e5fb490926360f26099eab0d41a946068c1514aa3ef64d6d7"
+  },
+  "locify_protected": {
+    "scope": {
+      "path": ".aeep/completion-20261116/c13-locify-protected-pair-20261119/operation-review.json",
+      "sha256": "be153d3260b9ed1ea7fdc1e1bb7471fd69ea8159803513768d44a573c0895526"
+    },
+    "result": {
+      "path": ".aeep/completion-20261116/c13-locify-protected-pair-20261119/execution/result.json",
+      "sha256": "754a74664fb9b5def8b339cce229fd203e4df4e3891171bd0f32540d3ba1f9f8"
+    },
+    "ledger": {
+      "path": ".aeep/completion-20261116/c13-locify-protected-pair-20261119/execution/ledger.json",
+      "sha256": "fc97c732ae541f81aa6387b4cfa6cdce89de0fba196c6972aaf7a09e2e0fa4aa"
+    },
+    "charges": [
+      {
+        "receipt": "rcpt_a6f076565e8045efa65461a807680f05",
+        "operation": "c13-locify-protected-pair-20261119:ryanhoangt__locify-8:reference",
+        "execution_success": false,
+        "observed_seconds": 0.4283950000535697,
+        "reserved_seconds": 35.0
+      }
+    ],
+    "reference_grade": null,
+    "original_started": false,
+    "launcher_root_cause": "The ordinary Python 3.13 worker failed to import pydantic in the retained image.",
+    "independent_launcher_observation": {
+      "python": [
+        3,
+        13
+      ],
+      "present": {
+        "pydantic": false,
+        "psutil": false,
+        "jsonschema": false,
+        "rfc8785": false,
+        "cryptography": false,
+        "httpx": false,
+        "yaml": false,
+        "opentelemetry": false
+      },
+      "missing_module": "pydantic",
+      "worker_import": false
+    }
+  },
+  "eos_protected": {
+    "scope": {
+      "path": ".aeep/completion-20261116/c13-eos-protected-pair-20261119/operation-review.json",
+      "sha256": "0632df3afcde084361dd72b0d88b6e852a3eb275b33fba66871fc9132011d425"
+    },
+    "result": {
+      "path": ".aeep/completion-20261116/c13-eos-protected-pair-20261119/execution/result.json",
+      "sha256": "0939a878a8c49949a81bda762e33123efaeca4414b9ebb0c3e0e80bcf7169af0"
+    },
+    "ledger": {
+      "path": ".aeep/completion-20261116/c13-eos-protected-pair-20261119/execution/ledger.json",
+      "sha256": "b1387217aa79f6fb5ffa2fbb6eaf4111b2c616f737678f377e82ec65cd865132"
+    },
+    "charges": [
+      {
+        "receipt": "rcpt_ce4690a7b22a4515b847aca1bdd390d7",
+        "operation": "c13-eos-protected-pair-20261119:Akkudoktor-EOS__EOS-459:reference",
+        "execution_success": false,
+        "observed_seconds": 10.368720333091915,
+        "reserved_seconds": 95.0
+      }
+    ],
+    "reference_grade": null,
+    "original_started": false,
+    "required_status_counts": {
+      "FAILED": 7,
+      "PASSED": 276,
+      "MISSING": 60
+    },
+    "failed_test_ids": [
+      "tests/test_class_optimize.py::test_optimize[optimize_input_1.json-optimize_result_1.json-3]",
+      "tests/test_class_ems.py::test_simulation",
+      "tests/test_class_ems_2.py::test_simulation",
+      "tests/test_class_optimize.py::test_optimize[optimize_input_2.json-optimize_result_2.json-3]",
+      "tests/test_doc.py::test_openapi_md_current",
+      "tests/test_elecpriceakkudoktor.py::test_cache_integration",
+      "tests/test_elecpriceakkudoktor.py::test_key_to_array_resampling"
+    ],
+    "unmatched_unclosed_parameter_ids": 60,
+    "protected_observations": {
+      "path": ".aeep/completion-20261116/c13-eos-protected-pair-20261119/execution/observations.json",
+      "sha256": "c4163fdf6001d0b55d0ed08575268bde0c1a16f79ac594d32dfb071c2c7ef6b5"
+    },
+    "protected_response_digest": "c01f9bb35068b79a85b325b28b3c0ab7a9cbd87b98121d0b26183a2923088ad8",
+    "interpretation": "The publisher row has 60 unclosed parameter IDs. The reference also returned seven explicit failures. No score was issued."
+  },
+  "eos_native": {
+    "scope": {
+      "path": ".aeep/completion-20261116/c13-eos-native-runtime-20261119/operation-review.json",
+      "sha256": "e264e496495f86b49ff9e462e48e885bedf3617f77c73e43db1930f945f59db9"
+    },
+    "result": {
+      "path": ".aeep/completion-20261116/c13-eos-native-runtime-20261119/result.json",
+      "sha256": "2f8cb60c940a38d4b3cabb9e4388e74e6b4604c1f6b1b721fbfc216d1c8f7489"
+    },
+    "image": "sha256:acdc208c6ab2481e5d014a8f6f91e8c6a672b9708e9c3c32d728a8e3b08a961e",
+    "published_version_checks": 68,
+    "successful_native_imports": 14,
+    "timezone_lookup": true,
+    "charges": [
+      {
+        "stage": "offline-build",
+        "receipt": "rcpt_0e3eedbf44824efaba28d27af811de30",
+        "elapsed_seconds": 22.110426167026162,
+        "reserved_seconds": 355.0,
+        "operation_evidence_ref": "f8bd055cb41106905477b4c4daf34f8ace18bec2bb552b7249606823a38a75dc"
+      },
+      {
+        "stage": "offline-import-probe",
+        "receipt": "rcpt_b8ea98ab3c8e4112b94f6d707cbe960b",
+        "elapsed_seconds": 3.246365249855444,
+        "reserved_seconds": 105.0,
+        "operation_evidence_ref": "0b8cb5431f603d152c0ff092c1d936fd84f859f21060c1f93b626955ccea5343"
+      }
+    ]
+  },
+  "launcher_smoke": {
+    "scope": {
+      "path": ".aeep/completion-20261116/c13-repository-launcher-smoke-20261119/operation-review.json",
+      "sha256": "175c27df4d9cc910cd88e8e9b00731f3f96c38c9c5d5f13cbe8becb7ce998f04"
+    },
+    "result": {
+      "path": ".aeep/completion-20261116/c13-repository-launcher-smoke-20261119/result.json",
+      "sha256": "dd58629d0ff3c88837461ad9e6803de34fbe1da14a4984c81026031e70f955d2"
+    },
+    "observations": {
+      "locify": {
+        "python": [
+          3,
+          13
+        ],
+        "present": {
+          "pydantic": false,
+          "psutil": false,
+          "jsonschema": false,
+          "rfc8785": false,
+          "cryptography": false,
+          "httpx": false,
+          "yaml": false,
+          "opentelemetry": false
+        },
+        "missing_module": "pydantic",
+        "worker_import": false
+      },
+      "eos": {
+        "python": [
+          3,
+          13
+        ],
+        "present": {
+          "pydantic": true,
+          "psutil": true,
+          "jsonschema": true,
+          "rfc8785": true,
+          "cryptography": true,
+          "httpx": true,
+          "yaml": true,
+          "opentelemetry": true
+        },
+        "worker_import": true
+      }
+    },
+    "charges": [
+      {
+        "stage": "eos",
+        "receipt": "rcpt_8af4e4c3de5648eaa5184603a0094909",
+        "elapsed_seconds": 1.0158270420506597,
+        "reserved_seconds": 30.0,
+        "operation_evidence_ref": "f1d0acf9c144b160fdf016774f9984f94b70cc7384f9d86f1635792ca249f73a"
+      },
+      {
+        "stage": "locify",
+        "receipt": "rcpt_3196f1f39d4e4f1c96fe0fefa5140327",
+        "elapsed_seconds": 0.3395892500411719,
+        "reserved_seconds": 30.0,
+        "operation_evidence_ref": "eab89918e0735c71e92124d4aacca428cdb6e397909971a262b14f1aa73bec7f"
+      }
+    ]
+  },
+  "fixture_storage": {
+    "result": {
+      "path": ".aeep/c13-combined-full-verification.4ae1bc40/obsolete-worker-cleanup-result.json",
+      "sha256": "3fc32956bc3ee6f6fb87bedce68eaf568ebb6976f0764641ab82c6a81ca2b48e"
+    },
+    "observed": {
+      "review_sha256": "17ac5b5ddc63c0da30e128dec327db5cd3f7e23cc852e1be23afe21debf2319f",
+      "files_removed": 1859,
+      "allocated_bytes": 2472960000,
+      "free_before_bytes": 53829640192,
+      "free_after_bytes": 56298680320,
+      "snapshots_removed": 0,
+      "docker_resources_removed": 0,
+      "backups_removed": 0,
+      "preserved_verified": 34,
+      "preserved_unchanged": true
+    },
+    "current_free_bytes": 55353778176,
+    "completed_regression_copy_cleanup": {
+      "result": {
+        "path": ".aeep/c13-combined-full-verification.4ae1bc40/plain-regression-cleanup-result.json",
+        "sha256": "11e3f5c5c3f9792f739b4c26159c517304481f7c511eb8adc0e85f8ce0d6f5b5"
+      },
+      "observed": {
+        "review_sha256": "b98536ee1550f8a6b302b8a28d3b28990f6b289a2c03e4ec23ddca20ba62cd46",
+        "files_removed": 2862,
+        "allocated_bytes": 3757301760,
+        "free_before_bytes": 53818802176,
+        "free_after_bytes": 53816926208,
+        "snapshots_removed": 0,
+        "docker_resources_removed": 0,
+        "backups_removed": 0,
+        "preserved_verified": 35,
+        "preserved_unchanged": true
+      }
+    }
+  },
+  "combined_source_verification": {
+    "patch": {
+      "path": ".aeep/c13-combined-full-verification.4ae1bc40/corrected-intake.patch",
+      "sha256": "5b921a0391c091119c77b6fc086c58893a0f9e6050fe83dd55f07c5eda7c6c63"
+    },
+    "regression_log": {
+      "path": ".aeep/c13-combined-full-verification.4ae1bc40/corrected/pytest.log",
+      "sha256": "6cf390a6763dba84e9f06deae8f6468b7cf68ca3fa5c9f496a309ee2673dce77"
+    },
+    "passed": 2196,
+    "skipped": 21,
+    "phases_complete_at_audit": [
+      {
+        "name": "compileall",
+        "exit": 0
+      },
+      {
+        "name": "schemas",
+        "exit": 0
+      },
+      {
+        "name": "ruff",
+        "exit": 0
+      },
+      {
+        "name": "mypy",
+        "exit": 0
+      },
+      {
+        "name": "assessment-policy",
+        "exit": 0
+      },
+      {
+        "name": "pytest",
+        "exit": 0
+      }
+    ],
+    "progress": {
+      "path": ".aeep/c13-combined-full-verification.4ae1bc40/corrected/verification-progress.json",
+      "sha256": "c31e7d088c2d43061f9609c4db1ad35bcb1bb2be41e97d3fd2644751d7dbd833"
+    },
+    "coverage": {
+      "exit_code": -15,
+      "guard": "storage",
+      "last_visible_test_progress_percent": 95,
+      "coverage_report_available": false,
+      "log": {
+        "path": ".aeep/c13-combined-full-verification.4ae1bc40/corrected/coverage-pytest.log",
+        "sha256": "3d67a8a732dc594117ae2c506baad2712ee54ac7dcd1c6b57bd6e763a0160e9d"
+      }
+    },
+    "draft_package": {
+      "result": {
+        "path": ".aeep/c13-combined-full-verification.4ae1bc40/corrected/package-only-result.json",
+        "sha256": "5ce8dd5ed8b2b70f07ec7c73c63bffc42e20ff8ca7072d2d2aba1e1f474863ae"
+      },
+      "exit_code": 0,
+      "argv": [
+        "python3",
+        "-B",
+        "-m",
+        "build",
+        "--no-isolation",
+        "--outdir",
+        "/Users/edwintse/Documents/aeep-toolkit-v2/.aeep/c13-combined-full-verification.4ae1bc40/corrected/dist"
+      ],
+      "artifacts": {
+        "aeep_agent_router-0.8.2-py3-none-any.whl": "0ebadb2fd9b2635e15b6203989aae710f0054352207a72d7a79f054822bb770a",
+        "aeep_agent_router-0.8.2.tar.gz": "2b7541755ed8e28566399e1b52a8a3a95690c2574067988b0a5ccbcf9e50a6a3"
+      },
+      "installed": false,
+      "coverage_used": false
+    },
+    "source_committed": false,
+    "documentation": {
+      "exit_code": 0,
+      "files_linted": 72,
+      "link_errors": 0,
+      "log": {
+        "path": ".aeep/c13-combined-full-verification.4ae1bc40/corrected/docs-linked-assets.log",
+        "sha256": "15bf268194a981f31e1b79d57c515cec201a9136295a2792d6412ed893c77e87"
+      },
+      "earlier_projection_failure": {
+        "path": ".aeep/c13-combined-full-verification.4ae1bc40/corrected/docs-final.log",
+        "sha256": "d069f510bf5cac0da3e18755a09cc6c8e4f6f8c8744c3ceb15fc3c1da473dbb4"
+      },
+      "correction": "Projected four existing link targets into the isolated docs tree without changing their bytes."
+    }
+  },
+  "formal_adoptions": 0,
+  "comparisons_paused": true,
+  "waza_excluded": true,
+  "model_turns": 0,
+  "cash_authority_used_usd": 0,
+  "pending_group": {
+    "review": {
+      "path": ".aeep/completion-20261116/c13-software-lead-corrections-20261119/operation-review.json",
+      "sha256": "c955cbf68ccfd50159db16213de9d02e38932972f0c5fcb7e5ee73dc07e794f0"
+    },
+    "execution_started": false,
+    "preflight_checks_passed": 7,
+    "scope_refs": {
+      "locify": {
+        "path": ".aeep/completion-20261116/c13-locify-ordinary-launcher-correction-20261119/operation-review.json",
+        "sha256": "2fd93efeab781c89b8a70c9490170c9cdb93c03d2cfe37ba66f5fe5716f53915"
+      },
+      "eos": {
+        "path": ".aeep/completion-20261116/c13-eos-protected-diagnostic-20261119/operation-review.json",
+        "sha256": "2ece582b6611fce27fbf5e62993140e98574aa884a7dc742a9383803a2c1e6ce"
+      }
+    },
+    "maximum_operations": 6,
+    "maximum_reserved_seconds": 450,
+    "minimum_free_bytes_for_group": 56908316672,
+    "reuse_prior_charges": true
+  }
+}

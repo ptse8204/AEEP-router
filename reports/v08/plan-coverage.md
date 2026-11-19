@@ -1,5 +1,16 @@
 # 0.8 plan coverage and remaining work
 
+The combined intake draft passed 2,196 tests and built a wheel and
+source distribution. The coverage run stopped at the storage guard
+before producing a report. Group `c955cbf6` covers the two remaining
+protected diagnostics and waits for approval and launch headroom.
+
+[C13 protected run and launcher audit](../toolkit-v2/c13/completion-20261116/rebench-protected-first-attempts-20261119.json)
+settles one reference attempt each for Locify and EOS. Locify's ordinary
+launcher needs a carrier with its Python 3.13 dependencies. EOS passed
+native runtime checks. Seven verifier failures and 60 unmatched upstream
+IDs prevent a protected grade. Both original roles remain unstarted.
+
 [C13 Locify runtime](../toolkit-v2/c13/completion-20261116/locify-native-runtime-20261119.json)
 verifies the retained source wheels, offline package closure, tokenizer
 and Git. Protected grades remain open.

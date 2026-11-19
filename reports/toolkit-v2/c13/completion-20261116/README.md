@@ -2,6 +2,22 @@
 
 ## November 19 handoff
 
+The combined intake draft passed 2,196 regression tests and produced
+a wheel and source distribution. The coverage pass stopped at the
+storage guard and produced no report. Grouped review `c955cbf6` binds
+the Locify launcher correction and exact EOS diagnostics. Seven
+preflight checks passed. The group needs operator approval and 53 GiB
+usable space. It has no model turns, provider disclosure, or downloads.
+
+[Protected-run readback](rebench-protected-first-attempts-20261119.json)
+accounts for the first Locify and EOS reference attempts. The launcher
+smoke identified Locify's missing Pydantic dependency in the ordinary
+Python 3.13 process. EOS has a working ARM64 runtime. Its reference
+collected 276 passing checks, seven failures, and 60 unmatched publisher
+identities. Neither case has a score. Both original-source roles are
+unstarted. A cleanup of verified old pytest copies recovered 2.30 GiB
+and preserved the 34 files bound to the cleanup review.
+
 The [protected Optype result](optype-and-storage-20261119.json) pairs
 the published repair's 1/1 with the original's 0/1. The original passed
 404 preservation tests and did not collect the 12 required issue tests.

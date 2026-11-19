@@ -1,5 +1,35 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 19. The combined intake passed regression and packaging.**
+The [verification and correction audit](../../reports/toolkit-v2/c13/completion-20261116/rebench-protected-first-attempts-20261119.json)
+binds the isolated draft, 2,196 passed tests, 21 skips, and the wheel
+and source distribution. The coverage test pass stopped at 95 percent
+of test progress when storage hit its guard. No coverage report was
+produced. The implementation remains in the verified draft pending
+the coverage checks. The package was built without installation.
+
+Grouped review `c955cbf6` is ready for operator approval. It can add the
+verified launcher to Locify and repeat its protected pair, then collect
+EOS's native IDs and failure sites. Maximum six offline operations and
+450 reserved seconds. The review requires 53 GiB usable before launch.
+A newly created November 19 snapshot is outside the completed November
+18 removal scope. Comparisons stay paused and Waza stays excluded.
+
+**November 19. Both remaining SWE-rebench references produced actionable evidence.**
+The [protected-run audit](../../reports/toolkit-v2/c13/completion-20261116/rebench-protected-first-attempts-20261119.json)
+reconciles both charged attempts from their ledgers. Locify's task imports
+passed on Python 3.12. The ordinary Python 3.13 launcher stopped on missing
+Pydantic. EOS's assembled runtime passed 68 version checks, 14 native
+imports, and a timezone lookup. Its protected reference reported 276
+passing checks, seven failures, and 60 unmatched parameterized identities.
+All 60 unmatched publisher IDs have an unclosed parameter list. Neither
+reference earned a grade. Both original-source roles remain unstarted.
+
+Rebase Locify on the verified ordinary launcher while retaining its
+Python 3.12 environment. Diagnose the seven EOS failures and bind the
+publisher's truncated identities to unique native IDs before scoring.
+C13 stays open. Comparisons remain paused and Waza remains excluded.
+
 **November 19. Locify's retained runtime passes offline imports.**
 The [runtime readback](../../reports/toolkit-v2/c13/completion-20261116/locify-native-runtime-20261119.json)
 binds two source-built wheels, all 65 exact packages, both retained
