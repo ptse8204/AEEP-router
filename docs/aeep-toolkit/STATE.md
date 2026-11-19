@@ -1,5 +1,20 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 19. One exact storage and Optype review is ready.**
+[Group `b72ac722`](../../reports/toolkit-v2/c13/completion-20261116/retired-worker-storage-and-optype-review-20261119.json)
+binds 2,581 verified old synthetic SQLite worker copies to their
+completed November 14 coverage run. The exact scope contains 3.175 GiB
+of allocated blocks. It stops on measured 52 GiB usable space and
+preserves primary databases, logs, all backups, snapshots and Docker
+resources. The retained snapshot is newer than the copies. Shared or
+snapshot-retained blocks may limit the observable gain.
+
+The host reports about 50.57 GiB usable. Optype's existing review can
+dispatch its one original-only offline invocation after explicit group
+approval, fresh space verification and its original hash and expiry
+checks. The group adds no model turns or cash. Both members remain
+unstarted. Comparisons stay paused and Waza stays excluded.
+
 **November 19. A public USDA document has an exact reference.**
 The [WASDE calibration](../../reports/toolkit-v2/c13/completion-20261116/usda-wasde-reference-calibration-20261119.json)
 matches the November 2026 PDF and XML on 32 rows and all 160 numeric

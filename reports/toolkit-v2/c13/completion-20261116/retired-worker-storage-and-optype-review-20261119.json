@@ -1,0 +1,62 @@
+{
+  "group": {
+    "path": ".aeep/completion-20261116/retired-coverage-copies-20261119/approval-bundle.json",
+    "sha256": "b72ac7228d214678fc7f1616e424df0ae70e478cb161249e34ca911f626544ae"
+  },
+  "schema_version": "aeep.c13.retired-worker-copy-and-optype-group.v1",
+  "base_commit": "873b4092",
+  "host_usable_bytes_at_review": 54301392896,
+  "required_host_usable_bytes": 55834574848,
+  "cleanup": {
+    "exact_review": {
+      "path": ".aeep/completion-20261116/retired-coverage-copies-20261119/operation-review.json",
+      "sha256": "ad599fcc4d450c00c44f98a3d11ccfcbc0113813b900937caeb0607c9454d82b"
+    },
+    "candidate_files": 2581,
+    "maximum_allocated_bytes": 3409534976,
+    "preserved_primary_databases_markers_and_logs": 26,
+    "verification": "Same-owner regular files, exact fixture markers and first-party grant invariants, no sidecars or open handles, pinned inode/size/allocation/mtime.",
+    "effects": "Delete only the exact approved synthetic worker copies, stopping as soon as 52 GiB usable space is observed. Skip cleanup if the floor is already met.",
+    "snapshot_caveat": "The retained local Time Machine snapshot is newer than this run. Snapshot or clone retention can reduce actual recovered free space. Keep the snapshot.",
+    "separate_approval_state": "unstarted"
+  },
+  "optype": {
+    "exact_review": {
+      "path": ".aeep/completion-20261116/full-rebench-three-leads-20261119/optype-original-only/operation-review.json",
+      "sha256": "4e6799371a9774e58d7e8eea34733cf24a525d0772e7bb6ad4deaee74031cb6a"
+    },
+    "scope": "one original-only protected offline invocation",
+    "maximum_operations": 1,
+    "maximum_reserved_seconds": 35,
+    "condition": "Dispatch only after a fresh measured host check meets 52 GiB and the unchanged Optype review passes expiry and exact pins.",
+    "separate_approval_state": "unstarted"
+  },
+  "refuse_unapproved_operations": [
+    "external backup or local snapshot changes",
+    "Docker resource cleanup or builds",
+    "model calls, paid services or comparison trials",
+    "any additional protected invocation or replay"
+  ],
+  "no_operations_executed": true,
+  "verification_controls_passed": 6,
+  "comparisons_paused": true,
+  "waza_excluded": true,
+  "document_pack_route_findings": {
+    "ordinary_document_cli": "src/aeep_toolkit/benchmarks.py",
+    "exact_workflow_binding": "src/aeep_toolkit/workflow.py",
+    "curated_cohort_binding": "src/aeep/assessment/extensions.py",
+    "implementation_gap": "A reviewed source pack must share one exact provenance digest across its two cohorts. Stage, inspect and workflow bindings must accept the new manifest and still verify role separation and explicit rights. The current ExtractBench manifest remains pinned.",
+    "production_source_changed": false
+  },
+  "source_verification": {
+    "ruff_passed": true,
+    "schema_check_passed": true,
+    "staged_document_lint_files": 72,
+    "staged_offline_links_ok": 1427,
+    "offline_link_errors": 0,
+    "docs_log": {
+      "path": ".aeep/c13-coverage-reclaim-docs.slgZc7/reclaim-docs.log",
+      "sha256": "1a06170365fc3ef9767b6006d7b0942dfd3086dd26f78994bd631c99f18983da"
+    }
+  }
+}

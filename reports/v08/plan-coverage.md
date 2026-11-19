@@ -1,5 +1,10 @@
 # 0.8 plan coverage and remaining work
 
+[C13 storage and Optype review](../toolkit-v2/c13/completion-20261116/retired-worker-storage-and-optype-review-20261119.json)
+groups one exact cleanup scope with the unchanged original-only
+grader review. The selected files are verified synthetic worker
+copies. Actual space recovery and protected grading remain pending.
+
 [C13 USDA calibration](../toolkit-v2/c13/completion-20261116/usda-wasde-reference-calibration-20261119.json)
 matched 32 rows across two tables to the publisher XML and verified
 the existing public ZIP projection. A reviewed external corpus path
