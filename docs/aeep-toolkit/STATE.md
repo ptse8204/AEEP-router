@@ -1,5 +1,31 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 19. Runtime availability verified for the pending SWE-rebench leads.**
+The [runtime availability audit](../../reports/toolkit-v2/c13/completion-20261116/full-rebench-runtime-availability-20261119.json)
+checks publisher metadata for 70 exact release pins, plus the retained Git
+binary, Linux ARM64 Python 3.12 archive and nonroot carrier. Their combined
+runtime remains unverified.
+
+Locify needs at least 76,454,400 download bytes for the known missing
+distributions and tokenizer vocabulary, before resolving LiteLLM. PyPI
+returns 404 for locked LiteLLM 1.50.1. The publisher's Git tag resolves
+to `fb523b79`, and the release has neither locked distribution. A
+source-based substitute needs a new exact binding and a protected check
+of tokenizer behavior. The existing-file patch limitation remains.
+
+EOS lacks a Linux ARM64 wheel for timezonefinder 6.5.8. The missing
+direct pins plus its exact source archive require at least 126,877,228
+download bytes after deducting two checksum-verified cached wheels.
+That exceeds the measured 86,458,368 bytes above the 52 GiB floor
+before including transitive dependencies or a native build. Upstream
+excludes the live weather development test. The frozen optimizer
+identities request the two three-generation cases. No benchmark
+assertions or required test identities were changed.
+
+No package artifacts were downloaded and no graders ran in this audit.
+Optype's original-only review `4e679937` remains unstarted pending
+approval. Comparisons stay paused, and Waza stays excluded.
+
 **November 19. Three SWE-rebench source leads advanced.**
 The [source and grader record](../../reports/toolkit-v2/c13/completion-20261116/full-rebench-three-leads-result-20261119.json)
 binds all three archives to their publisher Git trees, notices and exact

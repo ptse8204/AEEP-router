@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+[C13 runtime availability](../toolkit-v2/c13/completion-20261116/full-rebench-runtime-availability-20261119.json)
+identified the unavailable locked LiteLLM distribution for Locify and
+the missing ARM64 timezonefinder wheel for EOS. EOS's reviewed source
+route would exceed the measured storage headroom before resolving
+transitive dependencies. No new graders ran. The Optype original-only
+repeat remains pending under review `4e679937`.
+
 [Three C13 SWE-rebench leads](../toolkit-v2/c13/completion-20261116/full-rebench-three-leads-result-20261119.json)
 now have verified publisher trees and pinned protected inputs. Optype's
 reference passed 416 checks. The original lacked the 12 generated issue
