@@ -180,7 +180,13 @@ def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
         content_digest,
     )
 
-    from .benchmarks import BenchmarkPack, document_archive, inspect_pack, parse_pack
+    from .benchmarks import (
+        DOCUMENT_PACKS,
+        BenchmarkPack,
+        document_archive,
+        inspect_pack,
+        parse_pack,
+    )
     from .candidate import inspect
     from .cli import read_json
     from .installation import PreviewPolicy, preview
@@ -216,10 +222,10 @@ def prepare_stack(definition: Path, configuration: str) -> dict[str, Any]:
         recipe = RecipeDefinition.model_validate_json(recipe_raw)
         if recipe.dependencies.get('benchmark_pack') != content_digest(pack.model_dump(mode='json')):
             raise ValueError('canonical grader recipe differs from the exact task-pack assets')
-        if pack.pack_id == 'extractbench' and (
+        if pack.pack_id in DOCUMENT_PACKS and (
             recipe.extension is None or recipe.extension.schema_version not in NATIVE_SCORE_EXTENSIONS
         ):
-            raise ValueError('ExtractBench requires the native-score grader contract')
+            raise ValueError('document packs require the native-score grader contract')
     if not isinstance(pack, BenchmarkPack):
         blockers.append('MCP state-output execution requires a reviewed ToolHive/server binding and protected database verifier; file recipes cannot execute this pack')
     if any(task.rights_review_ref is None for task in pack.tasks if task.task_id in selected.task_ids):

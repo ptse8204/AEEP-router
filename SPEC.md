@@ -1142,6 +1142,20 @@ Default replies MUST NOT include raw logs or support collection-only grading.
 This version changes neither assertions nor execution authority and does not
 establish resistance to hostile in-process pytest/plugin tampering.
 
+`assessment.repository-suite-case.v7` inherits v6 and permits creation of exact
+Python paths listed in protected `create_paths`. That list MUST equal the subset
+of the public editable paths absent from the original archive. The existing patch
+format, archive checks, protected test boundary and grader remain applicable.
+Versions 1–6 MUST reject the new field and require each editable file to exist in
+the original archive.
+
+Version 7 MAY bind an intact public publisher statement using
+`instruction_format: source-statement-v1` and the reviewed
+`repository_archive:2` transform. That input MUST fit 16000 UTF-8 bytes.
+Its canonical digest covers the entire statement and its format. Version
+1–6 cases and the smaller transform MUST retain the original input format
+and 4000-character limit. The public source and protected overlay stay separate.
+
 The contained executor MAY use an explicit operator-owned `max_stdin_bytes`
 above1800000,up to16000000; its outer JSON envelope then allows that amount plus
 1000000bytes. The prior2000000byte outer allowance stays for smaller/default

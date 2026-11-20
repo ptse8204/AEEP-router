@@ -182,3 +182,39 @@ def test_changed_candidate_is_rejected_and_unready_run_never_opens_service(
     (skill / "SKILL.md").write_text("changed source")
     with pytest.raises(SystemExit):
         main(["workflow", "prepare", "--workflow", str(path), "--configuration", "document-data"])
+
+
+def test_v2_workflow_previews_reviewed_document_pack_without_resolving_rights(tmp_path, capsys):
+    from test_toolkit_benchmarks import reviewed_document_fixture
+
+    path, data, _ = definition(tmp_path)
+    selected = data["configurations"]["document-data"]
+    extra = tmp_path / "external"
+    extra.mkdir()
+    asset_root, _, candidate_pack = reviewed_document_fixture(extra)
+    pack = BenchmarkPack.model_validate(candidate_pack)
+    benchmark = path.parent / selected["benchmark"]["path"]
+    benchmark.write_text(pack.model_dump_json())
+    selected["benchmark"]["sha256"] = hashlib.sha256(benchmark.read_bytes()).hexdigest()
+    selected["asset_root"] = str(asset_root)
+    selected["task_ids"] = ["external"]
+    selected["components"] = ["aeep-evaluator", "reviewed-documents"]
+    registry_path = path.parent / data["registry"]["path"]
+    registry = json.loads(registry_path.read_bytes())
+    replacement = ExtensionManifest.model_validate(
+        extension_data() | dict(extension_id="reviewed-documents", role="benchmark", disk_bytes=0, memory_bytes=0)
+    )
+    registry["extensions"].append(replacement.model_dump(mode="json"))
+    registry_path.write_text(json.dumps(registry))
+    data["registry"]["sha256"] = hashlib.sha256(registry_path.read_bytes()).hexdigest()
+    policy_path = path.parent / data["policy"]["path"]
+    policy = json.loads(policy_path.read_bytes())
+    policy["reviewed_dependency_manifests"].append(manifest_digest(replacement))
+    policy_path.write_text(json.dumps(policy))
+    data["policy"]["sha256"] = hashlib.sha256(policy_path.read_bytes()).hexdigest()
+    path.write_text(json.dumps(data))
+    assert main(["workflow", "prepare", "--workflow", str(path), "--configuration", "document-data"]) == 0
+    preview = json.loads(capsys.readouterr().out)
+    assert preview["benchmark"]["pack"] == "reviewed-documents"
+    assert preview["benchmark"]["tasks"][0]["source"] == candidate_pack["task_sources"]["external"]
+    assert any("rights" in reason for reason in preview["blockers"])

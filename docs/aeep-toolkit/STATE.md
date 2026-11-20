@@ -1,5 +1,15 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 20. Repository and document intake passes full source verification.**
+The [operator report](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md)
+records 2,196 passed tests, 21 skips, 81.55 percent coverage, and both
+branch-coverage checks passing. The branch contains reviewed source-file
+additions, complete publisher statements and supplemental document
+sources. The Git index matched all 414 tested code and test paths.
+The run used available space and finished below the usual host reserve.
+The production reserve is unchanged. Comparison trials stay paused,
+Waza remains excluded, and C13 stays open for formal evaluation.
+
 **November 20. Locify's protected pair passes.**
 The [operator report](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md)
 shows the published repair at 1/1 and the original at 0/1. Synthetic Git

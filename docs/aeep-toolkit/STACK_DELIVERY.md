@@ -265,3 +265,24 @@ effects before proposing a new exact review.
 An accepted HTTP response establishes transport acceptance. Actual Langfuse
 ingestion and receipt/trace linkage need separate observations. Current checks
 use first-party transport substitutes; no Langfuse deployment has been qualified.
+
+## Reviewed supplemental document sources
+
+Use a reviewed document pack to fill a cohort with eligible sources beyond
+ExtractBench. Select `reviewed-documents` explicitly in the workflow and its
+registry. The v2 manifest binds an exact source pin for each task. The pack's
+`source.artifact_sha256` is the canonical digest of its `tasks` and
+`task_sources` fields. ExtractBench tasks included in this pack retain the
+original publisher revision, layout and scoring contract.
+
+Use `benchmark stage-document` as with an ExtractBench pack. The worker
+archive contains only the instructions, PDF and schema. Keep the expected
+answer, verifier and any publisher reference outside it. A supplemental
+task's `source_pin_sha256` in its asset-use determination binds the complete
+task source pin, including the source URL. A changed source requires a new
+matching determination even when the PDF bytes match.
+
+Formal preparation still requires an exact pack and grader binding, permitted
+asset use, verified reference and rejection cases, and the existing 8/28/105
+source-disjoint cohort sizes. Stage and inspect commands do not grant
+execution or disclosure authority.

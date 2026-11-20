@@ -1,5 +1,9 @@
 # 0.8 plan coverage and remaining work
 
+[C13 source verification and task results](../toolkit-v2/c13/completion-20261116/C13_STATUS.md)
+record 2,196 passes, 81.55 percent coverage and both branch checks passing.
+Verified repository and document intake is on the feature branch.
+
 The [C13 test results](../toolkit-v2/c13/completion-20261116/C13_STATUS.md)
 show Locify's verified 1/1 and 0/1 pair and the EOS diagnosis. The
 installer capacity fixture now covers the file installer, and 136

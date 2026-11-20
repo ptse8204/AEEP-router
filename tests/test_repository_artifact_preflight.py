@@ -55,6 +55,21 @@ def test_mixed_codecs_need_separate_static_worker_profiles(field):
         require_worker_artifact_encoding([case(), case('gzip-json')], [worker('candidate', field)])
 
 
+def test_extended_statement_requires_v7_and_large_artifact_profile_in_both_arms():
+    task = case('gzip-json')
+    task.action.input['instruction_format'] = 'source-statement-v1'
+    with pytest.raises(ConfigurationError, match='case v7'):
+        require_worker_artifact_encoding([task], [])
+    task.validators[-1].config['expected']['create_paths'] = []
+    candidate, baseline = (worker(name, 'patch_gzip_b64') for name in ('candidate', 'baseline'))
+    candidate.config['assessment_adapter'] = {'input_transform': 'repository_archive:2'}
+    baseline.config['assessment_adapter'] = {'input_transform': 'repository_archive:1'}
+    with pytest.raises(ConfigurationError, match='large artifact worker: baseline'):
+        require_worker_artifact_encoding([task], [candidate, baseline])
+    baseline.config['assessment_adapter']['input_transform'] = 'repository_archive:2'
+    require_worker_artifact_encoding([task], [candidate, baseline])
+
+
 def test_other_capabilities_direct_outputs_and_custom_bridges_keep_existing_contracts():
     require_worker_artifact_encoding([case(capability='fixture.other@1')], [worker('candidate', 'patch_gzip_b64')])
     require_worker_artifact_encoding([case()], [worker('candidate', None), worker('custom', 'reviewed_custom_field')])

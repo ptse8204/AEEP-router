@@ -137,6 +137,19 @@ class SuiteInput(StrictModel):
         return self
 
 
+class SuiteInputV7(SuiteInput):
+    """Public publisher statements carried intact under the reviewed large profile."""
+
+    instruction_format: Literal['source-statement-v1']
+    task: str = Field(min_length=1, max_length=16_000)
+
+    @model_validator(mode='after')
+    def statement_bytes(self) -> SuiteInputV7:
+        if len(self.task.encode('utf-8')) > 16_000:
+            raise ValueError('publisher statement exceeds 16000 UTF-8 bytes')
+        return self
+
+
 class SuiteTruth(StrictModel):
     input_sha256: Digest
     source: SuiteAsset
@@ -230,6 +243,18 @@ class SuiteTruthV6(SuiteTruthV5):
         return bool(name) and name.isprintable() and len(name.encode('utf-8')) <= 8192
 
 
+class SuiteTruthV7(SuiteTruthV6):
+    """Permit only explicitly reviewed additions to the existing replacement map."""
+
+    create_paths: list[str] = Field(max_length=64)
+
+    @model_validator(mode='after')
+    def distinct_creations(self) -> SuiteTruthV7:
+        if len(set(self.create_paths)) != len(self.create_paths):
+            raise ValueError('duplicate reviewed creation path')
+        return self
+
+
 class SuiteArtifact(StrictModel):
     patch_b64: str = Field(max_length=700_000)
 
@@ -289,7 +314,10 @@ def _decode_suite_patch(oracle: SuiteTruth, value: Any) -> RepositoryPatch:
 
 def _suite_version_schema(schema: dict[str, Any]) -> None:
     # Reuse Pydantic's references so definition renaming remains valid.
-    native_truth, large_truth, rooted_truth, compact_truth, plugin_truth, legacy_truth = schema['properties']['truth']['anyOf']
+    creation_truth, native_truth, large_truth, rooted_truth, compact_truth, plugin_truth, legacy_truth = schema['properties']['truth']['anyOf']
+    _, legacy_input = schema['properties']['input']['anyOf']
+    version_seven = {'properties': {'schema_version': {'const': 'assessment.repository-suite-case.v7'}},
+                     'required': ['schema_version']}
     schema['allOf'] = [
         {'if': {'properties': {'schema_version': {'const': 'assessment.repository-suite-case.v1'}}},
          'then': {'properties': {'truth': legacy_truth}}},
@@ -303,14 +331,17 @@ def _suite_version_schema(schema: dict[str, Any]) -> None:
          'then': {'properties': {'truth': large_truth}}},
         {'if': {'properties': {'schema_version': {'const': 'assessment.repository-suite-case.v6'}}, 'required': ['schema_version']},
          'then': {'properties': {'truth': native_truth}}},
+        {'if': version_seven,
+         'then': {'properties': {'truth': creation_truth}}},
+        {'if': {'not': version_seven}, 'then': {'properties': {'input': legacy_input}}},
     ]
 
 
 class RepositorySuiteCase(StrictModel):
     model_config = ConfigDict(json_schema_extra=_suite_version_schema)
-    schema_version: Literal['assessment.repository-suite-case.v1', 'assessment.repository-suite-case.v2', 'assessment.repository-suite-case.v3', 'assessment.repository-suite-case.v4', 'assessment.repository-suite-case.v5', 'assessment.repository-suite-case.v6'] = 'assessment.repository-suite-case.v1'
-    input: SuiteInput
-    truth: SuiteTruthV6 | SuiteTruthV5 | SuiteTruthV4 | SuiteTruthV3 | SuiteTruthV2 | SuiteTruth
+    schema_version: Literal['assessment.repository-suite-case.v1', 'assessment.repository-suite-case.v2', 'assessment.repository-suite-case.v3', 'assessment.repository-suite-case.v4', 'assessment.repository-suite-case.v5', 'assessment.repository-suite-case.v6', 'assessment.repository-suite-case.v7'] = 'assessment.repository-suite-case.v1'
+    input: SuiteInputV7 | SuiteInput
+    truth: SuiteTruthV7 | SuiteTruthV6 | SuiteTruthV5 | SuiteTruthV4 | SuiteTruthV3 | SuiteTruthV2 | SuiteTruth
     reference: SuiteAsset
     fault_outputs: list[dict[str, Any]] = Field(min_length=1, max_length=4)
     source_repository: str
@@ -324,13 +355,17 @@ class RepositorySuiteCase(StrictModel):
 
     @model_validator(mode='after')
     def bindings(self) -> RepositorySuiteCase:
-        version = 'v6' if isinstance(self.truth, SuiteTruthV6) else 'v5' if isinstance(self.truth, SuiteTruthV5) else 'v4' if isinstance(self.truth, SuiteTruthV4) else 'v3' if isinstance(self.truth, SuiteTruthV3) else 'v2' if isinstance(self.truth, SuiteTruthV2) else 'v1'
+        version = 'v7' if isinstance(self.truth, SuiteTruthV7) else 'v6' if isinstance(self.truth, SuiteTruthV6) else 'v5' if isinstance(self.truth, SuiteTruthV5) else 'v4' if isinstance(self.truth, SuiteTruthV4) else 'v3' if isinstance(self.truth, SuiteTruthV3) else 'v2' if isinstance(self.truth, SuiteTruthV2) else 'v1'
         if self.schema_version != 'assessment.repository-suite-case.' + version:
-            raise ValueError('explicit pytest plugins require repository suite case v2; compact patches require v3; declared test roots require v4; larger archives require v5; native identities require v6')
+            raise ValueError('explicit pytest plugins require repository suite case v2; compact patches require v3; declared test roots require v4; larger archives require v5; native identities require v6; reviewed file additions require v7')
         if (self.truth.input_sha256 != content_digest(self.input)
                 or self.truth.source.sha256 != self.input.source_sha256
                 or Path(self.truth.source.path).name != self.input.source_sha256 + '.tar.gz'):
             raise ValueError('suite task/source/oracle binding mismatch')
+        if isinstance(self.input, SuiteInputV7) and not isinstance(self.truth, SuiteTruthV7):
+            raise ValueError('publisher statement input requires repository suite case v7')
+        if isinstance(self.truth, SuiteTruthV7) and not set(self.truth.create_paths) <= set(self.input.editable_paths):
+            raise ValueError('reviewed creation paths must be listed as editable')
         for output in self.fault_outputs:
             patch = _decode_suite_patch(self.truth, output)
             if (patch.base_sha256 != self.truth.input_sha256 or not patch.files
@@ -341,7 +376,8 @@ class RepositorySuiteCase(StrictModel):
 
 def public_archive(arguments: dict[str, Any], roots: list[str], *, large: bool = False) -> dict[str, Any]:
     """Existing declarative adapter projects one hash-named public asset only."""
-    task = SuiteInput.model_validate(arguments)
+    model = SuiteInputV7 if large and 'instruction_format' in arguments else SuiteInput
+    task = model.model_validate(arguments)
     if len(roots) != 1:
         raise ConfigurationError('repository archive mapping requires one reviewed public asset root')
     root = Path(roots[0])
@@ -356,8 +392,9 @@ def public_archive(arguments: dict[str, Any], roots: list[str], *, large: bool =
 
 async def grade_suite_output(value: dict[str, Any], truth: dict[str, Any], output: Any,
                              probe: Probe) -> ValidationResult:
-    task = SuiteInput.model_validate(value)
-    oracle = (SuiteTruthV6 if 'identity_format' in truth else SuiteTruthV5 if 'archive_profile' in truth else SuiteTruthV4 if 'test_roots' in truth else SuiteTruthV3 if 'patch_encoding' in truth else SuiteTruthV2 if 'pytest_plugins' in truth else SuiteTruth).model_validate(truth)
+    oracle = (SuiteTruthV7 if 'create_paths' in truth else SuiteTruthV6 if 'identity_format' in truth else SuiteTruthV5 if 'archive_profile' in truth else SuiteTruthV4 if 'test_roots' in truth else SuiteTruthV3 if 'patch_encoding' in truth else SuiteTruthV2 if 'pytest_plugins' in truth else SuiteTruth).model_validate(truth)
+    model = SuiteInputV7 if isinstance(oracle, SuiteTruthV7) and 'instruction_format' in value else SuiteInput
+    task = model.model_validate(value)
     if oracle.input_sha256 != content_digest(value) or oracle.source.sha256 != task.source_sha256:
         raise ConfigurationError('repository suite input binding changed')
     failure = None
@@ -372,7 +409,11 @@ async def grade_suite_output(value: dict[str, Any], truth: dict[str, Any], outpu
     if failure is None:
         large = isinstance(oracle, SuiteTruthV5)
         files = archive_files(oracle.source.read(), large=large)
-        if not set(task.editable_paths) <= files.keys():
+        absent = set(task.editable_paths) - files.keys()
+        if isinstance(oracle, SuiteTruthV7):
+            if absent != set(oracle.create_paths):
+                raise ConfigurationError('reviewed creation paths differ from absent editable files')
+        elif absent:
             raise ConfigurationError('editable source absent from reviewed archive')
         tests = archive_files(oracle.tests.read(), large=large)
         test_roots = oracle.test_roots if isinstance(oracle, SuiteTruthV4) else ['tests']
@@ -512,19 +553,28 @@ def reference_outputs(recipe: RecipeDefinition, inputs: list[dict[str, Any]]) ->
 def require_worker_artifact_encoding(cases: list[BenchmarkCase], subjects: list[ExecutorSpec]) -> None:
     """Reject incompatible standard patch bridges before reserving model work."""
     expected = set()
+    extended = False
     for case in cases:
         if case.action.capability != 'assessment.repository_suite@1':
             continue
         truth = case.validators[-1].config.get('expected') if case.validators else None
         if not isinstance(truth, dict) or truth.get('patch_encoding') not in (None, 'gzip-json'):
             raise ConfigurationError('repository task has no supported patch-encoding truth')
+        if 'instruction_format' in case.action.input:
+            if not isinstance(truth.get('create_paths'), list):
+                raise ConfigurationError('publisher statement input requires repository suite case v7')
+            extended = True
         expected.add('patch_gzip_b64' if truth.get('patch_encoding') == 'gzip-json' else 'patch_b64')
     if not expected:
         return
     for subject in subjects:
         if subject.kind != ExecutorKind.MANAGED_HOST:
             continue
-        artifact = subject.managed_host_config().artifact
+        config = subject.managed_host_config()
+        artifact = config.artifact
+        if extended and (artifact is None or artifact.input_field != 'source_b64'
+                         or (config.assessment_adapter or {}).get('input_transform') != 'repository_archive:2'):
+            raise ConfigurationError(f'publisher statement input requires a reviewed large artifact worker: {subject.id}')
         if (artifact is not None and artifact.output_field in {'patch_b64', 'patch_gzip_b64'}
                 and expected != {artifact.output_field}):
             raise ConfigurationError(
@@ -541,6 +591,7 @@ def repository_suite_recipe(cases: list[RepositorySuiteCase], *, assessment: boo
     parser = (root / 'swe_rebench_pytest_parser.py').read_text()
     plugins = any(isinstance(case.truth, SuiteTruthV2) for case in cases)
     native = any(isinstance(case.truth, SuiteTruthV6) for case in cases)
+    creates = any(isinstance(case.truth, SuiteTruthV7) for case in cases)
     if native:
         program = (root / 'repository_suite_native_program.py').read_text().replace(
             "'__AEEP_NATIVE_CAPTURE_SOURCE__'", repr((root / 'repository_suite_native_capture.py').read_text()))
@@ -564,17 +615,20 @@ def repository_suite_recipe(cases: list[RepositorySuiteCase], *, assessment: boo
         identity['runtime_program_sha256'] = hashlib.sha256(program.encode()).hexdigest()
     recipe = RecipeDefinition(schema_version='assessment.recipe.v2', recipe_id='repository-suite-' + content_digest(identity)[:16], capability=observer.capability,
         description='Curated source-bound Python repository suites; no official benchmark score or arbitrary preservation claim.',
-        input_schema=SuiteInput.model_json_schema(), output_schema=(TypeAdapter(SuiteArtifact | SuiteCompressedArtifact).json_schema()
+        input_schema=(TypeAdapter(SuiteInputV7 | SuiteInput).json_schema()
+            if any(isinstance(case.input, SuiteInputV7) for case in cases) else SuiteInput.model_json_schema()),
+        output_schema=(TypeAdapter(SuiteArtifact | SuiteCompressedArtifact).json_schema()
             if any(isinstance(case.truth, SuiteTruthV3) for case in cases) else SuiteArtifact.model_json_schema()),
         generator='curated_repository:1', grader='contained_json:1', extractor='structural_json:1',
         generator_config={'cases': [case.model_dump(mode='json') for case in cases], 'assessment': assessment,
             'declared_origin_counts': dict(Counter(case.origin_kind for case in cases)),
             'real_repository_workload': all(case.origin_kind != 'synthetic_fixture' for case in cases)},
         dependencies={'program': hashlib.sha256(program.encode()).hexdigest()}, variations=variations,
-        exclusions=['unreviewed source/runtime', 'new/deleted files', 'tests/configuration edits', 'official upstream image equivalence',
+        exclusions=['unreviewed source/runtime', 'unreviewed additions and deleted files' if creates else 'new/deleted files', 'tests/configuration edits', 'official upstream image equivalence',
                     'adversarial test/log forgery guarantees', 'population-wide workload generalization'],
         extension=ExecutableRecipeExtension(schema_version='assessment.recipe-extension.v5', generator=observer, reference=observer,
-            grader=observer, truth_schema=(TypeAdapter(SuiteTruthV6 | SuiteTruthV5 | SuiteTruthV4 | SuiteTruthV3 | SuiteTruthV2 | SuiteTruth).json_schema()
+            grader=observer, truth_schema=(TypeAdapter(SuiteTruthV7 | SuiteTruthV6 | SuiteTruthV5 | SuiteTruthV4 | SuiteTruthV3 | SuiteTruthV2 | SuiteTruth).json_schema()
+                if creates else TypeAdapter(SuiteTruthV6 | SuiteTruthV5 | SuiteTruthV4 | SuiteTruthV3 | SuiteTruthV2 | SuiteTruth).json_schema()
                 if native else TypeAdapter(SuiteTruthV5 | SuiteTruthV4 | SuiteTruthV3 | SuiteTruthV2 | SuiteTruth).json_schema()
                 if any(isinstance(case.truth, SuiteTruthV5) for case in cases) else TypeAdapter(SuiteTruthV4 | SuiteTruthV3 | SuiteTruthV2 | SuiteTruth).json_schema()
                 if any(isinstance(case.truth, SuiteTruthV4) for case in cases) else TypeAdapter(SuiteTruthV3 | SuiteTruthV2 | SuiteTruth).json_schema()

@@ -152,8 +152,8 @@ Both arms receive the same instructions and artifact delivery.
 The agent unpacks the source into its private workspace and writes `patch.json`
 with the supplied base hash and replacement text for existing editable Python
 files. The artifact bridge returns that file as `patch_b64`. The coordinator
-rejects changed bindings, duplicate JSON keys, source escapes, new/deleted files,
-test/configuration edits and oversized patches before execution. It overlays
+rejects changed bindings, duplicate JSON keys, source escapes, unreviewed file
+additions, deletions, test edits and oversized patches before execution. It overlays
 the private tests and runs the reviewed pytest command in one fresh offline
 grader. The child returns test observations, not an authoritative verdict.
 
@@ -264,6 +264,24 @@ execute in the same process; this is not a proof against adversarial tampering.
 Preserve published aliases and old failures. Any corrected identity mapping must
 be frozen before execution, confirmed by native collection and recorded as a
 separate task without removing assertions or required identities.
+
+## Reviewed source file additions
+
+Use `assessment.repository-suite-case.v7` for a published repair that adds an
+editable Python file. Include the exact absent path in the public editable list
+and the protected `create_paths` list. Keep the original archive intact. Both
+arms receive the same instructions for returning the complete new file in the
+existing compressed patch. The grader verifies that the creation list matches
+the absent editable paths before merging the patch and protected test overlay.
+Versions 1–6 require all editable files to exist in the original archive.
+
+Version 7 can also carry a longer publisher statement in full. Set
+`instruction_format: source-statement-v1` and use the reviewed
+`repository_archive:2` transform. The statement may occupy up to 16,000
+UTF-8 bytes. If the repair creates no files, set protected `create_paths`
+to an empty list. The exact statement is part of the canonical input
+hash and appears in the worker prompt. The source archive and the private
+test and reference assets keep their separate bindings.
 
 ## Compare capability usefulness
 

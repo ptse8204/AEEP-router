@@ -35,8 +35,11 @@ The EOS diagnostic captured four `AttributeError` failures in simulation
 and optimization, one `ModuleNotFoundError` in OpenAPI documentation, and
 two `ConnectionError` failures in electricity-price tests. It identified
 the tests and exception categories. Their exact failure lines remain
-unavailable. Confirming the intended test identities and reproducing
-the reference are still required before EOS can supply a score.
+unavailable because an EOS fixture replaced the working-directory call
+the diagnostic used. A local test reproduced that behavior and
+restored the location when given a fixed repository path. Confirming
+the intended test identities and reproducing the reference are still
+required before EOS can supply a score.
 
 The three operations finished and their receipts reconcile with the
 saved test observations. Worker cleanup was verified. No models or
@@ -64,9 +67,16 @@ local checks. [C13 delegation](c13-offline-approval-20261117.json) and
 | Deliverable | Status |
 | --- | --- |
 | Reusable evaluation stack | All **37 required checks** passed on the verified source with Waza excluded. Both document/data and software workflows reached protected grading and produced ordinary CLI reports. |
-| New intake draft | **2,196 regression tests passed**, with 21 skipped. Documentation and package builds passed. The first branch coverage attempt stopped at the storage guard. A fresh coverage-only run is in progress. |
+| Repository and document intake | The feature branch includes reviewed source-file additions, longer publisher statements, and reviewed supplemental document sources. **2,196 tests passed**, with 21 skipped, **81.55% coverage**, and both branch-coverage checks passed. |
 | Candidate usefulness and AEEP selection | The last group prepared potential test cases for these separate studies. It supplied no candidate or selection result. Comparisons are paused while the formal workload and evidence requirements remain open. |
 | Release | The recorded decision is **LIMITED_BETA** for private evaluation with the reviewed macOS ARM64 runtime. Production release and public benefit claims remain **NO_GO**. |
+
+The coverage run finished with at least 39.19 GiB free. The earlier runs
+exposed an installer test fixture that used actual free space and a
+verification flag that blocked the test suite's local HTTP servers. The
+fixture now supplies its own capacity reading, and the full run used
+the normal test configuration. All 414 tracked code and test files
+matched the tested copy. [Source verification](intake-source-verification-20261120.json)
 
 Locify's protected pair can now support case intake. Formal assignment
 still requires the corpus and exposure checks shared by other cases.

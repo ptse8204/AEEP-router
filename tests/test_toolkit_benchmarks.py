@@ -390,3 +390,119 @@ def test_archive_instruction_limit_is_distinct_from_inline_limit(tmp_path):
     root, selected, _ = extractbench_fixture(tmp_path, b"A" * 600_001)
     with pytest.raises(ValueError, match="instruction exceeds"):
         document_archive(selected, root, "fixture", "large", archive_instructions=True)
+
+
+def reviewed_document_fixture(tmp_path):
+    from aeep.assessment.models import content_digest
+    from aeep_toolkit.benchmarks import REVIEWED_DOCUMENT_ASSET_ROLES
+
+    root, upstream, _ = extractbench_fixture(tmp_path)
+    value = upstream.model_dump(mode="json")
+    value.update(schema_version="aeep.toolkit.benchmark-pack.v2", pack_id="reviewed-documents")
+    legacy = value["tasks"][0]
+    extra = legacy | {"task_id": "external", "upstream_score": "binary", "assets": []}
+    for name, role in REVIEWED_DOCUMENT_ASSET_ROLES.items():
+        relative = f"tasks/external/{name}"
+        path = root / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        data = f"synthetic external {name}".encode()
+        path.write_bytes(data)
+        extra["assets"].append(
+            {"path": relative, "role": role, "bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()}
+        )
+    value["tasks"].append(extra)
+    value["task_sources"] = {}
+    for task in value["tasks"]:
+        pdf = next(asset for asset in task["assets"] if asset["path"].endswith("/document.pdf"))
+        pin = value["source"] | {"artifact_sha256": pdf["sha256"]}
+        if task is extra:
+            pin.update(repository="https://example.gov/public/external.pdf", revision=pdf["sha256"])
+        value["task_sources"][task["task_id"]] = pin
+    value["source"] = value["source"] | {"repository": "https://example.org/reviewed-inventory"}
+    value["source"]["artifact_sha256"] = content_digest(
+        {key: value[key] for key in ("tasks", "task_sources")}
+    )
+    return root, upstream, value
+
+
+def test_reviewed_document_cli_stages_both_sources_without_verifiers(tmp_path, capsys):
+    from zipfile import ZipFile
+
+    root, upstream, value = reviewed_document_fixture(tmp_path)
+    selected = BenchmarkPack.model_validate(value)
+    assert "task_sources" not in upstream.model_dump(mode="json")
+    assert inspect_pack(selected, root, ("fixture", "external"))["tasks"][1]["source"] == value["task_sources"]["external"]
+    path = tmp_path / "reviewed.json"
+    path.write_text(selected.model_dump_json())
+    output = tmp_path.resolve() / "public-zips"
+    output.mkdir()
+    for identity in ("fixture", "external"):
+        assert main([
+            "benchmark", "stage-document", "--pack", str(path), "--root", str(root),
+            "--task", identity, "--family", "multiple-collections", "--destination", str(output),
+            "--archive-instructions",
+        ]) == 0
+        descriptor = json.loads(capsys.readouterr().out)
+        assert descriptor["task_id"] == identity and descriptor["instruction_delivery"] == "archive"
+        with ZipFile(output / (descriptor["task_archive_sha256"] + ".zip")) as archive:
+            assert set(archive.namelist()) == {"instruction.md", "environment/document.pdf", "environment/schema.json"}
+
+
+@pytest.mark.parametrize("change", ["role", "missing-pin", "pdf-drift", "upstream-revision", "v1"])
+def test_reviewed_document_pack_rejects_changed_scope(tmp_path, change):
+    from aeep.assessment.models import content_digest
+
+    _, _, value = reviewed_document_fixture(tmp_path)
+    if change == "role":
+        next(asset for asset in value["tasks"][1]["assets"] if asset["role"] == "oracle")["role"] = "input"
+    elif change == "missing-pin":
+        value["task_sources"].pop("external")
+    elif change == "pdf-drift":
+        value["task_sources"]["external"]["artifact_sha256"] = "0" * 64
+    elif change == "upstream-revision":
+        value["task_sources"]["fixture"]["revision"] = "0" * 40
+    else:
+        value["schema_version"] = "aeep.toolkit.benchmark-pack.v1"
+    value["source"]["artifact_sha256"] = content_digest(
+        {key: value[key] for key in ("tasks", "task_sources")}
+    )
+    with pytest.raises(ValueError):
+        BenchmarkPack.model_validate(value)
+
+
+def test_reviewed_document_rights_bind_the_exact_task_source(tmp_path):
+    from aeep.assessment.models import content_digest
+    from aeep.assessment.repository import AssessmentRepository
+    from aeep.errors import ConfigurationError
+    from aeep.store import ReceiptStore
+    from aeep_toolkit.models import SourcePin
+    from aeep_toolkit.workflow_preparation import TaskRightsReview, require_rights
+
+    _, _, value = reviewed_document_fixture(tmp_path)
+    external = value["tasks"][1]
+    pin = SourcePin.model_validate(value["task_sources"]["external"])
+    rights = TaskRightsReview(
+        source_revision=pin.revision,
+        source_pin_sha256=content_digest(pin.model_dump(mode="json")),
+        task_id="external",
+        assets={asset["path"]: asset["sha256"] for asset in external["assets"]},
+        basis=["Synthetic reviewed individual source"],
+        local_execution_allowed=True,
+        provider_disclosure_allowed=True,
+    )
+    external["rights_review_ref"] = content_digest(rights)
+    value["source"]["artifact_sha256"] = content_digest(
+        {key: value[key] for key in ("tasks", "task_sources")}
+    )
+    selected = BenchmarkPack.model_validate(value)
+    with ReceiptStore(tmp_path / "rights.sqlite3") as store:
+        repository = AssessmentRepository(store)
+        repository.put("toolkit_task_rights", content_digest(rights), rights)
+        repository.review(content_digest(rights))
+        require_rights(repository, selected, ("external",))
+        value["task_sources"]["external"]["repository"] = "https://different.example.gov/public/external.pdf"
+        value["source"]["artifact_sha256"] = content_digest(
+            {key: value[key] for key in ("tasks", "task_sources")}
+        )
+        with pytest.raises(ConfigurationError, match="mismatched"):
+            require_rights(repository, BenchmarkPack.model_validate(value), ("external",))

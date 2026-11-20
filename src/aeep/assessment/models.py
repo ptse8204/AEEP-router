@@ -106,7 +106,7 @@ class DocumentTaskInput(StrictModel):
 
     @model_serializer(mode="wrap")
     def preserve_inline_descriptor(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
-        value = handler(self)
+        value: dict[str, Any] = handler(self)
         if self.instruction_delivery is None:
             value.pop("instruction_delivery", None)
         return value

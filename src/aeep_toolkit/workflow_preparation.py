@@ -7,7 +7,7 @@ import hashlib
 from pathlib import Path
 from typing import Any, Literal
 
-from pydantic import Field
+from pydantic import Field, SerializerFunctionWrapHandler, model_serializer
 
 from aeep.assessment.models import (
     AssessmentPlan,
@@ -33,12 +33,20 @@ class TaskRightsReview(StrictModel):
     """An operator's exact asset-use determination, not an inferred license."""
 
     schema_version: Literal["aeep.toolkit.task-rights.v1"] = "aeep.toolkit.task-rights.v1"
-    source_revision: str = Field(pattern=r"^[a-f0-9]{40}$")
+    source_revision: str = Field(pattern=r"^(?:[a-f0-9]{40}|[a-f0-9]{64})$")
+    source_pin_sha256: Digest | None = None
     task_id: str = Field(min_length=1, max_length=200)
     assets: dict[str, Digest] = Field(min_length=4, max_length=4096)
     basis: list[str] = Field(min_length=1, max_length=32)
     local_execution_allowed: bool = Field(strict=True)
     provider_disclosure_allowed: bool = Field(strict=True)
+
+    @model_serializer(mode="wrap")
+    def omit_legacy_source_pin(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
+        value: dict[str, Any] = handler(self)
+        if self.source_pin_sha256 is None:
+            value.pop("source_pin_sha256", None)
+        return value
 
 
 class PreparationIntent(StrictModel):
@@ -59,6 +67,7 @@ def require_rights(
 ) -> None:
     for identity in tasks:
         task = pack.task(identity)
+        source = pack.source_for_task(identity)
         if task.rights_review_ref is None:
             raise ConfigurationError(
                 "selected upstream task has no reviewed asset-use determination"
@@ -74,7 +83,9 @@ def require_rights(
             review is None
             or review[0]
             or content_digest(record) != task.rights_review_ref
-            or record.source_revision != pack.source.revision
+            or record.source_revision != source.revision
+            or (pack.task_sources is not None and record.source_pin_sha256 is None)
+            or (record.source_pin_sha256 is not None and record.source_pin_sha256 != content_digest(source.model_dump(mode="json")))
             or record.task_id != identity
             or record.assets != {asset.path: asset.sha256 for asset in task.assets}
             or not record.local_execution_allowed

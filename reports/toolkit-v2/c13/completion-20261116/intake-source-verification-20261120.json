@@ -1,0 +1,108 @@
+{
+  "schema_version": "aeep.c13.intake-source-verification.v1",
+  "source_digest": "2896e52509b33a5628f8d5833a9b6111ebff9f0ed374faa08da539a57753c896",
+  "tracked_source_and_test_files_matched": 414,
+  "intake_patch": {
+    "path": ".aeep/c13-combined-full-verification.4ae1bc40/corrected-intake.patch",
+    "sha256": "5b921a0391c091119c77b6fc086c58893a0f9e6050fe83dd55f07c5eda7c6c63"
+  },
+  "capacity_fixture": "tests/test_toolkit_runtime_install.py",
+  "focused_installation_tests_passed": 136,
+  "coverage_scope": {
+    "path": ".aeep/c13-combined-full-verification.4ae1bc40/cov20ok/scope.json",
+    "sha256": "aabae6d43b7de49b96a0b90bd38201289ec8ad1e41327f67a22cd418d65f69a5"
+  },
+  "coverage_result": {
+    "path": ".aeep/c13-combined-full-verification.4ae1bc40/cov20ok/result.json",
+    "sha256": "e5466bcdd10d495c3fb7728b0ecdec1b53dcede94d3a64b8f18c4fb92554157e"
+  },
+  "coverage_data": {
+    "path": ".aeep/c13-combined-full-verification.4ae1bc40/cov20ok/coverage.json",
+    "sha256": "e67e2932cc95893768ffb9dea3898004856d1ebaabfb5936417a420a40747965"
+  },
+  "checks": [
+    {
+      "name": "coverage-pytest",
+      "exit_code": 0,
+      "storage_guard": false,
+      "minimum_free_bytes": 42086682624,
+      "elapsed_seconds": 1055.64729025,
+      "log": ".aeep/c13-combined-full-verification.4ae1bc40/cov20ok/coverage-pytest.log",
+      "sha256": "528bd075b7944e7d0224f381737a1d9ab7b516f86443c4a789d1bd0d7067b0a1"
+    },
+    {
+      "name": "coverage-json",
+      "exit_code": 0,
+      "storage_guard": false,
+      "minimum_free_bytes": 42081972224,
+      "elapsed_seconds": 2.544265875000292,
+      "log": ".aeep/c13-combined-full-verification.4ae1bc40/cov20ok/coverage-json.log",
+      "sha256": "534196288f9f622dfe29470b8ed5c3e74ae691747bba9e606b2e81e6c68c1740"
+    },
+    {
+      "name": "critical-coverage",
+      "exit_code": 0,
+      "storage_guard": false,
+      "minimum_free_bytes": 42079866880,
+      "elapsed_seconds": 0.5182705419997546,
+      "log": ".aeep/c13-combined-full-verification.4ae1bc40/cov20ok/critical-coverage.log",
+      "sha256": "c54ccbd27dd9ac88dc8aadb5824c437cdd168e412d7fb8e566d4b6d6b488aca6"
+    },
+    {
+      "name": "assessment-coverage",
+      "exit_code": 0,
+      "storage_guard": false,
+      "minimum_free_bytes": 42079854592,
+      "elapsed_seconds": 0.5189321660000132,
+      "log": ".aeep/c13-combined-full-verification.4ae1bc40/cov20ok/assessment-coverage.log",
+      "sha256": "4a5e7160fe409aaf5c8393c734cf5200968132d88ce6394e9678be9551432d55"
+    },
+    {
+      "name": "coverage-report",
+      "exit_code": 0,
+      "storage_guard": false,
+      "minimum_free_bytes": 42079850496,
+      "elapsed_seconds": 2.037375915999746,
+      "log": ".aeep/c13-combined-full-verification.4ae1bc40/cov20ok/coverage-report.log",
+      "sha256": "6ec8a56b03e9b944693b131d7fc1907315f44fd29e03c188e36a543d35f74bc1"
+    }
+  ],
+  "pytest_passed": 2196,
+  "pytest_skipped": 21,
+  "coverage_percent": 81.54952800275407,
+  "critical_coverage_passed": true,
+  "assessment_coverage_passed": true,
+  "minimum_free_bytes": 42079850496,
+  "earlier_attempts": [
+    {
+      "cause": "the file installer did not use the existing test-only capacity fixture",
+      "record": {
+        "path": ".aeep/c13-combined-full-verification.4ae1bc40/cov20/result.json",
+        "sha256": "dfc89b8bebbf8b5b7b22becce94cfff3d2ecd820a51652a420137d6649797faa"
+      }
+    },
+    {
+      "cause": "the runner supplied a strict offline flag that denied test-only loopback connections",
+      "record": {
+        "path": ".aeep/c13-combined-full-verification.4ae1bc40/cov20f/result.json",
+        "sha256": "d96fcdbe2b80c25ec323ff9143a0ad9e08f931ec418889d236b342bcd481d37e"
+      }
+    }
+  ],
+  "production_storage_policy_changed": false,
+  "models": 0,
+  "comparisons_paused": true,
+  "waza_excluded": true,
+  "formal_cases_assigned": 0,
+  "compileall_passed": true,
+  "schema_check_passed": true,
+  "ruff_passed": true,
+  "mypy_source_files_passed": 196,
+  "assessment_policy_passed": true,
+  "docs_check": {
+    "inputs": 72,
+    "link_errors": 0,
+    "path": ".aeep/c13-combined-full-verification.4ae1bc40/cov20ok/docs-check.log",
+    "sha256": "38356c55a71ad1b3f4f0ebf50fc141c689fc548035ff6266f194d1fdba080723"
+  }
+}

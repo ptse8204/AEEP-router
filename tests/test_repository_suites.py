@@ -1013,6 +1013,119 @@ def test_native_identity_bounds_and_module_scope(large_case, bad):
 
 
 @pytest.mark.asyncio
+async def test_reviewed_long_statement_preserves_source_and_stays_versioned(large_case, suite_cases):
+    from jsonschema import Draft202012Validator, ValidationError
+
+    from aeep.assessment.repository_suites import SuiteInputV7, compressed_patch_artifact
+
+    old = native_case(large_case)
+    value = old.model_dump(mode='json')
+    value['schema_version'] = 'assessment.repository-suite-case.v7'
+    statement = ('Published original instructions.\n' * 350) + 'Verified final constraint é.'
+    value['input'].update(task=statement, instruction_format='source-statement-v1')
+    binding = content_digest(value['input'])
+    value['truth'].update(create_paths=[], input_sha256=binding)
+    output = compressed_patch_artifact(RepositoryPatch(
+        base_sha256=binding, files={'library/core.py': 'def value():\n    return 42\n'},
+    ))
+    value['fault_outputs'] = [output]
+    case = RepositorySuiteCase.model_validate(value)
+    assert isinstance(case.input, SuiteInputV7)
+    validator = Draft202012Validator(RepositorySuiteCase.model_json_schema())
+    validator.validate(value)
+    for version in range(1, 7):
+        wrong = value | {'schema_version': f'assessment.repository-suite-case.v{version}',
+                         'truth': old.truth.model_dump(mode='json') | {'input_sha256': binding}}
+        with pytest.raises(ValueError):
+            RepositorySuiteCase.model_validate(wrong)
+        with pytest.raises(ValidationError):
+            validator.validate(wrong)
+    with pytest.raises(ValueError, match='UTF-8 bytes'):
+        SuiteInputV7.model_validate(value['input'] | {'task': 'é' * 8_001})
+    root = str(Path(case.truth.source.path).parent)
+    with pytest.raises(ValueError):
+        public_archive(value['input'], [root])
+    projection = public_archive(value['input'], [root], large=True)
+    assert projection['task'] == statement and projection['base_sha256'] == binding
+    assert base64.b64decode(projection['source_b64']) == case.truth.source.read()
+    recipe = repository_suite_recipe([case, *suite_cases[1:]])
+    Draft202012Validator(recipe.input_schema).validate(value['input'])
+    with pytest.raises(ValidationError):
+        Draft202012Validator(repository_suite_recipe(suite_cases).input_schema).validate(value['input'])
+
+    async def probe(payload):
+        assert 'task' not in payload and 'instruction_format' not in payload
+        return success(payload, case.truth)
+
+    assert (await grade_suite_output(value['input'], value['truth'], output, probe)).valid
+
+
+@pytest.mark.asyncio
+async def test_reviewed_source_creation_requires_v7_and_exact_absent_path(large_case, suite_cases):
+    from jsonschema import Draft202012Validator, ValidationError
+
+    from aeep.assessment.repository_suites import compressed_patch_artifact
+
+    old_case = native_case(large_case)
+    value = old_case.model_dump(mode='json')
+    added = 'library/prompts.py'
+    value['schema_version'] = 'assessment.repository-suite-case.v7'
+    value['input']['editable_paths'].append(added)
+    digest = content_digest(value['input'])
+    value['truth'].update(input_sha256=digest, create_paths=[added])
+    output = compressed_patch_artifact(RepositoryPatch(base_sha256=digest, files={added: 'TEXT = "new"'}))
+    reference = Path(large_case.reference.path).with_name('creation-reference.json')
+    reference_bytes = json.dumps(output).encode()
+    reference.write_bytes(reference_bytes)
+    value['reference'] = {
+        'path': str(reference), 'sha256': hashlib.sha256(reference_bytes).hexdigest(),
+        'size_bytes': len(reference_bytes),
+    }
+    value['fault_outputs'] = [output]
+    case = RepositorySuiteCase.model_validate(value)
+    validator = Draft202012Validator(RepositorySuiteCase.model_json_schema())
+    validator.validate(value)
+    for version in range(1, 7):
+        wrong = value | {'schema_version': f'assessment.repository-suite-case.v{version}'}
+        with pytest.raises(ValueError):
+            RepositorySuiteCase.model_validate(wrong)
+        with pytest.raises(ValidationError):
+            validator.validate(wrong)
+    for paths in (['unlisted.py'], [added, added]):
+        wrong = value | {'truth': value['truth'] | {'create_paths': paths}}
+        with pytest.raises(ValueError):
+            RepositorySuiteCase.model_validate(wrong)
+    assert added not in archive_files(case.truth.source.read(), large=True)
+    recipe = repository_suite_recipe([case, *suite_cases[1:]])
+    old_recipe = repository_suite_recipe([old_case, *suite_cases[1:]])
+    assert 'SuiteTruthV7' in recipe.extension.truth_schema['$defs']
+    assert 'SuiteTruthV7' not in old_recipe.extension.truth_schema['$defs']
+    assert recipe.dependencies['program'] == old_recipe.dependencies['program']
+    assert reference_outputs(recipe, [value['input']]) == [output]
+
+    async def probe(payload):
+        files = archive_files(base64.b64decode(payload['archive']), large=True)
+        assert files[added] == b'TEXT = "new"'
+        assert files['library/core.py'] == b'def value():\n    return 0\n'
+        assert files['package/tests/test_core.py'].startswith(b'protected oracle')
+        return success(payload, case.truth)
+
+    async def forbidden(_payload):
+        pytest.fail('unreviewed file creation reached the protected executor')
+
+    assert (await grade_suite_output(value['input'], value['truth'], output, probe)).valid
+    forged = compressed_patch_artifact(RepositoryPatch(base_sha256=digest, files={'other.py': 'x = 1'}))
+    result = await grade_suite_output(value['input'], value['truth'], forged, forbidden)
+    assert result.detail == 'patch_contract'
+    with pytest.raises(ConfigurationError, match='absent'):
+        await grade_suite_output(value['input'], old_case.truth.model_dump(mode='json') |
+                                 {'input_sha256': digest}, output, forbidden)
+    with pytest.raises(ConfigurationError, match='creation paths'):
+        await grade_suite_output(value['input'], value['truth'] |
+                                 {'create_paths': ['library/core.py']}, output, forbidden)
+
+
+@pytest.mark.asyncio
 @pytest.mark.parametrize('outcome', ['pass', 'truncated', 'failed', 'skip', 'nonzero'])
 async def test_native_grading_never_infers_missing_or_nonpassing_results(large_case, outcome):
     case = native_case(large_case)

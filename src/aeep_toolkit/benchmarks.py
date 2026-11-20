@@ -12,7 +12,7 @@ import zipfile
 from pathlib import Path, PurePosixPath
 from typing import TYPE_CHECKING, Any, Literal
 
-from pydantic import Field, model_validator
+from pydantic import Field, SerializerFunctionWrapHandler, model_serializer, model_validator
 
 from .models import ContractModel, Count, Digest, Identifier, SourcePin
 
@@ -37,6 +37,19 @@ EXTRACTBENCH_ASSET_ROLES = {
     "tests/test.sh": "verifier",
     "tests/Dockerfile": "environment",
 }
+REVIEWED_DOCUMENT_ASSET_ROLES = {
+    "instruction.md": "instruction",
+    "environment/document.pdf": "input",
+    "environment/schema.json": "input",
+    "solution/expected.json": "oracle",
+    "tests/verifier.py": "verifier",
+}
+REVIEWED_DOCUMENT_OPTIONAL_ROLES = {
+    "LICENSE": "license",
+    "solution/reference.xml": "oracle",
+}
+DOCUMENT_PACKS = frozenset({"extractbench", "reviewed-documents"})
+
 INITIAL_TASKS: tuple[
     tuple[str, Literal["document-data", "software-engineering"], Literal["medium", "hard"]], ...
 ] = (
@@ -116,15 +129,35 @@ class BenchmarkTask(ContractModel):
 
 
 class BenchmarkPack(ContractModel):
-    schema_version: Literal["aeep.toolkit.benchmark-pack.v1"] = "aeep.toolkit.benchmark-pack.v1"
-    pack_id: Literal["skillsbench", "mcpmark", "mcp-universe", "extractbench"]
+    schema_version: Literal["aeep.toolkit.benchmark-pack.v1", "aeep.toolkit.benchmark-pack.v2"] = (
+        "aeep.toolkit.benchmark-pack.v1"
+    )
+    pack_id: Literal["skillsbench", "mcpmark", "mcp-universe", "extractbench", "reviewed-documents"]
     source: SourcePin
     tasks: tuple[BenchmarkTask, ...] = Field(min_length=1, max_length=256)
+    task_sources: dict[Identifier, SourcePin] | None = None
+
+    @model_serializer(mode="wrap")
+    def omit_legacy_task_sources(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
+        value: dict[str, Any] = handler(self)
+        if self.task_sources is None:
+            value.pop("task_sources", None)
+        return value
 
     @model_validator(mode="after")
     def pinned_pack(self) -> BenchmarkPack:
         from .stack_readiness import source_revisions
 
+        task_ids = {task.task_id for task in self.tasks}
+        if len(task_ids) != len(self.tasks):
+            raise ValueError("duplicate task identities")
+        if self.pack_id == "reviewed-documents":
+            if self.schema_version != "aeep.toolkit.benchmark-pack.v2":
+                raise ValueError("reviewed documents require a v2 pack")
+            self.check_document_sources(task_ids)
+            return self
+        if self.schema_version != "aeep.toolkit.benchmark-pack.v1" or self.task_sources is not None:
+            raise ValueError("pinned upstream packs require their v1 manifest")
         revision = (
             EXTRACTBENCH_REVISION if self.pack_id == "extractbench"
             else source_revisions("0" * 64)[self.pack_id]
@@ -135,25 +168,56 @@ class BenchmarkPack(ContractModel):
             if self.source.repository != EXTRACTBENCH_REPOSITORY:
                 raise ValueError("ExtractBench requires its pinned dataset repository")
             for task in self.tasks:
-                expected = {
-                    f"tasks/{task.task_id}/{path}": role
-                    for path, role in EXTRACTBENCH_ASSET_ROLES.items()
-                }
-                if (
-                    task.domain != "document-data" or task.upstream_score != "native_reward"
-                    or task.output_paths != ("output.json",)
-                    or {asset.path: asset.role for asset in task.assets} != expected
-                ):
-                    raise ValueError("ExtractBench requires its original protected task layout and native score")
-        if len({task.task_id for task in self.tasks}) != len(self.tasks):
-            raise ValueError("duplicate task identities")
+                check_document_roles(task, extractbench=True)
         return self
+
+    def check_document_sources(self, task_ids: set[str]) -> None:
+        from aeep.assessment.models import content_digest
+
+        if self.task_sources is None or self.task_sources.keys() != task_ids:
+            raise ValueError("reviewed document pack must pin each and only its reviewed tasks")
+        inventory = {
+            "tasks": [task.model_dump(mode="json") for task in self.tasks],
+            "task_sources": {name: pin.model_dump(mode="json") for name, pin in self.task_sources.items()},
+        }
+        if self.source.artifact_sha256 != content_digest(inventory):
+            raise ValueError("reviewed document pack differs from its source inventory")
+        for task in self.tasks:
+            source = self.task_sources[task.task_id]
+            extractbench = source.repository.rstrip("/") == EXTRACTBENCH_REPOSITORY
+            if extractbench and source.revision != EXTRACTBENCH_REVISION:
+                raise ValueError("ExtractBench members require the pinned dataset revision")
+            document = check_document_roles(task, extractbench=extractbench)
+            if source.artifact_sha256 != document.sha256:
+                raise ValueError("reviewed task source differs from its document asset")
+
+    def source_for_task(self, task_id: str) -> SourcePin:
+        return self.source if self.task_sources is None else self.task_sources[task_id]
 
     def task(self, task_id: str) -> BenchmarkTask:
         for task in self.tasks:
             if task.task_id == task_id:
                 return task
         raise ValueError("unknown benchmark task")
+
+
+def check_document_roles(task: BenchmarkTask, *, extractbench: bool) -> TaskAsset:
+    prefix = PurePosixPath("tasks") / task.task_id
+    roles = EXTRACTBENCH_ASSET_ROLES if extractbench else REVIEWED_DOCUMENT_ASSET_ROLES
+    required = {(prefix / path).as_posix(): role for path, role in roles.items()}
+    optional = {} if extractbench else {
+        (prefix / path).as_posix(): role for path, role in REVIEWED_DOCUMENT_OPTIONAL_ROLES.items()
+    }
+    assets = {asset.path: asset for asset in task.assets}
+    if (
+        task.domain != "document-data"
+        or task.output_paths != ("output.json",)
+        or (extractbench and task.upstream_score != "native_reward")
+        or not required.keys() <= assets.keys() <= required.keys() | optional.keys()
+        or any(asset.role != (required | optional)[name] for name, asset in assets.items())
+    ):
+        raise ValueError("document pack requires its original protected task layout and score contract")
+    return assets[(prefix / "environment/document.pdf").as_posix()]
 
 
 def parse_pack(value: Any) -> BenchmarkPack | MCPStatePack:
@@ -220,6 +284,8 @@ def inspect_pack(pack: BenchmarkPack | MCPStatePack, root: Path, task_ids: tuple
                     if a.role in {"oracle", "verifier"} or (isinstance(task, MCPStateTask) and a.role == 'environment')
                 ],
                 "rights_review_ref": task.rights_review_ref,
+                **({"source": pack.source_for_task(task.task_id).model_dump(mode="json")}
+                   if isinstance(pack, BenchmarkPack) and pack.task_sources is not None else {}),
                 "adaptations": list(task.adaptations),
                 "upstream_score": task.upstream_score,
                 **({'state_outputs':[output.model_dump(mode='json') for output in task.state_outputs],
@@ -236,7 +302,7 @@ def inspect_pack(pack: BenchmarkPack | MCPStatePack, root: Path, task_ids: tuple
 
 
 def _worker_path(pack_id: str, task_id: str, asset: TaskAsset) -> str:
-    if pack_id == "extractbench":
+    if pack_id in DOCUMENT_PACKS:
         return PurePosixPath(asset.path).relative_to(PurePosixPath("tasks") / task_id).as_posix()
     return asset.path
 
@@ -323,8 +389,8 @@ def document_archive(
         DocumentTaskInput,
     )
 
-    if pack.pack_id != 'extractbench':
-        raise ValueError('document archive staging requires the pinned ExtractBench pack')
+    if pack.pack_id not in DOCUMENT_PACKS:
+        raise ValueError('document archive staging requires a reviewed document pack')
     task = pack.task(task_id)
     input_value = task_input(pack, root, task_id)
     archive = base64.b64decode(input_value.pop('task_archive_b64'), validate=True)
