@@ -1,13 +1,16 @@
 # C13 beta handoff and remaining evidence
 
+Start with the [current C13 status](C13_STATUS.md) for the grader results,
+pending work, and operator decisions.
+
 ## November 19 handoff
 
 The combined intake draft passed 2,196 regression tests and produced
 a wheel and source distribution. The coverage pass stopped at the
 storage guard and produced no report. Grouped review `c955cbf6` binds
 the Locify launcher correction and exact EOS diagnostics. Seven
-preflight checks passed. The group needs operator approval and 53 GiB
-usable space. It has no model turns, provider disclosure, or downloads.
+preflight checks passed. The operator approved the group and a one-use
+storage exception. [Completed run](C13_STATUS.md#why-two-cases-have-no-grade)
 
 [Protected-run readback](rebench-protected-first-attempts-20261119.json)
 accounts for the first Locify and EOS reference attempts. The launcher
@@ -24,7 +27,8 @@ the published repair's 1/1 with the original's 0/1. The original passed
 Both settled receipts and the earlier failed attempt remain available.
 Removing the single approved local snapshot restored 12.24 GiB.
 The same audit verified all 43 newly acquired EOS artifacts by checksum.
-EOS native installation and grading remain open.
+The subsequent native installation passed its import checks. EOS
+grading remains open.
 
 The [Locify runtime check](locify-native-runtime-20261119.json) built
 Fire and LiteLLM locally from their pinned sources and installed all 65

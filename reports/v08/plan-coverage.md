@@ -1,5 +1,9 @@
 # 0.8 plan coverage and remaining work
 
+The [current C13 handoff](../toolkit-v2/c13/completion-20261116/C13_STATUS.md)
+summarizes task grades, ungraded attempts, the verified stack, and the
+remaining decisions in readable Markdown.
+
 [C13 correction group results](../toolkit-v2/c13/completion-20261116/rebench-storage-exception-result-20261119.json)
 record five settled offline operations under the scoped storage exception.
 Locify's launcher passed and its two protected fixtures errored. A

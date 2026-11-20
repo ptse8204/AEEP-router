@@ -98,6 +98,16 @@ observed trial is `NOT_ASSESSED`. The readable report shows the engineering
 comparison status separately from the unassessed real-model value. Earlier
 artifacts retain their original format and evidence meaning.
 
+## Operator handoffs
+
+For an operator handoff, open with a readable Markdown report that says
+what ran, the result by task, why a grade is unavailable, and whether the
+operator needs to act. Explain which checkpoint or decision the result
+affects. Include failed and interrupted attempts in that report. Link to
+the original receipts and JSON evidence for anyone who needs to verify the
+claims. The reader should be able to understand the outcome from the
+Markdown alone. [Example C13 handoff](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md)
+
 ## Native grading scores
 
 The version 7 contained integration grader carries the upstream 0–1 task

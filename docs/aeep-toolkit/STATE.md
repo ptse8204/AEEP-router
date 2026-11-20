@@ -1,5 +1,11 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 20. C13 operator handoff.**
+The [plain-language report](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md)
+explains the Locify and EOS test failures, where Optype received a grade,
+and how the cases affect the private beta. No operator decision is
+pending. The report links the original evidence for verification.
+
 **November 19. The approved Locify and EOS correction group ran.**
 The [receipt audit](../../reports/toolkit-v2/c13/completion-20261116/rebench-storage-exception-result-20261119.json)
 records the operator's one-use storage exception. The group settled
