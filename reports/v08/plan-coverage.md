@@ -1,5 +1,10 @@
 # 0.8 plan coverage and remaining work
 
+[EOS now has both protected grades](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#what-broke-in-eos-and-what-fixed-it)
+under the documented offline adaptation. The repair passed 359 tests
+and scored 1/1. The original failed the expected test, passed 358
+preservation checks and scored 0/1. No formal assignment was made.
+
 [C13 source verification and task results](../toolkit-v2/c13/completion-20261116/C13_STATUS.md)
 record 2,196 passes, 81.55 percent coverage and both branch checks passing.
 Verified repository and document intake is on the feature branch.

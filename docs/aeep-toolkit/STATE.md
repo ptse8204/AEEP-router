@@ -1,5 +1,17 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 20. EOS's adapted offline grader verifies both roles.**
+The [operator report](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md)
+locates all seven original failures and records their repairs. After
+using compatible SciPy, the publisher's GitPython dependency and its
+recorded price sample, all seven checks passed. The protected repair
+scored 1/1 with 359 passes. The original scored 0/1 with 358
+preservation passes and the expected visualization failure. The 16
+ambiguous preservation labels each require both native matches.
+Six local operations settled without model calls or cash. The case
+has adapted evidence and no formal assignment. Comparisons remain
+paused, Waza remains excluded, and C13 stays open.
+
 **November 20. Repository and document intake passes full source verification.**
 The [operator report](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md)
 records 2,196 passed tests, 21 skips, 81.55 percent coverage, and both

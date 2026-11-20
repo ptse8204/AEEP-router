@@ -1,0 +1,477 @@
+{
+  "schema_version": "aeep.c13.eos-repaired-grader.v1",
+  "native_source_revision": "d912561bfbe5c1c97505f89225c3f9650b00c3c7",
+  "initial_diagnostic": {
+    "actual": {
+      "path": ".aeep/completion-20261116/c13-eos-exact-failures-20261120/result.json",
+      "sha256": "683f5e0ff6bfe6be09df291d3b351d7fac419edc7db937ae89dcfc6ca9b413a8"
+    },
+    "located_failures": [
+      {
+        "test": "tests/test_class_ems.py::test_simulation",
+        "phase": "call",
+        "category": "AttributeError",
+        "file": "src/akkudoktoreos/prediction/interpolator.py",
+        "line": 28,
+        "attribute": "_grid",
+        "object_type": "RegularGridInterpolator",
+        "missing_module": null
+      },
+      {
+        "test": "tests/test_class_ems_2.py::test_simulation",
+        "phase": "call",
+        "category": "AttributeError",
+        "file": "src/akkudoktoreos/prediction/interpolator.py",
+        "line": 28,
+        "attribute": "_grid",
+        "object_type": "RegularGridInterpolator",
+        "missing_module": null
+      },
+      {
+        "test": "tests/test_class_optimize.py::test_optimize[optimize_input_1.json-optimize_result_1.json-3]",
+        "phase": "call",
+        "category": "AttributeError",
+        "file": "src/akkudoktoreos/prediction/interpolator.py",
+        "line": 28,
+        "attribute": "_grid",
+        "object_type": "RegularGridInterpolator",
+        "missing_module": null
+      },
+      {
+        "test": "tests/test_class_optimize.py::test_optimize[optimize_input_2.json-optimize_result_2.json-3]",
+        "phase": "call",
+        "category": "AttributeError",
+        "file": "src/akkudoktoreos/prediction/interpolator.py",
+        "line": 28,
+        "attribute": "_grid",
+        "object_type": "RegularGridInterpolator",
+        "missing_module": null
+      },
+      {
+        "test": "tests/test_doc.py::test_openapi_md_current",
+        "phase": "call",
+        "category": "ModuleNotFoundError",
+        "file": "scripts/generate_openapi_md.py",
+        "line": 8,
+        "attribute": null,
+        "object_type": null,
+        "missing_module": "git"
+      },
+      {
+        "test": "tests/test_elecpriceakkudoktor.py::test_cache_integration",
+        "phase": "call",
+        "category": "ConnectionError",
+        "file": "src/akkudoktoreos/prediction/elecpriceakkudoktor.py",
+        "line": 112,
+        "attribute": null,
+        "object_type": null,
+        "missing_module": null
+      },
+      {
+        "test": "tests/test_elecpriceakkudoktor.py::test_key_to_array_resampling",
+        "phase": "call",
+        "category": "ConnectionError",
+        "file": "src/akkudoktoreos/prediction/elecpriceakkudoktor.py",
+        "line": 112,
+        "attribute": null,
+        "object_type": null,
+        "missing_module": null
+      }
+    ]
+  },
+  "dependency_inputs": {
+    "path": ".aeep/completion-20261116/c13-eos-runtime-inputs-20261120/assets.json",
+    "sha256": "696541a3b2aad8fd4393de6938b9219d74a3ece6b47a692da27fe41db70ed161"
+  },
+  "child_image": {
+    "path": ".aeep/completion-20261116/c13-eos-runtime-inputs-20261120/runtime.json",
+    "sha256": "81e1bed83d057de706d9ec05622ff11073fbdb7e618689c12ef8d77235d3850a"
+  },
+  "build_driver": {
+    "path": ".aeep/completion-20261116/c13-eos-runtime-inputs-20261120/build-reviewed-overlay.py",
+    "sha256": "7af0df1bc1ddcbc2c55c77b55b1c9511663a85ea2fb69879651465317611ac58"
+  },
+  "first_fixture_attempt": {
+    "path": ".aeep/completion-20261116/c13-eos-repaired-pair-20261120/result.json",
+    "sha256": "91b751dd83d1ed3a2cde39dcc75272ed5d6b77a1dfbc80a6238beeda900d69ee"
+  },
+  "final_result": {
+    "path": ".aeep/completion-20261116/c13-eos-repaired-pair-local-date-20261120/result.json",
+    "sha256": "cf3811375ada268864a5e7031ead52e696b8b4545637c010ddd8c16c51473eec"
+  },
+  "actual": {
+    "targeted": {
+      "receipt": "rcpt_61d2b3f3f61f483ab32391e7b86bd2a9",
+      "score": null,
+      "statuses": {},
+      "passed": 7,
+      "failures": [],
+      "fixture_requests": [
+        "tests/test_elecpriceakkudoktor.py::test_cache_integration",
+        "tests/test_elecpriceakkudoktor.py::test_key_to_array_resampling"
+      ],
+      "accepted": true
+    },
+    "reference": {
+      "receipt": "rcpt_14a961f42fab499d9e96c213fc5af897",
+      "score": 1.0,
+      "statuses": {},
+      "passed": 359,
+      "failures": [],
+      "fixture_requests": [
+        "tests/test_elecpriceakkudoktor.py::test_cache_integration",
+        "tests/test_elecpriceakkudoktor.py::test_key_to_array_resampling"
+      ],
+      "accepted": true
+    },
+    "original": {
+      "receipt": "rcpt_0540d20da8d84ee58c2bd2cb85bc6c8b",
+      "score": 0.0,
+      "statuses": {
+        "tests/test_class_optimize.py::test_optimize[optimize_input_1.json-optimize_result_1.json-3]": "FAILED"
+      },
+      "passed": 358,
+      "failures": [
+        {
+          "test": "tests/test_class_optimize.py::test_optimize[optimize_input_1.json-optimize_result_1.json-3]",
+          "phase": "call",
+          "category": "ValueError",
+          "file": "src/akkudoktoreos/utils/visualize.py",
+          "line": 455,
+          "attribute": null,
+          "object_type": null,
+          "missing_module": null
+        }
+      ],
+      "fixture_requests": [
+        "tests/test_elecpriceakkudoktor.py::test_cache_integration",
+        "tests/test_elecpriceakkudoktor.py::test_key_to_array_resampling"
+      ],
+      "accepted": true
+    }
+  },
+  "native_matches": {
+    "tests/test_dataabc.py::TestDataImportProvider::test_import_datetimes[2024-11-10": [
+      "tests/test_dataabc.py::TestDataImportProvider::test_import_datetimes[2024-11-10 00:00:00-24-24]"
+    ],
+    "tests/test_dataabc.py::TestDataImportProvider::test_import_datetimes[2024-08-10": [
+      "tests/test_dataabc.py::TestDataImportProvider::test_import_datetimes[2024-08-10 00:00:00-24-24]"
+    ],
+    "tests/test_dataabc.py::TestDataImportProvider::test_import_datetimes[2024-03-31": [
+      "tests/test_dataabc.py::TestDataImportProvider::test_import_datetimes[2024-03-31 00:00:00-24-23]"
+    ],
+    "tests/test_dataabc.py::TestDataImportProvider::test_import_datetimes[2024-10-27": [
+      "tests/test_dataabc.py::TestDataImportProvider::test_import_datetimes[2024-10-27 00:00:00-24-25]"
+    ],
+    "tests/test_dataabc.py::TestDataImportProvider::test_import_datetimes_utc[2024-11-10": [
+      "tests/test_dataabc.py::TestDataImportProvider::test_import_datetimes_utc[2024-11-10 00:00:00-24-24]"
+    ],
+    "tests/test_dataabc.py::TestDataImportProvider::test_import_datetimes_utc[2024-08-10": [
+      "tests/test_dataabc.py::TestDataImportProvider::test_import_datetimes_utc[2024-08-10 00:00:00-24-24]"
+    ],
+    "tests/test_dataabc.py::TestDataImportProvider::test_import_datetimes_utc[2024-03-31": [
+      "tests/test_dataabc.py::TestDataImportProvider::test_import_datetimes_utc[2024-03-31 00:00:00-24-23]"
+    ],
+    "tests/test_dataabc.py::TestDataImportProvider::test_import_datetimes_utc[2024-10-27": [
+      "tests/test_dataabc.py::TestDataImportProvider::test_import_datetimes_utc[2024-10-27 00:00:00-24-25]"
+    ],
+    "tests/test_datetimeutil.py::test_to_datetime[TC004-Europe/Paris-2024-01-01": [
+      "tests/test_datetimeutil.py::test_to_datetime[TC004-Europe/Paris-2024-01-01 00:00:00-None-None-None-False-expected_output3-False]"
+    ],
+    "tests/test_datetimeutil.py::test_to_datetime[TC005-Etc/UTC-2024-01-01": [
+      "tests/test_datetimeutil.py::test_to_datetime[TC005-Etc/UTC-2024-01-01 00:00:00-None-None-None-False-expected_output4-False]"
+    ],
+    "tests/test_datetimeutil.py::test_to_datetime[TC006-Europe/Berlin-2024-01-01": [
+      "tests/test_datetimeutil.py::test_to_datetime[TC006-Europe/Berlin-2024-01-01 00:00:00-None-None-None-False-expected_output5-False]"
+    ],
+    "tests/test_datetimeutil.py::test_to_datetime[TC007-Atlantic/Canary-2024-01-01": [
+      "tests/test_datetimeutil.py::test_to_datetime[TC007-Atlantic/Canary-2024-01-01 12:00:00-None-None-None-False-expected_output6-False]"
+    ],
+    "tests/test_datetimeutil.py::test_to_datetime[TC008-Etc/UTC-2024-01-01": [
+      "tests/test_datetimeutil.py::test_to_datetime[TC008-Etc/UTC-2024-01-01 12:00:00-None-None-None-False-expected_output7-False]"
+    ],
+    "tests/test_datetimeutil.py::test_to_datetime[TC009-Europe/Berlin-2024-01-01": [
+      "tests/test_datetimeutil.py::test_to_datetime[TC009-Europe/Berlin-2024-01-01 12:00:00-None-None-None-False-expected_output8-False]"
+    ],
+    "tests/test_datetimeutil.py::test_to_duration_valid[2": [
+      "tests/test_datetimeutil.py::test_to_duration_valid[2 days-expected_output1]"
+    ],
+    "tests/test_datetimeutil.py::test_to_duration_valid[5": [
+      "tests/test_datetimeutil.py::test_to_duration_valid[5 hours-expected_output2]"
+    ],
+    "tests/test_datetimeutil.py::test_to_duration_valid[47": [
+      "tests/test_datetimeutil.py::test_to_duration_valid[47 hours-expected_output3]"
+    ],
+    "tests/test_datetimeutil.py::test_to_duration_valid[48": [
+      "tests/test_datetimeutil.py::test_to_duration_valid[48 hours-expected_output4]"
+    ],
+    "tests/test_datetimeutil.py::test_to_duration_valid[30": [
+      "tests/test_datetimeutil.py::test_to_duration_valid[30 minutes-expected_output5]"
+    ],
+    "tests/test_datetimeutil.py::test_to_duration_valid[45": [
+      "tests/test_datetimeutil.py::test_to_duration_valid[45 seconds-expected_output6]"
+    ],
+    "tests/test_datetimeutil.py::test_to_duration_valid[1": [
+      "tests/test_datetimeutil.py::test_to_duration_valid[1 day 2 hours 30 minutes 15 seconds-expected_output7]"
+    ],
+    "tests/test_datetimeutil.py::test_to_duration_valid[3": [
+      "tests/test_datetimeutil.py::test_to_duration_valid[3 days 4 hours-expected_output8]"
+    ],
+    "tests/test_datetimeutil.py::test_hours_in_day[Etc/UTC-2024-11-10": [
+      "tests/test_datetimeutil.py::test_hours_in_day[Etc/UTC-2024-11-10 00:00:00-Europe/Berlin-24]"
+    ],
+    "tests/test_datetimeutil.py::test_hours_in_day[Etc/UTC-2024-08-10": [
+      "tests/test_datetimeutil.py::test_hours_in_day[Etc/UTC-2024-08-10 00:00:00-Europe/Berlin-24]"
+    ],
+    "tests/test_datetimeutil.py::test_hours_in_day[Etc/UTC-2024-03-31": [
+      "tests/test_datetimeutil.py::test_hours_in_day[Etc/UTC-2024-03-31 00:00:00-Europe/Berlin-23]"
+    ],
+    "tests/test_datetimeutil.py::test_hours_in_day[Etc/UTC-2024-10-27": [
+      "tests/test_datetimeutil.py::test_hours_in_day[Etc/UTC-2024-10-27 00:00:00-Europe/Berlin-25]"
+    ],
+    "tests/test_datetimeutil.py::test_hours_in_day[Europe/Berlin-2024-11-10": [
+      "tests/test_datetimeutil.py::test_hours_in_day[Europe/Berlin-2024-11-10 00:00:00-Europe/Berlin-24]"
+    ],
+    "tests/test_datetimeutil.py::test_hours_in_day[Europe/Berlin-2024-08-10": [
+      "tests/test_datetimeutil.py::test_hours_in_day[Europe/Berlin-2024-08-10 00:00:00-Europe/Berlin-24]"
+    ],
+    "tests/test_datetimeutil.py::test_hours_in_day[Europe/Berlin-2024-03-31": [
+      "tests/test_datetimeutil.py::test_hours_in_day[Europe/Berlin-2024-03-31 00:00:00-Europe/Berlin-23]"
+    ],
+    "tests/test_datetimeutil.py::test_hours_in_day[Europe/Berlin-2024-10-27": [
+      "tests/test_datetimeutil.py::test_hours_in_day[Europe/Berlin-2024-10-27 00:00:00-Europe/Berlin-25]"
+    ],
+    "tests/test_elecpriceimport.py::test_import[2024-11-10": [
+      "tests/test_elecpriceimport.py::test_import[2024-11-10 00:00:00-False]",
+      "tests/test_elecpriceimport.py::test_import[2024-11-10 00:00:00-True]"
+    ],
+    "tests/test_elecpriceimport.py::test_import[2024-08-10": [
+      "tests/test_elecpriceimport.py::test_import[2024-08-10 00:00:00-False]",
+      "tests/test_elecpriceimport.py::test_import[2024-08-10 00:00:00-True]"
+    ],
+    "tests/test_elecpriceimport.py::test_import[2024-03-31": [
+      "tests/test_elecpriceimport.py::test_import[2024-03-31 00:00:00-False]",
+      "tests/test_elecpriceimport.py::test_import[2024-03-31 00:00:00-True]"
+    ],
+    "tests/test_elecpriceimport.py::test_import[2024-10-27": [
+      "tests/test_elecpriceimport.py::test_import[2024-10-27 00:00:00-False]",
+      "tests/test_elecpriceimport.py::test_import[2024-10-27 00:00:00-True]"
+    ],
+    "tests/test_prediction.py::test_prediction_common_settings_invalid[prediction_hours--1-Input": [
+      "tests/test_prediction.py::test_prediction_common_settings_invalid[prediction_hours--1-Input should be greater than or equal to 0]"
+    ],
+    "tests/test_prediction.py::test_prediction_common_settings_invalid[prediction_historic_hours--5-Input": [
+      "tests/test_prediction.py::test_prediction_common_settings_invalid[prediction_historic_hours--5-Input should be greater than or equal to 0]"
+    ],
+    "tests/test_prediction.py::test_prediction_common_settings_invalid[latitude--91.0-Input": [
+      "tests/test_prediction.py::test_prediction_common_settings_invalid[latitude--91.0-Input should be greater than or equal to -90]"
+    ],
+    "tests/test_prediction.py::test_prediction_common_settings_invalid[latitude-91.0-Input": [
+      "tests/test_prediction.py::test_prediction_common_settings_invalid[latitude-91.0-Input should be less than or equal to 90]"
+    ],
+    "tests/test_prediction.py::test_prediction_common_settings_invalid[longitude--181.0-Input": [
+      "tests/test_prediction.py::test_prediction_common_settings_invalid[longitude--181.0-Input should be greater than or equal to -180]"
+    ],
+    "tests/test_prediction.py::test_prediction_common_settings_invalid[longitude-181.0-Input": [
+      "tests/test_prediction.py::test_prediction_common_settings_invalid[longitude-181.0-Input should be less than or equal to 180]"
+    ],
+    "tests/test_predictionabc.py::TestPredictionContainer::test_end_datetime[2024-11-10": [
+      "tests/test_predictionabc.py::TestPredictionContainer::test_end_datetime[2024-11-10 00:00:00-24-2024-11-11 00:00:00]",
+      "tests/test_predictionabc.py::TestPredictionContainer::test_end_datetime[2024-11-10 00:00:00-48-2024-11-12 00:00:00]"
+    ],
+    "tests/test_predictionabc.py::TestPredictionContainer::test_end_datetime[2024-08-10": [
+      "tests/test_predictionabc.py::TestPredictionContainer::test_end_datetime[2024-08-10 00:00:00-24-2024-08-11 00:00:00]",
+      "tests/test_predictionabc.py::TestPredictionContainer::test_end_datetime[2024-08-10 00:00:00-48-2024-08-12 00:00:00]"
+    ],
+    "tests/test_predictionabc.py::TestPredictionContainer::test_end_datetime[2024-03-31": [
+      "tests/test_predictionabc.py::TestPredictionContainer::test_end_datetime[2024-03-31 00:00:00-24-2024-04-01 00:00:00]",
+      "tests/test_predictionabc.py::TestPredictionContainer::test_end_datetime[2024-03-31 00:00:00-48-2024-04-02 00:00:00]"
+    ],
+    "tests/test_predictionabc.py::TestPredictionContainer::test_end_datetime[2024-10-27": [
+      "tests/test_predictionabc.py::TestPredictionContainer::test_end_datetime[2024-10-27 00:00:00-24-2024-10-28 00:00:00]",
+      "tests/test_predictionabc.py::TestPredictionContainer::test_end_datetime[2024-10-27 00:00:00-48-2024-10-29 00:00:00]"
+    ],
+    "tests/test_predictionabc.py::TestPredictionContainer::test_total_hours[2024-11-10": [
+      "tests/test_predictionabc.py::TestPredictionContainer::test_total_hours[2024-11-10 00:00:00-24-24]"
+    ],
+    "tests/test_predictionabc.py::TestPredictionContainer::test_total_hours[2024-08-10": [
+      "tests/test_predictionabc.py::TestPredictionContainer::test_total_hours[2024-08-10 00:00:00-24-24]"
+    ],
+    "tests/test_predictionabc.py::TestPredictionContainer::test_total_hours[2024-03-31": [
+      "tests/test_predictionabc.py::TestPredictionContainer::test_total_hours[2024-03-31 00:00:00-24-23]"
+    ],
+    "tests/test_predictionabc.py::TestPredictionContainer::test_total_hours[2024-10-27": [
+      "tests/test_predictionabc.py::TestPredictionContainer::test_total_hours[2024-10-27 00:00:00-24-25]"
+    ],
+    "tests/test_predictionabc.py::TestPredictionContainer::test_keep_hours[2024-11-10": [
+      "tests/test_predictionabc.py::TestPredictionContainer::test_keep_hours[2024-11-10 00:00:00-24-24]"
+    ],
+    "tests/test_predictionabc.py::TestPredictionContainer::test_keep_hours[2024-08-10": [
+      "tests/test_predictionabc.py::TestPredictionContainer::test_keep_hours[2024-08-10 00:00:00-24-24]"
+    ],
+    "tests/test_predictionabc.py::TestPredictionContainer::test_keep_hours[2024-04-01": [
+      "tests/test_predictionabc.py::TestPredictionContainer::test_keep_hours[2024-04-01 00:00:00-24-24]"
+    ],
+    "tests/test_predictionabc.py::TestPredictionContainer::test_keep_hours[2024-10-28": [
+      "tests/test_predictionabc.py::TestPredictionContainer::test_keep_hours[2024-10-28 00:00:00-24-24]"
+    ],
+    "tests/test_pvforecastimport.py::test_import[2024-11-10": [
+      "tests/test_pvforecastimport.py::test_import[2024-11-10 00:00:00-False]",
+      "tests/test_pvforecastimport.py::test_import[2024-11-10 00:00:00-True]"
+    ],
+    "tests/test_pvforecastimport.py::test_import[2024-08-10": [
+      "tests/test_pvforecastimport.py::test_import[2024-08-10 00:00:00-False]",
+      "tests/test_pvforecastimport.py::test_import[2024-08-10 00:00:00-True]"
+    ],
+    "tests/test_pvforecastimport.py::test_import[2024-03-31": [
+      "tests/test_pvforecastimport.py::test_import[2024-03-31 00:00:00-False]",
+      "tests/test_pvforecastimport.py::test_import[2024-03-31 00:00:00-True]"
+    ],
+    "tests/test_pvforecastimport.py::test_import[2024-10-27": [
+      "tests/test_pvforecastimport.py::test_import[2024-10-27 00:00:00-False]",
+      "tests/test_pvforecastimport.py::test_import[2024-10-27 00:00:00-True]"
+    ],
+    "tests/test_weatherimport.py::test_import[2024-11-10": [
+      "tests/test_weatherimport.py::test_import[2024-11-10 00:00:00-False]",
+      "tests/test_weatherimport.py::test_import[2024-11-10 00:00:00-True]"
+    ],
+    "tests/test_weatherimport.py::test_import[2024-08-10": [
+      "tests/test_weatherimport.py::test_import[2024-08-10 00:00:00-False]",
+      "tests/test_weatherimport.py::test_import[2024-08-10 00:00:00-True]"
+    ],
+    "tests/test_weatherimport.py::test_import[2024-03-31": [
+      "tests/test_weatherimport.py::test_import[2024-03-31 00:00:00-False]",
+      "tests/test_weatherimport.py::test_import[2024-03-31 00:00:00-True]"
+    ],
+    "tests/test_weatherimport.py::test_import[2024-10-27": [
+      "tests/test_weatherimport.py::test_import[2024-10-27 00:00:00-False]",
+      "tests/test_weatherimport.py::test_import[2024-10-27 00:00:00-True]"
+    ]
+  },
+  "required_native_preservation_checks": 358,
+  "actual_operations": {
+    "c13-eos-exact-failures-20261120": {
+      "review": {
+        "path": ".aeep/completion-20261116/c13-eos-exact-failures-20261120/operation-review.json",
+        "sha256": "18e787eaf5476f02a75f48979ce02b0457d7856a0ed946e69f865623e6e905c9"
+      },
+      "ledger": {
+        "path": ".aeep/completion-20261116/c13-eos-exact-failures-20261120/ledger.json",
+        "sha256": "b37a94e13de8418405afa66d0ad1fcc500ec85f8ce0ff60c2434dd599c045fcb"
+      },
+      "receipts": [
+        {
+          "receipt": "rcpt_a93ccb9a42114e0eb1d408db0667cfe1",
+          "observation": {
+            "path": ".aeep/completion-20261116/c13-eos-exact-failures-20261120/receipt.json",
+            "sha256": "e580a48a1a764aeee9e722481918c55422d9a759fac9267b19994ae00b6ad373"
+          },
+          "seconds": 5.474725875000331,
+          "reserved_seconds": 95.0
+        }
+      ],
+      "containers_absent": [
+        "aeep-762c83870afc1f5b0d7c8092d6d9fc84"
+      ]
+    },
+    "c13-eos-runtime-inputs-20261120": {
+      "review": {
+        "path": ".aeep/completion-20261116/c13-eos-runtime-inputs-20261120/operation-review.json",
+        "sha256": "3059100ec2ecc4c963e98a8a23e89538cebefbfc3505606a5d5d5bb1fc2aa776"
+      },
+      "ledger": {
+        "path": ".aeep/completion-20261116/c13-eos-runtime-inputs-20261120/ledger.json",
+        "sha256": "6210f96af14a7b77abedf25b7162b53a96fde14d90a056d7061078f16ee4bb23"
+      },
+      "receipts": [
+        {
+          "receipt": "rcpt_c86da56591ad4783b3ba89fc0cb2e24b",
+          "observation": {
+            "path": ".aeep/completion-20261116/c13-eos-runtime-inputs-20261120/overlay-receipt.json",
+            "sha256": "76abf1d11cf011896cf3443902f7e8575bb2cd48660e11700c8320a8053ec68d"
+          },
+          "seconds": 5.884766790999947,
+          "reserved_seconds": 125.0
+        }
+      ],
+      "containers_absent": []
+    },
+    "c13-eos-repaired-pair-20261120": {
+      "review": {
+        "path": ".aeep/completion-20261116/c13-eos-repaired-pair-20261120/operation-review.json",
+        "sha256": "111ef6afbc39cb547f97da709c110c2bf1682dc7a17464eb864df6f9086bc309"
+      },
+      "ledger": {
+        "path": ".aeep/completion-20261116/c13-eos-repaired-pair-20261120/ledger.json",
+        "sha256": "fa8121c40597bb83dee983cabffc94a2e0c5baf9e5899a907545e9e4986a1e03"
+      },
+      "receipts": [
+        {
+          "receipt": "rcpt_019b13c404cf46e683c500cdcebaf562",
+          "observation": {
+            "path": ".aeep/completion-20261116/c13-eos-repaired-pair-20261120/targeted-receipt.json",
+            "sha256": "8c10670ce4f9bf9cd1eeb0e0d1ddee8840761cc46d0dc758fb026277d5227a40"
+          },
+          "seconds": 7.198426290999578,
+          "reserved_seconds": 95.0
+        }
+      ],
+      "containers_absent": [
+        "aeep-0c5ccea5db8469a3222c20fa5ea5b1b8",
+        "aeep-6e4a3ee9f1b5345d94ebd6ea16a8ad7b",
+        "aeep-f0d7c3443ca2edbc34293779d0c5d0d7"
+      ]
+    },
+    "c13-eos-repaired-pair-local-date-20261120": {
+      "review": {
+        "path": ".aeep/completion-20261116/c13-eos-repaired-pair-local-date-20261120/operation-review.json",
+        "sha256": "45c7ab6c64be3ffad9eb07eb43695bdfee36d8dd98249fba458348c4bbd32a86"
+      },
+      "ledger": {
+        "path": ".aeep/completion-20261116/c13-eos-repaired-pair-local-date-20261120/ledger.json",
+        "sha256": "998a5bc8ad44c8f4977d07b3c0e537b8c90d6c60c4af4331b8a1b30da6e4a566"
+      },
+      "receipts": [
+        {
+          "receipt": "rcpt_61d2b3f3f61f483ab32391e7b86bd2a9",
+          "observation": {
+            "path": ".aeep/completion-20261116/c13-eos-repaired-pair-local-date-20261120/targeted-receipt.json",
+            "sha256": "ad0b32783385d32a7e2dd78ae2776820a5bbe2ecee37b2c9b6ae0c02cdafc07b"
+          },
+          "seconds": 7.210464082999806,
+          "reserved_seconds": 95.0
+        },
+        {
+          "receipt": "rcpt_14a961f42fab499d9e96c213fc5af897",
+          "observation": {
+            "path": ".aeep/completion-20261116/c13-eos-repaired-pair-local-date-20261120/reference-receipt.json",
+            "sha256": "7b42dc3e8174ae26cff12e97d301692d4b0975fbb0e181f297a3e1b708d45e54"
+          },
+          "seconds": 12.526532625000073,
+          "reserved_seconds": 95.0
+        },
+        {
+          "receipt": "rcpt_0540d20da8d84ee58c2bd2cb85bc6c8b",
+          "observation": {
+            "path": ".aeep/completion-20261116/c13-eos-repaired-pair-local-date-20261120/original-receipt.json",
+            "sha256": "5b5dcdbedc808ccb86b77ebd3e3d5dc8a092238f21ea1089f77dc94a4ce9388c"
+          },
+          "seconds": 11.952402584000083,
+          "reserved_seconds": 95.0
+        }
+      ],
+      "containers_absent": [
+        "aeep-0c5ccea5db8469a3222c20fa5ea5b1b8",
+        "aeep-6e4a3ee9f1b5345d94ebd6ea16a8ad7b",
+        "aeep-f0d7c3443ca2edbc34293779d0c5d0d7"
+      ]
+    }
+  },
+  "official_reproduction": false,
+  "comparisons_paused": true,
+  "formal_cases_assigned": 0,
+  "waza_excluded": true,
+  "models": 0,
+  "cash_usd": 0,
+  "operator_authority": "The operator directed continued correction within the existing C13 offline scope."
+}

@@ -27,8 +27,9 @@ the published repair's 1/1 with the original's 0/1. The original passed
 Both settled receipts and the earlier failed attempt remain available.
 Removing the single approved local snapshot restored 12.24 GiB.
 The same audit verified all 43 newly acquired EOS artifacts by checksum.
-The subsequent native installation passed its import checks. EOS
-grading remains open.
+The subsequent native installation passed its import checks. The
+[adapted EOS grader](C13_STATUS.md#what-broke-in-eos-and-what-fixed-it)
+verified both protected grades.
 
 The [Locify runtime check](locify-native-runtime-20261119.json) built
 Fire and LiteLLM locally from their pinned sources and installed all 65
