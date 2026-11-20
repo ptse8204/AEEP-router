@@ -1,0 +1,163 @@
+{
+  "schema_version": "aeep.c13.rebench-storage-exception-result.v1",
+  "review": {
+    "path": ".aeep/completion-20261116/c13-software-lead-corrections-20261119/storage-exception-review.json",
+    "sha256": "9cf9912ce51d4b6c5bf90a4900bf0f6374ea499bb96e81f4e2c980edef820551"
+  },
+  "approved_group": {
+    "path": ".aeep/completion-20261116/c13-software-lead-corrections-20261119/operation-review.json",
+    "sha256": "c955cbf68ccfd50159db16213de9d02e38932972f0c5fcb7e5ee73dc07e794f0"
+  },
+  "result": {
+    "path": ".aeep/completion-20261116/c13-software-lead-corrections-20261119/result.json",
+    "sha256": "d4e6929474488cff312f31a37df5e520940105ea157d13d76065c0f9f8319ca9"
+  },
+  "storage_observation": {
+    "path": ".aeep/completion-20261116/c13-software-lead-corrections-20261119/storage-exception-observation.json",
+    "sha256": "2fcec8b20a1dbd91d9b40e7d41a3952b5cfa4ca8f90e0498ff3720a8880b1c62"
+  },
+  "storage": {
+    "baseline_bytes": 53177286656,
+    "floor_bytes": 51029803008,
+    "free_at_group_completion_bytes": 52308176896,
+    "existing_resources_removed": 0
+  },
+  "operations": [
+    {
+      "receipt": "rcpt_76940c9f9ebe44ce9930b3ca1ab8677b",
+      "receipt_record": {
+        "path": ".aeep/completion-20261116/c13-software-lead-corrections-20261119/locify/copy-launcher-receipt.json",
+        "sha256": "223544f3fcde4d54370284e00d1da2e56ba0d33d123de5ef311ef6082026fdbe"
+      },
+      "operation": "c13-software-lead-corrections-20261119:locify:copy-launcher",
+      "success": true,
+      "observed_seconds": 10.223146750126034,
+      "reserved_seconds": 155.0
+    },
+    {
+      "receipt": "rcpt_79a63b5a34f3472bafbc3bbdeaed6b94",
+      "receipt_record": {
+        "path": ".aeep/completion-20261116/c13-software-lead-corrections-20261119/locify/validate-launcher-receipt.json",
+        "sha256": "f0f1708a742dc1d6ac04a9adfac230fbbd738a7f25e60630dfdbb14d8dcbd07e"
+      },
+      "operation": "c13-software-lead-corrections-20261119:locify:validate-launcher",
+      "success": true,
+      "observed_seconds": 1.7145133330486715,
+      "reserved_seconds": 30.0
+    },
+    {
+      "receipt": "rcpt_a09f56ad8cc441a49b84ffff43ef76e6",
+      "receipt_record": {
+        "path": ".aeep/completion-20261116/c13-software-lead-corrections-20261119/locify-protected/receipt-rcpt_a09f56ad8cc441a49b84ffff43ef76e6.json",
+        "sha256": "0f330b8c1fdc6d9b34bbe522c5cc7f8c1017c1c23affeaaad8936aec4744036f"
+      },
+      "operation": "c13-locify-ordinary-launcher-correction-20261119:ryanhoangt__locify-8:reference",
+      "success": false,
+      "observed_seconds": 3.336235750000924,
+      "reserved_seconds": 35.0
+    },
+    {
+      "receipt": "rcpt_ae29fee3cfa144c09223341509f9c10f",
+      "receipt_record": {
+        "path": ".aeep/completion-20261116/c13-software-lead-corrections-20261119/eos-collect-receipt.json",
+        "sha256": "4d73818a7fc8ce501ee7a221a323e997b3f3d17cd53955e5bd7cb92e1cadf4ec"
+      },
+      "operation": "c13-eos-protected-diagnostic-20261119:collect",
+      "success": true,
+      "observed_seconds": 5.024947040947154,
+      "reserved_seconds": 95.0
+    },
+    {
+      "receipt": "rcpt_01a5413f404d4f8e89e94f18db9de34a",
+      "receipt_record": {
+        "path": ".aeep/completion-20261116/c13-software-lead-corrections-20261119/eos-failure-sites-receipt.json",
+        "sha256": "c40cda937a5c9d3cf399ca40320cfea48b6257ba3d824097ea4fec4ee5985e46"
+      },
+      "operation": "c13-eos-protected-diagnostic-20261119:failure-sites",
+      "success": true,
+      "observed_seconds": 4.308196374913678,
+      "reserved_seconds": 95.0
+    }
+  ],
+  "separate_first_party_git_check": {
+    "scope": {
+      "path": ".aeep/completion-20261116/c13-software-lead-corrections-20261119/locify-git-fixture-smoke/operation-review.json",
+      "sha256": "c957f23fa96d5553e50b2003f337bc10bb804fb8a12402d68d667f5e91443293"
+    },
+    "result": {
+      "path": ".aeep/completion-20261116/c13-software-lead-corrections-20261119/locify-git-fixture-smoke/result.json",
+      "sha256": "faef5a8cfa4572c05c77d4f7c504c106de91c8ca7b0494eb12c69844753d2bc5"
+    },
+    "outcome": {
+      "git": "/usr/local/bin/git",
+      "ordinary_commit_exit": 128,
+      "explicit_fixture_identity_exit": 0,
+      "missing_identity": true
+    },
+    "operations": [
+      {
+        "receipt": "rcpt_9085e1eeb05045c5869982c4f3db80a7",
+        "receipt_record": {
+          "path": ".aeep/completion-20261116/c13-software-lead-corrections-20261119/locify-git-fixture-smoke/git-fixture-receipt.json",
+          "sha256": "2de49b08b9c4ff38706f0b3b2d23f378dc044a969cd24fbfc635fd327f6bdc87"
+        },
+        "operation": "c13-locify-first-git-fixture-smoke-20261119:git-fixture",
+        "success": true,
+        "observed_seconds": 0.27336891693994403,
+        "reserved_seconds": 35.0
+      }
+    ]
+  },
+  "locify": {
+    "launcher": {
+      "path": ".aeep/completion-20261116/c13-software-lead-corrections-20261119/locify/launcher.json",
+      "sha256": "3a44c37ac92ccabb7e475f0197860050052a753b9282b751577e8f4ed8944700"
+    },
+    "corrected_image": "sha256:794460afa41f1c60e7eb1e5faf96f2f5bae0dc27a9005a6a65bdc3c183748e92",
+    "reference": {
+      "path": ".aeep/completion-20261116/c13-software-lead-corrections-20261119/locify-protected/observations.json",
+      "sha256": "3f471c889333f9f9e59ac0fc9c1be1c6cacbcfa7499b69b85e0b79f80ce4b1b8"
+    },
+    "grader_observation": {
+      "role": "reference",
+      "exit": 1,
+      "required_statuses": {
+        "tests/integration/test_repo_map_strategy.py::test_repo_map_strategy_get_ranked_tags_with_refs": "ERROR",
+        "tests/integration/test_repo_map_strategy.py::test_repo_map_strategy_get_ranked_tags_with_no_refs": "ERROR"
+      },
+      "protected_reply_sha256": "2c5707a7a2841656a37d2b01a3b6ea96186937cbd0550db95eaea4053097c588",
+      "contract_matched": false
+    },
+    "score": null,
+    "original_started": false
+  },
+  "eos": {
+    "collection": {
+      "path": ".aeep/completion-20261116/c13-software-lead-corrections-20261119/eos-collect.json",
+      "sha256": "ebcd55a171493715ed6e336a1f85d8d77799d275e19f051ffba3addffb450388"
+    },
+    "native_id_count": 367,
+    "unique_matches": 44,
+    "ambiguous_with_two_candidates": 16,
+    "failures": {
+      "path": ".aeep/completion-20261116/c13-software-lead-corrections-20261119/eos-failure-sites.json",
+      "sha256": "34e271e5cc4c2c5a41238ca76b65b38c0ea093798ece9029b1f68440f54ca876"
+    },
+    "failed_required_tests": 7,
+    "retained_failure_sites": 0,
+    "score": null
+  },
+  "owned_containers_absent": [
+    "aeep-a82cec8adb38e9df8b77ebcea50d8ba4",
+    "aeep-479495c6a03cfb46d2261c21862d1c3b",
+    "aeep-472b191efdbe73ae5a4e77bcf8c4041e",
+    "aeep-1d38f7616cb1b0e5609c1800da36ba58",
+    "c13-software-lead-corrections-20261119-locify-smoke",
+    "c13-locify-first-git-fixture-smoke-20261119"
+  ],
+  "models": 0,
+  "cash_usd": 0,
+  "formal_adoptions": 0,
+  "comparisons_paused": true,
+  "waza_excluded": true
+}

@@ -1,5 +1,20 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 19. The approved Locify and EOS correction group ran.**
+The [receipt audit](../../reports/toolkit-v2/c13/completion-20261116/rebench-storage-exception-result-20261119.json)
+records the operator's one-use storage exception. The group settled
+five offline operations and verified container cleanup. The corrected
+Locify image loaded the ordinary launcher, but both protected tests
+returned setup errors. A separate first-party Git check reproduced
+missing author identity and passed with an explicit synthetic identity.
+The protected original remains unstarted.
+
+EOS collected 367 native test IDs. Forty-four truncated publisher IDs
+matched uniquely and 16 each matched two native IDs. All seven selected
+failures reproduced. The diagnostic retained no failure locations.
+Neither case earned a score. Comparisons stay paused and Waza remains
+excluded. The storage exception applied to this work only.
+
 **November 19. The combined intake passed regression and packaging.**
 The [verification and correction audit](../../reports/toolkit-v2/c13/completion-20261116/rebench-protected-first-attempts-20261119.json)
 binds the isolated draft, 2,196 passed tests, 21 skips, and the wheel

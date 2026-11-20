@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+[C13 correction group results](../toolkit-v2/c13/completion-20261116/rebench-storage-exception-result-20261119.json)
+record five settled offline operations under the scoped storage exception.
+Locify's launcher passed and its two protected fixtures errored. A
+separate Git smoke check verified the missing fixture identity. EOS
+matched 44 native IDs uniquely, left 16 ambiguous, and reproduced seven
+failures without retaining their locations. Neither case has a grade.
+
 The combined intake draft passed 2,196 tests and built a wheel and
 source distribution. The coverage run stopped at the storage guard
 before producing a report. Group `c955cbf6` covers the two remaining
