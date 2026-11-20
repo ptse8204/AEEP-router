@@ -1,5 +1,19 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 20. Locify's protected pair passes.**
+The [operator report](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md)
+shows the published repair at 1/1 and the original at 0/1. Synthetic Git
+identity restored the fixtures without changing the protected tests.
+EOS reproduced all seven failures and returned exception categories.
+Sixteen ambiguous test identities remain. EOS stays outside the pool.
+The three offline operations settled and their workers were removed.
+
+The coverage restart exposed a missing fixture binding for synthetic
+file-install capacity. The fixture now covers the file installer as
+well as the wheel installer. All 136 focused tests passed. Full branch
+coverage is running on the same draft with the fixture correction.
+C13 stays open, comparisons stay paused, and Waza is excluded.
+
 **November 20. C13 operator handoff.**
 The [plain-language report](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md)
 explains the Locify and EOS test failures, where Optype received a grade,

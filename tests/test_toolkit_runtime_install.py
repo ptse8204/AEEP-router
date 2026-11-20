@@ -33,7 +33,7 @@ def installer_fixture_capacity(monkeypatch):
         pytest.skip("private runtime fixtures require POSIX no-follow paths")
 
     from aeep import component_setup
-    from aeep_toolkit import install_runtime
+    from aeep_toolkit import file_runtime, install_runtime
 
     class FixtureFilesystem:
         def disk_usage(self, _path):
@@ -43,6 +43,7 @@ def installer_fixture_capacity(monkeypatch):
             return getattr(shutil, name)
 
     view = FixtureFilesystem()
+    monkeypatch.setattr(file_runtime, "shutil", view)
     monkeypatch.setattr(install_runtime, "shutil", view)
     monkeypatch.setattr(component_setup, "shutil", view)
 

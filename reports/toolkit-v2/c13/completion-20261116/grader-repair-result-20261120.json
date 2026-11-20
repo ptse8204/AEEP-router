@@ -1,0 +1,136 @@
+{
+  "schema_version": "aeep.c13.grader-repair-result.v1",
+  "review": {
+    "path": ".aeep/completion-20261116/c13-grader-repairs-20261120/operation-review.json",
+    "sha256": "ed5396191382b4a16f1633d0edacb9e5c31ff0c260f4cebc4ee2cab31f42e92b"
+  },
+  "ledger": {
+    "path": ".aeep/completion-20261116/c13-grader-repairs-20261120/ledger.json",
+    "sha256": "5d22be232555dfb6ad607b526e16414a23c1d267ecda9754df7d368a571b3284"
+  },
+  "observed": {
+    "locify_reference": {
+      "exit_code": 0,
+      "failure_sites": [],
+      "statuses": {
+        "tests/integration/test_repo_map_strategy.py::test_repo_map_strategy_get_ranked_tags_with_refs": "PASSED",
+        "tests/integration/test_repo_map_strategy.py::test_repo_map_strategy_get_ranked_tags_with_no_refs": "PASSED"
+      },
+      "protected_response_sha256": "4011a5321eff3758513646f015113b5be6155898178707411e0190b96ebaff40",
+      "receipt": "rcpt_99c306cdd1cd4222994f719e64e7d8cd",
+      "accepted": true,
+      "score": 1.0,
+      "observed_seconds": 4.325033749999875,
+      "receipt_record": {
+        "path": ".aeep/completion-20261116/c13-grader-repairs-20261120/locify-reference-receipt.json",
+        "sha256": "6589ab997e721598af49b0c8eb331546189bdb30cb7c72e706c382a051d7df18"
+      }
+    },
+    "locify_original": {
+      "exit_code": 1,
+      "failure_sites": [
+        {
+          "test": "tests/integration/test_repo_map_strategy.py::test_repo_map_strategy_get_ranked_tags_with_refs",
+          "phase": "call",
+          "category": "AttributeError",
+          "file": "tests/integration/test_repo_map_strategy.py",
+          "line": 109
+        }
+      ],
+      "statuses": {
+        "tests/integration/test_repo_map_strategy.py::test_repo_map_strategy_get_ranked_tags_with_refs": "FAILED",
+        "tests/integration/test_repo_map_strategy.py::test_repo_map_strategy_get_ranked_tags_with_no_refs": "PASSED"
+      },
+      "protected_response_sha256": "f4e46049b067ed5cc3667a384ef6b67c83b9acd17f70426040812a5b47909356",
+      "receipt": "rcpt_81b6f415e34f41d2ac613d211ef20777",
+      "accepted": true,
+      "score": 0.0,
+      "observed_seconds": 3.7460500000001957,
+      "receipt_record": {
+        "path": ".aeep/completion-20261116/c13-grader-repairs-20261120/locify-original-receipt.json",
+        "sha256": "651c1b5441d652bf2cfe6123178b2a4b081fe422bf1a4875d5bf3fd74f0f98ca"
+      }
+    },
+    "eos_diagnostic": {
+      "exit_code": 1,
+      "failure_sites": [
+        {
+          "test": "tests/test_class_ems.py::test_simulation",
+          "phase": "call",
+          "category": "AttributeError",
+          "file": null,
+          "line": null
+        },
+        {
+          "test": "tests/test_class_ems_2.py::test_simulation",
+          "phase": "call",
+          "category": "AttributeError",
+          "file": null,
+          "line": null
+        },
+        {
+          "test": "tests/test_class_optimize.py::test_optimize[optimize_input_1.json-optimize_result_1.json-3]",
+          "phase": "call",
+          "category": "AttributeError",
+          "file": null,
+          "line": null
+        },
+        {
+          "test": "tests/test_class_optimize.py::test_optimize[optimize_input_2.json-optimize_result_2.json-3]",
+          "phase": "call",
+          "category": "AttributeError",
+          "file": null,
+          "line": null
+        },
+        {
+          "test": "tests/test_doc.py::test_openapi_md_current",
+          "phase": "call",
+          "category": "ModuleNotFoundError",
+          "file": null,
+          "line": null
+        },
+        {
+          "test": "tests/test_elecpriceakkudoktor.py::test_cache_integration",
+          "phase": "call",
+          "category": "ConnectionError",
+          "file": null,
+          "line": null
+        },
+        {
+          "test": "tests/test_elecpriceakkudoktor.py::test_key_to_array_resampling",
+          "phase": "call",
+          "category": "ConnectionError",
+          "file": null,
+          "line": null
+        }
+      ],
+      "statuses": {
+        "tests/test_class_ems.py::test_simulation": "FAILED",
+        "tests/test_class_ems_2.py::test_simulation": "FAILED",
+        "tests/test_class_optimize.py::test_optimize[optimize_input_1.json-optimize_result_1.json-3]": "FAILED",
+        "tests/test_class_optimize.py::test_optimize[optimize_input_2.json-optimize_result_2.json-3]": "FAILED",
+        "tests/test_doc.py::test_openapi_md_current": "FAILED",
+        "tests/test_elecpriceakkudoktor.py::test_cache_integration": "FAILED",
+        "tests/test_elecpriceakkudoktor.py::test_key_to_array_resampling": "FAILED"
+      },
+      "protected_response_sha256": "e2028dfbf964d72791229bf7092ea71ad40aa1e62f60c414a6bb30404adc3c20",
+      "receipt": "rcpt_7de6bc7973004b0ca880b4af1e511238",
+      "accepted": true,
+      "score": null,
+      "observed_seconds": 4.947441957999899,
+      "receipt_record": {
+        "path": ".aeep/completion-20261116/c13-grader-repairs-20261120/eos-diagnostic-receipt.json",
+        "sha256": "547ed825cb5f09a5256e8aa18b8be290e8f7878820c80b0319f7fdc560a82f8b"
+      }
+    }
+  },
+  "operations_settled": 3,
+  "owned_containers_absent": true,
+  "frozen_source": "9fd4f5571ab9a314075f353fae15adfc65a9f8d9677748db4b1082d6689601b7",
+  "max_net_storage_bytes": 805306368,
+  "model_turns": 0,
+  "cash_usd": 0,
+  "comparison_runs": 0,
+  "formal_adoptions": 0,
+  "waza_excluded": true
+}

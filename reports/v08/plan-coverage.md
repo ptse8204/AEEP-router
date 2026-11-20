@@ -1,5 +1,10 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 test results](../toolkit-v2/c13/completion-20261116/C13_STATUS.md)
+show Locify's verified 1/1 and 0/1 pair and the EOS diagnosis. The
+installer capacity fixture now covers the file installer, and 136
+focused tests passed. Full branch coverage is underway.
+
 The [current C13 handoff](../toolkit-v2/c13/completion-20261116/C13_STATUS.md)
 summarizes task grades, ungraded attempts, the verified stack, and the
 remaining decisions in readable Markdown.
