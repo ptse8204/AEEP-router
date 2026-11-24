@@ -1,5 +1,16 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. Current software evidence inventory rebuilt.**
+The [C13 handoff](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#what-still-blocks-formal-comparisons)
+reconciles 72 reproduced cases from 46 repository families and 146
+distinct protected receipts. The software cohort still needs at least
+174 more eligible cases. SQLacodegen 419 ran all 64 required assertions
+offline with its declared dependency range. Its published reference
+passed 21 and failed 43 on exact output checks. The one operation
+settled, and the original remains unstarted. Keep this case outside
+the inventory. Candidate and selection comparisons stay paused.
+Waza stays excluded.
+
 **November 24. VAREX allocation verified and AnyIO 975 held.**
 The [C13 handoff](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#what-still-blocks-formal-comparisons)
 records a provisional allocation of all 246 VAREX cases across four

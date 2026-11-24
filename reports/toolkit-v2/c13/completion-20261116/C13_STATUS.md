@@ -317,12 +317,37 @@ failure remains unexplained. The replay requires approval and has
 not started. [Run audit and exact continuation](protected-anyio-taskgroups-20261124.json)
 · [Trio 0.31.0 release](https://github.com/python-trio/trio/releases/tag/v0.31.0)
 
+### SQLacodegen 419 generated-code assertions
+
+The published reference passed 21 of 64 required checks. Forty tests
+failed at the shared exact generated-source assertion. Three more
+failed at the exact output assertions for the declarative, dataclass
+and SQLModel command-line generators. All required tests ran. The
+grader retained each failing test and assertion location. The single
+operation settled in 9.54 seconds, and the original remained
+unstarted. This case has no verified grade.
+
+The contained run used SQLAlchemy 2.0.41 within the snapshot's
+declared range and SQLModel 0.0.24. It reused the pinned driver
+packages and original CLI and generator tests. The CLI used local
+SQLite, and the generator tests made no external database connections.
+The source-output mismatch still needs diagnosis before any replay.
+[Protected reference, accounting and dependency pins](protected-sqlacodegen-419-20261124.json)
+· [SQLAlchemy 2.0.41](https://pypi.org/project/SQLAlchemy/2.0.41/)
+· [SQLModel 0.0.24](https://pypi.org/project/sqlmodel/0.0.24/)
+
 ## What still blocks formal comparisons
 
 | Workload | Remaining gap |
 | --- | --- |
-| Software | The audited pool contains 72 reproduced cases across 46 repositories. The two holdouts and shared early stages need at least 246 distinct cases, leaving a minimum gap of 174. Contract audits have the largest holdout gap, at 52 cases before early-stage needs. |
+| Software | The current inventory reconciles 72 reproduced cases, 46 repository families and 146 distinct protected receipts. The two holdouts and shared early stages need at least 246 distinct cases, leaving a minimum gap of 174. Contract audits have the largest holdout gap, at 52 cases before early-stage needs. |
 | Document/data | The 246 VAREX archives now have a verified provisional allocation. It keeps the known related forms in one stage and excludes both calibration cases. Final source-lineage review, asset-use decisions and study assignment remain open. The 18 ExtractBench annual disclosures remain held on source and asset-use grounds. |
+
+The software inventory records source revisions, task families and
+receipt IDs for each reproduced case. Its audit rejects duplicate
+cases, reused receipts and development-exposed repositories. Keep
+all revisions from the same repository in one study stage.
+[Current software inventory](current-software-inventory-20261124.json)
 
 VAREX now has 133 multi-collection prospects with distinct schema hashes.
 The audit matched all 1,777 schema IDs to exact publisher PDF paths. It

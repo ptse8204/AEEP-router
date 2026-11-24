@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [current software inventory](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#what-still-blocks-formal-comparisons)
+reconciles 72 reproduced cases and 146 distinct receipts across 46
+repositories. At least 174 additional eligible cases remain. The
+SQLacodegen 419 reference ran all 64 tests and stays ungraded after
+43 exact-output assertion failures. Comparisons remain paused.
+
 The [C13 workload handoff](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#what-still-blocks-formal-comparisons)
 records a verified provisional fit for all 246 VAREX archives, pending
 final lineage, asset use and formal assignment. AnyIO 975 remains
