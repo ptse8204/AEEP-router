@@ -12,6 +12,7 @@ BATCH = ROOT / ".aeep/c13-cohort-batch-20261124"
 SOFTWARE = BATCH / "software-pinned-carrier"
 BIRD = BATCH / "django-bird-grading"
 DOCUMENTS = BATCH / "documents-verified"
+TREASURY = BATCH / "treasury-october/document-verified"
 
 
 def evidence(path):
@@ -168,8 +169,8 @@ def new_pairs():
     return [param_row, bird_row]
 
 
-def document_cases():
-    result = audited(DOCUMENTS / "result.json")
+def document_cases(directory):
+    result = audited(directory / "result.json")
     if (
         result["model_turns"]
         or result["asset_use_reviewed_for_provider"]
@@ -182,11 +183,18 @@ def document_cases():
             roles[role]["score"]["score"] for role in ("reference-grade", "missing-row", "bad-json")
         ] != [1, 0, 0] or not all(item["verified"] for item in roles.values()):
             raise ValueError("document case lacks trustworthy calibration")
-        ledger = audited(DOCUMENTS / task / "ledger.json")
+        root = directory / task
+        ledger = audited(root / "ledger.json")
         if len(ledger["operations"]) != 4 or any(
             x["elapsed_seconds"] is None for x in ledger["operations"]
         ):
             raise ValueError("unsettled document grader")
+        for role, observation in roles.items():
+            if audited(root / f"{role}-result.json") != observation:
+                raise ValueError("document grade differs from the retained result")
+        archive = root / "public" / (row["public_zip_sha256"] + ".zip")
+        if len(read(archive, row["public_zip_sha256"])) != row["public_zip_bytes"]:
+            raise ValueError("document task archive size changed")
     return result["cases"]
 
 
@@ -200,7 +208,7 @@ def main():
         raise ValueError("earlier 54-case pool did not reproduce")
     retained, fresh = old_pairs(), new_pairs()
     updated = pool.assess(initial + retained + fresh, excluded)
-    cases = document_cases()
+    cases = document_cases(DOCUMENTS) | document_cases(TREASURY)
     print(
         json.dumps(
             {
@@ -220,7 +228,7 @@ def main():
                         BIRD / "selector-map.json",
                         DOCUMENTS / "pack.json",
                     )
-                },
+                } | {"treasury_pack": evidence(TREASURY / "pack.json")},
                 "comparisons_paused": True,
                 "waza_excluded": True,
                 "model_turns": 0,

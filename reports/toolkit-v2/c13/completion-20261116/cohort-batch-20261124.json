@@ -167,7 +167,124 @@
       "ledger": {
         "path": ".aeep/c13-cohort-batch-20261124/software-contracts-diagnosis/ledger.json",
         "sha256": "87c378fbcaa4ad1cb6813107a97a034562b07d2961800d42e07efa27a37e9e99"
-      }
+      },
+      "backend_and_subprocess_checks": [
+        {
+          "receipt_id": "rcpt_13e7b340588c48f88d3aeb0393699d76",
+          "review_sha256": "533ae253529e223ba439003653d1fb644ab6c4cb8f4708d269c9966c6909c571",
+          "attempt": "software-contracts-offline-backend",
+          "container_status": "success",
+          "pytest_counts": {
+            "PASSED": 67,
+            "FAILED": 2
+          },
+          "verified_grade": null,
+          "result": {
+            "path": ".aeep/c13-cohort-batch-20261124/software-contracts-offline-backend/execution/result.json",
+            "sha256": "576195358001843503ce5eec209bf5c8bff269f5c5129a585dd600d921727a4c"
+          },
+          "diagnostic": {
+            "path": ".aeep/c13-cohort-batch-20261124/software-contracts-offline-backend/execution/c13-software-cohort-contracts-20261124-backend:pypa__build-1027-aeep-contract-audit:reference-diagnostic.json",
+            "sha256": "798e7c708f307c7afcfa0dcabf45f87c57f11a784b7b137c9afb559e5e1611d4"
+          },
+          "ledger": {
+            "path": ".aeep/c13-cohort-batch-20261124/software-contracts-offline-backend/execution/ledger.json",
+            "sha256": "a3763713e49d5bec868a1519154165149121a0989289f2337ceae41d0101ca10"
+          }
+        },
+        {
+          "receipt_id": "rcpt_4b3f2056204549a49fdd483d287d9d7b",
+          "review_sha256": "1dfe0f89e75265cff6aae0c8cf6f3a184e7fbee8f849f20fee31b62e34223127",
+          "attempt": "software-contracts-subprocess-paths",
+          "container_status": "failed",
+          "pytest_counts": {},
+          "verified_grade": null,
+          "result": {
+            "path": ".aeep/c13-cohort-batch-20261124/software-contracts-subprocess-paths/execution/result.json",
+            "sha256": "71a9bbf2515e41082127a9f407e63060daa0cee7cdbfa8d22a396cbe6e45daeb"
+          },
+          "diagnostic": {
+            "path": ".aeep/c13-cohort-batch-20261124/software-contracts-subprocess-paths/execution/c13-software-cohort-contracts-20261124-subprocess-paths:pypa__build-1027-aeep-contract-audit:reference-diagnostic.json",
+            "sha256": "45650615b383cc55c3154eb6e4c9569ccc55bfa947f0026a199cf2279c1c971b"
+          },
+          "ledger": {
+            "path": ".aeep/c13-cohort-batch-20261124/software-contracts-subprocess-paths/execution/ledger.json",
+            "sha256": "d7f83ebecc545a552897c3b75fabffc3c876e5720389e0a3201dc009ece0c8a6"
+          }
+        },
+        {
+          "receipt_id": "rcpt_074cae8c689e47e3aad97bd0c4fc2e95",
+          "review_sha256": "8e731b1677fbd0c2867436c98e437d4b90bd6dd0d048f9ca285043fa95d3c412",
+          "attempt": "software-contracts-subprocess-paths-v2",
+          "container_status": "success",
+          "pytest_counts": {
+            "PASSED": 68,
+            "FAILED": 1
+          },
+          "verified_grade": null,
+          "result": {
+            "path": ".aeep/c13-cohort-batch-20261124/software-contracts-subprocess-paths-v2/execution/result.json",
+            "sha256": "de737425b67dd3605572af204b376adc7f50d40d50c6507e816378574c70d35f"
+          },
+          "diagnostic": {
+            "path": ".aeep/c13-cohort-batch-20261124/software-contracts-subprocess-paths-v2/execution/c13-software-cohort-contracts-20261124-subprocess-paths-v2:pypa__build-1027-aeep-contract-audit:reference-diagnostic.json",
+            "sha256": "d29485c7a0b6cf3386a203174fdeb007d7a3162b78999dc9b4d5e2ea62b8bb53"
+          },
+          "ledger": {
+            "path": ".aeep/c13-cohort-batch-20261124/software-contracts-subprocess-paths-v2/execution/ledger.json",
+            "sha256": "bccd041dad3e3ff715a31c2f21312f41f0d12b7b740030250d2dd734e82386dc"
+          }
+        }
+      ],
+      "backend_failure_sites": {
+        "receipt_id": "rcpt_bdbbe265ae52411989e4931c326a5759",
+        "failures": [
+          {
+            "test": "tests/test_projectbuilder.py::test_build_with_dep_on_console_script[False]",
+            "phase": "call",
+            "category": "IndexError",
+            "file": "tests/test_projectbuilder.py",
+            "line": 519
+          },
+          {
+            "test": "tests/test_projectbuilder.py::test_metadata_path_no_prepare[False]",
+            "phase": "call",
+            "category": "BuildBackendException",
+            "file": "src/build/_builder.py",
+            "line": 388
+          }
+        ],
+        "details": {
+          "path": ".aeep/c13-cohort-batch-20261124/software-contracts-backend-diagnosis/result.json",
+          "sha256": "aa99176592948c769a064705f4c97b55c55f359b080b80b3b81519a7331a00f6"
+        },
+        "ledger": {
+          "path": ".aeep/c13-cohort-batch-20261124/software-contracts-backend-diagnosis/ledger.json",
+          "sha256": "5920608d6649a63ce8ffaef6cc39c8b62398fd0f561e866671f07b77d0f8069a"
+        }
+      },
+      "subprocess_failure_sites": {
+        "receipt_id": "rcpt_ac8de38c2ac54492afdd9576e1b13599",
+        "failures": [
+          {
+            "test": "tests/test_projectbuilder.py::test_build_with_dep_on_console_script[False]",
+            "phase": "call",
+            "category": "IndexError",
+            "file": "tests/test_projectbuilder.py",
+            "line": 519
+          }
+        ],
+        "details": {
+          "path": ".aeep/c13-cohort-batch-20261124/software-contracts-subprocess-diagnosis/result.json",
+          "sha256": "c1fdfde8cc741e169a2bbe75b7afc3480c71269c3c57da0e1f9e2c712feb5ef5"
+        },
+        "ledger": {
+          "path": ".aeep/c13-cohort-batch-20261124/software-contracts-subprocess-diagnosis/ledger.json",
+          "sha256": "7ca068987b7bb39269a06ffb872bc2d387560e9d615ac3ee6ee2190d74a16e34"
+        }
+      },
+      "original_started": false,
+      "formal_case_added": false
     }
   },
   "document_data": {
@@ -263,6 +380,52 @@
             "error_type": null
           }
         }
+      },
+      "treasury-mts-202610": {
+        "source_family": "treasury-monthly-statement",
+        "publisher_crosscheck": "https://fiscaldata.treasury.gov/datasets/monthly-treasury-statement/",
+        "public_zip_sha256": "fad4703588b60fa392427604ce12ccba90f18e2539d877cd7e0202ee15caa6a6",
+        "public_zip_bytes": 1985316,
+        "crosschecked_row_count": 8,
+        "protected_review": "97781f03e7732cd91eccfbbe0a7a551865c8f38e3094736caeda9c5d347900db",
+        "checks": {
+          "reference": {
+            "verified": true,
+            "score": null,
+            "receipt": "rcpt_aa388155bbc846089ddb3c7ccd705d01",
+            "error_type": null
+          },
+          "reference-grade": {
+            "verified": true,
+            "score": {
+              "score": 1.0,
+              "valid": true,
+              "detail": ""
+            },
+            "receipt": "rcpt_ca0ee1e10ad748eabf371c6b28c1aa8c",
+            "error_type": null
+          },
+          "missing-row": {
+            "verified": true,
+            "score": {
+              "score": 0.0,
+              "valid": false,
+              "detail": "inexact_extraction"
+            },
+            "receipt": "rcpt_b9121b5b4293471894e7a27a666e875d",
+            "error_type": null
+          },
+          "bad-json": {
+            "verified": true,
+            "score": {
+              "score": 0.0,
+              "valid": false,
+              "detail": "invalid_submission"
+            },
+            "receipt": "rcpt_0b15cd11df7b49f68fcca395e85e4cd4",
+            "error_type": null
+          }
+        }
       }
     },
     "formal_cases_adopted": 0,
@@ -271,10 +434,10 @@
       "multiple_collection_minimum": 122,
       "previous_metadata_only_stored_zip_candidates": 108,
       "previous_metadata_only_favorable_compression_candidates": 113,
-      "possible_supplemental_cases": 3,
+      "possible_supplemental_cases": 4,
       "including_previously_calibrated_wasde": true,
-      "minimum_remaining_stored_size_scenario": 11,
-      "minimum_remaining_favorable_compression_scenario": 6
+      "minimum_remaining_stored_size_scenario": 10,
+      "minimum_remaining_favorable_compression_scenario": 5
     }
   },
   "evidence": {
@@ -313,6 +476,34 @@
     "public_publisher_acquisition": {
       "path": ".aeep/c13-cohort-batch-20261124/local-acquisition-result.json",
       "sha256": "985febd2c1df60523feb2714fda6aef3005229f801b9cdb5f6519ec2aea09109"
+    },
+    "treasury_pack": {
+      "path": ".aeep/c13-cohort-batch-20261124/treasury-october/document-verified/pack.json",
+      "sha256": "bf75c7e266c9431429c3f854b82cac9e5d583a16a40bd75760a3d6be62411d14"
+    },
+    "treasury_acquisition": {
+      "path": ".aeep/c13-cohort-batch-20261124/treasury-october/result.json",
+      "sha256": "9d2d3e8341728382f10356869bbca28248ccc5e409585cbba8234dfae29eddc3"
+    },
+    "treasury_outlay_sample_review": {
+      "path": ".aeep/c13-cohort-batch-20261124/treasury-october/outlays-sample-review.json",
+      "sha256": "15cdba60f76dff3834424d6fc16c4e90340395a0466dc515e02d54be7d6c34f1"
+    },
+    "treasury_outlay_sample": {
+      "path": ".aeep/c13-cohort-batch-20261124/treasury-october/outlays-sample.json",
+      "sha256": "118c6175932daded8a69961723b3205bad1c4e92e90fb59227835fca661b3c5c"
+    },
+    "treasury_documents": {
+      "path": ".aeep/c13-cohort-batch-20261124/treasury-october/document-verified/result.json",
+      "sha256": "0f1a88113a0ce6f6ad48c362e2a687be9b9d3aa0e53c3145a4dc885cedb74520"
+    },
+    "treasury_ledger": {
+      "path": ".aeep/c13-cohort-batch-20261124/treasury-october/document-verified/treasury-mts-202610/ledger.json",
+      "sha256": "ac6aa065085ca9519a93474d1470be918d3f0634eaed81a6b922d4f2b79a8078"
+    },
+    "other_publisher_pair_attempts": {
+      "path": ".aeep/c13-cohort-batch-20261124/publisher-pairs/result.json",
+      "sha256": "c9c53d577f44efb941c7fff793cce25cd994b39b89eed09cdf3b1ac36ce34681"
     }
   },
   "comparisons_paused": true,
@@ -331,6 +522,16 @@
         "exit_code": 0,
         "path": ".aeep/c13-cohort-batch-20261124/handoff.log",
         "sha256": "f13b5cbd47f7d1d0144411d0e5ba9ce0b361291055b8a5609be4f1ad92a068e1"
+      },
+      "followup-docs-check": {
+        "exit_code": 0,
+        "path": ".aeep/c13-cohort-batch-20261124/followup-docs-check.log",
+        "sha256": "f1d5766aeaf32542017318107efa853c34602d402dacded327ed054d91b3524b"
+      },
+      "followup-handoff": {
+        "exit_code": 0,
+        "path": ".aeep/c13-cohort-batch-20261124/followup-handoff.log",
+        "sha256": "7fa6037e15ba7bcd5ee3d2c546ba2c3dc0e821e204c2d975edfe24c5d8bbab9c"
       }
     }
   }

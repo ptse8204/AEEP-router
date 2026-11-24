@@ -1,5 +1,6 @@
-"""Cross-check two publisher references and grade a supplemental document pack."""
+"""Cross-check publisher references and grade supplemental document packs."""
 
+import argparse
 import asyncio
 import copy
 import json
@@ -7,7 +8,7 @@ import os
 import re
 import subprocess
 import sys
-from decimal import Decimal
+from decimal import ROUND_HALF_UP, Decimal
 from pathlib import Path
 from xml.etree import ElementTree
 from zipfile import ZipFile
@@ -25,16 +26,24 @@ from aeep_toolkit.stack_verification import ROOT as SOURCE_ROOT
 
 BATCH = ROOT / ".aeep/c13-cohort-batch-20261124"
 WORK = BATCH / "documents-verified"
+TREASURY = BATCH / "treasury-october"
 POPPLER = Path("/usr/local/Cellar/poppler/25.01.0/bin/pdftotext")
 POPPLER_SHA = "7d507ea2df5ce2b8eac1f09ee085c88b2c3cce7a7c5687eef60acfeeb22184a2"
 PDF_PINS = {
     "census": "d5d6c33ab8a39915bebd82a9e2761d4e916cefde543339db8562595d320de938",
     "bea": "8e62214df875053d3a167b11affdcac2edd2113ce585dea136c1fdd524889574",
+    "treasury": "956fca41af770139de490eff3f6d524367d28e7904761053cd8759ba075cb725",
 }
 CENSUS_CODES = ("441", "442", "443", "445", "446", "447")
 CENSUS_XLSX = "56629b17222b0b1f20c34efccda92bc5679091b2bf5048f8e05b7e79e38ca306"
 CENSUS_LISTING = "https://www.census.gov/retail/marts/historic_releases.html"
 BEA_LISTING = "https://www.bea.gov/news/2026/gdp-advance-estimate-3rd-quarter-2026"
+TREASURY_LISTING = "https://fiscaldata.treasury.gov/datasets/monthly-treasury-statement/"
+TASK_IDS = {
+    "census": "census-advance-retail-202609",
+    "bea": "bea-gdp-2026q3-advance",
+    "treasury": "treasury-mts-202610",
+}
 BEA_VALUES = {
     "activity": (
         ("real_gdp", "3.4", "2.2"),
@@ -61,11 +70,20 @@ GUIDES = {
         "For each measure give the third- and second-quarter annualized percent changes as "
         "one-decimal strings without the percent sign, including trailing zeroes."
     ),
+    "treasury": (
+        "Use the October 2026 Monthly Treasury Statement. For Table 4, collect the "
+        "current-month gross receipts, refunds and net receipts for Total -- Individual Income "
+        "Taxes, Corporation Income Taxes, Customs Duties and Total -- Receipts. For Table 5, "
+        "collect the current-month gross outlays, applicable receipts and net outlays for House "
+        "of Representatives, Library of Congress, Total--Legislative Branch and "
+        "Total--Judicial Branch. Preserve the stated row order, exact row names and the printed "
+        "integer amounts in millions of dollars. Use receipts and outlays as the collection names."
+    ),
 }
 
 
-def pdf_text(label):
-    path = BATCH / f"{label}.pdf"
+def pdf_text(label, directory=BATCH):
+    path = directory / f"{label}.pdf"
     read(path, PDF_PINS[label])
     if file_digest(POPPLER) != POPPLER_SHA:
         raise ValueError("pinned PDF decoder changed")
@@ -181,15 +199,72 @@ def schema_for(result):
     }
 
 
-def prepare_pack():
-    acquisition = verifier.get(BATCH / "local-acquisition-result.json")
-    source = {"census": census_reference(pdf_text("census")), "bea": bea_reference(pdf_text("bea"))}
+def treasury_reference(text):
+    receipt_table = text.split("Table 4. Receipts of the U.S. Government, October 2026", 1)[1]
+    receipt_table, outlay_table = receipt_table.split(
+        "Table 5. Outlays of the U.S. Government, October 2026", 1
+    )
+    outlay_table = outlay_table.split("Department of Agriculture:", 1)[0]
+    specs = {
+        "receipts": (
+            receipt_table,
+            "receipts.json",
+            "78b2fa366ede3d8c0eb7905e5059a9dc367dd9eb301c51ce01a10e167d4901f4",
+            ("Total -- Individual Income Taxes", "Corporation Income Taxes", "Customs Duties", "Total -- Receipts"),
+            {
+                "gross_receipts_millions": "current_month_gross_rcpt_amt",
+                "refunds_millions": "current_month_refund_amt",
+                "net_receipts_millions": "current_month_net_rcpt_amt",
+            },
+        ),
+        "outlays": (
+            outlay_table,
+            "outlays-sample.json",
+            "118c6175932daded8a69961723b3205bad1c4e92e90fb59227835fca661b3c5c",
+            ("House of Representatives", "Library of Congress", "Total--Legislative Branch", "Total--Judicial Branch"),
+            {
+                "gross_outlays_millions": "current_month_gross_outly_amt",
+                "applicable_receipts_millions": "current_month_app_rcpt_amt",
+                "net_outlays_millions": "current_month_net_outly_amt",
+            },
+        ),
+    }
+    def normalized(value):
+        return re.sub(r"\s*--\s*", "--", value)
+
+    groups = {}
+    for group, (table, name, pin, labels, fields) in specs.items():
+        rows = json.loads(read(TREASURY / name, pin))["data"]
+        groups[group] = []
+        for label in labels:
+            (published,) = [
+                row for row in rows if normalized(row["classification_desc"]) == normalized(label)
+            ]
+            if published["record_date"] != "2026-10-31":
+                raise ValueError("Treasury release dates differ")
+            (printed,) = re.findall(
+                r"(?m)^ *" + re.escape(label) + r" {2,}(-?[\d,]+) +(-?[\d,]+) +(-?[\d,]+) ",
+                table,
+            )
+            values = tuple(int(value.replace(",", "")) for value in printed)
+            independent = tuple(
+                int((Decimal(published[key]) / 10**6).quantize(Decimal("1"), rounding=ROUND_HALF_UP))
+                for key in fields.values()
+            )
+            if values != independent:
+                raise ValueError("Treasury API and PDF disagree")
+            groups[group].append({"classification": label, **dict(zip(fields, values, strict=True))})
+    return groups
+
+
+def prepare_pack(directory, acquisition, source):
+    acquisition = verifier.get(directory / acquisition)
     tasks, pins, protected = [], {}, {}
     guest = (HERE / "wasde_recipe_guest.py").read_bytes()
     bridge = (HERE / "extractbench_recipe_guest.py").read_bytes()
     for label, result in source.items():
-        task_id = {"census": "census-advance-retail-202609", "bea": "bea-gdp-2026q3-advance"}[label]
-        pdf = read(BATCH / f"{label}.pdf", PDF_PINS[label])
+        task_id = TASK_IDS[label]
+        pdf = read(directory / f"{label}.pdf", PDF_PINS[label])
         schema = schema_for(result)
         validate_json(result, schema, label="supplemental exact reference")
         expected = (json.dumps(result, sort_keys=True, indent=2) + "\n").encode()
@@ -248,7 +323,7 @@ def prepare_pack():
         tasks=tuple(tasks),
         task_sources=pins,
         source=SourcePin(
-            repository=CENSUS_LISTING,
+            repository=TREASURY_LISTING if set(source) == {"treasury"} else CENSUS_LISTING,
             revision=inventory,
             artifact_sha256=inventory,
             license_expression="LicenseRef-Per-task-review",
@@ -368,8 +443,16 @@ async def run_case(pack, task, protected):
         item.chmod(0o555 if item.is_dir() else 0o444)
     exact, checks = await verifier.grade(pack, descriptor, recipe, expected)
     return {
-        "source_family": {"census": "census-marts", "bea": "bea-nipa-gdp"}[label],
-        "publisher_crosscheck": {"census": CENSUS_LISTING, "bea": BEA_LISTING}[label],
+        "source_family": {
+            "census": "census-marts",
+            "bea": "bea-nipa-gdp",
+            "treasury": "treasury-monthly-statement",
+        }[label],
+        "publisher_crosscheck": {
+            "census": CENSUS_LISTING,
+            "bea": BEA_LISTING,
+            "treasury": TREASURY_LISTING,
+        }[label],
         "public_zip_sha256": file_digest(path),
         "public_zip_bytes": path.stat().st_size,
         "crosschecked_row_count": sum(len(rows) for rows in result.values()),
@@ -379,9 +462,23 @@ async def run_case(pack, task, protected):
 
 
 async def main():
+    global WORK
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--treasury", action="store_true")
+    args = parser.parse_args()
     os.umask(0o077)
+    if args.treasury:
+        WORK = TREASURY / "document-verified"
+        directory, acquisition = TREASURY, "result.json"
+        source = {"treasury": treasury_reference(pdf_text("treasury", TREASURY))}
+    else:
+        directory, acquisition = BATCH, "local-acquisition-result.json"
+        source = {
+            "census": census_reference(pdf_text("census")),
+            "bea": bea_reference(pdf_text("bea")),
+        }
     WORK.mkdir(mode=0o700)
-    pack, protected = prepare_pack()
+    pack, protected = prepare_pack(directory, acquisition, source)
     done = {}
     for task in pack.tasks:
         done[task.task_id] = await run_case(pack, task, protected[task.task_id])

@@ -147,27 +147,34 @@ and [protected calibration evidence](wasde-reviewed-pack-result-20261124.json)
 | Django Bird component props | The repair scored 1/1 across 74 native tests. The original scored 0/1 with one issue failure and 73 preservation passes. The publisher's added test row identified the issue among five matches for its truncated name. |
 | Census September retail sales | Twelve output rows matched the source PDF and workbook. The exact extraction scored 1/1. Missing data and invalid JSON scored 0/1. |
 | BEA third-quarter GDP | Five rows matched the PDF and publisher release narrative. The exact extraction scored 1/1. Missing data and invalid JSON scored 0/1. |
+| Treasury October receipts and outlays | Eight rows matched the PDF and the Fiscal Data API. The exact extraction scored 1/1. Missing data and invalid JSON scored 0/1. |
 
 The software inventory gained two newly verified pairs and reconciled
 three already settled pairs for Optype, Locify and adapted EOS. The
 documents passed the local binary extraction rubric. They still need
 case-specific asset-use review and a common cohort grading contract.
 [Federal retail archive](https://www.census.gov/retail/marts/historic_releases.html)
-and [BEA release](https://www.bea.gov/news/2026/gdp-advance-estimate-3rd-quarter-2026)
+· [BEA release](https://www.bea.gov/news/2026/gdp-advance-estimate-3rd-quarter-2026)
+· [Treasury statement and data](https://fiscaldata.treasury.gov/datasets/monthly-treasury-statement/)
 
-PyPA Build remains ungraded. After recovering the complete native test
-names, its repair passed 64 required tests and failed five. One console
-script test raised `IndexError`. Four metadata tests raised
-`BuildBackendException`. This case needs a reviewed runtime that can
-supply the offline backend and local package fixture. Its original
-has yet to run. [Batch receipts and diagnosis](cohort-batch-20261124.json)
+PyPA Build remains ungraded. The retained offline backend reduced the
+reference failures from five to two. Passing the same reviewed source
+and dependency paths to the test subprocesses cleared one more failure.
+An earlier attempt at that adapter change stopped before pytest because
+it referenced an unavailable import. That attempt remains recorded.
+All 69 assertions stayed in scope. The final diagnostic found one
+remaining failure, `test_build_with_dep_on_console_script[False]`.
+The test raised `IndexError` at line 519 while reading the expected
+console-script output. The grader keeps its non-executable scratch
+boundary. The original-source check has yet to run.
+[Batch receipts and diagnosis](cohort-batch-20261124.json)
 
 ## What still blocks formal comparisons
 
 | Workload | Remaining gap |
 | --- | --- |
 | Software | The audited pool contains 59 reproduced cases across 38 repositories. Two independent holdouts and shared early stages require at least 246 distinct cases. That leaves a minimum gap of 187 against this pool. Contract audits have the largest holdout gap, at 56 cases before early-stage needs. |
-| Document/data | The 18 annual disclosures remain held on source and asset-use grounds. The remaining ExtractBench metadata has 108 multiple-collection slots at stored ZIP size, or at most 113 if compression is favorable. The design needs 122. If Census, BEA and WASDE all qualify under the same cohort contract, the remaining gap is 11 at stored ZIP size or six with favorable compression. |
+| Document/data | The 18 annual disclosures remain held on source and asset-use grounds. The remaining ExtractBench metadata has 108 multiple-collection slots at stored ZIP size, or at most 113 if compression is favorable. The design needs 122. If Census, BEA, Treasury and WASDE all qualify under the same cohort contract, the remaining gap is 10 at stored ZIP size or five with favorable compression. |
 
 Live comparisons remain paused. Candidate benefit and selection benefit
 each need a separate result on frozen eligible tasks. Finishing the

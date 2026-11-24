@@ -9,6 +9,7 @@ from datetime import timedelta
 from pathlib import Path
 
 import check_eos_case_repair as checked
+import check_staged_offline_cases as staged
 import repository_offline_pair_batch as runner
 from audit_software_carrier_coverage import expected_rows
 from audit_staged_repository_graders import bind, index_paths, wheel_probe_assets
@@ -41,6 +42,8 @@ TARGETS = (PARAM, BIRD)
 BASE_EXPECTED = runner.expected_statuses
 AUDIT_GUARDS = {}
 COLLECT = False
+BACKEND = False
+BUILD_SUBPROCESS_PATHS = False
 LOCK_DIR = runner.WORK / "a2a-offline-assets"
 GUARDIAN = runner.WORK / "c13-django-guardian-protected-audit-20261118/operation-review.json"
 OLD_FIELDS = runner.review_fields
@@ -57,7 +60,10 @@ def definitions():
         for name, row in lock["wheels"].items()
     }
     guardian = get(GUARDIAN)
-    if runner.inspect_carrier() != guardian["carrier_layers"]:
+    if BACKEND:
+        if runner.inspect_carrier() != staged.image_layers():
+            raise ValueError("reviewed setuptools carrier layers differ")
+    elif runner.inspect_carrier() != guardian["carrier_layers"]:
         raise ValueError("reviewed Django carrier layers differ")
     rows = expected_rows()
     rows += get(HERE / "recovery-67a93f4c-result-20261119.json")["software_reproduction_pool"][
@@ -91,7 +97,7 @@ def definitions():
                     runner.asset(wheel, lock["sha256"]),
                     runner.asset(ROOT / mock["private_cache"], mock["sha256"]),
                 ]
-                plugins, inherited = ["pytest_mock"], []
+                plugins, inherited = ["pytest_mock"], ["setuptools-75.8.2"] if BACKEND else []
             else:
                 wheels = core
                 plugins = ["pytest_django.plugin"]
@@ -169,6 +175,20 @@ def definitions():
         if program.count(selection) != 1:
             raise ValueError("reviewed module selection hook changed")
         program = program.replace(selection, "*" + repr(required))
+    if BUILD_SUBPROCESS_PATHS:
+        # PyPA Build starts a new interpreter in the fixture backend directory.
+        # Supply the same reviewed source and wheel paths to those interpreters
+        # after bootstrapping the protected pytest process.
+        start_tests = "            + ';os.chdir('"
+        if program.count(start_tests) != 1:
+            raise ValueError("native observer bootstrap changed")
+        program = program.replace(
+            start_tests,
+            '            + \';os.environ["PYTHONPATH"]=\' + repr(":".join('
+            '[str(repo / "src"), str(repo), *wheels]))\n'
+            '            + \';os.environ["PIP_NO_INDEX"]="1"\'\n'
+            + start_tests,
+        )
     compile(program, "<protected native observer>", "exec")
     spec = ExecutorSpec(
         id="repository.suite.observe",
@@ -236,6 +256,7 @@ async def fields():
                 if TARGETS == (BUILD_AUDIT,)
                 else None
             ),
+            "build_subprocess_paths": BUILD_SUBPROCESS_PATHS,
             "sources": {
                 row["case_id"]: {
                     key: row[key]
@@ -273,6 +294,10 @@ async def collect_contract(*, diagnose=False):
 
     await grade_suite_output(case["input"], case["truth"], case["roles"]["reference"], record)
     earlier = "software-contracts-native-grading" if diagnose else "software-contracts-verified"
+    if BACKEND and diagnose:
+        earlier = "software-contracts-offline-backend"
+    if BUILD_SUBPROCESS_PATHS and diagnose:
+        earlier = "software-contracts-subprocess-paths-v2"
     previous = get(WORK.parent / earlier / "operation-review.json")
     (attempt,) = [item for item in previous["launches"] if item["operation"].endswith(":reference")]
     if content_digest(input_payload) != attempt["payload_sha256"]:
@@ -379,13 +404,19 @@ async def collect_contract(*, diagnose=False):
 
 
 async def main():
-    global NAME, WORK, TARGETS, COLLECT
+    global NAME, WORK, TARGETS, COLLECT, BACKEND, BUILD_SUBPROCESS_PATHS
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--contract-audits", action="store_true")
     parser.add_argument("--collect-contract", action="store_true")
     parser.add_argument("--diagnose-contract", action="store_true")
+    parser.add_argument("--contract-backend", action="store_true")
+    parser.add_argument("--contract-subprocess-paths", action="store_true")
     args = parser.parse_args()
-    if args.contract_audits or args.collect_contract or args.diagnose_contract:
+    BUILD_SUBPROCESS_PATHS = args.contract_subprocess_paths
+    BACKEND = args.contract_backend or BUILD_SUBPROCESS_PATHS
+    if BUILD_SUBPROCESS_PATHS and args.collect_contract:
+        parser.error("the subprocess path review reuses the native identities")
+    if args.contract_audits or args.collect_contract or args.diagnose_contract or BACKEND:
         NAME = "c13-software-cohort-contracts-20261124"
         WORK = WORK.parent / "software-contracts-published-ids"
         TARGETS = (BUILD_AUDIT,)
@@ -394,15 +425,25 @@ async def main():
             NAME = NAME + "-collection"
             WORK = WORK.parent / "software-contracts-collection"
         elif args.diagnose_contract:
-            NAME = NAME + "-diagnosis"
-            WORK = WORK.parent / "software-contracts-diagnosis"
+            if BUILD_SUBPROCESS_PATHS:
+                suffix = "-subprocess-diagnosis"
+            else:
+                suffix = "-backend-diagnosis" if BACKEND else "-diagnosis"
+            NAME += suffix
+            WORK = WORK.parent / ("software-contracts" + suffix)
+        elif BUILD_SUBPROCESS_PATHS:
+            NAME = NAME + "-subprocess-paths-v2"
+            WORK = WORK.parent / "software-contracts-subprocess-paths-v2"
+        elif BACKEND:
+            NAME = NAME + "-backend"
+            WORK = WORK.parent / "software-contracts-offline-backend"
         else:
             WORK = WORK.parent / "software-contracts-native-grading"
     os.umask(0o077)
     WORK.mkdir(mode=0o700)
     runner.NAME = NAME
     runner.FROZEN = SOURCE_ROOT
-    runner.CARRIER = get(GUARDIAN)["environment"]["container_image"]
+    runner.CARRIER = staged.CARRIER if BACKEND else get(GUARDIAN)["environment"]["container_image"]
     runner.REVIEW = WORK / "operation-review.json"
     runner.APPROVAL = WORK / "delegated-review.json"
     runner.RUN = WORK / "execution"
