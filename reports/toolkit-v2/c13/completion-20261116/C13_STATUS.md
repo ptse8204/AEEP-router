@@ -553,9 +553,14 @@ requires a frozen study and final lineage verification.
 · [Grouped local-use review](varex-local-use-review-20261124.json)
 · [CDLA Permissive 2.0 terms](https://cdla.dev/permissive-2-0/)
 
-All 246 proposed records passed a volatile-ledger rehearsal. Each
-survived idempotent storage, and the managed plan gate rejected every
-local-only record. The real ledger still awaits the grouped decision.
+The batch registration command passed eight checks. A temporary
+ledger accepted all 246 records and created zero grants or execution
+operations. The ordinary CLI and batch returned the same rights
+digest. The managed workflow rejected provider dispatch for all
+246 local-only records. The exact decision `1fbac221` still gates
+registration in the private definition ledger.
+
+[Registration rehearsal](varex-local-use-registration-handoff-20261124.json)
 
 ### Follow-up software source batches
 

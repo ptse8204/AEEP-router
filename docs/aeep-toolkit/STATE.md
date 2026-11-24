@@ -1,5 +1,14 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. VAREX local-use batch registration rehearsed.**
+The [local-use rehearsal](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#varex-protected-grading)
+verified all 246 rights definitions against the ordinary store and
+CLI. The managed workflow denied provider dispatch for every record
+and the test ledger accumulated no grants or operations. The private
+definition ledger is still gated on review `1fbac221`. Software intake
+waits for usable space and the exact storage decision. Comparisons
+stay paused and Waza stays excluded.
+
 **November 24. Targeted cleanup execution rehearsed.**
 The [storage recovery review](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#targeted-cleanup-option-for-reserve-intake)
 passed nine approval, scope, drift, preservation and replay checks.

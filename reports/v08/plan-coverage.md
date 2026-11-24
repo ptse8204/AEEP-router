@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [VAREX batch registration rehearsal](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#varex-protected-grading)
+accepted all 246 local-only records through the existing definition
+store. The managed workflow refused each record for provider use.
+The original operator decision remains pending. No plans were
+assigned and comparisons remain paused.
+
 The [targeted cleanup command](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#targeted-cleanup-option-for-reserve-intake)
 passed nine approval and preservation checks on synthetic files.
 The exact scope and 428 real fixture copies await the original
