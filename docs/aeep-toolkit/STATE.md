@@ -1,5 +1,15 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. Exact storage cleanup identified for reserve intake.**
+The [targeted storage review](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#targeted-cleanup-option-for-reserve-intake)
+lists 428 verified synthetic recipe-call database copies from the
+completed November 17 pytest run. Up to 546 MiB is allocated there.
+Review `b62d8a49` awaits approval and preserves both primary
+campaign databases, test logs, backups, snapshots and Docker resources.
+No copies have been removed. The supplemental intake still waits for
+usable space. VAREX local use and the CCFlow repeat remain open.
+Comparisons stay paused and Waza stays excluded.
+
 **November 24. Protected workload timing recovered from settled evidence.**
 The [C13 resource audit](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#measured-resource-needs-for-the-next-protected-batch)
 binds 119 comparable software operation timings from the 152 retained

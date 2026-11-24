@@ -752,6 +752,28 @@ Comparisons remain paused.
 
 [Receipt timings and read-only grant balance](protected-grader-batch-cost-20261124.json)
 
+### Targeted cleanup option for reserve intake
+
+The completed November 17 pytest run left 428 recipe-call
+SQLite copies from two synthetic list-count tests. The review
+verified each copy's ownership, test provenance and checksum.
+It found no open handles or active SQLite sidecar files. The
+review lists only those call copies and preserves the two
+primary campaign databases, fixture markers and test log.
+
+The listed copies account for up to 546 MiB of allocated space.
+Intake needs about 408 MiB more usable space at review time.
+The proposed cleanup stops once 50.13 GiB is usable and acts
+only on the reviewed files. Actual APFS recovery can differ
+from allocated size and must be measured after cleanup.
+Backups, snapshots and Docker resources stay intact.
+
+The exact review `b62d8a49` awaits operator approval. No
+files have been removed. The VAREX and CCFlow decisions
+remain separate.
+
+[Storage review summary](retired-recipe-call-storage-handoff-20261124.json)
+
 ### qBraid visualization grader preparation
 
 The pinned qBraid archive matches the publisher's 128-file Git tree.

@@ -1,5 +1,10 @@
 # 0.8 plan coverage and remaining work
 
+The [targeted reserve-intake storage review](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#targeted-cleanup-option-for-reserve-intake)
+binds 428 retired synthetic database copies and preserves the two
+primary results and their logs. It awaits exact approval. The
+supplemental intake and formal comparisons remain pending.
+
 The [protected workload resource audit](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#measured-resource-needs-for-the-next-protected-batch)
 reconciles 119 settled software operation timings and two whole VAREX
 calibration operations. This supports batch planning. Resource
