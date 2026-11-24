@@ -1,5 +1,14 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. All 131 remaining VAREX multiple-collection PDFs verified.**
+The [source-family screen](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#varex-protected-grading)
+reconciles 93 LFS digests and 38 Git blob IDs. The first-page text
+screen flagged eight related-form groups. Keeping one case per flagged
+group would leave 120 prospects against the 122-case minimum. Case
+rights, source review and protected grading still apply. Software
+remains at 64 verified reproductions. Comparisons stay paused and Waza
+stays excluded.
+
 **November 24. Pyserde protected pair and VAREX grading verified.**
 The [operator handoff](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#cohort-batch-results)
 records Pyserde issue 657 at 1/1 for the repair and 0/1 for the

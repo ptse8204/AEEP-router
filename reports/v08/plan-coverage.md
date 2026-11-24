@@ -1,5 +1,10 @@
 # 0.8 plan coverage and remaining work
 
+The [VAREX source-family screen](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#varex-protected-grading)
+verified all 131 remaining multiple-collection PDFs and flagged eight
+related-form groups. A one-per-group screen leaves 120 prospects against
+122 required. Independence and qualifying protected grades remain open.
+
 The [latest C13 cohort checks](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#cohort-batch-results)
 verified a Pyserde repair and original-source pair with all 12 tests.
 The software pool has 64 reproduced cases across 41 repositories.

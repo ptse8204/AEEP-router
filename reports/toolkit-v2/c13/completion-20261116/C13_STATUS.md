@@ -273,6 +273,18 @@ and protected grades still determine how many cases qualify. The two
 calibration forms stay outside that prospective count.
 [Full catalog capacity audit](varex-cohort-capacity-20261124.json)
 
+All 131 candidate PDF bodies now match the pinned publisher objects.
+The two acquisition paths verified 93 LFS SHA-256 digests and 38 Git
+blob IDs, covering 54,191,882 bytes. A local first-page text screen found
+eight groups of related forms. It flagged the published variants of
+Standard Forms 1152, 1153 and 85PS, as well as several FDA, GSA and
+California forms. One case lacked enough first-page text to screen.
+Counting one case per flagged group would leave 120, two short of the
+122-case minimum. The review still needs to distinguish distinct
+workloads from alternate versions of the same form before cohort
+assignment. No candidate PDFs from this batch went to a model or grader.
+[Verified PDF inventory and source-family screen](varex-source-family-screen-20261124.json)
+
 Live comparisons remain paused. Candidate benefit and selection benefit
 each need a separate result on frozen eligible tasks. Finishing the
 stack or approving more runs cannot fill either workload gap.

@@ -1,11 +1,12 @@
 """Acquire and bind two public VAREX cases for local protected calibration."""
 
 import argparse
+import hashlib
 import json
 import shutil
 from collections import Counter
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import parse_qs, quote, unquote, urlsplit
 from urllib.request import HTTPRedirectHandler, build_opener
 from zipfile import ZipFile
 
@@ -49,6 +50,27 @@ PDF_TREE = {
     "pdf-tree-0.json": "4790c7e98c391cb0a18f7d85e6faa272d18b0e5948b7507093d2303bf4da6194",
     "pdf-tree-1.json": "9f554d3779219f1919985234802ec99f56b3e624d5855a0823a4f4df05079ea6",
 }
+GIT_SAMPLES = ("HUD-1710-B", "SF523-93", "ri30-010_2018_05", "cdph252")
+
+
+class GitBlobRedirect(HTTPRedirectHandler):
+    def __init__(self, case):
+        self.case = case
+        self.observed = False
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        target = urlsplit(newurl)
+        etag = '"' + self.case["git_oid"] + '"'
+        if (
+            self.observed or urlsplit(req.full_url).hostname != "huggingface.co"
+            or target.scheme != "https" or target.netloc != "huggingface.co"
+            or unquote(target.path) != f"/api/resolve-cache/datasets/ibm-research/VAREX/{REV}/{self.case['pdf_path']}"
+            or parse_qs(target.query).get("etag") != [etag]
+            or headers.get("x-linked-etag") != etag or headers.get("x-repo-commit") != REV
+        ):
+            raise ValueError("Git PDF redirect does not match its publication pin")
+        self.observed = True
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
 
 
 class NoRedirect(HTTPRedirectHandler):
@@ -119,14 +141,87 @@ def schema_audit(node):
 
 def pdf(case):
     size = case["bytes"]
-    redirect = BoundRedirect({"lfs": {"oid": case["lfs_sha256"]}, "size": size})
-    with build_opener(redirect).open(f"{DATASET}/resolve/{REV}/{case['pdf_path']}", timeout=30) as reply:
-        if not redirect.observed or urlsplit(reply.geturl()).hostname != CDN or reply.status != 200:
+    lfs = case["lfs_sha256"]
+    redirect = BoundRedirect({"lfs": {"oid": lfs}, "size": size}) if lfs else GitBlobRedirect(case)
+    host = CDN if lfs else "huggingface.co"
+    with build_opener(redirect).open(f"{DATASET}/resolve/{REV}/{quote(case['pdf_path'])}", timeout=30) as reply:
+        if not redirect.observed or urlsplit(reply.geturl()).hostname != host or reply.status != 200:
             raise ValueError("PDF is outside the reviewed storage binding")
         body = reply.read(size + 1)
-    if len(body) != size or not body.startswith(b"%PDF-") or digest(body) != case["lfs_sha256"]:
+    if len(body) != size or not body.startswith(b"%PDF-"):
+        raise ValueError("complete PDF differs from the expected size or format")
+    if lfs:
+        observed, expected = digest(body), lfs
+    else:
+        observed = hashlib.sha1(f"blob {len(body)}\0".encode() + body, usedforsecurity=False).hexdigest()
+        expected = case["git_oid"]
+    if observed != expected:
         raise ValueError("complete PDF differs from the pinned object")
     return body
+
+
+def acquire_candidate_pdfs(kind):
+    """Verify the published PDF artifacts for the remaining multi-collection prospects."""
+    catalog = json.loads(pinned(
+        METADATA / "pdf-metadata-result.json",
+        "7ed679a52a481e6d842658a1f28476eb75a9c40dcfa650485ed45b4f316b1d28",
+    ))
+    git_rows = {row["doc_id"]: row for row in catalog["prospects"] if not row["lfs_sha256"]}
+    lfs_rows = {row["doc_id"]: row for row in catalog["prospects"] if row["lfs_sha256"]}
+    choices = {
+        "git-samples": (git_rows, GIT_SAMPLES),
+        "git-remaining": (git_rows, sorted(git_rows.keys() - set(GIT_SAMPLES))),
+        "lfs-remaining": (lfs_rows, sorted(lfs_rows.keys() - set(CASES))),
+    }
+    inventory, names = choices[kind]
+    selected = {name: inventory[name] for name in names}
+    cumulative = sum(row["bytes"] for row in selected.values())
+    if (
+        len(git_rows) != 38 or len(lfs_rows) != 95 or any(
+            row["collections"] < 2 or row["pdf_path"] != f"pdfs/{name}.pdf"
+            for name, row in selected.items()
+        ) or shutil.disk_usage(ROOT).free < 50 * 2**30 + cumulative
+    ):
+        raise ValueError("reviewed Git PDF selection or host reserve changed")
+    work = WORK.parent / {
+        "git-samples": "varex-git-pdf-samples", "git-remaining": "varex-git-pdf-remaining",
+        "lfs-remaining": "varex-lfs-pdf-remaining",
+    }[kind]
+    work.mkdir(mode=0o700)
+    review = {
+        "dataset_revision": REV, "driver_sha256": digest(Path(__file__).read_bytes()),
+        "cases": selected, "maximum_payload_bytes": cumulative,
+        "authority": "C13 bounded public source preparation",
+        "maximum_file_acquisitions": len(selected), "model_turns": 0, "cash_usd": 0,
+        "new_protected_grader_calls": 0, "formal_assignments": 0, "retries": 0,
+    }
+    write(work / "acquisition-review.json", review)
+    outcomes, failures = {}, {}
+    for name in names:
+        row = selected[name]
+        if shutil.disk_usage(ROOT).free < 50 * 2**30 + row["bytes"] + 4096:
+            failures[name] = "storage_reserve"
+            continue
+        try:
+            body = pdf(row)
+        except (OSError, ValueError) as error:
+            failures[name] = type(error).__name__
+            continue
+        with (work / f"{name}.pdf").open("xb") as stream:
+            stream.write(body)
+        outcomes[name] = {
+            "git_oid": row["git_oid"], "bytes": len(body), "sha256": digest(body),
+            "schema_sha256": row["schema_sha256"],
+        }
+    result = {
+        "review_sha256": digest((work / "acquisition-review.json").read_bytes()),
+        "dataset_revision": REV, "files": outcomes,
+        "unverified_files": failures,
+        "published_pdf_objects_verified": len(outcomes), "model_turns": 0, "cash_usd": 0,
+        "formal_assignments": 0,
+    }
+    write(work / "result.json", result)
+    return result
 
 
 def acquire(review):
@@ -330,7 +425,10 @@ def cohort_capacity():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("action", choices=("review", "acquire", "stage", "audit-cohort"))
+    parser.add_argument("action", choices=(
+        "review", "acquire", "stage", "audit-cohort", "verify-git-pdfs", "verify-remaining-git-pdfs",
+        "verify-remaining-lfs-pdfs",
+    ))
     action = parser.parse_args().action
     if action == "review":
         print(json.dumps(scope(), indent=2, sort_keys=True))
@@ -338,5 +436,11 @@ if __name__ == "__main__":
         acquire(scope())
     elif action == "stage":
         stage()
-    else:
+    elif action == "audit-cohort":
         print(json.dumps(cohort_capacity(), indent=2, sort_keys=True))
+    else:
+        kind = {
+            "verify-git-pdfs": "git-samples", "verify-remaining-git-pdfs": "git-remaining",
+            "verify-remaining-lfs-pdfs": "lfs-remaining",
+        }[action]
+        print(json.dumps(acquire_candidate_pdfs(kind), indent=2, sort_keys=True))
