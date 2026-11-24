@@ -14,7 +14,7 @@ PRIOR_INTAKE = HERE / "scientific-python-source-intake-20261124.json"
 QUEUE = acquisition.QUEUE
 
 
-def definition(selected):
+def definition(selected, *, sources_only=False):
     summary = acquisition.load(QUEUE / "summary.json")
     leads = {
         row["case_id"]: row
@@ -79,6 +79,8 @@ def definition(selected):
         "provider_disclosure": False,
         "authority": "First bounded public source intake under the C13 engineering delegation.",
     }
+    if sources_only:
+        definition["transport_projection"] = False
     return definition, leads, rows
 
 
@@ -87,6 +89,7 @@ def main():
     parser.add_argument("batch")
     parser.add_argument("--audit", action="append", default=[])
     parser.add_argument("--repair", action="append", default=[])
+    parser.add_argument("--sources-only", action="store_true")
     parser.add_argument("--execute")
     args = parser.parse_args()
     if not args.batch.isascii() or not args.batch.replace("-", "").isalnum():
@@ -99,7 +102,10 @@ def main():
     if args.execute:
         record = json.loads(read(acquisition.REVIEW, args.execute))
         selected = {entry["case_id"]: entry["intent"] for entry in record["sources"]}
-        acquisition.definition = lambda: definition(selected)
+        if args.sources_only or args.audit or args.repair:
+            parser.error("execution scope comes from the exact review")
+        sources_only = record.get("transport_projection") is False
+        acquisition.definition = lambda: definition(selected, sources_only=sources_only)
         write(acquisition.APPROVAL, encode({"approved": True, "review_sha256": args.execute}))
         report = acquisition.run(args.execute)
         print(json.dumps({k: v for k, v in report.items() if k != "observations"}))
@@ -109,7 +115,7 @@ def main():
         }
         if len(selected) != len(args.audit) + len(args.repair):
             parser.error("select each exact case once")
-        payload, _, _ = definition(selected)
+        payload, _, _ = definition(selected, sources_only=args.sources_only)
         folder.mkdir(mode=0o700)
         expiration = (datetime.now(UTC) + timedelta(hours=4)).isoformat()
         print(write(acquisition.REVIEW, encode(payload | {"expires_at": expiration}))["sha256"])

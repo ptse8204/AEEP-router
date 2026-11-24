@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 follow-up source batch](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#follow-up-software-source-batches)
+verified CCFlow's publisher archive and ordinary grader preparation.
+Its protected pair awaits the exact Linux runtime. Docling, AWS
+Powertools, PSyclone, and PyDAP have separate intake gaps. The reproduced
+software pool remains at 75. The VAREX decision and formal comparison
+gates are still open.
+
 The [C13 parser and documentation batch](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#parser-and-documentation-batch)
 adds verified Pyformlang and pdoc pairs. The 75-case software pool needs
 at least 171 more cases. The 246-document VAREX pack has a grouped

@@ -1,5 +1,17 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. CCFlow source and grader preparation verified.**
+The [follow-up batch](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#follow-up-software-source-batches)
+matched CCFlow's archive to its pinned publisher tree and staged all
+24 upstream checks plus one authored preservation control. Resolve the
+Linux runtime before protected grading. Docling hit the archived-source
+response bound. AWS Powertools and PSyclone retained neither archive.
+PyDAP stays held because a required test opens a public DAP endpoint.
+The archive-only route keeps source intake within the host reserve.
+No protected grades or new formal cases were recorded. The grouped
+VAREX local-use decision remains pending. Comparisons are paused and
+Waza is excluded.
+
 **November 24. Parser and documentation graders verified.**
 The [C13 batch report](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#parser-and-documentation-batch)
 records two verified reference and original pairs. Pyformlang passed 48

@@ -1,0 +1,191 @@
+{
+  "case_dispositions": {
+    "DS4SD__docling-824": {
+      "archive_head": "Both pinned owner URLs returned HTTP 200.",
+      "current_publisher": "docling-project/docling",
+      "historical_case_family": "ds4sd/docling",
+      "status": "No archive retained. Response was truncated or reached the 3.5 MB bound."
+    },
+    "Point72__ccflow-24": {
+      "archive": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-docling-ccflow-archive-only-v2-20261124/intake/archives/Point72__ccflow-24/source-original.tar.gz",
+        "sha256": "444346fb4e3787618356a9a696d6a7aae8bedebf0123f80917543c8221bb94a5"
+      },
+      "authored_preservation_guards": 1,
+      "eager_import_evidence": {
+        "ccflow/__init__.py": {
+          "required_eager_imports": [
+            "from .arrow import *",
+            "from .base import *",
+            "from .callable import *",
+            "from .context import *",
+            "from .enums import Enum",
+            "from .exttypes import *",
+            "from .object_config import *",
+            "from .publisher import *",
+            "from .result import *"
+          ],
+          "sha256": "25af89220c3fada5e9dc99fc561e3510c6fa1f9bade000f0d7262dbbe0f1ac10"
+        },
+        "ccflow/base.py": {
+          "required_eager_imports": [
+            "import collections.abc",
+            "import copy",
+            "import inspect",
+            "import logging",
+            "import pathlib",
+            "import platform",
+            "import typing",
+            "from types import GenericAlias, MappingProxyType",
+            "from typing import Any, Callable, ClassVar, Dict, Generic, List, Optional, Tuple, Type, TypeVar, get_args, get_origin",
+            "import typing_extensions",
+            "from omegaconf import DictConfig",
+            "from packaging import version",
+            "from pydantic import BaseModel as PydanticBaseModel, ConfigDict, PrivateAttr, SerializeAsAny, TypeAdapter, ValidationError, computed_field, field_validator, model_serializer, model_validator",
+            "from pydantic.fields import Field",
+            "from typing_extensions import Self",
+            "from .exttypes.pyobjectpath import PyObjectPath",
+            "from pydantic._internal._model_construction import ModelMetaclass"
+          ],
+          "sha256": "fbc6d89c0eb1070a60ce88a6fe11d5cb60b4efb3610f680d3ed5536738991181"
+        },
+        "ccflow/utils/tokenize.py": {
+          "required_eager_imports": [
+            "from dask.base import normalize_token, tokenize"
+          ],
+          "sha256": "4be1c9adfc3a927bae8cefeb30a2520e00512eebf0c9226ea5d20039ece25c35"
+        }
+      },
+      "protected_grades": 0,
+      "published_assertions": 24,
+      "publisher_dependency_metadata": {
+        "blob_sha1": "b1ad857ec9c36bd5dca5d7cab214e9e9248952fc",
+        "declared_dependencies": [
+          "cloudpathlib",
+          "cloudpickle",
+          "dask",
+          "hydra-core",
+          "IPython",
+          "jinja2",
+          "numpy<3",
+          "orjson",
+          "pandas",
+          "pyarrow",
+          "pydantic>=2.6,<3",
+          "smart_open",
+          "tenacity"
+        ],
+        "requires_python": ">=3.9",
+        "sha256": "900adf777db847b1f90f3286df3d30b2b681d70ab9ed4e4449eaaf7a0d32d7a7"
+      },
+      "runtime_status": "Pending exact Linux dependency closure. Dask and OmegaConf are imported by the pinned package before the protected assertions.",
+      "transport_index": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-docling-ccflow-archive-only-v2-20261124/ccflow-verified-archive-projection/index.json",
+        "sha256": "134de2257195b1ac5b2e6a7dcb3aaa604b625de003e136d08271143f8dbef8a5"
+      },
+      "transport_result": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-docling-ccflow-archive-only-v2-20261124/ccflow-verified-archive-projection/result.json",
+        "sha256": "00d8209787ae8a4b4250cee8433178f9ff4a204ffea7684f91c6937685fb99dd"
+      },
+      "transport_review": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-docling-ccflow-archive-only-v2-20261124/ccflow-verified-archive-projection/operation-review.json",
+        "sha256": "c6221d206c2050d0854e22f739b6183725bfe053f918b57b6ae82df8d064b76b"
+      }
+    },
+    "aws-powertools__powertools-lambda-python-7315": {
+      "publisher_metadata_blob_sha1": "5816a7356786286522fe7433a310b177ffc065b0",
+      "status": "Archive intake raised ValueError before retaining source. The acquisition driver did not capture the precise reason.",
+      "verified_test_fixture_import": "Published API Gateway tests import a local JSON event loader."
+    },
+    "pydap__pydap-624": {
+      "required_source": "https://github.com/pydap/pydap/blob/12fb95e64776aaabc5edddd1563c6e1c7b5656aa/src/pydap/tests/test_client.py#L1248-L1263",
+      "status": "Held before source intake. Required test passes the public DAP endpoint URL to open_url. Review exact offline fixture and replay equivalence before executing.",
+      "test_path": "src/pydap/tests/test_client.py::test_get_batch_data_sliced_nondims",
+      "upstream_test_git_blob_sha1": "8bce8a1976d97173e71422aa3db7149c9407a346"
+    },
+    "stfc__PSyclone-2999": {
+      "publisher_setup_blob_sha1": "2ab527f9f04e8cb6a6f4447a82005ce067ac6c87",
+      "selected_test_blob_sha1": "929a780cd57dbbd0347b9380cd4d24333c2e10bb",
+      "status": "Archive intake raised ValueError before retaining source. The acquisition driver did not capture the precise reason."
+    }
+  },
+  "cash_usd": 0,
+  "comparisons_paused": true,
+  "document_local_use_proposal": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/varex-local-use-review-20261124.json",
+    "sha256": "1fbac221fe8a252acc01caffec738f144fe69940b636f926358e74fc887092a4"
+  },
+  "formal_assignments": 0,
+  "model_turns": 0,
+  "new_protected_pairs": 0,
+  "schema_version": "aeep.c13.source-batch-archive-verification.v1",
+  "source_acquisitions": [
+    {
+      "observations": [
+        {
+          "case_id": "aws-powertools__powertools-lambda-python-7315",
+          "error_type": "ValueError",
+          "status": "source_or_transport_unverified"
+        },
+        {
+          "case_id": "stfc__PSyclone-2999",
+          "error_type": "ValueError",
+          "status": "source_or_transport_unverified"
+        }
+      ],
+      "result": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-aws-psyclone-archive-only-20261124/intake/result.json",
+        "sha256": "a6f83ea2cdb1d13355408ea50f65eaf5a338e682d299ea9775b9752bff01d665"
+      },
+      "review": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-aws-psyclone-archive-only-20261124/review.json",
+        "sha256": "018aebc7919bef78617fd3aa8899a1d3959d3cf6bdd228955bf4eb47b5f1b55d"
+      }
+    },
+    {
+      "observations": [
+        {
+          "case_id": "DS4SD__docling-824",
+          "error_type": "ValueError",
+          "phase": "archive_intake",
+          "reason": "archive_response_size",
+          "status": "source_or_transport_unverified"
+        },
+        {
+          "archive_bytes": 281473,
+          "archive_entries": 111,
+          "archive_sha256": "444346fb4e3787618356a9a696d6a7aae8bedebf0123f80917543c8221bb94a5",
+          "case_id": "Point72__ccflow-24",
+          "license_notices": [
+            {
+              "bytes": 11342,
+              "file": "LICENSE",
+              "sha256": "03ce99656ae62d69bca4504c006c220ea6224e18d26aeb0047c690de02d1e647"
+            }
+          ],
+          "publisher": {
+            "commit_metadata_sha256": "606ac24dfd0c0639efbec068c24c8e08b420fbd6cefd2b7c18952655bc1f45ac",
+            "published_tree": "0ee43af5e0d65c96229877263a24d5a3d5aefe3a",
+            "resolved_url": "https://api.github.com/repos/point72/ccflow/git/commits/67f4b6dcbb387e2e486e408806789d94c9b02886",
+            "url": "https://api.github.com/repos/point72/ccflow/git/commits/67f4b6dcbb387e2e486e408806789d94c9b02886"
+          },
+          "status": "archive_verified"
+        }
+      ],
+      "result": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-docling-ccflow-archive-only-v2-20261124/intake/result.json",
+        "sha256": "5fc62e57a87f2011c3033e86d1aa744be044ee41f2323cb29f56e3e51f9637ca"
+      },
+      "review": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-docling-ccflow-archive-only-v2-20261124/review.json",
+        "sha256": "b581282cfcbaba77e3454f4f760f626cd5ae617e2366c0b9065cac6aff3ef77e"
+      }
+    }
+  ],
+  "superseded_unstarted_intake": {
+    "path": ".aeep/c13-cohort-runtime-20261124/c13-parser-and-multifile-next-20261124/review.json",
+    "sha256": "c9ca51cedfa09510d1310fa0e944c3d8c6fcc484242d7a3d80bdabd815b2cc59"
+  },
+  "verification": "Four intake mode/space rehearsals, terminal replay refusal, exact archive refusal and unknown-exception minimization passed.",
+  "waza_excluded": true
+}

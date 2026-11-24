@@ -32,6 +32,15 @@ TARGET = WORK / "repository-expansion-acquisition"
 REVIEW = QUEUE / "acquisition-review.json"
 APPROVAL = QUEUE / "acquisition-approval.json"
 MAX_REPOSITORY_SIZE_HINT = 250_000
+SOURCE_REFUSALS = {
+    "public commit metadata exceeds the review bound": "commit_metadata_cap",
+    "publisher did not return the requested commit": "commit_identity",
+    "publisher commit lookup escaped approved scope": "commit_location",
+    "source response differs from the exact destination": "archive_location",
+    "declared source exceeds the reviewed cap": "archive_declared_size",
+    "source response truncated or at the reviewed cap": "archive_response_size",
+    "archive could not be tied to the published tree and notices": "archive_tree_or_license",
+}
 RESERVE = 52 * 1024**3
 
 
@@ -122,7 +131,7 @@ def definition():
     return review, leads, rows
 
 
-def process(choice, lead, row, helpers):
+def retain_source(choice, row):
     case = TARGET / "archives" / choice["case_id"]
     case.mkdir(mode=0o700, parents=True)
     archive = case / "source-original.tar.gz"
@@ -135,6 +144,18 @@ def process(choice, lead, row, helpers):
         raise ValueError("archive could not be tied to the published tree and notices")
     row_path = case / "row.json"
     write(row_path, encode(row))
+    result = {
+        "publisher": publisher,
+        "archive_sha256": sha,
+        "archive_entries": count,
+        "archive_bytes": archive.stat().st_size,
+        "license_notices": licenses,
+    }
+    return case, result
+
+
+def project_source(choice, lead, case, result, helpers):
+    archive = case / "source-original.tar.gz"
     binding = {
         **lead,
         "instance_id": lead["case_id"],
@@ -142,17 +163,10 @@ def process(choice, lead, row, helpers):
         "source_bindings": [
             {
                 "archive": archive.relative_to(ROOT).as_posix(),
-                "sha256": sha,
-                "license_notices": licenses,
+                "sha256": result["archive_sha256"],
+                "license_notices": result["license_notices"],
             }
         ],
-    }
-    result = {
-        "publisher": publisher,
-        "archive_sha256": sha,
-        "archive_entries": count,
-        "archive_bytes": archive.stat().st_size,
-        "license_notices": licenses,
     }
     if choice["intent"] == "audit":
         with TemporaryDirectory(prefix="aeep-expansion-audit-") as scratch:
@@ -164,7 +178,7 @@ def process(choice, lead, row, helpers):
         candidate = bind_row(
             details, binding, TARGET / "transport", case.parent, str(archive.relative_to(ROOT))
         )
-    return result, candidate
+    return candidate
 
 
 def run(exact):
@@ -188,7 +202,8 @@ def run(exact):
         or shutil.disk_usage(WORK).free < RESERVE + review["maximum_archive_response_bytes"]
     ):
         raise ValueError("review drift, expiry or insufficient storage")
-    helpers = load_reviewed_helpers()
+    project = review.get("transport_projection", True)
+    helpers = load_reviewed_helpers() if project else None
     TARGET.mkdir(mode=0o700)
     observations, candidates = [], []
     stopped = None
@@ -209,10 +224,16 @@ def run(exact):
         attempt.mkdir(mode=0o700, parents=True)
         write(attempt / "started.json", encode({"case_id": case_id, "review_sha256": exact}))
         observation = {"case_id": case_id}
+        phase = "archive_intake"
         try:
-            info, candidate = process(source, leads[case_id], source_rows[case_id], helpers)
+            case, info = retain_source(source, source_rows[case_id])
+            if project:
+                phase = "transport_projection"
+                candidate = project_source(source, leads[case_id], case, info, helpers)
         except urllib.error.HTTPError as failure:
-            observation.update(status="publisher_request_failed", http_code=failure.code)
+            observation.update(
+                status="publisher_request_failed", http_code=failure.code, phase=phase
+            )
             if failure.code in {403, 429}:
                 stopped = "publisher_rate_or_authority_limit"
         except (
@@ -229,11 +250,18 @@ def run(exact):
             # Some checked archives legitimately do not fit the source or test contract.
             # Preserve partial files and record the terminal result without retrying.
             observation.update(
-                status="source_or_transport_unverified", error_type=type(failure).__name__
+                status="source_or_transport_unverified",
+                error_type=type(failure).__name__,
+                phase=phase,
             )
+            if phase == "archive_intake" and type(failure) is ValueError:
+                reason = SOURCE_REFUSALS.get(str(failure))
+                if reason:
+                    observation["reason"] = reason
         else:
-            candidates.append(candidate)
-            observation.update(status="transport_staged", **info)
+            if project:
+                candidates.append(candidate)
+            observation.update(status="transport_staged" if project else "archive_verified", **info)
         write(attempt / "result.json", encode(observation))
         observations.append(observation)
         if stopped is not None:

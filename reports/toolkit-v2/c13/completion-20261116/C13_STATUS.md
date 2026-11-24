@@ -557,12 +557,33 @@ All 246 proposed records passed a volatile-ledger rehearsal. Each
 survived idempotent storage, and the managed plan gate rejected every
 local-only record. The real ledger still awaits the grouped decision.
 
-The next four software leads cover CCFlow, PyDAP, Docling, and AWS
-Powertools. Their pinned intake is prepared, with two contract cases
-and two multi-file repairs. Intake waits for enough usable space to
-cover the 14 MB archive cap above the host reserve.
+### Follow-up software source batches
 
-[Next batch and rights rehearsal](cohort-batch-continuation-20261124.json)
+The intake driver can now verify and retain an archive before allocating
+scratch space for grader preparation. The archived source still has to
+match its pinned publisher tree and retain its license notice. This
+lets a small source batch proceed within the 50 GiB host reserve.
+
+| Case | Result | Next step |
+| --- | --- | --- |
+| CCFlow | The 281,473-byte archive matched the publisher tree. Ordinary and protected grader preparation kept all 24 upstream test identities and added one authored preservation guard. | Verify the Linux dependency closure, then run the protected pair. |
+| Docling | The archive response was truncated or reached the 3.5 MB intake cap. Both owner URLs returned HTTP 200 for the pinned archive. | Review an explicit size-bounded recovery before downloading again. |
+| AWS Powertools and PSyclone | Each intake stopped with a `ValueError` before retaining an archive. The original driver recorded the exception class. | Retain both terminal attempts. A future recovery needs its own reviewed input scope. |
+| PyDAP | A required test opens a public DAP endpoint. The case stayed out of intake. | Verify an offline fixture and equivalent replay before grading. |
+
+CCFlow's cached OmegaConf 2.4.0 wheel falls outside Hydra 1.3.2's declared
+dependency range. The reviewed alternative pairs Hydra with OmegaConf
+2.3.0, which requires ANTLR 4.9. The exact ANTLR 4.9.3 artifact is a
+source distribution. Its license and offline import still need review,
+along with the rest of CCFlow's runtime.
+
+No new protected grades were recorded in this batch. The verified
+software pool still has 75 cases, leaving at least 171 to reproduce.
+
+[Source batch results](followup-source-batches-20261124.json)
+· [CCFlow dependency review](ccflow-configuration-dependency-preflight-20261124.json)
+· [PyDAP required test](https://github.com/pydap/pydap/blob/12fb95e64776aaabc5edddd1563c6e1c7b5656aa/src/pydap/tests/test_client.py#L1248-L1263)
+· [VAREX rights rehearsal](cohort-batch-continuation-20261124.json)
 
 Live comparisons remain paused. Candidate benefit and selection benefit
 each need a separate result on frozen eligible tasks. Finishing the
