@@ -1,5 +1,17 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. Formerly unbound Copier and pyinfra archives match their publisher trees.**
+The [retained software batch](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#two-retained-multi-file-cases)
+reused two complete archives and replayed both protected payload pairs
+without changing their byte bindings. The two cases raise the conditional
+detailed-queue capacity to 81 multi-file repairs. The 246-case capacity
+witness now works without supplementary catalog leads, which remain
+available as backups. Twenty-five pinned Linux wheels totaling
+13.04 MB and contained grading remain pending. No new protected grades
+or study assignments were recorded. The VAREX local-use decision and
+CCFlow repeat approval are still open. Comparisons stay paused and Waza
+stays excluded.
+
 **November 24. Two-cohort software capacity and first new revision batch verified.**
 The [C13 cohort report](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#software-cohort-capacity)
 records 75 protected-verified software cases and a minimum gap of 171.

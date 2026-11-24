@@ -639,6 +639,33 @@ paused and Waza remains excluded.
 [Software capacity calculation](two-cohort-source-capacity-20261124.json)
 · [Batch preflight](multi-snapshot-intake-preflight-20261124.json)
 
+### Two retained multi-file cases
+
+Copier's cleanup repair and pyinfra's SSH identity configuration
+repair each matched the Git tree returned by the publisher for its
+pinned commit. Both reused the complete local source archives.
+The protected payloads rebuilt with their original hashes and
+all seven Copier and eleven pyinfra test identities.
+
+| Case | Locked Linux packages | Verified in local cache | Still needed |
+| --- | ---: | ---: | ---: |
+| Copier 2646 | 30 | 17 | 13 wheels, 3.81 MB |
+| pyinfra 1630 | 33 | 21 | 12 wheels, 9.23 MB |
+
+Next, verify the 25 pinned wheels and run the unchanged protected
+tests in contained workers. Copier's cleanup checks use local Git
+fixtures. Pyinfra's selected SSH checks mock the connection.
+Neither case has a protected grade yet.
+
+Adding the two staged cases raises the conditional multi-file
+capacity from 79 to 81. The allocation now fits both holdouts and
+the shared early stages without using the supplementary metadata
+catalog, and keeps each repository in one stage. It still relies on
+every remaining multi-file prospect in the detailed queue qualifying.
+Keep the supplementary leads as backup capacity.
+
+[Publisher receipts, package pins and capacity](retained-multifile-publisher-and-runtime-20261124.json)
+
 ### qBraid visualization grader preparation
 
 The pinned qBraid archive matches the publisher's 128-file Git tree.

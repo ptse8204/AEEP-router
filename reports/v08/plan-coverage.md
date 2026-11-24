@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+The [two retained multi-file cases](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#two-retained-multi-file-cases)
+match Copier and pyinfra's publisher trees and preserve both protected
+payload pairs. The conditional detailed-queue projection reaches
+81 multi-file repairs. Runtime intake needs 25 exact wheels and
+protected grading is still pending. The verified software total
+remains 75.
+
 The [C13 software cohort audit](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#software-cohort-capacity)
 found a provisional fit for 246 cases using distinct revisions in
 the same stage and supplementary metadata leads. Only 75 cases
