@@ -75,7 +75,7 @@ else:
 """
 
 
-async def plan(key, expires, *, next_step=False, startup=False):
+async def plan(key, expires, *, next_step=False, startup=False, invocation=False):
     batch.assets.SUPPORT = WORK / "support"
     batch.assets.WHEELS = WORK / "wheels"
     case_dir = WORK / key
@@ -172,6 +172,31 @@ async def plan(key, expires, *, next_step=False, startup=False):
         ):
             raise ValueError("closed diagnostic evidence changed")
         extra_allowance = 1
+    if invocation:
+        import complete_anyio_pair as anyio_pair
+
+        if key != anyio_pair.KEY:
+            raise ValueError("invocation diagnostic only covers the reviewed AnyIO case")
+        parent = anyio_pair.REVIEW
+        corrected_review = runner.get(parent)
+        parent_result = anyio_pair.DEST / "result.json"
+        parent_ledger = anyio_pair.DEST / "ledger.json"
+        corrected = runner.get(parent_result)
+        ledger = runner.get(parent_ledger)
+        if (
+            corrected["verified"]
+            or set(corrected["observations"]) != {"reference"}
+            or corrected["observations"]["reference"]["grade"] is not None
+            or corrected["review_sha256"] != file_digest(parent)
+            or len(ledger["operations"]) != 5
+            or any(item["elapsed_seconds"] is None for item in ledger["operations"])
+        ):
+            raise ValueError("expected one settled failure under the plugin correction")
+        regenerated, _, _, actions, _ = await anyio_pair.prepare(corrected_review["expires_at"])
+        if regenerated != corrected_review:
+            raise ValueError("exact plugin-corrected payload changed")
+        spec, payload = actions[0].spec, actions[0].request.input
+        extra_allowance = 0
     argv = list(spec.config["argv"])
     text = argv[-1]
     point = "        assert log.stat().st_size <= 500_000 and events.is_file()"
@@ -183,17 +208,32 @@ async def plan(key, expires, *, next_step=False, startup=False):
         + DIAGNOSTIC
         + text[the_end:]
     )
-    if startup:
+    if startup or invocation:
         prefix = argv[-1][: argv[-1].index("        log = root")]
         suffix = argv[-1][argv[-1].index("\n\n\nif __name__") :]
         interpreter = STARTUP.replace("KEY", repr(key)).replace(
             "SUPPORT", repr(str(batch.assets.SUPPORT / key))
         )
+        if invocation:
+            interpreter = interpreter.replace(
+                interpreter.splitlines()[1],
+                "        boot = boot[:boot.index(';raise SystemExit(code)')]",
+                1,
+            ).replace(
+                "{'ok':True,'class':None,'sites':[]}",
+                "{'ok':True,'class':None,'sites':[],'pytest_exit':int(code)}",
+            )
         argv[-1] = prefix + interpreter + suffix
     compile(argv[-1], "<protected diagnostic>", "exec")
     diagnostic = spec.model_copy(update={"config": spec.config | {"argv": argv}})
     operation = runner.NAME + (
-        ":startup" if startup else ":collect-followup" if next_step else ":collect"
+        ":invocation"
+        if invocation
+        else ":startup"
+        if startup
+        else ":collect-followup"
+        if next_step
+        else ":collect"
     )
     action = runner.context(diagnostic, operation, payload | {"collect_only": True})
     executor = ContainerExecutor(env)
@@ -219,8 +259,9 @@ async def plan(key, expires, *, next_step=False, startup=False):
             "reserved_seconds": 50,
             "expires_at": expires,
             "grade": False,
-            "collection_only": not startup,
+            "collection_only": not startup or invocation,
             "startup_only": startup,
+            "invocation_only": invocation,
             "models": 0,
             "cash_usd": 0,
             "raw_logs_retained": False,
@@ -238,7 +279,9 @@ async def plan(key, expires, *, next_step=False, startup=False):
 
 async def execute(key, exact, recipe, executor, action, previous, attempt):
     stage = attempt.parent / (
-        "startup"
+        "invocation"
+        if recipe["invocation_only"]
+        else "startup"
         if recipe["startup_only"]
         else ("diagnostic-followup" if recipe["next_step"] else "diagnostic")
     )
@@ -344,12 +387,19 @@ async def execute(key, exact, recipe, executor, action, previous, attempt):
             and len(reply["classes"]) <= 15
             and all(isinstance(item, str) and item.isalpha() for item in reply["classes"])
         )
-        if recipe["startup_only"]:
+        if recipe["startup_only"] or recipe["invocation_only"]:
+            keys = {"ok", "class", "sites"}
+            if recipe["invocation_only"] and isinstance(reply, dict) and reply.get("ok") is True:
+                keys.add("pytest_exit")
             valid = (
                 raw.status.value == "success"
                 and isinstance(reply, dict)
-                and set(reply) == {"ok", "class", "sites"}
+                and set(reply) == keys
                 and type(reply["ok"]) is bool
+                and (
+                    "pytest_exit" not in reply
+                    or (type(reply["pytest_exit"]) is int and 0 <= reply["pytest_exit"] <= 5)
+                )
                 and (
                     reply["class"] is None
                     if reply["ok"]
@@ -410,6 +460,7 @@ async def main():
     parser.add_argument("profile", choices=batch.PROFILES)
     parser.add_argument("--followup", action="store_true")
     parser.add_argument("--startup", action="store_true")
+    parser.add_argument("--invocation", action="store_true")
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--prepare", action="store_true")
     group.add_argument("--execute")
@@ -418,7 +469,9 @@ async def main():
         WORK
         / args.profile
         / (
-            "startup-review.json"
+            "invocation-review.json"
+            if args.invocation
+            else "startup-review.json"
             if args.startup
             else "diagnostic-followup-review.json"
             if args.followup
@@ -428,7 +481,11 @@ async def main():
     old = None if args.prepare else json.loads(read(path, args.execute))
     expires = (utc_now() + timedelta(hours=2)).isoformat() if old is None else old["expires_at"]
     review, *launch = await plan(
-        args.profile, expires, next_step=args.followup or args.startup, startup=args.startup
+        args.profile,
+        expires,
+        next_step=args.followup or args.startup,
+        startup=args.startup,
+        invocation=args.invocation,
     )
     if args.prepare:
         runner.put(path, review)

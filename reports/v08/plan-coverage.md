@@ -1,5 +1,10 @@
 # 0.8 plan coverage and remaining work
 
+The [AnyIO and SQL dialect batch](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#anyio-and-sqlacodegen-dialects)
+added two protected pairs. Software has 72 reproduced cases across
+46 repositories and a minimum shortfall of 174. The exact 246-case
+VAREX asset-use inventory is unsigned. Comparisons remain paused.
+
 The [retained carrier batch](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#shared-carrier-batch)
 verified Skelebot and isolated AnyIO's problem to pytest invocation
 after startup. The software pool has 70 reproduced cases across 45

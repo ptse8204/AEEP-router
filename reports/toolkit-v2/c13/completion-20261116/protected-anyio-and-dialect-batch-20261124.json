@@ -1,0 +1,240 @@
+{
+  "asset_use_inventory": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/varex-asset-use-inventory-20261124.json",
+    "sha256": "bab0de4e6a672a6f0f29831e109958a2ebc39e41f46da98c339e429222911a5e"
+  },
+  "cash_usd": 0,
+  "comparisons_paused": true,
+  "formal_assignments": 0,
+  "models": 0,
+  "new_settled_operations": 8,
+  "prior_pool": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/protected-retained-carrier-batch-20261124.json",
+    "sha256": "76aa52a75b417898bd8bc34d75601ffd1b4b3fb106c3c74f3f7a68e15070b270"
+  },
+  "provider_disclosure": false,
+  "schema_version": "aeep.c13.anyio-and-dialect-batch-readback.v1",
+  "settled_anyio": {
+    "assertion_rewrite_diagnostic": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/anyio/invocation/result.json",
+      "sha256": "f1c7490abba4ee76aacb82c087356cb5fe230c4b22f1278af0954133f0d41245"
+    },
+    "case": "agronholm__anyio-935",
+    "ledger": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/anyio/with-publisher-pytest-entry-point/ledger.json",
+      "sha256": "9336576d027c1b5d0043b5bab432d89c375ab50299934d0bcf421f86c9412f99"
+    },
+    "original_plugin_continuation_engine": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/anyio/with-declared-pytest-plugin/executed-continuation-engine.py",
+      "sha256": "896298a5856cfd5f4ab7d25b01e74c2a8c2a87f8ef8c3000a4cc50641cc7637b"
+    },
+    "original_plugin_coordinator": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/anyio/with-declared-pytest-plugin/executed-coordinator.py",
+      "sha256": "5a41f08f5953e10d79e11c1bdc14e4199c8a4910eb42f579d12f975f92041403"
+    },
+    "result": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/anyio/with-publisher-pytest-entry-point/result.json",
+      "sha256": "02832ecfd5a5aa9d01a2451491de6f172c305ff831b588edc290f1e9f0ea6273"
+    },
+    "review": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/anyio/with-publisher-pytest-entry-point/operation-review.json",
+      "sha256": "79280f40cd640e07580cd0d3b59c3870c6a7468fe9cc9f4900d0091d35154176"
+    },
+    "revision": "89874ca47cbb3fb3d56f91b043a09b5ec81959a8",
+    "roles": {
+      "original": {
+        "all_status_counts": {
+          "FAILED": 4,
+          "PASSED": 36
+        },
+        "elapsed_seconds": 1.6552190000074916,
+        "grade": 0.0,
+        "nonpassing_required_tests": {
+          "tests/test_lowlevel.py::TestRunVar::test_runvar_does_not_share_storage_by_name[asyncio+uvloop]": "FAILED",
+          "tests/test_lowlevel.py::TestRunVar::test_runvar_does_not_share_storage_by_name[asyncio]": "FAILED",
+          "tests/test_lowlevel.py::TestRunVar::test_runvar_does_not_share_storage_by_name[trio]": "FAILED"
+        },
+        "pytest_exit": 1,
+        "receipt": {
+          "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/anyio/with-publisher-pytest-entry-point/receipt-original.json",
+          "sha256": "8b219d6b89a1a69ae3dccc56bf31e4559720729797b4f12d310200131191de14"
+        },
+        "receipt_id": "rcpt_7d1b13c2266149d5aa0faf53eef4c9b8",
+        "required_status_counts": {
+          "FAILED": 3,
+          "PASSED": 27
+        }
+      },
+      "reference": {
+        "all_status_counts": {
+          "PASSED": 40
+        },
+        "elapsed_seconds": 1.6845986249973066,
+        "grade": 1.0,
+        "nonpassing_required_tests": {},
+        "pytest_exit": 0,
+        "receipt": {
+          "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/anyio/with-publisher-pytest-entry-point/receipt-reference.json",
+          "sha256": "7c8c75cfd198dda34354dc891c86a6937484c8ff301a40ebce92b2de88479b55"
+        },
+        "receipt_id": "rcpt_221ebb6b28c34ba1a7fdaa984110a1b9",
+        "required_status_counts": {
+          "PASSED": 30
+        }
+      }
+    }
+  },
+  "settled_dialect_batch": {
+    "cases": {
+      "agronholm__sqlacodegen-368": {
+        "revision": "13d37018d9e55423fa3f771b12f574b6bc44651e",
+        "roles": {
+          "original": {
+            "all_status_counts": {
+              "FAILED": 1,
+              "PASSED": 38
+            },
+            "elapsed_seconds": 2.522232540999539,
+            "grade": 0.0,
+            "native_observation": {
+              "path": ".aeep/c13-cohort-runtime-20261124/c13-sqlacodegen-dialects-20261124/execution/observation-36162c935ba4c76a.json",
+              "sha256": "0696ff60e928e92d4e1e4a0bfc80483c32257ef47a1b3b532b8b739e2abe2b0a"
+            },
+            "nonpassing_required_tests": {
+              "tests/test_generator_tables.py::test_fancy_coltypes[postgresql]": "FAILED"
+            },
+            "pytest_exit": 1,
+            "receipt": {
+              "path": ".aeep/c13-cohort-runtime-20261124/c13-sqlacodegen-dialects-20261124/execution/receipt-rcpt_4f94348c349d45398a030c44bf3e26c3.json",
+              "sha256": "f7c6c58c9e885eade4417166c876ea61d7dccfaa6a1a35d24e96326c6a8c1975"
+            },
+            "receipt_id": "rcpt_4f94348c349d45398a030c44bf3e26c3",
+            "required_status_counts": {
+              "FAILED": 1,
+              "PASSED": 38
+            }
+          },
+          "reference": {
+            "all_status_counts": {
+              "PASSED": 39
+            },
+            "elapsed_seconds": 2.5908425000379793,
+            "grade": 1.0,
+            "native_observation": {
+              "path": ".aeep/c13-cohort-runtime-20261124/c13-sqlacodegen-dialects-20261124/execution/observation-bfb1272729245bd5.json",
+              "sha256": "69c09988800eeba1522b8ca67f013fcc50dfd407d5475fa0297487caddbd2bec"
+            },
+            "nonpassing_required_tests": {},
+            "pytest_exit": 0,
+            "receipt": {
+              "path": ".aeep/c13-cohort-runtime-20261124/c13-sqlacodegen-dialects-20261124/execution/receipt-rcpt_3e78f1e877374dbaadf62c761ba7c760.json",
+              "sha256": "08fcfb53ee8a8e06a812af47f5d3eb90f28390b62a7c1c9edf7d427a2b6cc216"
+            },
+            "receipt_id": "rcpt_3e78f1e877374dbaadf62c761ba7c760",
+            "required_status_counts": {
+              "PASSED": 39
+            }
+          }
+        }
+      },
+      "agronholm__sqlacodegen-371": {
+        "revision": "6da9a0b293461b42991413e3a3ec4dbf45b42701",
+        "roles": {
+          "reference": {
+            "all_status_counts": {
+              "FAILED": 1,
+              "PASSED": 38
+            },
+            "elapsed_seconds": 2.5620535420021042,
+            "grade": null,
+            "native_observation": {
+              "path": ".aeep/c13-cohort-runtime-20261124/c13-sqlacodegen-dialects-20261124/execution/observation-7bcb702872ee208b.json",
+              "sha256": "25f1aab3d1240f5353552c6e74be134d5550139c6a0a2e7e29f773d92f7bdef7"
+            },
+            "nonpassing_required_tests": {
+              "tests/test_generator_tables.py::test_fancy_coltypes[postgresql]": "FAILED"
+            },
+            "pytest_exit": 1,
+            "receipt": {
+              "path": ".aeep/c13-cohort-runtime-20261124/c13-sqlacodegen-dialects-20261124/execution/receipt-rcpt_b9c6bec2883940f0b4316c515c5c6855.json",
+              "sha256": "20ad4173e975916917a31f8054942dbbb44ba5f27eb4bda354d355758d218a9d"
+            },
+            "receipt_id": "rcpt_b9c6bec2883940f0b4316c515c5c6855",
+            "required_status_counts": {
+              "FAILED": 1,
+              "PASSED": 38
+            }
+          }
+        }
+      },
+      "agronholm__sqlacodegen-375": {
+        "revision": "70e1a5c079a9d1568f57b0a242e155d43df9510c",
+        "roles": {
+          "reference": {
+            "all_status_counts": {
+              "FAILED": 1,
+              "PASSED": 38
+            },
+            "elapsed_seconds": 2.5415328749804758,
+            "grade": null,
+            "native_observation": {
+              "path": ".aeep/c13-cohort-runtime-20261124/c13-sqlacodegen-dialects-20261124/execution/observation-be09830f237fe7fc.json",
+              "sha256": "50ad1e3cc45c57557bb068009831a52470f2b339f07448f65f3daedbc0460015"
+            },
+            "nonpassing_required_tests": {
+              "tests/test_generator_tables.py::test_fancy_coltypes[postgresql]": "FAILED"
+            },
+            "pytest_exit": 1,
+            "receipt": {
+              "path": ".aeep/c13-cohort-runtime-20261124/c13-sqlacodegen-dialects-20261124/execution/receipt-rcpt_94d75ab64fab41209f2d11b5ec47fd9f.json",
+              "sha256": "9de18e46b5f0484afd91cc4bccec297eca392180115fac05a0623f68c0f2b13a"
+            },
+            "receipt_id": "rcpt_94d75ab64fab41209f2d11b5ec47fd9f",
+            "required_status_counts": {
+              "FAILED": 1,
+              "PASSED": 38
+            }
+          }
+        }
+      }
+    },
+    "driver_acquisition_review": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-sqlacodegen-dialects-20261124/acquisition-review.json",
+      "sha256": "cf93a8306c587b4a27c1ebe5b1fb256bcb4756ac1a4c975fd341f18109e513ad"
+    },
+    "ledger": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-sqlacodegen-dialects-20261124/execution/ledger.json",
+      "sha256": "087efb8032883480dffc6554350867202ed339d7cbf3b6738d41cc7f2881f2e9"
+    },
+    "result": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-sqlacodegen-dialects-20261124/execution/result.json",
+      "sha256": "d59dc481be7989afd9b09d7cbd92d17200683ac04b92f91bc6666f663936b877"
+    },
+    "review": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-sqlacodegen-dialects-20261124/operation-review.json",
+      "sha256": "ac64015228c706e781e36806c5b351bff11ec273d07712be7c7e603c82b3fe04"
+    },
+    "verified_pairs": [
+      "agronholm__sqlacodegen-368"
+    ]
+  },
+  "software_pool": {
+    "counts_by_family": {
+      "contract-audit": 18,
+      "multi-file-repair": 24,
+      "single-file-repair": 30
+    },
+    "distinct_receipts": 146,
+    "largest_repository_group_rows": 14,
+    "minimum_missing_rows_if_all_reproduced_rows_are_eligible": 174,
+    "repository_families": 46,
+    "reproduced_rows": 72,
+    "two_balanced_holdouts_minimum_missing_by_family_before_early_stages": {
+      "contract-audit": 52,
+      "multi-file-repair": 46,
+      "single-file-repair": 40
+    },
+    "two_cohorts_shared_early_minimum": 246
+  },
+  "waza_excluded": true
+}

@@ -219,22 +219,39 @@ async def plan(expires, *, prepare=False):
     )
 
 
-async def execute(exact, review, case, executor, actions, previous):
-    if (CORRECTION / "started.json").exists() or shutil.disk_usage(
-        TARGET
+async def execute(
+    exact,
+    review,
+    case,
+    executor,
+    actions,
+    previous,
+    *,
+    target=TARGET,
+    correction=CORRECTION,
+    budget_predecessor=":startup:budget",
+):
+    if (correction / "started.json").exists() or shutil.disk_usage(
+        target
     ).free < batch.assets.FLOOR:
         raise ValueError("correction already started or host space below the reserve")
     started = datetime.fromisoformat(review["expires_at"])
     if started <= utc_now():
         raise ValueError("review expired")
     outcomes = {}
-    with ReceiptStore(ATTEMPT / "receipts.sqlite3") as store:
+    used = len(previous["operations"])
+    if len(actions) != 2 or any(
+        operation["elapsed_seconds"] is None for operation in previous["operations"]
+    ):
+        raise ValueError("paired continuation requires two new roles and settled prior operations")
+    amendment_id = f"{runner.NAME}:{correction.name}"
+    with ReceiptStore(target / "execution" / "receipts.sqlite3") as store:
         repo = AssessmentRepository(store)
         grant = AssessmentAuthorization.model_validate(repo.get("authorization", runner.NAME))
         if (
             repo.operation_ledger(runner.NAME).model_dump(mode="json") != previous
             or repo.current_grant(runner.NAME).limits
-            != AssessmentLimits(max_operations=5, max_elapsed_seconds=250)
+            != AssessmentLimits(max_operations=used, max_elapsed_seconds=used * 50)
             or grant.remote_disclosure
             or grant.allowed_destinations != ["local"]
             or grant.limits != AssessmentLimits(max_operations=2, max_elapsed_seconds=100)
@@ -243,10 +260,10 @@ async def execute(exact, review, case, executor, actions, previous):
         (old,) = grant.subject_digests
         scope = runner.Scope(review_sha256=exact)
         new = content_digest(scope)
-        repo.put("c13_skelebot_metadata_scope", new, scope)
+        repo.put("c13_retained_pair_continuation_scope", new, scope)
         repo.approve_bundle(
             AssessmentScopeAmendment(
-                amendment_id=runner.NAME + ":compatible-dependency-scope",
+                amendment_id=amendment_id + ":scope",
                 authorization_id=runner.NAME,
                 authorization_digest=content_digest(grant),
                 subject_digests=[old],
@@ -260,13 +277,15 @@ async def execute(exact, review, case, executor, actions, previous):
             },
             budget_amendment=AssessmentBudgetAmendment(
                 authorization_id=runner.NAME,
-                amendment_id=runner.NAME + ":compatible-dependency-budget",
+                amendment_id=amendment_id + ":budget",
                 authorization_digest=content_digest(grant),
                 previous_amendment_digest=content_digest(
-                    repo.get("budget_amendment", runner.NAME + ":startup:budget")
+                    repo.get("budget_amendment", runner.NAME + budget_predecessor)
                 ),
                 expires_at=started,
-                limits=AssessmentLimits(max_operations=7, max_elapsed_seconds=350),
+                limits=AssessmentLimits(
+                    max_operations=used + 2, max_elapsed_seconds=(used + 2) * 50
+                ),
             ),
         )
         request = RecipeMaterializationRequest(
@@ -279,14 +298,14 @@ async def execute(exact, review, case, executor, actions, previous):
             definition_digests=[old, new],
             seed=0,
         )
-        runner.put(CORRECTION / "started.json", {"review_sha256": exact})
+        runner.put(correction / "started.json", {"review_sha256": exact})
         try:
             for launch, action in zip(review["launches"], actions, strict=True):
                 role = launch["role"]
                 operation, owner = action.request.action_id, launch["container"]
                 if (
                     runner.docker("ps", "-aq", "--filter", f"name=^/{owner}$")
-                    or shutil.disk_usage(TARGET).free < batch.assets.FLOOR
+                    or shutil.disk_usage(target).free < batch.assets.FLOOR
                 ):
                     raise ValueError("container ownership or disk availability changed")
                 expected = runner.expected_statuses(case["truth"], role)
@@ -294,7 +313,7 @@ async def execute(exact, review, case, executor, actions, previous):
                     request,
                     operation,
                     AssessmentLimits(max_operations=1, max_elapsed_seconds=50),
-                    stage="protected_skelebot_metadata_grade",
+                    stage="protected_retained_pair_continuation",
                     require_settled_plan=True,
                 )
                 started, watch = utc_now(), time.monotonic()
@@ -330,7 +349,7 @@ async def execute(exact, review, case, executor, actions, previous):
                 repo.finish_operation(
                     operation, elapsed_seconds=time.monotonic() - watch, resources=raw.resources
                 )
-                runner.put(CORRECTION / f"receipt-{role}.json", receipt.model_dump(mode="json"))
+                runner.put(correction / f"receipt-{role}.json", receipt.model_dump(mode="json"))
                 outcomes[role] = {
                     "receipt_id": receipt.receipt_id,
                     "grade": None,
@@ -355,14 +374,14 @@ async def execute(exact, review, case, executor, actions, previous):
         finally:
             await executor.close()
             runner.put(
-                CORRECTION / "ledger.json",
+                correction / "ledger.json",
                 repo.operation_ledger(runner.NAME).model_dump(mode="json"),
             )
     complete = set(outcomes) == {"reference", "original"} and all(
         row["grade"] is not None for row in outcomes.values()
     )
     runner.put(
-        CORRECTION / "result.json",
+        correction / "result.json",
         {"verified": complete, "review_sha256": exact, "observations": outcomes},
     )
     return complete

@@ -1,5 +1,16 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. AnyIO and SQLacodegen 368 protected pairs verified.**
+The [protected batch](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#anyio-and-sqlacodegen-dialects)
+records both repairs at 1/1 and both originals at 0/1. AnyIO used its
+declared pytest entry point and plugin wheel. SQLacodegen compiled both
+dialects without database services. Issues 371 and 375 failed a
+preservation check and had no original dispatch. Software now has 72
+reproduced cases across 46 repositories against at least 246 needed.
+The VAREX review inventory binds all 246 cases and 1,476 asset hashes.
+It grants no execution or disclosure permission. Comparisons stay
+paused, and Waza stays excluded.
+
 **November 24. Shared carrier batch verified Skelebot.**
 The [protected batch](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#shared-carrier-batch)
 records a 1/1 repair and 0/1 original. The same offline carrier passed

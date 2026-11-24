@@ -226,9 +226,8 @@ SQLacodegen issue 391 passed all seven unchanged SQLite CLI tests on the
 published repair. The original reproduced both issue failures and kept
 all five preservation tests passing. A read-only launcher and locally
 derived package metadata supplied the project's published entry points
-without installing it. The other staged SQLacodegen cases still require
-PostgreSQL or MySQL test fixtures. Keep both verified SQLacodegen revisions
-in one study stage. [Protected pair and settled receipts](protected-cohort-expansion-20261124.json)
+without installing it. Keep all SQLacodegen revisions in one study stage.
+[Protected pair and settled receipts](protected-cohort-expansion-20261124.json)
 
 ### Avro model generation
 
@@ -277,18 +276,33 @@ use of `pathlib._Flavour`, which Python 3.13 removed. The passing run
 used the same image and unchanged tests with the compatible
 `dohq-artifactory` 1.0.2 wheel and read-only project metadata.
 
-AnyIO issue 935 remains ungraded. The offline startup probe loaded the
+AnyIO issue 935 remained ungraded after that batch. The offline startup probe loaded the
 pinned dependencies and the grader's plugin from the protected snapshot.
 Pytest still exited before emitting collection results. The original
 was never dispatched. Eleven operations settled across the two cases,
 including diagnostics, with zero model turns or cash.
 [Batch receipts and per-test results](protected-retained-carrier-batch-20261124.json)
 
+### AnyIO and SQLacodegen dialects
+
+| Case | Protected result |
+| --- | --- |
+| AnyIO 935 | The repair scored **1/1** on all 30 required checks. The original scored **0/1** on the three expected RunVar failures. Ten additional checks ran, including one extra failure on the eager-loop variant of the original. |
+| SQLacodegen 368 | The repair passed all 39 checks for **1/1**. The original failed only the expected PostgreSQL type assertion for **0/1**. The real PostgreSQL and MySQL drivers supported dialect compilation in the network-disabled carrier without database services. |
+| SQLacodegen 371 and 375 | Both published repairs failed the preserved PostgreSQL type assertion. The original sources were never dispatched. Both cases remain outside the pool. |
+
+The AnyIO fixture explicitly loads `pytest_mock`. Supplying that wheel
+exposed a pytest assertion-rewrite warning from importing the case
+plugin too early. The final run preserved the publisher's flags and used
+its declared pytest entry point with read-only metadata. All eight
+operations in this increment settled with zero model turns and cash.
+[Protected results and ledgers](protected-anyio-and-dialect-batch-20261124.json)
+
 ## What still blocks formal comparisons
 
 | Workload | Remaining gap |
 | --- | --- |
-| Software | The audited pool contains 70 reproduced cases across 45 repositories. The two holdouts and shared early stages need at least 246 distinct cases, leaving a minimum gap of 176. Contract audits have the largest holdout gap, at 52 cases before early-stage needs. |
+| Software | The audited pool contains 72 reproduced cases across 46 repositories. The two holdouts and shared early stages need at least 246 distinct cases, leaving a minimum gap of 174. Contract audits have the largest holdout gap, at 52 cases before early-stage needs. |
 | Document/data | The 246 VAREX archives fit the provisional stage sizes with all known related forms grouped together. An all-page text screen found no additional matches at its recorded thresholds. Final source-lineage review, asset use and stage assignment remain open. The 18 ExtractBench annual disclosures remain held on source and asset-use grounds. |
 
 VAREX now has 133 multi-collection prospects with distinct schema hashes.
@@ -399,6 +413,12 @@ The corrected audit checked all 246 staged PDFs for numbered variants
 and compared them with both earlier calibration PDFs. It found no
 additional relatives to hold. Both calibration cases stay outside the
 staged pack. [Calibration lineage check](varex-calibration-lineage-20261124.json)
+
+Ordinary pack inspection verified 1,476 asset hashes across all 246
+cases. The unsigned review inventory binds each PDF, its case assets
+and the accompanying CDLA-Permissive-2.0 notice to the exact source pin.
+The inventory grants zero execution or disclosure approvals and
+assigns no study stages. [Asset-use inventory proof](varex-asset-use-inventory-20261124.json)
 
 Live comparisons remain paused. Candidate benefit and selection benefit
 each need a separate result on frozen eligible tasks. Finishing the
