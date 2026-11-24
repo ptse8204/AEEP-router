@@ -553,6 +553,17 @@ requires a frozen study and final lineage verification.
 · [Grouped local-use review](varex-local-use-review-20261124.json)
 · [CDLA Permissive 2.0 terms](https://cdla.dev/permissive-2-0/)
 
+All 246 proposed records passed a volatile-ledger rehearsal. Each
+survived idempotent storage, and the managed plan gate rejected every
+local-only record. The real ledger still awaits the grouped decision.
+
+The next four software leads cover CCFlow, PyDAP, Docling, and AWS
+Powertools. Their pinned intake is prepared, with two contract cases
+and two multi-file repairs. Intake waits for enough usable space to
+cover the 14 MB archive cap above the host reserve.
+
+[Next batch and rights rehearsal](cohort-batch-continuation-20261124.json)
+
 Live comparisons remain paused. Candidate benefit and selection benefit
 each need a separate result on frozen eligible tasks. Finishing the
 stack or approving more runs cannot fill either workload gap.
