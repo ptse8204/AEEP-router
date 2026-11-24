@@ -1,5 +1,18 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. Multi-file capacity rechecked against issue overlap.**
+The [overlap and reserve review](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#multi-file-workload-overlap)
+carries forward the A2A 472 exclusion and holds three overlapping
+prospects. The detailed pool projects to 77 multi-file cases, four
+below the minimum. Seven graded SQLGlot cases with reused test
+methods have distinct publisher assertions bound to their protected
+overlays. The provisional 246-case allocation uses five supplementary
+leads. Twelve pinned Parquet ranges would verify the eight proposed
+reserve identities and patch scopes when host space permits. The
+verified software total stays at 75. VAREX local use and the CCFlow
+repeat await their existing decisions. Comparisons are paused and
+Waza is excluded.
+
 **November 24. Formerly unbound Copier and pyinfra archives match their publisher trees.**
 The [retained software batch](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#two-retained-multi-file-cases)
 reused two complete archives and replayed both protected payload pairs

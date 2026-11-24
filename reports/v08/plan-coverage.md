@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+The [multi-file issue screen](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#multi-file-workload-overlap)
+reduces the detailed projection to 77 cases using the prior protected
+exclusion and conservative overlap checks. The conditional allocation
+uses five supplementary leads. Exact source and test metadata ranges
+are staged for all eight reserve prospects. The software grade count
+remains 75.
+
 The [two retained multi-file cases](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#two-retained-multi-file-cases)
 match Copier and pyinfra's publisher trees and preserve both protected
 payload pairs. The conditional detailed-queue projection reaches

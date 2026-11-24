@@ -666,6 +666,36 @@ Keep the supplementary leads as backup capacity.
 
 [Publisher receipts, package pins and capacity](retained-multifile-publisher-and-runtime-20261124.json)
 
+### Multi-file workload overlap
+
+The 81-case projection counted source revisions. Reviewing shared
+production paths and issue tests reduced that projection to 77.
+The earlier A2A 472 exclusion still applies because its original
+failed to reproduce a required check. The screen also holds one
+staged variant and two metadata leads with overlapping repair
+scopes. The detailed queue needs at least four more multi-file
+cases to meet the 81-case minimum.
+
+Five pairs of graded SQLGlot cases share a test method. Review of
+the actual protected overlays confirmed all 54 publisher-added
+test lines across seven cases. The assertions cover distinct SQL
+behavior, including Oracle casting and PIVOT, DuckDB lambda
+syntax and ordered windows, and Snowflake column and sequence
+operations. Keep SQLGlot in one study stage. The existing
+grades and their receipts retain their original scope.
+
+One conditional allocation still fits 246 cases using five
+supplementary metadata leads. The next intake covers eight
+prospects in three Parquet row groups. The review binds 12 ranges
+for the source patches, test patches, and issue and preservation
+identities. The ranges total 34,569,167 bytes and will allow the
+same issue screen to check those leads before archive acquisition.
+The intake remains unstarted. Seven staged cases still need
+separate issue-scope review.
+
+[Issue overlap and protected readback](multifile-issue-overlap-20261124.json)
+· [Supplementary batch range preview](supplementary-multifile-range-preview-20261124.json)
+
 ### qBraid visualization grader preparation
 
 The pinned qBraid archive matches the publisher's 128-file Git tree.
