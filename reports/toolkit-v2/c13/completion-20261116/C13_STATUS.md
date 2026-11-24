@@ -336,6 +336,20 @@ The source-output mismatch still needs diagnosis before any replay.
 · [SQLAlchemy 2.0.41](https://pypi.org/project/SQLAlchemy/2.0.41/)
 · [SQLModel 0.0.24](https://pypi.org/project/sqlmodel/0.0.24/)
 
+### Next scientific Python cases
+
+Two new source families passed immutable source and protected-transport
+checks. VirtualiZarr is a multi-file repair with 78 required assertions.
+Nested Pandas is a contract audit with 55 published assertions and one
+authored preservation check. Git expanded `.git_archival.txt` in the
+Nested Pandas archive. Restoring that single publisher blob made the
+reconstructed tree match the pinned commit and preserved its license
+notice. Both cases are staged privately. They still need compatible
+runtime dependencies and protected reference and original grades.
+[Intake and assertion bindings](scientific-python-source-intake-20261124.json)
+· [VirtualiZarr source](https://github.com/zarr-developers/VirtualiZarr/commit/95fce110e6edfd5733ee66bc9824921c5eac6588)
+· [Nested Pandas source](https://github.com/lincc-frameworks/nested-pandas/commit/1eeda4bafab06582e90b1266a36f6923ccf31fdc)
+
 ## What still blocks formal comparisons
 
 | Workload | Remaining gap |

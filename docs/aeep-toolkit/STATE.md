@@ -1,5 +1,14 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. Scientific Python cases staged.**
+The [intake handoff](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#next-scientific-python-cases)
+binds VirtualiZarr's 78 assertions and Nested Pandas's 56 assertions.
+Both source trees match their pinned publisher commits. The Nested
+Pandas archive needed restoration of one Git-substituted metadata
+file. Next, pin both runtime closures and verify the generated
+version metadata and HDF fixtures before protected grading. No case
+count, comparison status or Waza scope changed.
+
 **November 24. Current software evidence inventory rebuilt.**
 The [C13 handoff](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#what-still-blocks-formal-comparisons)
 reconciles 72 reproduced cases from 46 repository families and 146
