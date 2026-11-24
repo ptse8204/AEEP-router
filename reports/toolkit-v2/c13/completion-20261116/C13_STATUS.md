@@ -230,12 +230,27 @@ without installing it. The other staged SQLacodegen cases still require
 PostgreSQL or MySQL test fixtures. Keep both verified SQLacodegen revisions
 in one study stage. [Protected pair and settled receipts](protected-cohort-expansion-20261124.json)
 
+### Avro model generation
+
+Two cases from the same repository passed protected grading on the
+retained Linux grader with their original dependency locks.
+
+| Case | Published repair | Buggy original |
+| --- | --- | --- |
+| 835, one-to-one relationships | **1/1**, all 44 tests passed | **0/1**, the relationship assertion failed at line 475. The other 43 tests passed. |
+| 870, Python keywords in generated models | **1/1**, all 14 tests passed | **0/1**, the keyword assertion failed at line 137. The other 13 tests passed. |
+
+All four operations settled in 10.50 seconds in total. Both worker
+profiles used the retained image and checksum-verified publisher wheels
+from read-only mounts. The two cases must stay in the same study stage.
+[Grader results and receipts](protected-avroschema-batch-20261124.json)
+
 ## What still blocks formal comparisons
 
 | Workload | Remaining gap |
 | --- | --- |
-| Software | The audited pool contains 65 reproduced cases across 41 repositories. Two independent holdouts and shared early stages require at least 246 distinct cases. That leaves a minimum gap of 181 against this pool. Contract audits have the largest holdout gap, at 55 cases before early-stage needs. |
-| Document/data | The 18 annual disclosures remain held on source and asset-use grounds. The remaining ExtractBench metadata has 108 multiple-collection slots at stored ZIP size, or at most 113 if compression is favorable. The design needs 122. If Census, BEA, Treasury, EIA and WASDE qualify under the same cohort contract, the remaining gap is nine at stored ZIP size or four with favorable compression. |
+| Software | The audited pool contains 67 reproduced cases across 42 repositories. The two holdouts and shared early stages need at least 246 distinct cases, leaving a minimum gap of 179. Contract audits have the largest holdout gap, at 55 cases before early-stage needs. |
+| Document/data | The 246 VAREX archives fit the provisional stage sizes with all known related forms grouped together. An all-page text screen found no additional matches at its recorded thresholds. Final source-lineage review, asset use and stage assignment remain open. The 18 ExtractBench annual disclosures remain held on source and asset-use grounds. |
 
 VAREX now has 133 multi-collection prospects with distinct schema hashes.
 The audit matched all 1,777 schema IDs to exact publisher PDF paths. It
@@ -332,6 +347,13 @@ The ordinary CLI reproduced an archive and its compact task descriptor.
 Complete source-lineage review, case-specific asset-use approval and
 frozen study assignments are still open.
 [Balanced archive verification](varex-balanced-archives-20261124.json)
+
+The full-page screen checked all 246 staged PDFs and found readable text
+in every document. The whole-document and page-level checks found no
+additional related forms at their recorded thresholds. The known FDA
+and California form groups still fit without splitting. Text similarity
+alone cannot establish independent source lineage.
+[Full-page lineage screen](varex-full-page-lineage-20261124.json)
 
 Live comparisons remain paused. Candidate benefit and selection benefit
 each need a separate result on frozen eligible tasks. Finishing the

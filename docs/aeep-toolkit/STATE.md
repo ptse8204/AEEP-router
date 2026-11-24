@@ -1,5 +1,15 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. Avro grading and the full-page VAREX screen passed.**
+The [operator handoff](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#avro-model-generation)
+records two 1/1 repairs and two 0/1 originals for Avro issues 835 and 870.
+All 56 preservation tests passed. The pool now has 67 reproduced cases across
+42 repositories, with at least 179 still needed. Both Avro cases share a
+source family. Full-page screening of the 246 VAREX PDFs found no new
+related forms at the recorded thresholds. Keep the known groups together.
+Final document lineage and asset-use review, cohort assignment, and
+comparative evidence remain open. Comparisons stay paused and Waza stays excluded.
+
 **November 24. Native VAREX batch and SQLacodegen pair verified.**
 The [operator handoff](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#varex-protected-grading)
 records 130 passing protected reference checks across 131 VAREX

@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 Avro and document batch](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#avro-model-generation)
+verified two Avro repairs and their originals and screened all 246 staged
+VAREX PDFs for additional related forms. Software has 67 reproduced cases
+across 42 repositories with a minimum shortfall of 179. Document lineage,
+asset use and stage assignments remain open. Comparisons stay paused.
+
 The [C13 protected cohort expansion](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#varex-protected-grading)
 verified the two VAREX shape families and staged 246 archives. The
 provisional source-group allocation fits both holdouts. Asset use and
