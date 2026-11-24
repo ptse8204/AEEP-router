@@ -1,5 +1,12 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. Towncrier configuration fallback verified.**
+The [protected grading result](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#towncrier-configuration-fallback)
+records all 17 checks passing for the repair. The original scored 0/1
+on its two expected issue failures and snapshot guard. Software has 69
+reproduced cases across 44 repositories, with at least 177 still needed.
+Comparisons stay paused and Waza stays excluded.
+
 **November 24. Confluence exporter CLI contract verified.**
 The [protected grading result](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#confluence-exporter-configuration)
 records a 1/1 repair with nine passing checks and a 0/1 original with

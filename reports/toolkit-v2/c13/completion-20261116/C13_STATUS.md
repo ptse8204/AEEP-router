@@ -256,11 +256,21 @@ It excluded the JMESPath command wrapper and kept the matching tqdm
 source license with the importable libraries. No package was installed.
 [Protected CLI grades and receipts](protected-confluence-cli-20261124.json)
 
+### Towncrier configuration fallback
+
+The published repair scored **1/1** on all 17 checks. The original
+scored **0/1** because the two expected pyproject configuration tests
+and the authored snapshot guard failed. The other 14 checks passed.
+Both operations settled in 3.48 seconds total. The import-only
+dependency tree excluded interpreter startup hooks, and the protected
+grader verified the expected native imports before testing.
+[Protected grades and receipts](protected-towncrier-contract-20261124.json)
+
 ## What still blocks formal comparisons
 
 | Workload | Remaining gap |
 | --- | --- |
-| Software | The audited pool contains 68 reproduced cases across 43 repositories. The two holdouts and shared early stages need at least 246 distinct cases, leaving a minimum gap of 178. Contract audits have the largest holdout gap, at 54 cases before early-stage needs. |
+| Software | The audited pool contains 69 reproduced cases across 44 repositories. The two holdouts and shared early stages need at least 246 distinct cases, leaving a minimum gap of 177. Contract audits have the largest holdout gap, at 53 cases before early-stage needs. |
 | Document/data | The 246 VAREX archives fit the provisional stage sizes with all known related forms grouped together. An all-page text screen found no additional matches at its recorded thresholds. Final source-lineage review, asset use and stage assignment remain open. The 18 ExtractBench annual disclosures remain held on source and asset-use grounds. |
 
 VAREX now has 133 multi-collection prospects with distinct schema hashes.

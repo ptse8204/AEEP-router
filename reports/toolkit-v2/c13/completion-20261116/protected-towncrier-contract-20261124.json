@@ -1,0 +1,134 @@
+{
+  "case": "twisted__towncrier-687-aeep-contract-audit",
+  "case_family": "contract-audit",
+  "cash_usd": 0,
+  "comparisons_paused": true,
+  "evidence": {
+    "acquisition-result.json": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-towncrier-contract-20261124/acquisition-result.json",
+      "sha256": "63134cc3d8626e7c13c9b00445b55e6696b6189aa7139dec3d2c29b168c6366a"
+    },
+    "acquisition-review.json": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-towncrier-contract-20261124/acquisition-review.json",
+      "sha256": "68504c139a02e4ca43ccfb6dff1129e59755f068fae50bc4d07461bd1c2e8741"
+    },
+    "execution/ledger.json": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-towncrier-contract-20261124/execution/ledger.json",
+      "sha256": "a15f960cef516cbcb15073c0aa86da25c1092dada37a6daac5f49b316fba3f56"
+    },
+    "execution/receipts.sqlite3": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-towncrier-contract-20261124/execution/receipts.sqlite3",
+      "sha256": "fde268b9dd800556009e25238e82d20e8b82aa98a14f404903e72b4b70ee700f"
+    },
+    "execution/result.json": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-towncrier-contract-20261124/execution/result.json",
+      "sha256": "17d256f3f4b0785b98e31e9fc2b47341f6c3031a39306d886b36e484996a6f3e"
+    },
+    "review.json": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-towncrier-contract-20261124/review.json",
+      "sha256": "618f87447ef20a52464f265d1b3d9e6376ae19e5c1894b1e4c5037fea585907f"
+    }
+  },
+  "formal_assignments": 0,
+  "image_id": "sha256:35dc1bcb7e8162c2a0cef6cbd30bc4bf276c082b11b6e5fc259b6800e8c5ca04",
+  "models": 0,
+  "prior_pool": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/protected-confluence-cli-20261124.json",
+    "sha256": "baf60685b06cbfc7cd3767877d714c9be6e86c9809780ee6f61fad4d3f1a0e1e"
+  },
+  "provider_disclosure": false,
+  "repository": "twisted/towncrier",
+  "roles": {
+    "original": {
+      "elapsed_seconds": 1.7005297080031596,
+      "observation": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-towncrier-contract-20261124/execution/observation-original.json",
+        "sha256": "71d11a44aea0b372dded0fbfa1a169440d7f13ae8b7dcfd89b643a0f2abab92b"
+      },
+      "receipt": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-towncrier-contract-20261124/execution/receipt-rcpt_c37538476c8f499c8fa7ecf7506f0f61.json",
+        "sha256": "f65ce87248e35f5698028778146968fd51b702939bd4dc060914d93301dcd12d"
+      },
+      "score": 0.0,
+      "status_counts": {
+        "FAILED": 3,
+        "PASSED": 14
+      },
+      "statuses": {
+        "src/towncrier/test/test_aeep_preservation.py::test_snapshot_preserved": "FAILED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_base": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_custom_types_as_tables": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_custom_types_as_tables_array_deprecated": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_explicit_template_extension": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_incorrect_all_bullets": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_incorrect_single_file": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_load_explicit_missing_config": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_load_no_config": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_markdown": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_missing_template": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_missing_template_in_towncrier": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_mistype_singlefile": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_pyproject_assert_fallback": "FAILED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_pyproject_only_pyproject_toml": "FAILED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_template_extended": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_towncrier_toml_preferred": "PASSED"
+      }
+    },
+    "reference": {
+      "elapsed_seconds": 1.7795693749794737,
+      "observation": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-towncrier-contract-20261124/execution/observation-reference.json",
+        "sha256": "db79f0ac0e1844bdf36b38e37d3997050a9300f2d6910b6537c2bcd2af1aee4b"
+      },
+      "receipt": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-towncrier-contract-20261124/execution/receipt-rcpt_8ede4f7652914e69978a34842b4dbd82.json",
+        "sha256": "86d136c92f9027aa2e784c4e8a722c3b049b1cbd5bae44eb80c9c54eb6b12af2"
+      },
+      "score": 1.0,
+      "status_counts": {
+        "PASSED": 17
+      },
+      "statuses": {
+        "src/towncrier/test/test_aeep_preservation.py::test_snapshot_preserved": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_base": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_custom_types_as_tables": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_custom_types_as_tables_array_deprecated": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_explicit_template_extension": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_incorrect_all_bullets": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_incorrect_single_file": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_load_explicit_missing_config": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_load_no_config": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_markdown": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_missing_template": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_missing_template_in_towncrier": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_mistype_singlefile": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_pyproject_assert_fallback": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_pyproject_only_pyproject_toml": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_template_extended": "PASSED",
+        "src/towncrier/test/test_settings.py::TomlSettingsTests::test_towncrier_toml_preferred": "PASSED"
+      }
+    }
+  },
+  "schema_version": "aeep.c13.towncrier-contract-readback.v1",
+  "software_pool": {
+    "counts_by_family": {
+      "contract-audit": 17,
+      "multi-file-repair": 24,
+      "single-file-repair": 28
+    },
+    "distinct_receipts": 140,
+    "largest_repository_group_rows": 14,
+    "minimum_missing_rows_if_all_reproduced_rows_are_eligible": 177,
+    "repository_families": 44,
+    "reproduced_rows": 69,
+    "two_balanced_holdouts_minimum_missing_by_family_before_early_stages": {
+      "contract-audit": 53,
+      "multi-file-repair": 46,
+      "single-file-repair": 42
+    },
+    "two_cohorts_shared_early_minimum": 246
+  },
+  "source_revision": "cd0d2df75d3fe8d6d8795a52e7fd115c43cf6f0c",
+  "summed_settled_wall_seconds": 3.4800990829826333,
+  "waza_excluded": true
+}

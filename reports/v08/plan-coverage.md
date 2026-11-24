@@ -1,5 +1,10 @@
 # 0.8 plan coverage and remaining work
 
+The [Towncrier contract audit](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#towncrier-configuration-fallback)
+verified the repaired configuration fallback and its expected failures
+on the original. The software pool now has 69 reproduced cases across 44
+repositories and a minimum shortfall of 177. Comparisons remain paused.
+
 The [Confluence exporter check](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#confluence-exporter-configuration)
 verified the published CLI repair and the original-source failure on the
 retained grader. Software has 68 reproduced cases across 43 repositories
