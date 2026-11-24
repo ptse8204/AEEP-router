@@ -1,5 +1,10 @@
 # 0.8 plan coverage and remaining work
 
+The [targeted cleanup command](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#targeted-cleanup-option-for-reserve-intake)
+passed nine approval and preservation checks on synthetic files.
+The exact scope and 428 real fixture copies await the original
+operator decision.
+
 The [targeted reserve-intake storage review](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#targeted-cleanup-option-for-reserve-intake)
 binds 428 retired synthetic database copies and preserves the two
 primary results and their logs. It awaits exact approval. The

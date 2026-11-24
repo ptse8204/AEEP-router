@@ -768,9 +768,12 @@ only on the reviewed files. Actual APFS recovery can differ
 from allocated size and must be measured after cleanup.
 Backups, snapshots and Docker resources stay intact.
 
-The exact review `b62d8a49` awaits operator approval. No
-files have been removed. The VAREX and CCFlow decisions
-remain separate.
+The cleanup command passed nine rehearsal checks. The tests
+covered the approval gate, changed files, SQLite sidecars,
+preservation, the free-space stop and replay protection.
+The exact review `b62d8a49` awaits operator approval, and
+the 428 listed copies remain in place. The VAREX and CCFlow
+decisions remain separate.
 
 [Storage review summary](retired-recipe-call-storage-handoff-20261124.json)
 

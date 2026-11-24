@@ -1,5 +1,14 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. Targeted cleanup execution rehearsed.**
+The [storage recovery review](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#targeted-cleanup-option-for-reserve-intake)
+passed nine approval, scope, drift, preservation and replay checks.
+The original approval scope `b62d8a49` is unchanged. The live
+command refused to start without approval. All 428 reviewed
+synthetic copies and the primary test results remain in place.
+Supplemental intake waits for usable space. Comparisons stay
+paused and Waza stays excluded.
+
 **November 24. Exact storage cleanup identified for reserve intake.**
 The [targeted storage review](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#targeted-cleanup-option-for-reserve-intake)
 lists 428 verified synthetic recipe-call database copies from the
