@@ -20,19 +20,19 @@
       "two_cohorts_shared_early_minimum": 246
     },
     "current": {
-      "reproduced_rows": 62,
-      "repository_families": 40,
+      "reproduced_rows": 63,
+      "repository_families": 41,
       "counts_by_family": {
-        "contract-audit": 14,
+        "contract-audit": 15,
         "single-file-repair": 24,
         "multi-file-repair": 24
       },
-      "distinct_receipts": 126,
+      "distinct_receipts": 128,
       "largest_repository_group_rows": 14,
       "two_cohorts_shared_early_minimum": 246,
-      "minimum_missing_rows_if_all_reproduced_rows_are_eligible": 184,
+      "minimum_missing_rows_if_all_reproduced_rows_are_eligible": 183,
       "two_balanced_holdouts_minimum_missing_by_family_before_early_stages": {
-        "contract-audit": 56,
+        "contract-audit": 55,
         "multi-file-repair": 46,
         "single-file-repair": 46
       }
@@ -126,6 +126,17 @@
         "receipt_ids": [
           "rcpt_61833cb7b8af4bee9e05ac2ac0d0944a",
           "rcpt_62324657763a413eb1c0147c89376844"
+        ]
+      },
+      {
+        "case": "openlawlibrary__pygls-524-aeep-contract-audit",
+        "repository": "openlawlibrary/pygls",
+        "revision": "6799d737ebc5b8c46ffb9b6ce061b18f1297787d",
+        "family": "contract-audit",
+        "evidence": "ordinary_protected_pair_with_publisher_selector_recovery",
+        "receipt_ids": [
+          "rcpt_fbe02c762b87430c841efa6e96611e81",
+          "rcpt_7360f00f372740f2a2580879da64cbd3"
         ]
       }
     ],
@@ -386,6 +397,46 @@
         "path": ".aeep/c13-cohort-continuation-20261124/pyfakefs-pair/execution/status-counts.json",
         "sha256": "1045aa3a5718f902c8ee4f954b44b1e246ef2e2dce24c633b8d84b3e2e7aabdf"
       }
+    },
+    "pygls_native_pair": {
+      "old_suite_timeout": {
+        "path": ".aeep/completion-20261116/c13-pygls-contract-20261118/timeout-diagnostic/execution/worker-diagnostic.json",
+        "sha256": "e7d5cd45d8dd77fe440af8d533dbf910a78a51fa8942f02436d8ba8758609fb0"
+      },
+      "timed_reference": {
+        "path": ".aeep/c13-cohort-runtime-20261124/pygls/execution/result.json",
+        "sha256": "4c2f7b1e56777a460f132b42e83ae8f3cddbf5903da0e0a7a7495150ea87d047"
+      },
+      "timed_reference_observations": {
+        "path": ".aeep/c13-cohort-runtime-20261124/pygls/execution/required-test-observations.json",
+        "sha256": "7044c69f1924f3fbf95fcc382b1b44b27627ad78e66a4afd495202e2e095474c"
+      },
+      "native_collection": {
+        "path": ".aeep/c13-cohort-runtime-20261124/pygls-native-identities/result.json",
+        "sha256": "943690d9689d7d8d2ccc2f665809dbe4fc91aae45b55ad04fabea74dd53b0f99"
+      },
+      "native_collection_ledger": {
+        "path": ".aeep/c13-cohort-runtime-20261124/pygls-native-identities/ledger.json",
+        "sha256": "51f7b3e7cf7cdc5d1838a559c2787aec0f3370224733d8b4cab0b592ee3eff7b"
+      },
+      "preflight_stopped_before_launch": {
+        "path": ".aeep/c13-cohort-runtime-20261124/pygls-verified-pair/operation-review.json",
+        "sha256": "5035efadfbd3478a2c951834f36519afa4c0fa4f284977520deeebf05ea5e685"
+      },
+      "verified_pair_ledger": {
+        "path": ".aeep/c13-cohort-runtime-20261124/pygls-verified-pair-50gib/execution/ledger.json",
+        "sha256": "93f2c887f8b6bf26b17d7b5dcd92486368936e04fa8e8583b7dd73231b888673"
+      },
+      "protected_test_counts": {
+        "path": ".aeep/c13-cohort-runtime-20261124/pygls-verified-pair-50gib/execution/required-test-observations.json",
+        "sha256": "f6af8dc53daaf1185972f1ef2056185cf8442b5dfe4484315171fe66ccf4ec89"
+      },
+      "actual_seconds": [
+        27.45597925002221,
+        27.001343208015896
+      ],
+      "case_added": "openlawlibrary__pygls-524-aeep-contract-audit",
+      "formal_assignments": 0
     }
   },
   "document_data": {
@@ -601,6 +652,94 @@
         "Independent template lineage and asset-use review",
         "Native scoring calibration and shared comparison contract"
       ]
+    },
+    "varex_projected_intake": {
+      "readback": {
+        "actual_range_bytes": 813498,
+        "analysis_driver_sha256": "1ac29f165a6c21cad01a3eb601aadf2852b9aa998ffc3eeec47d8dfad0e32c21",
+        "collections": {
+          "0": 1290,
+          "1": 354,
+          "2": 89,
+          "3": 35,
+          "4": 7,
+          "5": 1,
+          "6": 1
+        },
+        "documents": 1777,
+        "formal_assignments": 0,
+        "multiple_collection_schema_hashes": 133,
+        "multiple_collections": 133,
+        "projected_catalog_sha256": "78cb1fe89c3598af7ddb6c8b56cc90d60c7cc1235ef40bd99e883e6be41bdace",
+        "protected_grades": 0,
+        "publisher_splits": {
+          "Flat": 299,
+          "Nested": 1146,
+          "Table": 332
+        },
+        "range_requests": 44,
+        "review_sha256": "385823e337b803a9a1e7c9331e2b0c0dfd81173788c7075b8315f27f5950a03f",
+        "schema_version": "aeep.c13.varex-projected-schemas.v1"
+      },
+      "pdf_catalog_summary": {
+        "exact_pdf_paths": 1777,
+        "fetched_pdf_bodies": 0,
+        "formal_assignments": 0,
+        "joined_multicollection_prospects": 133,
+        "prospects_under_3500000_pdf_bytes": 133,
+        "revision": "ff36b6cd232efd401b3f4a20272a07bf2b749914",
+        "verified_tree_pages": [
+          {
+            "bytes": 247225,
+            "path": ".aeep/c13-cohort-runtime-20261124/varex/pdf-tree-0.json",
+            "rows": 1000,
+            "sha256": "4790c7e98c391cb0a18f7d85e6faa272d18b0e5948b7507093d2303bf4da6194"
+          },
+          {
+            "bytes": 181596,
+            "path": ".aeep/c13-cohort-runtime-20261124/varex/pdf-tree-1.json",
+            "rows": 777,
+            "sha256": "9f554d3779219f1919985234802ec99f56b3e624d5855a0823a4f4df05079ea6"
+          }
+        ]
+      },
+      "prospect_pdf_maximum_bytes": 2402382,
+      "private_prospects": {
+        "path": ".aeep/c13-cohort-runtime-20261124/varex/multiple-collection-prospects.json",
+        "sha256": "9d4604b731be1922926567e2ee2e31c6594a375801d8dea9901727cfe9a9d606"
+      },
+      "private_pdf_bindings": {
+        "path": ".aeep/c13-cohort-runtime-20261124/varex/pdf-metadata-result.json",
+        "sha256": "7ed679a52a481e6d842658a1f28476eb75a9c40dcfa650485ed45b4f316b1d28"
+      },
+      "metadata_and_projection": {
+        "publisher-tree.json": {
+          "path": ".aeep/c13-cohort-runtime-20261124/varex/publisher-tree.json",
+          "sha256": "587ab9762ea07d65c005451c7fbadde3b411fb0590e128c0a4c31e8dc3c64fee"
+        },
+        "schema-projection-review.json": {
+          "path": ".aeep/c13-cohort-runtime-20261124/varex/schema-projection-review.json",
+          "sha256": "385823e337b803a9a1e7c9331e2b0c0dfd81173788c7075b8315f27f5950a03f"
+        },
+        "range-receipts.json": {
+          "path": ".aeep/c13-cohort-runtime-20261124/varex/range-receipts.json",
+          "sha256": "06d7d6b9717c33e515810ff11031db52f253bde0796b62928a0a9dc66c150be0"
+        },
+        "verified-schema-projection.json": {
+          "path": ".aeep/c13-cohort-runtime-20261124/varex/verified-schema-projection.json",
+          "sha256": "a4c66d2e30e11b451bcee81091d1f32df9025c0ad2f117e99fe5d5c4ed11e4e6"
+        },
+        "pdf-metadata-review.json": {
+          "path": ".aeep/c13-cohort-runtime-20261124/varex/pdf-metadata-review.json",
+          "sha256": "269de2869c8584ef820a7d53e6ca9b18cacc77d05fbc18dac3e2a768996b27ca"
+        },
+        "pdf-tree-continuation-review.json": {
+          "path": ".aeep/c13-cohort-runtime-20261124/varex/pdf-tree-continuation-review.json",
+          "sha256": "64c41511fa184d691b5cfc3b6ccc97f5e963f469f6e8626d52487885312a686a"
+        }
+      },
+      "protected_grades": 0,
+      "formal_assignments": 0
     }
   },
   "evidence": {
@@ -707,6 +846,14 @@
     "energy_ledger": {
       "path": ".aeep/c13-cohort-continuation-20261124/energy-verified/eia-steo-balances-202611/ledger.json",
       "sha256": "5962e08add04132dfe92e362d099fd54555aa94a0b4403703925abb85f5a47a1"
+    },
+    "pygls_result": {
+      "path": ".aeep/c13-cohort-runtime-20261124/pygls-verified-pair-50gib/execution/result.json",
+      "sha256": "7781380bf707d9a212a90a5c44d18387c1b7d57cb753dccbbddc0360b3336e25"
+    },
+    "pygls_review": {
+      "path": ".aeep/c13-cohort-runtime-20261124/pygls-verified-pair-50gib/operation-review.json",
+      "sha256": "2e84ede11c4663dab7f230f7947458cb8a35dd148d281cf3ff4588ae01587710"
     }
   },
   "comparisons_paused": true,
@@ -754,6 +901,16 @@
       "eia-pyfakefs-handoff-check": {
         "exit_code": 0,
         "path": ".aeep/c13-cohort-continuation-20261124/handoff-check.log",
+        "sha256": "f9a8d2e86120924f79c4db2f2b7138cb3a47a974c1aec94927b27be02fc46f9c"
+      },
+      "pygls-varex-docs-check": {
+        "exit_code": 0,
+        "path": ".aeep/c13-cohort-runtime-20261124/docs-check.log",
+        "sha256": "84d6da92db99639a3eeebdea87cf00f38baf8cf759a0ba6e52dee501e1f614fe"
+      },
+      "pygls-varex-handoff-check": {
+        "exit_code": 0,
+        "path": ".aeep/c13-cohort-runtime-20261124/handoff-check.log",
         "sha256": "f9a8d2e86120924f79c4db2f2b7138cb3a47a974c1aec94927b27be02fc46f9c"
       }
     }

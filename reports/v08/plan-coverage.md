@@ -1,8 +1,9 @@
 # 0.8 plan coverage and remaining work
 
 The [C13 cohort batch](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#cohort-batch-results)
-verified five software repair pairs, reconciled three retained pairs
-and graded four supplemental publisher documents. The comparative
+verified six protected software pairs, reconciled three retained pairs
+and graded four supplemental publisher documents. It also identified 133
+VAREX prospects for protected grading. The comparative
 cohort and production adoption gates remain open.
 
 [Current Toolkit stack and installation evidence](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#what-passed-on-the-current-build)

@@ -1,5 +1,15 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. PyGLS protected grading and VAREX schema intake verified.**
+The [operator handoff](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#cohort-batch-results)
+records PyGLS at 1/1 for the reference and 0/1 for the original-source
+control. The updated child timeout and five exact native test identities
+preserved all 87 assertions. The software pool has 63 cases across 41
+repositories against 246 required. VAREX has 133 multi-collection
+prospects matched to exact publisher PDF paths. The scored document
+cohort remains unchanged pending protected samples, grader calibration
+and source grouping. Comparisons stay paused and Waza stays excluded.
+
 **November 24. Software and document cohort batch verified.**
 The [operator handoff](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#cohort-batch-results)
 records five protected pairs including Pyfakefs, whose reference now

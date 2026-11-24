@@ -148,12 +148,13 @@ and [protected calibration evidence](wasde-reviewed-pack-result-20261124.json)
 | A2A streaming error handling | The repair scored 1/1 with 39 passes. The original scored 0/1 with two expected failures and 37 passes. |
 | A2A transport context manager | The repair scored 1/1 with seven passes. The original scored 0/1 with two expected failures and five passes. |
 | Pyfakefs file-open behavior | The repair scored 1/1 on all 432 required tests. The original scored 0/1 with one expected failure and 431 passes. |
+| PyGLS standard-I/O contract | The reference scored 1/1 with 87 passes. The original-source control scored 0/1 with five expected failures and 82 passes. |
 | Census September retail sales | Twelve output rows matched the source PDF and workbook. The exact extraction scored 1/1. Missing data and invalid JSON scored 0/1. |
 | BEA third-quarter GDP | Five rows matched the PDF and publisher release narrative. The exact extraction scored 1/1. Missing data and invalid JSON scored 0/1. |
 | Treasury October receipts and outlays | Eight rows matched the PDF and the Fiscal Data API. The exact extraction scored 1/1. Missing data and invalid JSON scored 0/1. |
 | EIA November petroleum and gas balances | Eight rows matched annual figures calculated from the publisher's monthly workbook. The exact extraction scored 1/1. Missing data and invalid JSON scored 0/1. |
 
-The software inventory added five pairs on the current ordinary grader
+The software inventory added six pairs on the current ordinary grader
 and reconciled three already settled pairs for Optype, Locify and
 adapted EOS. Both A2A pairs reused the pinned dependency files. A single
 offline image build and four grader operations settled on a copy of the
@@ -167,6 +168,16 @@ metadata must exist on disk. The protected runtime now expands the same
 pinned pytest wheel into private scratch for this case. Both roles
 keep their original source, tests, dependencies, and payload hashes.
 The diagnostic and two graded runs retain their own receipts.
+
+PyGLS's two countdown fixtures account for 20 seconds of intentional
+waiting. The old 22-second child limit expired during the second fixture.
+A 55-second child limit let the unchanged suite finish. The first completed
+reference exposed five truncated publisher labels. A collection-only
+check recovered all 87 native identities and mapped the five labels
+uniquely. Both protected roles then settled in about 27 seconds each.
+The 52 GiB preflight review stopped before launch. The replacement used
+the 50 GiB host reserve, the retained read-only image, and the same
+64 MiB temporary filesystem. The earlier receipts and charges remain.
 
 EIA's complete tables PDF fits the transport ceiling as a 3,379,714-byte
 task ZIP. The workbook stays in the protected reference path. Housing
@@ -194,13 +205,19 @@ boundary. The original-source check has yet to run.
 
 | Workload | Remaining gap |
 | --- | --- |
-| Software | The audited pool contains 62 reproduced cases across 40 repositories. Two independent holdouts and shared early stages require at least 246 distinct cases. That leaves a minimum gap of 184 against this pool. Contract audits have the largest holdout gap, at 56 cases before early-stage needs. |
+| Software | The audited pool contains 63 reproduced cases across 41 repositories. Two independent holdouts and shared early stages require at least 246 distinct cases. That leaves a minimum gap of 183 against this pool. Contract audits have the largest holdout gap, at 55 cases before early-stage needs. |
 | Document/data | The 18 annual disclosures remain held on source and asset-use grounds. The remaining ExtractBench metadata has 108 multiple-collection slots at stored ZIP size, or at most 113 if compression is favorable. The design needs 122. If Census, BEA, Treasury, EIA and WASDE qualify under the same cohort contract, the remaining gap is nine at stored ZIP size or four with favorable compression. |
 
-VAREX's separately pinned evaluator and dataset agree on the 1,777-document
-manifest. The evaluator repository does not contain the per-document
-ground truths. Its native score and reviewed field exclusions need an
-offline calibration with exact data before any slots can be counted.
+VAREX now has 133 multi-collection prospects with distinct schema hashes.
+The audit matched all 1,777 schema IDs to exact publisher PDF paths. It
+read 813,498 bytes of pinned Parquet ranges for document IDs, splits and
+schemas. The largest of the 133 prospective PDFs is 2,402,382 bytes in
+the publisher metadata. The PDF bodies and protected answers remain
+unfetched. Distinct schema hashes leave template lineage and independent
+stage assignment open. The next calibration can use the retained private
+NumPy, SciPy and RapidFuzz runtime with VAREX's native score and field
+exclusions. Candidate counts stay outside the formal cohort until the
+protected grader and case eligibility checks pass.
 [VAREX dataset revision](https://huggingface.co/datasets/ibm-research/VAREX/tree/ff36b6cd232efd401b3f4a20272a07bf2b749914)
 · [VAREX evaluator revision](https://github.com/udibarzi/varex-bench/tree/3cce9c18530748cfc843f38c02e2f43e0694d167)
 

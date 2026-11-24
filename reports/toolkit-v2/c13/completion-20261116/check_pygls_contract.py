@@ -19,9 +19,11 @@ from packaging.requirements import Requirement
 from packaging.utils import canonicalize_name
 from stage_repository_transport import ROOT, WORK, digest, read
 
-from aeep.assessment.models import AssessmentEnvironment
+from aeep.assessment.models import AssessmentEnvironment, content_digest
 from aeep.assessment.repository_suites import LARGE_PAYLOAD, archive_files
+from aeep.assessment.verification import verification_source_digest
 from aeep.models import ExecutorSpec, utc_now
+from aeep_toolkit.stack_verification import ROOT as CURRENT_ROOT
 
 CASE = "openlawlibrary__pygls-524-aeep-contract-audit"
 NAME = "c13-pygls-contract-20261118"
@@ -55,6 +57,10 @@ DOWNLOADS = {
 }
 BASE_REVIEW, BASE_PROBE = runner.review_fields, runner.verify_probe
 CORE = {"pytest": "8.3.5", "packaging": "25.0", "iniconfig": "2.1.0", "pluggy": "1.6.0"}
+CONTINUATION = WORK.parent / "c13-cohort-runtime-20261124/pygls"
+CONTINUATION_SOURCE = "2896e52509b33a5628f8d5833a9b6111ebff9f0ed374faa08da539a57753c896"
+NATIVE_COLLECTION = CONTINUATION.parent / "pygls-native-identities/result.json"
+NATIVE_COLLECTION_SHA = "943690d9689d7d8d2ccc2f665809dbe4fc91aae45b55ad04fabea74dd53b0f99"
 
 
 def supports_checkout(origin_paths, wheels, repo):
@@ -125,15 +131,41 @@ def protected_inputs():
     return row, task, source, base_pin, wheels, negative
 
 
-def configure(observations):
-    verify_source()
+def recover_native_identities(required, collected):
+    """Match truncated labels to the remaining exact node IDs."""
+    unmatched = set(collected) - set(required)
+    missing = set(required) - set(collected)
+    if len(unmatched) != len(missing) or len(collected) != len(set(collected)):
+        raise ValueError("the declared and native test sets differ in size")
+    bindings = {}
+    for prefix in sorted(missing, key=lambda value: (-len(value), value)):
+        candidates = [node for node in unmatched if node.startswith(prefix) and node.endswith("]")]
+        if len(candidates) != 1 or prefix.count("[") <= prefix.count("]"):
+            raise ValueError("truncated publisher label has no unique native match")
+        bindings[prefix] = candidates[0]
+        unmatched.remove(candidates[0])
+    return bindings
+
+
+def configure(observations, *, timed_stdio=False, resolved_identities=False):
+    root, source_digest, name, destination = FROZEN, SOURCE, NAME, TARGET
+    if timed_stdio:
+        root, source_digest = CURRENT_ROOT, CONTINUATION_SOURCE
+        name, destination = "c13-pygls-stdio-countdowns-20261124", CONTINUATION
+        if verification_source_digest(root) != source_digest:
+            raise ValueError("use the verified current coordinator")
+        if resolved_identities:
+            name += "-native-identities"
+            destination = CONTINUATION.parent / "pygls-verified-pair-50gib"
+    else:
+        verify_source()
     row, _, source, base_pin, wheels, negative = protected_inputs()
     versions, pins = locked_runtime(source, fetch=False)
     wheels.extend(runner.asset(ROOT / item["path"], item["sha256"]) for item in pins.values())
     task, truth, reference, original, _ = bind(row, INDEX.parent, wheels)
     truth = truth.model_copy(update={"pytest_plugins": ["pytest_asyncio.plugin"]})
 
-    runtime = FROZEN / "integrations/assessment-runtime"
+    runtime = root / "integrations/assessment-runtime"
     program = (
         (runtime / "repository_suite_native_program.py")
         .read_text()
@@ -151,6 +183,12 @@ def configure(observations):
         "def main():", inspect.getsource(supports_checkout) + "\n\ndef main():"
     )
     program = program.replace(anchor, f"+ {bootstrap}\n            " + anchor)
+    if timed_stdio:
+        # The blocking and threaded countdown fixtures each sleep for 10 seconds.
+        # Budget both serial tests plus the unmodified stdio suite and fixture teardown.
+        if program.count("timeout=22, check=False") != 1:
+            raise ValueError("native pytest timeout anchor changed")
+        program = program.replace("timeout=22, check=False", "timeout=55, check=False")
     compile(program, "<PyGLS protected observer>", "exec")
 
     spec = ExecutorSpec(
@@ -162,18 +200,18 @@ def configure(observations):
             "argv": ["python3", "-B", "-c", program],
             "argv_literal": True,
             "stdin_json": True,
-            "timeout_seconds": 32,
+            "timeout_seconds": 65 if timed_stdio else 32,
             "max_stdin_bytes": LARGE_PAYLOAD,
             "max_output_bytes": 500_000,
             "output": {"type": "json"},
         },
     )
     environment = AssessmentEnvironment(
-        environment_id=NAME,
+        environment_id=name,
         kind="container",
         network=False,
         container_image=runner.CARRIER,
-        identity={"source": SOURCE, "source_index": INDEX_SHA},
+        identity={"source": source_digest, "source_index": INDEX_SHA},
         container_runtime=runner.DOCKER,
         container_socket=runner.SOCKET,
         memory_mb=512,
@@ -189,6 +227,24 @@ def configure(observations):
         "reference_archive_sha256": row["reference_archive_sha256"],
         "existing_image_dependencies": [],
     }
+    historical_subject = content_digest(subject)
+    substitutions = {}
+    if resolved_identities:
+        collection = json.loads(read(NATIVE_COLLECTION, NATIVE_COLLECTION_SHA))
+        substitutions = recover_native_identities(truth.pass_to_pass, collection["native_ids"])
+        if (
+            len(substitutions) != 5
+            or collection["grade_executed"]
+            or any(
+                node not in collection["missing_prefix_matches"][old]
+                for old, node in substitutions.items()
+            )
+            or substitutions.keys() & set(negative)
+        ):
+            raise ValueError("native collection changed the required assertion scope")
+        subject["truth"]["pass_to_pass"] = [
+            substitutions.get(item, item) for item in truth.pass_to_pass
+        ]
 
     def expected_statuses(truth, role):
         statuses = dict.fromkeys(truth["pass_to_pass"], "PASSED")
@@ -231,6 +287,44 @@ def configure(observations):
         fields, *_ = await BASE_REVIEW()
         if [call["required_tests"] for call in fields["launches"]] != [87, 87]:
             raise ValueError("protected launch identities differ")
+        continuation = {}
+        if timed_stdio:
+            previous = runner.get(TARGET / "operation-review.json")
+            diagnosis_path = TARGET / "timeout-diagnostic/execution/worker-diagnostic.json"
+            diagnosis = runner.get(diagnosis_path)
+            if (
+                diagnosis["observer_category"] != "child_timeout"
+                or diagnosis["last_required_test"]
+                != "tests/e2e/test_threaded_handlers.py::test_countdown_threaded"
+                or fields["carrier_layers"] != previous["carrier_layers"]
+                or {CASE: historical_subject} != previous["case_fingerprints"]
+                or any(
+                    probe[key] != retained[key]
+                    for probe, retained in zip(
+                        fields["launches"], previous["launches"], strict=True
+                    )
+                    for key in ("archive_sha256", "payload_sha256", "required_tests")
+                )
+            ):
+                raise ValueError("the timed stdio review must retain the original case")
+            continuation = {
+                "terminal_timeout_receipt": binding(diagnosis_path),
+                "prior_review": binding(TARGET / "operation-review.json"),
+                "inner_timeout_seconds": 55,
+                "worker_timeout_seconds": 65,
+            }
+            if resolved_identities:
+                deferred = CONTINUATION.parent / "pygls-verified-pair"
+                if (deferred / "execution").exists():
+                    raise ValueError("recover the prior pair before authorizing another launch")
+                continuation |= {
+                    "native_collection": binding(NATIVE_COLLECTION),
+                    "prior_timed_review": binding(CONTINUATION / "operation-review.json"),
+                    "exact_selector_bindings": substitutions,
+                    "preflight_only_review": binding(deferred / "operation-review.json"),
+                    "storage_floor_bytes": 50 * 2**30,
+                    "storage_basis": "Read-only retained image, 64 MiB of per-container tmpfs and bounded output. No install, rebuild, download or deletion.",
+                }
         return (
             fields
             | {
@@ -246,15 +340,19 @@ def configure(observations):
                 "transport": "Upstream CPython/stdio defaults with exact private Python paths. Optional TCP, WebSocket and Pyodide transports are outside the audited case.",
                 "comparisons_paused": True,
                 "waza_excluded": True,
-            },
+            }
+            | continuation,
             spec,
             environment,
             [subject],
         )
 
-    runner.NAME, runner.FROZEN, runner.MAX_CALLS = NAME, FROZEN, 2
-    runner.REVIEW, runner.APPROVAL = TARGET / "operation-review.json", TARGET / "approval.json"
-    runner.RUN = TARGET / "execution"
+    runner.NAME, runner.FROZEN, runner.MAX_CALLS = name, root, 2
+    if timed_stdio:
+        runner.ROLE_SECONDS = 75
+    runner.REVIEW = destination / "operation-review.json"
+    runner.APPROVAL = destination / "approval.json"
+    runner.RUN = destination / "execution"
     runner.definitions = lambda: (spec, environment, [subject])
     runner.review_fields, runner.verify_probe, runner.expected_statuses = (
         review_fields,
@@ -269,18 +367,26 @@ async def main():
     modes.add_argument("--acquire", action="store_true")
     modes.add_argument("--prepare", action="store_true")
     modes.add_argument("--exact-review")
+    parser.add_argument("--timed-stdio", action="store_true")
+    parser.add_argument("--resolved-identities", action="store_true")
     args = parser.parse_args()
+    if args.resolved_identities and not args.timed_stdio:
+        parser.error("--resolved-identities requires --timed-stdio")
     if args.acquire:
         _, _, source, *_ = protected_inputs()
         versions, pins = locked_runtime(source, fetch=True)
         print(json.dumps({"versions": versions, "pins": pins}, sort_keys=True, indent=2))
         return
     observations = []
-    configure(observations)
+    configure(
+        observations, timed_stdio=args.timed_stdio, resolved_identities=args.resolved_identities
+    )
     if args.prepare:
         review, *_ = await runner.review_fields()
         if runner.REVIEW.exists() or runner.RUN.exists():
             raise ValueError("preserve the original review and execution")
+        if args.timed_stdio:
+            runner.REVIEW.parent.mkdir(parents=True, mode=0o700)
         runner.put(
             runner.REVIEW,
             review | {"expires_at": (utc_now() + timedelta(days=7)).isoformat()},

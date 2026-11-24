@@ -19,6 +19,7 @@ A2A = BATCH / "a2a-current-ordinary"
 CONTINUATION = ROOT / ".aeep/c13-cohort-continuation-20261124"
 ENERGY = CONTINUATION / "energy-verified"
 PYFAKEFS = CONTINUATION / "pyfakefs-pair"
+PYGLS = ROOT / ".aeep/c13-cohort-runtime-20261124/pygls-verified-pair-50gib"
 
 
 def evidence(path):
@@ -296,31 +297,68 @@ def pyfakefs_pair():
         {"PASSED": 431, "FAILED": 1},
     ] or any(role["unexpected_required_status_counts"] for role in counts):
         raise ValueError("Pyfakefs did not preserve all required identities")
-    ledger = audited(run / "ledger.json")
-    if len(ledger["operations"]) != 2:
-        raise ValueError("Pyfakefs recorded an unexpected operation")
-    receipt_ids = []
-    for role, launch in zip(roles, review["launches"], strict=True):
-        receipt_id = role["receipt_id"]
-        receipt = audited(run / f"receipt-{receipt_id}.json")
-        settled(ledger, role["operation"])
-        if (
-            role["operation"] != launch["operation"]
-            or launch["required_tests"] != 432
-            or not role["contract_matched"]
-            or receipt["decision_id"] != role["operation"]
-            or receipt["receipt_id"] != receipt_id
-            or receipt["metadata"]["container_absent"] is not True
-            or not receipt["execution_success"]
-        ):
-            raise ValueError("Pyfakefs grade lacks its settled evidence")
-        receipt_ids.append(receipt_id)
+    receipt_ids = pair_receipts(run, roles, review["launches"], 432)
     return pool.case_row(
         legacy["case"],
         "pytest-dev/pyfakefs",
         legacy["source_revision"],
         "single-file-repair",
         "ordinary_protected_pair_with_expanded_pytest_wheel",
+        receipt_ids,
+    )
+
+
+def pair_receipts(run, roles, launches, test_count):
+    must_pair(roles)
+    ledger = audited(run / "ledger.json")
+    if len(ledger["operations"]) != 2:
+        raise ValueError("protected pair recorded an unexpected operation")
+    receipt_ids = []
+    for role, launch in zip(roles, launches, strict=True):
+        receipt_id = role["receipt_id"]
+        receipt = audited(run / f"receipt-{receipt_id}.json")
+        settled(ledger, role["operation"])
+        if (
+            role["operation"] != launch["operation"]
+            or launch["required_tests"] != test_count
+            or not role["contract_matched"]
+            or receipt["decision_id"] != role["operation"]
+            or receipt["receipt_id"] != receipt_id
+            or receipt["metadata"]["container_absent"] is not True
+            or not receipt["execution_success"]
+        ):
+            raise ValueError("grade lacks its settled protected evidence")
+        receipt_ids.append(receipt_id)
+    return receipt_ids
+
+
+def pygls_pair():
+    run = PYGLS / "execution"
+    review_path = PYGLS / "operation-review.json"
+    review = audited(review_path)
+    result = audited(run / "result.json")
+    legacy = audited(HERE / "pygls-first-protected-result-20261118.json")
+    case = legacy["case"]
+    counts = audited(run / "required-test-observations.json")
+    if (
+        not result["verified"]
+        or result["review_sha256"] != evidence(review_path)["sha256"]
+        or review["cases"][case["task_id"]]["source_revision"] != case["revision"]
+        or review["storage_floor_bytes"] != 50 * 2**30
+        or len(review["exact_selector_bindings"]) != 5
+        or [role["required_status_counts"] for role in counts]
+        != [{"PASSED": 87}, {"PASSED": 82, "FAILED": 5}]
+        or any(role["mismatch_identities"] for role in counts)
+        or any(result[key] for key in ("models", "cash_usd", "formal_cases_adopted"))
+    ):
+        raise ValueError("PyGLS native assertion evidence differs")
+    receipt_ids = pair_receipts(run, result["observations"], review["launches"], 87)
+    return pool.case_row(
+        case["task_id"],
+        "openlawlibrary/pygls",
+        case["revision"],
+        "contract-audit",
+        "ordinary_protected_pair_with_publisher_selector_recovery",
         receipt_ids,
     )
 
@@ -333,7 +371,7 @@ def main():
     _, _, excluded = previous_repositories()
     if pool.assess(initial, excluded) != recovery["capacity"]:
         raise ValueError("earlier 54-case pool did not reproduce")
-    retained, fresh = old_pairs(), new_pairs() + a2a_pairs() + [pyfakefs_pair()]
+    retained, fresh = old_pairs(), new_pairs() + a2a_pairs() + [pyfakefs_pair(), pygls_pair()]
     updated = pool.assess(initial + retained + fresh, excluded)
     cases = document_cases(DOCUMENTS) | document_cases(TREASURY) | document_cases(ENERGY)
     print(
@@ -364,6 +402,8 @@ def main():
                     "pyfakefs_review": evidence(PYFAKEFS / "operation-review.json"),
                     "pyfakefs_result": evidence(PYFAKEFS / "execution/result.json"),
                     "energy_pack": evidence(ENERGY / "pack.json"),
+                    "pygls_review": evidence(PYGLS / "operation-review.json"),
+                    "pygls_result": evidence(PYGLS / "execution/result.json"),
                 },
                 "comparisons_paused": True,
                 "waza_excluded": True,

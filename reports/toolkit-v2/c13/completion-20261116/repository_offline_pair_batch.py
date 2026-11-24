@@ -377,7 +377,10 @@ async def run(exact):
     expiry = datetime.fromisoformat(reviewed["expires_at"])
     if reviewed != {**scope, "expires_at": reviewed["expires_at"]} or expiry <= utc_now():
         raise ValueError("operation review drifted or expired")
-    if shutil.disk_usage(WORK).free < 52 * 1024**3:
+    minimum_free = scope.get("storage_floor_bytes", 52 * 1024**3)
+    if type(minimum_free) is not int or minimum_free < 50 * 1024**3:
+        raise ValueError("protected review floor must preserve the 50 GiB host reserve")
+    if shutil.disk_usage(WORK).free < minimum_free:
         raise ValueError("host is below the scoped storage floor")
     RUN.mkdir(mode=0o700)
     definition = Scope(review_sha256=exact)
@@ -424,7 +427,7 @@ async def run(exact):
                     ):
                         if (
                             file_digest(REVIEW) != exact
-                            or shutil.disk_usage(WORK).free < 52 * 1024**3
+                            or shutil.disk_usage(WORK).free < minimum_free
                         ):
                             raise RuntimeError("review or host free space changed")
                         trial = context(spec, identity, payload)
