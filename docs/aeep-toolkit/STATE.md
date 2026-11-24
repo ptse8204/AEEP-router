@@ -1,5 +1,17 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. Protected workload timing recovered from settled evidence.**
+The [C13 resource audit](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#measured-resource-needs-for-the-next-protected-batch)
+binds 119 comparable software operation timings from the 152 retained
+receipts. The median is 2.10 seconds and the 95th percentile is 8.43.
+Two retained VAREX calibrations are reported as whole batches, each
+about three seconds. These observations guide the next serial batch
+without setting acceptance thresholds. The read-only model grant
+was expired and both earlier unsettled reservations remain charged.
+The software grade total is 75. Storage and the existing VAREX and
+CCFlow decisions remain open. Comparisons are paused and Waza stays
+excluded.
+
 **November 24. Supplementary publisher metadata intake is runnable.**
 The [eight-case intake](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#supplementary-intake-through-the-existing-publisher-transport)
 uses the existing pinned shard reader and retains only selected

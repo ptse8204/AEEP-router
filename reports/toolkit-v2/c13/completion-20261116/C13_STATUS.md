@@ -715,6 +715,43 @@ and the exact response allowance. The verified grade count is still
 [Intake command](intake_supplementary_multifile_ranges.py)
 · [Nine rehearsal checks and live preflight](supplementary-multifile-intake-prelaunch-20261124.json)
 
+### Measured resource needs for the next protected batch
+
+The receipt audit recovered comparable settled elapsed time for
+119 of 152 software grader observations. Fifty-nine of the
+75 verified cases have timings for every recorded protected call.
+The median operation took 2.10 seconds, the 95th percentile
+took 8.43 seconds, and the longest took 27.46 seconds.
+
+| Software workload | Timed observations | Median | Longest |
+| --- | ---: | ---: | ---: |
+| Contract audit | 31 of 42 | 1.91 s | 27.46 s |
+| Multi-file repair | 38 of 50 | 2.05 s | 5.54 s |
+| Single-file repair | 50 of 60 | 2.23 s | 12.53 s |
+
+For the next software batch, use six cases with two from each
+family. Allow roughly three minutes of serial grader time for
+the 12 reference and original checks on comparable retained
+runtimes. Set the actual operation limits in each reviewed plan.
+Package setup, other runtimes and recovery can take longer.
+If all 75 previously verified cases qualify, filling the
+171-case gap still requires at least 342 additional grader calls.
+
+The document checks measured whole VAREX calibration batches.
+The 131-document batch took 3.00 seconds and the 144-document
+batch took 2.96 seconds. Record them as separate operations.
+Managed grading of new outputs and per-document elapsed time
+remain unmeasured. Resource acceptance remains open for both
+domains.
+
+The existing model grant had expired at readback. The ledger
+still accounts for both unsettled reservations and shows 2,171
+turns and 475,374 seconds below its historical ceilings.
+Renewal can be considered when a reviewed comparison is ready.
+Comparisons remain paused.
+
+[Receipt timings and read-only grant balance](protected-grader-batch-cost-20261124.json)
+
 ### qBraid visualization grader preparation
 
 The pinned qBraid archive matches the publisher's 128-file Git tree.

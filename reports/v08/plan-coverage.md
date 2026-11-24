@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [protected workload resource audit](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#measured-resource-needs-for-the-next-protected-batch)
+reconciles 119 settled software operation timings and two whole VAREX
+calibration operations. This supports batch planning. Resource
+acceptance and comparative execution remain open. The existing
+model grant is expired and its open reservations remain charged.
+
 The [eight-case supplementary intake](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#supplementary-intake-through-the-existing-publisher-transport)
 passed nine offline checks using the actual sparse reader. The live
 preflight stopped before the first request with about 405 MiB less

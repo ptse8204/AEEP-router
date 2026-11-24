@@ -1,0 +1,965 @@
+{
+  "schema_version": "aeep.c13.protected-grader-batch-cost.v1",
+  "observed_at": "2026-11-24T23:20:49+00:00",
+  "inventory_sha256": "4f66ba18c1cf70c824324fe4b5c6e6ba7dfdcca71c71df0b9bd87689a2b75b96",
+  "verified_cases": 75,
+  "complete_timing_case_count": 59,
+  "receipts_in_inventory": 152,
+  "timing_coverage": {
+    "observations": 119,
+    "minimum_seconds": 1.5024417079985142,
+    "median_seconds": 2.0974737918004394,
+    "p95_nearest_rank_seconds": 8.43334283301374,
+    "maximum_seconds": 27.45597925002221,
+    "sum_elapsed_seconds": 366.7937889567311
+  },
+  "measurements_by_family": {
+    "contract-audit": {
+      "observations": 31,
+      "minimum_seconds": 1.5024417079985142,
+      "median_seconds": 1.908303292002529,
+      "p95_nearest_rank_seconds": 27.001343208015896,
+      "maximum_seconds": 27.45597925002221,
+      "sum_elapsed_seconds": 116.09379070758587,
+      "receipts_in_inventory": 42
+    },
+    "multi-file-repair": {
+      "observations": 38,
+      "minimum_seconds": 1.693497792351991,
+      "median_seconds": 2.048525291727856,
+      "p95_nearest_rank_seconds": 5.01603320799768,
+      "maximum_seconds": 5.539470624993555,
+      "sum_elapsed_seconds": 89.38766062446575,
+      "receipts_in_inventory": 50
+    },
+    "single-file-repair": {
+      "observations": 50,
+      "minimum_seconds": 1.613078750204295,
+      "median_seconds": 2.2252039581071585,
+      "p95_nearest_rank_seconds": 10.184583040885627,
+      "maximum_seconds": 12.526532625000073,
+      "sum_elapsed_seconds": 161.31233762467946,
+      "receipts_in_inventory": 60
+    }
+  },
+  "protected_grade_span_scope": "Settled protected operation elapsed time from bound receipts. Setup and reporting outside the operation, artifact acquisition and model calls are excluded.",
+  "six_case_serial_example": {
+    "cases_per_family": 2,
+    "reference_and_original_operations": 12,
+    "sum_of_observed_family_p95s_seconds": 168.8078378275968,
+    "sum_of_observed_family_maxima_seconds": 182.08793000006335,
+    "scope": "Illustrative protected-only elapsed time using the observed mix. Preparation, runtime changes, timeouts and resource allowances need separate review."
+  },
+  "minimum_additional_protected_grader_calls": 342,
+  "document_protected_reference_batches": [
+    {
+      "input_documents": 131,
+      "passing_references": 130,
+      "settled_batch_elapsed_seconds": 3.004515499982517,
+      "receipt": "rcpt_9d37249528f54a228667e9ab12d32e32",
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/varex-protected-cohort-result-20261124.json",
+        "sha256": "6e470797af1d6d8bb16c1b03142c99f096a9397645592b44887e83c6f9598eda"
+      }
+    },
+    {
+      "input_documents": 144,
+      "passing_references": 141,
+      "settled_batch_elapsed_seconds": 2.955752082983963,
+      "receipt": "rcpt_33c50b97a9c44686bba931ecf9ce37ee",
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/varex-balanced-capacity-20261124.json",
+        "sha256": "a7eca5939be12d832c2112f58de5bff09f321a1451ce4c69f06c8d1a4a7423e1"
+      }
+    }
+  ],
+  "document_timing_scope": "Two whole VAREX reference-calibration operations. Concurrent capacity, per-document timings and managed task output grading were not measured.",
+  "operational_grant_readonly": {
+    "authorization_id": "onboarding",
+    "effective_grant_sha256": "8dab831857e44fd14c48481f89cfa6da4b734a690dfb5d1fe49c84e10c7e78de",
+    "absolute_limits": {
+      "max_operations": 50000,
+      "max_model_turns": 6000,
+      "max_elapsed_seconds": 604800.0,
+      "max_cash_usd": "0"
+    },
+    "expires_at": "2026-11-23T07:27:48.408693+00:00",
+    "revoked": false,
+    "charged_including_pending": {
+      "operations": 14058,
+      "model_turns": 3829,
+      "elapsed_seconds": 129426.47715447344,
+      "cash_usd": "0.0"
+    },
+    "remaining_including_pending": {
+      "operations": 35942,
+      "model_turns": 2171,
+      "elapsed_seconds": 475373.5228455266,
+      "cash_usd": "0.0"
+    },
+    "unresolved_reservations": [
+      {
+        "record_sha256": "f415bab7adbbf5f9681682d00404438bbc6267ce7239506cb3bc908e35bc948b",
+        "stage": "report_generation",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 0,
+          "max_elapsed_seconds": 30.0,
+          "max_cash_usd": "0"
+        }
+      },
+      {
+        "record_sha256": "0fe0ddeb9c835fb820cc59331f68dc2261756e8c965279369520c23dad40837d",
+        "stage": "ui_client",
+        "reserved": {
+          "max_operations": 1,
+          "max_model_turns": 1,
+          "max_elapsed_seconds": 200.0,
+          "max_cash_usd": "0"
+        }
+      }
+    ],
+    "expired_at_observation": true
+  },
+  "new_model_turns": 0,
+  "new_protected_operations": 0,
+  "grant_changed": false,
+  "resource_acceptance": "OPEN",
+  "comparisons_paused": true,
+  "waza_excluded": true,
+  "timing_receipts": {
+    "rcpt_0104a4853e094b55acd46d00144f4c36": {
+      "elapsed_seconds": 1.809951291885227,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_0540d20da8d84ee58c2bd2cb85bc6c8b": {
+      "elapsed_seconds": 11.952402584000083,
+      "source": {
+        "path": ".aeep/completion-20261116/c13-eos-repaired-pair-local-date-20261120/ledger.json",
+        "sha256": "998a5bc8ad44c8f4977d07b3c0e537b8c90d6c60c4af4331b8a1b30da6e4a566"
+      }
+    },
+    "rcpt_09aa4fd8b6eb405eba3796b504c8cf72": {
+      "elapsed_seconds": 1.917850624769926,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_0a3c723789b24efbb07db79e293d1ddd": {
+      "elapsed_seconds": 1.7972168331034482,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_0e1292e1db3144cc91771201ae600a82": {
+      "elapsed_seconds": 1.975601209094748,
+      "source": {
+        "path": ".aeep/completion-20261116/full-rebench-three-leads-20261119/optype-original-only/execution/ledger.json",
+        "sha256": "f23817f756c5ea3bd9575de03ca8e3a5bb77a51c2a31136165e251905f9e14a8"
+      }
+    },
+    "rcpt_0f6a5d1877594d0281a1f5ff174c0ded": {
+      "elapsed_seconds": 2.4913477078080177,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_1013bf1e2e1a4aae87af284587a69a5e": {
+      "elapsed_seconds": 2.2964208340272307,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_1053d0ae9d54416ca33dd8be4ac4c7e9": {
+      "elapsed_seconds": 2.226833166088909,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_14a961f42fab499d9e96c213fc5af897": {
+      "elapsed_seconds": 12.526532625000073,
+      "source": {
+        "path": ".aeep/completion-20261116/c13-eos-repaired-pair-local-date-20261120/ledger.json",
+        "sha256": "998a5bc8ad44c8f4977d07b3c0e537b8c90d6c60c4af4331b8a1b30da6e4a566"
+      }
+    },
+    "rcpt_15533997d1f54f16a932c4dca7c86caa": {
+      "elapsed_seconds": 4.804986000061035,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_17d8243427a2494cb6aa43e85f481f63": {
+      "elapsed_seconds": 2.743036249652505,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_1ae7efa501644e70a10c5d73a64e62e9": {
+      "elapsed_seconds": 2.3098590411245823,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_1be1da9c5318473bb403a443a4d667a1": {
+      "elapsed_seconds": 2.7481454578228295,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_1bfca78fc8f747f4855d301b6b6c9b3f": {
+      "elapsed_seconds": 1.7485969999688677,
+      "source": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/skelebot/with-compatible-artifactory/ledger.json",
+        "sha256": "91513594d2e828dd7b05326d7b3ced1e2802eb1e387751e30c3fc1c96f7e308d"
+      }
+    },
+    "rcpt_1d19a4c3f8514bc9a062807f77082ea9": {
+      "elapsed_seconds": 1.7020832081325352,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_1ddf56d286874a82a4cbd742a5c7da29": {
+      "elapsed_seconds": 2.061347082722932,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_1f06eb36abd84ab587f0891d4a410dad": {
+      "elapsed_seconds": 5.885875000152737,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_210302d136dd4d2a86675d4bd44d3083": {
+      "elapsed_seconds": 2.57538599986583,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_221ebb6b28c34ba1a7fdaa984110a1b9": {
+      "elapsed_seconds": 1.6845986249973066,
+      "source": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/anyio/with-publisher-pytest-entry-point/ledger.json",
+        "sha256": "9336576d027c1b5d0043b5bab432d89c375ab50299934d0bcf421f86c9412f99"
+      }
+    },
+    "rcpt_258ff8b892ad45e2bb4e37c4ce08de08": {
+      "elapsed_seconds": 2.1927074999548495,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_2ba3f3796c034c378f9f70a2d952de75": {
+      "elapsed_seconds": 1.6518495418131351,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_2d1b30237f6b4298ad03bf8060e59b48": {
+      "elapsed_seconds": 2.3929927912540734,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_3218193ff8f54fd293e7df9ce48d6bb8": {
+      "elapsed_seconds": 1.8786191251128912,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_33e4d97b13934e32a90855b02f1db2d3": {
+      "elapsed_seconds": 1.715022583026439,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_35c6781fe2d3438baea327ef08a9174c": {
+      "elapsed_seconds": 1.6324562919908203,
+      "source": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pdoc-806-20261124/pdoc/execution/ledger.json",
+        "sha256": "8b081392a8bef05ddcbebfceef956acdb04807c928107044ef470dcad91a4f53"
+      }
+    },
+    "rcpt_394f2487370f48c5adfee332c73d52bf": {
+      "elapsed_seconds": 2.182233167346567,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_3cd7dd9736a64ec288673b444bed2ca9": {
+      "elapsed_seconds": 2.109355332911946,
+      "source": {
+        "path": ".aeep/completion-20261116/c13-first-staged-protected-pairs-20261116/execution/completed.json",
+        "sha256": "4e3d52f98e7f0a4e9c7c2e7ff7527ed1bb1c2fcda8b4905ef82d685072d8df8c"
+      }
+    },
+    "rcpt_3da5c5f7132b47ee84e87f4533fa41e1": {
+      "elapsed_seconds": 1.7576174172572792,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_3e78f1e877374dbaadf62c761ba7c760": {
+      "elapsed_seconds": 2.5908425000379793,
+      "source": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-sqlacodegen-dialects-20261124/execution/ledger.json",
+        "sha256": "087efb8032883480dffc6554350867202ed339d7cbf3b6738d41cc7f2881f2e9"
+      }
+    },
+    "rcpt_43caf2c4af604dbab0fb9306693e4eea": {
+      "elapsed_seconds": 2.0107498336583376,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_43d483b567c04bef9f775fa0468daa2d": {
+      "elapsed_seconds": 1.749048582976684,
+      "source": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/skelebot/with-compatible-artifactory/ledger.json",
+        "sha256": "91513594d2e828dd7b05326d7b3ced1e2802eb1e387751e30c3fc1c96f7e308d"
+      }
+    },
+    "rcpt_493c0fd1d052469f80d8ae0587d5836a": {
+      "elapsed_seconds": 1.6597046249662526,
+      "source": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124-msgpack-original/execution/ledger.json",
+        "sha256": "2d1f819b99fe11e2ff9b9fb66fe5659ecb6cbe00b0f796fa4393b759a4357ca4"
+      }
+    },
+    "rcpt_4f94348c349d45398a030c44bf3e26c3": {
+      "elapsed_seconds": 2.522232540999539,
+      "source": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-sqlacodegen-dialects-20261124/execution/ledger.json",
+        "sha256": "087efb8032883480dffc6554350867202ed339d7cbf3b6738d41cc7f2881f2e9"
+      }
+    },
+    "rcpt_4f958922146e4415a2919d0336d80d64": {
+      "elapsed_seconds": 1.693497792351991,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_4fc35ada37d44a0d8e15ddb2456706a3": {
+      "elapsed_seconds": 1.7264926669886336,
+      "source": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124-msgpack/execution/ledger.json",
+        "sha256": "c90989c5d073c28c0272b50c21ce06fc7c93350aa6faba9188319dc66361ae14"
+      }
+    },
+    "rcpt_56ed23249db145f8a9f43acc1870f57a": {
+      "elapsed_seconds": 1.9093380416743457,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_579ef1851ae549a6b20cad37358d8a98": {
+      "elapsed_seconds": 1.8318853750824928,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_5ba09d42613f4e84b1b016195c1ad4f8": {
+      "elapsed_seconds": 1.8210303327068686,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_5daa3152f7a64c4a985b4b1d360568d8": {
+      "elapsed_seconds": 2.2383160419994965,
+      "source": {
+        "path": ".aeep/completion-20261116/c13-first-staged-protected-pairs-20261116/execution/completed.json",
+        "sha256": "4e3d52f98e7f0a4e9c7c2e7ff7527ed1bb1c2fcda8b4905ef82d685072d8df8c"
+      }
+    },
+    "rcpt_5e29c7d03c794d4c8cf66db269559550": {
+      "elapsed_seconds": 1.6666335831396282,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_5f714f5d464e4566b19db6aed2df058a": {
+      "elapsed_seconds": 1.840024041943252,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_60cff055a7c747c69bdf8ecf939f78bc": {
+      "elapsed_seconds": 2.0127241669688374,
+      "source": {
+        "path": ".aeep/completion-20261116/full-rebench-three-leads-20261119/optype-ordinary/execution/ledger.json",
+        "sha256": "a136283bc6f950b3aa6c2ebf94ac64a31e18cb5060037d240ac3fc6d819eac48"
+      }
+    },
+    "rcpt_61833cb7b8af4bee9e05ac2ac0d0944a": {
+      "elapsed_seconds": 1.7285123339970596,
+      "source": {
+        "path": ".aeep/c13-cohort-continuation-20261124/pyfakefs-pair/execution/ledger.json",
+        "sha256": "9556e634d515dace39d43a7a845261908090520a5fc987c4a34676dedec25b9c"
+      }
+    },
+    "rcpt_62324657763a413eb1c0147c89376844": {
+      "elapsed_seconds": 1.6804220420308411,
+      "source": {
+        "path": ".aeep/c13-cohort-continuation-20261124/pyfakefs-pair/execution/ledger.json",
+        "sha256": "9556e634d515dace39d43a7a845261908090520a5fc987c4a34676dedec25b9c"
+      }
+    },
+    "rcpt_6420d97feafa4cb99c104461c50add11": {
+      "elapsed_seconds": 1.9789609578438103,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_687508a03f4544c981bb309b6460d5a1": {
+      "elapsed_seconds": 1.9859962076880038,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_696aea2248c9449f8ff4f118fd82eb37": {
+      "elapsed_seconds": 1.7062845421023667,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_6b3abeb5801b4c19806b200a24d2d175": {
+      "elapsed_seconds": 6.945020249986555,
+      "source": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-sqlacodegen-sqlite-cli-391-20261124/execution/ledger.json",
+        "sha256": "bdffa0928bf799843c4e0ef1de8b7ed0b8ddc35ec997729483be00f2c606f113"
+      }
+    },
+    "rcpt_6d226183ff924a2a983a4fcb0421519e": {
+      "elapsed_seconds": 3.379281917004846,
+      "source": {
+        "path": ".aeep/completion-20261116/c13-first-staged-protected-pairs-20261116/execution/completed.json",
+        "sha256": "4e3d52f98e7f0a4e9c7c2e7ff7527ed1bb1c2fcda8b4905ef82d685072d8df8c"
+      }
+    },
+    "rcpt_7360f00f372740f2a2580879da64cbd3": {
+      "elapsed_seconds": 27.45597925002221,
+      "source": {
+        "path": ".aeep/c13-cohort-runtime-20261124/pygls-verified-pair-50gib/execution/ledger.json",
+        "sha256": "93f2c887f8b6bf26b17d7b5dcd92486368936e04fa8e8583b7dd73231b888673"
+      }
+    },
+    "rcpt_76a2cfd4cbbb4d75ac442224c5e8d409": {
+      "elapsed_seconds": 1.9384690411388874,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_76d1e001399e4e52832bfe9286215aac": {
+      "elapsed_seconds": 1.8022583751007915,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_7770b5e90b904ddda0d3bc23f838eb55": {
+      "elapsed_seconds": 2.9254029160365462,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_77f66f365cef484e890331be36421eaa": {
+      "elapsed_seconds": 2.0289025837555528,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_78a3cd7454b64942b8f0bbd33ec9d9b8": {
+      "elapsed_seconds": 2.2934456667862833,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_7a8880bba88d4c95a0110c6c9a19e9af": {
+      "elapsed_seconds": 1.8085434157401323,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_7d1b13c2266149d5aa0faf53eef4c9b8": {
+      "elapsed_seconds": 1.6552190000074916,
+      "source": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/anyio/with-publisher-pytest-entry-point/ledger.json",
+        "sha256": "9336576d027c1b5d0043b5bab432d89c375ab50299934d0bcf421f86c9412f99"
+      }
+    },
+    "rcpt_7fe37980625147bdb4071df7f122d2bd": {
+      "elapsed_seconds": 2.0397952920175157,
+      "source": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyformlang-35-licensed-runtime-20261124/execution/ledger.json",
+        "sha256": "a0e6c9ca682798554d258a0e857829ecbe63a0ba36ca5f9bdce1f211b96f49fb"
+      }
+    },
+    "rcpt_81b6f415e34f41d2ac613d211ef20777": {
+      "elapsed_seconds": 3.7460500000001957,
+      "source": {
+        "path": ".aeep/completion-20261116/c13-grader-repairs-20261120/ledger.json",
+        "sha256": "5d22be232555dfb6ad607b526e16414a23c1d267ecda9754df7d368a571b3284"
+      }
+    },
+    "rcpt_83df210f1c5a42e6a56ccafe2d6ea644": {
+      "elapsed_seconds": 8.43334283301374,
+      "source": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-sqlacodegen-sqlite-cli-391-20261124/execution/ledger.json",
+        "sha256": "bdffa0928bf799843c4e0ef1de8b7ed0b8ddc35ec997729483be00f2c606f113"
+      }
+    },
+    "rcpt_84099d81d7394b9eab4ed08c631bb893": {
+      "elapsed_seconds": 1.8336551659740508,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_869e67c3bc01451b9d0662a8dd488fb7": {
+      "elapsed_seconds": 1.613078750204295,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_8a00f0a83c8d44779d4f43464961dba7": {
+      "elapsed_seconds": 2.0974737918004394,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_8aa3189dc40646c0a4ef1974d491592c": {
+      "elapsed_seconds": 2.7662760000675917,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_8cd5510e83b84038ac32909f3ee9ebc9": {
+      "elapsed_seconds": 2.508047459006775,
+      "source": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-avroschema-pairs-20261124/835/execution/ledger.json",
+        "sha256": "0ea8fb53b897bcf0dc8eb68e646a9d1a629aab3b48eeb338cb87319f51efeb0a"
+      }
+    },
+    "rcpt_8e168b49f88545538f8e54198cbda57d": {
+      "elapsed_seconds": 3.1848441250622272,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_8ede4f7652914e69978a34842b4dbd82": {
+      "elapsed_seconds": 1.7795693749794737,
+      "source": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-towncrier-contract-20261124/execution/ledger.json",
+        "sha256": "a15f960cef516cbcb15073c0aa86da25c1092dada37a6daac5f49b316fba3f56"
+      }
+    },
+    "rcpt_90543cb7d7d94e7c8ee6cd2b6aebb26a": {
+      "elapsed_seconds": 2.422090374981053,
+      "source": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-avroschema-pairs-20261124/870/execution/ledger.json",
+        "sha256": "0fb0662e93df71cf66ea8dcfe93c7d1ee76ca12251ad9add7335d0ecd3a44e70"
+      }
+    },
+    "rcpt_91d3b5bee8f54513897779e42ac06f27": {
+      "elapsed_seconds": 1.6932467077858746,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_926684e54b1249948eda2cbfde597b2d": {
+      "elapsed_seconds": 2.6728619169443846,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_949a77f48fa1446987daad8c87dd407a": {
+      "elapsed_seconds": 2.2003102080198005,
+      "source": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-confluence-exporter-contract-20261124/execution/ledger.json",
+        "sha256": "a93a9efbb7548d72f6f1383b2e665fe1f6ecc12ab54090f1b37a8d668923c28a"
+      }
+    },
+    "rcpt_99c306cdd1cd4222994f719e64e7d8cd": {
+      "elapsed_seconds": 4.325033749999875,
+      "source": {
+        "path": ".aeep/completion-20261116/c13-grader-repairs-20261120/ledger.json",
+        "sha256": "5d22be232555dfb6ad607b526e16414a23c1d267ecda9754df7d368a571b3284"
+      }
+    },
+    "rcpt_9a027c8743cc4f26a58bedbf5287a9ad": {
+      "elapsed_seconds": 1.6026347088627517,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_9b1a28cd59b344398c003e50588a55e2": {
+      "elapsed_seconds": 1.963087874930352,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_a0b28f6b8fd74b2082a5c67183b502f2": {
+      "elapsed_seconds": 1.878092875238508,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_a15964585ef64d58b74668c71caeed0a": {
+      "elapsed_seconds": 4.582613208796829,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_a1aac4a23dd9406b9e47265f855bff94": {
+      "elapsed_seconds": 1.908303292002529,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_a2092cacf19d4912ac40cab358646f45": {
+      "elapsed_seconds": 2.099070958327502,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_a2455e1a2a5d455a9c876abb7e7fca4c": {
+      "elapsed_seconds": 1.8886382500641048,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_a3e2c324c900473e8c063ab698a57222": {
+      "elapsed_seconds": 2.5626289998181164,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_a4d96342e5194940831b455e60cdc0c2": {
+      "elapsed_seconds": 1.882171249948442,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_aad7c4fe9c794b51a5212584dfc53607": {
+      "elapsed_seconds": 2.764884708041791,
+      "source": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-avroschema-pairs-20261124/870/execution/ledger.json",
+        "sha256": "0fb0662e93df71cf66ea8dcfe93c7d1ee76ca12251ad9add7335d0ecd3a44e70"
+      }
+    },
+    "rcpt_ad4a8251752248958bad79f903615fc4": {
+      "elapsed_seconds": 3.4953974580275826,
+      "source": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-nested-pandas-302-20261124/execution/ledger.json",
+        "sha256": "baf9546a5c66aa0f0be96a0a8738743d597d345d958fc0647c1c717cf6bec6a7"
+      }
+    },
+    "rcpt_af16e041dcf345009d4c57911e9dac54": {
+      "elapsed_seconds": 2.6629599169827998,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_af39c5618bfd4840a1e7101b3f05835f": {
+      "elapsed_seconds": 1.6769328331574798,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_af5b72c3545f4d97a28248acfcc8babf": {
+      "elapsed_seconds": 2.4378048749640584,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_b5bc71c854da47f1b6b43fdd114e419d": {
+      "elapsed_seconds": 2.3955633332952857,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_b6989248993b46afa199f265c4acb5a1": {
+      "elapsed_seconds": 2.3962509580887854,
+      "source": {
+        "path": ".aeep/completion-20261116/c13-cached-native-repository-pairs-20261116/execution/ledger.json",
+        "sha256": "d2982baa7ff5c776ad6aa68c74786b55dcb7b0243496fbc5e2fb510ce9306d8d"
+      }
+    },
+    "rcpt_c18607e5e7c94a34a8cf2b2a8310e130": {
+      "elapsed_seconds": 2.223574750125408,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_c37538476c8f499c8fa7ecf7506f0f61": {
+      "elapsed_seconds": 1.7005297080031596,
+      "source": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-towncrier-contract-20261124/execution/ledger.json",
+        "sha256": "a15f960cef516cbcb15073c0aa86da25c1092dada37a6daac5f49b316fba3f56"
+      }
+    },
+    "rcpt_c6a81c746172490fb031d7f470c061b2": {
+      "elapsed_seconds": 2.0779088749550283,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_c78b1db5a55d4ed2b83cebc6b3a5fed0": {
+      "elapsed_seconds": 1.851710666960571,
+      "source": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-confluence-exporter-contract-20261124/execution/ledger.json",
+        "sha256": "a93a9efbb7548d72f6f1383b2e665fe1f6ecc12ab54090f1b37a8d668923c28a"
+      }
+    },
+    "rcpt_c80ea9784de84dd0aa4719e8488fa560": {
+      "elapsed_seconds": 1.7227992499247193,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_c8bdbaa621464dde9fc7f420559bf3aa": {
+      "elapsed_seconds": 2.4081724588759243,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_c95becb4a1294adab13f22919351a7a4": {
+      "elapsed_seconds": 5.01603320799768,
+      "source": {
+        "path": ".aeep/completion-20261116/c13-cached-native-repository-pairs-20261116/execution/ledger.json",
+        "sha256": "d2982baa7ff5c776ad6aa68c74786b55dcb7b0243496fbc5e2fb510ce9306d8d"
+      }
+    },
+    "rcpt_c96356498e6341ada2a582ce0951bd71": {
+      "elapsed_seconds": 10.184583040885627,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_c9f0be9562a840ea98598c046c012849": {
+      "elapsed_seconds": 2.7687021251767874,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_cb96741786ef48b3be324016e00d2db0": {
+      "elapsed_seconds": 1.8275425001047552,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_cc02a310eeb54a3ba7179170149f00e9": {
+      "elapsed_seconds": 2.5113774579949677,
+      "source": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyformlang-35-licensed-runtime-20261124/execution/ledger.json",
+        "sha256": "a0e6c9ca682798554d258a0e857829ecbe63a0ba36ca5f9bdce1f211b96f49fb"
+      }
+    },
+    "rcpt_ce0b6d5bacae487f8fbf03d1b2b594a1": {
+      "elapsed_seconds": 2.001561541110277,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_d181754c0d664a6a9c96e52e7d73cd1b": {
+      "elapsed_seconds": 2.945637708005961,
+      "source": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-nested-pandas-302-20261124/execution/ledger.json",
+        "sha256": "baf9546a5c66aa0f0be96a0a8738743d597d345d958fc0647c1c717cf6bec6a7"
+      }
+    },
+    "rcpt_d3ddacb373914584a2d53c4f600be7d1": {
+      "elapsed_seconds": 5.539470624993555,
+      "source": {
+        "path": ".aeep/completion-20261116/c13-cached-native-repository-pairs-20261116/execution/ledger.json",
+        "sha256": "d2982baa7ff5c776ad6aa68c74786b55dcb7b0243496fbc5e2fb510ce9306d8d"
+      }
+    },
+    "rcpt_d5b8a3ef0bae4628862880fe4e9006d2": {
+      "elapsed_seconds": 1.8014491251669824,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_d8db27bcf5c54c509f23bb2982fe4978": {
+      "elapsed_seconds": 2.1891755829565227,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_de5873b10b4d423fb69dc9f3efa804c6": {
+      "elapsed_seconds": 1.9189726673066616,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_e0c492c7add142a884a307a8db15eaae": {
+      "elapsed_seconds": 2.0145125002600253,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_e3db04a11211462fa3cd8511ea7af216": {
+      "elapsed_seconds": 2.228064666967839,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_e752dcc83d194b4baf15a1b4374e0a8e": {
+      "elapsed_seconds": 8.069176707882434,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_e9065f72e2ca42b6a793f2cbbbf99bde": {
+      "elapsed_seconds": 2.3303244579583406,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_e9d0d99557dc4e559486e893d84c083a": {
+      "elapsed_seconds": 1.5024417079985142,
+      "source": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pdoc-806-20261124/pdoc/execution/ledger.json",
+        "sha256": "8b081392a8bef05ddcbebfceef956acdb04807c928107044ef470dcad91a4f53"
+      }
+    },
+    "rcpt_ec56acacf25847a6921d940e3398fe51": {
+      "elapsed_seconds": 2.629400874953717,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_ef36df9219e846b080eac16379695f81": {
+      "elapsed_seconds": 2.294363124994561,
+      "source": {
+        "path": ".aeep/completion-20261116/c13-cached-native-repository-pairs-20261116/execution/ledger.json",
+        "sha256": "d2982baa7ff5c776ad6aa68c74786b55dcb7b0243496fbc5e2fb510ce9306d8d"
+      }
+    },
+    "rcpt_ef89df2f28e94d198a998a5bf7563d47": {
+      "elapsed_seconds": 1.9105846672318876,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_f2b250551e9041d79b4ca4c42ad1f034": {
+      "elapsed_seconds": 2.1686267917975783,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_f9896118f38e4a5eb6d5bc14c712edfa": {
+      "elapsed_seconds": 2.2071549999527633,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_f9b9103b73f04e7fb3419a2c33b86277": {
+      "elapsed_seconds": 1.9947753339074552,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    },
+    "rcpt_fb1c1a126db14278bb6796dd8490f80f": {
+      "elapsed_seconds": 2.8024263749830425,
+      "source": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-avroschema-pairs-20261124/835/execution/ledger.json",
+        "sha256": "0ea8fb53b897bcf0dc8eb68e646a9d1a629aab3b48eeb338cb87319f51efeb0a"
+      }
+    },
+    "rcpt_fbe02c762b87430c841efa6e96611e81": {
+      "elapsed_seconds": 27.001343208015896,
+      "source": {
+        "path": ".aeep/c13-cohort-runtime-20261124/pygls-verified-pair-50gib/execution/ledger.json",
+        "sha256": "93f2c887f8b6bf26b17d7b5dcd92486368936e04fa8e8583b7dd73231b888673"
+      }
+    },
+    "rcpt_fc135b215ca04d8ea2e077d937f958c2": {
+      "elapsed_seconds": 2.0825380831956863,
+      "source": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/retained-grader-evidence.json",
+        "sha256": "12f5a14a23d1cad15ba90c5de2b04611d8e9c2c2e883c77a6f10ba74e5d7c2a0"
+      }
+    }
+  }
+}
