@@ -1,5 +1,14 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. The USDA WASDE pack passed ordinary CLI staging and protected grading.**
+The [operator handoff](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#usda-document-grading)
+records the three-file public ZIP and the separate protected verifier.
+The exact extraction scored 1/1. A missing row and invalid JSON each
+scored 0/1. Four offline operations settled, including the reference.
+Case-specific asset-use review and formal assignment remain open.
+No provider transfer, model turn or cash occurred. Comparisons stay
+paused, and Waza is excluded.
+
 **November 24. Current source passes stack readiness and both install checks.**
 The [operator handoff](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md)
 records 37 accepted checks on source commit `943016e0` in a private

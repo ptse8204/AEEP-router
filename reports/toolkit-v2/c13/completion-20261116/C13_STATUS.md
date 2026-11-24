@@ -121,6 +121,24 @@ fixture now supplies its own capacity reading, and the full run used
 the normal test configuration. All 414 tracked code and test files
 matched the tested copy. [Source verification](intake-source-verification-20261120.json)
 
+## USDA document grading
+
+The ordinary CLI staged the USDA WASDE task as a reviewed document pack.
+The worker ZIP contains the PDF, instruction and output schema. The
+reference answer and verifier stayed in the separate protected directory.
+
+| Protected check | Result |
+| --- | --- |
+| Exact extraction | 1/1 |
+| One row missing | 0/1 |
+| Invalid JSON | 0/1 |
+
+All four operations settled offline, including the reference command.
+The result verifies one local grader. The task still needs a case-specific
+asset-use review before provider dispatch or formal assignment.
+[USDA publisher listing](https://esmis.nal.usda.gov/publication/world-agricultural-supply-and-demand-estimates)
+and [protected calibration evidence](wasde-reviewed-pack-result-20261124.json)
+
 ## What still blocks formal comparisons
 
 | Workload | Remaining gap |
