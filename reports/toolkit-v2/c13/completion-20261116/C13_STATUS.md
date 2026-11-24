@@ -201,25 +201,77 @@ console-script output. The grader keeps its non-executable scratch
 boundary. The original-source check has yet to run.
 [Batch receipts and diagnosis](cohort-batch-20261124.json)
 
+Pyserde issue 657 joined the reproduced software pool. The published
+repair passed all 12 required tests. The original failed the five
+issue assertions and passed all seven preservation tests. The first
+reference attempt hit a collection error because the test module
+imports MsgPack, an optional dependency absent from the retained image.
+A read-only projection of the publisher's MsgPack Python fallback
+allowed the same tests to run. The retained reference receipt contained
+all 12 passing statuses. I corrected the grader's reply formatting and
+recovered the 1/1 reference grade from that receipt before running the
+unstarted original, which scored 0/1. Both Pyserde revisions belong to
+the same repository family and must stay in the same study stage.
+[Protected pair and diagnostics](protected-cohort-followup-20261124.json)
+· [MsgPack publisher package](https://pypi.org/project/msgpack/1.1.2/)
+
+C++ linter hooks issue 142 stays outside the pool. Its published reference
+passed 28 of 29 required tests. The remaining test mocked tool discovery
+but reached the installer. The install path returned no executable, and
+the assertion tried to convert that empty result into a path. The
+protected run kept the assertion and isolation intact. The reference and
+diagnostic settled without a grade, and the original was never dispatched.
+
 ## What still blocks formal comparisons
 
 | Workload | Remaining gap |
 | --- | --- |
-| Software | The audited pool contains 63 reproduced cases across 41 repositories. Two independent holdouts and shared early stages require at least 246 distinct cases. That leaves a minimum gap of 183 against this pool. Contract audits have the largest holdout gap, at 55 cases before early-stage needs. |
+| Software | The audited pool contains 64 reproduced cases across 41 repositories. Two independent holdouts and shared early stages require at least 246 distinct cases. That leaves a minimum gap of 182 against this pool. Contract audits have the largest holdout gap, at 55 cases before early-stage needs. |
 | Document/data | The 18 annual disclosures remain held on source and asset-use grounds. The remaining ExtractBench metadata has 108 multiple-collection slots at stored ZIP size, or at most 113 if compression is favorable. The design needs 122. If Census, BEA, Treasury, EIA and WASDE qualify under the same cohort contract, the remaining gap is nine at stored ZIP size or four with favorable compression. |
 
 VAREX now has 133 multi-collection prospects with distinct schema hashes.
 The audit matched all 1,777 schema IDs to exact publisher PDF paths. It
 read 813,498 bytes of pinned Parquet ranges for document IDs, splits and
 schemas. The largest of the 133 prospective PDFs is 2,402,382 bytes in
-the publisher metadata. The PDF bodies and protected answers remain
-unfetched. Distinct schema hashes leave template lineage and independent
-stage assignment open. The next calibration can use the retained private
-NumPy, SciPy and RapidFuzz runtime with VAREX's native score and field
-exclusions. Candidate counts stay outside the formal cohort until the
-protected grader and case eligibility checks pass.
+the publisher metadata. The protected check below exercised two of the
+prospects. Distinct schema hashes leave template lineage and independent
+stage assignment open.
 [VAREX dataset revision](https://huggingface.co/datasets/ibm-research/VAREX/tree/ff36b6cd232efd401b3f4a20272a07bf2b749914)
 · [VAREX evaluator revision](https://github.com/udibarzi/varex-bench/tree/3cce9c18530748cfc843f38c02e2f43e0694d167)
+
+### VAREX protected grading
+
+Two VAREX forms passed ordinary CLI staging. Both exact references scored
+12/12 with the original evaluator and its published field exclusions.
+Each archive contains the pinned PDF, schema and local instructions. The
+reference answers and scorer stayed in the protected grader. The two PDF
+downloads matched their complete publisher hashes. Three bounded reads
+retrieved 136,972 bytes of reference columns from one pinned Parquet shard.
+Only the two selected reference records were staged for grading.
+[Data license](https://cdla.dev/permissive-2-0/)
+
+| Case | Exact reference | Reordered collection | Missing row or entry | Missing or malformed output |
+| --- | --- | --- | --- | --- |
+| GSA 3418 | 12/12 | 11/12 | 11/12 | 0/12 each |
+| HUD 11706 | 12/12 | 12/12 | 11/12 | 0/12 each |
+
+The grader aligns HUD's rows as objects. GSA's collection contains
+strings, which the scorer compares in their submitted order. My first
+readback expected both rearrangements to score 12/12. The verified
+receipt retained all ten observations, so the corrected readback
+recovered the actual scores without rerunning either case. The run used
+one offline container on the retained runtime and took 2.44 seconds from
+reservation to settlement.
+[Scores, source bindings and receipt](varex-calibration-20261124.json)
+
+The full VAREX metadata screen found 131 other multiple-collection
+prospects and 1,638 with at most one collection. The design needs
+at least 122 multiple-collection cases. A VAREX-only document cohort
+could retain one native normalized exact-match contract across both
+holdouts. Source-family grouping, asset-use decisions, staged ZIPs
+and protected grades still determine how many cases qualify. The two
+calibration forms stay outside that prospective count.
+[Full catalog capacity audit](varex-cohort-capacity-20261124.json)
 
 Live comparisons remain paused. Candidate benefit and selection benefit
 each need a separate result on frozen eligible tasks. Finishing the

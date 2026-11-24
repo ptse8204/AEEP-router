@@ -1,0 +1,329 @@
+{
+  "cash_usd": 0,
+  "comparisons_paused": true,
+  "documents": {
+    "calibration": {
+      "path": "reports/toolkit-v2/c13/completion-20261116/varex-calibration-20261124.json",
+      "sha256": "e3e2b4fd017a7e3af13acc66529d23181c0032258dd8b605411505636dbbfb0e"
+    },
+    "capacity": {
+      "path": "reports/toolkit-v2/c13/completion-20261116/varex-cohort-capacity-20261124.json",
+      "sha256": "e6d7f739a419575715f683269348869c9d0f826e824b7c354d6849c6e5165083"
+    },
+    "new_formal_eligible_cases": 0
+  },
+  "formal_assignments": 0,
+  "model_turns": 0,
+  "prior_pool": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/cohort-batch-20261124.json",
+    "sha256": "ad3611cea3766b28010cfeffea77daa07bbdbc9e585b7497867c9abc5c827e58"
+  },
+  "schema_version": "aeep.c13.protected-cohort-followup.v1",
+  "software_pair": {
+    "case": "yukinarit__pyserde-657",
+    "controls": {
+      "collection_errors": null,
+      "exit_code": 1,
+      "failure_sites": [
+        {
+          "category": "AssertionError",
+          "file": "tests/test_json.py",
+          "line": 55,
+          "phase": "call",
+          "test": "tests/test_json.py::test_skip_none_nested"
+        },
+        {
+          "category": "AssertionError",
+          "file": "tests/test_se.py",
+          "line": 154,
+          "phase": "call",
+          "test": "tests/test_se.py::test_render_list"
+        },
+        {
+          "category": "AssertionError",
+          "file": "tests/test_se.py",
+          "line": 161,
+          "phase": "call",
+          "test": "tests/test_se.py::test_render_dict"
+        },
+        {
+          "category": "AssertionError",
+          "file": "tests/test_se.py",
+          "line": 174,
+          "phase": "call",
+          "test": "tests/test_se.py::test_render_tuple"
+        },
+        {
+          "category": "AssertionError",
+          "file": "tests/test_se.py",
+          "line": 180,
+          "phase": "call",
+          "test": "tests/test_se.py::test_render_dataclass"
+        }
+      ],
+      "matched": true,
+      "required_statuses": {
+        "tests/test_json.py::test_json_basics": "PASSED",
+        "tests/test_json.py::test_skip_none": "PASSED",
+        "tests/test_json.py::test_skip_none_nested": "FAILED",
+        "tests/test_se.py::test_asdict": "PASSED",
+        "tests/test_se.py::test_astuple": "PASSED",
+        "tests/test_se.py::test_convert_sets_option": "PASSED",
+        "tests/test_se.py::test_render_dataclass": "FAILED",
+        "tests/test_se.py::test_render_dict": "FAILED",
+        "tests/test_se.py::test_render_list": "FAILED",
+        "tests/test_se.py::test_render_primitives": "PASSED",
+        "tests/test_se.py::test_render_tuple": "FAILED",
+        "tests/test_se.py::test_se_func_iter": "PASSED"
+      }
+    },
+    "family": "single-file-repair",
+    "image": "sha256:517cefb5aa4c4571dfb35dfebfd75e299ac6c173332e58d25054c5856459d8f7",
+    "msgpack": {
+      "projection_sha256": "f849baf513ca038efca023499625d2364f01f4a39bf0d6ee6c37a69bfff0d3b3",
+      "source_sha256": "3b60763c1373dd60f398488069bcdc703cd08a711477b5d480eecc9f9626f47e",
+      "version": "1.1.2"
+    },
+    "original": {
+      "contract_matched": true,
+      "operation": "c13-pyserde-657-pair-20261124-msgpack-original:yukinarit__pyserde-657:original",
+      "receipt_id": "rcpt_493c0fd1d052469f80d8ae0587d5836a",
+      "score": 0.0
+    },
+    "reference": {
+      "elapsed_seconds": 1.7264926669886336,
+      "pins": {
+        "execution/diagnostic.json": "3df8556c110478ebeea1650ac807405c4e241d19f9b6c62c82811f48ed9cbe6e",
+        "execution/ledger.json": "c90989c5d073c28c0272b50c21ce06fc7c93350aa6faba9188319dc66361ae14",
+        "execution/receipt-rcpt_4fc35ada37d44a0d8e15ddb2456706a3.json": "99ce2a61fde594f7717e2cc27284e763f583b513a78277bd5f45614347fe26e2",
+        "execution/result.json": "5f2ef713ccc355abcd58b9d5b58b5e08c29026130b5f6a8feadd5981101fe634",
+        "operation-review.json": "0181f911ef225053ecdb682616969eabc6dd79e8a03814c478aa04a74aca06c6"
+      },
+      "receipt": "rcpt_4fc35ada37d44a0d8e15ddb2456706a3",
+      "score": 1.0
+    },
+    "repository": "yukinarit/pyserde",
+    "revision": "eccc151f944330d8bacd156904a56a094a7820d8",
+    "scope": "Both Pyserde revisions belong to the same repository family. Keep them in one study stage."
+  },
+  "software_pool": {
+    "counts_by_family": {
+      "contract-audit": 15,
+      "multi-file-repair": 24,
+      "single-file-repair": 25
+    },
+    "distinct_receipts": 130,
+    "largest_repository_group_rows": 14,
+    "minimum_missing_rows_if_all_reproduced_rows_are_eligible": 182,
+    "repository_families": 41,
+    "reproduced_rows": 64,
+    "two_balanced_holdouts_minimum_missing_by_family_before_early_stages": {
+      "contract-audit": 55,
+      "multi-file-repair": 46,
+      "single-file-repair": 45
+    },
+    "two_cohorts_shared_early_minimum": 246
+  },
+  "software_rejected_case": {
+    "case": "cpp-linter__cpp-linter-hooks-142",
+    "failure": "The existing-version test calls Path() on None after the implementation tries its installer. It mocks tool detection and does not intercept installation.",
+    "grade_awarded": false,
+    "observed": "Published reference passed 28 required tests and failed one.",
+    "original_dispatched": false
+  },
+  "software_runs": {
+    "c13-cpp-linter-pair-20261124": {
+      "execution/ledger.json": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-cpp-linter-pair-20261124/execution/ledger.json",
+        "sha256": "fbf9c69eef5ba827f1fd14902dd73840564254ac3b083dafd608625b33589828"
+      },
+      "execution/result.json": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-cpp-linter-pair-20261124/execution/result.json",
+        "sha256": "76401f11c04eece9cecd29f1e37da9b25509c08350ef71481634a78dc3ae38f9"
+      },
+      "operation-review.json": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-cpp-linter-pair-20261124/operation-review.json",
+        "sha256": "5d330f7251f2246d992b1d276eb62aca69fb19797134e19461efb9d651344f20"
+      },
+      "receipts": [
+        {
+          "path": ".aeep/c13-cohort-runtime-20261124/c13-cpp-linter-pair-20261124/execution/receipt-rcpt_dc00d58668f3429c9376191fcd255a3c.json",
+          "sha256": "570cd2327d3635a319490980f734f50fdefbe587ae00277dad403bdcdd4c1387"
+        }
+      ],
+      "role": "software-reference"
+    },
+    "c13-cpp-linter-pair-20261124-diagnostic": {
+      "diagnostic": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-cpp-linter-pair-20261124-diagnostic/execution/diagnostic.json",
+        "sha256": "88b02b1ca3de4950b51634e337ba896086bab9c0774efde6088165f2725baa13"
+      },
+      "execution/ledger.json": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-cpp-linter-pair-20261124-diagnostic/execution/ledger.json",
+        "sha256": "72836f885319794d5b1b9dde17334de58ab97f6472feb78e01cbcbd6f1fc7131"
+      },
+      "execution/result.json": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-cpp-linter-pair-20261124-diagnostic/execution/result.json",
+        "sha256": "911ad1470a2eb72d5b9e44304a17ed3e71cd1b58be869523b5f053beac19453f"
+      },
+      "operation-review.json": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-cpp-linter-pair-20261124-diagnostic/operation-review.json",
+        "sha256": "a1c37737e2196f88349b80550625d7d1e9c38b583efb6bbfbfc258cbc009a761"
+      },
+      "receipts": [
+        {
+          "path": ".aeep/c13-cohort-runtime-20261124/c13-cpp-linter-pair-20261124-diagnostic/execution/receipt-rcpt_151792f9816445a78da026c1ef0547cc.json",
+          "sha256": "ef97751a24a29dc014625305b4bd138dd15fdaab274bbb671d048427cf6bb5bd"
+        }
+      ],
+      "role": "software-diagnostic"
+    },
+    "c13-pyserde-657-pair-20261124": {
+      "execution/ledger.json": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124/execution/ledger.json",
+        "sha256": "a509d50897230397fab138e07feaba560fbfeecf8f652a385dd09115d1f0f470"
+      },
+      "execution/result.json": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124/execution/result.json",
+        "sha256": "10361a197785234c629f9232c8a4c4080e76d25595d4ca9ab751999b07bbddbc"
+      },
+      "operation-review.json": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124/operation-review.json",
+        "sha256": "1f7119d72bbd735c71a2997a96278c187d248614bdca45baec1b2247c3959be8"
+      },
+      "receipts": [
+        {
+          "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124/execution/receipt-rcpt_3c59f0017fd648669d2fe51db749ca82.json",
+          "sha256": "423844e68f472735f6e7fd5b44824edca215f102fe4917bb045827005592e0f6"
+        }
+      ],
+      "role": "software-reference"
+    },
+    "c13-pyserde-657-pair-20261124-collection-envelope": {
+      "diagnostic": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124-collection-envelope/execution/diagnostic.json",
+        "sha256": "44f201b15dce361fb3e371ae043eac5cc8eaf269d52b716dfbc78deff9acb9ee"
+      },
+      "execution/ledger.json": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124-collection-envelope/execution/ledger.json",
+        "sha256": "8c6c479eea161a0d3ec64fe85ad98802772c4d6981b428b30da6317925d47440"
+      },
+      "execution/result.json": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124-collection-envelope/execution/result.json",
+        "sha256": "14d09a200775cc913ee906e9a9cbe7ba46e2a5359e149a9fe0b855519a9c09a0"
+      },
+      "operation-review.json": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124-collection-envelope/operation-review.json",
+        "sha256": "da8f04458dfa246cda692ce0a8691a1f973e69227fa3ad476afb078929985918"
+      },
+      "receipts": [
+        {
+          "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124-collection-envelope/execution/receipt-rcpt_4d2a677ce9634641852eedeb64359c11.json",
+          "sha256": "ebd8b4f83b17c103e1ef9b206cc56dce33e278789d3bf16cd2023e5ca1a33b9b"
+        }
+      ],
+      "role": "sanitized-collection-diagnostic"
+    },
+    "c13-pyserde-657-pair-20261124-diagnostic": {
+      "diagnostic": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124-diagnostic/execution/diagnostic.json",
+        "sha256": "690a77d7479a09bbbeee2fe89d250e38ef5831ad9aa3fadd5c08368cd97c5ee7"
+      },
+      "execution/ledger.json": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124-diagnostic/execution/ledger.json",
+        "sha256": "271009f0ea3a4197abadd94b56020c4ac2904e5a5a60bc0575ee7edd013e77c3"
+      },
+      "execution/result.json": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124-diagnostic/execution/result.json",
+        "sha256": "7257905c70cc73c967f1439b66188edbeeeab98bd61fc8cf3f6d12fb09ae826e"
+      },
+      "operation-review.json": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124-diagnostic/operation-review.json",
+        "sha256": "d9533e642a6667a683d63ed75d97d6da6e140e2ed548bd617edeafb282bc513f"
+      },
+      "receipts": [
+        {
+          "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124-diagnostic/execution/receipt-rcpt_0864b0e38d8c45db832741484d9f5aee.json",
+          "sha256": "f2e0752a7fa8e29c3ff41483a75ea5733091c8ec6b34ee7f44ebf533c9f3d85a"
+        }
+      ],
+      "role": "native-status-diagnostic"
+    },
+    "c13-pyserde-657-pair-20261124-msgpack": {
+      "diagnostic": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124-msgpack/execution/diagnostic.json",
+        "sha256": "3df8556c110478ebeea1650ac807405c4e241d19f9b6c62c82811f48ed9cbe6e"
+      },
+      "execution/ledger.json": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124-msgpack/execution/ledger.json",
+        "sha256": "c90989c5d073c28c0272b50c21ce06fc7c93350aa6faba9188319dc66361ae14"
+      },
+      "execution/result.json": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124-msgpack/execution/result.json",
+        "sha256": "5f2ef713ccc355abcd58b9d5b58b5e08c29026130b5f6a8feadd5981101fe634"
+      },
+      "operation-review.json": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124-msgpack/operation-review.json",
+        "sha256": "0181f911ef225053ecdb682616969eabc6dd79e8a03814c478aa04a74aca06c6"
+      },
+      "receipts": [
+        {
+          "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124-msgpack/execution/receipt-rcpt_4fc35ada37d44a0d8e15ddb2456706a3.json",
+          "sha256": "99ce2a61fde594f7717e2cc27284e763f583b513a78277bd5f45614347fe26e2"
+        }
+      ],
+      "role": "reconciled-reference"
+    },
+    "c13-pyserde-657-pair-20261124-msgpack-original": {
+      "diagnostic": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124-msgpack-original/execution/diagnostic.json",
+        "sha256": "1f6d84b9000314eb50f80cd0e0fe86320473ed0ddd8e4c4364b6c7d287cd56ae"
+      },
+      "execution/ledger.json": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124-msgpack-original/execution/ledger.json",
+        "sha256": "2d1f819b99fe11e2ff9b9fb66fe5659ecb6cbe00b0f796fa4393b759a4357ca4"
+      },
+      "execution/result.json": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124-msgpack-original/execution/result.json",
+        "sha256": "0c9e8e6b8af625f6a4d4f0379106f0f803fccbef06355bd7cea8b826f64e97fd"
+      },
+      "operation-review.json": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124-msgpack-original/operation-review.json",
+        "sha256": "43b0234e66e22caf1dd82b7b3443dc1aa0c8af4e989a86000d25db72906b298a"
+      },
+      "receipts": [
+        {
+          "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124-msgpack-original/execution/receipt-rcpt_493c0fd1d052469f80d8ae0587d5836a.json",
+          "sha256": "2c2d1a9d0f34319be29da47f7d5fb82034fed06652860e5b2e87f81461dbae49"
+        }
+      ],
+      "role": "verified-unstarted-control"
+    },
+    "c13-pyserde-657-pair-20261124-sanitized-collection": {
+      "diagnostic": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124-sanitized-collection/execution/diagnostic.json",
+        "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+      },
+      "execution/ledger.json": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124-sanitized-collection/execution/ledger.json",
+        "sha256": "2cb1f85bcaa7a770b2898297457841a95390d6b55e779a25e3d83e78996df27c"
+      },
+      "execution/result.json": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124-sanitized-collection/execution/result.json",
+        "sha256": "149928e7d953252399863efff9d88c027ed0b8e7baa3ae6c8e4f82ae68df56e9"
+      },
+      "operation-review.json": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124-sanitized-collection/operation-review.json",
+        "sha256": "2f4e86299902780f806b0649851762af0386f74ed97f13d7f0395baa3e267522"
+      },
+      "receipts": [
+        {
+          "path": ".aeep/c13-cohort-runtime-20261124/c13-pyserde-657-pair-20261124-sanitized-collection/execution/receipt-rcpt_612d5eef80854660a19ba2edbddca346.json",
+          "sha256": "38566bf65d03183b32ba155856543b014b4d2c02e90d77e830aeba45602732fb"
+        }
+      ],
+      "role": "rejected-diagnostic-protocol"
+    }
+  },
+  "waza_excluded": true
+}

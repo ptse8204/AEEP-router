@@ -1,5 +1,18 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. Pyserde protected pair and VAREX grading verified.**
+The [operator handoff](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#cohort-batch-results)
+records Pyserde issue 657 at 1/1 for the repair and 0/1 for the
+original, retaining all 12 tests. Both Pyserde cases share a source
+family. The software pool now has 64 reproduced cases across 41
+repositories against 246 needed. C++ linter hooks issue 142 remains
+ungraded after its reference failed a preservation test. Two VAREX
+forms reached protected grading through staged ordinary CLI inputs.
+Both exact references scored 12/12. The 131 remaining
+multiple-collection prospects need source grouping, case eligibility
+and protected grading. No cases were assigned to a formal stage.
+Comparisons stay paused and Waza stays excluded.
+
 **November 24. PyGLS protected grading and VAREX schema intake verified.**
 The [operator handoff](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#cohort-batch-results)
 records PyGLS at 1/1 for the reference and 0/1 for the original-source

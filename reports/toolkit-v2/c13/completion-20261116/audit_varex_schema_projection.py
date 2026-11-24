@@ -64,14 +64,15 @@ class BoundRedirect(HTTPRedirectHandler):
 
 
 class RangeStore:
-    def __init__(self, review, execute):
+    def __init__(self, review, execute, *, work=WORK):
         self.review = review
         self.execute = execute
+        self.work = work
         self.transfers = []
         self.requested = 0
         self.expected = {}
         if not execute:
-            records = json.loads((WORK / "range-receipts.json").read_text())
+            records = json.loads((self.work / "range-receipts.json").read_text())
             self.expected = {(r["object"], r["offset"], r["size"]): r for r in records}
             if len(self.expected) != len(records):
                 raise ValueError("range receipt is duplicated")
@@ -84,7 +85,7 @@ class RangeStore:
         if self.requested > self.review["max_bytes"] or len(self.transfers) >= MAX_REQUESTS:
             raise ValueError("bounded range acquisition exceeded its review")
         obj = row["lfs"]["oid"]
-        path = WORK / "ranges" / f"{obj[:16]}-{start}-{size}.bin"
+        path = self.work / "ranges" / f"{obj[:16]}-{start}-{size}.bin"
         if self.execute:
             url = f"https://huggingface.co/datasets/ibm-research/VAREX/resolve/{REV}/{row['path']}"
             request = Request(url, headers={"Range": f"bytes={start}-{end - 1}"})
@@ -150,7 +151,7 @@ class ColumnView(io.RawIOBase):
         raise OSError("Parquet attempted to read an unreviewed column")
 
 
-def project(row, store):
+def project(row, store, columns=COLUMNS):
     total = row["size"]
     tail = store.read(row, total - 8, 8)
     size = int.from_bytes(tail[:4], "little")
@@ -166,11 +167,11 @@ def project(row, store):
         selected = {
             col.path_in_schema: col
             for j in range(group.num_columns)
-            if (col := group.column(j)).path_in_schema in COLUMNS
+            if (col := group.column(j)).path_in_schema in columns
         }
-        if set(selected) != set(COLUMNS):
+        if set(selected) != set(columns):
             raise ValueError("published Parquet columns differ")
-        for name in COLUMNS:
+        for name in columns:
             col = selected[name]
             offset = col.dictionary_page_offset or col.data_page_offset
             count = col.total_compressed_size
@@ -184,8 +185,8 @@ def project(row, store):
     ranges = [(start, store.read(row, start, size)) for start, size in sorted(bounds)]
     with ColumnView(total, ranges) as view:
         reader = parquet.ParquetFile(view, metadata=metadata, pre_buffer=False, buffer_size=0)
-        table = reader.read(columns=list(COLUMNS), use_threads=False)
-    if table.num_rows != metadata.num_rows or set(table.column_names) != set(COLUMNS):
+        table = reader.read(columns=list(columns), use_threads=False)
+    if table.num_rows != metadata.num_rows or set(table.column_names) != set(columns):
         raise ValueError("projected Parquet rows differ")
     yield from table.to_pylist()
 

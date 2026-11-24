@@ -1,0 +1,227 @@
+{
+  "benchmark_pack": "2bf9991849fd9f59346be7cba70da04d33249c62b670ef2cae1c4b604bf1b03d",
+  "cash_usd": 0,
+  "dependency_projection_sha256": "0901a6cd7ec47142134ca171787e6ab58b365f94d3564db44283789d33b96423",
+  "formal_assignments": 0,
+  "grades": {
+    "GSA_3418": {
+      "malformed": {
+        "detail": "invalid_submission",
+        "kind": "callback",
+        "quality_score": 0.0,
+        "trust": "verified",
+        "valid": false
+      },
+      "missing_output": {
+        "detail": "invalid_submission",
+        "kind": "callback",
+        "quality_score": 0.0,
+        "trust": "verified",
+        "valid": false
+      },
+      "missing_row": {
+        "detail": "inexact_extraction",
+        "kind": "callback",
+        "quality_score": 0.9166666666666666,
+        "trust": "verified",
+        "valid": false
+      },
+      "reference": {
+        "detail": "",
+        "kind": "callback",
+        "quality_score": 1.0,
+        "trust": "verified",
+        "valid": true
+      },
+      "reordered": {
+        "detail": "inexact_extraction",
+        "kind": "callback",
+        "quality_score": 0.9166666666666666,
+        "trust": "verified",
+        "valid": false
+      }
+    },
+    "HUD-11706": {
+      "malformed": {
+        "detail": "invalid_submission",
+        "kind": "callback",
+        "quality_score": 0.0,
+        "trust": "verified",
+        "valid": false
+      },
+      "missing_output": {
+        "detail": "invalid_submission",
+        "kind": "callback",
+        "quality_score": 0.0,
+        "trust": "verified",
+        "valid": false
+      },
+      "missing_row": {
+        "detail": "inexact_extraction",
+        "kind": "callback",
+        "quality_score": 0.9166666666666666,
+        "trust": "verified",
+        "valid": false
+      },
+      "reference": {
+        "detail": "",
+        "kind": "callback",
+        "quality_score": 1.0,
+        "trust": "verified",
+        "valid": true
+      },
+      "reordered": {
+        "detail": "",
+        "kind": "callback",
+        "quality_score": 1.0,
+        "trust": "verified",
+        "valid": true
+      }
+    }
+  },
+  "image": "sha256:9e3b3712bae59607d06a162f275f0afbd916a70bcb91b544e9f350b6a6712fd7",
+  "inputs": {
+    "varex-gsa-3418": "00e7d66066be68294d4445b1f88c8e3cd36643fd960ef45e66d914900e629a60",
+    "varex-hud-11706": "9c397eb87c9b0f2d80aa7397dc666504a78bec5342f522ac4850206b31a56bb0"
+  },
+  "layers": [
+    "sha256:8227a1264c7ff2f8bd125b585e62c1cec77dd2099c985c33e08d34292d06144f",
+    "sha256:8a6da6eb1b282a3bab8da6e094b7259bf3f21335dd8e803b4dcede1afecc1716",
+    "sha256:d81ccc5a95666f072f57d6526d725c3e6c25eda2ee84b88e43fb8f7db5f47411",
+    "sha256:8fd7bcc5bf0ec20486b3ee0761eef560a3298d92e46ce7aed301a38b532ce945",
+    "sha256:2dbbecc823b874a53ae196efbddbf171afddd94650d9c21f3dadd3d43466a596"
+  ],
+  "ledger": {
+    "operations": [
+      {
+        "accounting": null,
+        "elapsed_seconds": 2.4352694579865783,
+        "operation_id": "c13-varex-calibration-20261124:protected-grading",
+        "plan_id": "c13-varex-calibration-20261124",
+        "reserved": {
+          "max_cash_usd": "0",
+          "max_elapsed_seconds": 100.0,
+          "max_model_turns": 0,
+          "max_operations": 1
+        },
+        "resources": {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 0,
+          "context_tokens": 0,
+          "cpu_ms": 0.0,
+          "gpu_ms": 0.0,
+          "input_tokens": 0,
+          "latency_ms": 2394.444042001851,
+          "memory_mb_seconds": 0.0,
+          "monetary_usd": 0.0,
+          "network_bytes": 0,
+          "output_tokens": 0,
+          "peak_memory_mb": 0.0,
+          "reasoning_output_tokens": 0,
+          "subscription_units": 0.0
+        },
+        "stage": "protected_varex_calibration",
+        "started_at": "2026-11-24T19:04:13.961345Z"
+      }
+    ],
+    "plan_id": "c13-varex-calibration-20261124"
+  },
+  "metric": "exact_match_normalized",
+  "model_turns": 0,
+  "observation": {
+    "scores": {
+      "GSA_3418": {
+        "malformed": {
+          "docs": 1,
+          "exact_match_normalized": 0.0,
+          "fields": 12,
+          "perfect_docs": 0
+        },
+        "missing_output": {
+          "docs": 1,
+          "exact_match_normalized": 0.0,
+          "fields": 12,
+          "perfect_docs": 0
+        },
+        "missing_row": {
+          "docs": 1,
+          "exact_match_normalized": 0.9166666666666666,
+          "fields": 12,
+          "perfect_docs": 0
+        },
+        "reference": {
+          "docs": 1,
+          "exact_match_normalized": 1.0,
+          "fields": 12,
+          "perfect_docs": 1
+        },
+        "reordered": {
+          "docs": 1,
+          "exact_match_normalized": 0.9166666666666666,
+          "fields": 12,
+          "perfect_docs": 0
+        }
+      },
+      "HUD-11706": {
+        "malformed": {
+          "docs": 1,
+          "exact_match_normalized": 0.0,
+          "fields": 12,
+          "perfect_docs": 0
+        },
+        "missing_output": {
+          "docs": 1,
+          "exact_match_normalized": 0.0,
+          "fields": 12,
+          "perfect_docs": 0
+        },
+        "missing_row": {
+          "docs": 1,
+          "exact_match_normalized": 0.9166666666666666,
+          "fields": 12,
+          "perfect_docs": 0
+        },
+        "reference": {
+          "docs": 1,
+          "exact_match_normalized": 1.0,
+          "fields": 12,
+          "perfect_docs": 1
+        },
+        "reordered": {
+          "docs": 1,
+          "exact_match_normalized": 1.0,
+          "fields": 12,
+          "perfect_docs": 1
+        }
+      }
+    },
+    "versions": {
+      "numpy": "2.4.3",
+      "rapidfuzz": "3.14.3",
+      "scipy": "1.17.1"
+    }
+  },
+  "operator_note": "The grader settled. The original expectation failed for GSA's ordered string array.",
+  "protected_files": {
+    "field_exclusions.json": "b07e545709b337176e50d7a6b3460cabce62029552b5d41c5881ff7fea04fdd9",
+    "guest.py": "7b53d65d52a24b7801faad4a6a210a51aeb411c7e180551c0f78ca2444ca761d",
+    "score.py": "f878742c621a43a8d4bd5f8d0815b66afec46b84abffe6ad6c79d37fde7c9379",
+    "varex-gsa-3418-reference.json": "ffd54a1fc3b3864d12a7c7f6478c939166fbff5c8dbafbde8f43131d8aa58949",
+    "varex-hud-11706-reference.json": "25f6df2383046202787401211718acbbcebcd847d552bfae880ad4b28c568665"
+  },
+  "receipt_id": "rcpt_8cefcfc16e7d4171a2cb53b350dd0ccb",
+  "replayed_container_calls": 0,
+  "review_sha256": "872333dd949c7804d7aad6691f6fcf5917ab0b50f61f800b1167ee01ae9c4d22",
+  "schema_version": "aeep.c13.varex-native-calibration-readback.v1",
+  "source": "2896e52509b33a5628f8d5833a9b6111ebff9f0ed374faa08da539a57753c896",
+  "staged_cases": {
+    "varex-gsa-3418": {
+      "archive_sha256": "6187fe31b697565c248eb2eec29a4bae572f1c6088c16fc133e7693e965f8d24",
+      "pdf_sha256": "2874b1042bd883def64eb31e9fb62fd2b681713fa664d7e8e75024fe35aa0bfd"
+    },
+    "varex-hud-11706": {
+      "archive_sha256": "b8483f1f766fbeb8a589180031eb0cb7eb135c5dd06e0039e7efe1b8808535f5",
+      "pdf_sha256": "e5bce6c733c5a9cc3c400cc7a9c8e6d73afec4d4b2dbc5ef1a1495582910dcbb"
+    }
+  }
+}

@@ -265,6 +265,10 @@ def verify_probe(reply, payload, expected, code):
     )
 
 
+def scorer_reply(reply):
+    return reply
+
+
 async def simulate_launches(spec, env, cases):
     executor = ContainerExecutor(env)
     launches = []
@@ -284,10 +288,10 @@ async def simulate_launches(spec, env, cases):
                 ):
                     raise ValueError("protected archive changed")
                 argv, owned = executor.command(context(spec, identity, payload))
-                root = FROZEN / "src"
+                reviewed_mounts = (str(FROZEN / "src"), *env.read_only_roots)
                 if (
                     {arg for arg in argv if arg.startswith("type=bind,")}
-                    != {f"type=bind,src={root},dst={root},readonly"}
+                    != {f"type=bind,src={root},dst={root},readonly" for root in reviewed_mounts}
                     or argv[argv.index("--network") + 1] != "none"
                     or argv[argv.index("--user") + 1] != "65534:65534"
                     or not {
@@ -455,11 +459,11 @@ async def run(exact):
                         valid = raw.status.value == "success" and verify_probe(
                             raw.output, payload, expected, code
                         )
-                        response = raw.output if valid else None
+                        response = scorer_reply(raw.output) if valid else None
                         metadata = {"operation_review_sha256": exact, "container_absent": True}
                         if response is not None:
                             metadata.update(
-                                protected_observation_sha256=content_digest(response),
+                                protected_observation_sha256=content_digest(raw.output),
                                 status_counts=dict(Counter(response["statuses"].values())),
                                 expected_status_count=len(expected),
                             )

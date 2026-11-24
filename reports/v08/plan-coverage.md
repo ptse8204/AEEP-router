@@ -1,5 +1,13 @@
 # 0.8 plan coverage and remaining work
 
+The [latest C13 cohort checks](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#cohort-batch-results)
+verified a Pyserde repair and original-source pair with all 12 tests.
+The software pool has 64 reproduced cases across 41 repositories.
+VAREX staged two document cases through the ordinary CLI and produced
+native protected scores for both. The 131 remaining multiple-collection
+prospects still need source-family and grading review. The formal
+cohort, comparative usefulness and production adoption gates remain open.
+
 The [C13 cohort batch](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#cohort-batch-results)
 verified six protected software pairs, reconciled three retained pairs
 and graded four supplemental publisher documents. It also identified 133
