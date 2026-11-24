@@ -1,5 +1,10 @@
 # 0.8 plan coverage and remaining work
 
+The [VAREX calibration lineage check](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#varex-protected-grading)
+verified that the 246 staged PDFs have no additional matches against
+either calibration PDF under the corrected form-number and text checks.
+The pack stays local pending final lineage, asset use and assignments.
+
 The [Towncrier contract audit](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#towncrier-configuration-fallback)
 verified the repaired configuration fallback and its expected failures
 on the original. The software pool now has 69 reproduced cases across 44

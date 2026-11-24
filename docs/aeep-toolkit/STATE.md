@@ -1,5 +1,12 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. Document calibration lineage checked.**
+The [VAREX operator handoff](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#varex-protected-grading)
+records a corrected form-number check and all-page comparison against
+both calibration PDFs. Neither check held any of the 246 staged cases.
+Both calibration cases stay out of the staged pack. Case-specific asset
+use and final study assignments remain open. Comparisons stay paused.
+
 **November 24. Towncrier configuration fallback verified.**
 The [protected grading result](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#towncrier-configuration-fallback)
 records all 17 checks passing for the repair. The original scored 0/1

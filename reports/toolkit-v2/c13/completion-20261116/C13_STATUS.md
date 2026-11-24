@@ -376,6 +376,12 @@ and California form groups still fit without splitting. Text similarity
 alone cannot establish independent source lineage.
 [Full-page lineage screen](varex-full-page-lineage-20261124.json)
 
+The earlier form-number filter used a literal `d` in place of a digit.
+The corrected audit checked all 246 staged PDFs for numbered variants
+and compared them with both earlier calibration PDFs. It found no
+additional relatives to hold. Both calibration cases stay outside the
+staged pack. [Calibration lineage check](varex-calibration-lineage-20261124.json)
+
 Live comparisons remain paused. Candidate benefit and selection benefit
 each need a separate result on frozen eligible tasks. Finishing the
 stack or approving more runs cannot fill either workload gap.
