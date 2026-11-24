@@ -1,0 +1,109 @@
+{
+  "case": "Aunsiels__pyformlang-35-aeep-contract-audit",
+  "cash_usd": 0,
+  "comparisons_paused": true,
+  "family": "contract-audit",
+  "formal_case_adopted": false,
+  "intake": {
+    "path": ".aeep/c13-cohort-runtime-20261124/c13-parser-docs-first-sources-20261124/intake/index.json",
+    "sha256": "ef2d1648ce8de16958631c24968acc85848ece47e82b1a1f6bffe0125b8fdfc5"
+  },
+  "ledger": {
+    "path": ".aeep/c13-cohort-runtime-20261124/c13-pyformlang-35-licensed-runtime-20261124/execution/ledger.json",
+    "sha256": "a0e6c9ca682798554d258a0e857829ecbe63a0ba36ca5f9bdce1f211b96f49fb"
+  },
+  "models": 0,
+  "repository": "aunsiels/pyformlang",
+  "result": {
+    "path": ".aeep/c13-cohort-runtime-20261124/c13-pyformlang-35-licensed-runtime-20261124/execution/result.json",
+    "sha256": "1a57160758109b71a0e7ff9d8a265d7d0062649da7c7a0900d3b5e9e5ed33751"
+  },
+  "review": {
+    "path": ".aeep/c13-cohort-runtime-20261124/c13-pyformlang-35-licensed-runtime-20261124/operation-review-frozen-notices.json",
+    "sha256": "a77dc52d42ca5dd7bd86ba8d83c42b0831698e7b5e77b9a9d97ebac6fa183c00"
+  },
+  "revision": "04d769ab7da44a7ae80eec49661c0b03fdcd0bac",
+  "roles": {
+    "original": {
+      "elapsed_seconds": 2.0397952920175157,
+      "failed_test_ids": [
+        "pyformlang/cfg/tests/test_aeep_preservation.py::test_snapshot_preserved",
+        "pyformlang/cfg/tests/test_cfg.py::TestCFG::test_concatenation_variable_names"
+      ],
+      "failure_sites": [
+        {
+          "category": "AssertionError",
+          "file": "pyformlang/cfg/tests/test_aeep_preservation.py",
+          "line": 7,
+          "phase": "call",
+          "test": "pyformlang/cfg/tests/test_aeep_preservation.py::test_snapshot_preserved"
+        },
+        {
+          "category": "AssertionError",
+          "file": "pyformlang/cfg/tests/test_cfg.py",
+          "line": 287,
+          "phase": "call",
+          "test": "pyformlang/cfg/tests/test_cfg.py::TestCFG::test_concatenation_variable_names"
+        }
+      ],
+      "observation": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyformlang-35-licensed-runtime-20261124/execution/observation-original.json",
+        "sha256": "27d96029b68d1f48e0b5e9bc53e2fcbed17d5239e6af1392476204b907bee6c6"
+      },
+      "receipt": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyformlang-35-licensed-runtime-20261124/execution/receipt-rcpt_7fe37980625147bdb4071df7f122d2bd.json",
+        "sha256": "ecc0399c85de0976cfc5ec50875fe5525c61da5f007725c668c4010264b2a0b1"
+      },
+      "score": 0,
+      "test_counts": {
+        "FAILED": 2,
+        "PASSED": 46
+      }
+    },
+    "reference": {
+      "elapsed_seconds": 2.5113774579949677,
+      "failed_test_ids": [],
+      "failure_sites": [],
+      "observation": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyformlang-35-licensed-runtime-20261124/execution/observation-reference.json",
+        "sha256": "be9293e62e75b153cae184f27e63bc8fbcf98a170f3347112a15da83239e6262"
+      },
+      "receipt": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pyformlang-35-licensed-runtime-20261124/execution/receipt-rcpt_cc02a310eeb54a3ba7179170149f00e9.json",
+        "sha256": "1ee7c6033f06ad12641352cd97b92155e50f56698c7f00dbc2b85c7225b5864c"
+      },
+      "score": 1,
+      "test_counts": {
+        "PASSED": 48
+      }
+    }
+  },
+  "runtime": {
+    "networkx": "3.4.2",
+    "numpy": "2.2.6",
+    "pydot": "4.0.1",
+    "pyparsing": "3.3.2",
+    "python": "3.13.15"
+  },
+  "runtime_review_notes": {
+    "adaptation": "The two inspected Pydot wheels lacked their text notices. Use version 4.0.1 with the two exact release-source notices in the import projection. All seven Python modules match that source byte for byte. The final review fixes archive entry timestamps before dispatch.",
+    "first_wheel_acquisition": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-pyformlang-35-20261124/acquisition-review.json",
+      "sha256": "f9977b9a56d59fd49c8c9025a6352a70966a185b540cabd66f24d96bd91f79dd"
+    },
+    "previous_review_unstarted": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-pyformlang-35-licensed-runtime-20261124/operation-review.json",
+      "sha256": "6d8addc44b917d9b5d9b82d600fc065d025292ca0759a6ecf6a0d40d540bb4f6"
+    },
+    "source_notice_review": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-pyformlang-35-licensed-runtime-20261124/source-notice-review.json",
+      "sha256": "5690ed6bd326dd25896d2272a1cc1ebd9d5006df994b8ca918f38e4bc8c4bbac"
+    },
+    "wheel_acquisition": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-pyformlang-35-licensed-runtime-20261124/acquisition-review.json",
+      "sha256": "20edf26cab61818665ae9ffc7eb5818f23f6dfb1f742d1144128ca979d76616d"
+    }
+  },
+  "schema_version": "aeep.c13.protected-case-addition.v1",
+  "waza_excluded": true
+}

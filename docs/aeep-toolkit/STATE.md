@@ -1,5 +1,18 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. Parser and documentation graders verified.**
+The [C13 batch report](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#parser-and-documentation-batch)
+records two verified reference and original pairs. Pyformlang passed 48
+checks on the repaired source, and pdoc passed 31. Both original-source
+controls reproduced their expected failures. The software pool now has
+75 cases across 49 repositories, leaving at least 171 more cases to
+reproduce. The grouped VAREX local-use proposal covers 246 PDFs and
+1,476 asset hashes. Its text screen found one reference to payment
+approval, which was reviewed in context. No rights approvals, formal
+assignments or comparison turns were recorded. Next, continue new
+software batches and obtain the single local-use decision for VAREX
+before registering the proposed records. Waza stays excluded.
+
 **November 24. Nested Pandas reproduced and VirtualiZarr held.**
 The [C13 scientific Python handoff](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#next-scientific-python-cases)
 records the Nested Pandas reference at 1/1 and original at 0/1, with

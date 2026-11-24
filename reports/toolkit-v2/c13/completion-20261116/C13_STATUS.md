@@ -361,21 +361,53 @@ call `xarray.tutorial.open_dataset`. The two required data blobs,
 `air_temperature.nc` and `ROMS_example.nc`, now have publisher tree
 pins and byte counts. Their use review and offline cache setup come
 before a protected replay. No tutorial dataset was downloaded.
-[Protected VirtualiZarr result and diagnosis](protected-virtualizarr-20261124.json)
+NOAA documents the NCEP/NCAR data-use terms. The Xarray tutorial
+identifies the ROMS subset, and the reviewed sources lack a use record
+for those exact bytes. VirtualiZarr stays out of the pool while that
+fixture is unresolved.
+
+[VirtualiZarr fixture review](virtualizarr-fixture-use-review-20261124.json)
+· [Protected VirtualiZarr result and diagnosis](protected-virtualizarr-20261124.json)
 · [Xarray tutorial cache behavior](https://docs.xarray.dev/en/v2024.11.0/generated/xarray.tutorial.open_dataset.html)
+
+### Parser and documentation batch
+
+The protected grader verified two more software cases on the same
+offline Linux ARM64 carrier.
+
+| Case | Repaired source | Original source |
+| --- | --- | --- |
+| Pyformlang grammar concatenation | **1/1**, all 48 checks passed | **0/1**, 46 passed. The original reproduced the variable-naming bug and failed the snapshot guard. |
+| pdoc table of contents | **1/1**, all 31 checks passed | **0/1**, 29 passed. Mixed Markdown headings produced the wrong table of contents, and the snapshot guard rejected it. |
+
+Pyformlang used the Pydot 4.0.1 wheel with both notices from the same
+published release. All seven wheel modules matched the source
+distribution. The four grader calls settled in 7.69 seconds. They used
+zero model turns and zero cash.
+
+The published pdoc records truncate five autolink test names. The grader
+ran all seven original parameter cases, including all three beginning
+with the ambiguous `See` prefix. It kept the original test code and
+binary grading. Exstruct and spec2nexus stopped during source acquisition
+with a retained `ValueError` and no archive or grade.
+
+[Pyformlang protected grades](protected-pyformlang-20261124.json)
+· [pdoc protected grades](protected-pdoc-20261124.json)
+· [Batch source and license evidence](parser-documentation-source-intake-20261124.json)
+· [Pydot 4.0.1 release](https://pypi.org/project/pydot/4.0.1/)
 
 ## What still blocks formal comparisons
 
 | Workload | Remaining gap |
 | --- | --- |
-| Software | The current inventory reconciles 73 reproduced cases, 47 repository families and 148 distinct protected receipts. The two holdouts and shared early stages need at least 246 distinct cases, leaving a minimum gap of 173. Contract audits have the largest holdout gap, at 51 cases before early-stage needs. |
+| Software | The current inventory reconciles 75 reproduced cases, 49 repository families and 152 distinct protected receipts. The two holdouts and shared early stages need at least 246 distinct cases, leaving a minimum gap of 171. Contract audits have the largest holdout gap, at 49 cases before early-stage needs. |
 | Document/data | The 246 VAREX archives now have a verified provisional allocation. It keeps the known related forms in one stage and excludes both calibration cases. Final source-lineage review, asset-use decisions and study assignment remain open. The 18 ExtractBench annual disclosures remain held on source and asset-use grounds. |
 
 The software inventory records source revisions, task families and
 receipt IDs for each reproduced case. Its audit rejects duplicate
 cases, reused receipts and development-exposed repositories. Keep
 all revisions from the same repository in one study stage.
-[Current software inventory](software-inventory-with-nested-pandas-20261124.json)
+[Current software inventory](software-inventory-with-parser-audits-20261124.json)
 
 VAREX now has 133 multi-collection prospects with distinct schema hashes.
 The audit matched all 1,777 schema IDs to exact publisher PDF paths. It
@@ -505,6 +537,21 @@ and a frozen study design still come before assignment.
 | Selection holdout | 52 | 53 | 105 |
 
 [Allocation verification](varex-packing-witness-20261124.json)
+
+The document notice screen checked all 246 pinned PDFs. It found one
+phrase mentioning written consent. In context, HUD requires that consent
+to release a construction payment. The phrase concerns the payment
+process rather than reuse of the form.
+
+The grouped proposal covers a single operator decision about local
+asset-use records for the 246 cases and their 1,476 verified assets.
+The proposed records retain the publisher's license notice. The review
+grants no trial execution or provider transfer. Formal assignment still
+requires a frozen study and final lineage verification.
+
+[Document notice screen](varex-document-notice-screen-20261124.json)
+· [Grouped local-use review](varex-local-use-review-20261124.json)
+· [CDLA Permissive 2.0 terms](https://cdla.dev/permissive-2-0/)
 
 Live comparisons remain paused. Candidate benefit and selection benefit
 each need a separate result on frozen eligible tasks. Finishing the

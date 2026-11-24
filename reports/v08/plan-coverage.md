@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 parser and documentation batch](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#parser-and-documentation-batch)
+adds verified Pyformlang and pdoc pairs. The 75-case software pool needs
+at least 171 more cases. The 246-document VAREX pack has a grouped
+local-use proposal and awaits one operator decision before registration.
+Formal assignments, comparative evidence and release remain open.
+Comparisons are paused and Waza is excluded.
+
 The [scientific Python grade and diagnosis](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#next-scientific-python-cases)
 adds Nested Pandas to the reproduced inventory. There are now
 73 cases across 47 repositories, with at least 173 more needed.

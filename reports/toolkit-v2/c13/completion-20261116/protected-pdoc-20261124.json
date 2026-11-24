@@ -1,0 +1,84 @@
+{
+  "case": "mitmproxy__pdoc-806-aeep-contract-audit",
+  "cash_usd": 0,
+  "comparisons_paused": true,
+  "family": "contract-audit",
+  "formal_case_adopted": false,
+  "intake": {
+    "path": ".aeep/c13-cohort-runtime-20261124/c13-parser-docs-first-sources-20261124/intake/index.json",
+    "sha256": "ef2d1648ce8de16958631c24968acc85848ece47e82b1a1f6bffe0125b8fdfc5"
+  },
+  "ledger": {
+    "path": ".aeep/c13-cohort-runtime-20261124/c13-pdoc-806-20261124/pdoc/execution/ledger.json",
+    "sha256": "8b081392a8bef05ddcbebfceef956acdb04807c928107044ef470dcad91a4f53"
+  },
+  "models": 0,
+  "native_autolink_ids": [
+    "test/test_render_helpers.py::test_markdown_autolink[https://example.com/-<p><a href=\"https://example.com/\">https://example.com/</a></p>\\n]",
+    "test/test_render_helpers.py::test_markdown_autolink[<https://example.com>-<p><a href=\"https://example.com\">https://example.com</a></p>\\n]",
+    "test/test_render_helpers.py::test_markdown_autolink[<a href=\"https://example.com\">link</a>-<p><a href=\"https://example.com\">link</a></p>\\n]",
+    "test/test_render_helpers.py::test_markdown_autolink[[link](https://example.com)-<p><a href=\"https://example.com\">link</a></p>\\n]",
+    "test/test_render_helpers.py::test_markdown_autolink[See the [Python home page ](https://www.python.org) for info.-<p>See the <a href=\"https://www.python.org\">Python home page </a> for info.</p>\\n]",
+    "test/test_render_helpers.py::test_markdown_autolink[See https://www.python.org.-<p>See <a href=\"https://www.python.org\">https://www.python.org</a>.</p>\\n]",
+    "test/test_render_helpers.py::test_markdown_autolink[See **https://www.python.org**.-<p>See <strong>https://www.python.org</strong>.</p>\\n]"
+  ],
+  "repository": "mitmproxy/pdoc",
+  "result": {
+    "path": ".aeep/c13-cohort-runtime-20261124/c13-pdoc-806-20261124/pdoc/execution/result.json",
+    "sha256": "2919be994875ca8783d631f35ccdcb03b8e7f7fa49d38cebf4da217e3f611759"
+  },
+  "review": {
+    "path": ".aeep/c13-cohort-runtime-20261124/c13-pdoc-806-20261124/pdoc/operation-review.json",
+    "sha256": "937608d728b5afab7b81346b4059e83c65846cbec56ced13b2d2b00388586740"
+  },
+  "revision": "ea2b69a4162226b07f68cd25d92d4d92dbbafaf8",
+  "roles": {
+    "original": {
+      "elapsed_seconds": 1.5024417079985142,
+      "failed_test_ids": [
+        "test/test_aeep_preservation.py::test_snapshot_preserved",
+        "test/test_render_helpers.py::test_mixed_toc"
+      ],
+      "observation": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pdoc-806-20261124/pdoc/execution/observation-original.json",
+        "sha256": "85c29b40ad2ec8cacad13d8e862ada3864f01442d8afb7192120801581ff7827"
+      },
+      "receipt": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pdoc-806-20261124/pdoc/execution/receipt-rcpt_e9d0d99557dc4e559486e893d84c083a.json",
+        "sha256": "d5f63f41f3bfdd10292a8eac040263ce4f649d0ddbd1f735bef47f1ff90a5089"
+      },
+      "score": 0,
+      "test_counts": {
+        "FAILED": 2,
+        "PASSED": 29
+      }
+    },
+    "reference": {
+      "elapsed_seconds": 1.6324562919908203,
+      "failed_test_ids": [],
+      "observation": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pdoc-806-20261124/pdoc/execution/observation-reference.json",
+        "sha256": "70e5141a7554c253b5c1a21dfab5350bc542d516314f6d0e076f45376b135d7a"
+      },
+      "receipt": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-pdoc-806-20261124/pdoc/execution/receipt-rcpt_35c6781fe2d3438baea327ef08a9174c.json",
+        "sha256": "59c590ca2200ab06a3c0658792a7ab6cd4168cb7b72a84d1eb2ec6698a281cef"
+      },
+      "score": 1,
+      "test_counts": {
+        "PASSED": 31
+      }
+    }
+  },
+  "runtime": {
+    "jinja2": "3.1.6",
+    "markupsafe": "3.0.3",
+    "pygments": "2.19.2",
+    "python": "3.13.15"
+  },
+  "runtime_review_notes": {
+    "adaptation": "The published records truncate five parametrized selectors. Grade all seven original autolink examples with exact native identities, including every match for the ambiguous prefix. Protected test bytes and score semantics are unchanged."
+  },
+  "schema_version": "aeep.c13.protected-case-addition.v1",
+  "waza_excluded": true
+}
