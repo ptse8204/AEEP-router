@@ -1,0 +1,69 @@
+{
+  "case": "agronholm__anyio-975-aeep-contract-audit",
+  "cash_usd": 0,
+  "comparisons_paused": true,
+  "elapsed_seconds": 16.194871541985776,
+  "failure_counts": {
+    "asyncio": 1,
+    "trio": 40
+  },
+  "grade": null,
+  "model_turns": 0,
+  "native_pytest_exit": 1,
+  "native_status_counts": {
+    "FAILED": 41,
+    "PASSED": 345,
+    "SKIPPED": 4,
+    "XFAIL": 4
+  },
+  "new_settled_operations": 1,
+  "original_dispatched": false,
+  "previous_ledger": {
+    "path": ".aeep/c13-cohort-runtime-20261124/c13-anyio-taskgroup-contract-20261124/execution/ledger.json",
+    "sha256": "614bfc592fe60abec59887ddb005904545e55e9ce4a89d172e2d2318027a3f75"
+  },
+  "previous_observation": {
+    "path": ".aeep/c13-cohort-runtime-20261124/c13-anyio-taskgroup-contract-20261124/execution/observation-reference.json",
+    "sha256": "00ed0cd65e614aa4590537d95603e8fd78f8b48e2fe34ed68c4a31682dcc2222"
+  },
+  "previous_receipt": {
+    "path": ".aeep/c13-cohort-runtime-20261124/c13-anyio-taskgroup-contract-20261124/execution/receipt-rcpt_085afda8f4354248961672979a8ae2d0.json",
+    "sha256": "09e476b397c201c3e7ef6611cc75e1ea6a968834e9328620b8c0fc8103374f68"
+  },
+  "previous_review": {
+    "path": ".aeep/c13-cohort-runtime-20261124/c13-anyio-taskgroup-contract-20261124/operation-review.json",
+    "sha256": "9a4b7a1bcc643944225fdb4d3c7d2bb1211671a233947b48bd60b22da17f40f6"
+  },
+  "proposed_repeat": {
+    "path": ".aeep/c13-cohort-runtime-20261124/c13-anyio-taskgroup-contract-20261124/trio-correction/diagnostic-operation-review.json",
+    "sha256": "26b6f7c9babb46f4d8b8d693c445bf7722aba9aac3cf82ff32b125e8e8e5cbdc"
+  },
+  "proposed_repeat_operations": 2,
+  "proposed_repeat_reserved_seconds": 260,
+  "provider_disclosure": false,
+  "required_assertions": 386,
+  "required_status_counts": {
+    "FAILED": 41,
+    "PASSED": 345
+  },
+  "runtime_wheel": {
+    "path": ".aeep/c13-cohort-runtime-20261124/c13-anyio-taskgroup-contract-20261124/trio-correction/wheel-audit.json",
+    "sha256": "2a1d68265fdd6d5af17c833e1dc686a0d91fd94eeb7dc31dab304e46494884d8"
+  },
+  "schema_version": "aeep.c13.anyio-taskgroup-reference-diagnosis.v1",
+  "software_pool": {
+    "minimum_gap": 174,
+    "repositories": 46,
+    "reproduced_cases": 72
+  },
+  "source_revision": "47a559ab1e1b03e51b769becdf6c76b732fdf127",
+  "stage": "protected_reference",
+  "trio_runtime_issue": {
+    "declared": "trio>=0.31.0",
+    "observed": "0.30.0",
+    "prepared": "0.31.0",
+    "static_cause": "The snapshot calls Trio CancelScope.cancel(reason). The retained 0.30.0 method takes no reason parameter. 0.31.0 introduces the declared parameter. Grader replay on 0.31.0 is unstarted."
+  },
+  "unresolved_asyncio_failure": "tests/test_taskgroups.py::test_start_crash_before_started_call[asyncio]",
+  "waza_excluded": true
+}

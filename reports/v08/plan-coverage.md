@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 workload handoff](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#what-still-blocks-formal-comparisons)
+records a verified provisional fit for all 246 VAREX archives, pending
+final lineage, asset use and formal assignment. AnyIO 975 remains
+ungraded on the old Trio runtime. The corrected runtime is prepared
+for a scoped replay. The software count and comparison pause remain.
+
 The [AnyIO and SQL dialect batch](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#anyio-and-sqlacodegen-dialects)
 added two protected pairs. Software has 72 reproduced cases across
 46 repositories and a minimum shortfall of 174. The exact 246-case

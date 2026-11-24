@@ -1,5 +1,17 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. VAREX allocation verified and AnyIO 975 held.**
+The [C13 handoff](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#what-still-blocks-formal-comparisons)
+records a provisional allocation of all 246 VAREX cases across four
+stages. The three known form groups stay intact, and both calibration
+cases stay outside the allocation. Asset-use decisions, final lineage
+review and study assignment remain open. AnyIO 975 produced 345 passes
+and 41 required failures. Its prepared correction binds Trio 0.31.0
+and preserves every assertion. The reference repeat is unstarted and
+the original remains gated on that result. Software remains at 72
+reproduced cases across 46 repositories. Comparisons stay paused and
+Waza stays excluded.
+
 **November 24. AnyIO and SQLacodegen 368 protected pairs verified.**
 The [protected batch](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#anyio-and-sqlacodegen-dialects)
 records both repairs at 1/1 and both originals at 0/1. AnyIO used its

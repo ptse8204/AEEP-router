@@ -298,12 +298,31 @@ its declared pytest entry point with read-only metadata. All eight
 operations in this increment settled with zero model turns and cash.
 [Protected results and ledgers](protected-anyio-and-dialect-batch-20261124.json)
 
+### AnyIO task-group reference remains ungraded
+
+The AnyIO 975 published snapshot passed 345 of 386 required checks.
+Forty failures were on Trio, and one was the asyncio test that checks
+an exception raised before a task reports it has started. Four skips
+and four expected failures were outside the required set. The one
+offline operation settled in 16.19 seconds. The original stayed
+unstarted, so this case does not change the software pool.
+
+The carrier reused Trio 0.30.0 from AnyIO 935. The newer snapshot
+declares Trio 0.31 or later and calls `CancelScope.cancel(reason)`,
+which Trio introduced in 0.31.0. The carrier should have checked
+that requirement before it started the reference. The prepared
+continuation changes that one dependency, preserves all assertions
+and captures test failure categories and locations. The asyncio
+failure remains unexplained. The replay requires approval and has
+not started. [Run audit and exact continuation](protected-anyio-taskgroups-20261124.json)
+· [Trio 0.31.0 release](https://github.com/python-trio/trio/releases/tag/v0.31.0)
+
 ## What still blocks formal comparisons
 
 | Workload | Remaining gap |
 | --- | --- |
 | Software | The audited pool contains 72 reproduced cases across 46 repositories. The two holdouts and shared early stages need at least 246 distinct cases, leaving a minimum gap of 174. Contract audits have the largest holdout gap, at 52 cases before early-stage needs. |
-| Document/data | The 246 VAREX archives fit the provisional stage sizes with all known related forms grouped together. An all-page text screen found no additional matches at its recorded thresholds. Final source-lineage review, asset use and stage assignment remain open. The 18 ExtractBench annual disclosures remain held on source and asset-use grounds. |
+| Document/data | The 246 VAREX archives now have a verified provisional allocation. It keeps the known related forms in one stage and excludes both calibration cases. Final source-lineage review, asset-use decisions and study assignment remain open. The 18 ExtractBench annual disclosures remain held on source and asset-use grounds. |
 
 VAREX now has 133 multi-collection prospects with distinct schema hashes.
 The audit matched all 1,777 schema IDs to exact publisher PDF paths. It
@@ -419,6 +438,20 @@ cases. The unsigned review inventory binds each PDF, its case assets
 and the accompanying CDLA-Permissive-2.0 notice to the exact source pin.
 The inventory grants zero execution or disclosure approvals and
 assigns no study stages. [Asset-use inventory proof](varex-asset-use-inventory-20261124.json)
+
+The provisional allocation uses each staged case once. None of the
+three known related form groups crosses stages. The counts below
+show the available workload balance. Approval of individual assets
+and a frozen study design still come before assignment.
+
+| Stage | Multiple collections | At most one collection | Total |
+| --- | ---: | ---: | ---: |
+| Qualification | 4 | 4 | 8 |
+| Training | 14 | 14 | 28 |
+| Candidate holdout | 52 | 53 | 105 |
+| Selection holdout | 52 | 53 | 105 |
+
+[Allocation verification](varex-packing-witness-20261124.json)
 
 Live comparisons remain paused. Candidate benefit and selection benefit
 each need a separate result on frozen eligible tasks. Finishing the
