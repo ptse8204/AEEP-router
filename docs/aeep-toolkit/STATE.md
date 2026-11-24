@@ -1,5 +1,18 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. Two-cohort software capacity and first new revision batch verified.**
+The [C13 cohort report](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#software-cohort-capacity)
+records 75 protected-verified software cases and a minimum gap of 171.
+With terminal attempts excluded, the detailed queue reaches at most
+79 multi-file cases against an 81-case requirement. A provisional
+246-case allocation uses three supplementary metadata leads and
+keeps each repository in one stage. The first three-revision intake
+passed preflight and waits for the host reserve plus its archive cap.
+All 246 VAREX proposals and 1,476 asset hashes matched the existing
+grouped local-use review, which still awaits approval. CCFlow repeat
+approval remains pending. No new protected grades or stage assignments
+were recorded. Comparisons stay paused and Waza stays excluded.
+
 **November 24. qBraid launch rehearsed on the preserved container path.**
 The [qBraid launch preflight](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#qbraid-visualization-grader-preparation)
 binds the two launches, the same nine required checks and the original

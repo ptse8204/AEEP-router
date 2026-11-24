@@ -1,5 +1,13 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 software cohort audit](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#software-cohort-capacity)
+found a provisional fit for 246 cases using distinct revisions in
+the same stage and supplementary metadata leads. Only 75 cases
+have protected grades. The next three source acquisitions await
+the host reserve plus their bounded archive allowance. The 246
+VAREX case proposals revalidated against the staged asset inventory.
+The grouped local-use decision remains open.
+
 The [qBraid launch preflight](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#qbraid-visualization-grader-preparation)
 rehearsed both contained commands with nine required checks and
 pinned the fixtures' Matplotlib 3.9.2 renderer. Native grading

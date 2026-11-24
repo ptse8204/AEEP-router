@@ -597,6 +597,48 @@ software pool still has 75 cases, leaving at least 171 to reproduce.
 · [PyDAP required test](https://github.com/pydap/pydap/blob/12fb95e64776aaabc5edddd1563c6e1c7b5656aa/src/pydap/tests/test_client.py#L1248-L1263)
 · [VAREX rights rehearsal](cohort-batch-continuation-20261124.json)
 
+### Software cohort capacity
+
+The software pool has 75 protected-verified cases across 49
+repositories. At least 171 more cases still need protected grading.
+Keeping one new case per repository gives at most 59 multi-file
+repairs from the current sources and fresh queue. Both holdouts need
+70. Qualification and training raise the minimum to 81.
+
+A second capacity check lets distinct revisions from one repository
+enter the same stage. It excludes exposed repositories and revisions
+with terminal intake attempts. The detailed queue and staged pool
+still offer at most 79 multi-file repairs. Supplementing that queue
+with provisional Python 3.12 metadata yields one balanced allocation
+across 165 repositories. This is a capacity estimate. It uses all
+75 verified cases, 54 staged but ungraded cases and 117 metadata leads,
+including three from the supplementary catalog. Each new case still
+needs publisher-source verification, protected grading and an
+independence check before it can count.
+
+| Stage | Contract audits | Multi-file repairs | Single-file repairs | Total |
+| --- | ---: | ---: | ---: | ---: |
+| Qualification | 3 | 3 | 2 | 8 |
+| Training | 9 | 9 | 10 | 28 |
+| Candidate holdout | 35 | 35 | 35 | 105 |
+| Selection holdout | 35 | 35 | 35 | 105 |
+
+The first three source leads cover py-pde's correlated noise,
+Linopy's model serialization and Conan's handling of Git remote
+output. Only one archive and one Git metadata request per case are
+in scope. The review caps archive responses at 10.5 MB. Intake waits
+for the 50 GiB reserve plus
+the archive allowance. Protected grading follows after source and
+runtime verification. No stage assignments were recorded.
+
+The same preflight matched the 246 proposed VAREX local-use
+records to all 1,476 reviewed asset hashes. That case batch awaits
+its grouped local-use determination. Comparison dispatch remains
+paused and Waza remains excluded.
+
+[Software capacity calculation](two-cohort-source-capacity-20261124.json)
+· [Batch preflight](multi-snapshot-intake-preflight-20261124.json)
+
 ### qBraid visualization grader preparation
 
 The pinned qBraid archive matches the publisher's 128-file Git tree.
