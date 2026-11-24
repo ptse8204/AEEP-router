@@ -2,9 +2,9 @@
 
 **November 24. Software and document cohort batch verified.**
 The [operator handoff](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#cohort-batch-results)
-records the Param and Django Bird protected pairs and reconciles the
-previous Optype, Locify and adapted EOS pairs. The software pool has
-59 reproduced cases across 38 repositories against 246 required.
+records the Param, Django Bird and two A2A protected pairs and
+reconciles Optype, Locify and adapted EOS. The software pool has
+61 reproduced cases across 39 repositories against 246 required.
 Census retail, BEA GDP and Treasury receipts and outlays passed
 protected local grading. Together with WASDE, the four supplemental
 cases could reduce the multiple-collection gap to five under favorable

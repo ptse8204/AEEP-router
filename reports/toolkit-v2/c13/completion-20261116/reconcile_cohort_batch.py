@@ -1,6 +1,8 @@
 """Read back prior and new protected pairs without opening enrollment or dispatch."""
 
 import json
+import sqlite3
+from contextlib import closing
 
 import audit_software_reproduction_pool as pool
 from audit_software_carrier_coverage import expected_rows
@@ -13,6 +15,7 @@ SOFTWARE = BATCH / "software-pinned-carrier"
 BIRD = BATCH / "django-bird-grading"
 DOCUMENTS = BATCH / "documents-verified"
 TREASURY = BATCH / "treasury-october/document-verified"
+A2A = BATCH / "a2a-current-ordinary"
 
 
 def evidence(path):
@@ -198,6 +201,77 @@ def document_cases(directory):
     return result["cases"]
 
 
+def a2a_pairs():
+    run = A2A / "execution"
+    result = audited(run / "result.json")
+    review = audited(A2A / "operation-review.json")
+    bridge = audited(HERE / "a2a-receipt-bridge-audit.json")
+    preparation = ROOT / ".aeep/completion-20261116/a2a-ordinary-grader"
+    definitions = audited(preparation / "summary.json")
+    ledger = audited(run / "ledger.json")
+    historical = audited(A2A / "history/ledger.json")
+    recorded = {row["operation_id"]: row for row in ledger["operations"]}
+    if (
+        not result["verified"]
+        or len(recorded) != 10
+        or any(recorded.get(row["operation_id"]) != row for row in historical["operations"])
+        or any(result[key] for key in ("models", "cash_usd", "formal_cases_adopted"))
+        or result["review_sha256"] != evidence(A2A / "operation-review.json")["sha256"]
+        or definitions["execution_definition_files"]["observer.json"]
+        != evidence(preparation / "observer.json")["sha256"]
+    ):
+        raise ValueError("A2A result or historical ledger differs")
+    rows = []
+    receipts = {row["role"]: row for row in result["operations"]}
+    with closing(
+        sqlite3.connect((A2A / "history/receipts.sqlite3").as_uri() + "?mode=ro", uri=True)
+    ) as db:
+        for case, source in bridge["cases"].items():
+            name = f"{case}.json"
+            definition = pool.artifact(
+                {
+                    "path": (preparation / name).relative_to(ROOT).as_posix(),
+                    "sha256": definitions["execution_definition_files"][name],
+                }
+            )
+            truth = definition["truth"]
+            assert truth["tests"]["sha256"] == source["protected_test_archive_sha256"]
+            assert (
+                len(truth["pass_to_pass"]) + len(truth["fail_to_pass"])
+                == source["required_assertions"]
+            )
+            pair = []
+            for role, score in (("reference", 1.0), ("original", 0.0)):
+                row = receipts[f"{case}-{role}"]
+                operation = f"aeep-c13-a2a-ordinary:{case}:{role}"
+                (stored,) = db.execute(
+                    "SELECT payload_json FROM receipts WHERE receipt_id=?", (row["receipt_id"],)
+                ).fetchone()
+                receipt = json.loads(stored)
+                settled(ledger, operation)
+                if (
+                    not row["contract_matched"]
+                    or not receipt["execution_success"]
+                    or receipt["decision_id"] != operation
+                    or review["attempts"][case][role]["expected_score"] != score
+                    or receipt["metadata"]["review_sha256"] != result["review_sha256"]
+                    or receipt["metadata"]["container_absent"] is not True
+                ):
+                    raise ValueError("A2A grade lacks its settled protected evidence")
+                pair.append(row["receipt_id"])
+            rows.append(
+                pool.case_row(
+                    case,
+                    "a2aproject/a2a-python",
+                    source["source_revision"],
+                    definition["input"]["family"],
+                    "ordinary_protected_pair",
+                    pair,
+                )
+            )
+    return rows
+
+
 def main():
     recovery = audited(HERE / "recovery-67a93f4c-result-20261119.json")[
         "software_reproduction_pool"
@@ -206,7 +280,7 @@ def main():
     _, _, excluded = previous_repositories()
     if pool.assess(initial, excluded) != recovery["capacity"]:
         raise ValueError("earlier 54-case pool did not reproduce")
-    retained, fresh = old_pairs(), new_pairs()
+    retained, fresh = old_pairs(), new_pairs() + a2a_pairs()
     updated = pool.assess(initial + retained + fresh, excluded)
     cases = document_cases(DOCUMENTS) | document_cases(TREASURY)
     print(
@@ -228,7 +302,13 @@ def main():
                         BIRD / "selector-map.json",
                         DOCUMENTS / "pack.json",
                     )
-                } | {"treasury_pack": evidence(TREASURY / "pack.json")},
+                }
+                | {
+                    "treasury_pack": evidence(TREASURY / "pack.json"),
+                    "a2a_result": evidence(A2A / "execution/result.json"),
+                    "a2a_ledger": evidence(A2A / "execution/ledger.json"),
+                    "a2a_review": evidence(A2A / "operation-review.json"),
+                },
                 "comparisons_paused": True,
                 "waza_excluded": True,
                 "model_turns": 0,

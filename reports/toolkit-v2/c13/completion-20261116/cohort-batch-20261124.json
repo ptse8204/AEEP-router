@@ -20,21 +20,21 @@
       "two_cohorts_shared_early_minimum": 246
     },
     "current": {
-      "reproduced_rows": 59,
-      "repository_families": 38,
+      "reproduced_rows": 61,
+      "repository_families": 39,
       "counts_by_family": {
         "contract-audit": 14,
-        "single-file-repair": 22,
-        "multi-file-repair": 23
+        "single-file-repair": 23,
+        "multi-file-repair": 24
       },
-      "distinct_receipts": 120,
+      "distinct_receipts": 124,
       "largest_repository_group_rows": 14,
       "two_cohorts_shared_early_minimum": 246,
-      "minimum_missing_rows_if_all_reproduced_rows_are_eligible": 187,
+      "minimum_missing_rows_if_all_reproduced_rows_are_eligible": 185,
       "two_balanced_holdouts_minimum_missing_by_family_before_early_stages": {
         "contract-audit": 56,
-        "multi-file-repair": 47,
-        "single-file-repair": 48
+        "multi-file-repair": 46,
+        "single-file-repair": 47
       }
     },
     "previously_verified_now_reconciled": [
@@ -93,6 +93,28 @@
         "receipt_ids": [
           "rcpt_b712bbb9295a44ccb1ce95be9ff7a8d5",
           "rcpt_ef91b6f6f6df4bd68f49b155de5e50ac"
+        ]
+      },
+      {
+        "case": "a2aproject__a2a-python-576",
+        "repository": "a2aproject/a2a-python",
+        "revision": "3bfbea9ec8d7982fa73eb12d8352a581307355dc",
+        "family": "multi-file-repair",
+        "evidence": "ordinary_protected_pair",
+        "receipt_ids": [
+          "rcpt_5a0d2dbe60874f1e9cbc665f9b2cd34a",
+          "rcpt_f65bb5f081a34d06995646b303545103"
+        ]
+      },
+      {
+        "case": "a2aproject__a2a-python-682_interface",
+        "repository": "a2aproject/a2a-python",
+        "revision": "c91d4fba517190d8f7c76b42ea26914a4275f1d5",
+        "family": "single-file-repair",
+        "evidence": "ordinary_protected_pair",
+        "receipt_ids": [
+          "rcpt_14679cfaa0b54829a7849a4867f1ba6e",
+          "rcpt_2467543a624341beadb9e2e826f855bb"
         ]
       }
     ],
@@ -285,6 +307,48 @@
       },
       "original_started": false,
       "formal_case_added": false
+    },
+    "a2a_current_ordinary": {
+      "operations_preserved": 5,
+      "additional_settled_operations": 5,
+      "image_id": "sha256:fcf9f724a7f8fdc71a6fcfc6af347188f24e18e9e9590e8211c7fe8fe49cd443",
+      "operation_review": "da840e78b27a77974a2184ffc324b9487ddd1ded32fa78cf445c4acf08270641",
+      "result_counts": {
+        "a2aproject__a2a-python-576-reference": {
+          "receipt": "rcpt_5a0d2dbe60874f1e9cbc665f9b2cd34a",
+          "score": 1.0,
+          "test_counts": {
+            "PASSED": 39
+          }
+        },
+        "a2aproject__a2a-python-576-original": {
+          "receipt": "rcpt_f65bb5f081a34d06995646b303545103",
+          "score": 0.0,
+          "test_counts": {
+            "PASSED": 37,
+            "FAILED": 2
+          }
+        },
+        "a2aproject__a2a-python-682_interface-reference": {
+          "receipt": "rcpt_14679cfaa0b54829a7849a4867f1ba6e",
+          "score": 1.0,
+          "test_counts": {
+            "PASSED": 7
+          }
+        },
+        "a2aproject__a2a-python-682_interface-original": {
+          "receipt": "rcpt_2467543a624341beadb9e2e826f855bb",
+          "score": 0.0,
+          "test_counts": {
+            "FAILED": 2,
+            "PASSED": 5
+          }
+        }
+      },
+      "legacy_receipt_replay": {
+        "path": ".aeep/c13-cohort-batch-20261124/a2a-current-source-readback.json",
+        "sha256": "5907b4af9e3cce56b040241f96027897baecfff0e2eab6d7eb1c025f78bd73df"
+      }
     }
   },
   "document_data": {
@@ -504,6 +568,18 @@
     "other_publisher_pair_attempts": {
       "path": ".aeep/c13-cohort-batch-20261124/publisher-pairs/result.json",
       "sha256": "c9c53d577f44efb941c7fff793cce25cd994b39b89eed09cdf3b1ac36ce34681"
+    },
+    "a2a_result": {
+      "path": ".aeep/c13-cohort-batch-20261124/a2a-current-ordinary/execution/result.json",
+      "sha256": "8f07827a6aed193ae48178aa898f0f3726882b99666bef6c2210a2a0425ed4ff"
+    },
+    "a2a_ledger": {
+      "path": ".aeep/c13-cohort-batch-20261124/a2a-current-ordinary/execution/ledger.json",
+      "sha256": "2e06a3631b3f01a7ef697e288226620d9a43070af080d1b41a100230d334a285"
+    },
+    "a2a_review": {
+      "path": ".aeep/c13-cohort-batch-20261124/a2a-current-ordinary/operation-review.json",
+      "sha256": "da840e78b27a77974a2184ffc324b9487ddd1ded32fa78cf445c4acf08270641"
     }
   },
   "comparisons_paused": true,
@@ -532,6 +608,16 @@
         "exit_code": 0,
         "path": ".aeep/c13-cohort-batch-20261124/followup-handoff.log",
         "sha256": "7fa6037e15ba7bcd5ee3d2c546ba2c3dc0e821e204c2d975edfe24c5d8bbab9c"
+      },
+      "a2a-docs-check": {
+        "exit_code": 0,
+        "path": ".aeep/c13-cohort-batch-20261124/a2a-docs-check.log",
+        "sha256": "f1d5766aeaf32542017318107efa853c34602d402dacded327ed054d91b3524b"
+      },
+      "a2a-handoff-check": {
+        "exit_code": 0,
+        "path": ".aeep/c13-cohort-batch-20261124/a2a-handoff-check.log",
+        "sha256": "9372f6b1897dde0627089ea2d5a1a34386ebfed73b5e2942964a64fcff744a1f"
       }
     }
   }

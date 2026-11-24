@@ -8,7 +8,7 @@ import shutil
 import subprocess
 import time
 from collections import Counter
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 
 from audit_a2a_receipt_bridge import CASES, SETTLED
@@ -34,6 +34,7 @@ from aeep.executors.command import CommandExecutor
 from aeep.models import ActionRequest, ExecutionReceipt, ExecutorSpec, utc_now
 from aeep.store import ReceiptStore
 from aeep_toolkit.install_runtime import file_digest
+from aeep_toolkit.stack_verification import ROOT as CURRENT_SOURCE_ROOT
 
 NAME = "aeep-c13-a2a-batch-20261116"
 TAG = "aeep-toolkit-v2/repository-grader:py313-a2a-native-20261116"
@@ -64,7 +65,7 @@ def retained(repository, summary):
     return grant
 
 
-def prepared():
+def prepared(renewed_expiry=None):
     summary = get(TARGET / "summary.json")
     context = TARGET / "image"
     support = context / "support"
@@ -102,13 +103,18 @@ def prepared():
         raise ValueError("local parent alias changed")
     with ReceiptStore(SETTLED / "receipts.sqlite3", read_only=True) as store:
         grant = retained(AssessmentRepository(store), summary)
-    return {
+    expiry = grant.expires_at if renewed_expiry is None else datetime.fromisoformat(renewed_expiry)
+    if renewed_expiry is not None and not (
+        grant.expires_at < utc_now() < expiry <= utc_now() + timedelta(days=1)
+    ):
+        raise ValueError("continuation expiry must renew an expired grant for at most one day")
+    review = {
         "purpose": "Verify the ordinary callback for two reproduced A2A cases in a private overlay",
         "summary_sha256": file_digest(TARGET / "summary.json"),
         "driver_sha256": file_digest(Path(__file__)),
         "builder_sha256": file_digest(PLUGIN),
         "docker_sha256": file_digest(Path(DOCKER)),
-        "expires_at": grant.expires_at.isoformat(),
+        "expires_at": expiry.isoformat(),
         "root_grant_digest": content_digest(grant),
         "build_command": [
             DOCKER,
@@ -139,6 +145,12 @@ def prepared():
         "provider_disclosure": False,
         "formal_adoption": False,
     }
+    if renewed_expiry is not None:
+        review.update(
+            historical_expiry=grant.expires_at.isoformat(),
+            current_callback_source=verification_source_digest(CURRENT_SOURCE_ROOT),
+        )
+    return review
 
 
 def exact_approval(digest):
@@ -160,9 +172,10 @@ def exact_approval(digest):
 async def run(exact):
     if not exact_approval(exact):
         raise ValueError("this unstarted A2A repeat requires its exact authority")
-    review = prepared()
+    stored_review = get(REVIEW)
+    review = prepared(stored_review["expires_at"] if "historical_expiry" in stored_review else None)
     if (
-        review != get(REVIEW)
+        review != stored_review
         or datetime.fromisoformat(review["expires_at"]) <= utc_now()
         or docker("image", "ls", "--filter", "reference=" + TAG, "-q")
         or shutil.disk_usage(WORK).free < 52 * 1024**3
@@ -196,7 +209,7 @@ async def run(exact):
                 amendment_id=NAME + ":ordinary-budget",
                 authorization_id=NAME,
                 authorization_digest=content_digest(grant),
-                expires_at=grant.expires_at,
+                expires_at=datetime.fromisoformat(review["expires_at"]),
                 limits=AssessmentLimits(
                     max_operations=grant.limits.max_operations + ADDITIONAL.max_operations,
                     max_elapsed_seconds=grant.limits.max_elapsed_seconds

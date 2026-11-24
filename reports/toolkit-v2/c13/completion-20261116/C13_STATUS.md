@@ -145,14 +145,20 @@ and [protected calibration evidence](wasde-reviewed-pack-result-20261124.json)
 | --- | --- |
 | Param configuration API | The repair scored 1/1 across 29 required tests. The original scored 0/1 with the expected issue failure and 28 passes. |
 | Django Bird component props | The repair scored 1/1 across 74 native tests. The original scored 0/1 with one issue failure and 73 preservation passes. The publisher's added test row identified the issue among five matches for its truncated name. |
+| A2A streaming error handling | The repair scored 1/1 with 39 passes. The original scored 0/1 with two expected failures and 37 passes. |
+| A2A transport context manager | The repair scored 1/1 with seven passes. The original scored 0/1 with two expected failures and five passes. |
 | Census September retail sales | Twelve output rows matched the source PDF and workbook. The exact extraction scored 1/1. Missing data and invalid JSON scored 0/1. |
 | BEA third-quarter GDP | Five rows matched the PDF and publisher release narrative. The exact extraction scored 1/1. Missing data and invalid JSON scored 0/1. |
 | Treasury October receipts and outlays | Eight rows matched the PDF and the Fiscal Data API. The exact extraction scored 1/1. Missing data and invalid JSON scored 0/1. |
 
-The software inventory gained two newly verified pairs and reconciled
-three already settled pairs for Optype, Locify and adapted EOS. The
-documents passed the local binary extraction rubric. They still need
-case-specific asset-use review and a common cohort grading contract.
+The software inventory added four pairs on the current ordinary grader
+and reconciled three already settled pairs for Optype, Locify and
+adapted EOS. Both A2A pairs reused the pinned dependency files. A single
+offline image build and four grader operations settled on a copy of the
+original ledger. Its five historical operations and the original ledger
+were preserved. The documents passed the local binary extraction rubric
+and still need case-specific asset-use review and a common cohort
+grading contract.
 [Federal retail archive](https://www.census.gov/retail/marts/historic_releases.html)
 · [BEA release](https://www.bea.gov/news/2026/gdp-advance-estimate-3rd-quarter-2026)
 · [Treasury statement and data](https://fiscaldata.treasury.gov/datasets/monthly-treasury-statement/)
@@ -173,7 +179,7 @@ boundary. The original-source check has yet to run.
 
 | Workload | Remaining gap |
 | --- | --- |
-| Software | The audited pool contains 59 reproduced cases across 38 repositories. Two independent holdouts and shared early stages require at least 246 distinct cases. That leaves a minimum gap of 187 against this pool. Contract audits have the largest holdout gap, at 56 cases before early-stage needs. |
+| Software | The audited pool contains 61 reproduced cases across 39 repositories. Two independent holdouts and shared early stages require at least 246 distinct cases. That leaves a minimum gap of 185 against this pool. Contract audits have the largest holdout gap, at 56 cases before early-stage needs. |
 | Document/data | The 18 annual disclosures remain held on source and asset-use grounds. The remaining ExtractBench metadata has 108 multiple-collection slots at stored ZIP size, or at most 113 if compression is favorable. The design needs 122. If Census, BEA, Treasury and WASDE all qualify under the same cohort contract, the remaining gap is 10 at stored ZIP size or five with favorable compression. |
 
 Live comparisons remain paused. Candidate benefit and selection benefit

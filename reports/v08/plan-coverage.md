@@ -1,7 +1,7 @@
 # 0.8 plan coverage and remaining work
 
 The [C13 cohort batch](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#cohort-batch-results)
-verified two software repair pairs, reconciled three retained pairs
+verified four software repair pairs, reconciled three retained pairs
 and graded three supplemental publisher documents. The comparative
 cohort and production adoption gates remain open.
 

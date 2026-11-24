@@ -1349,8 +1349,10 @@ protected archives without extra host mounts. Three authored launcher checks
 and five copied-ledger driver scenarios passed. Uncertain cleanup kept the
 current reservation open and stopped further dispatch. Review `56ed2748`
 covers one local build and four protected calls, capped at 265 additional
-reserved seconds, zero models and $0. The build and module-wide verification
-are unstarted. Both snapshots remain provisional.
+reserved seconds, zero models and $0. That review expired before execution.
+The [November 24 cohort batch](C13_STATUS.md#cohort-batch-results) completed
+the protected pairs after renewing the scope on a copy of the settled
+ledger. Both cases remain prospective for formal assignment.
 
 The next [workload intake](workload-intake-audit.json) checks both domains.
 On the software side, two original patches and protected test overlays apply
