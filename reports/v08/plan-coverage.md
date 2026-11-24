@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [CCFlow runtime and correction report](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#follow-up-software-source-batches)
+records the verified 46-package Linux runtime and the settled
+startup failure before pytest. Both corrected launches passed
+preflight. Protected grades, the grouped VAREX decision and
+the formal comparisons remain pending.
+
 The [C13 follow-up source batch](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#follow-up-software-source-batches)
 verified CCFlow's publisher archive and ordinary grader preparation.
 Its protected pair awaits the exact Linux runtime. Docling, AWS

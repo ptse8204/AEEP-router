@@ -1,5 +1,17 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. CCFlow offline runtime pinned and bootstrap corrected.**
+The [C13 verification report](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#follow-up-software-source-batches)
+binds 46 packages, including 22 reused from the retained offline
+carrier. The first reference settled in 1.75 seconds after Python
+rejected an extra semicolon in the generated child script. No upstream
+test executed and the original-source control stayed unstarted.
+Preflight now compiles the generated child script and rejects the
+earlier syntax defect. Correction `b0cadb8e` is prepared with the same
+25 protected identities. It awaits exact repeat approval and the
+50 GiB host reserve. C13 remains open. The VAREX local-use decision
+is pending, comparisons are paused and Waza is excluded.
+
 **November 24. CCFlow source and grader preparation verified.**
 The [follow-up batch](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#follow-up-software-source-batches)
 matched CCFlow's archive to its pinned publisher tree and staged all

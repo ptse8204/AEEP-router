@@ -566,16 +566,28 @@ lets a small source batch proceed within the 50 GiB host reserve.
 
 | Case | Result | Next step |
 | --- | --- | --- |
-| CCFlow | The 281,473-byte archive matched the publisher tree. Ordinary and protected grader preparation kept all 24 upstream test identities and added one authored preservation guard. | Verify the Linux dependency closure, then run the protected pair. |
+| CCFlow | The 281,473-byte archive matched the publisher tree. Grader preparation kept all 24 upstream test identities and one authored preservation guard. The first reference stopped during Python startup. | Run the reviewed bootstrap correction when approved and usable space is restored. |
 | Docling | The archive response was truncated or reached the 3.5 MB intake cap. Both owner URLs returned HTTP 200 for the pinned archive. | Review an explicit size-bounded recovery before downloading again. |
 | AWS Powertools and PSyclone | Each intake stopped with a `ValueError` before retaining an archive. The original driver recorded the exception class. | Retain both terminal attempts. A future recovery needs its own reviewed input scope. |
 | PyDAP | A required test opens a public DAP endpoint. The case stayed out of intake. | Verify an offline fixture and equivalent replay before grading. |
 
-CCFlow's cached OmegaConf 2.4.0 wheel falls outside Hydra 1.3.2's declared
-dependency range. The reviewed alternative pairs Hydra with OmegaConf
-2.3.0, which requires ANTLR 4.9. The exact ANTLR 4.9.3 artifact is a
-source distribution. Its license and offline import still need review,
-along with the rest of CCFlow's runtime.
+CCFlow's Linux runtime binds 46 packages, including 22 reused from
+existing carrier projections. The remaining inputs required about 5 MB
+of package downloads. ANTLR and Cloudpickle use the notices from their
+pinned upstream releases. The worker projects Python libraries into
+temporary storage and loads native extensions from read-only mounts.
+
+The first reference container stopped before pytest because the
+coordinator inserted an extra semicolon into its generated child
+script. The operation settled in 1.75 seconds. The original control
+stayed unstarted. A child-compilation check now accepts the corrected
+script and rejects the exact earlier syntax defect. Both corrected
+launches passed the planner and retained the same 25 assertions.
+The correction permits at most two offline operations and 110 reserved
+seconds. It awaits the repeat decision and at least 50 GiB of usable
+host space.
+
+[Runtime pins, first receipt and exact correction](ccflow-runtime-and-bootstrap-result-20261124.json)
 
 No new protected grades were recorded in this batch. The verified
 software pool still has 75 cases, leaving at least 171 to reproduce.
