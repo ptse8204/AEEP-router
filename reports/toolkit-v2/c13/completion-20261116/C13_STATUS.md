@@ -611,14 +611,22 @@ and the same source edits. The two image repairs are the only byte
 changes in the reconstructed protected test inputs. This is an
 adapted protected grader, with zero upstream tests executed.
 
-The retained Linux ARM64 EOS image matches all 36 reviewed layers and
-already contains Matplotlib, Pillow, NumPy and pytest. The remaining
-reviewed wheel downloads total 737,711 bytes with cached Jinja2.
-Preparation requires the real `pytest-mpl` plugin and `--mpl` so both
-image comparisons execute. The protected launch and grades still need
-verification after usable space returns above the 50 GiB reserve.
+The retained Linux ARM64 EOS image matches all 36 reviewed layers.
+Both expected images name Matplotlib 3.9.2. The grader pins that
+version and reuses the carrier's other reviewed libraries. The
+updated wheel scope is
+8,930,971 download bytes with cached Jinja2.
 
-[qBraid source, private verifier and dependency evidence](pyqasm-protected-transport-preflight-20261124.json)
+The in-memory rehearsal bound both container commands to the same nine
+test identities, including the two image comparisons. It compiled
+the generated child script, kept the network disabled and used an
+explicit `pytest-mpl` plugin with `--mpl`. The storage guard stopped
+package intake before network access. Native execution still awaits
+the 50 GiB host reserve plus space for the reviewed inputs.
+
+[qBraid source and private verifier](pyqasm-protected-transport-preflight-20261124.json)
+· [Matched renderer and dependency pins](pyqasm-renderer-bound-preflight-20261124.json)
+· [Offline launch preflight](pyqasm-offline-launch-preflight-20261124.json)
 
 Live comparisons remain paused. Candidate benefit and selection benefit
 each need a separate result on frozen eligible tasks. Finishing the

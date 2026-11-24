@@ -1,5 +1,10 @@
 # 0.8 plan coverage and remaining work
 
+The [qBraid launch preflight](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#qbraid-visualization-grader-preparation)
+rehearsed both contained commands with nine required checks and
+pinned the fixtures' Matplotlib 3.9.2 renderer. Native grading
+still awaits the host reserve and verified wheel intake.
+
 The [qBraid visualization preflight](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#qbraid-visualization-grader-preparation)
 pins nine protected checks and a retained Linux ARM64 carrier.
 The two baseline images have checksum-verified recoveries and stay

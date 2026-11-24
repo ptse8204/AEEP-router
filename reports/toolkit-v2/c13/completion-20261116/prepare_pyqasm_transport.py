@@ -42,9 +42,15 @@ CANDIDATES = {
     "pytest-mpl": "0.17.0",
     "jinja2": "3.1.6",
     "markupsafe": "3.0.2",
+    "matplotlib": "3.9.2",
 }
 RETAINED = {
-    "matplotlib": "3.10.0",
+    "contourpy": "1.4.0",
+    "cycler": "0.12.1",
+    "fonttools": "4.68.0",
+    "kiwisolver": "1.5.1",
+    "pyparsing": "3.3.2",
+    "python-dateutil": "4.0.0",
     "numpy": "2.2.3",
     "packaging": "26.3",
     "pillow": "13.0.0",
@@ -70,6 +76,7 @@ def png_payload(raw):
     if not raw.startswith(SIGNATURE):
         return None
     offset, dimensions, compressed = len(SIGNATURE), None, []
+    renderer = None
     while offset + 12 <= len(raw):
         size, kind = struct.unpack_from(">I4s", raw, offset)
         start = offset + 8
@@ -86,6 +93,13 @@ def png_payload(raw):
             if format_ != [8, 6, 0, 0, 0] or not (0 < width <= 2000 and 0 < height <= 1000):
                 return None
             dimensions = width, height
+        elif kind == b"tEXt" and raw[start:end].startswith(b"Software\0Matplotlib version"):
+            renderer = (
+                raw[start:end]
+                .split(b",", 1)[0]
+                .removeprefix(b"Software\0Matplotlib version")
+                .decode("ascii")
+            )
         elif kind == b"IDAT":
             compressed.append(raw[start:end])
         elif kind == b"IEND":
@@ -100,7 +114,12 @@ def png_payload(raw):
                 return None
             if len(pixels) != expected or not stream.eof or stream.unused_data:
                 return None
-            return {"width": width, "height": height, "scanline_sha256": digest(pixels)}
+            return {
+                "width": width,
+                "height": height,
+                "scanline_sha256": digest(pixels),
+                "matplotlib_version": renderer,
+            }
         offset = end + 4
     return None
 
@@ -123,7 +142,7 @@ def restore_png(raw, expected_sha):
     return recoveries[0]
 
 
-async def transport():
+async def bind_transport():
     (index,) = [path for path, sha in index_paths() if sha == INDEX]
     (row,) = [item for item in json.loads(read(index, INDEX)) if item["input"]["task_id"] == CASE]
     _, wheels = wheel_probe_assets()
@@ -160,13 +179,15 @@ async def transport():
             raise ValueError("image restoration changed more than missing line endings")
         restored[name] = data
         image_proofs[name] = png | {"publisher_sha256": expected, "recovered_sha256": digest(data)}
+    if {item["matplotlib_version"] for item in image_proofs.values()} != {CANDIDATES["matplotlib"]}:
+        raise ValueError("the package lock differs from the renderer named in the publisher images")
     original_files = public | protected
     private_paths = BASELINES | {TEST}
     hidden = protected | restored
     worker = {name: data for name, data in public.items() if name not in private_paths}
     source_blob, verifier_blob = pack_files(worker, large=True), pack_files(hidden, large=True)
     new_input = task.model_copy(update={"source_sha256": digest(source_blob)})
-    roles = {}
+    roles, artifacts = {}, {}
     for role, reply in (("reference", published), ("original", original)):
         patch = _decode_suite_patch(truth, reply)
         original_grade_input = pack_files(
@@ -182,10 +203,11 @@ async def transport():
             or patch.base_sha256 != truth.input_sha256
         ):
             raise ValueError("moving verifier assets changed protected grading bytes")
+        artifacts[role] = compressed_patch_artifact(rebound)
         roles[role] = {
             "protected_input_sha256": digest(new_grade_input),
             "old_protected_input_sha256": digest(original_grade_input),
-            "rebound_patch_sha256": content_digest(compressed_patch_artifact(rebound)),
+            "rebound_patch_sha256": content_digest(artifacts[role]),
         }
     if (
         private_paths & archive_files(source_blob, large=True).keys()
@@ -197,7 +219,7 @@ async def transport():
         raise ValueError(
             "protected assets leaked, or reference and fault differ from the source pin"
         )
-    return {
+    evidence = {
         "retained_index": ref(index),
         "publisher_license_sha256": digest(public["LICENSE"]),
         "publisher_git_tree": tree,
@@ -215,6 +237,13 @@ async def transport():
         "project_version": project["version"],
         "project_dependencies": project["dependencies"],
     }
+
+    return evidence, new_input, truth, artifacts, source_blob, verifier_blob
+
+
+async def transport():
+    evidence, *_ = await bind_transport()
+    return evidence
 
 
 def runtime(requirements):
@@ -272,7 +301,7 @@ def runtime(requirements):
             and (
                 item["filename"].endswith("-none-any.whl")
                 or (
-                    name == "markupsafe"
+                    name in {"markupsafe", "matplotlib"}
                     and item["filename"].endswith(
                         "-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
                     )
