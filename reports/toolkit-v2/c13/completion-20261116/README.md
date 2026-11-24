@@ -701,6 +701,12 @@ includes these two cases.
 
 ## Retained stack and lifecycle evidence
 
+On November 24, the ordinary CLI accepted all 37 checks against the
+current source with Waza excluded. The latest wheel passed private
+installation, reapply and removal on macOS ARM64 and the reviewed
+Linux ARM64 carrier. The [operator report](C13_STATUS.md#what-passed-on-the-current-build)
+summarizes both results and the remaining comparison gates.
+
 The operational ledger accepts all **37 required integration checks** for the
 frozen execution source, including the ordinary CLI and canonical reports for
 both workload domains. Waza is excluded by the operator. The CLI still rejects

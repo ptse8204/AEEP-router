@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+[Current Toolkit stack and installation evidence](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#what-passed-on-the-current-build)
+records 37 current-source checks and installation, reapply, reporting
+and removal on native macOS ARM64 and the retained Linux ARM64 carrier.
+These Toolkit checks leave v0.8 adoption, live effectiveness and
+production release gates at their existing scope.
+
 [EOS now has both protected grades](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#what-broke-in-eos-and-what-fixed-it)
 under the documented offline adaptation. The repair passed 359 tests
 and scored 1/1. The original failed the expected test, passed 358

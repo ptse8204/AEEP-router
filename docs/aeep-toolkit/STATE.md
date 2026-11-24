@@ -1,5 +1,17 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. Current source passes stack readiness and both install checks.**
+The [operator handoff](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md)
+records 37 accepted checks on source commit `943016e0` in a private
+ledger copy. Both SkillsBench workflows retained their reviewed asset
+rights, grading, reports and telemetry. The current Essentials wheel
+passed idempotent setup and removal on macOS ARM64 and the retained
+Linux ARM64 carrier. Both generated the same fixture reports. No
+operational records, prior charges, or unrelated Docker resources
+changed. No models or cash were used. C13 remains open for independent
+cohorts and comparative evidence. Comparisons stay paused, and Waza
+is excluded.
+
 **November 20. EOS's adapted offline grader verifies both roles.**
 The [operator report](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md)
 locates all seven original failures and records their repairs. After

@@ -1,10 +1,31 @@
 # Toolkit V2 status and recent grader results
 
-November 20, 2026
+November 24, 2026
 
-**The adapted offline EOS grader now scores the published repair 1/1 and
-the buggy original 0/1.**
-C13 is open. There is no approval pending from the operator.
+**The current stack passed all 37 required checks across 18 components
+with Waza excluded.** The current wheel passed private installation,
+reapply and removal on macOS ARM64 and the reviewed Linux ARM64 carrier.
+C13 remains open for comparative evidence.
+
+## What passed on the current build
+
+- **Stack readiness.** The ordinary CLI accepted all 37 checks in a private
+  ledger copy on commit `943016e0`. Sales Pivot and Spring Boot still bind
+  their original protected scores, settled charges, reports and verified
+  telemetry. Both asset-use reviews passed on the current source. The old
+  source binding, an unreviewed completion and a request selecting Waza
+  were rejected. The operational ledger was left intact.
+- **Essentials installation.** The same wheel installed using 32 unchanged
+  dependency wheels for each platform. Immediate reapply preserved the
+  install journal. Candidate inspection stayed inert, both report hashes
+  matched, and removal preserved the neighboring file. macOS passed
+  seven phases in 8.16 seconds. The pinned Linux ARM64 container finished
+  in 14.96 seconds and was removed after its receipt settled.
+- **Release scope.** Private beta remains limited to the reviewed macOS
+  runtime. The Linux result covers the tested carrier and Python 3.13.15.
+  These checks consumed zero model turns and zero cash.
+
+[Current stack and installation evidence](current-intake-readiness-20261124.json)
 
 <a id="why-two-cases-have-no-grade"></a>
 
@@ -87,7 +108,8 @@ and [GitPython 3.1.44 publisher release](https://pypi.org/project/GitPython/3.1.
 
 | Deliverable | Status |
 | --- | --- |
-| Reusable evaluation stack | All **37 required checks** passed on the verified source with Waza excluded. Both document/data and software workflows reached protected grading and produced ordinary CLI reports. |
+| Reusable evaluation stack | **37/37** on the current source with Waza excluded. Both ordinary CLI workflows retain protected grading, telemetry and reports. |
+| Private installation | The current wheel passed on macOS ARM64 and in the pinned Linux ARM64 carrier. |
 | Repository and document intake | The feature branch includes reviewed source-file additions, longer publisher statements, and reviewed supplemental document sources. **2,196 tests passed**, with 21 skipped, **81.55% coverage**, and both branch-coverage checks passed. |
 | Candidate usefulness and AEEP selection | The last group prepared potential test cases for these separate studies. It supplied no candidate or selection result. Comparisons are paused while the formal workload and evidence requirements remain open. |
 | Release | The recorded decision is **LIMITED_BETA** for private evaluation with the reviewed macOS ARM64 runtime. Production release and public benefit claims remain **NO_GO**. |
@@ -99,9 +121,17 @@ fixture now supplies its own capacity reading, and the full run used
 the normal test configuration. All 414 tracked code and test files
 matched the tested copy. [Source verification](intake-source-verification-20261120.json)
 
-Locify and adapted EOS have protected case evidence. Formal assignment
-still requires the corpus, runtime, and exposure checks shared by
-other cases. Candidate and selection usefulness need independent task
-assignments and separate results.
+## What still blocks formal comparisons
+
+| Workload | Remaining gap |
+| --- | --- |
+| Software | The audited pool contains 54 reproduced cases across 33 repositories. Two independent holdouts and shared early stages require at least 246 distinct cases. That leaves a minimum gap of 192 against this pool. The later Optype, Locify and adapted EOS grades need the same runtime, rights and exposure checks before adding them to the pool. |
+| Document/data | The 18 annual disclosures remain held on source and asset-use grounds. The remaining ExtractBench metadata has 108 multiple-collection slots at stored ZIP size, or at most 113 if compression is favorable. The design needs 122. These counts precede source, archive and protected-grade verification. |
+
+Live comparisons remain paused. Candidate benefit and selection benefit
+each need a separate result on frozen eligible tasks. Finishing the
+stack or approving more runs cannot fill either workload gap.
+[Corpus audit](recovery-67a93f4c-result-20261119.json)
+and [document rights review](extractbench-disclosure-source-review-20261119.json)
 [Stack readiness and release scope](README.md#retained-stack-and-lifecycle-evidence)
 and [formal evaluation requirements](README.md#formal-candidate-and-selection-gates)
