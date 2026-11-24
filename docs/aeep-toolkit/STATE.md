@@ -1,5 +1,18 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. Software and document cohort batch verified.**
+The [operator handoff](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#cohort-batch-results)
+records the Param and Django Bird protected pairs and reconciles the
+previous Optype, Locify and adapted EOS pairs. The software pool has
+59 reproduced cases across 38 repositories against 246 required.
+Census retail and BEA GDP passed protected local grading. Together
+with WASDE, these three supplemental documents could reduce the
+multiple-collection gap to six under favorable compression if their
+asset-use and cohort grading contracts are accepted. PyPA Build's
+repair still has five required failures. No formal assignments, model
+calls or provider disclosures occurred. Comparisons stay paused and
+Waza stays excluded.
+
 **November 24. The USDA WASDE pack passed ordinary CLI staging and protected grading.**
 The [operator handoff](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#usda-document-grading)
 records the three-file public ZIP and the separate protected verifier.

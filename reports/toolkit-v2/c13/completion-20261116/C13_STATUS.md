@@ -139,12 +139,35 @@ asset-use review before provider dispatch or formal assignment.
 [USDA publisher listing](https://esmis.nal.usda.gov/publication/world-agricultural-supply-and-demand-estimates)
 and [protected calibration evidence](wasde-reviewed-pack-result-20261124.json)
 
+## Cohort batch results
+
+| Case | Protected result |
+| --- | --- |
+| Param configuration API | The repair scored 1/1 across 29 required tests. The original scored 0/1 with the expected issue failure and 28 passes. |
+| Django Bird component props | The repair scored 1/1 across 74 native tests. The original scored 0/1 with one issue failure and 73 preservation passes. The publisher's added test row identified the issue among five matches for its truncated name. |
+| Census September retail sales | Twelve output rows matched the source PDF and workbook. The exact extraction scored 1/1. Missing data and invalid JSON scored 0/1. |
+| BEA third-quarter GDP | Five rows matched the PDF and publisher release narrative. The exact extraction scored 1/1. Missing data and invalid JSON scored 0/1. |
+
+The software inventory gained two newly verified pairs and reconciled
+three already settled pairs for Optype, Locify and adapted EOS. The
+documents passed the local binary extraction rubric. They still need
+case-specific asset-use review and a common cohort grading contract.
+[Federal retail archive](https://www.census.gov/retail/marts/historic_releases.html)
+and [BEA release](https://www.bea.gov/news/2026/gdp-advance-estimate-3rd-quarter-2026)
+
+PyPA Build remains ungraded. After recovering the complete native test
+names, its repair passed 64 required tests and failed five. One console
+script test raised `IndexError`. Four metadata tests raised
+`BuildBackendException`. This case needs a reviewed runtime that can
+supply the offline backend and local package fixture. Its original
+has yet to run. [Batch receipts and diagnosis](cohort-batch-20261124.json)
+
 ## What still blocks formal comparisons
 
 | Workload | Remaining gap |
 | --- | --- |
-| Software | The audited pool contains 54 reproduced cases across 33 repositories. Two independent holdouts and shared early stages require at least 246 distinct cases. That leaves a minimum gap of 192 against this pool. The later Optype, Locify and adapted EOS grades need the same runtime, rights and exposure checks before adding them to the pool. |
-| Document/data | The 18 annual disclosures remain held on source and asset-use grounds. The remaining ExtractBench metadata has 108 multiple-collection slots at stored ZIP size, or at most 113 if compression is favorable. The design needs 122. These counts precede source, archive and protected-grade verification. |
+| Software | The audited pool contains 59 reproduced cases across 38 repositories. Two independent holdouts and shared early stages require at least 246 distinct cases. That leaves a minimum gap of 187 against this pool. Contract audits have the largest holdout gap, at 56 cases before early-stage needs. |
+| Document/data | The 18 annual disclosures remain held on source and asset-use grounds. The remaining ExtractBench metadata has 108 multiple-collection slots at stored ZIP size, or at most 113 if compression is favorable. The design needs 122. If Census, BEA and WASDE all qualify under the same cohort contract, the remaining gap is 11 at stored ZIP size or six with favorable compression. |
 
 Live comparisons remain paused. Candidate benefit and selection benefit
 each need a separate result on frozen eligible tasks. Finishing the

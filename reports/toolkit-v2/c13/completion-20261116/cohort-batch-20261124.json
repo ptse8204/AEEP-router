@@ -1,0 +1,337 @@
+{
+  "schema_version": "aeep.c13.cohort-batch-readback.v1",
+  "software": {
+    "previous": {
+      "counts_by_family": {
+        "contract-audit": 14,
+        "multi-file-repair": 20,
+        "single-file-repair": 20
+      },
+      "distinct_receipts": 110,
+      "largest_repository_group_rows": 14,
+      "minimum_missing_rows_if_all_reproduced_rows_are_eligible": 192,
+      "repository_families": 33,
+      "reproduced_rows": 54,
+      "two_balanced_holdouts_minimum_missing_by_family_before_early_stages": {
+        "contract-audit": 56,
+        "multi-file-repair": 50,
+        "single-file-repair": 50
+      },
+      "two_cohorts_shared_early_minimum": 246
+    },
+    "current": {
+      "reproduced_rows": 59,
+      "repository_families": 38,
+      "counts_by_family": {
+        "contract-audit": 14,
+        "single-file-repair": 22,
+        "multi-file-repair": 23
+      },
+      "distinct_receipts": 120,
+      "largest_repository_group_rows": 14,
+      "two_cohorts_shared_early_minimum": 246,
+      "minimum_missing_rows_if_all_reproduced_rows_are_eligible": 187,
+      "two_balanced_holdouts_minimum_missing_by_family_before_early_stages": {
+        "contract-audit": 56,
+        "multi-file-repair": 47,
+        "single-file-repair": 48
+      }
+    },
+    "previously_verified_now_reconciled": [
+      {
+        "case": "jorenham__optype-29",
+        "repository": "jorenham/optype",
+        "revision": "4d3e3765a206e98df244e33b95a3c29175ed121c",
+        "family": "multi-file-repair",
+        "evidence": "adapted_selector_and_original_suite",
+        "receipt_ids": [
+          "rcpt_60cff055a7c747c69bdf8ecf939f78bc",
+          "rcpt_0e1292e1db3144cc91771201ae600a82"
+        ]
+      },
+      {
+        "case": "ryanhoangt__locify-8",
+        "repository": "ryanhoangt/locify",
+        "revision": "cabfbb04d0d94bb50f67c84201f1fdb9022a0a2c",
+        "family": "multi-file-repair",
+        "evidence": "published_repair_and_original",
+        "receipt_ids": [
+          "rcpt_99c306cdd1cd4222994f719e64e7d8cd",
+          "rcpt_81b6f415e34f41d2ac613d211ef20777"
+        ]
+      },
+      {
+        "case": "Akkudoktor-EOS__EOS-459",
+        "repository": "akkudoktor-eos/eos",
+        "revision": "d912561bfbe5c1c97505f89225c3f9650b00c3c7",
+        "family": "single-file-repair",
+        "evidence": "adapted_offline_dependency_and_fixture",
+        "receipt_ids": [
+          "rcpt_14a961f42fab499d9e96c213fc5af897",
+          "rcpt_0540d20da8d84ee58c2bd2cb85bc6c8b"
+        ]
+      }
+    ],
+    "fresh_protected_pairs": [
+      {
+        "case": "holoviz__param-1073",
+        "repository": "holoviz/param",
+        "revision": "bbaea5b8a64452d346afa05f6b18ba9cdd41f5a7",
+        "family": "single-file-repair",
+        "evidence": "ordinary_protected_pair",
+        "receipt_ids": [
+          "rcpt_d59ccfd8217643bda416084c07a2cfcd",
+          "rcpt_0f20059e5f604924bf7d95ad91807e4d"
+        ]
+      },
+      {
+        "case": "joshuadavidthomas__django-bird-239",
+        "repository": "joshuadavidthomas/django-bird",
+        "revision": "337ab6d4341e04ac3f048eabbd295546519ccef0",
+        "family": "multi-file-repair",
+        "evidence": "source_bound_native_selector_recovery",
+        "receipt_ids": [
+          "rcpt_b712bbb9295a44ccb1ce95be9ff7a8d5",
+          "rcpt_ef91b6f6f6df4bd68f49b155de5e50ac"
+        ]
+      }
+    ],
+    "formal_cases_adopted": 0,
+    "blocked_contract_audit": {
+      "case": "pypa__build-1027-aeep-contract-audit",
+      "classification": "ungraded_reference_failed",
+      "required_failures": [
+        {
+          "test": "tests/test_projectbuilder.py::test_build_with_dep_on_console_script[False]",
+          "phase": "call",
+          "category": "IndexError",
+          "file": "tests/test_projectbuilder.py",
+          "line": 519
+        },
+        {
+          "test": "tests/test_projectbuilder.py::test_metadata_path_no_prepare[False]",
+          "phase": "call",
+          "category": "BuildBackendException",
+          "file": "src/build/_builder.py",
+          "line": 388
+        },
+        {
+          "test": "tests/test_projectbuilder.py::test_metadata_path_with_prepare[False]",
+          "phase": "call",
+          "category": "BuildBackendException",
+          "file": "src/build/_builder.py",
+          "line": 382
+        },
+        {
+          "test": "tests/test_projectbuilder.py::test_metadata_path_legacy[False]",
+          "phase": "call",
+          "category": "BuildBackendException",
+          "file": "src/build/_builder.py",
+          "line": 382
+        },
+        {
+          "test": "tests/test_projectbuilder.py::test_metadata_invalid_wheel[False]",
+          "phase": "call",
+          "category": "BuildBackendException",
+          "file": "src/build/_builder.py",
+          "line": 382
+        }
+      ],
+      "diagnostic_receipt": "rcpt_258eb2b8a80f48fa88970e0921353670",
+      "earlier_evidence": [
+        {
+          "path": ".aeep/c13-cohort-batch-20261124/software-contracts-verified/execution/result.json",
+          "sha256": "146c72478700edd3843c846d507c20a7d3d6dd1414f90ceef39dc3ca41fc61bf"
+        },
+        {
+          "path": ".aeep/c13-cohort-batch-20261124/software-contracts-published-ids/execution/result.json",
+          "sha256": "6ca9409023d63b97a4c38e74df798b1906caee3ecc2ff535b14a02d260cbb5de"
+        },
+        {
+          "path": ".aeep/c13-cohort-batch-20261124/software-contracts-native-grading/execution/result.json",
+          "sha256": "18fefe8a1bf77e9b5c3f395fd21427c29d4643e11a07fda05591fda693fe4f9f"
+        }
+      ],
+      "collection": {
+        "path": ".aeep/c13-cohort-batch-20261124/software-contracts-collection/result.json",
+        "sha256": "170f9698864bd37fd23dc037cbb871ceb1f02c2a2410e5ad60ff5518f30a8ec3"
+      },
+      "bounded_wheel_acquisition": {
+        "path": ".aeep/c13-cohort-batch-20261124/build-audit-wheel-review.json",
+        "sha256": "4d768d212a6581c6d98d2f5bd2980be189bf947ee63dc03bb6c15d4cbe5c502b"
+      },
+      "details": {
+        "path": ".aeep/c13-cohort-batch-20261124/software-contracts-diagnosis/result.json",
+        "sha256": "37d485e2d452246322209f88934733c417b0f0418647d09279362043c26c284c"
+      },
+      "ledger": {
+        "path": ".aeep/c13-cohort-batch-20261124/software-contracts-diagnosis/ledger.json",
+        "sha256": "87c378fbcaa4ad1cb6813107a97a034562b07d2961800d42e07efa27a37e9e99"
+      }
+    }
+  },
+  "document_data": {
+    "new_local_grader_cases": {
+      "census-advance-retail-202609": {
+        "source_family": "census-marts",
+        "publisher_crosscheck": "https://www.census.gov/retail/marts/historic_releases.html",
+        "public_zip_sha256": "f66b00c378b4fac1c0427627ea036aaaed5ca32139a01e746de2abd08000b53d",
+        "public_zip_bytes": 178520,
+        "crosschecked_row_count": 12,
+        "protected_review": "e02b7c43bd508163c1cb396eb779ccaa84f0139a6abadada47c310a88d78067e",
+        "checks": {
+          "reference": {
+            "verified": true,
+            "score": null,
+            "receipt": "rcpt_4f5559b0eb174ae0bfb8b39c11522ada",
+            "error_type": null
+          },
+          "reference-grade": {
+            "verified": true,
+            "score": {
+              "score": 1.0,
+              "valid": true,
+              "detail": ""
+            },
+            "receipt": "rcpt_385253b064004ab58b62b9ec0752754d",
+            "error_type": null
+          },
+          "missing-row": {
+            "verified": true,
+            "score": {
+              "score": 0.0,
+              "valid": false,
+              "detail": "inexact_extraction"
+            },
+            "receipt": "rcpt_540ed492220546a5a168e54659509786",
+            "error_type": null
+          },
+          "bad-json": {
+            "verified": true,
+            "score": {
+              "score": 0.0,
+              "valid": false,
+              "detail": "invalid_submission"
+            },
+            "receipt": "rcpt_51b1d7441f444835b460261761c23e8e",
+            "error_type": null
+          }
+        }
+      },
+      "bea-gdp-2026q3-advance": {
+        "source_family": "bea-nipa-gdp",
+        "publisher_crosscheck": "https://www.bea.gov/news/2026/gdp-advance-estimate-3rd-quarter-2026",
+        "public_zip_sha256": "1a22a7ece54bd48eba754bda96a1bf912b94594d79c23e3c4ff22afa2aca56ef",
+        "public_zip_bytes": 382879,
+        "crosschecked_row_count": 5,
+        "protected_review": "68e0d3c646a958ec34bb1cf3634aad0f2cb35b374b53a3574e6df178e6e809c8",
+        "checks": {
+          "reference": {
+            "verified": true,
+            "score": null,
+            "receipt": "rcpt_cd8f0c520a3c46709f9d166435f8dbb2",
+            "error_type": null
+          },
+          "reference-grade": {
+            "verified": true,
+            "score": {
+              "score": 1.0,
+              "valid": true,
+              "detail": ""
+            },
+            "receipt": "rcpt_09fefe575cb84c5ca402a604fec4a3c6",
+            "error_type": null
+          },
+          "missing-row": {
+            "verified": true,
+            "score": {
+              "score": 0.0,
+              "valid": false,
+              "detail": "inexact_extraction"
+            },
+            "receipt": "rcpt_2c184eeb3fff4afa9c5db7bbb665ad6f",
+            "error_type": null
+          },
+          "bad-json": {
+            "verified": true,
+            "score": {
+              "score": 0.0,
+              "valid": false,
+              "detail": "invalid_submission"
+            },
+            "receipt": "rcpt_e4e776707fb1467482c7ce9fc62a3288",
+            "error_type": null
+          }
+        }
+      }
+    },
+    "formal_cases_adopted": 0,
+    "optimistic_capacity_after_supplemental_calibrations": {
+      "conditional_on_asset_use_and_common_cohort_contract": true,
+      "multiple_collection_minimum": 122,
+      "previous_metadata_only_stored_zip_candidates": 108,
+      "previous_metadata_only_favorable_compression_candidates": 113,
+      "possible_supplemental_cases": 3,
+      "including_previously_calibrated_wasde": true,
+      "minimum_remaining_stored_size_scenario": 11,
+      "minimum_remaining_favorable_compression_scenario": 6
+    }
+  },
+  "evidence": {
+    "operation-review.json": {
+      "path": ".aeep/c13-cohort-batch-20261124/software-pinned-carrier/operation-review.json",
+      "sha256": "50f8c3e4d1893ea62237068d98f9e02e4274fc977691f2918ef9b4c6831e0c76"
+    },
+    "selector-map.json": {
+      "path": ".aeep/c13-cohort-batch-20261124/django-bird-grading/selector-map.json",
+      "sha256": "60cbca08f8b0f91adeb11e5189b7d5b9060f0b7a337b3516caa2f3e96d80b6b5"
+    },
+    "pack.json": {
+      "path": ".aeep/c13-cohort-batch-20261124/documents-verified/pack.json",
+      "sha256": "331baf5167cfc8a62f73e4fc3c4dbf248078e3056460797b956ac57ad71a7306"
+    },
+    "software_run": {
+      "path": ".aeep/c13-cohort-batch-20261124/software-pinned-carrier/execution/result.json",
+      "sha256": "a1df7f0261d4207b3f77d842423a3f68f5b678ac458a6cb6720e5e7fc4cb81b0"
+    },
+    "django_bird_grades": {
+      "path": ".aeep/c13-cohort-batch-20261124/django-bird-grading/result.json",
+      "sha256": "86c8a8551771387b08aa0b309979efd141ae5bcd84b5f975015b2c2f17199b25"
+    },
+    "django_bird_collection": {
+      "path": ".aeep/c13-cohort-batch-20261124/django-bird-complete/result.json",
+      "sha256": "d691d2da5cbcf60761368b121226ffc0e2ff5359144c9b0ce3c0bb1e856718b2"
+    },
+    "documents": {
+      "path": ".aeep/c13-cohort-batch-20261124/documents-verified/result.json",
+      "sha256": "30dbb16e0712cdbe42912a9dce06a1a6eac2cf11e3a3773330c7c5fada1b8887"
+    },
+    "acquisition_review": {
+      "path": ".aeep/c13-cohort-batch-20261124/local-acquisition-review.json",
+      "sha256": "d114a88bc38e5ef8b94439aaac8e181ea41aea56131807947782fb0489851d86"
+    },
+    "public_publisher_acquisition": {
+      "path": ".aeep/c13-cohort-batch-20261124/local-acquisition-result.json",
+      "sha256": "985febd2c1df60523feb2714fda6aef3005229f801b9cdb5f6519ec2aea09109"
+    }
+  },
+  "comparisons_paused": true,
+  "waza_excluded": true,
+  "model_turns": 0,
+  "cash_usd": 0,
+  "verification": {
+    "deterministic_readback": true,
+    "offline_documentation": {
+      "docs-check": {
+        "exit_code": 0,
+        "path": ".aeep/c13-cohort-batch-20261124/docs-check.log",
+        "sha256": "f1d5766aeaf32542017318107efa853c34602d402dacded327ed054d91b3524b"
+      },
+      "handoff": {
+        "exit_code": 0,
+        "path": ".aeep/c13-cohort-batch-20261124/handoff.log",
+        "sha256": "f13b5cbd47f7d1d0144411d0e5ba9ce0b361291055b8a5609be4f1ad92a068e1"
+      }
+    }
+  }
+}
