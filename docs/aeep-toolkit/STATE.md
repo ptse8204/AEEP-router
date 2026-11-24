@@ -1,5 +1,15 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. Shared carrier batch verified Skelebot.**
+The [protected batch](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#shared-carrier-batch)
+records a 1/1 repair and 0/1 original. The same offline carrier passed
+with read-only package metadata and a compatible Artifactory wheel.
+AnyIO imports passed inside the carrier, and its collection still
+returned no results. The software pool has 70 reproduced cases
+across 45 repositories, with at least 176 still needed. The next
+AnyIO diagnostic should trace pytest invocation after startup.
+Comparisons stay paused and Waza stays excluded.
+
 **November 24. Document calibration lineage checked.**
 The [VAREX operator handoff](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#varex-protected-grading)
 records a corrected form-number check and all-page comparison against

@@ -1,0 +1,148 @@
+{
+  "all_operations_settled": 11,
+  "case": "carsdotcom__skelebot-280-aeep-contract-audit",
+  "cash_usd": 0,
+  "comparisons_paused": true,
+  "elapsed_seconds": 18.61194524797611,
+  "formal_assignments": 0,
+  "grading_evidence": {
+    "compatibility_intake": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/skelebot/artifactory-compatibility-acquisition.json",
+      "sha256": "3a08ec818c4d009ec1b1a8c45b0eb2bf34944dd892b14e0e9874b714ba3e838e"
+    },
+    "incompatible_dependency": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/skelebot/diagnostic-followup/result.json",
+      "sha256": "2cf3f2f274d11c28a59c82f20049e1931de79eed94adcd2233bd29415e6b996f"
+    },
+    "initial_source": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/anyio/executed-coordinator.py",
+      "sha256": "09a2fa1f819cb7803f0c5b4a5207ec00c0801221945dbc15d1e121741daf26de"
+    },
+    "ledger": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/skelebot/with-compatible-artifactory/ledger.json",
+      "sha256": "91513594d2e828dd7b05326d7b3ced1e2802eb1e387751e30c3fc1c96f7e308d"
+    },
+    "metadata_correction_source": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/skelebot/with-metadata/executed-coordinator.py",
+      "sha256": "063a0f69e6cedfe1a15725f2448948d1e4824393c9dc20319a8ea8e75b3fdce6"
+    },
+    "missing_metadata": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/skelebot/diagnostic/result.json",
+      "sha256": "f6ed8f3a2915d83d975bb1d2bce589e8f57e62121234bdc5366fa47d92ef620b"
+    },
+    "result": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/skelebot/with-compatible-artifactory/result.json",
+      "sha256": "3f72019a0cf3ff966c57819755d0dcaa44d045c3b0cbbf6d984303f5c5a6ac03"
+    },
+    "review": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/skelebot/with-compatible-artifactory/review-compatible-artifactory.json",
+      "sha256": "f857897b424782c7fb7a9863493a0747b133eb9658da600474b8936de5493d7d"
+    },
+    "startup": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/skelebot/startup/result.json",
+      "sha256": "4999227977ad45bbfe0dad46aebddf0e38742ed649337e84617057aa349c8d48"
+    }
+  },
+  "held_anyio": {
+    "case": "agronholm__anyio-935",
+    "collection": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/anyio/diagnostic-followup/result.json",
+      "sha256": "21a019a70cca7470686e7eee517a3c9433cfc8015a61a30c992694151c87c877"
+    },
+    "first_reference": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/anyio/execution/result.json",
+      "sha256": "47a55d1c13bd04fe6ff07fac3a5fe6ac074aa9c35a8906b046443ff1a8c465ce"
+    },
+    "grade": null,
+    "ledger": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/anyio/startup/ledger.json",
+      "sha256": "07f075394b4735e35e13953d879b4af89f5be3a00adf3361048321f201dfef07"
+    },
+    "next": "Trace pytest invocation inside the child. The dependency and case-plugin imports passed.",
+    "startup": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/anyio/startup/result.json",
+      "sha256": "be1d1e5bf8aa8fa69a0b7eb1e7553ab405dfc87592c617d3074cc45053ddeebf"
+    }
+  },
+  "models": 0,
+  "prior_pool": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/protected-towncrier-contract-20261124.json",
+    "sha256": "be18df5f5285b60ac6922d6af880bb6c1f9a1d18b267a1c33511c2eef448d3f9"
+  },
+  "provider_disclosure": false,
+  "repository": "carsdotcom/skelebot",
+  "roles": {
+    "original": {
+      "counts": {
+        "FAILED": 2,
+        "PASSED": 5
+      },
+      "elapsed_seconds": 1.749048582976684,
+      "grade": 0.0,
+      "receipt": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/skelebot/with-compatible-artifactory/receipt-original.json",
+        "sha256": "650b8f311bd17b4a1d68f85dcd67f1626e249f158bef326a2bd565bf77d815a9"
+      },
+      "statuses": {
+        "test/test_aeep_preservation.py::test_snapshot_preserved": "FAILED",
+        "test/test_components_package.py::TestPlugin::test_addParsers": "PASSED",
+        "test/test_components_package.py::TestPlugin::test_execute": "PASSED",
+        "test/test_components_package.py::TestPlugin::test_execute_existing": "FAILED",
+        "test/test_components_package.py::TestPlugin::test_execute_ignores": "PASSED",
+        "test/test_components_package.py::TestPlugin::test_invalid": "PASSED",
+        "test/test_components_package.py::TestPlugin::test_validate_valid": "PASSED"
+      }
+    },
+    "reference": {
+      "counts": {
+        "PASSED": 7
+      },
+      "elapsed_seconds": 1.7485969999688677,
+      "grade": 1.0,
+      "receipt": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/skelebot/with-compatible-artifactory/receipt-reference.json",
+        "sha256": "ab7ec5c92e47f57b35a2cf0ac1d4eee87b62ba977d197b9f10d05722177d34d8"
+      },
+      "statuses": {
+        "test/test_aeep_preservation.py::test_snapshot_preserved": "PASSED",
+        "test/test_components_package.py::TestPlugin::test_addParsers": "PASSED",
+        "test/test_components_package.py::TestPlugin::test_execute": "PASSED",
+        "test/test_components_package.py::TestPlugin::test_execute_existing": "PASSED",
+        "test/test_components_package.py::TestPlugin::test_execute_ignores": "PASSED",
+        "test/test_components_package.py::TestPlugin::test_invalid": "PASSED",
+        "test/test_components_package.py::TestPlugin::test_validate_valid": "PASSED"
+      }
+    }
+  },
+  "schema_version": "aeep.c13.retained-carrier-batch-readback.v1",
+  "software_pool": {
+    "counts_by_family": {
+      "contract-audit": 18,
+      "multi-file-repair": 24,
+      "single-file-repair": 28
+    },
+    "distinct_receipts": 142,
+    "largest_repository_group_rows": 14,
+    "minimum_missing_rows_if_all_reproduced_rows_are_eligible": 176,
+    "repository_families": 45,
+    "reproduced_rows": 70,
+    "two_balanced_holdouts_minimum_missing_by_family_before_early_stages": {
+      "contract-audit": 52,
+      "multi-file-repair": 46,
+      "single-file-repair": 42
+    },
+    "two_cohorts_shared_early_minimum": 246
+  },
+  "source_revision": "9532b09fb914e0d62c2221464518990c9afebf25",
+  "waza_excluded": true,
+  "wheel_intake": {
+    "downloaded_bytes": 5403401,
+    "downloaded_files": 9,
+    "reused_files": 17,
+    "review": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-retained-carrier-batch-20261124/acquisition-review.json",
+      "sha256": "afbe23d14b4bb59541fd549415459e7aa3de46c9afe794c273f3758db4c69da8"
+    },
+    "verified_filenames": 26
+  }
+}

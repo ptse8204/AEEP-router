@@ -1,5 +1,10 @@
 # 0.8 plan coverage and remaining work
 
+The [retained carrier batch](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#shared-carrier-batch)
+verified Skelebot and isolated AnyIO's problem to pytest invocation
+after startup. The software pool has 70 reproduced cases across 45
+repositories and a minimum shortfall of 176. Comparisons remain paused.
+
 The [VAREX calibration lineage check](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#varex-protected-grading)
 verified that the 246 staged PDFs have no additional matches against
 either calibration PDF under the corrected form-number and text checks.

@@ -266,11 +266,29 @@ dependency tree excluded interpreter startup hooks, and the protected
 grader verified the expected native imports before testing.
 [Protected grades and receipts](protected-towncrier-contract-20261124.json)
 
+### Shared carrier batch
+
+Skelebot's packaging repair scored **1/1** with all seven checks
+passing. The original scored **0/1**. Its overwrite test and the
+authored snapshot guard failed as expected, and five checks passed.
+Collection first needed the project's version metadata. The startup
+trace then located the remaining failure at the Artifactory client's
+use of `pathlib._Flavour`, which Python 3.13 removed. The passing run
+used the same image and unchanged tests with the compatible
+`dohq-artifactory` 1.0.2 wheel and read-only project metadata.
+
+AnyIO issue 935 remains ungraded. The offline startup probe loaded the
+pinned dependencies and the grader's plugin from the protected snapshot.
+Pytest still exited before emitting collection results. The original
+was never dispatched. Eleven operations settled across the two cases,
+including diagnostics, with zero model turns or cash.
+[Batch receipts and per-test results](protected-retained-carrier-batch-20261124.json)
+
 ## What still blocks formal comparisons
 
 | Workload | Remaining gap |
 | --- | --- |
-| Software | The audited pool contains 69 reproduced cases across 44 repositories. The two holdouts and shared early stages need at least 246 distinct cases, leaving a minimum gap of 177. Contract audits have the largest holdout gap, at 53 cases before early-stage needs. |
+| Software | The audited pool contains 70 reproduced cases across 45 repositories. The two holdouts and shared early stages need at least 246 distinct cases, leaving a minimum gap of 176. Contract audits have the largest holdout gap, at 52 cases before early-stage needs. |
 | Document/data | The 246 VAREX archives fit the provisional stage sizes with all known related forms grouped together. An all-page text screen found no additional matches at its recorded thresholds. Final source-lineage review, asset use and stage assignment remain open. The 18 ExtractBench annual disclosures remain held on source and asset-use grounds. |
 
 VAREX now has 133 multi-collection prospects with distinct schema hashes.
