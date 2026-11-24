@@ -1,5 +1,18 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. Native VAREX batch and SQLacodegen pair verified.**
+The [operator handoff](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#varex-protected-grading)
+records 130 passing protected reference checks across 131 VAREX
+forms. GSA 50A failed its published schema. The form lineage review
+left 122 staged multiple-collection prospects. The complementary batch
+verified 144 PDFs and 141 protected references. A provisional
+source-group allocation fits 246 local archives across both families.
+Complete lineage, asset use and study assignments remain open. SQLacodegen 391
+scored 1/1 on the repair and 0/1 on the original with all seven
+tests preserved, bringing software to 65 cases across 41 repositories.
+Local preparation granted no data transfer or formal assignment.
+Comparisons stay paused and Waza stays excluded.
+
 **November 24. All 131 remaining VAREX multiple-collection PDFs verified.**
 The [source-family screen](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#varex-protected-grading)
 reconciles 93 LFS digests and 38 Git blob IDs. The first-page text

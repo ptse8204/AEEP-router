@@ -1,5 +1,12 @@
 # 0.8 plan coverage and remaining work
 
+The [C13 protected cohort expansion](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#varex-protected-grading)
+verified the two VAREX shape families and staged 246 archives. The
+provisional source-group allocation fits both holdouts. Asset use and
+formal assignment remain open. SQLacodegen 391 joined the software
+pool, bringing it to 65 reproduced cases across 41 repositories.
+The balanced cohort, comparative usefulness and release gates remain open.
+
 The [VAREX source-family screen](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#varex-protected-grading)
 verified all 131 remaining multiple-collection PDFs and flagged eight
 related-form groups. A one-per-group screen leaves 120 prospects against

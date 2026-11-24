@@ -1,0 +1,93 @@
+{
+  "cash_usd": 0,
+  "comparisons_paused": true,
+  "formal_assignments": 0,
+  "model_turns": 0,
+  "prior_software_pool": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/protected-cohort-followup-20261124.json",
+    "sha256": "7ede6861e8332998615171e9d8b688319abda48fe8a68f87a9b89b1c4a60aa09"
+  },
+  "schema_version": "aeep.c13.protected-batches-readback.v1",
+  "software_pool": {
+    "counts_by_family": {
+      "contract-audit": 15,
+      "multi-file-repair": 24,
+      "single-file-repair": 26
+    },
+    "distinct_receipts": 132,
+    "largest_repository_group_rows": 14,
+    "minimum_missing_rows_if_all_reproduced_rows_are_eligible": 181,
+    "repository_families": 41,
+    "reproduced_rows": 65,
+    "two_balanced_holdouts_minimum_missing_by_family_before_early_stages": {
+      "contract-audit": 55,
+      "multi-file-repair": 46,
+      "single-file-repair": 44
+    },
+    "two_cohorts_shared_early_minimum": 246
+  },
+  "varex": {
+    "archive_bytes": 46997748,
+    "archive_manifest_sha256": "2fb6ddb8b5e04f1e4dccae66b1f79d088ca59bc40ab9bafdaab1ad5cf105ecfc",
+    "asset_use_approved": false,
+    "native_grade_evidence": {
+      "path": "reports/toolkit-v2/c13/completion-20261116/varex-protected-cohort-result-20261124.json",
+      "sha256": "6e470797af1d6d8bb16c1b03142c99f096a9397645592b44887e83c6f9598eda"
+    },
+    "pack_sha256": "68926216f7a64829d26050adeda7af691e96637a334d59b30e3e3d4b12aeaca0",
+    "protected_references": {
+      "path": ".aeep/c13-cohort-runtime-20261124/varex-protected-reference-intake/reference-intake.json",
+      "sha256": "e3e832f79a86550ead32bb4fc06854d6ec5333381babc13fb4100661b53644a0"
+    },
+    "staged_cases": 122,
+    "staging_record": {
+      "path": ".aeep/c13-cohort-runtime-20261124/varex-protected-reference-intake/staged-prospects/staged.json",
+      "sha256": "7c0a713ae6cb48b657272c04a79fd07efc48c80560ba37e89c3b633c61dbda8f"
+    }
+  },
+  "verified_sqlite_cli_pair": {
+    "case": "agronholm__sqlacodegen-391",
+    "cases": [
+      {
+        "elapsed_seconds": 8.43334283301374,
+        "receipt": {
+          "path": ".aeep/c13-cohort-runtime-20261124/c13-sqlacodegen-sqlite-cli-391-20261124/execution/receipt-rcpt_83df210f1c5a42e6a56ccafe2d6ea644.json",
+          "sha256": "6cd190d2e37e59af5c9b800de20ed20d022204e257ff0dd9624e0efcf75aea65"
+        },
+        "score": 1.0,
+        "status_counts": {
+          "PASSED": 7
+        }
+      },
+      {
+        "elapsed_seconds": 6.945020249986555,
+        "receipt": {
+          "path": ".aeep/c13-cohort-runtime-20261124/c13-sqlacodegen-sqlite-cli-391-20261124/execution/receipt-rcpt_6b3abeb5801b4c19806b200a24d2d175.json",
+          "sha256": "5f82397e4b8551449446f8cbd240fa4cd9cd88a9ad9b18d75a7462b840155535"
+        },
+        "score": 0.0,
+        "status_counts": {
+          "FAILED": 2,
+          "PASSED": 5
+        }
+      }
+    ],
+    "image": "sha256:b0eb4add50887814206ad86dc0b685003382da55a44b166711438409769a9661",
+    "ledger": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-sqlacodegen-sqlite-cli-391-20261124/execution/ledger.json",
+      "sha256": "bdffa0928bf799843c4e0ef1de8b7ed0b8ddc35ec997729483be00f2c606f113"
+    },
+    "other_revisions_must_share_stage": true,
+    "repository": "agronholm/sqlacodegen",
+    "result": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-sqlacodegen-sqlite-cli-391-20261124/execution/result.json",
+      "sha256": "b671cda7c2e89365c595f2622a4b382362cbab6d3237983818674332ca364c3d"
+    },
+    "review": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-sqlacodegen-sqlite-cli-391-20261124/operation-review.json",
+      "sha256": "097ea53fac3afa6cf95fbcea403e9335207d06ed82ab9319c1c83aacaa8b260c"
+    },
+    "source_revision": "636680d7948ee40710f13e6a451ccd771f2c7f1f"
+  },
+  "waza_excluded": true
+}

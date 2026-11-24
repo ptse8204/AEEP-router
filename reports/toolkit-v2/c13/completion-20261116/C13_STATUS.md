@@ -222,11 +222,19 @@ the assertion tried to convert that empty result into a path. The
 protected run kept the assertion and isolation intact. The reference and
 diagnostic settled without a grade, and the original was never dispatched.
 
+SQLacodegen issue 391 passed all seven unchanged SQLite CLI tests on the
+published repair. The original reproduced both issue failures and kept
+all five preservation tests passing. A read-only launcher and locally
+derived package metadata supplied the project's published entry points
+without installing it. The other staged SQLacodegen cases still require
+PostgreSQL or MySQL test fixtures. Keep both verified SQLacodegen revisions
+in one study stage. [Protected pair and settled receipts](protected-cohort-expansion-20261124.json)
+
 ## What still blocks formal comparisons
 
 | Workload | Remaining gap |
 | --- | --- |
-| Software | The audited pool contains 64 reproduced cases across 41 repositories. Two independent holdouts and shared early stages require at least 246 distinct cases. That leaves a minimum gap of 182 against this pool. Contract audits have the largest holdout gap, at 55 cases before early-stage needs. |
+| Software | The audited pool contains 65 reproduced cases across 41 repositories. Two independent holdouts and shared early stages require at least 246 distinct cases. That leaves a minimum gap of 181 against this pool. Contract audits have the largest holdout gap, at 55 cases before early-stage needs. |
 | Document/data | The 18 annual disclosures remain held on source and asset-use grounds. The remaining ExtractBench metadata has 108 multiple-collection slots at stored ZIP size, or at most 113 if compression is favorable. The design needs 122. If Census, BEA, Treasury, EIA and WASDE qualify under the same cohort contract, the remaining gap is nine at stored ZIP size or four with favorable compression. |
 
 VAREX now has 133 multi-collection prospects with distinct schema hashes.
@@ -284,6 +292,46 @@ Counting one case per flagged group would leave 120, two short of the
 workloads from alternate versions of the same form before cohort
 assignment. No candidate PDFs from this batch went to a model or grader.
 [Verified PDF inventory and source-family screen](varex-source-family-screen-20261124.json)
+
+The protected batch read nine bound reference ranges totaling 353,767
+bytes and graded all 131 documents offline. Of those, 130 references
+passed their published schema and the native grader's missing-field,
+missing-output and malformed-output checks. GSA 50A scored 18/18 on the
+native metric. Its distribution details are an object where the schema
+requires a string, so it stays outside the pool.
+
+The publisher review treats seven repeat forms as alternate versions of
+the same task. One form remains unresolved because its first page could
+not be screened. The FDA inspection forms and the two California storage
+applications cover different workflows. Keep those related forms within
+one study stage. [GSA forms library](https://www.gsa.gov/forms-library)
+· [FDA form guidance](https://www.fda.gov/media/182173/download)
+· [California cold-storage application](https://www.cdph.ca.gov/Programs/CEH/DFDCS/Pages/FDBPrograms/FoodSafetyProgram/ColdStorageFacilities.aspx)
+· [California frozen-locker application](https://www.cdph.ca.gov/Programs/CEH/DFDCS/Pages/FDBPrograms/FoodSafetyProgram/FrozenFoodLockerFacilities.aspx)
+
+The 122 multiple-collection prospects have staged document archives
+containing only the PDF, schema and instructions. The first
+staging attempt hit the existing hard-link guard. Independent APFS
+copies passed the same guard and kept all publisher hashes.
+[Native scores and form review](varex-protected-cohort-result-20261124.json)
+· [Archive readback](protected-cohort-expansion-20261124.json)
+
+The complementary batch verified 144 more VAREX PDFs with at most one
+collection. It reused the retained publisher reference ranges. The
+protected grader accepted 141 references. Cases 307, CDPH 263 and DS500
+had objects in fields the schema declares as strings. Four other forms
+lacked enough first-page text for the lineage screen, and one related
+form was held out. The remaining 136 prospects
+allow a provisional source-group allocation with 124 complementary
+cases. [Complementary grades and capacity](varex-balanced-capacity-20261124.json)
+
+The combined local pack has 246 staged document archives. The capacity
+check fits the shared 8-case qualification and 28-case training sets and
+both 105-case holdouts without splitting a provisional source group.
+The ordinary CLI reproduced an archive and its compact task descriptor.
+Complete source-lineage review, case-specific asset-use approval and
+frozen study assignments are still open.
+[Balanced archive verification](varex-balanced-archives-20261124.json)
 
 Live comparisons remain paused. Candidate benefit and selection benefit
 each need a separate result on frozen eligible tasks. Finishing the

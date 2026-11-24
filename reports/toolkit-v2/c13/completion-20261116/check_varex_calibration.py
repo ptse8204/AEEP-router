@@ -90,7 +90,7 @@ def read_cases():
     return pack_sha, inputs, protected, cases
 
 
-def fields(*, prepare=False):
+def pinned_runtime():
     if Path(aeep.__file__).resolve().parents[2] != FROZEN or verification_source_digest(FROZEN) != SOURCE:
         raise ValueError("requires the exact tested source")
     projection = json.loads(pinned(RUNTIME / "dependency-projection.json", PROJECTION))
@@ -105,6 +105,11 @@ def fields(*, prepare=False):
     runtime_review = json.loads(pinned(RUNTIME / "operation-review.json", RUNTIME_REVIEW))
     if image_layers() != runtime_review["layers"]:
         raise ValueError("retained image layers changed")
+    return deps, len(inventory), runtime_review
+
+
+def fields(*, prepare=False):
+    deps, dependency_count, runtime_review = pinned_runtime()
     pack, inputs, assets, cases = read_cases()
     assets.update({
         "guest.py": GUEST.read_bytes(),
@@ -155,7 +160,7 @@ def fields(*, prepare=False):
         "source": SOURCE, "driver_sha256": file_digest(Path(__file__)),
         "image": runtime_review["image"], "layers": runtime_review["layers"],
         "docker_sha256": file_digest(Path(DOCKER)), "dependency_projection_sha256": PROJECTION,
-        "dependency_versions": VERSIONS, "dependency_files": len(inventory), "protected_files": pins,
+        "dependency_versions": VERSIONS, "dependency_files": dependency_count, "protected_files": pins,
         "benchmark_pack": pack, "input_digests": {item.task_id: content_digest(item) for item in inputs},
         "roles": list(ROLES), "native_metric": "exact_match_normalized",
         "argv_sha256": content_digest({"argv": argv}), "container": name,
