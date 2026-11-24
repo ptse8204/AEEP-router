@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [qBraid visualization preflight](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#qbraid-visualization-grader-preparation)
+pins nine protected checks and a retained Linux ARM64 carrier.
+The two baseline images have checksum-verified recoveries and stay
+outside the worker archive. The offline native result and formal
+comparisons remain unverified.
+
 The [CCFlow runtime and correction report](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#follow-up-software-source-batches)
 records the verified 46-package Linux runtime and the settled
 startup failure before pytest. Both corrected launches passed

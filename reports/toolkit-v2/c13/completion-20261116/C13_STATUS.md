@@ -597,6 +597,29 @@ software pool still has 75 cases, leaving at least 171 to reproduce.
 · [PyDAP required test](https://github.com/pydap/pydap/blob/12fb95e64776aaabc5edddd1563c6e1c7b5656aa/src/pydap/tests/test_client.py#L1248-L1263)
 · [VAREX rights rehearsal](cohort-batch-continuation-20261124.json)
 
+### qBraid visualization grader preparation
+
+The pinned qBraid archive matches the publisher's 128-file Git tree.
+Both expected PNGs are malformed in that tree. Bell is missing one
+carriage return in its header. Misc is missing that byte and one inside
+the compressed image data. The unique recovery for each passes its
+original PNG chunk CRCs and complete compressed scanline checks.
+
+The prepared worker archive excludes both expected images and the
+verifier. The protected inputs retain the same nine test identities
+and the same source edits. The two image repairs are the only byte
+changes in the reconstructed protected test inputs. This is an
+adapted protected grader, with zero upstream tests executed.
+
+The retained Linux ARM64 EOS image matches all 36 reviewed layers and
+already contains Matplotlib, Pillow, NumPy and pytest. The remaining
+reviewed wheel downloads total 737,711 bytes with cached Jinja2.
+Preparation requires the real `pytest-mpl` plugin and `--mpl` so both
+image comparisons execute. The protected launch and grades still need
+verification after usable space returns above the 50 GiB reserve.
+
+[qBraid source, private verifier and dependency evidence](pyqasm-protected-transport-preflight-20261124.json)
+
 Live comparisons remain paused. Candidate benefit and selection benefit
 each need a separate result on frozen eligible tasks. Finishing the
 stack or approving more runs cannot fill either workload gap.

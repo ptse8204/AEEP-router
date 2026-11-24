@@ -1,5 +1,17 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. qBraid protected visualization transport verified.**
+The [C13 qBraid review](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#qbraid-visualization-grader-preparation)
+binds a retained Python 3.12 carrier and the same nine required
+identities. The publisher PNGs lost carriage returns. Their existing
+checksums establish one recovery each. The recovered images and the
+original verifier stay in protected input. Next, bind the small
+reviewed parser and image-comparison dependency set and verify the
+offline launches once there is enough usable space. CCFlow awaits
+its exact repeat decision, and the VAREX local-use decision remains
+pending. No new protected grades or formal assignments were recorded.
+Comparisons stay paused and Waza stays excluded.
+
 **November 24. CCFlow offline runtime pinned and bootstrap corrected.**
 The [C13 verification report](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#follow-up-software-source-batches)
 binds 46 packages, including 22 reused from the retained offline
