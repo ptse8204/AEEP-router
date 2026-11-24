@@ -1,5 +1,10 @@
 # 0.8 plan coverage and remaining work
 
+The [Confluence exporter check](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#confluence-exporter-configuration)
+verified the published CLI repair and the original-source failure on the
+retained grader. Software has 68 reproduced cases across 43 repositories
+and a minimum shortfall of 178. Comparisons remain paused.
+
 The [C13 Avro and document batch](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#avro-model-generation)
 verified two Avro repairs and their originals and screened all 246 staged
 VAREX PDFs for additional related forms. Software has 67 reproduced cases

@@ -1,0 +1,121 @@
+{
+  "case": "Spenhouet__confluence-markdown-exporter-92-aeep-contract-audit",
+  "case_family": "contract-audit",
+  "cash_usd": 0,
+  "comparisons_paused": true,
+  "formal_assignments": 0,
+  "image_id": "sha256:35dc1bcb7e8162c2a0cef6cbd30bc4bf276c082b11b6e5fc259b6800e8c5ca04",
+  "models": 0,
+  "observations": {
+    "original": {
+      "elapsed_seconds": 1.851710666960571,
+      "observation": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-confluence-exporter-contract-20261124/execution/observation-original.json",
+        "sha256": "ec6c91d30ebd1b6b435161d95436eba503dbc3eb88a772959dd841c6a9bc4e5f"
+      },
+      "receipt": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-confluence-exporter-contract-20261124/execution/receipt-rcpt_c78b1db5a55d4ed2b83cebc6b3a5fed0.json",
+        "sha256": "eea652ce5cc512c23f3d998b10d3fe69000c626822a5e8ecd428464cb2690880"
+      },
+      "score": 0.0,
+      "status_counts": {
+        "FAILED": 2,
+        "PASSED": 7
+      },
+      "statuses": {
+        "tests/test_aeep_preservation.py::test_snapshot_preserved": "FAILED",
+        "tests/unit/test_main.py::TestAppConfiguration::test_app_has_commands": "PASSED",
+        "tests/unit/test_main.py::TestAppConfiguration::test_app_is_typer_instance": "PASSED",
+        "tests/unit/test_main.py::TestAppConfiguration::test_config_interactive_command": "PASSED",
+        "tests/unit/test_main.py::TestAppConfiguration::test_config_jump_to_option": "PASSED",
+        "tests/unit/test_main.py::TestAppConfiguration::test_config_show_command": "FAILED",
+        "tests/unit/test_main.py::TestOverrideOutputPathConfig::test_with_none_value": "PASSED",
+        "tests/unit/test_main.py::TestOverrideOutputPathConfig::test_with_path_value": "PASSED",
+        "tests/unit/test_main.py::TestVersionCommand::test_version_output": "PASSED"
+      }
+    },
+    "reference": {
+      "elapsed_seconds": 2.2003102080198005,
+      "observation": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-confluence-exporter-contract-20261124/execution/observation-reference.json",
+        "sha256": "cbf8eaae3a80dafefe8cd82764c9f4f20afca63df74522d3bef819bafae54983"
+      },
+      "receipt": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-confluence-exporter-contract-20261124/execution/receipt-rcpt_949a77f48fa1446987daad8c87dd407a.json",
+        "sha256": "8540bacf0d349c477991b05843c0d14bbf85b3702a95a7fc589630da65b8c4d0"
+      },
+      "score": 1.0,
+      "status_counts": {
+        "PASSED": 9
+      },
+      "statuses": {
+        "tests/test_aeep_preservation.py::test_snapshot_preserved": "PASSED",
+        "tests/unit/test_main.py::TestAppConfiguration::test_app_has_commands": "PASSED",
+        "tests/unit/test_main.py::TestAppConfiguration::test_app_is_typer_instance": "PASSED",
+        "tests/unit/test_main.py::TestAppConfiguration::test_config_interactive_command": "PASSED",
+        "tests/unit/test_main.py::TestAppConfiguration::test_config_jump_to_option": "PASSED",
+        "tests/unit/test_main.py::TestAppConfiguration::test_config_show_command": "PASSED",
+        "tests/unit/test_main.py::TestOverrideOutputPathConfig::test_with_none_value": "PASSED",
+        "tests/unit/test_main.py::TestOverrideOutputPathConfig::test_with_path_value": "PASSED",
+        "tests/unit/test_main.py::TestVersionCommand::test_version_output": "PASSED"
+      }
+    }
+  },
+  "origin": "authored contract audit with original upstream tests",
+  "prior_pool": {
+    "path": "reports/toolkit-v2/c13/completion-20261116/protected-avroschema-batch-20261124.json",
+    "sha256": "53145500c6f23b885f24c7df2a9a8b53ce674a66698ea0dd241540cb53af86c2"
+  },
+  "proof": {
+    "acquisition": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-confluence-exporter-contract-20261124/acquisition-result.json",
+      "sha256": "31a854ee940f84859f709147f05a089952bd19498fa7aa44cf546ce0ffb742eb"
+    },
+    "ledger": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-confluence-exporter-contract-20261124/execution/ledger.json",
+      "sha256": "a93a9efbb7548d72f6f1383b2e665fe1f6ecc12ab54090f1b37a8d668923c28a"
+    },
+    "receipts": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-confluence-exporter-contract-20261124/execution/receipts.sqlite3",
+      "sha256": "5816496c3cbc4e4432dade3c0a0dafa3192e84d52f01319ae39ca035a98c66cd"
+    },
+    "result": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-confluence-exporter-contract-20261124/execution/result.json",
+      "sha256": "6a46c3a1c38faa276378752655d9ce3cd5ec75e2d1cf1c32f3d03c34c95c543e"
+    },
+    "review": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-confluence-exporter-contract-20261124/review.json",
+      "sha256": "84d4349202ac004486cd0382ec2b8736a1b39e3162b2fb283a36b21285a19d93"
+    },
+    "source_notice_review": {
+      "path": ".aeep/c13-cohort-runtime-20261124/c13-confluence-exporter-contract-20261124/tqdm-notice-acquisition-review.json",
+      "sha256": "5ee61c96961a921e5682d346d9a689c6ef66e06b692fafe9f0904b82c47a0b43"
+    }
+  },
+  "provider_disclosure": false,
+  "repository": "Spenhouet/confluence-markdown-exporter",
+  "schema_version": "aeep.c13.confluence-cli-contract-readback.v1",
+  "software_pool": {
+    "counts_by_family": {
+      "contract-audit": 16,
+      "multi-file-repair": 24,
+      "single-file-repair": 28
+    },
+    "distinct_receipts": 138,
+    "largest_repository_group_rows": 14,
+    "minimum_missing_rows_if_all_reproduced_rows_are_eligible": 178,
+    "repository_families": 43,
+    "reproduced_rows": 68,
+    "two_balanced_holdouts_minimum_missing_by_family_before_early_stages": {
+      "contract-audit": 54,
+      "multi-file-repair": 46,
+      "single-file-repair": 42
+    },
+    "two_cohorts_shared_early_minimum": 246
+  },
+  "source_revision": "7e08acc485dce32fc637336b877c223e4c6a4a4e",
+  "summed_settled_wall_seconds": 4.0520208749803714,
+  "waza_excluded": true,
+  "wheel_bytes": 6973833,
+  "wheel_files": 36
+}

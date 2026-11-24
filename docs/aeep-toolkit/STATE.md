@@ -1,5 +1,13 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. Confluence exporter CLI contract verified.**
+The [protected grading result](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#confluence-exporter-configuration)
+records a 1/1 repair with nine passing checks and a 0/1 original with
+the two expected failures. Both settled offline on the retained carrier.
+Software now has 68 reproduced cases across 43 repositories. At least
+178 more are needed. Prior source bindings and all receipts remain.
+Comparisons stay paused and Waza stays excluded.
+
 **November 24. Avro grading and the full-page VAREX screen passed.**
 The [operator handoff](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#avro-model-generation)
 records two 1/1 repairs and two 0/1 originals for Avro issues 835 and 870.

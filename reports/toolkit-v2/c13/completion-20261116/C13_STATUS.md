@@ -245,11 +245,22 @@ profiles used the retained image and checksum-verified publisher wheels
 from read-only mounts. The two cases must stay in the same study stage.
 [Grader results and receipts](protected-avroschema-batch-20261124.json)
 
+### Confluence exporter configuration
+
+The published repair scored **1/1** with all nine protected checks passing.
+The original scored **0/1**. The upstream configuration-display test
+failed, and the authored snapshot guard detected the original file.
+The other seven tests passed. Both offline operations settled in
+4.05 seconds total. The runtime reused the publisher's 36 locked wheels.
+It excluded the JMESPath command wrapper and kept the matching tqdm
+source license with the importable libraries. No package was installed.
+[Protected CLI grades and receipts](protected-confluence-cli-20261124.json)
+
 ## What still blocks formal comparisons
 
 | Workload | Remaining gap |
 | --- | --- |
-| Software | The audited pool contains 67 reproduced cases across 42 repositories. The two holdouts and shared early stages need at least 246 distinct cases, leaving a minimum gap of 179. Contract audits have the largest holdout gap, at 55 cases before early-stage needs. |
+| Software | The audited pool contains 68 reproduced cases across 43 repositories. The two holdouts and shared early stages need at least 246 distinct cases, leaving a minimum gap of 178. Contract audits have the largest holdout gap, at 54 cases before early-stage needs. |
 | Document/data | The 246 VAREX archives fit the provisional stage sizes with all known related forms grouped together. An all-page text screen found no additional matches at its recorded thresholds. Final source-lineage review, asset use and stage assignment remain open. The 18 ExtractBench annual disclosures remain held on source and asset-use grounds. |
 
 VAREX now has 133 multi-collection prospects with distinct schema hashes.
