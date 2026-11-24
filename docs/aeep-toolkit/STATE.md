@@ -1,5 +1,16 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. Supplementary publisher metadata intake is runnable.**
+The [eight-case intake](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#supplementary-intake-through-the-existing-publisher-transport)
+uses the existing pinned shard reader and retains only selected
+protected rows. Nine offline rehearsal checks passed, including
+scope drift, duplicate and interrupted runs. Live review `9e8cfe52`
+stopped about 405 MiB below its prelaunch requirement before any
+publisher request or attempt directory. No new protected grades or
+formal assignments were recorded. The VAREX local-use decision and
+CCFlow repeat approval remain open. Comparisons are paused and
+Waza is excluded.
+
 **November 24. Multi-file capacity rechecked against issue overlap.**
 The [overlap and reserve review](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#multi-file-workload-overlap)
 carries forward the A2A 472 exclusion and holds three overlapping

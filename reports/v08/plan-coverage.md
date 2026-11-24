@@ -1,5 +1,10 @@
 # 0.8 plan coverage and remaining work
 
+The [eight-case supplementary intake](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#supplementary-intake-through-the-existing-publisher-transport)
+passed nine offline checks using the actual sparse reader. The live
+preflight stopped before the first request with about 405 MiB less
+space than required. The verified software grade count is 75.
+
 The [multi-file issue screen](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#multi-file-workload-overlap)
 reduces the detailed projection to 77 cases using the prior protected
 exclusion and conservative overlap checks. The conditional allocation

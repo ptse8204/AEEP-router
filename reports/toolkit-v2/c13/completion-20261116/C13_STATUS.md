@@ -696,6 +696,25 @@ separate issue-scope review.
 [Issue overlap and protected readback](multifile-issue-overlap-20261124.json)
 · [Supplementary batch range preview](supplementary-multifile-range-preview-20261124.json)
 
+### Supplementary intake through the existing publisher transport
+
+The eight reserve cases now share one reviewed intake command. It
+checks the publisher shard identity, reads the twelve pinned ranges
+and keeps accepted issue and test metadata in a private directory.
+Each failed read leaves a journal entry. An intake that reaches its
+output directory requires review before a repeat.
+
+An offline Parquet rehearsal exercised the full intake path. It
+verified the range scope, rejected changed or expired reviews, and
+kept a missing oracle and an overlapping repair out of the estimate.
+The live preflight stopped before the first publisher request. It
+needs about 405 MiB more usable host space to meet the 50 GiB reserve
+and the exact response allowance. The verified grade count is still
+75, and the VAREX local-use decision remains open.
+
+[Intake command](intake_supplementary_multifile_ranges.py)
+· [Nine rehearsal checks and live preflight](supplementary-multifile-intake-prelaunch-20261124.json)
+
 ### qBraid visualization grader preparation
 
 The pinned qBraid archive matches the publisher's 128-file Git tree.
