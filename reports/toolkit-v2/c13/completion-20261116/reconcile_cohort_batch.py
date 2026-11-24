@@ -16,6 +16,9 @@ BIRD = BATCH / "django-bird-grading"
 DOCUMENTS = BATCH / "documents-verified"
 TREASURY = BATCH / "treasury-october/document-verified"
 A2A = BATCH / "a2a-current-ordinary"
+CONTINUATION = ROOT / ".aeep/c13-cohort-continuation-20261124"
+ENERGY = CONTINUATION / "energy-verified"
+PYFAKEFS = CONTINUATION / "pyfakefs-pair"
 
 
 def evidence(path):
@@ -272,6 +275,56 @@ def a2a_pairs():
     return rows
 
 
+def pyfakefs_pair():
+    run = PYFAKEFS / "execution"
+    result = audited(run / "result.json")
+    review_path = PYFAKEFS / "operation-review.json"
+    review = audited(review_path)
+    legacy = audited(HERE / "pyfakefs-protected-audit-result-20261118.json")
+    if (
+        not result["verified"]
+        or result["review_sha256"] != evidence(review_path)["sha256"]
+        or review["publisher_tree"] != legacy["publisher_tree"]
+        or any(result[key] for key in ("models", "cash_usd", "formal_cases_adopted"))
+    ):
+        raise ValueError("Pyfakefs review or result changed")
+    roles = result["observations"]
+    must_pair(roles)
+    counts = audited(run / "status-counts.json")
+    if [role["required_status_counts"] for role in counts] != [
+        {"PASSED": 432},
+        {"PASSED": 431, "FAILED": 1},
+    ] or any(role["unexpected_required_status_counts"] for role in counts):
+        raise ValueError("Pyfakefs did not preserve all required identities")
+    ledger = audited(run / "ledger.json")
+    if len(ledger["operations"]) != 2:
+        raise ValueError("Pyfakefs recorded an unexpected operation")
+    receipt_ids = []
+    for role, launch in zip(roles, review["launches"], strict=True):
+        receipt_id = role["receipt_id"]
+        receipt = audited(run / f"receipt-{receipt_id}.json")
+        settled(ledger, role["operation"])
+        if (
+            role["operation"] != launch["operation"]
+            or launch["required_tests"] != 432
+            or not role["contract_matched"]
+            or receipt["decision_id"] != role["operation"]
+            or receipt["receipt_id"] != receipt_id
+            or receipt["metadata"]["container_absent"] is not True
+            or not receipt["execution_success"]
+        ):
+            raise ValueError("Pyfakefs grade lacks its settled evidence")
+        receipt_ids.append(receipt_id)
+    return pool.case_row(
+        legacy["case"],
+        "pytest-dev/pyfakefs",
+        legacy["source_revision"],
+        "single-file-repair",
+        "ordinary_protected_pair_with_expanded_pytest_wheel",
+        receipt_ids,
+    )
+
+
 def main():
     recovery = audited(HERE / "recovery-67a93f4c-result-20261119.json")[
         "software_reproduction_pool"
@@ -280,9 +333,9 @@ def main():
     _, _, excluded = previous_repositories()
     if pool.assess(initial, excluded) != recovery["capacity"]:
         raise ValueError("earlier 54-case pool did not reproduce")
-    retained, fresh = old_pairs(), new_pairs() + a2a_pairs()
+    retained, fresh = old_pairs(), new_pairs() + a2a_pairs() + [pyfakefs_pair()]
     updated = pool.assess(initial + retained + fresh, excluded)
-    cases = document_cases(DOCUMENTS) | document_cases(TREASURY)
+    cases = document_cases(DOCUMENTS) | document_cases(TREASURY) | document_cases(ENERGY)
     print(
         json.dumps(
             {
@@ -308,6 +361,9 @@ def main():
                     "a2a_result": evidence(A2A / "execution/result.json"),
                     "a2a_ledger": evidence(A2A / "execution/ledger.json"),
                     "a2a_review": evidence(A2A / "operation-review.json"),
+                    "pyfakefs_review": evidence(PYFAKEFS / "operation-review.json"),
+                    "pyfakefs_result": evidence(PYFAKEFS / "execution/result.json"),
+                    "energy_pack": evidence(ENERGY / "pack.json"),
                 },
                 "comparisons_paused": True,
                 "waza_excluded": True,

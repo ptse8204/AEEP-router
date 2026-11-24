@@ -35,7 +35,36 @@ ROLE_ARCHIVES = (
 BASE_REVIEW, BASE_PROBE = runner.review_fields, runner.verify_probe
 
 
-def configure(diagnostics):
+def expand_pytest_wheel(program):
+    marker = "            wheels.append(str(path))"
+    if program.count(marker) != 1:
+        raise ValueError("protected wheel import point changed")
+    # The upstream test accesses pytest's metadata as filesystem files.
+    # Preserve the reviewed wheel's contents and change only its import layout.
+    expanded = """            if name == 'pytest-8.3.5-py3-none-any.whl':
+                from zipfile import ZipFile
+                unpacked = root / 'pytest-wheel'
+                unpacked.mkdir(mode=0o700)
+                with ZipFile(path) as wheel:
+                    entries = wheel.infolist()
+                    assert len(entries) <= 1000 and sum(f.file_size for f in entries) <= 4_000_000
+                    seen = set()
+                    for member in entries:
+                        relative = Path(member.filename)
+                        assert not relative.is_absolute() and '..' not in relative.parts
+                        assert not member.is_dir() and relative not in seen
+                        seen.add(relative)
+                        target = unpacked / relative
+                        target.parent.mkdir(parents=True, exist_ok=True)
+                        with target.open('xb') as stream:
+                            stream.write(wheel.read(member))
+                assert (unpacked / 'pytest-8.3.5.dist-info/METADATA').is_file()
+                path = unpacked
+"""
+    return program.replace(marker, expanded + marker)
+
+
+def configure(diagnostics, *, expanded_pytest=False):
     if (
         Path(aeep.__file__).resolve().parents[2] != FROZEN
         or verification_source_digest(FROZEN) != SOURCE
@@ -85,6 +114,9 @@ def configure(diagnostics):
     )
     if digest(program.encode()) != OBSERVER:
         raise ValueError("protected native observer differs")
+    if expanded_pytest:
+        program = expand_pytest_wheel(program)
+    compile(program, "<protected Pyfakefs observer>", "exec")
     spec = ExecutorSpec(
         id="repository.suite.observe",
         capability="assessment.repository_suite@1",
@@ -162,6 +194,11 @@ def configure(diagnostics):
                 "raw_protected_output_retained": False,
                 "comparisons_paused": True,
                 "waza_excluded": True,
+                **(
+                    {"pytest_source": "same reviewed wheel expanded inside protected scratch"}
+                    if expanded_pytest
+                    else {}
+                ),
             },
             spec,
             env,
@@ -176,14 +213,22 @@ def configure(diagnostics):
 
 
 async def main():
+    global FROZEN, SOURCE, NAME, TARGET, REVIEW
     parser = argparse.ArgumentParser(description=__doc__)
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--prepare", action="store_true")
     mode.add_argument("--verify")
     mode.add_argument("--exact-review")
+    parser.add_argument("--expanded-pytest", action="store_true")
     args = parser.parse_args()
+    if args.expanded_pytest:
+        NAME = "c13-pyfakefs-metadata-layout-20261124"
+        TARGET = WORK.parent / "c13-cohort-continuation-20261124/pyfakefs-pair"
+        REVIEW = TARGET / "operation-review.json"
+        FROZEN = WORK.parent / "c13-intake-wheel-20261124/linux/source"
+        SOURCE = "2896e52509b33a5628f8d5833a9b6111ebff9f0ed374faa08da539a57753c896"
     diagnostics = []
-    configure(diagnostics)
+    configure(diagnostics, expanded_pytest=args.expanded_pytest)
     if args.exact_review:
         try:
             passed = await runner.run(args.exact_review)

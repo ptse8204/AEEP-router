@@ -2,13 +2,15 @@
 
 **November 24. Software and document cohort batch verified.**
 The [operator handoff](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#cohort-batch-results)
-records the Param, Django Bird and two A2A protected pairs and
-reconciles Optype, Locify and adapted EOS. The software pool has
-61 reproduced cases across 39 repositories against 246 required.
-Census retail, BEA GDP and Treasury receipts and outlays passed
-protected local grading. Together with WASDE, the four supplemental
-cases could reduce the multiple-collection gap to five under favorable
-compression if their asset-use and cohort grading contracts are accepted.
+records five protected pairs including Pyfakefs, whose reference now
+passes all 432 required tests with the exact pytest wheel expanded into
+private scratch. The software pool has 62 reproduced cases across 40
+repositories against 246 required. EIA joined Census, BEA and Treasury
+in passing protected document grading. Together with WASDE, the five
+supplemental cases could reduce the multiple-collection gap to four
+under favorable compression if their asset-use and cohort grading
+contracts are accepted. The VAREX dataset and evaluator manifests
+match. Per-document protected inputs and grader calibration remain open.
 PyPA Build now passes 68 of 69 required tests. Its console-script test
 still fails, and neither role has a verified grade. No formal assignments, model
 calls or provider disclosures occurred. Comparisons stay paused and

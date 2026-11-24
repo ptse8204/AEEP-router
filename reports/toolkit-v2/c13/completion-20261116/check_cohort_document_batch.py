@@ -8,6 +8,7 @@ import os
 import re
 import subprocess
 import sys
+from calendar import monthrange
 from decimal import ROUND_HALF_UP, Decimal
 from pathlib import Path
 from xml.etree import ElementTree
@@ -27,22 +28,33 @@ from aeep_toolkit.stack_verification import ROOT as SOURCE_ROOT
 BATCH = ROOT / ".aeep/c13-cohort-batch-20261124"
 WORK = BATCH / "documents-verified"
 TREASURY = BATCH / "treasury-october"
+ENERGY = ROOT / ".aeep/c13-cohort-continuation-20261124/publisher-inputs"
 POPPLER = Path("/usr/local/Cellar/poppler/25.01.0/bin/pdftotext")
 POPPLER_SHA = "7d507ea2df5ce2b8eac1f09ee085c88b2c3cce7a7c5687eef60acfeeb22184a2"
 PDF_PINS = {
     "census": "d5d6c33ab8a39915bebd82a9e2761d4e916cefde543339db8562595d320de938",
     "bea": "8e62214df875053d3a167b11affdcac2edd2113ce585dea136c1fdd524889574",
     "treasury": "956fca41af770139de490eff3f6d524367d28e7904761053cd8759ba075cb725",
+    "energy": "53b7e6f85694576a11d031e46f108c5bdcd6e47d90828b4542bbeedf1f1acec6",
 }
 CENSUS_CODES = ("441", "442", "443", "445", "446", "447")
 CENSUS_XLSX = "56629b17222b0b1f20c34efccda92bc5679091b2bf5048f8e05b7e79e38ca306"
 CENSUS_LISTING = "https://www.census.gov/retail/marts/historic_releases.html"
 BEA_LISTING = "https://www.bea.gov/news/2026/gdp-advance-estimate-3rd-quarter-2026"
 TREASURY_LISTING = "https://fiscaldata.treasury.gov/datasets/monthly-treasury-statement/"
+ENERGY_LISTING = "https://www.eia.gov/outlooks/steo/data.php"
+ENERGY_WORKBOOK = "7d28012ff726ebeafd584905d842ded42bb3c9922550cb26e005af9cd4e27fb5"
+SOURCE_LISTINGS = {
+    "census": CENSUS_LISTING,
+    "bea": BEA_LISTING,
+    "treasury": TREASURY_LISTING,
+    "energy": ENERGY_LISTING,
+}
 TASK_IDS = {
     "census": "census-advance-retail-202609",
     "bea": "bea-gdp-2026q3-advance",
     "treasury": "treasury-mts-202610",
+    "energy": "eia-steo-balances-202611",
 }
 BEA_VALUES = {
     "activity": (
@@ -78,6 +90,15 @@ GUIDES = {
         "of Representatives, Library of Congress, Total--Legislative Branch and "
         "Total--Judicial Branch. Preserve the stated row order, exact row names and the printed "
         "integer amounts in millions of dollars. Use receipts and outlays as the collection names."
+    ),
+    "energy": (
+        "Use the EIA November 2026 Short-Term Energy Outlook tables. Extract the 2025, "
+        "2026 and 2027 annual columns from Table 4a and Table 5a. In petroleum, include "
+        "Alaska, Total Supply, Commercial inventory net withdrawals and Petroleum product "
+        "net imports (d), in million barrels per day. In natural_gas, include U.S. total "
+        "marketed natural gas production, Total supply, Net imports and Total consumption, "
+        "in billion cubic feet per day. Keep this row order, exact labels, signs and printed "
+        "decimal places. Store the numeric values as strings."
     ),
 }
 
@@ -210,7 +231,12 @@ def treasury_reference(text):
             receipt_table,
             "receipts.json",
             "78b2fa366ede3d8c0eb7905e5059a9dc367dd9eb301c51ce01a10e167d4901f4",
-            ("Total -- Individual Income Taxes", "Corporation Income Taxes", "Customs Duties", "Total -- Receipts"),
+            (
+                "Total -- Individual Income Taxes",
+                "Corporation Income Taxes",
+                "Customs Duties",
+                "Total -- Receipts",
+            ),
             {
                 "gross_receipts_millions": "current_month_gross_rcpt_amt",
                 "refunds_millions": "current_month_refund_amt",
@@ -221,7 +247,12 @@ def treasury_reference(text):
             outlay_table,
             "outlays-sample.json",
             "118c6175932daded8a69961723b3205bad1c4e92e90fb59227835fca661b3c5c",
-            ("House of Representatives", "Library of Congress", "Total--Legislative Branch", "Total--Judicial Branch"),
+            (
+                "House of Representatives",
+                "Library of Congress",
+                "Total--Legislative Branch",
+                "Total--Judicial Branch",
+            ),
             {
                 "gross_outlays_millions": "current_month_gross_outly_amt",
                 "applicable_receipts_millions": "current_month_app_rcpt_amt",
@@ -229,6 +260,7 @@ def treasury_reference(text):
             },
         ),
     }
+
     def normalized(value):
         return re.sub(r"\s*--\s*", "--", value)
 
@@ -248,12 +280,109 @@ def treasury_reference(text):
             )
             values = tuple(int(value.replace(",", "")) for value in printed)
             independent = tuple(
-                int((Decimal(published[key]) / 10**6).quantize(Decimal("1"), rounding=ROUND_HALF_UP))
+                int(
+                    (Decimal(published[key]) / 10**6).quantize(Decimal("1"), rounding=ROUND_HALF_UP)
+                )
                 for key in fields.values()
             )
             if values != independent:
                 raise ValueError("Treasury API and PDF disagree")
-            groups[group].append({"classification": label, **dict(zip(fields, values, strict=True))})
+            groups[group].append(
+                {"classification": label, **dict(zip(fields, values, strict=True))}
+            )
+    return groups
+
+
+def energy_reference(text):
+    specs = (
+        (
+            "petroleum",
+            "4a",
+            10,
+            "0.01",
+            (
+                "Alaska",
+                "Total Supply",
+                "Commercial inventory net withdrawals",
+                "Petroleum product net imports (d)",
+            ),
+        ),
+        (
+            "natural_gas",
+            "5a",
+            14,
+            "0.1",
+            (
+                "U.S. total marketed natural gas production",
+                "Total supply",
+                "Net imports",
+                "Total consumption",
+            ),
+        ),
+    )
+    if "Short-Term Energy Outlook - November 2026" not in text:
+        raise ValueError("EIA report vintage differs")
+    ns = {"s": "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
+    workbook = ENERGY / "energy.xlsx"
+    read(workbook, ENERGY_WORKBOOK)
+    groups = {}
+    columns = [f"A{c}" for c in "MNOPQRSTUVWXYZ"] + [f"B{c}" for c in "ABCDEFGHIJKLMNOPQRSTUV"]
+
+    def xml(archive, name):
+        if archive.getinfo(name).file_size > 500_000:
+            raise ValueError("EIA workbook XML exceeds its scope")
+        raw = archive.read(name)
+        if b"<!" in raw:
+            raise ValueError("unexpected EIA workbook XML declaration")
+        return ElementTree.fromstring(raw)
+
+    with ZipFile(workbook) as archive:
+        strings = ["".join(item.itertext()) for item in xml(archive, "xl/sharedStrings.xml")]
+        for group, table, sheet, precision, labels in specs:
+            pdf = text.split(f"Table {table}.", 1)[1].split(f"Table {table[0]}b.", 1)[0]
+            tree = xml(archive, f"xl/worksheets/sheet{sheet}.xml")
+            rows = {}
+            for row in tree.findall(".//s:row", ns):
+                cells = {}
+                for item in row.findall("s:c", ns):
+                    value = item.findtext("s:v", None, ns)
+                    if value is not None:
+                        col = item.attrib["r"].rstrip("0123456789")
+                        cells[col] = strings[int(value)] if item.attrib.get("t") == "s" else value
+                label = cells.get("B")
+                if row.attrib["r"] == "2" and "November 2026" not in (label or ""):
+                    raise ValueError("EIA workbook vintage differs")
+                if row.attrib["r"] == "3" and tuple(cells[key] for key in ("AM", "AY", "BK")) != (
+                    "2025",
+                    "2026",
+                    "2027",
+                ):
+                    raise ValueError("EIA workbook years differ")
+                if label in labels:
+                    if label in rows:
+                        raise ValueError("duplicate EIA row")
+                    # AM through BV are the consecutive months for 2025 through 2027.
+                    rows[label] = [Decimal(cells[col]) for col in columns]
+            groups[group] = []
+            for label in labels:
+                (match,) = re.findall(r"(?m)^ *" + re.escape(label) + r" +\.+ +(.+)$", pdf)
+                figures = match.split()
+                if len(figures) != 15:
+                    raise ValueError("EIA quarter and annual columns differ")
+                output = {"measure": label}
+                for i, year in enumerate((2025, 2026, 2027)):
+                    months = rows[label][12 * i : 12 * (i + 1)]
+                    weights = [monthrange(year, month)[1] for month in range(1, 13)]
+                    annual = sum(
+                        number * days for number, days in zip(months, weights, strict=True)
+                    ) / sum(weights)
+                    printed = format(
+                        annual.quantize(Decimal(precision), rounding=ROUND_HALF_UP), "f"
+                    )
+                    if printed != figures[12 + i]:
+                        raise ValueError("EIA workbook and PDF annual values differ")
+                    output[f"year_{year}"] = printed
+                groups[group].append(output)
     return groups
 
 
@@ -323,7 +452,7 @@ def prepare_pack(directory, acquisition, source):
         tasks=tuple(tasks),
         task_sources=pins,
         source=SourcePin(
-            repository=TREASURY_LISTING if set(source) == {"treasury"} else CENSUS_LISTING,
+            repository=SOURCE_LISTINGS[next(iter(source))],
             revision=inventory,
             artifact_sha256=inventory,
             license_expression="LicenseRef-Per-task-review",
@@ -447,12 +576,9 @@ async def run_case(pack, task, protected):
             "census": "census-marts",
             "bea": "bea-nipa-gdp",
             "treasury": "treasury-monthly-statement",
+            "energy": "eia-short-term-energy-outlook",
         }[label],
-        "publisher_crosscheck": {
-            "census": CENSUS_LISTING,
-            "bea": BEA_LISTING,
-            "treasury": TREASURY_LISTING,
-        }[label],
+        "publisher_crosscheck": SOURCE_LISTINGS[label],
         "public_zip_sha256": file_digest(path),
         "public_zip_bytes": path.stat().st_size,
         "crosschecked_row_count": sum(len(rows) for rows in result.values()),
@@ -464,13 +590,19 @@ async def run_case(pack, task, protected):
 async def main():
     global WORK
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--treasury", action="store_true")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--treasury", action="store_true")
+    mode.add_argument("--energy", action="store_true")
     args = parser.parse_args()
     os.umask(0o077)
     if args.treasury:
         WORK = TREASURY / "document-verified"
         directory, acquisition = TREASURY, "result.json"
         source = {"treasury": treasury_reference(pdf_text("treasury", TREASURY))}
+    elif args.energy:
+        WORK = ENERGY.parent / "energy-verified"
+        directory, acquisition = ENERGY, "acquisition-result.json"
+        source = {"energy": energy_reference(pdf_text("energy", ENERGY))}
     else:
         directory, acquisition = BATCH, "local-acquisition-result.json"
         source = {

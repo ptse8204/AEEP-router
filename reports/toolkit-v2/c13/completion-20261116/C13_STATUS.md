@@ -147,11 +147,13 @@ and [protected calibration evidence](wasde-reviewed-pack-result-20261124.json)
 | Django Bird component props | The repair scored 1/1 across 74 native tests. The original scored 0/1 with one issue failure and 73 preservation passes. The publisher's added test row identified the issue among five matches for its truncated name. |
 | A2A streaming error handling | The repair scored 1/1 with 39 passes. The original scored 0/1 with two expected failures and 37 passes. |
 | A2A transport context manager | The repair scored 1/1 with seven passes. The original scored 0/1 with two expected failures and five passes. |
+| Pyfakefs file-open behavior | The repair scored 1/1 on all 432 required tests. The original scored 0/1 with one expected failure and 431 passes. |
 | Census September retail sales | Twelve output rows matched the source PDF and workbook. The exact extraction scored 1/1. Missing data and invalid JSON scored 0/1. |
 | BEA third-quarter GDP | Five rows matched the PDF and publisher release narrative. The exact extraction scored 1/1. Missing data and invalid JSON scored 0/1. |
 | Treasury October receipts and outlays | Eight rows matched the PDF and the Fiscal Data API. The exact extraction scored 1/1. Missing data and invalid JSON scored 0/1. |
+| EIA November petroleum and gas balances | Eight rows matched annual figures calculated from the publisher's monthly workbook. The exact extraction scored 1/1. Missing data and invalid JSON scored 0/1. |
 
-The software inventory added four pairs on the current ordinary grader
+The software inventory added five pairs on the current ordinary grader
 and reconciled three already settled pairs for Optype, Locify and
 adapted EOS. Both A2A pairs reused the pinned dependency files. A single
 offline image build and four grader operations settled on a copy of the
@@ -159,9 +161,22 @@ original ledger. Its five historical operations and the original ledger
 were preserved. The documents passed the local binary extraction rubric
 and still need case-specific asset-use review and a common cohort
 grading contract.
+
+Pyfakefs's earlier reference stopped at the assertion that pytest's
+metadata must exist on disk. The protected runtime now expands the same
+pinned pytest wheel into private scratch for this case. Both roles
+keep their original source, tests, dependencies, and payload hashes.
+The diagnostic and two graded runs retain their own receipts.
+
+EIA's complete tables PDF fits the transport ceiling as a 3,379,714-byte
+task ZIP. The workbook stays in the protected reference path. Housing
+and wholesale release files returned HTTP 403 in the local intake and
+remain outside the verified pool.
+
 [Federal retail archive](https://www.census.gov/retail/marts/historic_releases.html)
 · [BEA release](https://www.bea.gov/news/2026/gdp-advance-estimate-3rd-quarter-2026)
 · [Treasury statement and data](https://fiscaldata.treasury.gov/datasets/monthly-treasury-statement/)
+· [EIA tables](https://www.eia.gov/outlooks/steo/data.php)
 
 PyPA Build remains ungraded. The retained offline backend reduced the
 reference failures from five to two. Passing the same reviewed source
@@ -179,8 +194,15 @@ boundary. The original-source check has yet to run.
 
 | Workload | Remaining gap |
 | --- | --- |
-| Software | The audited pool contains 61 reproduced cases across 39 repositories. Two independent holdouts and shared early stages require at least 246 distinct cases. That leaves a minimum gap of 185 against this pool. Contract audits have the largest holdout gap, at 56 cases before early-stage needs. |
-| Document/data | The 18 annual disclosures remain held on source and asset-use grounds. The remaining ExtractBench metadata has 108 multiple-collection slots at stored ZIP size, or at most 113 if compression is favorable. The design needs 122. If Census, BEA, Treasury and WASDE all qualify under the same cohort contract, the remaining gap is 10 at stored ZIP size or five with favorable compression. |
+| Software | The audited pool contains 62 reproduced cases across 40 repositories. Two independent holdouts and shared early stages require at least 246 distinct cases. That leaves a minimum gap of 184 against this pool. Contract audits have the largest holdout gap, at 56 cases before early-stage needs. |
+| Document/data | The 18 annual disclosures remain held on source and asset-use grounds. The remaining ExtractBench metadata has 108 multiple-collection slots at stored ZIP size, or at most 113 if compression is favorable. The design needs 122. If Census, BEA, Treasury, EIA and WASDE qualify under the same cohort contract, the remaining gap is nine at stored ZIP size or four with favorable compression. |
+
+VAREX's separately pinned evaluator and dataset agree on the 1,777-document
+manifest. The evaluator repository does not contain the per-document
+ground truths. Its native score and reviewed field exclusions need an
+offline calibration with exact data before any slots can be counted.
+[VAREX dataset revision](https://huggingface.co/datasets/ibm-research/VAREX/tree/ff36b6cd232efd401b3f4a20272a07bf2b749914)
+· [VAREX evaluator revision](https://github.com/udibarzi/varex-bench/tree/3cce9c18530748cfc843f38c02e2f43e0694d167)
 
 Live comparisons remain paused. Candidate benefit and selection benefit
 each need a separate result on frozen eligible tasks. Finishing the

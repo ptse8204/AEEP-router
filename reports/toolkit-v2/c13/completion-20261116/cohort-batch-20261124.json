@@ -20,21 +20,21 @@
       "two_cohorts_shared_early_minimum": 246
     },
     "current": {
-      "reproduced_rows": 61,
-      "repository_families": 39,
+      "reproduced_rows": 62,
+      "repository_families": 40,
       "counts_by_family": {
         "contract-audit": 14,
-        "single-file-repair": 23,
+        "single-file-repair": 24,
         "multi-file-repair": 24
       },
-      "distinct_receipts": 124,
+      "distinct_receipts": 126,
       "largest_repository_group_rows": 14,
       "two_cohorts_shared_early_minimum": 246,
-      "minimum_missing_rows_if_all_reproduced_rows_are_eligible": 185,
+      "minimum_missing_rows_if_all_reproduced_rows_are_eligible": 184,
       "two_balanced_holdouts_minimum_missing_by_family_before_early_stages": {
         "contract-audit": 56,
         "multi-file-repair": 46,
-        "single-file-repair": 47
+        "single-file-repair": 46
       }
     },
     "previously_verified_now_reconciled": [
@@ -115,6 +115,17 @@
         "receipt_ids": [
           "rcpt_14679cfaa0b54829a7849a4867f1ba6e",
           "rcpt_2467543a624341beadb9e2e826f855bb"
+        ]
+      },
+      {
+        "case": "pytest-dev__pyfakefs-1269",
+        "repository": "pytest-dev/pyfakefs",
+        "revision": "a3685da29db2f185d4793f185ca07dfe36f3d9a9",
+        "family": "single-file-repair",
+        "evidence": "ordinary_protected_pair_with_expanded_pytest_wheel",
+        "receipt_ids": [
+          "rcpt_61833cb7b8af4bee9e05ac2ac0d0944a",
+          "rcpt_62324657763a413eb1c0147c89376844"
         ]
       }
     ],
@@ -349,6 +360,32 @@
         "path": ".aeep/c13-cohort-batch-20261124/a2a-current-source-readback.json",
         "sha256": "5907b4af9e3cce56b040241f96027897baecfff0e2eab6d7eb1c025f78bd73df"
       }
+    },
+    "pyfakefs_metadata_layout": {
+      "previous_reference": {
+        "path": "reports/toolkit-v2/c13/completion-20261116/pyfakefs-protected-audit-result-20261118.json",
+        "sha256": "dab92d27eea3eda6bec5c8823e2dc91f03f035879305f69e68ca07ada778e948"
+      },
+      "diagnostic_review": {
+        "path": ".aeep/c13-cohort-continuation-20261124/pyfakefs-diagnostic/operation-review.json",
+        "sha256": "84276bb9231cbeca7b187dd586f5e4cae477558b8c81461efab63f5342e1a48c"
+      },
+      "diagnostic": {
+        "path": ".aeep/c13-cohort-continuation-20261124/pyfakefs-diagnostic/result.json",
+        "sha256": "d2e96caf6609bade38021a46dca73fadcb2b0467fd7d23921fb7da291702b6ea"
+      },
+      "diagnostic_ledger": {
+        "path": ".aeep/c13-cohort-continuation-20261124/pyfakefs-diagnostic/ledger.json",
+        "sha256": "516761d8551a1a3e1f0f792db03fa9774929eb8e2b251fa39591e9c851b590df"
+      },
+      "ledger": {
+        "path": ".aeep/c13-cohort-continuation-20261124/pyfakefs-pair/execution/ledger.json",
+        "sha256": "9556e634d515dace39d43a7a845261908090520a5fc987c4a34676dedec25b9c"
+      },
+      "status_counts": {
+        "path": ".aeep/c13-cohort-continuation-20261124/pyfakefs-pair/execution/status-counts.json",
+        "sha256": "1045aa3a5718f902c8ee4f954b44b1e246ef2e2dce24c633b8d84b3e2e7aabdf"
+      }
     }
   },
   "document_data": {
@@ -490,6 +527,52 @@
             "error_type": null
           }
         }
+      },
+      "eia-steo-balances-202611": {
+        "source_family": "eia-short-term-energy-outlook",
+        "publisher_crosscheck": "https://www.eia.gov/outlooks/steo/data.php",
+        "public_zip_sha256": "0da3a934f3242822b4c0d9358d8744b4cbeff3633e180685ffd2fc4e1d27cc97",
+        "public_zip_bytes": 3379714,
+        "crosschecked_row_count": 8,
+        "protected_review": "1402e75feaa5e5caf2bce4fec419c48bfd526298e0f9980767852fb2caef2b99",
+        "checks": {
+          "reference": {
+            "verified": true,
+            "score": null,
+            "receipt": "rcpt_6c9c4150526c4e5abf796813a410528b",
+            "error_type": null
+          },
+          "reference-grade": {
+            "verified": true,
+            "score": {
+              "score": 1.0,
+              "valid": true,
+              "detail": ""
+            },
+            "receipt": "rcpt_e481b828fc254af2881424c9972caf63",
+            "error_type": null
+          },
+          "missing-row": {
+            "verified": true,
+            "score": {
+              "score": 0.0,
+              "valid": false,
+              "detail": "inexact_extraction"
+            },
+            "receipt": "rcpt_7e23e97136b04f469ff1f2a17821649b",
+            "error_type": null
+          },
+          "bad-json": {
+            "verified": true,
+            "score": {
+              "score": 0.0,
+              "valid": false,
+              "detail": "invalid_submission"
+            },
+            "receipt": "rcpt_8cb4bba15873437e8e307871497046c1",
+            "error_type": null
+          }
+        }
       }
     },
     "formal_cases_adopted": 0,
@@ -498,10 +581,26 @@
       "multiple_collection_minimum": 122,
       "previous_metadata_only_stored_zip_candidates": 108,
       "previous_metadata_only_favorable_compression_candidates": 113,
-      "possible_supplemental_cases": 4,
+      "possible_supplemental_cases": 5,
       "including_previously_calibrated_wasde": true,
-      "minimum_remaining_stored_size_scenario": 10,
-      "minimum_remaining_favorable_compression_scenario": 5
+      "minimum_remaining_stored_size_scenario": 9,
+      "minimum_remaining_favorable_compression_scenario": 4
+    },
+    "varex_static_intake": {
+      "source_pin": {
+        "path": ".aeep/c13-cohort-continuation-20261124/varex-source-metadata/static-file-result.json",
+        "sha256": "94bb8408ee55a4d319bc4929b0e87074e91fdca1ab8d0fa12c694eecb4d5e74b"
+      },
+      "dataset_revision": "ff36b6cd232efd401b3f4a20272a07bf2b749914",
+      "evaluator_revision": "3cce9c18530748cfc843f38c02e2f43e0694d167",
+      "manifest_matches": true,
+      "publisher_documents": 1777,
+      "new_formal_cases": 0,
+      "missing": [
+        "Per-document protected ground truths at the exact release",
+        "Independent template lineage and asset-use review",
+        "Native scoring calibration and shared comparison contract"
+      ]
     }
   },
   "evidence": {
@@ -580,6 +679,34 @@
     "a2a_review": {
       "path": ".aeep/c13-cohort-batch-20261124/a2a-current-ordinary/operation-review.json",
       "sha256": "da840e78b27a77974a2184ffc324b9487ddd1ded32fa78cf445c4acf08270641"
+    },
+    "pyfakefs_review": {
+      "path": ".aeep/c13-cohort-continuation-20261124/pyfakefs-pair/operation-review.json",
+      "sha256": "35d498372f6ff30e5790d316fd12e8b3afa2b14813b56d7a54efabc19d00f878"
+    },
+    "pyfakefs_result": {
+      "path": ".aeep/c13-cohort-continuation-20261124/pyfakefs-pair/execution/result.json",
+      "sha256": "b4552efc16ef2e1d21b3e8b5abce6bcc46d32e02dc90fc2dad8396e9dd88e454"
+    },
+    "energy_pack": {
+      "path": ".aeep/c13-cohort-continuation-20261124/energy-verified/pack.json",
+      "sha256": "230933b79c22d65b429807d836c707cccdb85780341eb003e0ca3198c33f1367"
+    },
+    "energy_acquisition": {
+      "path": ".aeep/c13-cohort-continuation-20261124/publisher-inputs/acquisition-result.json",
+      "sha256": "e052ccb511b8e28fa3bead7b62e1748f17547480f2071199dfc8d9c73853e9dd"
+    },
+    "energy_acquisition_review": {
+      "path": ".aeep/c13-cohort-continuation-20261124/publisher-inputs/acquisition-review.json",
+      "sha256": "d3a75f3fdef26fe7c5edfba921d630d0ba677d966cc3263d1df73b4c38efbd31"
+    },
+    "energy_grades": {
+      "path": ".aeep/c13-cohort-continuation-20261124/energy-verified/result.json",
+      "sha256": "780d51efbd64a04dcc9febde2d6842190784d4e9a03be2dfde1faeaa00dd9f2d"
+    },
+    "energy_ledger": {
+      "path": ".aeep/c13-cohort-continuation-20261124/energy-verified/eia-steo-balances-202611/ledger.json",
+      "sha256": "5962e08add04132dfe92e362d099fd54555aa94a0b4403703925abb85f5a47a1"
     }
   },
   "comparisons_paused": true,
@@ -618,6 +745,16 @@
         "exit_code": 0,
         "path": ".aeep/c13-cohort-batch-20261124/a2a-handoff-check.log",
         "sha256": "9372f6b1897dde0627089ea2d5a1a34386ebfed73b5e2942964a64fcff744a1f"
+      },
+      "eia-pyfakefs-docs-check": {
+        "exit_code": 0,
+        "path": ".aeep/c13-cohort-continuation-20261124/docs-check.log",
+        "sha256": "f1d5766aeaf32542017318107efa853c34602d402dacded327ed054d91b3524b"
+      },
+      "eia-pyfakefs-handoff-check": {
+        "exit_code": 0,
+        "path": ".aeep/c13-cohort-continuation-20261124/handoff-check.log",
+        "sha256": "f9a8d2e86120924f79c4db2f2b7138cb3a47a974c1aec94927b27be02fc46f9c"
       }
     }
   }
