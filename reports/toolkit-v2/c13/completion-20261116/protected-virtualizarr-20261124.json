@@ -1,0 +1,109 @@
+{
+  "case": "zarr-developers__VirtualiZarr-395",
+  "cash_usd": 0,
+  "comparisons_paused": true,
+  "dependency_transfer": {
+    "path": ".aeep/c13-cohort-runtime-20261124/c13-virtualizarr-395-20261124/acquisition-result.json",
+    "sha256": "8d2bff51b746906a2ea80adb17624080074e8519a40c44c607f7ce7fb89ea143"
+  },
+  "elapsed_seconds": 3.8763551249867305,
+  "failure_locations": [
+    {
+      "category": "ImportError",
+      "file": "conftest.py",
+      "line": 44,
+      "required_tests": 19
+    },
+    {
+      "category": "ImportError",
+      "file": "conftest.py",
+      "line": 89,
+      "required_tests": 2
+    },
+    {
+      "category": "ImportError",
+      "file": "virtualizarr/accessor.py",
+      "line": 177,
+      "required_tests": 1
+    },
+    {
+      "category": "ImportError",
+      "file": "virtualizarr/tests/test_integration.py",
+      "line": 93,
+      "required_tests": 6
+    },
+    {
+      "category": "ImportError",
+      "file": "virtualizarr/tests/test_integration.py",
+      "line": 129,
+      "required_tests": 6
+    }
+  ],
+  "fresh_protected_replay_approved": false,
+  "identified_runtime_gaps": {
+    "parquet": "The required parquet path calls Kerchunk refs_to_dataframe, whose fsspec mapper defaults to fastparquet. The runtime did not include Fastparquet.",
+    "tutorial_data": "The required examples call xr.tutorial.open_dataset. The retained xarray wheel imports pooch for its cache, which was absent."
+  },
+  "ledger": {
+    "path": ".aeep/c13-cohort-runtime-20261124/c13-virtualizarr-395-20261124/execution/ledger.json",
+    "sha256": "5a6e552e17f74ee505180d1d4fa46fc88a2c6999553e5ae60443033c7c69d70d"
+  },
+  "models": 0,
+  "observation": {
+    "path": ".aeep/c13-cohort-runtime-20261124/c13-virtualizarr-395-20261124/execution/observation-reference.json",
+    "sha256": "4fa14a4a201e5b38a7411b31dba39b1bc1a47fb234c6fc45ace0efac560e4503"
+  },
+  "operation_review": {
+    "path": ".aeep/c13-cohort-runtime-20261124/c13-virtualizarr-395-20261124/operation-review.json",
+    "sha256": "42f3966bb5fae900553c8fa2bddb827724729a49587dd245e8994ba5a8cde2ad"
+  },
+  "original_dispatched": false,
+  "receipt": {
+    "path": ".aeep/c13-cohort-runtime-20261124/c13-virtualizarr-395-20261124/execution/receipt-rcpt_c2b2750bb04b48a39f4d19a3541f266f.json",
+    "sha256": "dcd6ca8c3452042b075d5b2cafd299e3923993e0c3e33bf09be5feee09e8649b"
+  },
+  "reference_grade": null,
+  "registry_license": {
+    "path": ".aeep/c13-cohort-runtime-20261124/c13-virtualizarr-395-20261124/codec-registry-provenance.json",
+    "sha256": "1c877e7e73d0b654e82c67e0d053b989424d5e6b5a3ffe91775f5562ab7ffe56"
+  },
+  "required_counts": {
+    "ERROR": 21,
+    "FAILED": 13,
+    "PASSED": 44
+  },
+  "runtime_review": {
+    "path": ".aeep/c13-cohort-runtime-20261124/virtualizarr-395-runtime-review.json",
+    "sha256": "291229dc7052bfe0e254f60c3eed72da1fb9d1204ac84530095c1941607b1dc5"
+  },
+  "schema_version": "aeep.c13.protected-virtualizarr-reference-diagnosis.v1",
+  "source_revision": "95fce110e6edfd5733ee66bc9824921c5eac6588",
+  "test_assertions": 78,
+  "test_result": {
+    "path": ".aeep/c13-cohort-runtime-20261124/c13-virtualizarr-395-20261124/execution/result.json",
+    "sha256": "7294413522c9cd97df288677fc9fa0e6272d4aa3714d784223beebc0ef7b926f"
+  },
+  "tutorial_cache": {
+    "data": {
+      "ROMS_example.nc": {
+        "blob_sha1": "5ac91327d3863722e311cf0aa07969086cdf8db2",
+        "bytes": 9399150
+      },
+      "air_temperature.nc": {
+        "blob_sha1": "1389771ebb1e3fe9013248e9ee3c75a80d6fdcae",
+        "bytes": 7751328
+      }
+    },
+    "dataset_bytes_acquired": false,
+    "pending_use_review": true,
+    "publisher_tree": "a35297e9da2cc99c811014f0c8a4297345a5c28d",
+    "repository": "https://github.com/pydata/xarray-data",
+    "xarray_docs": "https://docs.xarray.dev/en/v2024.11.0/generated/xarray.tutorial.open_dataset.html"
+  },
+  "unmodified_upstream_skips_for_network": [
+    "virtualizarr/tests/test_backend.py::TestReadFromS3::test_anon_read_s3",
+    "virtualizarr/tests/test_backend.py::TestReadFromURL::test_read_from_url",
+    "virtualizarr/tests/test_backend.py::TestReadFromURL::test_virtualizarr_vs_local_nisar"
+  ],
+  "waza_excluded": true
+}

@@ -104,7 +104,46 @@ def serde_pair(block):
     )
 
 
-def audit():
+def protected_addition(record):
+    if (
+        record["schema_version"] != "aeep.c13.protected-case-addition.v1"
+        or record["formal_case_adopted"]
+        or not record["comparisons_paused"]
+        or not record["waza_excluded"]
+        or record["models"]
+        or record["cash_usd"]
+    ):
+        raise ValueError("unexpected protected case scope")
+    result = pool.artifact(record["result"])
+    review = pool.artifact(record["review"])
+    case = record["case"]
+    if (
+        not result["verified"]
+        or result["review_sha256"] != record["review"]["sha256"]
+        or review["cases"][case]["source_revision"] != record["revision"]
+        or result["models"]
+        or result["cash_usd"]
+        or result["formal_cases_adopted"]
+    ):
+        raise ValueError("case evidence does not match its settled review")
+    row = verified_pair(
+        case, record["repository"], record["revision"], record["family"], record["roles"], record
+    )
+    (reference, original) = result["observations"]
+    for role, proof, receipt, score in zip(
+        ("reference", "original"), (reference, original), row["receipt_ids"], (1, 0), strict=True
+    ):
+        if (
+            proof["receipt_id"] != receipt
+            or not proof["contract_matched"]
+            or proof["score"] != score
+            or not proof["operation"].endswith(f":{case}:{role}")
+        ):
+            raise ValueError("reference or original outcome is bound to a different attempt")
+    return row
+
+
+def audit(additions=()):
     pins = {}
     _, _, excluded = pool.previous_repositories()
     rows = cohort.expected_rows()
@@ -229,10 +268,14 @@ def audit():
             )
         )
     check_capacity(latest["software_pool"])
+    for name in additions:
+        if Path(name).name != name:
+            raise ValueError("additional evidence must be a case report in this directory")
+        rows.append(protected_addition(pool.load(name, pins)))
     return {
         "schema_version": "aeep.c13.current-protected-software-inventory.v1",
         "inputs": pins,
-        "capacity": latest["software_pool"],
+        "capacity": pool.assess(rows, excluded),
         "rows": sorted(rows, key=lambda row: row["case"]),
         "formal_cases_adopted": 0,
         "formal_assignments": 0,
@@ -245,7 +288,8 @@ def audit():
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("out", type=Path)
+    parser.add_argument("--add-case", action="append", default=[])
     args = parser.parse_args()
-    report = (json.dumps(audit(), indent=2, sort_keys=True) + "\n").encode()
+    report = (json.dumps(audit(args.add_case), indent=2, sort_keys=True) + "\n").encode()
     write(args.out.resolve(), report)
     print(digest(report))

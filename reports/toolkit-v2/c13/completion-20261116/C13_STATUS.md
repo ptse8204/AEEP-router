@@ -338,30 +338,44 @@ The source-output mismatch still needs diagnosis before any replay.
 
 ### Next scientific Python cases
 
-Two new source families passed immutable source and protected-transport
-checks. VirtualiZarr is a multi-file repair with 78 required assertions.
-Nested Pandas is a contract audit with 55 published assertions and one
-authored preservation check. Git expanded `.git_archival.txt` in the
-Nested Pandas archive. Restoring that single publisher blob made the
-reconstructed tree match the pinned commit and preserved its license
-notice. Both cases are staged privately. They still need compatible
-runtime dependencies and protected reference and original grades.
+**Nested Pandas joined the reproduced pool.** The reference passed all
+56 required assertions. The original failed the reduction test and the
+snapshot-preservation check as expected, passing the other 54. The two
+offline operations settled in 6.44 seconds. The worker generated the
+publisher's version file from the archive's verified tag and commit
+before grading. The staged source still matches the publisher tree
+after restoration of one Git-substituted metadata file.
 [Intake and assertion bindings](scientific-python-source-intake-20261124.json)
-· [VirtualiZarr source](https://github.com/zarr-developers/VirtualiZarr/commit/95fce110e6edfd5733ee66bc9824921c5eac6588)
-· [Nested Pandas source](https://github.com/lincc-frameworks/nested-pandas/commit/1eeda4bafab06582e90b1266a36f6923ccf31fdc)
+· [Protected Nested Pandas pair](protected-nested-pandas-20261124.json)
+
+**VirtualiZarr remains ungraded.** The first offline reference ran all
+78 required assertions. Forty-four passed, 21 had setup errors, and
+13 failed during execution. The failures were import errors from calls
+to Xarray's tutorial datasets and the Kerchunk Parquet export. The
+retained environment lacks Pooch and Fastparquet. The operation settled
+in 3.88 seconds. The original stayed unstarted.
+
+The case's three network-marked tests are outside the required set
+and follow the publisher's default skip. Some required fixtures still
+call `xarray.tutorial.open_dataset`. The two required data blobs,
+`air_temperature.nc` and `ROMS_example.nc`, now have publisher tree
+pins and byte counts. Their use review and offline cache setup come
+before a protected replay. No tutorial dataset was downloaded.
+[Protected VirtualiZarr result and diagnosis](protected-virtualizarr-20261124.json)
+· [Xarray tutorial cache behavior](https://docs.xarray.dev/en/v2024.11.0/generated/xarray.tutorial.open_dataset.html)
 
 ## What still blocks formal comparisons
 
 | Workload | Remaining gap |
 | --- | --- |
-| Software | The current inventory reconciles 72 reproduced cases, 46 repository families and 146 distinct protected receipts. The two holdouts and shared early stages need at least 246 distinct cases, leaving a minimum gap of 174. Contract audits have the largest holdout gap, at 52 cases before early-stage needs. |
+| Software | The current inventory reconciles 73 reproduced cases, 47 repository families and 148 distinct protected receipts. The two holdouts and shared early stages need at least 246 distinct cases, leaving a minimum gap of 173. Contract audits have the largest holdout gap, at 51 cases before early-stage needs. |
 | Document/data | The 246 VAREX archives now have a verified provisional allocation. It keeps the known related forms in one stage and excludes both calibration cases. Final source-lineage review, asset-use decisions and study assignment remain open. The 18 ExtractBench annual disclosures remain held on source and asset-use grounds. |
 
 The software inventory records source revisions, task families and
 receipt IDs for each reproduced case. Its audit rejects duplicate
 cases, reused receipts and development-exposed repositories. Keep
 all revisions from the same repository in one study stage.
-[Current software inventory](current-software-inventory-20261124.json)
+[Current software inventory](software-inventory-with-nested-pandas-20261124.json)
 
 VAREX now has 133 multi-collection prospects with distinct schema hashes.
 The audit matched all 1,777 schema IDs to exact publisher PDF paths. It

@@ -1,0 +1,89 @@
+{
+  "case": "lincc-frameworks__nested-pandas-302-aeep-contract-audit",
+  "case_intake": {
+    "path": ".aeep/c13-cohort-runtime-20261124/nested-pandas-export-substitution-20261124/result.json",
+    "sha256": "4f62f211ae40572b09f16cd23243f84a88c8e2288f2279fdf041a7d81b61073d"
+  },
+  "cash_usd": 0,
+  "comparisons_paused": true,
+  "family": "contract-audit",
+  "formal_case_adopted": false,
+  "ledger": {
+    "path": ".aeep/c13-cohort-runtime-20261124/c13-nested-pandas-302-20261124/execution/ledger.json",
+    "sha256": "baf9546a5c66aa0f0be96a0a8738743d597d345d958fc0647c1c717cf6bec6a7"
+  },
+  "models": 0,
+  "publisher_version": "0.4.6.dev4+g1eeda4ba",
+  "repository": "lincc-frameworks/nested-pandas",
+  "result": {
+    "path": ".aeep/c13-cohort-runtime-20261124/c13-nested-pandas-302-20261124/execution/result.json",
+    "sha256": "beaa0bc1538d941f0cf90018699137d9f78385bdb14df646f4e1efb768101033"
+  },
+  "review": {
+    "path": ".aeep/c13-cohort-runtime-20261124/c13-nested-pandas-302-20261124/operation-review.json",
+    "sha256": "126752ee43d64c9527d1e369b80c7d2aab647d7461fae87cf129f1b04d2b92c6"
+  },
+  "revision": "1eeda4bafab06582e90b1266a36f6923ccf31fdc",
+  "roles": {
+    "original": {
+      "elapsed_seconds": 2.945637708005961,
+      "failure_sites": [
+        {
+          "category": "AssertionError",
+          "file": "tests/nested_pandas/nestedframe/test_nestedframe.py",
+          "line": 1098,
+          "phase": "call",
+          "test": "tests/nested_pandas/nestedframe/test_nestedframe.py::test_reduce"
+        },
+        {
+          "category": "AssertionError",
+          "file": "tests/test_aeep_preservation.py",
+          "line": 7,
+          "phase": "call",
+          "test": "tests/test_aeep_preservation.py::test_snapshot_preserved"
+        }
+      ],
+      "observation": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-nested-pandas-302-20261124/execution/observation-original.json",
+        "sha256": "0827eca2658614fc73c367d7adf4754afb02e4e5a93cdf299aafd2fbc2a8d4f6"
+      },
+      "receipt": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-nested-pandas-302-20261124/execution/receipt-rcpt_d181754c0d664a6a9c96e52e7d73cd1b.json",
+        "sha256": "d60124bd08beafbb0a88c23858d1e511a0eddfa024776322848c94f0039f33bf"
+      },
+      "score": 0,
+      "test_counts": {
+        "FAILED": 2,
+        "PASSED": 54
+      }
+    },
+    "reference": {
+      "elapsed_seconds": 3.4953974580275826,
+      "failure_sites": [],
+      "observation": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-nested-pandas-302-20261124/execution/observation-reference.json",
+        "sha256": "0b65e07903a950fc63b92af3d334538a41f09cf33734de5ec498872e3f0a9702"
+      },
+      "receipt": {
+        "path": ".aeep/c13-cohort-runtime-20261124/c13-nested-pandas-302-20261124/execution/receipt-rcpt_ad4a8251752248958bad79f903615fc4.json",
+        "sha256": "f2fa65879c86d7ac2962ec142ea8e6879e5ab5d9ca34dfe7175a9701e986c18e"
+      },
+      "score": 1,
+      "test_counts": {
+        "PASSED": 56
+      }
+    }
+  },
+  "runtime": {
+    "numpy": "2.2.6",
+    "pandas": "2.2.3",
+    "pyarrow": "18.1.0",
+    "python": "3.13"
+  },
+  "schema_version": "aeep.c13.protected-case-addition.v1",
+  "waza_excluded": true,
+  "wheel_intake": {
+    "path": ".aeep/c13-cohort-runtime-20261124/c13-nested-pandas-302-20261124/acquisition-review.json",
+    "sha256": "d9b240680da671ad34e0aad520555226a1081b22b04eb60fd0aa8cbe928ee413"
+  }
+}

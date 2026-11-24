@@ -1,5 +1,17 @@
 # AEEP Toolkit V2 — authoritative checkpoint state
 
+**November 24. Nested Pandas reproduced and VirtualiZarr held.**
+The [C13 scientific Python handoff](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#next-scientific-python-cases)
+records the Nested Pandas reference at 1/1 and original at 0/1, with
+all 56 assertions accounted for. Software now has 73 reproduced
+cases across 47 repositories and needs at least 173 more.
+VirtualiZarr's offline reference ran all 78 assertions and remains
+ungraded after 34 import errors. The original stayed unstarted.
+The next preparation step is exact use review and offline cache
+binding for the two published Xarray tutorial blobs and the
+missing tutorial and Parquet dependencies. No replay is authorized.
+Comparisons stay paused and Waza stays excluded.
+
 **November 24. Scientific Python cases staged.**
 The [intake handoff](../../reports/toolkit-v2/c13/completion-20261116/C13_STATUS.md#next-scientific-python-cases)
 binds VirtualiZarr's 78 assertions and Nested Pandas's 56 assertions.

@@ -1,5 +1,11 @@
 # 0.8 plan coverage and remaining work
 
+The [scientific Python grade and diagnosis](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#next-scientific-python-cases)
+adds Nested Pandas to the reproduced inventory. There are now
+73 cases across 47 repositories, with at least 173 more needed.
+VirtualiZarr remains ungraded pending its offline tutorial cache
+and Parquet dependency review. Comparisons remain paused.
+
 The [current software inventory](../toolkit-v2/c13/completion-20261116/C13_STATUS.md#what-still-blocks-formal-comparisons)
 reconciles 72 reproduced cases and 146 distinct receipts across 46
 repositories. At least 174 additional eligible cases remain. The
